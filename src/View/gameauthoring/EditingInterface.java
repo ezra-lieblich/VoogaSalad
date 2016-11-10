@@ -1,4 +1,4 @@
-package gameauthoring;
+package View.gameauthoring;
 
 public class EditingInterface {
 
