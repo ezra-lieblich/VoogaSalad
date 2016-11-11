@@ -1,6 +1,7 @@
 package view.helper;
 
 import javafx.scene.image.ImageView;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Pane;
 
 public class DragDrop {
@@ -20,7 +21,12 @@ public class DragDrop {
 	
 	public void detectDrag(){
 		target.setOnDragOver(e -> {
-            
+			if (e.getGestureSource() != target) {
+	              /* allow for moving */
+	              e.acceptTransferModes(TransferMode.MOVE);
+	          }
+	          
+	          e.consume();
         });
 		target.setOnDragDropped(e -> {
             
