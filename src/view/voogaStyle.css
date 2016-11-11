@@ -1,0 +1,10 @@
+.grid {
+	-fx-background-color: white;
+	-fx-border-color: black;
+	-fx-border-width: 3.0;
+}
+
+.root {
+	-fx-background-image: url(https://images.alphacoders.com/224/thumb-1920-224763.jpg);
+	-fx-background-position: center center;
+}
