@@ -7,7 +7,7 @@ import javafx.scene.layout.VBox;
 import view.helper.GraphicsLibrary;
 
 /**
- * Overseer of all of the games made, able to create multiple/have them 
+ * Overseer of game GUI
  * @author lucyzhang
  *
  */

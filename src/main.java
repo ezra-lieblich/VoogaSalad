@@ -16,7 +16,8 @@ public class main extends Application {
 	@Override
 	public void start(Stage s){
 		this.stage = s;
-		GameGUI game = new GameGUI();
+		//This is just for testing, should be switched to creating the authoring environment first
+		GameGUI game = new GameGUI(); 
 		Scene scene = game.init();
 		s.setScene(scene);
 		s.show();
