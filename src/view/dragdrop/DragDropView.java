@@ -8,6 +8,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import view.GridGUI;
 import view.helper.GraphicsLibrary;
 
 /**
@@ -24,11 +25,13 @@ public class DragDropView {
 	private GraphicsLibrary graphicLib;
 	public static final int DEFENSIVEWIDTH = 50;
 	public static final int DEFENSIVEHEIGHT = 50;
+	private GridGUI grid;
 
-	public DragDropView() {
+	public DragDropView(GridGUI grid) {
 		this.dragDropPane = new TabPane();
 		this.tabs = new ArrayList<Tab>();
 		this.graphicLib = new GraphicsLibrary();
+		this.grid = grid;
 
 	}
 	
@@ -64,6 +67,9 @@ public class DragDropView {
 		int rIndex = 0;
 		for (String image:imageLocations){
 			ImageView currentImage = graphicLib.createImageView(graphicLib.createImage(image));
+			DragDrop dragger = new DragDrop(currentImage, this.grid.getGrid());
+			dragger.makeDraggable();
+			dragger.detectDrag();
 			graphicLib.setImageViewParams(currentImage, DEFENSIVEWIDTH, DEFENSIVEHEIGHT);
 			grid.add(currentImage ,cIndex, rIndex);
 			rIndex++;

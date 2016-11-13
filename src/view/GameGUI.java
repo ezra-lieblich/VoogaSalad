@@ -29,7 +29,7 @@ public class GameGUI {
 		this.mainScreen = new BorderPane();
 		this.graphics = new GraphicsLibrary();
 		this.grid = new GridGUI();
-		this.dragDrop = new DragDropView(); 
+		this.dragDrop = new DragDropView(this.grid); 
 		
 	}
 	
@@ -60,7 +60,7 @@ public class GameGUI {
 		mainScreen.setRight(dragDrop.getDragDropPane());
 		Tab tab = dragDrop.createTab("Blah test");
 		dragDrop.populateImageViewsToTab(tab, testImages);
-		Tab tab2 = dragDrop.createTab("nother text");
+		Tab tab2 = dragDrop.createTab("Another text");
 		dragDrop.populateImageViewsToTab(tab2, testImages2);
 	}
 	
