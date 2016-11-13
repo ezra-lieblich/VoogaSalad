@@ -22,6 +22,8 @@ public class DragDropView {
 	private TabPane dragDropPane;
 	private ArrayList<Tab> tabs;
 	private GraphicsLibrary graphicLib;
+	public static final int DEFENSIVEWIDTH = 50;
+	public static final int DEFENSIVEHEIGHT = 50;
 
 	public DragDropView() {
 		this.dragDropPane = new TabPane();
@@ -62,10 +64,11 @@ public class DragDropView {
 		int rIndex = 0;
 		for (String image:imageLocations){
 			ImageView currentImage = graphicLib.createImageView(graphicLib.createImage(image));
+			graphicLib.setImageViewParams(currentImage, DEFENSIVEWIDTH, DEFENSIVEHEIGHT);
 			grid.add(currentImage ,cIndex, rIndex);
 			rIndex++;
 		}
-		tab.setContent(grid);
+		tab.setContent(root);
 		
 
 	}

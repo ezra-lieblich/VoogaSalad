@@ -45,9 +45,9 @@ public class GraphicsLibrary {
 		image.setFitWidth(width);
 	}
 
-	public void setImageViewParams(ImageView image, double x, double y) {
-		image.setX(x);
-		image.setY(y);
+	public void setImageViewParams(ImageView image, double width, double height) {
+		image.setFitHeight(height);
+		image.setFitWidth(width);
 	}
 
 	public Button createButton(String label) {

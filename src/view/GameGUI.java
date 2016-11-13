@@ -56,9 +56,12 @@ public class GameGUI {
 	
 	private void initDragDropPane(){
 		String[] testImages = {"butterfly.png","kaneki.jpg","penguin.jpg"};//TODO: get rid of 
+		String[] testImages2 = {"butterfly.png","kaneki.jpg"};//TODO: get rid of 
 		mainScreen.setRight(dragDrop.getDragDropPane());
 		Tab tab = dragDrop.createTab("Blah test");
 		dragDrop.populateImageViewsToTab(tab, testImages);
+		Tab tab2 = dragDrop.createTab("nother text");
+		dragDrop.populateImageViewsToTab(tab2, testImages2);
 	}
 	
 }
