@@ -1,4 +1,4 @@
-package view.helper;
+package view.dragdrop;
 
 import javafx.scene.image.ImageView;
 import javafx.scene.input.TransferMode;
