@@ -249,6 +249,9 @@ Example Bloons Game
 
 # Design Details
 
+   1. Bloons - Classic tower defense game where the game authoring environment allows for drag-and-dropping towers as well as outlining the path.
+   2. Plants vs Zombies - Variation of a tower defense game where there are multiple paths and that the enemies can destroy the towers. The game authoring environment will allow for the user to define multiple paths as well as set the towers to be destructable.
+   3. Boxhead - Abstract take on a tower defense game where the paths are dynamic and the destination point is movable. The game authoring environment will allow for the selection of the path type as well as the destination option.
 # Example Games
 
 # Design Considerations
@@ -257,3 +260,14 @@ We will need to consider the exact information that needs to be included in the 
 ### Game Playing Environment Considerations
 Some design choices we considered was how to update the position of the enemies. For some types of Tower Defense games, the enemies move along a path, but in other types, the enemies move straight across the screen. We decided to use a grid to represent the space in which the enemies move, and their paths will be defined by the cells on the grid. Moving forward, we will have to decide if we want to detect collisions from the occupants of a single cell, or if two objects have the same x and y coordinates. The advantage of using the cell method is that it is easier to detect collisions, but it also requires handling the case when multiple enemies occupy the same cell.
 
+### Game Engine Considerations
+Some design choices we considered was how to represent the path in terms of coordinates. We could have made x and y for
+pixels or used grid coordinates. While using pixel locations for the x and y would have been more exact and look more 
+fluid, we decided to ultimately go with grid coordinate for the path. Having discussions with the Game Player side
+made us realize that it would be easier for them to have grid coordinates. We also had discussions on how the game 
+authoring environment would interact with the game engine. We had to decide how often to update the model when the view
+changed. We ultimately decided to have the authoring environment create interfaces with methods that will perform tasks
+they need the backend to perform. Then, the game engine will implement these interfaces to change the model. We will
+then use observable observer design pattern to update the necessary view components. By doing this we are hiding from 
+the view how we implement the changes in the backend and by using the Observer patter, we are able to signal to the
+necessary front end components.
