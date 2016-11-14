@@ -113,7 +113,7 @@ public class GamePlayModel {
 	//get direction
 	
 	
-	private void moveSingleEnemy(Enemy e){
+	private void moveSingleEnemy(Enemy e) throws NullPointerException{
 		//to make it easier, only updating enemy's current cell once it reaches the center point of the next cell
 		double moveDist = e.getMovingSpeed();
 		double distToMove = (Math.abs(cellToCoordinate(e.getCurrentCell().getNext().getX()) - e.getX()) + 
@@ -133,15 +133,20 @@ public class GamePlayModel {
 			}
 			
 		}
-		
-		
-		// sub life when enter the end
 	}
 	
 	private void updateEnemy(){
 		// move on Grid Enemy
 		for (Enemy e: enemyOnGrid){
-			moveSingleEnemy(e);
+			try {
+				moveSingleEnemy(e);
+			}
+			catch(NullPointerException exception) {
+				numberOfLife -= 1;
+				if (numberOfLife == 0) {
+					//end game
+				}
+			}
 		}
 		
 		
