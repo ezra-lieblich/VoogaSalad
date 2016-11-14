@@ -1,4 +1,4 @@
-package view.helper.dragdrop;
+package gameplayer.view.helper.dragdrop;
 
 import javafx.event.EventHandler;
 import javafx.scene.image.ImageView;

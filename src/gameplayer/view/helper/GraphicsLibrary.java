@@ -1,4 +1,4 @@
-package view.helper;
+package gameplayer.view.helper;
 
 import javafx.geometry.Insets;
 import javafx.scene.Group;

@@ -1,15 +1,15 @@
-package view.helper.dragdrop;
+package gameplayer.view.helper.dragdrop;
 
 import java.util.ArrayList;
 
 import gameplayer.view.GridGUI;
+import gameplayer.view.helper.GraphicsLibrary;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
-import view.helper.GraphicsLibrary;
 
 /**
  * Responsible for the tab pane that holds all of the defensive structures that
