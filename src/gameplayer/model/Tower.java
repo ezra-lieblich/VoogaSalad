@@ -9,6 +9,7 @@ public class Tower {
 	private String image;
 	private int ID;  // towerType
 	private int counter;
+	private double[] coordinates;
 	
 	
 	public Tower (int ID, double attackingRange,int fireRate, double cost, int weapon, String image){
@@ -29,6 +30,16 @@ public class Tower {
 		counter++;
 		return false;
 	}
+	
+	void setCoordinates(double x, double y){
+		coordinates[0] = x;
+		coordinates[1] = y;
+	}
+	
+	double[] getCoordinate(){
+		return this.coordinates;
+	}
+	
 	
 	int getType(){
 		return this.ID;
