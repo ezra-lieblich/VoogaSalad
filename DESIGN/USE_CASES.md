@@ -24,12 +24,22 @@
 22. Pause the game: Controller freezes all the animation and disable user input other than resume button
 23. Load XML file, initialize game stage: XML Loader, BattleGrid
 24. Start game: EnemyAnimator, WeaponAnimator, EventHandler
-25.Switch to a previously played game: XML Loader, BattleGrid
+25. Switch to a previously played game: XML Loader, BattleGrid
 26. Save game progress: XML Saver
 27. Change the tower’s attack preference to target the strongest enemies
 28. User specifies different enemy types for different waves within a level
 29. Enemies destroy the base and user loses
 30. User changes game settings in the middle of a game
 31. Enemy destroys tower
+32. Adding a new image for a tower, enemy, or weapon
+33. Saving an incomplete created game
+34. User inputs an invalid parameter for a attribute
+35. User creates a tower that is floating above the map
+36. User tries to move a tower in between levels
+37. User tries to purchase a tower that they cannot afford
+38. User restarts the game
+39. User loads an existing XML file to continue designing an incomplete game
+40. User gives enemy different speed for each level
+
 
 
