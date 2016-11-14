@@ -1,4 +1,4 @@
-package model;
+package gameplayer.model;
 
 import java.util.List;
 

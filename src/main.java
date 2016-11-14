@@ -1,7 +1,7 @@
+import gameplayer.view.GameGUI;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import view.GameGUI;
 
 public class main extends Application {
 
@@ -19,6 +19,7 @@ public class main extends Application {
 		//This is just for testing, should be switched to creating the authoring environment first
 		GameGUI game = new GameGUI(); 
 		Scene scene = game.init();
+		s.setTitle(TITLE);
 		s.setScene(scene);
 		s.show();
 

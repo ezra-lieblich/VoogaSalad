@@ -95,3 +95,14 @@ program that loads the game data and uses the game engine to run a particular ga
 ## Controller
 * Tower Manager
 * Game Setting Manager
+
+### Model
+GamePlayModel: primary class containing all game objects, updates grid
+Tower: fires weapons, has cost
+Enemy
+Grid: represents the area of gameplay, enemies move along paths in the grid
+Weapon
+Cell: point on the grid, collisions of weapons and enemies occur within cells
+Collision: has enemy and weapon attributes, effect of collision is updated on the enemy object
+
+

@@ -1,4 +1,4 @@
-package view;
+package gameplayer.view;
 
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
