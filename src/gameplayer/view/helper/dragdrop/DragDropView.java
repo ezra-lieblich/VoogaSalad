@@ -71,7 +71,6 @@ public class DragDropView {
 		for (String image:imageLocations){
 			ImageView currentImage = graphicLib.createImageView(graphicLib.createImage(image));
 			DragDrop dragger = new DragDrop(currentImage, /*this.game.getGrid()*/target);
-			dragger.makeDraggable();
 			dragger.detectDrag();
 			graphicLib.setImageViewParams(currentImage, DEFENSIVEWIDTH, DEFENSIVEHEIGHT);
 			grid.add(currentImage ,cIndex, rIndex);

@@ -31,8 +31,6 @@ public class GameGUI {
 		this.graphics = new GraphicsLibrary();
 		this.grid = new GridGUI();
 		this.dragDrop = new DragDropView(); 
-
-
 	}
 	
 	public Scene init(){
@@ -53,10 +51,6 @@ public class GameGUI {
 	
 	
 	private void createGrid(){
-		//this.leftPane = graphics.createVBoxPane(SCENE_WIDTH/2, SCENE_HEIGHT*.75);
-		//this.leftPane.getStyleClass().add("grid");
-		//this.leftPane.getChildren().addAll(grid.getGrid());	
-		//this.mainScreen.setLeft(leftPane);
 		this.mainScreen.setCenter(grid.getGrid());
 	}
 	
