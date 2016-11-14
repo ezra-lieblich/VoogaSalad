@@ -83,6 +83,7 @@ This may be auto-generated if we do “open” type
     * Terrains locations
     * Background image 
 
+
 # Game Data: 
 files, assets, preferences, and code that represent a particular game
 ## Classes
@@ -91,6 +92,131 @@ files, assets, preferences, and code that represent a particular game
         * num_towers
         * num_enemies
         * grid_position
+        
+Example Layout
+XML Basic Design
+
+``` xml
+
+<isValid> Boolean
+<gameSetting>
+	<title>
+<background>
+	<tower>
+		<name> 
+		<imagePath>
+		<isDestroyable> 
+		<range> 
+		<fireRate (int)> 
+		<cost> 
+		<unlockLevel> 
+		<weaponType>
+		<upgrade>
+			<cost> 
+			<type> 
+
+
+<enemy>
+	<name> 
+	<imagePath>
+<widthOfImage>
+	<heightOfImage>
+	<speed>
+	<health>
+	<points>
+	<money>
+	<collisionEffect> ?
+<weapon>
+	<name>
+	<imagePath>
+	<weaponEffect>
+	<projectileSpeed>
+	<damage>
+<path @imagePath>
+	<type>
+	<coordinates>
+		<coordinate>
+		…	
+		
+<level>
+<enemies>
+<type> # </type>
+<healthRegeneration>
+<points>
+<money>
+```
+
+Example XML Game- Bloons
+
+```xml
+
+<isValid> true </isValid>
+<gameSetting>
+	<title> “Bloons” </title>
+<background> “src/images/background” </background>
+	<tower>
+		<name> “ninja monkey” </name>
+		<imagePath> “src/images/ninja” </imagePath>
+		<isDestroyable> false </isDestroyable>
+		<range> 4 </range>
+		<fireRate (int)> 5 </fireRate>
+		<cost> 500 </cost>
+		<unlockLevel>  0 </unlockLevel>
+		<weaponType> “cannon” </weaponType>
+		<upgrade>
+			<cost> 200 </cost>
+			<type> “tower” </type>
+	</tower>
+	<tower> second tower </tower>
+	<tower> “third tower” </tower>
+<enemy>
+	<name> “black balloon” </name>
+	<imagePath> “src/images/cannon” </imagePath>
+<widthOfImage> 20 </widthOfImage>
+	<heightOfImage> 20 </heightOfImage>
+	<speed> 5 </speed>
+	<health> 6 </health>
+	<points> 10 </points>
+	<money> 15 </money>
+	<collisionEffect> “explode” <collisionEffect>
+</enemy>
+<enemy> “enemy 2” </enemy>
+<weapon>
+	<name> “cannon” </name>
+	<imagePath> “src/images/cannon” </imagePath>
+	<weaponEffect> “damage” </weaponEffect>
+	<projectileSpeed> 8 </projectileSpeed>
+	<damage> 2 </damage>
+</weapon>
+<weapon> “weapon 2” </weapon>
+<path @imagePath = “src/images/pathImage>
+	<type> “fixed” </type>
+	<coordinates>
+		<coordinate> (0,0) </coordinate>
+		<coordinate> (0,1) </coordinate>
+		<coordinate> (1,1) </coordinate>
+		…
+<coordinate> (20, 45) </coordinate>	
+		
+<level>
+<enemies>
+<type @type= “red”> 10 </type>
+</enemies>
+<healthRegeneration> “none” </healthRegeneration>
+<points> 100 </points>
+<money> 100 </money>
+	</level>
+	<level>
+		<enemies>
+			<type @type = “red”> 15 </type>
+			<type @type = “blue> 5 </type>
+		</enemies>
+		<healthRegeneration> “none” </healthRegeneration>
+		<points> 150 </points>
+		<money> 100 </money>
+	</level>
+
+```
 
 # Game Player: 
 program that loads the game data and uses the game engine to run a particular game
@@ -118,6 +244,9 @@ Weapon
 Cell: point on the grid, collisions of weapons and enemies occur within cells
 Collision: has enemy and weapon attributes, effect of collision is updated on the enemy object
 
+#Example Data
+Example Bloons Game
+
 # Design Details
 
 # Example Games
@@ -125,6 +254,6 @@ Collision: has enemy and weapon attributes, effect of collision is updated on th
 # Design Considerations
 We will need to consider the exact information that needs to be included in the XML file. This file is meant to encompass all game data/settings that are defined by the game author, so we must decide the type of data that will be in the XML. We also need to determine how to transition from the game authoring environment to the game playing environment.
 
-### Game Playing Environment considerations
+### Game Playing Environment Considerations
 Some design choices we considered was how to update the position of the enemies. For some types of Tower Defense games, the enemies move along a path, but in other types, the enemies move straight across the screen. We decided to use a grid to represent the space in which the enemies move, and their paths will be defined by the cells on the grid. Moving forward, we will have to decide if we want to detect collisions from the occupants of a single cell, or if two objects have the same x and y coordinates. The advantage of using the cell method is that it is easier to detect collisions, but it also requires handling the case when multiple enemies occupy the same cell.
 
