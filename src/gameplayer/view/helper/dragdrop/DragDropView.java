@@ -11,6 +11,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 
 /**
  * Responsible for the tab pane that holds all of the defensive structures that
@@ -26,14 +27,18 @@ public class DragDropView {
 	private GraphicsLibrary graphicLib;
 	public static final int DEFENSIVEWIDTH = 50;
 	public static final int DEFENSIVEHEIGHT = 50;
-	private GridGUI game;
+	private Pane target;
 
-	public DragDropView(GridGUI game) {
+	public DragDropView(/*GridGUI game*/) {
 		this.dragDropPane = new TabPane();
 		this.tabs = new ArrayList<Tab>();
 		this.graphicLib = new GraphicsLibrary();
-		this.game = game;
+		//this.game = game;
 
+	}
+	
+	public void setDragTarget(Pane target){
+		this.target = target; 
 	}
 	
 	public TabPane getDragDropPane(){
@@ -53,9 +58,6 @@ public class DragDropView {
 		return newTab;
 	}
 
-	private void populateTab(int tabIndex, Node content) {
-		tabs.get(tabIndex).setContent(content);
-	}
 
 	/**
 	 * Populates a tab with images to later drag and drop
@@ -68,7 +70,7 @@ public class DragDropView {
 		int rIndex = 0;
 		for (String image:imageLocations){
 			ImageView currentImage = graphicLib.createImageView(graphicLib.createImage(image));
-			DragDrop dragger = new DragDrop(currentImage, this.game.getGrid());
+			DragDrop dragger = new DragDrop(currentImage, /*this.game.getGrid()*/target);
 			dragger.makeDraggable();
 			dragger.detectDrag();
 			graphicLib.setImageViewParams(currentImage, DEFENSIVEWIDTH, DEFENSIVEHEIGHT);
