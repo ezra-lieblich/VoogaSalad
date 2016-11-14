@@ -75,12 +75,23 @@ public class GamePlayModel {
 		return (d < this.gridX * cellSize && e < this.gridY *cellSize);
 	}
 	
+	
+	private double getDistance(double x1, double y1, double x2, double y2){
+		return Math.sqrt(Math.pow(x2-x1, 2) + Math.pow(y2-y1, 2));
+	}
+	
+	private Boolean inShootingRange(Weapon w){
+		Tower t = w.getShootingAgent();
+		return getDistance(w.getX(), w.getY(), t.getCoordinate()[0], t.getCoordinate()[1]) <= t.getAttackingRange();	
+		
+	}
+	
 	private void updateWeapon(){
 		for(Weapon w: weaponOnGrid){
 			w.setX(w.getSpeedX() + w.getX());
 			w.setY(w.getSpeedY() + w.getY());
 			
-			if(!coordinateInBound(w.getX(), w.getY())){
+			if(!coordinateInBound(w.getX(), w.getY()) && !inShootingRange(w)){
 				this.weaponOnGrid.remove(w);
 			}
 		}
@@ -92,6 +103,7 @@ public class GamePlayModel {
 					Weapon toAdd = this.weaponTypes.get(weaponType);
 					toAdd.setX(cellToCoordinate(i));
 					toAdd.setY(cellToCoordinate(j));
+					toAdd.setShootingAgent(gridArray[i][j].getTower());
 					weaponOnGrid.add(toAdd);
 				}
 			}

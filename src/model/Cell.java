@@ -54,6 +54,12 @@ public class Cell {
 		return -1;
 	}
 	
+
+	public Tower getTower(){
+		return this.tower;
+	}
+	
+	
 	
 	public int getX(){
 		return xCoordinate;		
