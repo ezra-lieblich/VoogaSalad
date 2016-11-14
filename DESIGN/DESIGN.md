@@ -11,22 +11,22 @@ In the game player, we are dividing the work into parsing the xml file, using th
 
 The user interface will contain two toolbars: a main toolbar and a tabbed-toolbar. The main toolbar will give the user the ability to open another, previously saved game, create a new game, see the title of the current game design, and the ability to close the window. The side toolbar contains the subcomponents of the game that the designer can change. This would include components such as game conditions, enemies, weapons, towers, and path. Each component will change the main screen with its particular elements such as choosing the image of the enemy, its speed, etc.
 
+# Design Details
 
+## Game Authoring Environment (View)
 Program of visual tools for placing, specifying, editing, and combining general game elements together to make a particular game
 
-## View
 ### Classes:
 * GameConditions (number of rounds, health, money…)
-     *
 * EditingInterface: Interface to create the game 
 * EnemyView: Displays all of the available enemy images, contains dropdowns/input fields to set enemy settings
 * WeaponView: Displays input fields for weapon settings
 * TowerView: Displays input fields for tower settings
-* LevelView: Dropdown to customize each level (?)
+* LevelView: Displays design options for each level
 
-# Game Engine: 
-framework of general Java classes to support any kind of game within a specific game genre
-## Model
+## Game Engine (Model): 
+Framework of general Java classes to support any kind of game within a specific game genre
+
 ### Classes:
 * Tower (abstract class?)
     * Subclasses represent tower types
@@ -85,9 +85,10 @@ This may be auto-generated if we do “open” type
     * Background image 
 
 
-# Game Data: 
-files, assets, preferences, and code that represent a particular game
-## Classes
+## Game Data: 
+Files, assets, preferences, and code that represent a particular game
+
+### Classes
 * XML data:
     * Tags:
         * num_towers
@@ -219,10 +220,10 @@ Example XML Game- Bloons
 
 ```
 
-# Game Player: 
+## Game Player: 
 program that loads the game data and uses the game engine to run a particular game
-## View
-### Classes:
+### View
+Classes:
 * BattleGrid: Grid that contains the towers, enemies, etc.
 * EventHandler: To drag and drop ALL THE THINGS
 * EnemyAnimator: Handles animation of the enemy (any cool effects?), holds all of the animation effects
@@ -232,21 +233,21 @@ program that loads the game data and uses the game engine to run a particular ga
 * Abstract enemy, tower classes
 
 
-## Controller
+### Controller
+Classes:
 * Tower Manager
 * Game Setting Manager
 
 ### Model
-GamePlayModel: primary class containing all game objects, updates grid
-Tower: fires weapons, has cost
-Enemy
-Grid: represents the area of gameplay, enemies move along paths in the grid
-Weapon
-Cell: point on the grid, collisions of weapons and enemies occur within cells
-Collision: has enemy and weapon attributes, effect of collision is updated on the enemy object
+Classes:
+* GamePlayModel: primary class containing all game objects, updates grid
+* Tower: fires weapons, has cost
+* Enemy
+* Grid: represents the area of gameplay, enemies move along paths in the grid
+* Weapon
+* Cell: point on the grid, collisions of weapons and enemies occur within cells
+* Collision: has enemy and weapon attributes, effect of collision is updated on the enemy object
 
-#Example Data
-Example Bloons Game
 
 # Design Details
 
