@@ -1,5 +1,5 @@
 # Introduction
-Our group will be implementing a game authoring and playing environment for tower defense games. We will need to support different types of tower defense games, such as Bloons and Plants vs. Zombies. Our design will
+Our group will be implementing a game authoring and playing environment for tower defense games. We will need to support different types of tower defense games, such as Bloons and Plants vs. Zombies, which means we need the design to be very flexible in what kind of decisions it allows the user to make when creating a game and how a player interacts with the game. 
 
 # Overview
 At a high level, this project is divided into the "game authoring environment" and the "game player". The authoring environment will allow users to create their tower defense game and define settings. These settings and specifications will be recorded in an XML file, which will be used by the game player program to load the game and allow a user to play it. With this design, the primary means of communication between these two parts is the XML file. The only information the game player program needs to load the game is the game data, which the game authoring environment provides in the XML file. 
@@ -9,14 +9,15 @@ In the game player, we are dividing the work into parsing the xml file, using th
 
 # User Interface
 
-The user interface will contain two toolbars: a main toolbar and a tabbed-toolbar. The main toolbar will give the user the ability to open another, previously saved game, see the title of the current game design, and the ability to close the window. The side toolbar contains the subcomponents of the game that the designer can change. This would include components such as game conditions, enemies, weapons, towers, and path. Each component will change the main screen with its particular elements such as choosing the image of the enemy, its speed, etc.
+The user interface will contain two toolbars: a main toolbar and a tabbed-toolbar. The main toolbar will give the user the ability to open another, previously saved game, create a new game, see the title of the current game design, and the ability to close the window. The side toolbar contains the subcomponents of the game that the designer can change. This would include components such as game conditions, enemies, weapons, towers, and path. Each component will change the main screen with its particular elements such as choosing the image of the enemy, its speed, etc.
 
-### Game Authoring Environment Considerations
+
 Program of visual tools for placing, specifying, editing, and combining general game elements together to make a particular game
 
 ## View
 ### Classes:
 * GameConditions (number of rounds, health, money…)
+     *
 * EditingInterface: Interface to create the game 
 * EnemyView: Displays all of the available enemy images, contains dropdowns/input fields to set enemy settings
 * WeaponView: Displays input fields for weapon settings
@@ -258,6 +259,8 @@ Example Bloons Game
     with its main principles of the data not having to know about the front end and not having to know about the game player.
 
 
+
+
 # Example Games
    1. Bloons - Classic tower defense game where the game authoring environment allows for drag-and-dropping towers as well as outlining the path.
    2. Plants vs Zombies - Variation of a tower defense game where there are multiple paths and that the enemies can destroy the towers. The game authoring environment will allow for the user to define multiple paths as well as set the towers to be destructable.
@@ -281,3 +284,7 @@ they need the backend to perform. Then, the game engine will implement these int
 then use observable observer design pattern to update the necessary view components. By doing this we are hiding from 
 the view how we implement the changes in the backend and by using the Observer patter, we are able to signal to the
 necessary front end components.
+
+### Game Authoring Environment considerations
+One design choice we considered was how to determine the different attributes of each level. For example, an enemy could have a different frequency at each level, but we had to decide if that frequency will be determined in the enemy class (with a combo box for the user to set which level they were adding an attribute to) or in a new Design Level class. At this point, we have decided to use a DesignLevel class. After looking at the way the xml file is formatted, we decided that it would be easier for the backend to interpret information if we send it by level. Also, this design allows the user to make a new level by only working in one or two tabs of the user interface. Another design consideration was how often the view should be updating the model (also discussed in game engine considerations). One reason to constantly update the model is to allow for the future extension of allowing two people to create a game together, at the same time. However, this could cause invalid data to be passed to the backend if the user is in the middle of creating something, like an enemy.   
+
