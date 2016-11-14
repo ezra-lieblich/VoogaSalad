@@ -1,5 +1,7 @@
 package gameauthoringenvironment.view.path;
 
+import javafx.scene.Node;
+
 /**
  * 
  * This interface details the components of the path tab. The interface defines our internal API
@@ -7,5 +9,7 @@ package gameauthoringenvironment.view.path;
  *
  */
 public interface IPathView {
+    
+    public Node getNodeAsInstance();
 
 }
