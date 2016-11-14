@@ -248,7 +248,9 @@ Collision: has enemy and weapon attributes, effect of collision is updated on th
 Example Bloons Game
 
 # Design Details
-
+    1. Bloons - Classic tower defense game where the game authoring environment allows for drag-and-dropping towers as well as outlining the path.
+    2. Plants vs Zombies - Variation of a tower defense game where there are multiple paths and that the enemies can destroy the towers. The game authoring environment will allow for the user to define multiple paths as well as set the towers to be destructable.
+    3. Boxhead - Abstract take on a tower defense game where the paths are dynamic and the destination point is movable. The game authoring environment will allow for the selection of the path type as well as the destination option.
 # Example Games
 
 # Design Considerations
