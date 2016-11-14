@@ -176,6 +176,7 @@ Cell: point on the grid, collisions of weapons and enemies occur within cells
 Collision: has enemy and weapon attributes, effect of collision is updated on the enemy object
 
 #Example Data
+
 Example Bloons Game
 ```xml
 
