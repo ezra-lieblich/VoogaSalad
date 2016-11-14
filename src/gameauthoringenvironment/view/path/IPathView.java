@@ -1,6 +1,7 @@
 package gameauthoringenvironment.view.path;
 
 import javafx.scene.Node;
+import javafx.scene.image.ImageView;
 
 /**
  * 
@@ -10,6 +11,10 @@ import javafx.scene.Node;
  */
 public interface IPathView {
     
+    /**
+     * 
+     * @return node of path view
+     */
     public Node getNodeAsInstance();
 
 }
