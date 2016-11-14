@@ -16,16 +16,36 @@ The user interface will contain two toolbars: a main toolbar and a tabbed-toolba
 ## Game Authoring Environment (View)
 Program of visual tools for placing, specifying, editing, and combining general game elements together to make a particular game
 
-### Classes:
+### Modules:
 * GameConditions (number of rounds, health, money…)
 * EditingInterface: Interface to create the game 
-* EnemyView: Displays all of the available enemy images, contains dropdowns/input fields to set enemy settings
-* WeaponView: Displays input fields for weapon settings
-* TowerView: Displays input fields for tower settings
-* LevelView: Displays design options for each level
+* Enemy: Displays all of the available enemy images, contains dropdowns/input fields to set enemy settings
+    * EnemyView
+    * EnemyImageView
+    * EnemyReactionsView
+    * EnemySpeedAndFrequencyView
+* Weapon: Displays input fields for weapon settings
+    * WeaponView 
+    * WeaponEffectView
+    * WeaponImageView
+* Tower: Displays input fields for tower settings
+    * TowerView
+    * TowerFrequencyView
+    * TowerImageView
+    * TowerRangeView
+    * TowerSpeedView
+* Level: Displays design options for each level
 
 ## Game Engine (Model): 
 Framework of general Java classes to support any kind of game within a specific game genre
+
+This module will be responsible for storing the inputed data from the game authoring environment and output an xml file for the game player to read.
+It will accomplish this by receiving values from the Game Authoring Environment. When the authoring environment is done creating a specific module (i.e enemy, weapon, tower),
+the authoring environment will call an interface to set the updated changes. These interfaces will be set up through the main controller that interacts with the authoring environment and engine.
+The call will then be traced to the proper module and set the corresponding data that will ultimately be put into the XML. The model with then notify the front end authoring
+environment of the changes through an observer pattern. Observers in the view will be notified of these changes and update their display accordingly. This design can be easily
+extend by adding another base class to account for a new module or by subclassing one of the existing abstract ones to account for the new desired functionality. This design corresponds
+with its main principles of the data not having to know about the front end and not having to know about the game player.
 
 ### Classes:
 * Tower (abstract class?)
@@ -148,78 +168,6 @@ XML Basic Design
 <money>
 ```
 
-Example XML Game- Bloons
-
-```xml
-
-<isValid> true </isValid>
-<gameSetting>
-	<title> “Bloons” </title>
-<background> “src/images/background” </background>
-	<tower>
-		<name> “ninja monkey” </name>
-		<imagePath> “src/images/ninja” </imagePath>
-		<isDestroyable> false </isDestroyable>
-		<range> 4 </range>
-		<fireRate (int)> 5 </fireRate>
-		<cost> 500 </cost>
-		<unlockLevel>  0 </unlockLevel>
-		<weaponType> “cannon” </weaponType>
-		<upgrade>
-			<cost> 200 </cost>
-			<type> “tower” </type>
-	</tower>
-	<tower> second tower </tower>
-	<tower> “third tower” </tower>
-<enemy>
-	<name> “black balloon” </name>
-	<imagePath> “src/images/cannon” </imagePath>
-<widthOfImage> 20 </widthOfImage>
-	<heightOfImage> 20 </heightOfImage>
-	<speed> 5 </speed>
-	<health> 6 </health>
-	<points> 10 </points>
-	<money> 15 </money>
-	<collisionEffect> “explode” <collisionEffect>
-</enemy>
-<enemy> “enemy 2” </enemy>
-<weapon>
-	<name> “cannon” </name>
-	<imagePath> “src/images/cannon” </imagePath>
-	<weaponEffect> “damage” </weaponEffect>
-	<projectileSpeed> 8 </projectileSpeed>
-	<damage> 2 </damage>
-</weapon>
-<weapon> “weapon 2” </weapon>
-<path @imagePath = “src/images/pathImage>
-	<type> “fixed” </type>
-	<coordinates>
-		<coordinate> (0,0) </coordinate>
-		<coordinate> (0,1) </coordinate>
-		<coordinate> (1,1) </coordinate>
-		…
-<coordinate> (20, 45) </coordinate>	
-		
-<level>
-<enemies>
-<type @type= “red”> 10 </type>
-</enemies>
-<healthRegeneration> “none” </healthRegeneration>
-<points> 100 </points>
-<money> 100 </money>
-	</level>
-	<level>
-		<enemies>
-			<type @type = “red”> 15 </type>
-			<type @type = “blue> 5 </type>
-		</enemies>
-		<healthRegeneration> “none” </healthRegeneration>
-		<points> 150 </points>
-		<money> 100 </money>
-	</level>
-
-```
-
 ## Game Player: 
 program that loads the game data and uses the game engine to run a particular game
 ### View
@@ -247,18 +195,6 @@ Classes:
 * Weapon
 * Cell: point on the grid, collisions of weapons and enemies occur within cells
 * Collision: has enemy and weapon attributes, effect of collision is updated on the enemy object
-
-
-# Design Details
-
-    *   Game Engine - This module will be responsible for storing the inputed data from the game authoring environment and output an xml file for the game player to read.
-    It will accomplish this by receiving values from the Game Authoring Environment. When the authoring environment is done creating a specific module (i.e enemy, weapon, tower),
-    the authoring environment will call an interface to set the updated changes. These interfaces will be set up through the main controller that interacts with the authoring environment and engine.
-    The call will then be traced to the proper module and set the corresponding data that will ultimately be put into the XML. The model with then notify the front end authoring
-    environment of the changes through an observer pattern. Observers in the view will be notified of these changes and update their display accordingly. This design can be easily
-    extend by adding another base class to account for a new module or by subclassing one of the existing abstract ones to account for the new desired functionality. This design corresponds
-    with its main principles of the data not having to know about the front end and not having to know about the game player.
-
 
 
 
