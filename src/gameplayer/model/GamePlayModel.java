@@ -20,7 +20,7 @@ public class GamePlayModel {
 	private Map<Integer, Tower> towerTypes;  // initialize in xml
 	private Cell[][] gridArray;
 	
-	private int numberOfLife; 
+	private int numberOfLife;  //initialize in xml
 	
 	private Enemy nextEnteringEnemy; // decide how each wave of enemy comes either in pack or one at a time
 	private Cell startPoint;    // get from xml 
@@ -50,7 +50,7 @@ public class GamePlayModel {
 	}
 	
 	private double cellToCoordinate(int cellNumber){
-		return (cellNumber - 0.5) * cellSize;
+		return (cellNumber + 0.5) * cellSize;
 	}
 	
 	
@@ -128,8 +128,10 @@ public class GamePlayModel {
 		
 		
 		//enter new enemy
-		if(this.nextEnteringEnemy != null)
+		if(this.nextEnteringEnemy != null){
 			enemyOnGrid.add(this.nextEnteringEnemy);
+			this.nextEnteringEnemy.setCurrentCell(this.startPoint);
+		}
 		this.nextEnteringEnemy = packOfEnemyComing.poll();
 		
 		

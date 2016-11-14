@@ -7,7 +7,7 @@ public class Enemy {
 	private String image;
 	private double xCoordinate;
 	private double yCoordinate;
-	
+	private Cell currentCell;
 	
 
 	public Enemy(double movingSpeed, int health, String image){
@@ -17,6 +17,13 @@ public class Enemy {
 		
 	}
 	
+	void setCurrentCell(Cell c){
+		this.currentCell = c;
+	}
+	
+	Cell getCurrentCell(){
+		return this.currentCell;
+	}
 	
 	double getX() {
 		return xCoordinate;

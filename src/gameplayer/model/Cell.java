@@ -20,7 +20,13 @@ public class Cell {
 		this.next = next;
 		this.tower = null;
 	}
+	
+	
 
+	Cell getNext(){
+		return this.next;
+	}
+	
 	/**
 	 * remove all the following methods
 	 * @param obj
