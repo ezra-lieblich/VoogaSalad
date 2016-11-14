@@ -93,7 +93,56 @@ Classes
         * num_towers
         * num_enemies
         * grid_position
+Example Layout
+XML Basic Design
+```xml
+<isValid> Boolean
+<gameSetting>
+	<title>
+<background>
+	<tower>
+		<name> 
+		<imagePath>
+		<isDestroyable> 
+		<range> 
+		<fireRate (int)> 
+		<cost> 
+		<unlockLevel> 
+		<weaponType>
+		<upgrade>
+			<cost> 
+			<type> 
 
+
+<enemy>
+	<name> 
+	<imagePath>
+<widthOfImage>
+	<heightOfImage>
+	<speed>
+	<health>
+	<points>
+	<money>
+	<collisionEffect> ?
+<weapon>
+	<name>
+	<imagePath>
+	<weaponEffect>
+	<projectileSpeed>
+	<damage>
+<path @imagePath>
+	<type>
+	<coordinates>
+		<coordinate>
+		…	
+		
+<level>
+<enemies>
+<type> # </type>
+<healthRegeneration>
+<points>
+<money>
+```
 # Design Details: Game Player
 program that loads the game data and uses the game engine to run a particular game
 ## View
@@ -121,8 +170,76 @@ Weapon
 Cell: point on the grid, collisions of weapons and enemies occur within cells
 Collision: has enemy and weapon attributes, effect of collision is updated on the enemy object
 
+#Example Data
+Example Bloons Game
+```xml
+<isValid> true </isValid>
+<gameSetting>
+	<title> “Bloons” </title>
+<background> “src/images/background” </background>
+	<tower>
+		<name> “ninja monkey” </name>
+		<imagePath> “src/images/ninja” </imagePath>
+		<isDestroyable> false </isDestroyable>
+		<range> 4 </range>
+		<fireRate (int)> 5 </fireRate>
+		<cost> 500 </cost>
+		<unlockLevel>  0 </unlockLevel>
+		<weaponType> “cannon” </weaponType>
+		<upgrade>
+			<cost> 200 </cost>
+			<type> “tower” </type>
+	</tower>
+	<tower> second tower </tower>
+	<tower> “third tower” </tower>
+<enemy>
+	<name> “black balloon” </name>
+	<imagePath> “src/images/cannon” </imagePath>
+<widthOfImage> 20 </widthOfImage>
+	<heightOfImage> 20 </heightOfImage>
+	<speed> 5 </speed>
+	<health> 6 </health>
+	<points> 10 </points>
+	<money> 15 </money>
+	<collisionEffect> “explode” <collisionEffect>
+</enemy>
+<enemy> “enemy 2” </enemy>
+<weapon>
+	<name> “cannon” </name>
+	<imagePath> “src/images/cannon” </imagePath>
+	<weaponEffect> “damage” </weaponEffect>
+	<projectileSpeed> 8 </projectileSpeed>
+	<damage> 2 </damage>
+</weapon>
+<weapon> “weapon 2” </weapon>
+<path @imagePath = “src/images/pathImage>
+	<type> “fixed” </type>
+	<coordinates>
+		<coordinate> (0,0) </coordinate>
+		<coordinate> (0,1) </coordinate>
+		<coordinate> (1,1) </coordinate>
+		…
+<coordinate> (20, 45) </coordinate>	
+		
+<level>
+<enemies>
+<type @type= “red”> 10 </type>
+</enemies>
+<healthRegeneration> “none” </healthRegeneration>
+<points> 100 </points>
+<money> 100 </money>
+	</level>
+	<level>
+		<enemies>
+			<type @type = “red”> 15 </type>
+			<type @type = “blue> 5 </type>
+		</enemies>
+		<healthRegeneration> “none” </healthRegeneration>
+		<points> 150 </points>
+		<money> 100 </money>
+	</level>
 
-
+```
 # Example Games
 
 
