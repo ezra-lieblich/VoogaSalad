@@ -8,6 +8,14 @@ In the game player, we are dividing the work into parsing the xml file, using th
 ### Game Authoring
 
 # User Interface
+* Diane: Weapons Module, Towers Module, Path Module, SplashScreen/Editing Interface, Creating a new file, both work on Shared Editor extension
+* Kayla: Game Conditions Module, Enemies Module, Opening a previous file, both work on Shared Editor extension
+
+#Game Data
+
+#Game Engine
+ 
+#Game Player
 
 # Design Details
 Game Player: The game player group is divided into two subsections: Frontend and Backend. For the basic implementation, front end is charge of the view portion of the game player. Specifically, front end is in charge of rendering the game as well as allowing users to interact with the game player to play the game/advance levels. The backend is in charge of parsing the xml created by users and then updating logic of all enemies, towers and game settings. 
