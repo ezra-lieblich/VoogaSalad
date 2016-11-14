@@ -29,7 +29,7 @@ public class GameGUI {
 		this.mainScreen = new BorderPane();
 		this.graphics = new GraphicsLibrary();
 		this.grid = new GridGUI();
-		this.dragDrop = new DragDropView(this.grid); 
+		this.dragDrop = new DragDropView(this); 
 		
 	}
 	
@@ -38,6 +38,10 @@ public class GameGUI {
 		createGrid();
 		initDragDropPane();
 		return this.scene;
+	}
+	
+	public VBox getLeftPane(){
+		return this.leftPane;
 	}
 	
 	private void createScene(){
