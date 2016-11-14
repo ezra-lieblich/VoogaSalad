@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GameSetting Title="Bloons">
+	<isValid> true </isValid>
+	<background> images/butterfly </background>
+		<towerlist>
+			<tower>
+				<name> ninja monkey </name>
+				<imagePath> images/kaneki </imagePath>
+				<isDestroyable> false </isDestroyable>
+				<range> 4 </range>
+				<fireRate> 5 </fireRate>
+				<cost> 500 </cost>
+				<unlockLevel>  0 </unlockLevel>
+				<weaponType> cannon </weaponType>
+				<upgrade>
+					<cost> 200 </cost>
+					<type> “tower” </type>
+				</upgrade>
+			</tower>
+		</towerlist>
+	<enemy>
+		<name> “black balloon” </name>
+		<imagePath> “src/images/cannon” </imagePath>
+		<widthOfImage> 20 </widthOfImage>
+		<heightOfImage> 20 </heightOfImage>
+		<speed> 5 </speed>
+		<health> 6 </health>
+		<points> 10 </points>
+		<money> 15 </money>
+		<collisionEffect> explode </collisionEffect>
+	</enemy>
+	<enemy> “enemy 2” </enemy>
+	<weapon>
+		<name> “cannon” </name>
+		<imagePath> “src/images/cannon” </imagePath>
+		<weaponEffect> “damage” </weaponEffect>
+		<projectileSpeed> 8 </projectileSpeed>
+		<damage> 2 </damage>
+	</weapon>
+	<weapon> “weapon 2” </weapon>
+	<path>
+		<imagePath>src/images/pathImage</imagePath>
+		<type> “fixed” </type>
+		<coordinates>
+			<coordinate> (0,0) </coordinate>
+			<coordinate> (0,1) </coordinate>
+			<coordinate> (1,1) </coordinate>
+		</coordinates>
+	</path>
+	<level>
+		<enemies>
+			<enemy>
+				<type> red </type>
+				<amount>10</amount>
+			</enemy>
+		</enemies>
+		<healthRegeneration> “none” </healthRegeneration>
+		<points> 100 </points>
+		<money> 100 </money>
+	</level>
+	<level>
+		<enemies>
+			<enemy>
+				<type>red </type>
+				<amount>15</amount>
+			</enemy>
+			<enemy>
+				<type> blue </type>
+				<amount>5</amount>
+			</enemy>
+		</enemies>
+		<healthRegeneration> “none” </healthRegeneration>
+		<points> 150 </points>
+		<money> 100 </money>
+	</level>
+</GameSetting>

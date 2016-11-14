@@ -10,6 +10,7 @@ public class Weapon {
 	private String image;
 	private double xCoordinate;
 	private double yCoordinate;
+	private Tower shootingAgent;
 	
 	
 	public Weapon(int ID, double demage, double speedX, double speedY, String image) {
@@ -20,6 +21,14 @@ public class Weapon {
 		this.image = image;
 	}
 	
+	
+	public void setShootingAgent(Tower t){
+		this.shootingAgent = t;
+	}
+	
+	public Tower getShootingAgent(){
+		return this.shootingAgent;
+	}
 	
 	double getSpeedX(){
 		return this.speedX;

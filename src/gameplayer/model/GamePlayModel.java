@@ -20,7 +20,7 @@ public class GamePlayModel {
 	private Map<Integer, Tower> towerTypes;  // initialize in xml
 	private Cell[][] gridArray;
 	
-	private int numberOfLife; 
+	private int numberOfLife;  //initialize in xml
 	
 	private Enemy nextEnteringEnemy; // decide how each wave of enemy comes either in pack or one at a time
 	private Cell startPoint;    // get from xml 
@@ -50,7 +50,7 @@ public class GamePlayModel {
 	}
 	
 	private double cellToCoordinate(int cellNumber){
-		return (cellNumber - 0.5) * cellSize;
+		return (cellNumber + 0.5) * cellSize;
 	}
 	
 	
@@ -75,12 +75,23 @@ public class GamePlayModel {
 		return (d < this.gridX * cellSize && e < this.gridY *cellSize);
 	}
 	
+	
+	private double getDistance(double x1, double y1, double x2, double y2){
+		return Math.sqrt(Math.pow(x2-x1, 2) + Math.pow(y2-y1, 2));
+	}
+	
+	private Boolean inShootingRange(Weapon w){
+		Tower t = w.getShootingAgent();
+		return getDistance(w.getX(), w.getY(), t.getCoordinate()[0], t.getCoordinate()[1]) <= t.getAttackingRange();	
+		
+	}
+	
 	private void updateWeapon(){
 		for(Weapon w: weaponOnGrid){
 			w.setX(w.getSpeedX() + w.getX());
 			w.setY(w.getSpeedY() + w.getY());
 			
-			if(!coordinateInBound(w.getX(), w.getY())){
+			if(!coordinateInBound(w.getX(), w.getY()) && !inShootingRange(w)){
 				this.weaponOnGrid.remove(w);
 			}
 		}
@@ -92,32 +103,58 @@ public class GamePlayModel {
 					Weapon toAdd = this.weaponTypes.get(weaponType);
 					toAdd.setX(cellToCoordinate(i));
 					toAdd.setY(cellToCoordinate(j));
+					toAdd.setShootingAgent(gridArray[i][j].getTower());
 					weaponOnGrid.add(toAdd);
 				}
 			}
 		}
-		
 	}
 	
 	//get direction
 	
 	
-	private void moveSingleEnemy(Enemy e){
-		
-		
-		// sub life when enter the end
+	private void moveSingleEnemy(Enemy e) throws NullPointerException{
+		//to make it easier, only updating enemy's current cell once it reaches the center point of the next cell
+		double moveDist = e.getMovingSpeed();
+		double distToMove = (Math.abs(cellToCoordinate(e.getCurrentCell().getNext().getX()) - e.getX()) + 
+				Math.abs(cellToCoordinate(e.getCurrentCell().getNext().getY()) - e.getY()));
+		while (moveDist > 0) {
+			if (moveDist >= distToMove) { //can move to center of next cell
+				e.setX(e.getX() + e.getxDirection() * distToMove);
+				e.setY(e.getY() + e.getyDirection() * distToMove);
+				e.setCurrentCell(e.getCurrentCell().getNext());
+				e.setxDirection(e.getCurrentCell().getNext().getX() - e.getCurrentCell().getX()); //-1, 0, or 1
+				e.setyDirection(e.getCurrentCell().getNext().getY() - e.getCurrentCell().getY());
+				moveDist -= distToMove;
+			}
+			else {
+				e.setX(e.getX() + e.getxDirection() * moveDist);
+				e.setY(e.getY() + e.getyDirection() * moveDist);
+			}
+			
+		}
 	}
 	
 	private void updateEnemy(){
 		// move on Grid Enemy
 		for (Enemy e: enemyOnGrid){
-			moveSingleEnemy(e);
+			try {
+				moveSingleEnemy(e);
+			}
+			catch(NullPointerException exception) {
+				numberOfLife -= 1;
+				if (numberOfLife == 0) {
+					//end game
+				}
+			}
 		}
 		
 		
 		//enter new enemy
-		if(this.nextEnteringEnemy != null)
+		if(this.nextEnteringEnemy != null) {
 			enemyOnGrid.add(this.nextEnteringEnemy);
+			this.nextEnteringEnemy.setCurrentCell(this.startPoint);
+		}
 		this.nextEnteringEnemy = packOfEnemyComing.poll();
 		
 		

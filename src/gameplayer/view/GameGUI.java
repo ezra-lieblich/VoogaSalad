@@ -30,7 +30,6 @@ public class GameGUI {
 		this.graphics = new GraphicsLibrary();
 		this.grid = new GridGUI();
 		this.dragDrop = new DragDropView(this); 
-		
 	}
 	
 	public Scene init(){
