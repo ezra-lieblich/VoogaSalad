@@ -1,10 +1,10 @@
 # Introduction
-Our group will be implementing a game authoring and playing environment for tower defense games. We will need to support different types of tower defense games, such as Bloons and Plants vs. Zombies, which means we need the design to be very flexible in what kind of decisions it allows the user to make when creating a game and how a player interacts with the game. 
+Our group will be implementing a game authoring and playing environment for tower defense games. We will need to support different types of tower defense games, such as Bloons and Plants vs. Zombies, which means we need the design to be very flexible in what kind of decisions it allows the user to make when creating a game and how a player interacts with the game.
 
 # Overview
-At a high level, this project is divided into the "game authoring environment" and the "game player". The authoring environment will allow users to create their tower defense game and define settings. These settings and specifications will be recorded in an XML file, which will be used by the game player program to load the game and allow a user to play it. With this design, the primary means of communication between these two parts is the XML file. The only information the game player program needs to load the game is the game data, which the game authoring environment provides in the XML file. 
+At a high level, this project is divided into the "game authoring environment" and the "game player". The authoring environment will allow users to create their tower defense game and define settings. These settings and specifications will be recorded in an XML file, which will be used by the game player program to load the game and allow a user to play it. With this design, the primary means of communication between these two parts is the XML file. The only information the game player program needs to load the game is the game data, which the game authoring environment provides in the XML file.
 ##### Game Player
-In the game player, we are dividing the work into parsing the xml file, using the data to create the game logic (back end), and displaying the game to the user (front end). The back and front ends will communicate through controllers. There will be many controllers, each of which represent a type of view. Each of these controllers will pass data and modifications between the model and the view (using observables). 
+In the game player, we are dividing the work into parsing the xml file, using the data to create the game logic (back end), and displaying the game to the user (front end). The back and front ends will communicate through controllers. There will be many controllers, each of which represent a type of view. Each of these controllers will pass data and modifications between the model and the view (using observables).
 ##### Game Authoring
 
 # User Interface
@@ -24,14 +24,14 @@ Program of visual tools for placing, specifying, editing, and combining general 
 
 ### Modules:
 * GameConditions (number of rounds, health, money…)
-* EditingInterface: Interface to create the game 
+* EditingInterface: Interface to create the game
 * Enemy: Displays all of the available enemy images, contains dropdowns/input fields to set enemy settings
     * EnemyView
     * EnemyImageView
     * EnemyReactionsView
     * EnemySpeedAndFrequencyView
 * Weapon: Displays input fields for weapon settings
-    * WeaponView 
+    * WeaponView
     * WeaponEffectView
     * WeaponImageView
 * Tower: Displays input fields for tower settings
@@ -42,8 +42,10 @@ Program of visual tools for placing, specifying, editing, and combining general 
     * TowerSpeedView
 * Level: Displays design options for each level
 
-## Game Engine (Model): 
+## Game Engine (Model):
 Framework of general Java classes to support any kind of game within a specific game genre
+
+![Engine Model](data/EngineDesignMock.jpg "Structure of Game Engine Model")
 
 This module will be responsible for storing the inputed data from the game authoring environment and output an xml file for the game player to read.
 It will accomplish this by receiving values from the Game Authoring Environment. When the authoring environment is done creating a specific module (i.e enemy, weapon, tower),
@@ -61,7 +63,7 @@ with its main principles of the data not having to know about the front end and 
     - attackRange: Determines the distance at which the tower can attack enemies
     - fireRate/frequency: Determines how much time it takes the tower to reload and fire again.
     - Weapon instance
-    - Ground vs. Aerial 
+    - Ground vs. Aerial
     - Cost
     - Attack preference (first vs last)   
     - Image
@@ -83,18 +85,18 @@ with its main principles of the data not having to know about the front end and 
     * Speed
     * Image?
     * HP
-    * Layering? 
+    * Layering?
     * Death effect
     * Regen?
     * Image
-    * EnemyPath 
+    * EnemyPath
 This may be auto-generated if we do “open” type
-* Player: made using the game authoring environment, creates a user with # of lives, wealth, etc. 
+* Player: made using the game authoring environment, creates a user with # of lives, wealth, etc.
 * BattleGrid (of some sort)
 * Profile (name, etc. idk)
 * Terrain
 * Affects how enemies move, where towers can be placed
-* Water/Deadspace 
+* Water/Deadspace
 * Level
     * Numbers/types of creeps
     * Release times
@@ -108,10 +110,10 @@ This may be auto-generated if we do “open” type
 * Map/Board/whatever
     * Size
     * Terrains locations
-    * Background image 
+    * Background image
 
 
-## Game Data: 
+## Game Data:
 Files, assets, preferences, and code that represent a particular game
 
 ### Classes
@@ -120,7 +122,7 @@ Files, assets, preferences, and code that represent a particular game
         * num_towers
         * num_enemies
         * grid_position
-        
+
 Example Layout
 XML Basic Design
 
@@ -131,21 +133,21 @@ XML Basic Design
 	<title>
 <background>
 	<tower>
-		<name> 
+		<name>
 		<imagePath>
-		<isDestroyable> 
-		<range> 
-		<fireRate (int)> 
-		<cost> 
-		<unlockLevel> 
+		<isDestroyable>
+		<range>
+		<fireRate (int)>
+		<cost>
+		<unlockLevel>
 		<weaponType>
 		<upgrade>
-			<cost> 
-			<type> 
+			<cost>
+			<type>
 
 
 <enemy>
-	<name> 
+	<name>
 	<imagePath>
 <widthOfImage>
 	<heightOfImage>
@@ -164,8 +166,8 @@ XML Basic Design
 	<type>
 	<coordinates>
 		<coordinate>
-		…	
-		
+		…
+
 <level>
 <enemies>
 <type> # </type>
@@ -174,7 +176,7 @@ XML Basic Design
 <money>
 ```
 
-## Game Player: 
+## Game Player:
 program that loads the game data and uses the game engine to run a particular game
 ### View
 Classes:
@@ -183,7 +185,7 @@ Classes:
 * EnemyAnimator: Handles animation of the enemy (any cool effects?), holds all of the animation effects
 * WeaponAnimator: Handles animation of weapons
 ## Model（Back end）
-* XML Loader: Loads information from game engine 
+* XML Loader: Loads information from game engine
 * Abstract enemy, tower classes
 
 
@@ -218,16 +220,15 @@ Some design choices we considered was how to update the position of the enemies.
 
 ### Game Engine Considerations
 Some design choices we considered was how to represent the path in terms of coordinates. We could have made x and y for
-pixels or used grid coordinates. While using pixel locations for the x and y would have been more exact and look more 
+pixels or used grid coordinates. While using pixel locations for the x and y would have been more exact and look more
 fluid, we decided to ultimately go with grid coordinate for the path. Having discussions with the Game Player side
-made us realize that it would be easier for them to have grid coordinates. We also had discussions on how the game 
+made us realize that it would be easier for them to have grid coordinates. We also had discussions on how the game
 authoring environment would interact with the game engine. We had to decide how often to update the model when the view
 changed. We ultimately decided to have the authoring environment create interfaces with methods that will perform tasks
 they need the backend to perform. Then, the game engine will implement these interfaces to change the model. We will
-then use observable observer design pattern to update the necessary view components. By doing this we are hiding from 
+then use observable observer design pattern to update the necessary view components. By doing this we are hiding from
 the view how we implement the changes in the backend and by using the Observer patter, we are able to signal to the
 necessary front end components.
 
 ### Game Authoring Environment considerations
 One design choice we considered was how to determine the different attributes of each level. For example, an enemy could have a different frequency at each level, but we had to decide if that frequency will be determined in the enemy class (with a combo box for the user to set which level they were adding an attribute to) or in a new Design Level class. At this point, we have decided to use a DesignLevel class. After looking at the way the xml file is formatted, we decided that it would be easier for the backend to interpret information if we send it by level. Also, this design allows the user to make a new level by only working in one or two tabs of the user interface. Another design consideration was how often the view should be updating the model (also discussed in game engine considerations). One reason to constantly update the model is to allow for the future extension of allowing two people to create a game together, at the same time. However, this could cause invalid data to be passed to the backend if the user is in the middle of creating something, like an enemy.   
-
