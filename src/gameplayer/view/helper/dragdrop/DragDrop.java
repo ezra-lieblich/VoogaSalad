@@ -1,6 +1,7 @@
 package gameplayer.view.helper.dragdrop;
 
 import javafx.event.EventHandler;
+import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DragEvent;
@@ -11,9 +12,12 @@ import javafx.scene.layout.Pane;
 
 public class DragDrop {
 	private ImageView source;
-	private Pane target;
+	private Node target;
+	
+	//get rid of this later
 
-	public DragDrop(ImageView source, Pane target) {
+
+	public DragDrop(ImageView source,Node target) {
 		this.source = source;
 		this.target = target;
 	}
