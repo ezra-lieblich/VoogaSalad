@@ -1,7 +1,4 @@
 
-# Design Details
-Game Player: The game player group is divided into two subsections: Frontend and Backend. For the basic implementation, front end is charge of the view portion of the game player. Specifically, front end is in charge of rendering the game as well as allowing users to interact with the game player to play the game/advance levels. The backend is in charge of parsing the xml created by users and then updating logic of all enemies, towers and game settings. 
-
 Lucy Zhang's Modules: In charge of user interactivity with the game. Working on DragDrop, DragDropView and GameGUI. Has dependencies with the gameplayer controller and backend modeling. 
 
 Ben Linde's Modules: In charge of grid updating. Working on GridGUI. Has dependencies with GameGUI and back end modeling. 
