@@ -94,9 +94,12 @@ Classes
         * num_towers
         * num_enemies
         * grid_position
+        
 Example Layout
 XML Basic Design
-```xml
+
+``` xml
+
 <isValid> Boolean
 <gameSetting>
 	<title>
