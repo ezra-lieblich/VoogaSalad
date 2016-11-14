@@ -11,6 +11,12 @@ In the game player, we are dividing the work into parsing the xml file, using th
 
 The user interface will contain two toolbars: a main toolbar and a tabbed-toolbar. The main toolbar will give the user the ability to open another, previously saved game, create a new game, see the title of the current game design, and the ability to close the window. The side toolbar contains the subcomponents of the game that the designer can change. This would include components such as game conditions, enemies, weapons, towers, and path. Each component will change the main screen with its particular elements such as choosing the image of the enemy, its speed, etc.
 
+![Enemy View](data/EnemyView.jpg “UI for enemy tab")
+![New Enemy View](data/NewEnemyView.jpg "UI for creating a new enemy")
+![Game Conditions View](data/GameConditionsView.jpg "UI for setting game conditions")
+![Path View](data/PathView.jpg "UI for designing path")
+
+
 # Design Details
 
 ## Game Authoring Environment (View)
