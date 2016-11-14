@@ -2,11 +2,12 @@
 Our group will be implementing a game authoring and playing environment for tower defense games. We will need to support different types of tower defense games, such as Bloons and Plants vs. Zombies, which means we need the design to be very flexible in what kind of decisions it allows the user to make when creating a game and how a player interacts with the game. 
 
 # Overview
-At a high level, this project is divided into the "game authoring environment" and the "game player". The authoring environment will allow users to create their tower defense game and define settings. These settings and specifications will be recorded in an XML file, which will be used by the game player program to load the game and allow a user to play it. With this design, the primary means of communication between these two parts is the XML file. The only information the game player program needs to load the game is the game data, which the game authoring environment provides in the XML file. 
+At a high level, this project is divided into the "game authoring environment" and the "game player". The authoring environment will allow users to create their tower defense game and define settings. These settings and specifications will be recorded in an XML file (run by the game engine).
+Once the user decides the play the game, the game player will accept the XML file from the game engine and load the game. With this design, the primary means of communication between these two parts is the XML file. The only information the game player program needs to load the game is the game data, which the game authoring environment provides in the XML file. 
 ##### Game Player
 In the game player, we are dividing the work into parsing the xml file, using the data to create the game logic (back end), and displaying the game to the user (front end). The back and front ends will communicate through controllers. There will be many controllers, each of which represent a type of view. Each of these controllers will pass data and modifications between the model and the view (using observables). 
 ##### Game Authoring
-
+The game authoring environment will communicate to the game engine through interfaces. When game authoring needs to set an item in the game engine, it will call the set interface, passing the necessary information to the game engine. The game authoring environment will not communicate with the game player.
 # User Interface
 
 The user interface will contain two toolbars: a main toolbar and a tabbed-toolbar. The main toolbar will give the user the ability to open another, previously saved game, create a new game, see the title of the current game design, and the ability to close the window. The side toolbar contains the subcomponents of the game that the designer can change. This would include components such as game conditions, enemies, weapons, towers, and path. Each component will change the main screen with its particular elements such as choosing the image of the enemy, its speed, etc.
@@ -19,6 +20,7 @@ Program of visual tools for placing, specifying, editing, and combining general 
 ### Modules:
 * GameConditions (number of rounds, health, money…)
 * EditingInterface: Interface to create the game 
+*Each subcomponent of the modules will have an interface to pass necessary information to the game engine, along with an interface to create their particular view. In regards to the latter, each subcomponent will create its own pane and components so it is loaded in one main DesignScene, what is ultimately seen by the user.
 * Enemy: Displays all of the available enemy images, contains dropdowns/input fields to set enemy settings
     * EnemyView
     * EnemyImageView
