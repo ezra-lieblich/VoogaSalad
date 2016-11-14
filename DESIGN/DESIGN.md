@@ -249,10 +249,20 @@ Example Bloons Game
 
 # Design Details
 
+    *   Game Engine - This module will be responsible for storing the inputed data from the game authoring environment and output an xml file for the game player to read.
+    It will accomplish this by receiving values from the Game Authoring Environment. When the authoring environment is done creating a specific module (i.e enemy, weapon, tower),
+    the authoring environment will call an interface to set the updated changes. These interfaces will be set up through the main controller that interacts with the authoring environment and engine.
+    The call will then be traced to the proper module and set the corresponding data that will ultimately be put into the XML. The model with then notify the front end authoring
+    environment of the changes through an observer pattern. Observers in the view will be notified of these changes and update their display accordingly. This design can be easily
+    extend by adding another base class to account for a new module or by subclassing one of the existing abstract ones to account for the new desired functionality. This design corresponds
+    with its main principles of the data not having to know about the front end and not having to know about the game player.
+
+
+# Example Games
    1. Bloons - Classic tower defense game where the game authoring environment allows for drag-and-dropping towers as well as outlining the path.
    2. Plants vs Zombies - Variation of a tower defense game where there are multiple paths and that the enemies can destroy the towers. The game authoring environment will allow for the user to define multiple paths as well as set the towers to be destructable.
    3. Boxhead - Abstract take on a tower defense game where the paths are dynamic and the destination point is movable. The game authoring environment will allow for the selection of the path type as well as the destination option.
-# Example Games
+
 
 # Design Considerations
 We will need to consider the exact information that needs to be included in the XML file. This file is meant to encompass all game data/settings that are defined by the game author, so we must decide the type of data that will be in the XML. We also need to determine how to transition from the game authoring environment to the game playing environment.
