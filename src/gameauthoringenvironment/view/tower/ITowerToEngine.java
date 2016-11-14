@@ -1,8 +1,10 @@
 package gameauthoringenvironment.view.tower;
 
-import javafx.scene.image.ImageView;
-
-
+/**
+ * 
+ * Interface to communicate with the game engine about changes in the tower settings
+ *
+ */
 public interface ITowerToEngine {
 
     /**
@@ -10,5 +12,7 @@ public interface ITowerToEngine {
      * 
      * @param towerImage
      */
-    public void setTowerImage (ImageView towerImage);
+    public void setTowerImage (int towerImageID);
+
+    public void setTowerFrequency (int towerFrequency);
 }
