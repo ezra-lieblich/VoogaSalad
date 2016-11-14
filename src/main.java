@@ -19,6 +19,7 @@ public class main extends Application {
 		//This is just for testing, should be switched to creating the authoring environment first
 		GameGUI game = new GameGUI(); 
 		Scene scene = game.init();
+		s.setTitle(TITLE);
 		s.setScene(scene);
 		s.show();
 
