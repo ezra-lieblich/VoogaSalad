@@ -84,6 +84,7 @@ This may be auto-generated if we do “open” type
     * Terrains locations
     * Background image 
 
+
 # Design Details: Game Data 
 Files, assets, preferences, and code that represent a particular game
 
@@ -143,6 +144,7 @@ XML Basic Design
 <points>
 <money>
 ```
+
 # Design Details: Game Player
 program that loads the game data and uses the game engine to run a particular game
 ## View
@@ -173,6 +175,7 @@ Collision: has enemy and weapon attributes, effect of collision is updated on th
 #Example Data
 Example Bloons Game
 ```xml
+
 <isValid> true </isValid>
 <gameSetting>
 	<title> “Bloons” </title>
@@ -240,6 +243,7 @@ Example Bloons Game
 	</level>
 
 ```
+
 # Example Games
 
 
