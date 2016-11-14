@@ -2,6 +2,7 @@ package gameplayer.view.helper.dragdrop;
 
 import java.util.ArrayList;
 
+import gameplayer.view.GameGUI;
 import gameplayer.view.GridGUI;
 import gameplayer.view.helper.GraphicsLibrary;
 import javafx.scene.Group;
@@ -25,13 +26,13 @@ public class DragDropView {
 	private GraphicsLibrary graphicLib;
 	public static final int DEFENSIVEWIDTH = 50;
 	public static final int DEFENSIVEHEIGHT = 50;
-	private GridGUI grid;
+	private GameGUI game;
 
-	public DragDropView(GridGUI grid) {
+	public DragDropView(GameGUI game) {
 		this.dragDropPane = new TabPane();
 		this.tabs = new ArrayList<Tab>();
 		this.graphicLib = new GraphicsLibrary();
-		this.grid = grid;
+		this.game = game;
 
 	}
 	
@@ -62,12 +63,12 @@ public class DragDropView {
 	 */
 	public void populateImageViewsToTab(Tab tab, String[] imageLocations) {
 		Group root = new Group();
-		GridPane grid = graphicLib.creatGridPane(root, 10, 10); //TODO: change
+		GridPane grid = graphicLib.creatGridPane(root, 20, 20); //TODO: change, would be set by the xml file
 		int cIndex = 0;
 		int rIndex = 0;
 		for (String image:imageLocations){
 			ImageView currentImage = graphicLib.createImageView(graphicLib.createImage(image));
-			DragDrop dragger = new DragDrop(currentImage, this.grid.getGrid());
+			DragDrop dragger = new DragDrop(currentImage, this.game.getLeftPane());
 			dragger.makeDraggable();
 			dragger.detectDrag();
 			graphicLib.setImageViewParams(currentImage, DEFENSIVEWIDTH, DEFENSIVEHEIGHT);
