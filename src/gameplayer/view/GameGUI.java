@@ -1,12 +1,12 @@
-package view;
+package gameplayer.view;
 
 import javafx.scene.Scene;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
-import view.dragdrop.DragDropView;
 import view.helper.GraphicsLibrary;
+import view.helper.dragdrop.DragDropView;
 
 /**
  * Overseer of game GUI
@@ -42,7 +42,7 @@ public class GameGUI {
 	
 	private void createScene(){
 		this.scene = new Scene(mainScreen, SCENE_WIDTH, SCENE_HEIGHT);
-		this.scene.getStylesheets().add(this.getClass().getResource("/view/voogaStyle.css").toExternalForm());
+		this.scene.getStylesheets().add(this.getClass().getResource("/gameplayer/view/voogaStyle.css").toExternalForm());
 	}
 	
 	

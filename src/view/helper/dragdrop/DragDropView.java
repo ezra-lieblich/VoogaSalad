@@ -1,14 +1,14 @@
-package view.dragdrop;
+package view.helper.dragdrop;
 
 import java.util.ArrayList;
 
+import gameplayer.view.GridGUI;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
-import view.GridGUI;
 import view.helper.GraphicsLibrary;
 
 /**

@@ -1,4 +1,4 @@
-package view.dragdrop;
+package view.helper.dragdrop;
 
 import javafx.event.EventHandler;
 import javafx.scene.image.ImageView;
@@ -40,6 +40,8 @@ public class DragDrop {
 	}
 
 	public void detectDrag() {
+		System.out.println("Called detectdrag");
+		System.out.println("The target: "+target);
 		target.setOnDragOver(new EventHandler <DragEvent>() {
             @Override
             public void handle(DragEvent event) {
@@ -56,17 +58,7 @@ public class DragDrop {
                 event.consume();
             }
         });
-		
-		target.setOnDragOver(e -> {
-			if (e.getGestureSource() != target) {
-				/* allow for moving */
-				e.acceptTransferModes(TransferMode.MOVE);
-			}else{
-				System.out.println("Over target!");
-			}
-
-			e.consume();
-		});
+	
 		target.setOnDragDropped(e -> {
 
 		});

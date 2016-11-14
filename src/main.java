@@ -1,7 +1,7 @@
+import gameplayer.view.GameGUI;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import view.GameGUI;
 
 public class main extends Application {
 
