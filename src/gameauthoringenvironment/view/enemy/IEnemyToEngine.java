@@ -1,5 +1,5 @@
 package gameauthoringenvironment.view.enemy;
 
-public class EnemySpeedAndFrequencyView {
+public interface IEnemyToEngine {
 
 }
