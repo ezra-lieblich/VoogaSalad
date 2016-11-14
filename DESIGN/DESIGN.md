@@ -9,12 +9,13 @@ In the game player, we are dividing the work into parsing the xml file, using th
 
 # User Interface
 
-# Design Details: Game Authoring Environment
+The user interface will contain two toolbars: a main toolbar and a tabbed-toolbar. The main toolbar will give the user the ability to open another, previously saved game, see the title of the current game design, and the ability to close the window. The side toolbar contains the subcomponents of the game that the designer can change. This would include components such as game conditions, enemies, weapons, towers, and path. Each component will change the main screen with its particular elements such as choosing the image of the enemy, its speed, etc.
 
+### Game Authoring Environment Considerations
 Program of visual tools for placing, specifying, editing, and combining general game elements together to make a particular game
 
 ## View
-Classes:
+### Classes:
 * GameConditions (number of rounds, health, money…)
 * EditingInterface: Interface to create the game 
 * EnemyView: Displays all of the available enemy images, contains dropdowns/input fields to set enemy settings
@@ -22,12 +23,10 @@ Classes:
 * TowerView: Displays input fields for tower settings
 * LevelView: Dropdown to customize each level (?)
 
-
-# Design Details: Game Engine
- 
-Framework of general Java classes to support any kind of game within a specific game genre
+# Game Engine: 
+framework of general Java classes to support any kind of game within a specific game genre
 ## Model
-Classes:
+### Classes:
 * Tower (abstract class?)
     * Subclasses represent tower types
     - Upgrades represented as subclasses of subclasses?
@@ -85,10 +84,9 @@ This may be auto-generated if we do “open” type
     * Background image 
 
 
-# Design Details: Game Data 
-Files, assets, preferences, and code that represent a particular game
-
-Classes
+# Game Data: 
+files, assets, preferences, and code that represent a particular game
+## Classes
 * XML data:
     * Tags:
         * num_towers
@@ -148,35 +146,8 @@ XML Basic Design
 <money>
 ```
 
-# Design Details: Game Player
-program that loads the game data and uses the game engine to run a particular game
-## View
-Classes:
-* BattleGrid: Grid that contains the towers, enemies, etc.
-* EventHandler: To drag and drop ALL THE THINGS
-* EnemyAnimator: Handles animation of the enemy (any cool effects?), holds all of the animation effects
-* WeaponAnimator: Handles animation of weapons
-## Model（Back end）
-* XML Loader: Loads information from game engine 
-* Abstract enemy, tower classes
+Example XML Game- Bloons
 
-
-## Controller
-Classes:
-* Tower Manager
-* Game Setting Manager
-
-### Model
-GamePlayModel: primary class containing all game objects, updates grid
-Tower: fires weapons, has cost
-Enemy
-Grid: represents the area of gameplay, enemies move along paths in the grid
-Weapon
-Cell: point on the grid, collisions of weapons and enemies occur within cells
-Collision: has enemy and weapon attributes, effect of collision is updated on the enemy object
-
-#Example Data
-Example Bloons Game
 ```xml
 
 <isValid> true </isValid>
@@ -247,21 +218,42 @@ Example Bloons Game
 
 ```
 
-# Example Games
+# Game Player: 
+program that loads the game data and uses the game engine to run a particular game
+## View
+### Classes:
+* BattleGrid: Grid that contains the towers, enemies, etc.
+* EventHandler: To drag and drop ALL THE THINGS
+* EnemyAnimator: Handles animation of the enemy (any cool effects?), holds all of the animation effects
+* WeaponAnimator: Handles animation of weapons
+## Model（Back end）
+* XML Loader: Loads information from game engine 
+* Abstract enemy, tower classes
 
+
+## Controller
+* Tower Manager
+* Game Setting Manager
+
+### Model
+GamePlayModel: primary class containing all game objects, updates grid
+Tower: fires weapons, has cost
+Enemy
+Grid: represents the area of gameplay, enemies move along paths in the grid
+Weapon
+Cell: point on the grid, collisions of weapons and enemies occur within cells
+Collision: has enemy and weapon attributes, effect of collision is updated on the enemy object
+
+#Example Data
+Example Bloons Game
+
+# Design Details
+
+# Example Games
 
 # Design Considerations
 We will need to consider the exact information that needs to be included in the XML file. This file is meant to encompass all game data/settings that are defined by the game author, so we must decide the type of data that will be in the XML. We also need to determine how to transition from the game authoring environment to the game playing environment.
 
-### Game Playing Environment considerations
+### Game Playing Environment Considerations
 Some design choices we considered was how to update the position of the enemies. For some types of Tower Defense games, the enemies move along a path, but in other types, the enemies move straight across the screen. We decided to use a grid to represent the space in which the enemies move, and their paths will be defined by the cells on the grid. Moving forward, we will have to decide if we want to detect collisions from the occupants of a single cell, or if two objects have the same x and y coordinates. The advantage of using the cell method is that it is easier to detect collisions, but it also requires handling the case when multiple enemies occupy the same cell.
-
-### Game Authoring Environment considerations
-
-
-
-
-
-
-
 
