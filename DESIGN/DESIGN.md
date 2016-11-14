@@ -1,5 +1,5 @@
 # Introduction
-Our group will be implementing a game authoring and playing environment for tower defense games. We will need to support different types of tower defense games, such as Bloons and Plants vs. Zombies. Our design will
+Our group will be implementing a game authoring and playing environment for tower defense games. We will need to support different types of tower defense games, such as Bloons and Plants vs. Zombies, which means we need the design to be very flexible in what kind of decisions it allows the user to make when creating a game and how a player interacts with the game. 
 
 # Overview
 At a high level, this project is divided into the "game authoring environment" and the "game player". The authoring environment will allow users to create their tower defense game and define settings. These settings and specifications will be recorded in an XML file, which will be used by the game player program to load the game and allow a user to play it. With this design, the primary means of communication between these two parts is the XML file. The only information the game player program needs to load the game is the game data, which the game authoring environment provides in the XML file. 
@@ -9,7 +9,7 @@ In the game player, we are dividing the work into parsing the xml file, using th
 
 # User Interface
 
-The user interface will contain two toolbars: a main toolbar and a tabbed-toolbar. The main toolbar will give the user the ability to open another, previously saved game, see the title of the current game design, and the ability to close the window. The side toolbar contains the subcomponents of the game that the designer can change. This would include components such as game conditions, enemies, weapons, towers, and path. Each component will change the main screen with its particular elements such as choosing the image of the enemy, its speed, etc.
+The user interface will contain two toolbars: a main toolbar and a tabbed-toolbar. The main toolbar will give the user the ability to open another, previously saved game, create a new game, see the title of the current game design, and the ability to close the window. The side toolbar contains the subcomponents of the game that the designer can change. This would include components such as game conditions, enemies, weapons, towers, and path. Each component will change the main screen with its particular elements such as choosing the image of the enemy, its speed, etc.
 
 ### Game Authoring Environment Considerations
 Program of visual tools for placing, specifying, editing, and combining general game elements together to make a particular game
@@ -282,3 +282,5 @@ they need the backend to perform. Then, the game engine will implement these int
 then use observable observer design pattern to update the necessary view components. By doing this we are hiding from 
 the view how we implement the changes in the backend and by using the Observer patter, we are able to signal to the
 necessary front end components.
+
+### Game Authoring Environment considerations
