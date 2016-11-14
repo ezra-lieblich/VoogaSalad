@@ -1,5 +1,10 @@
 package gameauthoringenvironment.view.tower;
 
+/**
+ * 
+ * Interface to communicate with the game engine about changes in the tower settings
+ *
+ */
 public interface ITowerToEngine {
 
     /**
@@ -8,4 +13,6 @@ public interface ITowerToEngine {
      * @param towerImage
      */
     public void setTowerImage (int towerImageID);
+
+    public void setTowerFrequency (int towerFrequency);
 }

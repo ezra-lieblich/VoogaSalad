@@ -1,5 +1,13 @@
 package gameauthoringenvironment.view.level;
 
-public class LevelView {
+import javafx.scene.Node;
+
+public class LevelView implements ILevelView {
+
+    @Override
+    public Node getInstanceAsNode () {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
 }

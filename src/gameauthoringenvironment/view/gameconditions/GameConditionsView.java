@@ -1,5 +1,5 @@
 package gameauthoringenvironment.view.gameconditions;
 
-public class GameConditionsView {
+public class GameConditionsView implements IGameConditionsView {
 
 }

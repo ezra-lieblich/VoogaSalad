@@ -1,5 +1,7 @@
 package gameauthoringenvironment.view.level;
 
+import javafx.scene.Node;
+
 /**
  * 
  * Communicates with the model to indicate when a new level was chosen
@@ -9,8 +11,8 @@ public interface ILevelView {
 
     /**
      * 
-     * @param level
+     * @return node of level view
      */
-    public void setLevel(int level);
-    
+    public Node getInstanceAsNode ();
+
 }
