@@ -4,12 +4,52 @@ public class Weapon {
 	
 	private int ID;
 	private double demage;
-	private double speed;
+	private double speedX;
+	private double speedY;
 
-	public Weapon(int ID, double demage, double speed) {
+	private String image;
+	private double xCoordinate;
+	private double yCoordinate;
+	
+	
+	public Weapon(int ID, double demage, double speedX, double speedY, String image) {
 		this.ID = ID;
 		this.demage = demage;
-		this.speed = speed;
+		this.speedX = speedX;
+		this.speedY  = speedY;
+		this.image = image;
+	}
+	
+	
+	double getSpeedX(){
+		return this.speedX;
+	}
+	
+	double getSpeedY(){
+		return this.speedY;
+	}
+	
+	/*
+	 * can factor out to a moving object class with enemy class
+	 */
+	double getX() {
+		return xCoordinate;
+	}
+
+	void setX(double xCoordinate) {
+		this.xCoordinate = xCoordinate;
+	}
+
+	double getY() {
+		return yCoordinate;
+	}
+
+	void setY(double yCoordinate) {
+		this.yCoordinate = yCoordinate;
+	}
+	
+	String getImage(){
+		return this.image;
 	}
 
 	int getID() {
@@ -28,13 +68,7 @@ public class Weapon {
 		this.demage = demage;
 	}
 
-	double getSpeed() {
-		return speed;
-	}
 
-	void setSpeed(double speed) {
-		this.speed = speed;
-	}
 
 	
 	

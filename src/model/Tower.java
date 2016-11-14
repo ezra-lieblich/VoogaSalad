@@ -3,16 +3,39 @@ package model;
 public class Tower {
 	
 	private double attackingRange;
-	private double fireRate;
+	private int fireRate; // number of interation or update
 	private double cost;
 	private int weaponType;
+	private String image;
+	private int ID;  // towerType
+	private int counter;
 	
-	public Tower (double attackingRange,double fireRate, double cost, int weapon ){
+	
+	public Tower (int ID, double attackingRange,int fireRate, double cost, int weapon, String image){
 		this.attackingRange = attackingRange;
 		this.fireRate = fireRate;
 		this.cost = cost;
 		this.weaponType = weapon;
-		
+		this.image = image;
+		this.ID = ID;
+		this.counter = 0;
+	}
+	
+	Boolean isFiring(){
+		if(counter % fireRate == 0){
+			counter++;
+			return true;
+		}
+		counter++;
+		return false;
+	}
+	
+	int getType(){
+		return this.ID;
+	}
+	
+	String getImage(){
+		return this.image;
 	}
 
 	double getAttackingRange() {
@@ -23,11 +46,11 @@ public class Tower {
 		this.attackingRange = attackingRange;
 	}
 
-	double getFireRate() {
+	int getFireRate() {
 		return fireRate;
 	}
 
-	void setFireRate(double fireRate) {
+	void setFireRate(int fireRate) {
 		this.fireRate = fireRate;
 	}
 
