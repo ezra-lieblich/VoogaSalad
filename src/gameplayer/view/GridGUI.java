@@ -14,10 +14,15 @@ public class GridGUI {
 	
 	public GridGUI(){
 		this.grid = new Pane();
+		styleGrid();
 	}
 	
 	public Pane getGrid(){
 		return this.grid;
+	}
+	
+	private void styleGrid(){
+		grid.getStyleClass().add("grid");
 	}
 	
 	public void populateGrid(){

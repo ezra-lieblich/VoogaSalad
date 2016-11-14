@@ -29,7 +29,7 @@ public class GameGUI {
 		this.mainScreen = new BorderPane();
 		this.graphics = new GraphicsLibrary();
 		this.grid = new GridGUI();
-		this.dragDrop = new DragDropView(this); 
+		this.dragDrop = new DragDropView(this.grid); 
 		
 	}
 	
@@ -40,8 +40,8 @@ public class GameGUI {
 		return this.scene;
 	}
 	
-	public VBox getLeftPane(){
-		return this.leftPane;
+	public GridGUI getGrid(){
+		return this.grid;
 	}
 	
 	private void createScene(){
@@ -51,10 +51,11 @@ public class GameGUI {
 	
 	
 	private void createGrid(){
-		this.leftPane = graphics.createVBoxPane(SCENE_WIDTH/2, SCENE_HEIGHT*.75);
-		this.leftPane.getStyleClass().add("grid");
-		this.leftPane.getChildren().addAll(grid.getGrid());	
-		this.mainScreen.setLeft(leftPane);
+		//this.leftPane = graphics.createVBoxPane(SCENE_WIDTH/2, SCENE_HEIGHT*.75);
+		//this.leftPane.getStyleClass().add("grid");
+		//this.leftPane.getChildren().addAll(grid.getGrid());	
+		//this.mainScreen.setLeft(leftPane);
+		this.mainScreen.setCenter(grid.getGrid());
 	}
 	
 	

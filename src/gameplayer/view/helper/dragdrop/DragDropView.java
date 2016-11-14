@@ -26,9 +26,9 @@ public class DragDropView {
 	private GraphicsLibrary graphicLib;
 	public static final int DEFENSIVEWIDTH = 50;
 	public static final int DEFENSIVEHEIGHT = 50;
-	private GameGUI game;
+	private GridGUI game;
 
-	public DragDropView(GameGUI game) {
+	public DragDropView(GridGUI game) {
 		this.dragDropPane = new TabPane();
 		this.tabs = new ArrayList<Tab>();
 		this.graphicLib = new GraphicsLibrary();
@@ -68,7 +68,7 @@ public class DragDropView {
 		int rIndex = 0;
 		for (String image:imageLocations){
 			ImageView currentImage = graphicLib.createImageView(graphicLib.createImage(image));
-			DragDrop dragger = new DragDrop(currentImage, this.game.getLeftPane());
+			DragDrop dragger = new DragDrop(currentImage, this.game.getGrid());
 			dragger.makeDraggable();
 			dragger.detectDrag();
 			graphicLib.setImageViewParams(currentImage, DEFENSIVEWIDTH, DEFENSIVEHEIGHT);
