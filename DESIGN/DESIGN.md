@@ -16,6 +16,7 @@ Program of visual tools for placing, specifying, editing, and combining general 
 ## View
 Classes:
 * GameConditions (number of rounds, health, money…)
+     *
 * EditingInterface: Interface to create the game 
 * EnemyView: Displays all of the available enemy images, contains dropdowns/input fields to set enemy settings
 * WeaponView: Displays input fields for weapon settings
