@@ -9,6 +9,10 @@ import javafx.scene.Node;
  */
 public interface ITowerView {
     
+    /**
+     * To be seen by the IDesignScene class
+     * @return Node of the tower view
+     */
     public Node getNodeAsInstance();
 
 }

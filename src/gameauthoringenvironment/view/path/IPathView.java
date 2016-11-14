@@ -1,7 +1,6 @@
 package gameauthoringenvironment.view.path;
 
 import javafx.scene.Node;
-import javafx.scene.image.ImageView;
 
 /**
  * 

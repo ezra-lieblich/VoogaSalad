@@ -1,8 +1,5 @@
 package gameauthoringenvironment.view.tower;
 
-import javafx.scene.image.ImageView;
-
-
 public interface ITowerToEngine {
 
     /**
@@ -10,5 +7,5 @@ public interface ITowerToEngine {
      * 
      * @param towerImage
      */
-    public void setTowerImage (ImageView towerImage);
+    public void setTowerImage (int towerImageID);
 }
