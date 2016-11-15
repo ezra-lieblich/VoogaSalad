@@ -1,4 +1,4 @@
-package gameauthoringenvironment.view.createscene;
+package gameauthoringenvironment.view.createscene.toolbar;
 
 import javafx.scene.Node;
 

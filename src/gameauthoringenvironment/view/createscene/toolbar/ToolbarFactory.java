@@ -1,5 +1,4 @@
-package gameauthoringenvironment.view.createscene;
-
+package gameauthoringenvironment.view.createscene.toolbar;
 
 public class ToolbarFactory {
 
