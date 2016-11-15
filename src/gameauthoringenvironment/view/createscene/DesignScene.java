@@ -1,5 +1,7 @@
 package gameauthoringenvironment.view.createscene;
 
+import gameauthoringenvironment.view.createscene.sidetabbedtoolbar.ISideTabbedToolbar;
+import gameauthoringenvironment.view.createscene.sidetabbedtoolbar.SideTabbedToolbarFactory;
 import gameauthoringenvironment.view.createscene.toolbar.IToolbar;
 import gameauthoringenvironment.view.createscene.toolbar.ToolbarFactory;
 import javafx.scene.Group;
@@ -11,6 +13,7 @@ public class DesignScene implements IDesignScene {
     private Scene myScene;
     private Group myRoot;
     private IToolbar myToolbar;
+    private ISideTabbedToolbar mySideTabbedToolbar;
     private static final int SIZE = 500;
     private BorderPane authoringView;
     
@@ -18,13 +21,15 @@ public class DesignScene implements IDesignScene {
         myRoot = new Group();
         myScene = new Scene(myRoot);
         myToolbar = ToolbarFactory.build(SIZE, SIZE/20);
+        mySideTabbedToolbar = SideTabbedToolbarFactory.build(SIZE, SIZE);
         authoringView = new BorderPane();
         myRoot.getChildren().add(authoringView);
         initScene();
     }
     
     private void initScene() {
-        authoringView.getChildren().add(myToolbar.getInstanceAsNode());
+        authoringView.setTop(myToolbar.getInstanceAsNode());
+        authoringView.setRight(mySideTabbedToolbar.getInstanceAsNode());
     }
     
     @Override
