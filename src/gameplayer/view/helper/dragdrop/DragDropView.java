@@ -56,7 +56,7 @@ public class DragDropView {
 	/**
 	 * Creates a new tab and adds it to the main tabpane
 	 * @param title
-	 * @return
+	 * @return The new tab object
 	 */
 	public Tab createTab(String title) {
 		Tab newTab = new Tab();
