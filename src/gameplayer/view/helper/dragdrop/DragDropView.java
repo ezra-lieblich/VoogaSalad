@@ -75,10 +75,8 @@ public class DragDropView {
 		int rIndex = 0;
 		for (String image:imageLocations){
 			ImageView currentImage = graphicLib.createImageView(graphicLib.createImage(image));
-			ImageView copy = graphicLib.createImageView(graphicLib.createImage(image));
-			System.out.println("CurrentImage: "+currentImage);
 			dragDrop.init(currentImage, target);
-			objects.add(currentImage);
+			objects.add(currentImage);//TODO: do I need this?
 			graphicLib.setImageViewParams(currentImage, DEFENSIVEWIDTH, DEFENSIVEHEIGHT);
 			grid.add(currentImage ,cIndex, rIndex);
 			rIndex++;
