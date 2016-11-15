@@ -38,8 +38,11 @@ public class DragDropView {
 		this.graphicLib = new GraphicsLibrary();
 		this.dragDrop = new DragDrop();
 		this.objects = new ArrayList<ImageView>();
-		//this.game = game;
-
+		setTabPaneStyle();
+	}
+	
+	private void setTabPaneStyle(){
+		this.dragDropPane.getStyleClass().add("dragDropPane");
 	}
 	
 	public void setDragTarget(Pane target){
