@@ -59,7 +59,7 @@ public class GameGUI {
 	
 	private void styleGrid(){
 		BorderPane.setAlignment(this.grid.getGrid(), Pos.CENTER);
-		BorderPane.setMargin(this.grid.getGrid(), new Insets(12,50,12,12));
+		BorderPane.setMargin(this.grid.getGrid(), new Insets(10,50,10,0));
 	}
 	
 	private void initDragDropPane(){
