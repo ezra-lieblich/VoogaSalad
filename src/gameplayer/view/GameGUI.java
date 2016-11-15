@@ -2,6 +2,8 @@ package gameplayer.view;
 
 import gameplayer.view.helper.GraphicsLibrary;
 import gameplayer.view.helper.dragdrop.DragDropView;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -51,9 +53,14 @@ public class GameGUI {
 	
 	
 	private void createGrid(){
+		styleGrid();
 		this.mainScreen.setCenter(grid.getGrid());
 	}
 	
+	private void styleGrid(){
+		BorderPane.setAlignment(this.grid.getGrid(), Pos.CENTER);
+		BorderPane.setMargin(this.grid.getGrid(), new Insets(12,50,12,12));
+	}
 	
 	private void initDragDropPane(){
 		dragDrop.setDragTarget(grid.getGrid());
