@@ -29,6 +29,11 @@ public class DragDrop {
 		this.graphicLib = new GraphicsLibrary();
 	}
 
+	/**
+	 * Initializes the drag functionality for an element and its target location
+	 * @param source This is the source that is to be dragged and dropped
+	 * @param target This is the target that the image is to be dropped into
+	 */
 	public void init(ImageView source, Node target) {
 		detectDrag(source, target);
 	}

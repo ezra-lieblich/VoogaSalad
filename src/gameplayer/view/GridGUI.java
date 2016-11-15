@@ -1,6 +1,6 @@
 package gameplayer.view;
 
-import javafx.scene.layout.BorderPane;
+
 import javafx.scene.layout.Pane;
 
 /**
@@ -11,6 +11,9 @@ import javafx.scene.layout.Pane;
 public class GridGUI {
 	
 	private Pane grid;
+	public static final int GRID_WIDTH = 800;
+	public static final int GRID_HEIGHT = 600;
+	
 	
 	public GridGUI(){
 		this.grid = new Pane();
@@ -23,6 +26,8 @@ public class GridGUI {
 	
 	private void styleGrid(){
 		grid.getStyleClass().add("grid");
+		grid.setMaxWidth(GRID_WIDTH);
+		grid.setMaxHeight(GRID_HEIGHT);
 	}
 	
 	public void populateGrid(){
