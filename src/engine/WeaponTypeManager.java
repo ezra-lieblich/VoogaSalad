@@ -1,5 +1,5 @@
 package engine;
 
-public class WeaponTypeManager {
-
+public class WeaponTypeManager extends DataManager<WeaponType>{
+	
 }
