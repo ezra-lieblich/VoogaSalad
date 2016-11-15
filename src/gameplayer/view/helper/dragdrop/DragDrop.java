@@ -19,39 +19,47 @@ public class DragDrop {
 	//private Node target;
 
 	// get rid of this later
+	private ImageView source;
 
 	public DragDrop() {
 	}
 
 	
 	public void init(ImageView source, Node target){
-		System.out.println("source: "+source+", target: "+target);
+		//System.out.println("source: "+source+", target: "+target);
 		detectDrag(source, target);
 	}
 
 	private void initDragDetectionIcon(ImageView source){
+		//System.out.println("Current source: "+source.getImage());
 		Dragboard db = source.startDragAndDrop(TransferMode.MOVE);
-		System.out.println(db.getImage());
 		ClipboardContent content = new ClipboardContent();
 		content.putString("blahy poo");
 		db.setContent(content);	
 	}
 	
 	private void addImagetoDroppedLoc(double xpos, double ypos, Node target, ImageView source){
+		System.out.println("Original source: "+source.getImage());
 		ImageView copy = new ImageView(source.getImage());
 		((Pane) target).getChildren().add(copy);
 		copy.setX(xpos);
 		copy.setY(ypos);
 	}
 	
+	private void setSource(ImageView source){
+		this.source = source;
+	}
+	
 	private void detectDrag(ImageView source, Node target) {
+		System.out.println("Source in detectDrag: "+source.getImage());
 
 
 		source.setOnDragDetected(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
+				setSource(source);
+				System.out.println("Currently clicking on: "+source.getImage());
 				/* drag was detected, start drag-and-drop gesture */
-				System.out.println(source.getImage());
 				initDragDetectionIcon(source);
 				event.consume();
 			}
@@ -82,18 +90,17 @@ public class DragDrop {
 		});
 
 		target.setOnDragDropped(event -> {
-			System.out.println("on drag dropped!");
+			//System.out.println("on drag dropped!");
 			// Dragboard db = event.getDragboard();
 			// System.out.println("The db likely null: "+db.getImage());
-			System.out.println("in db.hasImage()");
+			//System.out.println("in db.hasImage()");
+			System.out.println("Source in setOnDragDropped: "+source.getImage());
 			double xcoord = event.getSceneX();
 			double ycoord = event.getSceneY();
-			// ImageView imageView = new ImageView(source/* db.getImage() */);
-			// imageView.setFitHeight(30);
-			// imageView.setFitWidth(30);
-			// imageView.setPreserveRatio(true);
-
-			addImagetoDroppedLoc(xcoord, ycoord, target, source);
+			ImageView copy = new ImageView(this.source.getImage());
+			((Pane) target).getChildren().add(copy);
+			copy.setX(xcoord);
+			copy.setY(ycoord);
 			event.setDropCompleted(true);
 			// }
 
