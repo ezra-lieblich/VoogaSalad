@@ -11,6 +11,7 @@ public class GamePlayerController {
 		view = gui; 
 		XMLParser authoringFileReader = new XMLParser("../../player.samplexml/test.xml");
 		
+		
 	}
 	
 
