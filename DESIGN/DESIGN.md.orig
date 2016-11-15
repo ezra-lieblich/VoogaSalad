@@ -1,11 +1,15 @@
 # Introduction
-Our group will be implementing a game authoring and playing environment for tower defense games. We will need to support different types of tower defense games, such as Bloons and Plants vs. Zombies, which means we need the design to be very flexible in what kind of decisions it allows the user to make when creating a game and how a player interacts with the game. 
+Our group will be implementing a game authoring and playing environment for tower defense games. We will need to support different types of tower defense games, such as Bloons and Plants vs. Zombies, which means we need the design to be very flexible in what kind of decisions it allows the user to make when creating a game and how a player interacts with the game.
 
 # Overview
+<<<<<<< HEAD
+At a high level, this project is divided into the "game authoring environment" and the "game player". The authoring environment will allow users to create their tower defense game and define settings. These settings and specifications will be recorded in an XML file, which will be used by the game player program to load the game and allow a user to play it. With this design, the primary means of communication between these two parts is the XML file. The only information the game player program needs to load the game is the game data, which the game authoring environment provides in the XML file.
+=======
 At a high level, this project is divided into the "game authoring environment" and the "game player". The authoring environment will allow users to create their tower defense game and define settings. These settings and specifications will be recorded in an XML file (run by the game engine).
 Once the user decides the play the game, the game player will accept the XML file from the game engine and load the game. With this design, the primary means of communication between these two parts is the XML file. The only information the game player program needs to load the game is the game data, which the game authoring environment provides in the XML file. 
+>>>>>>> aa401b0f2fd032950f0621e98cac1ddd75a10e39
 ##### Game Player
-In the game player, we are dividing the work into parsing the xml file, using the data to create the game logic (back end), and displaying the game to the user (front end). The back and front ends will communicate through controllers. There will be many controllers, each of which represent a type of view. Each of these controllers will pass data and modifications between the model and the view (using observables). 
+In the game player, we are dividing the work into parsing the xml file, using the data to create the game logic (back end), and displaying the game to the user (front end). The back and front ends will communicate through controllers. There will be many controllers, each of which represent a type of view. Each of these controllers will pass data and modifications between the model and the view (using observables).
 ##### Game Authoring
 The game authoring environment will communicate to the game engine through interfaces. When game authoring needs to set an item in the game engine, it will call the set interface, passing the necessary information to the game engine. The game authoring environment will not communicate with the game player.
 # User Interface
@@ -25,15 +29,19 @@ Program of visual tools for placing, specifying, editing, and combining general 
 
 ### Modules:
 * GameConditions (number of rounds, health, money…)
+<<<<<<< HEAD
+* EditingInterface: Interface to create the game
+=======
 * EditingInterface: Interface to create the game 
 *Each subcomponent of the modules will have an interface to pass necessary information to the game engine, along with an interface to create their particular view. In regards to the latter, each subcomponent will create its own pane and components so it is loaded in one main DesignScene, what is ultimately seen by the user.
+>>>>>>> aa401b0f2fd032950f0621e98cac1ddd75a10e39
 * Enemy: Displays all of the available enemy images, contains dropdowns/input fields to set enemy settings
     * EnemyView
     * EnemyImageView
     * EnemyReactionsView
     * EnemySpeedAndFrequencyView
 * Weapon: Displays input fields for weapon settings
-    * WeaponView 
+    * WeaponView
     * WeaponEffectView
     * WeaponImageView
 * Tower: Displays input fields for tower settings
@@ -44,7 +52,7 @@ Program of visual tools for placing, specifying, editing, and combining general 
     * TowerSpeedView
 * Level: Displays design options for each level
 
-## Game Engine (Model): 
+## Game Engine (Model):
 Framework of general Java classes to support any kind of game within a specific game genre
 
 ![Engine Model](data/EngineDesignMock.jpg "Structure of Game Engine Model")
@@ -65,7 +73,7 @@ with its main principles of the data not having to know about the front end and 
     - attackRange: Determines the distance at which the tower can attack enemies
     - fireRate/frequency: Determines how much time it takes the tower to reload and fire again.
     - Weapon instance
-    - Ground vs. Aerial 
+    - Ground vs. Aerial
     - Cost
     - Attack preference (first vs last)   
     - Image
@@ -87,11 +95,11 @@ with its main principles of the data not having to know about the front end and 
     * Speed
     * Image?
     * HP
-    * Layering? 
+    * Layering?
     * Death effect
     * Regen?
     * Image
-    * EnemyPath 
+    * EnemyPath
 This may be auto-generated if we do “open” type
 * Player: made using the game authoring environment, creates a user with # of lives, wealth, etc.
 * BattleGrid (of some sort)

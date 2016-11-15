@@ -1,5 +1,13 @@
 package gameauthoringenvironment.view.path;
 
-public class PathView {
+import javafx.scene.Node;
+
+public class PathView implements IPathView {
+
+    @Override
+    public Node getNodeAsInstance () {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
 }

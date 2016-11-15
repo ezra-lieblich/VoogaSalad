@@ -1,6 +1,7 @@
 package gameplayer.view.helper.dragdrop;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import gameplayer.view.GameGUI;
 import gameplayer.view.GridGUI;
@@ -11,6 +12,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 
 /**
  * Responsible for the tab pane that holds all of the defensive structures that
@@ -26,14 +28,25 @@ public class DragDropView {
 	private GraphicsLibrary graphicLib;
 	public static final int DEFENSIVEWIDTH = 50;
 	public static final int DEFENSIVEHEIGHT = 50;
-	private GameGUI game;
+	private Pane target;
+	private DragDrop dragDrop;
+	private List<ImageView> objects;
 
-	public DragDropView(GameGUI game) {
+	public DragDropView(/*GridGUI game*/) {
 		this.dragDropPane = new TabPane();
 		this.tabs = new ArrayList<Tab>();
 		this.graphicLib = new GraphicsLibrary();
-		this.game = game;
-
+		this.dragDrop = new DragDrop();
+		this.objects = new ArrayList<ImageView>();
+		setTabPaneStyle();
+	}
+	
+	private void setTabPaneStyle(){
+		this.dragDropPane.getStyleClass().add("dragDropPane");
+	}
+	
+	public void setDragTarget(Pane target){
+		this.target = target; 
 	}
 	
 	public TabPane getDragDropPane(){
@@ -43,7 +56,7 @@ public class DragDropView {
 	/**
 	 * Creates a new tab and adds it to the main tabpane
 	 * @param title
-	 * @return
+	 * @return The new tab object
 	 */
 	public Tab createTab(String title) {
 		Tab newTab = new Tab();
@@ -53,9 +66,6 @@ public class DragDropView {
 		return newTab;
 	}
 
-	private void populateTab(int tabIndex, Node content) {
-		tabs.get(tabIndex).setContent(content);
-	}
 
 	/**
 	 * Populates a tab with images to later drag and drop
@@ -68,9 +78,8 @@ public class DragDropView {
 		int rIndex = 0;
 		for (String image:imageLocations){
 			ImageView currentImage = graphicLib.createImageView(graphicLib.createImage(image));
-			DragDrop dragger = new DragDrop(currentImage, this.game.getLeftPane());
-			dragger.makeDraggable();
-			dragger.detectDrag();
+			dragDrop.init(currentImage, target);
+			objects.add(currentImage);//TODO: do I need this?
 			graphicLib.setImageViewParams(currentImage, DEFENSIVEWIDTH, DEFENSIVEHEIGHT);
 			grid.add(currentImage ,cIndex, rIndex);
 			rIndex++;

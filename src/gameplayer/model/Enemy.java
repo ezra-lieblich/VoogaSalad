@@ -1,6 +1,8 @@
 package gameplayer.model;
 
-public class Enemy {
+import java.util.Observable;
+
+public class Enemy extends Observable{
 	
 	private double movingSpeed;  
 	private double health;
@@ -18,12 +20,14 @@ public class Enemy {
 		
 	}
 	
-	public int getxDirection() {
+	public int getxDirection() { //heading
 		return xDirection;
 	}
 
-	public void setxDirection(int xDirection) {
+	public void setxDirection(int xDirection) { //heading
 		this.xDirection = xDirection;
+		setChanged();
+		notifyObservers();
 	}
 
 	public int getyDirection() {
@@ -32,10 +36,12 @@ public class Enemy {
 
 	public void setyDirection(int yDirection) {
 		this.yDirection = yDirection;
+		setChanged();
+		notifyObservers();
 	}
 
 
-	void setCurrentCell(Cell c){
+	void setCurrentCell(Cell c){ //don't think we need to notify observers of this change
 		this.currentCell = c;
 		this.xDirection = c.getNext().getX() - c.getX();
 		this.yDirection = c.getNext().getY() - c.getY();
@@ -51,6 +57,8 @@ public class Enemy {
 
 	void setX(double xCoordinate) {
 		this.xCoordinate = xCoordinate;
+		setChanged();
+		notifyObservers();
 	}
 
 	double getY() {
@@ -59,10 +67,14 @@ public class Enemy {
 
 	void setY(double yCoordinate) {
 		this.yCoordinate = yCoordinate;
+		setChanged();
+		notifyObservers();
 	}
 
-	void setImage(String image) {
+	void setImage(String image) { //might not need to notify observers here
 		this.image = image;
+		setChanged();
+		notifyObservers();
 	}
 
 	
@@ -76,6 +88,8 @@ public class Enemy {
 
 	void setMovingSpeed(double movingSpeed) {
 		this.movingSpeed = movingSpeed;
+		setChanged();
+		notifyObservers();
 	}
 
 	double getHealth() {
@@ -84,6 +98,8 @@ public class Enemy {
 
 	void setHealth(double d) {
 		this.health = d;
+		setChanged();
+		notifyObservers();
 	}
 
 }

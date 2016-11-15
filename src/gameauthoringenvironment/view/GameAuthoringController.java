@@ -1,5 +1,5 @@
 package gameauthoringenvironment.view;
 
-public class GameConditionsView {
+public class GameAuthoringController {
 
 }

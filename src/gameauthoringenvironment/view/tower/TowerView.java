@@ -1,5 +1,13 @@
 package gameauthoringenvironment.view.tower;
 
-public class TowerView {
+import javafx.scene.Node;
+
+public class TowerView implements ITowerView {
+
+    @Override
+    public Node getNodeAsInstance () {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
 }
