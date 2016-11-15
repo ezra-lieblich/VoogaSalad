@@ -101,7 +101,7 @@ public class GraphicsLibrary {
 		GridPane grid = new GridPane();
         grid.setHgap(hgap);
         grid.setVgap(vgap);
-        grid.setPadding(new Insets(25, 25, 25, 25));//TODO: change!
+        //grid.setPadding(new Insets(25, 25, 25, 25));//TODO: change!
         root.getChildren().add(grid);
         return grid;
 	}
