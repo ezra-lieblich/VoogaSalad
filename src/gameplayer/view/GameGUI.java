@@ -64,8 +64,8 @@ public class GameGUI {
 		
 		Tab tab = dragDrop.createTab("Blah test");
 		dragDrop.populateImageViewsToTab(tab, testImages);
-		Tab tab2 = dragDrop.createTab("Another text");
-		dragDrop.populateImageViewsToTab(tab2, testImages2);
+		//Tab tab2 = dragDrop.createTab("Another text");
+		//dragDrop.populateImageViewsToTab(tab2, testImages2);
 	}
 	
 }

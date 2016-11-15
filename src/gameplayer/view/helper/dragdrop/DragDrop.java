@@ -15,21 +15,21 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Pane;
 
 public class DragDrop {
-	private ImageView source;
-	private Node target;
+	//private ImageView source;
+	//private Node target;
 
 	// get rid of this later
 
-	public DragDrop(ImageView source, Node target) {
-		this.source = source;
-		this.target = target;
+	public DragDrop() {
 	}
 
-	private void enableDragging(Node node) {
-
+	
+	public void init(ImageView source, Node target){
+		System.out.println("source: "+source+", target: "+target);
+		detectDrag(source, target);
 	}
 
-	private void initDragDetectionIcon(){
+	private void initDragDetectionIcon(ImageView source){
 		Dragboard db = source.startDragAndDrop(TransferMode.MOVE);
 		System.out.println(db.getImage());
 		ClipboardContent content = new ClipboardContent();
@@ -37,18 +37,22 @@ public class DragDrop {
 		db.setContent(content);	
 	}
 	
-	private void addImagetoDroppedLoc(){
-		
+	private void addImagetoDroppedLoc(double xpos, double ypos, Node target, ImageView source){
+		ImageView copy = new ImageView(source.getImage());
+		((Pane) target).getChildren().add(copy);
+		copy.setX(xpos);
+		copy.setY(ypos);
 	}
 	
-	public void detectDrag() {
+	private void detectDrag(ImageView source, Node target) {
 
 
 		source.setOnDragDetected(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
 				/* drag was detected, start drag-and-drop gesture */
-				initDragDetectionIcon();
+				System.out.println(source.getImage());
+				initDragDetectionIcon(source);
 				event.consume();
 			}
 		});
@@ -89,9 +93,7 @@ public class DragDrop {
 			// imageView.setFitWidth(30);
 			// imageView.setPreserveRatio(true);
 
-			((Pane) target).getChildren().add(source);
-			source.setX(xcoord);
-			source.setY(ycoord);
+			addImagetoDroppedLoc(xcoord, ycoord, target, source);
 			event.setDropCompleted(true);
 			// }
 
