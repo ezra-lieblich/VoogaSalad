@@ -4,15 +4,22 @@ import java.util.List;
 
 public abstract class DataManager <E> {
     List<E> data;
-    int id;
+    int nextId;
+    
     
     public void addEntry(E entry) {
         data.add(entry);
-        id++;
+        nextId++;
     }
     
     public void removeEntry(E entry) {
         data.remove(entry);
     }
-        
+    
+    public int getNextId() {
+        return nextId;
+    }
+    
+    public abstract E create();
+    
 }
