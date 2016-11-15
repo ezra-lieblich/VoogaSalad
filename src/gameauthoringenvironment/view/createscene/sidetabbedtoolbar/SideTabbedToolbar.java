@@ -6,8 +6,15 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 
 
+/**
+ * Much of this and the idea for the ribbon menu comes from the following link:
+ * https://introjava.wordpress.com/2012/04/08/java-fx-2-ribbon-menu/
+ * 
+ * @author Kayla Schulz
+ *
+ */
 public class SideTabbedToolbar implements ISideTabbedToolbar {
-
+    //TODO: TabPane or Ribbon Menu?
     private TabPane myTabPane;
 
     public SideTabbedToolbar (int aWidth, int aHeight) {
