@@ -2,7 +2,7 @@ package engine;
 
 import java.util.List;
 
-public abstract class DataManager <E> {
+public abstract class EntityManager <E extends Entity> {
     List<E> data;
     int nextId;
     
