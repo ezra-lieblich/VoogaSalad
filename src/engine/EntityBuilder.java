@@ -20,6 +20,11 @@ public class EntityBuilder<E extends Entity> {
         entity.setId(id);
     }
     
+    public void buildSize(int size) {
+        entity.setSize(size);
+    }
+    
+    
     protected E getEntity() {
         return entity;
     }
