@@ -10,7 +10,7 @@ public class GamePlayerFactory {
 
 	public GamePlayerFactory(String fileLocation){
 		authoringFileReader = new XMLParser(fileLocation);
-		System.out.println(authoringFileReader.getVariableValues("level1"));
+//		System.out.println(authoringFileReader.getTagsUnder("level1"));
 	}
 	
 	public HashMap<String, Double> getGameSetting(){

@@ -22,6 +22,7 @@ public class main extends Application {
 		GameGUI game = new GameGUI(); 
 		GamePlayerController playerController = new GamePlayerController(game);
 		Scene scene = game.init();
+		
 		s.setTitle(TITLE);
 		s.setScene(scene);
 		s.show();

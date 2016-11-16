@@ -6,32 +6,42 @@
 		<gold>1000</gold>
 		<levelnumber>10</levelnumber>
 	</init>
-	
 	<level1>
 		<dimension>
 			<width>10</width>
 			<height>10</height>
 		</dimension>
 		<path>
-			<coordinate> 0,0 </coordinate>
-			<coordinate> 0,1 </coordinate>
-			<coordinate> 0,2 </coordinate>
-			<coordinate> 0,3 </coordinate>
-			<coordinate> 0,4 </coordinate>
-			<coordinate> 0,5 </coordinate>
-			<coordinate> 0,6 </coordinate>
-			<coordinate> 0,7 </coordinate>
-			<coordinate> 0,8 </coordinate>
-			<coordinate> 0,9 </coordinate>
+			<coordinate>0,0</coordinate>
+			<coordinate>0,1</coordinate>
+			<coordinate>0,2</coordinate>
+			<coordinate>0,3</coordinate>
+			<coordinate>0,4</coordinate>
+			<coordinate>0,5</coordinate>
+			<coordinate>0,6</coordinate>
+			<coordinate>0,7</coordinate>
+			<coordinate>0,8</coordinate>
+			<coordinate>0,9</coordinate>
 		</path>
 	</level1>
-	
 	<level2>
-	
+		<dimension>
+			<width>10</width>
+			<height>10</height>
+		</dimension>
+		<path>
+			<coordinate>0,0</coordinate>
+			<coordinate>0,1</coordinate>
+			<coordinate>0,2</coordinate>
+			<coordinate>0,3</coordinate>
+			<coordinate>0,4</coordinate>
+			<coordinate>0,5</coordinate>
+			<coordinate>0,6</coordinate>
+			<coordinate>0,7</coordinate>
+			<coordinate>0,8</coordinate>
+			<coordinate>0,9</coordinate>
+		</path>
 	</level2>
-	
-	
-	
 	
 	<background> images/butterfly </background>
 		<towerlist>
