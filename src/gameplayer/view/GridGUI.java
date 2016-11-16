@@ -1,5 +1,8 @@
 package gameplayer.view;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import gameplayer.model.Cell;
 import gameplayer.model.Grid;
 import gameplayer.model.Tower;
@@ -25,21 +28,35 @@ public class GridGUI {
 	private double cellWidth;
 	private double cellHeight;
 	private GraphicsLibrary graphicsLib;
+	private List<int[]> path;
 
 	public static final String TEST_URL = "https://images.designtrends.com/wp-content/uploads/2016/03/30060819/Elegant-Night-Stay-Anime-Background.jpg"; // TODO:
 																																							// dummy
 																																							// url
 
-	public GridGUI(int rows, int columns) {
+	public GridGUI(int rows, int columns/*, List<int[]> path*/) {
 		this.grid = new Pane();
 		this.graphicsLib = new GraphicsLibrary();
 		this.rows = rows;
 		this.cols = columns;
 		this.cellWidth = GRID_WIDTH / cols;
 		this.cellHeight = GRID_HEIGHT / rows;
-		styleGrid(TEST_URL);
+		//this.path = path;
 	}
 
+	private void initDummyPath(){
+		int[] stuff  = {5,6};
+		int []stuff1 = {10,10};
+		this.path = new ArrayList<int[]>();
+		this.path.add(stuff);
+		this.path.add(stuff1);
+	}
+	public void init(){
+		initDummyPath(); //TODO: get rid of
+		styleGrid(TEST_URL);
+		populatePath(this.path);
+		
+	}
 	public Pane getGrid() {
 		return this.grid;
 	}
@@ -66,21 +83,32 @@ public class GridGUI {
 		graphicsLib.setImageViewParams(towerImage, cellWidth * col, cellHeight * row, cellWidth, cellHeight);
 		this.grid.getChildren().add(towerImage);
 	}
+
+	private void populatePath( List<int[]> path) { //TODO: change how path is being sent
+		System.out.println("Populate path!");
+		for (int i = 0; i < path.size(); i++) {
+			double x = path.get(i)[0];
+			double y = path.get(i)[1];
+			ImageView pathImage = graphicsLib.createImageView(graphicsLib.createImage("kaneki.jpg"));
+			graphicsLib.setImageViewParams(pathImage, cellWidth, cellHeight);
+			this.grid.getChildren().add(pathImage);
+			pathImage.setX(x*cellWidth);
+			pathImage.setY(y*cellHeight);
+		}
+	}
 	
 
 	// TOWER AND PATH ONLY
 	public void populateGrid(Grid grid) {
+		//populatePath(grid, gri)
+		/*
 		Cell[][] gridArr = grid.getGrid();
-
 		for (int row = 0; row < gridArr.length; row++) {
 			for (int col = 0; col < gridArr[row].length; col++) {
-				if (gridArr[col][row].getTower() != null) {
-					// add tower
-					addTowerToGrid(gridArr[col][row].getTower(), row, col);
-				}
+
 			}
 		}
-
+		*/
 	}
 
 }

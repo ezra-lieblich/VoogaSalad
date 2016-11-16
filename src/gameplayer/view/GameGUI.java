@@ -1,5 +1,7 @@
 package gameplayer.view;
 
+import java.util.List;
+
 import gameplayer.view.buttonPanel.ButtonPanel;
 import gameplayer.view.buttonPanel.GamePlayButtonPanel;
 import gameplayer.view.helper.GraphicsLibrary;
@@ -32,11 +34,12 @@ public class GameGUI {
 	private DragDropView dragDrop;
 	private GamePlayButtonPanel buttonPanel;
 	private StatsDisplay statsDisplay;
+	private List path;
 	
 	public GameGUI(int rows, int columns){
 		this.mainScreen = new BorderPane();
 		this.graphics = new GraphicsLibrary();
-		this.grid = new GridGUI(rows, columns); 
+		this.grid = new GridGUI(rows, columns/*, path*/); 
 		this.dragDrop = new DragDropView(); 
 		this.buttonPanel = new GamePlayButtonPanel();
 	}
@@ -48,6 +51,10 @@ public class GameGUI {
 		addButtonPanel();
 		initStatsDisplay(gold, lives, level);
 		return this.scene;
+	}
+	
+	public void setPath(List<int[]> path){
+		this.path = path;
 	}
 	
 	public GridGUI getGrid(){
@@ -68,6 +75,7 @@ public class GameGUI {
 	private void createGrid(){
 		styleGrid();
 		this.mainScreen.setCenter(grid.getGrid());
+		grid.init();
 	}
 	
 	private void styleGrid(){
