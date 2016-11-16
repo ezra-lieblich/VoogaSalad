@@ -19,12 +19,19 @@ public class GamePlayerController {
 	
 	private GamePlayerFactory loader; 
 	private GameGUI view;
+	private XMLParser parser;
 	
 	public GamePlayerController(GameGUI gui){
 		//use xml parser to create classes. 
 		view = gui; 
-		loader = new GamePlayerFactory("player.samplexml/test.xml");//hardcoded
+		parser = new XMLParser("player.samplexml/test.xml"); //hardcoded
+		loader = new GamePlayerFactory(parser); 
 		//System.out.println(authoringFileReader.getVariableValues("height"));
+		setGUIsettings();
+	}
+	
+	private void setGUIsettings() {
+		
 	}
 	
 	
@@ -39,6 +46,7 @@ public class GamePlayerController {
 		animation.play();
 	}
 	*/
+	
 	
 
 }

@@ -152,6 +152,7 @@ public class GamePlayModel {
 			else {
 				e.setX(e.getX() + e.getxDirection() * moveDist);
 				e.setY(e.getY() + e.getyDirection() * moveDist);
+				moveDist -= moveDist;
 			}
 			
 		}

@@ -8,8 +8,8 @@ public class GamePlayerFactory {
 	
 	XMLParser authoringFileReader;
 
-	public GamePlayerFactory(String fileLocation){
-		authoringFileReader = new XMLParser(fileLocation);
+	public GamePlayerFactory(XMLParser parser){
+		authoringFileReader = parser;
 //		System.out.println(authoringFileReader.getTagsUnder("level1"));
 	}
 	
