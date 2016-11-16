@@ -1,6 +1,8 @@
 package gameplayer.model;
 
-public class Weapon {
+import java.util.Observable;
+
+public class Weapon extends Observable{
 	
 	private int ID;
 	private double demage;
@@ -47,6 +49,8 @@ public class Weapon {
 
 	void setX(double xCoordinate) {
 		this.xCoordinate = xCoordinate;
+		setChanged();
+		notifyObservers();
 	}
 
 	double getY() {
@@ -55,6 +59,8 @@ public class Weapon {
 
 	void setY(double yCoordinate) {
 		this.yCoordinate = yCoordinate;
+		setChanged();
+		notifyObservers();
 	}
 	
 	String getImage(){

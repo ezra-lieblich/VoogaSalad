@@ -2,6 +2,8 @@ package usecases;
 
 public class SaveFromEngine {
 
+/*
+	
 	onUserSave(){
 		presentSaveFileDialog();
 	}
@@ -12,5 +14,7 @@ public class SaveFromEngine {
 			this.errorPresenter.presentIncompleteGameWarning();
 		}
 	}
+	
+*/
 	
 }

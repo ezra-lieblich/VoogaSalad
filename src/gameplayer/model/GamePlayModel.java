@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 
+import javafx.beans.property.SimpleListProperty;
+import javafx.collections.ObservableList;
+
 public class GamePlayModel {
 
 	private int cellSize;
@@ -12,8 +15,8 @@ public class GamePlayModel {
 	private int gridX;
 	private int gridY;
 
-	private List<Enemy> enemyOnGrid;
-	private List<Weapon> weaponOnGrid;
+	private ObservableList<Enemy> enemyOnGrid;
+	private ObservableList<Weapon> weaponOnGrid;
 	private int hitBuffer = 10; // initialize from xml
 	
 	private Map<Integer, Weapon> weaponTypes; // initialize in xml
@@ -33,8 +36,8 @@ public class GamePlayModel {
 		this.cellSize = cellSize;	
 		this.grid = new Grid(gridX, gridY);
 		gridArray = this.grid.getGrid();
-		enemyOnGrid = new ArrayList<Enemy>();
-		weaponOnGrid = new ArrayList<Weapon>();
+		enemyOnGrid = new SimpleListProperty<Enemy>();
+		weaponOnGrid = new SimpleListProperty<Weapon>();
 		this.gridX = gridX;
 		this.gridY = gridY;
 		this.numberOfLife = numberOfLife;
