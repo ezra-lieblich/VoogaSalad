@@ -17,7 +17,7 @@ import java.util.ResourceBundle;
  *
  */
 public class HomeSelection {
-	private final File INITIAL_DIRECTORY = new File("data");
+	private final File INITIAL_DIRECTORY = new File("player.samplexml");
 	private final File IMAGE_DIRECTORY = new File("Images");
 	public static final int WIDTH = 500;
 	public static final int HEIGHT = 500;
