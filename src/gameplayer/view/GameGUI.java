@@ -4,6 +4,7 @@ import gameplayer.view.buttonPanel.ButtonPanel;
 import gameplayer.view.buttonPanel.GamePlayButtonPanel;
 import gameplayer.view.helper.GraphicsLibrary;
 import gameplayer.view.helper.dragdrop.DragDropView;
+import gameplayer.view.statsdisplay.StatsDisplay;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -30,20 +31,22 @@ public class GameGUI {
 	private GridGUI grid;
 	private DragDropView dragDrop;
 	private GamePlayButtonPanel buttonPanel;
+	private StatsDisplay statsDisplay;
 	
-	public GameGUI(){
+	public GameGUI(int rows, int columns){
 		this.mainScreen = new BorderPane();
 		this.graphics = new GraphicsLibrary();
-		this.grid = new GridGUI();
+		this.grid = new GridGUI(rows, columns); 
 		this.dragDrop = new DragDropView(); 
 		this.buttonPanel = new GamePlayButtonPanel();
 	}
 	
-	public Scene init(){
+	public Scene init(double gold, double lives, double level){
 		createScene();
 		createGrid();
 		initDragDropPane();
 		addButtonPanel();
+		initStatsDisplay(gold, lives, level);
 		return this.scene;
 	}
 	
@@ -53,7 +56,7 @@ public class GameGUI {
 	
 	private void addButtonPanel(){
 		this.buttonPanel.init();
-		mainScreen.setBottom(this.buttonPanel.getPane());
+		mainScreen.setTop(this.buttonPanel.getPane());
 	}
 	
 	private void createScene(){
@@ -81,6 +84,12 @@ public class GameGUI {
 		dragDrop.populateImageViewsToTab(tab, testImages);
 		//Tab tab2 = dragDrop.createTab("Another text");
 		//dragDrop.populateImageViewsToTab(tab2, testImages2);
+	}
+	
+	private void initStatsDisplay(double gold, double lives, double level){
+		this.statsDisplay = new StatsDisplay(gold,lives,level);
+		statsDisplay.init();
+		this.mainScreen.setBottom(statsDisplay.getScorePane());
 	}
 	
 }
