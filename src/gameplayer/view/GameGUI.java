@@ -33,10 +33,10 @@ public class GameGUI {
 	private GamePlayButtonPanel buttonPanel;
 	private StatsDisplay statsDisplay;
 	
-	public GameGUI(){
+	public GameGUI(int rows, int columns){
 		this.mainScreen = new BorderPane();
 		this.graphics = new GraphicsLibrary();
-		this.grid = new GridGUI();
+		this.grid = new GridGUI(rows, columns); 
 		this.dragDrop = new DragDropView(); 
 		this.buttonPanel = new GamePlayButtonPanel();
 	}

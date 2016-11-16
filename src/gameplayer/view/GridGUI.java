@@ -1,10 +1,13 @@
 package gameplayer.view;
 
+import gameplayer.model.Cell;
+import gameplayer.model.Grid;
 import gameplayer.view.helper.GraphicsLibrary;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 
 /**
+ * 
  * Responsible for creating the grid in which the towers and enemies are placed
  * 
  * @author lucyzhang
@@ -13,17 +16,25 @@ import javafx.scene.layout.Pane;
 public class GridGUI {
 
 	private Pane grid;
-	public static final int GRID_WIDTH = 800;
-	public static final int GRID_HEIGHT = 600;
+	public static final int GRID_WIDTH = 700;
+	public static final int GRID_HEIGHT = 700;
+	private double rows;
+	private double cols;
+	private double cellWidth;
+	private double cellHeight;
 	private GraphicsLibrary graphicsLib;
 
 	public static final String TEST_URL = "https://images.designtrends.com/wp-content/uploads/2016/03/30060819/Elegant-Night-Stay-Anime-Background.jpg"; // TODO:
 																																							// dummy
 																																							// url
 
-	public GridGUI() {
+	public GridGUI(int rows, int columns) {
 		this.grid = new Pane();
 		this.graphicsLib = new GraphicsLibrary();
+		this.rows = rows;
+		this.cols = columns;
+		this.cellWidth = GRID_WIDTH / cols;
+		this.cellHeight = GRID_HEIGHT / rows;
 		styleGrid(TEST_URL);
 	}
 
@@ -48,8 +59,18 @@ public class GridGUI {
 				+ "-fx-background-repeat: stretch;");
 	}
 
-	public void populateGrid() {
-
+	// TOWER AND PATH ONLY
+	public void populateGrid(Grid grid) {
+		Cell[][] gridArr = grid.getGrid();
+		for (Cell[] row : gridArr) {
+			for (Cell col : row) {
+				if (col.getTower()!=null){
+					//add tower
+					//col.getTower().get
+				}
+				
+			}
+		}
 	}
 
 }
