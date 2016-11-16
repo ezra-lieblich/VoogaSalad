@@ -32,9 +32,9 @@ public class GamePlayModel {
 	private List<Queue<Enemy>> enemyAtCurrentLevel; 
 	//number of gold
 	
-	public GamePlayModel (String xmlFileName){
-		XMLParser parser = new XMLParser(xmlFileName);
-		
+	public GamePlayModel (String xmlFileName){  //takes in gamePlayFactory 
+		XMLParser parser = new XMLParser(xmlFileName); 
+		initializeGameSetting(parser);
 		
 	}
 	
@@ -44,8 +44,12 @@ public class GamePlayModel {
 		 * for (){
 		 * 
 		 * }
+		 * 
+		 * get tower map
 		 */
 	}
+	
+	
 	
 	//change this to xml parser parsing all the info
 	// initialize grid each level
@@ -67,8 +71,11 @@ public class GamePlayModel {
 	
 	
 	
-	public void placeTower(int type, int x, int y){		
+	public Boolean placeTower(int type, int x, int y){	
+		//later check if is a valid location to place the tower
+		//if()
 		grid.placeTower(towerTypes.get(type), x, y);	
+		return true;
 	}
 	
 	private double cellToCoordinate(int cellNumber){
@@ -183,13 +190,13 @@ public class GamePlayModel {
 	}
 	
 	
-	public void update(){
+	public void updateInLevel(){
 		checkCollision();
 		updateWeapon();		
-		updateEnemy();
-		
-		
+		updateEnemy();		
 	}
+	
+	
 	
 	
 	
