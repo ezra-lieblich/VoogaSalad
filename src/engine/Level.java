@@ -7,5 +7,5 @@ public class Level {
 	private int rewardHealth;
 	private int rewardMoney;
 	private int rewardPoints;
-	
+	private double durationInSeconds;
 }
