@@ -32,10 +32,15 @@ public class GamePlayModel extends Observable{
 	
 	private List<Queue<Enemy>> enemyAtCurrentLevel; 
 	
+	private GamePlayerFactory factory;
 	
 	private double gold;
 	private double lives;
-	private double levelnumber;
+	private double levelnumber;  // reach level number winning the game
+	private double currentLevel;
+	private int waveOfEnemy;
+	
+	
 	//number of gold
 	
 
@@ -48,7 +53,8 @@ public class GamePlayModel extends Observable{
 	 * could be used when start another game
 	 * @param factory
 	 */
-	public void initializeGameSetting(GamePlayerFactory factory){		
+	public void initializeGameSetting(GamePlayerFactory factory){	
+		this.factory = factory;
 		HashMap<String, Double> settingInfo = factory.getGameSetting();
 		this.levelnumber = settingInfo.get("levelnumber");
 		this.gold = settingInfo.get("gold");
@@ -57,27 +63,19 @@ public class GamePlayModel extends Observable{
 	
 	
 	public void initializeLevelInfo(){
-		
-		
+		this.enemyAtCurrentLevel = this.factory.getEnemy();
+		this.towerTypes = this.factory.getTowers();
+		//this.weaponTypes = this.factory.getWeapon();
+		this.waveOfEnemy = 0;
 		
 	}
 	
 	
 	
-	//change this to xml parser parsing all the info
-	// initialize grid each level
-	public GamePlayModel(int cellSize, int gridX, int gridY,int numberOfLife) {	
-		this.cellSize = cellSize;	
-		this.grid = new Grid(gridX, gridY);
-		gridArray = this.grid.getGrid();
-		enemyOnGrid = new SimpleListProperty<Enemy>();
-		weaponOnGrid = new SimpleListProperty<Weapon>();
-		this.gridX = gridX;
-		this.gridY = gridY;
-		
-		//initialize path in xml
+	int[] getDimension(){
+		int[] dimension = {this.gridX, this.gridY};
+		return dimension;
 	}
-	
 	
 
 	double getGold() {
@@ -104,15 +102,12 @@ public class GamePlayModel extends Observable{
 	}
 
 
-	double getLevel() {
-		return this.levelnumber;
-	}
 
 
-	void setLevel(int level) {
+	void setLevel(double d) {
 		setChanged();
 		notifyObservers();
-		this.levelnumber = level;
+		this.currentLevel = d;
 	}
 
 	
@@ -244,6 +239,18 @@ public class GamePlayModel extends Observable{
 			enemyOnGrid.add(this.nextEnteringEnemy);
 			this.nextEnteringEnemy.setCurrentCell(this.grid.getStartPoint());
 		}
+		
+		if(packOfEnemyComing.isEmpty() && enemyOnGrid.isEmpty() ){
+			if(waveOfEnemy < enemyAtCurrentLevel.size()){
+				packOfEnemyComing = enemyAtCurrentLevel.get(waveOfEnemy);
+				waveOfEnemy++;
+			}
+			else{
+				setLevel(this.currentLevel+1);  
+			}
+			
+		}
+		
 		this.nextEnteringEnemy = packOfEnemyComing.poll();
 		
 		setChanged();
@@ -251,11 +258,13 @@ public class GamePlayModel extends Observable{
 		
 	}
 	
-	
+
+
+
 	public void updateInLevel(){
 		checkCollision();
 		updateWeapon();		
-		updateEnemy();	
+		updateEnemy();
 		
 	}
 	
