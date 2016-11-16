@@ -55,6 +55,14 @@ public class XMLParser {
     	return rootElement.getAttribute("Title");
     }
     
+//    public NodeList getTagsUnder(String tag){
+//    	NodeList l = rootElement.getChildNodes();
+//    	for(int i=0;i<l.getLength();i++){
+//    		System.out.println(l.item(i).getNodeValue());
+//    	}
+//    	return rootElement.getElementsByTagName(tag);
+//    }
+    
     //Returns String of w.e variable u give it. For example: Within the example xml, if call this with variable = width, this should return 500
     public String getVariableValues(String variable){
     	NodeList info = xmlDocument.getElementsByTagName(variable);
