@@ -89,6 +89,7 @@ public class GridGUI {
 		for (int i = 0; i < path.size(); i++) {
 			double x = path.get(i)[0];
 			double y = path.get(i)[1];
+			System.out.println("X: "+x+", Y: "+y);
 			ImageView pathImage = graphicsLib.createImageView(graphicsLib.createImage("kaneki.jpg"));
 			graphicsLib.setImageViewParams(pathImage, cellWidth, cellHeight);
 			this.grid.getChildren().add(pathImage);
