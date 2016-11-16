@@ -8,9 +8,11 @@ public class TowerType extends Entity {
     private List<WeaponType> weapons;
     private List<EnemyType> targets;
     private List<String> abilities;
-    private double cost;
     private String attackPreference;
-    
+    private double cost;
+    private double sellAmount;
+    private int unlockLevel;
+
     TowerType () {
         this.upgrades = new ArrayList<TowerType>();
         this.targets = new ArrayList<EnemyType>();
