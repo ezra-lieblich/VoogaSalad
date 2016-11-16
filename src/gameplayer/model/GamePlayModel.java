@@ -8,7 +8,6 @@ import java.util.Observable;
 import java.util.Queue;
 
 import gameplayer.loader.GamePlayerFactory;
-import gameplayer.loader.XMLParser;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.ObservableList;
 
@@ -19,8 +18,8 @@ public class GamePlayModel extends Observable{
 	private int gridX;
 	private int gridY;
 
-	private ObservableList<Enemy> enemyOnGrid;
-	private ObservableList<Weapon> weaponOnGrid;
+	private List<Enemy> enemyOnGrid;
+	private List<Weapon> weaponOnGrid;
 	private int hitBuffer = 10; // initialize from xml
 	
 	private Map<Integer, Weapon> weaponTypes; // initialize in xml
@@ -124,7 +123,7 @@ public class GamePlayModel extends Observable{
 			return false;
 		}
 		grid.placeTower(towerTypes.get(type), x, y);
-		this.gold -= t.getCost();
+		setGold(this.gold - t.getCost());
 		return true;
 	}
 	
@@ -148,6 +147,8 @@ public class GamePlayModel extends Observable{
 			if(e.getHealth()< 0)
 				enemyOnGrid.remove(e);
 		}
+		setChanged();
+		notifyObservers();
 	}
 	
 	private Boolean coordinateInBound(double d, double e){
@@ -187,6 +188,9 @@ public class GamePlayModel extends Observable{
 				}
 			}
 		}
+		
+		setChanged();
+		notifyObservers();
 	}
 	
 	//get direction
@@ -242,6 +246,8 @@ public class GamePlayModel extends Observable{
 		}
 		this.nextEnteringEnemy = packOfEnemyComing.poll();
 		
+		setChanged();
+		notifyObservers();
 		
 	}
 	
@@ -249,7 +255,8 @@ public class GamePlayModel extends Observable{
 	public void updateInLevel(){
 		checkCollision();
 		updateWeapon();		
-		updateEnemy();		
+		updateEnemy();	
+		
 	}
 	
 	
