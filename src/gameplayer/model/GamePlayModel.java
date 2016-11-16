@@ -1,15 +1,18 @@
 package gameplayer.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Observable;
 import java.util.Queue;
 
+import gameplayer.loader.GamePlayerFactory;
 import gameplayer.loader.XMLParser;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.ObservableList;
 
-public class GamePlayModel {
+public class GamePlayModel extends Observable{
 
 	private int cellSize;
 	private Grid grid;
@@ -24,29 +27,40 @@ public class GamePlayModel {
 	private Map<Integer, Tower> towerTypes;  // initialize in xml
 	private Cell[][] gridArray;
 	
-	private int numberOfLife;  //initialize in xml
 	
-	private Enemy nextEnteringEnemy; // decide how each wave of enemy comes either in pack or one at a time
-	private Cell startPoint;    // get from xml 
+	private Enemy nextEnteringEnemy; 
 	private Queue<Enemy> packOfEnemyComing;
+	
 	private List<Queue<Enemy>> enemyAtCurrentLevel; 
+	
+	
+	private double gold;
+	private double lives;
+	private double levelnumber;
 	//number of gold
 	
-	public GamePlayModel (String xmlFileName){  //takes in gamePlayFactory 
-		XMLParser parser = new XMLParser(xmlFileName); 
-		initializeGameSetting(parser);
-		
+
+	public GamePlayModel(GamePlayerFactory factory){
+		initializeGameSetting(factory);
 	}
 	
-	private void initializeGameSetting(XMLParser parser){
-		/*
-		 * Map = parser.getGameSetting 
-		 * for (){
-		 * 
-		 * }
-		 * 
-		 * get tower map
-		 */
+	
+	/**
+	 * could be used when start another game
+	 * @param factory
+	 */
+	public void initializeGameSetting(GamePlayerFactory factory){		
+		HashMap<String, Double> settingInfo = factory.getGameSetting();
+		this.levelnumber = settingInfo.get("levelnumber");
+		this.gold = settingInfo.get("gold");
+		this.lives = settingInfo.get("lives");
+	}
+	
+	
+	public void initializeLevelInfo(){
+		
+		
+		
 	}
 	
 	
@@ -61,20 +75,56 @@ public class GamePlayModel {
 		weaponOnGrid = new SimpleListProperty<Weapon>();
 		this.gridX = gridX;
 		this.gridY = gridY;
-		this.numberOfLife = numberOfLife;
-		
-		//this.iterations = 0;
 		
 		//initialize path in xml
 	}
 	
 	
-	
+
+	double getGold() {
+		return gold;
+	}
+
+
+	void setGold(double gold) {
+		setChanged();
+		notifyObservers();
+		this.gold = gold;
+	}
+
+
+	double getLife() {
+		return this.lives;
+	}
+
+
+	void setLife(double life) {
+		setChanged();
+		notifyObservers();
+		this.lives = life;
+	}
+
+
+	double getLevel() {
+		return this.levelnumber;
+	}
+
+
+	void setLevel(int level) {
+		setChanged();
+		notifyObservers();
+		this.levelnumber = level;
+	}
+
 	
 	public Boolean placeTower(int type, int x, int y){	
 		//later check if is a valid location to place the tower
-		//if()
-		grid.placeTower(towerTypes.get(type), x, y);	
+		Tower t  = towerTypes.get(type);
+		if(this.gold - t.getCost() < 0){
+			return false;
+		}
+		grid.placeTower(towerTypes.get(type), x, y);
+		this.gold -= t.getCost();
 		return true;
 	}
 	
@@ -162,6 +212,9 @@ public class GamePlayModel {
 			}
 			
 		}
+		
+		
+		//sub lives if enemy got into base
 	}
 	
 	private void updateEnemy(){
@@ -171,10 +224,13 @@ public class GamePlayModel {
 				moveSingleEnemy(e);
 			}
 			catch(NullPointerException exception) {
-				numberOfLife -= 1;
-				if (numberOfLife == 0) {
+				lives -= 1;
+				
+				/*
+				if (lives == 0) {
 					//end game
 				}
+				*/
 			}
 		}
 		
@@ -182,7 +238,7 @@ public class GamePlayModel {
 		//enter new enemy
 		if(this.nextEnteringEnemy != null) {
 			enemyOnGrid.add(this.nextEnteringEnemy);
-			this.nextEnteringEnemy.setCurrentCell(this.startPoint);
+			this.nextEnteringEnemy.setCurrentCell(this.grid.getStartPoint());
 		}
 		this.nextEnteringEnemy = packOfEnemyComing.poll();
 		
