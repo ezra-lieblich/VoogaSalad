@@ -2,8 +2,10 @@ package gameplayer.view;
 
 import gameplayer.model.Cell;
 import gameplayer.model.Grid;
+import gameplayer.model.Tower;
 import gameplayer.view.helper.GraphicsLibrary;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
 /**
@@ -59,18 +61,26 @@ public class GridGUI {
 				+ "-fx-background-repeat: stretch;");
 	}
 
+	private void addTowerToGrid(Tower tower, int row, int col) {
+		ImageView towerImage = graphicsLib.createImageView(graphicsLib.createImage(tower.getImage()));
+		graphicsLib.setImageViewParams(towerImage, cellWidth * col, cellHeight * row, cellWidth, cellHeight);
+		this.grid.getChildren().add(towerImage);
+	}
+	
+
 	// TOWER AND PATH ONLY
 	public void populateGrid(Grid grid) {
 		Cell[][] gridArr = grid.getGrid();
-		for (Cell[] row : gridArr) {
-			for (Cell col : row) {
-				if (col.getTower()!=null){
-					//add tower
-					//col.getTower().get
+
+		for (int row = 0; row < gridArr.length; row++) {
+			for (int col = 0; col < gridArr[row].length; col++) {
+				if (gridArr[col][row].getTower() != null) {
+					// add tower
+					addTowerToGrid(gridArr[col][row].getTower(), row, col);
 				}
-				
 			}
 		}
+
 	}
 
 }
