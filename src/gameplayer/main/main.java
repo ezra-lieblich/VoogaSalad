@@ -20,8 +20,14 @@ public class main extends Application {
 		this.stage = s;
 		//This is just for testing, should be switched to creating the authoring environment first
 		GameGUI game = new GameGUI(); 
+<<<<<<< HEAD
 		//GamePlayerController playerController = new GamePlayerController(game);
 		Scene scene = game.init(10,11,12);
+=======
+		GamePlayerController playerController = new GamePlayerController(game);
+		Scene scene = game.init();
+		
+>>>>>>> 1fc90ae2424bff47122b06055528d4d110b434b1
 		s.setTitle(TITLE);
 		s.setScene(scene);
 		s.show();
