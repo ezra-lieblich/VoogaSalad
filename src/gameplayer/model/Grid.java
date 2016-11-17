@@ -5,6 +5,7 @@ import java.util.List;
 public class Grid {
 
 	private Cell[][] grid;
+	private Cell start;
 	//private List<Enemy> enemyOnGrid;
 	
 	
@@ -12,14 +13,23 @@ public class Grid {
 		grid = new Cell[x][y];
 		for(int i = 0; i < grid.length;i++){
 			for(int j = 0; j < grid[0].length; j++){
-				grid[i][j] = new Cell(i, j, null);
+				grid[i][j] = new Cell(i, j);
 			}
 		}
 		
 	}
 	
+	public void setStart(Cell cell){
+		this.start = cell;
+	}
+	
+	public Cell getStartPoint(){
+		return this.start;
+	}
+	
+	
 	public Cell[][] getGrid(){
-		return grid;
+		return this.grid;
 	}
 	
 	public void placeTower(Tower t, int x, int y){
