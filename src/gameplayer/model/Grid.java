@@ -15,8 +15,11 @@ public class Grid {
 			for(int j = 0; j < grid[0].length; j++){
 				grid[i][j] = new Cell(i, j);
 			}
-		}
-		
+		}	
+	}
+	
+	public Cell getCell(int x, int y){
+		return grid[x][y];
 	}
 	
 	public void setStart(Cell cell){
