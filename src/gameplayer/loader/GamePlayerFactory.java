@@ -6,17 +6,16 @@ import java.util.Map;
 import java.util.Observable;
 import java.util.Queue;
 
+import gameplayer.model.Cell;
 import gameplayer.model.Enemy;
 import gameplayer.model.Grid;
 import gameplayer.model.Tower;
 
 public class GamePlayerFactory{
 	XMLParser authoringFileReader;
-	//private int currentlevel; // know which level for level specific info
 
 	public GamePlayerFactory(XMLParser parser){
 		this.authoringFileReader = parser;
-		//System.out.println(authoringFileReader.getTagsUnder("level1"));
 	}
 	
 	public HashMap<String, Double> getGameSetting(){
@@ -28,9 +27,22 @@ public class GamePlayerFactory{
 	}
 
 	public Grid getGrid(int level){
+		String width = authoringFileReader.getTextValue("level"+level,"width");
+		String height = authoringFileReader.getTextValue("level"+level,"height");
+		Grid gameGrid = new Grid(Integer.parseInt(width),Integer.parseInt(height));
+		String coordinates = authoringFileReader.getTextValue("level"+level, "coordinates");
+		String[] splitCoordinates = coordinates.split(";");
+		String[] start = splitCoordinates[0].split(",");
+		Cell current = gameGrid.getCell(Integer.parseInt(start[0]), Integer.parseInt(start[1]));
 		
-		
-		return null;		
+		gameGrid.setStart(current);
+		for(int i=1;i<splitCoordinates.length;i++){
+			String[] nextLocations = splitCoordinates[i].split(",");
+			Cell next = gameGrid.getCell(Integer.parseInt(nextLocations[0]), Integer.parseInt(nextLocations[1]));
+			current.setNext(next);
+			current = next; 
+		}
+		return gameGrid; 	
 	}
 	
 	public Map<Integer, Tower> getTowers(){

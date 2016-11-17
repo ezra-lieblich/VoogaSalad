@@ -64,7 +64,6 @@ public class XMLParser {
 	        if (nl != null && nl.getLength() > 0) {
 	        	for(int i=0;i<nl.getLength();i++){
 		            Element el = (Element) nl.item(i);
-		            System.out.println(el.getFirstChild().getNodeValue());
 		            textVal += el.getFirstChild().getNodeValue()+";";
 	        	}
 	        }
