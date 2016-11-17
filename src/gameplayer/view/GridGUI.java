@@ -40,7 +40,7 @@ public class GridGUI {
 		this.rows = rows;
 		this.cols = columns;
 		this.cellWidth = GRID_WIDTH / cols;
-		this.cellHeight = GRID_HEIGHT / rows;
+		this.cellHeight = GRID_HEIGHT / this.rows;
 		//this.path = path;
 	}
 
@@ -90,11 +90,15 @@ public class GridGUI {
 			double x = path.get(i)[0];
 			double y = path.get(i)[1];
 			System.out.println("X: "+x+", Y: "+y);
+			System.out.println("Cell width: "+cellWidth);
 			ImageView pathImage = graphicsLib.createImageView(graphicsLib.createImage("kaneki.jpg"));
-			graphicsLib.setImageViewParams(pathImage, cellWidth, cellHeight);
+			System.out.println("Path image: "+pathImage);
+			graphicsLib.setImageViewParams(pathImage, x*cellWidth, y*cellHeight,cellWidth, cellHeight);
 			this.grid.getChildren().add(pathImage);
-			pathImage.setX(x*cellWidth);
-			pathImage.setY(y*cellHeight);
+			//pathImage.setX(x*cellWidth);
+			//pathImage.setY(x*cellWidth);
+			//pathImage.relocate(x*cellWidth, y*cellHeight);
+			System.out.println("path image coords: "+pathImage.getX()+", "+pathImage.getY());
 		}
 	}
 	
