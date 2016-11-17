@@ -35,22 +35,30 @@ public class GridGUI {
 																																							// url
 
 	public GridGUI(int rows, int columns/*, List<int[]> path*/) {
+		System.out.println("Rows: "+rows+"; columns: "+columns);
 		this.grid = new Pane();
 		this.graphicsLib = new GraphicsLibrary();
 		this.rows = rows;
 		this.cols = columns;
 		this.cellWidth = GRID_WIDTH / cols;
 		this.cellHeight = GRID_HEIGHT / this.rows;
+		System.out.println("Cell width: "+cellWidth+", "+cellHeight);
 		//this.path = path;
 	}
 
+	//for testing
 	private void initDummyPath(){
-		int[] stuff  = {5,6};
-		int []stuff1 = {10,10};
+		int[] stuff  = {1,1};
+		int []stuff1 = {2,2};
+		int []stuff2 = {3,3};
+		int[] stuff3={4,4};
 		this.path = new ArrayList<int[]>();
 		this.path.add(stuff);
 		this.path.add(stuff1);
+		this.path.add(stuff2);
+		this.path.add(stuff3);
 	}
+	
 	public void init(){
 		initDummyPath(); //TODO: get rid of
 		styleGrid(TEST_URL);
@@ -90,7 +98,6 @@ public class GridGUI {
 			double x = path.get(i)[0];
 			double y = path.get(i)[1];
 			System.out.println("X: "+x+", Y: "+y);
-			System.out.println("Cell width: "+cellWidth);
 			ImageView pathImage = graphicsLib.createImageView(graphicsLib.createImage("kaneki.jpg"));
 			System.out.println("Path image: "+pathImage);
 			graphicsLib.setImageViewParams(pathImage, x*cellWidth, y*cellHeight,cellWidth, cellHeight);

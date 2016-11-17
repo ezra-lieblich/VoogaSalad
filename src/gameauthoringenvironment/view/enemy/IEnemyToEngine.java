@@ -8,6 +8,7 @@ public interface IEnemyToEngine {
      */
     public void setEnemyImage(int enemyImageID);
     
+    //public void placeEnemyImageInMap(int enemyImageID, )
     
     /**
      * Creates new enemy
