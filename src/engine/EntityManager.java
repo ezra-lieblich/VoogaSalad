@@ -1,9 +1,11 @@
 package engine;
 
+import java.util.List;
 import java.util.Map;
 
 public abstract class EntityManager <E extends Entity> {
     Map<Integer, E> data;
+    List<E> activeEntities;
     int nextId;
     
     
