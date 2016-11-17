@@ -90,7 +90,7 @@ public class GamePlayModel extends Observable{
 	}
 
 
-	double getLife() {
+	public double getLife() {
 		return this.lives;
 	}
 
@@ -100,8 +100,6 @@ public class GamePlayModel extends Observable{
 		notifyObservers();
 		this.lives = life;
 	}
-
-
 
 
 	void setLevel(double d) {
@@ -193,9 +191,17 @@ public class GamePlayModel extends Observable{
 	
 	private void moveSingleEnemy(Enemy e) throws NullPointerException{
 		//to make it easier, only updating enemy's current cell once it reaches the center point of the next cell
+		double distToMove;
+		try {
+			distToMove = (Math.abs(cellToCoordinate(e.getCurrentCell().getNext().getX()) - e.getX()) + 
+					Math.abs(cellToCoordinate(e.getCurrentCell().getNext().getY()) - e.getY()));
+		}
+		catch(NullPointerException exception) {
+			distToMove = 0;//this needs to change
+		}
+		
 		double moveDist = e.getMovingSpeed();
-		double distToMove = (Math.abs(cellToCoordinate(e.getCurrentCell().getNext().getX()) - e.getX()) + 
-				Math.abs(cellToCoordinate(e.getCurrentCell().getNext().getY()) - e.getY()));
+		
 		while (moveDist > 0) {
 			if (moveDist >= distToMove) { //can move to center of next cell
 				e.setX(e.getX() + e.getxDirection() * distToMove);
@@ -208,6 +214,7 @@ public class GamePlayModel extends Observable{
 			else {
 				e.setX(e.getX() + e.getxDirection() * moveDist);
 				e.setY(e.getY() + e.getyDirection() * moveDist);
+				moveDist -= moveDist;
 			}
 			
 		}
