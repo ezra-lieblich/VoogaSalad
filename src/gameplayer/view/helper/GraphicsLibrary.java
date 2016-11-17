@@ -82,6 +82,12 @@ public class GraphicsLibrary {
 		root.getChildren().add(t);
 		return t;
 	}
+	
+	public Text createText(Group root,String text) {
+		Text t = new Text(text);
+		root.getChildren().add(t);
+		return t;
+	}
 
 	public void setTextAttributes(Text text, Color color, Font font, String id) {
 		text.setFill(color);

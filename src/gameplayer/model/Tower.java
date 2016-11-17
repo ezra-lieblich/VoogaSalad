@@ -45,7 +45,7 @@ public class Tower {
 		return this.ID;
 	}
 	
-	String getImage(){
+	public String getImage(){
 		return this.image;
 	}
 
