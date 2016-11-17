@@ -1,5 +1,10 @@
 package gameauthoringenvironment.view.createscene.sidetabbedtoolbar;
 
+
+import gameauthoringenvironment.view.enemy.EnemyViewFactory;
+import gameauthoringenvironment.view.enemy.IEnemyView;
+import gameauthoringenvironment.view.tower.ITowerView;
+import gameauthoringenvironment.view.tower.TowerViewFactory;
 import javafx.geometry.Side;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -17,6 +22,10 @@ import javafx.scene.image.ImageView;
  *
  */
 public class SideTabbedToolbar implements ISideTabbedToolbar {
+
+    //TODO: TabPane or Ribbon Menu?
+    private TabPane myTabPane;
+    private ITowerView towerView;
 
     private Button enemyButton;
     private Button towerButton;
@@ -54,12 +63,22 @@ public class SideTabbedToolbar implements ISideTabbedToolbar {
         
         this.towerButton.setGraphicTextGap(5.0);
         this.towerButton.setGraphic(towerImage);
+        this.towerButton.setPrefWidth(180);
         
         this.enemyButton.setGraphicTextGap(5.0);
         this.enemyButton.setGraphic(enemyImage);
         //this.enemyButton.setMaxWidth(Region.USE_PREF_SIZE);
         Tab testTab = new Tab();
         Tab testTab2 = new Tab();
+        
+        Tab myTestTab = new Tab();
+        myTestTab.setText("Tower");
+        towerView = TowerViewFactory.build();    
+        myTestTab.setContent(towerView.getNodeAsInstance());
+        
+        
+        tabPane.getTabs().addAll(myTestTab);
+        tabPane.setSide(Side.RIGHT);
        
         //testTab.setContent(enemyButton);
         testTab.setGraphic(enemyButton); //setContent gives correct button but with little edge
@@ -72,8 +91,7 @@ public class SideTabbedToolbar implements ISideTabbedToolbar {
         testTab.setClosable(false);
 
         
-        //this.towerButton = new 
-    }
+}
 
     @Override
     public Node getInstanceAsNode () {

@@ -57,4 +57,10 @@ public class SelectNewEnemyImage implements IEnemyToEngine {
         
     }
 
+    @Override
+    public void initNewEnemy () {
+        // TODO Auto-generated method stub
+        
+    }
+
 }
