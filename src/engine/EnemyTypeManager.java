@@ -1,8 +1,7 @@
 package engine;
 
-public class EnemyTypeManager extends DataManager<EnemyType>{
+public class EnemyTypeManager extends EntityManager<EnemyType>{
 
-	@Override
 	public EnemyType create() {
 		// TODO Auto-generated method stub
 		return null;

@@ -2,8 +2,7 @@ package engine;
 
 import java.util.ResourceBundle;
 
-public class EnemyType {
-	private int id;
+public class EnemyType extends Entity{
 	private String name;
 	private String imagePath;
 	private double speed;
@@ -18,23 +17,12 @@ public class EnemyType {
 	
 	public EnemyType() {
 		//possible hold a resource file that has default values for an enemy
-		resources =  ResourceBundle.getBundle("resources/internal/ImageMappings");
+		resources =  ResourceBundle.getBundle(DEFAULTVALUESPATH);
 		imagePath = resources.getString("EnemyImage");
 		speed = Double.parseDouble(resources.getString("Default"));
 	}
 	
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getImagePath() {
-		return imagePath;
-	}
-	public void setImagePath(String imagePath) {
-		this.imagePath = imagePath;
-	}
+	
 	public double getSpeed() {
 		return speed;
 	}

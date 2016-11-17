@@ -1,14 +1,14 @@
 package engine;
 
-import java.util.List;
+import java.util.Map;
 
 public abstract class EntityManager <E extends Entity> {
-    List<E> data;
+    Map<Integer, E> data;
     int nextId;
     
     
     public void addEntry(E entry) {
-        data.add(entry);
+        data.put(nextId, entry);
         nextId++;
     }
     
