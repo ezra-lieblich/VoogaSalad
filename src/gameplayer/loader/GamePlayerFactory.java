@@ -45,7 +45,7 @@ public class GamePlayerFactory{
 		return gameGrid; 	
 	}
 	
-	public Map<Integer, Tower> getTowers(){
+	public HashMap<Integer, Tower> getTowers(){
 		
 		
 		return null;
@@ -54,6 +54,8 @@ public class GamePlayerFactory{
 	public List<Queue<Enemy>> getEnemy(){
 		// each queue is a wave of enemy 
 		// ArrayList of queue are all the waves at the current level
+		
+		
 		
 		return null;
 	}
