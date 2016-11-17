@@ -1,74 +1,125 @@
 package gameplayer.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Observable;
 import java.util.Queue;
 
-import gameplayer.loader.XMLParser;
+import gameplayer.loader.GamePlayerFactory;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.ObservableList;
 
-public class GamePlayModel {
+public class GamePlayModel extends Observable{
 
 	private int cellSize;
 	private Grid grid;
 	private int gridX;
 	private int gridY;
 
-	private ObservableList<Enemy> enemyOnGrid;
-	private ObservableList<Weapon> weaponOnGrid;
+	private List<Enemy> enemyOnGrid;
+	private List<Weapon> weaponOnGrid;
 	private int hitBuffer = 10; // initialize from xml
 	
 	private Map<Integer, Weapon> weaponTypes; // initialize in xml
 	private Map<Integer, Tower> towerTypes;  // initialize in xml
 	private Cell[][] gridArray;
 	
-	private int numberOfLife;  //initialize in xml
 	
-	private Enemy nextEnteringEnemy; // decide how each wave of enemy comes either in pack or one at a time
-	private Cell startPoint;    // get from xml 
+	private Enemy nextEnteringEnemy; 
 	private Queue<Enemy> packOfEnemyComing;
+	
 	private List<Queue<Enemy>> enemyAtCurrentLevel; 
+	
+	private GamePlayerFactory factory;
+	
+	private double gold;
+	private double lives;
+	private double levelnumber;  // reach level number winning the game
+	private double currentLevel;
+	private int waveOfEnemy;
+	
+	
 	//number of gold
 	
-	public GamePlayModel (String xmlFileName){
-		XMLParser parser = new XMLParser(xmlFileName);
-		
-		
+
+	public GamePlayModel(GamePlayerFactory factory){
+		initializeGameSetting(factory);
 	}
 	
-	private void initializeGameSetting(XMLParser parser){
-		/*
-		 * Map = parser.getGameSetting 
-		 * for (){
-		 * 
-		 * }
-		 */
+	
+	/**
+	 * could be used when start another game
+	 * @param factory
+	 */
+	public void initializeGameSetting(GamePlayerFactory factory){	
+		this.factory = factory;
+		HashMap<String, Double> settingInfo = factory.getGameSetting();
+		this.levelnumber = settingInfo.get("levelnumber");
+		this.gold = settingInfo.get("gold");
+		this.lives = settingInfo.get("lives");
 	}
 	
-	//change this to xml parser parsing all the info
-	// initialize grid each level
-	public GamePlayModel(int cellSize, int gridX, int gridY,int numberOfLife) {	
-		this.cellSize = cellSize;	
-		this.grid = new Grid(gridX, gridY);
-		gridArray = this.grid.getGrid();
-		enemyOnGrid = new SimpleListProperty<Enemy>();
-		weaponOnGrid = new SimpleListProperty<Weapon>();
-		this.gridX = gridX;
-		this.gridY = gridY;
-		this.numberOfLife = numberOfLife;
+	
+	public void initializeLevelInfo(){
+		this.enemyAtCurrentLevel = this.factory.getEnemy();
+		this.towerTypes = this.factory.getTowers();
+		//this.weaponTypes = this.factory.getWeapon();
+		this.waveOfEnemy = 0;
 		
-		//this.iterations = 0;
-		
-		//initialize path in xml
 	}
 	
 	
 	
+	int[] getDimension(){
+		int[] dimension = {this.gridX, this.gridY};
+		return dimension;
+	}
 	
-	public void placeTower(int type, int x, int y){		
-		grid.placeTower(towerTypes.get(type), x, y);	
+
+	double getGold() {
+		return gold;
+	}
+
+
+	void setGold(double gold) {
+		setChanged();
+		notifyObservers();
+		this.gold = gold;
+	}
+
+
+	double getLife() {
+		return this.lives;
+	}
+
+
+	void setLife(double life) {
+		setChanged();
+		notifyObservers();
+		this.lives = life;
+	}
+
+
+
+
+	void setLevel(double d) {
+		setChanged();
+		notifyObservers();
+		this.currentLevel = d;
+	}
+
+	
+	public Boolean placeTower(int type, int x, int y){	
+		//later check if is a valid location to place the tower
+		Tower t  = towerTypes.get(type);
+		if(this.gold - t.getCost() < 0){
+			return false;
+		}
+		grid.placeTower(towerTypes.get(type), x, y);
+		setGold(this.gold - t.getCost());
+		return true;
 	}
 	
 	private double cellToCoordinate(int cellNumber){
@@ -91,6 +142,8 @@ public class GamePlayModel {
 			if(e.getHealth()< 0)
 				enemyOnGrid.remove(e);
 		}
+		setChanged();
+		notifyObservers();
 	}
 	
 	private Boolean coordinateInBound(double d, double e){
@@ -130,6 +183,9 @@ public class GamePlayModel {
 				}
 			}
 		}
+		
+		setChanged();
+		notifyObservers();
 	}
 	
 	//get direction
@@ -155,6 +211,9 @@ public class GamePlayModel {
 			}
 			
 		}
+		
+		
+		//sub lives if enemy got into base
 	}
 	
 	private void updateEnemy(){
@@ -164,10 +223,13 @@ public class GamePlayModel {
 				moveSingleEnemy(e);
 			}
 			catch(NullPointerException exception) {
-				numberOfLife -= 1;
-				if (numberOfLife == 0) {
+				lives -= 1;
+				
+				/*
+				if (lives == 0) {
 					//end game
 				}
+				*/
 			}
 		}
 		
@@ -175,21 +237,38 @@ public class GamePlayModel {
 		//enter new enemy
 		if(this.nextEnteringEnemy != null) {
 			enemyOnGrid.add(this.nextEnteringEnemy);
-			this.nextEnteringEnemy.setCurrentCell(this.startPoint);
+			this.nextEnteringEnemy.setCurrentCell(this.grid.getStartPoint());
 		}
+		
+		if(packOfEnemyComing.isEmpty() && enemyOnGrid.isEmpty() ){
+			if(waveOfEnemy < enemyAtCurrentLevel.size()){
+				packOfEnemyComing = enemyAtCurrentLevel.get(waveOfEnemy);
+				waveOfEnemy++;
+			}
+			else{
+				setLevel(this.currentLevel+1);  
+			}
+			
+		}
+		
 		this.nextEnteringEnemy = packOfEnemyComing.poll();
 		
+		setChanged();
+		notifyObservers();
 		
 	}
 	
-	
-	public void update(){
+
+
+
+	public void updateInLevel(){
 		checkCollision();
 		updateWeapon();		
 		updateEnemy();
 		
-		
 	}
+	
+	
 	
 	
 	
