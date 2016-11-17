@@ -45,7 +45,7 @@ public class GamePlayerFactory{
 		return gameGrid; 	
 	}
 	
-	public HashMap<Integer, Tower> getTowers(){
+	public HashMap<Integer, TowerType> getTowers(){
 		
 		
 		return null;
