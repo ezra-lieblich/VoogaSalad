@@ -6,7 +6,7 @@
 		<gold>1000</gold>
 		<levelnumber>10</levelnumber>
 	</init>
-	<level1>
+	<level1> 
 		<dimension>
 			<width>10</width>
 			<height>10</height>

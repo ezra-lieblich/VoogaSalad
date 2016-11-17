@@ -12,11 +12,11 @@ import gameplayer.model.Tower;
 
 public class GamePlayerFactory{
 	XMLParser authoringFileReader;
-	private int currentLivel; // know which level for level specific info
+	//private int currentlevel; // know which level for level specific info
 
 	public GamePlayerFactory(XMLParser parser){
-		authoringFileReader = parser;
-//		System.out.println(authoringFileReader.getTagsUnder("level1"));
+		this.authoringFileReader = parser;
+		//System.out.println(authoringFileReader.getTagsUnder("level1"));
 	}
 	
 	public HashMap<String, Double> getGameSetting(){
@@ -26,13 +26,7 @@ public class GamePlayerFactory{
 		settings.put("levelnumber",  Double.parseDouble(authoringFileReader.getVariableValues("levelnumber")));
 		return settings; 
 	}
-	
-	
-	public void getLevelInfo(int level){
-		this.currentLivel = level;
-	}
 
-	
 	public Grid getGrid(int level){
 		
 		

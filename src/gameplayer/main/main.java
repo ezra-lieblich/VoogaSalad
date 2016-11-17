@@ -22,6 +22,7 @@ public class main extends Application {
 
 		GamePlayerController playerController = new GamePlayerController();
 		GameGUI game = playerController.getView();
+		System.out.println("*******************");
 		Scene scene = game.init(10,11,12);
 		s.setTitle(TITLE);
 		s.setScene(scene);
