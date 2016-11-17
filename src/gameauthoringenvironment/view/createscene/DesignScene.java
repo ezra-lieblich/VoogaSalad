@@ -31,13 +31,13 @@ public class DesignScene implements IDesignScene {
     private void initScene() {
         authoringView.setTop(myToolbar.getInstanceAsNode());
         authoringView.setRight(mySideTabbedToolbar.getInstanceAsNode());
-        //authoringView.setCenter(createTempMidScreen());
+        authoringView.setCenter(createTempMidScreen());
     }
     
     private Pane createTempMidScreen() {
         Pane tempmid = new Pane();
         tempmid.setMaxSize(SIZE*9/10, SIZE);
-        tempmid.setPrefSize(SIZE*9/10, SIZE*19/20);
+        tempmid.setPrefSize(SIZE*7.9/10, SIZE*19/20);
         return tempmid;
     }
     
