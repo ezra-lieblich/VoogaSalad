@@ -55,6 +55,25 @@ public class XMLParser {
     	return rootElement.getAttribute("Title");
     }
     
+    public String getTextValue(String parent, String tagName) {
+        String textVal = "";
+        try{
+        	NodeList parentList = xmlDocument.getElementsByTagName(parent);
+        
+	        NodeList nl = ((Element)parentList.item(0)).getElementsByTagName("coordinate");
+	        if (nl != null && nl.getLength() > 0) {
+	        	for(int i=0;i<nl.getLength();i++){
+		            Element el = (Element) nl.item(i);
+		            textVal += el.getFirstChild().getNodeValue()+";";
+	        	}
+	        }
+        }
+        catch(Exception e){
+        	throw new XMLParserException(e);
+        }
+        return textVal;
+    }
+    
     //Returns String of w.e variable u give it. For example: Within the example xml, if call this with variable = width, this should return 500
     public String getVariableValues(String variable){
     	NodeList info = xmlDocument.getElementsByTagName(variable);

@@ -12,18 +12,21 @@ public class Cell {
 	private Cell next;
 	private Tower tower;
 
-	public Cell(int x, int y, Cell next) {
+	public Cell(int x, int y) {
 		enemies = new ArrayList<Enemy>();
 		weapons = new ArrayList<Weapon>();
 		this.xCoordinate = x;
 		this.yCoordinate = y;
-		this.next = next;
+		this.next = null;
 		this.tower = null;
 	}
 	
 	
+	public void setNext(Cell cell){
+		this.next = cell;
+	}
 
-	Cell getNext(){
+	public Cell getNext(){
 		return this.next;
 	}
 	

@@ -2,6 +2,7 @@ package usecases;
 
 import gameplayer.model.Enemy;
 
+/*
 public class UpdateEnemyPosition {
 	private void moveSingleEnemy(Enemy e) throws NullPointerException{
 		//to make it easier, only updating enemy's current cell once it reaches the center point of the next cell
@@ -24,4 +25,8 @@ public class UpdateEnemyPosition {
 			
 		}
 	}
+	
 }
+
+*/	
+
