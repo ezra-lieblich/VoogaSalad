@@ -30,7 +30,6 @@ public class Entity implements IEntity {
         this.imagePath = imagePath;
     }
 
-
     @Override
     public double getSize () {
         return size;

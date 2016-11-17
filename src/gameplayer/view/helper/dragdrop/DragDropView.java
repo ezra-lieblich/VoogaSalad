@@ -38,8 +38,11 @@ public class DragDropView {
 		this.graphicLib = new GraphicsLibrary();
 		this.dragDrop = new DragDrop();
 		this.objects = new ArrayList<ImageView>();
-		//this.game = game;
-
+		setTabPaneStyle();
+	}
+	
+	private void setTabPaneStyle(){
+		this.dragDropPane.getStyleClass().add("dragDropPane");
 	}
 	
 	public void setDragTarget(Pane target){
@@ -53,7 +56,7 @@ public class DragDropView {
 	/**
 	 * Creates a new tab and adds it to the main tabpane
 	 * @param title
-	 * @return
+	 * @return The new tab object
 	 */
 	public Tab createTab(String title) {
 		Tab newTab = new Tab();
@@ -75,10 +78,8 @@ public class DragDropView {
 		int rIndex = 0;
 		for (String image:imageLocations){
 			ImageView currentImage = graphicLib.createImageView(graphicLib.createImage(image));
-			ImageView copy = graphicLib.createImageView(graphicLib.createImage(image));
-			System.out.println("CurrentImage: "+currentImage);
 			dragDrop.init(currentImage, target);
-			objects.add(currentImage);
+			objects.add(currentImage);//TODO: do I need this?
 			graphicLib.setImageViewParams(currentImage, DEFENSIVEWIDTH, DEFENSIVEHEIGHT);
 			grid.add(currentImage ,cIndex, rIndex);
 			rIndex++;

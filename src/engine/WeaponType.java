@@ -1,6 +1,6 @@
 package engine;
 
-public class WeaponType {
+public class WeaponType extends Entity{
     private double fireRate;
     private String path;
     private String effect;

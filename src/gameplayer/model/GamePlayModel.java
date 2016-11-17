@@ -5,6 +5,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 
+import gameplayer.loader.XMLParser;
+import javafx.beans.property.SimpleListProperty;
+import javafx.collections.ObservableList;
+
 public class GamePlayModel {
 
 	private int cellSize;
@@ -12,8 +16,8 @@ public class GamePlayModel {
 	private int gridX;
 	private int gridY;
 
-	private List<Enemy> enemyOnGrid;
-	private List<Weapon> weaponOnGrid;
+	private ObservableList<Enemy> enemyOnGrid;
+	private ObservableList<Weapon> weaponOnGrid;
 	private int hitBuffer = 10; // initialize from xml
 	
 	private Map<Integer, Weapon> weaponTypes; // initialize in xml
@@ -25,16 +29,32 @@ public class GamePlayModel {
 	private Enemy nextEnteringEnemy; // decide how each wave of enemy comes either in pack or one at a time
 	private Cell startPoint;    // get from xml 
 	private Queue<Enemy> packOfEnemyComing;
+	private List<Queue<Enemy>> enemyAtCurrentLevel; 
+	//number of gold
 	
+	public GamePlayModel (String xmlFileName){
+		XMLParser parser = new XMLParser(xmlFileName);
+		
+		
+	}
 	
+	private void initializeGameSetting(XMLParser parser){
+		/*
+		 * Map = parser.getGameSetting 
+		 * for (){
+		 * 
+		 * }
+		 */
+	}
 	
-	
+	//change this to xml parser parsing all the info
+	// initialize grid each level
 	public GamePlayModel(int cellSize, int gridX, int gridY,int numberOfLife) {	
 		this.cellSize = cellSize;	
 		this.grid = new Grid(gridX, gridY);
 		gridArray = this.grid.getGrid();
-		enemyOnGrid = new ArrayList<Enemy>();
-		weaponOnGrid = new ArrayList<Weapon>();
+		enemyOnGrid = new SimpleListProperty<Enemy>();
+		weaponOnGrid = new SimpleListProperty<Weapon>();
 		this.gridX = gridX;
 		this.gridY = gridY;
 		this.numberOfLife = numberOfLife;
@@ -43,6 +63,8 @@ public class GamePlayModel {
 		
 		//initialize path in xml
 	}
+	
+	
 	
 	
 	public void placeTower(int type, int x, int y){		

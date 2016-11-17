@@ -2,6 +2,7 @@ package usecases;
 
 import gameplayer.model.Weapon;
 
+/*
 public class UpdateWeapon {
 	private void updateWeapon(){
 		for(Weapon w: weaponOnGrid){
@@ -28,3 +29,5 @@ public class UpdateWeapon {
 	}
 
 }
+
+*/

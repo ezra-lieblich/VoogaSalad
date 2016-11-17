@@ -82,6 +82,12 @@ public class GraphicsLibrary {
 		root.getChildren().add(t);
 		return t;
 	}
+	
+	public Text createText(Group root,String text) {
+		Text t = new Text(text);
+		root.getChildren().add(t);
+		return t;
+	}
 
 	public void setTextAttributes(Text text, Color color, Font font, String id) {
 		text.setFill(color);
@@ -101,7 +107,7 @@ public class GraphicsLibrary {
 		GridPane grid = new GridPane();
         grid.setHgap(hgap);
         grid.setVgap(vgap);
-        grid.setPadding(new Insets(25, 25, 25, 25));//TODO: change!
+        //grid.setPadding(new Insets(25, 25, 25, 25));//TODO: change!
         root.getChildren().add(grid);
         return grid;
 	}
