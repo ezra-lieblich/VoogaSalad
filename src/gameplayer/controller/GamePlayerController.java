@@ -2,6 +2,7 @@ package gameplayer.controller;
 
 import gameplayer.loader.GamePlayerFactory;
 import gameplayer.loader.XMLParser;
+import gameplayer.model.GamePlayModel;
 import gameplayer.view.GameGUI;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -31,7 +32,7 @@ public class GamePlayerController {
 	
 	/*
 	private void setUpTimeLine() {
-		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> BACKEND?????.update(SECOND_DELAY));
+		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> GamePlayModel.update(SECOND_DELAY));
 		Timeline animation = new Timeline();
 		application.setTimeline(animation);
 		animation.setCycleCount(Timeline.INDEFINITE);
