@@ -90,7 +90,7 @@ public class GamePlayModel extends Observable{
 	}
 
 
-	double getLife() {
+	public double getLife() {
 		return this.lives;
 	}
 
@@ -100,8 +100,6 @@ public class GamePlayModel extends Observable{
 		notifyObservers();
 		this.lives = life;
 	}
-
-
 
 
 	void setLevel(double d) {
@@ -208,6 +206,7 @@ public class GamePlayModel extends Observable{
 			else {
 				e.setX(e.getX() + e.getxDirection() * moveDist);
 				e.setY(e.getY() + e.getyDirection() * moveDist);
+				moveDist -= moveDist;
 			}
 			
 		}
