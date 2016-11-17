@@ -1,8 +1,10 @@
 package gameauthoringenvironment.view.enemy;
 
 import gameauthoringenvironment.view.enemy.enemycomponents.InitNewEnemyView;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
+
 
 public class EnemyView implements IEnemyView {
 
@@ -11,7 +13,7 @@ public class EnemyView implements IEnemyView {
 	
 	public EnemyView(){
 		root = new BorderPane();
-		newEnemy = new InitNewEnemyView();
+		newEnemy = new InitNewEnemyView(this);
 		root.setCenter(newEnemy.getRoot());
 		
 	}
@@ -19,6 +21,11 @@ public class EnemyView implements IEnemyView {
     @Override
     public Node getNodeAsInstance () {      
     	return root;
+    }
+    
+    public void getEnemySetter(){
+    	Group designEnemy = new Group();
+    	root.setCenter(designEnemy);
     }
     
     

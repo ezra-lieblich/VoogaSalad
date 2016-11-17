@@ -1,14 +1,12 @@
 package gameauthoringenvironment.view.createscene.sidetabbedtoolbar;
 
-import gameauthoringenvironment.view.enemy.EnemyView;
+
 import gameauthoringenvironment.view.enemy.EnemyViewFactory;
 import gameauthoringenvironment.view.enemy.IEnemyView;
 import javafx.geometry.Side;
-import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-import javafx.scene.text.Text;
 
 
 /**
