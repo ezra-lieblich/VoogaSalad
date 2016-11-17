@@ -1,13 +1,14 @@
 package engine;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class TowerType extends Entity {
     private List<TowerType> upgrades;
     private List<WeaponType> weapons;
     private List<EnemyType> targets;
-    private List<String> abilities;
+    private List<AbilityType> abilities;
     private String attackPreference;
     private double cost;
     private double sellAmount;
@@ -17,9 +18,11 @@ public class TowerType extends Entity {
         this.upgrades = new ArrayList<TowerType>();
         this.targets = new ArrayList<EnemyType>();
         this.weapons = new ArrayList<WeaponType>();
-        this.abilities = new ArrayList<String>();
-        setCost(0);
-        setAttackPreference("");
+        this.abilities = new ArrayList<AbilityType>();
+        this.cost = 0;
+        this.sellAmount = 0;
+        this.unlockLevel = 0;
+        this.attackPreference = "";
     }
 	
     public void addUpgrade(TowerType upgrade) {
@@ -36,6 +39,10 @@ public class TowerType extends Entity {
 
     public void removeWeapon (WeaponType weapon) {
         weapons.remove(weapon);
+    }
+    
+    public List<WeaponType> getWeapon() {
+        return Collections.unmodifiableList(weapons);
     }
 
     public void removeTarget (EnemyType target) {

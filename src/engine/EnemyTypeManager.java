@@ -2,10 +2,11 @@ package engine;
 
 public class EnemyTypeManager extends EntityManager<EnemyType>{
 
-	public EnemyType create() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    protected EnemyType createInstance () {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
 //	public double getSpeed(int id) {
 //		return speed;

@@ -1,5 +1,6 @@
 package engine;
 
+
 public class EntityBuilder<E extends Entity> {
 //    private E entity;
 //    
@@ -28,5 +29,4 @@ public class EntityBuilder<E extends Entity> {
 //    protected E getEntity() {
 //        return entity;
 //    }
-
 }
