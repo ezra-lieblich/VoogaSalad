@@ -1,9 +1,14 @@
 package gameauthoringenvironment.view.createscene.sidetabbedtoolbar;
 
+import gameauthoringenvironment.view.enemy.EnemyView;
+import gameauthoringenvironment.view.enemy.EnemyViewFactory;
+import gameauthoringenvironment.view.enemy.IEnemyView;
 import javafx.geometry.Side;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.text.Text;
 
 
 /**
@@ -16,6 +21,7 @@ import javafx.scene.control.TabPane;
 public class SideTabbedToolbar implements ISideTabbedToolbar {
     //TODO: TabPane or Ribbon Menu?
     private TabPane myTabPane;
+    private IEnemyView enemyView;
 
     public SideTabbedToolbar (int aWidth, int aHeight) {
         myTabPane = new TabPane();
@@ -26,8 +32,15 @@ public class SideTabbedToolbar implements ISideTabbedToolbar {
     private void setTabs () {
         Tab myTestTab = new Tab();
         myTestTab.setText("Enemy");
+        enemyView = EnemyViewFactory.build();    
+        myTestTab.setContent(enemyView.getNodeAsInstance());
+        
+
+        
         myTabPane.getTabs().addAll(myTestTab);
         myTabPane.setSide(Side.RIGHT);
+        
+        
     }
 
     @Override

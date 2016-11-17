@@ -7,4 +7,10 @@ public interface IEnemyToEngine {
      * @param enemyImageID from the user
      */
     public void setEnemyImage(int enemyImageID);
+    
+    
+    /**
+     * Creates new enemy
+     */
+    public void initNewEnemy();
 }
