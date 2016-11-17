@@ -39,7 +39,7 @@ public class GamePlayerController implements Observer{
 		int cols = parser.getCols();
 		view = new GameGUI(rows, cols);
 		*/
-		view = new GameGUI(5,5); //just for testing, should be replaced by block above
+		view = new GameGUI(5,5); //just for testing, should be replaced by block above, 5 rows, 5 columns
 	}
 	
 	public GameGUI getView() {
