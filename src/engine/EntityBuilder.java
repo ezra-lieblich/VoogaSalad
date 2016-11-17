@@ -1,6 +1,6 @@
 package engine;
 
-public class EntityBuilder<E extends Entity> {
+public class EntityBuilder<E extends IEntity> {
     private E entity;
     
     EntityBuilder(E entity) {
