@@ -9,7 +9,9 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 
 
 /**
@@ -27,13 +29,13 @@ public class SideTabbedToolbar implements ISideTabbedToolbar {
     public SideTabbedToolbar (int width, int height) {
         tabPane = new TabPane();
         //tabPane.setMaxSize(width/10, height);
-        //tabPane.setPrefSize(width/10, height);
+        //tabPane.setMinSize(width/10, height);
         tabPane.setSide(Side.RIGHT);
+   
         buildRibbonMenu();
     }
 
     private void buildRibbonMenu () {
-        HBox myTestBox = new HBox();
         
         this.enemyButton = new Button();
         this.enemyButton.setText("Enemy");
@@ -41,16 +43,16 @@ public class SideTabbedToolbar implements ISideTabbedToolbar {
         ImageView enemyImage = new ImageView(enemy);
         enemyImage.setFitHeight(30);
         enemyImage.setFitWidth(30);
+        
         this.enemyButton.setGraphicTextGap(5.0);
         this.enemyButton.setGraphic(enemyImage);
+        //this.enemyButton.setMaxWidth(Region.USE_PREF_SIZE);
         Tab testTab = new Tab();
-        //testTab.setText("Enemy");
-        //testTab.setGraphic(enemyImage);
-        myTestBox.getChildren().add(enemyButton);
-        testTab.setContent(myTestBox);
+        tabPane.getTabs().add(testTab);
+        testTab.setGraphic(enemyButton); //setContent gives correct button but with little edge
        
         testTab.setClosable(false);
-        tabPane.getTabs().add(testTab);
+
         
         //this.towerButton = new 
     }
