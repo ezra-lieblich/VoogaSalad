@@ -23,6 +23,10 @@ public class Grid {
 		this.start = cell;
 	}
 	
+	public Cell getStartPoint(){
+		return this.start;
+	}
+	
 	
 	public Cell[][] getGrid(){
 		return this.grid;

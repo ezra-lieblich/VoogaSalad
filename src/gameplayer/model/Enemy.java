@@ -78,7 +78,7 @@ public class Enemy extends Observable{
 	}
 
 	
-	String getImage(){
+	public String getImage(){
 		return this.image;
 	}
 
