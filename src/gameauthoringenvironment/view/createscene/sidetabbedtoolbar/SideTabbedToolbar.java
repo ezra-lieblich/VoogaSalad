@@ -3,15 +3,10 @@ package gameauthoringenvironment.view.createscene.sidetabbedtoolbar;
 import javafx.geometry.Side;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.SplitMenuButton;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
 
 
 /**
@@ -24,6 +19,7 @@ import javafx.scene.layout.Region;
 public class SideTabbedToolbar implements ISideTabbedToolbar {
 
     private Button enemyButton;
+    private Button towerButton;
     private TabPane tabPane;
 
     public SideTabbedToolbar (int width, int height) {
@@ -31,6 +27,11 @@ public class SideTabbedToolbar implements ISideTabbedToolbar {
         //tabPane.setMaxSize(width/10, height);
         //tabPane.setMinSize(width/10, height);
         tabPane.setSide(Side.RIGHT);
+        tabPane.setTabMaxHeight(80);
+        tabPane.setTabMaxWidth(30);
+        
+        tabPane.setTabMinHeight(80);
+        tabPane.setTabMinWidth(30);
    
         buildRibbonMenu();
     }
@@ -44,12 +45,29 @@ public class SideTabbedToolbar implements ISideTabbedToolbar {
         enemyImage.setFitHeight(30);
         enemyImage.setFitWidth(30);
         
+        this.towerButton = new Button();
+        this.towerButton.setText("Tower");
+        Image tower = new Image(getClass().getClassLoader().getResourceAsStream("tower.png"));
+        ImageView towerImage = new ImageView(tower);
+        towerImage.setFitHeight(30);
+        towerImage.setFitWidth(20);
+        
+        this.towerButton.setGraphicTextGap(5.0);
+        this.towerButton.setGraphic(towerImage);
+        
         this.enemyButton.setGraphicTextGap(5.0);
         this.enemyButton.setGraphic(enemyImage);
         //this.enemyButton.setMaxWidth(Region.USE_PREF_SIZE);
         Tab testTab = new Tab();
-        tabPane.getTabs().add(testTab);
+        Tab testTab2 = new Tab();
+       
+        //testTab.setContent(enemyButton);
         testTab.setGraphic(enemyButton); //setContent gives correct button but with little edge
+        testTab2.setGraphic(towerButton);
+        //testTab.setContent(new Rectangle)
+        
+        tabPane.getTabs().add(testTab);
+        tabPane.getTabs().add(testTab2);
        
         testTab.setClosable(false);
 
