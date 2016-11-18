@@ -30,16 +30,13 @@ public class GamePlayerController implements Observer{
 		initGUI();
 		parser = new XMLParser("player.samplexml/test.xml"); //hardcoded
 		loader = new GamePlayerFactory(parser); 
-		//System.out.println(authoringFileReader.getVariableValues("height"));
+		loader.getTowers();
 	}
 	
 	private void initGUI() {
-		/*
-		int rows = parser.getRows();
-		int cols = parser.getCols();
-		view = new GameGUI(rows, cols);
-		*/
+		System.out.println("STARTING: ***********");
 		view = new GameGUI(5,5); //just for testing, should be replaced by block above, 5 rows, 5 columns
+		System.out.println("ENDING: **********");
 	}
 	
 	public GameGUI getView() {

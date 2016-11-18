@@ -6,17 +6,17 @@ import java.util.Map;
 import java.util.Observable;
 import java.util.Queue;
 
+import engine.TowerType;
+import gameplayer.model.Cell;
 import gameplayer.model.Enemy;
 import gameplayer.model.Grid;
 import gameplayer.model.Tower;
 
 public class GamePlayerFactory{
 	XMLParser authoringFileReader;
-	private int currentLivel; // know which level for level specific info
 
 	public GamePlayerFactory(XMLParser parser){
-		authoringFileReader = parser;
-//		System.out.println(authoringFileReader.getTagsUnder("level1"));
+		this.authoringFileReader = parser;
 	}
 	
 	public HashMap<String, Double> getGameSetting(){
@@ -26,28 +26,44 @@ public class GamePlayerFactory{
 		settings.put("levelnumber",  Double.parseDouble(authoringFileReader.getVariableValues("levelnumber")));
 		return settings; 
 	}
-	
-	
-	public void getLevelInfo(int level){
-		this.currentLivel = level;
-	}
 
-	
 	public Grid getGrid(int level){
+		String width = authoringFileReader.getTextValue("level"+level,"width");
+		String height = authoringFileReader.getTextValue("level"+level,"height");
+		Grid gameGrid = new Grid(Integer.parseInt(width),Integer.parseInt(height));
+		String coordinates = authoringFileReader.getTextValue("level"+level, "coordinates");
+		String[] splitCoordinates = coordinates.split(";");
+		String[] start = splitCoordinates[0].split(",");
+		Cell current = gameGrid.getCell(Integer.parseInt(start[0]), Integer.parseInt(start[1]));
 		
-		
-		return null;		
+		gameGrid.setStart(current);
+		for(int i=1;i<splitCoordinates.length;i++){
+			String[] nextLocations = splitCoordinates[i].split(",");
+			Cell next = gameGrid.getCell(Integer.parseInt(nextLocations[0]), Integer.parseInt(nextLocations[1]));
+			current.setNext(next);
+			current = next; 
+		}
+		return gameGrid; 	
 	}
 	
-	public Map<Integer, Tower> getTowers(){
+	public HashMap<Integer, TowerType> getTowers(){
+		HashMap<Integer,TowerType> allTowers = new HashMap<>(); 
+		String name = authoringFileReader.getTextValue("tower", "name");
+		String imageLocation = authoringFileReader.getTextValue("tower", "imageLocation");
+		double cost = Double.parseDouble(authoringFileReader.getTextValue("tower", "cost"));
+		double sellAmount = Double.parseDouble(authoringFileReader.getTextValue("tower", "sellAmount"));
+		int fireRate = Integer.parseInt(authoringFileReader.getTextValue("tower", "fireRate"));
+		int unlockLevel = Integer.parseInt(authoringFileReader.getTextValue("tower", "unlockLevel"));
+		allTowers.put(1,new TowerType(name,imageLocation,cost,sellAmount,fireRate,unlockLevel));
 		
-		
-		return null;
+		return allTowers; 
 	}
 	
 	public List<Queue<Enemy>> getEnemy(){
 		// each queue is a wave of enemy 
 		// ArrayList of queue are all the waves at the current level
+		
+		
 		
 		return null;
 	}
