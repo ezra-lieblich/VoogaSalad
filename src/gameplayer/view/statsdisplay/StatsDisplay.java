@@ -2,8 +2,10 @@ package gameplayer.view.statsdisplay;
 
 import gameplayer.view.helper.GraphicsLibrary;
 import javafx.scene.Group;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 /**
@@ -15,72 +17,64 @@ import javafx.scene.text.Text;
  *
  */
 public class StatsDisplay {
-	
+
+	private static final String LEVEL = "Level: ";
+	private static final String LIVES_LEFT = "Lives left: ";
+	private static final String AMOUNT_OF_GOLD = "Amount of gold: ";
 	private HBox scorePane;
 	private GraphicsLibrary graphics;
-	private Group goldScore;
-	private Group liveScore;
-	private Group levelScore;
+	private Label goldLabel;
+	private Label liveLabel;
+	private Label levelLabel;
 	private double initGold;
 	private double initLives;
 	private double initLevel;
-	
-	
-	public StatsDisplay(double gold, double lives, double level){
-		this.scorePane = new HBox();
+
+	public StatsDisplay(double gold, double lives, double level) {
+		this.scorePane = new HBox(10);
+		this.scorePane.getStyleClass().add("statsHBox");
 		this.graphics = new GraphicsLibrary();
 		/*
-		this.goldScore = new Text();
-		this.liveScore = new Text();
-		this.levelScore = new Text();
-		*/
+		 * this.goldScore = new Text(); this.liveScore = new Text();
+		 * this.levelScore = new Text();
+		 */
 		this.initGold = gold;
 		this.initLives = lives;
 		this.initLevel = level;
 	}
-	
-	
-	public HBox getScorePane(){
+
+	public HBox getScorePane() {
 		return this.scorePane;
 	}
-	
-	public void init(){
-		System.out.println("Gold: "+initGold);
-		System.out.println("Lives: "+initLives);
-		System.out.println("Level: "+initLevel);
-		createTextScore("Amount of gold: ", Double.toString(this.initGold), this.goldScore);
-		createTextScore("Lives left: ", Double.toString(this.initLives), this.liveScore);
-		createTextScore("Level: ", Double.toString(this.initLevel), this.levelScore);	
+
+	public void init() {
+		this.goldLabel = createTextScore(AMOUNT_OF_GOLD, Double.toString(this.initGold), this.goldLabel);
+		this.liveLabel = createTextScore(LIVES_LEFT, Double.toString(this.initLives), this.liveLabel);
+		this.levelLabel= createTextScore(LEVEL, Double.toString(this.initLevel), this.levelLabel);
 	}
-	
-	private void createTextScore(String title, String score, Group scoreType){
+
+	private Label createTextScore(String title, String score, Label scoreType) {
 		Group root = new Group();
 		this.scorePane.getChildren().add(root);
-		//Label label = new Label(title);
-		//this.scorePane.getChildren().add(label);
-		Text label = graphics.createText(root, title);
-		label.getStyleClass().add("scoreLabel");
-		scoreType = new Group();
+		scoreType = new Label(title + score);
+		// Label label = new Label(title);
+		// this.scorePane.getChildren().add(label);
+//		Text label = graphics.createText(root, title);
+		scoreType.getStyleClass().add("scoreLabel");
 		this.scorePane.getChildren().add(scoreType);
-		graphics.createText(scoreType,score).getStyleClass().add("scoreLabel");	
+		return scoreType;
 	}
-	
-	private void updateScore(double score, Group root){
-		root.getChildren().clear();
-		Text label = graphics.createText(root, Double.toString(score));	
-		label.getStyleClass().add("scoreLabel");
+
+	public void updateGold(double gold) {
+		this.goldLabel.setText(AMOUNT_OF_GOLD + Double.toString(gold));
 	}
-	
-	public void updateGold(double gold){
-		updateScore(gold, this.goldScore);
+
+	public void updateLives(double lives) {
+		this.liveLabel.setText(LIVES_LEFT + Double.toString(lives));
 	}
-	
-	public void updateLives(double lives){
-		updateScore(lives, this.liveScore);
-	}
-	
-	public void updateLevel(double level){
-		updateScore(level, this.levelScore);
+
+	public void updateLevel(double level) {
+		this.levelLabel.setText(LEVEL + Double.toString(level));
 	}
 
 }
