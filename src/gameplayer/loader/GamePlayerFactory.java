@@ -17,6 +17,7 @@ public class GamePlayerFactory{
 
 	public GamePlayerFactory(XMLParser parser){
 		this.authoringFileReader = parser;
+		authoringFileReader.getTowerTypes();
 	}
 	
 	public HashMap<String, Double> getGameSetting(){
@@ -47,24 +48,13 @@ public class GamePlayerFactory{
 	}
 	
 	public HashMap<Integer, TowerType> getTowers(){
-		HashMap<Integer,TowerType> allTowers = new HashMap<>(); 
-		String name = authoringFileReader.getTextValue("tower", "name");
-		String imageLocation = authoringFileReader.getTextValue("tower", "imageLocation");
-		double cost = Double.parseDouble(authoringFileReader.getTextValue("tower", "cost"));
-		double sellAmount = Double.parseDouble(authoringFileReader.getTextValue("tower", "sellAmount"));
-		int fireRate = Integer.parseInt(authoringFileReader.getTextValue("tower", "fireRate"));
-		int unlockLevel = Integer.parseInt(authoringFileReader.getTextValue("tower", "unlockLevel"));
-		allTowers.put(1,new TowerType(name,imageLocation,cost,sellAmount,fireRate,unlockLevel));
-		
+		HashMap<Integer,TowerType> allTowers = authoringFileReader.getTowerTypes(); 
 		return allTowers; 
 	}
 	
 	public List<Queue<Enemy>> getEnemy(){
 		// each queue is a wave of enemy 
 		// ArrayList of queue are all the waves at the current level
-		
-		
-		
 		return null;
 	}
 	

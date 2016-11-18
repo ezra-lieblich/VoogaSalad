@@ -17,6 +17,21 @@
 					<type>tower</type>
 				</upgrade>
 			</tower>
+			<tower>
+				<name>test monkey</name>
+				<imageLocation>images/kaneki.jpg</imageLocation>
+				<isDestroyable>false</isDestroyable>
+				<range>10</range>
+				<fireRate>2</fireRate>
+				<cost>500</cost>
+				<sellAmount>200</sellAmount>
+				<unlockLevel>0</unlockLevel>
+				<weaponType>cannon</weaponType>
+				<upgrade>
+					<cost>200</cost>
+					<type>tower</type>
+				</upgrade>
+			</tower>
 		</towerList>
 	<init>	
 		<lives>50</lives>

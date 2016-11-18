@@ -1,6 +1,7 @@
 package gameplayer.loader;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -10,6 +11,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+
+import engine.TowerType;
 
 
 
@@ -59,7 +62,6 @@ public class XMLParser {
         String textVal = "";
         try{
         	NodeList parentList = xmlDocument.getElementsByTagName(parent);
-        
 	        NodeList nl = ((Element)parentList.item(0)).getElementsByTagName(tagName);
 	        if (nl != null && nl.getLength() > 0) {
 	        	for(int i=0;i<nl.getLength();i++){
@@ -72,6 +74,28 @@ public class XMLParser {
         	throw new XMLParserException(e);
         }
         return textVal;
+    }
+    
+    public HashMap<Integer,TowerType> getTowerTypes(){
+    	HashMap<Integer,TowerType>ret = new HashMap<>(); 
+    	try{
+    		NodeList parentList = xmlDocument.getElementsByTagName("tower");
+    		for(int i=0;i<parentList.getLength();i++){
+    			Element tower = (Element)parentList.item(i);
+    			String name = ((Element)(tower.getElementsByTagName("name").item(0))).getFirstChild().getNodeValue();
+    			String imageLocation = ((Element)(tower.getElementsByTagName("imageLocation").item(0))).getFirstChild().getNodeValue();
+    			double cost = Double.parseDouble(((Element)(tower.getElementsByTagName("imageLocation").item(0))).getFirstChild().getNodeValue());
+    			double sellAmount = Double.parseDouble(((Element)(tower.getElementsByTagName("sellAmount").item(0))).getFirstChild().getNodeValue());
+    			int fireRate = Integer.parseInt(((Element)(tower.getElementsByTagName("fireRate").item(0))).getFirstChild().getNodeValue());
+    			int unlockLevel = Integer.parseInt(((Element)(tower.getElementsByTagName("unlockLevel").item(0))).getFirstChild().getNodeValue());
+    			TowerType towerType = new TowerType(name,imageLocation,cost,sellAmount,fireRate,unlockLevel);
+    			ret.put(i, towerType);
+    		}
+    	}
+    	catch(Exception e){
+    		throw new XMLParserException(e);
+    	}
+    	return ret; 
     }
     
     //Returns String of w.e variable u give it. For example: Within the example xml, if call this with variable = width, this should return 500
