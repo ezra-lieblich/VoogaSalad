@@ -32,10 +32,10 @@ public class EditorTabPane implements IEditorTabPane {
         tabPane = new TabPane();
 
         tabPane.setSide(Side.RIGHT);
-        tabPane.setTabMaxHeight(100);
+        tabPane.setTabMaxHeight(120);
         tabPane.setTabMaxWidth(30);
 
-        tabPane.setTabMinHeight(100);
+        tabPane.setTabMinHeight(120);
         tabPane.setTabMinWidth(30);
         
 
@@ -46,9 +46,17 @@ public class EditorTabPane implements IEditorTabPane {
 
         Button enemyButton = buildButton(GUIResources.getString("Enemy"), "enemy.png");
         Button towerButton = buildButton(GUIResources.getString("Tower"), "tower.png");
+        Button pathButton = buildButton(GUIResources.getString("Path"), "path.png");
+        Button weaponsButton = buildButton(GUIResources.getString("Weapons"), "weapons.png");
+        Button settingsButton = buildButton(GUIResources.getString("GameSettings"), "gamesettings.png");
+        Button levelButton = buildButton(GUIResources.getString("Level"), "level.png");
 
         buildTabs(enemyButton);
         buildTabs(towerButton);
+        buildTabs(pathButton);
+        buildTabs(weaponsButton);
+        buildTabs(settingsButton);
+        buildTabs(levelButton);
 
     }
 
@@ -68,7 +76,7 @@ public class EditorTabPane implements IEditorTabPane {
         curImage.setFitWidth(30);
         button.setGraphic(curImage);
         button.setGraphicTextGap(5);
-        button.setMinSize(100, 30);
+        button.setMinSize(120, 30);
         return button;
     }
 

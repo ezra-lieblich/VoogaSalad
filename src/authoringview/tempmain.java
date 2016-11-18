@@ -8,6 +8,7 @@ public class tempmain extends Application {
 
     public static final String TITLE = "VOOGASquad";
     private Stage stage;
+    private static final int SIZE = 700;
 
     
     public Stage getStage(){
@@ -18,7 +19,7 @@ public class tempmain extends Application {
     public void start(Stage s){
             this.stage = s;
             //This is just for testing, should be switched to creating the authoring environment first
-            AuthoringView game = new AuthoringView(); 
+            AuthoringView game = new AuthoringView(SIZE, SIZE); 
             Scene scene = game.getScene();
             s.setTitle(TITLE);
             s.setScene(scene);

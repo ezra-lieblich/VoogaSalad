@@ -2,6 +2,8 @@ package authoringview;
 
 import authoringview.editortabpane.EditorTabPaneFactory;
 import authoringview.editortabpane.IEditorTabPane;
+import authoringview.gamesettings.GameSettingsEditorViewFactory;
+import authoringview.gamesettings.IGameSettingsEditorView;
 import authoringview.path.IPathEditorView;
 import authoringview.path.PathEditorViewFactory;
 import authoringview.toolbar.IToolbar;
@@ -24,10 +26,12 @@ public class AuthoringView implements IAuthoringView {
     private BorderPane authoringView;
     private ITowerEditorView towerView;
     private IPathEditorView pathView;
+    private IGameSettingsEditorView gameSettingsView;
     
     public AuthoringView(int aWidth, int aHeight) {
         towerView = TowerEditorViewFactory.build();
         pathView = PathEditorViewFactory.build(SIZE, SIZE);
+        gameSettingsView = GameSettingsEditorViewFactory.build(SIZE, SIZE);
         myRoot = new Group();
         myScene = new Scene(myRoot, SIZE, SIZE);
         myToolbar = ToolbarFactory.build(SIZE, SIZE/20);

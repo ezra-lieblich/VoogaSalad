@@ -11,9 +11,9 @@ public class GameSettingsEditorView implements IGameSettingsEditorView {
 
     private Pane gameConditionsPane;
 
-    public GameSettingsEditorView () {
+    public GameSettingsEditorView (int aWidth, int aHeight) {
         this.gameConditionsPane = new Pane();
-        makeTextField("Enemy");
+        makeTextField("Number of Columns: ");
     }
 
     private void makeTextField (String label) {

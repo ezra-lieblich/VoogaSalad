@@ -9,7 +9,7 @@ public class PathEditorView implements IPathEditorView {
     private GridGUI gridGUI;
 
     public PathEditorView (int aWidth, int aHeight) {
-        this.gridGUI = new GridGUI(4, 4);
+        this.gridGUI = new GridGUI(8, 8);
         this.gridGUI.init();
     }
 
