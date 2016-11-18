@@ -5,8 +5,9 @@ import gameauthoringenvironment.view.IGameAuthoringToEngine;
 public class EngineController implements IGameAuthoringToEngine {
 
 	@Override
-	public void setEnemyImage(int enemyImageID) {
+	public void setEnemyImage(int enemyImageID){
 		// TODO Auto-generated method stub
+		
 	}
 
 	@Override

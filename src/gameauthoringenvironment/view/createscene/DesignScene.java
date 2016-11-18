@@ -1,7 +1,7 @@
 package gameauthoringenvironment.view.createscene;
 
-import gameauthoringenvironment.view.createscene.sidetabbedtoolbar.ISideTabbedToolbar;
-import gameauthoringenvironment.view.createscene.sidetabbedtoolbar.SideTabbedToolbarFactory;
+import gameauthoringenvironment.view.createscene.editortabpane.IEditorTabPane;
+import gameauthoringenvironment.view.createscene.editortabpane.EditorTabPaneFactory;
 import gameauthoringenvironment.view.createscene.toolbar.IToolbar;
 import gameauthoringenvironment.view.createscene.toolbar.ToolbarFactory;
 import gameauthoringenvironment.view.path.IPathView;
@@ -19,7 +19,7 @@ public class DesignScene implements IDesignScene {
     private Scene myScene;
     private Group myRoot;
     private IToolbar myToolbar;
-    private ISideTabbedToolbar mySideTabbedToolbar;
+    private IEditorTabPane mySideTabbedToolbar;
     private static final int SIZE = 700;
     private BorderPane authoringView;
     private ITowerView towerView;
@@ -31,7 +31,7 @@ public class DesignScene implements IDesignScene {
         myRoot = new Group();
         myScene = new Scene(myRoot, SIZE, SIZE);
         myToolbar = ToolbarFactory.build(SIZE, SIZE/20);
-        mySideTabbedToolbar = SideTabbedToolbarFactory.build(SIZE, SIZE);
+        mySideTabbedToolbar = EditorTabPaneFactory.build(SIZE, SIZE);
         authoringView = new BorderPane();
         myRoot.getChildren().add(authoringView);
         initScene();

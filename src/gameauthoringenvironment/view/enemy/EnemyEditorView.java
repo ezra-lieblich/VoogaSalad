@@ -1,6 +1,6 @@
 package gameauthoringenvironment.view.enemy;
 
-import gameauthoringenvironment.view.enemy.enemycomponents.InitNewEnemyView;
+import gameauthoringenvironment.view.enemy.subviews.InitNewEnemyView;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;

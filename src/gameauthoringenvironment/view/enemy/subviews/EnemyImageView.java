@@ -1,4 +1,4 @@
-package gameauthoringenvironment.view.enemy.enemycomponents;
+package gameauthoringenvironment.view.enemy.subviews;
 
 import javafx.scene.Group;
 

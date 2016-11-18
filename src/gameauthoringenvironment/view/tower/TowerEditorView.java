@@ -1,17 +1,17 @@
 package gameauthoringenvironment.view.tower;
 
-import gameauthoringenvironment.view.tower.towercomponents.InitNewTowerView;
+import gameauthoringenvironment.view.tower.subviews.InitNewTowerView;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
 
-public class TowerView implements ITowerView {
+public class TowerEditorView implements ITowerView {
 
 	
 	private BorderPane root;
 	private InitNewTowerView newTower;
 	
-	public TowerView(){
+	public TowerEditorView(){
 		root = new BorderPane();
 		newTower = new InitNewTowerView(this);
 		root.setCenter(newTower.getRoot());
