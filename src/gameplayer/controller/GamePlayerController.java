@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.util.HashMap;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -24,18 +25,26 @@ public class GamePlayerController implements Observer{
 	private GamePlayerFactory loader; 
 	private GameGUI view;
 	private XMLParser parser;
+	private Scene mainScene;
 	
 	public GamePlayerController(){
 		//use xml parser to create classes. 
-		initGUI();
-		parser = new XMLParser("player.samplexml/test.xml"); //hardcoded
-		loader = new GamePlayerFactory(parser); 
+		this.parser = new XMLParser("player.samplexml/test.xml"); //hardcoded
+		this.loader = new GamePlayerFactory(parser); 
 	}
 	
-	private void initGUI() {
-		System.out.println("STARTING: ***********");
+	public void init(){
+		HashMap<String,Double> settings = this.loader.getGameSetting();
+		initGUI(settings);
+	}
+	
+	private void initGUI(HashMap<String,Double> settings) {
 		view = new GameGUI(5,5); //just for testing, should be replaced by block above, 5 rows, 5 columns
-		System.out.println("ENDING: **********");
+		this.mainScene = view.init(settings.get("gold"), settings.get("lives"), settings.get("numLevels"));
+	}
+	
+	public Scene getMainScene(){
+		return this.mainScene;
 	}
 	
 	public GameGUI getView() {
