@@ -6,12 +6,12 @@ import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
 
 
-public class EnemyView implements IEnemyView {
+public class EnemyEditorView implements IEnemyView {
 
 	private BorderPane root;
 	private InitNewEnemyView newEnemy;
 	
-	public EnemyView(){
+	public EnemyEditorView(){
 		root = new BorderPane();
 		newEnemy = new InitNewEnemyView(this);
 		root.setCenter(newEnemy.getRoot());

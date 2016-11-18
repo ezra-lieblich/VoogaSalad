@@ -7,7 +7,7 @@ public class PathViewFactory {
     }
 
     public static IPathView build (int aWidth, int aHeight) {
-        return new PathView(aWidth, aHeight);
+        return new PathEditorView(aWidth, aHeight);
     }
 
 }
