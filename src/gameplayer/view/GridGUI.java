@@ -21,8 +21,8 @@ import javafx.scene.layout.Pane;
 public class GridGUI {
 
 	private Pane grid;
-	public static final int GRID_WIDTH = 700;
-	public static final int GRID_HEIGHT = 700;
+	public static final int GRID_WIDTH = 600;
+	public static final int GRID_HEIGHT = 600;
 	private double rows;
 	private double cols;
 	private double cellWidth;
@@ -48,15 +48,17 @@ public class GridGUI {
 
 	//for testing
 	private void initDummyPath(){
-		int[] stuff  = {1,1};
-		int []stuff1 = {2,2};
-		int []stuff2 = {3,3};
-		int[] stuff3={4,4};
+		int[] stuff  = {0,0};
+		int []stuff1 = {1,1};
+		int []stuff2 = {2,2};
+		int[] stuff3={3,3};
+		int[] stuff4={4,4};
 		this.path = new ArrayList<int[]>();
 		this.path.add(stuff);
 		this.path.add(stuff1);
 		this.path.add(stuff2);
 		this.path.add(stuff3);
+		this.path.add(stuff4);
 	}
 	
 	public void init(){
@@ -101,6 +103,7 @@ public class GridGUI {
 			ImageView pathImage = graphicsLib.createImageView(graphicsLib.createImage("kaneki.jpg"));
 			System.out.println("Path image: "+pathImage);
 			graphicsLib.setImageViewParams(pathImage, x*cellWidth, y*cellHeight,cellWidth, cellHeight);
+			System.out.println("Image width and height: "+pathImage.getFitWidth()+","+pathImage.getFitHeight());
 			this.grid.getChildren().add(pathImage);
 			//pathImage.setX(x*cellWidth);
 			//pathImage.setY(x*cellWidth);
