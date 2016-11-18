@@ -36,7 +36,13 @@
     -fx-effect: dropshadow( one-pass-box , black , 0, 0.0 , 0 , -1 );
 }
 
+
+
 .scoreLabel{
 	-fx-font-size: 20;
-	-fx-text-fill: #006464;
+	-fx-text-fill: white;
+}
+
+.statsHBox {
+	-fx-background-color: #8da899;
 }

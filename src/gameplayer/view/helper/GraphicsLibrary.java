@@ -1,5 +1,7 @@
 package gameplayer.view.helper;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
@@ -52,6 +54,12 @@ public class GraphicsLibrary {
 
 	public Button createButton(String label) {
 		Button button = new Button(label);
+		return button;
+	}
+	
+	public Button createButton(String label, EventHandler<ActionEvent> e){
+		Button button = new Button(label);
+		button.setOnAction(e);
 		return button;
 	}
 
