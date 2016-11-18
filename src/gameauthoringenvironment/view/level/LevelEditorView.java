@@ -2,7 +2,7 @@ package gameauthoringenvironment.view.level;
 
 import javafx.scene.Node;
 
-public class LevelView implements ILevelView {
+public class LevelEditorView implements ILevelView {
 
     @Override
     public Node getInstanceAsNode () {

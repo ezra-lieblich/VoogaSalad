@@ -7,11 +7,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 
 
-public class PathView implements IPathView {
+public class PathEditorView implements IPathView {
 
     private GridGUI gridGUI;
 
-    public PathView (int aWidth, int aHeight) {
+    public PathEditorView (int aWidth, int aHeight) {
         this.gridGUI = new GridGUI(8, 8);
         this.gridGUI.init();
     }

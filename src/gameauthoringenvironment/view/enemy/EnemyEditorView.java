@@ -1,17 +1,17 @@
 package gameauthoringenvironment.view.enemy;
 
-import gameauthoringenvironment.view.enemy.enemycomponents.InitNewEnemyView;
+import gameauthoringenvironment.view.enemy.subviews.InitNewEnemyView;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
 
 
-public class EnemyView implements IEnemyView {
+public class EnemyEditorView implements IEnemyView {
 
 	private BorderPane root;
 	private InitNewEnemyView newEnemy;
 	
-	public EnemyView(){
+	public EnemyEditorView(){
 		root = new BorderPane();
 		newEnemy = new InitNewEnemyView(this);
 		root.setCenter(newEnemy.getRoot());

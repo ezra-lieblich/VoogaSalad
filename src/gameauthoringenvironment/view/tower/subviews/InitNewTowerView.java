@@ -1,20 +1,20 @@
-package gameauthoringenvironment.view.tower.towercomponents;
+package gameauthoringenvironment.view.tower.subviews;
 
 import java.util.ResourceBundle;
 
-import gameauthoringenvironment.view.tower.TowerView;
+import gameauthoringenvironment.view.tower.TowerEditorView;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 
 public class InitNewTowerView {
 	private BorderPane root;
-	private TowerView towerView;
+	private TowerEditorView towerView;
 	
 	private static final String RESOURCE_FILE_NAME = "resources/GameAuthoringTower";	
 	private ResourceBundle towerResources = ResourceBundle.getBundle(RESOURCE_FILE_NAME);
 	
-	public InitNewTowerView(TowerView towerView){
+	public InitNewTowerView(TowerEditorView towerView){
 		root = new BorderPane();
 		this.towerView = towerView;
 		initRoot();

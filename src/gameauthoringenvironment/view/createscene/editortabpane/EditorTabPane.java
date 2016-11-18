@@ -1,4 +1,4 @@
-package gameauthoringenvironment.view.createscene.sidetabbedtoolbar;
+package gameauthoringenvironment.view.createscene.editortabpane;
 
 import java.util.ResourceBundle;
 import javafx.geometry.Side;
@@ -17,14 +17,15 @@ import javafx.scene.image.ImageView;
  * @author Kayla Schulz
  *
  */
-public class SideTabbedToolbar implements ISideTabbedToolbar {
+public class EditorTabPane implements IEditorTabPane {
 
     // private ITowerView towerView;
 
     private TabPane tabPane;
     private ResourceBundle GUIResources;
+    private EditorTabPaneDelegate delegate;
 
-    public SideTabbedToolbar (int width, int height) {
+    public EditorTabPane (int width, int height) {
         String initFile = "resources";
         String fileName = "/GameAuthoringToolbar";
         GUIResources = ResourceBundle.getBundle(initFile + fileName);
@@ -75,6 +76,11 @@ public class SideTabbedToolbar implements ISideTabbedToolbar {
     public Node getInstanceAsNode () {
         return tabPane;
     }
+
+	@Override
+	public void setDelegate(EditorTabPaneDelegate delegate) {
+		this.delegate = delegate;
+	}
 
 }
 
