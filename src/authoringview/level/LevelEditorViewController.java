@@ -1,5 +1,7 @@
 package authoringview.level;
 
-public class LevelEditorViewController {
+import authoringview.EditorViewController;
+
+public class LevelEditorViewController extends EditorViewController {
 
 }

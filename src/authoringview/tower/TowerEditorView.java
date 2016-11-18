@@ -1,12 +1,11 @@
 package authoringview.tower;
 
-import authoringview.EditorView;
 import authoringview.tower.subviews.InitNewTowerView;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
 
-public class TowerEditorView extends EditorView implements ITowerEditorView {
+public class TowerEditorView implements ITowerEditorView {
 
 	
 	private BorderPane root;

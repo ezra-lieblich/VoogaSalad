@@ -1,5 +1,7 @@
 package authoringview.path;
 
-public class PathEditorViewController {
+import authoringview.EditorViewController;
+
+public class PathEditorViewController extends EditorViewController {
 
 }

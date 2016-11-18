@@ -1,5 +1,7 @@
 package authoringview.enemy;
 
-public class EnemyEditorViewController {
+import authoringview.EditorViewController;
+
+public class EnemyEditorViewController extends EditorViewController {
 
 }

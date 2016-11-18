@@ -1,5 +1,7 @@
 package authoringview.tower;
 
-public class TowerEditorViewController {
+import authoringview.EditorViewController;
+
+public class TowerEditorViewController extends EditorViewController {
 
 }

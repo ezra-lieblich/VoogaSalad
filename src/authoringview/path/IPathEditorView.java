@@ -1,6 +1,6 @@
 package authoringview.path;
 
-import javafx.scene.Node;
+import authoringview.IEditorView;
 
 /**
  * 
@@ -8,12 +8,7 @@ import javafx.scene.Node;
  * and the public methods defining what components the path view should contain.
  *
  */
-public interface IPathEditorView {
+public interface IPathEditorView extends IEditorView {
     
-    /**
-     * 
-     * @return node of path view
-     */
-    public Node getInstanceAsNode();
 
 }

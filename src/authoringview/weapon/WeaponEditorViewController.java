@@ -1,5 +1,7 @@
 package authoringview.weapon;
 
-public class WeaponEditorViewController {
+import authoringview.EditorViewController;
+
+public class WeaponEditorViewController extends EditorViewController {
 
 }

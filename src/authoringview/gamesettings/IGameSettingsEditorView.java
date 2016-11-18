@@ -1,9 +1,7 @@
 package authoringview.gamesettings;
 
-import javafx.scene.Node;
+import authoringview.IEditorView;
 
+public interface IGameSettingsEditorView extends IEditorView {
 
-public interface IGameSettingsEditorView {
-
-    public Node getInstanceAsNode ();
 }

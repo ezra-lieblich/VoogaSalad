@@ -1,9 +1,8 @@
 package authoringview.level;
 
-import authoringview.EditorView;
 import javafx.scene.Node;
 
-public class LevelEditorView extends EditorView implements ILevelEditorView {
+public class LevelEditorView implements ILevelEditorView {
 
     @Override
     public Node getInstanceAsNode () {

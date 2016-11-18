@@ -1,11 +1,10 @@
 package authoringview.path;
 
-import authoringview.EditorView;
 import gameplayer.view.GridGUI;
 import javafx.scene.Node;
 
 
-public class PathEditorView extends EditorView implements IPathEditorView {
+public class PathEditorView implements IPathEditorView {
 
     private GridGUI gridGUI;
 
