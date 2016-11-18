@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Observable;
 import java.util.Queue;
 
+import engine.TowerType;
 import gameplayer.model.Cell;
 import gameplayer.model.Enemy;
 import gameplayer.model.Grid;
