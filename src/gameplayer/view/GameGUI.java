@@ -25,6 +25,8 @@ public class GameGUI {
 	
 	public static final int SCENE_WIDTH = 1200;
 	public static final int SCENE_HEIGHT = 700;
+	public static final double xError = -20;
+	public static final double yError = -60;
 	
 	private BorderPane mainScreen;
 	private Scene scene;
@@ -40,7 +42,7 @@ public class GameGUI {
 		this.mainScreen = new BorderPane();
 		this.graphics = new GraphicsLibrary();
 		this.grid = new GridGUI(rows, columns/*, path*/); 
-		this.dragDrop = new DragDropView(); 
+		this.dragDrop = new DragDropView(xError, yError); 
 		this.buttonPanel = new GamePlayButtonPanel();
 	}
 	
@@ -74,13 +76,13 @@ public class GameGUI {
 	
 	private void createGrid(){
 		styleGrid();
-		this.mainScreen.setCenter(grid.getGrid());
+		this.mainScreen.setLeft(grid.getGrid());
 		grid.init();
 	}
 	
 	private void styleGrid(){
 		BorderPane.setAlignment(this.grid.getGrid(), Pos.CENTER);
-		BorderPane.setMargin(this.grid.getGrid(), new Insets(10,50,10,0));
+		//BorderPane.setMargin(this.grid.getGrid(), new Insets(10,50,10,0));
 	}
 	
 	private void initDragDropPane(){

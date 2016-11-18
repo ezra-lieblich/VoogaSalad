@@ -35,14 +35,14 @@ public class GridGUI {
 																																							// url
 
 	public GridGUI(int rows, int columns/*, List<int[]> path*/) {
-		System.out.println("Rows: "+rows+"; columns: "+columns);
+		//System.out.println("Rows: "+rows+"; columns: "+columns);
 		this.grid = new Pane();
 		this.graphicsLib = new GraphicsLibrary();
 		this.rows = rows;
 		this.cols = columns;
 		this.cellWidth = GRID_WIDTH / cols;
 		this.cellHeight = GRID_HEIGHT / this.rows;
-		System.out.println("Cell width: "+cellWidth+", "+cellHeight);
+		//System.out.println("Cell width: "+cellWidth+", "+cellHeight);
 		//this.path = path;
 	}
 
@@ -95,20 +95,20 @@ public class GridGUI {
 	}
 
 	private void populatePath( List<int[]> path) { //TODO: change how path is being sent
-		System.out.println("Populate path!");
+		//System.out.println("Populate path!");
 		for (int i = 0; i < path.size(); i++) {
 			double x = path.get(i)[0];
 			double y = path.get(i)[1];
-			System.out.println("X: "+x+", Y: "+y);
+			//System.out.println("X: "+x+", Y: "+y);
 			ImageView pathImage = graphicsLib.createImageView(graphicsLib.createImage("kaneki.jpg"));
-			System.out.println("Path image: "+pathImage);
+			//System.out.println("Path image: "+pathImage);
 			graphicsLib.setImageViewParams(pathImage, x*cellWidth, y*cellHeight,cellWidth, cellHeight);
-			System.out.println("Image width and height: "+pathImage.getFitWidth()+","+pathImage.getFitHeight());
+			//System.out.println("Image width and height: "+pathImage.getFitWidth()+","+pathImage.getFitHeight());
 			this.grid.getChildren().add(pathImage);
 			//pathImage.setX(x*cellWidth);
 			//pathImage.setY(x*cellWidth);
 			//pathImage.relocate(x*cellWidth, y*cellHeight);
-			System.out.println("path image coords: "+pathImage.getX()+", "+pathImage.getY());
+			//System.out.println("path image coords: "+pathImage.getX()+", "+pathImage.getY());
 		}
 	}
 	

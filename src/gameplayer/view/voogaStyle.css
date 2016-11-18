@@ -11,9 +11,23 @@
 
 .dragDropPane{
 	-fx-min-width: 300;
-	-fx-background-color: lightgrey;
 	-fx-border-width: 3.0;
+	-fx-padding: 10 0 0 0;
+    -fx-border-insets: 0px;
+    -fx-background-insets: 0px;
 }
+
+/* tab pane default */
+.tab-pane {
+    my-tab-header-background: derive(-fx-text-box-border, 30%) ;
+}
+
+.tab-pane > .tab-header-area > .tab-header-background {
+    -fx-background-color: -fx-outer-border, -fx-text-box-border, 
+        linear-gradient(from 0px 0px to 0px 5px, -fx-text-box-border, my-tab-header-background) ;
+}
+
+
 
 .ipad-dark-grey {
     -fx-background-color: 
