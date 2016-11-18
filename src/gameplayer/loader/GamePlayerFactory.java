@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Observable;
 import java.util.Queue;
 
+import engine.EnemyType;
 import engine.TowerType;
 import gameplayer.model.Cell;
 import gameplayer.model.Enemy;
@@ -13,17 +14,22 @@ import gameplayer.model.Grid;
 import gameplayer.model.Tower;
 
 public class GamePlayerFactory{
-	XMLParser authoringFileReader;
+	private XMLParser authoringFileReader;
+	private HashMap<Integer,TowerType>allTowers; 
+	private HashMap<String,EnemyType>allEnemies; 
+	
 
 	public GamePlayerFactory(XMLParser parser){
 		this.authoringFileReader = parser;
-		authoringFileReader.getTowerTypes();
+		allTowers = authoringFileReader.getTowerTypes(); 
+		allEnemies = authoringFileReader.getEnemyTypes();
 	}
 	
 	public HashMap<String, Double> getGameSetting(){
 		HashMap<String,Double>settings = new HashMap<>(); 
+		settings.put("numLevels", Double.parseDouble(authoringFileReader.getVariableValues("numLevels")));
 		settings.put("lives", Double.parseDouble(authoringFileReader.getVariableValues("lives")));
-		settings.put("gold",  Double.parseDouble(authoringFileReader.getVariableValues("lives")));
+		settings.put("gold",  Double.parseDouble(authoringFileReader.getVariableValues("gold")));
 		settings.put("levelnumber",  Double.parseDouble(authoringFileReader.getVariableValues("levelnumber")));
 		return settings; 
 	}
@@ -48,7 +54,6 @@ public class GamePlayerFactory{
 	}
 	
 	public HashMap<Integer, TowerType> getTowers(){
-		HashMap<Integer,TowerType> allTowers = authoringFileReader.getTowerTypes(); 
 		return allTowers; 
 	}
 	

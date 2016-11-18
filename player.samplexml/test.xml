@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <GameSetting Title="Bloons">
 	<isValid> true </isValid>
+	<init>	
+		<numLevels>2</numLevels>
+		<lives>50</lives>
+		<gold>1000</gold>
+		<levelnumber>10</levelnumber>
+	</init>
 	<towerList>
 			<tower>
 				<name>ninja monkey</name>
@@ -33,14 +39,43 @@
 				</upgrade>
 			</tower>
 		</towerList>
-	<init>	
-		<lives>50</lives>
-		<gold>1000</gold>
-		<levelnumber>10</levelnumber>
-	</init>
+	<enemyList>
+		<enemy>
+			<name>redballoon</name>
+			<imagePath>images/redbaloon.jpg</imagePath>
+			<widthOfImage> 20 </widthOfImage>
+			<heightOfImage> 20 </heightOfImage>
+			<speed>5</speed>
+			<health>6</health>
+			<points>10</points>
+			<money>15</money>
+			<collisionEffect>explode</collisionEffect>
+		</enemy>
+		<enemy>
+			<name>redmoab</name>
+			<imagePath>images/redmoab.jpg</imagePath>
+			<widthOfImage>50</widthOfImage>
+			<heightOfImage>50</heightOfImage>
+			<speed>3</speed>
+			<health>100</health>
+			<points>200</points>
+			<money>1000</money>
+			<collisionEffect> explode </collisionEffect>
+		</enemy>
+	</enemyList>
 	<level1> 
 		<width>10</width>
 		<height>10</height>
+		<wave>
+			<enemies>
+				<type>redballoon</type>
+				<amount>50</amount>
+			</enemies>
+			<enemies>
+				<type>redmoab</type>
+				<amount>2</amount>
+			</enemies>
+		</wave>
 		<path>
 			<coordinate>0,0;</coordinate>
 			<coordinate>0,1;</coordinate>
@@ -53,6 +88,9 @@
 			<coordinate>0,8;</coordinate>
 			<coordinate>0,9;</coordinate>
 		</path>
+		<enemies>
+			
+		</enemies>
 	</level1>
 	<level2>
 		<width>10</width>
@@ -72,17 +110,7 @@
 	</level2>
 	
 	<background> images/butterfly </background>
-	<enemy>
-		<name> “black balloon” </name>
-		<imagePath> “src/images/cannon” </imagePath>
-		<widthOfImage> 20 </widthOfImage>
-		<heightOfImage> 20 </heightOfImage>
-		<speed> 5 </speed>
-		<health> 6 </health>
-		<points> 10 </points>
-		<money> 15 </money>
-		<collisionEffect> explode </collisionEffect>
-	</enemy>
+	
 	<enemy> “enemy 2” </enemy>
 	<weapon>
 		<name> “cannon” </name>
@@ -92,15 +120,7 @@
 		<damage> 2 </damage>
 	</weapon>
 	<weapon> “weapon 2” </weapon>
-	<path>
-		<imagePath>src/images/pathImage</imagePath>
-		<type> “fixed” </type>
-		<coordinates>
-			<coordinate> (0,0) </coordinate>
-			<coordinate> (0,1) </coordinate>
-			<coordinate> (1,1) </coordinate>
-		</coordinates>
-	</path>
+
 	<level>
 		<enemies>
 			<enemy>

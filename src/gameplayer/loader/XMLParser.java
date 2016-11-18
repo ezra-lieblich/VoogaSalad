@@ -12,7 +12,9 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import engine.EnemyType;
 import engine.TowerType;
+import gameplayer.model.Enemy;
 
 
 
@@ -52,6 +54,21 @@ public class XMLParser {
     		throw new XMLParserException(e);
     	}
     }
+   
+    private void reset(){
+    	DOCUMENT_BUILDER.reset(); 
+    }
+
+    // Helper method to do the boilerplate code needed to make a documentBuilder.
+    private static DocumentBuilder getDocumentBuilder () {
+        try {
+            return DocumentBuilderFactory.newInstance().newDocumentBuilder();
+        }
+        catch (ParserConfigurationException e) {
+            throw new XMLParserException(e);
+        }
+    }
+    
     
     //This returns the TYPE of the xml
     public String getName(){
@@ -84,7 +101,7 @@ public class XMLParser {
     			Element tower = (Element)parentList.item(i);
     			String name = ((Element)(tower.getElementsByTagName("name").item(0))).getFirstChild().getNodeValue();
     			String imageLocation = ((Element)(tower.getElementsByTagName("imageLocation").item(0))).getFirstChild().getNodeValue();
-    			double cost = Double.parseDouble(((Element)(tower.getElementsByTagName("imageLocation").item(0))).getFirstChild().getNodeValue());
+    			double cost = Double.parseDouble(((Element)(tower.getElementsByTagName("cost").item(0))).getFirstChild().getNodeValue());
     			double sellAmount = Double.parseDouble(((Element)(tower.getElementsByTagName("sellAmount").item(0))).getFirstChild().getNodeValue());
     			int fireRate = Integer.parseInt(((Element)(tower.getElementsByTagName("fireRate").item(0))).getFirstChild().getNodeValue());
     			int unlockLevel = Integer.parseInt(((Element)(tower.getElementsByTagName("unlockLevel").item(0))).getFirstChild().getNodeValue());
@@ -109,18 +126,27 @@ public class XMLParser {
     	}
     }
     
-    private void reset(){
-    	DOCUMENT_BUILDER.reset(); 
-    }
-
-    // Helper method to do the boilerplate code needed to make a documentBuilder.
-    private static DocumentBuilder getDocumentBuilder () {
-        try {
-            return DocumentBuilderFactory.newInstance().newDocumentBuilder();
-        }
-        catch (ParserConfigurationException e) {
-            throw new XMLParserException(e);
-        }
-    }
+	public HashMap<String, EnemyType> getEnemyTypes() {
+		HashMap<String,EnemyType>ret = new HashMap<>(); 
+    	try{
+    		NodeList parentList = xmlDocument.getElementsByTagName("enemy");
+    		for(int i=0;i<parentList.getLength();i++){
+    			Element enemy = (Element)parentList.item(i);
+    			String name = ((Element)(enemy.getElementsByTagName("name").item(0))).getFirstChild().getNodeValue();
+    			String imageLocation = ((Element)(enemy.getElementsByTagName("imageLocation").item(0))).getFirstChild().getNodeValue();
+    			double speed = Double.parseDouble(((Element)(enemy.getElementsByTagName("speed").item(0))).getFirstChild().getNodeValue());
+    			double health = Double.parseDouble(((Element)(enemy.getElementsByTagName("health").item(0))).getFirstChild().getNodeValue());
+    			double points = Double.parseDouble(((Element)(enemy.getElementsByTagName("points").item(0))).getFirstChild().getNodeValue());
+    			double money = Double.parseDouble(((Element)(enemy.getElementsByTagName("money").item(0))).getFirstChild().getNodeValue());
+    			String collisionEffect = ((Element)(enemy.getElementsByTagName("collisionEffect").item(0))).getFirstChild().getNodeValue();
+    			EnemyType enemyType = new EnemyType(name,imageLocation,speed,health,points,money,collisionEffect);
+    			ret.put(name, enemyType);
+    		}
+    	}
+    	catch(Exception e){
+    		throw new XMLParserException(e);
+    	}
+    	return ret; 
+	}
 
 }
