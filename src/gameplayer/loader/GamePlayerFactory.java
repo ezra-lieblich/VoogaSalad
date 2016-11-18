@@ -53,10 +53,8 @@ public class GamePlayerFactory{
 		return authoringFileReader.getTowerTypes(); 
 	}
 	
-	public List<Queue<Enemy>> getEnemy(){
-		// each queue is a wave of enemy 
-		// ArrayList of queue are all the waves at the current level
-		return authoringFileReader.getEnemy(); 
+	public List<Queue<Enemy>> getEnemy(int level){
+		return authoringFileReader.getEnemy(level); 
 	}
 	
 }

@@ -130,25 +130,20 @@ public class XMLParser {
     	}
     }
 	
-	public List<Queue<Enemy>> getEnemy(){
+	public List<Queue<Enemy>> getEnemy(int level){
 		ArrayList<Queue<Enemy>>enemyByLevel=new ArrayList<>(); 
 		HashMap<String,EnemyType> types = getEnemyTypes();
-		int numLevels = Integer.parseInt(getVariableValues("numLevels"));
-		for(int i=1;i<=numLevels;i++){
+		String[]enemiesRawString = getTextValue("level"+level,"typeAmount").split(";");
+		for(int i=1;i<=enemiesRawString.length;i++){
 			Queue<Enemy>enemiesInLevel= new LinkedList<Enemy>(); 
-			String[]enemiesRawString = getTextValue("level"+i,"typeAmount").split(";");
-			for(int j=0;j<enemiesRawString.length;j++){
-				String[]enemies=enemiesRawString[j].split(",");
-				for(int k=0;k<Integer.parseInt(enemies[1]);k++){
-					EnemyType type = types.get(enemies[0]);
-					enemiesInLevel.add(new Enemy(type.getName(),type.getSpeed(),(int)(type.getHealth()),type.getImageLocation()));
-				}
+			String[]enemies = enemiesRawString[i].split(",");
+			for(int k=0;k<Integer.parseInt(enemies[1]);k++){
+				EnemyType type = types.get(enemies[0]);
+				enemiesInLevel.add(new Enemy(type.getName(),type.getSpeed(),(int)(type.getHealth()),type.getImageLocation()));
 			}
 			enemyByLevel.add(enemiesInLevel);
 		}
-		
 		return enemyByLevel; 
-		
 	}
 	
 	private HashMap<String, EnemyType> getEnemyTypes() {
