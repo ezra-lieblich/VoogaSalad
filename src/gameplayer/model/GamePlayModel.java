@@ -64,7 +64,7 @@ public class GamePlayModel extends Observable{
 	
 	public void initializeLevelInfo(){
 		this.enemyAtCurrentLevel = this.factory.getEnemy();
-		this.towerTypes = this.factory.getTowers();
+		//this.towerTypes = this.factory.getTowers();
 		//this.weaponTypes = this.factory.getWeapon();
 		this.waveOfEnemy = 0;
 		

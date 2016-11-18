@@ -6,11 +6,9 @@
 		<gold>1000</gold>
 		<levelnumber>10</levelnumber>
 	</init>
-	<level1>
-		<dimension>
-			<width>10</width>
-			<height>10</height>
-		</dimension>
+	<level1> 
+		<width>10</width>
+		<height>10</height>
 		<path>
 			<coordinate>0,0</coordinate>
 			<coordinate>0,1</coordinate>
@@ -25,10 +23,8 @@
 		</path>
 	</level1>
 	<level2>
-		<dimension>
-			<width>10</width>
-			<height>10</height>
-		</dimension>
+		<width>10</width>
+		<height>10</height>
 		<path>
 			<coordinate>0,0</coordinate>
 			<coordinate>0,1</coordinate>
