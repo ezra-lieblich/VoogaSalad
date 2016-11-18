@@ -25,7 +25,7 @@ public class AuthoringView implements IAuthoringView {
     private ITowerEditorView towerView;
     private IPathEditorView pathView;
     
-    public AuthoringView() {
+    public AuthoringView(int aWidth, int aHeight) {
         towerView = TowerEditorViewFactory.build();
         pathView = PathEditorViewFactory.build(SIZE, SIZE);
         myRoot = new Group();
