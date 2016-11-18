@@ -7,6 +7,7 @@ import gameauthoringenvironment.view.createscene.toolbar.ToolbarFactory;
 import gameauthoringenvironment.view.tower.ITowerView;
 import gameauthoringenvironment.view.tower.TowerViewFactory;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -19,10 +20,10 @@ public class DesignScene implements IDesignScene {
     private ISideTabbedToolbar mySideTabbedToolbar;
     private static final int SIZE = 500;
     private BorderPane authoringView;
-    //private ITowerView towerView;
+    private ITowerView towerView;
     
     public DesignScene() {
-        //towerView = TowerViewFactory.build();
+        towerView = TowerViewFactory.build();
         myRoot = new Group();
         myScene = new Scene(myRoot, SIZE, SIZE);
         myToolbar = ToolbarFactory.build(SIZE, SIZE/20);
@@ -40,7 +41,8 @@ public class DesignScene implements IDesignScene {
     
     private Pane createTempMidScreen() {
         Pane tempmid = new Pane();
-        //tempmid.add(towerView);
+        Node towerViewNode = towerView.getInstanceAsNode();
+        tempmid.getChildren().add(towerViewNode);
         tempmid.setMaxSize(SIZE*9/10, SIZE);
         tempmid.setPrefSize(SIZE*7.9/10, SIZE*19/20);
         return tempmid;

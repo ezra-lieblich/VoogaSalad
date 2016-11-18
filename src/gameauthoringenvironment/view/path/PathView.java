@@ -5,7 +5,7 @@ import javafx.scene.Node;
 public class PathView implements IPathView {
 
     @Override
-    public Node getNodeAsInstance () {
+    public Node getInstanceAsNode () {
         // TODO Auto-generated method stub
         return null;
     }

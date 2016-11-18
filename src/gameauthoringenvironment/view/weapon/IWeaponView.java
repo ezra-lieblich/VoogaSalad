@@ -9,6 +9,6 @@ import javafx.scene.Node;
  */
 public interface IWeaponView {
 
-    public Node getNodeAsInstance();
+    public Node getInstanceAsNode();
     
 }

@@ -19,7 +19,7 @@ public class EnemyView implements IEnemyView {
 	}
 	
     @Override
-    public Node getNodeAsInstance () {      
+    public Node getInstanceAsNode () {      
     	return root;
     }
     
