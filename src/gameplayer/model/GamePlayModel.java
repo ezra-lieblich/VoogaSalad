@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Observable;
 import java.util.Queue;
 
+import engine.TowerType;
 import gameplayer.loader.GamePlayerFactory;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.ObservableList;
@@ -23,7 +24,7 @@ public class GamePlayModel extends Observable{
 	private int hitBuffer = 10; // initialize from xml
 	
 	private Map<Integer, Weapon> weaponTypes; // initialize in xml
-	private Map<Integer, Tower> towerTypes;  // initialize in xml
+	private Map<Integer, TowerType> towerTypes;  // initialize in xml
 	private Cell[][] gridArray;
 	
 	
@@ -64,7 +65,7 @@ public class GamePlayModel extends Observable{
 	
 	public void initializeLevelInfo(){
 		this.enemyAtCurrentLevel = this.factory.getEnemy();
-		//this.towerTypes = this.factory.getTowers();
+		this.towerTypes = this.factory.getTowers();
 		//this.weaponTypes = this.factory.getWeapon();
 		this.waveOfEnemy = 0;
 		
@@ -111,11 +112,17 @@ public class GamePlayModel extends Observable{
 	
 	public Boolean placeTower(int type, int x, int y){	
 		//later check if is a valid location to place the tower
-		Tower t  = towerTypes.get(type);
+		TowerType tt = towerTypes.get(type);
+		
+		
+		//public Tower (int ID, double attackingRange,int fireRate, double cost, int weapon, String image, String name){
+
+		Tower t  = new Tower(type,tt.getFireRate(),y, tt.getCost(), 1,tt.getImageLocation(),tt.getName() );
 		if(this.gold - t.getCost() < 0){
 			return false;
 		}
-		grid.placeTower(towerTypes.get(type), x, y);
+		t.setCoordinates(x, y);
+		grid.placeTower(t, x, y);
 		setGold(this.gold - t.getCost());
 		return true;
 	}

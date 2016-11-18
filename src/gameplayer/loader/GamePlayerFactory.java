@@ -14,15 +14,30 @@ import gameplayer.model.Tower;
 
 public class GamePlayerFactory{
 	XMLParser authoringFileReader;
+	HashMap<Integer, TowerType> allTowerTypes;
+
 
 	public GamePlayerFactory(XMLParser parser){
 		this.authoringFileReader = parser;
 	}
 	
+	private void generateAllTowerTypes(){
+		HashMap<Integer,TowerType> allTowers = new HashMap<>(); 
+		String name = authoringFileReader.getTextValue("tower", "name");
+		String imageLocation = authoringFileReader.getTextValue("tower", "imageLocation");
+		double cost = Double.parseDouble(authoringFileReader.getTextValue("tower", "cost"));
+		double sellAmount = Double.parseDouble(authoringFileReader.getTextValue("tower", "sellAmount"));
+		int fireRate = Integer.parseInt(authoringFileReader.getTextValue("tower", "fireRate"));
+		int unlockLevel = Integer.parseInt(authoringFileReader.getTextValue("tower", "unlockLevel"));
+		allTowers.put(1,new TowerType(name,imageLocation,cost,sellAmount,fireRate,unlockLevel));
+		this.allTowerTypes = allTowers;
+		
+	}
+	
 	public HashMap<String, Double> getGameSetting(){
 		HashMap<String,Double>settings = new HashMap<>(); 
 		settings.put("lives", Double.parseDouble(authoringFileReader.getVariableValues("lives")));
-		settings.put("gold",  Double.parseDouble(authoringFileReader.getVariableValues("lives")));
+		settings.put("gold",  Double.parseDouble(authoringFileReader.getVariableValues("gold")));
 		settings.put("levelnumber",  Double.parseDouble(authoringFileReader.getVariableValues("levelnumber")));
 		return settings; 
 	}
@@ -46,17 +61,10 @@ public class GamePlayerFactory{
 		return gameGrid; 	
 	}
 	
+	
+	
 	public HashMap<Integer, TowerType> getTowers(){
-		HashMap<Integer,TowerType> allTowers = new HashMap<>(); 
-		String name = authoringFileReader.getTextValue("tower", "name");
-		String imageLocation = authoringFileReader.getTextValue("tower", "imageLocation");
-		double cost = Double.parseDouble(authoringFileReader.getTextValue("tower", "cost"));
-		double sellAmount = Double.parseDouble(authoringFileReader.getTextValue("tower", "sellAmount"));
-		int fireRate = Integer.parseInt(authoringFileReader.getTextValue("tower", "fireRate"));
-		int unlockLevel = Integer.parseInt(authoringFileReader.getTextValue("tower", "unlockLevel"));
-		allTowers.put(1,new TowerType(name,imageLocation,cost,sellAmount,fireRate,unlockLevel));
-		
-		return allTowers; 
+		return this.allTowerTypes; 
 	}
 	
 	public List<Queue<Enemy>> getEnemy(){
@@ -68,4 +76,8 @@ public class GamePlayerFactory{
 		return null;
 	}
 	
+	
+	public String getGameTitle(){
+		return this.authoringFileReader.getName();
+	}
 }

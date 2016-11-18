@@ -12,7 +12,7 @@ public class Tower {
 	private double[] coordinates;
 	
 	
-	public Tower (int ID, double attackingRange,int fireRate, double cost, int weapon, String image){
+	public Tower (int ID, double attackingRange,int fireRate, double cost, int weapon, String image, String name){
 		this.attackingRange = attackingRange;
 		this.fireRate = fireRate;
 		this.cost = cost;
