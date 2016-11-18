@@ -36,6 +36,8 @@ public class GameGUI {
 	private DragDropView dragDrop;
 	private GamePlayButtonPanel buttonPanel;
 	private StatsDisplay statsDisplay;
+	private double numLevels;
+	private double currentLevel;
 	private List path;
 	
 	public GameGUI(int rows, int columns){
@@ -44,15 +46,26 @@ public class GameGUI {
 		this.grid = new GridGUI(rows, columns/*, path*/); 
 		this.dragDrop = new DragDropView(xError, yError); 
 		this.buttonPanel = new GamePlayButtonPanel();
+		this.currentLevel = 0;
 	}
 	
 	public Scene init(double gold, double lives, double level){
+		this.numLevels = level;
 		createScene();
 		createGrid();
 		initDragDropPane();
 		addButtonPanel();
-		initStatsDisplay(gold, lives, level);
+		initStatsDisplay(gold, lives, currentLevel);
 		return this.scene;
+	}
+	
+	/**
+	 * Update the current level in the stats display only
+	 * @param newLevel
+	 */
+	public void updateCurrentLevelStats(double newLevel){
+		this.currentLevel = newLevel;
+		this.statsDisplay.updateLevel(newLevel);
 	}
 	
 	public void setPath(List<int[]> path){

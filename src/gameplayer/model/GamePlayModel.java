@@ -107,6 +107,10 @@ public class GamePlayModel extends Observable{
 		notifyObservers();
 		this.currentLevel = d;
 	}
+	
+	public double getCurrentLevel(){
+		return this.currentLevel;
+	}
 
 	
 	public Boolean placeTower(int type, int x, int y){	

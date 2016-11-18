@@ -26,11 +26,14 @@ public class GamePlayerController implements Observer{
 	private GameGUI view;
 	private XMLParser parser;
 	private Scene mainScene;
+	private GamePlayModel model;
 	
 	public GamePlayerController(){
 		//use xml parser to create classes. 
 		this.parser = new XMLParser("player.samplexml/test.xml"); //hardcoded
-		this.loader = new GamePlayerFactory(parser); 
+		this.loader = new GamePlayerFactory(parser);
+		this.model = new GamePlayModel(this.loader);
+		this.model.addObserver(this);
 	}
 	
 	public void init(){
@@ -39,7 +42,7 @@ public class GamePlayerController implements Observer{
 	}
 	
 	private void initGUI(HashMap<String,Double> settings) {
-		view = new GameGUI(5,5); //just for testing, should be replaced by block above, 5 rows, 5 columns
+		this.view = new GameGUI(5,5); //just for testing, should be replaced by block above, 5 rows, 5 columns
 		this.mainScene = view.init(settings.get("gold"), settings.get("lives"), settings.get("numLevels"));
 	}
 	
@@ -53,10 +56,16 @@ public class GamePlayerController implements Observer{
 
 	@Override
 	public void update(Observable o, Object arg) {
+		if (o instanceof GamePlayModel){
+			//update level in display
+			this.view.updateCurrentLevelStats(((GamePlayModel) o).getCurrentLevel());
+		}
+		/*
 		GamePlayModel model = (GamePlayModel) o;
 		if (model.getLife() == 0) {
 			updateLevel();
 		}
+		*/
 		
 	}
 	
