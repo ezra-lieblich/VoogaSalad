@@ -72,7 +72,7 @@ public class GamePlayModel extends Observable{
 	
 	
 	
-	int[] getDimension(){
+	public int[] getDimension(){
 		int[] dimension = {this.gridX, this.gridY};
 		return dimension;
 	}
@@ -196,7 +196,7 @@ public class GamePlayModel extends Observable{
 	private void moveSingleEnemy(Enemy e) {
 		//to make it easier, only updating enemy's current cell once it reaches the center point of the next cell
 		double distToMove;
-		boolean willReachBase = false;
+		boolean onLastCell = false;
 		
 		double moveDist = e.getMovingSpeed();
 		
@@ -210,12 +210,12 @@ public class GamePlayModel extends Observable{
 				double destinationYpos = e.getCurrentCell().getY() + e.getyDirection() * cellSize/2;
 				distToMove = Math.abs(destinationXpos - e.getX()) 
 						+ Math.abs(destinationYpos - e.getY());
-				willReachBase = true;
+				onLastCell = true;
 			}
 			if (moveDist >= distToMove) { //can move to center of next cell
 				e.setX(e.getX() + e.getxDirection() * distToMove);
 				e.setY(e.getY() + e.getyDirection() * distToMove);
-				if (willReachBase) {
+				if (onLastCell) {
 					setLife(this.lives-1);
 				}
 				e.setCurrentCell(e.getCurrentCell().getNext());
