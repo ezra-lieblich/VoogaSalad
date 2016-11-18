@@ -1,5 +1,7 @@
 package authoringview.gamesettings;
 
-public class GameSettingsEditorViewController {
+import authoringview.EditorViewController;
+
+public class GameSettingsEditorViewController extends EditorViewController {
 
 }

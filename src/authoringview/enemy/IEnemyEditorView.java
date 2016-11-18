@@ -1,5 +1,6 @@
 package authoringview.enemy;
 
+import authoringview.IEditorView;
 import javafx.scene.Node;
 
 /**
@@ -7,8 +8,7 @@ import javafx.scene.Node;
  * determines a portion of our internal API.
  *
  */
-public interface IEnemyEditorView {
+public interface IEnemyEditorView extends IEditorView {
 
-    public Node getInstanceAsNode();
     
 }
