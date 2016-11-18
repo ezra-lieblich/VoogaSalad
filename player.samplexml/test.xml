@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <GameSetting Title="Bloons">
 	<isValid> true </isValid>
+	<towerList>
+			<tower>
+				<name>ninja monkey</name>
+				<imageLocation>images/penguin.jpg</imageLocation>
+				<isDestroyable>false</isDestroyable>
+				<range>5</range>
+				<fireRate>5</fireRate>
+				<cost>500</cost>
+				<sellAmount>200</sellAmount>
+				<unlockLevel>0</unlockLevel>
+				<weaponType>cannon</weaponType>
+				<upgrade>
+					<cost>200</cost>
+					<type>tower</type>
+				</upgrade>
+			</tower>
+		</towerList>
 	<init>	
 		<lives>50</lives>
 		<gold>1000</gold>
@@ -10,52 +27,36 @@
 		<width>10</width>
 		<height>10</height>
 		<path>
-			<coordinate>0,0</coordinate>
-			<coordinate>0,1</coordinate>
-			<coordinate>0,2</coordinate>
-			<coordinate>0,3</coordinate>
-			<coordinate>0,4</coordinate>
-			<coordinate>0,5</coordinate>
-			<coordinate>0,6</coordinate>
-			<coordinate>0,7</coordinate>
-			<coordinate>0,8</coordinate>
-			<coordinate>0,9</coordinate>
+			<coordinate>0,0;</coordinate>
+			<coordinate>0,1;</coordinate>
+			<coordinate>0,2;</coordinate>
+			<coordinate>0,3;</coordinate>
+			<coordinate>0,4;</coordinate>
+			<coordinate>0,5;</coordinate>
+			<coordinate>0,6;</coordinate>
+			<coordinate>0,7;</coordinate>
+			<coordinate>0,8;</coordinate>
+			<coordinate>0,9;</coordinate>
 		</path>
 	</level1>
 	<level2>
 		<width>10</width>
 		<height>10</height>
 		<path>
-			<coordinate>0,0</coordinate>
-			<coordinate>0,1</coordinate>
-			<coordinate>0,2</coordinate>
-			<coordinate>0,3</coordinate>
-			<coordinate>0,4</coordinate>
-			<coordinate>0,5</coordinate>
-			<coordinate>0,6</coordinate>
-			<coordinate>0,7</coordinate>
-			<coordinate>0,8</coordinate>
-			<coordinate>0,9</coordinate>
+			<coordinate>0,0;</coordinate>
+			<coordinate>0,1;</coordinate>
+			<coordinate>0,2;</coordinate>
+			<coordinate>0,3;</coordinate>
+			<coordinate>0,4;</coordinate>
+			<coordinate>0,5;</coordinate>
+			<coordinate>0,6;</coordinate>
+			<coordinate>0,7;</coordinate>
+			<coordinate>0,8;</coordinate>
+			<coordinate>0,9;</coordinate>
 		</path>
 	</level2>
 	
 	<background> images/butterfly </background>
-		<towerlist>
-			<tower>
-				<name> ninja monkey </name>
-				<imagePath> images/kaneki </imagePath>
-				<isDestroyable> false </isDestroyable>
-				<range> 4 </range>
-				<fireRate> 5 </fireRate>
-				<cost> 500 </cost>
-				<unlockLevel>  0 </unlockLevel>
-				<weaponType> cannon </weaponType>
-				<upgrade>
-					<cost> 200 </cost>
-					<type> “tower” </type>
-				</upgrade>
-			</tower>
-		</towerlist>
 	<enemy>
 		<name> “black balloon” </name>
 		<imagePath> “src/images/cannon” </imagePath>

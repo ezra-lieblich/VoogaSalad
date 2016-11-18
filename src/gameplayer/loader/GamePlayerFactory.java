@@ -47,9 +47,16 @@ public class GamePlayerFactory{
 	}
 	
 	public HashMap<Integer, TowerType> getTowers(){
+		HashMap<Integer,TowerType> allTowers = new HashMap<>(); 
+		String name = authoringFileReader.getTextValue("tower", "name");
+		String imageLocation = authoringFileReader.getTextValue("tower", "imageLocation");
+		double cost = Double.parseDouble(authoringFileReader.getTextValue("tower", "cost"));
+		double sellAmount = Double.parseDouble(authoringFileReader.getTextValue("tower", "sellAmount"));
+		int fireRate = Integer.parseInt(authoringFileReader.getTextValue("tower", "fireRate"));
+		int unlockLevel = Integer.parseInt(authoringFileReader.getTextValue("tower", "unlockLevel"));
+		allTowers.put(1,new TowerType(name,imageLocation,cost,sellAmount,fireRate,unlockLevel));
 		
-		
-		return null;
+		return allTowers; 
 	}
 	
 	public List<Queue<Enemy>> getEnemy(){
