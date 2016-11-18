@@ -20,7 +20,7 @@ public class TowerView implements ITowerView {
 
 	
     @Override
-    public Node getNodeAsInstance () {      
+    public Node getInstanceAsNode () {      
     	return root;
     }
     

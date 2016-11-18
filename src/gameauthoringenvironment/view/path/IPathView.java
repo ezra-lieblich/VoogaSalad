@@ -14,6 +14,6 @@ public interface IPathView {
      * 
      * @return node of path view
      */
-    public Node getNodeAsInstance();
+    public Node getInstanceAsNode();
 
 }

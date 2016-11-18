@@ -14,7 +14,7 @@ public class WeaponView implements IWeaponView {
 	
 	
     @Override
-    public Node getNodeAsInstance () {
+    public Node getInstanceAsNode () {
         return root;
     }
 

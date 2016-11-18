@@ -64,7 +64,7 @@ public class GamePlayModel extends Observable{
 	
 	public void initializeLevelInfo(){
 		this.enemyAtCurrentLevel = this.factory.getEnemy();
-		this.towerTypes = this.factory.getTowers();
+		//this.towerTypes = this.factory.getTowers();
 		//this.weaponTypes = this.factory.getWeapon();
 		this.waveOfEnemy = 0;
 		
@@ -191,9 +191,17 @@ public class GamePlayModel extends Observable{
 	
 	private void moveSingleEnemy(Enemy e) throws NullPointerException{
 		//to make it easier, only updating enemy's current cell once it reaches the center point of the next cell
+		double distToMove;
+		try {
+			distToMove = (Math.abs(cellToCoordinate(e.getCurrentCell().getNext().getX()) - e.getX()) + 
+					Math.abs(cellToCoordinate(e.getCurrentCell().getNext().getY()) - e.getY()));
+		}
+		catch(NullPointerException exception) {
+			distToMove = 0;//this needs to change
+		}
+		
 		double moveDist = e.getMovingSpeed();
-		double distToMove = (Math.abs(cellToCoordinate(e.getCurrentCell().getNext().getX()) - e.getX()) + 
-				Math.abs(cellToCoordinate(e.getCurrentCell().getNext().getY()) - e.getY()));
+		
 		while (moveDist > 0) {
 			if (moveDist >= distToMove) { //can move to center of next cell
 				e.setX(e.getX() + e.getxDirection() * distToMove);

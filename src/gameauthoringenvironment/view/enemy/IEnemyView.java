@@ -9,6 +9,6 @@ import javafx.scene.Node;
  */
 public interface IEnemyView {
 
-    public Node getNodeAsInstance();
+    public Node getInstanceAsNode();
     
 }
