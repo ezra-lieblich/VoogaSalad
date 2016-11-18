@@ -1,11 +1,13 @@
 package gameplayer.loader;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Queue;
 
+import engine.EnemyType;
 import engine.TowerType;
 import gameplayer.model.Cell;
 import gameplayer.model.Enemy;
@@ -13,7 +15,7 @@ import gameplayer.model.Grid;
 import gameplayer.model.Tower;
 
 public class GamePlayerFactory{
-	XMLParser authoringFileReader;
+	private XMLParser authoringFileReader;
 
 	public GamePlayerFactory(XMLParser parser){
 		this.authoringFileReader = parser;
@@ -21,8 +23,9 @@ public class GamePlayerFactory{
 	
 	public HashMap<String, Double> getGameSetting(){
 		HashMap<String,Double>settings = new HashMap<>(); 
+		settings.put("numLevels", Double.parseDouble(authoringFileReader.getVariableValues("numLevels")));
 		settings.put("lives", Double.parseDouble(authoringFileReader.getVariableValues("lives")));
-		settings.put("gold",  Double.parseDouble(authoringFileReader.getVariableValues("lives")));
+		settings.put("gold",  Double.parseDouble(authoringFileReader.getVariableValues("gold")));
 		settings.put("levelnumber",  Double.parseDouble(authoringFileReader.getVariableValues("levelnumber")));
 		return settings; 
 	}
@@ -47,18 +50,13 @@ public class GamePlayerFactory{
 	}
 	
 	public HashMap<Integer, TowerType> getTowers(){
-		
-		
-		return null;
+		return authoringFileReader.getTowerTypes(); 
 	}
 	
 	public List<Queue<Enemy>> getEnemy(){
 		// each queue is a wave of enemy 
 		// ArrayList of queue are all the waves at the current level
-		
-		
-		
-		return null;
+		return authoringFileReader.getEnemy(); 
 	}
 	
 }

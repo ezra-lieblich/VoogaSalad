@@ -4,6 +4,7 @@ import java.util.Observable;
 
 public class Enemy extends Observable{
 	
+	private String name; 
 	private double movingSpeed;  
 	private double health;
 	private String image;
@@ -13,11 +14,15 @@ public class Enemy extends Observable{
 	private int xDirection; //-1 if moving left, 1 if moving right
 	private int yDirection; //-1 if moving down, 1 if moving up	
 
-	public Enemy(double movingSpeed, int health, String image){
+	public Enemy(String name, double movingSpeed, int health, String image){
+		this.name = name; 
 		this.movingSpeed = movingSpeed;
 		this.health = health;	
 		this.image = image;
-		
+	}
+	
+	public String getName(){
+		return name; 
 	}
 	
 	public int getxDirection() { //heading
