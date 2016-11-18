@@ -5,7 +5,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
-import gameauthoringenvironment.view.enemy.IEnemyToEngine;
+
+import authoringview.enemy.IEnemyToEngine;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
