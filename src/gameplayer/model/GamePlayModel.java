@@ -79,7 +79,7 @@ public class GamePlayModel extends Observable{
 	}
 	
 
-	double getGold() {
+	public double getGold() {
 		return gold;
 	}
 
@@ -107,6 +107,10 @@ public class GamePlayModel extends Observable{
 		setChanged();
 		notifyObservers();
 		this.currentLevel = d;
+	}
+	
+	public double getCurrentLevel(){
+		return this.currentLevel;
 	}
 
 	
