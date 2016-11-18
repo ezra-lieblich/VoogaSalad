@@ -1,5 +1,7 @@
 package authoring.editortabpane;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -67,7 +69,15 @@ public class EditorTabPane implements IEditorTabPane {
         ToggleButton levelButton =
                 buildButton(GUIResources.getString("Level"), "level.png",
                             event -> openView(GUIResources.getString("Level")));
-        
+
+        List<ToggleButton> buttonList = new ArrayList<ToggleButton>();
+        buttonList.add(enemyButton);
+        buttonList.add(towerButton);
+        buttonList.add(pathButton);
+        buttonList.add(weaponsButton);
+        buttonList.add(settingsButton);
+        buttonList.add(levelButton);
+
         ToggleGroup group1 = new ToggleGroup();
         group1.selectedToggleProperty()
                 // Set Change Text if toggled
@@ -79,24 +89,16 @@ public class EditorTabPane implements IEditorTabPane {
                     if (new_toggle.isSelected()) {
                     }
                 });
-        enemyButton.setToggleGroup(group1);
-        towerButton.setToggleGroup(group1);
-        pathButton.setToggleGroup(group1);
-        weaponsButton.setToggleGroup(group1);
-        settingsButton.setToggleGroup(group1);
-        levelButton.setToggleGroup(group1);
-        
 
-        buildTabs(enemyButton);
-        buildTabs(towerButton);
-        buildTabs(pathButton);
-        buildTabs(weaponsButton);
-        buildTabs(settingsButton);
-        buildTabs(levelButton);
+        for (ToggleButton button : buttonList) {
+            button.setToggleGroup(group1);
+            buildTabs(button);
+        }
 
     }
 
     private void openView (String text) {
+        //TODO: Talk to Andrew about controller stuff this needs to be shipped out of here
         System.out.println(text);
     }
 
@@ -107,7 +109,9 @@ public class EditorTabPane implements IEditorTabPane {
         tabPane.getTabs().add(tab);
     }
 
-    private ToggleButton buildButton (String text, String fileName, EventHandler<ActionEvent> handler) {
+    private ToggleButton buildButton (String text,
+                                      String fileName,
+                                      EventHandler<ActionEvent> handler) {
         ToggleButton button = new ToggleButton();
         button.setText(text);
         Image image = new Image(getClass().getClassLoader().getResourceAsStream(fileName));
