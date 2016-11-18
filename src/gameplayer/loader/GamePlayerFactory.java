@@ -1,5 +1,6 @@
 package gameplayer.loader;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,14 +16,9 @@ import gameplayer.model.Tower;
 
 public class GamePlayerFactory{
 	private XMLParser authoringFileReader;
-	private HashMap<Integer,TowerType>allTowers; 
-	private HashMap<String,EnemyType>allEnemies; 
-	
 
 	public GamePlayerFactory(XMLParser parser){
 		this.authoringFileReader = parser;
-		allTowers = authoringFileReader.getTowerTypes(); 
-		allEnemies = authoringFileReader.getEnemyTypes();
 	}
 	
 	public HashMap<String, Double> getGameSetting(){
@@ -54,13 +50,13 @@ public class GamePlayerFactory{
 	}
 	
 	public HashMap<Integer, TowerType> getTowers(){
-		return allTowers; 
+		return authoringFileReader.getTowerTypes(); 
 	}
 	
 	public List<Queue<Enemy>> getEnemy(){
 		// each queue is a wave of enemy 
 		// ArrayList of queue are all the waves at the current level
-		return null;
+		return authoringFileReader.getEnemy(); 
 	}
 	
 }

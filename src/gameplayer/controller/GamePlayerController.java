@@ -30,7 +30,6 @@ public class GamePlayerController implements Observer{
 		initGUI();
 		parser = new XMLParser("player.samplexml/test.xml"); //hardcoded
 		loader = new GamePlayerFactory(parser); 
-		loader.getTowers();
 	}
 	
 	private void initGUI() {

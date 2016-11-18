@@ -1,7 +1,11 @@
 package gameplayer.loader;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -125,8 +129,29 @@ public class XMLParser {
     		return null; 
     	}
     }
-    
-	public HashMap<String, EnemyType> getEnemyTypes() {
+	
+	public List<Queue<Enemy>> getEnemy(){
+		ArrayList<Queue<Enemy>>enemyByLevel=new ArrayList<>(); 
+		HashMap<String,EnemyType> types = getEnemyTypes();
+		int numLevels = Integer.parseInt(getVariableValues("numLevels"));
+		for(int i=1;i<=numLevels;i++){
+			Queue<Enemy>enemiesInLevel= new LinkedList<Enemy>(); 
+			String[]enemiesRawString = getTextValue("level"+i,"typeAmount").split(";");
+			for(int j=0;j<enemiesRawString.length;j++){
+				String[]enemies=enemiesRawString[j].split(",");
+				for(int k=0;k<Integer.parseInt(enemies[1]);k++){
+					EnemyType type = types.get(enemies[0]);
+					enemiesInLevel.add(new Enemy(type.getName(),type.getSpeed(),(int)(type.getHealth()),type.getImageLocation()));
+				}
+			}
+			enemyByLevel.add(enemiesInLevel);
+		}
+		
+		return enemyByLevel; 
+		
+	}
+	
+	private HashMap<String, EnemyType> getEnemyTypes() {
 		HashMap<String,EnemyType>ret = new HashMap<>(); 
     	try{
     		NodeList parentList = xmlDocument.getElementsByTagName("enemy");
@@ -148,5 +173,6 @@ public class XMLParser {
     	}
     	return ret; 
 	}
+	
 
 }
