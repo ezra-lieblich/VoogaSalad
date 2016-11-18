@@ -76,5 +76,11 @@ public class StatsDisplay {
 	public void updateLevel(double level) {
 		this.levelLabel.setText(LEVEL + Double.toString(level));
 	}
+	
+	public void updateLevelUI(double gold, double lives, double level){
+		updateGold(gold);
+		updateLives(lives);
+		updateLevel(level);
+	}
 
 }

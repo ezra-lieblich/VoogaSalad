@@ -78,7 +78,7 @@ public class GamePlayModel extends Observable{
 	}
 	
 
-	double getGold() {
+	public double getGold() {
 		return gold;
 	}
 

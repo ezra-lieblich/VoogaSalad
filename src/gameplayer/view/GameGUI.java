@@ -60,6 +60,7 @@ public class GameGUI {
 	}
 	
 	/**
+	 * MIGHT NOT BE NECESSARY
 	 * Update the current level in the stats display only
 	 * @param newLevel
 	 */
@@ -115,4 +116,7 @@ public class GameGUI {
 		this.mainScreen.setBottom(statsDisplay.getScorePane());
 	}
 	
+	public void updateStatsDisplay(double gold, double lives, double level){
+		this.statsDisplay.updateLevelUI(gold, lives, level);
+	}
 }

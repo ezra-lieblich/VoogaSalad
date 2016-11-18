@@ -58,6 +58,7 @@ public class GamePlayerController implements Observer{
 	public void update(Observable o, Object arg) {
 		if (o instanceof GamePlayModel){
 			//update level in display
+			this.view.updateStatsDisplay(((GamePlayModel) o).getGold(), ((GamePlayModel) o).getLife(), ((GamePlayModel) o).getCurrentLevel());
 			this.view.updateCurrentLevelStats(((GamePlayModel) o).getCurrentLevel());
 		}
 		/*
