@@ -2,7 +2,6 @@ package authoringview.path;
 
 import gameplayer.view.GridGUI;
 import javafx.scene.Node;
-import javafx.scene.control.TextField;
 
 
 public class PathEditorView implements IPathEditorView {
@@ -10,7 +9,7 @@ public class PathEditorView implements IPathEditorView {
     private GridGUI gridGUI;
 
     public PathEditorView (int aWidth, int aHeight) {
-        this.gridGUI = new GridGUI(8, 8);
+        this.gridGUI = new GridGUI(4, 4);
         this.gridGUI.init();
     }
 
@@ -18,12 +17,7 @@ public class PathEditorView implements IPathEditorView {
     public Node getInstanceAsNode () {
         return gridGUI.getGrid();
     }
-    
-    private void makeTextField(String label) {
-        //HBox
-        //TextField textField = new TextField();
-    }
-    
-    //TODO: One of the things we will need: setting the grid... # of columns and rows
+
+    // TODO: One of the things we will need: setting the grid... # of columns and rows
 
 }
