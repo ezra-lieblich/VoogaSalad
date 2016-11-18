@@ -7,7 +7,7 @@ import javafx.scene.Node;
  * determines a portion of our internal API.
  *
  */
-public interface IEnemyView {
+public interface IEnemyEditorView {
 
     public Node getInstanceAsNode();
     

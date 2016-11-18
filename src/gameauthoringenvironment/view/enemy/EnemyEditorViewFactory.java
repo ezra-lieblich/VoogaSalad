@@ -2,7 +2,7 @@ package gameauthoringenvironment.view.enemy;
 
 public class EnemyEditorViewFactory {
 
-    public static IEnemyView build () {
+    public static IEnemyEditorView build () {
         return new EnemyEditorView();
     }
 

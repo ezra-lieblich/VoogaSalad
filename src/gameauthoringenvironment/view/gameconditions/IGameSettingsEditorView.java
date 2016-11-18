@@ -1,5 +1,5 @@
 package gameauthoringenvironment.view.gameconditions;
 
-public interface IGameConditionsView {
+public interface IGameSettingsEditorView {
 
 }

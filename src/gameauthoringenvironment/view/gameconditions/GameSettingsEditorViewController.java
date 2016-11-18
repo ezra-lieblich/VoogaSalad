@@ -1,5 +1,5 @@
 package gameauthoringenvironment.view.gameconditions;
 
-public class SettingsEditorViewController {
+public class GameSettingsEditorViewController {
 
 }
