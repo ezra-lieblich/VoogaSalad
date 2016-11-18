@@ -1,5 +1,6 @@
 package authoringview.gamesettings;
 
+import authoringview.EditorView;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -7,7 +8,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
 
-public class GameSettingsEditorView implements IGameSettingsEditorView {
+public class GameSettingsEditorView extends EditorView implements IGameSettingsEditorView {
 
     private Pane gameConditionsPane;
 

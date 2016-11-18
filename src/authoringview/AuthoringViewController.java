@@ -1,11 +1,13 @@
 package authoringview;
 
-import javafx.scene.Scene;
+import java.util.HashMap;
 
 public class AuthoringViewController {
-	private Scene scene;
+	private IAuthoringView scene;
+	private HashMap<String, EditorView> editors;
 	
-	public AuthoringViewController(){
+	public AuthoringViewController(int width, int height){
+		scene = AuthoringViewFactory.build(width, height);
 		
 	}
 	

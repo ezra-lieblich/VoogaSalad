@@ -1,10 +1,11 @@
 package authoringview.weapon;
 
+import authoringview.EditorView;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
 
 
-public class WeaponEditorView implements IWeaponEditorView {
+public class WeaponEditorView extends EditorView implements IWeaponEditorView {
 
 	private BorderPane root;
 	

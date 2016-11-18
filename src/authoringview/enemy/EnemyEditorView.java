@@ -1,12 +1,13 @@
 package authoringview.enemy;
 
+import authoringview.EditorView;
 import authoringview.enemy.subviews.InitNewEnemyView;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
 
 
-public class EnemyEditorView implements IEnemyEditorView {
+public class EnemyEditorView extends EditorView implements IEnemyEditorView {
 
 	private BorderPane root;
 	private InitNewEnemyView newEnemy;
