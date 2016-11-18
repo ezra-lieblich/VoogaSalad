@@ -1,6 +1,6 @@
 package engine;
 
-import authoringview.IGameAuthoringToEngine;
+import authoring.IGameAuthoringToEngine;
 
 public class EngineController implements IGameAuthoringToEngine {
 
