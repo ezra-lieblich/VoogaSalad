@@ -6,7 +6,7 @@ import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
 
 
-public class EnemyEditorView implements IEnemyView {
+public class EnemyEditorView implements IEnemyEditorView {
 
 	private BorderPane root;
 	private InitNewEnemyView newEnemy;
