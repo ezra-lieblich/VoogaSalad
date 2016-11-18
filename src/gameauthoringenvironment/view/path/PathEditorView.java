@@ -5,7 +5,7 @@ import javafx.scene.Node;
 import javafx.scene.control.TextField;
 
 
-public class PathEditorView implements IPathView {
+public class PathEditorView implements IPathEditorView {
 
     private GridGUI gridGUI;
 

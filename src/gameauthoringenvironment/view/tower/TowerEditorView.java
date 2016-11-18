@@ -5,7 +5,7 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
 
-public class TowerEditorView implements ITowerView {
+public class TowerEditorView implements ITowerEditorView {
 
 	
 	private BorderPane root;

@@ -4,10 +4,10 @@ import gameauthoringenvironment.view.createscene.editortabpane.IEditorTabPane;
 import gameauthoringenvironment.view.createscene.editortabpane.EditorTabPaneFactory;
 import gameauthoringenvironment.view.createscene.toolbar.IToolbar;
 import gameauthoringenvironment.view.createscene.toolbar.ToolbarFactory;
-import gameauthoringenvironment.view.path.IPathView;
-import gameauthoringenvironment.view.path.PathViewFactory;
-import gameauthoringenvironment.view.tower.ITowerView;
-import gameauthoringenvironment.view.tower.TowerViewFactory;
+import gameauthoringenvironment.view.path.IPathEditorView;
+import gameauthoringenvironment.view.path.PathEditorViewFactory;
+import gameauthoringenvironment.view.tower.ITowerEditorView;
+import gameauthoringenvironment.view.tower.TowerEditorViewFactory;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -22,12 +22,12 @@ public class DesignScene implements IDesignScene {
     private IEditorTabPane mySideTabbedToolbar;
     private static final int SIZE = 700;
     private BorderPane authoringView;
-    private ITowerView towerView;
-    private IPathView pathView;
+    private ITowerEditorView towerView;
+    private IPathEditorView pathView;
     
     public DesignScene() {
-        towerView = TowerViewFactory.build();
-        pathView = PathViewFactory.build(SIZE, SIZE);
+        towerView = TowerEditorViewFactory.build();
+        pathView = PathEditorViewFactory.build(SIZE, SIZE);
         myRoot = new Group();
         myScene = new Scene(myRoot, SIZE, SIZE);
         myToolbar = ToolbarFactory.build(SIZE, SIZE/20);

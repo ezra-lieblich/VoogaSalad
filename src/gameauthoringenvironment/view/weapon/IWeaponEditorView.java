@@ -7,7 +7,7 @@ import javafx.scene.Node;
  * determines a portion of our internal API.
  *
  */
-public interface IWeaponView {
+public interface IWeaponEditorView {
 
     public Node getInstanceAsNode();
     

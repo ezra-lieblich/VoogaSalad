@@ -4,11 +4,11 @@ import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
 
 
-public class WeaponView implements IWeaponView {
+public class WeaponEditorView implements IWeaponEditorView {
 
 	private BorderPane root;
 	
-	public WeaponView(){
+	public WeaponEditorView(){
 		root = new BorderPane();
 	}
 	

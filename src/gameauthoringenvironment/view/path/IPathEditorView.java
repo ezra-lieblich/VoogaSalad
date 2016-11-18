@@ -8,7 +8,7 @@ import javafx.scene.Node;
  * and the public methods defining what components the path view should contain.
  *
  */
-public interface IPathView {
+public interface IPathEditorView {
     
     /**
      * 

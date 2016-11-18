@@ -1,9 +1,9 @@
 package gameauthoringenvironment.view.tower;
 
 
-public class TowerViewFactory {
+public class TowerEditorViewFactory {
 	
-	public static ITowerView build () {
+	public static ITowerEditorView build () {
         return new TowerEditorView();
     }
 
