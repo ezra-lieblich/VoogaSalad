@@ -60,11 +60,11 @@ public class XMLParser {
         try{
         	NodeList parentList = xmlDocument.getElementsByTagName(parent);
         
-	        NodeList nl = ((Element)parentList.item(0)).getElementsByTagName("coordinate");
+	        NodeList nl = ((Element)parentList.item(0)).getElementsByTagName(tagName);
 	        if (nl != null && nl.getLength() > 0) {
 	        	for(int i=0;i<nl.getLength();i++){
 		            Element el = (Element) nl.item(i);
-		            textVal += el.getFirstChild().getNodeValue()+";";
+		            textVal += el.getFirstChild().getNodeValue();
 	        	}
 	        }
         }
