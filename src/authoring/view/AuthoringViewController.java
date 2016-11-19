@@ -1,6 +1,8 @@
 package authoring.view;
 
 import java.util.HashMap;
+
+import authoring.editortabpane.EditorTabPaneDelegate;
 import authoring.editorview.EditorViewController;
 import authoring.editorview.enemy.EnemyEditorViewController;
 import authoring.editorview.gamesettings.GameSettingsEditorViewController;
@@ -9,7 +11,7 @@ import authoring.editorview.path.PathEditorViewController;
 import authoring.editorview.tower.TowerEditorViewController;
 import authoring.editorview.weapon.WeaponEditorViewController;
 
-public class AuthoringViewController {
+public class AuthoringViewController implements EditorTabPaneDelegate {
 	private IAuthoringView scene;
 	private HashMap<String, EditorViewController> editors;
 	
