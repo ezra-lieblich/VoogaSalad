@@ -1,16 +1,14 @@
 package engine;
 
-public class Entity implements IEntity {
-    
+import java.util.ResourceBundle;
+
+public abstract class Entity implements IEntity {
     private String name;
     private String imagePath;
     private double size;
-    
-    Entity(String name, String imagePath, double size) {
-        this.name = name;
-        this.imagePath = imagePath;
-        this.size = size;
-    }
+
+    private static final String DEFAULTVALUESPATH = "resources/DefaultEntityValues/";
+    private static ResourceBundle resources = ResourceBundle.getBundle(DEFAULTVALUESPATH);
 
     @Override
     public String getName () {
@@ -44,6 +42,10 @@ public class Entity implements IEntity {
     @Override
     public void setSize (double size) {
         this.size = size;
+    }
+
+    protected ResourceBundle getResources() {
+        return resources;
     }
 
 }

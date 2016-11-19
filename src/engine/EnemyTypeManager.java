@@ -31,10 +31,10 @@ public class EnemyTypeManager extends EntityManager<EnemyType>{
 	public void setMoney(int id, double money) {
         data.get(id).setMoney(money);
 	}
-	public String getColissionEffect(int id) {
-		return data.get(id).getColissionEffect();
+	public String getCollissionEffect(int id) {
+		return data.get(id).getCollisionEffect();
 	}
-	public void setColissionEffect(int id, String colissionEffect) {
-        data.get(id).setColissionEffect(colissionEffect);
+	public void setColissionEffect(int id, String colisionEffect) {
+        data.get(id).setCollisionEffect(colisionEffect);
 	}
 }
