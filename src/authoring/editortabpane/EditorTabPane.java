@@ -1,12 +1,13 @@
 package authoring.editortabpane;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Side;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.Toggle;
@@ -23,15 +24,17 @@ import javafx.scene.image.ImageView;
  * @author Kayla Schulz
  *
  */
-public class EditorTabPane implements IEditorTabPane {
+public class EditorTabPane implements IEditorTabPane, EditorTabPaneDelegate {
 
     // private ITowerView towerView;
 
     private TabPane tabPane;
     private ResourceBundle GUIResources;
     private EditorTabPaneDelegate delegate;
+    private String viewToOpen;
 
     public EditorTabPane (int width, int height) {
+        viewToOpen = "Enemy"; //default, change this later
         String initFile = "resources";
         String fileName = "/GameAuthoringToolbar";
         GUIResources = ResourceBundle.getBundle(initFile + fileName);
@@ -51,23 +54,31 @@ public class EditorTabPane implements IEditorTabPane {
 
         ToggleButton enemyButton =
                 buildButton(GUIResources.getString("Enemy"), "enemy.png",
-                            event -> openView(GUIResources.getString("Enemy")));
+                            event -> userSelectedTab(GUIResources.getString("Enemy")));
         ToggleButton towerButton =
                 buildButton(GUIResources.getString("Tower"), "tower.png",
-                            event -> openView(GUIResources.getString("Tower")));
+                            event -> userSelectedTab(GUIResources.getString("Tower")));
         ToggleButton pathButton =
                 buildButton(GUIResources.getString("Path"), "path.png",
-                            event -> openView(GUIResources.getString("Path")));
+                            event -> userSelectedTab(GUIResources.getString("Path")));
         ToggleButton weaponsButton =
                 buildButton(GUIResources.getString("Weapons"), "weapons.png",
-                            event -> openView(GUIResources.getString("Weapons")));
+                            event -> userSelectedTab(GUIResources.getString("Weapons")));
         ToggleButton settingsButton =
                 buildButton(GUIResources.getString("GameSettings"), "gamesettings.png",
-                            event -> openView(GUIResources.getString("GameSettings")));
+                            event -> userSelectedTab(GUIResources.getString("GameSettings")));
         ToggleButton levelButton =
                 buildButton(GUIResources.getString("Level"), "level.png",
-                            event -> openView(GUIResources.getString("Level")));
-        
+                            event -> userSelectedTab(GUIResources.getString("Level")));
+
+        List<ToggleButton> buttonList = new ArrayList<ToggleButton>();
+        buttonList.add(enemyButton);
+        buttonList.add(towerButton);
+        buttonList.add(pathButton);
+        buttonList.add(weaponsButton);
+        buttonList.add(settingsButton);
+        buttonList.add(levelButton);
+
         ToggleGroup group1 = new ToggleGroup();
         group1.selectedToggleProperty()
                 // Set Change Text if toggled
@@ -79,25 +90,17 @@ public class EditorTabPane implements IEditorTabPane {
                     if (new_toggle.isSelected()) {
                     }
                 });
-        enemyButton.setToggleGroup(group1);
-        towerButton.setToggleGroup(group1);
-        pathButton.setToggleGroup(group1);
-        weaponsButton.setToggleGroup(group1);
-        settingsButton.setToggleGroup(group1);
-        levelButton.setToggleGroup(group1);
-        
 
-        buildTabs(enemyButton);
-        buildTabs(towerButton);
-        buildTabs(pathButton);
-        buildTabs(weaponsButton);
-        buildTabs(settingsButton);
-        buildTabs(levelButton);
+        for (ToggleButton button : buttonList) {
+            button.setToggleGroup(group1);
+            buildTabs(button);
+        }
 
     }
 
-    private void openView (String text) {
-        System.out.println(text);
+    @Override
+    public String getViewToOpen () {
+        return viewToOpen;
     }
 
     private void buildTabs (ToggleButton button) {
@@ -107,7 +110,9 @@ public class EditorTabPane implements IEditorTabPane {
         tabPane.getTabs().add(tab);
     }
 
-    private ToggleButton buildButton (String text, String fileName, EventHandler<ActionEvent> handler) {
+    private ToggleButton buildButton (String text,
+                                      String fileName,
+                                      EventHandler<ActionEvent> handler) {
         ToggleButton button = new ToggleButton();
         button.setText(text);
         Image image = new Image(getClass().getClassLoader().getResourceAsStream(fileName));
@@ -129,6 +134,12 @@ public class EditorTabPane implements IEditorTabPane {
     @Override
     public void setDelegate (EditorTabPaneDelegate delegate) {
         this.delegate = delegate;
+    }
+
+    @Override
+    public void userSelectedTab (String tabName) {
+        // TODO Auto-generated method stub
+        
     }
 
 }

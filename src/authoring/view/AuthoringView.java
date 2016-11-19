@@ -38,6 +38,11 @@ public class AuthoringView implements IAuthoringView {
         initScene();
     }
     
+    @Override
+    public IEditorTabPane getMySideTabbedToolbar () {
+        return editorTabPane;
+    }
+
     private void initScene() {
         authoringView.setTop(myToolbar.getInstanceAsNode());
         authoringView.setRight(editorTabPane.getInstanceAsNode());
