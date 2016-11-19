@@ -115,7 +115,7 @@ public class EditorTabPane implements IEditorTabPane, EditorTabPaneDelegate {
 
     @Override
     public void userSelectedTab (String tabName) {
-        System.out.println(GUIResources.getKeys().toString());
+        // TODO: set what happens on userSelectedTab
 
     }
 
