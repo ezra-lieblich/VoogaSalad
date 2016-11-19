@@ -1,6 +1,7 @@
 package authoring.view;
 
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 
 
@@ -22,5 +23,7 @@ public interface IAuthoringView {
      * @return root of the game authoring scene
      */
     public Group getMyRoot ();
+    
+    public void setEditorView(Node editor);
 
 }

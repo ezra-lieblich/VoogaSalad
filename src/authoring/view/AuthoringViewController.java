@@ -28,5 +28,11 @@ public class AuthoringViewController implements EditorTabPaneDelegate {
 		editors.put("gameSettings", new GameSettingsEditorViewController());
 		editors.put("level", new LevelEditorViewController());
 	}
+
+	@Override
+	public void userSelectedTab(String tabName) {
+		EditorViewController editor = this.editors.get(tabName);
+		this.scene.setEditorView(editor.getView());
+	}
 	
 }

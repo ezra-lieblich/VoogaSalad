@@ -24,6 +24,7 @@ public class AuthoringView implements IAuthoringView {
     private IEditorTabPane mySideTabbedToolbar;
     private static final int SIZE = 700;
     private BorderPane authoringView;
+    private Pane editorView;
     private ITowerEditorView towerView;
     private IPathEditorView pathView;
     private IGameSettingsEditorView gameSettingsView;
@@ -37,6 +38,7 @@ public class AuthoringView implements IAuthoringView {
         myToolbar = ToolbarFactory.build(SIZE, SIZE/20);
         mySideTabbedToolbar = EditorTabPaneFactory.build(SIZE, SIZE);
         authoringView = new BorderPane();
+        editorView = createEditor();
         myRoot.getChildren().add(authoringView);
         initScene();
     }
@@ -44,17 +46,17 @@ public class AuthoringView implements IAuthoringView {
     private void initScene() {
         authoringView.setTop(myToolbar.getInstanceAsNode());
         authoringView.setRight(mySideTabbedToolbar.getInstanceAsNode());
-        authoringView.setCenter(createTempMidScreen());
+        authoringView.setCenter(editorView);
     }
     
-    private Pane createTempMidScreen() {
-        Pane tempmid = new Pane();
+    private Pane createEditor() {
+        Pane editor = new Pane();
         //change back here for tower
         Node pathViewNode = pathView.getInstanceAsNode();
-        tempmid.getChildren().add(pathViewNode);
-        tempmid.setMaxSize(SIZE*9/10, SIZE);
-        tempmid.setPrefSize(SIZE*7.9/10, SIZE*19/20);
-        return tempmid;
+//        tempmid.getChildren().add(pathViewNode);
+        editor.setMaxSize(SIZE*9/10, SIZE);
+        editor.setPrefSize(SIZE*7.9/10, SIZE*19/20);
+        return editor;
     }
     
     @Override
@@ -66,5 +68,11 @@ public class AuthoringView implements IAuthoringView {
     public Group getMyRoot () {
         return myRoot;
     }
+
+	@Override
+	public void setEditorView(Node editor) {
+		editorView.getChildren().clear();
+		editorView.getChildren().add(editor);
+	}
 
 }
