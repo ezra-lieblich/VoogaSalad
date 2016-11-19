@@ -134,16 +134,22 @@ public class GamePlayModel extends Observable{
 		//later check if is a valid location to place the tower
 		TowerType tt = towerTypes.get(type);
 		
-		
-		//public Tower (int ID, double attackingRange,int fireRate, double cost, int weapon, String image, String name){
+		// get weaponTypes
+		// actually implement the firing counter into each weapon types
 
-		Tower t  = new Tower(type,tt.getFireRate(),y, tt.getCost(), 1,tt.getImageLocation(),tt.getName() );
+		
+//++++++++++++++++++++++++++++fix this after weapon type is done+++++++++++++++++++++++++		
+		/*
+		Tower t = new Tower(type, tt.getCost(), tt.getWeapon(),tt.getImageLocation(),tt.getName());
 		if(this.gold - t.getCost() < 0){
 			return false;
 		}
 		t.setCoordinates(x, y);
 		grid.placeTower(t, x, y);
 		setGold(this.gold - t.getCost());
+		
+		
+		*/
 		return true;
 	}
 	
@@ -191,11 +197,17 @@ public class GamePlayModel extends Observable{
 			w.setX(w.getSpeedX() + w.getX());
 			w.setY(w.getSpeedY() + w.getY());
 			
+			// update distance travelled
+			
+			
+			// update in shooting range function
 			if(!coordinateInBound(w.getX(), w.getY()) && !inShootingRange(w)){
 				this.weaponOnGrid.remove(w);
 			}
 		}
 		
+		
+		// check all the weapon types
 		for (int i = 0; i < gridX; i++){
 			for(int j = 0; j < gridY; j++){
 				int weaponType = gridArray[i][j].fireWeapon();
@@ -297,18 +309,6 @@ public class GamePlayModel extends Observable{
 		updateEnemy();
 		
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+		
 
 }

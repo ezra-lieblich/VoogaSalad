@@ -1,35 +1,26 @@
 package gameplayer.model;
 
+import java.util.ArrayList;
+
 public class Tower {
 	
 	private double attackingRange;
 	private int fireRate; // number of interation or update
 	private double cost;
-	private int weaponType;
+	private ArrayList<Integer> weaponType;
 	private String image;
 	private int ID;  // towerType
-	private int counter;
 	private double[] coordinates;
 	
 	
-	public Tower (int ID, double attackingRange,int fireRate, double cost, int weapon, String image, String name){
-		this.attackingRange = attackingRange;
-		this.fireRate = fireRate;
+	public Tower (int ID, double cost, ArrayList<Integer> weaponTypes, String image, String name){
 		this.cost = cost;
-		this.weaponType = weapon;
+		this.weaponType = weaponTypes;
 		this.image = image;
 		this.ID = ID;
-		this.counter = 0;
 	}
 	
-	Boolean isFiring(){
-		if(counter % fireRate == 0){
-			counter++;
-			return true;
-		}
-		counter++;
-		return false;
-	}
+
 	
 	void setCoordinates(double x, double y){
 		coordinates[0] = x;
@@ -73,13 +64,10 @@ public class Tower {
 		this.cost = cost;
 	}
 
-	int getWeaponType() {
-		return weaponType;
+	ArrayList<Integer> getWeaponType() {
+		return this.weaponType;
 	}
 
-	void setWeaponType(int weaponType) {
-		this.weaponType = weaponType;
-	}
 
 
 
