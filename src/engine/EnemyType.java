@@ -3,8 +3,6 @@ package engine;
 import java.util.ResourceBundle;
 
 public class EnemyType extends Entity{
-	private String name;
-	private String imagePath;
 	private double speed;
 	private double health;
 	private double points;
@@ -16,10 +14,15 @@ public class EnemyType extends Entity{
 
 	
 	public EnemyType() {
-		//possible hold a resource file that has default values for an enemy
-		resources =  ResourceBundle.getBundle(DEFAULTVALUESPATH);
-		imagePath = resources.getString("EnemyImage");
-		speed = Double.parseDouble(resources.getString("Default"));
+//		//possible hold a resource file that has default values for an enemy
+//		resources =  ResourceBundle.getBundle(DEFAULTVALUESPATH);
+//		//imagePath = resources.getString("EnemyImage");
+//		speed = Double.parseDouble(resources.getString("Default"));
+		speed = 5;
+		health = 10;
+		points = 50;
+		money = 50;
+		colissionEffect = "normal";
 	}
 	
 	

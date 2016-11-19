@@ -7,34 +7,34 @@ public class EnemyTypeManager extends EntityManager<EnemyType>{
         return new EnemyType();
     }
 
-//	public double getSpeed(int id) {
-//		return speed;
-//	}
-//	public void setSpeed(double speed) {
-//		this.speed = speed;
-//	}
-//	public double getHealth() {
-//		return health;
-//	}
-//	public void setHealth(double health) {
-//		this.health = health;
-//	}
-//	public double getPoints() {
-//		return points;
-//	}
-//	public void setPoints(double points) {
-//		this.points = points;
-//	}
-//	public double getMoney() {
-//		return money;
-//	}
-//	public void setMoney(double money) {
-//		this.money = money;
-//	}
-//	public String getColissionEffect() {
-//		return colissionEffect;
-//	}
-//	public void setColissionEffect(String colissionEffect) {
-//		this.colissionEffect = colissionEffect;
-//	}
+	public double getSpeed(int id) {
+		return data.get(id).getSpeed();
+	}
+	public void setSpeed(int id, double speed) {
+		data.get(id).setSpeed(speed);
+	}
+	public double getHealth(int id) {
+        return data.get(id).getHealth();
+	}
+	public void setHealth(int id, double health) {
+        data.get(id).setHealth(health);
+	}
+	public double getPoints(int id ) {
+        return data.get(id).getPoints();
+	}
+	public void setPoints(int id, double points) {
+        data.get(id).setPoints(points);
+	}
+	public double getMoney(int id) {
+		return data.get(id).getMoney();
+	}
+	public void setMoney(int id, double money) {
+        data.get(id).setMoney(money);
+	}
+	public String getColissionEffect(int id) {
+		return data.get(id).getColissionEffect();
+	}
+	public void setColissionEffect(int id, String colissionEffect) {
+        data.get(id).setColissionEffect(colissionEffect);
+	}
 }
