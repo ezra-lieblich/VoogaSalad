@@ -1,16 +1,13 @@
 package gameplayer.model;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Queue;
-
 import engine.TowerType;
 import gameplayer.loader.GamePlayerFactory;
-import javafx.beans.property.SimpleListProperty;
-import javafx.collections.ObservableList;
+
 
 public class GamePlayModel extends Observable{
 
@@ -24,7 +21,7 @@ public class GamePlayModel extends Observable{
 	private int hitBuffer = 10; // initialize from xml
 	
 	private Map<Integer, Weapon> weaponTypes; // initialize in xml
-	private Map<Integer, TowerType> towerTypes;  // initialize in xml
+	private Map<Integer, TowerType> towerTypes;  
 	private Cell[][] gridArray;
 	
 	
@@ -40,10 +37,9 @@ public class GamePlayModel extends Observable{
 	private double levelnumber;  // reach level number winning the game
 	private int currentLevel;
 	private int waveOfEnemy;
+	private String gameTitle;
 	
-	
-	//number of gold
-	
+		
 
 	public GamePlayModel(GamePlayerFactory factory){
 		initializeGameSetting(factory);
@@ -60,14 +56,25 @@ public class GamePlayModel extends Observable{
 		this.levelnumber = settingInfo.get("levelnumber");
 		this.gold = settingInfo.get("gold");
 		this.lives = settingInfo.get("lives");
+		this.towerTypes = this.factory.getTowers();
+		this.gameTitle = this.factory.getGameTitle();
+	//	this.weaponTypes = this.factory.getWeapon();  need from xml
 	}
 	
 	
 	public void initializeLevelInfo(){
-		this.enemyAtCurrentLevel = this.factory.getEnemy(currentLevel);
-		this.towerTypes = this.factory.getTowers();
-		//this.weaponTypes = this.factory.getWeapon();
+		this.enemyAtCurrentLevel = this.factory.getEnemy(this.currentLevel);
 		this.waveOfEnemy = 0;
+		packOfEnemyComing = this.enemyAtCurrentLevel.get(waveOfEnemy);
+		this.waveOfEnemy++;
+		nextEnteringEnemy = this.packOfEnemyComing.poll();
+		this.grid = this.factory.getGrid(this.currentLevel);
+		gridArray = this.grid.getGrid();
+		this.gridX = this.gridArray.length;
+		this.gridY = this.gridArray[0].length;
+		enemyOnGrid = new ArrayList<Enemy>();
+		weaponOnGrid = new ArrayList<Weapon>();
+		
 		
 	}
 	
@@ -78,17 +85,26 @@ public class GamePlayModel extends Observable{
 		return dimension;
 	}
 	
+	public String getGameTitle(){
+		return this.gameTitle;
+	}
+	
+	public int getLevelNumber(){
+		return (int)this.levelnumber;
+	}
+	
 
 	public double getGold() {
 		return gold;
 	}
 
 
-	void setGold(double gold) {
+	private void setGold(double gold) {
+		this.gold = gold;
 		setChanged();
 		notifyObservers();
-		this.gold = gold;
 	}
+
 
 
 	public double getLife() {
@@ -96,17 +112,17 @@ public class GamePlayModel extends Observable{
 	}
 
 
-	void setLife(double life) {
+	private void setLife(double life) {
+		this.lives = life;
 		setChanged();
 		notifyObservers();
-		this.lives = life;
 	}
 
 
-	void setLevel(int d) {
+	private void setLevel(int d) {
+		this.currentLevel = d;
 		setChanged();
 		notifyObservers();
-		this.currentLevel = d;
 	}
 	
 	public int getCurrentLevel(){
