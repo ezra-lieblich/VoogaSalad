@@ -4,36 +4,35 @@ import java.util.ResourceBundle;
 
 public class EnemyType extends Entity{
 
-	private String name;
-	private String imageLocation;
 	private double speed;
 	private double health;
 	private double points;
 	private double money;
 	private String collisionEffect;
-	
-    private static final String DEFAULTVALUESPATH = "resources/DefaultEntityValues/";
-	private static ResourceBundle resources;
 
 	
 	public EnemyType() {
-//		//possible hold a resource file that has default values for an enemy
-//		resources =  ResourceBundle.getBundle(DEFAULTVALUESPATH);
-//		//imagePath = resources.getString("EnemyImage");
-//		speed = Double.parseDouble(resources.getString("Default"));
-		speed = 5;
-		health = 10;
-		points = 50;
-		money = 50;
-        collisionEffect = "normal";
+		//possible hold a resource file that has default values for an enemy
+        super.setName(super.getResources().getString("EnemyName"));
+		super.setImagePath(super.getResources().getString("EnemyImage"));
+		speed = Double.parseDouble(super.getResources().getString("EnemySpeed"));
+        health = Double.parseDouble(super.getResources().getString("EnemyHealth"));
+        points = Double.parseDouble(super.getResources().getString("EnemyPoints"));
+        money = Double.parseDouble(super.getResources().getString("EnemyMoney"));
+        collisionEffect = super.getResources().getString("EnemyCollisionEffect");
+//		speed = 5;
+//		health = 10;
+//		points = 50;
+//		money = 50;
+//        collisionEffect = "normal";
 
 	}
 	
 	public EnemyType(String name, String imageLocation, double speed, 
 			double health, double points, double money, String collisionEffect){
 		
-		this.name = name; 
-		this.imageLocation = imageLocation; 
+		super.setName(name);
+		super.setImagePath(imageLocation);
 		this.speed = speed; 
 		this.health = health; 
 		this.points = points; 
@@ -43,11 +42,11 @@ public class EnemyType extends Entity{
 	}
 	
 	public String getName(){
-		return name; 
+		return super.getName();
 	}
 	
 	public String getImageLocation(){
-		return imageLocation; 
+		return super.getImagePath() ;
 	}
 	
 	public double getSpeed() {
@@ -77,7 +76,7 @@ public class EnemyType extends Entity{
 	public String getCollisionEffect() {
 		return collisionEffect;
 	}
-	public void setColissionEffect(String collisionEffect) {
+	public void setCollisionEffect(String collisionEffect) {
 		this.collisionEffect = collisionEffect;
 	}
 	
