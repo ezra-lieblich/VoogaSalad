@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 
+
 public class AuthoringView implements IAuthoringView {
 
     private Scene myScene;
@@ -20,36 +21,35 @@ public class AuthoringView implements IAuthoringView {
     private static final int SIZE = 700;
     private BorderPane authoringView;
     private Pane editorView;
-    
-    public AuthoringView(int aWidth, int aHeight) {
+
+    public AuthoringView (int editorWidth, int edit) {
         myRoot = new Group();
         myScene = new Scene(myRoot, SIZE, SIZE);
-        myToolbar = ToolbarFactory.build(SIZE, SIZE/20);
+        myToolbar = ToolbarFactory.build(SIZE, SIZE / 20);
         editorTabPane = EditorTabPaneFactory.build(SIZE, SIZE);
         authoringView = new BorderPane();
-        editorView = createEditor();
         myRoot.getChildren().add(authoringView);
         initScene();
     }
-    
+
     @Override
     public IEditorTabPane getMySideTabbedToolbar () {
         return editorTabPane;
     }
 
-    private void initScene() {
+    private void initScene () {
         authoringView.setTop(myToolbar.getInstanceAsNode());
         authoringView.setRight(editorTabPane.getInstanceAsNode());
         authoringView.setCenter(editorView);
     }
-    
-    private Pane createEditor() {
-        Pane editor = new Pane();
-        editor.setMaxSize(SIZE*9/10, SIZE);
-        editor.setPrefSize(SIZE*7.9/10, SIZE*19/20);
-        return editor;
+
+    private void createEditorView (Node editor) {
+        editorView = new Pane();
+        editorView.setPrefSize(editor.prefWidth(0), editor.prefHeight(0));
+        editorView.setMaxSize(editor.maxWidth(0), editor.maxHeight(0));
+
     }
-    
+
     @Override
     public Scene getScene () {
         return myScene;
@@ -60,15 +60,18 @@ public class AuthoringView implements IAuthoringView {
         return myRoot;
     }
 
-	@Override
-	public void setEditorView(Node editor) {
-		editorView.getChildren().clear();
-		editorView.getChildren().add(editor);
-	}
+    @Override
+    public void setEditorView (Node editor) {
+        if (editorView == null) {
+            createEditorView(editor);
+        }
+        editorView.getChildren().clear();
+        editorView.getChildren().add(editor);
+    }
 
-	@Override
-	public void setEditorTabPaneDelegate(EditorTabPaneDelegate delegate) {
-		editorTabPane.setDelegate(delegate);
-	}
+    @Override
+    public void setEditorTabPaneDelegate (EditorTabPaneDelegate delegate) {
+        editorTabPane.setDelegate(delegate);
+    }
 
 }
