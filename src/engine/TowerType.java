@@ -23,32 +23,10 @@ public class TowerType extends Entity {
         this.targets = new ArrayList<EnemyType>();
         this.weapons = new ArrayList<WeaponType>();
         this.abilities = new ArrayList<AbilityType>();
-        this.name = name; 
-        this.imageLocation = imageLocation; 
-        this.cost = cost; 
-        this.sellAmount = sellAmount; 
-        this.fireRate = fireRate; 
-        this.unlockLevel = unlockLevel;
-    }
-    
-    public String getImageLocation(){
-    	return imageLocation; 
-    }
-    
-    public String getName(){
-    	return name; 
-    }
-    
-    public double getSellAmount(){
-    	return sellAmount; 
-    }
-    
-    public int getUnlockLevel(){
-    	return unlockLevel;
-    }
-    
-    public int getFireRate(){
-    	return fireRate; 
+        this.attackPreference = "large";
+        this.cost = 100;
+        this.sellAmount = 1000;
+        this.unlockLevel = 3;
     }
 	
     public void addUpgrade(TowerType upgrade) {
@@ -57,6 +35,10 @@ public class TowerType extends Entity {
     
     public void removeUpgrade(TowerType upgrade) {
         upgrades.remove(upgrade);
+    }
+    
+    public List<TowerType> getUpgrades() {
+        return Collections.unmodifiableList(upgrades);
     }
 
     public void addWeapon (WeaponType weapon) {
@@ -78,7 +60,23 @@ public class TowerType extends Entity {
     public void addTarget (EnemyType target) {
         targets.add(target);
     }
+    
+    public List<EnemyType> getTargets() {
+        return Collections.unmodifiableList(targets);
+    }
 
+    public void removeAbility (AbilityType ability) {
+        abilities.remove(ability);
+    }
+
+    public void addAbility (AbilityType ability) {
+        abilities.add(ability);
+    }
+    
+    public List<AbilityType> getAbility() {
+        return Collections.unmodifiableList(abilities);
+    }
+    
     public double getCost () {
         return cost;
     }
@@ -93,5 +91,21 @@ public class TowerType extends Entity {
 
     public void setAttackPreference (String attackPreference) {
         this.attackPreference = attackPreference;
+    }
+
+    public double getSellAmount () {
+        return sellAmount;
+    }
+
+    public void setSellAmount (double sellAmount) {
+        this.sellAmount = sellAmount;
+    }
+
+    public int getUnlockLevel () {
+        return unlockLevel;
+    }
+
+    public void setUnlockLevel (int unlockLevel) {
+        this.unlockLevel = unlockLevel;
     }
 }

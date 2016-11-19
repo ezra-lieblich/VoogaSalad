@@ -21,8 +21,8 @@ public abstract class EntityManager <E extends IEntity> extends Observable{
         nextId++;
     }
     
-    public void removeEntry(E entry) {
-        data.remove(entry);
+    public void removeEntry(int id) {
+        data.remove(id);
     }
     
     public int getNextId() {
