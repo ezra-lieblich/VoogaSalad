@@ -45,7 +45,6 @@ public class AuthoringView implements IAuthoringView {
     
     private Pane createEditor() {
         Pane editor = new Pane();
-        //change back here for tower
         editor.setMaxSize(SIZE*9/10, SIZE);
         editor.setPrefSize(SIZE*7.9/10, SIZE*19/20);
         return editor;
