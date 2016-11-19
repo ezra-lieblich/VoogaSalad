@@ -10,7 +10,7 @@ import java.util.function.Consumer;
 public abstract class EntityManager <E extends IEntity> extends Observable{
     Map<Integer, E> data;
     //List<E> activeEntities;
-
+    int activeId;
     int nextId;
     
     
@@ -52,6 +52,10 @@ public abstract class EntityManager <E extends IEntity> extends Observable{
     
     public E getEntity(int index) {
         return data.get(index);
+    }
+    
+    public int getActiveId() {
+        return activeId;
     }
     
     protected abstract E createInstance();

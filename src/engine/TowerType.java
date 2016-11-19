@@ -5,28 +5,32 @@ import java.util.Collections;
 import java.util.List;
 
 public class TowerType extends Entity {
+    /*public static final String DEFAULT_NAME = "New Tower";
+    public static final String DEFAULT_IMAGE_LOCATION = "Images.penguin.jpg";
+    public static final String DEFAULT_ATTACK_PREFERENCE = "all";
+    public static final double DEFAULT_COST = 100;
+    public static final double DEFAULT_SELL_AMOUNT = DEFAULT_COST / 2;
+    public static final int DEFAULT_UNLOCK_LEVEL = 0;
+    */
     private List<TowerType> upgrades;
     private List<WeaponType> weapons;
     private List<EnemyType> targets;
     private List<AbilityType> abilities;
-    private String name; 
-    private String imageLocation; 
     private String attackPreference;
     private double cost;
     private double sellAmount;
-    private int unlockLevel;
-    private int fireRate; 
-    
+    private int unlockLevel;    
 
-    public TowerType (String name, String imageLocation, double cost, double sellAmount, int fireRate, int unlockLevel) {
+    public TowerType () {
+        super(DEFAULT_NAME, DEFAULT_IMAGE_LOCATION, 1);
         this.upgrades = new ArrayList<TowerType>();
         this.targets = new ArrayList<EnemyType>();
         this.weapons = new ArrayList<WeaponType>();
         this.abilities = new ArrayList<AbilityType>();
-        this.attackPreference = "large";
-        this.cost = 100;
-        this.sellAmount = 1000;
-        this.unlockLevel = 3;
+        this.attackPreference = DEFAULT_ATTACK_PREFERENCE;
+        this.cost = DEFAULT_COST;
+        this.sellAmount = DEFAULT_SELL_AMOUNT;
+        this.unlockLevel = DEFAULT_UNLOCK_LEVEL;
     }
 	
     public void addUpgrade(TowerType upgrade) {
