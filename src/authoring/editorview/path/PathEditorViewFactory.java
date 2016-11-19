@@ -6,8 +6,8 @@ public class PathEditorViewFactory {
         // Does Nothing
     }
 
-    public static IPathEditorView build (int aWidth, int aHeight) {
-        return new PathEditorView(aWidth, aHeight);
+    public static IPathEditorView build (int width, int height) {
+        return new PathEditorView(width, height);
     }
 
 }

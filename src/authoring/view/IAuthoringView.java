@@ -1,7 +1,10 @@
 package authoring.view;
 
 import authoring.editortabpane.IEditorTabPane;
+import authoring.editortabpane.EditorTabPaneDelegate;
+
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 
 
@@ -23,6 +26,10 @@ public interface IAuthoringView {
      * @return root of the game authoring scene
      */
     public Group getMyRoot ();
+    
+    public void setEditorView(Node editor);
+    
+    public void setEditorTabPaneDelegate(EditorTabPaneDelegate delegate);
 
     public IEditorTabPane getMySideTabbedToolbar();
     

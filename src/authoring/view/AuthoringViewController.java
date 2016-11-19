@@ -1,7 +1,12 @@
 package authoring.view;
 
 import java.util.HashMap;
+
 import authoring.editortabpane.IEditorTabPane;
+
+
+import authoring.editortabpane.EditorTabPaneDelegate;
+
 import authoring.editorview.EditorViewController;
 import authoring.editorview.enemy.EnemyEditorViewController;
 import authoring.editorview.gamesettings.GameSettingsEditorViewController;
@@ -11,23 +16,21 @@ import authoring.editorview.tower.TowerEditorViewController;
 import authoring.editorview.weapon.WeaponEditorViewController;
 import javafx.scene.Scene;
 
-public class AuthoringViewController {
-	private IAuthoringView authoringView;
+public class AuthoringViewController implements EditorTabPaneDelegate {
+	private IAuthoringView scene;
 	private HashMap<String, EditorViewController> editors;
-	private IEditorTabPane editorTabPane;
 	
 	public AuthoringViewController(int width, int height){
-		authoringView = AuthoringViewFactory.build(width, height);
-		editorTabPane = authoringView.getMySideTabbedToolbar();
 		createEditors();
-		checkTabPane();
+		createScene(width, height);
 	}
 	
-	private void checkTabPane () {
-	    //This needs to be called consistently... It won't be doing that. Observer for this??
-            editorTabPane.getViewToOpen();
-        
-    }
+	private void createScene(int width, int height){
+		scene = AuthoringViewFactory.build(width, height);
+		scene.setEditorView(editors.get("path").getView());
+		scene.setEditorTabPaneDelegate(this);
+	}
+	
 
     private void createEditors(){
 		editors.put("path", new PathEditorViewController());
@@ -37,9 +40,13 @@ public class AuthoringViewController {
 		editors.put("gameSettings", new GameSettingsEditorViewController());
 		editors.put("level", new LevelEditorViewController());
 	}
-	
-	public Scene getScene() {
-	    return authoringView.getScene();
+
+	@Override
+	public void userSelectedTab(String tabName) {
+		EditorViewController editor = this.editors.get(tabName);
+		this.scene.setEditorView(editor.getView());
 	}
+	
+
 	
 }

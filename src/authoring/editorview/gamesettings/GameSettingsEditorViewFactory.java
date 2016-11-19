@@ -6,8 +6,8 @@ public class GameSettingsEditorViewFactory {
         // Does Nothing
     }
 
-    public static IGameSettingsEditorView build (int aWidth, int aHeight) {
-        return new GameSettingsEditorView(aWidth, aHeight);
+    public static IGameSettingsEditorView build (int width, int height) {
+        return new GameSettingsEditorView(width, height);
     }
 
 }
