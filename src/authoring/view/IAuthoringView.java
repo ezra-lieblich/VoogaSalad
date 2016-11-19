@@ -1,5 +1,6 @@
 package authoring.view;
 
+import authoring.editortabpane.IEditorTabPane;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 
@@ -23,4 +24,6 @@ public interface IAuthoringView {
      */
     public Group getMyRoot ();
 
+    public IEditorTabPane getMySideTabbedToolbar();
+    
 }
