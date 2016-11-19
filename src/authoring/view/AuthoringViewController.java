@@ -11,7 +11,6 @@ import authoring.editorview.level.LevelEditorViewController;
 import authoring.editorview.path.PathEditorViewController;
 import authoring.editorview.tower.TowerEditorViewController;
 import authoring.editorview.weapon.WeaponEditorViewController;
-import sun.security.util.Resources;
 
 public class AuthoringViewController implements EditorTabPaneDelegate {
 	private IAuthoringView scene;

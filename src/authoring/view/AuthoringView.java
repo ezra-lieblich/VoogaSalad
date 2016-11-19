@@ -32,7 +32,7 @@ public class AuthoringView implements IAuthoringView {
     }
     
     @Override
-    public IEditorTabPane getMySideTabbedToolbar () {
+    public IEditorTabPane getMySideTabbedToolbar() {
         return editorTabPane;
     }
 
