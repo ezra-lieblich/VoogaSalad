@@ -8,11 +8,13 @@ import gameplayer.view.GridGUI;
 import gameplayer.view.helper.GraphicsLibrary;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.TilePane;
 
 /**
  * Responsible for the tab pane that holds all of the defensive structures that
@@ -26,17 +28,17 @@ public class DragDropView {
 	private TabPane dragDropPane;
 	private ArrayList<Tab> tabs;
 	private GraphicsLibrary graphicLib;
-	public static final int DEFENSIVEWIDTH = 50;
-	public static final int DEFENSIVEHEIGHT = 50;
+	public static final int DEFENSIVEWIDTH = 70;
+	public static final int DEFENSIVEHEIGHT = 70;
 	private Pane target;
 	private DragDrop dragDrop;
 	private List<ImageView> objects;
 
-	public DragDropView(/*GridGUI game*/) {
+	public DragDropView(double xError, double yError) {
 		this.dragDropPane = new TabPane();
 		this.tabs = new ArrayList<Tab>();
 		this.graphicLib = new GraphicsLibrary();
-		this.dragDrop = new DragDrop();
+		this.dragDrop = new DragDrop(xError,yError);
 		this.objects = new ArrayList<ImageView>();
 		setTabPaneStyle();
 	}
@@ -72,17 +74,20 @@ public class DragDropView {
 	 * @param imageLocations Array of the image location names
 	 */
 	public void populateImageViewsToTab(Tab tab, String[] imageLocations) {
-		Group root = new Group();
-		GridPane grid = graphicLib.creatGridPane(root, 20, 20); //TODO: change, would be set by the xml file
-		int cIndex = 0;
-		int rIndex = 0;
+		ScrollPane root = new ScrollPane();
+		TilePane grid = new TilePane(); //TODO: change, would be set by the xml file
+		grid.setHgap(20);
+		grid.setVgap(20);
+		root.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER); // Horizontal
+        root.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED); // Vertical scroll bar
+        root.setFitToWidth(true);
+        root.setContent(grid);
 		for (String image:imageLocations){
 			ImageView currentImage = graphicLib.createImageView(graphicLib.createImage(image));
 			dragDrop.init(currentImage, target);
 			objects.add(currentImage);//TODO: do I need this?
 			graphicLib.setImageViewParams(currentImage, DEFENSIVEWIDTH, DEFENSIVEHEIGHT);
-			grid.add(currentImage ,cIndex, rIndex);
-			rIndex++;
+			grid.getChildren().add(currentImage);// ,cIndex, rIndex);
 		}
 		tab.setContent(root);
 		
