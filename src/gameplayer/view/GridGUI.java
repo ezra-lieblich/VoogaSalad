@@ -94,6 +94,19 @@ public class GridGUI {
 		this.grid.getChildren().add(towerImage);
 	}
 
+	public void populatePath(Cell startingCell){
+		ImageView pathImage = graphicsLib.createImageView(graphicsLib.createImage("kaneki.jpg")); //TODO: replace with whatever shows the path
+		Cell current = startingCell;
+		while (current != null){
+			double x =current.getX();
+			double y = current.getY();
+			graphicsLib.setImageViewParams(pathImage, x*cellWidth, y*cellHeight,cellWidth, cellHeight);
+			this.grid.getChildren().add(pathImage);
+			current = current.getNext();
+		}
+	}
+	
+	
 	private void populatePath( List<int[]> path) { //TODO: change how path is being sent
 		//System.out.println("Populate path!");
 		for (int i = 0; i < path.size(); i++) {
