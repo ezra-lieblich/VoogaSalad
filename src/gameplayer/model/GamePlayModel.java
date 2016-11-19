@@ -89,6 +89,10 @@ public class GamePlayModel extends Observable{
 		return this.gameTitle;
 	}
 	
+	public Grid getGrid(){
+		return this.grid;
+	}
+	
 	public int getLevelNumber(){
 		return (int)this.levelnumber;
 	}
