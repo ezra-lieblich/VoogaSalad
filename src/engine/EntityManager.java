@@ -1,5 +1,6 @@
 package engine;
 
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +10,7 @@ import java.util.function.Consumer;
 public abstract class EntityManager <E extends IEntity> extends Observable{
     Map<Integer, E> data;
     //List<E> activeEntities;
+
     int nextId;
     
     

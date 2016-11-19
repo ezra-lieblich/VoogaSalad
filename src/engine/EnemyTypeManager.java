@@ -4,8 +4,37 @@ public class EnemyTypeManager extends EntityManager<EnemyType>{
 
     @Override
     protected EnemyType createInstance () {
-        // TODO Auto-generated method stub
-        return null;
+        return new EnemyType();
     }
 
+	public double getSpeed(int id) {
+		return data.get(id).getSpeed();
+	}
+	public void setSpeed(int id, double speed) {
+		data.get(id).setSpeed(speed);
+	}
+	public double getHealth(int id) {
+        return data.get(id).getHealth();
+	}
+	public void setHealth(int id, double health) {
+        data.get(id).setHealth(health);
+	}
+	public double getPoints(int id ) {
+        return data.get(id).getPoints();
+	}
+	public void setPoints(int id, double points) {
+        data.get(id).setPoints(points);
+	}
+	public double getMoney(int id) {
+		return data.get(id).getMoney();
+	}
+	public void setMoney(int id, double money) {
+        data.get(id).setMoney(money);
+	}
+	public String getColissionEffect(int id) {
+		return data.get(id).getColissionEffect();
+	}
+	public void setColissionEffect(int id, String colissionEffect) {
+        data.get(id).setColissionEffect(colissionEffect);
+	}
 }

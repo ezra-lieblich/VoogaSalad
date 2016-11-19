@@ -3,25 +3,52 @@ package engine;
 import java.util.ResourceBundle;
 
 public class EnemyType extends Entity{
+
 	private String name;
-	private String imagePath;
+	private String imageLocation;
 	private double speed;
 	private double health;
 	private double points;
 	private double money;
-	private String colissionEffect;
+	private String collisionEffect;
 	
     private static final String DEFAULTVALUESPATH = "resources/DefaultEntityValues/";
 	private static ResourceBundle resources;
 
 	
 	public EnemyType() {
-		//possible hold a resource file that has default values for an enemy
-		resources =  ResourceBundle.getBundle(DEFAULTVALUESPATH);
-		imagePath = resources.getString("EnemyImage");
-		speed = Double.parseDouble(resources.getString("Default"));
+//		//possible hold a resource file that has default values for an enemy
+//		resources =  ResourceBundle.getBundle(DEFAULTVALUESPATH);
+//		//imagePath = resources.getString("EnemyImage");
+//		speed = Double.parseDouble(resources.getString("Default"));
+		speed = 5;
+		health = 10;
+		points = 50;
+		money = 50;
+        collisionEffect = "normal";
+
 	}
 	
+	public EnemyType(String name, String imageLocation, double speed, 
+			double health, double points, double money, String collisionEffect){
+		
+		this.name = name; 
+		this.imageLocation = imageLocation; 
+		this.speed = speed; 
+		this.health = health; 
+		this.points = points; 
+		this.money = money; 
+		this.collisionEffect = collisionEffect; 
+		
+	}
+	
+	public String getName(){
+		return name; 
+	}
+	
+	public String getImageLocation(){
+		return imageLocation; 
+	}
 	
 	public double getSpeed() {
 		return speed;
@@ -47,11 +74,11 @@ public class EnemyType extends Entity{
 	public void setMoney(double money) {
 		this.money = money;
 	}
-	public String getColissionEffect() {
-		return colissionEffect;
+	public String getCollisionEffect() {
+		return collisionEffect;
 	}
-	public void setColissionEffect(String colissionEffect) {
-		this.colissionEffect = colissionEffect;
+	public void setColissionEffect(String collisionEffect) {
+		this.collisionEffect = collisionEffect;
 	}
 	
 }
