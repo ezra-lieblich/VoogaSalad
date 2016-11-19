@@ -38,7 +38,7 @@ public class GamePlayModel extends Observable{
 	private double gold;
 	private double lives;
 	private double levelnumber;  // reach level number winning the game
-	private double currentLevel;
+	private int currentLevel;
 	private int waveOfEnemy;
 	
 	
@@ -64,7 +64,7 @@ public class GamePlayModel extends Observable{
 	
 	
 	public void initializeLevelInfo(){
-		this.enemyAtCurrentLevel = this.factory.getEnemy();
+		this.enemyAtCurrentLevel = this.factory.getEnemy(currentLevel);
 		this.towerTypes = this.factory.getTowers();
 		//this.weaponTypes = this.factory.getWeapon();
 		this.waveOfEnemy = 0;
@@ -103,13 +103,13 @@ public class GamePlayModel extends Observable{
 	}
 
 
-	void setLevel(double d) {
+	void setLevel(int d) {
 		setChanged();
 		notifyObservers();
 		this.currentLevel = d;
 	}
 	
-	public double getCurrentLevel(){
+	public int getCurrentLevel(){
 		return this.currentLevel;
 	}
 
