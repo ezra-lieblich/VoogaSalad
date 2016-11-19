@@ -16,8 +16,14 @@ public class AuthoringViewController implements EditorTabPaneDelegate {
 	private HashMap<String, EditorViewController> editors;
 	
 	public AuthoringViewController(int width, int height){
-		scene = AuthoringViewFactory.build(width, height);
 		createEditors();
+		createScene(width, height);
+	}
+	
+	private void createScene(int width, int height){
+		scene = AuthoringViewFactory.build(width, height);
+		scene.setEditorView(editors.get("path").getView());
+		scene.setEditorTabPaneDelegate(this);
 	}
 	
 	private void createEditors(){

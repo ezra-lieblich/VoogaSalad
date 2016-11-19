@@ -1,5 +1,6 @@
 package authoring.view;
 
+import authoring.editortabpane.EditorTabPaneDelegate;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -25,5 +26,7 @@ public interface IAuthoringView {
     public Group getMyRoot ();
     
     public void setEditorView(Node editor);
+    
+    public void setEditorTabPaneDelegate(EditorTabPaneDelegate delegate);
 
 }

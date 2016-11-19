@@ -1,5 +1,6 @@
 package authoring.view;
 
+import authoring.editortabpane.EditorTabPaneDelegate;
 import authoring.editortabpane.EditorTabPaneFactory;
 import authoring.editortabpane.IEditorTabPane;
 import authoring.editorview.gamesettings.GameSettingsEditorViewFactory;
@@ -21,22 +22,16 @@ public class AuthoringView implements IAuthoringView {
     private Scene myScene;
     private Group myRoot;
     private IToolbar myToolbar;
-    private IEditorTabPane mySideTabbedToolbar;
+    private IEditorTabPane editorTabPane;
     private static final int SIZE = 700;
     private BorderPane authoringView;
     private Pane editorView;
-    private ITowerEditorView towerView;
-    private IPathEditorView pathView;
-    private IGameSettingsEditorView gameSettingsView;
     
     public AuthoringView(int aWidth, int aHeight) {
-        towerView = TowerEditorViewFactory.build();
-        pathView = PathEditorViewFactory.build(SIZE, SIZE);
-        gameSettingsView = GameSettingsEditorViewFactory.build(SIZE, SIZE);
         myRoot = new Group();
         myScene = new Scene(myRoot, SIZE, SIZE);
         myToolbar = ToolbarFactory.build(SIZE, SIZE/20);
-        mySideTabbedToolbar = EditorTabPaneFactory.build(SIZE, SIZE);
+        editorTabPane = EditorTabPaneFactory.build(SIZE, SIZE);
         authoringView = new BorderPane();
         editorView = createEditor();
         myRoot.getChildren().add(authoringView);
@@ -45,15 +40,13 @@ public class AuthoringView implements IAuthoringView {
     
     private void initScene() {
         authoringView.setTop(myToolbar.getInstanceAsNode());
-        authoringView.setRight(mySideTabbedToolbar.getInstanceAsNode());
+        authoringView.setRight(editorTabPane.getInstanceAsNode());
         authoringView.setCenter(editorView);
     }
     
     private Pane createEditor() {
         Pane editor = new Pane();
         //change back here for tower
-        Node pathViewNode = pathView.getInstanceAsNode();
-//        tempmid.getChildren().add(pathViewNode);
         editor.setMaxSize(SIZE*9/10, SIZE);
         editor.setPrefSize(SIZE*7.9/10, SIZE*19/20);
         return editor;
@@ -73,6 +66,11 @@ public class AuthoringView implements IAuthoringView {
 	public void setEditorView(Node editor) {
 		editorView.getChildren().clear();
 		editorView.getChildren().add(editor);
+	}
+
+	@Override
+	public void setEditorTabPaneDelegate(EditorTabPaneDelegate delegate) {
+		editorTabPane.setDelegate(delegate);
 	}
 
 }
