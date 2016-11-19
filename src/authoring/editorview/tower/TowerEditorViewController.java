@@ -5,6 +5,6 @@ import authoring.editorview.EditorViewController;
 public class TowerEditorViewController extends EditorViewController {
 
 	public TowerEditorViewController(int editorWidth, int editorHeight){
-		view = TowerEditorViewFactory.build();
+		view = TowerEditorViewFactory.build(editorWidth, editorHeight);
 	}
 }

@@ -3,12 +3,6 @@ package authoring.view;
 import authoring.editortabpane.EditorTabPaneDelegate;
 import authoring.editortabpane.EditorTabPaneFactory;
 import authoring.editortabpane.IEditorTabPane;
-import authoring.editorview.gamesettings.GameSettingsEditorViewFactory;
-import authoring.editorview.gamesettings.IGameSettingsEditorView;
-import authoring.editorview.path.IPathEditorView;
-import authoring.editorview.path.PathEditorViewFactory;
-import authoring.editorview.tower.ITowerEditorView;
-import authoring.editorview.tower.TowerEditorViewFactory;
 import authoring.toolbar.IToolbar;
 import authoring.toolbar.ToolbarFactory;
 import javafx.scene.Group;
@@ -40,7 +34,7 @@ public class AuthoringView implements IAuthoringView {
     
     @Override
     public IEditorTabPane getMySideTabbedToolbar () {
-        return mySideTabbedToolbar;
+        return editorTabPane;
     }
 
     private void initScene() {
