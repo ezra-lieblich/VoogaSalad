@@ -1,15 +1,13 @@
 package gameplayer.model;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Queue;
-
+import engine.TowerType;
 import gameplayer.loader.GamePlayerFactory;
-import javafx.beans.property.SimpleListProperty;
-import javafx.collections.ObservableList;
+
 
 public class GamePlayModel extends Observable{
 
@@ -23,7 +21,7 @@ public class GamePlayModel extends Observable{
 	private int hitBuffer = 10; // initialize from xml
 	
 	private Map<Integer, Weapon> weaponTypes; // initialize in xml
-	private Map<Integer, Tower> towerTypes;  // initialize in xml
+	private Map<Integer, TowerType> towerTypes;  
 	private Cell[][] gridArray;
 	
 	
@@ -37,12 +35,11 @@ public class GamePlayModel extends Observable{
 	private double gold;
 	private double lives;
 	private double levelnumber;  // reach level number winning the game
-	private double currentLevel;
+	private int currentLevel;
 	private int waveOfEnemy;
+	private String gameTitle;
 	
-	
-	//number of gold
-	
+		
 
 	public GamePlayModel(GamePlayerFactory factory){
 		initializeGameSetting(factory);
@@ -59,14 +56,25 @@ public class GamePlayModel extends Observable{
 		this.levelnumber = settingInfo.get("levelnumber");
 		this.gold = settingInfo.get("gold");
 		this.lives = settingInfo.get("lives");
+		this.towerTypes = this.factory.getTowers();
+		this.gameTitle = this.factory.getGameTitle();
+	//	this.weaponTypes = this.factory.getWeapon();  need from xml
 	}
 	
 	
 	public void initializeLevelInfo(){
-		this.enemyAtCurrentLevel = this.factory.getEnemy();
-		//this.towerTypes = this.factory.getTowers();
-		//this.weaponTypes = this.factory.getWeapon();
+		this.enemyAtCurrentLevel = this.factory.getEnemy(this.currentLevel);
 		this.waveOfEnemy = 0;
+		packOfEnemyComing = this.enemyAtCurrentLevel.get(waveOfEnemy);
+		this.waveOfEnemy++;
+		nextEnteringEnemy = this.packOfEnemyComing.poll();
+		this.grid = this.factory.getGrid(this.currentLevel);
+		gridArray = this.grid.getGrid();
+		this.gridX = this.gridArray.length;
+		this.gridY = this.gridArray[0].length;
+		enemyOnGrid = new ArrayList<Enemy>();
+		weaponOnGrid = new ArrayList<Weapon>();
+		
 		
 	}
 	
@@ -77,17 +85,30 @@ public class GamePlayModel extends Observable{
 		return dimension;
 	}
 	
+	public String getGameTitle(){
+		return this.gameTitle;
+	}
+	
+	public Grid getGrid(){
+		return this.grid;
+	}
+	
+	public int getLevelNumber(){
+		return (int)this.levelnumber;
+	}
+	
 
 	public double getGold() {
 		return gold;
 	}
 
 
-	void setGold(double gold) {
+	private void setGold(double gold) {
+		this.gold = gold;
 		setChanged();
 		notifyObservers();
-		this.gold = gold;
 	}
+
 
 
 	public double getLife() {
@@ -95,32 +116,44 @@ public class GamePlayModel extends Observable{
 	}
 
 
-	void setLife(double life) {
+	private void setLife(double life) {
+		this.lives = life;
 		setChanged();
 		notifyObservers();
-		this.lives = life;
 	}
 
 
-	void setLevel(double d) {
+	private void setLevel(int d) {
+		this.currentLevel = d;
 		setChanged();
 		notifyObservers();
-		this.currentLevel = d;
 	}
 	
-	public double getCurrentLevel(){
+	public int getCurrentLevel(){
 		return this.currentLevel;
 	}
 
 	
 	public Boolean placeTower(int type, int x, int y){	
 		//later check if is a valid location to place the tower
-		Tower t  = towerTypes.get(type);
+		TowerType tt = towerTypes.get(type);
+		
+		// get weaponTypes
+		// actually implement the firing counter into each weapon types
+
+		
+//++++++++++++++++++++++++++++fix this after weapon type is done+++++++++++++++++++++++++		
+		/*
+		Tower t = new Tower(type, tt.getCost(), tt.getWeapon(),tt.getImageLocation(),tt.getName());
 		if(this.gold - t.getCost() < 0){
 			return false;
 		}
-		grid.placeTower(towerTypes.get(type), x, y);
+		t.setCoordinates(x, y);
+		grid.placeTower(t, x, y);
 		setGold(this.gold - t.getCost());
+		
+		
+		*/
 		return true;
 	}
 	
@@ -168,11 +201,17 @@ public class GamePlayModel extends Observable{
 			w.setX(w.getSpeedX() + w.getX());
 			w.setY(w.getSpeedY() + w.getY());
 			
+			// update distance travelled
+			
+			
+			// update in shooting range function
 			if(!coordinateInBound(w.getX(), w.getY()) && !inShootingRange(w)){
 				this.weaponOnGrid.remove(w);
 			}
 		}
 		
+		
+		// check all the weapon types
 		for (int i = 0; i < gridX; i++){
 			for(int j = 0; j < gridY; j++){
 				int weaponType = gridArray[i][j].fireWeapon();
@@ -274,18 +313,6 @@ public class GamePlayModel extends Observable{
 		updateEnemy();
 		
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+		
 
 }

@@ -37,6 +37,7 @@ public class GamePlayerController implements Observer{
 	}
 	
 	public void init(){
+		this.model.initializeLevelInfo();
 		HashMap<String,Double> settings = this.loader.getGameSetting();
 		initGUI(settings);
 	}
@@ -47,7 +48,7 @@ public class GamePlayerController implements Observer{
 		int cols = dimensions[1];
 		this.view = new GameGUI(rows,cols); //just for testing, should be replaced by block above, 5 rows, 5 columns
 		this.mainScene = view.init(settings.get("gold"), settings.get("lives"), settings.get("numLevels"));
-		//this.view.getGrid().populatePath(model.get startingCell); TODO: need to get grid from model to get starting cell
+		this.view.getGrid().populatePath(model.getGrid().getStartPoint()); //TODO: need to get grid from model to get starting cell
 	}
 	
 	public Scene getMainScene(){

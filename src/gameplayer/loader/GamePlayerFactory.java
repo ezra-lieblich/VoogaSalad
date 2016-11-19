@@ -15,11 +15,15 @@ import gameplayer.model.Grid;
 import gameplayer.model.Tower;
 
 public class GamePlayerFactory{
-	private XMLParser authoringFileReader;
+
+	XMLParser authoringFileReader;
+
+
 
 	public GamePlayerFactory(XMLParser parser){
 		this.authoringFileReader = parser;
 	}
+
 	
 	public HashMap<String, Double> getGameSetting(){
 		HashMap<String,Double>settings = new HashMap<>(); 
@@ -29,7 +33,18 @@ public class GamePlayerFactory{
 		settings.put("levelnumber",  Double.parseDouble(authoringFileReader.getVariableValues("levelnumber")));
 		return settings; 
 	}
+	
+	/*
+	public int[] getGridDimension{
+		int width = Integer.parseInt(authoringFileReader.getTextValue("level"+level,"width"));
+		int height = Integer.parseInt(authoringFileReader.getTextValue("level"+level,"height"));
+		
+		
+	}
 
+	*/
+	
+	
 	public Grid getGrid(int level){
 		String width = authoringFileReader.getTextValue("level"+level,"width");
 		String height = authoringFileReader.getTextValue("level"+level,"height");
@@ -49,7 +64,10 @@ public class GamePlayerFactory{
 		return gameGrid; 	
 	}
 	
+	
+	
 	public HashMap<Integer, TowerType> getTowers(){
+
 		return authoringFileReader.getTowerTypes(); 
 	}
 	
@@ -57,4 +75,8 @@ public class GamePlayerFactory{
 		return authoringFileReader.getEnemy(level); 
 	}
 	
+	
+	public String getGameTitle(){
+		return this.authoringFileReader.getName();
+	}
 }
