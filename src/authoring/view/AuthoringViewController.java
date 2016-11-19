@@ -32,8 +32,8 @@ public class AuthoringViewController implements EditorTabPaneDelegate {
 	}
 	
 	private void createEditors(){
-		int width = Integer.parseInt(settingsResource.getString("editorWidth"));
-		int height = Integer.parseInt(settingsResource.getString("editorHeight"));
+		int width = Integer.parseInt(settingsResource.getString("editorPrefWidth"));
+		int height = Integer.parseInt(settingsResource.getString("editorPrefHeight"));
 		editors.put("path", new PathEditorViewController(width, height));
 		editors.put("weapon", new WeaponEditorViewController(width, height));
 		editors.put("enemy", new EnemyEditorViewController(width, height));

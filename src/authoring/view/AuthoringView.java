@@ -21,13 +21,12 @@ public class AuthoringView implements IAuthoringView {
     private BorderPane authoringView;
     private Pane editorView;
     
-    public AuthoringView(int aWidth, int aHeight) {
+    public AuthoringView(int editorWidth, int edit) {
         myRoot = new Group();
         myScene = new Scene(myRoot, SIZE, SIZE);
         myToolbar = ToolbarFactory.build(SIZE, SIZE/20);
         editorTabPane = EditorTabPaneFactory.build(SIZE, SIZE);
         authoringView = new BorderPane();
-        editorView = createEditor();
         myRoot.getChildren().add(authoringView);
         initScene();
     }
@@ -43,12 +42,10 @@ public class AuthoringView implements IAuthoringView {
         authoringView.setCenter(editorView);
     }
     
-    private Pane createEditor() {
-        Pane editor = new Pane();
-        //change back here for tower
-        editor.setMaxSize(SIZE*9/10, SIZE);
-        editor.setPrefSize(SIZE*7.9/10, SIZE*19/20);
-        return editor;
+    private void createEditorView(Node editor) {
+		editorView = new Pane();
+		editorView.setPrefSize(editor.prefWidth(0), editor.prefHeight(0));
+		editorView.setMaxSize(editor.maxWidth(0), editor.maxHeight(0));
     }
     
     @Override
@@ -63,6 +60,9 @@ public class AuthoringView implements IAuthoringView {
 
 	@Override
 	public void setEditorView(Node editor) {
+		if (editorView == null){
+			createEditorView(editor);
+		}
 		editorView.getChildren().clear();
 		editorView.getChildren().add(editor);
 	}
