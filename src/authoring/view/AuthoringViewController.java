@@ -1,6 +1,7 @@
 package authoring.view;
 
 import java.util.HashMap;
+import java.util.ResourceBundle;
 
 import authoring.editortabpane.EditorTabPaneDelegate;
 import authoring.editorview.EditorViewController;
@@ -10,12 +11,16 @@ import authoring.editorview.level.LevelEditorViewController;
 import authoring.editorview.path.PathEditorViewController;
 import authoring.editorview.tower.TowerEditorViewController;
 import authoring.editorview.weapon.WeaponEditorViewController;
+import sun.security.util.Resources;
 
 public class AuthoringViewController implements EditorTabPaneDelegate {
 	private IAuthoringView scene;
 	private HashMap<String, EditorViewController> editors;
+	private ResourceBundle settingsResource;
+	private final String SETTINGS_RESOURCE_PATH = "resources/ViewSettings";
 	
 	public AuthoringViewController(int width, int height){
+		settingsResource = ResourceBundle.getBundle(SETTINGS_RESOURCE_PATH);
 		createEditors();
 		createScene(width, height);
 	}
@@ -27,12 +32,14 @@ public class AuthoringViewController implements EditorTabPaneDelegate {
 	}
 	
 	private void createEditors(){
-		editors.put("path", new PathEditorViewController());
-		editors.put("weapon", new WeaponEditorViewController());
-		editors.put("enemy", new EnemyEditorViewController());
-		editors.put("tower", new TowerEditorViewController());
-		editors.put("gameSettings", new GameSettingsEditorViewController());
-		editors.put("level", new LevelEditorViewController());
+		int width = Integer.parseInt(settingsResource.getString("editorWidth"));
+		int height = Integer.parseInt(settingsResource.getString("editorHeight"));
+		editors.put("path", new PathEditorViewController(width, height));
+		editors.put("weapon", new WeaponEditorViewController(width, height));
+		editors.put("enemy", new EnemyEditorViewController(width, height));
+		editors.put("tower", new TowerEditorViewController(width, height));
+		editors.put("gameSettings", new GameSettingsEditorViewController(width, height));
+		editors.put("level", new LevelEditorViewController(width, height));
 	}
 
 	@Override
