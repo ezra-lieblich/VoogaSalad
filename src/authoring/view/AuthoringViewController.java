@@ -14,7 +14,7 @@ import authoring.editorview.level.LevelEditorViewController;
 import authoring.editorview.path.PathEditorViewController;
 import authoring.editorview.tower.TowerEditorViewController;
 import authoring.editorview.weapon.WeaponEditorViewController;
-import javafx.scene.Scene;
+
 
 public class AuthoringViewController implements EditorTabPaneDelegate {
 	private IAuthoringView scene;
