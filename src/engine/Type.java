@@ -1,6 +1,6 @@
 package engine;
 
-public interface IEntity {
+public interface Type {
 
     String getName ();
 

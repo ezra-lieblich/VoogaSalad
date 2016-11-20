@@ -1,10 +1,13 @@
-package engine;
+package engine.tower;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import engine.AbstractType;
+import engine.enemy.EnemyType;
+import engine.weapon.WeaponType;
 
-public class TowerType extends Entity {
+public class TowerType extends AbstractType {
     /*public static final String DEFAULT_NAME = "New Tower";
     public static final String DEFAULT_IMAGE_LOCATION = "Images.penguin.jpg";
     public static final String DEFAULT_ATTACK_PREFERENCE = "all";
@@ -22,15 +25,14 @@ public class TowerType extends Entity {
     private int unlockLevel;    
 
     public TowerType () {
-        super(DEFAULT_NAME, DEFAULT_IMAGE_LOCATION, 1);
         this.upgrades = new ArrayList<TowerType>();
         this.targets = new ArrayList<EnemyType>();
         this.weapons = new ArrayList<WeaponType>();
         this.abilities = new ArrayList<AbilityType>();
-        this.attackPreference = DEFAULT_ATTACK_PREFERENCE;
-        this.cost = DEFAULT_COST;
-        this.sellAmount = DEFAULT_SELL_AMOUNT;
-        this.unlockLevel = DEFAULT_UNLOCK_LEVEL;
+        this.attackPreference = getResources("TowerTypeAttackPreference");
+        this.cost = Double.parseDouble(getResources("TowerTypeCost"));
+        this.sellAmount = Double.parseDouble(getResources("TowerTypeSellAmount"));
+        this.unlockLevel = Integer.parseInt(getResources("TowerTypeUnlockLevel"));
     }
 	
     public void addUpgrade(TowerType upgrade) {

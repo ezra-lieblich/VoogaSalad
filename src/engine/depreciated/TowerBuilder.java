@@ -1,4 +1,6 @@
-package engine;
+package engine.depreciated;
+
+import engine.tower.TowerType;
 
 public class TowerBuilder extends EntityBuilder<TowerType>{
 

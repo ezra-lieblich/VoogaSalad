@@ -1,8 +1,9 @@
-package engine;
+package engine.enemy;
 
 import java.util.ResourceBundle;
+import engine.AbstractType;
 
-public class EnemyType extends Entity{
+public class EnemyType extends AbstractType{
 
 	private double speed;
 	private double health;

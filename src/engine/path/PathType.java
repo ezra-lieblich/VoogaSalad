@@ -1,15 +1,15 @@
-package engine;
+package engine.path;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Path {
+public class PathType {
     private String type;
-    private List<Coordinate> coordinates;
+    private List<PathCoordinate> coordinates;
     
-    Path() {
-        this.coordinates = new ArrayList<Coordinate>();
+    PathType() {
+        this.coordinates = new ArrayList<PathCoordinate>();
     }
 
     public String getType () {
@@ -20,15 +20,15 @@ public class Path {
         this.type = type;
     }
 
-    public void addCoordinate(Coordinate coordinate) {
+    public void addCoordinate(PathCoordinate coordinate) {
         coordinates.add(coordinate);
     }
     
-    public void removeCoordinate(Coordinate coordinate) {
+    public void removeCoordinate(PathCoordinate coordinate) {
         coordinates.remove(coordinate);
     }
     
-    public List<Coordinate> getCoordinates () {
+    public List<PathCoordinate> getCoordinates () {
         return Collections.unmodifiableList(coordinates);
     }
     

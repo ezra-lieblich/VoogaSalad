@@ -6,9 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Queue;
-
-import engine.EnemyType;
-import engine.TowerType;
+import engine.enemy.EnemyType;
+import engine.tower.TowerType;
 import gameplayer.model.Cell;
 import gameplayer.model.Enemy;
 import gameplayer.model.Grid;

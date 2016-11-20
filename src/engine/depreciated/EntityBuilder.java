@@ -1,7 +1,8 @@
-package engine;
+package engine.depreciated;
 
+import engine.AbstractType;
 
-public class EntityBuilder<E extends Entity> {
+public class EntityBuilder<E extends AbstractType> {
 //    private E entity;
 //    
 //    EntityBuilder(E entity) {

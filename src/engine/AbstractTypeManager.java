@@ -7,10 +7,10 @@ import java.util.Map;
 import java.util.Observable;
 import java.util.function.Consumer;
 
-public abstract class EntityManager <E extends IEntity> extends Observable{
+public abstract class AbstractTypeManager <E extends Type> extends Observable{
     Map<Integer, E> data;
     //List<E> activeEntities;
-    int activeId;
+    E activeEntity;
     int nextId;
     
     
@@ -50,12 +50,16 @@ public abstract class EntityManager <E extends IEntity> extends Observable{
         activeEntities.stream().forEach(function);
     }*/
     
-    public E getEntity(int index) {
+    private E getEntity(int index) {
         return data.get(index);
     }
     
-    public int getActiveId() {
-        return activeId;
+    public E getActiveEntity() {
+        return activeEntity;
+    }
+    
+    public void setActiveEntity(int id) {
+        activeEntity = getEntity(id);
     }
     
     protected abstract E createInstance();
