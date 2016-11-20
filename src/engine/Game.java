@@ -5,6 +5,11 @@ import java.util.List;
 import java.io.Serializable;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
+import engine.enemy.EnemyTypeManager;
+import engine.level.LevelManager;
+import engine.path.PathManager;
+import engine.tower.TowerTypeManager;
+import engine.weapon.WeaponTypeManager;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 

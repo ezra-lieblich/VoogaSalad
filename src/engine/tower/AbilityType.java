@@ -1,6 +1,8 @@
-package engine;
+package engine.tower;
 
-public class AbilityType extends Entity {
+import engine.AbstractType;
+
+public class AbilityType extends AbstractType {
     private String effect;
     private double rate;
     

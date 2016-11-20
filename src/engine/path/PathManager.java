@@ -1,4 +1,4 @@
-package engine;
+package engine.path;
 
 public class PathManager {
 

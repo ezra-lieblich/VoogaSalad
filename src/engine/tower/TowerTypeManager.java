@@ -1,10 +1,12 @@
-package engine;
+package engine.tower;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import engine.AbstractTypeManager;
+import engine.weapon.WeaponType;
 
-public class TowerTypeManager extends EntityManager<TowerType> {
+public class TowerTypeManager extends AbstractTypeManager<TowerType> {
 
     private Map<WeaponType, List<TowerType>> weaponMappings = new HashMap<WeaponType, List<TowerType>>();
 

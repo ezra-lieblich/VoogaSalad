@@ -1,6 +1,8 @@
-package engine;
+package engine.weapon;
 
-public class WeaponTypeManager extends EntityManager<WeaponType>{
+import engine.AbstractTypeManager;
+
+public class WeaponTypeManager extends AbstractTypeManager<WeaponType>{
 
 
     @Override
