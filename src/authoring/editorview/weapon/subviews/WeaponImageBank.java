@@ -16,9 +16,9 @@ import javafx.stage.Stage;
 
 public class WeaponImageBank {
 
-    //TODO: I want to be able to load in a default weapon with default settings from model
+    // TODO: I want to be able to load in a default weapon with default settings from model
     // What is our current plan with defaults?
-    
+
     private Button createWeaponButton;
     private File chosenFile;
     private ScrollPane weaponBank;
@@ -28,6 +28,11 @@ public class WeaponImageBank {
         createWeaponButton = new Button("Create Weapon");
         createWeaponButton.setOnAction(event -> selectFile("Photos: "));
         weaponBank.setContent(createWeaponButton);
+
+    }
+
+    public Map<Integer, ImageIcon> getMyWeapons () {
+        return activeWeapons;
     }
 
     private void openFileChooser (FileChooser chooseFile) {
@@ -41,7 +46,7 @@ public class WeaponImageBank {
             }
             catch (Exception e) {
                 System.out.println("Unable to load photo");
-                //TODO: Fix this output to be better for the user
+                // TODO: Fix this output to be better for the user
             }
         }
     }
@@ -54,8 +59,8 @@ public class WeaponImageBank {
         choose.getExtensionFilters().add(extFilter);
         openFileChooser(choose);
     }
-    
-    public Node getInstanceAsNode(){
+
+    public Node getInstanceAsNode () {
         return weaponBank;
     }
 
