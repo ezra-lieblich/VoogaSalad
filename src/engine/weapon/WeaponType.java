@@ -1,51 +1,74 @@
 package engine.weapon;
 
 import engine.AbstractType;
+import engine.Type;
 
-public class WeaponType extends AbstractType{
+public class WeaponType extends AbstractType implements Weapon {
     private double fireRate;
-    private String path;
+    private String trajectory;
     private String effect;
     private double speed;
     private double range;
     
     WeaponType() {
         this.fireRate = Double.parseDouble(getResources("WeaponTypeFireRate"));
-        this.path = getResources("WeaponTypePath");
+        this.trajectory = getResources("WeaponTypePath");
         this.effect = getResources("WeaponTypeEffect");
         this.speed = Double.parseDouble(getResources("WeaponTypeSpeed"));
         this.range = Double.parseDouble(getResources("WeaponTypeRange"));
     }
     
+    @Override
     public double getFireRate () {
         return fireRate;
     }
+
+    @Override
     public void setFireRate (double fireRate) {
         this.fireRate = fireRate;
     }
+
+    
+    @Override
     public String getPath () {
-        return path;
+        return trajectory;
     }
+
+    @Override
     public void setPath (String path) {
-        this.path = path;
+        this.trajectory = path;
     }
+
+    @Override
     public String getEffect () {
         return effect;
     }
+
+    @Override
     public void setEffect (String effect) {
         this.effect = effect;
     }
+
+    @Override
     public double getSpeed () {
         return speed;
     }
+
+    @Override
     public void setSpeed (double speed) {
         this.speed = speed;
     }
+    /* (non-Javadoc)
+     * @see engine.weapon.Weapon#getRange()
+     */
+    @Override
     public double getRange () {
         return range;
     }
+
+    @Override
     public void setRange (double range) {
         this.range = range;
     }
-    
+
 }

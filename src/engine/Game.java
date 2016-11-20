@@ -5,7 +5,7 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 import engine.enemy.EnemyManager;
 import engine.level.LevelTypeManager;
 import engine.path.PathManager;
-import engine.tower.TowerTypeManager;
+import engine.tower.TowerManager;
 import engine.weapon.WeaponTypeManager;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
@@ -15,7 +15,7 @@ public class Game {
 	private GameSettings settings;
 	private EnemyManager enemies;
 	private WeaponTypeManager weapons;
-	private TowerTypeManager towers;
+	private TowerManager towers;
 	private PathManager path;
 	private LevelTypeManager levels;
 
