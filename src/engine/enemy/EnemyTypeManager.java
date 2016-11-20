@@ -2,41 +2,92 @@ package engine.enemy;
 
 import engine.AbstractTypeManager;
 
-public class EnemyTypeManager extends AbstractTypeManager<EnemyType>{
+public class EnemyTypeManager extends AbstractTypeManager<Enemy> implements EnemyManager {
 
     @Override
     protected EnemyType createInstance () {
         return new EnemyType();
     }
 
-	public double getSpeed(int id) {
-		return data.get(id).getSpeed();
+	@Override
+	public double getSpeed() {
+		return getActiveEntity().getSpeed();
 	}
-	public void setSpeed(int id, double speed) {
-		data.get(id).setSpeed(speed);
+	@Override
+	public void setSpeed(double speed) {
+		getActiveEntity().setSpeed(speed);
 	}
-	public double getHealth(int id) {
-        return data.get(id).getHealth();
+	@Override
+	public double getHealth() {
+        return getActiveEntity().getHealth();
 	}
-	public void setHealth(int id, double health) {
-        data.get(id).setHealth(health);
+	@Override
+	public void setHealth(double health) {
+		getActiveEntity().setHealth(health);
 	}
-	public double getPoints(int id ) {
-        return data.get(id).getPoints();
+	@Override
+	public double getPoints() {
+        return getActiveEntity().getPoints();
 	}
-	public void setPoints(int id, double points) {
-        data.get(id).setPoints(points);
+	@Override
+	public void setPoints(double points) {
+		getActiveEntity().setPoints(points);
 	}
-	public double getMoney(int id) {
-		return data.get(id).getMoney();
+
+	@Override
+	public double getDamage() {
+		return getActiveEntity().getDamage();
 	}
-	public void setMoney(int id, double money) {
-        data.get(id).setMoney(money);
+
+	@Override
+	public void setDamage(double damage) {
+		getActiveEntity().setDamage(damage);
 	}
-	public String getCollissionEffect(int id) {
-		return data.get(id).getCollisionEffect();
+
+	@Override
+	public double getMoney() {
+		return getActiveEntity().getMoney();
 	}
-	public void setColissionEffect(int id, String colisionEffect) {
-        data.get(id).setCollisionEffect(colisionEffect);
+	@Override
+	public void setMoney(double money) {
+		getActiveEntity().setMoney(money);
+	}
+	@Override
+	public String getCollisionEffect() {
+		return getActiveEntity().getCollisionEffect();
+	}
+	@Override
+	public void setCollisionEffect(String colisionEffect) {
+		getActiveEntity().setCollisionEffect(colisionEffect);
+	}
+
+	@Override
+	public String getName() {
+		return getActiveEntity().getName();
+	}
+
+	@Override
+	public void setName(String name) {
+		getActiveEntity().setName(name);
+	}
+
+	@Override
+	public String getImagePath() {
+		return getActiveEntity().getImagePath();
+	}
+
+	@Override
+	public void setImagePath(String imagePath) {
+		getActiveEntity().setImagePath(imagePath);
+	}
+
+	@Override
+	public double getSize() {
+		return getActiveEntity().getSize();
+	}
+
+	@Override
+	public void setSize(double size) {
+		getActiveEntity().setSize(size);
 	}
 }
