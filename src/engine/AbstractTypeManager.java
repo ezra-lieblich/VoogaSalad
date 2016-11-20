@@ -8,7 +8,7 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 
-public abstract class AbstractTypeManager<E extends Type> extends Observable implements Manager<E> {
+public abstract class AbstractTypeManager<E extends Type> extends Observable implements Manager {
     Map<Integer, E> data;
     // List<E> activeEntities;
     int activeId;
@@ -23,7 +23,7 @@ public abstract class AbstractTypeManager<E extends Type> extends Observable imp
 
     @Override
     public void removeEntry (int id) {
-        data.remove(id);
+        notifyObservers(data.remove(id));
     }
 
     protected int getNextId () {

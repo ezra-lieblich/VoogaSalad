@@ -1,6 +1,6 @@
 package engine;
 
-public interface Manager<E> extends Type{
+public interface Manager extends Type{
 
     void removeEntry (int id);
 

@@ -7,6 +7,8 @@ import engine.AbstractType;
 import engine.enemy.EnemyType;
 import engine.weapon.Weapon;
 import engine.weapon.WeaponType;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 
 
 public class TowerType extends AbstractType implements Tower {
@@ -34,6 +36,9 @@ public class TowerType extends AbstractType implements Tower {
         this.cost = Double.parseDouble(getResources("TowerTypeCost"));
         this.sellAmount = Double.parseDouble(getResources("TowerTypeSellAmount"));
         this.unlockLevel = Integer.parseInt(getResources("TowerTypeUnlockLevel"));
+        //DoubleProperty blah = new SimpleDoubleProperty();
+        //blah.addListener((observable, oldValue, newValue) -> view.getTowerView().setHealth(newValue));
+        
     }
 
     @Override

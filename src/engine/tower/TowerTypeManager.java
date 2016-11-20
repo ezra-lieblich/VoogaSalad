@@ -10,7 +10,7 @@ import engine.weapon.WeaponType;
 
 public class TowerTypeManager extends AbstractTypeManager<Tower> implements TowerManager {
 
-    private Map<WeaponType, List<TowerType>> weaponMappings = new HashMap<WeaponType, List<TowerType>>();
+    //private Map<WeaponType, List<TowerType>> weaponMappings = new HashMap<WeaponType, List<TowerType>>();
 
     @Override
     protected Tower createInstance () {
@@ -18,7 +18,8 @@ public class TowerTypeManager extends AbstractTypeManager<Tower> implements Towe
     }
 
     @Override
-    public void addUpgrade (TowerType upgrade) {
+    public void addUpgrade () {
+        //add active prototype to Tower list
         getActiveEntity().addUpgrade(upgrade);
         notifyObservers(getActiveId());
     }
