@@ -1,34 +1,40 @@
 package engine.path;
 
+import engine.AbstractType;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class PathType {
+public class PathType extends AbstractType implements Path {
     private String type;
-    private List<PathCoordinate> coordinates;
+    private List<GridCoordinate> coordinates;
     
     PathType() {
-        this.coordinates = new ArrayList<PathCoordinate>();
+        this.coordinates = new ArrayList<GridCoordinate>();
     }
 
+    @Override
     public String getType () {
         return type;
     }
 
+    @Override
     public void setType (String type) {
         this.type = type;
     }
 
-    public void addCoordinate(PathCoordinate coordinate) {
+    @Override
+    public void addCoordinate(GridCoordinate coordinate) {
         coordinates.add(coordinate);
     }
     
-    public void removeCoordinate(PathCoordinate coordinate) {
+    @Override
+    public void removeCoordinate(GridCoordinate coordinate) {
         coordinates.remove(coordinate);
     }
     
-    public List<PathCoordinate> getCoordinates () {
+    @Override
+    public List<GridCoordinate> getCoordinates () {
         return Collections.unmodifiableList(coordinates);
     }
     
