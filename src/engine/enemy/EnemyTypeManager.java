@@ -1,6 +1,8 @@
-package engine;
+package engine.enemy;
 
-public class EnemyTypeManager extends EntityManager<EnemyType>{
+import engine.AbstractTypeManager;
+
+public class EnemyTypeManager extends AbstractTypeManager<EnemyType>{
 
     @Override
     protected EnemyType createInstance () {

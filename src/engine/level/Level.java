@@ -1,9 +1,10 @@
-package engine;
+package engine.level;
 
 import gameplayer.model.Enemy;
 
 import java.util.Collections;
 import java.util.Map;
+import engine.enemy.EnemyType;
 import java.util.HashMap;
 
 

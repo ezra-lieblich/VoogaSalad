@@ -1,6 +1,8 @@
-package engine;
+package engine.weapon;
 
-public class WeaponType extends Entity{
+import engine.AbstractType;
+
+public class WeaponType extends AbstractType{
     private double fireRate;
     private String path;
     private String effect;
@@ -8,11 +10,11 @@ public class WeaponType extends Entity{
     private double range;
     
     WeaponType() {
-        this.fireRate = 0;
-        this.path = "straight";
-        this.effect = "";
-        this.speed = 0;
-        this.range = 0;
+        this.fireRate = Double.parseDouble(getResources("WeaponTypeFireRate"));
+        this.path = getResources("WeaponTypePath");
+        this.effect = getResources("WeaponTypeEffect");
+        this.speed = Double.parseDouble(getResources("WeaponTypeSpeed"));
+        this.range = Double.parseDouble(getResources("WeaponTypeRange"));
     }
     
     public double getFireRate () {

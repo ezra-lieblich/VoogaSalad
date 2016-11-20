@@ -1,15 +1,15 @@
-package engine;
+package engine.path;
 
-public class Coordinate {
+public class PathCoordinate {
     private int x;
     private int y;
     
-    Coordinate(int x, int y) {
+    PathCoordinate(int x, int y) {
         this.x = x;
         this.y = y;
     }
     
-    Coordinate() {
+    PathCoordinate() {
         this(0, 0);
     }
 
