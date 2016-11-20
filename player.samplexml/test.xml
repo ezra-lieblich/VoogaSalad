@@ -2,117 +2,108 @@
 <GameSetting Title="Bloons">
 	<isValid> true </isValid>
 	<init>	
+		<numLevels>2</numLevels>
 		<lives>50</lives>
 		<gold>1000</gold>
 		<levelnumber>10</levelnumber>
 	</init>
-	<level1>
-		<dimension>
-			<width>10</width>
-			<height>10</height>
-		</dimension>
-		<path>
-			<coordinate>0,0</coordinate>
-			<coordinate>0,1</coordinate>
-			<coordinate>0,2</coordinate>
-			<coordinate>0,3</coordinate>
-			<coordinate>0,4</coordinate>
-			<coordinate>0,5</coordinate>
-			<coordinate>0,6</coordinate>
-			<coordinate>0,7</coordinate>
-			<coordinate>0,8</coordinate>
-			<coordinate>0,9</coordinate>
-		</path>
-	</level1>
-	<level2>
-		<dimension>
-			<width>10</width>
-			<height>10</height>
-		</dimension>
-		<path>
-			<coordinate>0,0</coordinate>
-			<coordinate>0,1</coordinate>
-			<coordinate>0,2</coordinate>
-			<coordinate>0,3</coordinate>
-			<coordinate>0,4</coordinate>
-			<coordinate>0,5</coordinate>
-			<coordinate>0,6</coordinate>
-			<coordinate>0,7</coordinate>
-			<coordinate>0,8</coordinate>
-			<coordinate>0,9</coordinate>
-		</path>
-	</level2>
-	
-	<background> images/butterfly </background>
-		<towerlist>
+	<towerList>
 			<tower>
-				<name> ninja monkey </name>
-				<imagePath> images/kaneki </imagePath>
-				<isDestroyable> false </isDestroyable>
-				<range> 4 </range>
-				<fireRate> 5 </fireRate>
-				<cost> 500 </cost>
-				<unlockLevel>  0 </unlockLevel>
-				<weaponType> cannon </weaponType>
+				<name>ninja monkey</name>
+				<imageLocation>images/penguin.jpg</imageLocation>
+				<isDestroyable>false</isDestroyable>
+				<range>5</range>
+				<fireRate>5</fireRate>
+				<cost>500</cost>
+				<sellAmount>200</sellAmount>
+				<unlockLevel>0</unlockLevel>
+				<weaponType>cannon</weaponType>
 				<upgrade>
-					<cost> 200 </cost>
-					<type> “tower” </type>
+					<cost>200</cost>
+					<type>tower</type>
 				</upgrade>
 			</tower>
-		</towerlist>
-	<enemy>
-		<name> “black balloon” </name>
-		<imagePath> “src/images/cannon” </imagePath>
-		<widthOfImage> 20 </widthOfImage>
-		<heightOfImage> 20 </heightOfImage>
-		<speed> 5 </speed>
-		<health> 6 </health>
-		<points> 10 </points>
-		<money> 15 </money>
-		<collisionEffect> explode </collisionEffect>
-	</enemy>
-	<enemy> “enemy 2” </enemy>
-	<weapon>
-		<name> “cannon” </name>
-		<imagePath> “src/images/cannon” </imagePath>
-		<weaponEffect> “damage” </weaponEffect>
-		<projectileSpeed> 8 </projectileSpeed>
-		<damage> 2 </damage>
-	</weapon>
-	<weapon> “weapon 2” </weapon>
-	<path>
-		<imagePath>src/images/pathImage</imagePath>
-		<type> “fixed” </type>
-		<coordinates>
-			<coordinate> (0,0) </coordinate>
-			<coordinate> (0,1) </coordinate>
-			<coordinate> (1,1) </coordinate>
-		</coordinates>
-	</path>
-	<level>
+			<tower>
+				<name>test monkey</name>
+				<imageLocation>images/kaneki.jpg</imageLocation>
+				<isDestroyable>false</isDestroyable>
+				<range>10</range>
+				<fireRate>2</fireRate>
+				<cost>500</cost>
+				<sellAmount>200</sellAmount>
+				<unlockLevel>0</unlockLevel>
+				<weaponType>cannon</weaponType>
+				<upgrade>
+					<cost>200</cost>
+					<type>tower</type>
+				</upgrade>
+			</tower>
+		</towerList>
+	<enemyList>
+		<enemy>
+			<name>redballoon</name>
+			<imageLocation>images/redbaloon.jpg</imageLocation>
+			<widthOfImage> 20 </widthOfImage>
+			<heightOfImage> 20 </heightOfImage>
+			<speed>5</speed>
+			<health>6</health>
+			<points>10</points>
+			<money>15</money>
+			<collisionEffect>explode</collisionEffect>
+		</enemy>
+		<enemy>
+			<name>redmoab</name>
+			<imageLocation>images/redmoab.jpg</imageLocation>
+			<widthOfImage>50</widthOfImage>
+			<heightOfImage>50</heightOfImage>
+			<speed>3</speed>
+			<health>100</health>
+			<points>200</points>
+			<money>1000</money>
+			<collisionEffect>explode</collisionEffect>
+		</enemy>
+	</enemyList>
+	<level1> 
+		<width>10</width>
+		<height>10</height>
+		<wave>
+			<typeAmount>redballoon,50;</typeAmount>
+			<typeAmount>redmoab,2;</typeAmount>
+		</wave>
+		<path>
+			<coordinate>0,0;</coordinate>
+			<coordinate>0,1;</coordinate>
+			<coordinate>0,2;</coordinate>
+			<coordinate>0,3;</coordinate>
+			<coordinate>0,4;</coordinate>
+			<coordinate>0,5;</coordinate>
+			<coordinate>0,6;</coordinate>
+			<coordinate>0,7;</coordinate>
+			<coordinate>0,8;</coordinate>
+			<coordinate>0,9;</coordinate>
+		</path>
 		<enemies>
-			<enemy>
-				<type> red </type>
-				<amount>10</amount>
-			</enemy>
+			
 		</enemies>
-		<healthRegeneration> “none” </healthRegeneration>
-		<points> 100 </points>
-		<money> 100 </money>
-	</level>
-	<level>
-		<enemies>
-			<enemy>
-				<type>red </type>
-				<amount>15</amount>
-			</enemy>
-			<enemy>
-				<type> blue </type>
-				<amount>5</amount>
-			</enemy>
-		</enemies>
-		<healthRegeneration> “none” </healthRegeneration>
-		<points> 150 </points>
-		<money> 100 </money>
-	</level>
+	</level1>
+	<level2>
+		<width>10</width>
+		<height>10</height>
+		<wave>
+			<typeAmount>redballoon,50;</typeAmount>
+			<typeAmount>redmoab,3;</typeAmount>
+		</wave>
+		<path>
+			<coordinate>0,0;</coordinate>
+			<coordinate>0,1;</coordinate>
+			<coordinate>0,2;</coordinate>
+			<coordinate>0,3;</coordinate>
+			<coordinate>0,4;</coordinate>
+			<coordinate>0,5;</coordinate>
+			<coordinate>0,6;</coordinate>
+			<coordinate>0,7;</coordinate>
+			<coordinate>0,8;</coordinate>
+			<coordinate>0,9;</coordinate>
+		</path>
+	</level2>
 </GameSetting>

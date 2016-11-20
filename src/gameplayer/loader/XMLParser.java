@@ -1,6 +1,11 @@
 package gameplayer.loader;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -10,6 +15,10 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+
+import engine.EnemyType;
+import engine.TowerType;
+import gameplayer.model.Enemy;
 
 
 
@@ -49,31 +58,7 @@ public class XMLParser {
     		throw new XMLParserException(e);
     	}
     }
-    
-    //This returns the TYPE of the xml
-    public String getName(){
-    	return rootElement.getAttribute("Title");
-    }
-    
-//    public NodeList getTagsUnder(String tag){
-//    	NodeList l = rootElement.getChildNodes();
-//    	for(int i=0;i<l.getLength();i++){
-//    		System.out.println(l.item(i).getNodeValue());
-//    	}
-//    	return rootElement.getElementsByTagName(tag);
-//    }
-    
-    //Returns String of w.e variable u give it. For example: Within the example xml, if call this with variable = width, this should return 500
-    public String getVariableValues(String variable){
-    	NodeList info = xmlDocument.getElementsByTagName(variable);
-    	if(info!=null&& info.getLength()>0){
-    		return info.item(0).getFirstChild().getNodeValue(); 
-    	}
-    	else{
-    		return null; 
-    	}
-    }
-    
+   
     private void reset(){
     	DOCUMENT_BUILDER.reset(); 
     }
@@ -87,5 +72,107 @@ public class XMLParser {
             throw new XMLParserException(e);
         }
     }
+    
+    
+    //This returns the TYPE of the xml
+    public String getName(){
+    	return rootElement.getAttribute("Title");
+    }
+    
+    public String getTextValue(String parent, String tagName) {
+        String textVal = "";
+        try{
+        	NodeList parentList = xmlDocument.getElementsByTagName(parent);
+	        NodeList nl = ((Element)parentList.item(0)).getElementsByTagName(tagName);
+	        if (nl != null && nl.getLength() > 0) {
+	        	for(int i=0;i<nl.getLength();i++){
+		            Element el = (Element) nl.item(i);
+		            textVal += el.getFirstChild().getNodeValue();
+	        	}
+	        }
+        }
+        catch(Exception e){
+        	throw new XMLParserException(e);
+        }
+        return textVal;
+    }
+    
+    public HashMap<Integer,TowerType> getTowerTypes(){
+    	HashMap<Integer,TowerType>ret = new HashMap<>(); 
+    	try{
+    		NodeList parentList = xmlDocument.getElementsByTagName("tower");
+    		for(int i=0;i<parentList.getLength();i++){
+    			Element tower = (Element)parentList.item(i);
+    			String name = ((Element)(tower.getElementsByTagName("name").item(0))).getFirstChild().getNodeValue();
+    			String imageLocation = ((Element)(tower.getElementsByTagName("imageLocation").item(0))).getFirstChild().getNodeValue();
+    			double cost = Double.parseDouble(((Element)(tower.getElementsByTagName("cost").item(0))).getFirstChild().getNodeValue());
+    			double sellAmount = Double.parseDouble(((Element)(tower.getElementsByTagName("sellAmount").item(0))).getFirstChild().getNodeValue());
+    			int fireRate = Integer.parseInt(((Element)(tower.getElementsByTagName("fireRate").item(0))).getFirstChild().getNodeValue());
+    			int unlockLevel = Integer.parseInt(((Element)(tower.getElementsByTagName("unlockLevel").item(0))).getFirstChild().getNodeValue());
+    			TowerType towerType = new TowerType(name,imageLocation,cost,sellAmount,fireRate,unlockLevel);
+    			ret.put(i, towerType);
+    		}
+    	}
+    	catch(Exception e){
+    		throw new XMLParserException(e);
+    	}
+    	return ret; 
+    }
+    
+    //Returns String of w.e variable u give it. For example: Within the example xml, if call this with variable = width, this should return 500
+    public String getVariableValues(String variable){
+    	NodeList info = xmlDocument.getElementsByTagName(variable);
+    	if(info!=null&& info.getLength()>0){
+    		return info.item(0).getFirstChild().getNodeValue(); 
+    	}
+    	else{
+    		return null; 
+    	}
+    }
+	
+	public List<Queue<Enemy>> getEnemy(){
+		ArrayList<Queue<Enemy>>enemyByLevel=new ArrayList<>(); 
+		HashMap<String,EnemyType> types = getEnemyTypes();
+		int numLevels = Integer.parseInt(getVariableValues("numLevels"));
+		for(int i=1;i<=numLevels;i++){
+			Queue<Enemy>enemiesInLevel= new LinkedList<Enemy>(); 
+			String[]enemiesRawString = getTextValue("level"+i,"typeAmount").split(";");
+			for(int j=0;j<enemiesRawString.length;j++){
+				String[]enemies=enemiesRawString[j].split(",");
+				for(int k=0;k<Integer.parseInt(enemies[1]);k++){
+					EnemyType type = types.get(enemies[0]);
+					enemiesInLevel.add(new Enemy(type.getName(),type.getSpeed(),(int)(type.getHealth()),type.getImageLocation()));
+				}
+			}
+			enemyByLevel.add(enemiesInLevel);
+		}
+		
+		return enemyByLevel; 
+		
+	}
+	
+	private HashMap<String, EnemyType> getEnemyTypes() {
+		HashMap<String,EnemyType>ret = new HashMap<>(); 
+    	try{
+    		NodeList parentList = xmlDocument.getElementsByTagName("enemy");
+    		for(int i=0;i<parentList.getLength();i++){
+    			Element enemy = (Element)parentList.item(i);
+    			String name = ((Element)(enemy.getElementsByTagName("name").item(0))).getFirstChild().getNodeValue();
+    			String imageLocation = ((Element)(enemy.getElementsByTagName("imageLocation").item(0))).getFirstChild().getNodeValue();
+    			double speed = Double.parseDouble(((Element)(enemy.getElementsByTagName("speed").item(0))).getFirstChild().getNodeValue());
+    			double health = Double.parseDouble(((Element)(enemy.getElementsByTagName("health").item(0))).getFirstChild().getNodeValue());
+    			double points = Double.parseDouble(((Element)(enemy.getElementsByTagName("points").item(0))).getFirstChild().getNodeValue());
+    			double money = Double.parseDouble(((Element)(enemy.getElementsByTagName("money").item(0))).getFirstChild().getNodeValue());
+    			String collisionEffect = ((Element)(enemy.getElementsByTagName("collisionEffect").item(0))).getFirstChild().getNodeValue();
+    			EnemyType enemyType = new EnemyType(name,imageLocation,speed,health,points,money,collisionEffect);
+    			ret.put(name, enemyType);
+    		}
+    	}
+    	catch(Exception e){
+    		throw new XMLParserException(e);
+    	}
+    	return ret; 
+	}
+	
 
 }

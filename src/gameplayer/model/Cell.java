@@ -22,11 +22,11 @@ public class Cell {
 	}
 	
 	
-	void setNext(Cell cell){
+	public void setNext(Cell cell){
 		this.next = cell;
 	}
 
-	Cell getNext(){
+	public Cell getNext(){
 		return this.next;
 	}
 	

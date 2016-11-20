@@ -1,5 +1,7 @@
 package gameplayer.view.helper;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
@@ -7,6 +9,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -52,6 +55,12 @@ public class GraphicsLibrary {
 
 	public Button createButton(String label) {
 		Button button = new Button(label);
+		return button;
+	}
+	
+	public Button createButton(String label, EventHandler<ActionEvent> e){
+		Button button = new Button(label);
+		button.setOnAction(e);
 		return button;
 	}
 
@@ -105,6 +114,15 @@ public class GraphicsLibrary {
 	
 	public GridPane creatGridPane(Group root, int hgap, int vgap){
 		GridPane grid = new GridPane();
+        grid.setHgap(hgap);
+        grid.setVgap(vgap);
+        //grid.setPadding(new Insets(25, 25, 25, 25));//TODO: change!
+        root.getChildren().add(grid);
+        return grid;
+	}
+	
+	public TilePane creatTilePane(Group root, int hgap, int vgap){
+		TilePane grid = new TilePane();
         grid.setHgap(hgap);
         grid.setVgap(vgap);
         //grid.setPadding(new Insets(25, 25, 25, 25));//TODO: change!

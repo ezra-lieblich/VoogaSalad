@@ -25,6 +25,8 @@ public class GameGUI {
 	
 	public static final int SCENE_WIDTH = 1200;
 	public static final int SCENE_HEIGHT = 700;
+	public static final double xError = -20;
+	public static final double yError = -60;
 	
 	private BorderPane mainScreen;
 	private Scene scene;
@@ -34,23 +36,37 @@ public class GameGUI {
 	private DragDropView dragDrop;
 	private GamePlayButtonPanel buttonPanel;
 	private StatsDisplay statsDisplay;
+	private double numLevels;
+	private double currentLevel;
 	private List path;
 	
 	public GameGUI(int rows, int columns){
 		this.mainScreen = new BorderPane();
 		this.graphics = new GraphicsLibrary();
 		this.grid = new GridGUI(rows, columns/*, path*/); 
-		this.dragDrop = new DragDropView(); 
+		this.dragDrop = new DragDropView(xError, yError); 
 		this.buttonPanel = new GamePlayButtonPanel();
+		this.currentLevel = 0;
 	}
 	
 	public Scene init(double gold, double lives, double level){
+		this.numLevels = level;
 		createScene();
 		createGrid();
 		initDragDropPane();
 		addButtonPanel();
-		initStatsDisplay(gold, lives, level);
+		initStatsDisplay(gold, lives, currentLevel);
 		return this.scene;
+	}
+	
+	/**
+	 * MIGHT NOT BE NECESSARY
+	 * Update the current level in the stats display only
+	 * @param newLevel
+	 */
+	public void updateCurrentLevelStats(double newLevel){
+		this.currentLevel = newLevel;
+		this.statsDisplay.updateLevel(newLevel);
 	}
 	
 	public void setPath(List<int[]> path){
@@ -74,13 +90,13 @@ public class GameGUI {
 	
 	private void createGrid(){
 		styleGrid();
-		this.mainScreen.setCenter(grid.getGrid());
+		this.mainScreen.setLeft(grid.getGrid());
 		grid.init();
 	}
 	
 	private void styleGrid(){
 		BorderPane.setAlignment(this.grid.getGrid(), Pos.CENTER);
-		BorderPane.setMargin(this.grid.getGrid(), new Insets(10,50,10,0));
+		//BorderPane.setMargin(this.grid.getGrid(), new Insets(10,50,10,0));
 	}
 	
 	private void initDragDropPane(){
@@ -100,4 +116,7 @@ public class GameGUI {
 		this.mainScreen.setBottom(statsDisplay.getScorePane());
 	}
 	
+	public void updateStatsDisplay(double gold, double lives, double level){
+		this.statsDisplay.updateLevelUI(gold, lives, level);
+	}
 }

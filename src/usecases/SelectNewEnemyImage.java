@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
-import gameauthoringenvironment.view.enemy.IEnemyToEngine;
+import authoring.editorview.enemy.IEnemyToEngine;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
@@ -53,6 +53,12 @@ public class SelectNewEnemyImage implements IEnemyToEngine {
 
     @Override
     public void setEnemyImage (int enemyImageID) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void initNewEnemy () {
         // TODO Auto-generated method stub
         
     }

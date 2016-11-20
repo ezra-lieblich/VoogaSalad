@@ -24,9 +24,19 @@ public class DragDrop {
 	private double width;
 	private double height;
 	private GraphicsLibrary graphicLib;
+	private double yError;
+	private double xError;
 
 	public DragDrop() {
 		this.graphicLib = new GraphicsLibrary();
+		this.xError = 0;
+		this.yError = 0;
+	}
+	
+	public DragDrop(double xError, double yError) {
+		this.graphicLib = new GraphicsLibrary();
+		this.xError = xError;
+		this.yError = yError;
 	}
 
 	/**
@@ -49,8 +59,8 @@ public class DragDrop {
 		ImageView copy = new ImageView(this.source.getImage());
 		graphicLib.setImageViewParams(copy, this.width, this.height);
 		((Pane) target).getChildren().add(copy);
-		copy.setX(xpos);
-		copy.setY(ypos);
+		copy.setX(xpos+this.xError);
+		copy.setY(ypos+this.yError);
 	}
 
 	private void setSourceInfo(ImageView source) {
