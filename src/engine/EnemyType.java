@@ -13,13 +13,13 @@ public class EnemyType extends Entity{
 	
 	public EnemyType() {
 		//possible hold a resource file that has default values for an enemy
-        super.setName(super.getResources().getString("EnemyName"));
-		super.setImagePath(super.getResources().getString("EnemyImage"));
-		speed = Double.parseDouble(super.getResources().getString("EnemySpeed"));
-        health = Double.parseDouble(super.getResources().getString("EnemyHealth"));
-        points = Double.parseDouble(super.getResources().getString("EnemyPoints"));
-        money = Double.parseDouble(super.getResources().getString("EnemyMoney"));
-        collisionEffect = super.getResources().getString("EnemyCollisionEffect");
+        super.setName(super.getResources().getString("EnemyTypeName"));
+		super.setImagePath(super.getResources().getString("EnemyTypeImage"));
+		speed = Double.parseDouble(super.getResources().getString("EnemyTypeSpeed"));
+        health = Double.parseDouble(super.getResources().getString("EnemyTypeHealth"));
+        points = Double.parseDouble(super.getResources().getString("EnemyTypePoints"));
+        money = Double.parseDouble(super.getResources().getString("EnemyTypeMoney"));
+        collisionEffect = super.getResources().getString("EnemyTypeCollisionEffect");
 //		speed = 5;
 //		health = 10;
 //		points = 50;

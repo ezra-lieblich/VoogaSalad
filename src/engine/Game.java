@@ -10,7 +10,6 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 
 public class Game {
-	private String name;
 	private GameSettings settings;
 	private EnemyTypeManager enemies;
 	private WeaponTypeManager weapons;
