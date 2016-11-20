@@ -1,31 +1,31 @@
 package engine.path;
 
-public class PathCoordinate {
+public class GridCoordinate implements Coordinate<Integer>{
     private int x;
     private int y;
     
-    PathCoordinate(int x, int y) {
+    GridCoordinate(int x, int y) {
         this.x = x;
         this.y = y;
     }
     
-    PathCoordinate() {
+    GridCoordinate() {
         this(0, 0);
     }
 
-    public int getX () {
+    public Integer getX () {
         return x;
     }
 
-    public void setX (int x) {
+    public void setX (Integer x) {
         this.x = x;
     }
 
-    public int getY () {
+    public Integer getY () {
         return y;
     }
 
-    public void setY (int y) {
+    public void setY (Integer y) {
         this.y = y;
     }
     
