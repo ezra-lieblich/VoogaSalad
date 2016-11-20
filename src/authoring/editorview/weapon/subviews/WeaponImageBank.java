@@ -8,8 +8,6 @@ import javax.swing.ImageIcon;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -23,12 +21,12 @@ public class WeaponImageBank {
     private File chosenFile;
     private ScrollPane weaponBank;
     private Map<Integer, ImageIcon> activeWeapons;
+    private ImageIcon imageView;
 
     public WeaponImageBank () {
         createWeaponButton = new Button("Create Weapon");
         createWeaponButton.setOnAction(event -> selectFile("Photos: "));
         weaponBank.setContent(createWeaponButton);
-
     }
 
     public Map<Integer, ImageIcon> getMyWeapons () {
@@ -42,7 +40,7 @@ public class WeaponImageBank {
             BufferedImage image;
             try {
                 image = ImageIO.read(chosenFile);
-                ImageIcon imageView = new ImageIcon(image);
+                imageView = new ImageIcon(image);
             }
             catch (Exception e) {
                 System.out.println("Unable to load photo");
