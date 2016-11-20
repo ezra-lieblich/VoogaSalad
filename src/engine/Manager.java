@@ -1,6 +1,6 @@
 package engine;
 
-public interface Manager extends Type{
+public interface Manager{
 
     void removeEntry (int id);
 
@@ -10,7 +10,5 @@ public interface Manager extends Type{
      * @return This returns the ID of the most recently added Entity
      */
     int create ();
-
-    void setActiveEntity (int id);
-
+    
 }

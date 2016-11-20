@@ -3,6 +3,6 @@ package engine.tower;
 import engine.Manager;
 import engine.Type;
 
-public interface TowerManager extends Tower, Manager {
+public interface TowerManager extends Manager {
 
 }

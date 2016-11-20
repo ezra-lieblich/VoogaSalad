@@ -13,5 +13,7 @@ public interface Type {
     double getSize ();
 
     void setSize (double size);
+    
+    int getId ();
 
 }

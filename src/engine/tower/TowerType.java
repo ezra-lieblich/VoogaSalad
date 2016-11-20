@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import engine.AbstractType;
+import engine.ability.Ability;
 import engine.enemy.EnemyType;
 import engine.weapon.Weapon;
 import engine.weapon.WeaponType;
@@ -20,19 +21,20 @@ public class TowerType extends AbstractType implements Tower {
      * public static final double DEFAULT_SELL_AMOUNT = DEFAULT_COST / 2;
      * public static final int DEFAULT_UNLOCK_LEVEL = 0;
      */
-    private List<TowerType> upgrades;
-    private List<WeaponType> weapons;
-    private List<EnemyType> targets;
-    private List<AbilityType> abilities;
+    private List<Tower> upgrades;
+    private List<Weapon> weapons;
+    private List<Enemy> targets;
+    private List<Ability> abilities;
     private double cost;
     private double sellAmount;
     private int unlockLevel;
 
-    public TowerType () {
-        this.upgrades = new ArrayList<TowerType>();
-        this.targets = new ArrayList<EnemyType>();
-        this.weapons = new ArrayList<WeaponType>();
-        this.abilities = new ArrayList<AbilityType>();
+    public TowerType (int id) {
+        super(id);
+        this.upgrades = new ArrayList<Tower>();
+        this.targets = new ArrayList<Enemy>();
+        this.weapons = new ArrayList<Weapon>();
+        this.abilities = new ArrayList<Ability>();
         this.cost = Double.parseDouble(getResources("TowerTypeCost"));
         this.sellAmount = Double.parseDouble(getResources("TowerTypeSellAmount"));
         this.unlockLevel = Integer.parseInt(getResources("TowerTypeUnlockLevel"));
@@ -42,7 +44,7 @@ public class TowerType extends AbstractType implements Tower {
     }
 
     @Override
-    public void addUpgrade (TowerType upgrade) {
+    public void addUpgrade (Tower upgrade) {
         upgrades.add(upgrade);
     }
 
@@ -52,12 +54,12 @@ public class TowerType extends AbstractType implements Tower {
     }
 
     @Override
-    public List<TowerType> getUpgrades () {
+    public List<Tower> getUpgrades () {
         return Collections.unmodifiableList(upgrades);
     }
 
     @Override
-    public void addWeapon (WeaponType weapon) {
+    public void addWeapon (Weapon weapon) {
         weapons.add(weapon);
     }
 
@@ -67,22 +69,22 @@ public class TowerType extends AbstractType implements Tower {
     }
 
     @Override
-    public List<WeaponType> getWeapon () {
+    public List<Weapon> getWeapon () {
         return Collections.unmodifiableList(weapons);
     }
 
     @Override
-    public void removeTarget (EnemyType target) {
+    public void removeTarget (Enemy target) {
         targets.remove(target);
     }
 
     @Override
-    public void addTarget (EnemyType target) {
+    public void addTarget (Enemy target) {
         targets.add(target);
     }
 
     @Override
-    public List<EnemyType> getTargets () {
+    public List<Enemy> getTargets () {
         return Collections.unmodifiableList(targets);
     }
 
@@ -92,12 +94,12 @@ public class TowerType extends AbstractType implements Tower {
     }
 
     @Override
-    public void addAbility (AbilityType ability) {
+    public void addAbility (Ability ability) {
         abilities.add(ability);
     }
 
     @Override
-    public List<AbilityType> getAbility () {
+    public List<Ability> getAbility () {
         return Collections.unmodifiableList(abilities);
     }
 
