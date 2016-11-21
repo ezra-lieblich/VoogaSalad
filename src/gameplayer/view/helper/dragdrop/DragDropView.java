@@ -73,7 +73,7 @@ public class DragDropView {
 	 * Populates a tab with images to later drag and drop
 	 * @param imageLocations Array of the image location names
 	 */
-	public void populateImageViewsToTab(Tab tab, String[] imageLocations) {
+	public void populateImageViewsToTab(Tab tab, List<String> imageLocations) {
 		ScrollPane root = new ScrollPane();
 		TilePane grid = new TilePane(); //TODO: change, would be set by the xml file
 		grid.setHgap(20);

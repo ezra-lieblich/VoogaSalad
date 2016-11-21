@@ -12,9 +12,12 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Observable;
 import java.util.Observer;
+
+import engine.TowerType;
 
 public class GamePlayerController implements Observer{
 
@@ -48,10 +51,18 @@ public class GamePlayerController implements Observer{
 		int rows = dimensions[0];
 		int cols = dimensions[1];
 		this.view = new GameGUI(rows,cols); //just for testing, should be replaced by block above, 5 rows, 5 columns
-		this.mainScene = view.init(this.model.getGold(), this.model.getLife(), this.model.getCurrentLevel());
+		this.mainScene = view.init(this.model.getGold(), this.model.getLife(), this.model.getCurrentLevel(),getTowerImages());
 		this.view.getGrid().populatePath(model.getGrid().getStartPoint()); //TODO: need to get grid from model to get starting cell
 	}
 	
+	private ArrayList<String> getTowerImages(){
+		ArrayList<String> towerImages= new ArrayList<String>();
+		HashMap<Integer, TowerType> towers = this.loader.getTowers();
+		for (TowerType tower: towers.values()){
+			towerImages.add(tower.getImageLocation());
+		}
+		return towerImages;
+	}
 	public Scene getMainScene(){
 		return this.mainScene;
 	}

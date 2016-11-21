@@ -49,11 +49,11 @@ public class GameGUI {
 		this.currentLevel = 0;
 	}
 	
-	public Scene init(double gold, double lives, double level){
+	public Scene init(double gold, double lives, double level, List<String> imagePaths){
 		this.numLevels = level;
 		createScene();
 		createGrid();
-		initDragDropPane();
+		initDragDropPane(imagePaths);
 		addButtonPanel();
 		initStatsDisplay(gold, lives, currentLevel);
 		return this.scene;
@@ -99,13 +99,13 @@ public class GameGUI {
 		//BorderPane.setMargin(this.grid.getGrid(), new Insets(10,50,10,0));
 	}
 	
-	private void initDragDropPane(){
+	private void initDragDropPane(List<String> imagePaths){
 		dragDrop.setDragTarget(grid.getGrid());
 		String[] testImages = {"butterfly.png","kaneki.jpg","penguin.jpg"};//TODO: get rid of 
 		String[] testImages2 = {"butterfly.png","kaneki.jpg"};//TODO: get rid of 
 		mainScreen.setRight(dragDrop.getDragDropPane());
 		Tab tab = dragDrop.createTab("Blah test");
-		dragDrop.populateImageViewsToTab(tab, testImages);
+		dragDrop.populateImageViewsToTab(tab, imagePaths);
 		//Tab tab2 = dragDrop.createTab("Another text");
 		//dragDrop.populateImageViewsToTab(tab2, testImages2);
 	}
