@@ -1,5 +1,5 @@
 package authoring.editorview.gamesettings;
 
-public interface IGameConditionsToEngine {
+public interface GameSettingsDataSource {
 
 }

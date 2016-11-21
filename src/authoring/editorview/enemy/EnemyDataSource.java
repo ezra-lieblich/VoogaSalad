@@ -1,6 +1,6 @@
 package authoring.editorview.enemy;
 
-public interface IEnemyToEngine {
+public interface EnemyDataSource {
 
     /**
      * Sets the enemy image in the game engine

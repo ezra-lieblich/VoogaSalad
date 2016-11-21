@@ -1,6 +1,6 @@
 package authoring.editorview.path;
 
-public interface IPathToEngine {
+public interface PathDataSource {
 
     /**
      * Pass the background image to game engine
