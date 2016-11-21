@@ -13,12 +13,21 @@ public class Enemy extends Observable{
 	private Cell currentCell;
 	private int xDirection; //-1 if moving left, 1 if moving right
 	private int yDirection; //-1 if moving down, 1 if moving up	
-
-	public Enemy(String name, double movingSpeed, int health, String image){
+	private double width, height;
+	
+	public Enemy(String name, double movingSpeed, int health, String image, double width, double height){
 		this.name = name; 
 		this.movingSpeed = movingSpeed;
 		this.health = health;	
 		this.image = image;
+		this.width = width;
+		this.height = height;
+				
+	}
+	
+	public double[] getWidthAndHeight(){
+		double[] weidthAndHeight = {this.width, this.height};
+		return weidthAndHeight;
 	}
 	
 	public String getName(){
