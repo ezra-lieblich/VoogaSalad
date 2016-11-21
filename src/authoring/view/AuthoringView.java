@@ -67,6 +67,7 @@ public class AuthoringView implements IAuthoringView {
         }
         editorView.getChildren().clear();
         editorView.getChildren().add(editor);
+        authoringView.setCenter(editorView);
     }
     
 
