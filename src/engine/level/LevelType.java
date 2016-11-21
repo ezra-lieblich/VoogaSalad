@@ -5,20 +5,28 @@ import java.util.Collections;
 import java.util.Map;
 
 import engine.AbstractType;
+import engine.TypeInitializer;
 import engine.enemy.EnemyType;
 import java.util.HashMap;
 
 
 public class LevelType extends AbstractType implements Level {
-	private Map<EnemyType, Integer> enemyCounts;
+
+    private Map<EnemyType, Integer> enemyCounts;
 	private int rewardHealth;
 	private int rewardMoney;
 	private int rewardPoints;
 	private double durationInSeconds;
 
-	public LevelType() {
-		enemyCounts = new HashMap<>();
+
+    protected LevelType (TypeInitializer typeBuilder) {
+	super(typeBuilder);
+	 // TODO Auto-generated constructor stub
 	}
+    
+//	public LevelType() {
+//		enemyCounts = new HashMap<>();
+//	}
 
 	@Override
 	public Map<EnemyType, Integer> getEnemyCounts() {

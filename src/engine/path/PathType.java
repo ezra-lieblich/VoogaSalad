@@ -1,18 +1,22 @@
 package engine.path;
 
 import engine.AbstractType;
+import engine.TypeInitializer;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class PathType extends AbstractType implements Path {
+
     private String type;
     private List<GridCoordinate> coordinates;
     
-    PathType() {
-        this.coordinates = new ArrayList<GridCoordinate>();
-    }
 
+    protected PathType (TypeInitializer typeBuilder) {
+        super(typeBuilder);
+        // TODO Auto-generated constructor stub
+    }
+    
     @Override
     public String getType () {
         return type;

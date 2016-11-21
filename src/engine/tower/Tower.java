@@ -3,9 +3,8 @@ package engine.tower;
 import java.util.List;
 import engine.Type;
 import engine.ability.Ability;
-import engine.enemy.EnemyType;
+import engine.enemy.Enemy;
 import engine.weapon.Weapon;
-import engine.weapon.WeaponType;
 
 
 public interface Tower extends Type {
@@ -22,7 +21,7 @@ public interface Tower extends Type {
 
     List<Weapon> getWeapon ();
 
-    void removeTarget (Enemy target);
+    void removeEnemy (Enemy target);
 
     void addTarget (Enemy target);
 

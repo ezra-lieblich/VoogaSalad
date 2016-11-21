@@ -1,36 +1,13 @@
 package engine.ability;
 
 import engine.AbstractTypeManager;
+import engine.ManagerMediator;
 
-public class AbilityTypeManager extends AbstractTypeManager<Ability> implements Ability {
+public class AbilityTypeManager extends AbstractTypeManager<Ability> {
 
-    @Override
-    protected Ability createInstance () {
-        return new AbilityType();
-    }
-
-    @Override
-    public String getEffect () {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public void setEffect (String effect) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public double getRate () {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    @Override
-    public void setRate (double rate) {
-        // TODO Auto-generated method stub
-        
+    protected AbilityTypeManager (ManagerMediator managerMediator) {
+        super(managerMediator);
+        // TODO Auto-generated constructor stub
     }
 
 }
