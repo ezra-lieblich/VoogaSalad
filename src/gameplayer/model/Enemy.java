@@ -24,10 +24,19 @@ public class Enemy extends Observable{
 		this.height = height;
 				
 	}
-	
+	/*
 	public double[] getWidthAndHeight(){
 		double[] weidthAndHeight = {this.width, this.height};
 		return weidthAndHeight;
+	}
+	*/
+	
+	public double getWidth(){
+		return this.width;
+	}
+	
+	public double getHeight(){
+		return this.height;
 	}
 	
 	public String getName(){

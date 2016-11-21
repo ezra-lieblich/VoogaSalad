@@ -133,6 +133,7 @@ public class GamePlayModel extends Observable{
 		return this.currentLevel;
 	}
 	
+	//TODO: move to EnemyModel
 	public List<Enemy> getEnemyList(){
 		return this.enemyOnGrid;
 	}
@@ -235,7 +236,7 @@ public class GamePlayModel extends Observable{
 	
 	//get direction
 	
-	
+	//TODO: move to EnemyModel
 	private void moveSingleEnemy(Enemy e) {
 		//to make it easier, only updating enemy's current cell once it reaches the center point of the next cell
 		double distToMove;
@@ -277,6 +278,7 @@ public class GamePlayModel extends Observable{
 		//sub lives if enemy got into base
 	}
 	
+	//TODO: move to EnemyModel
 	private void updateEnemy(){
 		// move on Grid Enemy
 		for (Enemy e: enemyOnGrid){		
