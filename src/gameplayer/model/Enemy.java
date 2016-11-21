@@ -29,6 +29,7 @@ public class Enemy extends Observable{
 		return xDirection;
 	}
 
+	
 	public void setxDirection(int xDirection) { //heading
 		this.xDirection = xDirection;
 		setChanged();
@@ -97,7 +98,7 @@ public class Enemy extends Observable{
 		notifyObservers();
 	}
 
-	double getHealth() {
+	public double getHealth() {
 		return health;
 	}
 

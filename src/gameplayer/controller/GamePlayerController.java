@@ -31,6 +31,8 @@ public class GamePlayerController implements Observer{
 	private Scene mainScene;
 	private GamePlayModel model;
 	
+	private Timeline animation;
+	
 	public GamePlayerController(){
 		//use xml parser to create classes. 
 		this.parser = new XMLParser("player.samplexml/test.xml"); //hardcoded
@@ -44,6 +46,7 @@ public class GamePlayerController implements Observer{
 		HashMap<String,Double> settings = this.loader.getGameSetting();
 		System.out.println("Settings: "+ settings);
 		initGUI();
+		createTimeline();
 	}
 	
 	private void initGUI() {
@@ -86,24 +89,29 @@ public class GamePlayerController implements Observer{
 		*/
 		
 	}
-	
+
+	/*
 	private void updateLevel() {
 		//TODO: use Parser's method to get path and update the view's grid with that path
 	}
-	
-	
-	
-	/*
-	private void setUpTimeLine() {
-		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> GamePlayModel.update(SECOND_DELAY));
-		Timeline animation = new Timeline();
-		application.setTimeline(animation);
-		animation.setCycleCount(Timeline.INDEFINITE);
-		animation.getKeyFrames().add(frame);
-		animation.play();
-	}
 	*/
 	
+
+	private void createTimeline() {
+		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> {
+			this.model.updateInLevel();
+		});
+		Timeline animation = new Timeline();
+		animation.setCycleCount(Timeline.INDEFINITE);
+		animation.getKeyFrames().add(frame);
+		//animation.play();
+		this.animation = animation;
+	}
+	
+	public Timeline getTimeline(){
+		return this.animation;
+	}
+
 	
 
 }

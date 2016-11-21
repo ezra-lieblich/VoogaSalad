@@ -132,6 +132,10 @@ public class GamePlayModel extends Observable{
 	public int getCurrentLevel(){
 		return this.currentLevel;
 	}
+	
+	public List<Enemy> getEnemyList(){
+		return this.enemyOnGrid;
+	}
 
 	
 	public Boolean placeTower(int type, int x, int y){	
