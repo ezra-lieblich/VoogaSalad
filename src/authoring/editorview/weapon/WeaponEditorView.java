@@ -14,13 +14,13 @@ public class WeaponEditorView implements IWeaponEditorView {
 
     public WeaponEditorView () {
         weaponEditorView = new BorderPane();
-        weaponBank = new WeaponImageBank();
+//        weaponBank = new WeaponImageBank();
         weaponEffects = new WeaponEffectView();
         setBorderPane();
     }
 
     private void setBorderPane () {
-        weaponEditorView.setLeft(weaponBank.getInstanceAsNode());
+//        weaponEditorView.setLeft(weaponBank.getInstanceAsNode());
         weaponEditorView.setCenter(weaponEffects.getCompleteView());
     }
 

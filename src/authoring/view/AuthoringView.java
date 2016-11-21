@@ -1,5 +1,7 @@
 package authoring.view;
 
+import java.util.List;
+
 import authoring.editortabpane.EditorTabPaneDelegate;
 import authoring.editortabpane.EditorTabPaneFactory;
 import authoring.editortabpane.IEditorTabPane;
@@ -26,7 +28,6 @@ public class AuthoringView implements IAuthoringView {
         myRoot = new Group();
         myScene = new Scene(myRoot, SIZE, SIZE);
         myToolbar = ToolbarFactory.build(SIZE, SIZE / 20);
-        editorTabPane = EditorTabPaneFactory.build(SIZE, SIZE);
         authoringView = new BorderPane();
         myRoot.getChildren().add(authoringView);
         initScene();
@@ -39,7 +40,6 @@ public class AuthoringView implements IAuthoringView {
 
     private void initScene () {
         authoringView.setTop(myToolbar.getInstanceAsNode());
-        authoringView.setRight(editorTabPane.getInstanceAsNode());
         authoringView.setCenter(editorView);
     }
 
@@ -68,6 +68,13 @@ public class AuthoringView implements IAuthoringView {
         editorView.getChildren().clear();
         editorView.getChildren().add(editor);
     }
+    
+
+	@Override
+	public void createEditorTabPane(List<String> tabs) {
+        editorTabPane = EditorTabPaneFactory.build(SIZE, SIZE, tabs);
+        authoringView.setRight(editorTabPane.getInstanceAsNode());
+	}
 
     @Override
     public void setEditorTabPaneDelegate (EditorTabPaneDelegate delegate) {
