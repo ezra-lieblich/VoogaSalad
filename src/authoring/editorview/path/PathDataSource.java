@@ -1,5 +1,7 @@
 package authoring.editorview.path;
 
+import java.util.List;
+
 public interface PathDataSource {
 
     /**
@@ -14,4 +16,8 @@ public interface PathDataSource {
      * @param pathImage set by the user
      */
     public void setPathImage (int pathImageID);
+    
+    public boolean addPath(List<Coordinate> pathCoordinates);
+    
+    public void clearPaths();
 }
