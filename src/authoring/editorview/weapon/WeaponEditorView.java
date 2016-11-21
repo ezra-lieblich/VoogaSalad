@@ -14,7 +14,7 @@ public class WeaponEditorView implements IWeaponEditorView {
 
     public WeaponEditorView () {
         weaponEditorView = new BorderPane();
-        weaponBank = new WeaponImageBank();
+        weaponBank = new WeaponImageBank(delegate);
         weaponEffects = new WeaponEffectView();
         setBorderPane();
     }

@@ -13,8 +13,45 @@ public class TowerEditorViewController extends EditorViewController
     }
 
     @Override
-    public void setTowerCost (double cost) {
+    public int createNewTower () {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    public void setTowerName (String name) {
         // TODO Auto-generated method stub
         
     }
+
+    @Override
+    public void setTowerImage (int imageID) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void setBuyPrice (int price) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void setSellPrice (int price) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void setUnlockLevel (int level) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void setFireRate (int fireRate) {
+        // TODO Auto-generated method stub
+        
+    }
+
 }

@@ -31,8 +31,26 @@ public class WeaponEditorViewController extends EditorViewController
     }
 
     @Override
-    public void setWeaponRange (double range) {
+    public void setWeaponRange (int range) {
         // TODO Auto-generated method stub
         
+    }
+
+    @Override
+    public void setWeaponImage (int weaponImageID) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void setWeaponDamage (int damage) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public int createWeapon () {
+        // TODO Auto-generated method stub
+        return 0;
     }
 }

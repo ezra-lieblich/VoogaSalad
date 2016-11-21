@@ -3,27 +3,25 @@ package authoring.editorview.weapon.subviews;
 import authoring.editorview.weapon.WeaponEditorViewDelegate;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 
 public class WeaponEffectView {
 
     private double fireRate;
-    private String path;
+    private String imagePath;
     private String effect;
     private double speed;
-    private double range;
+    private int range;
 
     private VBox vboxView;
     private ScrollPane completeView;
     private WeaponEditorViewDelegate delegate;
 
     public WeaponEffectView () {
-        vboxView = new VBox();
+        vboxView = new VBox(10);
         completeView = new ScrollPane();
         placeInVBox();
         completeView.setContent(vboxView);
@@ -51,6 +49,7 @@ public class WeaponEffectView {
 
     private TextField makeTextField (String name, EventHandler<ActionEvent> event) {
         TextField textField = new TextField();
+        //textField.text
         textField.setPromptText(name);
         textField.setOnAction(event);
         return textField;

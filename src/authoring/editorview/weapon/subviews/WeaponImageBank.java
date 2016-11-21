@@ -5,6 +5,7 @@ import java.io.File;
 import java.util.Map;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import authoring.editorview.weapon.WeaponEditorViewDelegate;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
@@ -23,8 +24,10 @@ public class WeaponImageBank {
     private ScrollPane weaponBank;
     private Map<Integer, ImageIcon> activeWeapons;
     private ImageIcon imageView;
+    private WeaponEditorViewDelegate delegate;
 
-    public WeaponImageBank () {
+    public WeaponImageBank (WeaponEditorViewDelegate delegate) {
+        this.delegate = delegate;
         weaponBank = new ScrollPane();
         Button createWeaponButton = createButton("Create Weapon", e -> selectFile("Photos: "));
         weaponBank.setContent(createWeaponButton);
@@ -48,6 +51,8 @@ public class WeaponImageBank {
             try {
                 image = ImageIO.read(chosenFile);
                 imageView = new ImageIcon(image);
+                int newWeaponID = delegate.createWeapon();
+                activeWeapons.put(newWeaponID, imageView);
             }
             catch (Exception e) {
                 System.out.println("Unable to load photo");

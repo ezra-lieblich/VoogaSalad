@@ -8,6 +8,12 @@ public interface WeaponEditorViewDelegate {
     
     public void setWeaponEffect (String collisionEffect);
     
-    public void setWeaponRange (double range);
+    public void setWeaponRange (int range);
+    
+    public void setWeaponImage (int weaponImageID);
+
+    public void setWeaponDamage (int damage);
+
+    public int createWeapon ();
     
 }

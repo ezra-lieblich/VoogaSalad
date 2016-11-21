@@ -1,6 +1,5 @@
 package authoring;
 
-import authoring.view.AuthoringView;
 import authoring.view.AuthoringViewController;
 import authoring.view.IAuthoringView;
 import javafx.application.Application;
