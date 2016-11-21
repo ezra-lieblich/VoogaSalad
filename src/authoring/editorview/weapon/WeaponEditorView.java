@@ -7,20 +7,20 @@ import javafx.scene.layout.BorderPane;
 
 
 public class WeaponEditorView implements IWeaponEditorView {
-	private WeaponEditorViewDelegate delegate;
+    private WeaponEditorViewDelegate delegate;
     private BorderPane weaponEditorView;
     private WeaponImageBank weaponBank;
     private WeaponEffectView weaponEffects;
 
     public WeaponEditorView () {
         weaponEditorView = new BorderPane();
-//        weaponBank = new WeaponImageBank();
+        weaponBank = new WeaponImageBank();
         weaponEffects = new WeaponEffectView();
         setBorderPane();
     }
 
     private void setBorderPane () {
-//        weaponEditorView.setLeft(weaponBank.getInstanceAsNode());
+        weaponEditorView.setLeft(weaponBank.getInstanceAsNode());
         weaponEditorView.setCenter(weaponEffects.getCompleteView());
     }
 
@@ -31,7 +31,7 @@ public class WeaponEditorView implements IWeaponEditorView {
 
     @Override
     public void setDelegate (WeaponEditorViewDelegate delegate) {
-    	this.delegate = delegate;
+        this.delegate = delegate;
     }
 
 }
