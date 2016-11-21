@@ -2,6 +2,7 @@ package engine.tower;
 
 import java.util.List;
 import engine.Type;
+import engine.ability.Ability;
 import engine.enemy.EnemyType;
 import engine.weapon.Weapon;
 import engine.weapon.WeaponType;
@@ -9,29 +10,29 @@ import engine.weapon.WeaponType;
 
 public interface Tower extends Type {
 
-    void addUpgrade (TowerType upgrade);
+    void addUpgrade (Tower upgrade);
 
     void removeUpgrade (Tower upgrade);
 
-    List<TowerType> getUpgrades ();
+    List<Tower> getUpgrades ();
 
-    void addWeapon (WeaponType weapon);
+    void addWeapon (Weapon weapon);
 
     void removeWeapon (Weapon weapon);
 
-    List<WeaponType> getWeapon ();
+    List<Weapon> getWeapon ();
 
-    void removeTarget (EnemyType target);
+    void removeTarget (Enemy target);
 
-    void addTarget (EnemyType target);
+    void addTarget (Enemy target);
 
-    List<EnemyType> getTargets ();
+    List<Enemy> getTargets ();
 
     void removeAbility (Ability ability);
 
-    void addAbility (AbilityType ability);
+    void addAbility (Ability ability);
 
-    List<AbilityType> getAbility ();
+    List<Ability> getAbility ();
 
     double getCost ();
 
