@@ -8,22 +8,18 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 
-public abstract class AbstractTypeManager<E extends Type> extends Observable implements Manager<E> {
+public abstract class AbstractTypeManager<E extends Type> extends Observable implements Manager {
     Map<Integer, E> data;
-    // List<E> activeEntities;
-    int activeId;
     int nextId;
 
     private void addEntry (E entry) {
         data.put(nextId, entry);
-        // activeEntities.clear();
-        // activeEntities.add(entry);
         nextId++;
     }
 
     @Override
     public void removeEntry (int id) {
-        data.remove(id);
+        notifyObservers(data.remove(id));
     }
 
     protected int getNextId () {
@@ -43,8 +39,15 @@ public abstract class AbstractTypeManager<E extends Type> extends Observable imp
 
     protected <U> void setForActiveEntity(Consumer<U> setter, U newValue) {
         setter.accept(newValue);
-        notifyObservers(activeId);
+        //notifyObservers(activeId);
     }
+
+    private E getEntity (int index) {
+        return data.get(index);
+    }
+
+    protected abstract E createInstance ();
+
     
     /*
      * public void activate(int ... ids) {
@@ -56,53 +59,5 @@ public abstract class AbstractTypeManager<E extends Type> extends Observable imp
      * activeEntities.stream().forEach(function);
      * }
      */
-
-    private E getEntity (int index) {
-        return data.get(index);
-    }
-
-    protected E getActiveEntity () {
-        return getEntity(activeId);
-    }
-
-    @Override
-    public void setActiveEntity (int id) {
-        activeId = id;
-    }
     
-    protected int getActiveId() {
-        return activeId;
-    }
-
-    protected abstract E createInstance ();
-
-    @Override
-    public String getName () {
-        return getFromActiveEntity(getActiveEntity()::getName);
-    }
-
-    @Override
-    public void setName (String name) {
-        setForActiveEntity(getActiveEntity()::setName, name);
-    }
-
-    @Override
-    public String getImagePath () {
-        return getFromActiveEntity(getActiveEntity()::getImagePath);
-    }
-
-    @Override
-    public void setImagePath (String imagePath) {
-        setForActiveEntity(getActiveEntity()::setImagePath, imagePath);
-    }
-
-    @Override
-    public double getSize () {
-        return getFromActiveEntity(getActiveEntity()::getSize);
-    }
-
-    @Override
-    public void setSize (double size) {
-        setForActiveEntity(getActiveEntity()::setSize, size);
-    }
 }

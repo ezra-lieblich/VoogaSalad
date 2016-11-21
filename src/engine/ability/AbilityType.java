@@ -1,4 +1,4 @@
-package engine.tower;
+package engine.ability;
 
 import engine.AbstractType;
 

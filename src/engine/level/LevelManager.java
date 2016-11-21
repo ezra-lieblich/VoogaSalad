@@ -5,5 +5,5 @@ import engine.Manager;
 /**
  * Created by ezra on 11/20/16.
  */
-public interface LevelManager extends Manager<Level> {
+public interface LevelManager extends Manager {
 }

@@ -1,7 +1,8 @@
 package engine.tower;
 
+import engine.Manager;
 import engine.Type;
 
-public interface TowerManager extends Tower {
+public interface TowerManager extends Manager {
 
 }

@@ -6,5 +6,5 @@ import engine.Manager;
 /**
  * Created by ezra on 11/19/16.
  */
-public interface EnemyManager extends Manager<Enemy>{
+public interface EnemyManager extends Manager{
 }
