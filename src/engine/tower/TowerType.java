@@ -8,6 +8,7 @@ import engine.ability.Ability;
 import engine.enemy.EnemyType;
 import engine.weapon.Weapon;
 import engine.weapon.WeaponType;
+import gameplayer.model.Enemy;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 

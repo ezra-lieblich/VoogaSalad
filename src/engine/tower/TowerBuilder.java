@@ -2,6 +2,7 @@ package engine.tower;
 
 import engine.ability.Ability;
 import engine.weapon.Weapon;
+import gameplayer.model.Enemy;
 
 
 public interface TowerBuilder {

@@ -12,28 +12,6 @@ import engine.weapon.WeaponType;
 
 public class TowerTypeManager extends AbstractTypeManager<Tower> implements TowerManager {
 
-    //private Map<WeaponType, List<TowerType>> weaponMappings = new HashMap<WeaponType, List<TowerType>>();
 
-    @Override
-    protected Tower createInstance () {
-        return new TowerType();
-    }
-
-    @Override
-    public void addUpgrade (Tower upgrade) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void removeUpgrade (Tower upgrade) {
-        getActiveEntity().removeUpgrade(upgrade);
-        notifyObservers(getActiveId());
-    }
-
-    @Override
-    public List<Tower> getUpgrades () {
-        return getActiveEntity().getUpgrades();
-    }
-
+        //TODO - Flatten hierarchy maybe?
 }

@@ -1,14 +1,16 @@
 package engine;
 
-public interface Manager{
+public interface Manager<E extends Type> {
+
+    int addEntry (E entry);
 
     void removeEntry (int id);
 
-    /**
-     * Creates a new entity and activates it
-     * 
-     * @return This returns the ID of the most recently added Entity
-     */
-    int create ();
-    
+    //TODO - Make this private and just pass in a functional static interface
+    E getActiveEntity ();
+
+    int getActiveId ();
+
+    void setActiveId (int activeId);
+
 }

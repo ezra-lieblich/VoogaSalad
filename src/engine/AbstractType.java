@@ -7,9 +7,6 @@ public abstract class AbstractType implements Type {
     private String imagePath;
     private double size;
     private final int id;
-
-    private static final String DEFAULTVALUESPATH = "resources/DefaultEntityValues/";
-    private static ResourceBundle resources = ResourceBundle.getBundle(DEFAULTVALUESPATH);
     
     protected AbstractType(int id) {
         this.id = id;
