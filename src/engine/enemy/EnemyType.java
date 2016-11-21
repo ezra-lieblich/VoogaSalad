@@ -3,10 +3,11 @@ package engine.enemy;
 import java.util.ResourceBundle;
 import engine.AbstractType;
 
-public class EnemyType extends AbstractType{
+public class EnemyType extends AbstractType implements Enemy {
 
 	private double speed;
 	private double health;
+	private double damage;
 	private double points;
 	private double money;
 	private String collisionEffect;
@@ -14,13 +15,14 @@ public class EnemyType extends AbstractType{
 	
 	public EnemyType() {
 		//possible hold a resource file that has default values for an enemy
-        super.setName(super.getResources().getString("EnemyName"));
-		super.setImagePath(super.getResources().getString("EnemyImage"));
-		speed = Double.parseDouble(super.getResources().getString("EnemySpeed"));
-        health = Double.parseDouble(super.getResources().getString("EnemyHealth"));
-        points = Double.parseDouble(super.getResources().getString("EnemyPoints"));
-        money = Double.parseDouble(super.getResources().getString("EnemyMoney"));
-        collisionEffect = super.getResources().getString("EnemyCollisionEffect");
+        super.setName(super.getResources("EnemyTypeName"));
+		super.setImagePath(super.getResources("EnemyTypeImage"));
+		speed = Double.parseDouble(super.getResources("EnemyTypeSpeed"));
+        health = Double.parseDouble(super.getResources("EnemyTypeHealth"));
+		damage = Double.parseDouble(super.getResources("EnemyTypeDamage"));
+        points = Double.parseDouble(super.getResources("EnemyTypePoints"));
+        money = Double.parseDouble(super.getResources("EnemyTypeMoney"));
+        collisionEffect = super.getResources("EnemyTypeCollisionEffect");
 //		speed = 5;
 //		health = 10;
 //		points = 50;
@@ -42,42 +44,54 @@ public class EnemyType extends AbstractType{
 		
 	}
 	
-	public String getName(){
-		return super.getName();
-	}
+
 	
-	public String getImageLocation(){
-		return super.getImagePath() ;
-	}
-	
-	public double getSpeed() {
+	@Override
+    public double getSpeed() {
 		return speed;
 	}
-	public void setSpeed(double speed) {
+	@Override
+    public void setSpeed(double speed) {
 		this.speed = speed;
 	}
-	public double getHealth() {
+	@Override
+    public double getHealth() {
 		return health;
 	}
-	public void setHealth(double health) {
+	@Override
+    public void setHealth(double health) {
 		this.health = health;
 	}
-	public double getPoints() {
+	@Override
+    public double getDamage(){
+		return damage;
+	}
+	@Override
+    public void setDamage(double damage) {
+		this.damage = damage;
+	}
+	@Override
+    public double getPoints() {
 		return points;
 	}
-	public void setPoints(double points) {
+	@Override
+    public void setPoints(double points) {
 		this.points = points;
 	}
-	public double getMoney() {
+	@Override
+    public double getMoney() {
 		return money;
 	}
-	public void setMoney(double money) {
+	@Override
+    public void setMoney(double money) {
 		this.money = money;
 	}
-	public String getCollisionEffect() {
+	@Override
+    public String getCollisionEffect() {
 		return collisionEffect;
 	}
-	public void setCollisionEffect(String collisionEffect) {
+	@Override
+    public void setCollisionEffect(String collisionEffect) {
 		this.collisionEffect = collisionEffect;
 	}
 	

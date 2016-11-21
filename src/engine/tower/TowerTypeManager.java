@@ -36,4 +36,5 @@ public class TowerTypeManager extends AbstractTypeManager<Tower> implements Towe
         return getActiveEntity().getUpgrades();
     }
 
+
 }
