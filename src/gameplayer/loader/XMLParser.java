@@ -81,6 +81,8 @@ public class XMLParser {
     
     public String getTextValue(String parent, String tagName) {
         String textVal = "";
+        System.out.println("parent: " + parent);
+        System.out.println("tag name: " + tagName);
         try{
         	NodeList parentList = xmlDocument.getElementsByTagName(parent);
 	        NodeList nl = ((Element)parentList.item(0)).getElementsByTagName(tagName);

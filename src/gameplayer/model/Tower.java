@@ -4,8 +4,6 @@ import java.util.ArrayList;
 
 public class Tower {
 	
-	private double attackingRange;
-	private int fireRate; // number of interation or update
 	private double cost;
 	private ArrayList<Integer> weaponType;
 	private String image;
@@ -40,21 +38,7 @@ public class Tower {
 		return this.image;
 	}
 
-	double getAttackingRange() {
-		return attackingRange;
-	}
 
-	void setAttackingRange(double attackingRange) {
-		this.attackingRange = attackingRange;
-	}
-
-	int getFireRate() {
-		return fireRate;
-	}
-
-	void setFireRate(int fireRate) {
-		this.fireRate = fireRate;
-	}
 
 	double getCost() {
 		return cost;

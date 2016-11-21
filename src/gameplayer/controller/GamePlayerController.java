@@ -14,6 +14,7 @@ import javafx.util.Duration;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -37,6 +38,8 @@ public class GamePlayerController implements Observer{
 		//use xml parser to create classes. 
 		this.parser = new XMLParser("player.samplexml/test.xml"); //hardcoded
 		this.loader = new GamePlayerFactory(parser);
+		Map temp = this.loader.getGameSetting();
+		System.out.println("check null: " + temp == null);
 		this.model = new GamePlayModel(this.loader);
 		this.model.addObserver(this);
 	}
