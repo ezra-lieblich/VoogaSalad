@@ -7,4 +7,7 @@ public class PathEditorViewController extends EditorViewController {
 	public PathEditorViewController(int editorWidth, int editorHeight){
 		view = PathEditorViewFactory.build(editorWidth, editorHeight);
 	}
+	
+	
+	
 }
