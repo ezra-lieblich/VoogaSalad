@@ -14,4 +14,5 @@ public class TowerTypeManager extends AbstractTypeManager<Tower> implements Towe
 
 
         //TODO - Flatten hierarchy maybe?
+
 }

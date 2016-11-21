@@ -5,6 +5,7 @@ import engine.ability.Ability;
 import engine.tower.Tower;
 import engine.tower.TowerType;
 import engine.weapon.Weapon;
+import gameplayer.model.Enemy;
 
 public class TowerTypeBuilder extends AbstractTypeBuilder<Tower> implements TowerBuilder{
 

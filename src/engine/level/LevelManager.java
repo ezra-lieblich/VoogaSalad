@@ -1,12 +1,9 @@
 package engine.level;
 
-import java.util.List;
+import engine.Manager;
 
 /**
- *
- * Created by ezra on 11/17/16.
+ * Created by ezra on 11/20/16.
  */
-public class LevelManager {
-    private List<Level> levels;
-
+public interface LevelManager extends Manager {
 }

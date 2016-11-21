@@ -1,61 +1,31 @@
 package engine.level;
 
-import gameplayer.model.Enemy;
-
-import java.util.Collections;
-import java.util.Map;
+import engine.Type;
 import engine.enemy.EnemyType;
-import java.util.HashMap;
 
+import java.util.Map;
 
-public class Level {
-	private Map<EnemyType, Integer> enemyCounts;
-	private int rewardHealth;
-	private int rewardMoney;
-	private int rewardPoints;
-	private double durationInSeconds;
+/**
+ * Created by ezra on 11/19/16.
+ */
+public interface Level extends Type{
+    Map<EnemyType, Integer> getEnemyCounts();
 
-	public Level() {
-		enemyCounts = new HashMap<>();
-	}
+    void setEnemyCounts(EnemyType enemy, int enemyCount);
 
-	public Map<EnemyType, Integer> getEnemyCounts() {
-		return Collections.unmodifiableMap(enemyCounts);
-	}
+    int getRewardHealth();
 
-	public void setEnemyCounts(EnemyType enemy, int enemyCount) {
-		enemyCounts.put(enemy, enemyCount);
-	}
+    void setRewardHealth(int rewardHealth);
 
-	public int getRewardHealth() {
-		return rewardHealth;
-	}
+    int getRewardMoney();
 
-	public void setRewardHealth(int rewardHealth) {
-		this.rewardHealth = rewardHealth;
-	}
+    void setRewardMoney(int rewardMoney);
 
-	public int getRewardMoney() {
-		return rewardMoney;
-	}
+    int getRewardPoints();
 
-	public void setRewardMoney(int rewardMoney) {
-		this.rewardMoney = rewardMoney;
-	}
+    void setRewardPoints(int rewardPoints);
 
-	public int getRewardPoints() {
-		return rewardPoints;
-	}
+    double getDurationInSeconds();
 
-	public void setRewardPoints(int rewardPoints) {
-		this.rewardPoints = rewardPoints;
-	}
-
-	public double getDurationInSeconds() {
-		return durationInSeconds;
-	}
-
-	public void setDurationInSeconds(double durationInSeconds) {
-		this.durationInSeconds = durationInSeconds;
-	}
+    void setDurationInSeconds(double durationInSeconds);
 }
