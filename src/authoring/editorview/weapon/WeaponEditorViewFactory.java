@@ -1,6 +1,10 @@
 package authoring.editorview.weapon;
 
-
+/**
+ * 
+ * @author Diane Hadley
+ *
+ */
 
 public class WeaponEditorViewFactory {
 	

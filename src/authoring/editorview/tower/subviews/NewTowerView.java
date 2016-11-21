@@ -6,14 +6,20 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 
-public class InitNewTowerView {
+/**
+ * 
+ * @author Diane Hadley
+ *
+ */
+
+public class NewTowerView {
 	private BorderPane root;
 	private TowerEditorView towerView;
 	
 	private static final String RESOURCE_FILE_NAME = "resources/GameAuthoringTower";	
 	private ResourceBundle towerResources = ResourceBundle.getBundle(RESOURCE_FILE_NAME);
 	
-	public InitNewTowerView(TowerEditorView towerView){
+	public NewTowerView(TowerEditorView towerView){
 		root = new BorderPane();
 		this.towerView = towerView;
 		initRoot();
