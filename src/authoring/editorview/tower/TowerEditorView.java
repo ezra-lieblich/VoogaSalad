@@ -1,31 +1,29 @@
 package authoring.editorview.tower;
-
-import authoring.editorview.tower.subviews.InitNewTowerView;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
-
-
+/**
+ * 
+ * @author Diane Hadley
+ *
+ */
 public class TowerEditorView implements ITowerEditorView {
-
-    private BorderPane root;
-    private InitNewTowerView newTower;
-
-    public TowerEditorView () {
-        root = new BorderPane();
-        newTower = new InitNewTowerView(this);
-        root.setCenter(newTower.getRoot());
-
-    }
-
+        
+        private BorderPane root;
+        
+        
+        public TowerEditorView(){
+                root = new BorderPane();
+                
+        }
+        
     @Override
-    public Node getInstanceAsNode () {
+    public Node getInstanceAsNode () {      
         return root;
     }
-
-    public void getTowerSetter () {
+    
+    public void getTowerSetter(){
         Group designTower = new Group();
         root.setCenter(designTower);
     }
-
 }
