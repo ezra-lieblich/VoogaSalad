@@ -10,5 +10,6 @@ import authoring.editorview.IEditorView;
  */
 public interface IPathEditorView extends IEditorView {
     
+	public void setDelegate (PathEditorViewDelegate delegate);
 
 }
