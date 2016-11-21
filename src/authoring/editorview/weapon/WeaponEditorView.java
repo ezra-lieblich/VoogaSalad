@@ -7,7 +7,7 @@ import javafx.scene.layout.BorderPane;
 
 
 public class WeaponEditorView implements IWeaponEditorView {
-
+	private WeaponEditorViewDelegate delegate;
     private BorderPane weaponEditorView;
     private WeaponImageBank weaponBank;
     private WeaponEffectView weaponEffects;
@@ -31,8 +31,7 @@ public class WeaponEditorView implements IWeaponEditorView {
 
     @Override
     public void setDelegate (WeaponEditorViewDelegate delegate) {
-        
-        
+    	this.delegate = delegate;
     }
 
 }
