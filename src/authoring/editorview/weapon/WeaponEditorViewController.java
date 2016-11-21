@@ -23,4 +23,16 @@ public class WeaponEditorViewController extends EditorViewController
         // TODO Auto-generated method stub
 
     }
+
+    @Override
+    public void setWeaponEffect (String collisionEffect) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void setWeaponRange (double range) {
+        // TODO Auto-generated method stub
+        
+    }
 }
