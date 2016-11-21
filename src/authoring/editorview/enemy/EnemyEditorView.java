@@ -1,20 +1,19 @@
 package authoring.editorview.enemy;
 
-import authoring.editorview.enemy.subviews.InitNewEnemyView;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
 
+/**
+ * @author Diane Hadley
+ */
 
 public class EnemyEditorView implements IEnemyEditorView {
-
+	private EnemyEditorViewDelegate delegate;
 	private BorderPane root;
-	private InitNewEnemyView newEnemy;
 	
 	public EnemyEditorView(){
 		root = new BorderPane();
-		newEnemy = new InitNewEnemyView(this);
-		root.setCenter(newEnemy.getRoot());
 		
 	}
 	
@@ -27,6 +26,11 @@ public class EnemyEditorView implements IEnemyEditorView {
     	Group designEnemy = new Group();
     	root.setCenter(designEnemy);
     }
+
+	@Override
+	public void setDelegate(EnemyEditorViewDelegate delegate) {
+		this.delegate = delegate;
+	}
     
     
     

@@ -2,9 +2,11 @@ package authoring.editorview.enemy;
 
 import authoring.editorview.EditorViewController;
 
-public class EnemyEditorViewController extends EditorViewController {
+public class EnemyEditorViewController extends EditorViewController implements EnemyEditorViewDelegate {
 
 	public EnemyEditorViewController(int editorWidth, int editorHeight){
-		view = EnemyEditorViewFactory.build(editorWidth, editorHeight);
+		IEnemyEditorView myView = EnemyEditorViewFactory.build(editorWidth, editorHeight);
+		myView.setDelegate(this);
+		this.view = myView;
 	}
 }

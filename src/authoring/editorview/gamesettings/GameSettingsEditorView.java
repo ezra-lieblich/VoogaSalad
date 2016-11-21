@@ -9,7 +9,7 @@ import javafx.scene.layout.Pane;
 
 
 public class GameSettingsEditorView extends EditorViewController implements IGameSettingsEditorView {
-
+	private GameSettingsEditorViewDelegate delegate;
     private Pane gameConditionsPane;
 
     public GameSettingsEditorView (int aWidth, int aHeight) {
@@ -29,5 +29,10 @@ public class GameSettingsEditorView extends EditorViewController implements IGam
     public Node getInstanceAsNode () {
         return gameConditionsPane;
     }
+
+	@Override
+	public void setDelegate(GameSettingsEditorViewDelegate delegate) {
+		this.delegate = delegate;
+	}
 
 }

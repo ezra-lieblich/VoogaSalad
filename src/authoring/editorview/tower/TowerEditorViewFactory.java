@@ -1,5 +1,10 @@
 package authoring.editorview.tower;
 
+/**
+ * 
+ * @author Diane Hadley
+ *
+ */
 
 public class TowerEditorViewFactory {
 	
