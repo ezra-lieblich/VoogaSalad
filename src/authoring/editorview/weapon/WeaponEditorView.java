@@ -29,4 +29,10 @@ public class WeaponEditorView implements IWeaponEditorView {
         return weaponEditorView;
     }
 
+    @Override
+    public void setDelegate (WeaponEditorViewDelegate delegate) {
+        // TODO Auto-generated method stub
+        
+    }
+
 }

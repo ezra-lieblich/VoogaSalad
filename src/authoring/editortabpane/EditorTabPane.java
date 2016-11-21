@@ -25,8 +25,6 @@ import javafx.scene.image.ImageView;
  */
 public class EditorTabPane implements IEditorTabPane {
 
-    // private ITowerView towerView;
-
     private TabPane tabPane;
     private ResourceBundle GUIResources;
     private EditorTabPaneDelegate delegate;

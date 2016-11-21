@@ -1,5 +1,8 @@
 package authoring.editorview.weapon.subviews;
 
+import authoring.editorview.weapon.WeaponEditorViewDelegate;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -17,6 +20,7 @@ public class WeaponEffectView {
 
     private VBox vboxView;
     private ScrollPane completeView;
+    private WeaponEditorViewDelegate delegate;
 
     public WeaponEffectView () {
         vboxView = new VBox();
@@ -36,21 +40,17 @@ public class WeaponEffectView {
     private void placeInVBox () {
         // TODO: Get the photo and id of the current weapon from the model and place first in this
         // box
-        vboxView.getChildren().add(makeTextField("Set weapon speed: "));
-        vboxView.getChildren().add(makeTextField("Set fire rate: "));
+        vboxView.getChildren()
+                .add(makeTextField("Set weapon speed: ", e -> delegate.setWeaponSpeed(speed)));
+        vboxView.getChildren()
+                .add(makeTextField("Set fire rate: ", e -> delegate.setWeaponFireRate(fireRate)));
     }
 
-    private TextField makeTextField (String name) {
+    private TextField makeTextField (String name, EventHandler<ActionEvent> event) {
         TextField textField = new TextField();
         textField.setPromptText(name);
-        textField.setOnAction(event -> sendToModel());
+        textField.setOnAction(event);
         return textField;
-    }
-
-    private Object sendToModel () {
-        // TODO This is where we would send the input value to the model
-        // TODO Check for number (integer, double, etc.)
-        return null;
     }
 
 }
