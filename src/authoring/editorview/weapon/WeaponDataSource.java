@@ -8,5 +8,4 @@ public interface WeaponDataSource {
 
     public void setWeaponImage (int weaponID, int weaponImageID);
     public void setWeaponDamage(int weaponID, int damage);
-    public void 
 }

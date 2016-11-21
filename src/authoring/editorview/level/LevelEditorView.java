@@ -3,7 +3,7 @@ package authoring.editorview.level;
 import javafx.scene.Node;
 
 public class LevelEditorView implements ILevelEditorView {
-
+	private LevelEditorViewDelegate delegate;
     LevelEditorView(int width, int height) {
         
     }
@@ -13,5 +13,10 @@ public class LevelEditorView implements ILevelEditorView {
         // TODO Auto-generated method stub
         return null;
     }
+
+	@Override
+	public void setDelegate(LevelEditorViewDelegate delegate) {
+		this.delegate = delegate;
+	}
 
 }

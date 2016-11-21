@@ -8,7 +8,7 @@ import javafx.scene.layout.BorderPane;
  *
  */
 public class TowerEditorView implements ITowerEditorView {
-        
+        private TowerEditorViewDelegate delegate;
         private BorderPane root;
         
         
@@ -26,4 +26,9 @@ public class TowerEditorView implements ITowerEditorView {
         Group designTower = new Group();
         root.setCenter(designTower);
     }
+
+	@Override
+	public void setDelegate(TowerEditorViewDelegate delegate) {
+		this.delegate = delegate;
+	}
 }
