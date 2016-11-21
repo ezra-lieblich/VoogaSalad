@@ -31,7 +31,7 @@ public class WeaponEditorView implements IWeaponEditorView {
 
     @Override
     public void setDelegate (WeaponEditorViewDelegate delegate) {
-        // TODO Auto-generated method stub
+        
         
     }
 
