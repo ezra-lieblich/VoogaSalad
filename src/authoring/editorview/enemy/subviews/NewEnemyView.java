@@ -6,7 +6,13 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 
-public class InitNewEnemyView {
+/**
+ * 
+ * @author Diane Hadley
+ *
+ */
+
+public class NewEnemyView {
 	
 	private BorderPane root;
 	private EnemyEditorView enemyView;
@@ -14,7 +20,7 @@ public class InitNewEnemyView {
 	private static final String RESOURCE_FILE_NAME = "resources/GameAuthoringEnemy";	
 	private ResourceBundle enemyResources = ResourceBundle.getBundle(RESOURCE_FILE_NAME);
 	
-	public InitNewEnemyView(EnemyEditorView enemyView){
+	public NewEnemyView(EnemyEditorView enemyView){
 		root = new BorderPane();
 		this.enemyView = enemyView;
 		initRoot();

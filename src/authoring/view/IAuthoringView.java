@@ -1,6 +1,9 @@
 package authoring.view;
 
 import authoring.editortabpane.IEditorTabPane;
+
+import java.util.List;
+
 import authoring.editortabpane.EditorTabPaneDelegate;
 
 import javafx.scene.Group;
@@ -28,6 +31,8 @@ public interface IAuthoringView {
     public Group getMyRoot ();
     
     public void setEditorView(Node editor);
+    
+    public void createEditorTabPane(List<String> tabs);
     
     public void setEditorTabPaneDelegate(EditorTabPaneDelegate delegate);
 
