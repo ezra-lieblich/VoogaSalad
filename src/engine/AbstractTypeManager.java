@@ -10,9 +10,14 @@ import java.util.function.Supplier;
 
 
 public abstract class AbstractTypeManager<E extends Type> extends Observable implements Manager<E> {
+    ManagerMediator managerMediator;
     Map<Integer, E> data;
     int activeId;
 
+    protected AbstractTypeManager(ManagerMediator managerMediator) {
+        this.managerMediator = managerMediator;
+    }
+    
     @Override
     public int addEntry (E entry) {
         data.put(entry.getId(), entry);
@@ -21,9 +26,11 @@ public abstract class AbstractTypeManager<E extends Type> extends Observable imp
 
     @Override
     public void removeEntry (int id) {
-        notifyObservers(data.remove(id));
+        managerMediator.removeEntryReferences(data.get(id));
+        data.remove(id);
+        //notifyObservers(data.remove(id));
     }
-    
+        
     protected <U> U getFromEntity(Supplier<U> getter) {
         return getter.get();
     }
@@ -32,7 +39,12 @@ public abstract class AbstractTypeManager<E extends Type> extends Observable imp
         setter.accept(newValue);
         //notifyObservers(activeId);
     }
-
+    
+    @Override
+    public void applyToAllEntities(Consumer<E> entry) {
+        data.values().stream().forEach(entry);
+    }
+    
     /*public <U> Consumer<U> setForActiveEntity(Consumer<U> setter, U newValue) {
         //Apply Type::setName to activeEntity
         Consumer<U> blahtest = e - setter.accept(newValue);; //.setName(c); // Type::setName;
@@ -42,7 +54,8 @@ public abstract class AbstractTypeManager<E extends Type> extends Observable imp
         Consumer<AbstractTypeManager> eblah = c -> c.setForActiveEntity(getActiveEntity()::setter)
     }*/
     
-    private E getEntity (int index) {
+    @Override //TODO - hide in interface
+    public E getEntity (int index) {
         return data.get(index);
     }
 
@@ -54,7 +67,7 @@ public abstract class AbstractTypeManager<E extends Type> extends Observable imp
     public E getActiveEntity () {
         return getEntity(activeId);
     }
-
+    
     /* (non-Javadoc)
      * @see engine.Manager#getActiveId()
      */

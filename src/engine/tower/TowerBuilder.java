@@ -1,11 +1,12 @@
 package engine.tower;
 
+import engine.TypeBuilder;
 import engine.ability.Ability;
+import engine.enemy.Enemy;
 import engine.weapon.Weapon;
-import gameplayer.model.Enemy;
 
 
-public interface TowerBuilder {
+public interface TowerBuilder extends TypeBuilder<Tower>, TowerInitializer { //TODO - Add bindable interface
 
     TowerBuilder buildUpgrade (Tower ... upgrades);
 

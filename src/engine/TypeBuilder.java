@@ -1,6 +1,6 @@
 package engine;
 
-public interface AbstractBuilder<E extends Type> {
+public interface TypeBuilder<E extends Type> {
 
     void buildName (String name);
 

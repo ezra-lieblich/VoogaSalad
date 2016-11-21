@@ -2,10 +2,11 @@ package engine.enemy;
 
 import java.util.ResourceBundle;
 import engine.AbstractType;
+import engine.TypeInitializer;
 
 public class EnemyType extends AbstractType implements Enemy {
 
-	private double speed;
+    private double speed;
 	private double health;
 	private double damage;
 	private double points;
@@ -13,36 +14,42 @@ public class EnemyType extends AbstractType implements Enemy {
 	private String collisionEffect;
 
 	
-	public EnemyType() {
-		//possible hold a resource file that has default values for an enemy
-        super.setName(super.getResources("EnemyTypeName"));
-		super.setImagePath(super.getResources("EnemyTypeImage"));
-		speed = Double.parseDouble(super.getResources("EnemyTypeSpeed"));
-        health = Double.parseDouble(super.getResources("EnemyTypeHealth"));
-		damage = Double.parseDouble(super.getResources("EnemyTypeDamage"));
-        points = Double.parseDouble(super.getResources("EnemyTypePoints"));
-        money = Double.parseDouble(super.getResources("EnemyTypeMoney"));
-        collisionEffect = super.getResources("EnemyTypeCollisionEffect");
-//		speed = 5;
-//		health = 10;
-//		points = 50;
-//		money = 50;
-//        collisionEffect = "normal";
-
-	}
+    protected EnemyType (TypeInitializer typeBuilder) {
+        super(typeBuilder);
+        // TODO Auto-generated constructor stub
+    }
 	
-	public EnemyType(String name, String imageLocation, double speed, 
-			double health, double points, double money, String collisionEffect){
-		
-		super.setName(name);
-		super.setImagePath(imageLocation);
-		this.speed = speed; 
-		this.health = health; 
-		this.points = points; 
-		this.money = money; 
-		this.collisionEffect = collisionEffect; 
-		
-	}
+	
+//	public EnemyType() {
+//		//possible hold a resource file that has default values for an enemy
+//        super.setName(super.getResources("EnemyTypeName"));
+//		super.setImagePath(super.getResources("EnemyTypeImage"));
+//		speed = Double.parseDouble(super.getResources("EnemyTypeSpeed"));
+//        health = Double.parseDouble(super.getResources("EnemyTypeHealth"));
+//		damage = Double.parseDouble(super.getResources("EnemyTypeDamage"));
+//        points = Double.parseDouble(super.getResources("EnemyTypePoints"));
+//        money = Double.parseDouble(super.getResources("EnemyTypeMoney"));
+//        collisionEffect = super.getResources("EnemyTypeCollisionEffect");
+////		speed = 5;
+////		health = 10;
+////		points = 50;
+////		money = 50;
+////        collisionEffect = "normal";
+//
+//	}
+//	
+//	public EnemyType(String name, String imageLocation, double speed, 
+//			double health, double points, double money, String collisionEffect){
+//		
+//		super.setName(name);
+//		super.setImagePath(imageLocation);
+//		this.speed = speed; 
+//		this.health = health; 
+//		this.points = points; 
+//		this.money = money; 
+//		this.collisionEffect = collisionEffect; 
+//		
+//	}
 	
 
 	

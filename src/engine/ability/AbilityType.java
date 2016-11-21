@@ -1,16 +1,18 @@
 package engine.ability;
 
 import engine.AbstractType;
+import engine.TypeInitializer;
 
 public class AbilityType extends AbstractType implements Ability {
+
     private String effect;
     private double rate;
     
-    AbilityType() {
-        this.effect = "";
-        this.rate = 0;
+    protected AbilityType (TypeInitializer typeBuilder) {
+        super(typeBuilder);
+        // TODO Auto-generated constructor stub
     }
-
+    
     @Override
     public String getEffect () {
         return effect;
