@@ -8,11 +8,17 @@ public class WeaponEditorViewController extends EditorViewController
         implements WeaponEditorViewDelegate {
 
     private WeaponDataSource weaponDataSource;
+    private int currentWeaponID;
 
     public WeaponEditorViewController (int editorWidth, int editorHeight) throws IOException {
         IWeaponEditorView myView = WeaponEditorViewFactory.build(editorWidth, editorHeight);
         myView.setDelegate(this);
         this.view = myView;
+    }
+    
+    private void updateWeaponID () {
+        //How do I know which ID I'm working with?
+        //currentWeaponID = weaponDataSource.getWeap
     }
 
     public void setWeaponDataSource (WeaponDataSource source) {
@@ -20,8 +26,8 @@ public class WeaponEditorViewController extends EditorViewController
     }
 
     @Override
-    public void onUserEnteredWeaponFireRate (String rate) {
-        // TODO Auto-generated method stub
+    public void onUserEnteredWeaponFireRate (String fireRate) {
+        weaponDataSource.setWeaponFireRate(0, Integer.parseInt(fireRate));
 
     }
 

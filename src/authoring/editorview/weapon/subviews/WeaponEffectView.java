@@ -187,5 +187,9 @@ public class WeaponEffectView {
     public void updateWeaponDamage (int damage) {
         damageField.setText(Integer.toString(damage));
     }
+    
+    public void updateCreateWeapon () {
+        //Call all of the other update methods
+    }
 
 }

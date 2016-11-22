@@ -50,7 +50,7 @@ public class WeaponEditorView implements IWeaponEditorView {
 
     @Override
     public void updateCollisionEffectDisplay (String collisionEffect) {
-        // TODO Auto-generated method stub
+        weaponEffectsView.updateWeaponEffectDisplay(collisionEffect);
 
     }
 
@@ -78,7 +78,7 @@ public class WeaponEditorView implements IWeaponEditorView {
 
     @Override
     public void onUserPressedCreate () {
-        // TODO Auto-generated method stub
+        //weaponEffectsView.update
 
     }
 
@@ -87,5 +87,6 @@ public class WeaponEditorView implements IWeaponEditorView {
         // TODO Auto-generated method stub
         
     }
+    
 
 }

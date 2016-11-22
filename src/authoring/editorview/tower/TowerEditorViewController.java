@@ -18,6 +18,9 @@ public class TowerEditorViewController extends EditorViewController
         this.towerDataSource = source;
     }
 
+    /**
+     * Notification methods coming from delegate
+     */
     @Override
     public void onUserPressedCreateNewTower () {
         // TODO Auto-generated method stub
