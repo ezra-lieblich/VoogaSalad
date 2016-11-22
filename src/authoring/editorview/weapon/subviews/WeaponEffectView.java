@@ -2,6 +2,7 @@ package authoring.editorview.weapon.subviews;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ResourceBundle;
 import javax.imageio.ImageIO;
 import authoring.editorview.weapon.WeaponEditorViewDelegate;
 import javafx.collections.FXCollections;
@@ -19,7 +20,6 @@ import javafx.scene.layout.VBox;
 
 public class WeaponEffectView {
 
-    private String fireRate;
     private String imagePath;
     private String effect;
     private String speed;
@@ -29,14 +29,30 @@ public class WeaponEffectView {
     private ScrollPane completeView;
     private WeaponEditorViewDelegate delegate;
     private TextField fireRateField;
+    private TextField speedField;
+    private TextField rangeField;
+
+    private final String WEAPON_EFFECT_RESOURCE_PATH = "resources/GameAuthoringWeapon";
 
     public WeaponEffectView () throws IOException {
         vboxView = new VBox(10);
         completeView = new ScrollPane();
         completeView.setContent(vboxView);
-        fireRateField = makeTextField("Set weapon fire rate: ",
-                                      e -> delegate.onUserEnteredWeaponFireRate(fireRate));
+
+        buildViewComponents();
         placeInVBox();
+    }
+
+    private void buildViewComponents () {
+        ResourceBundle labelsResource = ResourceBundle.getBundle(WEAPON_EFFECT_RESOURCE_PATH);
+        fireRateField = makeTextField(labelsResource.getString("Rate"),
+                                      e -> delegate.onUserEnteredWeaponFireRate(fireRateField
+                                              .getText()));
+        speedField = makeTextField(labelsResource.getString("Speed"),
+                                   e -> delegate
+                                           .onUserEnteredProjectileSpeed(speedField.getText()));
+        rangeField = makeTextField(labelsResource.getString("Range"),
+                                   e -> delegate.onUserEnteredWeaponRange(rangeField.getText()));
     }
 
     public ScrollPane getCompleteView () {
@@ -46,30 +62,25 @@ public class WeaponEffectView {
     private void placeInVBox () throws IOException {
         // TODO: Get the photo and id of the current weapon from the model and place first in this
         // box
-        BufferedImage image;
+        BufferedImage imageRead;
         ImageView myImageView = new ImageView();
         try {
-            image = ImageIO.read(getClass().getClassLoader().getResourceAsStream(imagePath));
-            Image image2 = SwingFXUtils.toFXImage(image, null);
+            imageRead = ImageIO.read(getClass().getClassLoader().getResourceAsStream(imagePath));
+            Image image2 = SwingFXUtils.toFXImage(imageRead, null);
             myImageView.setImage(image2);
         }
         catch (Exception e) {
-            image =
+            imageRead =
                     ImageIO.read(getClass().getClassLoader()
                             .getResourceAsStream("questionmark.png"));
-            Image image2 = SwingFXUtils.toFXImage(image, null);
+            Image image2 = SwingFXUtils.toFXImage(imageRead, null);
             myImageView.setImage(image2);
             System.out.println("Unable to find picture in files");
         }
         vboxView.getChildren().add(myImageView);
-        vboxView.getChildren()
-                .add(makeTextField("Set weapon speed: ",
-                                   e -> delegate.onUserEnteredProjectileSpeed(speed)));
-        vboxView.getChildren()
-                .add(fireRateField);
-        vboxView.getChildren()
-                .add(makeTextField("Set weapon range: ",
-                                   e -> delegate.onUserEnteredWeaponRange(range)));
+        vboxView.getChildren().add(speedField);
+        vboxView.getChildren().add(fireRateField);
+        vboxView.getChildren().add(rangeField);
         javafx.collections.ObservableList<String> effectOptions =
                 FXCollections.observableArrayList("IDK", "Sorry");
         vboxView.getChildren()

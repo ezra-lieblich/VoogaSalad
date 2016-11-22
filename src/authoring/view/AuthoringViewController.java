@@ -29,18 +29,14 @@ public class AuthoringViewController implements EditorTabPaneDelegate {
     }
 
     private void createScene (int width, int height) {
-    	if (tabNames==null){
-    		loadInTabNames();
-    	}
+    	checkNullTabs();
         view = AuthoringViewFactory.build(width, height);
         view.createEditorTabPane(tabNames);
         view.setEditorTabPaneDelegate(this);
     }
 
     private void createEditors () throws IOException {
-    	if (tabNames==null){
-    		loadInTabNames();
-    	}
+        checkNullTabs();
         ResourceBundle settingsResource = ResourceBundle.getBundle(SETTINGS_RESOURCE_PATH);
     	editors = new HashMap<String, EditorViewController>();
         int width = Integer.parseInt(settingsResource.getString("editorPrefWidth"));
@@ -52,9 +48,15 @@ public class AuthoringViewController implements EditorTabPaneDelegate {
         editors.put("settings", new GameSettingsEditorViewController(width, height));
         editors.put("level", new LevelEditorViewController(width, height));
     }
+
+    private void checkNullTabs () {
+        if (tabNames==null){
+    		loadInTabNames();
+    	}
+    }
     
     private void createEditorViewControllerForTab(String tabNames){
-    	//TODO: Reflection
+    	//TODO: Reflection (see createEditors method)
     }
 
     private void loadInTabNames(){
