@@ -41,4 +41,11 @@ public class WeaponEditorView implements IWeaponEditorView {
         this.delegate = delegate;
     }
 
+
+    @Override
+    public void updateHealthDisplay (int health) {
+        // TODO Auto-generated method stub
+        
+    }
+
 }

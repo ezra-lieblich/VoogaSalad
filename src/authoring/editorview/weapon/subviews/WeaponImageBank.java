@@ -11,7 +11,6 @@ import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -54,7 +53,7 @@ public class WeaponImageBank {
                 image = ImageIO.read(chosenFile);
                 //TODO: Figure this out
                 imageView = new ImageIcon(image);
-                delegate.createWeapon();
+                delegate.onUserPressedCreate();
                 //int newWeaponID = dataSource.createWeapon
                 //activeWeapons.put(newWeaponID, imageView);
             }

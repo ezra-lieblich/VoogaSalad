@@ -19,11 +19,11 @@ import javafx.scene.layout.VBox;
 
 public class WeaponEffectView {
 
-    private double fireRate;
+    private String fireRate;
     private String imagePath;
     private String effect;
-    private double speed;
-    private int range;
+    private String speed;
+    private String range;
 
     private VBox vboxView;
     private ScrollPane completeView;
@@ -64,16 +64,16 @@ public class WeaponEffectView {
         }
         vboxView.getChildren().add(myImageView);
         vboxView.getChildren()
-                .add(makeTextField("Set weapon speed: ", e -> delegate.setWeaponSpeed(speed)));
+                .add(makeTextField("Set weapon speed: ", e -> delegate.onUserEnteredProjectileSpeed(speed)));
         vboxView.getChildren()
                 .add(makeTextField("Set weapon fire rate: ",
-                                   e -> delegate.setWeaponFireRate(fireRate)));
+                                   e -> delegate.onUserEnteredWeaponFireRate(fireRate)));
         vboxView.getChildren()
-                .add(makeTextField("Set weapon range: ", e -> delegate.setWeaponRange(range)));
+                .add(makeTextField("Set weapon range: ", e -> delegate.onUserEnteredWeaponRange(range)));
         javafx.collections.ObservableList<String> effectOptions =
                 FXCollections.observableArrayList("IDK", "Sorry");
         vboxView.getChildren()
-                .add(makeComboBox("Set weapon effect: ", e -> delegate.setWeaponEffect(effect),
+                .add(makeComboBox("Set weapon effect: ", e -> delegate.onUserEnteredWeaponEffect(effect),
                                   effectOptions));
     }
 
