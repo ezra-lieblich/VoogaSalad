@@ -2,7 +2,6 @@ package authoring.editorview.weapon.subviews;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.List;
 import javax.imageio.ImageIO;
 import authoring.editorview.weapon.WeaponEditorViewDelegate;
 import javafx.collections.FXCollections;
