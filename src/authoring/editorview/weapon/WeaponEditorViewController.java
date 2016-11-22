@@ -1,5 +1,6 @@
 package authoring.editorview.weapon;
 
+import java.io.IOException;
 import authoring.editorview.EditorViewController;
 
 
@@ -8,7 +9,7 @@ public class WeaponEditorViewController extends EditorViewController
 	
 	private WeaponDataSource weaponDataSource;
 
-    public WeaponEditorViewController (int editorWidth, int editorHeight) {
+    public WeaponEditorViewController (int editorWidth, int editorHeight) throws IOException {
         IWeaponEditorView myView = WeaponEditorViewFactory.build(editorWidth, editorHeight);
         myView.setDelegate(this);
         this.view = myView;
