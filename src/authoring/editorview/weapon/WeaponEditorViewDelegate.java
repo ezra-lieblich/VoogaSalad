@@ -13,6 +13,8 @@ public interface WeaponEditorViewDelegate {
     public void onUserEnteredWeaponImage (String weaponImagePath);
 
     public void onUserEnteredWeaponDamage (String damage);
+    
+    public void onUserEntereredWeaponName (String weaponName);
 
     public void onUserPressedCreate ();
 

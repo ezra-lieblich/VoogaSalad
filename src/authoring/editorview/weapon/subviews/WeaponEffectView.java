@@ -32,11 +32,14 @@ public class WeaponEffectView {
     private TextField fireRateField;
     private TextField speedField;
     private TextField rangeField;
+    private TextField nameField;
+    private ComboBox<String> weaponEffectBox;
     private ResourceBundle labelsResource;
 
     private final String WEAPON_EFFECT_RESOURCE_PATH = "resources/GameAuthoringWeapon";
 
-    public WeaponEffectView () throws IOException {
+    public WeaponEffectView (WeaponEditorViewDelegate delegate) throws IOException {
+        this.delegate = delegate;
         labelsResource = ResourceBundle.getBundle(WEAPON_EFFECT_RESOURCE_PATH);
         vboxView = new VBox(10);
         completeView = new ScrollPane();
@@ -46,23 +49,29 @@ public class WeaponEffectView {
         placeInVBox();
     }
 
-    private void buildViewComponents () {
+    private void buildViewComponents () throws IOException {
         makeTextFields();
 
         vboxView.getChildren().add(createHBox(labelsResource.getString("Rate"), fireRateField));
         vboxView.getChildren().add(createHBox(labelsResource.getString("Speed"), speedField));
         vboxView.getChildren().add(createHBox(labelsResource.getString("Range"), rangeField));
+        vboxView.getChildren().add(createHBox(labelsResource.getString("Name"), nameField));
+        ImageView myImageView = loadWeaponImage();
+        vboxView.getChildren().add(myImageView);
     }
 
     private void makeTextFields () {
         rangeField = makeTextField("Enter integer value",
                                    e -> delegate.onUserEnteredWeaponRange(rangeField.getText()));
+        System.out.println(delegate);
         speedField = makeTextField("Enter integer value",
                                    e -> delegate
                                            .onUserEnteredProjectileSpeed(speedField.getText()));
         fireRateField = makeTextField("Enter integer value",
                                       e -> delegate.onUserEnteredWeaponFireRate(fireRateField
                                               .getText()));
+        nameField = makeTextField("Enter name",
+                                  e -> delegate.onUserEntereredWeaponName(nameField.getText()));
     }
 
     private HBox createHBox (String labelString, TextField textField) {
@@ -77,8 +86,18 @@ public class WeaponEffectView {
     }
 
     private void placeInVBox () throws IOException {
-        // TODO: Get the photo and id of the current weapon from the model and place first in this
-        // box
+        Button loadNewImageButton = new Button("Load new weapon image");
+        // loadNewImageButton.setOnMouseClicked(e -> openFileChooser!!!!)
+        vboxView.getChildren().add(loadNewImageButton);
+        javafx.collections.ObservableList<String> effectOptions =
+                FXCollections.observableArrayList("IDK", "Sorry");
+        weaponEffectBox = makeComboBox("Set weapon effect: ",
+                                       e -> delegate.onUserEnteredWeaponEffect(effect),
+                                       effectOptions);
+        vboxView.getChildren().add(weaponEffectBox);
+    }
+
+    private ImageView loadWeaponImage () throws IOException {
         BufferedImage imageRead;
         ImageView myImageView = new ImageView();
         try {
@@ -94,20 +113,7 @@ public class WeaponEffectView {
             myImageView.setImage(image2);
             System.out.println("Unable to find picture in files");
         }
-        vboxView.getChildren().add(myImageView);
-        Button loadNewImageButton = new Button("Load new weapon image");
-        // loadNewImageButton.setOnMouseClicked(e -> openFileChooser!!!!)
-        vboxView.getChildren().add(loadNewImageButton);
-        javafx.collections.ObservableList<String> effectOptions =
-                FXCollections.observableArrayList("IDK", "Sorry");
-        vboxView.getChildren()
-                .add(makeComboBox("Set weapon effect: ",
-                                  e -> delegate.onUserEnteredWeaponEffect(effect),
-                                  effectOptions));
-    }
-
-    public void updateFireRateDisplay (int fireRate) {
-        fireRateField.setText(Integer.toString(fireRate));
+        return myImageView;
     }
 
     private TextField makeTextField (String name, EventHandler<ActionEvent> event) {
@@ -124,6 +130,26 @@ public class WeaponEffectView {
         combobox.setOnAction(event);
         combobox.setPromptText(name);
         return combobox;
+    }
+
+    /**
+     * Update fields methods
+     */
+
+    public void updateFireRateDisplay (int fireRate) {
+        fireRateField.setText(Integer.toString(fireRate));
+    }
+
+    public void updateSpeedDisplay (int speed) {
+        speedField.setText(Integer.toString(speed));
+    }
+
+    public void updateRangeDisplay (int range) {
+        rangeField.setText(Integer.toString(range));
+    }
+
+    public void updateWeaponEffectDisplay (String effect) {
+        weaponEffectBox.setValue(effect);
     }
 
 }

@@ -11,6 +11,7 @@ import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -22,8 +23,7 @@ public class WeaponImageBank {
 
     private File chosenFile;
     private ScrollPane weaponBank;
-    //ImageIcon is not going to work here... Need to come up with something better
-    private Map<Integer, ImageIcon> activeWeapons;
+    private Map<Integer, ImageView> activeWeapons;
     private ImageIcon imageView;
     private WeaponEditorViewDelegate delegate;
 
@@ -34,7 +34,7 @@ public class WeaponImageBank {
         weaponBank.setContent(createWeaponButton);
     }
 
-    public Map<Integer, ImageIcon> getMyWeapons () {
+    public Map<Integer, ImageView> getMyWeapons () {
         return activeWeapons;
     }
     
@@ -51,7 +51,6 @@ public class WeaponImageBank {
             BufferedImage image;
             try {
                 image = ImageIO.read(chosenFile);
-                //TODO: Figure this out
                 imageView = new ImageIcon(image);
                 delegate.onUserPressedCreate();
                 //int newWeaponID = dataSource.createWeapon

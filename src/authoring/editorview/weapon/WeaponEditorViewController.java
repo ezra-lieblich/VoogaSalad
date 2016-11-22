@@ -8,7 +8,6 @@ public class WeaponEditorViewController extends EditorViewController
         implements WeaponEditorViewDelegate {
 
     private WeaponDataSource weaponDataSource;
-    private IWeaponEditorView myView;
 
     public WeaponEditorViewController (int editorWidth, int editorHeight) throws IOException {
         IWeaponEditorView myView = WeaponEditorViewFactory.build(editorWidth, editorHeight);
@@ -40,8 +39,7 @@ public class WeaponEditorViewController extends EditorViewController
 
     @Override
     public void onUserEnteredWeaponRange (String range) {
-        // TODO Auto-generated method stub
-
+        weaponDataSource.setWeaponRange(0, Integer.parseInt(range));
     }
 
     @Override
@@ -60,5 +58,11 @@ public class WeaponEditorViewController extends EditorViewController
     public void onUserPressedCreate () {
         // TODO Auto-generated method stub
 
+    }
+
+    @Override
+    public void onUserEntereredWeaponName (String weaponName) {
+        // TODO Auto-generated method stub
+        
     }
 }

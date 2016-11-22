@@ -16,7 +16,7 @@ public class WeaponEditorView implements IWeaponEditorView {
     public WeaponEditorView () throws IOException {
         weaponEditorView = new BorderPane();
         weaponBank = new WeaponImageBank(delegate);
-        weaponEffectsView = new WeaponEffectView();
+        weaponEffectsView = new WeaponEffectView(delegate);
         setBorderPane();
     }
 
@@ -42,8 +42,7 @@ public class WeaponEditorView implements IWeaponEditorView {
 
     @Override
     public void updateSpeedDisplay (int speed) {
-        // TODO Auto-generated method stub
-
+        weaponEffectsView.updateSpeedDisplay(speed);
     }
 
     @Override
@@ -54,8 +53,7 @@ public class WeaponEditorView implements IWeaponEditorView {
 
     @Override
     public void updateRangeDisplay (int range) {
-        // TODO Auto-generated method stub
-
+        weaponEffectsView.updateRangeDisplay(range);
     }
 
     @Override
@@ -65,7 +63,7 @@ public class WeaponEditorView implements IWeaponEditorView {
     }
 
     @Override
-    public void updateImageID (int weaponImageID) {
+    public void updateWeaponID (int weaponID) {
         // TODO Auto-generated method stub
 
     }
