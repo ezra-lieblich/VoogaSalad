@@ -1,10 +1,8 @@
 package authoring.editorview.weapon.subviews;
 
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.Map;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
+import authoring.editorview.PhotoFileChooser;
 import authoring.editorview.weapon.WeaponEditorViewDelegate;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -12,8 +10,6 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 
 
 public class WeaponImageBank {
@@ -28,7 +24,8 @@ public class WeaponImageBank {
 
     public WeaponImageBank () {
         weaponBank = new ScrollPane();
-        Button createWeaponButton = createButton("Create Weapon", e -> selectFile("Photos: "));
+        PhotoFileChooser fileChooser = new PhotoFileChooser();
+        Button createWeaponButton = createButton("Create Weapon", e -> fileChooser.selectFile("Photos: ", "Select new weapon image"));
         weaponBank.setContent(createWeaponButton);
     }
 
@@ -42,7 +39,7 @@ public class WeaponImageBank {
         return button;
     }
 
-    private void openFileChooser (FileChooser chooseFile) {
+/*    private void openFileChooser (FileChooser chooseFile) {
         chosenFile = chooseFile.showOpenDialog(new Stage());
         if (chosenFile != null) {
             // give this image an id, keep it in bank
@@ -69,6 +66,7 @@ public class WeaponImageBank {
         choose.getExtensionFilters().add(extFilter);
         openFileChooser(choose);
     }
+*/
 
     public Node getInstanceAsNode () {
         return weaponBank;
