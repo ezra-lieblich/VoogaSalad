@@ -15,4 +15,22 @@ public class LevelEditorViewController extends EditorViewController implements L
 	public void setLevelDataSource(LevelDataSource source){
 		this.levelDataSource = source;
 	}
+
+	@Override
+	public void onUserEnteredRewardPoints(String points) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onUserEnteredRewardMoney(String money) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onUserEnteredRewardHealth(String health) {
+		// TODO Auto-generated method stub
+		
+	}
 }
