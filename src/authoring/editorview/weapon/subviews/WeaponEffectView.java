@@ -69,17 +69,17 @@ public class WeaponEffectView {
     }
 
     private void makeTextFields () {
-        rangeField = makeTextField("Enter integer value",
+        rangeField = makeTextField(labelsResource.getString("EnterInt"),
                                    e -> delegate.onUserEnteredWeaponRange(rangeField.getText()));
-        speedField = makeTextField("Enter integer value",
+        speedField = makeTextField(labelsResource.getString("EnterInt"),
                                    e -> delegate
                                            .onUserEnteredProjectileSpeed(speedField.getText()));
-        fireRateField = makeTextField("Enter integer value",
+        fireRateField = makeTextField(labelsResource.getString("EnterInt"),
                                       e -> delegate.onUserEnteredWeaponFireRate(fireRateField
                                               .getText()));
-        nameField = makeTextField("Enter name",
+        nameField = makeTextField(labelsResource.getString("EnterString"),
                                   e -> delegate.onUserEnteredWeaponName(nameField.getText()));
-        damageField = makeTextField("Enter integer value",
+        damageField = makeTextField(labelsResource.getString("EnterInt"),
                                     e -> delegate.onUserEnteredWeaponDamage(damageField.getText()));
     }
 
@@ -97,7 +97,7 @@ public class WeaponEffectView {
     private void placeInVBox () throws IOException {
         javafx.collections.ObservableList<String> effectOptions =
                 FXCollections.observableArrayList("IDK", "Sorry");
-        weaponEffectBox = makeComboBox("Set weapon effect: ",
+        weaponEffectBox = makeComboBox(labelsResource.getString("Effect"),
                                        e -> delegate.onUserEnteredWeaponEffect(weaponEffectBox
                                                .getValue()),
                                        effectOptions);
@@ -105,9 +105,10 @@ public class WeaponEffectView {
         javafx.collections.ObservableList<String> pathOptions =
                 FXCollections.observableArrayList("I still don't know", "Sorry");
         weaponPathBox =
-                makeComboBox("Set weapon path: ",
+                makeComboBox(labelsResource.getString("Path"),
                              e -> delegate.onUserEnteredWeaponPath(weaponPathBox.getValue()),
                              pathOptions);
+        vboxView.getChildren().add(weaponPathBox);
     }
 
     private ImageView loadWeaponImage () throws IOException {
@@ -117,11 +118,12 @@ public class WeaponEffectView {
             imageRead = ImageIO.read(getClass().getClassLoader().getResourceAsStream(imagePath));
             Image image2 = SwingFXUtils.toFXImage(imageRead, null);
             myImageView.setImage(image2);
+            delegate.onUserEnteredWeaponImage(imagePath);
         }
         catch (Exception e) {
             imageRead =
                     ImageIO.read(getClass().getClassLoader()
-                            .getResourceAsStream("questionmark.png"));
+                            .getResourceAsStream(labelsResource.getString("DefaultImagePath")));
             Image image2 = SwingFXUtils.toFXImage(imageRead, null);
             myImageView.setImage(image2);
             System.out.println("Unable to find picture in files");
@@ -166,8 +168,8 @@ public class WeaponEffectView {
         weaponEffectBox.setValue(effect);
     }
 
-    public void updateWeaponImagePath (String imagepath) {
-        // load in new photo
+    public void updateWeaponImagePath (String imagePath) {
+        this.imagePath = imagePath;
     }
 
     public void updateWeaponName (String name) {
