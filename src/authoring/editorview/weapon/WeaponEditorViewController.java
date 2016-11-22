@@ -49,8 +49,7 @@ public class WeaponEditorViewController extends EditorViewController
     }
 
     @Override
-    public int createWeapon () {
+    public void createWeapon () {
         // TODO Auto-generated method stub
-        return 0;
     }
 }
