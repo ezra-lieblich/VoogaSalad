@@ -43,7 +43,10 @@ public class WeaponEffectView {
         vboxView.getChildren()
                 .add(makeTextField("Set weapon speed: ", e -> delegate.setWeaponSpeed(speed)));
         vboxView.getChildren()
-                .add(makeTextField("Set fire rate: ", e -> delegate.setWeaponFireRate(fireRate)));
+                .add(makeTextField("Set weapon fire rate: ",
+                                   e -> delegate.setWeaponFireRate(fireRate)));
+        vboxView.getChildren()
+                .add(makeTextField("Set weapon range: ", e -> delegate.setWeaponRange(range)));
     }
 
     private TextField makeTextField (String name, EventHandler<ActionEvent> event) {

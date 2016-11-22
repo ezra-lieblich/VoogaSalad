@@ -25,6 +25,7 @@ public class WeaponImageBank {
     private ImageIcon imageView;
 
     public WeaponImageBank () {
+        weaponBank = new ScrollPane();
         Button createWeaponButton = createButton("Create Weapon", e -> selectFile("Photos: "));
         weaponBank.setContent(createWeaponButton);
     }

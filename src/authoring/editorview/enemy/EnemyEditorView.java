@@ -9,7 +9,7 @@ import javafx.scene.layout.BorderPane;
  */
 
 public class EnemyEditorView implements IEnemyEditorView {
-
+	private EnemyEditorViewDelegate delegate;
 	private BorderPane root;
 	
 	public EnemyEditorView(){
@@ -26,6 +26,11 @@ public class EnemyEditorView implements IEnemyEditorView {
     	Group designEnemy = new Group();
     	root.setCenter(designEnemy);
     }
+
+	@Override
+	public void setDelegate(EnemyEditorViewDelegate delegate) {
+		this.delegate = delegate;
+	}
     
     
     
