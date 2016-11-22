@@ -1,6 +1,6 @@
 package engine;
 
-public interface IEntity {
+public interface Type {
 
     String getName ();
 
@@ -13,5 +13,7 @@ public interface IEntity {
     double getSize ();
 
     void setSize (double size);
+    
+    int getId ();
 
 }
