@@ -1,32 +1,28 @@
 package engine;
 
-import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.io.xml.DomDriver;
-import engine.enemy.EnemyManager;
-import engine.level.LevelTypeManager;
-import engine.path.PathManager;
-import engine.tower.TowerManager;
-import engine.weapon.WeaponTypeManager;
-import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import java.util.List;
 
+/**
+ * Created by ezra on 11/20/16.
+ */
+public interface Game {
+    String getName();
 
+    void setName(String name);
 
-public class Game {
-	private GameSettings settings;
-	private EnemyManager enemies;
-	private WeaponTypeManager weapons;
-	private TowerManager towers;
-	private PathManager path;
-	private LevelTypeManager levels;
+    String getBackgroundImage();
 
-    @XStreamOmitField
-    private XStream Serializer = new XStream(new DomDriver());
+    void setBackgroundImage(String backgroundImage);
 
+    List<String> getWinningConditions();
 
+    void setWinningConditions(String winningConditions);
 
+    List<String> getLosingConditions();
 
-    public String SaveData() {
-        return Serializer.toXML(this);
-    }
+    void setLosingConditions(String losingConditions);
+
+    String getGameType();
+
+    void setGameType(String gameType);
 }
-

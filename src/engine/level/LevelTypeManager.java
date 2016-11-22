@@ -15,4 +15,5 @@ public class LevelTypeManager extends AbstractTypeManager<Level> implements Leve
     protected Level createInstance() {
         return null;
     }
+
 }

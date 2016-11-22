@@ -6,6 +6,7 @@ import engine.ability.Ability;
 import engine.enemy.EnemyType;
 import engine.weapon.Weapon;
 import engine.weapon.WeaponType;
+import gameplayer.model.Enemy;
 
 
 public interface Tower extends Type {

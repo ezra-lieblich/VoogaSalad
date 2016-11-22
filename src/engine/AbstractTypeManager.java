@@ -59,5 +59,5 @@ public abstract class AbstractTypeManager<E extends Type> extends Observable imp
      * activeEntities.stream().forEach(function);
      * }
      */
-    
+
 }
