@@ -14,4 +14,16 @@ public class GameSettingsEditorViewController extends EditorViewController imple
 	public void setGameSettingsDataSource(GameSettingsDataSource source){
 		this.gameSettingsDataSource = source;
 	}
+
+	@Override
+	public void onUserEnteredGameLives(String lives) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onUserEnteredGameNames(String name) {
+		// TODO Auto-generated method stub
+		
+	}
 }
