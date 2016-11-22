@@ -10,11 +10,14 @@ import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 
@@ -22,8 +25,6 @@ public class WeaponEffectView {
 
     private String imagePath;
     private String effect;
-    private String speed;
-    private String range;
 
     private VBox vboxView;
     private ScrollPane completeView;
@@ -31,10 +32,12 @@ public class WeaponEffectView {
     private TextField fireRateField;
     private TextField speedField;
     private TextField rangeField;
+    private ResourceBundle labelsResource;
 
     private final String WEAPON_EFFECT_RESOURCE_PATH = "resources/GameAuthoringWeapon";
 
     public WeaponEffectView () throws IOException {
+        labelsResource = ResourceBundle.getBundle(WEAPON_EFFECT_RESOURCE_PATH);
         vboxView = new VBox(10);
         completeView = new ScrollPane();
         completeView.setContent(vboxView);
@@ -44,15 +47,29 @@ public class WeaponEffectView {
     }
 
     private void buildViewComponents () {
-        ResourceBundle labelsResource = ResourceBundle.getBundle(WEAPON_EFFECT_RESOURCE_PATH);
-        fireRateField = makeTextField(labelsResource.getString("Rate"),
-                                      e -> delegate.onUserEnteredWeaponFireRate(fireRateField
-                                              .getText()));
-        speedField = makeTextField(labelsResource.getString("Speed"),
+        makeTextFields();
+
+        vboxView.getChildren().add(createHBox(labelsResource.getString("Rate"), fireRateField));
+        vboxView.getChildren().add(createHBox(labelsResource.getString("Speed"), speedField));
+        vboxView.getChildren().add(createHBox(labelsResource.getString("Range"), rangeField));
+    }
+
+    private void makeTextFields () {
+        rangeField = makeTextField("Enter integer value",
+                                   e -> delegate.onUserEnteredWeaponRange(rangeField.getText()));
+        speedField = makeTextField("Enter integer value",
                                    e -> delegate
                                            .onUserEnteredProjectileSpeed(speedField.getText()));
-        rangeField = makeTextField(labelsResource.getString("Range"),
-                                   e -> delegate.onUserEnteredWeaponRange(rangeField.getText()));
+        fireRateField = makeTextField("Enter integer value",
+                                      e -> delegate.onUserEnteredWeaponFireRate(fireRateField
+                                              .getText()));
+    }
+
+    private HBox createHBox (String labelString, TextField textField) {
+        HBox box = new HBox(5);
+        Label label = new Label(labelString);
+        box.getChildren().addAll(label, textField);
+        return box;
     }
 
     public ScrollPane getCompleteView () {
@@ -78,9 +95,9 @@ public class WeaponEffectView {
             System.out.println("Unable to find picture in files");
         }
         vboxView.getChildren().add(myImageView);
-        vboxView.getChildren().add(speedField);
-        vboxView.getChildren().add(fireRateField);
-        vboxView.getChildren().add(rangeField);
+        Button loadNewImageButton = new Button("Load new weapon image");
+        // loadNewImageButton.setOnMouseClicked(e -> openFileChooser!!!!)
+        vboxView.getChildren().add(loadNewImageButton);
         javafx.collections.ObservableList<String> effectOptions =
                 FXCollections.observableArrayList("IDK", "Sorry");
         vboxView.getChildren()
@@ -95,7 +112,6 @@ public class WeaponEffectView {
 
     private TextField makeTextField (String name, EventHandler<ActionEvent> event) {
         TextField textField = new TextField();
-        // textField.text This is the location of the label :)
         textField.setPromptText(name);
         textField.setOnAction(event);
         return textField;
