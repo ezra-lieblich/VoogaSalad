@@ -1,5 +1,6 @@
 package authoring.view;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -21,7 +22,7 @@ public class AuthoringViewController implements EditorTabPaneDelegate {
     private final String TABS_RESOURCE_PATH = "resources/GameAuthoringToolbar";
     private ArrayList<String> tabNames;
 
-    public AuthoringViewController (int width, int height) {
+    public AuthoringViewController (int width, int height) throws IOException {
         createEditors();
         createScene(width, height);
         view.setEditorView(editors.values().iterator().next().getView());
@@ -36,7 +37,7 @@ public class AuthoringViewController implements EditorTabPaneDelegate {
         view.setEditorTabPaneDelegate(this);
     }
 
-    private void createEditors () {
+    private void createEditors () throws IOException {
     	if (tabNames==null){
     		loadInTabNames();
     	}

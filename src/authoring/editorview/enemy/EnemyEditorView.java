@@ -10,21 +10,21 @@ import javafx.scene.layout.BorderPane;
 
 public class EnemyEditorView implements IEnemyEditorView {
 	private EnemyEditorViewDelegate delegate;
-	private BorderPane root;
+	private BorderPane enemyEditorView;
 	
 	public EnemyEditorView(){
-		root = new BorderPane();
+		enemyEditorView = new BorderPane();
 		
 	}
 	
     @Override
     public Node getInstanceAsNode () {      
-    	return root;
+    	return enemyEditorView;
     }
     
     public void getEnemySetter(){
     	Group designEnemy = new Group();
-    	root.setCenter(designEnemy);
+    	enemyEditorView.setCenter(designEnemy);
     }
 
 	@Override
