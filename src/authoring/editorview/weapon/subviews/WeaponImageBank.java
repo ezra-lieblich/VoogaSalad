@@ -39,36 +39,6 @@ public class WeaponImageBank extends PhotoFileChooser {
         return button;
     }
 
-    /*
-     * private void openFileChooser (FileChooser chooseFile) {
-     * chosenFile = chooseFile.showOpenDialog(new Stage());
-     * if (chosenFile != null) {
-     * // give this image an id, keep it in bank
-     * BufferedImage image;
-     * try {
-     * image = ImageIO.read(chosenFile);
-     * ImageIcon imageView = new ImageIcon(image);
-     * delegate.onUserPressedCreate();
-     * //int newWeaponID = dataSource.createWeapon
-     * //activeWeapons.put(newWeaponID, imageView);
-     * }
-     * catch (Exception e) {
-     * System.out.println("Unable to load photo");
-     * // TODO: Fix this output to be better for the user
-     * }
-     * }
-     * }
-     * 
-     * private void selectFile (String fieldText) {
-     * FileChooser choose = new FileChooser();
-     * choose.setTitle("Load New Weapon to Editor");
-     * FileChooser.ExtensionFilter extFilter =
-     * new FileChooser.ExtensionFilter(fieldText, "*.png", "*.jpg", "*.gif");
-     * choose.getExtensionFilters().add(extFilter);
-     * openFileChooser(choose);
-     * }
-     */
-
     public Node getInstanceAsNode () {
         return weaponBank;
     }
