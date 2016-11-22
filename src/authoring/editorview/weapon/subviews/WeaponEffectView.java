@@ -33,13 +33,13 @@ public class WeaponEffectView {
     private TextField speedField;
     private TextField rangeField;
     private TextField nameField;
+    private TextField damageField;
     private ComboBox<String> weaponEffectBox;
     private ResourceBundle labelsResource;
 
     private final String WEAPON_EFFECT_RESOURCE_PATH = "resources/GameAuthoringWeapon";
 
     public WeaponEffectView () throws IOException {
-        this.delegate = delegate;
         labelsResource = ResourceBundle.getBundle(WEAPON_EFFECT_RESOURCE_PATH);
         vboxView = new VBox(10);
         completeView = new ScrollPane();
@@ -49,21 +49,28 @@ public class WeaponEffectView {
         placeInVBox();
     }
 
+    public void setDelegate (WeaponEditorViewDelegate delegate) {
+        this.delegate = delegate;
+    }
+
     private void buildViewComponents () throws IOException {
         makeTextFields();
-
+        
+        ImageView myImageView = loadWeaponImage();
+        vboxView.getChildren().add(myImageView);
+        Button loadNewImageButton = new Button(labelsResource.getString("Image"));
+        // loadNewImageButton.setOnMouseClicked(e -> openFileChooser!!!!)
+        vboxView.getChildren().add(loadNewImageButton);
+        vboxView.getChildren().add(createHBox(labelsResource.getString("Name"), nameField));
         vboxView.getChildren().add(createHBox(labelsResource.getString("Rate"), fireRateField));
         vboxView.getChildren().add(createHBox(labelsResource.getString("Speed"), speedField));
         vboxView.getChildren().add(createHBox(labelsResource.getString("Range"), rangeField));
-        vboxView.getChildren().add(createHBox(labelsResource.getString("Name"), nameField));
-        ImageView myImageView = loadWeaponImage();
-        vboxView.getChildren().add(myImageView);
+        vboxView.getChildren().add(createHBox(labelsResource.getString("Damage"), damageField));
     }
 
     private void makeTextFields () {
         rangeField = makeTextField("Enter integer value",
                                    e -> delegate.onUserEnteredWeaponRange(rangeField.getText()));
-        System.out.println(delegate);
         speedField = makeTextField("Enter integer value",
                                    e -> delegate
                                            .onUserEnteredProjectileSpeed(speedField.getText()));
@@ -72,6 +79,8 @@ public class WeaponEffectView {
                                               .getText()));
         nameField = makeTextField("Enter name",
                                   e -> delegate.onUserEntereredWeaponName(nameField.getText()));
+        damageField = makeTextField("Enter integer value",
+                              e -> delegate.onUserEnteredWeaponDamage(damageField.getText()));
     }
 
     private HBox createHBox (String labelString, TextField textField) {
@@ -86,9 +95,6 @@ public class WeaponEffectView {
     }
 
     private void placeInVBox () throws IOException {
-        Button loadNewImageButton = new Button("Load new weapon image");
-        // loadNewImageButton.setOnMouseClicked(e -> openFileChooser!!!!)
-        vboxView.getChildren().add(loadNewImageButton);
         javafx.collections.ObservableList<String> effectOptions =
                 FXCollections.observableArrayList("IDK", "Sorry");
         weaponEffectBox = makeComboBox("Set weapon effect: ",
@@ -150,10 +156,6 @@ public class WeaponEffectView {
 
     public void updateWeaponEffectDisplay (String effect) {
         weaponEffectBox.setValue(effect);
-    }
-    
-    public void setDelegate(WeaponEditorViewDelegate delegate){
-    	this.delegate = delegate;
     }
 
 }

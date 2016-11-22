@@ -63,6 +63,6 @@ public class WeaponEditorViewController extends EditorViewController
     @Override
     public void onUserEntereredWeaponName (String weaponName) {
         // TODO Auto-generated method stub
-        
+
     }
 }
