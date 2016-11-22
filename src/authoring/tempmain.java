@@ -1,5 +1,6 @@
 package authoring;
 
+import java.io.IOException;
 import authoring.view.AuthoringViewController;
 import authoring.view.IAuthoringView;
 import javafx.application.Application;
@@ -18,7 +19,7 @@ public class tempmain extends Application {
     }
 
     @Override
-    public void start(Stage s){
+    public void start(Stage s) throws IOException{
             this.stage = s;
             //This is just for testing, should be switched to creating the authoring environment first
 //            AuthoringView game = new AuthoringView(SIZE, SIZE); 

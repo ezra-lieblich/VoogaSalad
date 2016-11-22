@@ -1,5 +1,6 @@
 package authoring.editorview.weapon;
 
+import java.io.IOException;
 import authoring.editorview.weapon.subviews.WeaponEffectView;
 import authoring.editorview.weapon.subviews.WeaponImageBank;
 import javafx.scene.Node;
@@ -12,7 +13,7 @@ public class WeaponEditorView implements IWeaponEditorView {
     private WeaponImageBank weaponBank;
     private WeaponEffectView weaponEffects;
 
-    public WeaponEditorView () {
+    public WeaponEditorView () throws IOException {
         weaponEditorView = new BorderPane();
         weaponBank = new WeaponImageBank(delegate);
         weaponEffects = new WeaponEffectView();
