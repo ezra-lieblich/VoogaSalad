@@ -136,17 +136,20 @@ public class XMLParser {
 		ArrayList<Queue<Enemy>>enemyByLevel=new ArrayList<>(); 
 		HashMap<String,EnemyType> types = getEnemyTypes();
 		String[]enemiesRawString = getTextValue("level"+level,"typeAmount").split(";");
-		for(int i=1;i<=enemiesRawString.length;i++){
+		for(int i=0;i<enemiesRawString.length;i++){
 			Queue<Enemy>enemiesInLevel= new LinkedList<Enemy>(); 
 			String[]enemies = enemiesRawString[i].split(",");
 			for(int k=0;k<Integer.parseInt(enemies[1]);k++){
 				EnemyType type = types.get(enemies[0]);
-				enemiesInLevel.add(new Enemy(type.getName(),type.getSpeed(),(int)(type.getHealth()),type.getImageLocation()));
+				double width = 20; //for testing purposes
+				double height = 20; //for testing purposes
+				enemiesInLevel.add(new Enemy(type.getName(),type.getSpeed(),(int)(type.getHealth()), type.getImageLocation(), width ,height)); //for testing
 			}
 			enemyByLevel.add(enemiesInLevel);
 		}
 		return enemyByLevel; 
 	}
+	
 	
 	private HashMap<String, EnemyType> getEnemyTypes() {
 		HashMap<String,EnemyType>ret = new HashMap<>(); 
