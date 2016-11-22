@@ -15,8 +15,8 @@ public class WeaponEditorView implements IWeaponEditorView {
 
     public WeaponEditorView () throws IOException {
         weaponEditorView = new BorderPane();
-        weaponBank = new WeaponImageBank(delegate);
-        weaponEffectsView = new WeaponEffectView(delegate);
+        weaponBank = new WeaponImageBank();
+        weaponEffectsView = new WeaponEffectView();
         setBorderPane();
     }
 
@@ -33,6 +33,8 @@ public class WeaponEditorView implements IWeaponEditorView {
     @Override
     public void setDelegate (WeaponEditorViewDelegate delegate) {
         this.delegate = delegate;
+        weaponBank.setDelegate(delegate);
+        weaponEffectsView.setDelegate(delegate);
     }
 
     @Override

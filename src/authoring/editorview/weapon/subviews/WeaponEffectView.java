@@ -38,7 +38,7 @@ public class WeaponEffectView {
 
     private final String WEAPON_EFFECT_RESOURCE_PATH = "resources/GameAuthoringWeapon";
 
-    public WeaponEffectView (WeaponEditorViewDelegate delegate) throws IOException {
+    public WeaponEffectView () throws IOException {
         this.delegate = delegate;
         labelsResource = ResourceBundle.getBundle(WEAPON_EFFECT_RESOURCE_PATH);
         vboxView = new VBox(10);
@@ -150,6 +150,10 @@ public class WeaponEffectView {
 
     public void updateWeaponEffectDisplay (String effect) {
         weaponEffectBox.setValue(effect);
+    }
+    
+    public void setDelegate(WeaponEditorViewDelegate delegate){
+    	this.delegate = delegate;
     }
 
 }

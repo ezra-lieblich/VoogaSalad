@@ -27,8 +27,7 @@ public class WeaponImageBank {
     private ImageIcon imageView;
     private WeaponEditorViewDelegate delegate;
 
-    public WeaponImageBank (WeaponEditorViewDelegate delegate) {
-        this.delegate = delegate;
+    public WeaponImageBank () {
         weaponBank = new ScrollPane();
         Button createWeaponButton = createButton("Create Weapon", e -> selectFile("Photos: "));
         weaponBank.setContent(createWeaponButton);
@@ -74,6 +73,11 @@ public class WeaponImageBank {
 
     public Node getInstanceAsNode () {
         return weaponBank;
+    }
+    
+    
+    public void setDelegate(WeaponEditorViewDelegate delegate){
+    	this.delegate = delegate;
     }
 
 }
