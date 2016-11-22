@@ -28,16 +28,15 @@ public class WeaponEffectView {
     private VBox vboxView;
     private ScrollPane completeView;
     private WeaponEditorViewDelegate delegate;
+    private TextField fireRateField;
 
     public WeaponEffectView () throws IOException {
         vboxView = new VBox(10);
         completeView = new ScrollPane();
-        placeInVBox();
         completeView.setContent(vboxView);
-    }
-
-    public void update () {
-
+        fireRateField = makeTextField("Set weapon fire rate: ",
+                                      e -> delegate.onUserEnteredWeaponFireRate(fireRate));
+        placeInVBox();
     }
 
     public ScrollPane getCompleteView () {
@@ -64,17 +63,23 @@ public class WeaponEffectView {
         }
         vboxView.getChildren().add(myImageView);
         vboxView.getChildren()
-                .add(makeTextField("Set weapon speed: ", e -> delegate.onUserEnteredProjectileSpeed(speed)));
+                .add(makeTextField("Set weapon speed: ",
+                                   e -> delegate.onUserEnteredProjectileSpeed(speed)));
         vboxView.getChildren()
-                .add(makeTextField("Set weapon fire rate: ",
-                                   e -> delegate.onUserEnteredWeaponFireRate(fireRate)));
+                .add(fireRateField);
         vboxView.getChildren()
-                .add(makeTextField("Set weapon range: ", e -> delegate.onUserEnteredWeaponRange(range)));
+                .add(makeTextField("Set weapon range: ",
+                                   e -> delegate.onUserEnteredWeaponRange(range)));
         javafx.collections.ObservableList<String> effectOptions =
                 FXCollections.observableArrayList("IDK", "Sorry");
         vboxView.getChildren()
-                .add(makeComboBox("Set weapon effect: ", e -> delegate.onUserEnteredWeaponEffect(effect),
+                .add(makeComboBox("Set weapon effect: ",
+                                  e -> delegate.onUserEnteredWeaponEffect(effect),
                                   effectOptions));
+    }
+
+    public void updateFireRateDisplay (int fireRate) {
+        fireRateField.setText(Integer.toString(fireRate));
     }
 
     private TextField makeTextField (String name, EventHandler<ActionEvent> event) {

@@ -1,7 +1,6 @@
 package authoring.editorview.weapon;
 
 import authoring.editorview.IEditorView;
-import authoring.editorview.weapon.subviews.WeaponEffectView;
 
 
 /**
@@ -12,7 +11,21 @@ import authoring.editorview.weapon.subviews.WeaponEffectView;
 public interface IWeaponEditorView extends IEditorView {
 
     public void setDelegate (WeaponEditorViewDelegate delegate);
+    
+    public void updateFireRateDisplay (int rate);
+    
+    public void updateSpeedDisplay(int speed);
 
-    public void updateHealthDisplay (int health);
+    public void updateCollisionEffectDisplay(String collisionEffect);
+
+    public void updateRangeDisplay(int range);
+
+    public void updateImagePath(String imagePath);
+    
+    public void updateImageID(int weaponImageID);
+
+    public void updateDamageDisplay(int damage);
+
+    public void onUserPressedCreate ();
 
 }

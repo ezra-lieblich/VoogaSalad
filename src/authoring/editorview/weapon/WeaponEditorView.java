@@ -11,24 +11,18 @@ public class WeaponEditorView implements IWeaponEditorView {
     private WeaponEditorViewDelegate delegate;
     private BorderPane weaponEditorView;
     private WeaponImageBank weaponBank;
-    private WeaponEffectView weaponEffects;
+    private WeaponEffectView weaponEffectsView;
 
     public WeaponEditorView () throws IOException {
         weaponEditorView = new BorderPane();
         weaponBank = new WeaponImageBank(delegate);
-        weaponEffects = new WeaponEffectView();
+        weaponEffectsView = new WeaponEffectView();
         setBorderPane();
     }
 
-
-    public WeaponEffectView getWeaponEffects () {
-        return weaponEffects;
-    }
-
-
     private void setBorderPane () {
         weaponEditorView.setLeft(weaponBank.getInstanceAsNode());
-        weaponEditorView.setCenter(weaponEffects.getCompleteView());
+        weaponEditorView.setCenter(weaponEffectsView.getCompleteView());
     }
 
     @Override
@@ -41,11 +35,51 @@ public class WeaponEditorView implements IWeaponEditorView {
         this.delegate = delegate;
     }
 
+    @Override
+    public void updateFireRateDisplay (int rate) {
+        weaponEffectsView.updateFireRateDisplay(rate);
+    }
 
     @Override
-    public void updateHealthDisplay (int health) {
+    public void updateSpeedDisplay (int speed) {
         // TODO Auto-generated method stub
-        
+
+    }
+
+    @Override
+    public void updateCollisionEffectDisplay (String collisionEffect) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void updateRangeDisplay (int range) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void updateImagePath (String imagePath) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void updateImageID (int weaponImageID) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void updateDamageDisplay (int damage) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void onUserPressedCreate () {
+        // TODO Auto-generated method stub
+
     }
 
 }
