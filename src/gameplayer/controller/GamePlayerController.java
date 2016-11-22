@@ -40,6 +40,7 @@ public class GamePlayerController implements Observer{
 		this.loader = new GamePlayerFactory(parser);
 		Map temp = this.loader.getGameSetting();
 		System.out.println("check null: " + temp == null);
+		System.out.println("levelnumber: " + temp.get("levelnumber"));
 		this.model = new GamePlayModel(this.loader);
 		this.model.addObserver(this);
 	}

@@ -141,7 +141,9 @@ public class XMLParser {
 			String[]enemies = enemiesRawString[i].split(",");
 			for(int k=0;k<Integer.parseInt(enemies[1]);k++){
 				EnemyType type = types.get(enemies[0]);
-				enemiesInLevel.add(new Enemy(type.getName(),type.getSpeed(),(int)(type.getHealth()),type.getImageLocation()));
+				
+		//+++++++++++++++++++++++++DEBUG++++++++++++++++++++++++++++++++++		
+				//enemiesInLevel.add(new Enemy(type.getName(),type.getSpeed(),(int)(type.getHealth()),type.getImageLocation(), k, k));
 			}
 			enemyByLevel.add(enemiesInLevel);
 		}

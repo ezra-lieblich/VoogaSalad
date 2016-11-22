@@ -5,7 +5,6 @@
 		<numLevels>2</numLevels>
 		<lives>50</lives>
 		<gold>1000</gold>
-		<levelnumber>10</levelnumber>
 	</init>
 	<towerList>
 			<tower>
