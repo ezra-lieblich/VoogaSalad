@@ -2,18 +2,18 @@ package authoring.editorview.tower;
 
 public interface TowerEditorViewDelegate {
 
-    public int createNewTower ();
+    public int onUserPressedCreateNewTower ();
 
-    public void setTowerName (String name);
+    public void onUserEnteredName (String name);
 
-    public void setTowerImage (int imageID);
+    public void onUserEnteredTowerImage (String imageID);
 
-    public void setBuyPrice (int price);
+    public void onUserEnteredBuyPrice (String price);
 
-    public void setSellPrice (int price);
+    public void onUserEnteredSellPrice (String price);
 
-    public void setUnlockLevel (int level);
+    public void onUserEnteredUnlockLevel (String level);
 
-    public void setFireRate (int fireRate);
+    public void onUserEnteredFireRate (String fireRate);
 
 }

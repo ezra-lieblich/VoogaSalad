@@ -2,20 +2,20 @@ package authoring.editorview.enemy;
 
 public interface EnemyEditorViewDelegate {
 
-    public void createEnemy ();
+    public void onUserPressedCreateEnemy ();
 
-    public void setEnemySpeed (double speed);
+    public void onUserEnteredEnemySpeed (String speed);
 
-    public void setEnemyHealth (double health);
+    public void onUserEnteredEnemyHealth (String health);
 
-    public void setEnemyDamage (double damage);
+    public void onUserEnteredEnemyDamage (String damage);
 
-    public void setEnemyPoints (double points);
+    public void onUserEnteredEnemyPoints (String points);
 
-    public void setEnemyMoney (double money);
+    public void onUserEnteredEnemyMoney (String money);
 
-    public void setEnemyCollisionEffect (String collisionEffect);
+    public void onUserEnteredEnemyCollisionEffect (String collisionEffect);
 
-    public void setEnemyImagePath (String imagePath);
+    public void onUserEnteredEnemyImagePath (String imagePath);
 
 }
