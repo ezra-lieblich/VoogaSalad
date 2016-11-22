@@ -22,7 +22,7 @@ public class WeaponEditorView implements IWeaponEditorView {
 
     private void setBorderPane () {
         weaponEditorView.setLeft(weaponBank.getInstanceAsNode());
-        weaponEditorView.setCenter(weaponEffectsView.getCompleteView());
+        weaponEditorView.setCenter(weaponEffectsView.getInstanceAsNode());
     }
 
     @Override

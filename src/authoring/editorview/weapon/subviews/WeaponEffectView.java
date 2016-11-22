@@ -24,7 +24,6 @@ import javafx.scene.layout.VBox;
 public class WeaponEffectView {
 
     private String imagePath;
-    private String effect;
 
     private VBox vboxView;
     private ScrollPane completeView;
@@ -35,6 +34,7 @@ public class WeaponEffectView {
     private TextField nameField;
     private TextField damageField;
     private ComboBox<String> weaponEffectBox;
+    private ComboBox<String> weaponPathBox;
     private ResourceBundle labelsResource;
 
     private final String WEAPON_EFFECT_RESOURCE_PATH = "resources/GameAuthoringWeapon";
@@ -55,7 +55,7 @@ public class WeaponEffectView {
 
     private void buildViewComponents () throws IOException {
         makeTextFields();
-        
+
         ImageView myImageView = loadWeaponImage();
         vboxView.getChildren().add(myImageView);
         Button loadNewImageButton = new Button(labelsResource.getString("Image"));
@@ -78,9 +78,9 @@ public class WeaponEffectView {
                                       e -> delegate.onUserEnteredWeaponFireRate(fireRateField
                                               .getText()));
         nameField = makeTextField("Enter name",
-                                  e -> delegate.onUserEntereredWeaponName(nameField.getText()));
+                                  e -> delegate.onUserEnteredWeaponName(nameField.getText()));
         damageField = makeTextField("Enter integer value",
-                              e -> delegate.onUserEnteredWeaponDamage(damageField.getText()));
+                                    e -> delegate.onUserEnteredWeaponDamage(damageField.getText()));
     }
 
     private HBox createHBox (String labelString, TextField textField) {
@@ -90,7 +90,7 @@ public class WeaponEffectView {
         return box;
     }
 
-    public ScrollPane getCompleteView () {
+    public ScrollPane getInstanceAsNode () {
         return completeView;
     }
 
@@ -98,9 +98,16 @@ public class WeaponEffectView {
         javafx.collections.ObservableList<String> effectOptions =
                 FXCollections.observableArrayList("IDK", "Sorry");
         weaponEffectBox = makeComboBox("Set weapon effect: ",
-                                       e -> delegate.onUserEnteredWeaponEffect(effect),
+                                       e -> delegate.onUserEnteredWeaponEffect(weaponEffectBox
+                                               .getValue()),
                                        effectOptions);
         vboxView.getChildren().add(weaponEffectBox);
+        javafx.collections.ObservableList<String> pathOptions =
+                FXCollections.observableArrayList("I still don't know", "Sorry");
+        weaponPathBox =
+                makeComboBox("Set weapon path: ",
+                             e -> delegate.onUserEnteredWeaponPath(weaponPathBox.getValue()),
+                             pathOptions);
     }
 
     private ImageView loadWeaponImage () throws IOException {
@@ -143,6 +150,7 @@ public class WeaponEffectView {
      */
 
     public void updateFireRateDisplay (int fireRate) {
+        // TODO: Watch for integer to string and error check
         fireRateField.setText(Integer.toString(fireRate));
     }
 
@@ -156,6 +164,18 @@ public class WeaponEffectView {
 
     public void updateWeaponEffectDisplay (String effect) {
         weaponEffectBox.setValue(effect);
+    }
+
+    public void updateWeaponImagePath (String imagepath) {
+        // load in new photo
+    }
+
+    public void updateWeaponName (String name) {
+        nameField.setText(name);
+    }
+
+    public void updateWeaponDamage (int damage) {
+        damageField.setText(Integer.toString(damage));
     }
 
 }
