@@ -48,8 +48,22 @@ public class GamePlayerController implements Observer{
 		this.model.initializeLevelInfo();
 		HashMap<String,Double> settings = this.loader.getGameSetting();
 		System.out.println("Settings: "+ settings);
-		initGUI();
-		createTimeline();
+		initGUIDummy(settings); 
+		//initGUI();
+		//createTimeline();
+	}
+	
+	//For testing only
+	private void initGUIDummy(HashMap<String,Double> settings) {
+		int[] dimensions = model.getDimension();
+		int rows = dimensions[0];
+		int cols = dimensions[1];
+		this.view = new GameGUI(rows,cols); //just for testing, should be replaced by block above, 5 rows, 5 columns
+		ArrayList<String> towerImages = new ArrayList<String>();
+		towerImages.add("kaneki.jpg");
+		towerImages.add("penguin.jpg");
+		this.mainScene = view.init(settings.get("gold"), settings.get("lives"), settings.get("numLevels"),towerImages);
+		this.view.getGrid().populatePath(model.getGrid().getStartPoint()); //TODO: need to get grid from model to get starting cell
 	}
 	
 	private void initGUI() {
