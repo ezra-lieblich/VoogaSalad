@@ -34,7 +34,7 @@ public class GamePlayModel extends Observable{
 	
 	private double gold;
 	private double lives;
-	private double levelnumber;  // reach level number winning the game
+	private double numLevels;  // reach level number winning the game
 	private int currentLevel;
 	private int waveOfEnemy;
 	private String gameTitle;
@@ -53,7 +53,8 @@ public class GamePlayModel extends Observable{
 	public void initializeGameSetting(GamePlayerFactory factory){	
 		this.factory = factory;
 		HashMap<String, Double> settingInfo = factory.getGameSetting();
-		this.levelnumber = settingInfo.get("levelnumber");
+		this.currentLevel = settingInfo.get("levelnumber").intValue(); //do we need levelnumber and current level?
+		this.numLevels = settingInfo.get("numLevels");
 		this.gold = settingInfo.get("gold");
 		this.lives = settingInfo.get("lives");
 		this.towerTypes = this.factory.getTowers();
@@ -94,7 +95,7 @@ public class GamePlayModel extends Observable{
 	}
 	
 	public int getLevelNumber(){
-		return (int)this.levelnumber;
+		return (int)this.numLevels;
 	}
 	
 
