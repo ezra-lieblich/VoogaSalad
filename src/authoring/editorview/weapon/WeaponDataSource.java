@@ -27,11 +27,21 @@ public interface WeaponDataSource {
 
     public int createWeapon ();
 
-    public int getWeaponImage (int weaponID);
+    public String getWeaponImage (int weaponID);
 
     public int getWeaponDamage (int weaponID);
 
     public int getWeaponRange (int weaponID);
+    
+    public int getWeaponFireRate (int weaponID);
+    
+    public int getWeaponSpeed (int weaponID);
+    
+    public String getWeaponCollisionEffect (int weaponID);
+    
+    public String getWeaponName (int weaponID);
+    
+    public String getWeaponPath (int weaponID);
 
     public List<Integer> getActiveWeaponIDs ();
 

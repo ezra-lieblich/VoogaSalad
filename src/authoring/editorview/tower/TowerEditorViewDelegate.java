@@ -2,7 +2,7 @@ package authoring.editorview.tower;
 
 public interface TowerEditorViewDelegate {
 
-    public int onUserPressedCreateNewTower ();
+    public void onUserPressedCreateNewTower ();
 
     public void onUserEnteredName (String name);
 

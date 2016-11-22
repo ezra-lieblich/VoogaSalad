@@ -55,7 +55,7 @@ public class WeaponEditorViewController extends EditorViewController
     }
 
     @Override
-    public void onUserPressedCreate () {
+    public void onUserPressedCreateWeapon () {
         // TODO Auto-generated method stub
 
     }

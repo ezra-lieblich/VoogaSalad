@@ -18,6 +18,6 @@ public interface WeaponEditorViewDelegate {
     
     public void onUserEnteredWeaponPath (String path);
 
-    public void onUserPressedCreate ();
+    public void onUserPressedCreateWeapon ();
 
 }
