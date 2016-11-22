@@ -14,50 +14,58 @@ public class TowerEditorViewController extends EditorViewController
         this.view = myView;
     }
 
-    @Override
-    public int createNewTower () {
-        // TODO Auto-generated method stub
-        return 0;
-    }
 
-    @Override
-    public void setTowerName (String name) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void setTowerImage (int imageID) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void setBuyPrice (int price) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void setSellPrice (int price) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void setUnlockLevel (int level) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void setFireRate (int fireRate) {
-        // TODO Auto-generated method stub
-        
-    }
-    
     public void setTowerDataSource(TowerDataSource source){
     	this.towerDataSource = source;
     }
+
+
+	@Override
+	public int onUserPressedCreateNewTower() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+	@Override
+	public void onUserEnteredName(String name) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void onUserEnteredTowerImage(String imageID) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void onUserEnteredBuyPrice(String price) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void onUserEnteredSellPrice(String price) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void onUserEnteredUnlockLevel(String level) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void onUserEnteredFireRate(String fireRate) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

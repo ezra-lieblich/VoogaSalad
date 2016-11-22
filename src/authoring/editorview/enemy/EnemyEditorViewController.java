@@ -18,52 +18,53 @@ public class EnemyEditorViewController extends EditorViewController
         this.enemyDataSource = source;
     }
 
-    @Override
-    public void createEnemy () {
-        // TODO Auto-generated method stub
+	@Override
+	public void onUserPressedCreateEnemy() {
+		// TODO Auto-generated method stub
+		
+	}
 
-    }
+	@Override
+	public void onUserEnteredEnemySpeed(String speed) {
+		// TODO Auto-generated method stub
+		
+	}
 
-    @Override
-    public void setEnemySpeed (double speed) {
-        // TODO Auto-generated method stub
+	@Override
+	public void onUserEnteredEnemyHealth(String health) {
+		// TODO Auto-generated method stub
+		
+	}
 
-    }
+	@Override
+	public void onUserEnteredEnemyDamage(String damage) {
+		// TODO Auto-generated method stub
+		
+	}
 
-    @Override
-    public void setEnemyHealth (double health) {
-        // TODO Auto-generated method stub
+	@Override
+	public void onUserEnteredEnemyPoints(String points) {
+		// TODO Auto-generated method stub
+		
+	}
 
-    }
+	@Override
+	public void onUserEnteredEnemyMoney(String money) {
+		// TODO Auto-generated method stub
+		
+	}
 
-    @Override
-    public void setEnemyDamage (double damage) {
-        // TODO Auto-generated method stub
+	@Override
+	public void onUserEnteredEnemyCollisionEffect(String collisionEffect) {
+		// TODO Auto-generated method stub
+		
+	}
 
-    }
+	@Override
+	public void onUserEnteredEnemyImagePath(String imagePath) {
+		// TODO Auto-generated method stub
+		
+	}
 
-    @Override
-    public void setEnemyPoints (double points) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void setEnemyMoney (double money) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void setEnemyCollisionEffect (String collisionEffect) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void setEnemyImagePath (String imagePath) {
-        // TODO Auto-generated method stub
-
-    }
 
 }
