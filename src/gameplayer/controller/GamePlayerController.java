@@ -50,7 +50,6 @@ public class GamePlayerController implements Observer{
 	 * If not, it will not create a game and it will throw an error
 	 */
 	public void checkIfValid() {
-		System.out.println("xml valid: " + loader.xmlIsValid());
 		if(!loader.xmlIsValid()) {
 			System.out.println("XML is invalid, game cannot be created");
 			//TODO: actually throw an error

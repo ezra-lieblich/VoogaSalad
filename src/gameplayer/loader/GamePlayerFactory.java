@@ -61,7 +61,9 @@ public class GamePlayerFactory{
 		String[] start = splitCoordinates[0].split(",");
 		Cell current = gameGrid.getCell(Integer.parseInt(start[0]), Integer.parseInt(start[1]));
 		
+		System.out.println("cell is valid" + current == null);
 		gameGrid.setStart(current);
+		
 		for(int i=1;i<splitCoordinates.length;i++){
 			String[] nextLocations = splitCoordinates[i].split(",");
 			Cell next = gameGrid.getCell(Integer.parseInt(nextLocations[0]), Integer.parseInt(nextLocations[1]));
