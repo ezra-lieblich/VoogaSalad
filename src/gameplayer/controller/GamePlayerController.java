@@ -38,10 +38,23 @@ public class GamePlayerController implements Observer{
 		//use xml parser to create classes. 
 		this.parser = new XMLParser("player.samplexml/test.xml"); //hardcoded
 		this.loader = new GamePlayerFactory(parser);
+		checkIfValid();
 		Map temp = this.loader.getGameSetting();
 		System.out.println("check null: " + temp == null);
 		this.model = new GamePlayModel(this.loader);
 		this.model.addObserver(this);
+	}
+	
+	/**
+	 * Checks to see if XML is valid
+	 * If not, it will not create a game and it will throw an error
+	 */
+	public void checkIfValid() {
+		System.out.println("xml valid: " + loader.xmlIsValid());
+		if(!loader.xmlIsValid()) {
+			System.out.println("XML is invalid, game cannot be created");
+			//TODO: actually throw an error
+		}
 	}
 	
 	public void init(){

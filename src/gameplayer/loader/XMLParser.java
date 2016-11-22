@@ -63,6 +63,7 @@ public class XMLParser {
     	DOCUMENT_BUILDER.reset(); 
     }
 
+    
     // Helper method to do the boilerplate code needed to make a documentBuilder.
     private static DocumentBuilder getDocumentBuilder () {
         try {
@@ -73,6 +74,15 @@ public class XMLParser {
         }
     }
     
+    public boolean isValid() {
+    	NodeList nodeList = rootElement.getElementsByTagName("isValid");
+    	//System.out.println("node" + nodeList.item(0).getTextContent());
+    	if (nodeList != null && nodeList.getLength() > 0) {
+			return Boolean.parseBoolean(nodeList.item(0).getTextContent().trim()); //check if the string can actually be parsed as a boolean
+		}
+    	return false;
+    	
+    }
     
     //This returns the TYPE of the xml
     public String getName(){

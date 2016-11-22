@@ -23,6 +23,10 @@ public class GamePlayerFactory{
 	public GamePlayerFactory(XMLParser parser){
 		this.authoringFileReader = parser;
 	}
+	
+	public boolean xmlIsValid() {
+		return authoringFileReader.isValid();
+	}
 
 	
 	public HashMap<String, Double> getGameSetting(){
