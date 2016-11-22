@@ -61,7 +61,13 @@ public class WeaponEditorViewController extends EditorViewController
     }
 
     @Override
-    public void onUserEntereredWeaponName (String weaponName) {
+    public void onUserEnteredWeaponName (String weaponName) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void onUserEnteredWeaponPath (String path) {
         // TODO Auto-generated method stub
 
     }

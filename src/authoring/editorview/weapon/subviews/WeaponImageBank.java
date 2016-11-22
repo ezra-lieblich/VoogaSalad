@@ -24,7 +24,6 @@ public class WeaponImageBank {
     private File chosenFile;
     private ScrollPane weaponBank;
     private Map<Integer, ImageView> activeWeapons;
-    private ImageIcon imageView;
     private WeaponEditorViewDelegate delegate;
 
     public WeaponImageBank () {
@@ -50,7 +49,7 @@ public class WeaponImageBank {
             BufferedImage image;
             try {
                 image = ImageIO.read(chosenFile);
-                imageView = new ImageIcon(image);
+                ImageIcon imageView = new ImageIcon(image);
                 delegate.onUserPressedCreate();
                 //int newWeaponID = dataSource.createWeapon
                 //activeWeapons.put(newWeaponID, imageView);
