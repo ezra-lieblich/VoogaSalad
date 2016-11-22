@@ -7,18 +7,14 @@ import javafx.stage.Stage;
 
 public class PhotoFileChooser {
 
+    private File chosenFile;
+
     public PhotoFileChooser () {
 
     }
-    
-    private File chosenFile;
 
     public File getChosenFile () {
         return chosenFile;
-    }
-
-    private void openFileChooser (FileChooser chooseFile) {
-        chosenFile = chooseFile.showOpenDialog(new Stage());
     }
 
     public void selectFile (String fieldText, String chooserTitle) {
@@ -30,4 +26,7 @@ public class PhotoFileChooser {
         openFileChooser(choose);
     }
 
+    private void openFileChooser (FileChooser chooseFile) {
+        chosenFile = chooseFile.showOpenDialog(new Stage());
+    }
 }

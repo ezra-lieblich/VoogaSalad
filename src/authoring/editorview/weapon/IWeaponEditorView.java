@@ -1,5 +1,6 @@
 package authoring.editorview.weapon;
 
+import java.util.List;
 import authoring.editorview.IEditorView;
 
 
@@ -25,6 +26,8 @@ public interface IWeaponEditorView extends IEditorView {
     public void updateWeaponID (int weaponID);
 
     public void updateDamageDisplay (int damage);
+
+    public void updateWeaponBank (List<Integer> activeWeapons);
 
     public void onUserPressedCreate ();
 

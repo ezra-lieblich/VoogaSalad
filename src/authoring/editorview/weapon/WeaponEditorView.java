@@ -1,6 +1,7 @@
 package authoring.editorview.weapon;
 
 import java.io.IOException;
+import java.util.List;
 import authoring.editorview.weapon.subviews.WeaponEffectView;
 import authoring.editorview.weapon.subviews.WeaponImageBank;
 import javafx.scene.Node;
@@ -60,7 +61,7 @@ public class WeaponEditorView implements IWeaponEditorView {
 
     @Override
     public void updateImagePath (String imagePath) {
-        // TODO Auto-generated method stub
+        weaponEffectsView.updateWeaponImagePath(imagePath);
 
     }
 
@@ -72,14 +73,19 @@ public class WeaponEditorView implements IWeaponEditorView {
 
     @Override
     public void updateDamageDisplay (int damage) {
-        // TODO Auto-generated method stub
-
+        weaponEffectsView.updateWeaponDamage(damage);
     }
 
     @Override
     public void onUserPressedCreate () {
         // TODO Auto-generated method stub
 
+    }
+
+    @Override
+    public void updateWeaponBank (List<Integer> activeWeapons) {
+        // TODO Auto-generated method stub
+        
     }
 
 }
