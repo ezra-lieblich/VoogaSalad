@@ -45,8 +45,10 @@ public class AuthoringView implements IAuthoringView {
 
     private void createEditorView (Node editor) {
         editorView = new Pane();
-        editorView.setPrefSize(editor.prefWidth(400), editor.prefHeight(400));
-        editorView.setMaxSize(editor.maxWidth(400), editor.maxHeight(400));
+        editorView.setMinWidth(SIZE);
+        editorView.setMinHeight(SIZE);
+//        editorView.setPrefSize(editor.prefWidth(400), editor.prefHeight(400));
+//        editorView.setMinSize(editor.minWidth(400), editor.minHeight(400));
 
     }
 
@@ -65,6 +67,7 @@ public class AuthoringView implements IAuthoringView {
         if (editorView == null) {
             createEditorView(editor);
         }
+        
         editorView.getChildren().clear();
         editorView.getChildren().add(editor);
         authoringView.setCenter(editorView);

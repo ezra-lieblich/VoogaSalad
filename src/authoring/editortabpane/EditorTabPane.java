@@ -34,7 +34,7 @@ public class EditorTabPane implements IEditorTabPane {
         viewToOpen = "Enemy"; // default, change this later
         tabPane = new TabPane();
         tabNames = tabs;
-        tabPane.setSide(Side.RIGHT);
+        tabPane.setSide(Side.LEFT);
         tabPane.setTabMaxHeight(120);
         tabPane.setTabMaxWidth(30);
 
