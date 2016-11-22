@@ -11,4 +11,6 @@ public interface IWeaponEditorView extends IEditorView {
     
     public void setDelegate(WeaponEditorViewDelegate delegate);
     
+    public void updateHealthDisplay(int health);
+    
 }
