@@ -5,7 +5,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 
-public class PhotoFileChooser {
+public abstract class PhotoFileChooser {
 
     private File chosenFile;
 
@@ -26,7 +26,5 @@ public class PhotoFileChooser {
         openFileChooser(choose);
     }
 
-    private void openFileChooser (FileChooser chooseFile) {
-        chosenFile = chooseFile.showOpenDialog(new Stage());
-    }
+    public abstract void openFileChooser (FileChooser chooseFile);
 }

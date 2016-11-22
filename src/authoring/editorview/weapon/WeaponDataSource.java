@@ -9,7 +9,7 @@ import java.util.List;
  */
 public interface WeaponDataSource {
 
-    public void setWeaponImage (int weaponID, String weaponImagePath);
+    public void setWeaponImagePath (int weaponID, String weaponImagePath);
 
     public void setWeaponDamage (int weaponID, int damage);
 
@@ -27,7 +27,7 @@ public interface WeaponDataSource {
 
     public int createWeapon ();
 
-    public String getWeaponImage (int weaponID);
+    public String getWeaponImagePath (int weaponID);
 
     public int getWeaponDamage (int weaponID);
 

@@ -23,6 +23,12 @@ public interface EnemyDataSource {
 
     public void setEnemyCollisionEffect (int enemyID, String collisionEffect);
 
+    /**
+     * Values to get from model
+     * @param enemyID
+     * @return
+     */
+    
     public String getEnemyImage (int enemyID);
 
     public String getEnemyName (int enemyID);

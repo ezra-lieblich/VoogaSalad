@@ -1,6 +1,7 @@
 package authoring.editorview.weapon.subviews;
 
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.util.ResourceBundle;
 import javax.imageio.ImageIO;
@@ -20,9 +21,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 
-public class WeaponEffectView {
+public class WeaponEffectView extends PhotoFileChooser {
 
     private String imagePath;
 
@@ -37,12 +40,11 @@ public class WeaponEffectView {
     private ComboBox<String> weaponEffectBox;
     private ComboBox<String> weaponPathBox;
     private ResourceBundle labelsResource;
-    private PhotoFileChooser fileChooser;
+    private File chosenFile;
 
     private final String WEAPON_EFFECT_RESOURCE_PATH = "resources/GameAuthoringWeapon";
 
     public WeaponEffectView () throws IOException {
-        fileChooser = new PhotoFileChooser();
         labelsResource = ResourceBundle.getBundle(WEAPON_EFFECT_RESOURCE_PATH);
         vboxView = new VBox(10);
         completeView = new ScrollPane();
@@ -62,7 +64,7 @@ public class WeaponEffectView {
         ImageView myImageView = loadWeaponImage();
         vboxView.getChildren().add(myImageView);
         vboxView.getChildren().add(makeButton(labelsResource.getString("Image"),
-                                              e -> fileChooser.selectFile("text", "text")));
+                                              e -> selectFile("text", "text")));
         vboxView.getChildren().add(createHBox(labelsResource.getString("Name"), nameField));
         vboxView.getChildren().add(createHBox(labelsResource.getString("Rate"), fireRateField));
         vboxView.getChildren().add(createHBox(labelsResource.getString("Speed"), speedField));
@@ -187,9 +189,16 @@ public class WeaponEffectView {
     public void updateWeaponDamage (int damage) {
         damageField.setText(Integer.toString(damage));
     }
-    
+
     public void updateCreateWeapon () {
-        //Call all of the other update methods
+        // Call all of the other update methods to get the default values
+    }
+
+    @Override
+    public void openFileChooser (FileChooser chooseFile) {
+        chosenFile = chooseFile.showOpenDialog(new Stage());
+        // if not null -> get imageFilePath and update the instance variable
+        // then loadImage through the created method above
     }
 
 }

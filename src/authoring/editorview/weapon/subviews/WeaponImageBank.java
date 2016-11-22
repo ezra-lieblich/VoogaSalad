@@ -1,7 +1,7 @@
 package authoring.editorview.weapon.subviews;
 
 import java.io.File;
-import java.util.Map;
+import java.util.List;
 import authoring.editorview.PhotoFileChooser;
 import authoring.editorview.weapon.WeaponEditorViewDelegate;
 import javafx.event.ActionEvent;
@@ -9,28 +9,23 @@ import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 
-public class WeaponImageBank {
+public class WeaponImageBank extends PhotoFileChooser {
 
     // TODO: I want to be able to load in a default weapon with default settings from model
     // What is our current plan with defaults?
 
     private File chosenFile;
     private ScrollPane weaponBank;
-    private Map<Integer, ImageView> activeWeapons;
     private WeaponEditorViewDelegate delegate;
 
     public WeaponImageBank () {
         weaponBank = new ScrollPane();
-        PhotoFileChooser fileChooser = new PhotoFileChooser();
-        Button createWeaponButton = createButton("Create Weapon", e -> fileChooser.selectFile("Photos: ", "Select new weapon image"));
+        Button createWeaponButton = createButton("Create Weapon", e -> selectFile("Photos: ", "Select new weapon image"));
         weaponBank.setContent(createWeaponButton);
-    }
-
-    public Map<Integer, ImageView> getMyWeapons () {
-        return activeWeapons;
     }
     
     private Button createButton(String label, EventHandler<ActionEvent> event) {
@@ -75,6 +70,16 @@ public class WeaponImageBank {
     
     public void setDelegate(WeaponEditorViewDelegate delegate){
     	this.delegate = delegate;
+    }
+    
+    public void updateWeaponBank (List<Integer> activeWeapons) {
+        //update each weapon in bank
+    }
+
+    @Override
+    public void openFileChooser (FileChooser chooseFile) {
+        chosenFile = chooseFile.showOpenDialog(new Stage());
+        
     }
 
 }

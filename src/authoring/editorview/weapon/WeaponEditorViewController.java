@@ -27,14 +27,13 @@ public class WeaponEditorViewController extends EditorViewController
 
     @Override
     public void onUserEnteredWeaponFireRate (String fireRate) {
-        weaponDataSource.setWeaponFireRate(0, Integer.parseInt(fireRate));
-
+        //Should update currentWeaponID every time this is called
+        weaponDataSource.setWeaponFireRate(currentWeaponID, Integer.parseInt(fireRate));
     }
 
     @Override
     public void onUserEnteredProjectileSpeed (String speed) {
-        // TODO Auto-generated method stub
-
+        weaponDataSource.setWeaponSpeed(currentWeaponID, Integer.parseInt(speed));
     }
 
     @Override

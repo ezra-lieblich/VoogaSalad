@@ -84,7 +84,7 @@ public class WeaponEditorView implements IWeaponEditorView {
 
     @Override
     public void updateWeaponBank (List<Integer> activeWeapons) {
-        // TODO Auto-generated method stub
+        //weaponBank.
         
     }
     
