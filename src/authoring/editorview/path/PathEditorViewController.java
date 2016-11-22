@@ -9,6 +9,24 @@ public class PathEditorViewController extends EditorViewController implements Pa
 		pathView.setDelegate(this);
 		this.view = pathView;
 	}
+
+	@Override
+	public void createNewPath() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setPathImage() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setPathBackgroundImage() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 	

@@ -14,5 +14,9 @@ public class PathBank {
 	public Node getInstanceAsNode () {
 		return pathBank;
 	}
+	
+	public void updatePathBank(){
+		
+	}
 
 }
