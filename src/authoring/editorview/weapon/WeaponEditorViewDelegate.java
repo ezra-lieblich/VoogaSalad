@@ -14,6 +14,6 @@ public interface WeaponEditorViewDelegate {
 
     public void setWeaponDamage (int damage);
 
-    public int createWeapon ();
+    public void createWeapon ();
     
 }

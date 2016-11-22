@@ -54,9 +54,9 @@ public class WeaponImageBank {
                 image = ImageIO.read(chosenFile);
                 //TODO: Figure this out
                 imageView = new ImageIcon(image);
-                //Andrew: should we be getting the id from delegate? Shouldn't it always come from data source?
-                int newWeaponID = delegate.createWeapon();
-                activeWeapons.put(newWeaponID, imageView);
+                delegate.createWeapon();
+                //int newWeaponID = dataSource.createWeapon
+                //activeWeapons.put(newWeaponID, imageView);
             }
             catch (Exception e) {
                 System.out.println("Unable to load photo");
