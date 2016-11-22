@@ -1,6 +1,8 @@
 package authoring.editorview.weapon;
 
 import authoring.editorview.IEditorView;
+import authoring.editorview.weapon.subviews.WeaponEffectView;
+
 
 /**
  * The Weapon View interface will detail the components of the weapon creation. The interface
@@ -8,7 +10,8 @@ import authoring.editorview.IEditorView;
  *
  */
 public interface IWeaponEditorView extends IEditorView {
-    
-    public void setDelegate(WeaponEditorViewDelegate delegate);
-    
+
+    public void setDelegate (WeaponEditorViewDelegate delegate);
+
+
 }

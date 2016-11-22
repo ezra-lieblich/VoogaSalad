@@ -2,18 +2,22 @@ package authoring.editorview.weapon;
 
 import java.io.IOException;
 import authoring.editorview.EditorViewController;
+import authoring.editorview.weapon.subviews.WeaponEffectView;
 
 
 public class WeaponEditorViewController extends EditorViewController
         implements WeaponEditorViewDelegate {
-	
-	private WeaponDataSource weaponDataSource;
+
+    private WeaponDataSource weaponDataSource;
+    private IWeaponEditorView myView;
+    private WeaponEffectView effectView;
 
     public WeaponEditorViewController (int editorWidth, int editorHeight) throws IOException {
         IWeaponEditorView myView = WeaponEditorViewFactory.build(editorWidth, editorHeight);
         myView.setDelegate(this);
         this.view = myView;
     }
+
 
     @Override
     public void setWeaponFireRate (double fireRate) {
@@ -30,33 +34,33 @@ public class WeaponEditorViewController extends EditorViewController
     @Override
     public void setWeaponEffect (String collisionEffect) {
         // TODO Auto-generated method stub
-        
+
     }
 
     @Override
     public void setWeaponRange (int range) {
         // TODO Auto-generated method stub
-        
+
     }
 
     @Override
     public void setWeaponImage (int weaponImageID) {
         // TODO Auto-generated method stub
-        
+
     }
 
     @Override
     public void setWeaponDamage (int damage) {
         // TODO Auto-generated method stub
-        
+
     }
 
     @Override
     public void createWeapon () {
         // TODO Auto-generated method stub
     }
-    
-    public void setWeaponDataSource(WeaponDataSource source){
-    	this.weaponDataSource = source;
+
+    public void setWeaponDataSource (WeaponDataSource source) {
+        this.weaponDataSource = source;
     }
 }

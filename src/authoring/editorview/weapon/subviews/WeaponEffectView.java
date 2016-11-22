@@ -36,6 +36,10 @@ public class WeaponEffectView {
         completeView.setContent(vboxView);
     }
 
+    public void update () {
+
+    }
+
     public ScrollPane getCompleteView () {
         return completeView;
     }
