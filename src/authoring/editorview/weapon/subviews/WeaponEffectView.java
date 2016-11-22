@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ResourceBundle;
 import javax.imageio.ImageIO;
+import authoring.editorview.PhotoFileChooser;
 import authoring.editorview.weapon.WeaponEditorViewDelegate;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -36,10 +37,12 @@ public class WeaponEffectView {
     private ComboBox<String> weaponEffectBox;
     private ComboBox<String> weaponPathBox;
     private ResourceBundle labelsResource;
+    private PhotoFileChooser fileChooser;
 
     private final String WEAPON_EFFECT_RESOURCE_PATH = "resources/GameAuthoringWeapon";
 
     public WeaponEffectView () throws IOException {
+        fileChooser = new PhotoFileChooser();
         labelsResource = ResourceBundle.getBundle(WEAPON_EFFECT_RESOURCE_PATH);
         vboxView = new VBox(10);
         completeView = new ScrollPane();
@@ -58,14 +61,19 @@ public class WeaponEffectView {
 
         ImageView myImageView = loadWeaponImage();
         vboxView.getChildren().add(myImageView);
-        Button loadNewImageButton = new Button(labelsResource.getString("Image"));
-        // loadNewImageButton.setOnMouseClicked(e -> openFileChooser!!!!)
-        vboxView.getChildren().add(loadNewImageButton);
+        vboxView.getChildren().add(makeButton(labelsResource.getString("Image"),
+                                              e -> fileChooser.selectFile("text", "text")));
         vboxView.getChildren().add(createHBox(labelsResource.getString("Name"), nameField));
         vboxView.getChildren().add(createHBox(labelsResource.getString("Rate"), fireRateField));
         vboxView.getChildren().add(createHBox(labelsResource.getString("Speed"), speedField));
         vboxView.getChildren().add(createHBox(labelsResource.getString("Range"), rangeField));
         vboxView.getChildren().add(createHBox(labelsResource.getString("Damage"), damageField));
+    }
+
+    private Button makeButton (String text, EventHandler<ActionEvent> event) {
+        Button button = new Button(text);
+        button.setOnAction(event);
+        return button;
     }
 
     private void makeTextFields () {
@@ -95,14 +103,14 @@ public class WeaponEffectView {
     }
 
     private void placeInVBox () throws IOException {
-        javafx.collections.ObservableList<String> effectOptions =
+        ObservableList<String> effectOptions =
                 FXCollections.observableArrayList("IDK", "Sorry");
         weaponEffectBox = makeComboBox(labelsResource.getString("Effect"),
                                        e -> delegate.onUserEnteredWeaponEffect(weaponEffectBox
                                                .getValue()),
                                        effectOptions);
         vboxView.getChildren().add(weaponEffectBox);
-        javafx.collections.ObservableList<String> pathOptions =
+        ObservableList<String> pathOptions =
                 FXCollections.observableArrayList("I still don't know", "Sorry");
         weaponPathBox =
                 makeComboBox(labelsResource.getString("Path"),
