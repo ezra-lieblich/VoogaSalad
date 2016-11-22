@@ -18,7 +18,7 @@ import javafx.scene.text.Text;
  */
 public class StatsDisplay {
 
-	private static final String LEVEL = "Level: ";
+	private static final String LEVEL = "LevelType: ";
 	private static final String LIVES_LEFT = "Lives left: ";
 	private static final String AMOUNT_OF_GOLD = "Amount of gold: ";
 	private HBox scorePane;
