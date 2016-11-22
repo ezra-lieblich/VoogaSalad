@@ -5,6 +5,8 @@ import authoring.editorview.EditorViewController;
 
 public class TowerEditorViewController extends EditorViewController
         implements TowerEditorViewDelegate {
+	
+	private TowerDataSource towerDataSource;
 
     public TowerEditorViewController (int editorWidth, int editorHeight) {
         ITowerEditorView myView = TowerEditorViewFactory.build(editorWidth, editorHeight);
@@ -52,6 +54,10 @@ public class TowerEditorViewController extends EditorViewController
     public void setFireRate (int fireRate) {
         // TODO Auto-generated method stub
         
+    }
+    
+    public void setTowerDataSource(TowerDataSource source){
+    	this.towerDataSource = source;
     }
 
 }

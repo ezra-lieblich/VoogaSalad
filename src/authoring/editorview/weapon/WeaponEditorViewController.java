@@ -5,6 +5,8 @@ import authoring.editorview.EditorViewController;
 
 public class WeaponEditorViewController extends EditorViewController
         implements WeaponEditorViewDelegate {
+	
+	private WeaponDataSource weaponDataSource;
 
     public WeaponEditorViewController (int editorWidth, int editorHeight) {
         IWeaponEditorView myView = WeaponEditorViewFactory.build(editorWidth, editorHeight);
@@ -51,5 +53,9 @@ public class WeaponEditorViewController extends EditorViewController
     @Override
     public void createWeapon () {
         // TODO Auto-generated method stub
+    }
+    
+    public void setWeaponDataSource(WeaponDataSource source){
+    	this.weaponDataSource = source;
     }
 }
