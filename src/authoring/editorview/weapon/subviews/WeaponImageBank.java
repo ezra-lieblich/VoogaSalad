@@ -1,7 +1,10 @@
 package authoring.editorview.weapon.subviews;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.List;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import authoring.editorview.PhotoFileChooser;
 import authoring.editorview.weapon.WeaponEditorViewDelegate;
 import javafx.event.ActionEvent;
@@ -24,17 +27,62 @@ public class WeaponImageBank extends PhotoFileChooser {
 
     public WeaponImageBank () {
         weaponBank = new ScrollPane();
-        Button createWeaponButton = createButton("Create Weapon", e -> selectFile("Photos: ", "Select new weapon image"));
+        Button createWeaponButton =
+                createButton("Create Weapon",
+                             e -> selectFile("Photos: ", "Select new weapon image"));
         weaponBank.setContent(createWeaponButton);
     }
-    
-    private Button createButton(String label, EventHandler<ActionEvent> event) {
+
+    private Button createButton (String label, EventHandler<ActionEvent> event) {
         Button button = new Button(label);
         button.setOnAction(event);
         return button;
     }
 
-/*    private void openFileChooser (FileChooser chooseFile) {
+    /*
+     * private void openFileChooser (FileChooser chooseFile) {
+     * chosenFile = chooseFile.showOpenDialog(new Stage());
+     * if (chosenFile != null) {
+     * // give this image an id, keep it in bank
+     * BufferedImage image;
+     * try {
+     * image = ImageIO.read(chosenFile);
+     * ImageIcon imageView = new ImageIcon(image);
+     * delegate.onUserPressedCreate();
+     * //int newWeaponID = dataSource.createWeapon
+     * //activeWeapons.put(newWeaponID, imageView);
+     * }
+     * catch (Exception e) {
+     * System.out.println("Unable to load photo");
+     * // TODO: Fix this output to be better for the user
+     * }
+     * }
+     * }
+     * 
+     * private void selectFile (String fieldText) {
+     * FileChooser choose = new FileChooser();
+     * choose.setTitle("Load New Weapon to Editor");
+     * FileChooser.ExtensionFilter extFilter =
+     * new FileChooser.ExtensionFilter(fieldText, "*.png", "*.jpg", "*.gif");
+     * choose.getExtensionFilters().add(extFilter);
+     * openFileChooser(choose);
+     * }
+     */
+
+    public Node getInstanceAsNode () {
+        return weaponBank;
+    }
+
+    public void setDelegate (WeaponEditorViewDelegate delegate) {
+        this.delegate = delegate;
+    }
+
+    public void updateWeaponBank (List<Integer> activeWeapons) {
+        // update each weapon in bank
+    }
+
+    @Override
+    public void openFileChooser (FileChooser chooseFile) {
         chosenFile = chooseFile.showOpenDialog(new Stage());
         if (chosenFile != null) {
             // give this image an id, keep it in bank
@@ -42,44 +90,15 @@ public class WeaponImageBank extends PhotoFileChooser {
             try {
                 image = ImageIO.read(chosenFile);
                 ImageIcon imageView = new ImageIcon(image);
-                delegate.onUserPressedCreate();
-                //int newWeaponID = dataSource.createWeapon
-                //activeWeapons.put(newWeaponID, imageView);
+                delegate.onUserPressedCreateWeapon();
+                // int newWeaponID = dataSource.createWeapon
+                // activeWeapons.put(newWeaponID, imageView);
             }
             catch (Exception e) {
                 System.out.println("Unable to load photo");
                 // TODO: Fix this output to be better for the user
             }
         }
-    }
 
-    private void selectFile (String fieldText) {
-        FileChooser choose = new FileChooser();
-        choose.setTitle("Load New Weapon to Editor");
-        FileChooser.ExtensionFilter extFilter =
-                new FileChooser.ExtensionFilter(fieldText, "*.png", "*.jpg", "*.gif");
-        choose.getExtensionFilters().add(extFilter);
-        openFileChooser(choose);
     }
-*/
-
-    public Node getInstanceAsNode () {
-        return weaponBank;
-    }
-    
-    
-    public void setDelegate(WeaponEditorViewDelegate delegate){
-    	this.delegate = delegate;
-    }
-    
-    public void updateWeaponBank (List<Integer> activeWeapons) {
-        //update each weapon in bank
-    }
-
-    @Override
-    public void openFileChooser (FileChooser chooseFile) {
-        chosenFile = chooseFile.showOpenDialog(new Stage());
-        
-    }
-
 }
