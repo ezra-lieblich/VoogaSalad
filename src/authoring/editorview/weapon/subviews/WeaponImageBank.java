@@ -16,6 +16,12 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 
+/**
+ * 
+ * @author Kayla Schulz
+ *
+ */
+// TODO: This needs to implement IImageBank once I figure out how to get parameter correct
 public class WeaponImageBank extends PhotoFileChooser {
 
     // TODO: I want to be able to load in a default weapon with default settings from model

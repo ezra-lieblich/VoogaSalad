@@ -8,6 +8,7 @@ import javafx.scene.layout.BorderPane;
 
 /**
  * @author Diane Hadley
+ * @author Kayla Schulz
  */
 
 public class EnemyEditorView implements IEnemyEditorView {
@@ -18,6 +19,11 @@ public class EnemyEditorView implements IEnemyEditorView {
     public EnemyEditorView () {
         enemyEditorView = new BorderPane();
         enemyBank = new EnemyImageBank();
+        setBorderPane();
+    }
+    
+    private void setBorderPane () {
+        enemyEditorView.setLeft(enemyBank.getInstanceAsNode());
     }
 
     @Override
