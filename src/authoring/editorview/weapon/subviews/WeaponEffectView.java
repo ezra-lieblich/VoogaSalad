@@ -63,7 +63,16 @@ public class WeaponEffectView extends PhotoFileChooser {
         ImageView myImageView = loadWeaponImage();
         vboxView.getChildren().add(myImageView);
         vboxView.getChildren().add(ButtonFactory.makeButton(labelsResource.getString("Image"),
-                                                            e -> selectFile("text", "text")));
+                                                            e -> {
+                                                                try {
+                                                                    selectFile("text", "text");
+                                                                }
+                                                                catch (IOException e1) {
+                                                                    // TODO Auto-generated catch
+                                                                    // block
+                                                                    e1.printStackTrace();
+                                                                }
+                                                            }));
         vboxView.getChildren()
                 .add(BoxFactory.createHBoxWithTextField(labelsResource.getString("Name"),
                                                         nameField));
