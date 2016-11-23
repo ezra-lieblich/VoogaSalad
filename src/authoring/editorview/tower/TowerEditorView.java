@@ -1,8 +1,10 @@
 package authoring.editorview.tower;
 
+import java.io.IOException;
 import authoring.editorview.tower.subviews.TowerEffectView;
 import authoring.editorview.tower.subviews.TowerImageBank;
 import authoring.editorview.tower.subviews.editorfields.TowerFrequencyField;
+import authoring.editorview.tower.subviews.editorfields.TowerImageView;
 import authoring.editorview.tower.subviews.editorfields.TowerNameField;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -21,13 +23,15 @@ public class TowerEditorView implements ITowerEditorView {
     private TowerNameField towerName;
     private TowerEffectView towerEffectView;
     private TowerFrequencyField towerFrequency;
+    private TowerImageView towerImage;
 
-    public TowerEditorView () {
+    public TowerEditorView () throws IOException {
         towerEditorView = new BorderPane();
         towerBank = new TowerImageBank();
         towerName = new TowerNameField();
         towerFrequency = new TowerFrequencyField();
-        towerEffectView = new TowerEffectView(towerName, towerFrequency);
+        towerImage = new TowerImageView();
+        towerEffectView = new TowerEffectView(towerName, towerFrequency, towerImage);
     }
 
     @Override

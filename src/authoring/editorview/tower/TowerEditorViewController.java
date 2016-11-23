@@ -1,5 +1,6 @@
 package authoring.editorview.tower;
 
+import java.io.IOException;
 import authoring.editorview.EditorViewController;
 
 
@@ -9,7 +10,7 @@ public class TowerEditorViewController extends EditorViewController
     private TowerDataSource towerDataSource;
     private int currentTowerID;
 
-    public TowerEditorViewController (int editorWidth, int editorHeight) {
+    public TowerEditorViewController (int editorWidth, int editorHeight) throws IOException {
         ITowerEditorView myView = TowerEditorViewFactory.build(editorWidth, editorHeight);
         myView.setDelegate(this);
         this.view = myView;
@@ -34,7 +35,7 @@ public class TowerEditorViewController extends EditorViewController
     }
 
     @Override
-    public void onUserEnteredTowerImage (String imageID) {
+    public void onUserEnteredTowerImagePath (String imagePath) {
         // TODO Auto-generated method stub
 
     }
