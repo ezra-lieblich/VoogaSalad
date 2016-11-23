@@ -10,7 +10,7 @@
 	<towerList>
 			<tower>
 				<name>ninja monkey</name>
-				<imageLocation>images/penguin.jpg</imageLocation>
+				<imageLocation>penguin.jpg</imageLocation>
 				<isDestroyable>false</isDestroyable>
 				<range>5</range>
 				<fireRate>5</fireRate>
@@ -25,7 +25,7 @@
 			</tower>
 			<tower>
 				<name>test monkey</name>
-				<imageLocation>images/kaneki.jpg</imageLocation>
+				<imageLocation>butterfly.png</imageLocation>
 				<isDestroyable>false</isDestroyable>
 				<range>10</range>
 				<fireRate>2</fireRate>

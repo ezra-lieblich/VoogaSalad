@@ -47,7 +47,9 @@ public class GridGUI {
 	}
 
 	//for testing
+	@Deprecated
 	private void initDummyPath(){
+		
 		int[] stuff  = {0,0};
 		int []stuff1 = {1,1};
 		int []stuff2 = {2,2};
@@ -62,9 +64,9 @@ public class GridGUI {
 	}
 	
 	public void init(){
-		initDummyPath(); //TODO: get rid of
+		//initDummyPath(); //TODO: get rid of
 		styleGrid(TEST_URL);
-		populatePath(this.path);
+		//populatePath(this.path);
 		
 	}
 	public Pane getGrid() {
@@ -79,11 +81,6 @@ public class GridGUI {
 	}
 
 	private void setTerrain(String imageURL) {
-		// Image background = graphicsLib.createImage("kaneki.jpg");
-		// graphicsLib.createImageView(graphicsLib.createImage("kaneki.jpg"));
-
-		// String image =
-		// this.getClass().getResource("kaneki.jpg").toExternalForm();
 		grid.setStyle("-fx-background-image: url('" + imageURL + "'); " + "-fx-background-position: center center; "
 				+ "-fx-background-repeat: stretch;");
 	}
@@ -102,13 +99,14 @@ public class GridGUI {
 			ImageView pathImage = graphicsLib.createImageView(graphicsLib.createImage("kaneki.jpg"));
 			double x =current.getX();
 			double y = current.getY();
+			System.out.println("path cell x: "+x+"; y: "+y);
 			graphicsLib.setImageViewParams(pathImage, x*cellWidth, y*cellHeight,cellWidth, cellHeight);
 			this.grid.getChildren().add(pathImage);
 			current = current.getNext();
 		}
 	}
 	
-	
+	@Deprecated
 	private void populatePath( List<int[]> path) { //TODO: change how path is being sent
 		//System.out.println("Populate path!");
 		for (int i = 0; i < path.size(); i++) {
