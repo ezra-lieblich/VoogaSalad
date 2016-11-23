@@ -7,19 +7,18 @@ import java.util.ResourceBundle;
 import javax.imageio.ImageIO;
 import authoring.editorview.PhotoFileChooser;
 import authoring.editorview.weapon.WeaponEditorViewDelegate;
+import authoring.utilityfactories.BoxFactory;
+import authoring.utilityfactories.ButtonFactory;
+import authoring.utilityfactories.ComboBoxFactory;
+import authoring.utilityfactories.TextFieldFactory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -37,8 +36,8 @@ public class WeaponEffectView extends PhotoFileChooser {
     private TextField rangeField;
     private TextField nameField;
     private TextField damageField;
-    private ComboBox<String> weaponEffectBox;
-    private ComboBox<String> weaponPathBox;
+    private ComboBox<Object> weaponEffectBox;
+    private ComboBox<Object> weaponPathBox;
     private ResourceBundle labelsResource;
     private File chosenFile;
 
@@ -63,41 +62,40 @@ public class WeaponEffectView extends PhotoFileChooser {
 
         ImageView myImageView = loadWeaponImage();
         vboxView.getChildren().add(myImageView);
-        vboxView.getChildren().add(makeButton(labelsResource.getString("Image"),
-                                              e -> selectFile("text", "text")));
-        vboxView.getChildren().add(createHBox(labelsResource.getString("Name"), nameField));
-        vboxView.getChildren().add(createHBox(labelsResource.getString("Rate"), fireRateField));
-        vboxView.getChildren().add(createHBox(labelsResource.getString("Speed"), speedField));
-        vboxView.getChildren().add(createHBox(labelsResource.getString("Range"), rangeField));
-        vboxView.getChildren().add(createHBox(labelsResource.getString("Damage"), damageField));
-    }
-
-    private Button makeButton (String buttonText, EventHandler<ActionEvent> event) {
-        Button button = new Button(buttonText);
-        button.setOnAction(event);
-        return button;
+        vboxView.getChildren().add(ButtonFactory.makeButton(labelsResource.getString("Image"),
+                                                            e -> selectFile("text", "text")));
+        vboxView.getChildren()
+                .add(BoxFactory.createHBox(labelsResource.getString("Name"), nameField));
+        vboxView.getChildren()
+                .add(BoxFactory.createHBox(labelsResource.getString("Rate"), fireRateField));
+        vboxView.getChildren()
+                .add(BoxFactory.createHBox(labelsResource.getString("Speed"), speedField));
+        vboxView.getChildren()
+                .add(BoxFactory.createHBox(labelsResource.getString("Range"), rangeField));
+        vboxView.getChildren()
+                .add(BoxFactory.createHBox(labelsResource.getString("Damage"), damageField));
     }
 
     private void makeTextFields () {
-        rangeField = makeTextField(labelsResource.getString("EnterInt"),
-                                   e -> delegate.onUserEnteredWeaponRange(rangeField.getText()));
-        speedField = makeTextField(labelsResource.getString("EnterInt"),
-                                   e -> delegate
-                                           .onUserEnteredProjectileSpeed(speedField.getText()));
-        fireRateField = makeTextField(labelsResource.getString("EnterInt"),
-                                      e -> delegate.onUserEnteredWeaponFireRate(fireRateField
-                                              .getText()));
-        nameField = makeTextField(labelsResource.getString("EnterString"),
-                                  e -> delegate.onUserEnteredWeaponName(nameField.getText()));
-        damageField = makeTextField(labelsResource.getString("EnterInt"),
-                                    e -> delegate.onUserEnteredWeaponDamage(damageField.getText()));
-    }
-
-    private HBox createHBox (String labelString, TextField textField) {
-        HBox box = new HBox(5);
-        Label label = new Label(labelString);
-        box.getChildren().addAll(label, textField);
-        return box;
+        rangeField = TextFieldFactory.makeTextField(labelsResource.getString("EnterInt"),
+                                                    e -> delegate
+                                                            .onUserEnteredWeaponRange(rangeField
+                                                                    .getText()));
+        speedField = TextFieldFactory.makeTextField(labelsResource.getString("EnterInt"),
+                                                    e -> delegate
+                                                            .onUserEnteredProjectileSpeed(speedField
+                                                                    .getText()));
+        fireRateField = TextFieldFactory.makeTextField(labelsResource.getString("EnterInt"),
+                                                       e -> delegate
+                                                               .onUserEnteredWeaponFireRate(fireRateField
+                                                                       .getText()));
+        nameField = TextFieldFactory.makeTextField(labelsResource.getString("EnterString"),
+                                                   e -> delegate.onUserEnteredWeaponName(nameField
+                                                           .getText()));
+        damageField = TextFieldFactory.makeTextField(labelsResource.getString("EnterInt"),
+                                                     e -> delegate
+                                                             .onUserEnteredWeaponDamage(damageField
+                                                                     .getText()));
     }
 
     public ScrollPane getInstanceAsNode () {
@@ -105,19 +103,23 @@ public class WeaponEffectView extends PhotoFileChooser {
     }
 
     private void placeInVBox () throws IOException {
-        ObservableList<String> effectOptions =
+        // TODO: check cast for the string
+        ObservableList<Object> effectOptions =
                 FXCollections.observableArrayList("IDK", "Sorry");
-        weaponEffectBox = makeComboBox(labelsResource.getString("Effect"),
-                                       e -> delegate.onUserEnteredWeaponEffect(weaponEffectBox
-                                               .getValue()),
-                                       effectOptions);
+        weaponEffectBox = ComboBoxFactory.makeComboBox(labelsResource.getString("Effect"),
+                                                       e -> delegate
+                                                               .onUserEnteredWeaponEffect((String) weaponEffectBox
+                                                                       .getValue()),
+                                                       effectOptions);
         vboxView.getChildren().add(weaponEffectBox);
-        ObservableList<String> pathOptions =
+        ObservableList<Object> pathOptions =
                 FXCollections.observableArrayList("I still don't know", "Sorry");
         weaponPathBox =
-                makeComboBox(labelsResource.getString("Path"),
-                             e -> delegate.onUserEnteredWeaponPath(weaponPathBox.getValue()),
-                             pathOptions);
+                ComboBoxFactory.makeComboBox(labelsResource.getString("Path"),
+                                             e -> delegate
+                                                     .onUserEnteredWeaponPath((String) weaponPathBox
+                                                             .getValue()),
+                                             pathOptions);
         vboxView.getChildren().add(weaponPathBox);
     }
 
@@ -139,22 +141,6 @@ public class WeaponEffectView extends PhotoFileChooser {
             System.out.println("Unable to find picture in files");
         }
         return myImageView;
-    }
-
-    private TextField makeTextField (String promptText, EventHandler<ActionEvent> event) {
-        TextField textField = new TextField();
-        textField.setPromptText(promptText);
-        textField.setOnAction(event);
-        return textField;
-    }
-
-    private ComboBox<String> makeComboBox (String name,
-                                           EventHandler<ActionEvent> event,
-                                           ObservableList<String> options) {
-        ComboBox<String> combobox = new ComboBox<String>(options);
-        combobox.setOnAction(event);
-        combobox.setPromptText(name);
-        return combobox;
     }
 
     /**
