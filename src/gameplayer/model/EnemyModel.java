@@ -19,6 +19,14 @@ public class EnemyModel extends Observable {
 		this.grid = this.gamePlayModel.getGrid();
 
 	}
+	
+	public List<Enemy> getEnemyOnGrid(){
+		return enemyOnGrid;
+	}
+	
+	public void spawnEnemy(Enemy enemy){
+		enemyOnGrid.add(enemy);
+	}
 
 	// TODO: move to EnemyModel
 	private void moveSingleEnemy(Enemy e) {

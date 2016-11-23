@@ -74,37 +74,37 @@ public class Enemy extends Observable{
 	}
 
 
-	void setCurrentCell(Cell c){ //don't think we need to notify observers of this change
+	public void setCurrentCell(Cell c){ //don't think we need to notify observers of this change
 		this.currentCell = c;
 		this.xDirection = c.getNext().getX() - c.getX();
 		this.yDirection = c.getNext().getY() - c.getY();
 	}
 	
-	Cell getCurrentCell(){
+	public Cell getCurrentCell(){
 		return this.currentCell;
 	}
 	
-	double getX() {
+	public double getX() {
 		return xCoordinate;
 	}
 
-	void setX(double xCoordinate) {
+	public void setX(double xCoordinate) {
 		this.xCoordinate = xCoordinate;
 		setChanged();
 		notifyObservers();
 	}
 
-	double getY() {
+	public double getY() {
 		return yCoordinate;
 	}
 
-	void setY(double yCoordinate) {
+	public void setY(double yCoordinate) {
 		this.yCoordinate = yCoordinate;
 		setChanged();
 		notifyObservers();
 	}
 
-	void setImage(String image) { //might not need to notify observers here
+	public void setImage(String image) { //might not need to notify observers here
 		this.image = image;
 		setChanged();
 		notifyObservers();
@@ -115,11 +115,11 @@ public class Enemy extends Observable{
 		return this.image;
 	}
 
-	double getMovingSpeed() {
+	public double getMovingSpeed() {
 		return movingSpeed;
 	}
 
-	void setMovingSpeed(double movingSpeed) {
+	public void setMovingSpeed(double movingSpeed) {
 		this.movingSpeed = movingSpeed;
 		setChanged();
 		notifyObservers();
@@ -129,7 +129,7 @@ public class Enemy extends Observable{
 		return health;
 	}
 
-	void setHealth(double d) {
+	public void setHealth(double d) {
 		this.health = d;
 		setChanged();
 		notifyObservers();

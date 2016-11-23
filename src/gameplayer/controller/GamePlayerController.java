@@ -2,6 +2,7 @@ package gameplayer.controller;
 
 import gameplayer.loader.GamePlayerFactory;
 import gameplayer.loader.XMLParser;
+import gameplayer.model.Enemy;
 import gameplayer.model.EnemyModel;
 import gameplayer.model.GamePlayModel;
 import gameplayer.view.GameGUI;
@@ -15,9 +16,11 @@ import javafx.util.Duration;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Queue;
 
 import engine.TowerType;
 
@@ -36,17 +39,18 @@ public class GamePlayerController implements Observer{
 	private EnemyController enemyController;
 	private EnemyModel enemyModel;
 	
+	private Queue<Enemy>currentWave; 
+
+	
 	public GamePlayerController(){
 		//use xml parser to create classes. 
 		this.loader = new GamePlayerFactory(new XMLParser("player.samplexml/test.xml"));//hardcoded
 		
 		checkIfValid();
-		Map temp = this.loader.getGameSetting();
-		System.out.println("check null: " + temp == null);
 		this.model = new GamePlayModel(this.loader);
 		this.enemyModel = new EnemyModel(this.model);
 		this.model.addObserver(this);
-	}
+	}	
 	
 	/**
 	 * Checks to see if XML is valid
@@ -90,6 +94,26 @@ public class GamePlayerController implements Observer{
 		this.view.bindAnimationStart(e->{
 			//TODO: initialize animation
 			this.startAnimation(); 
+			
+			
+			
+			//TESTING MANUALLY ADDING IN ONE ENEMY
+			this.currentWave= this.model.getPackOfEnemyComing(); 
+			Enemy test = currentWave.poll(); 
+			test.setCurrentCell(this.model.getGrid().getCell(0, 0));
+			System.out.println(test.getCurrentCell().getX());
+			this.enemyModel.spawnEnemy(currentWave.poll());
+			List<Enemy>thingsOnGrid = this.enemyModel.getEnemyOnGrid();
+			System.out.println(thingsOnGrid.size());
+			for(int i=0;i<thingsOnGrid.size();i++){
+				System.out.println(i+": "+thingsOnGrid.get(i).getX());
+			}
+			this.enemyModel.update();
+			System.out.println("**********");
+			for(int i=0;i<thingsOnGrid.size();i++){
+				System.out.println(i+": "+thingsOnGrid.get(i).getX());
+			}
+			
 		});
 		System.out.println("Tower images: "+getTowerImages());
 		this.mainScene = view.init(this.model.getGold(), this.model.getLife(), this.model.getCurrentLevel(),getTowerImages());
@@ -104,6 +128,7 @@ public class GamePlayerController implements Observer{
 		}
 		return towerImages;
 	}
+	
 	public Scene getMainScene(){
 		return this.mainScene;
 	}
@@ -133,11 +158,10 @@ public class GamePlayerController implements Observer{
 		//TODO: use Parser's method to get path and update the view's grid with that path
 	}
 	*/
-	
 
 	private void startAnimation() {
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> {
-			this.model.updateInLevel();
+			
 		});
 		Timeline animation = new Timeline();
 		animation.setCycleCount(Timeline.INDEFINITE);
