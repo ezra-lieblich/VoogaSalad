@@ -2,7 +2,6 @@ package authoring.editorview;
 
 import java.io.File;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 
 
 public abstract class PhotoFileChooser {

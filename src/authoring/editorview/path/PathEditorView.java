@@ -1,40 +1,74 @@
 package authoring.editorview.path;
 
+import java.util.ResourceBundle;
+
+import authoring.editorview.path.subviews.BackgroundImageView;
 import authoring.editorview.path.subviews.PathBank;
+import authoring.editorview.path.subviews.PathBuilderView;
+import authoring.editorview.path.subviews.PathImageView;
+import authoring.editorview.path.subviews.PathSizeView;
 import gameplayer.view.GridGUI;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 
 
 public class PathEditorView implements IPathEditorView {
-    private PathEditorViewDelegate delegate;
-  //  private GridGUI gridGUI;
-    private PathBank pathBank;
-    private BorderPane pathView;
-    private Group root = new Group();
+   
+	private PathEditorViewDelegate delegate;
     
+    private BorderPane pathView;
+    
+    private PathBank pathBank;
+    private BackgroundImageView backgroundImageView;
+    private PathImageView pathImageView;
+    private PathSizeView pathSizeView;
+    private PathBuilderView pathBuilderView;
+    
+    private static final String RESOURCE_FILE_NAME = "resources/GameAuthoringPath";	
+	private ResourceBundle pathResource = ResourceBundle.getBundle(RESOURCE_FILE_NAME);
 
     public PathEditorView (int aWidth, int aHeight) {
         this.pathView = new BorderPane();
-    	//this.gridGUI = new GridGUI(5, 5);
-        //this.gridGUI.init();
-        this.pathBank = new PathBank();
-        pathView.setLeft(pathBank.getInstanceAsNode());
+        setPathView();
      
     }
 
     @Override
     public Node getInstanceAsNode () {
-        return root;
+        return pathView;
     }
 
     @Override
     public void setDelegate (PathEditorViewDelegate delegate) {
         this.delegate = delegate;
     }
-
-    // TODO: One of the things we will need: setting the grid... # of columns and rows
+    
+    private void setPathView(){
+    	pathBank = new PathBank(pathResource);       
+    	backgroundImageView = new BackgroundImageView();
+    	pathSizeView = new PathSizeView();
+    	pathImageView = new PathImageView();
+    	pathBuilderView = new PathBuilderView();
+    	
+        pathView.setLeft(pathBank.getInstanceAsNode());
+        
+        BorderPane editor = new BorderPane();
+        editor.setCenter(pathBuilderView.getInstanceAsNode());
+        
+        HBox pathSettings = new HBox();
+        pathSettings.getChildren().addAll(pathImageView.getInstanceAsNode(),
+        		pathSizeView.getInstanceAsNode(),
+        		backgroundImageView.getInstanceAsNode());
+        
+        editor.setLeft(pathSettings);
+        
+        pathView.setCenter(editor);
+        
+        
+        
+    }
     
 
 }
