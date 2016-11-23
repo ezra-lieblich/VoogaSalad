@@ -19,7 +19,11 @@ import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-
+/**
+ * 
+ * @author Kayla Schulz
+ *
+ */
 public class EnemyImageBank extends PhotoFileChooser {
 
     private EnemyEditorViewDelegate delegate;
@@ -41,7 +45,8 @@ public class EnemyImageBank extends PhotoFileChooser {
                                              }
                                          });
         vbox = BoxFactory.createVBox("Enemy Bank: ");
-        enemyBank.setContent(createNewEnemy);
+        vbox.getChildren().add(createNewEnemy);
+        enemyBank.setContent(vbox);
     }
 
     public void setDelegate (EnemyEditorViewDelegate delegate) {
@@ -67,7 +72,7 @@ public class EnemyImageBank extends PhotoFileChooser {
                 imageRead = ImageIO.read(chosenFile);
                 Image image2 = SwingFXUtils.toFXImage(imageRead, null);
                 imageView.setImage(image2);
-//                 enemyBank.setContent(imageView);
+                // enemyBank.setContent(imageView);
                 // TODO: These should be correct but are erring out currently
                 // delegate.onUserPressedCreateEnemy();
                 // delegate.onUserEnteredEnemyImage(chosenFile.toURI().toString());

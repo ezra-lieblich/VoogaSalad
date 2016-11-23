@@ -17,5 +17,9 @@ public interface EnemyEditorViewDelegate {
     public void onUserEnteredEnemyCollisionEffect (String collisionEffect);
 
     public void onUserEnteredEnemyImagePath (String imagePath);
+    
+    public void onUserEnteredEnemyName (String enemyName);
+    
+    public void onUserEnteredEnemyFrequency (String frequency);
 
 }

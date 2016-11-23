@@ -6,7 +6,7 @@ import java.util.List;
 public interface TowerDataSource {
     public String getTowerName (int towerID);
 
-    public int getTowerImage (int towerID);
+    public String getTowerImagePath (int towerID);
 
     public int getBuyPrice (int towerID);
 
@@ -27,11 +27,11 @@ public interface TowerDataSource {
 
     public void setTowerName (int towerID, String name);
 
-    public void setTowerImage (int towerID, int imageID);
+    public void setTowerImagePath (int towerID, String imagePath);
 
-    public void setBuyPrice (int towerID, int price);
+    public void setBuyPrice (int towerID, int buyPrice);
 
-    public void setSellPrice (int towerID, int price);
+    public void setSellPrice (int towerID, int sellPrice);
 
     public void setUnlockLevel (int towerID, int level);
 

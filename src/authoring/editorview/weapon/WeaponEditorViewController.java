@@ -4,6 +4,12 @@ import java.io.IOException;
 import authoring.editorview.EditorViewController;
 
 
+/**
+ * 
+ * @author Kayla Schulz
+ * @author Andrew Bihl
+ *
+ */
 public class WeaponEditorViewController extends EditorViewController
         implements WeaponEditorViewDelegate {
 
@@ -38,13 +44,13 @@ public class WeaponEditorViewController extends EditorViewController
 
     @Override
     public void onUserEnteredWeaponEffect (String collisionEffect) {
-        weaponDataSource.setWeaponCollisionEffect(0, collisionEffect);
+        weaponDataSource.setWeaponCollisionEffect(currentWeaponID, collisionEffect);
 
     }
 
     @Override
     public void onUserEnteredWeaponRange (String range) {
-        weaponDataSource.setWeaponRange(0, Integer.parseInt(range));
+        weaponDataSource.setWeaponRange(currentWeaponID, Integer.parseInt(range));
     }
 
     @Override

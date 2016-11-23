@@ -7,6 +7,7 @@ public class TowerEditorViewController extends EditorViewController
         implements TowerEditorViewDelegate {
 
     private TowerDataSource towerDataSource;
+    private int currentTowerID;
 
     public TowerEditorViewController (int editorWidth, int editorHeight) {
         ITowerEditorView myView = TowerEditorViewFactory.build(editorWidth, editorHeight);
@@ -27,7 +28,7 @@ public class TowerEditorViewController extends EditorViewController
     }
 
     @Override
-    public void onUserEnteredName (String name) {
+    public void onUserEnteredTowerName (String towerName) {
         // TODO Auto-generated method stub
 
     }
@@ -58,6 +59,18 @@ public class TowerEditorViewController extends EditorViewController
 
     @Override
     public void onUserEnteredFireRate (String fireRate) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void onUserEnteredFrequency (String frequency) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void onUserEnteredRange (String range) {
         // TODO Auto-generated method stub
 
     }

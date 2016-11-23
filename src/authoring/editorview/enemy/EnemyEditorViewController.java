@@ -1,5 +1,6 @@
 package authoring.editorview.enemy;
 
+import java.io.IOException;
 import authoring.editorview.EditorViewController;
 
 
@@ -7,8 +8,9 @@ public class EnemyEditorViewController extends EditorViewController
         implements EnemyEditorViewDelegate {
 
     private EnemyDataSource enemyDataSource;
+    private int currentEnemyID;
 
-    public EnemyEditorViewController (int editorWidth, int editorHeight) {
+    public EnemyEditorViewController (int editorWidth, int editorHeight) throws IOException {
         IEnemyEditorView myView = EnemyEditorViewFactory.build(editorWidth, editorHeight);
         myView.setDelegate(this);
         this.view = myView;
@@ -65,6 +67,18 @@ public class EnemyEditorViewController extends EditorViewController
 		// TODO Auto-generated method stub
 		
 	}
+
+    @Override
+    public void onUserEnteredEnemyName (String enemyName) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void onUserEnteredEnemyFrequency (String frequency) {
+        // TODO Auto-generated method stub
+        
+    }
 
 
 }

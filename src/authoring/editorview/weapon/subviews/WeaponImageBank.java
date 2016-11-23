@@ -10,8 +10,6 @@ import authoring.editorview.weapon.WeaponEditorViewDelegate;
 import authoring.utilityfactories.BoxFactory;
 import authoring.utilityfactories.ButtonFactory;
 import javafx.embed.swing.SwingFXUtils;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -52,7 +50,8 @@ public class WeaponImageBank extends PhotoFileChooser {
                                              }
                                          });
         vbox = BoxFactory.createVBox("Weapon Bank: ");
-        weaponBank.setContent(createWeaponButton);
+        vbox.getChildren().add(createWeaponButton);
+        weaponBank.setContent(vbox);
     }
 
     public Node getInstanceAsNode () {

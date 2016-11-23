@@ -23,12 +23,15 @@ public interface EnemyDataSource {
 
     public void setEnemyCollisionEffect (int enemyID, String collisionEffect);
 
+    public void setEnemyFrequency (int enemyID, int frequency);
+
     /**
      * Values to get from model
+     * 
      * @param enemyID
      * @return
      */
-    
+
     public String getEnemyImage (int enemyID);
 
     public String getEnemyName (int enemyID);
@@ -42,6 +45,8 @@ public interface EnemyDataSource {
     public int getEnemyRewardMoney (int enemyID);
 
     public int getEnemyRewardPoints (int enemyID);
+
+    public int getEnemyFrequency (int enemyID);
 
     public String getEnemyCollisionEffect (int enemyID);
 

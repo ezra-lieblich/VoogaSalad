@@ -1,42 +1,41 @@
-package authoring.editorview.enemy.subviews;
+package authoring.editorview.weapon.subviews.editorfields;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ResourceBundle;
 import javax.imageio.ImageIO;
-import authoring.editorview.enemy.EnemyEditorViewDelegate;
+import authoring.editorview.weapon.WeaponEditorViewDelegate;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 
-public class EnemyImageView {
+public class WeaponImageView {
 
-    private EnemyEditorViewDelegate delegate;
+    private WeaponEditorViewDelegate delegate;
     private ResourceBundle labelsResource;
     private String imagePath;
-    private ImageView enemyImage;
+    private ImageView weaponImage;
 
-    // TODO: Make this enemy
     private final String WEAPON_EFFECT_RESOURCE_PATH = "resources/GameAuthoringWeapon";
 
-    public EnemyImageView () throws IOException {
+    public WeaponImageView () throws IOException {
         labelsResource = ResourceBundle.getBundle(WEAPON_EFFECT_RESOURCE_PATH);
-        enemyImage = loadEnemyImage();
+        weaponImage = loadWeaponImage();
     }
 
-    public void updateEnemyImagePath (String imagePath) {
+    public void updateWeaponImagePath (String imagePath) {
         this.imagePath = imagePath;
     }
 
-    private ImageView loadEnemyImage () throws IOException {
+    private ImageView loadWeaponImage () throws IOException {
         BufferedImage imageRead;
         ImageView myImageView = new ImageView();
         try {
             imageRead = ImageIO.read(getClass().getClassLoader().getResourceAsStream(imagePath));
             Image image2 = SwingFXUtils.toFXImage(imageRead, null);
             myImageView.setImage(image2);
-            delegate.onUserEnteredEnemyImagePath(imagePath);
+            delegate.onUserEnteredWeaponImage(imagePath);
         }
         catch (Exception e) {
             imageRead =
@@ -49,11 +48,11 @@ public class EnemyImageView {
         return myImageView;
     }
 
-    public ImageView getEnemyImage () {
-        return enemyImage;
+    public ImageView getWeaponImage () {
+        return weaponImage;
     }
 
-    public void setDelegate (EnemyEditorViewDelegate delegate) {
+    public void setDelegate (WeaponEditorViewDelegate delegate) {
         this.delegate = delegate;
     }
 
