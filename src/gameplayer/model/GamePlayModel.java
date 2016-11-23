@@ -175,28 +175,20 @@ public class GamePlayModel extends Observable{
 		return this.lives;
 	}
 
-
-	private void setLife(double life) {
+	//used by enemymodel
+	public void setLife(double life) {
 		this.lives = life;
 		setChanged();
 		notifyObservers();
 	}
-	
-	//used by enemymodel
-	public void setLives(double life){
-		this.lives = life;
-	}
 
 
-	private void setLevel(int d) {
+	public void setLevel(int d) {
 		this.currentLevel = d;
 		setChanged();
 		notifyObservers();
 	}
 	
-	public void setCurrentLevel(int level){
-		this.currentLevel = level;
-	}
 	
 	public int getCurrentLevel(){
 		return this.currentLevel;

@@ -50,7 +50,7 @@ public class EnemyModel extends Observable {
 				e.setX(e.getX() + e.getxDirection() * distToMove);
 				e.setY(e.getY() + e.getyDirection() * distToMove);
 				if (onLastCell) {
-					gamePlayModel.setLives(gamePlayModel.getLife() - 1);
+					gamePlayModel.setLife(gamePlayModel.getLife() - 1);
 				}
 				e.setCurrentCell(e.getCurrentCell().getNext());
 				e.setxDirection(e.getCurrentCell().getNext().getX() - e.getCurrentCell().getX()); // -1,
@@ -70,35 +70,45 @@ public class EnemyModel extends Observable {
 	}
 
 	// TODO: move to EnemyModel
-	private void updateEnemy(){
-			// move on Grid Enemy
-			for (Enemy e: enemyOnGrid){		
-				moveSingleEnemy(e);
-			}
-			
-			
-			//enter new enemy
-			if(this.gamePlayModel.getNextEnteringEnemy() != null) {
-				enemyOnGrid.add(this.gamePlayModel.getNextEnteringEnemy() );
-				this.gamePlayModel.getNextEnteringEnemy().setCurrentCell(this.grid.getStartPoint());
-			}
-			
-			if(this.gamePlayModel.getPackOfEnemyComing().isEmpty() && enemyOnGrid.isEmpty() ){
-				if(this.gamePlayModel.getWaveOfEnemy() < this.gamePlayModel.getEnemyAtCurrentLevel().size()){
-					this.gamePlayModel.setPackOfEnemyComing(this.gamePlayModel.getEnemyAtCurrentLevel().get(this.gamePlayModel.getWaveOfEnemy()));
-					this.gamePlayModel.setWaveOfEnemy(this.gamePlayModel.getWaveOfEnemy()+1);
-				}
-				else{
-					gamePlayModel.setCurrentLevel(gamePlayModel.getCurrentLevel()+1);  
-				}
-				
-			}
-			
-			this.gamePlayModel.setNextEnteringEnemy(this.gamePlayModel.getPackOfEnemyComing().poll());
-			
+	private void updateEnemy() {
+		// move on Grid Enemy
+		for (Enemy e : enemyOnGrid) {
+			moveSingleEnemy(e);
 			setChanged();
 			notifyObservers();
-			
 		}
+
+		// enter new enemy
+		if (this.gamePlayModel.getNextEnteringEnemy() != null) {
+			enemyOnGrid.add(this.gamePlayModel.getNextEnteringEnemy());
+			this.gamePlayModel.getNextEnteringEnemy().setCurrentCell(this.grid.getStartPoint());
+			setChanged();
+			notifyObservers();
+		}
+
+		if (this.gamePlayModel.getPackOfEnemyComing().isEmpty() && enemyOnGrid.isEmpty()) {
+			if (this.gamePlayModel.getWaveOfEnemy() < this.gamePlayModel.getEnemyAtCurrentLevel().size()) {
+				this.gamePlayModel.setPackOfEnemyComing(
+						this.gamePlayModel.getEnemyAtCurrentLevel().get(this.gamePlayModel.getWaveOfEnemy()));
+				this.gamePlayModel.setWaveOfEnemy(this.gamePlayModel.getWaveOfEnemy() + 1);
+				setChanged();
+				notifyObservers();
+			} else {
+				gamePlayModel.setLevel(gamePlayModel.getCurrentLevel() + 1);
+				setChanged();
+				notifyObservers();
+			}
+
+		}
+
+		this.gamePlayModel.setNextEnteringEnemy(this.gamePlayModel.getPackOfEnemyComing().poll());
+
+
+
+	}
+	
+	public void update(){
+		updateEnemy();
+	}
 
 }
