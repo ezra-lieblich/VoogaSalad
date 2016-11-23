@@ -6,6 +6,7 @@ import authoring.editorview.tower.subviews.TowerImageBank;
 import authoring.editorview.tower.subviews.editorfields.TowerFrequencyField;
 import authoring.editorview.tower.subviews.editorfields.TowerImageView;
 import authoring.editorview.tower.subviews.editorfields.TowerNameField;
+import authoring.editorview.tower.subviews.editorfields.TowerRangeField;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
@@ -24,14 +25,24 @@ public class TowerEditorView implements ITowerEditorView {
     private TowerEffectView towerEffectView;
     private TowerFrequencyField towerFrequency;
     private TowerImageView towerImage;
+    private TowerRangeField towerRange;
 
     public TowerEditorView () throws IOException {
         towerEditorView = new BorderPane();
-        towerBank = new TowerImageBank();
+        
         towerName = new TowerNameField();
         towerFrequency = new TowerFrequencyField();
         towerImage = new TowerImageView();
-        towerEffectView = new TowerEffectView(towerName, towerFrequency, towerImage);
+        towerRange = new TowerRangeField();
+        
+        towerBank = new TowerImageBank();
+        towerEffectView = new TowerEffectView(towerName, towerFrequency, towerImage, towerRange);
+        setBorderPane();
+    }
+
+    private void setBorderPane () {
+        towerEditorView.setLeft(towerBank.getInstanceAsNode());
+        towerEditorView.setCenter(towerEffectView.getInstanceAsNode());
     }
 
     @Override
@@ -46,5 +57,6 @@ public class TowerEditorView implements ITowerEditorView {
         towerEffectView.setDelegate(delegate);
         towerName.setDelegate(delegate);
         towerFrequency.setDelegate(delegate);
+        towerRange.setDelegate(delegate);
     }
 }

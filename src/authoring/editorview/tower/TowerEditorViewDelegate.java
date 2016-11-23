@@ -8,9 +8,9 @@ public interface TowerEditorViewDelegate {
 
     public void onUserEnteredTowerImagePath (String imagePath);
 
-    public void onUserEnteredBuyPrice (String buyPrice);
+    public void onUserEnteredTowerBuyPrice (String buyPrice);
 
-    public void onUserEnteredSellPrice (String sellPrice);
+    public void onUserEnteredTowerSellPrice (String sellPrice);
 
     public void onUserEnteredUnlockLevel (String level);
 
