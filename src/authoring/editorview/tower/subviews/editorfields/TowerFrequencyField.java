@@ -1,4 +1,4 @@
-package authoring.editorview.tower.subviews;
+package authoring.editorview.tower.subviews.editorfields;
 
 import authoring.editorview.tower.TowerEditorViewDelegate;
 import authoring.utilityfactories.TextFieldFactory;

@@ -1,9 +1,9 @@
 package authoring.editorview.tower;
 
 import authoring.editorview.tower.subviews.TowerEffectView;
-import authoring.editorview.tower.subviews.TowerFrequencyField;
 import authoring.editorview.tower.subviews.TowerImageBank;
-import authoring.editorview.tower.subviews.TowerNameField;
+import authoring.editorview.tower.subviews.editorfields.TowerFrequencyField;
+import authoring.editorview.tower.subviews.editorfields.TowerNameField;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;

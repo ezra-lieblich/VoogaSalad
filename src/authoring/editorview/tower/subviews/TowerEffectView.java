@@ -3,6 +3,8 @@ package authoring.editorview.tower.subviews;
 import java.io.IOException;
 import authoring.editorview.PhotoFileChooser;
 import authoring.editorview.tower.TowerEditorViewDelegate;
+import authoring.editorview.tower.subviews.editorfields.TowerFrequencyField;
+import authoring.editorview.tower.subviews.editorfields.TowerNameField;
 import javafx.stage.FileChooser;
 
 

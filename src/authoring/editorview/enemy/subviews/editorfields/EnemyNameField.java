@@ -1,4 +1,4 @@
-package authoring.editorview.enemy.subviews;
+package authoring.editorview.enemy.subviews.editorfields;
 
 import authoring.editorview.enemy.EnemyEditorViewDelegate;
 import authoring.utilityfactories.TextFieldFactory;

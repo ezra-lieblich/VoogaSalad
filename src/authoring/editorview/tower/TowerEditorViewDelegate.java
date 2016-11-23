@@ -6,7 +6,7 @@ public interface TowerEditorViewDelegate {
 
     public void onUserEnteredTowerName (String towerName);
 
-    public void onUserEnteredTowerImage (String imageID);
+    public void onUserEnteredTowerImagePath (String imagePath);
 
     public void onUserEnteredBuyPrice (String buyPrice);
 

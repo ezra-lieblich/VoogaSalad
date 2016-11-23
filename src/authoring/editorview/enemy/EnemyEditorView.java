@@ -3,9 +3,9 @@ package authoring.editorview.enemy;
 import java.io.IOException;
 import authoring.editorview.enemy.subviews.EnemyEffectView;
 import authoring.editorview.enemy.subviews.EnemyImageBank;
-import authoring.editorview.enemy.subviews.EnemyImageView;
-import authoring.editorview.enemy.subviews.EnemyNameField;
-import authoring.editorview.enemy.subviews.EnemySpeedField;
+import authoring.editorview.enemy.subviews.editorfields.EnemyImageView;
+import authoring.editorview.enemy.subviews.editorfields.EnemyNameField;
+import authoring.editorview.enemy.subviews.editorfields.EnemySpeedField;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
 

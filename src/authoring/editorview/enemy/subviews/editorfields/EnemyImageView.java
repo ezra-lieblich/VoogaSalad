@@ -1,4 +1,4 @@
-package authoring.editorview.enemy.subviews;
+package authoring.editorview.enemy.subviews.editorfields;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
