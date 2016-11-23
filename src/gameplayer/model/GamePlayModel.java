@@ -30,6 +30,17 @@ public class GamePlayModel extends Observable{
 	
 	private List<Queue<Enemy>> enemyAtCurrentLevel; 
 	
+	public List<Queue<Enemy>> getEnemyAtCurrentLevel() {
+		return enemyAtCurrentLevel;
+	}
+
+
+
+
+	public void setEnemyAtCurrentLevel(List<Queue<Enemy>> enemyAtCurrentLevel) {
+		this.enemyAtCurrentLevel = enemyAtCurrentLevel;
+	}
+
 	private GamePlayerFactory factory;
 	
 	private double gold;
@@ -46,6 +57,43 @@ public class GamePlayModel extends Observable{
 	}
 	
 	
+	
+	
+	public Queue<Enemy> getPackOfEnemyComing() {
+		return packOfEnemyComing;
+	}
+
+
+
+
+	public void setPackOfEnemyComing(Queue<Enemy> packOfEnemyComing) {
+		this.packOfEnemyComing = packOfEnemyComing;
+	}
+
+
+
+
+	public int getWaveOfEnemy() {
+		return waveOfEnemy;
+	}
+
+
+
+
+	public void setWaveOfEnemy(int waveOfEnemy) {
+		this.waveOfEnemy = waveOfEnemy;
+	}
+
+
+
+
+	public void setNextEnteringEnemy(Enemy nextEnteringEnemy) {
+		this.nextEnteringEnemy = nextEnteringEnemy;
+	}
+
+
+
+
 	/**
 	 * could be used when start another game
 	 * @param factory
@@ -79,6 +127,17 @@ public class GamePlayModel extends Observable{
 		
 	}
 	
+	public Enemy getNextEnteringEnemy(){
+		return this.nextEnteringEnemy;
+	}
+	
+	public void setCellSize(int size){
+		this.cellSize = size;
+	}
+	
+	public int getCellSize(){
+		return this.cellSize;
+	}
 	
 	
 	public int[] getDimension(){
@@ -122,12 +181,21 @@ public class GamePlayModel extends Observable{
 		setChanged();
 		notifyObservers();
 	}
+	
+	//used by enemymodel
+	public void setLives(double life){
+		this.lives = life;
+	}
 
 
 	private void setLevel(int d) {
 		this.currentLevel = d;
 		setChanged();
 		notifyObservers();
+	}
+	
+	public void setCurrentLevel(int level){
+		this.currentLevel = level;
 	}
 	
 	public int getCurrentLevel(){
@@ -163,8 +231,8 @@ public class GamePlayModel extends Observable{
 		return true;
 	}
 	
-	private double cellToCoordinate(int cellNumber){
-		return (cellNumber + 0.5) * cellSize;
+	public double cellToCoordinate(double d){
+		return (d + 0.5) * cellSize;
 	}
 	
 	
@@ -236,7 +304,7 @@ public class GamePlayModel extends Observable{
 	}
 	
 	//get direction
-	
+/*	
 	//TODO: move to EnemyModel
 	private void moveSingleEnemy(Enemy e) {
 		//to make it easier, only updating enemy's current cell once it reaches the center point of the next cell
@@ -310,14 +378,14 @@ public class GamePlayModel extends Observable{
 		notifyObservers();
 		
 	}
-	
+*/	
 
 
 
 	public void updateInLevel(){
 		checkCollision();
 		updateWeapon();		
-		updateEnemy();
+		//updateEnemy();
 		
 	}
 		

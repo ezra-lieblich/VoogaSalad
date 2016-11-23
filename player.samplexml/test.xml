@@ -42,7 +42,7 @@
 	<enemyList>
 		<enemy>
 			<name>redballoon</name>
-			<imageLocation>images/redbaloon.jpg</imageLocation>
+			<imageLocation>redballoon.jpg</imageLocation>
 			<widthOfImage> 20 </widthOfImage>
 			<heightOfImage> 20 </heightOfImage>
 			<speed>5</speed>
@@ -53,7 +53,7 @@
 		</enemy>
 		<enemy>
 			<name>redmoab</name>
-			<imageLocation>images/redmoab.jpg</imageLocation>
+			<imageLocation>redmoab.jpg</imageLocation>
 			<widthOfImage>50</widthOfImage>
 			<heightOfImage>50</heightOfImage>
 			<speed>3</speed>

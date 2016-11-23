@@ -14,6 +14,7 @@ public class Enemy extends Observable{
 	private int xDirection; //-1 if moving left, 1 if moving right
 	private int yDirection; //-1 if moving down, 1 if moving up	
 	private double width, height;
+	private int uniqueID;
 	
 	public Enemy(String name, double movingSpeed, int health, String image, double width, double height){
 		this.name = name; 
@@ -30,6 +31,14 @@ public class Enemy extends Observable{
 		return weidthAndHeight;
 	}
 	*/
+	
+	public void setUniqueID(int id){
+		this.uniqueID = id;
+	}
+	
+	public int getUniqueID(){
+		return this.uniqueID;
+	}
 	
 	public double getWidth(){
 		return this.width;

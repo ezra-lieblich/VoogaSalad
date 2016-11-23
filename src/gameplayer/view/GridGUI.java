@@ -45,6 +45,14 @@ public class GridGUI {
 		//System.out.println("Cell width: "+cellWidth+", "+cellHeight);
 		//this.path = path;
 	}
+	
+	public double getCellWidth(){
+		return this.cellWidth;
+	}
+	
+	public double getCellHeight(){
+		return this.cellHeight;
+	}
 
 	//for testing
 	@Deprecated

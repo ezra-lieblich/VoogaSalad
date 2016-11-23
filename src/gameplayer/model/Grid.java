@@ -6,16 +6,27 @@ public class Grid {
 
 	private Cell[][] grid;
 	private Cell start;
-	//private List<Enemy> enemyOnGrid;
+	private int row;
+	private int col;
 	
 	
 	public Grid(int x, int y) {
+		this.row = x;
+		this.col = y;
 		grid = new Cell[x][y];
 		for(int i = 0; i < grid.length;i++){
 			for(int j = 0; j < grid[0].length; j++){
 				grid[i][j] = new Cell(i, j);
 			}
 		}	
+	}
+	
+	public int getRows(){
+		return this.row;
+	}
+	
+	public int getCol(){
+		return this.col;
 	}
 	
 	public Cell getCell(int x, int y){
