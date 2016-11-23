@@ -41,18 +41,6 @@ public class TowerEditorViewController extends EditorViewController
     }
 
     @Override
-    public void onUserEnteredBuyPrice (String price) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void onUserEnteredSellPrice (String price) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
     public void onUserEnteredUnlockLevel (String level) {
         // TODO Auto-generated method stub
 
@@ -74,6 +62,18 @@ public class TowerEditorViewController extends EditorViewController
     public void onUserEnteredRange (String range) {
         // TODO Auto-generated method stub
 
+    }
+
+    @Override
+    public void onUserEnteredTowerBuyPrice (String buyPrice) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void onUserEnteredTowerSellPrice (String sellPrice) {
+        // TODO Auto-generated method stub
+        
     }
 
 }
