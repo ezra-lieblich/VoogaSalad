@@ -181,8 +181,12 @@ public class WeaponEffectView extends PhotoFileChooser {
         damageField.setText(Integer.toString(damage));
     }
 
-    public void updateCreateWeapon () {
+    public void createNewWeapon () {
         // Call all of the other update methods to get the default values
+    }
+
+    public void updateWeaponPath (String path) {
+        weaponPathBox.setValue(path);
     }
 
     @Override

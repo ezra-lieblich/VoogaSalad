@@ -60,14 +60,8 @@ public class WeaponEditorView implements IWeaponEditorView {
     }
 
     @Override
-    public void updateImagePath (String imagePath) {
+    public void updateWeaponImagePath (String imagePath) {
         weaponEffectsView.updateWeaponImagePath(imagePath);
-
-    }
-
-    @Override
-    public void updateWeaponID (int weaponID) {
-        // TODO Auto-generated method stub
 
     }
 
@@ -77,16 +71,27 @@ public class WeaponEditorView implements IWeaponEditorView {
     }
 
     @Override
-    public void onUserPressedCreate () {
-        //weaponEffectsView.update
+    public void updateWeaponBank (List<Integer> activeWeapons) {
+        // weaponBank.
 
     }
 
     @Override
-    public void updateWeaponBank (List<Integer> activeWeapons) {
-        //weaponBank.
-        
+    public void updateWeaponName (String weaponName) {
+        weaponEffectsView.updateWeaponName(weaponName);
     }
-    
+
+    @Override
+    public void updateWeaponPath (String path) {
+        weaponEffectsView.updateWeaponPath(path);
+
+    }
+
+    @Override
+    public void createNewWeapon () {
+        // TODO Auto-generated method stub
+        // This will set all default values for the weapon
+
+    }
 
 }

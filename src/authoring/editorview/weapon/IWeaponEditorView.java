@@ -21,14 +21,16 @@ public interface IWeaponEditorView extends IEditorView {
 
     public void updateRangeDisplay (int range);
 
-    public void updateImagePath (String imagePath);
+    public void updateWeaponImagePath (String imagePath);
 
-    public void updateWeaponID (int weaponID);
+    public void updateWeaponName (String weaponName);
 
     public void updateDamageDisplay (int damage);
 
     public void updateWeaponBank (List<Integer> activeWeapons);
 
-    public void onUserPressedCreate ();
+    public void updateWeaponPath (String path);
+
+    public void createNewWeapon ();
 
 }

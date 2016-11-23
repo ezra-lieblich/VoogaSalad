@@ -7,6 +7,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import authoring.editorview.PhotoFileChooser;
 import authoring.editorview.weapon.WeaponEditorViewDelegate;
+import authoring.utilityfactories.ButtonFactory;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
@@ -34,7 +35,7 @@ public class WeaponImageBank extends PhotoFileChooser {
     public WeaponImageBank () {
         weaponBank = new ScrollPane();
         Button createWeaponButton =
-                createButton("Create Weapon",
+                ButtonFactory.makeButton("Create Weapon",
                              e -> selectFile("Photos: ", "Select new weapon image"));
         weaponBank.setContent(createWeaponButton);
     }
