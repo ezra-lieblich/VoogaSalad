@@ -12,7 +12,7 @@ public class EnemyFrequencyField {
 
     public EnemyFrequencyField () {
         enemyFrequencyField =
-                TextFieldFactory.makeTextField("Set tower frequency: ",
+                TextFieldFactory.makeTextField("Set enemy frequency: ",
                                                e -> delegate
                                                        .onUserEnteredEnemyFrequency(enemyFrequencyField
                                                                .getText()));
@@ -22,7 +22,7 @@ public class EnemyFrequencyField {
         this.delegate = delegate;
     }
 
-    public TextField getTowerFrequencyField () {
+    public TextField getEnemyFrequencyField () {
         return enemyFrequencyField;
     }
 

@@ -6,6 +6,8 @@ import authoring.editorview.tower.TowerEditorViewDelegate;
 import authoring.editorview.tower.subviews.editorfields.TowerFrequencyField;
 import authoring.editorview.tower.subviews.editorfields.TowerImageView;
 import authoring.editorview.tower.subviews.editorfields.TowerNameField;
+import javafx.scene.Node;
+import javafx.scene.control.ScrollPane;
 import javafx.stage.FileChooser;
 
 
@@ -15,11 +17,15 @@ public class TowerEffectView extends PhotoFileChooser {
     private TowerNameField towerName;
     private TowerFrequencyField towerFrequency;
     private TowerImageView towerImage;
+    private ScrollPane completeView;
 
-    public TowerEffectView (TowerNameField towerName, TowerFrequencyField towerFrequency, TowerImageView towerImage) {
+    public TowerEffectView (TowerNameField towerName,
+                            TowerFrequencyField towerFrequency,
+                            TowerImageView towerImage) {
         this.towerName = towerName;
         this.towerFrequency = towerFrequency;
         this.towerImage = towerImage;
+        completeView = new ScrollPane();
     }
 
     public void setDelegate (TowerEditorViewDelegate delegate) {
@@ -30,6 +36,10 @@ public class TowerEffectView extends PhotoFileChooser {
     public void openFileChooser (FileChooser chooseFile) throws IOException {
         // TODO Auto-generated method stub
 
+    }
+    
+    public Node getInstanceAsNode () {
+        return completeView;
     }
 
 }

@@ -39,11 +39,6 @@ public class TowerEditorView implements ITowerEditorView {
         return towerEditorView;
     }
 
-    public void getTowerSetter () {
-        Group designTower = new Group();
-        towerEditorView.setCenter(designTower);
-    }
-
     @Override
     public void setDelegate (TowerEditorViewDelegate delegate) {
         this.delegate = delegate;

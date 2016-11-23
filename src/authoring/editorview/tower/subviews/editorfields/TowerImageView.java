@@ -50,7 +50,7 @@ public class TowerImageView {
         catch (Exception e) {
             imageRead =
                     ImageIO.read(getClass().getClassLoader()
-                            .getResourceAsStream(towerResources.getString("DefaultImagePath")));
+                            .getResourceAsStream("questionmark.png"));
             Image image2 = SwingFXUtils.toFXImage(imageRead, null);
             myImageView.setImage(image2);
             System.out.println("Unable to find picture in files");
