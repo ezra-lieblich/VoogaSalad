@@ -22,7 +22,7 @@ public class ComboBoxFactory {
      * 
      * @param promptText
      * @param event (ActionEvent)
-     * @param options
+     * @param options (List)
      * @return generic comboBox with promptText, corresponding event, and list options
      */
     public static ComboBox<Object> makeComboBox (String promptText,

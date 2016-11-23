@@ -25,7 +25,9 @@ public interface WeaponDataSource {
 
     public void setWeaponPath (int weaponID, String path);
 
-    public int createWeapon ();
+    public void createWeapon ();
+    
+    public int getCreatedWeapon ();
 
     public String getWeaponImagePath (int weaponID);
 

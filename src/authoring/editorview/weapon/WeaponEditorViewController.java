@@ -15,10 +15,10 @@ public class WeaponEditorViewController extends EditorViewController
         myView.setDelegate(this);
         this.view = myView;
     }
-    
+
     private void updateWeaponID () {
-        //How do I know which ID I'm working with?
-        //currentWeaponID = weaponDataSource.getWeap
+        // How do I know which ID I'm working with?
+        // currentWeaponID = weaponDataSource.getWeap
     }
 
     public void setWeaponDataSource (WeaponDataSource source) {
@@ -27,7 +27,7 @@ public class WeaponEditorViewController extends EditorViewController
 
     @Override
     public void onUserEnteredWeaponFireRate (String fireRate) {
-        //Should update currentWeaponID every time this is called
+        // Should update currentWeaponID every time this is called
         weaponDataSource.setWeaponFireRate(currentWeaponID, Integer.parseInt(fireRate));
     }
 
@@ -38,7 +38,7 @@ public class WeaponEditorViewController extends EditorViewController
 
     @Override
     public void onUserEnteredWeaponEffect (String collisionEffect) {
-        // TODO Auto-generated method stub
+        weaponDataSource.setWeaponCollisionEffect(0, collisionEffect);
 
     }
 
@@ -48,32 +48,27 @@ public class WeaponEditorViewController extends EditorViewController
     }
 
     @Override
-    public void onUserEnteredWeaponImage (String weaponImageID) {
-        // TODO Auto-generated method stub
-
+    public void onUserEnteredWeaponImage (String weaponImagePath) {
+        weaponDataSource.setWeaponImagePath(currentWeaponID, weaponImagePath);
     }
 
     @Override
     public void onUserEnteredWeaponDamage (String damage) {
-        // TODO Auto-generated method stub
-
+        weaponDataSource.setWeaponDamage(currentWeaponID, Integer.parseInt(damage));
     }
 
     @Override
     public void onUserPressedCreateWeapon () {
-        // TODO Auto-generated method stub
-
+        weaponDataSource.createWeapon();
     }
 
     @Override
     public void onUserEnteredWeaponName (String weaponName) {
-        // TODO Auto-generated method stub
-
+        weaponDataSource.setWeaponName(currentWeaponID, weaponName);
     }
 
     @Override
     public void onUserEnteredWeaponPath (String path) {
-        // TODO Auto-generated method stub
-
+        weaponDataSource.setWeaponPath(currentWeaponID, path);
     }
 }
