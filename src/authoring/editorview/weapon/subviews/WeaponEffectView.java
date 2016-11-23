@@ -72,8 +72,8 @@ public class WeaponEffectView extends PhotoFileChooser {
         vboxView.getChildren().add(createHBox(labelsResource.getString("Damage"), damageField));
     }
 
-    private Button makeButton (String text, EventHandler<ActionEvent> event) {
-        Button button = new Button(text);
+    private Button makeButton (String buttonText, EventHandler<ActionEvent> event) {
+        Button button = new Button(buttonText);
         button.setOnAction(event);
         return button;
     }
@@ -141,9 +141,9 @@ public class WeaponEffectView extends PhotoFileChooser {
         return myImageView;
     }
 
-    private TextField makeTextField (String name, EventHandler<ActionEvent> event) {
+    private TextField makeTextField (String promptText, EventHandler<ActionEvent> event) {
         TextField textField = new TextField();
-        textField.setPromptText(name);
+        textField.setPromptText(promptText);
         textField.setOnAction(event);
         return textField;
     }
@@ -162,7 +162,7 @@ public class WeaponEffectView extends PhotoFileChooser {
      */
 
     public void updateFireRateDisplay (int fireRate) {
-        // TODO: Watch for integer to string and error check
+        // TODO: Watch for integer to string and error check in controller
         fireRateField.setText(Integer.toString(fireRate));
     }
 

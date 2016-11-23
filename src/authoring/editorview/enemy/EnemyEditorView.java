@@ -1,5 +1,6 @@
 package authoring.editorview.enemy;
 
+import authoring.editorview.enemy.subviews.EnemyImageBank;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
@@ -12,10 +13,11 @@ import javafx.scene.layout.BorderPane;
 public class EnemyEditorView implements IEnemyEditorView {
     private EnemyEditorViewDelegate delegate;
     private BorderPane enemyEditorView;
+    private EnemyImageBank enemyBank;
 
     public EnemyEditorView () {
         enemyEditorView = new BorderPane();
-
+        enemyBank = new EnemyImageBank();
     }
 
     @Override
@@ -31,6 +33,7 @@ public class EnemyEditorView implements IEnemyEditorView {
     @Override
     public void setDelegate (EnemyEditorViewDelegate delegate) {
         this.delegate = delegate;
+        enemyBank.setDelegate(delegate);
     }
 
 }
