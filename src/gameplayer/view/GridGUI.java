@@ -74,8 +74,8 @@ public class GridGUI {
 	private void styleGrid(String terrainURL) {
 		setTerrain(terrainURL);
 		grid.getStyleClass().add("grid");
-		grid.setMaxWidth(GRID_WIDTH);
-		grid.setMaxHeight(GRID_HEIGHT);
+		grid.setMinWidth(GRID_WIDTH);
+		grid.setMinHeight(GRID_HEIGHT);
 	}
 
 	private void setTerrain(String imageURL) {

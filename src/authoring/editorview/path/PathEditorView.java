@@ -15,7 +15,7 @@ public class PathEditorView implements IPathEditorView {
 
     public PathEditorView (int aWidth, int aHeight) {
         this.pathView = new BorderPane();
-    	this.gridGUI = new GridGUI(8, 8);
+    	this.gridGUI = new GridGUI(50, 50);
         this.gridGUI.init();
         this.pathBank = new PathBank();
         pathView.setLeft(pathBank.getInstanceAsNode());
