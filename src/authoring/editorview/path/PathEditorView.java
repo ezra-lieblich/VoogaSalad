@@ -2,21 +2,23 @@ package authoring.editorview.path;
 
 import authoring.editorview.path.subviews.PathBank;
 import gameplayer.view.GridGUI;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
 
 
 public class PathEditorView implements IPathEditorView {
     private PathEditorViewDelegate delegate;
-    private GridGUI gridGUI;
+  //  private GridGUI gridGUI;
     private PathBank pathBank;
     private BorderPane pathView;
+    private Group root = new Group();
     
 
     public PathEditorView (int aWidth, int aHeight) {
         this.pathView = new BorderPane();
-    	this.gridGUI = new GridGUI(50, 50);
-        this.gridGUI.init();
+    	//this.gridGUI = new GridGUI(5, 5);
+        //this.gridGUI.init();
         this.pathBank = new PathBank();
         pathView.setLeft(pathBank.getInstanceAsNode());
      
@@ -24,7 +26,7 @@ public class PathEditorView implements IPathEditorView {
 
     @Override
     public Node getInstanceAsNode () {
-        return gridGUI.getGrid();
+        return root;
     }
 
     @Override
