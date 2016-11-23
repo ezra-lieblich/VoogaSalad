@@ -2,6 +2,7 @@ package gameplayer.controller;
 
 import gameplayer.loader.GamePlayerFactory;
 import gameplayer.loader.XMLParser;
+import gameplayer.model.EnemyModel;
 import gameplayer.model.GamePlayModel;
 import gameplayer.view.GameGUI;
 import javafx.animation.KeyFrame;
@@ -33,15 +34,19 @@ public class GamePlayerController implements Observer{
 	private GamePlayModel model;
 	
 	private Timeline animation;
+	private EnemyController enemyController;
+	private EnemyModel enemyModel;
 	
 	public GamePlayerController(){
 		//use xml parser to create classes. 
 		this.parser = new XMLParser("player.samplexml/test.xml"); //hardcoded
 		this.loader = new GamePlayerFactory(parser);
+		
 		checkIfValid();
 		Map temp = this.loader.getGameSetting();
 		System.out.println("check null: " + temp == null);
 		this.model = new GamePlayModel(this.loader);
+		this.enemyModel = new EnemyModel(this.model);
 		this.model.addObserver(this);
 	}
 	
@@ -60,9 +65,8 @@ public class GamePlayerController implements Observer{
 		this.model.initializeLevelInfo();
 		HashMap<String,Double> settings = this.loader.getGameSetting();
 		System.out.println("Settings: "+ settings);
-		//initGUIDummy(settings); 
 		initGUI();
-		//createTimeline();
+		this.enemyController = new EnemyController(this.enemyModel, this.view.getGrid());
 	}
 	
 	//For testing only

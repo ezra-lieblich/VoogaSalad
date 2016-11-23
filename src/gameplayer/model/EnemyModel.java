@@ -13,7 +13,7 @@ public class EnemyModel extends Observable {
 	private GamePlayModel gamePlayModel;
 	private Grid grid;
 
-	public EnemyModel(GamePlayModel model, GamePlayerFactory factory) {
+	public EnemyModel(GamePlayModel model) {
 		this.enemyOnGrid = new ArrayList<Enemy>();
 		this.gamePlayModel = model;
 		this.grid = this.gamePlayModel.getGrid();
@@ -103,12 +103,28 @@ public class EnemyModel extends Observable {
 
 		this.gamePlayModel.setNextEnteringEnemy(this.gamePlayModel.getPackOfEnemyComing().poll());
 
-
-
 	}
+	
+	private void checkCollision() {
+		for (Enemy e : getEnemyList()) {
+			for (Weapon w : this.gamePlayModel.getWeaponOnGrid()) {
+				gamePlayModel.singleCollision(e, w);
+			}
+			if (e.getHealth() < 0)
+				getEnemyList().remove(e);
+		}
+		setChanged();
+		notifyObservers();
+	}
+	
+	// TODO: move to EnemyModel
+		public List<Enemy> getEnemyList() {
+			return this.enemyOnGrid;
+		}
 	
 	public void update(){
 		updateEnemy();
+		checkCollision();
 	}
 
 }
