@@ -66,6 +66,7 @@ public class GamePlayerController implements Observer{
 	}
 	
 	//For testing only
+	@Deprecated
 	private void initGUIDummy(HashMap<String,Double> settings) {
 		int[] dimensions = model.getDimension();
 		int rows = dimensions[0];
