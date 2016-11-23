@@ -65,15 +65,20 @@ public class WeaponEffectView extends PhotoFileChooser {
         vboxView.getChildren().add(ButtonFactory.makeButton(labelsResource.getString("Image"),
                                                             e -> selectFile("text", "text")));
         vboxView.getChildren()
-                .add(BoxFactory.createHBox(labelsResource.getString("Name"), nameField));
+                .add(BoxFactory.createHBoxWithTextField(labelsResource.getString("Name"),
+                                                        nameField));
         vboxView.getChildren()
-                .add(BoxFactory.createHBox(labelsResource.getString("Rate"), fireRateField));
+                .add(BoxFactory.createHBoxWithTextField(labelsResource.getString("Rate"),
+                                                        fireRateField));
         vboxView.getChildren()
-                .add(BoxFactory.createHBox(labelsResource.getString("Speed"), speedField));
+                .add(BoxFactory.createHBoxWithTextField(labelsResource.getString("Speed"),
+                                                        speedField));
         vboxView.getChildren()
-                .add(BoxFactory.createHBox(labelsResource.getString("Range"), rangeField));
+                .add(BoxFactory.createHBoxWithTextField(labelsResource.getString("Range"),
+                                                        rangeField));
         vboxView.getChildren()
-                .add(BoxFactory.createHBox(labelsResource.getString("Damage"), damageField));
+                .add(BoxFactory.createHBoxWithTextField(labelsResource.getString("Damage"),
+                                                        damageField));
     }
 
     private void makeTextFields () {
