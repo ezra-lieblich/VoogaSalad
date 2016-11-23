@@ -9,6 +9,5 @@ public interface PathEditorViewDelegate {
 	
 	public void setPathBackgroundImage();
 	
-	
 
 }

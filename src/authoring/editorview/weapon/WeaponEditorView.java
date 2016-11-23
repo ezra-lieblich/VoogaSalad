@@ -1,5 +1,7 @@
 package authoring.editorview.weapon;
 
+import java.io.IOException;
+import java.util.List;
 import authoring.editorview.weapon.subviews.WeaponEffectView;
 import authoring.editorview.weapon.subviews.WeaponImageBank;
 import javafx.scene.Node;
@@ -10,18 +12,18 @@ public class WeaponEditorView implements IWeaponEditorView {
     private WeaponEditorViewDelegate delegate;
     private BorderPane weaponEditorView;
     private WeaponImageBank weaponBank;
-    private WeaponEffectView weaponEffects;
+    private WeaponEffectView weaponEffectsView;
 
-    public WeaponEditorView () {
+    public WeaponEditorView () throws IOException {
         weaponEditorView = new BorderPane();
         weaponBank = new WeaponImageBank();
-        weaponEffects = new WeaponEffectView();
+        weaponEffectsView = new WeaponEffectView();
         setBorderPane();
     }
 
     private void setBorderPane () {
         weaponEditorView.setLeft(weaponBank.getInstanceAsNode());
-        weaponEditorView.setCenter(weaponEffects.getCompleteView());
+        weaponEditorView.setCenter(weaponEffectsView.getInstanceAsNode());
     }
 
     @Override
@@ -32,6 +34,59 @@ public class WeaponEditorView implements IWeaponEditorView {
     @Override
     public void setDelegate (WeaponEditorViewDelegate delegate) {
         this.delegate = delegate;
+        weaponBank.setDelegate(delegate);
+        weaponEffectsView.setDelegate(delegate);
     }
+
+    @Override
+    public void updateFireRateDisplay (int rate) {
+        weaponEffectsView.updateFireRateDisplay(rate);
+    }
+
+    @Override
+    public void updateSpeedDisplay (int speed) {
+        weaponEffectsView.updateSpeedDisplay(speed);
+    }
+
+    @Override
+    public void updateCollisionEffectDisplay (String collisionEffect) {
+        weaponEffectsView.updateWeaponEffectDisplay(collisionEffect);
+
+    }
+
+    @Override
+    public void updateRangeDisplay (int range) {
+        weaponEffectsView.updateRangeDisplay(range);
+    }
+
+    @Override
+    public void updateImagePath (String imagePath) {
+        weaponEffectsView.updateWeaponImagePath(imagePath);
+
+    }
+
+    @Override
+    public void updateWeaponID (int weaponID) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void updateDamageDisplay (int damage) {
+        weaponEffectsView.updateWeaponDamage(damage);
+    }
+
+    @Override
+    public void onUserPressedCreate () {
+        //weaponEffectsView.update
+
+    }
+
+    @Override
+    public void updateWeaponBank (List<Integer> activeWeapons) {
+        //weaponBank.
+        
+    }
+    
 
 }

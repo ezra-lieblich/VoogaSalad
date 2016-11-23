@@ -1,5 +1,8 @@
 package authoring.editorview.tower;
 
+import java.util.List;
+
+
 public interface TowerDataSource {
     public String getTowerName (int towerID);
 
@@ -12,6 +15,8 @@ public interface TowerDataSource {
     public int getUnlockLevel (int towerID);
 
     public int getFireRate (int towerID);
+
+    public List<Integer> getActiveTowers ();
 
     /**
      * Create new tower with default values

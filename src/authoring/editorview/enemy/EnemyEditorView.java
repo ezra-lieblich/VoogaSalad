@@ -1,38 +1,39 @@
 package authoring.editorview.enemy;
 
+import authoring.editorview.enemy.subviews.EnemyImageBank;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
+
 
 /**
  * @author Diane Hadley
  */
 
 public class EnemyEditorView implements IEnemyEditorView {
-	private EnemyEditorViewDelegate delegate;
-	private BorderPane root;
-	
-	public EnemyEditorView(){
-		root = new BorderPane();
-		
-	}
-	
-    @Override
-    public Node getInstanceAsNode () {      
-    	return root;
-    }
-    
-    public void getEnemySetter(){
-    	Group designEnemy = new Group();
-    	root.setCenter(designEnemy);
+    private EnemyEditorViewDelegate delegate;
+    private BorderPane enemyEditorView;
+    private EnemyImageBank enemyBank;
+
+    public EnemyEditorView () {
+        enemyEditorView = new BorderPane();
+        enemyBank = new EnemyImageBank();
     }
 
-	@Override
-	public void setDelegate(EnemyEditorViewDelegate delegate) {
-		this.delegate = delegate;
-	}
-    
-    
-    
+    @Override
+    public Node getInstanceAsNode () {
+        return enemyEditorView;
+    }
+
+    public void getEnemySetter () {
+        Group designEnemy = new Group();
+        enemyEditorView.setCenter(designEnemy);
+    }
+
+    @Override
+    public void setDelegate (EnemyEditorViewDelegate delegate) {
+        this.delegate = delegate;
+        enemyBank.setDelegate(delegate);
+    }
 
 }
