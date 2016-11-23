@@ -75,6 +75,7 @@ public class GamePlayerController implements Observer{
 		towerImages.add("kaneki.jpg");
 		towerImages.add("penguin.jpg");
 		this.mainScene = view.init(settings.get("gold"), settings.get("lives"), settings.get("numLevels"),towerImages);
+		System.out.println("Start point: "+model.getGrid().getStartPoint());
 		this.view.getGrid().populatePath(model.getGrid().getStartPoint()); //TODO: need to get grid from model to get starting cell
 	}
 	
