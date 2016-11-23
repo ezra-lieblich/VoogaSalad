@@ -28,8 +28,7 @@ public class GamePlayerController implements Observer{
 	public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
 	
 	private GamePlayerFactory loader; 
-	private GameGUI view;
-	private XMLParser parser;
+	private GameGUI view;	
 	private Scene mainScene;
 	private GamePlayModel model;
 	
@@ -39,8 +38,7 @@ public class GamePlayerController implements Observer{
 	
 	public GamePlayerController(){
 		//use xml parser to create classes. 
-		this.parser = new XMLParser("player.samplexml/test.xml"); //hardcoded
-		this.loader = new GamePlayerFactory(parser);
+		this.loader = new GamePlayerFactory(new XMLParser("player.samplexml/test.xml"));//hardcoded
 		
 		checkIfValid();
 		Map temp = this.loader.getGameSetting();
@@ -89,6 +87,10 @@ public class GamePlayerController implements Observer{
 		int rows = dimensions[0];
 		int cols = dimensions[1];
 		this.view = new GameGUI(rows,cols); //just for testing, should be replaced by block above, 5 rows, 5 columns
+		this.view.bindAnimationStart(e->{
+			//TODO: initialize animation
+			this.startAnimation(); 
+		});
 		System.out.println("Tower images: "+getTowerImages());
 		this.mainScene = view.init(this.model.getGold(), this.model.getLife(), this.model.getCurrentLevel(),getTowerImages());
 		this.view.getGrid().populatePath(model.getGrid().getStartPoint()); //TODO: need to get grid from model to get starting cell
@@ -133,7 +135,7 @@ public class GamePlayerController implements Observer{
 	*/
 	
 
-	private void createTimeline() {
+	private void startAnimation() {
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> {
 			this.model.updateInLevel();
 		});

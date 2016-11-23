@@ -7,6 +7,9 @@ import gameplayer.view.buttonPanel.GamePlayButtonPanel;
 import gameplayer.view.helper.GraphicsLibrary;
 import gameplayer.view.helper.dragdrop.DragDropView;
 import gameplayer.view.statsdisplay.StatsDisplay;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -39,6 +42,7 @@ public class GameGUI {
 	private double numLevels;
 	private double currentLevel;
 	private List path;
+	private EventHandler animationBind;
 	
 	public GameGUI(int rows, int columns){
 		this.mainScreen = new BorderPane();
@@ -75,6 +79,10 @@ public class GameGUI {
 	
 	public GridGUI getGrid(){
 		return this.grid;
+	}
+	
+	public void bindAnimationStart(EventHandler<ActionEvent> handle){
+		this.buttonPanel.bindAnimationStart(handle);
 	}
 	
 	private void addButtonPanel(){

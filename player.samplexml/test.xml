@@ -72,15 +72,15 @@
 		</wave>
 		<path>
 			<coordinate>0,0;</coordinate>
-			<coordinate>0,1;</coordinate>
-			<coordinate>0,2;</coordinate>
-			<coordinate>0,3;</coordinate>
-			<coordinate>0,4;</coordinate>
-			<coordinate>0,5;</coordinate>
-			<coordinate>0,6;</coordinate>
-			<coordinate>0,7;</coordinate>
-			<coordinate>0,8;</coordinate>
-			<coordinate>0,9;</coordinate>
+			<coordinate>1,0;</coordinate>
+			<coordinate>2,0;</coordinate>
+			<coordinate>3,0;</coordinate>
+			<coordinate>4,0;</coordinate>
+			<coordinate>5,0;</coordinate>
+			<coordinate>6,0;</coordinate>
+			<coordinate>7,0;</coordinate>
+			<coordinate>8,0;</coordinate>
+			<coordinate>9,0;</coordinate>
 		</path>
 		<enemies>
 			
@@ -95,15 +95,15 @@
 		</wave>
 		<path>
 			<coordinate>0,0;</coordinate>
-			<coordinate>0,1;</coordinate>
-			<coordinate>0,2;</coordinate>
-			<coordinate>0,3;</coordinate>
-			<coordinate>0,4;</coordinate>
-			<coordinate>0,5;</coordinate>
-			<coordinate>0,6;</coordinate>
-			<coordinate>0,7;</coordinate>
-			<coordinate>0,8;</coordinate>
-			<coordinate>0,9;</coordinate>
+			<coordinate>1,0;</coordinate>
+			<coordinate>2,0;</coordinate>
+			<coordinate>3,0;</coordinate>
+			<coordinate>4,0;</coordinate>
+			<coordinate>5,0;</coordinate>
+			<coordinate>6,0;</coordinate>
+			<coordinate>7,0;</coordinate>
+			<coordinate>8,0;</coordinate>
+			<coordinate>9,0;</coordinate>
 		</path>
 	</level2>
 </GameSetting>
