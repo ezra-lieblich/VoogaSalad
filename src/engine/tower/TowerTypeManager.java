@@ -13,7 +13,7 @@ import engine.weapon.WeaponType;
 
 public class TowerTypeManager extends AbstractTypeManager<Tower> implements TowerManager {
 
-    TowerTypeManager (ManagerMediator managerMediator) {
+    public TowerTypeManager (ManagerMediator managerMediator) {
         super(managerMediator);
         // TODO Auto-generated constructor stub
     }

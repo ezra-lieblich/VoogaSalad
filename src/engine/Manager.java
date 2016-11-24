@@ -2,7 +2,7 @@ package engine;
 
 import java.util.function.Consumer;
 
-public interface Manager<E extends Type> {
+public interface Manager<E extends Type> extends ManagerVisitor {
 
     int addEntry (E entry);
 

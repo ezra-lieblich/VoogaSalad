@@ -96,4 +96,9 @@ public abstract class AbstractTypeManager<E extends Type> extends Observable imp
      * }
      */
     
+    @Override
+    public <U extends Type> U visitManagerGetEntity(Manager<U> typeManager, int index) {
+        return typeManager.getEntity(index);
+    }
+    
 }
