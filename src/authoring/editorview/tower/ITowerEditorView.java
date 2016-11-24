@@ -9,5 +9,7 @@ import authoring.editorview.IEditorView;
  *
  */
 public interface ITowerEditorView extends IEditorView {
+
     public void setDelegate (TowerEditorViewDelegate delegate);
+
 }

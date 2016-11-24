@@ -9,5 +9,7 @@ import authoring.editorview.IEditorView;
  *
  */
 public interface IEnemyEditorView extends IEditorView {
+
     public void setDelegate (EnemyEditorViewDelegate delegate);
+
 }
