@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.List;
 import javax.imageio.ImageIO;
 import authoring.editorview.PhotoFileChooser;
+import authoring.editorview.weapon.IWeaponEditorView;
 import authoring.editorview.weapon.WeaponEditorViewDelegate;
 import authoring.utilityfactories.BoxFactory;
 import authoring.utilityfactories.ButtonFactory;
@@ -26,7 +27,7 @@ import javafx.stage.Stage;
  *
  */
 // TODO: This needs to implement IImageBank once I figure out how to get parameter correct
-public class WeaponImageBank extends PhotoFileChooser {
+public class WeaponImageBank extends PhotoFileChooser implements IWeaponEditorView {
 
     // TODO: I want to be able to load in a default weapon with default settings from model
     // What is our current plan with defaults?
@@ -54,10 +55,12 @@ public class WeaponImageBank extends PhotoFileChooser {
         weaponBank.setContent(vbox);
     }
 
+    @Override
     public Node getInstanceAsNode () {
         return weaponBank;
     }
 
+    @Override
     public void setDelegate (WeaponEditorViewDelegate delegate) {
         this.delegate = delegate;
     }

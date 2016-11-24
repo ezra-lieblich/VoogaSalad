@@ -18,11 +18,13 @@ public class WeaponFireRateField implements IWeaponEditorView {
     private WeaponEditorViewDelegate delegate;
 
     public WeaponFireRateField () {
+        createField();
+    }
+
+    private void createField () {
         weaponFireRateField =
-                TextFieldFactory.makeTextField("Set weapon fire rate: ",
-                                               e -> delegate
-                                                       .onUserEnteredWeaponFireRate(weaponFireRateField
-                                                               .getText()));
+                TextFieldFactory.makeTextField("Set weapon fire rate: ", e -> delegate
+                        .onUserEnteredWeaponFireRate(weaponFireRateField.getText()));
     }
 
     @Override

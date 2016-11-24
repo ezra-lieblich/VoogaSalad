@@ -6,6 +6,9 @@ import java.util.List;
 /**
  * The Weapon View interface will detail the components of the weapon creation. The interface
  * determines a portion of our internal API.
+ * 
+ * @author Andrew Bihl
+ * @author Kayla Schulz
  *
  */
 public interface IWeaponUpdateView extends IWeaponEditorView {

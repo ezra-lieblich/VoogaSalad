@@ -17,7 +17,6 @@ import authoring.utilityfactories.BoxFactory;
 import authoring.utilityfactories.ButtonFactory;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -82,7 +81,8 @@ public class WeaponEffectView extends PhotoFileChooser {
         vboxView.getChildren().add(ButtonFactory.makeButton(labelsResource.getString("Image"),
                                                             e -> {
                                                                 try {
-                                                                    selectFile("Select new weapon image", "Photos: ");
+                                                                    selectFile("Select new weapon image",
+                                                                               "Photos: ");
                                                                 }
                                                                 catch (IOException e1) {
                                                                     // TODO Fix this for better user

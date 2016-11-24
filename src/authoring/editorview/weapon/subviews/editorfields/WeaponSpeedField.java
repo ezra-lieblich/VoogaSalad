@@ -18,11 +18,13 @@ public class WeaponSpeedField implements IWeaponEditorView {
     private WeaponEditorViewDelegate delegate;
 
     public WeaponSpeedField () {
+        createField();
+    }
+
+    private void createField () {
         weaponSpeedField =
-                TextFieldFactory.makeTextField("Set weapon speed: ",
-                                               e -> delegate
-                                                       .onUserEnteredProjectileSpeed(weaponSpeedField
-                                                               .getText()));
+                TextFieldFactory.makeTextField("Set weapon speed: ", e -> delegate
+                        .onUserEnteredProjectileSpeed(weaponSpeedField.getText()));
     }
 
     @Override

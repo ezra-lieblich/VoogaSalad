@@ -18,10 +18,13 @@ public class WeaponNameField implements IWeaponEditorView {
     private WeaponEditorViewDelegate delegate;
 
     public WeaponNameField () {
+        createField();
+    }
+
+    private void createField () {
         weaponNameField =
-                TextFieldFactory.makeTextField("Set weapon name: ",
-                                               e -> delegate.onUserEnteredWeaponName(weaponNameField
-                                                       .getText()));
+                TextFieldFactory.makeTextField("Set weapon name: ", e -> delegate
+                        .onUserEnteredWeaponName(weaponNameField.getText()));
     }
 
     @Override

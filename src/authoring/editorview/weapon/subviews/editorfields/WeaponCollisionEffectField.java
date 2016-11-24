@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 
+
 /**
  * 
  * @author Kayla Schulz
@@ -19,13 +20,20 @@ public class WeaponCollisionEffectField implements IWeaponEditorView {
     private WeaponEditorViewDelegate delegate;
 
     public WeaponCollisionEffectField () {
+        ObservableList<Object> effectOptions = setList();
+        createComboBox(effectOptions);
+    }
+
+    private ObservableList<Object> setList () {
         ObservableList<Object> effectOptions =
                 FXCollections.observableArrayList("IDK", "Sorry");
+        return effectOptions;
+    }
+
+    private void createComboBox (ObservableList<Object> effectOptions) {
         weaponCollisionEffectBox =
-                ComboBoxFactory.makeComboBox("Set collision effect: ",
-                                             e -> delegate
-                                                     .onUserEnteredWeaponEffect((String) weaponCollisionEffectBox
-                                                             .getValue()),
+                ComboBoxFactory.makeComboBox("Set collision effect: ", e -> delegate
+                        .onUserEnteredWeaponEffect((String) weaponCollisionEffectBox.getValue()),
                                              effectOptions);
     }
 

@@ -18,11 +18,13 @@ public class WeaponRangeField implements IWeaponEditorView {
     private WeaponEditorViewDelegate delegate;
 
     public WeaponRangeField () {
+        createField();
+    }
+
+    private void createField () {
         weaponRangeField =
-                TextFieldFactory.makeTextField("Set weapon range: ",
-                                               e -> delegate
-                                                       .onUserEnteredWeaponRange(weaponRangeField
-                                                               .getText()));
+                TextFieldFactory.makeTextField("Set weapon range: ", e -> delegate
+                        .onUserEnteredWeaponRange(weaponRangeField.getText()));
     }
 
     @Override

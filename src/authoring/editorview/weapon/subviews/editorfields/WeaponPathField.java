@@ -15,14 +15,20 @@ public class WeaponPathField implements IWeaponEditorView {
     private WeaponEditorViewDelegate delegate;
 
     public WeaponPathField () {
+        ObservableList<Object> pathOptions = setList();
+        createField(pathOptions);
+    }
+
+    private ObservableList<Object> setList () {
         ObservableList<Object> pathOptions =
                 FXCollections.observableArrayList("I still don't know", "Sorry");
+        return pathOptions;
+    }
+
+    private void createField (ObservableList<Object> pathOptions) {
         weaponPathBox =
-                ComboBoxFactory.makeComboBox("Set weapon path: ",
-                                             e -> delegate
-                                                     .onUserEnteredWeaponPath((String) weaponPathBox
-                                                             .getValue()),
-                                             pathOptions);
+                ComboBoxFactory.makeComboBox("Set weapon path: ", e -> delegate
+                        .onUserEnteredWeaponPath((String) weaponPathBox.getValue()), pathOptions);
     }
 
     @Override

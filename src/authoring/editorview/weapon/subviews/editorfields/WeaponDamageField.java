@@ -18,11 +18,13 @@ public class WeaponDamageField implements IWeaponEditorView {
     private WeaponEditorViewDelegate delegate;
 
     public WeaponDamageField () {
+        createField();
+    }
+
+    private void createField () {
         weaponDamageField =
-                TextFieldFactory.makeTextField("Set weapon damage: ",
-                                               e -> delegate
-                                                       .onUserEnteredWeaponDamage(weaponDamageField
-                                                               .getText()));
+                TextFieldFactory.makeTextField("Set weapon damage: ", e -> delegate
+                        .onUserEnteredWeaponDamage(weaponDamageField.getText()));
     }
 
     @Override
