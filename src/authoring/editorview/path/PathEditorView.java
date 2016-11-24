@@ -14,7 +14,7 @@ import javafx.scene.layout.VBox;
 
 public class PathEditorView implements IPathEditorView {
    
-	private PathEditorViewDelegate delegate;
+//	private PathEditorViewDelegate delegate;
 	private static final int BOX_SPACING = 10;
     
     private BorderPane pathView;
@@ -45,14 +45,12 @@ public class PathEditorView implements IPathEditorView {
 
     @Override
     public void setDelegate (PathEditorViewDelegate delegate) {
-        this.delegate = delegate;
+        //this.delegate = delegate;
+        backgroundImageView.setDelegate(delegate);
     }
     
     private void setPathView(){
-    	
-    	
-       
-        
+    	     
         BorderPane editor = new BorderPane();
         editor.setCenter(pathBuilderView.getInstanceAsNode());
         

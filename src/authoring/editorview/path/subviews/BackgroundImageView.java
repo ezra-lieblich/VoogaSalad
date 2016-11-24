@@ -1,19 +1,16 @@
 package authoring.editorview.path.subviews;
 
-import java.awt.image.BufferedImage;
+
 import java.io.IOException;
 import java.util.ResourceBundle;
 
-import javax.imageio.ImageIO;
-
 import authoring.editorview.PhotoFileChooser;
+import authoring.editorview.path.PathEditorViewDelegate;
 import authoring.utilityfactories.ButtonFactory;
-import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 
@@ -22,6 +19,7 @@ public class BackgroundImageView extends PhotoFileChooser{
 	
 	private VBox root;
 	private String backgroundImagePath;
+	private PathEditorViewDelegate delegate;
 	
 	private static final String RESOURCE_FILE_NAME = "resources/GameAuthoringPath";	
 	private ResourceBundle pathResource = ResourceBundle.getBundle(RESOURCE_FILE_NAME);
@@ -32,13 +30,13 @@ public class BackgroundImageView extends PhotoFileChooser{
 	
 	public BackgroundImageView(){
 		root = new VBox();
-		makeSetImageButton();
+		makeChooseImageButton();
 		
-	}
-	
-	
-	public Node getInstanceAsNode(){
 		
+		
+	}	
+	
+	public Node getInstanceAsNode(){		
 		return root;
 		
 	}
@@ -46,8 +44,12 @@ public class BackgroundImageView extends PhotoFileChooser{
 	public String getBackgroundImagePath(){
 		return backgroundImagePath;
 	}
+	
+	public void setDelegate(PathEditorViewDelegate delegate){
+		this.delegate = delegate;
+	}
 
-	private void makeSetImageButton(){
+	private void makeChooseImageButton(){
 		Button setBackgroundImageButton = ButtonFactory.makeButton(pathResource.getString("BackgroundImageButton"), 
 				e -> selectFile("Photos: ", "Select new background image"));
 		root.getChildren().add(setBackgroundImageButton);
@@ -60,38 +62,20 @@ public class BackgroundImageView extends PhotoFileChooser{
 		
 	}
 	
-	private ImageView loadBackgroundImage(){
-		ImageView backgroundImageView = new ImageView();
-		
+	private ImageView loadBackgroundImage() throws IOException{
+		ImageView backgroundImageView = new ImageView();		
 		try {
-			
+			Image image = new Image(getClass().getClassLoader().getResourceAsStream(backgroundImagePath));
+			backgroundImageView.setImage(image);
+			delegate.setPathBackgroundImage(backgroundImagePath);			
 		}
 		catch (Exception e){
-			
-		}
-		
+			Image defaultImage = new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_IMAGE_FILE_NAME));
+			backgroundImageView.setImage(defaultImage);	
+		}		
 		return backgroundImageView;
 		
 	}
-	
-//	
-//	private ImageView loadWeaponImage () throws IOException {
-//        
-//        try {
-//            Image image = ImageIO.read(getClass().getClassLoader().getResourceAsStream(imagePath));
-//            Image image2 = SwingFXUtils.toFXImage(imageRead, null);
-//            myImageView.setImage(image2);
-//            delegate.onUserEnteredWeaponImage(imagePath);
-//        }
-//        catch (Exception e) {
-//            imageRead =
-//                    ImageIO.read(getClass().getClassLoader()
-//                            .getResourceAsStream(labelsResource.getString("DefaultImagePath")));
-//            Image image2 = SwingFXUtils.toFXImage(imageRead, null);
-//            myImageView.setImage(image2);
-//            System.out.println("Unable to find picture in files");
-//        }
-//        return myImageView;
-//    }
+
 	
 }

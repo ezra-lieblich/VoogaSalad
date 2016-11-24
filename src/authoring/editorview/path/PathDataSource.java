@@ -9,15 +9,17 @@ public interface PathDataSource {
      * 
      * @param background image set by user
      */
-    public void setGameBackground (int backgroundID);
+    public void setGameBackground (int pathID, String backgroundImagePath);
 
     /**
      * 
      * @param pathImage set by the user
      */
-    public void setPathImage (int pathImageID);
+    public void setPathImage (int pathID, String pathImagePath);
     
-    public boolean addPath(List<Coordinate> pathCoordinates);
+    public boolean addPathCoordinates(List<Coordinate> pathCoordinates);
     
     public void clearPaths();
+    
+    
 }
