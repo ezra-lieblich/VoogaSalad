@@ -81,7 +81,7 @@ public class WeaponEffectView extends PhotoFileChooser {
         vboxView.getChildren().add(ButtonFactory.makeButton(labelsResource.getString("Image"),
                                                             e -> {
                                                                 try {
-                                                                    selectFile("text", "text");
+                                                                    selectFile("Select new weapon image", "Photos: ");
                                                                 }
                                                                 catch (IOException e1) {
                                                                     // TODO Fix this for better user
