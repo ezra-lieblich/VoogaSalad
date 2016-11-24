@@ -19,7 +19,7 @@ public class AuthoringViewController implements EditorTabPaneDelegate {
     private IAuthoringView view;
     private HashMap<String, EditorViewController> editors;
     private final String SETTINGS_RESOURCE_PATH = "resources/ViewSettings";
-    private final String TABS_RESOURCE_PATH = "resources/GameAuthoringToolbar";
+    private final String TABS_RESOURCE_PATH = "resources/GameAuthoringEditorToolbar";
     private ArrayList<String> tabNames;
 
     public AuthoringViewController (int width, int height) throws IOException {

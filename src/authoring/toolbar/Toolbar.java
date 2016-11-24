@@ -9,7 +9,10 @@ public class Toolbar implements IToolbar {
     private ToolBar myToolbar;
     
     public Toolbar(int aWidth, int aHeight) {
-        myToolbar = new ToolBar(new Button("Open"));
+        myToolbar = new ToolBar(
+        		new Button("New"),
+        		new Button ("Open")
+        		);
     }
 
     @Override

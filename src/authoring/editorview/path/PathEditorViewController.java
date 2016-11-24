@@ -2,6 +2,7 @@ package authoring.editorview.path;
 
 import authoring.editorview.EditorViewController;
 
+
 public class PathEditorViewController extends EditorViewController implements PathEditorViewDelegate {
 
 	private PathDataSource pathDataSource;
@@ -10,6 +11,25 @@ public class PathEditorViewController extends EditorViewController implements Pa
 		IPathEditorView myView = PathEditorViewFactory.build(editorWidth, editorHeight);
 		myView.setDelegate(this);
 		this.view = myView;
+
+	}
+
+	@Override
+	public void createNewPath() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setPathImage() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setPathBackgroundImage() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	public void setPathDataSource(PathDataSource source){
