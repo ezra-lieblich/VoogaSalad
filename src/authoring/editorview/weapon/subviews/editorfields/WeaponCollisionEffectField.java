@@ -1,9 +1,11 @@
 package authoring.editorview.weapon.subviews.editorfields;
 
+import authoring.editorview.weapon.IWeaponEditorView;
 import authoring.editorview.weapon.WeaponEditorViewDelegate;
 import authoring.utilityfactories.ComboBoxFactory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 
 /**
@@ -11,7 +13,7 @@ import javafx.scene.control.ComboBox;
  * @author Kayla Schulz
  *
  */
-public class WeaponCollisionEffectField {
+public class WeaponCollisionEffectField implements IWeaponEditorView {
 
     private ComboBox<Object> weaponCollisionEffectBox;
     private WeaponEditorViewDelegate delegate;
@@ -27,11 +29,13 @@ public class WeaponCollisionEffectField {
                                              effectOptions);
     }
 
+    @Override
     public void setDelegate (WeaponEditorViewDelegate delegate) {
         this.delegate = delegate;
     }
 
-    public ComboBox<Object> getWeaponCollisionEffectField () {
+    @Override
+    public Node getInstanceAsNode () {
         return weaponCollisionEffectBox;
     }
 

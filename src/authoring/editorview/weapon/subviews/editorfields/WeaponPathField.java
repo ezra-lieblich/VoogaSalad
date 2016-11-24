@@ -1,13 +1,15 @@
 package authoring.editorview.weapon.subviews.editorfields;
 
+import authoring.editorview.weapon.IWeaponEditorView;
 import authoring.editorview.weapon.WeaponEditorViewDelegate;
 import authoring.utilityfactories.ComboBoxFactory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 
 
-public class WeaponPathField {
+public class WeaponPathField implements IWeaponEditorView {
 
     private ComboBox<Object> weaponPathBox;
     private WeaponEditorViewDelegate delegate;
@@ -23,11 +25,13 @@ public class WeaponPathField {
                                              pathOptions);
     }
 
+    @Override
     public void setDelegate (WeaponEditorViewDelegate delegate) {
         this.delegate = delegate;
     }
 
-    public ComboBox<Object> getWeaponPathField () {
+    @Override
+    public Node getInstanceAsNode () {
         return weaponPathBox;
     }
 
