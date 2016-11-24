@@ -71,5 +71,10 @@ public class TowerEditorView implements ITowerEditorView {
         towerName.setDelegate(delegate);
         towerFrequency.setDelegate(delegate);
         towerRange.setDelegate(delegate);
+        towerImage.setDelegate(delegate);
+        towerBuyPrice.setDelegate(delegate);
+        towerFireRate.setDelegate(delegate);
+        towerSellPrice.setDelegate(delegate);
+        towerUnlockLevel.setDelegate(delegate);
     }
 }

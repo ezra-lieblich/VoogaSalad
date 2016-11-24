@@ -112,7 +112,6 @@ public class TowerEffectView extends PhotoFileChooser {
 
     @Override
     public void openFileChooser (FileChooser chooseFile) throws IOException {
-        // TODO Auto-generated method stub
         chosenFile = chooseFile.showOpenDialog(new Stage());
     }
 

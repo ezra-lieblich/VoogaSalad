@@ -4,10 +4,14 @@ import java.io.File;
 import java.io.IOException;
 import authoring.editorview.PhotoFileChooser;
 import authoring.editorview.tower.TowerEditorViewDelegate;
+import authoring.utilityfactories.BoxFactory;
+import authoring.utilityfactories.ButtonFactory;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 
 public class TowerImageBank extends PhotoFileChooser {
@@ -19,6 +23,20 @@ public class TowerImageBank extends PhotoFileChooser {
 
     public TowerImageBank () {
         towerBank = new ScrollPane();
+        Button createTowerButton =
+                ButtonFactory.makeButton("Create Tower",
+                                         e -> {
+                                             try {
+                                                 selectFile("Photos: ", "Select new tower image");
+                                             }
+                                             catch (IOException e1) {
+                                                 // TODO Make this exception more user friendly
+                                                 e1.printStackTrace();
+                                             }
+                                         });
+        vbox = BoxFactory.createVBox("Tower Bank: ");
+        vbox.getChildren().add(createTowerButton);
+        towerBank.setContent(vbox);
     }
 
     public void setDelegate (TowerEditorViewDelegate delegate) {
@@ -31,7 +49,7 @@ public class TowerImageBank extends PhotoFileChooser {
 
     @Override
     public void openFileChooser (FileChooser chooseFile) throws IOException {
-        // TODO Auto-generated method stub
+        chosenFile = chooseFile.showOpenDialog(new Stage());
         
     }
 

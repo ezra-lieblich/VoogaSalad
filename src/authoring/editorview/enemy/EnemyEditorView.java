@@ -43,7 +43,7 @@ public class EnemyEditorView implements IEnemyEditorView {
 
     private void setBorderPane () {
         enemyEditorView.setLeft(enemyBank.getInstanceAsNode());
-        //enemyEditorView.setCenter(enemyEffectView.getInstanceAsNode());
+        enemyEditorView.setCenter(enemyEffectView.getInstanceAsNode());
     }
 
     @Override
@@ -58,6 +58,8 @@ public class EnemyEditorView implements IEnemyEditorView {
         enemyName.setDelegate(delegate);
         enemySpeed.setDelegate(delegate);
         enemyImage.setDelegate(delegate);
+        enemyFrequency.setDelegate(delegate);
+        enemyReactions.setDelegate(delegate);
     }
 
 }
