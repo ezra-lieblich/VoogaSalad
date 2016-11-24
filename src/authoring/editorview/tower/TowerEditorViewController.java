@@ -30,50 +30,42 @@ public class TowerEditorViewController extends EditorViewController
 
     @Override
     public void onUserEnteredTowerName (String towerName) {
-        // TODO Auto-generated method stub
-
+        towerDataSource.setTowerName(currentTowerID, towerName);
     }
 
     @Override
     public void onUserEnteredTowerImagePath (String imagePath) {
-        // TODO Auto-generated method stub
-
+        towerDataSource.setTowerImagePath(currentTowerID, imagePath);
     }
 
     @Override
     public void onUserEnteredUnlockLevel (String level) {
-        // TODO Auto-generated method stub
-
+        towerDataSource.setUnlockLevel(currentTowerID, Integer.parseInt(level));
     }
 
     @Override
     public void onUserEnteredFireRate (String fireRate) {
-        // TODO Auto-generated method stub
-
+        towerDataSource.setFireRate(currentTowerID, Integer.parseInt(fireRate));
     }
 
     @Override
     public void onUserEnteredFrequency (String frequency) {
-        // TODO Auto-generated method stub
-
+        towerDataSource.setTowerFrequency(currentTowerID, Integer.parseInt(frequency));
     }
 
     @Override
     public void onUserEnteredRange (String range) {
-        // TODO Auto-generated method stub
-
+        towerDataSource.setTowerRange(currentTowerID, Integer.parseInt(range));
     }
 
     @Override
     public void onUserEnteredTowerBuyPrice (String buyPrice) {
-        // TODO Auto-generated method stub
-        
+        towerDataSource.setBuyPrice(currentTowerID, Integer.parseInt(buyPrice));
     }
 
     @Override
     public void onUserEnteredTowerSellPrice (String sellPrice) {
-        // TODO Auto-generated method stub
-        
+        towerDataSource.setSellPrice(currentTowerID, Integer.parseInt(sellPrice));
     }
 
 }
