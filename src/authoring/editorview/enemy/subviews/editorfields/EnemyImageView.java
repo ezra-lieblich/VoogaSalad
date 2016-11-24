@@ -5,12 +5,14 @@ import java.io.IOException;
 import java.util.ResourceBundle;
 import javax.imageio.ImageIO;
 import authoring.editorview.enemy.EnemyEditorViewDelegate;
+import authoring.editorview.enemy.IEnemyEditorView;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 
-public class EnemyImageView {
+public class EnemyImageView implements IEnemyEditorView {
 
     private EnemyEditorViewDelegate delegate;
     private ResourceBundle labelsResource;
@@ -49,10 +51,12 @@ public class EnemyImageView {
         return myImageView;
     }
 
-    public ImageView getEnemyImage () {
+    @Override
+    public Node getInstanceAsNode () {
         return enemyImage;
     }
 
+    @Override
     public void setDelegate (EnemyEditorViewDelegate delegate) {
         this.delegate = delegate;
     }

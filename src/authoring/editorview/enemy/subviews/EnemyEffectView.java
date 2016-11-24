@@ -3,6 +3,8 @@ package authoring.editorview.enemy.subviews;
 import java.io.IOException;
 import java.util.ResourceBundle;
 import authoring.editorview.PhotoFileChooser;
+import authoring.editorview.enemy.EnemyEditorViewDelegate;
+import authoring.editorview.enemy.IEnemyEditorView;
 import authoring.editorview.enemy.subviews.editorfields.EnemyFrequencyField;
 import authoring.editorview.enemy.subviews.editorfields.EnemyImageView;
 import authoring.editorview.enemy.subviews.editorfields.EnemyNameField;
@@ -12,7 +14,6 @@ import authoring.utilityfactories.BoxFactory;
 import authoring.utilityfactories.ButtonFactory;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 
@@ -24,10 +25,11 @@ import javafx.stage.FileChooser;
  *
  */
 
-public class EnemyEffectView extends PhotoFileChooser {
+public class EnemyEffectView extends PhotoFileChooser implements IEnemyEditorView  {
 
     private ScrollPane enemyEffectView;
     private VBox vbox;
+    private EnemyEditorViewDelegate delegate;
 
     private EnemyFrequencyField enemyFrequency;
     private EnemyImageView enemyImage;
@@ -59,7 +61,7 @@ public class EnemyEffectView extends PhotoFileChooser {
     }
     
     private void buildViewComponents () {
-        ImageView myImageView = enemyImage.getEnemyImage();
+        Node myImageView = enemyImage.getInstanceAsNode();
 
         vbox.getChildren().add(myImageView);
         vbox.getChildren().add(ButtonFactory.makeButton(labelsResource.getString("Image"),
@@ -76,18 +78,24 @@ public class EnemyEffectView extends PhotoFileChooser {
                                                         }));
         vbox.getChildren()
                 .add(BoxFactory.createHBoxWithTextField(labelsResource.getString("Name"),
-                                                        enemyName.getEnemyNameField()));
+                                                        enemyName.getInstanceAsNode()));
         vbox.getChildren()
                 .add(BoxFactory.createHBoxWithTextField(labelsResource.getString("Frequency"),
-                                                        enemyFrequency.getEnemyFrequencyField()));
+                                                        enemyFrequency.getInstanceAsNode()));
         vbox.getChildren()
                 .add(BoxFactory.createHBoxWithTextField(labelsResource.getString("Reaction"),
-                                                        enemyReactions.getEnemyReactionField()));
+                                                        enemyReactions.getInstanceAsNode()));
         vbox.getChildren()
                 .add(BoxFactory.createHBoxWithTextField(labelsResource.getString("Speed"),
-                                                        enemySpeed.getEnemySpeedField()));
+                                                        enemySpeed.getInstanceAsNode()));
+    }
+    
+    @Override
+    public void setDelegate(EnemyEditorViewDelegate delegate) {
+        this.delegate = delegate;
     }
 
+    @Override
     public Node getInstanceAsNode () {
         return enemyEffectView;
     }

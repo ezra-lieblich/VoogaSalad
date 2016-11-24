@@ -60,6 +60,7 @@ public class EnemyEditorView implements IEnemyEditorView {
         enemyImage.setDelegate(delegate);
         enemyFrequency.setDelegate(delegate);
         enemyReactions.setDelegate(delegate);
+        enemyEffectView.setDelegate(delegate);
     }
 
 }

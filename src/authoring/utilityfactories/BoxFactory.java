@@ -1,5 +1,6 @@
 package authoring.utilityfactories;
 
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
@@ -25,7 +26,7 @@ public class BoxFactory {
      * @param textField
      * @return HBox containing label and textField
      */
-    public static HBox createHBoxWithTextField (String labelString, TextField textField) {
+    public static HBox createHBoxWithTextField (String labelString, Node textField) {
         HBox box = new HBox(5);
         Label label = new Label(labelString);
         box.getChildren().addAll(label, textField);
