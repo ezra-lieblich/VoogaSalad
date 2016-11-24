@@ -14,14 +14,13 @@ import authoring.editorview.PhotoFileChooser;
 public class PathBank extends PhotoFileChooser {
 	
 	private ScrollPane pathBank;
-	private ResourceBundle pathResource;
+	
+	private static final String RESOURCE_FILE_NAME = "resources/GameAuthoringPath";	
+	private ResourceBundle pathResource = ResourceBundle.getBundle(RESOURCE_FILE_NAME);
 	
 	
-	
-	
-	public PathBank(ResourceBundle pathResource){
+	public PathBank(){
 		this.pathBank = new ScrollPane();
-		this.pathResource = pathResource;
 		buildViewComponents();	   
 	}
 

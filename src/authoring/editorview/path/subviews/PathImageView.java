@@ -1,16 +1,14 @@
 package authoring.editorview.path.subviews;
 
 import javafx.scene.Node;
-import javafx.scene.layout.HBox;
-import javafx.scene.text.Text;
+import javafx.scene.layout.VBox;
 
 public class PathImageView {
 
-	private HBox root = new HBox();
+	private VBox root = new VBox();
 	
 	public Node getInstanceAsNode(){
-		Text hello = new Text("hello");
-		root.getChildren().add(hello);
+		
 		return root;
 		
 	}

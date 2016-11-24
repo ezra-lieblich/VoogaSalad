@@ -1,22 +1,20 @@
 package authoring.editorview.path;
 
-import java.util.ResourceBundle;
 
 import authoring.editorview.path.subviews.BackgroundImageView;
 import authoring.editorview.path.subviews.PathBank;
 import authoring.editorview.path.subviews.PathBuilderView;
 import authoring.editorview.path.subviews.PathImageView;
 import authoring.editorview.path.subviews.PathSizeView;
-import gameplayer.view.GridGUI;
-import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 
 public class PathEditorView implements IPathEditorView {
    
 	private PathEditorViewDelegate delegate;
+	private static final int BOX_SPACING = 10;
     
     private BorderPane pathView;
     
@@ -26,8 +24,7 @@ public class PathEditorView implements IPathEditorView {
     private PathSizeView pathSizeView;
     private PathBuilderView pathBuilderView;
     
-    private static final String RESOURCE_FILE_NAME = "resources/GameAuthoringPath";	
-	private ResourceBundle pathResource = ResourceBundle.getBundle(RESOURCE_FILE_NAME);
+   
 
     public PathEditorView (int aWidth, int aHeight) {
         this.pathView = new BorderPane();
@@ -46,7 +43,7 @@ public class PathEditorView implements IPathEditorView {
     }
     
     private void setPathView(){
-    	pathBank = new PathBank(pathResource);       
+    	pathBank = new PathBank();       
     	backgroundImageView = new BackgroundImageView();
     	pathSizeView = new PathSizeView();
     	pathImageView = new PathImageView();
@@ -57,10 +54,11 @@ public class PathEditorView implements IPathEditorView {
         BorderPane editor = new BorderPane();
         editor.setCenter(pathBuilderView.getInstanceAsNode());
         
-        HBox pathSettings = new HBox();
-        pathSettings.getChildren().addAll(pathImageView.getInstanceAsNode(),
-        		pathSizeView.getInstanceAsNode(),
-        		backgroundImageView.getInstanceAsNode());
+        VBox pathSettings = new VBox(BOX_SPACING);
+        pathSettings.getChildren().addAll(pathSizeView.getInstanceAsNode(),
+        		backgroundImageView.getInstanceAsNode(),
+        		pathImageView.getInstanceAsNode()      		
+        );
         
         editor.setLeft(pathSettings);
         
