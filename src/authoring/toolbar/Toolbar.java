@@ -4,20 +4,20 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ToolBar;
 
+
 public class Toolbar implements IToolbar {
 
     private ToolBar myToolbar;
-    
-    public Toolbar(int aWidth, int aHeight) {
+
+    public Toolbar (int aWidth, int aHeight) {
         myToolbar = new ToolBar(
-        		new Button("New"),
-        		new Button ("Open")
-        		);
+                                new Button("New"),
+                                new Button("Open"));
     }
 
     @Override
     public Node getInstanceAsNode () {
         return myToolbar;
     }
-    
+
 }
