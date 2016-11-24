@@ -1,24 +1,30 @@
 package authoring.editorview.path.subviews;
 
 
-import java.io.IOException;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.ResourceBundle;
+import javax.imageio.ImageIO;
 
 import authoring.editorview.PhotoFileChooser;
 import authoring.editorview.path.PathEditorViewDelegate;
 import authoring.utilityfactories.ButtonFactory;
+import authoring.utilityfactories.DialogueBoxFactory;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 
 public class BackgroundImageView extends PhotoFileChooser{
 	
 	private VBox root;
 	private String backgroundImagePath;
+	private ImageView backgroundImageView;
 	private PathEditorViewDelegate delegate;
 	
 	private static final String RESOURCE_FILE_NAME = "resources/GameAuthoringPath";	
@@ -29,11 +35,16 @@ public class BackgroundImageView extends PhotoFileChooser{
 	
 	
 	public BackgroundImageView(){
-		root = new VBox();
+		root = new VBox(10);
 		makeChooseImageButton();
-		
-		
-		
+		formatBackgroundImageView();
+		addBackgroundImageView();	
+	}
+
+	private void formatBackgroundImageView() {
+		backgroundImageView = new ImageView();
+		backgroundImageView.setFitHeight(100);
+		backgroundImageView.setFitWidth(100);
 	}	
 	
 	public Node getInstanceAsNode(){		
@@ -58,16 +69,37 @@ public class BackgroundImageView extends PhotoFileChooser{
 
 	@Override
 	public void openFileChooser(FileChooser chooseFile) {
-		// TODO Auto-generated method stub
+		File chosenFile = chooseFile.showOpenDialog(new Stage());
+		if (chosenFile != null){
+			try {
+				BufferedImage image = ImageIO.read(chosenFile) ;
+				backgroundImagePath = chosenFile.getPath();
+				addBackgroundImageView();
+				
+			}
+			catch(Exception e){
+				Alert errorDialogueBox = DialogueBoxFactory.displayErrorDialogueBox("Invalid File", "Error With File");
+				errorDialogueBox.show();
+			}
+		}
+		
 		
 	}
 	
-	private ImageView loadBackgroundImage() throws IOException{
-		ImageView backgroundImageView = new ImageView();		
+	
+	private void addBackgroundImageView() {
+		if (root.getChildren().contains(backgroundImageView)){
+			root.getChildren().remove(backgroundImageView);
+		}
+		backgroundImageView = loadBackgroundImage();
+		root.getChildren().add(backgroundImageView);
+	}
+	
+	private ImageView loadBackgroundImage() {	
 		try {
-			Image image = new Image(getClass().getClassLoader().getResourceAsStream(backgroundImagePath));
+			Image image = new Image(backgroundImagePath);
 			backgroundImageView.setImage(image);
-			delegate.setPathBackgroundImage(backgroundImagePath);			
+			delegate.onUserEnteredBackgroundImage(backgroundImagePath);			
 		}
 		catch (Exception e){
 			Image defaultImage = new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_IMAGE_FILE_NAME));
