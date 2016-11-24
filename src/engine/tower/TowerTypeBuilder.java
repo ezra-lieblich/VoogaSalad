@@ -12,7 +12,7 @@ import engine.weapon.Weapon;
 public class TowerTypeBuilder extends AbstractTypeBuilder<Tower> implements TowerBuilder {
     
      public static final String DEFAULT_NAME = "New Tower";
-     public static final String DEFAULT_IMAGE_LOCATION = "Images.penguin.jpg";
+     public static final String DEFAULT_IMAGE_PATH = "Images.penguin.jpg";
      public static final int DEFAULT_SIZE = 1;
      public static final List<Tower> DEFAULT_UPGRADES = Arrays.asList(new Tower[]{});
      public static final List<Weapon> DEFAULT_WEAPONS = Arrays.asList(new Weapon[]{});
@@ -31,7 +31,7 @@ public class TowerTypeBuilder extends AbstractTypeBuilder<Tower> implements Towe
      private int unlockLevel;
      
      public TowerTypeBuilder() {
-         super(DEFAULT_NAME, DEFAULT_IMAGE_LOCATION, DEFAULT_SIZE);
+         super(DEFAULT_NAME, DEFAULT_IMAGE_PATH, DEFAULT_SIZE);
          this.upgrades = DEFAULT_UPGRADES;
          this.weapons = DEFAULT_WEAPONS;
          this.targets = DEFAULT_TARGETS;
@@ -42,7 +42,7 @@ public class TowerTypeBuilder extends AbstractTypeBuilder<Tower> implements Towe
      }
     
     @Override
-    public TowerBuilder buildUpgrade(Tower... upgrades) {
+    public TowerBuilder buildUpgrades(Tower... upgrades) {
         this.upgrades = Arrays.asList(upgrades);
         return this;
     }
@@ -84,8 +84,8 @@ public class TowerTypeBuilder extends AbstractTypeBuilder<Tower> implements Towe
     }
 
     @Override
-    public Tower create () {
-        return null;
+    protected Tower create () {
+        return new TowerType(this);
     }
 
     @Override
@@ -121,6 +121,19 @@ public class TowerTypeBuilder extends AbstractTypeBuilder<Tower> implements Towe
     @Override
     public int getUnlockLevel () {
         return unlockLevel;
+    }
+
+    @Override
+    protected void restoreDefaults () {
+        buildName(DEFAULT_NAME);
+        buildImagePath(DEFAULT_IMAGE_PATH);
+        buildSize(DEFAULT_SIZE);
+        this.weapons = DEFAULT_WEAPONS;
+        this.targets = DEFAULT_TARGETS;
+        this.abilities = DEFAULT_ABILITIES;
+        this.cost = DEFAULT_COST;
+        this.sellAmount = DEFAULT_SELL_AMOUNT;
+        this.unlockLevel = DEFAULT_UNLOCK_LEVEL;
     }
 
     

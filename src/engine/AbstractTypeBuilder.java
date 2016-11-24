@@ -2,6 +2,7 @@ package engine;
 
 import java.util.Arrays;
 import java.util.function.Consumer;
+import engine.weapon.Weapon;
 
 public abstract class AbstractTypeBuilder<E extends Type> implements TypeBuilder<E>, TypeInitializer {
     
@@ -26,6 +27,7 @@ public abstract class AbstractTypeBuilder<E extends Type> implements TypeBuilder
     @Override
     public void buildImagePath(String imagePath) {
         this.imagePath = imagePath;
+        Weapon.class.getClass().getName();
     }
     
     @Override
@@ -37,6 +39,7 @@ public abstract class AbstractTypeBuilder<E extends Type> implements TypeBuilder
     public E build () {
         E newEntity = create();
         nextId++;
+        restoreDefaults();
         return newEntity;
     }
     
@@ -60,7 +63,9 @@ public abstract class AbstractTypeBuilder<E extends Type> implements TypeBuilder
         return nextId;
     }
     
-    public abstract E create ();
+    protected abstract E create ();
+    
+    protected abstract void restoreDefaults();
 
     
 }

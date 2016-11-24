@@ -8,7 +8,7 @@ import engine.weapon.Weapon;
 
 public interface TowerBuilder extends TypeBuilder<Tower>, TowerInitializer { //TODO - Add bindable interface
 
-    TowerBuilder buildUpgrade (Tower ... upgrades);
+    TowerBuilder buildUpgrades (Tower ... upgrades);
 
     TowerBuilder buildWeapons (Weapon ... weapons);
 
