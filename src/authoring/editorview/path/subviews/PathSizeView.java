@@ -12,7 +12,7 @@ import javafx.scene.layout.VBox;
 
 public class PathSizeView {
 	
-	private VBox root;
+	private HBox root;
 	private int numColumns;
 	private int numRows;
 	
@@ -28,7 +28,7 @@ public class PathSizeView {
 	private ResourceBundle pathResource = ResourceBundle.getBundle(RESOURCE_FILE_NAME);
 	
 	public PathSizeView(){
-		this.root = new VBox(BOX_SPACING);
+		this.root = new HBox(BOX_SPACING);
 		makeGridColumnsTextField();
 		makeGridRowsTextField();
 	}
@@ -40,8 +40,9 @@ public class PathSizeView {
 	}
 	
 	private void makeGridColumnsTextField(){
-		columnsTextField = TextFieldFactory.makeTextField(pathResource.getString("NeedIntegerValue"), 
+		columnsTextField = TextFieldFactory.makeTextField("1", 
 				e -> setNumColumns(columnsTextField.getText()));
+		columnsTextField.setMaxWidth(75);
 		columnsBox = BoxFactory.createHBoxWithTextField(pathResource.getString("ColumnTextField"), columnsTextField);
 		
 		root.getChildren().add(columnsBox);
@@ -54,8 +55,9 @@ public class PathSizeView {
 	}
 	
 	private void makeGridRowsTextField(){
-		rowsTextField = TextFieldFactory.makeTextField(pathResource.getString("NeedIntegerValue"), 
+		rowsTextField = TextFieldFactory.makeTextField("1", 
 				e -> setNumRows(rowsTextField.getText()));
+		rowsTextField.setMaxWidth(75);
 		rowsBox = BoxFactory.createHBoxWithTextField(pathResource.getString("RowTextField"), rowsTextField);
 		
 		root.getChildren().add(rowsBox);

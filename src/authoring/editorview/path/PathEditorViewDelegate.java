@@ -5,9 +5,9 @@ public interface PathEditorViewDelegate {
 	
 	public void createNewPath();
 	
-	public void setPathImage();
+	public void setPathImage(String imagePath);
 	
-	public void setPathBackgroundImage();
+	public void setPathBackgroundImage(String imagePath);
 	
 
 }
