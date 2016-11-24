@@ -4,8 +4,10 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ResourceBundle;
 import javax.imageio.ImageIO;
+import authoring.editorview.tower.ITowerEditorView;
 import authoring.editorview.tower.TowerEditorViewDelegate;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -17,7 +19,7 @@ import javafx.scene.image.ImageView;
  *
  */
 
-public class TowerImageView {
+public class TowerImageView implements ITowerEditorView {
 
     private TowerEditorViewDelegate delegate;
     private String imagePath;
@@ -34,6 +36,7 @@ public class TowerImageView {
         this.imagePath = imagePath;
     }
 
+    @Override
     public void setDelegate (TowerEditorViewDelegate delegate) {
         this.delegate = delegate;
     }
@@ -58,7 +61,8 @@ public class TowerImageView {
         return myImageView;
     }
 
-    public ImageView getTowerImage () {
+    @Override
+    public Node getInstanceAsNode () {
         return towerImage;
     }
 

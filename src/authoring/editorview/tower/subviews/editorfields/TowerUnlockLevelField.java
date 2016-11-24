@@ -1,11 +1,13 @@
 package authoring.editorview.tower.subviews.editorfields;
 
+import authoring.editorview.tower.ITowerEditorView;
 import authoring.editorview.tower.TowerEditorViewDelegate;
 import authoring.utilityfactories.TextFieldFactory;
+import javafx.scene.Node;
 import javafx.scene.control.TextField;
 
 
-public class TowerUnlockLevelField {
+public class TowerUnlockLevelField implements ITowerEditorView {
 
     private TextField towerLevelField;
     private TowerEditorViewDelegate delegate;
@@ -18,11 +20,13 @@ public class TowerUnlockLevelField {
                                                                .getText()));
     }
 
+    @Override
     public void setDelegate (TowerEditorViewDelegate delegate) {
         this.delegate = delegate;
     }
 
-    public TextField getTowerLevelField () {
+    @Override
+    public Node getInstanceAsNode () {
         return towerLevelField;
     }
 

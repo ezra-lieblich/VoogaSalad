@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ResourceBundle;
 import authoring.editorview.PhotoFileChooser;
+import authoring.editorview.tower.ITowerEditorView;
 import authoring.editorview.tower.TowerEditorViewDelegate;
 import authoring.editorview.tower.subviews.editorfields.TowerBuyPriceField;
 import authoring.editorview.tower.subviews.editorfields.TowerFireRateField;
@@ -17,13 +18,12 @@ import authoring.utilityfactories.BoxFactory;
 import authoring.utilityfactories.ButtonFactory;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 
-public class TowerEffectView extends PhotoFileChooser {
+public class TowerEffectView extends PhotoFileChooser implements ITowerEditorView {
 
     private TowerEditorViewDelegate delegate;
     private TowerNameField towerName;
@@ -68,7 +68,7 @@ public class TowerEffectView extends PhotoFileChooser {
     }
 
     private void buildViewComponents () {
-        ImageView myImageView = towerImage.getTowerImage();
+        Node myImageView = towerImage.getInstanceAsNode();
 
         vbox.getChildren().add(myImageView);
         vbox.getChildren().add(ButtonFactory.makeButton(labelsResource.getString("Image"),
@@ -85,27 +85,28 @@ public class TowerEffectView extends PhotoFileChooser {
                                                         }));
         vbox.getChildren()
                 .add(BoxFactory.createHBoxWithTextField(labelsResource.getString("Name"),
-                                                        towerName.getTowerNameField()));
+                                                        towerName.getInstanceAsNode()));
         vbox.getChildren()
                 .add(BoxFactory.createHBoxWithTextField(labelsResource.getString("Rate"),
-                                                        towerFireRate.getTowerFireRateField()));
+                                                        towerFireRate.getInstanceAsNode()));
         vbox.getChildren()
                 .add(BoxFactory.createHBoxWithTextField(labelsResource.getString("Frequency"),
-                                                        towerFrequency.getTowerFrequencyField()));
+                                                        towerFrequency.getInstanceAsNode()));
         vbox.getChildren()
                 .add(BoxFactory.createHBoxWithTextField(labelsResource.getString("Range"),
-                                                        towerRange.getTowerRangeField()));
+                                                        towerRange.getInstanceAsNode()));
         vbox.getChildren()
                 .add(BoxFactory.createHBoxWithTextField(labelsResource.getString("BuyPrice"),
-                                                        towerBuyPrice.getTowerBuyPriceField()));
+                                                        towerBuyPrice.getInstanceAsNode()));
         vbox.getChildren()
                 .add(BoxFactory.createHBoxWithTextField(labelsResource.getString("SellPrice"),
-                                                        towerSellPrice.getTowerSellPriceField()));
+                                                        towerSellPrice.getInstanceAsNode()));
         vbox.getChildren()
                 .add(BoxFactory.createHBoxWithTextField(labelsResource.getString("UnlockLevel"),
-                                                        towerUnlockLevel.getTowerLevelField()));
+                                                        towerUnlockLevel.getInstanceAsNode()));
     }
 
+    @Override
     public void setDelegate (TowerEditorViewDelegate delegate) {
         this.delegate = delegate;
     }
@@ -115,6 +116,7 @@ public class TowerEffectView extends PhotoFileChooser {
         chosenFile = chooseFile.showOpenDialog(new Stage());
     }
 
+    @Override
     public Node getInstanceAsNode () {
         return completeView;
     }

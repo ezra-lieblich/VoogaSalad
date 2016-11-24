@@ -1,11 +1,13 @@
 package authoring.editorview.tower.subviews.editorfields;
 
+import authoring.editorview.tower.ITowerEditorView;
 import authoring.editorview.tower.TowerEditorViewDelegate;
 import authoring.utilityfactories.TextFieldFactory;
+import javafx.scene.Node;
 import javafx.scene.control.TextField;
 
 
-public class TowerFrequencyField {
+public class TowerFrequencyField implements ITowerEditorView {
 
     private TowerEditorViewDelegate delegate;
     private TextField towerFrequencyField;
@@ -18,11 +20,13 @@ public class TowerFrequencyField {
                                                                .getText()));
     }
 
+    @Override
     public void setDelegate (TowerEditorViewDelegate delegate) {
         this.delegate = delegate;
     }
 
-    public TextField getTowerFrequencyField () {
+    @Override
+    public Node getInstanceAsNode () {
         return towerFrequencyField;
     }
 

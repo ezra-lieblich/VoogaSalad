@@ -1,10 +1,12 @@
 package authoring.editorview.tower.subviews.editorfields;
 
+import authoring.editorview.tower.ITowerEditorView;
 import authoring.editorview.tower.TowerEditorViewDelegate;
 import authoring.utilityfactories.TextFieldFactory;
+import javafx.scene.Node;
 import javafx.scene.control.TextField;
 
-public class TowerRangeField {
+public class TowerRangeField implements ITowerEditorView {
 
     private TowerEditorViewDelegate delegate;
     private TextField towerRangeField;
@@ -17,11 +19,13 @@ public class TowerRangeField {
                                                                .getText()));
     }
 
+    @Override
     public void setDelegate (TowerEditorViewDelegate delegate) {
         this.delegate = delegate;
     }
 
-    public TextField getTowerRangeField () {
+    @Override
+    public Node getInstanceAsNode () {
         return towerRangeField;
     }
 
