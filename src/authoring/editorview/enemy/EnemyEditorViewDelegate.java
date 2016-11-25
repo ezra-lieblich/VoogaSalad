@@ -4,22 +4,22 @@ public interface EnemyEditorViewDelegate {
 
     public void onUserPressedCreateEnemy ();
 
-    public void onUserEnteredEnemySpeed (String speed);
+    public void onUserEnteredEnemySpeed (String enemySpeed);
 
-    public void onUserEnteredEnemyHealth (String health);
+    public void onUserEnteredEnemyHealth (String enemyHealth);
 
-    public void onUserEnteredEnemyDamage (String damage);
+    public void onUserEnteredEnemyDamage (String enemyDamage);
 
-    public void onUserEnteredEnemyPoints (String points);
+    public void onUserEnteredEnemyPoints (String enemyRewardPoints);
 
-    public void onUserEnteredEnemyMoney (String money);
+    public void onUserEnteredEnemyMoney (String enemyRewardMoney);
 
-    public void onUserEnteredEnemyCollisionEffect (String collisionEffect);
+    public void onUserEnteredEnemyCollisionEffect (String enemyCollisionEffect);
 
-    public void onUserEnteredEnemyImagePath (String imagePath);
-    
+    public void onUserEnteredEnemyImagePath (String enemyImagePath);
+
     public void onUserEnteredEnemyName (String enemyName);
-    
-    public void onUserEnteredEnemyFrequency (String frequency);
+
+    public void onUserEnteredEnemyFrequency (String enemyFrequency);
 
 }

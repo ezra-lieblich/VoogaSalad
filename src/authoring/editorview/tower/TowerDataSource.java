@@ -8,17 +8,17 @@ public interface TowerDataSource {
 
     public String getTowerImagePath (int towerID);
 
-    public int getBuyPrice (int towerID);
+    public int getTowerBuyPrice (int towerID);
 
-    public int getSellPrice (int towerID);
+    public int getTowerSellPrice (int towerID);
 
-    public int getUnlockLevel (int towerID);
+    public int getTowerUnlockLevel (int towerID);
 
-    public int getFireRate (int towerID);
+    public int getTowerFireRate (int towerID);
 
-    public int getFrequency (int towerID);
+    public int getTowerFrequency (int towerID);
 
-    public int getRange (int towerID);
+    public int getTowerRange (int towerID);
 
     public String getTowerUpgrade (int towerID);
 
@@ -39,21 +39,21 @@ public interface TowerDataSource {
      */
     public void createNewTower ();
 
-    public void setTowerName (int towerID, String name);
+    public void setTowerName (int towerID, String towerName);
 
-    public void setTowerImagePath (int towerID, String imagePath);
+    public void setTowerImagePath (int towerID, String towerImagePath);
 
-    public void setBuyPrice (int towerID, int buyPrice);
+    public void setTowerBuyPrice (int towerID, int towerBuyPrice);
 
-    public void setSellPrice (int towerID, int sellPrice);
+    public void setTowerSellPrice (int towerID, int towerSellPrice);
 
-    public void setUnlockLevel (int towerID, int level);
+    public void setTowerUnlockLevel (int towerID, int towerLevel);
 
-    public void setFireRate (int towerID, int fireRate);
+    public void setTowerFireRate (int towerID, int towerFireRate);
 
-    public void setTowerFrequency (int towerID, int frequency);
+    public void setTowerFrequency (int towerID, int towerFrequency);
 
-    public void setTowerRange (int towerID, int range);
+    public void setTowerRange (int towerID, int towerRange);
 
     public void setTowerAbility (int towerID, String towerAbility);
 

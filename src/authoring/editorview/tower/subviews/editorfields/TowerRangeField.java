@@ -15,7 +15,7 @@ public class TowerRangeField implements ITowerEditorView {
         towerRangeField =
                 TextFieldFactory.makeTextField("Set tower range: ",
                                                e -> delegate
-                                                       .onUserEnteredRange(towerRangeField
+                                                       .onUserEnteredTowerRange(towerRangeField
                                                                .getText()));
     }
 

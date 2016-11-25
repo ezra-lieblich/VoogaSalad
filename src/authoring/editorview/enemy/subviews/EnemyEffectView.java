@@ -8,7 +8,7 @@ import authoring.editorview.enemy.IEnemyEditorView;
 import authoring.editorview.enemy.subviews.editorfields.EnemyFrequencyField;
 import authoring.editorview.enemy.subviews.editorfields.EnemyImageView;
 import authoring.editorview.enemy.subviews.editorfields.EnemyNameField;
-import authoring.editorview.enemy.subviews.editorfields.EnemyReactionsView;
+import authoring.editorview.enemy.subviews.editorfields.EnemyCollisionEffectField;
 import authoring.editorview.enemy.subviews.editorfields.EnemySpeedField;
 import authoring.utilityfactories.BoxFactory;
 import authoring.utilityfactories.ButtonFactory;
@@ -34,7 +34,7 @@ public class EnemyEffectView extends PhotoFileChooser implements IEnemyEditorVie
     private EnemyFrequencyField enemyFrequency;
     private EnemyImageView enemyImage;
     private EnemyNameField enemyName;
-    private EnemyReactionsView enemyReactions;
+    private EnemyCollisionEffectField enemyReactions;
     private EnemySpeedField enemySpeed;
 
     private ResourceBundle labelsResource;
@@ -43,7 +43,7 @@ public class EnemyEffectView extends PhotoFileChooser implements IEnemyEditorVie
     public EnemyEffectView (EnemyFrequencyField enemyFrequency,
                             EnemyImageView enemyImage,
                             EnemyNameField enemyName,
-                            EnemyReactionsView enemyReactions,
+                            EnemyCollisionEffectField enemyReactions,
                             EnemySpeedField enemySpeed) {
         enemyEffectView = new ScrollPane();
         vbox = new VBox(10);

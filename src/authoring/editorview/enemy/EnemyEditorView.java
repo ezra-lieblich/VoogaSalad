@@ -6,7 +6,7 @@ import authoring.editorview.enemy.subviews.EnemyImageBank;
 import authoring.editorview.enemy.subviews.editorfields.EnemyFrequencyField;
 import authoring.editorview.enemy.subviews.editorfields.EnemyImageView;
 import authoring.editorview.enemy.subviews.editorfields.EnemyNameField;
-import authoring.editorview.enemy.subviews.editorfields.EnemyReactionsView;
+import authoring.editorview.enemy.subviews.editorfields.EnemyCollisionEffectField;
 import authoring.editorview.enemy.subviews.editorfields.EnemySpeedField;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
@@ -27,7 +27,7 @@ public class EnemyEditorView implements IEnemyEditorView {
     private EnemyImageView enemyImage;
     private EnemyEffectView enemyEffectView;
     private EnemyFrequencyField enemyFrequency;
-    private EnemyReactionsView enemyReactions;
+    private EnemyCollisionEffectField enemyReactions;
 
     public EnemyEditorView () throws IOException {
         enemyEditorView = new BorderPane();
@@ -35,7 +35,7 @@ public class EnemyEditorView implements IEnemyEditorView {
         enemyName = new EnemyNameField();
         enemySpeed = new EnemySpeedField();
         enemyFrequency = new EnemyFrequencyField();
-        enemyReactions = new EnemyReactionsView();
+        enemyReactions = new EnemyCollisionEffectField();
         enemyImage = new EnemyImageView();
         enemyEffectView = new EnemyEffectView(enemyFrequency, enemyImage, enemyName, enemyReactions, enemySpeed);
         setBorderPane();

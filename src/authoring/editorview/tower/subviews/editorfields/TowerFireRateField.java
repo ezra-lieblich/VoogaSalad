@@ -16,7 +16,7 @@ public class TowerFireRateField implements ITowerEditorView {
         towerFireRateField =
                 TextFieldFactory.makeTextField("Set tower fire rate: ",
                                                e -> delegate
-                                                       .onUserEnteredFireRate(towerFireRateField
+                                                       .onUserEnteredTowerFireRate(towerFireRateField
                                                                .getText()));
     }
 

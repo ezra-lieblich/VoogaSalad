@@ -35,15 +35,15 @@ public class TowerEditorViewController extends EditorViewController
     }
 
     @Override
-    public void onUserEnteredTowerImagePath (String imagePath) {
-        towerDataSource.setTowerImagePath(currentTowerID, imagePath);
+    public void onUserEnteredTowerImagePath (String towerImagePath) {
+        towerDataSource.setTowerImagePath(currentTowerID, towerImagePath);
     }
 
     @Override
-    public void onUserEnteredUnlockLevel (String level) {
+    public void onUserEnteredTowerUnlockLevel (String towerLevel) {
         try {
-            Integer.parseInt(level);
-            towerDataSource.setUnlockLevel(currentTowerID, Integer.parseInt(level));
+            Integer.parseInt(towerLevel);
+            towerDataSource.setTowerUnlockLevel(currentTowerID, Integer.parseInt(towerLevel));
         }
         catch (NumberFormatException e) {
             ErrorBox.createErrorBox("This input is not an integer");
@@ -51,10 +51,10 @@ public class TowerEditorViewController extends EditorViewController
     }
 
     @Override
-    public void onUserEnteredFireRate (String fireRate) {
+    public void onUserEnteredTowerFireRate (String towerFireRate) {
         try {
-            Integer.parseInt(fireRate);
-            towerDataSource.setFireRate(currentTowerID, Integer.parseInt(fireRate));
+            Integer.parseInt(towerFireRate);
+            towerDataSource.setTowerFireRate(currentTowerID, Integer.parseInt(towerFireRate));
         }
         catch (NumberFormatException e) {
             ErrorBox.createErrorBox("This input is not an integer");
@@ -62,10 +62,10 @@ public class TowerEditorViewController extends EditorViewController
     }
 
     @Override
-    public void onUserEnteredFrequency (String frequency) {
+    public void onUserEnteredTowerFrequency (String towerFrequency) {
         try {
-            Integer.parseInt(frequency);
-            towerDataSource.setTowerFrequency(currentTowerID, Integer.parseInt(frequency));
+            Integer.parseInt(towerFrequency);
+            towerDataSource.setTowerFrequency(currentTowerID, Integer.parseInt(towerFrequency));
         }
         catch (NumberFormatException e) {
             ErrorBox.createErrorBox("This input is not an integer");
@@ -73,10 +73,10 @@ public class TowerEditorViewController extends EditorViewController
     }
 
     @Override
-    public void onUserEnteredRange (String range) {
+    public void onUserEnteredTowerRange (String towerRange) {
         try {
-            Integer.parseInt(range);
-            towerDataSource.setTowerRange(currentTowerID, Integer.parseInt(range));
+            Integer.parseInt(towerRange);
+            towerDataSource.setTowerRange(currentTowerID, Integer.parseInt(towerRange));
         }
         catch (NumberFormatException e) {
             ErrorBox.createErrorBox("This input is not an integer");
@@ -84,10 +84,10 @@ public class TowerEditorViewController extends EditorViewController
     }
 
     @Override
-    public void onUserEnteredTowerBuyPrice (String buyPrice) {
+    public void onUserEnteredTowerBuyPrice (String towerBuyPrice) {
         try {
-            Integer.parseInt(buyPrice);
-            towerDataSource.setBuyPrice(currentTowerID, Integer.parseInt(buyPrice));
+            Integer.parseInt(towerBuyPrice);
+            towerDataSource.setTowerBuyPrice(currentTowerID, Integer.parseInt(towerBuyPrice));
         }
         catch (NumberFormatException e) {
             ErrorBox.createErrorBox("This input is not an integer");
@@ -95,10 +95,10 @@ public class TowerEditorViewController extends EditorViewController
     }
 
     @Override
-    public void onUserEnteredTowerSellPrice (String sellPrice) {
+    public void onUserEnteredTowerSellPrice (String towerSellPrice) {
         try {
-            Integer.parseInt(sellPrice);
-            towerDataSource.setSellPrice(currentTowerID, Integer.parseInt(sellPrice));
+            Integer.parseInt(towerSellPrice);
+            towerDataSource.setTowerSellPrice(currentTowerID, Integer.parseInt(towerSellPrice));
         }
         catch (NumberFormatException e) {
             ErrorBox.createErrorBox("This input is not an integer");

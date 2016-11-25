@@ -6,28 +6,28 @@ public interface TowerEditorViewDelegate {
 
     public void onUserEnteredTowerAbility (String towerAbility);
 
-    public void onUserEnteredTowerChosenEnemy (String chosenEnemy);
+    public void onUserEnteredTowerChosenEnemy (String towerChosenEnemy);
 
-    public void onUserEnteredTowerChosenWeapon (String chosenWeapon);
+    public void onUserEnteredTowerChosenWeapon (String towerChosenWeapon);
 
     public void onUserEnteredTowerUpgrade (String towerUpgrade);
 
     public void onUserEnteredTowerName (String towerName);
 
-    public void onUserEnteredTowerImagePath (String imagePath);
+    public void onUserEnteredTowerImagePath (String towerImagePath);
 
-    public void onUserEnteredTowerBuyPrice (String buyPrice);
+    public void onUserEnteredTowerBuyPrice (String towerBuyPrice);
 
-    public void onUserEnteredTowerSellPrice (String sellPrice);
+    public void onUserEnteredTowerSellPrice (String towerSellPrice);
 
-    public void onUserEnteredUnlockLevel (String level);
+    public void onUserEnteredTowerUnlockLevel (String towerLevel);
 
-    public void onUserEnteredFireRate (String fireRate);
+    public void onUserEnteredTowerFireRate (String towerFireRate);
 
     // TODO: Does tower need either of the below methods?
 
-    public void onUserEnteredFrequency (String frequency);
+    public void onUserEnteredTowerFrequency (String towerFrequency);
 
-    public void onUserEnteredRange (String range);
+    public void onUserEnteredTowerRange (String towerRange);
 
 }

@@ -27,43 +27,42 @@ public class EnemyEditorViewController extends EditorViewController
     }
 
     @Override
-    public void onUserEnteredEnemySpeed (String speed) {
+    public void onUserEnteredEnemySpeed (String enemySpeed) {
+        enemyDataSource.setEnemySpeed(currentEnemyID, Integer.parseInt(enemySpeed));
+    }
+
+    @Override
+    public void onUserEnteredEnemyHealth (String enemyHealth) {
         // TODO Auto-generated method stub
 
     }
 
     @Override
-    public void onUserEnteredEnemyHealth (String health) {
+    public void onUserEnteredEnemyDamage (String enemyDamage) {
         // TODO Auto-generated method stub
 
     }
 
     @Override
-    public void onUserEnteredEnemyDamage (String damage) {
+    public void onUserEnteredEnemyPoints (String enemyRewardPoints) {
         // TODO Auto-generated method stub
 
     }
 
     @Override
-    public void onUserEnteredEnemyPoints (String points) {
+    public void onUserEnteredEnemyMoney (String enemyRewardMoney) {
         // TODO Auto-generated method stub
 
     }
 
     @Override
-    public void onUserEnteredEnemyMoney (String money) {
+    public void onUserEnteredEnemyCollisionEffect (String enemyCollisionEffect) {
         // TODO Auto-generated method stub
 
     }
 
     @Override
-    public void onUserEnteredEnemyCollisionEffect (String collisionEffect) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void onUserEnteredEnemyImagePath (String imagePath) {
+    public void onUserEnteredEnemyImagePath (String enemyImagePath) {
         // TODO Auto-generated method stub
 
     }
@@ -75,7 +74,7 @@ public class EnemyEditorViewController extends EditorViewController
     }
 
     @Override
-    public void onUserEnteredEnemyFrequency (String frequency) {
+    public void onUserEnteredEnemyFrequency (String enemyFrequency) {
         // TODO Auto-generated method stub
 
     }

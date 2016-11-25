@@ -16,7 +16,7 @@ public class TowerFrequencyField implements ITowerEditorView {
         towerFrequencyField =
                 TextFieldFactory.makeTextField("Set tower frequency: ",
                                                e -> delegate
-                                                       .onUserEnteredFrequency(towerFrequencyField
+                                                       .onUserEnteredTowerFrequency(towerFrequencyField
                                                                .getText()));
     }
 

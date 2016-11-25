@@ -16,7 +16,7 @@ public class TowerUnlockLevelField implements ITowerEditorView {
         towerLevelField =
                 TextFieldFactory.makeTextField("Set tower unlock level: ",
                                                e -> delegate
-                                                       .onUserEnteredUnlockLevel(towerLevelField
+                                                       .onUserEnteredTowerUnlockLevel(towerLevelField
                                                                .getText()));
     }
 
