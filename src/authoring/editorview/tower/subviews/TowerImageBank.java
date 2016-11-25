@@ -14,6 +14,11 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 
+/**
+ * 
+ * @author Kayla Schulz
+ *
+ */
 public class TowerImageBank extends PhotoFileChooser {
 
     private TowerEditorViewDelegate delegate;
@@ -42,7 +47,7 @@ public class TowerImageBank extends PhotoFileChooser {
     public void setDelegate (TowerEditorViewDelegate delegate) {
         this.delegate = delegate;
     }
-    
+
     public Node getInstanceAsNode () {
         return towerBank;
     }
@@ -50,7 +55,7 @@ public class TowerImageBank extends PhotoFileChooser {
     @Override
     public void openFileChooser (FileChooser chooseFile) throws IOException {
         chosenFile = chooseFile.showOpenDialog(new Stage());
-        
+
     }
 
 }

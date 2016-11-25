@@ -4,6 +4,12 @@ import java.io.IOException;
 import authoring.editorview.EditorViewController;
 
 
+/**
+ * 
+ * @author Andrew Bihl
+ * @author Kayla Schulz
+ *
+ */
 public class EnemyEditorViewController extends EditorViewController
         implements EnemyEditorViewDelegate {
 

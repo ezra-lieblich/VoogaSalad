@@ -33,11 +33,11 @@ public class WeaponEditorViewController extends EditorViewController
     }
 
     @Override
-    public void onUserEnteredWeaponFireRate (String fireRate) {
+    public void onUserEnteredWeaponFireRate (String weaponFireRate) {
         // Should update currentWeaponID every time this is called
         try {
-            Integer.parseInt(fireRate);
-            weaponDataSource.setWeaponFireRate(currentWeaponID, Integer.parseInt(fireRate));
+            Integer.parseInt(weaponFireRate);
+            weaponDataSource.setWeaponFireRate(currentWeaponID, Integer.parseInt(weaponFireRate));
         }
         catch (NumberFormatException e) {
             ErrorBox.createErrorBox("This input is not an integer");
@@ -45,10 +45,10 @@ public class WeaponEditorViewController extends EditorViewController
     }
 
     @Override
-    public void onUserEnteredProjectileSpeed (String speed) {
+    public void onUserEnteredWeaponSpeed (String weaponSpeed) {
         try {
-            Integer.parseInt(speed);
-            weaponDataSource.setWeaponSpeed(currentWeaponID, Integer.parseInt(speed));
+            Integer.parseInt(weaponSpeed);
+            weaponDataSource.setWeaponSpeed(currentWeaponID, Integer.parseInt(weaponSpeed));
         }
         catch (NumberFormatException e) {
             ErrorBox.createErrorBox("This input is not an integer");
@@ -56,15 +56,15 @@ public class WeaponEditorViewController extends EditorViewController
     }
 
     @Override
-    public void onUserEnteredWeaponEffect (String collisionEffect) {
-        weaponDataSource.setWeaponCollisionEffect(currentWeaponID, collisionEffect);
+    public void onUserEnteredWeaponEffect (String weaponCollisionEffect) {
+        weaponDataSource.setWeaponCollisionEffect(currentWeaponID, weaponCollisionEffect);
     }
 
     @Override
-    public void onUserEnteredWeaponRange (String range) {
+    public void onUserEnteredWeaponRange (String weaponRange) {
         try {
-            Integer.parseInt(range);
-            weaponDataSource.setWeaponRange(currentWeaponID, Integer.parseInt(range));
+            Integer.parseInt(weaponRange);
+            weaponDataSource.setWeaponRange(currentWeaponID, Integer.parseInt(weaponRange));
         }
         catch (NumberFormatException e) {
             ErrorBox.createErrorBox("This input is not an integer");
@@ -77,10 +77,10 @@ public class WeaponEditorViewController extends EditorViewController
     }
 
     @Override
-    public void onUserEnteredWeaponDamage (String damage) {
+    public void onUserEnteredWeaponDamage (String weaponDamage) {
         try {
-            Integer.parseInt(damage);
-            weaponDataSource.setWeaponDamage(currentWeaponID, Integer.parseInt(damage));
+            Integer.parseInt(weaponDamage);
+            weaponDataSource.setWeaponDamage(currentWeaponID, Integer.parseInt(weaponDamage));
         }
         catch (NumberFormatException e) {
             ErrorBox.createErrorBox("This input is not an integer");
@@ -98,7 +98,7 @@ public class WeaponEditorViewController extends EditorViewController
     }
 
     @Override
-    public void onUserEnteredWeaponPath (String path) {
-        weaponDataSource.setWeaponPath(currentWeaponID, path);
+    public void onUserEnteredWeaponPath (String weaponPath) {
+        weaponDataSource.setWeaponPath(currentWeaponID, weaponPath);
     }
 }

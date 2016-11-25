@@ -12,6 +12,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 
+/**
+ * 
+ * @author Kayla Schulz
+ *
+ */
 public class WeaponImageView implements IWeaponEditorView {
 
     private WeaponEditorViewDelegate delegate;

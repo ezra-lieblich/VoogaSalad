@@ -3,6 +3,11 @@ package authoring.editorview.enemy;
 import java.util.List;
 
 
+/**
+ * 
+ * @author Kayla Schulz
+ *
+ */
 public interface EnemyDataSource {
 
     public void createEnemy ();

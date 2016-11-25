@@ -3,6 +3,12 @@ package authoring.editorview.tower;
 import java.util.List;
 
 
+/**
+ * 
+ * @author Andrew Bihl
+ * @author Kayla Schulz
+ *
+ */
 public interface ITowerUpdateView extends ITowerEditorView {
 
     public void updateFireRateDisplay (int towerFireRate);

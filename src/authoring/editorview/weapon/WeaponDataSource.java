@@ -12,19 +12,19 @@ public interface WeaponDataSource {
 
     public void setWeaponImagePath (int weaponID, String weaponImagePath);
 
-    public void setWeaponDamage (int weaponID, int damage);
+    public void setWeaponDamage (int weaponID, int weaponDamage);
 
-    public void setWeaponRange (int weaponID, int range);
+    public void setWeaponRange (int weaponID, int weaponRange);
 
-    public void setWeaponFireRate (int weaponID, int fireRate);
+    public void setWeaponFireRate (int weaponID, int weaponFireRate);
 
-    public void setWeaponSpeed (int weaponID, int speed);
+    public void setWeaponSpeed (int weaponID, int weaponSpeed);
 
-    public void setWeaponCollisionEffect (int weaponID, String collisionEffect);
+    public void setWeaponCollisionEffect (int weaponID, String weaponCollisionEffect);
 
-    public void setWeaponName (int weaponID, String name);
+    public void setWeaponName (int weaponID, String weaponName);
 
-    public void setWeaponPath (int weaponID, String path);
+    public void setWeaponPath (int weaponID, String weaponPath);
 
     public void createWeapon ();
 

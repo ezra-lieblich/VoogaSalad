@@ -1,5 +1,11 @@
 package authoring.editorview.tower;
 
+/**
+ * 
+ * @author Andrew Bihl
+ * @author Kayla Schulz
+ *
+ */
 public interface TowerEditorViewDelegate {
 
     public void onUserPressedCreateNewTower ();

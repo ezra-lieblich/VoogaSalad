@@ -8,7 +8,11 @@ import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 
-
+/**
+ * 
+ * @author Kayla Schulz
+ *
+ */
 public class WeaponPathField implements IWeaponEditorView {
 
     private ComboBox<Object> weaponPathBox;

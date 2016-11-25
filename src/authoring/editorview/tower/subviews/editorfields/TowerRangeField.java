@@ -6,6 +6,12 @@ import authoring.utilityfactories.TextFieldFactory;
 import javafx.scene.Node;
 import javafx.scene.control.TextField;
 
+
+/**
+ * 
+ * @author Kayla Schulz
+ *
+ */
 public class TowerRangeField implements ITowerEditorView {
 
     private TowerEditorViewDelegate delegate;
@@ -32,5 +38,5 @@ public class TowerRangeField implements ITowerEditorView {
     public void updateTowerRange (String towerRange) {
         towerRangeField.setText(towerRange);
     }
-    
+
 }

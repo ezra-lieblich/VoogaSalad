@@ -8,7 +8,11 @@ import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 
-
+/**
+ * 
+ * @author  Kayla Schulz
+ *
+ */
 public class TowerChooseEnemyField implements ITowerEditorView {
 
     private ComboBox<Object> towerChooseEnemyBox;

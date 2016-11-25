@@ -6,7 +6,11 @@ import authoring.utilityfactories.TextFieldFactory;
 import javafx.scene.Node;
 import javafx.scene.control.TextField;
 
-
+/**
+ * 
+ * @author Kayla Schulz
+ *
+ */
 public class TowerBuyPriceField implements ITowerEditorView {
 
     private TextField towerBuyField;

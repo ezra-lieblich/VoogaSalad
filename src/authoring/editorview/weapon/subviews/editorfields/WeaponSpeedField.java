@@ -24,7 +24,7 @@ public class WeaponSpeedField implements IWeaponEditorView {
     private void createField () {
         weaponSpeedField =
                 TextFieldFactory.makeTextField("Set weapon speed: ", e -> delegate
-                        .onUserEnteredProjectileSpeed(weaponSpeedField.getText()));
+                        .onUserEnteredWeaponSpeed(weaponSpeedField.getText()));
     }
 
     @Override

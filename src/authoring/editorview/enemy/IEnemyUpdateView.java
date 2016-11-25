@@ -3,6 +3,12 @@ package authoring.editorview.enemy;
 import java.util.List;
 
 
+/**
+ * 
+ * @author Andrew Bihl
+ * @author Kayla Schulz
+ *
+ */
 public interface IEnemyUpdateView extends IEnemyEditorView {
 
     public void updateFrequencyDisplay (int frequency);

@@ -20,7 +20,6 @@ import authoring.editorview.tower.subviews.editorfields.TowerUnlockLevelField;
 import authoring.editorview.tower.subviews.editorfields.TowerUpgradeField;
 import authoring.utilityfactories.BoxFactory;
 import authoring.utilityfactories.ButtonFactory;
-import authoring.utilityfactories.ComboBoxFactory;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
@@ -28,6 +27,11 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 
+/**
+ * 
+ * @author Kayla Schulz
+ *
+ */
 public class TowerEffectView extends PhotoFileChooser implements ITowerEditorView {
 
     private TowerEditorViewDelegate delegate;

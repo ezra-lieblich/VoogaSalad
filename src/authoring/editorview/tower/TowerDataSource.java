@@ -3,6 +3,12 @@ package authoring.editorview.tower;
 import java.util.List;
 
 
+/**
+ * 
+ * @author Andrew Bihl
+ * @author Kayla Schulz
+ *
+ */
 public interface TowerDataSource {
     public String getTowerName (int towerID);
 

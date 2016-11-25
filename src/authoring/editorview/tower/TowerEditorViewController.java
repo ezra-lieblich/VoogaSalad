@@ -5,6 +5,12 @@ import authoring.ErrorBox;
 import authoring.editorview.EditorViewController;
 
 
+/**
+ * 
+ * @author Kayla Schulz
+ * @author Andrew Bihl
+ *
+ */
 public class TowerEditorViewController extends EditorViewController
         implements TowerEditorViewDelegate {
 

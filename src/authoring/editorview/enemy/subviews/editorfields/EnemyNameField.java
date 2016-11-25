@@ -7,6 +7,11 @@ import javafx.scene.Node;
 import javafx.scene.control.TextField;
 
 
+/**
+ * 
+ * @author Kayla Schulz
+ *
+ */
 public class EnemyNameField implements IEnemyEditorView {
 
     private TextField enemyNameField;

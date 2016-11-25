@@ -1,5 +1,11 @@
 package authoring.editorview.enemy;
 
+/**
+ * 
+ * @author Andrew Bihl
+ * @author Kayla Schulz
+ *
+ */
 public interface EnemyEditorViewDelegate {
 
     public void onUserPressedCreateEnemy ();
