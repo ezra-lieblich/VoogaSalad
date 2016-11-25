@@ -19,4 +19,14 @@ public interface IEnemyUpdateView extends IEnemyEditorView {
 
     public void createNewEnemy ();
 
+    public void updateEnemyHealthDisplay (int enemyHealth);
+
+    public void updateEnemyDamage (int damage);
+
+    public void updateEnemyRewardMoney (int rewardMoney);
+
+    public void updateEnemyRewardPoints (int rewardPoints);
+
+    public void updateEnemyCollisionEffect (String collisionEffect);
+
 }
