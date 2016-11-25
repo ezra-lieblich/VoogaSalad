@@ -2,5 +2,5 @@ package engine.observer;
 
 public interface Observer<E extends Observable<U>, U> {
     
-    void update(E observable, U value);
+    <R extends E> void update(R observable, U value);
 }

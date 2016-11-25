@@ -2,7 +2,8 @@ package engine;
 
 import engine.observer.Observable;
 
+//U = object that is being passed in, E = some Visiting Manager
 public interface VisitableManager<E>{
 
-    void accept (VisitorManager visitor, E methodData);
+    <U extends VisitorManager<E>> void accept (U visitor, E methodData);
 }

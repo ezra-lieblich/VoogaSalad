@@ -1,5 +1,6 @@
 package engine;
 
-public interface VisitorManager {
-    <U> void visitManager(VisitableManager<U> visitableManager, MethodData<Integer> dataMethod);
+//E = object that is being passed in, U = Some VisitableManager
+public interface VisitorManager<E> {
+    <U extends VisitableManager<E>> void visitManager(U visitableManager, E dataMethod);
 }

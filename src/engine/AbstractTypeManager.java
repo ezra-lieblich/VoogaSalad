@@ -105,9 +105,9 @@ public abstract class AbstractTypeManager<E extends Type> extends AbstractObserv
 //                                                 } else {
 //                                                         downPolymorphic.invoke(this, new Object[] {object});
 //                                                 }
-    
+    //TODO - error might occur due to taking in a VisitableManager
     @Override
-    public <U> void visitManager(VisitableManager<U> visitableManager, MethodData<Integer> dataMethod) {
+    public <U extends VisitableManager<MethodData<Integer>>> void visitManager(U visitableManager, MethodData<Integer> dataMethod) {
         try {
             Method visitMethod = this.getClass().getMethod("visit" + dataMethod.getMethod(), new Class[] {visitableManager.getClass()});
             visitMethod.invoke(this, new Object[] {visitableManager, dataMethod.getValue()});
@@ -135,7 +135,7 @@ public abstract class AbstractTypeManager<E extends Type> extends AbstractObserv
     }
     
     @Override
-    public void accept (VisitorManager visitor, MethodData<Integer> methodData) {
+    public <U extends VisitorManager<MethodData<Integer>>> void accept (U visitor, MethodData<Integer> methodData) {
         visitor.visitManager(this, methodData);
     }
     
