@@ -18,12 +18,15 @@ public class PathBank extends PhotoFileChooser {
 	
 	private ScrollPane pathBank;
 	
+	
 	private static final String RESOURCE_FILE_NAME = "resources/GameAuthoringPath";	
 	private ResourceBundle pathResource = ResourceBundle.getBundle(RESOURCE_FILE_NAME);
 	
 	
 	public PathBank(){
 		this.pathBank = new ScrollPane();
+		pathBank.setPrefHeight(640);
+		pathBank.setPrefWidth(135);
 		buildViewComponents();	   
 	}
 
@@ -31,17 +34,21 @@ public class PathBank extends PhotoFileChooser {
 	private void buildViewComponents() {
 		//TODO: Fix event
 		Button createWeaponButton =
-	                createButton(pathResource.getString("NewPathButton"),
-	                             e -> {
-									try {
-										selectFile("Photos: ", "Select new path image");
-									} catch (IOException e1) {
-										Alert errorDialogueBox = DialogueBoxFactory.createErrorDialogueBox("Invalid File", "Error With File");
-										errorDialogueBox.show();
-									}
-								});
+				createButton(pathResource.getString("NewPathButton"),
+                 e -> {
+					try {
+						selectFile("Photos: ", "Select new path image");
+					} catch (IOException e1) {
+						Alert errorDialogueBox = 
+								DialogueBoxFactory.createErrorDialogueBox("Invalid File", "Error With File");
+						errorDialogueBox.show();
+					}
+				});
 		
 	    pathBank.setContent(createWeaponButton);
+	    createWeaponButton.setTranslateY(5);
+	    createWeaponButton.setTranslateX(5);
+	    createWeaponButton.setFocusTraversable(false);
 	}
 	
 	 

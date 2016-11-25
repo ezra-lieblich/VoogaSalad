@@ -31,7 +31,7 @@ public class PathNameView {
 		nameTextField = TextFieldFactory.makeTextField("Path 1", 
 				e -> setName(nameTextField.getText()));
 		nameTextField.setMaxWidth(75);
-		root = BoxFactory.createHBoxWithLabelandNode(pathResource.getString("ColumnTextField"), nameTextField);
+		root = BoxFactory.createHBoxWithLabelandNode(pathResource.getString("NameTextField"), nameTextField);
 	}
 	
 	private void setName(String name){

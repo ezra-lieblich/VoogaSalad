@@ -38,16 +38,10 @@ public class BackgroundImageView extends PhotoFileChooser{
 	
 	public BackgroundImageView(){
 		root = new HBox(10);
+		createBackgroundImage();
 		makeChooseImageButton();
-		formatBackgroundImageView();
-		addBackgroundImageView();	
 	}
 
-	private void formatBackgroundImageView() {
-		backgroundImageView = new ImageView();
-		backgroundImageView.setFitHeight(100);
-		backgroundImageView.setFitWidth(100);
-	}	
 	
 	public Node getInstanceAsNode(){		
 		return root;
@@ -87,33 +81,21 @@ public class BackgroundImageView extends PhotoFileChooser{
 		File chosenFile = chooseFile.showOpenDialog(new Stage());
 		if (chosenFile != null){
 			BufferedImage image = ImageIO.read(chosenFile) ;
-			backgroundImagePath = chosenFile.getPath();
-			addBackgroundImageView();		
-		}
-		
-		
+			backgroundImagePath = chosenFile.getPath();	
+			createBackgroundImage();
+		}	
 	}
 	
 	
-	private void addBackgroundImageView() {
-		if (root.getChildren().contains(backgroundImageView)){
-			root.getChildren().remove(backgroundImageView);
-		}
-		backgroundImageView = loadBackgroundImage();
-		root.getChildren().add(backgroundImageView);
-	}
-	
-	private ImageView loadBackgroundImage() {	
+	private void createBackgroundImage() {	
 		try {
 			backgroundImage = new Image(backgroundImagePath);
-			backgroundImageView.setImage(backgroundImage);
 			delegate.onUserEnteredBackgroundImage(backgroundImagePath);			
 		}
 		catch (Exception e){
 			backgroundImage = new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_IMAGE_FILE_NAME));
-			backgroundImageView.setImage(backgroundImage);	
 		}		
-		return backgroundImageView;
+		
 		
 	}
 
