@@ -35,7 +35,7 @@ public class EnemyFrequencyField implements IEnemyEditorView {
         return enemyFrequencyField;
     }
 
-    public void updateTowerFrequency (String enemyFrequency) {
+    public void updateEnemyFrequency (String enemyFrequency) {
         enemyFrequencyField.setText(enemyFrequency);
     }
 }
