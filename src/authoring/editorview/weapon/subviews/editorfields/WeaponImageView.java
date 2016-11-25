@@ -4,13 +4,20 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ResourceBundle;
 import javax.imageio.ImageIO;
+import authoring.editorview.weapon.IWeaponEditorView;
 import authoring.editorview.weapon.WeaponEditorViewDelegate;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 
-public class WeaponImageView {
+/**
+ * 
+ * @author Kayla Schulz
+ *
+ */
+public class WeaponImageView implements IWeaponEditorView {
 
     private WeaponEditorViewDelegate delegate;
     private ResourceBundle labelsResource;
@@ -43,15 +50,17 @@ public class WeaponImageView {
                             .getResourceAsStream(labelsResource.getString("DefaultImagePath")));
             Image image2 = SwingFXUtils.toFXImage(imageRead, null);
             myImageView.setImage(image2);
-            System.out.println("Unable to find picture in files");
+            // ErrorBox.createErrorBox("Unable to load tower image");
         }
         return myImageView;
     }
 
-    public ImageView getWeaponImage () {
+    @Override
+    public Node getInstanceAsNode () {
         return weaponImage;
     }
 
+    @Override
     public void setDelegate (WeaponEditorViewDelegate delegate) {
         this.delegate = delegate;
     }

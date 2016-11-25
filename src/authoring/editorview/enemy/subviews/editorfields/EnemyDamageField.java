@@ -12,16 +12,16 @@ import javafx.scene.control.TextField;
  * @author Kayla Schulz
  *
  */
-public class EnemySpeedField implements IEnemyEditorView {
+public class EnemyDamageField implements IEnemyEditorView {
 
-    private TextField enemySpeedField;
     private EnemyEditorViewDelegate delegate;
+    private TextField enemyDamageField;
 
-    public EnemySpeedField () {
-        enemySpeedField =
-                TextFieldFactory.makeTextField("Set enemy speed: ",
+    public EnemyDamageField () {
+        enemyDamageField =
+                TextFieldFactory.makeTextField("Set enemy damage: ",
                                                e -> delegate
-                                                       .onUserEnteredEnemySpeed(enemySpeedField
+                                                       .onUserEnteredEnemyDamage(enemyDamageField
                                                                .getText()));
     }
 
@@ -32,11 +32,11 @@ public class EnemySpeedField implements IEnemyEditorView {
 
     @Override
     public Node getInstanceAsNode () {
-        return enemySpeedField;
+        return enemyDamageField;
     }
 
-    public void updateEnemySpeed (String enemySpeed) {
-        enemySpeedField.setText(enemySpeed);
+    public void updateEnemyFrequency (String enemyDamage) {
+        enemyDamageField.setText(enemyDamage);
     }
 
 }

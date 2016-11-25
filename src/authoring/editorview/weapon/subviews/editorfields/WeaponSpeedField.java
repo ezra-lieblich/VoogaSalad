@@ -1,7 +1,9 @@
 package authoring.editorview.weapon.subviews.editorfields;
 
+import authoring.editorview.weapon.IWeaponEditorView;
 import authoring.editorview.weapon.WeaponEditorViewDelegate;
 import authoring.utilityfactories.TextFieldFactory;
+import javafx.scene.Node;
 import javafx.scene.control.TextField;
 
 
@@ -10,24 +12,28 @@ import javafx.scene.control.TextField;
  * @author Kayla Schulz
  *
  */
-public class WeaponSpeedField {
+public class WeaponSpeedField implements IWeaponEditorView {
 
     private TextField weaponSpeedField;
     private WeaponEditorViewDelegate delegate;
 
     public WeaponSpeedField () {
-        weaponSpeedField =
-                TextFieldFactory.makeTextField("Set weapon speed: ",
-                                               e -> delegate
-                                                       .onUserEnteredProjectileSpeed(weaponSpeedField
-                                                               .getText()));
+        createField();
     }
 
+    private void createField () {
+        weaponSpeedField =
+                TextFieldFactory.makeTextField("Set weapon speed: ", e -> delegate
+                        .onUserEnteredWeaponSpeed(weaponSpeedField.getText()));
+    }
+
+    @Override
     public void setDelegate (WeaponEditorViewDelegate delegate) {
         this.delegate = delegate;
     }
 
-    public TextField getWeaponSpeedField () {
+    @Override
+    public Node getInstanceAsNode () {
         return weaponSpeedField;
     }
 

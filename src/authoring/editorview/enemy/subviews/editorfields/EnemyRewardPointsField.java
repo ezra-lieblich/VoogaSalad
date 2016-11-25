@@ -7,21 +7,16 @@ import javafx.scene.Node;
 import javafx.scene.control.TextField;
 
 
-/**
- * 
- * @author Kayla Schulz
- *
- */
-public class EnemySpeedField implements IEnemyEditorView {
+public class EnemyRewardPointsField implements IEnemyEditorView {
 
-    private TextField enemySpeedField;
     private EnemyEditorViewDelegate delegate;
+    private TextField enemyRewardPointsField;
 
-    public EnemySpeedField () {
-        enemySpeedField =
-                TextFieldFactory.makeTextField("Set enemy speed: ",
+    public EnemyRewardPointsField () {
+        enemyRewardPointsField =
+                TextFieldFactory.makeTextField("Set enemy reward points: ",
                                                e -> delegate
-                                                       .onUserEnteredEnemySpeed(enemySpeedField
+                                                       .onUserEnteredEnemyPoints(enemyRewardPointsField
                                                                .getText()));
     }
 
@@ -32,11 +27,11 @@ public class EnemySpeedField implements IEnemyEditorView {
 
     @Override
     public Node getInstanceAsNode () {
-        return enemySpeedField;
+        return enemyRewardPointsField;
     }
 
-    public void updateEnemySpeed (String enemySpeed) {
-        enemySpeedField.setText(enemySpeed);
+    public void updateEnemyRewardPoints (String enemyRewardPoints) {
+        enemyRewardPointsField.setText(enemyRewardPoints);
     }
 
 }

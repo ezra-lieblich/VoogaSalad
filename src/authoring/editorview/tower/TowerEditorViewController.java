@@ -1,9 +1,16 @@
 package authoring.editorview.tower;
 
 import java.io.IOException;
+import authoring.ErrorBox;
 import authoring.editorview.EditorViewController;
 
 
+/**
+ * 
+ * @author Kayla Schulz
+ * @author Andrew Bihl
+ *
+ */
 public class TowerEditorViewController extends EditorViewController
         implements TowerEditorViewDelegate {
 
@@ -25,55 +32,103 @@ public class TowerEditorViewController extends EditorViewController
      */
     @Override
     public void onUserPressedCreateNewTower () {
-        // TODO Auto-generated method stub
+        towerDataSource.createNewTower();
     }
 
     @Override
     public void onUserEnteredTowerName (String towerName) {
-        // TODO Auto-generated method stub
-
+        towerDataSource.setTowerName(currentTowerID, towerName);
     }
 
     @Override
-    public void onUserEnteredTowerImagePath (String imagePath) {
-        // TODO Auto-generated method stub
-
+    public void onUserEnteredTowerImagePath (String towerImagePath) {
+        towerDataSource.setTowerImagePath(currentTowerID, towerImagePath);
     }
 
     @Override
-    public void onUserEnteredUnlockLevel (String level) {
-        // TODO Auto-generated method stub
-
+    public void onUserEnteredTowerUnlockLevel (String towerLevel) {
+        try {
+            Integer.parseInt(towerLevel);
+            towerDataSource.setTowerUnlockLevel(currentTowerID, Integer.parseInt(towerLevel));
+        }
+        catch (NumberFormatException e) {
+            ErrorBox.createErrorBox("This input is not an integer");
+        }
     }
 
     @Override
-    public void onUserEnteredFireRate (String fireRate) {
-        // TODO Auto-generated method stub
-
+    public void onUserEnteredTowerFireRate (String towerFireRate) {
+        try {
+            Integer.parseInt(towerFireRate);
+            towerDataSource.setTowerFireRate(currentTowerID, Integer.parseInt(towerFireRate));
+        }
+        catch (NumberFormatException e) {
+            ErrorBox.createErrorBox("This input is not an integer");
+        }
     }
 
     @Override
-    public void onUserEnteredFrequency (String frequency) {
-        // TODO Auto-generated method stub
-
+    public void onUserEnteredTowerFrequency (String towerFrequency) {
+        try {
+            Integer.parseInt(towerFrequency);
+            towerDataSource.setTowerFrequency(currentTowerID, Integer.parseInt(towerFrequency));
+        }
+        catch (NumberFormatException e) {
+            ErrorBox.createErrorBox("This input is not an integer");
+        }
     }
 
     @Override
-    public void onUserEnteredRange (String range) {
-        // TODO Auto-generated method stub
-
+    public void onUserEnteredTowerRange (String towerRange) {
+        try {
+            Integer.parseInt(towerRange);
+            towerDataSource.setTowerRange(currentTowerID, Integer.parseInt(towerRange));
+        }
+        catch (NumberFormatException e) {
+            ErrorBox.createErrorBox("This input is not an integer");
+        }
     }
 
     @Override
-    public void onUserEnteredTowerBuyPrice (String buyPrice) {
-        // TODO Auto-generated method stub
-        
+    public void onUserEnteredTowerBuyPrice (String towerBuyPrice) {
+        try {
+            Integer.parseInt(towerBuyPrice);
+            towerDataSource.setTowerBuyPrice(currentTowerID, Integer.parseInt(towerBuyPrice));
+        }
+        catch (NumberFormatException e) {
+            ErrorBox.createErrorBox("This input is not an integer");
+        }
     }
 
     @Override
-    public void onUserEnteredTowerSellPrice (String sellPrice) {
-        // TODO Auto-generated method stub
-        
+    public void onUserEnteredTowerSellPrice (String towerSellPrice) {
+        try {
+            Integer.parseInt(towerSellPrice);
+            towerDataSource.setTowerSellPrice(currentTowerID, Integer.parseInt(towerSellPrice));
+        }
+        catch (NumberFormatException e) {
+            ErrorBox.createErrorBox("This input is not an integer");
+        }
+    }
+
+    @Override
+    public void onUserEnteredTowerAbility (String towerAbility) {
+        towerDataSource.setTowerAbility(currentTowerID, towerAbility);
+    }
+
+    @Override
+    public void onUserEnteredTowerChosenEnemy (String towerChosenEnemy) {
+        towerDataSource.setTowerChosenEnemy(currentTowerID, towerChosenEnemy);
+    }
+
+    @Override
+    public void onUserEnteredTowerChosenWeapon (String towerChosenWeapon) {
+        towerDataSource.setTowerChosenWeapon(currentTowerID, towerChosenWeapon);
+    }
+
+    @Override
+    public void onUserEnteredTowerUpgrade (String towerUpgrade) {
+        towerDataSource.setTowerUpgrade(currentTowerID, towerUpgrade);
     }
 
 }

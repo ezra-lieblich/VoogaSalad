@@ -3,27 +3,32 @@ package authoring.editorview.enemy;
 import java.util.List;
 
 
+/**
+ * 
+ * @author Kayla Schulz
+ *
+ */
 public interface EnemyDataSource {
 
     public void createEnemy ();
 
-    public void setEnemyName (int enemyID, String name);
+    public void setEnemyName (int enemyID, String enemyName);
 
     public void setEnemyImage (int enemyID, String enemyImagePath);
 
-    public void setEnemySpeed (int enemyID, int speed);
+    public void setEnemySpeed (int enemyID, int enemySpeed);
 
-    public void setEnemyHealth (int enemyID, int health);
+    public void setEnemyHealth (int enemyID, int enemyHealth);
 
-    public void setEnemyDamage (int enemyID, int damage);
+    public void setEnemyDamage (int enemyID, int enemyDamage);
 
-    public void setEnemyRewardMoney (int enemyID, int money);
+    public void setEnemyRewardMoney (int enemyID, int enemyRewardMoney);
 
-    public void setEnemyRewardPoints (int enemyID, int points);
+    public void setEnemyRewardPoints (int enemyID, int enemyRewardPoints);
 
-    public void setEnemyCollisionEffect (int enemyID, String collisionEffect);
+    public void setEnemyCollisionEffect (int enemyID, String enemyCollisionEffect);
 
-    public void setEnemyFrequency (int enemyID, int frequency);
+    public void setEnemyFrequency (int enemyID, int enemyFrequency);
 
     /**
      * Values to get from model
@@ -50,6 +55,8 @@ public interface EnemyDataSource {
 
     public String getEnemyCollisionEffect (int enemyID);
 
-    public List<Integer> getActiveWeaponIDs ();
+    public int getCreatedEnemy ();
+
+    public List<Integer> getActiveEnemyIDs ();
 
 }

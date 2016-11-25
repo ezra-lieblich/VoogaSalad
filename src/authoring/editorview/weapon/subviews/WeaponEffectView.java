@@ -15,8 +15,8 @@ import authoring.editorview.weapon.subviews.editorfields.WeaponRangeField;
 import authoring.editorview.weapon.subviews.editorfields.WeaponSpeedField;
 import authoring.utilityfactories.BoxFactory;
 import authoring.utilityfactories.ButtonFactory;
+import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -76,12 +76,13 @@ public class WeaponEffectView extends PhotoFileChooser {
     }
 
     private void buildViewComponents () throws IOException {
-        ImageView myImageView = weaponImage.getWeaponImage();
+        Node myImageView = weaponImage.getInstanceAsNode();
         vboxView.getChildren().add(myImageView);
         vboxView.getChildren().add(ButtonFactory.makeButton(labelsResource.getString("Image"),
                                                             e -> {
                                                                 try {
-                                                                    selectFile("text", "text");
+                                                                    selectFile("Select new weapon image",
+                                                                               "Photos: ");
                                                                 }
                                                                 catch (IOException e1) {
                                                                     // TODO Fix this for better user
@@ -90,22 +91,22 @@ public class WeaponEffectView extends PhotoFileChooser {
                                                                 }
                                                             }));
         vboxView.getChildren()
-                .add(BoxFactory.createHBoxWithTextField(labelsResource.getString("Name"),
-                                                        weaponName.getWeaponNameField()));
+                .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Name"),
+                                                        weaponName.getInstanceAsNode()));
         vboxView.getChildren()
-                .add(BoxFactory.createHBoxWithTextField(labelsResource.getString("Rate"),
-                                                        weaponFireRate.getWeaponFireRateField()));
+                .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Rate"),
+                                                        weaponFireRate.getInstanceAsNode()));
         vboxView.getChildren()
-                .add(BoxFactory.createHBoxWithTextField(labelsResource.getString("Speed"),
-                                                        weaponSpeed.getWeaponSpeedField()));
+                .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Speed"),
+                                                        weaponSpeed.getInstanceAsNode()));
         vboxView.getChildren()
-                .add(BoxFactory.createHBoxWithTextField(labelsResource.getString("Range"),
-                                                        weaponRange.getWeaponRangeField()));
+                .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Range"),
+                                                        weaponRange.getInstanceAsNode()));
         vboxView.getChildren()
-                .add(BoxFactory.createHBoxWithTextField(labelsResource.getString("Damage"),
-                                                        weaponDamage.getWeaponDamageField()));
-        vboxView.getChildren().add(weaponCollision.getWeaponCollisionEffectField());
-        vboxView.getChildren().add(weaponPath.getWeaponPathField());
+                .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Damage"),
+                                                        weaponDamage.getInstanceAsNode()));
+        vboxView.getChildren().add(weaponCollision.getInstanceAsNode());
+        vboxView.getChildren().add(weaponPath.getInstanceAsNode());
     }
 
     public ScrollPane getInstanceAsNode () {

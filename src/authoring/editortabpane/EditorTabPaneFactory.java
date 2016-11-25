@@ -2,6 +2,7 @@ package authoring.editortabpane;
 
 import java.util.List;
 
+
 public class EditorTabPaneFactory {
 
     private EditorTabPaneFactory () {

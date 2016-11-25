@@ -1,10 +1,18 @@
 package authoring.editorview.tower.subviews.editorfields;
 
+import authoring.editorview.tower.ITowerEditorView;
 import authoring.editorview.tower.TowerEditorViewDelegate;
 import authoring.utilityfactories.TextFieldFactory;
+import javafx.scene.Node;
 import javafx.scene.control.TextField;
 
-public class TowerRangeField {
+
+/**
+ * 
+ * @author Kayla Schulz
+ *
+ */
+public class TowerRangeField implements ITowerEditorView {
 
     private TowerEditorViewDelegate delegate;
     private TextField towerRangeField;
@@ -13,20 +21,22 @@ public class TowerRangeField {
         towerRangeField =
                 TextFieldFactory.makeTextField("Set tower range: ",
                                                e -> delegate
-                                                       .onUserEnteredRange(towerRangeField
+                                                       .onUserEnteredTowerRange(towerRangeField
                                                                .getText()));
     }
 
+    @Override
     public void setDelegate (TowerEditorViewDelegate delegate) {
         this.delegate = delegate;
     }
 
-    public TextField getTowerRangeField () {
+    @Override
+    public Node getInstanceAsNode () {
         return towerRangeField;
     }
 
     public void updateTowerRange (String towerRange) {
         towerRangeField.setText(towerRange);
     }
-    
+
 }
