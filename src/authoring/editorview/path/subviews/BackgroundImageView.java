@@ -15,6 +15,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -22,9 +23,10 @@ import javafx.stage.Stage;
 
 public class BackgroundImageView extends PhotoFileChooser{
 	
-	private VBox root;
+	private HBox root;
 	private String backgroundImagePath;
 	private ImageView backgroundImageView;
+	private Image backgroundImage;
 	private PathEditorViewDelegate delegate;
 	
 	private static final String RESOURCE_FILE_NAME = "resources/GameAuthoringPath";	
@@ -35,7 +37,7 @@ public class BackgroundImageView extends PhotoFileChooser{
 	
 	
 	public BackgroundImageView(){
-		root = new VBox(10);
+		root = new HBox(10);
 		makeChooseImageButton();
 		formatBackgroundImageView();
 		addBackgroundImageView();	
@@ -56,6 +58,11 @@ public class BackgroundImageView extends PhotoFileChooser{
 		return backgroundImagePath;
 	}
 	
+	public Image getBackgroundImage(){
+		return backgroundImage;
+	}
+	
+
 	public void setDelegate(PathEditorViewDelegate delegate){
 		this.delegate = delegate;
 	}
@@ -97,13 +104,13 @@ public class BackgroundImageView extends PhotoFileChooser{
 	
 	private ImageView loadBackgroundImage() {	
 		try {
-			Image image = new Image(backgroundImagePath);
-			backgroundImageView.setImage(image);
+			backgroundImage = new Image(backgroundImagePath);
+			backgroundImageView.setImage(backgroundImage);
 			delegate.onUserEnteredBackgroundImage(backgroundImagePath);			
 		}
 		catch (Exception e){
-			Image defaultImage = new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_IMAGE_FILE_NAME));
-			backgroundImageView.setImage(defaultImage);	
+			backgroundImage = new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_IMAGE_FILE_NAME));
+			backgroundImageView.setImage(backgroundImage);	
 		}		
 		return backgroundImageView;
 		

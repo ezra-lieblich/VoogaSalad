@@ -7,13 +7,14 @@ import authoring.utilityfactories.TextFieldFactory;
 import javafx.scene.Node;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 
 public class PathSizeView {
 	
-	private HBox root;
-	private int numColumns;
-	private int numRows;
+	private VBox root;
+	private int numColumns = 1;
+	private int numRows = 1;
 	
 	private TextField columnsTextField;
 	private HBox columnsBox;
@@ -21,22 +22,33 @@ public class PathSizeView {
 	private TextField rowsTextField;
 	private HBox rowsBox;
 	
+	
+	
 	private static final int BOX_SPACING = 10;
 	
 	private static final String RESOURCE_FILE_NAME = "resources/GameAuthoringPath";	
 	private ResourceBundle pathResource = ResourceBundle.getBundle(RESOURCE_FILE_NAME);
 	
 	public PathSizeView(){
-		this.root = new HBox(BOX_SPACING);
+		this.root = new VBox(BOX_SPACING);
 		makeGridColumnsTextField();
 		makeGridRowsTextField();
 	}
 	
-	public Node getInstanceAsNode(){
-		
+	public Node getInstanceAsNode(){		
 		return root;
 		
 	}
+	
+	public int getNumberOfColumns(){
+		return numColumns;
+	}
+	
+	public int getNumberOfRows(){
+		return numRows;
+	}
+	
+	
 	
 	private void makeGridColumnsTextField(){
 		columnsTextField = TextFieldFactory.makeTextField("1", 

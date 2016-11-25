@@ -5,6 +5,7 @@ import authoring.editorview.path.subviews.BackgroundImageView;
 import authoring.editorview.path.subviews.PathBank;
 import authoring.editorview.path.subviews.PathBuilderView;
 import authoring.editorview.path.subviews.PathImageView;
+import authoring.editorview.path.subviews.PathNameView;
 import authoring.editorview.path.subviews.PathSizeView;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
@@ -24,6 +25,7 @@ public class PathEditorView implements IPathEditorView {
     private PathImageView pathImageView;
     private PathSizeView pathSizeView;
     private PathBuilderView pathBuilderView;
+    private PathNameView pathNameView;
     
    
 
@@ -32,11 +34,20 @@ public class PathEditorView implements IPathEditorView {
         pathBank = new PathBank();       
     	backgroundImageView = new BackgroundImageView();
     	pathSizeView = new PathSizeView();
+    	
     	pathImageView = new PathImageView();
     	pathBuilderView = new PathBuilderView();
+    	formatPathGrid();
+    	
+    	pathNameView = new PathNameView();
         setPathView();
      
     }
+
+	private void formatPathGrid() {
+		pathBuilderView.setGridSize(pathSizeView.getNumberOfColumns(), pathSizeView.getNumberOfRows());	
+    	pathBuilderView.setBackgroundImage(backgroundImageView.getBackgroundImage());
+	}
 
     @Override
     public Node getInstanceAsNode () {
@@ -48,26 +59,29 @@ public class PathEditorView implements IPathEditorView {
         backgroundImageView.setDelegate(delegate);
     }
     
+    
     private void setPathView(){
     	     
         BorderPane editor = new BorderPane();
         editor.setCenter(pathBuilderView.getInstanceAsNode());
         
-        HBox imageSettings = new HBox(50);
+        VBox imageSettings = new VBox(10);
         imageSettings.getChildren().addAll(backgroundImageView.getInstanceAsNode(),
         		pathImageView.getInstanceAsNode());
         
-        VBox pathSettings = new VBox(BOX_SPACING);
-        pathSettings.getChildren().addAll(pathSizeView.getInstanceAsNode(), imageSettings);
+        VBox textFieldSettings = new VBox(BOX_SPACING);
+        textFieldSettings.getChildren().addAll(pathSizeView.getInstanceAsNode(), 
+        		pathNameView.getInstanceAsNode());
+        
+        HBox pathSettings = new HBox(20);
+        pathSettings.getChildren().addAll(imageSettings, textFieldSettings);
         
         editor.setTop(pathSettings);
         
         pathView.setCenter(editor);
         pathView.setLeft(pathBank.getInstanceAsNode());
-        
-        
-        
+            
     }
-    
+   
 
 }

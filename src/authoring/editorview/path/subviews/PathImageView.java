@@ -15,13 +15,17 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+//TODO: Combine with BackgroundImageView to reduce duplicated code
+
+
 public class PathImageView extends PhotoFileChooser{
 
-	private VBox root;
+	private HBox root;
 	private String pathImagePath;
 	private ImageView pathImageView;
 	private PathEditorViewDelegate delegate;
@@ -31,7 +35,7 @@ public class PathImageView extends PhotoFileChooser{
 	private static final String DEFAULT_IMAGE_FILE_NAME = "blacksquare.png";
 	
 	public PathImageView(){
-		root = new VBox(10);
+		root = new HBox(10);
 		makeChooseImageButton();
 		formatPathImageView();
 		addPathImageView();
