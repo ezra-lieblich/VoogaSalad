@@ -7,7 +7,7 @@ public class AbstractObservable<U> implements Observable<U> {
     
     private List<Observer<Observable<U>, U>> observers;
     
-    AbstractObservable() {
+    protected AbstractObservable() {
         this.observers = new ArrayList<Observer<Observable<U>, U>>();
     }
     
