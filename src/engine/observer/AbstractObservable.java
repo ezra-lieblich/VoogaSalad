@@ -1,4 +1,4 @@
-package engine;
+package engine.observer;
 
 import java.util.ArrayList;
 import java.util.List;

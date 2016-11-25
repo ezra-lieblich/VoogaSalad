@@ -1,4 +1,4 @@
-package engine;
+package engine.observer;
 
 public interface Observable<U> {
 
