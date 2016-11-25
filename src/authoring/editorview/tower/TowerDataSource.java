@@ -17,8 +17,10 @@ public interface TowerDataSource {
     public int getFireRate (int towerID);
 
     public int getFrequency (int towerID);
-    
+
     public int getRange (int towerID);
+
+    public int getCreatedTower ();
 
     public List<Integer> getActiveTowers ();
 
@@ -27,7 +29,7 @@ public interface TowerDataSource {
      * 
      * @return tower id
      */
-    public int createNewTower ();
+    public void createNewTower ();
 
     public void setTowerName (int towerID, String name);
 
@@ -42,6 +44,6 @@ public interface TowerDataSource {
     public void setFireRate (int towerID, int fireRate);
 
     public void setTowerFrequency (int towerID, int frequency);
-    
+
     public void setTowerRange (int towerID, int range);
 }

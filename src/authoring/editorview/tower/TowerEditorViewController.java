@@ -25,7 +25,7 @@ public class TowerEditorViewController extends EditorViewController
      */
     @Override
     public void onUserPressedCreateNewTower () {
-        // TODO Auto-generated method stub
+        towerDataSource.createNewTower();
     }
 
     @Override
