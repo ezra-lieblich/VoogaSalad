@@ -4,5 +4,5 @@ import engine.observer.Observable;
 
 public interface VisitableManager<E>{
 
-    void accept (VisitorManager visitor, MethodData<E> methodData);
+    void accept (VisitorManager visitor, E methodData);
 }

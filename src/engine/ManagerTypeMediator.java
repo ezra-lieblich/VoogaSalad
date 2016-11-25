@@ -190,6 +190,9 @@ public class ManagerTypeMediator implements ManagerMediator, Observer<Observable
         System.out.println(test.toString());
         System.out.println(getter.toString());
         System.out.println(testM);
+        VisitableManager<MethodData<Integer>> blah = new EnemyTypeManager(null);
+        System.out.print(blah.getClass().getName());
+        
     }
 
     @Override
