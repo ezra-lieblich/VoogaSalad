@@ -25,10 +25,10 @@ public class EnemyImageView implements IEnemyEditorView {
     private ImageView enemyImage;
 
     // TODO: Make this enemy
-    private final String WEAPON_EFFECT_RESOURCE_PATH = "resources/GameAuthoringWeapon";
+    private final String ENEMY_EFFECT_RESOURCE_PATH = "resources/GameAuthoringEnemy";
 
     public EnemyImageView () throws IOException {
-        labelsResource = ResourceBundle.getBundle(WEAPON_EFFECT_RESOURCE_PATH);
+        labelsResource = ResourceBundle.getBundle(ENEMY_EFFECT_RESOURCE_PATH);
         enemyImage = loadEnemyImage();
     }
 

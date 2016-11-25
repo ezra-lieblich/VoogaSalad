@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ResourceBundle;
 import javax.imageio.ImageIO;
+import authoring.ErrorBox;
 import authoring.editorview.tower.ITowerEditorView;
 import authoring.editorview.tower.TowerEditorViewDelegate;
 import javafx.embed.swing.SwingFXUtils;
@@ -53,10 +54,10 @@ public class TowerImageView implements ITowerEditorView {
         catch (Exception e) {
             imageRead =
                     ImageIO.read(getClass().getClassLoader()
-                            .getResourceAsStream("questionmark.png"));
+                            .getResourceAsStream(towerResources.getString("DefaultImagePath")));
             Image image2 = SwingFXUtils.toFXImage(imageRead, null);
             myImageView.setImage(image2);
-            System.out.println("Unable to find picture in files");
+            //ErrorBox.createErrorBox("Unable to load tower image");
         }
         return myImageView;
     }

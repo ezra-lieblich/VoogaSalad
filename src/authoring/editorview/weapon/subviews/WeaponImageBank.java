@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.ResourceBundle;
 import javax.imageio.ImageIO;
 import authoring.editorview.PhotoFileChooser;
 import authoring.editorview.weapon.IWeaponEditorView;
@@ -37,20 +38,26 @@ public class WeaponImageBank extends PhotoFileChooser implements IWeaponEditorVi
     private WeaponEditorViewDelegate delegate;
     private VBox vbox;
 
+    private ResourceBundle labelsResource;
+    private final String WEAPON_EFFECT_RESOURCE_PATH = "resources/GameAuthoringWeapon";
+
     public WeaponImageBank () {
+        labelsResource = ResourceBundle.getBundle(WEAPON_EFFECT_RESOURCE_PATH);
         weaponBank = new ScrollPane();
         Button createWeaponButton =
                 ButtonFactory.makeButton("Create Weapon",
                                          e -> {
                                              try {
-                                                 selectFile("Photos: ", "Select new weapon image");
+                                                 selectFile(labelsResource.getString("Photos"),
+                                                            labelsResource.getString("NewWeapon"));
                                              }
                                              catch (IOException e1) {
-                                                 // TODO Auto-generated catch block
                                                  e1.printStackTrace();
+                                                 // ErrorBox.createErrorBox("Unable to load tower
+                                                 // image");
                                              }
                                          });
-        vbox = BoxFactory.createVBox("Weapon Bank: ");
+        vbox = BoxFactory.createVBox(labelsResource.getString("WeaponBank"));
         vbox.getChildren().add(createWeaponButton);
         weaponBank.setContent(vbox);
     }

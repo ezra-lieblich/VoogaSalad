@@ -50,7 +50,7 @@ public class WeaponImageView implements IWeaponEditorView {
                             .getResourceAsStream(labelsResource.getString("DefaultImagePath")));
             Image image2 = SwingFXUtils.toFXImage(imageRead, null);
             myImageView.setImage(image2);
-            System.out.println("Unable to find picture in files");
+            // ErrorBox.createErrorBox("Unable to load tower image");
         }
         return myImageView;
     }

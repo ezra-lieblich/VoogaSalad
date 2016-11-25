@@ -1,6 +1,7 @@
 package authoring.editorview.enemy;
 
 import java.io.IOException;
+import authoring.ErrorBox;
 import authoring.editorview.EditorViewController;
 
 
@@ -28,61 +29,90 @@ public class EnemyEditorViewController extends EditorViewController
 
     @Override
     public void onUserPressedCreateEnemy () {
-        // TODO Auto-generated method stub
-
+        enemyDataSource.createEnemy();
     }
 
     @Override
     public void onUserEnteredEnemySpeed (String enemySpeed) {
-        enemyDataSource.setEnemySpeed(currentEnemyID, Integer.parseInt(enemySpeed));
+        try {
+            Integer.parseInt(enemySpeed);
+            enemyDataSource.setEnemySpeed(currentEnemyID, Integer.parseInt(enemySpeed));
+        }
+        catch (NumberFormatException e) {
+            ErrorBox.createErrorBox("This input is not an integer");
+        }
     }
 
     @Override
     public void onUserEnteredEnemyHealth (String enemyHealth) {
-        // TODO Auto-generated method stub
+        try {
+            Integer.parseInt(enemyHealth);
+            enemyDataSource.setEnemyHealth(currentEnemyID, Integer.parseInt(enemyHealth));
+        }
+        catch (NumberFormatException e) {
+            ErrorBox.createErrorBox("This input is not an integer");
+        }
 
     }
 
     @Override
     public void onUserEnteredEnemyDamage (String enemyDamage) {
-        // TODO Auto-generated method stub
-
+        try {
+            Integer.parseInt(enemyDamage);
+            enemyDataSource.setEnemyDamage(currentEnemyID, Integer.parseInt(enemyDamage));
+        }
+        catch (NumberFormatException e) {
+            ErrorBox.createErrorBox("This input is not an integer");
+        }
     }
 
     @Override
     public void onUserEnteredEnemyPoints (String enemyRewardPoints) {
-        // TODO Auto-generated method stub
-
+        try {
+            Integer.parseInt(enemyRewardPoints);
+            enemyDataSource.setEnemyRewardPoints(currentEnemyID,
+                                                 Integer.parseInt(enemyRewardPoints));
+        }
+        catch (NumberFormatException e) {
+            ErrorBox.createErrorBox("This input is not an integer");
+        }
     }
 
     @Override
     public void onUserEnteredEnemyMoney (String enemyRewardMoney) {
-        // TODO Auto-generated method stub
-
+        try {
+            Integer.parseInt(enemyRewardMoney);
+            enemyDataSource.setEnemyRewardMoney(currentEnemyID, Integer.parseInt(enemyRewardMoney));
+        }
+        catch (NumberFormatException e) {
+            ErrorBox.createErrorBox("This input is not an integer");
+        }
     }
 
     @Override
     public void onUserEnteredEnemyCollisionEffect (String enemyCollisionEffect) {
-        // TODO Auto-generated method stub
-
+        enemyDataSource.setEnemyCollisionEffect(currentEnemyID, enemyCollisionEffect);
     }
 
     @Override
     public void onUserEnteredEnemyImagePath (String enemyImagePath) {
-        // TODO Auto-generated method stub
-
+        enemyDataSource.setEnemyImage(currentEnemyID, enemyImagePath);
     }
 
     @Override
     public void onUserEnteredEnemyName (String enemyName) {
-        // TODO Auto-generated method stub
-
+        enemyDataSource.setEnemyName(currentEnemyID, enemyName);
     }
 
     @Override
     public void onUserEnteredEnemyFrequency (String enemyFrequency) {
-        // TODO Auto-generated method stub
-
+        try {
+            Integer.parseInt(enemyFrequency);
+            enemyDataSource.setEnemyFrequency(currentEnemyID, Integer.parseInt(enemyFrequency));
+        }
+        catch (NumberFormatException e) {
+            ErrorBox.createErrorBox("This input is not an integer");
+        }
     }
 
 }
