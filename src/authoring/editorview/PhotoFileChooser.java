@@ -1,6 +1,7 @@
 package authoring.editorview;
 
 import java.io.File;
+import java.io.IOException;
 import javafx.stage.FileChooser;
 
 
@@ -16,7 +17,7 @@ public abstract class PhotoFileChooser {
         return chosenFile;
     }
 
-    public void selectFile (String fieldText, String chooserTitle) {
+    public void selectFile (String fieldText, String chooserTitle) throws IOException {
         FileChooser choose = new FileChooser();
         choose.setTitle(chooserTitle);
         FileChooser.ExtensionFilter extFilter =
@@ -25,5 +26,5 @@ public abstract class PhotoFileChooser {
         openFileChooser(choose);
     }
 
-    public abstract void openFileChooser (FileChooser chooseFile);
+    public abstract void openFileChooser (FileChooser chooseFile) throws IOException;
 }

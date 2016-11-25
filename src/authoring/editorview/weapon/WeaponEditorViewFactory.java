@@ -2,6 +2,7 @@ package authoring.editorview.weapon;
 
 import java.io.IOException;
 
+
 /**
  * 
  * @author Diane Hadley
@@ -10,7 +11,7 @@ import java.io.IOException;
 
 public class WeaponEditorViewFactory {
 
-    public static IWeaponEditorView build (int width, int height) throws IOException {
+    public static IWeaponUpdateView build (int width, int height) throws IOException {
         return new WeaponEditorView();
     }
 

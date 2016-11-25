@@ -1,19 +1,39 @@
 package authoring.editorview.tower;
 
+/**
+ * 
+ * @author Andrew Bihl
+ * @author Kayla Schulz
+ *
+ */
 public interface TowerEditorViewDelegate {
 
     public void onUserPressedCreateNewTower ();
 
-    public void onUserEnteredName (String name);
+    public void onUserEnteredTowerAbility (String towerAbility);
 
-    public void onUserEnteredTowerImage (String imageID);
+    public void onUserEnteredTowerChosenEnemy (String towerChosenEnemy);
 
-    public void onUserEnteredBuyPrice (String price);
+    public void onUserEnteredTowerChosenWeapon (String towerChosenWeapon);
 
-    public void onUserEnteredSellPrice (String price);
+    public void onUserEnteredTowerUpgrade (String towerUpgrade);
 
-    public void onUserEnteredUnlockLevel (String level);
+    public void onUserEnteredTowerName (String towerName);
 
-    public void onUserEnteredFireRate (String fireRate);
+    public void onUserEnteredTowerImagePath (String towerImagePath);
+
+    public void onUserEnteredTowerBuyPrice (String towerBuyPrice);
+
+    public void onUserEnteredTowerSellPrice (String towerSellPrice);
+
+    public void onUserEnteredTowerUnlockLevel (String towerLevel);
+
+    public void onUserEnteredTowerFireRate (String towerFireRate);
+
+    // TODO: Does tower need either of the below methods?
+
+    public void onUserEnteredTowerFrequency (String towerFrequency);
+
+    public void onUserEnteredTowerRange (String towerRange);
 
 }

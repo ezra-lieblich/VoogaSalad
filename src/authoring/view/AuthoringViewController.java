@@ -70,7 +70,6 @@ public class AuthoringViewController implements EditorTabPaneDelegate {
     
     @Override
     public void userSelectedTab (String tabName) {
-    	System.out.println(tabName);
     	tabName = tabName.toLowerCase();
         EditorViewController editor = this.editors.get(tabName);
         this.view.setEditorView(editor.getView());
