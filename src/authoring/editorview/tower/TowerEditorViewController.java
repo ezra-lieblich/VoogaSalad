@@ -40,32 +40,68 @@ public class TowerEditorViewController extends EditorViewController
 
     @Override
     public void onUserEnteredUnlockLevel (String level) {
-        towerDataSource.setUnlockLevel(currentTowerID, Integer.parseInt(level));
+        try {
+            Integer.parseInt(level);
+            towerDataSource.setUnlockLevel(currentTowerID, Integer.parseInt(level));
+        }
+        catch (NumberFormatException e) {
+            System.out.println("This input is not an integer");
+        }
     }
 
     @Override
     public void onUserEnteredFireRate (String fireRate) {
-        towerDataSource.setFireRate(currentTowerID, Integer.parseInt(fireRate));
+        try {
+            Integer.parseInt(fireRate);
+            towerDataSource.setFireRate(currentTowerID, Integer.parseInt(fireRate));
+        }
+        catch (NumberFormatException e) {
+            System.out.println("This input is not an integer");
+        }
     }
 
     @Override
     public void onUserEnteredFrequency (String frequency) {
-        towerDataSource.setTowerFrequency(currentTowerID, Integer.parseInt(frequency));
+        try {
+            Integer.parseInt(frequency);
+            towerDataSource.setTowerFrequency(currentTowerID, Integer.parseInt(frequency));
+        }
+        catch (NumberFormatException e) {
+            System.out.println("This input is not an integer");
+        }
     }
 
     @Override
     public void onUserEnteredRange (String range) {
-        towerDataSource.setTowerRange(currentTowerID, Integer.parseInt(range));
+        try {
+            Integer.parseInt(range);
+            towerDataSource.setTowerRange(currentTowerID, Integer.parseInt(range));
+        }
+        catch (NumberFormatException e) {
+            System.out.println("This input is not an integer");
+        }
     }
 
     @Override
     public void onUserEnteredTowerBuyPrice (String buyPrice) {
-        towerDataSource.setBuyPrice(currentTowerID, Integer.parseInt(buyPrice));
+        try {
+            Integer.parseInt(buyPrice);
+            towerDataSource.setBuyPrice(currentTowerID, Integer.parseInt(buyPrice));
+        }
+        catch (NumberFormatException e) {
+            System.out.println("This input is not an integer");
+        }
     }
 
     @Override
     public void onUserEnteredTowerSellPrice (String sellPrice) {
-        towerDataSource.setSellPrice(currentTowerID, Integer.parseInt(sellPrice));
+        try {
+            Integer.parseInt(sellPrice);
+            towerDataSource.setSellPrice(currentTowerID, Integer.parseInt(sellPrice));
+        }
+        catch (NumberFormatException e) {
+            System.out.println("This input is not an integer");
+        }
     }
 
 }

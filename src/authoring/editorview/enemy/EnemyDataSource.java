@@ -50,6 +50,8 @@ public interface EnemyDataSource {
 
     public String getEnemyCollisionEffect (int enemyID);
 
-    public List<Integer> getActiveWeaponIDs ();
+    public int getCreatedEnemy ();
+
+    public List<Integer> getActiveEnemyIDs ();
 
 }

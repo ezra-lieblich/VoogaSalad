@@ -57,7 +57,6 @@ public class WeaponEditorViewController extends EditorViewController
     @Override
     public void onUserEnteredWeaponEffect (String collisionEffect) {
         weaponDataSource.setWeaponCollisionEffect(currentWeaponID, collisionEffect);
-
     }
 
     @Override
@@ -85,7 +84,6 @@ public class WeaponEditorViewController extends EditorViewController
         catch (NumberFormatException e) {
             System.out.println("This input is not an integer");
         }
-        weaponDataSource.setWeaponDamage(currentWeaponID, Integer.parseInt(damage));
     }
 
     @Override
