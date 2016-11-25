@@ -1,8 +1,9 @@
 package engine;
 
 import java.util.function.Consumer;
+import engine.observer.Observable;
 
-public interface Manager<E extends Type> extends ManagerVisitor {
+public interface Manager<E extends Type> extends VisitorManager, VisitableManager<Integer>, Observable<MethodData<Integer>> {
 
     int addEntry (E entry);
 

@@ -1,15 +1,17 @@
 package engine;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.Observable;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
+import engine.observer.AbstractObservable;
 
 
-public abstract class AbstractTypeManager<E extends Type> extends Observable implements Manager<E> {
+public abstract class AbstractTypeManager<E extends Type> extends AbstractObservable<MethodData<Integer>> implements Manager<E> {
     ManagerMediator managerMediator;
     Map<Integer, E> data;
     int activeId;
@@ -95,10 +97,46 @@ public abstract class AbstractTypeManager<E extends Type> extends Observable imp
      * activeEntities.stream().forEach(function);
      * }
      */
+//    Method downPolymorphic = object.getClass().getMethod("visit",
+//                                                         new Class[] { object.getClass() });
+//
+//                                                 if (downPolymorphic == null) {
+//                                                         defaultVisit(object);
+//                                                 } else {
+//                                                         downPolymorphic.invoke(this, new Object[] {object});
+//                                                 }
     
     @Override
-    public <U extends Type> U visitManagerGetEntity(Manager<U> typeManager, int index) {
-        return typeManager.getEntity(index);
+    public <U> void visitManager(VisitableManager<U> visitableManager, MethodData<Integer> dataMethod) {
+        try {
+            Method visitMethod = this.getClass().getMethod("visit" + dataMethod.getMethod(), new Class[] {visitableManager.getClass()});
+            visitMethod.invoke(this, new Object[] {visitableManager, dataMethod.getValue()});
+        }
+        catch (NoSuchMethodException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        catch (SecurityException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        catch (IllegalAccessException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        catch (IllegalArgumentException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        catch (InvocationTargetException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+    
+    @Override
+    public void accept (VisitorManager visitor, MethodData<Integer> methodData) {
+        visitor.visitManager(this, methodData);
     }
     
 }

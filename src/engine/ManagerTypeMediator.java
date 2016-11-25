@@ -12,6 +12,10 @@ import engine.enemy.Enemy;
 import engine.enemy.EnemyManager;
 import engine.enemy.EnemyTypeManager;
 import engine.level.Level;
+import engine.observer.AbstractObservable;
+import engine.observer.Observable;
+import engine.observer.ObservableManager;
+import engine.observer.Observer;
 import engine.path.Path;
 import engine.tower.Tower;
 import engine.tower.TowerTypeManager;
@@ -19,7 +23,7 @@ import engine.weapon.Weapon;
 //TODO - maybe implement observer pattern with each manager as both observer/observable
 //TODO - use generics
 //TODO - override each manager's hashcode (to make it unique) or give managers an index (support multiple);
-public class ManagerTypeMediator implements ManagerMediator {
+public class ManagerTypeMediator implements ManagerMediator, Observer<ObservableManager, MethodData<Integer>> {
     
     private List<Manager<?>> enemyReferences;
     private List<Manager<?>> weaponReferences;
@@ -34,6 +38,7 @@ public class ManagerTypeMediator implements ManagerMediator {
     private Manager<Ability> abilityManager;
     
     ManagerTypeMediator(Manager<Enemy> enemyManager, Manager<Tower> towerManager, Manager<Weapon> weaponManager, Manager<Level> levelManager, Manager<Path> pathManager, Manager<Ability> abilityManager) {
+        super();
         this.enemyManager = enemyManager;
         this.towerManager = towerManager;
         this.weaponManager = weaponManager;
@@ -186,5 +191,13 @@ public class ManagerTypeMediator implements ManagerMediator {
         System.out.println(getter.toString());
         System.out.println(testM);
     }
+
+    @Override
+    public void update (ObservableManager observable, MethodData<Integer> value) {
+        allManagers.forEach(a -> a.visitManager(observable, value));
+        
+    }
+    
+
     
 }
