@@ -54,7 +54,7 @@ public class PathSizeView {
 		columnsTextField = TextFieldFactory.makeTextField("1", 
 				e -> setNumColumns(columnsTextField.getText()));
 		columnsTextField.setMaxWidth(75);
-		columnsBox = BoxFactory.createHBoxWithTextField(pathResource.getString("ColumnTextField"), columnsTextField);
+		columnsBox = BoxFactory.createHBoxWithLabelandNode(pathResource.getString("ColumnTextField"), columnsTextField);
 		
 		root.getChildren().add(columnsBox);
 		
@@ -69,7 +69,7 @@ public class PathSizeView {
 		rowsTextField = TextFieldFactory.makeTextField("1", 
 				e -> setNumRows(rowsTextField.getText()));
 		rowsTextField.setMaxWidth(75);
-		rowsBox = BoxFactory.createHBoxWithTextField(pathResource.getString("RowTextField"), rowsTextField);
+		rowsBox = BoxFactory.createHBoxWithLabelandNode(pathResource.getString("RowTextField"), rowsTextField);
 		
 		root.getChildren().add(rowsBox);
 		

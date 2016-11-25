@@ -3,6 +3,7 @@ package authoring.editorview.path.subviews;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.util.ResourceBundle;
 import javax.imageio.ImageIO;
 
@@ -16,7 +17,6 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -68,26 +68,27 @@ public class BackgroundImageView extends PhotoFileChooser{
 	}
 
 	private void makeChooseImageButton(){
-		Button setBackgroundImageButton = ButtonFactory.makeButton(pathResource.getString("BackgroundImageButton"), 
-				e -> selectFile("Photos: ", "Select new background image"));
-		root.getChildren().add(setBackgroundImageButton);
+			Button setBackgroundImageButton = ButtonFactory.makeButton(pathResource.getString("BackgroundImageButton"), 
+					e -> {
+						try {
+							selectFile("Photos: ", "Select new background image");
+						} catch (IOException e1) {
+							Alert errorDialogueBox = DialogueBoxFactory.createErrorDialogueBox("Invalid File", "Error With File");
+							errorDialogueBox.show();
+						}
+					});
+			root.getChildren().add(setBackgroundImageButton);
 	}
+	
 
 
 	@Override
-	public void openFileChooser(FileChooser chooseFile) {
+	public void openFileChooser(FileChooser chooseFile) throws IOException {
 		File chosenFile = chooseFile.showOpenDialog(new Stage());
 		if (chosenFile != null){
-			try {
-				BufferedImage image = ImageIO.read(chosenFile) ;
-				backgroundImagePath = chosenFile.getPath();
-				addBackgroundImageView();
-				
-			}
-			catch(Exception e){
-				Alert errorDialogueBox = DialogueBoxFactory.displayErrorDialogueBox("Invalid File", "Error With File");
-				errorDialogueBox.show();
-			}
+			BufferedImage image = ImageIO.read(chosenFile) ;
+			backgroundImagePath = chosenFile.getPath();
+			addBackgroundImageView();		
 		}
 		
 		

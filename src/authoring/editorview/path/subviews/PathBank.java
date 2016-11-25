@@ -3,13 +3,16 @@ package authoring.editorview.path.subviews;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.stage.FileChooser;
 
+import java.io.IOException;
 import java.util.ResourceBundle;
 
 import authoring.editorview.PhotoFileChooser;
+import authoring.utilityfactories.DialogueBoxFactory;
 
 public class PathBank extends PhotoFileChooser {
 	
@@ -29,7 +32,14 @@ public class PathBank extends PhotoFileChooser {
 		//TODO: Fix event
 		Button createWeaponButton =
 	                createButton(pathResource.getString("NewPathButton"),
-	                             e -> selectFile("Photos: ", "Select new path image"));
+	                             e -> {
+									try {
+										selectFile("Photos: ", "Select new path image");
+									} catch (IOException e1) {
+										Alert errorDialogueBox = DialogueBoxFactory.createErrorDialogueBox("Invalid File", "Error With File");
+										errorDialogueBox.show();
+									}
+								});
 		
 	    pathBank.setContent(createWeaponButton);
 	}

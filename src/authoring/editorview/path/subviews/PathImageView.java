@@ -2,6 +2,7 @@ package authoring.editorview.path.subviews;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.util.ResourceBundle;
 
 import javax.imageio.ImageIO;
@@ -62,24 +63,26 @@ public class PathImageView extends PhotoFileChooser{
 	
 	private void makeChooseImageButton(){
 		Button setPathImageButton = ButtonFactory.makeButton(pathResource.getString("PathImageButton"), 
-				e -> selectFile("Photos: ", "Select new path image"));
+				e -> {
+					try {
+						selectFile("Photos: ", "Select new path image");
+					} catch (IOException e1) {
+						Alert errorDialogueBox = DialogueBoxFactory.createErrorDialogueBox("Invalid File", "Error With File");
+						errorDialogueBox.show();
+					}
+				});
 		root.getChildren().add(setPathImageButton);
 	}
 
 	@Override
-	public void openFileChooser(FileChooser chooseFile) {
+	public void openFileChooser(FileChooser chooseFile) throws IOException {
 		File chosenFile = chooseFile.showOpenDialog(new Stage());
 		if (chosenFile != null){
-			try {
-				BufferedImage image = ImageIO.read(chosenFile) ;
-				pathImagePath = chosenFile.getPath();
-				addPathImageView();
+			BufferedImage image = ImageIO.read(chosenFile) ;
+			pathImagePath = chosenFile.getPath();
+			addPathImageView();
 				
-			}
-			catch(Exception e){
-				Alert errorDialogueBox = DialogueBoxFactory.displayErrorDialogueBox("Invalid File", "Error With File");
-				errorDialogueBox.show();
-			}
+			
 		}
 	}
 	

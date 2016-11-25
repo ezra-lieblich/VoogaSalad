@@ -20,9 +20,9 @@ public class DialogueBoxFactory {
 	 * @return Alert with error
 	 * 
 	 */
-	public static Alert displayErrorDialogueBox(String error, String headerText){
+	public static Alert createErrorDialogueBox(String error, String title){
 		Alert dialogueBox = new Alert(AlertType.ERROR);
-		dialogueBox.setHeaderText(headerText);
+		dialogueBox.setTitle(title);
 		dialogueBox.setContentText(error);
 		return dialogueBox;
 		
