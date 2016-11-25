@@ -1,6 +1,7 @@
 package authoring.editorview.tower;
 
 import java.io.IOException;
+import authoring.ErrorBox;
 import authoring.editorview.EditorViewController;
 
 
@@ -45,7 +46,7 @@ public class TowerEditorViewController extends EditorViewController
             towerDataSource.setUnlockLevel(currentTowerID, Integer.parseInt(level));
         }
         catch (NumberFormatException e) {
-            System.out.println("This input is not an integer");
+            ErrorBox.createErrorBox("This input is not an integer");
         }
     }
 
@@ -56,7 +57,7 @@ public class TowerEditorViewController extends EditorViewController
             towerDataSource.setFireRate(currentTowerID, Integer.parseInt(fireRate));
         }
         catch (NumberFormatException e) {
-            System.out.println("This input is not an integer");
+            ErrorBox.createErrorBox("This input is not an integer");
         }
     }
 
@@ -67,7 +68,7 @@ public class TowerEditorViewController extends EditorViewController
             towerDataSource.setTowerFrequency(currentTowerID, Integer.parseInt(frequency));
         }
         catch (NumberFormatException e) {
-            System.out.println("This input is not an integer");
+            ErrorBox.createErrorBox("This input is not an integer");
         }
     }
 
@@ -78,7 +79,7 @@ public class TowerEditorViewController extends EditorViewController
             towerDataSource.setTowerRange(currentTowerID, Integer.parseInt(range));
         }
         catch (NumberFormatException e) {
-            System.out.println("This input is not an integer");
+            ErrorBox.createErrorBox("This input is not an integer");
         }
     }
 
@@ -89,7 +90,7 @@ public class TowerEditorViewController extends EditorViewController
             towerDataSource.setBuyPrice(currentTowerID, Integer.parseInt(buyPrice));
         }
         catch (NumberFormatException e) {
-            System.out.println("This input is not an integer");
+            ErrorBox.createErrorBox("This input is not an integer");
         }
     }
 
@@ -100,7 +101,7 @@ public class TowerEditorViewController extends EditorViewController
             towerDataSource.setSellPrice(currentTowerID, Integer.parseInt(sellPrice));
         }
         catch (NumberFormatException e) {
-            System.out.println("This input is not an integer");
+            ErrorBox.createErrorBox("This input is not an integer");
         }
     }
 

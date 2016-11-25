@@ -1,6 +1,7 @@
 package authoring.editorview.weapon;
 
 import java.io.IOException;
+import authoring.ErrorBox;
 import authoring.editorview.EditorViewController;
 
 
@@ -39,7 +40,7 @@ public class WeaponEditorViewController extends EditorViewController
             weaponDataSource.setWeaponFireRate(currentWeaponID, Integer.parseInt(fireRate));
         }
         catch (NumberFormatException e) {
-            System.out.println("This input is not an integer");
+            ErrorBox.createErrorBox("This input is not an integer");
         }
     }
 
@@ -50,7 +51,7 @@ public class WeaponEditorViewController extends EditorViewController
             weaponDataSource.setWeaponSpeed(currentWeaponID, Integer.parseInt(speed));
         }
         catch (NumberFormatException e) {
-            System.out.println("This input is not an integer");
+            ErrorBox.createErrorBox("This input is not an integer");
         }
     }
 
@@ -66,7 +67,7 @@ public class WeaponEditorViewController extends EditorViewController
             weaponDataSource.setWeaponRange(currentWeaponID, Integer.parseInt(range));
         }
         catch (NumberFormatException e) {
-            System.out.println("This input is not an integer");
+            ErrorBox.createErrorBox("This input is not an integer");
         }
     }
 
@@ -82,7 +83,7 @@ public class WeaponEditorViewController extends EditorViewController
             weaponDataSource.setWeaponDamage(currentWeaponID, Integer.parseInt(damage));
         }
         catch (NumberFormatException e) {
-            System.out.println("This input is not an integer");
+            ErrorBox.createErrorBox("This input is not an integer");
         }
     }
 
