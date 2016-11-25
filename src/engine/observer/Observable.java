@@ -1,5 +1,6 @@
 package engine.observer;
 
+//U = value that is passed back
 public interface Observable<U> {
 
     void addObserver (Observer<Observable<U>,U> observer);

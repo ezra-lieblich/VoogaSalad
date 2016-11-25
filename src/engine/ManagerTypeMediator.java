@@ -36,6 +36,7 @@ public class ManagerTypeMediator implements ManagerMediator, Observer<Manager<?>
     private Manager<Path> pathManager;
     private Manager<Ability> abilityManager;
     
+    //TODO - remove this
     ManagerTypeMediator(Manager<Enemy> enemyManager, Manager<Tower> towerManager, Manager<Weapon> weaponManager, Manager<Level> levelManager, Manager<Path> pathManager, Manager<Ability> abilityManager) {
         super();
         this.enemyManager = enemyManager;
@@ -194,6 +195,7 @@ public class ManagerTypeMediator implements ManagerMediator, Observer<Manager<?>
         
     }
 
+    //TODO - might have to get rid of the wild card
     @Override
     public <R extends Manager<?>> void update (R observable, MethodData<Integer> value) {
         allManagers.forEach(a -> a.visitManager(observable, value));
