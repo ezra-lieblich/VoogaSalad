@@ -5,21 +5,29 @@ import java.util.List;
 
 public interface ITowerUpdateView extends ITowerEditorView {
 
-    public void updateFireRateDisplay (int rate);
+    public void updateFireRateDisplay (int towerFireRate);
 
-    public void updateUnlockLevelDisplay (int unlockLevel);
+    public void updateUnlockLevelDisplay (int towerUnlockLevel);
 
-    public void updateFrequencyDisplay (int frequency);
+    public void updateFrequencyDisplay (int towerFrequency);
 
-    public void updateRangeDisplay (int range);
+    public void updateRangeDisplay (int towerRange);
 
-    public void updateTowerImagePath (String imagePath);
+    public void updateTowerImagePath (String towerImagePath);
 
     public void updateTowerName (String towerName);
 
-    public void updateTowerBuyPriceDisplay (int buyPrice);
+    public void updateTowerBuyPriceDisplay (int towerBuyPrice);
 
-    public void updateTowerSellPriceDisplay (int sellPrice);
+    public void updateTowerSellPriceDisplay (int towerSellPrice);
+
+    public void updateTowerAbility (String towerAbility);
+
+    public void updateTowerChosenEnemy (String towerChosenEnemy);
+
+    public void updateTowerChosenWeapon (String towerChosenWeapon);
+
+    public void updateTowerUpgrade (String towerUpgrade);
 
     public void updateTowerBank (List<Integer> activeTowers);
 

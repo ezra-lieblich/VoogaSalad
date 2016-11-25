@@ -6,7 +6,10 @@ import java.util.ResourceBundle;
 import authoring.editorview.PhotoFileChooser;
 import authoring.editorview.tower.ITowerEditorView;
 import authoring.editorview.tower.TowerEditorViewDelegate;
+import authoring.editorview.tower.subviews.editorfields.TowerAbilityField;
 import authoring.editorview.tower.subviews.editorfields.TowerBuyPriceField;
+import authoring.editorview.tower.subviews.editorfields.TowerChooseEnemyField;
+import authoring.editorview.tower.subviews.editorfields.TowerChooseWeaponField;
 import authoring.editorview.tower.subviews.editorfields.TowerFireRateField;
 import authoring.editorview.tower.subviews.editorfields.TowerFrequencyField;
 import authoring.editorview.tower.subviews.editorfields.TowerImageView;
@@ -14,8 +17,10 @@ import authoring.editorview.tower.subviews.editorfields.TowerNameField;
 import authoring.editorview.tower.subviews.editorfields.TowerRangeField;
 import authoring.editorview.tower.subviews.editorfields.TowerSellPriceField;
 import authoring.editorview.tower.subviews.editorfields.TowerUnlockLevelField;
+import authoring.editorview.tower.subviews.editorfields.TowerUpgradeField;
 import authoring.utilityfactories.BoxFactory;
 import authoring.utilityfactories.ButtonFactory;
+import authoring.utilityfactories.ComboBoxFactory;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
@@ -34,6 +39,10 @@ public class TowerEffectView extends PhotoFileChooser implements ITowerEditorVie
     private TowerFireRateField towerFireRate;
     private TowerSellPriceField towerSellPrice;
     private TowerUnlockLevelField towerUnlockLevel;
+    private TowerAbilityField towerAbility;
+    private TowerChooseEnemyField towerChooseEnemy;
+    private TowerChooseWeaponField towerChooseWeapon;
+    private TowerUpgradeField towerUpgrade;
 
     private VBox vbox;
     private ScrollPane completeView;
@@ -49,7 +58,12 @@ public class TowerEffectView extends PhotoFileChooser implements ITowerEditorVie
                             TowerBuyPriceField towerBuyPrice,
                             TowerFireRateField towerFireRate,
                             TowerSellPriceField towerSellPrice,
-                            TowerUnlockLevelField towerUnlockLevel) {
+                            TowerUnlockLevelField towerUnlockLevel,
+                            TowerAbilityField towerAbility,
+                            TowerChooseEnemyField towerChooseEnemy,
+                            TowerChooseWeaponField towerChooseWeapon,
+                            TowerUpgradeField towerUpgrade) {
+
         this.towerName = towerName;
         this.towerFrequency = towerFrequency;
         this.towerImage = towerImage;
@@ -58,6 +72,10 @@ public class TowerEffectView extends PhotoFileChooser implements ITowerEditorVie
         this.towerFireRate = towerFireRate;
         this.towerSellPrice = towerSellPrice;
         this.towerUnlockLevel = towerUnlockLevel;
+        this.towerAbility = towerAbility;
+        this.towerChooseEnemy = towerChooseEnemy;
+        this.towerChooseWeapon = towerChooseWeapon;
+        this.towerUpgrade = towerUpgrade;
 
         labelsResource = ResourceBundle.getBundle(TOWER_EFFECT_RESOURCE_PATH);
         vbox = new VBox(10);
@@ -85,25 +103,29 @@ public class TowerEffectView extends PhotoFileChooser implements ITowerEditorVie
                                                         }));
         vbox.getChildren()
                 .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Name"),
-                                                        towerName.getInstanceAsNode()));
+                                                           towerName.getInstanceAsNode()));
         vbox.getChildren()
                 .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Rate"),
-                                                        towerFireRate.getInstanceAsNode()));
+                                                           towerFireRate.getInstanceAsNode()));
         vbox.getChildren()
                 .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Frequency"),
-                                                        towerFrequency.getInstanceAsNode()));
+                                                           towerFrequency.getInstanceAsNode()));
         vbox.getChildren()
                 .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Range"),
-                                                        towerRange.getInstanceAsNode()));
+                                                           towerRange.getInstanceAsNode()));
         vbox.getChildren()
                 .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("BuyPrice"),
-                                                        towerBuyPrice.getInstanceAsNode()));
+                                                           towerBuyPrice.getInstanceAsNode()));
         vbox.getChildren()
                 .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("SellPrice"),
-                                                        towerSellPrice.getInstanceAsNode()));
+                                                           towerSellPrice.getInstanceAsNode()));
         vbox.getChildren()
                 .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("UnlockLevel"),
-                                                        towerUnlockLevel.getInstanceAsNode()));
+                                                           towerUnlockLevel.getInstanceAsNode()));
+        vbox.getChildren().add(towerAbility.getInstanceAsNode());
+        vbox.getChildren().add(towerChooseEnemy.getInstanceAsNode());
+        vbox.getChildren().add(towerChooseWeapon.getInstanceAsNode());
+        vbox.getChildren().add(towerUpgrade.getInstanceAsNode());
     }
 
     @Override

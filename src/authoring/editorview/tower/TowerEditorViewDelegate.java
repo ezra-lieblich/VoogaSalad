@@ -4,6 +4,14 @@ public interface TowerEditorViewDelegate {
 
     public void onUserPressedCreateNewTower ();
 
+    public void onUserEnteredTowerAbility (String towerAbility);
+
+    public void onUserEnteredTowerChosenEnemy (String chosenEnemy);
+
+    public void onUserEnteredTowerChosenWeapon (String chosenWeapon);
+
+    public void onUserEnteredTowerUpgrade (String towerUpgrade);
+
     public void onUserEnteredTowerName (String towerName);
 
     public void onUserEnteredTowerImagePath (String imagePath);

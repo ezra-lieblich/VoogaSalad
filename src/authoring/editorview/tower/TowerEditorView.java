@@ -3,7 +3,10 @@ package authoring.editorview.tower;
 import java.io.IOException;
 import authoring.editorview.tower.subviews.TowerEffectView;
 import authoring.editorview.tower.subviews.TowerImageBank;
+import authoring.editorview.tower.subviews.editorfields.TowerAbilityField;
 import authoring.editorview.tower.subviews.editorfields.TowerBuyPriceField;
+import authoring.editorview.tower.subviews.editorfields.TowerChooseEnemyField;
+import authoring.editorview.tower.subviews.editorfields.TowerChooseWeaponField;
 import authoring.editorview.tower.subviews.editorfields.TowerFireRateField;
 import authoring.editorview.tower.subviews.editorfields.TowerFrequencyField;
 import authoring.editorview.tower.subviews.editorfields.TowerImageView;
@@ -11,6 +14,7 @@ import authoring.editorview.tower.subviews.editorfields.TowerNameField;
 import authoring.editorview.tower.subviews.editorfields.TowerRangeField;
 import authoring.editorview.tower.subviews.editorfields.TowerSellPriceField;
 import authoring.editorview.tower.subviews.editorfields.TowerUnlockLevelField;
+import authoring.editorview.tower.subviews.editorfields.TowerUpgradeField;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
 
@@ -33,6 +37,10 @@ public class TowerEditorView implements ITowerEditorView {
     private TowerFireRateField towerFireRate;
     private TowerSellPriceField towerSellPrice;
     private TowerUnlockLevelField towerUnlockLevel;
+    private TowerAbilityField towerAbility;
+    private TowerChooseEnemyField towerChooseEnemy;
+    private TowerChooseWeaponField towerChooseWeapon;
+    private TowerUpgradeField towerUpgrade;
 
     public TowerEditorView () throws IOException {
         towerEditorView = new BorderPane();
@@ -45,11 +53,17 @@ public class TowerEditorView implements ITowerEditorView {
         towerFireRate = new TowerFireRateField();
         towerSellPrice = new TowerSellPriceField();
         towerUnlockLevel = new TowerUnlockLevelField();
+        towerAbility = new TowerAbilityField();
+        towerChooseEnemy = new TowerChooseEnemyField();
+        towerChooseWeapon = new TowerChooseWeaponField();
+        towerUpgrade = new TowerUpgradeField();
 
         towerBank = new TowerImageBank();
         towerEffectView =
                 new TowerEffectView(towerName, towerFrequency, towerImage, towerRange,
-                                    towerBuyPrice, towerFireRate, towerSellPrice, towerUnlockLevel);
+                                    towerBuyPrice, towerFireRate, towerSellPrice, towerUnlockLevel,
+                                    towerAbility, towerChooseEnemy, towerChooseWeapon,
+                                    towerUpgrade);
         setBorderPane();
     }
 
@@ -76,5 +90,9 @@ public class TowerEditorView implements ITowerEditorView {
         towerFireRate.setDelegate(delegate);
         towerSellPrice.setDelegate(delegate);
         towerUnlockLevel.setDelegate(delegate);
+        towerAbility.setDelegate(delegate);
+        towerChooseEnemy.setDelegate(delegate);
+        towerChooseWeapon.setDelegate(delegate);
+        towerUpgrade.setDelegate(delegate);
     }
 }

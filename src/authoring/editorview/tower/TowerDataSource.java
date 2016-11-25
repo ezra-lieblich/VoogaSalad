@@ -20,6 +20,14 @@ public interface TowerDataSource {
 
     public int getRange (int towerID);
 
+    public String getTowerUpgrade (int towerID);
+
+    public String getTowerChosenEnemy (int towerID);
+
+    public String getTowerChosenWeapon (int towerID);
+
+    public String getTowerAbility (int towerID);
+
     public int getCreatedTower ();
 
     public List<Integer> getActiveTowers ();
@@ -46,4 +54,12 @@ public interface TowerDataSource {
     public void setTowerFrequency (int towerID, int frequency);
 
     public void setTowerRange (int towerID, int range);
+
+    public void setTowerAbility (int towerID, String towerAbility);
+
+    public void setTowerChosenEnemy (int towerID, String towerChosenEnemy);
+
+    public void setTowerChosenWeapon (int towerID, String towerChosenWeapon);
+
+    public void setTowerUpgrade (int towerID, String towerUpgrade);
 }

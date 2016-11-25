@@ -104,4 +104,24 @@ public class TowerEditorViewController extends EditorViewController
         }
     }
 
+    @Override
+    public void onUserEnteredTowerAbility (String towerAbility) {
+        towerDataSource.setTowerAbility(currentTowerID, towerAbility);
+    }
+
+    @Override
+    public void onUserEnteredTowerChosenEnemy (String towerChosenEnemy) {
+        towerDataSource.setTowerChosenEnemy(currentTowerID, towerChosenEnemy);
+    }
+
+    @Override
+    public void onUserEnteredTowerChosenWeapon (String towerChosenWeapon) {
+        towerDataSource.setTowerChosenWeapon(currentTowerID, towerChosenWeapon);
+    }
+
+    @Override
+    public void onUserEnteredTowerUpgrade (String towerUpgrade) {
+        towerDataSource.setTowerUpgrade(currentTowerID, towerUpgrade);
+    }
+
 }
