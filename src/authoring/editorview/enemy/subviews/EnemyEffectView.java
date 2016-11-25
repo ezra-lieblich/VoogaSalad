@@ -25,7 +25,7 @@ import javafx.stage.FileChooser;
  *
  */
 
-public class EnemyEffectView extends PhotoFileChooser implements IEnemyEditorView  {
+public class EnemyEffectView extends PhotoFileChooser implements IEnemyEditorView {
 
     private ScrollPane enemyEffectView;
     private VBox vbox;
@@ -36,7 +36,7 @@ public class EnemyEffectView extends PhotoFileChooser implements IEnemyEditorVie
     private EnemyNameField enemyName;
     private EnemyReactionsView enemyReactions;
     private EnemySpeedField enemySpeed;
-    
+
     private ResourceBundle labelsResource;
     private final String ENEMY_EFFECT_RESOURCE_PATH = "resources/GameAuthoringEnemy";
 
@@ -48,18 +48,18 @@ public class EnemyEffectView extends PhotoFileChooser implements IEnemyEditorVie
         enemyEffectView = new ScrollPane();
         vbox = new VBox(10);
         enemyEffectView.setContent(vbox);
-        
+
         this.enemyFrequency = enemyFrequency;
         this.enemyImage = enemyImage;
         this.enemyName = enemyName;
         this.enemyReactions = enemyReactions;
         this.enemySpeed = enemySpeed;
-        
+
         labelsResource = ResourceBundle.getBundle(ENEMY_EFFECT_RESOURCE_PATH);
-        
+
         buildViewComponents();
     }
-    
+
     private void buildViewComponents () {
         Node myImageView = enemyImage.getInstanceAsNode();
 
@@ -77,21 +77,21 @@ public class EnemyEffectView extends PhotoFileChooser implements IEnemyEditorVie
                                                             }
                                                         }));
         vbox.getChildren()
-                .add(BoxFactory.createHBoxWithTextField(labelsResource.getString("Name"),
-                                                        enemyName.getInstanceAsNode()));
+                .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Name"),
+                                                           enemyName.getInstanceAsNode()));
         vbox.getChildren()
-                .add(BoxFactory.createHBoxWithTextField(labelsResource.getString("Frequency"),
-                                                        enemyFrequency.getInstanceAsNode()));
+                .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Frequency"),
+                                                           enemyFrequency.getInstanceAsNode()));
         vbox.getChildren()
-                .add(BoxFactory.createHBoxWithTextField(labelsResource.getString("Reaction"),
-                                                        enemyReactions.getInstanceAsNode()));
+                .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Reaction"),
+                                                           enemyReactions.getInstanceAsNode()));
         vbox.getChildren()
-                .add(BoxFactory.createHBoxWithTextField(labelsResource.getString("Speed"),
-                                                        enemySpeed.getInstanceAsNode()));
+                .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Speed"),
+                                                           enemySpeed.getInstanceAsNode()));
     }
-    
+
     @Override
-    public void setDelegate(EnemyEditorViewDelegate delegate) {
+    public void setDelegate (EnemyEditorViewDelegate delegate) {
         this.delegate = delegate;
     }
 
@@ -103,7 +103,7 @@ public class EnemyEffectView extends PhotoFileChooser implements IEnemyEditorVie
     @Override
     public void openFileChooser (FileChooser chooseFile) throws IOException {
         // TODO Auto-generated method stub
-        
+
     }
 
 }

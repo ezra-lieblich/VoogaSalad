@@ -84,25 +84,25 @@ public class TowerEffectView extends PhotoFileChooser implements ITowerEditorVie
                                                             }
                                                         }));
         vbox.getChildren()
-                .add(BoxFactory.createHBoxWithTextField(labelsResource.getString("Name"),
+                .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Name"),
                                                         towerName.getInstanceAsNode()));
         vbox.getChildren()
-                .add(BoxFactory.createHBoxWithTextField(labelsResource.getString("Rate"),
+                .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Rate"),
                                                         towerFireRate.getInstanceAsNode()));
         vbox.getChildren()
-                .add(BoxFactory.createHBoxWithTextField(labelsResource.getString("Frequency"),
+                .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Frequency"),
                                                         towerFrequency.getInstanceAsNode()));
         vbox.getChildren()
-                .add(BoxFactory.createHBoxWithTextField(labelsResource.getString("Range"),
+                .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Range"),
                                                         towerRange.getInstanceAsNode()));
         vbox.getChildren()
-                .add(BoxFactory.createHBoxWithTextField(labelsResource.getString("BuyPrice"),
+                .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("BuyPrice"),
                                                         towerBuyPrice.getInstanceAsNode()));
         vbox.getChildren()
-                .add(BoxFactory.createHBoxWithTextField(labelsResource.getString("SellPrice"),
+                .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("SellPrice"),
                                                         towerSellPrice.getInstanceAsNode()));
         vbox.getChildren()
-                .add(BoxFactory.createHBoxWithTextField(labelsResource.getString("UnlockLevel"),
+                .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("UnlockLevel"),
                                                         towerUnlockLevel.getInstanceAsNode()));
     }
 

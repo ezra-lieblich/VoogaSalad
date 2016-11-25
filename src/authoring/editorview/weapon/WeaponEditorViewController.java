@@ -34,12 +34,24 @@ public class WeaponEditorViewController extends EditorViewController
     @Override
     public void onUserEnteredWeaponFireRate (String fireRate) {
         // Should update currentWeaponID every time this is called
-        weaponDataSource.setWeaponFireRate(currentWeaponID, Integer.parseInt(fireRate));
+        try {
+            Integer.parseInt(fireRate);
+            weaponDataSource.setWeaponFireRate(currentWeaponID, Integer.parseInt(fireRate));
+        }
+        catch (NumberFormatException e) {
+            System.out.println("This input is not an integer");
+        }
     }
 
     @Override
     public void onUserEnteredProjectileSpeed (String speed) {
-        weaponDataSource.setWeaponSpeed(currentWeaponID, Integer.parseInt(speed));
+        try {
+            Integer.parseInt(speed);
+            weaponDataSource.setWeaponSpeed(currentWeaponID, Integer.parseInt(speed));
+        }
+        catch (NumberFormatException e) {
+            System.out.println("This input is not an integer");
+        }
     }
 
     @Override
@@ -50,7 +62,13 @@ public class WeaponEditorViewController extends EditorViewController
 
     @Override
     public void onUserEnteredWeaponRange (String range) {
-        weaponDataSource.setWeaponRange(currentWeaponID, Integer.parseInt(range));
+        try {
+            Integer.parseInt(range);
+            weaponDataSource.setWeaponRange(currentWeaponID, Integer.parseInt(range));
+        }
+        catch (NumberFormatException e) {
+            System.out.println("This input is not an integer");
+        }
     }
 
     @Override
@@ -60,6 +78,13 @@ public class WeaponEditorViewController extends EditorViewController
 
     @Override
     public void onUserEnteredWeaponDamage (String damage) {
+        try {
+            Integer.parseInt(damage);
+            weaponDataSource.setWeaponDamage(currentWeaponID, Integer.parseInt(damage));
+        }
+        catch (NumberFormatException e) {
+            System.out.println("This input is not an integer");
+        }
         weaponDataSource.setWeaponDamage(currentWeaponID, Integer.parseInt(damage));
     }
 

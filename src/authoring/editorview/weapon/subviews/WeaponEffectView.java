@@ -91,19 +91,19 @@ public class WeaponEffectView extends PhotoFileChooser {
                                                                 }
                                                             }));
         vboxView.getChildren()
-                .add(BoxFactory.createHBoxWithTextField(labelsResource.getString("Name"),
+                .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Name"),
                                                         weaponName.getInstanceAsNode()));
         vboxView.getChildren()
-                .add(BoxFactory.createHBoxWithTextField(labelsResource.getString("Rate"),
+                .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Rate"),
                                                         weaponFireRate.getInstanceAsNode()));
         vboxView.getChildren()
-                .add(BoxFactory.createHBoxWithTextField(labelsResource.getString("Speed"),
+                .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Speed"),
                                                         weaponSpeed.getInstanceAsNode()));
         vboxView.getChildren()
-                .add(BoxFactory.createHBoxWithTextField(labelsResource.getString("Range"),
+                .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Range"),
                                                         weaponRange.getInstanceAsNode()));
         vboxView.getChildren()
-                .add(BoxFactory.createHBoxWithTextField(labelsResource.getString("Damage"),
+                .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Damage"),
                                                         weaponDamage.getInstanceAsNode()));
         vboxView.getChildren().add(weaponCollision.getInstanceAsNode());
         vboxView.getChildren().add(weaponPath.getInstanceAsNode());
