@@ -25,11 +25,10 @@ public class TowerImageView implements ITowerEditorView {
     private TowerEditorViewDelegate delegate;
     private String imagePath;
     private ImageView towerImage;
+    private ResourceBundle labelsResource;
 
-    private static final String RESOURCE_FILE_NAME = "resources/GameAuthoringTower";
-    private ResourceBundle towerResources = ResourceBundle.getBundle(RESOURCE_FILE_NAME);
-
-    public TowerImageView () throws IOException {
+    public TowerImageView (ResourceBundle labelsResource) throws IOException {
+        this.labelsResource = labelsResource;
         towerImage = loadTowerImage();
     }
 
@@ -54,7 +53,7 @@ public class TowerImageView implements ITowerEditorView {
         catch (Exception e) {
             imageRead =
                     ImageIO.read(getClass().getClassLoader()
-                            .getResourceAsStream(towerResources.getString("DefaultImagePath")));
+                            .getResourceAsStream(labelsResource.getString("DefaultImagePath")));
             Image image2 = SwingFXUtils.toFXImage(imageRead, null);
             myImageView.setImage(image2);
             // TODO: Undo comment on this when model and view are connected

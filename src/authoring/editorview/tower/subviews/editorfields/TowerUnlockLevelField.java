@@ -18,10 +18,7 @@ public class TowerUnlockLevelField implements ITowerEditorView {
     private TextField towerLevelField;
     private TowerEditorViewDelegate delegate;
 
-    public TowerUnlockLevelField () {
-        ResourceBundle labelsResource;
-        String TOWER_EFFECT_RESOURCE_PATH = "resources/GameAuthoringTower";
-        labelsResource = ResourceBundle.getBundle(TOWER_EFFECT_RESOURCE_PATH);
+    public TowerUnlockLevelField (ResourceBundle labelsResource) {
         towerLevelField =
                 TextFieldFactory.makeTextField(labelsResource.getString("EnterInt"),
                                                e -> delegate

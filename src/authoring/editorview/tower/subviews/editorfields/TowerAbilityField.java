@@ -19,8 +19,10 @@ public class TowerAbilityField implements ITowerEditorView {
 
     private ComboBox<Object> towerAbilityBox;
     private TowerEditorViewDelegate delegate;
+    private ResourceBundle labelsResource;
 
-    public TowerAbilityField () {
+    public TowerAbilityField (ResourceBundle labelsResource) {
+        this.labelsResource = labelsResource;
         ObservableList<Object> abilityOptions = setList();
         createComboBox(abilityOptions);
     }
@@ -32,9 +34,6 @@ public class TowerAbilityField implements ITowerEditorView {
     }
 
     private void createComboBox (ObservableList<Object> abilityOptions) {
-        ResourceBundle labelsResource;
-        String TOWER_EFFECT_RESOURCE_PATH = "resources/GameAuthoringTower";
-        labelsResource = ResourceBundle.getBundle(TOWER_EFFECT_RESOURCE_PATH);
         towerAbilityBox =
                 ComboBoxFactory.makeComboBox(labelsResource.getString("Ability"), e -> delegate
                         .onUserEnteredTowerAbility((String) towerAbilityBox.getValue()),

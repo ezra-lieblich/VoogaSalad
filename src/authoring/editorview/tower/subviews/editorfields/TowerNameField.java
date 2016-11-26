@@ -18,10 +18,7 @@ public class TowerNameField implements ITowerEditorView {
     private TextField towerNameField;
     private TowerEditorViewDelegate delegate;
 
-    public TowerNameField () {
-        ResourceBundle labelsResource;
-        String TOWER_EFFECT_RESOURCE_PATH = "resources/GameAuthoringTower";
-        labelsResource = ResourceBundle.getBundle(TOWER_EFFECT_RESOURCE_PATH);
+    public TowerNameField (ResourceBundle labelsResource) {
         towerNameField =
                 TextFieldFactory.makeTextField(labelsResource.getString("EnterString"),
                                                e -> delegate.onUserEnteredTowerName(towerNameField

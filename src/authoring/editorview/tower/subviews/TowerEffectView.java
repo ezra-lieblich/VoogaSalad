@@ -54,7 +54,6 @@ public class TowerEffectView extends PhotoFileChooser implements ITowerEditorVie
     private File chosenFile;
 
     private ResourceBundle labelsResource;
-    private final String TOWER_EFFECT_RESOURCE_PATH = "resources/GameAuthoringTower";
 
     public TowerEffectView (TowerNameField towerName,
                             TowerFrequencyField towerFrequency,
@@ -67,8 +66,10 @@ public class TowerEffectView extends PhotoFileChooser implements ITowerEditorVie
                             TowerAbilityField towerAbility,
                             TowerChooseEnemyField towerChooseEnemy,
                             TowerChooseWeaponField towerChooseWeapon,
-                            TowerUpgradeField towerUpgrade) {
+                            TowerUpgradeField towerUpgrade,
+                            ResourceBundle labelsResource) {
 
+        this.labelsResource = labelsResource;
         this.towerName = towerName;
         this.towerFrequency = towerFrequency;
         this.towerImage = towerImage;
@@ -82,7 +83,6 @@ public class TowerEffectView extends PhotoFileChooser implements ITowerEditorVie
         this.towerChooseWeapon = towerChooseWeapon;
         this.towerUpgrade = towerUpgrade;
 
-        labelsResource = ResourceBundle.getBundle(TOWER_EFFECT_RESOURCE_PATH);
         vbox = new VBox(10);
         completeView = new ScrollPane();
         completeView.setContent(vbox);

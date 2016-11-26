@@ -19,8 +19,10 @@ public class TowerUpgradeField implements ITowerEditorView {
 
     private ComboBox<Object> towerUpgradeBox;
     private TowerEditorViewDelegate delegate;
+    private ResourceBundle labelsResource;
 
-    public TowerUpgradeField () {
+    public TowerUpgradeField (ResourceBundle labelsResource) {
+        this.labelsResource = labelsResource;
         ObservableList<Object> upgradeOptions = setList();
         createComboBox(upgradeOptions);
     }
@@ -32,9 +34,7 @@ public class TowerUpgradeField implements ITowerEditorView {
     }
 
     private void createComboBox (ObservableList<Object> upgradeOptions) {
-        ResourceBundle labelsResource;
-        String TOWER_EFFECT_RESOURCE_PATH = "resources/GameAuthoringTower";
-        labelsResource = ResourceBundle.getBundle(TOWER_EFFECT_RESOURCE_PATH);
+
         towerUpgradeBox =
                 ComboBoxFactory.makeComboBox(labelsResource.getString("Upgrade"), e -> delegate
                         .onUserEnteredTowerUpgrade((String) towerUpgradeBox.getValue()),

@@ -18,10 +18,7 @@ public class TowerFrequencyField implements ITowerEditorView {
     private TowerEditorViewDelegate delegate;
     private TextField towerFrequencyField;
 
-    public TowerFrequencyField () {
-        ResourceBundle labelsResource;
-        String TOWER_EFFECT_RESOURCE_PATH = "resources/GameAuthoringTower";
-        labelsResource = ResourceBundle.getBundle(TOWER_EFFECT_RESOURCE_PATH);
+    public TowerFrequencyField (ResourceBundle labelsResource) {
         towerFrequencyField =
                 TextFieldFactory.makeTextField(labelsResource.getString("EnterInt"),
                                                e -> delegate

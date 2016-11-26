@@ -19,8 +19,10 @@ public class TowerChooseEnemyField implements ITowerEditorView {
 
     private ComboBox<Object> towerChooseEnemyBox;
     private TowerEditorViewDelegate delegate;
+    private ResourceBundle labelsResource;
 
-    public TowerChooseEnemyField () {
+    public TowerChooseEnemyField (ResourceBundle labelsResource) {
+        this.labelsResource = labelsResource;
         ObservableList<Object> enemyOptions = setList();
         createComboBox(enemyOptions);
     }
@@ -32,9 +34,6 @@ public class TowerChooseEnemyField implements ITowerEditorView {
     }
 
     private void createComboBox (ObservableList<Object> enemyOptions) {
-        ResourceBundle labelsResource;
-        String TOWER_EFFECT_RESOURCE_PATH = "resources/GameAuthoringTower";
-        labelsResource = ResourceBundle.getBundle(TOWER_EFFECT_RESOURCE_PATH);
         towerChooseEnemyBox =
                 ComboBoxFactory.makeComboBox(labelsResource.getString("ChooseEnemy"), e -> delegate
                         .onUserEnteredTowerChosenEnemy((String) towerChooseEnemyBox.getValue()),

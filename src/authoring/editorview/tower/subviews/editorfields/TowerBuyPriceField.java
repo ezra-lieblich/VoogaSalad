@@ -18,10 +18,7 @@ public class TowerBuyPriceField implements ITowerEditorView {
     private TextField towerBuyField;
     private TowerEditorViewDelegate delegate;
 
-    public TowerBuyPriceField () {
-        ResourceBundle labelsResource;
-        String TOWER_EFFECT_RESOURCE_PATH = "resources/GameAuthoringTower";
-        labelsResource = ResourceBundle.getBundle(TOWER_EFFECT_RESOURCE_PATH);
+    public TowerBuyPriceField (ResourceBundle labelsResource) {
         towerBuyField =
                 TextFieldFactory.makeTextField(labelsResource.getString("EnterInt"),
                                                e -> delegate

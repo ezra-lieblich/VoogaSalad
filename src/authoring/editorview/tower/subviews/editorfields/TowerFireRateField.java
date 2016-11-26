@@ -18,10 +18,7 @@ public class TowerFireRateField implements ITowerEditorView {
     private TextField towerFireRateField;
     private TowerEditorViewDelegate delegate;
 
-    public TowerFireRateField () {
-        ResourceBundle labelsResource;
-        String TOWER_EFFECT_RESOURCE_PATH = "resources/GameAuthoringTower";
-        labelsResource = ResourceBundle.getBundle(TOWER_EFFECT_RESOURCE_PATH);
+    public TowerFireRateField (ResourceBundle labelsResource) {
         towerFireRateField =
                 TextFieldFactory.makeTextField(labelsResource.getString("EnterInt"),
                                                e -> delegate
