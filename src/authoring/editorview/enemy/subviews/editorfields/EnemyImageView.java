@@ -21,15 +21,12 @@ import javafx.scene.image.ImageView;
 public class EnemyImageView implements IEnemyEditorView {
 
     private EnemyEditorViewDelegate delegate;
-    private ResourceBundle labelsResource;
     private String imagePath;
     private ImageView enemyImage;
+    private ResourceBundle labelsResource;
 
-    // TODO: Make this enemy
-    private final String ENEMY_EFFECT_RESOURCE_PATH = "resources/GameAuthoringEnemy";
-
-    public EnemyImageView () throws IOException {
-        labelsResource = ResourceBundle.getBundle(ENEMY_EFFECT_RESOURCE_PATH);
+    public EnemyImageView (ResourceBundle labelsResource) throws IOException {
+        this.labelsResource = labelsResource;
         enemyImage = loadEnemyImage();
     }
 

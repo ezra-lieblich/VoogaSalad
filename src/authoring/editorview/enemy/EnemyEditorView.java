@@ -1,6 +1,7 @@
 package authoring.editorview.enemy;
 
 import java.io.IOException;
+import java.util.ResourceBundle;
 import authoring.editorview.enemy.subviews.EnemyEffectView;
 import authoring.editorview.enemy.subviews.EnemyImageBank;
 import authoring.editorview.enemy.subviews.editorfields.EnemyFrequencyField;
@@ -38,17 +39,21 @@ public class EnemyEditorView implements IEnemyEditorView {
     private EnemyRewardPointsField enemyRewardPoints;
 
     public EnemyEditorView () throws IOException {
+        ResourceBundle labelsResource;
+        String ENEMY_EFFECT_RESOURCE_PATH = "resources/GameAuthoringEnemy";
+        labelsResource = ResourceBundle.getBundle(ENEMY_EFFECT_RESOURCE_PATH);
+
         enemyEditorView = new BorderPane();
-        enemyBank = new EnemyImageBank();
-        enemyName = new EnemyNameField();
-        enemySpeed = new EnemySpeedField();
-        enemyFrequency = new EnemyFrequencyField();
-        enemyReactions = new EnemyCollisionEffectField();
-        enemyImage = new EnemyImageView();
-        enemyDamage = new EnemyDamageField();
-        enemyHealth = new EnemyHealthField();
-        enemyRewardMoney = new EnemyRewardMoneyField();
-        enemyRewardPoints = new EnemyRewardPointsField();
+        enemyBank = new EnemyImageBank(labelsResource);
+        enemyName = new EnemyNameField(labelsResource);
+        enemySpeed = new EnemySpeedField(labelsResource);
+        enemyFrequency = new EnemyFrequencyField(labelsResource);
+        enemyReactions = new EnemyCollisionEffectField(labelsResource);
+        enemyImage = new EnemyImageView(labelsResource);
+        enemyDamage = new EnemyDamageField(labelsResource);
+        enemyHealth = new EnemyHealthField(labelsResource);
+        enemyRewardMoney = new EnemyRewardMoneyField(labelsResource);
+        enemyRewardPoints = new EnemyRewardPointsField(labelsResource);
         enemyEffectView =
                 new EnemyEffectView(enemyFrequency, enemyImage, enemyName, enemyReactions,
                                     enemySpeed, enemyDamage, enemyHealth, enemyRewardMoney,

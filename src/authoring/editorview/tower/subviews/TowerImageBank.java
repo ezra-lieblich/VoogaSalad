@@ -6,6 +6,7 @@ import authoring.editorview.PhotoFileChooser;
 import authoring.editorview.tower.TowerEditorViewDelegate;
 import authoring.utilityfactories.BoxFactory;
 import authoring.utilityfactories.ButtonFactory;
+import authoring.utilityfactories.DialogueBoxFactory;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -35,8 +36,9 @@ public class TowerImageBank extends PhotoFileChooser {
                                                  selectFile("Photos: ", "Select new tower image");
                                              }
                                              catch (IOException e1) {
-                                                 // TODO Make this exception more user friendly
-                                                 e1.printStackTrace();
+                                                 DialogueBoxFactory
+                                                         .createErrorDialogueBox("Unable to open file chooser",
+                                                                                 "Try again");
                                              }
                                          });
         vbox = BoxFactory.createVBox("Tower Bank: ");

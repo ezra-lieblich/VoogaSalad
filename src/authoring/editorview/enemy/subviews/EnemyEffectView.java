@@ -17,6 +17,7 @@ import authoring.editorview.enemy.subviews.editorfields.EnemyDamageField;
 import authoring.editorview.enemy.subviews.editorfields.EnemySpeedField;
 import authoring.utilityfactories.BoxFactory;
 import authoring.utilityfactories.ButtonFactory;
+import authoring.utilityfactories.DialogueBoxFactory;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
@@ -90,9 +91,9 @@ public class EnemyEffectView extends PhotoFileChooser implements IEnemyEditorVie
                                                                            "Photos: ");
                                                             }
                                                             catch (IOException e1) {
-                                                                // TODO Fix this for better user
-                                                                // output
-                                                                e1.printStackTrace();
+                                                                DialogueBoxFactory
+                                                                        .createErrorDialogueBox("Unable to open file chooser",
+                                                                                                "Try again");
                                                             }
                                                         }));
         vbox.getChildren()

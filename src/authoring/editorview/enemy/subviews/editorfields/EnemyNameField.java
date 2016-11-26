@@ -1,5 +1,6 @@
 package authoring.editorview.enemy.subviews.editorfields;
 
+import java.util.ResourceBundle;
 import authoring.editorview.enemy.EnemyEditorViewDelegate;
 import authoring.editorview.enemy.IEnemyEditorView;
 import authoring.utilityfactories.TextFieldFactory;
@@ -17,9 +18,9 @@ public class EnemyNameField implements IEnemyEditorView {
     private TextField enemyNameField;
     private EnemyEditorViewDelegate delegate;
 
-    public EnemyNameField () {
+    public EnemyNameField (ResourceBundle labelsResource) {
         enemyNameField =
-                TextFieldFactory.makeTextField("Set enemy name: ",
+                TextFieldFactory.makeTextField(labelsResource.getString("EnterString"),
                                                e -> delegate.onUserEnteredEnemyName(enemyNameField
                                                        .getText()));
     }

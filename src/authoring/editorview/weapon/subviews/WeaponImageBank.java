@@ -11,6 +11,7 @@ import authoring.editorview.weapon.IWeaponEditorView;
 import authoring.editorview.weapon.WeaponEditorViewDelegate;
 import authoring.utilityfactories.BoxFactory;
 import authoring.utilityfactories.ButtonFactory;
+import authoring.utilityfactories.DialogueBoxFactory;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -52,9 +53,9 @@ public class WeaponImageBank extends PhotoFileChooser implements IWeaponEditorVi
                                                             labelsResource.getString("NewWeapon"));
                                              }
                                              catch (IOException e1) {
-                                                 e1.printStackTrace();
-                                                 // ErrorBox.createErrorBox("Unable to load tower
-                                                 // image");
+                                                 DialogueBoxFactory
+                                                         .createErrorDialogueBox("Unable to open file chooser",
+                                                                                 "Try again");
                                              }
                                          });
         vbox = BoxFactory.createVBox(labelsResource.getString("WeaponBank"));

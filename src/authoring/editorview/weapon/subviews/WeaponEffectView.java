@@ -15,6 +15,7 @@ import authoring.editorview.weapon.subviews.editorfields.WeaponRangeField;
 import authoring.editorview.weapon.subviews.editorfields.WeaponSpeedField;
 import authoring.utilityfactories.BoxFactory;
 import authoring.utilityfactories.ButtonFactory;
+import authoring.utilityfactories.DialogueBoxFactory;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
@@ -85,26 +86,26 @@ public class WeaponEffectView extends PhotoFileChooser {
                                                                                "Photos: ");
                                                                 }
                                                                 catch (IOException e1) {
-                                                                    // TODO Fix this for better user
-                                                                    // output
-                                                                    e1.printStackTrace();
+                                                                    DialogueBoxFactory
+                                                                            .createErrorDialogueBox("Unable to open file chooser",
+                                                                                                    "Try again");
                                                                 }
                                                             }));
         vboxView.getChildren()
                 .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Name"),
-                                                        weaponName.getInstanceAsNode()));
+                                                           weaponName.getInstanceAsNode()));
         vboxView.getChildren()
                 .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Rate"),
-                                                        weaponFireRate.getInstanceAsNode()));
+                                                           weaponFireRate.getInstanceAsNode()));
         vboxView.getChildren()
                 .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Speed"),
-                                                        weaponSpeed.getInstanceAsNode()));
+                                                           weaponSpeed.getInstanceAsNode()));
         vboxView.getChildren()
                 .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Range"),
-                                                        weaponRange.getInstanceAsNode()));
+                                                           weaponRange.getInstanceAsNode()));
         vboxView.getChildren()
                 .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Damage"),
-                                                        weaponDamage.getInstanceAsNode()));
+                                                           weaponDamage.getInstanceAsNode()));
         vboxView.getChildren().add(weaponCollision.getInstanceAsNode());
         vboxView.getChildren().add(weaponPath.getInstanceAsNode());
     }
@@ -112,10 +113,6 @@ public class WeaponEffectView extends PhotoFileChooser {
     public ScrollPane getInstanceAsNode () {
         return completeView;
     }
-
-    /**
-     * Update fields methods
-     */
 
     public void createNewWeapon () {
         // Call all of the other update methods to get the default values
