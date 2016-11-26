@@ -15,9 +15,9 @@ import javafx.scene.layout.Pane;
 
 public class AuthoringView implements IAuthoringView {
 
-    private Scene myScene;
-    private Group myRoot;
-    private IToolbar myToolbar;
+    private Scene scene;
+    private Group root;
+    private IToolbar toolbar;
     private IEditorTabPane editorTabPane;
     // TODO: Get this magic value out
     private static final int SIZE = 700;
@@ -25,11 +25,12 @@ public class AuthoringView implements IAuthoringView {
     private Pane editorView;
 
     public AuthoringView (int editorWidth, int edit) {
-        myRoot = new Group();
-        myScene = new Scene(myRoot, SIZE, SIZE);
-        myToolbar = ToolbarFactory.build(SIZE, SIZE / 20);
-        authoringView = new BorderPane();
-        myRoot.getChildren().add(authoringView);
+        this.root = new Group();
+        this.scene = new Scene(root, SIZE, SIZE);
+        this.toolbar = ToolbarFactory.build(SIZE, SIZE / 20);
+        this.authoringView = new BorderPane();
+        
+        root.getChildren().add(authoringView);
         initScene();
     }
 
@@ -39,8 +40,10 @@ public class AuthoringView implements IAuthoringView {
     }
 
     private void initScene () {
-        authoringView.setTop(myToolbar.getInstanceAsNode());
+        authoringView.setTop(toolbar.getInstanceAsNode());
         authoringView.setCenter(editorView);
+        
+        
     }
 
     private void createEditorView (Node editor) {
@@ -52,7 +55,7 @@ public class AuthoringView implements IAuthoringView {
 
     @Override
     public Scene getScene () {
-        return myScene;
+        return scene;
     }
 
     @Override

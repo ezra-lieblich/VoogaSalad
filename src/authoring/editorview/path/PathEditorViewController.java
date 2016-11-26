@@ -14,25 +14,58 @@ public class PathEditorViewController extends EditorViewController implements Pa
 
 	}
 
-	@Override
-	public void createNewPath() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setPathImage() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setPathBackgroundImage() {
-		// TODO Auto-generated method stub
-		
-	}
+	
 	
 	public void setPathDataSource(PathDataSource source){
 		this.pathDataSource = source;
 	}
+
+
+
+	@Override
+	public void onUserEnteredNumberColumns(int numColumns) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void onUserEnteredNumberRows(int numRows) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void onUserEnteredBackgroundImage(String backgroundImagePath) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void onUserEnteredPathImage(String pathImagePath) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void onUserEnteredPathName(String pathName) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void onUserEnteredCreatePath() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

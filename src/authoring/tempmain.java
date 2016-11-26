@@ -14,6 +14,7 @@ public class tempmain extends Application {
     public static final String TITLE = "VOOGASquad";
     private Stage stage;
     private static final int SIZE = 700;
+   
 
     public Stage getStage () {
         return stage;
