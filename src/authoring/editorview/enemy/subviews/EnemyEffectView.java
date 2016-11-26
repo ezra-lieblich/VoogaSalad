@@ -1,5 +1,6 @@
 package authoring.editorview.enemy.subviews;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ResourceBundle;
 import authoring.editorview.PhotoFileChooser;
@@ -20,6 +21,7 @@ import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 
 /**
@@ -34,6 +36,7 @@ public class EnemyEffectView extends PhotoFileChooser implements IEnemyEditorVie
     private ScrollPane enemyEffectView;
     private VBox vbox;
     private EnemyEditorViewDelegate delegate;
+    private File chosenFile;
 
     private EnemyFrequencyField enemyFrequency;
     private EnemyImageView enemyImage;
@@ -130,7 +133,7 @@ public class EnemyEffectView extends PhotoFileChooser implements IEnemyEditorVie
 
     @Override
     public void openFileChooser (FileChooser chooseFile) throws IOException {
-        // TODO Auto-generated method stub
+        chosenFile = chooseFile.showOpenDialog(new Stage());
 
     }
 

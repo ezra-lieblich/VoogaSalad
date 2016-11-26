@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 import javax.imageio.ImageIO;
 import authoring.editorview.tower.ITowerEditorView;
 import authoring.editorview.tower.TowerEditorViewDelegate;
+import authoring.utilityfactories.DialogueBoxFactory;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
@@ -56,7 +57,9 @@ public class TowerImageView implements ITowerEditorView {
                             .getResourceAsStream(towerResources.getString("DefaultImagePath")));
             Image image2 = SwingFXUtils.toFXImage(imageRead, null);
             myImageView.setImage(image2);
-            // ErrorBox.createErrorBox("Unable to load tower image");
+            // TODO: Undo comment on this when model and view are connected
+            // DialogueBoxFactory.createErrorDialogueBox("Could not load file",
+            // "Try new photo");
         }
         return myImageView;
     }

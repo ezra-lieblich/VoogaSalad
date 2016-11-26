@@ -1,5 +1,6 @@
 package authoring.editorview.tower.subviews.editorfields;
 
+import java.util.ResourceBundle;
 import authoring.editorview.tower.ITowerEditorView;
 import authoring.editorview.tower.TowerEditorViewDelegate;
 import authoring.utilityfactories.ComboBoxFactory;
@@ -31,8 +32,11 @@ public class TowerUpgradeField implements ITowerEditorView {
     }
 
     private void createComboBox (ObservableList<Object> upgradeOptions) {
+        ResourceBundle labelsResource;
+        String TOWER_EFFECT_RESOURCE_PATH = "resources/GameAuthoringTower";
+        labelsResource = ResourceBundle.getBundle(TOWER_EFFECT_RESOURCE_PATH);
         towerUpgradeBox =
-                ComboBoxFactory.makeComboBox("Set tower upgrade: ", e -> delegate
+                ComboBoxFactory.makeComboBox(labelsResource.getString("Upgrade"), e -> delegate
                         .onUserEnteredTowerUpgrade((String) towerUpgradeBox.getValue()),
                                              upgradeOptions);
     }

@@ -109,7 +109,7 @@ public class TowerEffectView extends PhotoFileChooser implements ITowerEditorVie
                 .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Name"),
                                                            towerName.getInstanceAsNode()));
         vbox.getChildren()
-                .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Rate"),
+                .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("FireRate"),
                                                            towerFireRate.getInstanceAsNode()));
         vbox.getChildren()
                 .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Frequency"),

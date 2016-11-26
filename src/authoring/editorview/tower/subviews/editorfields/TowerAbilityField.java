@@ -1,5 +1,6 @@
 package authoring.editorview.tower.subviews.editorfields;
 
+import java.util.ResourceBundle;
 import authoring.editorview.tower.ITowerEditorView;
 import authoring.editorview.tower.TowerEditorViewDelegate;
 import authoring.utilityfactories.ComboBoxFactory;
@@ -7,6 +8,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
+
 
 /**
  * 
@@ -30,8 +32,11 @@ public class TowerAbilityField implements ITowerEditorView {
     }
 
     private void createComboBox (ObservableList<Object> abilityOptions) {
+        ResourceBundle labelsResource;
+        String TOWER_EFFECT_RESOURCE_PATH = "resources/GameAuthoringTower";
+        labelsResource = ResourceBundle.getBundle(TOWER_EFFECT_RESOURCE_PATH);
         towerAbilityBox =
-                ComboBoxFactory.makeComboBox("Set tower ability: ", e -> delegate
+                ComboBoxFactory.makeComboBox(labelsResource.getString("Ability"), e -> delegate
                         .onUserEnteredTowerAbility((String) towerAbilityBox.getValue()),
                                              abilityOptions);
     }

@@ -1,5 +1,6 @@
 package authoring.editorview.tower.subviews.editorfields;
 
+import java.util.ResourceBundle;
 import authoring.editorview.tower.ITowerEditorView;
 import authoring.editorview.tower.TowerEditorViewDelegate;
 import authoring.utilityfactories.ComboBoxFactory;
@@ -8,9 +9,10 @@ import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 
+
 /**
  * 
- * @author  Kayla Schulz
+ * @author Kayla Schulz
  *
  */
 public class TowerChooseEnemyField implements ITowerEditorView {
@@ -30,8 +32,11 @@ public class TowerChooseEnemyField implements ITowerEditorView {
     }
 
     private void createComboBox (ObservableList<Object> enemyOptions) {
+        ResourceBundle labelsResource;
+        String TOWER_EFFECT_RESOURCE_PATH = "resources/GameAuthoringTower";
+        labelsResource = ResourceBundle.getBundle(TOWER_EFFECT_RESOURCE_PATH);
         towerChooseEnemyBox =
-                ComboBoxFactory.makeComboBox("Set tower enemy: ", e -> delegate
+                ComboBoxFactory.makeComboBox(labelsResource.getString("ChooseEnemy"), e -> delegate
                         .onUserEnteredTowerChosenEnemy((String) towerChooseEnemyBox.getValue()),
                                              enemyOptions);
     }

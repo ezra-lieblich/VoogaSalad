@@ -1,5 +1,6 @@
 package authoring.editorview.tower.subviews.editorfields;
 
+import java.util.ResourceBundle;
 import authoring.editorview.tower.ITowerEditorView;
 import authoring.editorview.tower.TowerEditorViewDelegate;
 import authoring.utilityfactories.TextFieldFactory;
@@ -18,8 +19,11 @@ public class TowerSellPriceField implements ITowerEditorView {
     private TowerEditorViewDelegate delegate;
 
     public TowerSellPriceField () {
+        ResourceBundle labelsResource;
+        String TOWER_EFFECT_RESOURCE_PATH = "resources/GameAuthoringTower";
+        labelsResource = ResourceBundle.getBundle(TOWER_EFFECT_RESOURCE_PATH);
         towerSellField =
-                TextFieldFactory.makeTextField("Set tower sell price: ",
+                TextFieldFactory.makeTextField(labelsResource.getString("EnterInt"),
                                                e -> delegate
                                                        .onUserEnteredTowerSellPrice(towerSellField
                                                                .getText()));
