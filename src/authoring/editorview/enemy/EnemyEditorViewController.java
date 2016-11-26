@@ -1,8 +1,8 @@
 package authoring.editorview.enemy;
 
 import java.io.IOException;
-import authoring.ErrorBox;
 import authoring.editorview.EditorViewController;
+import authoring.utilityfactories.DialogueBoxFactory;
 
 
 /**
@@ -39,7 +39,8 @@ public class EnemyEditorViewController extends EditorViewController
             enemyDataSource.setEnemySpeed(currentEnemyID, Integer.parseInt(enemySpeed));
         }
         catch (NumberFormatException e) {
-            ErrorBox.createErrorBox("This input is not an integer");
+            DialogueBoxFactory.createErrorDialogueBox("This input is not an integer",
+                                                      "Check input");
         }
     }
 
@@ -50,7 +51,8 @@ public class EnemyEditorViewController extends EditorViewController
             enemyDataSource.setEnemyHealth(currentEnemyID, Integer.parseInt(enemyHealth));
         }
         catch (NumberFormatException e) {
-            ErrorBox.createErrorBox("This input is not an integer");
+            DialogueBoxFactory.createErrorDialogueBox("This input is not an integer",
+                                                      "Check input");
         }
 
     }
@@ -62,7 +64,8 @@ public class EnemyEditorViewController extends EditorViewController
             enemyDataSource.setEnemyDamage(currentEnemyID, Integer.parseInt(enemyDamage));
         }
         catch (NumberFormatException e) {
-            ErrorBox.createErrorBox("This input is not an integer");
+            DialogueBoxFactory.createErrorDialogueBox("This input is not an integer",
+                                                      "Check input");
         }
     }
 
@@ -74,7 +77,8 @@ public class EnemyEditorViewController extends EditorViewController
                                                  Integer.parseInt(enemyRewardPoints));
         }
         catch (NumberFormatException e) {
-            ErrorBox.createErrorBox("This input is not an integer");
+            DialogueBoxFactory.createErrorDialogueBox("This input is not an integer",
+                                                      "Check input");
         }
     }
 
@@ -85,7 +89,8 @@ public class EnemyEditorViewController extends EditorViewController
             enemyDataSource.setEnemyRewardMoney(currentEnemyID, Integer.parseInt(enemyRewardMoney));
         }
         catch (NumberFormatException e) {
-            ErrorBox.createErrorBox("This input is not an integer");
+            DialogueBoxFactory.createErrorDialogueBox("This input is not an integer",
+                                                      "Check input");
         }
     }
 
@@ -111,7 +116,8 @@ public class EnemyEditorViewController extends EditorViewController
             enemyDataSource.setEnemyFrequency(currentEnemyID, Integer.parseInt(enemyFrequency));
         }
         catch (NumberFormatException e) {
-            ErrorBox.createErrorBox("This input is not an integer");
+            DialogueBoxFactory.createErrorDialogueBox("This input is not an integer",
+                                                      "Check input");
         }
     }
 

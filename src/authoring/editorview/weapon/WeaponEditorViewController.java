@@ -1,8 +1,8 @@
 package authoring.editorview.weapon;
 
 import java.io.IOException;
-import authoring.ErrorBox;
 import authoring.editorview.EditorViewController;
+import authoring.utilityfactories.DialogueBoxFactory;
 
 
 /**
@@ -40,7 +40,8 @@ public class WeaponEditorViewController extends EditorViewController
             weaponDataSource.setWeaponFireRate(currentWeaponID, Integer.parseInt(weaponFireRate));
         }
         catch (NumberFormatException e) {
-            ErrorBox.createErrorBox("This input is not an integer");
+            DialogueBoxFactory.createErrorDialogueBox("This input is not an integer",
+                                                      "Check input");
         }
     }
 
@@ -51,7 +52,8 @@ public class WeaponEditorViewController extends EditorViewController
             weaponDataSource.setWeaponSpeed(currentWeaponID, Integer.parseInt(weaponSpeed));
         }
         catch (NumberFormatException e) {
-            ErrorBox.createErrorBox("This input is not an integer");
+            DialogueBoxFactory.createErrorDialogueBox("This input is not an integer",
+                                                      "Check input");
         }
     }
 
@@ -67,7 +69,8 @@ public class WeaponEditorViewController extends EditorViewController
             weaponDataSource.setWeaponRange(currentWeaponID, Integer.parseInt(weaponRange));
         }
         catch (NumberFormatException e) {
-            ErrorBox.createErrorBox("This input is not an integer");
+            DialogueBoxFactory.createErrorDialogueBox("This input is not an integer",
+                                                      "Check input");
         }
     }
 
@@ -83,7 +86,8 @@ public class WeaponEditorViewController extends EditorViewController
             weaponDataSource.setWeaponDamage(currentWeaponID, Integer.parseInt(weaponDamage));
         }
         catch (NumberFormatException e) {
-            ErrorBox.createErrorBox("This input is not an integer");
+            DialogueBoxFactory.createErrorDialogueBox("This input is not an integer",
+                                                      "Check input");
         }
     }
 

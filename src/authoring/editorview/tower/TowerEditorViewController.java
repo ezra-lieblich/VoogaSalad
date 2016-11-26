@@ -1,8 +1,8 @@
 package authoring.editorview.tower;
 
 import java.io.IOException;
-import authoring.ErrorBox;
 import authoring.editorview.EditorViewController;
+import authoring.utilityfactories.DialogueBoxFactory;
 
 
 /**
@@ -52,7 +52,8 @@ public class TowerEditorViewController extends EditorViewController
             towerDataSource.setTowerUnlockLevel(currentTowerID, Integer.parseInt(towerLevel));
         }
         catch (NumberFormatException e) {
-            ErrorBox.createErrorBox("This input is not an integer");
+            DialogueBoxFactory.createErrorDialogueBox("This input is not an integer",
+                                                      "Check input");
         }
     }
 
@@ -63,7 +64,8 @@ public class TowerEditorViewController extends EditorViewController
             towerDataSource.setTowerFireRate(currentTowerID, Integer.parseInt(towerFireRate));
         }
         catch (NumberFormatException e) {
-            ErrorBox.createErrorBox("This input is not an integer");
+            DialogueBoxFactory.createErrorDialogueBox("This input is not an integer",
+                                                      "Check input");
         }
     }
 
@@ -74,7 +76,8 @@ public class TowerEditorViewController extends EditorViewController
             towerDataSource.setTowerFrequency(currentTowerID, Integer.parseInt(towerFrequency));
         }
         catch (NumberFormatException e) {
-            ErrorBox.createErrorBox("This input is not an integer");
+            DialogueBoxFactory.createErrorDialogueBox("This input is not an integer",
+                                                      "Check input");
         }
     }
 
@@ -85,7 +88,8 @@ public class TowerEditorViewController extends EditorViewController
             towerDataSource.setTowerRange(currentTowerID, Integer.parseInt(towerRange));
         }
         catch (NumberFormatException e) {
-            ErrorBox.createErrorBox("This input is not an integer");
+            DialogueBoxFactory.createErrorDialogueBox("This input is not an integer",
+                                                      "Check input");
         }
     }
 
@@ -96,7 +100,8 @@ public class TowerEditorViewController extends EditorViewController
             towerDataSource.setTowerBuyPrice(currentTowerID, Integer.parseInt(towerBuyPrice));
         }
         catch (NumberFormatException e) {
-            ErrorBox.createErrorBox("This input is not an integer");
+            DialogueBoxFactory.createErrorDialogueBox("This input is not an integer",
+                                                      "Check input");
         }
     }
 
@@ -107,7 +112,8 @@ public class TowerEditorViewController extends EditorViewController
             towerDataSource.setTowerSellPrice(currentTowerID, Integer.parseInt(towerSellPrice));
         }
         catch (NumberFormatException e) {
-            ErrorBox.createErrorBox("This input is not an integer");
+            DialogueBoxFactory.createErrorDialogueBox("This input is not an integer",
+                                                      "Check input");
         }
     }
 

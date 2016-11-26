@@ -4,7 +4,6 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ResourceBundle;
 import javax.imageio.ImageIO;
-import authoring.ErrorBox;
 import authoring.editorview.tower.ITowerEditorView;
 import authoring.editorview.tower.TowerEditorViewDelegate;
 import javafx.embed.swing.SwingFXUtils;
@@ -57,7 +56,7 @@ public class TowerImageView implements ITowerEditorView {
                             .getResourceAsStream(towerResources.getString("DefaultImagePath")));
             Image image2 = SwingFXUtils.toFXImage(imageRead, null);
             myImageView.setImage(image2);
-            //ErrorBox.createErrorBox("Unable to load tower image");
+            // ErrorBox.createErrorBox("Unable to load tower image");
         }
         return myImageView;
     }
