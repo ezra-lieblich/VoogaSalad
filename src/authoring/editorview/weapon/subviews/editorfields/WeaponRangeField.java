@@ -1,5 +1,6 @@
 package authoring.editorview.weapon.subviews.editorfields;
 
+import java.util.ResourceBundle;
 import authoring.editorview.weapon.IWeaponEditorView;
 import authoring.editorview.weapon.WeaponEditorViewDelegate;
 import authoring.utilityfactories.TextFieldFactory;
@@ -17,13 +18,13 @@ public class WeaponRangeField implements IWeaponEditorView {
     private TextField weaponRangeField;
     private WeaponEditorViewDelegate delegate;
 
-    public WeaponRangeField () {
-        createField();
+    public WeaponRangeField (ResourceBundle labelsResource) {
+        createField(labelsResource);
     }
 
-    private void createField () {
+    private void createField (ResourceBundle labelsResource) {
         weaponRangeField =
-                TextFieldFactory.makeTextField("Set weapon range: ", e -> delegate
+                TextFieldFactory.makeTextField(labelsResource.getString("EnterInt"), e -> delegate
                         .onUserEnteredWeaponRange(weaponRangeField.getText()));
     }
 

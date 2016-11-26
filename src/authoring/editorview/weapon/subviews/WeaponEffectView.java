@@ -45,8 +45,6 @@ public class WeaponEffectView extends PhotoFileChooser {
     private WeaponPathField weaponPath;
     private WeaponImageView weaponImage;
 
-    private final String WEAPON_EFFECT_RESOURCE_PATH = "resources/GameAuthoringWeapon";
-
     public WeaponEffectView (WeaponNameField weaponName,
                              WeaponSpeedField weaponSpeed,
                              WeaponFireRateField weaponFireRate,
@@ -54,8 +52,11 @@ public class WeaponEffectView extends PhotoFileChooser {
                              WeaponDamageField weaponDamage,
                              WeaponCollisionEffectField weaponCollision,
                              WeaponPathField weaponPath,
-                             WeaponImageView weaponImage)
+                             WeaponImageView weaponImage,
+                             ResourceBundle labelsResource)
         throws IOException {
+        this.labelsResource = labelsResource;
+
         this.weaponName = weaponName;
         this.weaponSpeed = weaponSpeed;
         this.weaponFireRate = weaponFireRate;
@@ -64,7 +65,7 @@ public class WeaponEffectView extends PhotoFileChooser {
         this.weaponCollision = weaponCollision;
         this.weaponPath = weaponPath;
         this.weaponImage = weaponImage;
-        labelsResource = ResourceBundle.getBundle(WEAPON_EFFECT_RESOURCE_PATH);
+
         vboxView = new VBox(10);
         completeView = new ScrollPane();
         completeView.setContent(vboxView);
@@ -95,7 +96,7 @@ public class WeaponEffectView extends PhotoFileChooser {
                 .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Name"),
                                                            weaponName.getInstanceAsNode()));
         vboxView.getChildren()
-                .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Rate"),
+                .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("FireRate"),
                                                            weaponFireRate.getInstanceAsNode()));
         vboxView.getChildren()
                 .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Speed"),

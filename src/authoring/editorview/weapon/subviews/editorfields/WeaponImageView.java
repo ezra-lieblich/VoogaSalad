@@ -25,10 +25,8 @@ public class WeaponImageView implements IWeaponEditorView {
     private String imagePath;
     private ImageView weaponImage;
 
-    private final String WEAPON_EFFECT_RESOURCE_PATH = "resources/GameAuthoringWeapon";
-
-    public WeaponImageView () throws IOException {
-        labelsResource = ResourceBundle.getBundle(WEAPON_EFFECT_RESOURCE_PATH);
+    public WeaponImageView (ResourceBundle labelsResource) throws IOException {
+        this.labelsResource = labelsResource;
         weaponImage = loadWeaponImage();
     }
 

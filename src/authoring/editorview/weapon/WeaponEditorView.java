@@ -2,6 +2,7 @@ package authoring.editorview.weapon;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.ResourceBundle;
 import authoring.editorview.weapon.subviews.WeaponEffectView;
 import authoring.editorview.weapon.subviews.WeaponImageBank;
 import authoring.editorview.weapon.subviews.editorfields.WeaponCollisionEffectField;
@@ -36,20 +37,23 @@ public class WeaponEditorView implements IWeaponUpdateView {
     private WeaponImageView weaponImageView;
 
     public WeaponEditorView () throws IOException {
+        ResourceBundle labelsResource;
+        labelsResource = ResourceBundle.getBundle("resources/GameAuthoringWeapon");
+
         weaponEditorView = new BorderPane();
-        weaponBank = new WeaponImageBank();
-        weaponNameView = new WeaponNameField();
-        weaponSpeedView = new WeaponSpeedField();
-        weaponRangeView = new WeaponRangeField();
-        weaponFireRateView = new WeaponFireRateField();
-        weaponDamageView = new WeaponDamageField();
-        weaponCollisionView = new WeaponCollisionEffectField();
-        weaponPathView = new WeaponPathField();
-        weaponImageView = new WeaponImageView();
+        weaponBank = new WeaponImageBank(labelsResource);
+        weaponNameView = new WeaponNameField(labelsResource);
+        weaponSpeedView = new WeaponSpeedField(labelsResource);
+        weaponRangeView = new WeaponRangeField(labelsResource);
+        weaponFireRateView = new WeaponFireRateField(labelsResource);
+        weaponDamageView = new WeaponDamageField(labelsResource);
+        weaponCollisionView = new WeaponCollisionEffectField(labelsResource);
+        weaponPathView = new WeaponPathField(labelsResource);
+        weaponImageView = new WeaponImageView(labelsResource);
         weaponEffectsView =
                 new WeaponEffectView(weaponNameView, weaponSpeedView, weaponFireRateView,
                                      weaponRangeView, weaponDamageView, weaponCollisionView,
-                                     weaponPathView, weaponImageView);
+                                     weaponPathView, weaponImageView, labelsResource);
         setBorderPane();
     }
 

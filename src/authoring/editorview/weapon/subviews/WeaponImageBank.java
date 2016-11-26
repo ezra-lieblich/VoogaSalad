@@ -40,10 +40,9 @@ public class WeaponImageBank extends PhotoFileChooser implements IWeaponEditorVi
     private VBox vbox;
 
     private ResourceBundle labelsResource;
-    private final String WEAPON_EFFECT_RESOURCE_PATH = "resources/GameAuthoringWeapon";
 
-    public WeaponImageBank () {
-        labelsResource = ResourceBundle.getBundle(WEAPON_EFFECT_RESOURCE_PATH);
+    public WeaponImageBank (ResourceBundle labelsResource) {
+        this.labelsResource = labelsResource;
         weaponBank = new ScrollPane();
         Button createWeaponButton =
                 ButtonFactory.makeButton("Create Weapon",
