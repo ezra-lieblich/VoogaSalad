@@ -6,9 +6,13 @@ import authoring.editorview.PhotoFileChooser;
 import authoring.editorview.enemy.EnemyEditorViewDelegate;
 import authoring.editorview.enemy.IEnemyEditorView;
 import authoring.editorview.enemy.subviews.editorfields.EnemyFrequencyField;
+import authoring.editorview.enemy.subviews.editorfields.EnemyHealthField;
 import authoring.editorview.enemy.subviews.editorfields.EnemyImageView;
 import authoring.editorview.enemy.subviews.editorfields.EnemyNameField;
+import authoring.editorview.enemy.subviews.editorfields.EnemyRewardMoneyField;
+import authoring.editorview.enemy.subviews.editorfields.EnemyRewardPointsField;
 import authoring.editorview.enemy.subviews.editorfields.EnemyCollisionEffectField;
+import authoring.editorview.enemy.subviews.editorfields.EnemyDamageField;
 import authoring.editorview.enemy.subviews.editorfields.EnemySpeedField;
 import authoring.utilityfactories.BoxFactory;
 import authoring.utilityfactories.ButtonFactory;
@@ -36,6 +40,10 @@ public class EnemyEffectView extends PhotoFileChooser implements IEnemyEditorVie
     private EnemyNameField enemyName;
     private EnemyCollisionEffectField enemyReactions;
     private EnemySpeedField enemySpeed;
+    private EnemyDamageField enemyDamage;
+    private EnemyHealthField enemyHealth;
+    private EnemyRewardMoneyField enemyRewardMoney;
+    private EnemyRewardPointsField enemyRewardPoints;
 
     private ResourceBundle labelsResource;
     private final String ENEMY_EFFECT_RESOURCE_PATH = "resources/GameAuthoringEnemy";
@@ -44,7 +52,11 @@ public class EnemyEffectView extends PhotoFileChooser implements IEnemyEditorVie
                             EnemyImageView enemyImage,
                             EnemyNameField enemyName,
                             EnemyCollisionEffectField enemyReactions,
-                            EnemySpeedField enemySpeed) {
+                            EnemySpeedField enemySpeed,
+                            EnemyDamageField enemyDamage,
+                            EnemyHealthField enemyHealth,
+                            EnemyRewardMoneyField enemyRewardMoney,
+                            EnemyRewardPointsField enemyRewardPoints) {
         enemyEffectView = new ScrollPane();
         vbox = new VBox(10);
         enemyEffectView.setContent(vbox);
@@ -54,6 +66,10 @@ public class EnemyEffectView extends PhotoFileChooser implements IEnemyEditorVie
         this.enemyName = enemyName;
         this.enemyReactions = enemyReactions;
         this.enemySpeed = enemySpeed;
+        this.enemyDamage = enemyDamage;
+        this.enemyHealth = enemyHealth;
+        this.enemyRewardMoney = enemyRewardMoney;
+        this.enemyRewardPoints = enemyRewardPoints;
 
         labelsResource = ResourceBundle.getBundle(ENEMY_EFFECT_RESOURCE_PATH);
 
@@ -88,6 +104,18 @@ public class EnemyEffectView extends PhotoFileChooser implements IEnemyEditorVie
         vbox.getChildren()
                 .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Speed"),
                                                            enemySpeed.getInstanceAsNode()));
+        vbox.getChildren()
+                .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Damage"),
+                                                           enemyDamage.getInstanceAsNode()));
+        vbox.getChildren()
+                .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Health"),
+                                                           enemyHealth.getInstanceAsNode()));
+        vbox.getChildren()
+                .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("RewardMoney"),
+                                                           enemyRewardMoney.getInstanceAsNode()));
+        vbox.getChildren()
+                .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("RewardPoints"),
+                                                           enemyRewardPoints.getInstanceAsNode()));
     }
 
     @Override

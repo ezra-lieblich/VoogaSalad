@@ -24,8 +24,8 @@ public class DialogueBoxFactory {
 		Alert dialogueBox = new Alert(AlertType.ERROR);
 		dialogueBox.setTitle(title);
 		dialogueBox.setContentText(error);
+		dialogueBox.showAndWait();
 		return dialogueBox;
-		
 	};
 
 }

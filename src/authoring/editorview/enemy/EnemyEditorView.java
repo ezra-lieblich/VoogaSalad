@@ -4,9 +4,13 @@ import java.io.IOException;
 import authoring.editorview.enemy.subviews.EnemyEffectView;
 import authoring.editorview.enemy.subviews.EnemyImageBank;
 import authoring.editorview.enemy.subviews.editorfields.EnemyFrequencyField;
+import authoring.editorview.enemy.subviews.editorfields.EnemyHealthField;
 import authoring.editorview.enemy.subviews.editorfields.EnemyImageView;
 import authoring.editorview.enemy.subviews.editorfields.EnemyNameField;
+import authoring.editorview.enemy.subviews.editorfields.EnemyRewardMoneyField;
+import authoring.editorview.enemy.subviews.editorfields.EnemyRewardPointsField;
 import authoring.editorview.enemy.subviews.editorfields.EnemyCollisionEffectField;
+import authoring.editorview.enemy.subviews.editorfields.EnemyDamageField;
 import authoring.editorview.enemy.subviews.editorfields.EnemySpeedField;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
@@ -28,6 +32,10 @@ public class EnemyEditorView implements IEnemyEditorView {
     private EnemyEffectView enemyEffectView;
     private EnemyFrequencyField enemyFrequency;
     private EnemyCollisionEffectField enemyReactions;
+    private EnemyDamageField enemyDamage;
+    private EnemyHealthField enemyHealth;
+    private EnemyRewardMoneyField enemyRewardMoney;
+    private EnemyRewardPointsField enemyRewardPoints;
 
     public EnemyEditorView () throws IOException {
         enemyEditorView = new BorderPane();
@@ -37,7 +45,14 @@ public class EnemyEditorView implements IEnemyEditorView {
         enemyFrequency = new EnemyFrequencyField();
         enemyReactions = new EnemyCollisionEffectField();
         enemyImage = new EnemyImageView();
-        enemyEffectView = new EnemyEffectView(enemyFrequency, enemyImage, enemyName, enemyReactions, enemySpeed);
+        enemyDamage = new EnemyDamageField();
+        enemyHealth = new EnemyHealthField();
+        enemyRewardMoney = new EnemyRewardMoneyField();
+        enemyRewardPoints = new EnemyRewardPointsField();
+        enemyEffectView =
+                new EnemyEffectView(enemyFrequency, enemyImage, enemyName, enemyReactions,
+                                    enemySpeed, enemyDamage, enemyHealth, enemyRewardMoney,
+                                    enemyRewardPoints);
         setBorderPane();
     }
 
@@ -60,6 +75,10 @@ public class EnemyEditorView implements IEnemyEditorView {
         enemyImage.setDelegate(delegate);
         enemyFrequency.setDelegate(delegate);
         enemyReactions.setDelegate(delegate);
+        enemyDamage.setDelegate(delegate);
+        enemyHealth.setDelegate(delegate);
+        enemyRewardMoney.setDelegate(delegate);
+        enemyRewardPoints.setDelegate(delegate);
         enemyEffectView.setDelegate(delegate);
     }
 
