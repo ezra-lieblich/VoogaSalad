@@ -46,8 +46,8 @@ public class TowerEditorView implements ITowerEditorView {
     public TowerEditorView () throws IOException {
         towerEditorView = new BorderPane();
 
-        ResourceBundle labelsResource;
-        labelsResource = ResourceBundle.getBundle("resources/GameAuthoringTower");
+        ResourceBundle labelsResource = ResourceBundle.getBundle("resources/GameAuthoringTower");
+        ResourceBundle dialogueBoxResource = ResourceBundle.getBundle("resources/DialogueBox");
 
         towerName = new TowerNameField(labelsResource);
         towerFrequency = new TowerFrequencyField(labelsResource);
@@ -62,12 +62,12 @@ public class TowerEditorView implements ITowerEditorView {
         towerChooseWeapon = new TowerChooseWeaponField(labelsResource);
         towerUpgrade = new TowerUpgradeField(labelsResource);
 
-        towerBank = new TowerImageBank();
+        towerBank = new TowerImageBank(labelsResource, dialogueBoxResource);
         towerEffectView =
                 new TowerEffectView(towerName, towerFrequency, towerImage, towerRange,
                                     towerBuyPrice, towerFireRate, towerSellPrice, towerUnlockLevel,
                                     towerAbility, towerChooseEnemy, towerChooseWeapon,
-                                    towerUpgrade, labelsResource);
+                                    towerUpgrade, labelsResource, dialogueBoxResource);
         setBorderPane();
     }
 

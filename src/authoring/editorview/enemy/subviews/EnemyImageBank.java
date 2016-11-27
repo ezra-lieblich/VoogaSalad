@@ -34,18 +34,21 @@ public class EnemyImageBank extends PhotoFileChooser {
     private VBox vbox;
     private File chosenFile;
 
-    public EnemyImageBank (ResourceBundle labelsResource) {
+    public EnemyImageBank (ResourceBundle labelsResource, ResourceBundle dialogueBoxResource) {
         enemyBank = new ScrollPane();
         Button createNewEnemy =
                 ButtonFactory.makeButton(labelsResource.getString("NewEnemy"),
                                          e -> {
                                              try {
-                                                 selectFile("Photos: ", "Select new enemy image");
+                                                 selectFile(labelsResource.getString("Photos"),
+                                                            labelsResource.getString("Image"));
                                              }
                                              catch (IOException e1) {
                                                  DialogueBoxFactory
-                                                         .createErrorDialogueBox("Unable to open file chooser",
-                                                                                 "Try again");
+                                                         .createErrorDialogueBox(dialogueBoxResource
+                                                                 .getString("UnableToOpen"),
+                                                                                 dialogueBoxResource
+                                                                                         .getString("TryAgain"));
                                              }
                                          });
         vbox = BoxFactory.createVBox(labelsResource.getString("EnemyBank"));

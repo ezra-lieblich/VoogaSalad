@@ -54,6 +54,7 @@ public class TowerEffectView extends PhotoFileChooser implements ITowerEditorVie
     private File chosenFile;
 
     private ResourceBundle labelsResource;
+    private ResourceBundle dialogueBoxResource;
 
     public TowerEffectView (TowerNameField towerName,
                             TowerFrequencyField towerFrequency,
@@ -67,9 +68,12 @@ public class TowerEffectView extends PhotoFileChooser implements ITowerEditorVie
                             TowerChooseEnemyField towerChooseEnemy,
                             TowerChooseWeaponField towerChooseWeapon,
                             TowerUpgradeField towerUpgrade,
-                            ResourceBundle labelsResource) {
+                            ResourceBundle labelsResource,
+                            ResourceBundle dialogueBoxResource) {
 
         this.labelsResource = labelsResource;
+        this.dialogueBoxResource = dialogueBoxResource;
+
         this.towerName = towerName;
         this.towerFrequency = towerFrequency;
         this.towerImage = towerImage;
@@ -97,13 +101,17 @@ public class TowerEffectView extends PhotoFileChooser implements ITowerEditorVie
         vbox.getChildren().add(ButtonFactory.makeButton(labelsResource.getString("Image"),
                                                         e -> {
                                                             try {
-                                                                selectFile("Select new tower image",
-                                                                           "Photos: ");
+                                                                selectFile(labelsResource
+                                                                        .getString("Image"),
+                                                                           labelsResource
+                                                                                   .getString("Photos"));
                                                             }
                                                             catch (IOException e1) {
                                                                 DialogueBoxFactory
-                                                                        .createErrorDialogueBox("Unable to open file chooser",
-                                                                                                "Try again");
+                                                                        .createErrorDialogueBox(dialogueBoxResource
+                                                                                .getString("UnableToOpen"),
+                                                                                                dialogueBoxResource
+                                                                                                        .getString("TryAgain"));
                                                             }
                                                         }));
         vbox.getChildren()
@@ -141,6 +149,9 @@ public class TowerEffectView extends PhotoFileChooser implements ITowerEditorVie
     @Override
     public void openFileChooser (FileChooser chooseFile) throws IOException {
         chosenFile = chooseFile.showOpenDialog(new Stage());
+        if (chosenFile != null) {
+
+        }
     }
 
     @Override

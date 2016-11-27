@@ -20,7 +20,7 @@ public class EnemySpeedField implements IEnemyEditorView {
 
     public EnemySpeedField (ResourceBundle labelsResource) {
         enemySpeedField =
-                TextFieldFactory.makeTextField(labelsResource.getString("Speed"),
+                TextFieldFactory.makeTextField(labelsResource.getString("EnterInt"),
                                                e -> delegate
                                                        .onUserEnteredEnemySpeed(enemySpeedField
                                                                .getText()));

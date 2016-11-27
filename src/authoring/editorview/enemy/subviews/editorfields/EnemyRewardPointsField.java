@@ -15,7 +15,7 @@ public class EnemyRewardPointsField implements IEnemyEditorView {
 
     public EnemyRewardPointsField (ResourceBundle labelsResource) {
         enemyRewardPointsField =
-                TextFieldFactory.makeTextField(labelsResource.getString("RewardPoints"),
+                TextFieldFactory.makeTextField(labelsResource.getString("EnterInt"),
                                                e -> delegate
                                                        .onUserEnteredEnemyPoints(enemyRewardPointsField
                                                                .getText()));

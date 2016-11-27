@@ -39,12 +39,12 @@ public class EnemyEditorView implements IEnemyEditorView {
     private EnemyRewardPointsField enemyRewardPoints;
 
     public EnemyEditorView () throws IOException {
-        ResourceBundle labelsResource;
         String ENEMY_EFFECT_RESOURCE_PATH = "resources/GameAuthoringEnemy";
-        labelsResource = ResourceBundle.getBundle(ENEMY_EFFECT_RESOURCE_PATH);
+        ResourceBundle labelsResource = ResourceBundle.getBundle(ENEMY_EFFECT_RESOURCE_PATH);
+        ResourceBundle dialogueBoxResource = ResourceBundle.getBundle("resources/DialogueBox");
 
         enemyEditorView = new BorderPane();
-        enemyBank = new EnemyImageBank(labelsResource);
+        enemyBank = new EnemyImageBank(labelsResource, dialogueBoxResource);
         enemyName = new EnemyNameField(labelsResource);
         enemySpeed = new EnemySpeedField(labelsResource);
         enemyFrequency = new EnemyFrequencyField(labelsResource);

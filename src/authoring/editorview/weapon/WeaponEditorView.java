@@ -139,7 +139,6 @@ public class WeaponEditorView implements IWeaponUpdateView {
     @Override
     public void updateWeaponPath (String path) {
         weaponPathView.updateWeaponPath(path);
-
     }
 
     @Override

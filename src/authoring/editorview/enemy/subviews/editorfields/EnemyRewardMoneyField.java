@@ -15,7 +15,7 @@ public class EnemyRewardMoneyField implements IEnemyEditorView {
 
     public EnemyRewardMoneyField (ResourceBundle labelsResource) {
         enemyRewardMoneyField =
-                TextFieldFactory.makeTextField(labelsResource.getString("RewardMoney"),
+                TextFieldFactory.makeTextField(labelsResource.getString("EnterInt"),
                                                e -> delegate
                                                        .onUserEnteredEnemyMoney(enemyRewardMoneyField
                                                                .getText()));
