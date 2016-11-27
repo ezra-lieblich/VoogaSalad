@@ -1,5 +1,8 @@
 package engine.weapon;
 
-public interface WeaponManager {
+import engine.Manager;
+import engine.tower.Tower;
+
+public interface WeaponManager extends Manager<Weapon>{
 
 }
