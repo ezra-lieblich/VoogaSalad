@@ -28,19 +28,18 @@ public abstract class AbstractTypeManager<E extends Type> extends AbstractObserv
 
     @Override
     public void removeEntry (int id) {
-        managerMediator.removeEntryReferences(data.get(id));
         data.remove(id);
-        //notifyObservers(data.remove(id));
+        notifyObservers(new MethodObjectData<Integer>("RemoveEntry", id));
     }
         
-    protected <U> U getFromEntity(Supplier<U> getter) {
-        return getter.get();
-    }
-
-    protected <U> void setForEntity(Consumer<U> setter, U newValue) {
-        setter.accept(newValue);
-        //notifyObservers(activeId);
-    }
+//    protected <U> U getFromEntity(Supplier<U> getter) {
+//        return getter.get();
+//    }
+//
+//    protected <U> void setForEntity(Consumer<U> setter, U newValue) {
+//        setter.accept(newValue);
+//        //notifyObservers(activeId);
+//    }
     
     @Override
     public void applyToAllEntities(Consumer<E> entry) {
@@ -56,31 +55,22 @@ public abstract class AbstractTypeManager<E extends Type> extends AbstractObserv
         Consumer<AbstractTypeManager> eblah = c -> c.setForActiveEntity(getActiveEntity()::setter)
     }*/
     
-    @Override //TODO - hide in interface
-    public E getEntity (int index) {
+//    @Override //TODO - hide in interface
+    private E getEntity (int index) {
         return data.get(index);
     }
 
     //TODO - Make this private and just pass in a functional static interface
-    /* (non-Javadoc)
-     * @see engine.Manager#getActiveEntity()
-     */
     @Override
     public E getActiveEntity () {
         return getEntity(activeId);
     }
     
-    /* (non-Javadoc)
-     * @see engine.Manager#getActiveId()
-     */
     @Override
     public int getActiveId () {
         return activeId;
     }
 
-    /* (non-Javadoc)
-     * @see engine.Manager#setActiveId(int)
-     */
     @Override
     public void setActiveId (int activeId) {
         this.activeId = activeId;

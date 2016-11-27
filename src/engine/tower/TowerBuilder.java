@@ -8,7 +8,7 @@ import engine.enemy.Enemy;
 import engine.weapon.Weapon;
 
 
-public interface TowerBuilder extends TypeBuilder<Tower, TowerBuilder>, TowerInitializer { //TODO - Add bindable interface
+public interface TowerBuilder extends TypeBuilder<Tower, TowerBuilder>, TowerInitializer, BindableTower { //TODO - Add bindable interface
 
     TowerBuilder buildUpgrades (Integer ... upgrades);
     
@@ -31,11 +31,5 @@ public interface TowerBuilder extends TypeBuilder<Tower, TowerBuilder>, TowerIni
     TowerBuilder buildSellAmount (double sellAmount);
 
     TowerBuilder buildUnlockLevel (int unlockLevel);
-
-    TowerBuilder addCostListener (BiConsumer<Double, Double> listener);
-
-    TowerBuilder addSellAmountListener (BiConsumer<Double, Double> listener);
-
-    TowerBuilder addUnlockLevelListener (BiConsumer<Integer, Integer> listener);
 
 }
