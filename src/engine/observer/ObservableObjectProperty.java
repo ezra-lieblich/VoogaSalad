@@ -14,7 +14,7 @@ public class ObservableObjectProperty<U> extends AbstractObservable<U> implement
     private List<BiConsumer<U, U>> listeners;
     private U property;
 
-    ObservableObjectProperty(U value) {
+    public ObservableObjectProperty(U value) {
         this.property = value;
         this.listeners = new ArrayList<BiConsumer<U, U>>();
     }
