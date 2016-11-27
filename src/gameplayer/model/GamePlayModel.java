@@ -184,7 +184,7 @@ public class GamePlayModel extends Observable {
 	public Boolean placeTower(int type, int x, int y) {
 		// later check if is a valid location to place the tower
 		TowerType tt = towerTypes.get(type);
-
+		System.out.println("Placed a tower");
 		// get weaponTypes
 		// actually implement the firing counter into each weapon types
 

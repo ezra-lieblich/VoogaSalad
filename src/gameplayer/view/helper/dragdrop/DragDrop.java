@@ -1,5 +1,7 @@
 package gameplayer.view.helper.dragdrop;
 
+import java.util.Observable;
+
 import gameplayer.view.helper.GraphicsLibrary;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
@@ -18,7 +20,7 @@ import javafx.scene.layout.Pane;
  * @author lucyzhang
  *
  */
-public class DragDrop {
+public class DragDrop extends Observable{
 
 	private ImageView source;
 	private double width;
@@ -37,6 +39,10 @@ public class DragDrop {
 		this.graphicLib = new GraphicsLibrary();
 		this.xError = xError;
 		this.yError = yError;
+	}
+	
+	public ImageView getSource(){
+		return this.source;
 	}
 
 	/**
@@ -61,6 +67,8 @@ public class DragDrop {
 		((Pane) target).getChildren().add(copy);
 		copy.setX(xpos+this.xError);
 		copy.setY(ypos+this.yError);
+		setChanged();
+		notifyObservers();
 	}
 
 	private void setSourceInfo(ImageView source) {
