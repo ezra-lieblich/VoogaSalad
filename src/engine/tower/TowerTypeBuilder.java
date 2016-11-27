@@ -147,11 +147,12 @@ public class TowerTypeBuilder extends AbstractTypeBuilder<Tower, TowerBuilder> i
         return unlockLevel;
     }
 
+    //Is this too inconsistant?
     @Override
     protected void restoreDefaults () {
-        buildName(DEFAULT_NAME);
-        buildImagePath(DEFAULT_IMAGE_PATH);
-        buildSize(DEFAULT_SIZE);
+        setName(new ObservableObjectProperty<String>(DEFAULT_NAME));
+        setImagePath(new ObservableObjectProperty<String>(DEFAULT_IMAGE_PATH));
+        setSize(new ObservableObjectProperty<Double>(DEFAULT_SIZE));
         buildWeapons(DEFAULT_WEAPONS);
         buildTargets(DEFAULT_TARGETS);
         buildAbilities(DEFAULT_ABILITIES);
@@ -161,7 +162,7 @@ public class TowerTypeBuilder extends AbstractTypeBuilder<Tower, TowerBuilder> i
     }
 
     @Override
-    protected TowerTypeBuilder getThis () {
+    protected TowerBuilder getThis () {
         return this;
     }
     

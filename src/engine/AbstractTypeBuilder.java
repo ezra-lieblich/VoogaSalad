@@ -87,6 +87,18 @@ public abstract class AbstractTypeBuilder<E extends Type, R extends TypeBuilder<
         return getThis();
     }
     
+    protected void setName(ObservableProperty<String> name) {
+        this.name = name;
+    }
+    
+    protected void setImagePath(ObservableProperty<String> imagePath) {
+        this.imagePath = imagePath;
+    }
+    
+    protected void setSize(ObservableProperty<Double> size) {
+        this.size = size;
+    }
+    
     protected abstract E create ();
     
     protected abstract void restoreDefaults();
