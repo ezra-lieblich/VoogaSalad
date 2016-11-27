@@ -1,38 +1,44 @@
 package engine;
 
 import java.util.Arrays;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
+import engine.observer.ObservableObjectProperty;
+import engine.observer.ObservableProperty;
+import engine.tower.TowerBuilder;
 import engine.weapon.Weapon;
 
-public abstract class AbstractTypeBuilder<E extends Type> implements TypeBuilder<E>, TypeInitializer {
+public abstract class AbstractTypeBuilder<E extends Type, R extends TypeBuilder<E, R>> implements TypeBuilder<E, R>, TypeInitializer {
     
-    private String name;
-    private String imagePath;
-    private int size;
+    private ObservableProperty<String> name;
+    private ObservableProperty<String> imagePath;
+    private ObservableProperty<Double> size;
     private int nextId;
     
     
-    protected AbstractTypeBuilder(String name, String imagePath, int size) {
-        this.name = name;
-        this.imagePath = imagePath;
-        this.size = size;
+    protected AbstractTypeBuilder(String name, String imagePath, double size) {
+        this.name = new ObservableObjectProperty<String>(name);
+        this.imagePath = new ObservableObjectProperty<String>(imagePath);
+        this.size = new ObservableObjectProperty<Double>(size);
         this.nextId = 0;
     }
     
     @Override
-    public void buildName(String name) {
-        this.name = name;
+    public R buildName (String name) {
+        this.name.setProperty(name);
+        return getThis();
     }
     
     @Override
-    public void buildImagePath(String imagePath) {
-        this.imagePath = imagePath;
-        Weapon.class.getClass().getName();
+    public R buildImagePath(String imagePath) {
+        this.imagePath.setProperty(imagePath);
+        return getThis();
     }
     
     @Override
-    public void buildSize(int size) {
-        this.size = size;
+    public R buildSize(double size) {
+        this.size.setProperty(size);
+        return getThis();
     }
     
     @Override
@@ -44,17 +50,17 @@ public abstract class AbstractTypeBuilder<E extends Type> implements TypeBuilder
     }
     
     @Override
-    public String getName () {
+    public ObservableProperty<String> getName () {
         return name;
     }
 
     @Override
-    public String getImagePath () {
+    public ObservableProperty<String> getImagePath () {
         return imagePath;
     }
 
     @Override
-    public int getSize () {
+    public ObservableProperty<Double> getSize () {
         return size;
     }
     
@@ -63,9 +69,29 @@ public abstract class AbstractTypeBuilder<E extends Type> implements TypeBuilder
         return nextId;
     }
     
+    @Override
+    public R addNameListener(BiConsumer<String, String> listener) {
+        name.addListener(listener);
+        return getThis();
+    }
+    
+    @Override
+    public R addImagePathListener(BiConsumer<String, String> listener) {
+        imagePath.addListener(listener);
+        return getThis();
+    }
+    
+    @Override
+    public R addSizeListener(BiConsumer<Double, Double> listener) {
+        size.addListener(listener);
+        return getThis();
+    }
+    
     protected abstract E create ();
     
     protected abstract void restoreDefaults();
+    
+    protected abstract R getThis();
 
     
 }
