@@ -6,6 +6,8 @@ import java.util.Observer;
 import gameplayer.model.GamePlayModel;
 import gameplayer.view.helper.dragdrop.DragDrop;
 import gameplayer.view.helper.dragdrop.DragDropView;
+import javafx.scene.Node;
+import javafx.scene.layout.Pane;
 
 public class DragDropController implements Observer{
 	private DragDrop dragDrop;
@@ -19,7 +21,11 @@ public class DragDropController implements Observer{
 	@Override
 	public void update(Observable o, Object arg) {
 		if (o instanceof DragDrop){
-			this.model.placeTower(0, (int)dragDrop.getSource().getX(), (int)dragDrop.getSource().getY()); //TODO: what is they tower type, how to get it? Using 0 for now as dummy
+			boolean okToPlace = this.model.placeTower(0, (int)dragDrop.getSource().getX(), (int)dragDrop.getSource().getY()); //TODO: what is they tower type, how to get it? Using 0 for now as dummy
+			if (!okToPlace){
+				System.out.println("Not ok to place here!");
+				((Pane) dragDrop.getTarget()).getParent().getChildrenUnmodifiable().remove(dragDrop.getSource());// remove((Node) dragDrop.getSource());
+			}
 		}
 		
 	}

@@ -28,6 +28,7 @@ public class DragDrop extends Observable{
 	private GraphicsLibrary graphicLib;
 	private double yError;
 	private double xError;
+	private Node target;
 
 	public DragDrop() {
 		this.graphicLib = new GraphicsLibrary();
@@ -44,6 +45,10 @@ public class DragDrop extends Observable{
 	public ImageView getSource(){
 		return this.source;
 	}
+	
+	public Node getTarget(){
+		return this.target;
+	}
 
 	/**
 	 * Initializes the drag functionality for an element and its target location
@@ -51,6 +56,7 @@ public class DragDrop extends Observable{
 	 * @param target This is the target that the image is to be dropped into
 	 */
 	public void init(ImageView source, Node target) {
+		this.target = target;
 		detectDrag(source, target);
 	}
 
