@@ -141,7 +141,7 @@ public class GamePlayerController implements Observer {
 																			// get
 																			// starting
 																			// cell
-		this.dropController = new DragDropController(this.view.getDragDrop(), this.model);
+		this.dropController = new DragDropController(this.view, this.model);
 	}
 
 	private ArrayList<String> getTowerImages() {

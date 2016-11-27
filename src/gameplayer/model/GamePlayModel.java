@@ -16,7 +16,7 @@ public class GamePlayModel extends Observable {
 	private int gridX;
 	private int gridY;
 
-	//private List<Enemy> enemyOnGrid;
+	// private List<Enemy> enemyOnGrid;
 	private List<Weapon> weaponOnGrid;
 	private int hitBuffer = 10; // initialize from xml
 
@@ -37,15 +37,15 @@ public class GamePlayModel extends Observable {
 	private int currentLevel;
 	private int waveOfEnemy;
 	private String gameTitle;
-	
-	//private EnemyModel enemyModel;
+
+	// private EnemyModel enemyModel;
 
 	public GamePlayModel(GamePlayerFactory factory) {
 		initializeGameSetting(factory);
-		//this.enemyModel = new EnemyModel(this);
+		// this.enemyModel = new EnemyModel(this);
 	}
-	
-	public  List<Weapon> getWeaponOnGrid(){
+
+	public List<Weapon> getWeaponOnGrid() {
 		return this.weaponOnGrid;
 	}
 
@@ -109,7 +109,7 @@ public class GamePlayModel extends Observable {
 		gridArray = this.grid.getGrid();
 		this.gridX = this.gridArray.length;
 		this.gridY = this.gridArray[0].length;
-		//enemyOnGrid = new ArrayList<Enemy>();
+		// enemyOnGrid = new ArrayList<Enemy>();
 		weaponOnGrid = new ArrayList<Weapon>();
 
 	}
@@ -129,6 +129,16 @@ public class GamePlayModel extends Observable {
 	public int[] getDimension() {
 		int[] dimension = { this.gridX, this.gridY };
 		return dimension;
+	}
+
+	public int getRow() {
+		int[] dimensions = this.getDimension();
+		return dimensions[0];
+	}
+
+	public int getColumns() {
+		int[] dimensions = this.getDimension();
+		return dimensions[1];
 	}
 
 	public String getGameTitle() {
@@ -176,15 +186,14 @@ public class GamePlayModel extends Observable {
 
 	// TODO: move to EnemyModel
 	/*
-	public List<Enemy> getEnemyList() {
-		return this.enemyOnGrid;
-	}
-	*/
+	 * public List<Enemy> getEnemyList() { return this.enemyOnGrid; }
+	 */
 
 	public Boolean placeTower(int type, int x, int y) {
 		// later check if is a valid location to place the tower
 		TowerType tt = towerTypes.get(type);
 		System.out.println("Placed a tower");
+		System.out.println("Tower x: " + x + "; y:" + y);
 		// get weaponTypes
 		// actually implement the firing counter into each weapon types
 
@@ -210,21 +219,15 @@ public class GamePlayModel extends Observable {
 			e.setHealth(e.getHealth() - w.getDemage());
 		}
 	}
-	
-	//Moved to EnemyModel
-/*
-	private void checkCollision() {
-		for (Enemy e : this.enemyModel.getEnemyList()) {
-			for (Weapon w : weaponOnGrid) {
-				singleCollision(e, w);
-			}
-			if (e.getHealth() < 0)
-				this.enemyModel.getEnemyList().remove(e);
-		}
-		setChanged();
-		notifyObservers();
-	}
-*/
+
+	// Moved to EnemyModel
+	/*
+	 * private void checkCollision() { for (Enemy e :
+	 * this.enemyModel.getEnemyList()) { for (Weapon w : weaponOnGrid) {
+	 * singleCollision(e, w); } if (e.getHealth() < 0)
+	 * this.enemyModel.getEnemyList().remove(e); } setChanged();
+	 * notifyObservers(); }
+	 */
 	private Boolean coordinateInBound(double d, double e) {
 		return (d < this.gridX * cellSize && e < this.gridY * cellSize);
 	}
@@ -326,9 +329,9 @@ public class GamePlayModel extends Observable {
 	 */
 
 	public void updateInLevel() {
-		//checkCollision();
-		//updateWeapon();
-		//this.enemyModel.update();
+		// checkCollision();
+		// updateWeapon();
+		// this.enemyModel.update();
 
 	}
 

@@ -29,6 +29,7 @@ public class DragDrop extends Observable{
 	private double yError;
 	private double xError;
 	private Node target;
+	private ImageView droppedImage;
 
 	public DragDrop() {
 		this.graphicLib = new GraphicsLibrary();
@@ -48,6 +49,10 @@ public class DragDrop extends Observable{
 	
 	public Node getTarget(){
 		return this.target;
+	}
+	
+	public ImageView getDroppedImage(){
+		return this.droppedImage;
 	}
 
 	/**
@@ -69,6 +74,7 @@ public class DragDrop extends Observable{
 
 	private void addImagetoDroppedLoc(double xpos, double ypos, Node target) {
 		ImageView copy = new ImageView(this.source.getImage());
+		this.droppedImage = copy;
 		graphicLib.setImageViewParams(copy, this.width, this.height);
 		((Pane) target).getChildren().add(copy);
 		copy.setX(xpos+this.xError);
