@@ -9,8 +9,6 @@ public interface Manager<E extends Type> extends VisitorManager<MethodData<Integ
 
     void removeEntry (int id);
     
-    public E getEntity (int index);
-
     //TODO - Make this private and just pass in a functional static interface
     E getActiveEntity ();
 

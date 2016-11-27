@@ -62,7 +62,7 @@ public class TowerType extends AbstractType implements Tower {
     }
 
     @Override
-    public List<Integer> getWeapon () {
+    public List<Integer> getWeapons () {
         return Collections.unmodifiableList(weapons);
     }
 
@@ -92,7 +92,7 @@ public class TowerType extends AbstractType implements Tower {
     }
 
     @Override
-    public List<Integer> getAbility () {
+    public List<Integer> getAbilities () {
         return Collections.unmodifiableList(abilities);
     }
 
