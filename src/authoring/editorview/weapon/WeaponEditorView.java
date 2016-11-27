@@ -40,8 +40,8 @@ public class WeaponEditorView implements IWeaponUpdateView {
     private int height;
 
     public WeaponEditorView (int width, int height) throws IOException {
-        ResourceBundle labelsResource;
-        labelsResource = ResourceBundle.getBundle("resources/GameAuthoringWeapon");
+        ResourceBundle labelsResource = ResourceBundle.getBundle("resources/GameAuthoringWeapon");
+        ResourceBundle dialogueBoxResource = ResourceBundle.getBundle("resources/DialogueBox");
 
         this.width = width;
         this.height = height;
@@ -63,7 +63,8 @@ public class WeaponEditorView implements IWeaponUpdateView {
         weaponEffectsView =
                 new WeaponEffectView(weaponNameView, weaponSpeedView, weaponFireRateView,
                                      weaponRangeView, weaponDamageView, weaponCollisionView,
-                                     weaponPathView, weaponImageView, labelsResource);
+                                     weaponPathView, weaponImageView, labelsResource,
+                                     dialogueBoxResource);
         setBorderPane();
     }
 
@@ -91,7 +92,6 @@ public class WeaponEditorView implements IWeaponUpdateView {
         weaponCollisionView.setDelegate(delegate);
         weaponEffectsView.setDelegate(delegate);
         weaponPathView.setDelegate(delegate);
-
     }
 
     @Override

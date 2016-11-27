@@ -45,6 +45,8 @@ public class WeaponEffectView extends PhotoFileChooser {
     private WeaponPathField weaponPath;
     private WeaponImageView weaponImage;
 
+    private ResourceBundle dialogueBoxResource;
+
     public WeaponEffectView (WeaponNameField weaponName,
                              WeaponSpeedField weaponSpeed,
                              WeaponFireRateField weaponFireRate,
@@ -53,9 +55,11 @@ public class WeaponEffectView extends PhotoFileChooser {
                              WeaponCollisionEffectField weaponCollision,
                              WeaponPathField weaponPath,
                              WeaponImageView weaponImage,
-                             ResourceBundle labelsResource)
+                             ResourceBundle labelsResource,
+                             ResourceBundle dialogueBoxResource)
         throws IOException {
         this.labelsResource = labelsResource;
+        this.dialogueBoxResource = dialogueBoxResource;
 
         this.weaponName = weaponName;
         this.weaponSpeed = weaponSpeed;
@@ -89,13 +93,17 @@ public class WeaponEffectView extends PhotoFileChooser {
         vboxView.getChildren().add(ButtonFactory.makeButton(labelsResource.getString("Image"),
                                                             e -> {
                                                                 try {
-                                                                    selectFile("Photos:",
-                                                                               "Select new weapon image");
+                                                                    selectFile(labelsResource
+                                                                            .getString("Photos"),
+                                                                               labelsResource
+                                                                                       .getString("NewWeapon"));
                                                                 }
                                                                 catch (IOException e1) {
                                                                     DialogueBoxFactory
-                                                                            .createErrorDialogueBox("Unable to open file chooser",
-                                                                                                    "Try again");
+                                                                            .createErrorDialogueBox(dialogueBoxResource
+                                                                                    .getString("UnableToOpen"),
+                                                                                                    dialogueBoxResource
+                                                                                                            .getString("TryAgain"));
                                                                 }
                                                             }));
         vboxView.getChildren()

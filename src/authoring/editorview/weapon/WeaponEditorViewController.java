@@ -1,6 +1,7 @@
 package authoring.editorview.weapon;
 
 import java.io.IOException;
+import java.util.ResourceBundle;
 import authoring.editorview.EditorViewController;
 import authoring.utilityfactories.DialogueBoxFactory;
 
@@ -40,8 +41,7 @@ public class WeaponEditorViewController extends EditorViewController
             weaponDataSource.setWeaponFireRate(currentWeaponID, Integer.parseInt(weaponFireRate));
         }
         catch (NumberFormatException e) {
-            DialogueBoxFactory.createErrorDialogueBox("This input is not an integer",
-                                                      "Check input");
+            createDialogueBox();
         }
     }
 
@@ -52,8 +52,7 @@ public class WeaponEditorViewController extends EditorViewController
             weaponDataSource.setWeaponSpeed(currentWeaponID, Integer.parseInt(weaponSpeed));
         }
         catch (NumberFormatException e) {
-            DialogueBoxFactory.createErrorDialogueBox("This input is not an integer",
-                                                      "Check input");
+            createDialogueBox();
         }
     }
 
@@ -69,8 +68,7 @@ public class WeaponEditorViewController extends EditorViewController
             weaponDataSource.setWeaponRange(currentWeaponID, Integer.parseInt(weaponRange));
         }
         catch (NumberFormatException e) {
-            DialogueBoxFactory.createErrorDialogueBox("This input is not an integer",
-                                                      "Check input");
+            createDialogueBox();
         }
     }
 
@@ -86,8 +84,7 @@ public class WeaponEditorViewController extends EditorViewController
             weaponDataSource.setWeaponDamage(currentWeaponID, Integer.parseInt(weaponDamage));
         }
         catch (NumberFormatException e) {
-            DialogueBoxFactory.createErrorDialogueBox("This input is not an integer",
-                                                      "Check input");
+            createDialogueBox();
         }
     }
 
@@ -104,5 +101,11 @@ public class WeaponEditorViewController extends EditorViewController
     @Override
     public void onUserEnteredWeaponPath (String weaponPath) {
         weaponDataSource.setWeaponPath(currentWeaponID, weaponPath);
+    }
+
+    private void createDialogueBox () {
+        ResourceBundle dialogueBoxResource = ResourceBundle.getBundle("resources/DialogueBox");
+        DialogueBoxFactory.createErrorDialogueBox(dialogueBoxResource.getString("Integer"),
+                                                  dialogueBoxResource.getString("CheckInput"));
     }
 }
