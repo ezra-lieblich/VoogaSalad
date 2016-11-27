@@ -25,7 +25,7 @@ public class WeaponEditorViewController extends EditorViewController
 
     private void updateWeaponID () {
         // How do I know which ID I'm working with?
-        // currentWeaponID = weaponDataSource.getWeap
+        currentWeaponID = weaponDataSource.getCreatedWeapon();
     }
 
     public void setWeaponDataSource (WeaponDataSource source) {

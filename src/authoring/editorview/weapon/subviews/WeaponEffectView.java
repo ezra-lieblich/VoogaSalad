@@ -73,6 +73,12 @@ public class WeaponEffectView extends PhotoFileChooser {
         buildViewComponents();
     }
 
+    public void setPaneSize (int width, int height) {
+        completeView.setMaxSize(width, height);
+        completeView.setMinSize(width, height);
+        completeView.setPrefSize(width, height);
+    }
+
     public void setDelegate (WeaponEditorViewDelegate delegate) {
         this.delegate = delegate;
     }
@@ -83,8 +89,8 @@ public class WeaponEffectView extends PhotoFileChooser {
         vboxView.getChildren().add(ButtonFactory.makeButton(labelsResource.getString("Image"),
                                                             e -> {
                                                                 try {
-                                                                    selectFile("Select new weapon image",
-                                                                               "Photos: ");
+                                                                    selectFile("Photos:",
+                                                                               "Select new weapon image");
                                                                 }
                                                                 catch (IOException e1) {
                                                                     DialogueBoxFactory
@@ -122,6 +128,9 @@ public class WeaponEffectView extends PhotoFileChooser {
     @Override
     public void openFileChooser (FileChooser chooseFile) {
         chosenFile = chooseFile.showOpenDialog(new Stage());
+        if (chosenFile != null) {
+            delegate.onUserEnteredWeaponImage(chosenFile.toURI().toString());
+        }
         // if not null -> get imageFilePath and update the instance variable
         // then loadImage through the created method above
     }

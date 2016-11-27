@@ -36,11 +36,21 @@ public class WeaponEditorView implements IWeaponUpdateView {
     private WeaponPathField weaponPathView;
     private WeaponImageView weaponImageView;
 
-    public WeaponEditorView () throws IOException {
+    private int width;
+    private int height;
+
+    public WeaponEditorView (int width, int height) throws IOException {
         ResourceBundle labelsResource;
         labelsResource = ResourceBundle.getBundle("resources/GameAuthoringWeapon");
 
+        this.width = width;
+        this.height = height;
+
         weaponEditorView = new BorderPane();
+        weaponEditorView.setPrefSize(width, height);
+        weaponEditorView.setMaxSize(width, height);
+        weaponEditorView.setMinSize(width, height);
+
         weaponBank = new WeaponImageBank(labelsResource);
         weaponNameView = new WeaponNameField(labelsResource);
         weaponSpeedView = new WeaponSpeedField(labelsResource);
@@ -58,6 +68,8 @@ public class WeaponEditorView implements IWeaponUpdateView {
     }
 
     private void setBorderPane () {
+        weaponBank.setPaneSize(width / 4, height);
+        weaponEffectsView.setPaneSize(width * 3 / 4, height);
         weaponEditorView.setLeft(weaponBank.getInstanceAsNode());
         weaponEditorView.setCenter(weaponEffectsView.getInstanceAsNode());
     }

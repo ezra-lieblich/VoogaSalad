@@ -62,6 +62,12 @@ public class WeaponImageBank extends PhotoFileChooser implements IWeaponEditorVi
         weaponBank.setContent(vbox);
     }
 
+    public void setPaneSize (int width, int height) {
+        weaponBank.setMaxSize(width, height);
+        weaponBank.setMinSize(width, height);
+        weaponBank.setPrefSize(width, height);
+    }
+
     @Override
     public Node getInstanceAsNode () {
         return weaponBank;
@@ -87,10 +93,10 @@ public class WeaponImageBank extends PhotoFileChooser implements IWeaponEditorVi
                 imageRead = ImageIO.read(chosenFile);
                 Image image2 = SwingFXUtils.toFXImage(imageRead, null);
                 imageView.setImage(image2);
+                // delegate.onUserEnteredWeaponImage(chosenFile.toURI().toString());
                 // weaponBank.setContent(imageView);
                 // TODO: These should be correct but are erring out currently
                 // delegate.onUserPressedCreateWeapon();
-                // delegate.onUserEnteredWeaponImage(chosenFile.toURI().toString());
             }
             catch (Exception e) {
                 System.out.println("You failed");
