@@ -2,11 +2,16 @@ package authoring.editorview.weapon;
 
 import authoring.editorview.IEditorView;
 
+
 /**
- * The Weapon View interface will detail the components of the weapon creation. The interface
- * determines a portion of our internal API.
+ * The interface for all weapon views. Allows those classes to implement setDelegate and
+ * getInstanceAsNode
+ * 
+ * @author Kayla Schulz
  *
  */
 public interface IWeaponEditorView extends IEditorView {
-    
+
+    public void setDelegate (WeaponEditorViewDelegate delegate);
+
 }

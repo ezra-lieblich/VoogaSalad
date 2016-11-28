@@ -1,34 +1,66 @@
 package authoring.editorview.enemy;
 
-import authoring.editorview.enemy.subviews.InitNewEnemyView;
-import javafx.scene.Group;
+import java.io.IOException;
+import authoring.editorview.enemy.subviews.EnemyEffectView;
+import authoring.editorview.enemy.subviews.EnemyImageBank;
+import authoring.editorview.enemy.subviews.editorfields.EnemyFrequencyField;
+import authoring.editorview.enemy.subviews.editorfields.EnemyImageView;
+import authoring.editorview.enemy.subviews.editorfields.EnemyNameField;
+import authoring.editorview.enemy.subviews.editorfields.EnemyCollisionEffectField;
+import authoring.editorview.enemy.subviews.editorfields.EnemySpeedField;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
 
 
-public class EnemyEditorView implements IEnemyEditorView {
+/**
+ * @author Kayla Schulz
+ * @author Diane Hadley
+ * 
+ */
 
-	private BorderPane root;
-	private InitNewEnemyView newEnemy;
-	
-	public EnemyEditorView(){
-		root = new BorderPane();
-		newEnemy = new InitNewEnemyView(this);
-		root.setCenter(newEnemy.getRoot());
-		
-	}
-	
+public class EnemyEditorView implements IEnemyEditorView {
+    private EnemyEditorViewDelegate delegate;
+    private BorderPane enemyEditorView;
+    private EnemyImageBank enemyBank;
+    private EnemyNameField enemyName;
+    private EnemySpeedField enemySpeed;
+    private EnemyImageView enemyImage;
+    private EnemyEffectView enemyEffectView;
+    private EnemyFrequencyField enemyFrequency;
+    private EnemyCollisionEffectField enemyReactions;
+
+    public EnemyEditorView () throws IOException {
+        enemyEditorView = new BorderPane();
+        enemyBank = new EnemyImageBank();
+        enemyName = new EnemyNameField();
+        enemySpeed = new EnemySpeedField();
+        enemyFrequency = new EnemyFrequencyField();
+        enemyReactions = new EnemyCollisionEffectField();
+        enemyImage = new EnemyImageView();
+        enemyEffectView = new EnemyEffectView(enemyFrequency, enemyImage, enemyName, enemyReactions, enemySpeed);
+        setBorderPane();
+    }
+
+    private void setBorderPane () {
+        enemyEditorView.setLeft(enemyBank.getInstanceAsNode());
+        enemyEditorView.setCenter(enemyEffectView.getInstanceAsNode());
+    }
+
     @Override
-    public Node getInstanceAsNode () {      
-    	return root;
+    public Node getInstanceAsNode () {
+        return enemyEditorView;
     }
-    
-    public void getEnemySetter(){
-    	Group designEnemy = new Group();
-    	root.setCenter(designEnemy);
+
+    @Override
+    public void setDelegate (EnemyEditorViewDelegate delegate) {
+        this.delegate = delegate;
+        enemyBank.setDelegate(delegate);
+        enemyName.setDelegate(delegate);
+        enemySpeed.setDelegate(delegate);
+        enemyImage.setDelegate(delegate);
+        enemyFrequency.setDelegate(delegate);
+        enemyReactions.setDelegate(delegate);
+        enemyEffectView.setDelegate(delegate);
     }
-    
-    
-    
 
 }
