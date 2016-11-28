@@ -16,7 +16,7 @@ public class GamePlayModel extends Observable {
 	private int gridX;
 	private int gridY;
 
-	// private List<Enemy> enemyOnGrid;
+	private List<Enemy> enemyOnGrid;
 	private List<Weapon> weaponOnGrid;
 	private int hitBuffer = 10; // initialize from xml
 
@@ -85,12 +85,7 @@ public class GamePlayModel extends Observable {
 	public void initializeGameSetting(GamePlayerFactory factory) {
 		this.factory = factory;
 		HashMap<String, Double> settingInfo = factory.getGameSetting();
-		this.currentLevel = settingInfo.get("levelnumber").intValue(); // do we
-																		// need
-																		// levelnumber
-																		// and
-																		// current
-																		// level?
+		this.currentLevel = settingInfo.get("levelnumber").intValue(); // we should just set it to be 1 to start
 		this.numLevels = settingInfo.get("numLevels");
 		this.gold = settingInfo.get("gold");
 		this.lives = settingInfo.get("lives");
@@ -109,8 +104,9 @@ public class GamePlayModel extends Observable {
 		gridArray = this.grid.getGrid();
 		this.gridX = this.gridArray.length;
 		this.gridY = this.gridArray[0].length;
-		// enemyOnGrid = new ArrayList<Enemy>();
 		weaponOnGrid = new ArrayList<Weapon>();
+		enemyOnGrid = new ArrayList<Enemy>();
+
 
 	}
 

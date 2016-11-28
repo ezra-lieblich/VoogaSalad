@@ -14,7 +14,7 @@ public class EnemyType extends AbstractType implements Enemy {
 	private String collisionEffect;
 
 	
-    protected EnemyType (TypeInitializer typeBuilder) {
+    public EnemyType (TypeInitializer typeBuilder) {
         super(typeBuilder);
         // TODO Auto-generated constructor stub
     }

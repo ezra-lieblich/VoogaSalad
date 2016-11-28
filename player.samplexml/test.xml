@@ -5,10 +5,7 @@
 		<numLevels>2</numLevels>
 		<lives>50</lives>
 		<gold>1000</gold>
-<<<<<<< HEAD
-=======
 		<levelnumber>1</levelnumber>
->>>>>>> fe89404c17e22eb3c01fccdc170aebb928eb7a3f
 	</init>
 	<towerList>
 			<tower>

@@ -16,7 +16,8 @@ public class Enemy extends Observable{
 	private double width, height;
 	private int uniqueID;
 	
-	public Enemy(String name, double movingSpeed, int health, String image, double width, double height){
+	public Enemy(int ID, String name, double movingSpeed, int health, String image, double width, double height){
+		this.uniqueID = ID;
 		this.name = name; 
 		this.movingSpeed = movingSpeed;
 		this.health = health;	

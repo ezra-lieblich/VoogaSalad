@@ -120,6 +120,9 @@ public class XMLParser {
     			double sellAmount = Double.parseDouble(((Element)(tower.getElementsByTagName("sellAmount").item(0))).getFirstChild().getNodeValue());
     			int fireRate = Integer.parseInt(((Element)(tower.getElementsByTagName("fireRate").item(0))).getFirstChild().getNodeValue());
     			int unlockLevel = Integer.parseInt(((Element)(tower.getElementsByTagName("unlockLevel").item(0))).getFirstChild().getNodeValue());
+    			
+//+++++++++++++talked to game engine for enemy type constructor what is the interface initializer????++++++
+    			
     			TowerType towerType = new TowerType(name,imageLocation,cost,sellAmount,fireRate,unlockLevel);
     			ret.put(i, towerType);
     		}
@@ -153,7 +156,7 @@ public class XMLParser {
 
 				double width = 20; //for testing purposes
 				double height = 20; //for testing purposes
-				enemiesInLevel.add(new Enemy(type.getName(),type.getSpeed(),(int)(type.getHealth()), type.getImageLocation(), width ,height)); //for testing
+				enemiesInLevel.add(new Enemy(type.getName(),type.getSpeed(),(int)(type.getHealth()), type.getImagePath(), width ,height)); //for testing
 			}
 			enemyByLevel.add(enemiesInLevel);
 		}
@@ -174,7 +177,11 @@ public class XMLParser {
     			double points = Double.parseDouble(((Element)(enemy.getElementsByTagName("points").item(0))).getFirstChild().getNodeValue());
     			double money = Double.parseDouble(((Element)(enemy.getElementsByTagName("money").item(0))).getFirstChild().getNodeValue());
     			String collisionEffect = ((Element)(enemy.getElementsByTagName("collisionEffect").item(0))).getFirstChild().getNodeValue();
-    			EnemyType enemyType = new EnemyType(name,imageLocation,speed,health,points,money,collisionEffect);
+    			
+    			
+  //+++++++++++++talked to game engine for enemy type constructor what is the interface initializer????++++++
+    			//EnemyType enemyType = new EnemyType(name,imageLocation,speed,health,points,money,collisionEffect);
+    			EnemyType enemyType = new EnemyType(null);
     			ret.put(name, enemyType);
     		}
     	}

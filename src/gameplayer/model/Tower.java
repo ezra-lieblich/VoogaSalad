@@ -7,11 +7,12 @@ public class Tower {
 	private double cost;
 	private ArrayList<Integer> weaponType;
 	private String image;
-	private int ID;  // towerType
+	private int type;// towerType
+	private int ID;  // unique ID for each tower on map
 	private double[] coordinates;
 	
 	
-	public Tower (int ID, double cost, ArrayList<Integer> weaponTypes, String image, String name){
+	public Tower (int type, int ID, double cost, ArrayList<Integer> weaponTypes, String image, String name){
 		this.cost = cost;
 		this.weaponType = weaponTypes;
 		this.image = image;
@@ -31,8 +32,14 @@ public class Tower {
 	
 	
 	int getType(){
+		return this.type;
+	}
+	
+	
+	int getID(){
 		return this.ID;
 	}
+	
 	
 	public String getImage(){
 		return this.image;
