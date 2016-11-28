@@ -2,44 +2,45 @@ package engine.path;
 
 import engine.AbstractType;
 import engine.TypeInitializer;
+import engine.observer.ObservableProperty;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class PathType extends AbstractType implements Path {
 
-    private String type;
-    private List<GridCoordinate> coordinates;
-    
+    private ObservableProperty<String> type;
+    private ObservableProperty<List<Coordinate<Integer>>> coordinates;    
 
-    protected PathType (TypeInitializer typeBuilder) {
-        super(typeBuilder);
-        // TODO Auto-generated constructor stub
+    protected PathType (PathInitializer pathInitializer) {
+        super(pathInitializer);
+        this.type = pathInitializer.getType();
+        this.coordinates = pathInitializer.getCoordinates();
     }
     
     @Override
     public String getType () {
-        return type;
+        return type.getProperty();
     }
 
     @Override
     public void setType (String type) {
-        this.type = type;
+        this.type.setProperty(type);
     }
 
     @Override
-    public void addCoordinate(GridCoordinate coordinate) {
-        coordinates.add(coordinate);
+    public void addCoordinate(Coordinate<Integer> coordinate) {
+        coordinates.getProperty().add(coordinate);
     }
     
     @Override
-    public void removeCoordinate(GridCoordinate coordinate) {
-        coordinates.remove(coordinate);
+    public void removeCoordinate(Coordinate<Integer> coordinate) {
+        coordinates.getProperty().remove(coordinate);
     }
     
     @Override
-    public List<GridCoordinate> getCoordinates () {
-        return Collections.unmodifiableList(coordinates);
+    public List<Coordinate<Integer>> getCoordinates () {
+        return Collections.unmodifiableList(coordinates.getProperty());
     }
     
 }
