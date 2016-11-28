@@ -18,11 +18,11 @@ public class AbilityTypeBuilder extends AbstractTypeBuilder<Ability, AbilityBuil
      public static final String DEFAULT_NAME = "New Weapon";
      public static final String DEFAULT_IMAGE_PATH = "Images.penguin.jpg";
      public static final double DEFAULT_SIZE = 1;
-     public static final double DEFAULT_FIRE_RATE = 2;
+     public static final double DEFAULT_RATE = 2;
      public static final String DEFAULT_EFFECT = "";
      
      
-     private ObservableProperty<Double> fireRate;
+     private ObservableProperty<Double> rate;
      private ObservableProperty<String> effect;
      
      public AbilityTypeBuilder() {
@@ -31,7 +31,7 @@ public class AbilityTypeBuilder extends AbstractTypeBuilder<Ability, AbilityBuil
     
     @Override
     public AbilityBuilder buildRate(double rate) {
-        this.fireRate.setProperty(rate);
+        this.rate.setProperty(rate);
         return this;
     }
     
@@ -47,8 +47,8 @@ public class AbilityTypeBuilder extends AbstractTypeBuilder<Ability, AbilityBuil
     }
 
     @Override
-    public ObservableProperty<Double> getFireRate () {
-        return fireRate;
+    public ObservableProperty<Double> getRate () {
+        return rate;
     }
 
     @Override
@@ -58,7 +58,7 @@ public class AbilityTypeBuilder extends AbstractTypeBuilder<Ability, AbilityBuil
 
     @Override
     protected void restoreTypeDefaults () {
-        this.fireRate = new ObservableObjectProperty<Double>(DEFAULT_FIRE_RATE);
+        this.rate = new ObservableObjectProperty<Double>(DEFAULT_RATE);
         this.effect = new ObservableObjectProperty<String>(DEFAULT_EFFECT);
     }
 
@@ -69,7 +69,7 @@ public class AbilityTypeBuilder extends AbstractTypeBuilder<Ability, AbilityBuil
     
     @Override
     public AbilityBuilder addFireRateListener(BiConsumer<Double, Double> listener) {
-        fireRate.addListener(listener);
+        rate.addListener(listener);
         return this;
     }
     

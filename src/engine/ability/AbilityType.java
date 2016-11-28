@@ -9,10 +9,10 @@ public class AbilityType extends AbstractType implements Ability {
     private ObservableProperty<Double> rate;
     private ObservableProperty<String> effect;
     
-    protected AbilityType (AbilityBuilder abilityBuilder) {
-        super(abilityBuilder);
-        this.rate = abilityBuilder.getFireRate();
-        this.effect = abilityBuilder.getEffect();
+    protected AbilityType (AbilityInitializer abilityInitializer) {
+        super(abilityInitializer);
+        this.rate = abilityInitializer.getRate();
+        this.effect = abilityInitializer.getEffect();
     }
     
     @Override
