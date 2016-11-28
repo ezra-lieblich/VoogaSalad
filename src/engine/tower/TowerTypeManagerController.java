@@ -3,8 +3,8 @@ package engine.tower;
 public class TowerTypeManagerController {
     private TowerManager towerManager;
     
-    TowerTypeManagerController() {
-        
+    TowerTypeManagerController(TowerManager towerManager) {
+        this.towerManager = towerManager;
     }
 
 }
