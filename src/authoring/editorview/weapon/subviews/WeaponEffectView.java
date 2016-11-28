@@ -1,59 +1,131 @@
 package authoring.editorview.weapon.subviews;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ResourceBundle;
+import authoring.editorview.PhotoFileChooser;
 import authoring.editorview.weapon.WeaponEditorViewDelegate;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.control.Label;
+import authoring.editorview.weapon.subviews.editorfields.WeaponCollisionEffectField;
+import authoring.editorview.weapon.subviews.editorfields.WeaponDamageField;
+import authoring.editorview.weapon.subviews.editorfields.WeaponFireRateField;
+import authoring.editorview.weapon.subviews.editorfields.WeaponImageView;
+import authoring.editorview.weapon.subviews.editorfields.WeaponNameField;
+import authoring.editorview.weapon.subviews.editorfields.WeaponPathField;
+import authoring.editorview.weapon.subviews.editorfields.WeaponRangeField;
+import authoring.editorview.weapon.subviews.editorfields.WeaponSpeedField;
+import authoring.utilityfactories.BoxFactory;
+import authoring.utilityfactories.ButtonFactory;
+import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 
-public class WeaponEffectView {
-
-    private double fireRate;
-    private String path;
-    private String effect;
-    private double speed;
-    private double range;
+/**
+ * 
+ * @author Kayla Schulz
+ *
+ */
+public class WeaponEffectView extends PhotoFileChooser {
 
     private VBox vboxView;
     private ScrollPane completeView;
     private WeaponEditorViewDelegate delegate;
 
-    public WeaponEffectView () {
-        vboxView = new VBox();
+    private ResourceBundle labelsResource;
+    private File chosenFile;
+    private WeaponNameField weaponName;
+    private WeaponSpeedField weaponSpeed;
+    private WeaponFireRateField weaponFireRate;
+    private WeaponRangeField weaponRange;
+    private WeaponDamageField weaponDamage;
+    private WeaponCollisionEffectField weaponCollision;
+    private WeaponPathField weaponPath;
+    private WeaponImageView weaponImage;
+
+    private final String WEAPON_EFFECT_RESOURCE_PATH = "resources/GameAuthoringWeapon";
+
+    public WeaponEffectView (WeaponNameField weaponName,
+                             WeaponSpeedField weaponSpeed,
+                             WeaponFireRateField weaponFireRate,
+                             WeaponRangeField weaponRange,
+                             WeaponDamageField weaponDamage,
+                             WeaponCollisionEffectField weaponCollision,
+                             WeaponPathField weaponPath,
+                             WeaponImageView weaponImage)
+        throws IOException {
+        this.weaponName = weaponName;
+        this.weaponSpeed = weaponSpeed;
+        this.weaponFireRate = weaponFireRate;
+        this.weaponRange = weaponRange;
+        this.weaponDamage = weaponDamage;
+        this.weaponCollision = weaponCollision;
+        this.weaponPath = weaponPath;
+        this.weaponImage = weaponImage;
+        labelsResource = ResourceBundle.getBundle(WEAPON_EFFECT_RESOURCE_PATH);
+        vboxView = new VBox(10);
         completeView = new ScrollPane();
-        placeInVBox();
         completeView.setContent(vboxView);
+
+        buildViewComponents();
     }
 
-    // TODO: Effect view will allow developer to define range, speed, collision effects, and rate of
-    // fire what about path?
+    public void setDelegate (WeaponEditorViewDelegate delegate) {
+        this.delegate = delegate;
+    }
 
-    public ScrollPane getCompleteView () {
-        // TODO: This will go into the full weapon window
+    private void buildViewComponents () throws IOException {
+        Node myImageView = weaponImage.getInstanceAsNode();
+        vboxView.getChildren().add(myImageView);
+        vboxView.getChildren().add(ButtonFactory.makeButton(labelsResource.getString("Image"),
+                                                            e -> {
+                                                                try {
+                                                                    selectFile("Select new weapon image",
+                                                                               "Photos: ");
+                                                                }
+                                                                catch (IOException e1) {
+                                                                    // TODO Fix this for better user
+                                                                    // output
+                                                                    e1.printStackTrace();
+                                                                }
+                                                            }));
+        vboxView.getChildren()
+                .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Name"),
+                                                        weaponName.getInstanceAsNode()));
+        vboxView.getChildren()
+                .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Rate"),
+                                                        weaponFireRate.getInstanceAsNode()));
+        vboxView.getChildren()
+                .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Speed"),
+                                                        weaponSpeed.getInstanceAsNode()));
+        vboxView.getChildren()
+                .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Range"),
+                                                        weaponRange.getInstanceAsNode()));
+        vboxView.getChildren()
+                .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Damage"),
+                                                        weaponDamage.getInstanceAsNode()));
+        vboxView.getChildren().add(weaponCollision.getInstanceAsNode());
+        vboxView.getChildren().add(weaponPath.getInstanceAsNode());
+    }
+
+    public ScrollPane getInstanceAsNode () {
         return completeView;
     }
 
-    private void placeInVBox () {
-        // TODO: Get the photo and id of the current weapon from the model and place first in this
-        // box
-        vboxView.getChildren()
-                .add(makeTextField("Set weapon speed: ", e -> delegate.setWeaponSpeed(speed)));
-        vboxView.getChildren()
-                .add(makeTextField("Set weapon fire rate: ",
-                                   e -> delegate.setWeaponFireRate(fireRate)));
-        vboxView.getChildren()
-                .add(makeTextField("Set weapon range: ", e -> delegate.setWeaponRange(range)));
+    /**
+     * Update fields methods
+     */
+
+    public void createNewWeapon () {
+        // Call all of the other update methods to get the default values
     }
 
-    private TextField makeTextField (String name, EventHandler<ActionEvent> event) {
-        TextField textField = new TextField();
-        textField.setPromptText(name);
-        textField.setOnAction(event);
-        return textField;
+    @Override
+    public void openFileChooser (FileChooser chooseFile) {
+        chosenFile = chooseFile.showOpenDialog(new Stage());
+        // if not null -> get imageFilePath and update the instance variable
+        // then loadImage through the created method above
     }
 
 }
