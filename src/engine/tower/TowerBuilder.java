@@ -8,11 +8,7 @@ import engine.enemy.Enemy;
 import engine.weapon.Weapon;
 
 
-public interface TowerBuilder extends TypeBuilder<Tower, TowerBuilder>, TowerInitializer, BindableTower { //TODO - Add bindable interface
-
-    TowerBuilder buildUpgrades (Integer ... upgrades);
-    
-    TowerBuilder buildUpgrades (List<Integer> upgrades);
+public interface TowerBuilder extends TypeBuilder<Tower, TowerBuilder>, BindableTower { //TODO - Add bindable interface
 
     TowerBuilder buildWeapons (Integer ... weapons);
     
@@ -25,6 +21,8 @@ public interface TowerBuilder extends TypeBuilder<Tower, TowerBuilder>, TowerIni
     TowerBuilder buildAbilities (Integer ... targets);
     
     TowerBuilder buildAbilities (List<Integer> targets);
+
+    TowerBuilder buildUpgrade (Integer upgrade);
 
     TowerBuilder buildCost (double cost);
 

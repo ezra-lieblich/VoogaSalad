@@ -11,7 +11,6 @@ public interface TowerManager extends Manager<Tower> {
     
     void visitRemoveEntry(EnemyManager manager, Integer index);
     
-    
     void visitRemoveEntry(WeaponManager manager, Integer index);
     
     void visitRemoveEntry(AbilityManager manager, Integer index);

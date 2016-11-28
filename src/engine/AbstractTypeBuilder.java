@@ -10,17 +10,24 @@ import engine.weapon.Weapon;
 
 public abstract class AbstractTypeBuilder<E extends Type, R extends TypeBuilder<E, R>> implements TypeBuilder<E, R>, TypeInitializer {
     
+    private final String DEFAULT_NAME;
+    private final String DEFAULT_IMAGE_PATH;
+    private final Double DEFAULT_SIZE;
+    
+    
     private ObservableProperty<String> name;
     private ObservableProperty<String> imagePath;
     private ObservableProperty<Double> size;
+    private int id;
     private int nextId;
     
     
     protected AbstractTypeBuilder(String name, String imagePath, double size) {
-        this.name = new ObservableObjectProperty<String>(name);
-        this.imagePath = new ObservableObjectProperty<String>(imagePath);
-        this.size = new ObservableObjectProperty<Double>(size);
+        this.DEFAULT_NAME = name;
+        this.DEFAULT_IMAGE_PATH = imagePath;
+        this.DEFAULT_SIZE = size;
         this.nextId = 0;
+        restoreDefaults();
     }
     
     @Override
@@ -38,6 +45,12 @@ public abstract class AbstractTypeBuilder<E extends Type, R extends TypeBuilder<
     @Override
     public R buildSize(double size) {
         this.size.setProperty(size);
+        return getThis();
+    }
+    
+    @Override
+    public R buildId(int id) {
+        this.id = id;
         return getThis();
     }
     
@@ -65,8 +78,8 @@ public abstract class AbstractTypeBuilder<E extends Type, R extends TypeBuilder<
     }
     
     @Override
-    public int getNextId() {
-        return nextId;
+    public int getId() {
+        return id;
     }
     
     @Override
@@ -87,21 +100,29 @@ public abstract class AbstractTypeBuilder<E extends Type, R extends TypeBuilder<
         return getThis();
     }
     
-    protected void setName(ObservableProperty<String> name) {
+    protected void resetName(ObservableProperty<String> name) {
         this.name = name;
     }
     
-    protected void setImagePath(ObservableProperty<String> imagePath) {
+    protected void resetImagePath(ObservableProperty<String> imagePath) {
         this.imagePath = imagePath;
     }
     
-    protected void setSize(ObservableProperty<Double> size) {
+    protected void resetSize(ObservableProperty<Double> size) {
         this.size = size;
+    }
+    
+    private void restoreDefaults() {
+        this.name = new ObservableObjectProperty<String>(DEFAULT_NAME);
+        this.imagePath = new ObservableObjectProperty<String>(DEFAULT_IMAGE_PATH);
+        this.size = new ObservableObjectProperty<Double>(DEFAULT_SIZE);
+        this.id = nextId;
+        restoreTypeDefaults();
     }
     
     protected abstract E create ();
     
-    protected abstract void restoreDefaults();
+    protected abstract void restoreTypeDefaults();
     
     protected abstract R getThis();
 

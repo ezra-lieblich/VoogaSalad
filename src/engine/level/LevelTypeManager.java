@@ -15,7 +15,6 @@ public class LevelTypeManager extends AbstractTypeManager<Level> implements Leve
     private List<Level> levels;
     
     protected LevelTypeManager (ManagerMediator managerMediator) {
-        super(managerMediator);
         // TODO Auto-generated constructor stub
     }
 

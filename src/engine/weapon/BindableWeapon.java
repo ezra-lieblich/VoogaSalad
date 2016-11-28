@@ -1,9 +1,10 @@
 package engine.weapon;
 
 import java.util.function.BiConsumer;
+import engine.BindableType;
 
 
-public interface BindableWeapon {
+public interface BindableWeapon extends BindableType<WeaponBuilder> {
 
     WeaponBuilder addFireRateListener (BiConsumer<Double, Double> listener);
 

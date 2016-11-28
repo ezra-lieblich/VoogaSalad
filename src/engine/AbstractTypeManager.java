@@ -11,14 +11,10 @@ import java.util.function.Supplier;
 import engine.observer.AbstractObservable;
 
 
-public abstract class AbstractTypeManager<E extends Type> extends AbstractObservable<MethodData<Integer>> implements Manager<E> {
-    ManagerMediator managerMediator;
+public abstract class AbstractTypeManager<E extends Type> extends AbstractObservable<MethodData<?>> implements Manager<E> {
+    //ManagerMediator managerMediator;
     Map<Integer, E> data;
     int activeId;
-
-    protected AbstractTypeManager(ManagerMediator managerMediator) {
-        this.managerMediator = managerMediator;
-    }
     
     @Override
     public int addEntry (E entry) {
@@ -97,7 +93,7 @@ public abstract class AbstractTypeManager<E extends Type> extends AbstractObserv
 //                                                 }
     //TODO - error might occur due to taking in a VisitableManager
     @Override
-    public <U extends VisitableManager<MethodData<Integer>>> void visitManager(U visitableManager, MethodData<Integer> dataMethod) {
+    public <U extends VisitableManager<MethodData<?>>> void visitManager(U visitableManager, MethodData<?> dataMethod) {
         try {
             Method visitMethod = this.getClass().getMethod("visit" + dataMethod.getMethod(), new Class[] {visitableManager.getClass()});
             visitMethod.invoke(this, new Object[] {visitableManager, dataMethod.getValue()});
@@ -125,7 +121,7 @@ public abstract class AbstractTypeManager<E extends Type> extends AbstractObserv
     }
     
     @Override
-    public <U extends VisitorManager<MethodData<Integer>>> void accept (U visitor, MethodData<Integer> methodData) {
+    public <U extends VisitorManager<MethodData<?>>> void accept (U visitor, MethodData<?> methodData) {
         visitor.visitManager(this, methodData);
     }
     

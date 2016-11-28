@@ -1,9 +1,10 @@
 package engine.weapon;
 
+import engine.TypeInitializer;
 import engine.observer.ObservableProperty;
 
 
-public interface WeaponInitializer {
+public interface WeaponInitializer extends TypeInitializer {
 
     ObservableProperty<Double> getFireRate ();
 

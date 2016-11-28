@@ -9,6 +9,8 @@ public interface TypeBuilder<E extends Type, R extends TypeBuilder<E, R>> extend
     R buildImagePath (String imagePath);
 
     R buildSize (double size);
+    
+    R buildId (int id);
 
     E build ();
 

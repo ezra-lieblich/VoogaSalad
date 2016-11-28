@@ -16,19 +16,11 @@ public class WeaponType extends AbstractType implements Weapon {
     private ObservableProperty<Double> range;
     
     
-    protected WeaponType (TypeInitializer typeBuilder) {
-        super(typeBuilder);
+    protected WeaponType (WeaponInitializer weaponInitializer) {
+        super(weaponInitializer);
         // TODO Auto-generated constructor stub
     }
-    
-//    WeaponType() {
-//        this.fireRate = Double.parseDouble(getResources("WeaponTypeFireRate"));
-//        this.trajectory = getResources("WeaponTypePath");
-//        this.effect = getResources("WeaponTypeEffect");
-//        this.speed = Double.parseDouble(getResources("WeaponTypeSpeed"));
-//        this.range = Double.parseDouble(getResources("WeaponTypeRange"));
-//    }
-    
+
     @Override
     public double getFireRate () {
         return fireRate.getProperty();
