@@ -4,11 +4,13 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.ResourceBundle;
 import javax.imageio.ImageIO;
 import authoring.editorview.PhotoFileChooser;
 import authoring.editorview.enemy.EnemyEditorViewDelegate;
 import authoring.utilityfactories.BoxFactory;
 import authoring.utilityfactories.ButtonFactory;
+import authoring.utilityfactories.DialogueBoxFactory;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -18,6 +20,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+
 
 /**
  * 
@@ -31,20 +34,24 @@ public class EnemyImageBank extends PhotoFileChooser {
     private VBox vbox;
     private File chosenFile;
 
-    public EnemyImageBank () {
+    public EnemyImageBank (ResourceBundle labelsResource, ResourceBundle dialogueBoxResource) {
         enemyBank = new ScrollPane();
         Button createNewEnemy =
-                ButtonFactory.makeButton("Create New Enemy",
+                ButtonFactory.makeButton(labelsResource.getString("NewEnemy"),
                                          e -> {
                                              try {
-                                                 selectFile("Photos: ", "Select new enemy image");
+                                                 selectFile(labelsResource.getString("Photos"),
+                                                            labelsResource.getString("Image"));
                                              }
                                              catch (IOException e1) {
-                                                 // TODO Auto-generated catch block
-                                                 e1.printStackTrace();
+                                                 DialogueBoxFactory
+                                                         .createErrorDialogueBox(dialogueBoxResource
+                                                                 .getString("UnableToOpen"),
+                                                                                 dialogueBoxResource
+                                                                                         .getString("TryAgain"));
                                              }
                                          });
-        vbox = BoxFactory.createVBox("Enemy Bank: ");
+        vbox = BoxFactory.createVBox(labelsResource.getString("EnemyBank"));
         vbox.getChildren().add(createNewEnemy);
         enemyBank.setContent(vbox);
     }

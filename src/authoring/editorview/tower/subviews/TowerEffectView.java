@@ -20,6 +20,7 @@ import authoring.editorview.tower.subviews.editorfields.TowerUnlockLevelField;
 import authoring.editorview.tower.subviews.editorfields.TowerUpgradeField;
 import authoring.utilityfactories.BoxFactory;
 import authoring.utilityfactories.ButtonFactory;
+import authoring.utilityfactories.DialogueBoxFactory;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
@@ -53,7 +54,7 @@ public class TowerEffectView extends PhotoFileChooser implements ITowerEditorVie
     private File chosenFile;
 
     private ResourceBundle labelsResource;
-    private final String TOWER_EFFECT_RESOURCE_PATH = "resources/GameAuthoringTower";
+    private ResourceBundle dialogueBoxResource;
 
     public TowerEffectView (TowerNameField towerName,
                             TowerFrequencyField towerFrequency,
@@ -66,7 +67,12 @@ public class TowerEffectView extends PhotoFileChooser implements ITowerEditorVie
                             TowerAbilityField towerAbility,
                             TowerChooseEnemyField towerChooseEnemy,
                             TowerChooseWeaponField towerChooseWeapon,
-                            TowerUpgradeField towerUpgrade) {
+                            TowerUpgradeField towerUpgrade,
+                            ResourceBundle labelsResource,
+                            ResourceBundle dialogueBoxResource) {
+
+        this.labelsResource = labelsResource;
+        this.dialogueBoxResource = dialogueBoxResource;
 
         this.towerName = towerName;
         this.towerFrequency = towerFrequency;
@@ -81,7 +87,6 @@ public class TowerEffectView extends PhotoFileChooser implements ITowerEditorVie
         this.towerChooseWeapon = towerChooseWeapon;
         this.towerUpgrade = towerUpgrade;
 
-        labelsResource = ResourceBundle.getBundle(TOWER_EFFECT_RESOURCE_PATH);
         vbox = new VBox(10);
         completeView = new ScrollPane();
         completeView.setContent(vbox);
@@ -96,20 +101,24 @@ public class TowerEffectView extends PhotoFileChooser implements ITowerEditorVie
         vbox.getChildren().add(ButtonFactory.makeButton(labelsResource.getString("Image"),
                                                         e -> {
                                                             try {
-                                                                selectFile("Select new tower image",
-                                                                           "Photos: ");
+                                                                selectFile(labelsResource
+                                                                        .getString("Image"),
+                                                                           labelsResource
+                                                                                   .getString("Photos"));
                                                             }
                                                             catch (IOException e1) {
-                                                                // TODO Fix this for better user
-                                                                // output
-                                                                e1.printStackTrace();
+                                                                DialogueBoxFactory
+                                                                        .createErrorDialogueBox(dialogueBoxResource
+                                                                                .getString("UnableToOpen"),
+                                                                                                dialogueBoxResource
+                                                                                                        .getString("TryAgain"));
                                                             }
                                                         }));
         vbox.getChildren()
                 .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Name"),
                                                            towerName.getInstanceAsNode()));
         vbox.getChildren()
-                .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Rate"),
+                .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("FireRate"),
                                                            towerFireRate.getInstanceAsNode()));
         vbox.getChildren()
                 .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Frequency"),
@@ -140,6 +149,9 @@ public class TowerEffectView extends PhotoFileChooser implements ITowerEditorVie
     @Override
     public void openFileChooser (FileChooser chooseFile) throws IOException {
         chosenFile = chooseFile.showOpenDialog(new Stage());
+        if (chosenFile != null) {
+
+        }
     }
 
     @Override
