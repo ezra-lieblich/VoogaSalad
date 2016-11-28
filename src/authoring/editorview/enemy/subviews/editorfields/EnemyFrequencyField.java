@@ -1,5 +1,6 @@
 package authoring.editorview.enemy.subviews.editorfields;
 
+import java.util.ResourceBundle;
 import authoring.editorview.enemy.EnemyEditorViewDelegate;
 import authoring.editorview.enemy.IEnemyEditorView;
 import authoring.utilityfactories.TextFieldFactory;
@@ -17,9 +18,9 @@ public class EnemyFrequencyField implements IEnemyEditorView {
     private EnemyEditorViewDelegate delegate;
     private TextField enemyFrequencyField;
 
-    public EnemyFrequencyField () {
+    public EnemyFrequencyField (ResourceBundle labelsResource) {
         enemyFrequencyField =
-                TextFieldFactory.makeTextField("Set enemy frequency: ",
+                TextFieldFactory.makeTextField(labelsResource.getString("EnterInt"),
                                                e -> delegate
                                                        .onUserEnteredEnemyFrequency(enemyFrequencyField
                                                                .getText()));

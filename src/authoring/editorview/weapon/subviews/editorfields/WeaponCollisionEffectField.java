@@ -1,5 +1,6 @@
 package authoring.editorview.weapon.subviews.editorfields;
 
+import java.util.ResourceBundle;
 import authoring.editorview.weapon.IWeaponEditorView;
 import authoring.editorview.weapon.WeaponEditorViewDelegate;
 import authoring.utilityfactories.ComboBoxFactory;
@@ -18,8 +19,10 @@ public class WeaponCollisionEffectField implements IWeaponEditorView {
 
     private ComboBox<Object> weaponCollisionEffectBox;
     private WeaponEditorViewDelegate delegate;
+    private ResourceBundle labelsResource;
 
-    public WeaponCollisionEffectField () {
+    public WeaponCollisionEffectField (ResourceBundle labelsResource) {
+        this.labelsResource = labelsResource;
         ObservableList<Object> effectOptions = setList();
         createComboBox(effectOptions);
     }
@@ -32,8 +35,10 @@ public class WeaponCollisionEffectField implements IWeaponEditorView {
 
     private void createComboBox (ObservableList<Object> effectOptions) {
         weaponCollisionEffectBox =
-                ComboBoxFactory.makeComboBox("Set collision effect: ", e -> delegate
-                        .onUserEnteredWeaponEffect((String) weaponCollisionEffectBox.getValue()),
+                ComboBoxFactory.makeComboBox(labelsResource.getString("CollisionEffect"),
+                                             e -> delegate
+                                                     .onUserEnteredWeaponEffect((String) weaponCollisionEffectBox
+                                                             .getValue()),
                                              effectOptions);
     }
 

@@ -1,5 +1,6 @@
 package authoring.editorview.tower.subviews.editorfields;
 
+import java.util.ResourceBundle;
 import authoring.editorview.tower.ITowerEditorView;
 import authoring.editorview.tower.TowerEditorViewDelegate;
 import authoring.utilityfactories.TextFieldFactory;
@@ -17,9 +18,9 @@ public class TowerUnlockLevelField implements ITowerEditorView {
     private TextField towerLevelField;
     private TowerEditorViewDelegate delegate;
 
-    public TowerUnlockLevelField () {
+    public TowerUnlockLevelField (ResourceBundle labelsResource) {
         towerLevelField =
-                TextFieldFactory.makeTextField("Set tower unlock level: ",
+                TextFieldFactory.makeTextField(labelsResource.getString("EnterInt"),
                                                e -> delegate
                                                        .onUserEnteredTowerUnlockLevel(towerLevelField
                                                                .getText()));

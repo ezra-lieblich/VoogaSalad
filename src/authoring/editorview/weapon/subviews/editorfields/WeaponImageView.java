@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 import javax.imageio.ImageIO;
 import authoring.editorview.weapon.IWeaponEditorView;
 import authoring.editorview.weapon.WeaponEditorViewDelegate;
+import authoring.utilityfactories.DialogueBoxFactory;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
@@ -24,10 +25,8 @@ public class WeaponImageView implements IWeaponEditorView {
     private String imagePath;
     private ImageView weaponImage;
 
-    private final String WEAPON_EFFECT_RESOURCE_PATH = "resources/GameAuthoringWeapon";
-
-    public WeaponImageView () throws IOException {
-        labelsResource = ResourceBundle.getBundle(WEAPON_EFFECT_RESOURCE_PATH);
+    public WeaponImageView (ResourceBundle labelsResource) throws IOException {
+        this.labelsResource = labelsResource;
         weaponImage = loadWeaponImage();
     }
 
@@ -50,7 +49,9 @@ public class WeaponImageView implements IWeaponEditorView {
                             .getResourceAsStream(labelsResource.getString("DefaultImagePath")));
             Image image2 = SwingFXUtils.toFXImage(imageRead, null);
             myImageView.setImage(image2);
-            // ErrorBox.createErrorBox("Unable to load tower image");
+            // TODO: Undo comment on this when model and view are connected
+            // DialogueBoxFactory.createErrorDialogueBox("Could not load file",
+            // "Try new photo");
         }
         return myImageView;
     }

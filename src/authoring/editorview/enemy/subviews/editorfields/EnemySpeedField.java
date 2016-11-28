@@ -1,5 +1,6 @@
 package authoring.editorview.enemy.subviews.editorfields;
 
+import java.util.ResourceBundle;
 import authoring.editorview.enemy.EnemyEditorViewDelegate;
 import authoring.editorview.enemy.IEnemyEditorView;
 import authoring.utilityfactories.TextFieldFactory;
@@ -17,9 +18,9 @@ public class EnemySpeedField implements IEnemyEditorView {
     private TextField enemySpeedField;
     private EnemyEditorViewDelegate delegate;
 
-    public EnemySpeedField () {
+    public EnemySpeedField (ResourceBundle labelsResource) {
         enemySpeedField =
-                TextFieldFactory.makeTextField("Set enemy speed: ",
+                TextFieldFactory.makeTextField(labelsResource.getString("EnterInt"),
                                                e -> delegate
                                                        .onUserEnteredEnemySpeed(enemySpeedField
                                                                .getText()));
