@@ -33,11 +33,6 @@ public class WeaponTypeBuilder extends AbstractTypeBuilder<Weapon, WeaponBuilder
      
      public WeaponTypeBuilder() {
          super(DEFAULT_NAME, DEFAULT_IMAGE_PATH, DEFAULT_SIZE);
-         this.fireRate = new ObservableObjectProperty<Double>(DEFAULT_FIRE_RATE);
-         this.trajectory = new ObservableObjectProperty<String>(DEFAULT_TRAJECTORY);
-         this.effect = new ObservableObjectProperty<String>(DEFAULT_EFFECT);
-         this.speed = new ObservableObjectProperty<Double>(DEFAULT_SPEED);
-         this.range = new ObservableObjectProperty<Double>(DEFAULT_RANGE);
      }
     
     @Override
@@ -53,7 +48,7 @@ public class WeaponTypeBuilder extends AbstractTypeBuilder<Weapon, WeaponBuilder
     }
     
     @Override
-    public WeaponBuilder buildUnlockLevel(String effect) {
+    public WeaponBuilder buildEffect(String effect) {
         this.effect.setProperty(effect);
         return this;
     }
@@ -100,12 +95,8 @@ public class WeaponTypeBuilder extends AbstractTypeBuilder<Weapon, WeaponBuilder
         return range;
     }
 
-    //TODO - Is this too inconsistant?
     @Override
-    protected void restoreDefaults () {
-        setName(new ObservableObjectProperty<String>(DEFAULT_NAME));
-        setImagePath(new ObservableObjectProperty<String>(DEFAULT_IMAGE_PATH));
-        setSize(new ObservableObjectProperty<Double>(DEFAULT_SIZE));
+    protected void restoreTypeDefaults () {
         this.fireRate = new ObservableObjectProperty<Double>(DEFAULT_FIRE_RATE);
         this.trajectory = new ObservableObjectProperty<String>(DEFAULT_TRAJECTORY);
         this.effect = new ObservableObjectProperty<String>(DEFAULT_EFFECT);

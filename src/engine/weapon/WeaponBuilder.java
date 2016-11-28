@@ -8,7 +8,7 @@ public interface WeaponBuilder extends TypeBuilder<Weapon, WeaponBuilder>, Weapo
 
     WeaponBuilder buildTrajectory (String trajectory);
 
-    WeaponBuilder buildUnlockLevel (String effect);
+    WeaponBuilder buildEffect (String effect);
 
     WeaponBuilder buildSpeed (double speed);
 
