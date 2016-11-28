@@ -7,23 +7,28 @@ import java.util.Observable;
 import java.util.Observer;
 
 import gameplayer.model.Enemy;
+import gameplayer.model.EnemyModel;
 import gameplayer.model.GamePlayModel;
 import gameplayer.view.GridGUI;
 import gameplayer.view.entity.EnemyView;
 
 public class EnemyController implements Observer{
-	private GamePlayModel model;
+	private EnemyModel model;
 	//private List<EnemyView> enemyViews;
 	private HashMap<Enemy, EnemyView> enemyToView;
 	private GridGUI grid;
 	
 	//TODO: enemy model instead of GamePlayModel
-	public EnemyController(GamePlayModel model, GridGUI grid){
+	public EnemyController(EnemyModel model, GridGUI grid){
 		this.model = model;
 		this.model.addObserver(this);
 		//this.enemyViews = new ArrayList<EnemyView>();
 		this.grid = grid;
 		this.enemyToView = new HashMap<Enemy, EnemyView>();
+	}
+	
+	public EnemyModel getEnemyModel(){
+		return this.model;
 	}
 	
 	private void createEnemyViews(){
@@ -67,8 +72,8 @@ public class EnemyController implements Observer{
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
-		if (o instanceof GamePlayModel){
-			
+		if (o instanceof EnemyModel){
+			updateEnemyViews();
 		}
 		
 	}

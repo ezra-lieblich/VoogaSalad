@@ -63,6 +63,7 @@ public class XMLParser {
     	DOCUMENT_BUILDER.reset(); 
     }
 
+    
     // Helper method to do the boilerplate code needed to make a documentBuilder.
     private static DocumentBuilder getDocumentBuilder () {
         try {
@@ -73,6 +74,15 @@ public class XMLParser {
         }
     }
     
+    public boolean isValid() {
+    	NodeList nodeList = rootElement.getElementsByTagName("isValid");
+    	//System.out.println("node" + nodeList.item(0).getTextContent());
+    	if (nodeList != null && nodeList.getLength() > 0) {
+			return Boolean.parseBoolean(nodeList.item(0).getTextContent().trim()); //check if the string can actually be parsed as a boolean
+		}
+    	return false;
+    	
+    }
     
     //This returns the TYPE of the xml
     public String getName(){
@@ -136,19 +146,21 @@ public class XMLParser {
 		ArrayList<Queue<Enemy>>enemyByLevel=new ArrayList<>(); 
 		HashMap<String,EnemyType> types = getEnemyTypes();
 		String[]enemiesRawString = getTextValue("level"+level,"typeAmount").split(";");
-		for(int i=1;i<=enemiesRawString.length;i++){
+		for(int i=0;i<enemiesRawString.length;i++){
 			Queue<Enemy>enemiesInLevel= new LinkedList<Enemy>(); 
 			String[]enemies = enemiesRawString[i].split(",");
 			for(int k=0;k<Integer.parseInt(enemies[1]);k++){
 				EnemyType type = types.get(enemies[0]);
-				
-		//+++++++++++++++++++++++++DEBUG++++++++++++++++++++++++++++++++++		
-				//enemiesInLevel.add(new Enemy(type.getName(),type.getSpeed(),(int)(type.getHealth()),type.getImageLocation(), k, k));
+
+				double width = 20; //for testing purposes
+				double height = 20; //for testing purposes
+				enemiesInLevel.add(new Enemy(type.getName(),type.getSpeed(),(int)(type.getHealth()), type.getImageLocation(), width ,height)); //for testing
 			}
 			enemyByLevel.add(enemiesInLevel);
 		}
 		return enemyByLevel; 
 	}
+	
 	
 	private HashMap<String, EnemyType> getEnemyTypes() {
 		HashMap<String,EnemyType>ret = new HashMap<>(); 

@@ -5,11 +5,15 @@
 		<numLevels>2</numLevels>
 		<lives>50</lives>
 		<gold>1000</gold>
+<<<<<<< HEAD
+=======
+		<levelnumber>1</levelnumber>
+>>>>>>> fe89404c17e22eb3c01fccdc170aebb928eb7a3f
 	</init>
 	<towerList>
 			<tower>
 				<name>ninja monkey</name>
-				<imageLocation>images/penguin.jpg</imageLocation>
+				<imageLocation>penguin.jpg</imageLocation>
 				<isDestroyable>false</isDestroyable>
 				<range>5</range>
 				<fireRate>5</fireRate>
@@ -24,7 +28,7 @@
 			</tower>
 			<tower>
 				<name>test monkey</name>
-				<imageLocation>images/kaneki.jpg</imageLocation>
+				<imageLocation>butterfly.png</imageLocation>
 				<isDestroyable>false</isDestroyable>
 				<range>10</range>
 				<fireRate>2</fireRate>
@@ -41,7 +45,7 @@
 	<enemyList>
 		<enemy>
 			<name>redballoon</name>
-			<imageLocation>images/redbaloon.jpg</imageLocation>
+			<imageLocation>redballoon.jpg</imageLocation>
 			<widthOfImage> 20 </widthOfImage>
 			<heightOfImage> 20 </heightOfImage>
 			<speed>5</speed>
@@ -52,7 +56,7 @@
 		</enemy>
 		<enemy>
 			<name>redmoab</name>
-			<imageLocation>images/redmoab.jpg</imageLocation>
+			<imageLocation>redmoab.jpg</imageLocation>
 			<widthOfImage>50</widthOfImage>
 			<heightOfImage>50</heightOfImage>
 			<speed>3</speed>
@@ -71,15 +75,15 @@
 		</wave>
 		<path>
 			<coordinate>0,0;</coordinate>
-			<coordinate>0,1;</coordinate>
-			<coordinate>0,2;</coordinate>
-			<coordinate>0,3;</coordinate>
-			<coordinate>0,4;</coordinate>
-			<coordinate>0,5;</coordinate>
-			<coordinate>0,6;</coordinate>
-			<coordinate>0,7;</coordinate>
-			<coordinate>0,8;</coordinate>
-			<coordinate>0,9;</coordinate>
+			<coordinate>1,0;</coordinate>
+			<coordinate>2,0;</coordinate>
+			<coordinate>3,0;</coordinate>
+			<coordinate>4,0;</coordinate>
+			<coordinate>5,0;</coordinate>
+			<coordinate>6,0;</coordinate>
+			<coordinate>7,0;</coordinate>
+			<coordinate>8,0;</coordinate>
+			<coordinate>9,0;</coordinate>
 		</path>
 		<enemies>
 			
@@ -94,15 +98,15 @@
 		</wave>
 		<path>
 			<coordinate>0,0;</coordinate>
-			<coordinate>0,1;</coordinate>
-			<coordinate>0,2;</coordinate>
-			<coordinate>0,3;</coordinate>
-			<coordinate>0,4;</coordinate>
-			<coordinate>0,5;</coordinate>
-			<coordinate>0,6;</coordinate>
-			<coordinate>0,7;</coordinate>
-			<coordinate>0,8;</coordinate>
-			<coordinate>0,9;</coordinate>
+			<coordinate>1,0;</coordinate>
+			<coordinate>2,0;</coordinate>
+			<coordinate>3,0;</coordinate>
+			<coordinate>4,0;</coordinate>
+			<coordinate>5,0;</coordinate>
+			<coordinate>6,0;</coordinate>
+			<coordinate>7,0;</coordinate>
+			<coordinate>8,0;</coordinate>
+			<coordinate>9,0;</coordinate>
 		</path>
 	</level2>
 </GameSetting>

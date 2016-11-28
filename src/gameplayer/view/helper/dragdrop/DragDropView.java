@@ -55,6 +55,10 @@ public class DragDropView {
 		return this.dragDropPane;
 	}
 	
+	public DragDrop getDragDrop(){
+		return this.dragDrop;
+	}
+	
 	/**
 	 * Creates a new tab and adds it to the main tabpane
 	 * @param title

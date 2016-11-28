@@ -5,8 +5,12 @@ import java.util.List;
 import gameplayer.view.buttonPanel.ButtonPanel;
 import gameplayer.view.buttonPanel.GamePlayButtonPanel;
 import gameplayer.view.helper.GraphicsLibrary;
+import gameplayer.view.helper.dragdrop.DragDrop;
 import gameplayer.view.helper.dragdrop.DragDropView;
 import gameplayer.view.statsdisplay.StatsDisplay;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -39,6 +43,7 @@ public class GameGUI {
 	private double numLevels;
 	private double currentLevel;
 	private List path;
+	private EventHandler animationBind;
 	
 	public GameGUI(int rows, int columns){
 		this.mainScreen = new BorderPane();
@@ -77,6 +82,14 @@ public class GameGUI {
 		return this.grid;
 	}
 	
+	public DragDrop getDragDrop(){
+		return this.dragDrop.getDragDrop();
+	}
+	
+	public void bindAnimationStart(EventHandler<ActionEvent> handle){
+		this.buttonPanel.bindAnimationStart(handle);
+	}
+	
 	private void addButtonPanel(){
 		this.buttonPanel.init();
 		mainScreen.setTop(this.buttonPanel.getPane());
@@ -106,8 +119,6 @@ public class GameGUI {
 		mainScreen.setRight(dragDrop.getDragDropPane());
 		Tab tab = dragDrop.createTab("Blah test");
 		dragDrop.populateImageViewsToTab(tab, imagePaths);
-		//Tab tab2 = dragDrop.createTab("Another text");
-		//dragDrop.populateImageViewsToTab(tab2, testImages2);
 	}
 	
 	private void initStatsDisplay(double gold, double lives, double level){
