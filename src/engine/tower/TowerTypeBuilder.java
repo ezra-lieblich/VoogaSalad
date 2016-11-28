@@ -20,15 +20,15 @@ public class TowerTypeBuilder extends AbstractTypeBuilder<Tower, TowerBuilder> i
      public static final double DEFAULT_SIZE = 1;
      public static final List<Integer> DEFAULT_WEAPONS = Arrays.asList(new Integer[]{});
      public static final List<Integer> DEFAULT_TARGETS = Arrays.asList(new Integer[]{});
-     public static final List<Integer> DEFAULT_ABILITIES= Arrays.asList(new Integer[]{});
+     public static final List<Integer> DEFAULT_ABILITIES = Arrays.asList(new Integer[]{});
      public static final int DEFAULT_UPGRADE = -1;
      public static final double DEFAULT_COST = 100;
      public static final double DEFAULT_SELL_AMOUNT = DEFAULT_COST / 2;
      public static final int DEFAULT_UNLOCK_LEVEL = 0;
      
-     private List<Integer> weapons;
-     private List<Integer> targets;
-     private List<Integer> abilities;
+     private ObservableProperty<List<Integer>> weapons;
+     private ObservableProperty<List<Integer>> targets;
+     private ObservableProperty<List<Integer>> abilities;
      private ObservableProperty<Integer> upgrade;
      private ObservableProperty<Double> cost;
      private ObservableProperty<Double> sellAmount;
@@ -36,13 +36,6 @@ public class TowerTypeBuilder extends AbstractTypeBuilder<Tower, TowerBuilder> i
      
      public TowerTypeBuilder() {
          super(DEFAULT_NAME, DEFAULT_IMAGE_PATH, DEFAULT_SIZE);
-         this.upgrade = new ObservableObjectProperty<Integer>(DEFAULT_UNLOCK_LEVEL);
-         this.weapons = DEFAULT_WEAPONS;
-         this.targets = DEFAULT_TARGETS;
-         this.abilities = DEFAULT_ABILITIES;
-         this.cost = new ObservableObjectProperty<Double>(DEFAULT_COST);
-         this.sellAmount = new ObservableObjectProperty<Double>(DEFAULT_SELL_AMOUNT);
-         this.unlockLevel = new ObservableObjectProperty<Integer>(DEFAULT_UNLOCK_LEVEL);
      }
     
     @Override
@@ -58,7 +51,7 @@ public class TowerTypeBuilder extends AbstractTypeBuilder<Tower, TowerBuilder> i
     
     @Override
     public TowerBuilder buildWeapons(List<Integer> weapons) {
-        this.weapons = weapons;
+        this.weapons.setProperty(weapons);
         return this;
     }
     
@@ -69,7 +62,7 @@ public class TowerTypeBuilder extends AbstractTypeBuilder<Tower, TowerBuilder> i
     
     @Override
     public TowerBuilder buildTargets(List<Integer> targets) {
-        this.targets = targets;
+        this.targets.setProperty(targets);
         return this;
     }
     
@@ -80,7 +73,7 @@ public class TowerTypeBuilder extends AbstractTypeBuilder<Tower, TowerBuilder> i
     
     @Override
     public TowerBuilder buildAbilities(List<Integer> abilities) {
-        this.abilities = abilities;
+        this.abilities.setProperty(abilities);
         return this;
     }
     
@@ -108,18 +101,18 @@ public class TowerTypeBuilder extends AbstractTypeBuilder<Tower, TowerBuilder> i
     }
 
     @Override
-    public List<Integer> getWeapons () {
-        return Collections.unmodifiableList(weapons);
+    public ObservableProperty<List<Integer>> getWeapons () {
+        return weapons;
     }
 
     @Override
-    public List<Integer> getTargets () {
-        return Collections.unmodifiableList(targets);
+    public ObservableProperty<List<Integer>> getTargets () {
+        return targets;
     }
 
     @Override
-    public List<Integer> getAbilities () {
-        return Collections.unmodifiableList(abilities);
+    public ObservableProperty<List<Integer>> getAbilities () {
+        return abilities;
     }
     
     @Override
@@ -142,15 +135,12 @@ public class TowerTypeBuilder extends AbstractTypeBuilder<Tower, TowerBuilder> i
         return unlockLevel;
     }
 
-    //Is this too inconsistant?
     @Override
-    protected void restoreDefaults () {
-        setName(new ObservableObjectProperty<String>(DEFAULT_NAME));
-        setImagePath(new ObservableObjectProperty<String>(DEFAULT_IMAGE_PATH));
-        setSize(new ObservableObjectProperty<Double>(DEFAULT_SIZE));
-        buildWeapons(DEFAULT_WEAPONS);
-        buildTargets(DEFAULT_TARGETS);
-        buildAbilities(DEFAULT_ABILITIES);
+    protected void restoreTypeDefaults () {
+        this.weapons = new ObservableObjectProperty<List<Integer>>(DEFAULT_WEAPONS);
+        this.targets = new ObservableObjectProperty<List<Integer>>(DEFAULT_TARGETS);
+        this.abilities = new ObservableObjectProperty<List<Integer>>(DEFAULT_ABILITIES);
+        this.upgrade = new ObservableObjectProperty<Integer>(DEFAULT_UNLOCK_LEVEL);
         this.cost = new ObservableObjectProperty<Double>(DEFAULT_COST);
         this.sellAmount = new ObservableObjectProperty<Double>(DEFAULT_SELL_AMOUNT);
         this.unlockLevel = new ObservableObjectProperty<Integer>(DEFAULT_UNLOCK_LEVEL);

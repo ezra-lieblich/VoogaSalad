@@ -10,6 +10,6 @@ public interface TypeInitializer {
 
     ObservableProperty<Double> getSize ();
     
-    int getNextId ();
+    int getId ();
     
 }

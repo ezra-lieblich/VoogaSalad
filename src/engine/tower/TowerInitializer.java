@@ -10,11 +10,11 @@ import engine.weapon.Weapon;
 
 public interface TowerInitializer extends TypeInitializer {
 
-    List<Integer> getWeapons ();
+    ObservableProperty<List<Integer>> getWeapons ();
 
-    List<Integer> getTargets ();
+    ObservableProperty<List<Integer>> getTargets ();
 
-    List<Integer> getAbilities ();
+    ObservableProperty<List<Integer>> getAbilities ();
     
     ObservableProperty<Integer> getUpgrade ();
 

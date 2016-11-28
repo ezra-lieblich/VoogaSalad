@@ -17,9 +17,9 @@ import javafx.beans.property.SimpleDoubleProperty;
 
 public class TowerType extends AbstractType implements Tower {
 
-    private List<Integer> weapons;
-    private List<Integer> targets;
-    private List<Integer> abilities;
+    private ObservableProperty<List<Integer>> weapons;
+    private ObservableProperty<List<Integer>> targets;
+    private ObservableProperty<List<Integer>> abilities;
     private ObservableProperty<Integer> upgrade;
     private ObservableProperty<Double> cost;
     private ObservableProperty<Double> sellAmount;
@@ -48,47 +48,47 @@ public class TowerType extends AbstractType implements Tower {
 
     @Override
     public void addWeapon (int weapon) {
-        weapons.add(weapon);
+        weapons.getProperty().add(weapon);
     }
 
     @Override
     public void removeWeapon (int weapon) {
-        weapons.removeIf(a -> a.equals(weapon));
+        weapons.getProperty().removeIf(a -> a.equals(weapon));
     }
 
     @Override
     public List<Integer> getWeapons () {
-        return Collections.unmodifiableList(weapons);
+        return Collections.unmodifiableList(weapons.getProperty());
     }
 
     @Override
     public void removeEnemy (int target) {
-        targets.removeIf(a -> a.equals(target));
+        targets.getProperty().removeIf(a -> a.equals(target));
     }
 
     @Override
     public void addTarget (int target) {
-        targets.add(target);
+        targets.getProperty().add(target);
     }
 
     @Override
     public List<Integer> getTargets () {
-        return Collections.unmodifiableList(targets);
+        return Collections.unmodifiableList(targets.getProperty());
     }
 
     @Override
     public void removeAbility (int ability) {
-        abilities.removeIf(a -> a.equals(ability));
+        abilities.getProperty().removeIf(a -> a.equals(ability));
     }
 
     @Override
     public void addAbility (int ability) {
-        abilities.add(ability);
+        abilities.getProperty().add(ability);
     }
 
     @Override
     public List<Integer> getAbilities () {
-        return Collections.unmodifiableList(abilities);
+        return Collections.unmodifiableList(abilities.getProperty());
     }
 
     @Override
