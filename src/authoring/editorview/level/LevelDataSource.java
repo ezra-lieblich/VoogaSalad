@@ -9,7 +9,7 @@ import java.util.Map;
  * 
  * @author Andrew Bihl
  */
-public interface ILevelToEngine {
+public interface LevelDataSource {
 
     /**
      * Sets creeps in the game engine

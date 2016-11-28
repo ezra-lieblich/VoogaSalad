@@ -5,12 +5,19 @@ import java.util.Collections;
 import java.util.List;
 
 public class GameSettings extends AbstractType implements Game {
+
+
 	private String name;
     private String gameType;
     private String backgroundImage;
     private List<String> winningConditions;
     private List<String> losingConditions;
 
+	protected GameSettings(TypeInitializer typeBuilder) {
+		super(typeBuilder);
+		// TODO Auto-generated constructor stub
+	}
+	
     public String getName() {
         return name;
     }

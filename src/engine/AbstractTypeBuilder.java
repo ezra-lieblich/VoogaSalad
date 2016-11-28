@@ -3,44 +3,64 @@ package engine;
 import java.util.Arrays;
 import java.util.function.Consumer;
 
-public abstract class AbstractTypeBuilder<E extends Type> implements AbstractBuilder<E> {
-    private E entity;
+public abstract class AbstractTypeBuilder<E extends Type> implements TypeBuilder<E>, TypeInitializer {
     
-    protected AbstractTypeBuilder() {
-        this.entity = setNextEntityToBuild();
+    private String name;
+    private String imagePath;
+    private int size;
+    private int nextId;
+    
+    
+    protected AbstractTypeBuilder(String name, String imagePath, int size) {
+        this.name = name;
+        this.imagePath = imagePath;
+        this.size = size;
+        this.nextId = 0;
     }
     
     @Override
     public void buildName(String name) {
-        entity.setName(name);
+        this.name = name;
     }
     
     @Override
     public void buildImagePath(String imagePath) {
-        entity.setImagePath(imagePath);
+        this.imagePath = imagePath;
     }
     
     @Override
     public void buildSize(int size) {
-        entity.setSize(size);
+        this.size = size;
     }
     
     @Override
     public E build () {
-        E createdEntity = entity;
-        entity = setNextEntityToBuild();
-        return createdEntity;
+        E newEntity = create();
+        nextId++;
+        return newEntity;
     }
     
-    protected E getEntity() {
-        return entity;
+    @Override
+    public String getName () {
+        return name;
+    }
+
+    @Override
+    public String getImagePath () {
+        return imagePath;
+    }
+
+    @Override
+    public int getSize () {
+        return size;
     }
     
-    protected abstract E setNextEntityToBuild();
-    
-    @SuppressWarnings("unchecked") //TODO - Is this bad?
-    protected <U> void addList(Consumer<U> setter, U... newItems) {
-        Arrays.asList(newItems).stream().forEach(setter);
+    @Override
+    public int getNextId() {
+        return nextId;
     }
+    
+    public abstract E create ();
+
     
 }

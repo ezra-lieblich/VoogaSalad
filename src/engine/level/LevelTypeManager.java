@@ -1,7 +1,7 @@
 package engine.level;
 
 import engine.AbstractTypeManager;
-
+import engine.ManagerMediator;
 import java.util.List;
 
 /**
@@ -10,10 +10,10 @@ import java.util.List;
  */
 public class LevelTypeManager extends AbstractTypeManager<Level> implements LevelManager{
     private List<Level> levels;
-
-    @Override
-    protected Level createInstance() {
-        return null;
+    
+    protected LevelTypeManager (ManagerMediator managerMediator) {
+        super(managerMediator);
+        // TODO Auto-generated constructor stub
     }
 
 }

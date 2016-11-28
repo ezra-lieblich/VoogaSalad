@@ -1,18 +1,21 @@
 package engine;
 
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public abstract class AbstractType implements Type {
     private String name;
     private String imagePath;
     private double size;
     private final int id;
-
-    private static final String DEFAULTVALUESPATH = "resources/DefaultEntityValues/";
-    private static ResourceBundle resources = ResourceBundle.getBundle(DEFAULTVALUESPATH);
     
-    protected AbstractType(int id) {
-        this.id = id;
+    protected AbstractType(TypeInitializer typeBuilder) {
+        this.name = typeBuilder.getName();
+        this.imagePath = typeBuilder.getImagePath();
+        this.size = typeBuilder.getSize();    
+        this.id = typeBuilder.getNextId();
     }
     
     @Override
@@ -47,13 +50,13 @@ public abstract class AbstractType implements Type {
         this.size = size;
     }
 
-    protected String getResources(String key) {
-        return resources.getString(key);
-    }
-
     @Override
     public int getId () {
         return id;
     }
 
+    //TODO - consider using removef
+    /*protected <E> List<E> filterList(List<E> list, Predicate<E> condition) {
+        return list.stream().filter(condition).collect(Collectors.toList());
+    }*/
 }

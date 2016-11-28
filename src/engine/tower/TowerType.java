@@ -3,25 +3,19 @@ package engine.tower;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 import engine.AbstractType;
 import engine.ability.Ability;
+import engine.enemy.Enemy;
 import engine.enemy.EnemyType;
 import engine.weapon.Weapon;
 import engine.weapon.WeaponType;
-import gameplayer.model.Enemy;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 
 
 public class TowerType extends AbstractType implements Tower {
-    /*
-     * public static final String DEFAULT_NAME = "New Tower";
-     * public static final String DEFAULT_IMAGE_LOCATION = "Images.penguin.jpg";
-     * public static final String DEFAULT_ATTACK_PREFERENCE = "all";
-     * public static final double DEFAULT_COST = 100;
-     * public static final double DEFAULT_SELL_AMOUNT = DEFAULT_COST / 2;
-     * public static final int DEFAULT_UNLOCK_LEVEL = 0;
-     */
+
     private List<Tower> upgrades;
     private List<Weapon> weapons;
     private List<Enemy> targets;
@@ -30,18 +24,15 @@ public class TowerType extends AbstractType implements Tower {
     private double sellAmount;
     private int unlockLevel;
 
-    public TowerType (int id) {
-        super(id);
-        this.upgrades = new ArrayList<Tower>();
-        this.targets = new ArrayList<Enemy>();
-        this.weapons = new ArrayList<Weapon>();
-        this.abilities = new ArrayList<Ability>();
-        this.cost = Double.parseDouble(getResources("TowerTypeCost"));
-        this.sellAmount = Double.parseDouble(getResources("TowerTypeSellAmount"));
-        this.unlockLevel = Integer.parseInt(getResources("TowerTypeUnlockLevel"));
-        //DoubleProperty blah = new SimpleDoubleProperty();
-        //blah.addListener((observable, oldValue, newValue) -> view.getTowerView().setHealth(newValue));
-        
+    protected TowerType (TowerInitializer towerInitializer) {
+        super(towerInitializer);
+        this.upgrades = towerInitializer.getUpgrades();
+        this.targets = towerInitializer.getTargets();
+        this.weapons = towerInitializer.getWeapons();
+        this.abilities = towerInitializer.getAbilities();
+        this.cost = towerInitializer.getCost();
+        this.sellAmount = towerInitializer.getSellAmount();
+        this.unlockLevel = towerInitializer.getUnlockLevel();
     }
 
     @Override
@@ -51,7 +42,7 @@ public class TowerType extends AbstractType implements Tower {
 
     @Override
     public void removeUpgrade (Tower upgrade) {
-        upgrades.remove(upgrade);
+        upgrades.removeIf(a -> a.equals(upgrade));
     }
 
     @Override
@@ -66,7 +57,7 @@ public class TowerType extends AbstractType implements Tower {
 
     @Override
     public void removeWeapon (Weapon weapon) {
-        weapons.remove(weapon);
+        weapons.removeIf(a -> a.equals(weapon));
     }
 
     @Override
@@ -75,8 +66,8 @@ public class TowerType extends AbstractType implements Tower {
     }
 
     @Override
-    public void removeTarget (Enemy target) {
-        targets.remove(target);
+    public void removeEnemy (Enemy target) {
+        targets.removeIf(a -> a.equals(target));
     }
 
     @Override
@@ -91,7 +82,7 @@ public class TowerType extends AbstractType implements Tower {
 
     @Override
     public void removeAbility (Ability ability) {
-        abilities.remove(ability);
+        abilities.removeIf(a -> a.equals(ability));
     }
 
     @Override
