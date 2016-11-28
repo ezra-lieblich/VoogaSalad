@@ -10,10 +10,10 @@ public interface Path extends Type {
 
     void setType (String type);
 
-    void addCoordinate (GridCoordinate coordinate);
+    void addCoordinate (Coordinate<Integer> coordinate);
 
-    void removeCoordinate (GridCoordinate coordinate);
+    void removeCoordinate (Coordinate<Integer> coordinate);
 
-    List<GridCoordinate> getCoordinates ();
+    List<Coordinate<Integer>> getCoordinates ();
 
 }
