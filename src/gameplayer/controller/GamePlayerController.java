@@ -67,6 +67,7 @@ public class GamePlayerController implements Observer {
 		this.model.initializeLevelInfo();
 		HashMap<String, Double> settings = this.loader.getGameSetting();
 		System.out.println("Settings: " + settings);
+		//initGUIDummy(settings);
 		initGUI();
 		this.enemyController = new EnemyController(this.enemyModel, this.view.getGrid());
 	}
