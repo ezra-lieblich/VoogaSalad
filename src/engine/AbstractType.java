@@ -16,7 +16,7 @@ public abstract class AbstractType implements Type {
         this.name = typeBuilder.getName();
         this.imagePath = typeBuilder.getImagePath();
         this.size = typeBuilder.getSize();    
-        this.id = typeBuilder.getNextId();
+        this.id = typeBuilder.getId();
     }
     
     @Override
