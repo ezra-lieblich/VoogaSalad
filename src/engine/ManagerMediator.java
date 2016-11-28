@@ -9,7 +9,7 @@ import engine.tower.Tower;
 import engine.weapon.Weapon;
 
 
-public interface ManagerMediator extends Observer<Manager<?>, MethodData<Integer>>{
+public interface ManagerMediator extends Observer<Manager<? extends Type>, MethodData<?>>{
 
     void addManager(Manager<? extends Type> manager);
 

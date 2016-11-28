@@ -27,9 +27,15 @@ public class ManagerTypeMediator implements ManagerMediator {
     private List<Manager<? extends Type>> allManagers;
    
     @Override
-    public <R extends Manager<?>> void update (R observable, MethodData<Integer> value) {
+    public <R extends Manager<? extends Type>> void update (R observable, MethodData<?> value) {
         allManagers.forEach(a -> a.visitManager(observable, value));
     }
+    
+//    @Override
+//    public <R extends Manager<? extends Type>> void update (R observable, MethodData<?> value) {
+//        // TODO Auto-generated method stub
+//        
+//    }
     
     @Override
     public void addManager(Manager<? extends Type> manager) {
@@ -40,6 +46,7 @@ public class ManagerTypeMediator implements ManagerMediator {
     public void removeManager(Manager<? extends Type> manager) {
         allManagers.remove(manager);
     }
+
     
 //    @Override
 //    public Enemy getEnemy(int id) {
