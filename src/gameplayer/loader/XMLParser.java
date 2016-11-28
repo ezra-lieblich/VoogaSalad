@@ -17,6 +17,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 import engine.enemy.EnemyType;
 import engine.tower.TowerType;
+import engine.tower.TowerTypeBuilder;
 import gameplayer.model.Enemy;
 
 
@@ -114,13 +115,15 @@ public class XMLParser {
     		NodeList parentList = xmlDocument.getElementsByTagName("tower");
     		for(int i=0;i<parentList.getLength();i++){
     			Element tower = (Element)parentList.item(i);
+    			TowerTypeBuilder towerTypeBuilder = new TowerTypeBuilder();
     			String name = ((Element)(tower.getElementsByTagName("name").item(0))).getFirstChild().getNodeValue();
     			String imageLocation = ((Element)(tower.getElementsByTagName("imageLocation").item(0))).getFirstChild().getNodeValue();
-    			double cost = Double.parseDouble(((Element)(tower.getElementsByTagName("cost").item(0))).getFirstChild().getNodeValue());
-    			double sellAmount = Double.parseDouble(((Element)(tower.getElementsByTagName("sellAmount").item(0))).getFirstChild().getNodeValue());
+    			towerTypeBuilder.buildCost(Double.parseDouble(((Element)(tower.getElementsByTagName("cost").item(0))).getFirstChild().getNodeValue()));
+    			towerTypeBuilder.buildSellAmount(Double.parseDouble(((Element)(tower.getElementsByTagName("sellAmount").item(0))).getFirstChild().getNodeValue()));
     			int fireRate = Integer.parseInt(((Element)(tower.getElementsByTagName("fireRate").item(0))).getFirstChild().getNodeValue());
-    			int unlockLevel = Integer.parseInt(((Element)(tower.getElementsByTagName("unlockLevel").item(0))).getFirstChild().getNodeValue());
-    			TowerType towerType = new TowerType(name,imageLocation,cost,sellAmount,fireRate,unlockLevel);
+    			towerTypeBuilder.buildUnlockLevel(Integer.parseInt(((Element)(tower.getElementsByTagName("unlockLevel").item(0))).getFirstChild().getNodeValue()));
+    			//TowerType towerType = new TowerType(name,imageLocation,cost,sellAmount,fireRate,unlockLevel);
+    			TowerType towerType = new TowerType(towerTypeBuilder);
     			ret.put(i, towerType);
     		}
     	}
