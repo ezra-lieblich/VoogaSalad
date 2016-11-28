@@ -1,9 +1,7 @@
 package authoring.editortabpane;
 
-import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
-import java.util.ResourceBundle;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -25,22 +23,17 @@ import javafx.scene.image.ImageView;
  * @author Kayla Schulz
  *
  */
-public class EditorTabPane implements IEditorTabPane, EditorTabPaneDelegate {
-
-    // private ITowerView towerView;
+public class EditorTabPane implements IEditorTabPane {
 
     private TabPane tabPane;
-    private ResourceBundle GUIResources;
     private EditorTabPaneDelegate delegate;
     private String viewToOpen;
+    private List<String> tabNames;
 
-    public EditorTabPane (int width, int height) {
+    public EditorTabPane (int width, int height, List<String> tabs) {
         viewToOpen = "Enemy"; // default, change this later
-        String initFile = "resources";
-        String fileName = "/GameAuthoringToolbar";
-        GUIResources = ResourceBundle.getBundle(initFile + fileName);
         tabPane = new TabPane();
-
+        tabNames = tabs;
         tabPane.setSide(Side.RIGHT);
         tabPane.setTabMaxHeight(120);
         tabPane.setTabMaxWidth(30);
@@ -64,11 +57,9 @@ public class EditorTabPane implements IEditorTabPane, EditorTabPaneDelegate {
                     }
                 });
 
-        Enumeration<String> nextVal = GUIResources.getKeys();
-        while (nextVal.hasMoreElements()) {
-            String editorName = nextVal.nextElement();
-            ToggleButton button = buildButton(editorName, editorName.toLowerCase() + ".png",
-                                              event -> userSelectedTab(editorName));
+        for(String name: tabNames) {
+            ToggleButton button = buildButton(name, name.toLowerCase() + ".png",
+                                              event -> delegate.userSelectedTab(name));
             button.setToggleGroup(group1);
             buildTabs(button);
         }
@@ -111,12 +102,6 @@ public class EditorTabPane implements IEditorTabPane, EditorTabPaneDelegate {
     @Override
     public void setDelegate (EditorTabPaneDelegate delegate) {
         this.delegate = delegate;
-    }
-
-    @Override
-    public void userSelectedTab (String tabName) {
-        // TODO: set what happens on userSelectedTab
-
     }
 
 }

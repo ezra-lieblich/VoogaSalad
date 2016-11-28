@@ -15,9 +15,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
-
-import engine.EnemyType;
-import engine.TowerType;
+import engine.enemy.EnemyType;
+import engine.tower.TowerType;
 import gameplayer.model.Enemy;
 
 

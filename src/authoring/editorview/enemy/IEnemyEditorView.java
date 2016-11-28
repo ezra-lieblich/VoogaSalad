@@ -9,6 +9,5 @@ import javafx.scene.Node;
  *
  */
 public interface IEnemyEditorView extends IEditorView {
-
-    
+	public void setDelegate(EnemyEditorViewDelegate delegate);
 }
