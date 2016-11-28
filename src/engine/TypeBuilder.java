@@ -1,12 +1,16 @@
 package engine;
 
-public interface TypeBuilder<E extends Type> {
+import java.util.function.BiConsumer;
 
-    void buildName (String name);
+public interface TypeBuilder<E extends Type, R extends TypeBuilder<E, R>> extends BindableType<R> {
 
-    void buildImagePath (String imagePath);
+    R buildName (String name);
 
-    void buildSize (int size);
+    R buildImagePath (String imagePath);
+
+    R buildSize (double size);
+    
+    R buildId (int id);
 
     E build ();
 
