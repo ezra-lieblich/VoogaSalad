@@ -3,82 +3,75 @@ package engine.weapon;
 import engine.AbstractType;
 import engine.Type;
 import engine.TypeInitializer;
+import engine.observer.ObservableProperty;
 
 public class WeaponType extends AbstractType implements Weapon {
     
 
 
-    private double fireRate;
-    private String trajectory;
-    private String effect;
-    private double speed;
-    private double range;
+    private ObservableProperty<Double> fireRate;
+    private ObservableProperty<String> trajectory;
+    private ObservableProperty<String> effect;
+    private ObservableProperty<Double> speed;
+    private ObservableProperty<Double> range;
     
     
-    protected WeaponType (TypeInitializer typeBuilder) {
-        super(typeBuilder);
+    protected WeaponType (WeaponInitializer weaponInitializer) {
+        super(weaponInitializer);
         // TODO Auto-generated constructor stub
     }
-    
-//    WeaponType() {
-//        this.fireRate = Double.parseDouble(getResources("WeaponTypeFireRate"));
-//        this.trajectory = getResources("WeaponTypePath");
-//        this.effect = getResources("WeaponTypeEffect");
-//        this.speed = Double.parseDouble(getResources("WeaponTypeSpeed"));
-//        this.range = Double.parseDouble(getResources("WeaponTypeRange"));
-//    }
-    
+
     @Override
     public double getFireRate () {
-        return fireRate;
+        return fireRate.getProperty();
     }
 
     @Override
     public void setFireRate (double fireRate) {
-        this.fireRate = fireRate;
+        this.fireRate.setProperty(fireRate);
     }
 
     
     @Override
     public String getPath () {
-        return trajectory;
+        return trajectory.getProperty();
     }
 
     @Override
     public void setPath (String path) {
-        this.trajectory = path;
+        this.trajectory.setProperty(path);
     }
 
     @Override
     public String getEffect () {
-        return effect;
+        return effect.getProperty();
     }
 
     @Override
     public void setEffect (String effect) {
-        this.effect = effect;
+        this.effect.setProperty(effect);
     }
 
     @Override
     public double getSpeed () {
-        return speed;
+        return speed.getProperty();
     }
 
     @Override
     public void setSpeed (double speed) {
-        this.speed = speed;
+        this.speed.setProperty(speed);
     }
     /* (non-Javadoc)
      * @see engine.weapon.Weapon#getRange()
      */
     @Override
     public double getRange () {
-        return range;
+        return range.getProperty();
     }
 
     @Override
     public void setRange (double range) {
-        this.range = range;
+        this.range.setProperty(range);
     }
 
 }
