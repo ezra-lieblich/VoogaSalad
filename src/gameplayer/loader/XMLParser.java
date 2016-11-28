@@ -16,6 +16,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 import engine.enemy.EnemyType;
+import engine.tower.Tower;
 import engine.tower.TowerType;
 import engine.tower.TowerTypeBuilder;
 import gameplayer.model.Enemy;
@@ -33,10 +34,12 @@ public class XMLParser {
 	
 	private Element rootElement;
 	private Document xmlDocument; 
+	private TowerTypeBuilder towerBuilder;
 
 	public XMLParser(String xmlFilename){
 		parseNewXML(xmlFilename);
-		rootElement = getRootElement(); 		
+		rootElement = getRootElement(); 
+		towerBuilder = new TowerTypeBuilder();
 	}
 	
     /**
@@ -109,22 +112,20 @@ public class XMLParser {
         return textVal;
     }
     
-    public HashMap<Integer,TowerType> getTowerTypes(){
-    	HashMap<Integer,TowerType>ret = new HashMap<>(); 
+    public HashMap<Integer,Tower> getTowerTypes(){
+    	HashMap<Integer,Tower>ret = new HashMap<>(); 
     	try{
     		NodeList parentList = xmlDocument.getElementsByTagName("tower");
     		for(int i=0;i<parentList.getLength();i++){
-    			Element tower = (Element)parentList.item(i);
-    			TowerTypeBuilder towerTypeBuilder = new TowerTypeBuilder();
-    			String name = ((Element)(tower.getElementsByTagName("name").item(0))).getFirstChild().getNodeValue();
-    			String imageLocation = ((Element)(tower.getElementsByTagName("imageLocation").item(0))).getFirstChild().getNodeValue();
-    			towerTypeBuilder.buildCost(Double.parseDouble(((Element)(tower.getElementsByTagName("cost").item(0))).getFirstChild().getNodeValue()));
-    			towerTypeBuilder.buildSellAmount(Double.parseDouble(((Element)(tower.getElementsByTagName("sellAmount").item(0))).getFirstChild().getNodeValue()));
-    			int fireRate = Integer.parseInt(((Element)(tower.getElementsByTagName("fireRate").item(0))).getFirstChild().getNodeValue());
-    			towerTypeBuilder.buildUnlockLevel(Integer.parseInt(((Element)(tower.getElementsByTagName("unlockLevel").item(0))).getFirstChild().getNodeValue()));
+    			Element towerElement= (Element)parentList.item(i);
+    			towerBuilder.buildName(((Element)(towerElement.getElementsByTagName("name").item(0))).getFirstChild().getNodeValue());
+    			towerBuilder.buildImagePath(((Element)(towerElement.getElementsByTagName("imageLocation").item(0))).getFirstChild().getNodeValue());
+    			towerBuilder.buildCost(Double.parseDouble(((Element)(towerElement.getElementsByTagName("cost").item(0))).getFirstChild().getNodeValue()));
+    			towerBuilder.buildSellAmount(Double.parseDouble(((Element)(towerElement.getElementsByTagName("sellAmount").item(0))).getFirstChild().getNodeValue()));
+    			towerBuilder.buildUnlockLevel(Integer.parseInt(((Element)(towerElement.getElementsByTagName("unlockLevel").item(0))).getFirstChild().getNodeValue()));
     			//TowerType towerType = new TowerType(name,imageLocation,cost,sellAmount,fireRate,unlockLevel);
-    			TowerType towerType = new TowerType(towerTypeBuilder);
-    			ret.put(i, towerType);
+    			Tower tower = towerBuilder.build();
+    			ret.put(i, tower);
     		}
     	}
     	catch(Exception e){
@@ -155,7 +156,7 @@ public class XMLParser {
 				EnemyType type = types.get(enemies[0]);
 				double width = 20; //for testing purposes
 				double height = 20; //for testing purposes
-				enemiesInLevel.add(new Enemy(type.getName(),type.getSpeed(),(int)(type.getHealth()), type.getImageLocation(), width ,height)); //for testing
+				enemiesInLevel.add(new Enemy(type.getName(),type.getSpeed(),(int)(type.getHealth()), type.getImagePath(), width ,height)); //for testing
 			}
 			enemyByLevel.add(enemiesInLevel);
 		}

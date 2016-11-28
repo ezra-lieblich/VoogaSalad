@@ -22,7 +22,7 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.Queue;
 
-import engine.TowerType;
+import engine.tower.Tower;
 
 public class GamePlayerController implements Observer {
 
@@ -146,9 +146,9 @@ public class GamePlayerController implements Observer {
 
 	private ArrayList<String> getTowerImages() {
 		ArrayList<String> towerImages = new ArrayList<String>();
-		HashMap<Integer, TowerType> towers = this.loader.getTowers();
-		for (TowerType tower : towers.values()) {
-			towerImages.add(tower.getImageLocation());
+		HashMap<Integer, Tower> towers = this.loader.getTowers();
+		for (Tower tower : towers.values()) {
+			towerImages.add(tower.getImagePath());
 		}
 		return towerImages;
 	}
