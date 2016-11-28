@@ -1,5 +1,6 @@
 package authoring.view;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -18,28 +19,24 @@ public class AuthoringViewController implements EditorTabPaneDelegate {
     private IAuthoringView view;
     private HashMap<String, EditorViewController> editors;
     private final String SETTINGS_RESOURCE_PATH = "resources/ViewSettings";
-    private final String TABS_RESOURCE_PATH = "resources/GameAuthoringToolbar";
+    private final String TABS_RESOURCE_PATH = "resources/GameAuthoringEditorToolbar";
     private ArrayList<String> tabNames;
 
-    public AuthoringViewController (int width, int height) {
+    public AuthoringViewController (int width, int height) throws IOException {
         createEditors();
         createScene(width, height);
         view.setEditorView(editors.values().iterator().next().getView());
     }
 
     private void createScene (int width, int height) {
-    	if (tabNames==null){
-    		loadInTabNames();
-    	}
+    	checkNullTabs();
         view = AuthoringViewFactory.build(width, height);
         view.createEditorTabPane(tabNames);
         view.setEditorTabPaneDelegate(this);
     }
 
-    private void createEditors () {
-    	if (tabNames==null){
-    		loadInTabNames();
-    	}
+    private void createEditors () throws IOException {
+        checkNullTabs();
         ResourceBundle settingsResource = ResourceBundle.getBundle(SETTINGS_RESOURCE_PATH);
     	editors = new HashMap<String, EditorViewController>();
         int width = Integer.parseInt(settingsResource.getString("editorPrefWidth"));
@@ -51,9 +48,15 @@ public class AuthoringViewController implements EditorTabPaneDelegate {
         editors.put("settings", new GameSettingsEditorViewController(width, height));
         editors.put("level", new LevelEditorViewController(width, height));
     }
+
+    private void checkNullTabs () {
+        if (tabNames==null){
+    		loadInTabNames();
+    	}
+    }
     
     private void createEditorViewControllerForTab(String tabNames){
-    	//TODO: Reflection
+    	//TODO: Reflection (see createEditors method)
     }
 
     private void loadInTabNames(){
@@ -67,7 +70,6 @@ public class AuthoringViewController implements EditorTabPaneDelegate {
     
     @Override
     public void userSelectedTab (String tabName) {
-    	System.out.println(tabName);
     	tabName = tabName.toLowerCase();
         EditorViewController editor = this.editors.get(tabName);
         this.view.setEditorView(editor.getView());
