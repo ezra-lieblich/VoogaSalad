@@ -12,13 +12,9 @@ import engine.observer.AbstractObservable;
 
 
 public abstract class AbstractTypeManager<E extends Type> extends AbstractObservable<MethodData<Integer>> implements Manager<E> {
-    ManagerMediator managerMediator;
+    //ManagerMediator managerMediator;
     Map<Integer, E> data;
     int activeId;
-
-    protected AbstractTypeManager(ManagerMediator managerMediator) {
-        this.managerMediator = managerMediator;
-    }
     
     @Override
     public int addEntry (E entry) {
