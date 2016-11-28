@@ -13,7 +13,7 @@ import engine.tower.Tower;
 import engine.tower.TowerType;
 import engine.weapon.Weapon;
 
-public class WeaponTypeBuilder extends AbstractTypeBuilder<Weapon, WeaponBuilder> implements WeaponBuilder {
+public class WeaponTypeBuilder extends AbstractTypeBuilder<Weapon, WeaponBuilder> implements WeaponBuilder, WeaponInitializer {
     
      public static final String DEFAULT_NAME = "New Weapon";
      public static final String DEFAULT_IMAGE_PATH = "Images.penguin.jpg";

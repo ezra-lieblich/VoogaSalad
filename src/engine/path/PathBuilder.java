@@ -8,7 +8,7 @@ import engine.weapon.WeaponBuilder;
 import engine.weapon.WeaponInitializer;
 
 
-public interface PathBuilder extends TypeBuilder<Path, PathBuilder>, PathInitializer, BindablePath { //TODO - Add bindable interface
+public interface PathBuilder extends TypeBuilder<Path, PathBuilder>, BindablePath { //TODO - Add bindable interface
 
     PathBuilder buildType (String type);
 

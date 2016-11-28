@@ -10,7 +10,7 @@ public abstract class AbstractType implements Type {
     private ObservableProperty<String> name;
     private ObservableProperty<String> imagePath;
     private ObservableProperty<Double> size;
-    private int id;
+    private final int id;
     
     protected AbstractType(TypeInitializer typeBuilder) {
         this.name = typeBuilder.getName();
@@ -56,8 +56,4 @@ public abstract class AbstractType implements Type {
         return id;
     }
 
-    //TODO - consider using removef
-    /*protected <E> List<E> filterList(List<E> list, Predicate<E> condition) {
-        return list.stream().filter(condition).collect(Collectors.toList());
-    }*/
 }

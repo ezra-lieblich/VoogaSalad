@@ -6,7 +6,7 @@ import engine.weapon.Weapon;
 import engine.weapon.WeaponBuilder;
 import engine.weapon.WeaponInitializer;
 
-public interface AbilityBuilder extends TypeBuilder<Ability, AbilityBuilder>, AbilityInitializer, BindableAbility { //TODO - Add bindable interface
+public interface AbilityBuilder extends TypeBuilder<Ability, AbilityBuilder>, BindableAbility { //TODO - Add bindable interface
 
     AbilityBuilder buildRate (double rate);
 
