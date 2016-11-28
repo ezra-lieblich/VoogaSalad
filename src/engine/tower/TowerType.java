@@ -17,17 +17,17 @@ import javafx.beans.property.SimpleDoubleProperty;
 
 public class TowerType extends AbstractType implements Tower {
 
-    private List<Integer> upgrades;
     private List<Integer> weapons;
     private List<Integer> targets;
     private List<Integer> abilities;
+    private ObservableProperty<Integer> upgrade;
     private ObservableProperty<Double> cost;
     private ObservableProperty<Double> sellAmount;
     private ObservableProperty<Integer> unlockLevel;
 
     protected TowerType (TowerInitializer towerInitializer) {
         super(towerInitializer);
-        this.upgrades = towerInitializer.getUpgrades();
+        this.upgrade = towerInitializer.getUpgrade();
         this.targets = towerInitializer.getTargets();
         this.weapons = towerInitializer.getWeapons();
         this.abilities = towerInitializer.getAbilities();
@@ -37,27 +37,22 @@ public class TowerType extends AbstractType implements Tower {
     }
 
     @Override
-    public void addUpgrade (Integer upgrade) {
-        upgrades.add(upgrade);
+    public void setUpgrade (int upgrade) {
+        this.upgrade.setProperty(upgrade);
+    }
+    
+    @Override
+    public int getUpgrade () {
+        return upgrade.getProperty();
     }
 
     @Override
-    public void removeUpgrade (Integer upgrade) {
-        upgrades.removeIf(a -> a.equals(upgrade));
-    }
-
-    @Override
-    public List<Integer> getUpgrades () {
-        return Collections.unmodifiableList(upgrades);
-    }
-
-    @Override
-    public void addWeapon (Integer weapon) {
+    public void addWeapon (int weapon) {
         weapons.add(weapon);
     }
 
     @Override
-    public void removeWeapon (Integer weapon) {
+    public void removeWeapon (int weapon) {
         weapons.removeIf(a -> a.equals(weapon));
     }
 
@@ -67,12 +62,12 @@ public class TowerType extends AbstractType implements Tower {
     }
 
     @Override
-    public void removeEnemy (Integer target) {
+    public void removeEnemy (int target) {
         targets.removeIf(a -> a.equals(target));
     }
 
     @Override
-    public void addTarget (Integer target) {
+    public void addTarget (int target) {
         targets.add(target);
     }
 
@@ -82,12 +77,12 @@ public class TowerType extends AbstractType implements Tower {
     }
 
     @Override
-    public void removeAbility (Integer ability) {
+    public void removeAbility (int ability) {
         abilities.removeIf(a -> a.equals(ability));
     }
 
     @Override
-    public void addAbility (Integer ability) {
+    public void addAbility (int ability) {
         abilities.add(ability);
     }
 
