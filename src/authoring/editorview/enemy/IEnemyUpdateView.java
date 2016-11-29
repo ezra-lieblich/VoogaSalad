@@ -12,12 +12,6 @@ import authoring.editorview.IUpdateView;
  */
 public interface IEnemyUpdateView extends IEnemyEditorView, IUpdateView {
 
-    public void updateFrequencyDisplay (double frequency);
-
-    public void updateEnemyImagePath (String imagePath);
-
-    public void updateEnemyName (String enemyName);
-
     public void updateEnemyReactions (String enemyReactions);
 
     public void updateEnemySpeed (double speed);

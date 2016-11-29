@@ -107,13 +107,7 @@ public class WeaponEditorView implements IWeaponUpdateView {
 
     @Override
     public void updateRangeDisplay (double range) {
-        weaponRangeView.updateWeaponRange(Double.toString(range));
-    }
-
-    @Override
-    public void updateWeaponImagePath (String imagePath) {
-        weaponImageView.updateWeaponImagePath(imagePath);
-
+        this.weaponRangeView.updateWeaponRange(Double.toString(range));
     }
 
     @Override
@@ -123,13 +117,8 @@ public class WeaponEditorView implements IWeaponUpdateView {
     }
 
     @Override
-    public void updateWeaponName (String weaponName) {
-        this.weaponNameView.updateWeaponName(weaponName);
-    }
-
-    @Override
     public void updateWeaponTrajectory (String path) {
-        weaponPathView.updateWeaponPath(path);
+        this.weaponPathView.updateWeaponPath(path);
     }
 
     @Override
@@ -139,38 +128,27 @@ public class WeaponEditorView implements IWeaponUpdateView {
 
     }
 
-    // @Override
-    public int getCurrentWeaponID () {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
     @Override
     public void updateTargetEnemies (List<Integer> targetEnemies) {
         // TODO Auto-generated method stub
 
     }
 
-    public WeaponEditorView getTowerUpdater () {
-        return this;
-    }
-
     @Override
     public void updateNameDisplay (String name) {
-        // TODO Auto-generated method stub
-        
+        this.weaponNameView.updateWeaponName(name);
+
     }
 
     @Override
     public void updateImagePathDisplay (String imagePath) {
-        // TODO Auto-generated method stub
-        
+        this.weaponImageView.updateWeaponImagePath(imagePath);
     }
 
     @Override
     public void updateSizeDisplay (double size) {
         // TODO Auto-generated method stub
-        
+
     }
 
 }

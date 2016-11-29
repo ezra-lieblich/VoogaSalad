@@ -10,6 +10,7 @@ import authoring.editorview.enemy.subviews.editorfields.EnemyImageView;
 import authoring.editorview.enemy.subviews.editorfields.EnemyNameField;
 import authoring.editorview.enemy.subviews.editorfields.EnemyRewardMoneyField;
 import authoring.editorview.enemy.subviews.editorfields.EnemyRewardPointsField;
+import authoring.editorview.enemy.subviews.editorfields.EnemySizeField;
 import authoring.editorview.enemy.subviews.editorfields.EnemyCollisionEffectField;
 import authoring.editorview.enemy.subviews.editorfields.EnemyDamageField;
 import authoring.editorview.enemy.subviews.editorfields.EnemySpeedField;
@@ -36,6 +37,7 @@ public class EnemyEditorView implements IEnemyUpdateView {
     private EnemyHealthField enemyHealth;
     private EnemyRewardMoneyField enemyRewardMoney;
     private EnemyRewardPointsField enemyRewardPoints;
+    private EnemySizeField enemySize;
 
     public EnemyEditorView () throws IOException {
         String ENEMY_EFFECT_RESOURCE_PATH = "resources/GameAuthoringEnemy";
@@ -52,10 +54,11 @@ public class EnemyEditorView implements IEnemyUpdateView {
         enemyHealth = new EnemyHealthField(labelsResource);
         enemyRewardMoney = new EnemyRewardMoneyField(labelsResource);
         enemyRewardPoints = new EnemyRewardPointsField(labelsResource);
+        enemySize = new EnemySizeField(labelsResource);
         enemyEffectView =
                 new EnemyEffectView(enemyImage, enemyName, enemyReactions,
                                     enemySpeed, enemyDamage, enemyHealth, enemyRewardMoney,
-                                    enemyRewardPoints);
+                                    enemyRewardPoints, enemySize);
         setBorderPane();
     }
 
@@ -73,6 +76,7 @@ public class EnemyEditorView implements IEnemyUpdateView {
     public void setDelegate (EnemyEditorViewDelegate delegate) {
         this.delegate = delegate;
         enemyBank.setDelegate(delegate);
+        enemyEffectView.setDelegate(delegate);
         enemyName.setDelegate(delegate);
         enemySpeed.setDelegate(delegate);
         enemyImage.setDelegate(delegate);
@@ -81,97 +85,70 @@ public class EnemyEditorView implements IEnemyUpdateView {
         enemyHealth.setDelegate(delegate);
         enemyRewardMoney.setDelegate(delegate);
         enemyRewardPoints.setDelegate(delegate);
-        enemyEffectView.setDelegate(delegate);
-    }
-
-    @Override
-    public void updateFrequencyDisplay (double frequency) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void updateEnemyImagePath (String imagePath) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void updateEnemyName (String enemyName) {
-        // TODO Auto-generated method stub
-        
+        enemySize.setDelegate(delegate);
     }
 
     @Override
     public void updateEnemyReactions (String enemyReactions) {
-        // TODO Auto-generated method stub
-        
+        this.enemyReactions.updateEnemyReaction(enemyReactions);
+
     }
 
     @Override
     public void updateEnemySpeed (double speed) {
-        // TODO Auto-generated method stub
-        
+        this.enemySpeed.updateEnemySpeed(Double.toString(speed));
     }
 
     @Override
     public void updateEnemyBank (List<Integer> activeEnemies) {
         // TODO Auto-generated method stub
-        
+
     }
 
     @Override
     public void createNewEnemy () {
         // TODO Auto-generated method stub
-        
+
     }
 
     @Override
     public void updateEnemyHealthDisplay (double enemyHealth) {
-        // TODO Auto-generated method stub
-        
+        this.enemyHealth.updateEnemyHealth(Double.toString(enemyHealth));
     }
 
     @Override
     public void updateEnemyDamage (double damage) {
-        // TODO Auto-generated method stub
-        
+        this.enemyDamage.updateEnemyFrequency(Double.toString(damage));
     }
 
     @Override
     public void updateEnemyRewardMoney (double rewardMoney) {
-        // TODO Auto-generated method stub
-        
+        this.enemyRewardMoney.updateEnemyRewardMoney(Double.toString(rewardMoney));
     }
 
     @Override
     public void updateEnemyRewardPoints (double rewardPoints) {
-        // TODO Auto-generated method stub
-        
+        this.enemyRewardPoints.updateEnemyRewardPoints(Double.toString(rewardPoints));
     }
 
     @Override
     public void updateEnemyCollisionEffect (String collisionEffect) {
-        // TODO Auto-generated method stub
-        
+        this.enemyReactions.updateEnemyReaction(collisionEffect);
     }
 
     @Override
     public void updateNameDisplay (String name) {
-        // TODO Auto-generated method stub
-        
+        this.enemyName.updateEnemyName(name);
     }
 
     @Override
     public void updateImagePathDisplay (String imagePath) {
-        // TODO Auto-generated method stub
-        
+        this.enemyImage.updateEnemyImagePath(imagePath);
     }
 
     @Override
     public void updateSizeDisplay (double size) {
-        // TODO Auto-generated method stub
-        
+        this.enemySize.updateEnemySize(Double.toString(size));
     }
 
 }

@@ -22,10 +22,6 @@ public interface IWeaponUpdateView extends IWeaponEditorView, IUpdateView {
 
     public void updateRangeDisplay (double range);
 
-    public void updateWeaponImagePath (String imagePath);
-
-    public void updateWeaponName (String weaponName);
-
     public void updateWeaponBank (List<Integer> activeWeapons);
 
     public void updateTargetEnemies (List<Integer> targetEnemies);

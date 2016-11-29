@@ -85,45 +85,18 @@ public class TowerEditorView implements ITowerUpdateView {
     }
 
     @Override
-    public void updateFireRateDisplay (double towerFireRate) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void updateUnlockLevelDisplay (int towerUnlockLevel) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void updateRangeDisplay (double towerRange) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void updateTowerImagePath (String towerImagePath) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void updateTowerName (String towerName) {
-        // TODO Auto-generated method stub
-
+    public void updateUnlockLevelDisplay (int towerLevel) {
+        this.towerUnlockLevel.updateTowerUnlockLevel(Integer.toString(towerLevel));
     }
 
     @Override
     public void updateTowerBuyPriceDisplay (double towerBuyPrice) {
-        // TODO Auto-generated method stub
-
+        this.towerBuyPrice.updateTowerBuyPrice(Double.toString(towerBuyPrice));
     }
 
     @Override
     public void updateTowerSellPriceDisplay (double towerSellPrice) {
-        // TODO Auto-generated method stub
-
+        this.towerSellPrice.updateTowerSellPrice(Double.toString(towerSellPrice));
     }
 
     @Override
@@ -152,14 +125,12 @@ public class TowerEditorView implements ITowerUpdateView {
 
     @Override
     public void updateNameDisplay (String name) {
-        // TODO Auto-generated method stub
-
+        this.towerName.updateTowerName(name);
     }
 
     @Override
     public void updateImagePathDisplay (String imagePath) {
-        // TODO Auto-generated method stub
-
+        this.towerImage.updateTowerImagePath(imagePath);
     }
 
     @Override

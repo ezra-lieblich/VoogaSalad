@@ -12,15 +12,7 @@ import authoring.editorview.IUpdateView;
  */
 public interface ITowerUpdateView extends ITowerEditorView, IUpdateView {
 
-    public void updateFireRateDisplay (double towerFireRate);
-
-    public void updateUnlockLevelDisplay (int towerUnlockLevel);
-
-    public void updateRangeDisplay (double towerRange);
-
-    public void updateTowerImagePath (String towerImagePath);
-
-    public void updateTowerName (String towerName);
+    public void updateUnlockLevelDisplay (int towerLevel);
 
     public void updateTowerBuyPriceDisplay (double towerBuyPrice);
 
