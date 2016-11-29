@@ -15,5 +15,13 @@ public interface Path extends Type {
     void removeCoordinate (Coordinate<Integer> coordinate);
 
     List<Coordinate<Integer>> getCoordinates ();
+    
+    int getGridRows();
+    
+    void setGridRows(int gridRows);
+    
+    int getGridColumns();
+    
+    void setGridColumns(int gridColumns);
 
 }
