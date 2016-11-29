@@ -10,45 +10,31 @@ public interface PathDataSource {
      */
     public int createNewPath();
 	
-    /**
-     * Pass the background image to game engine
-     * 
-     * @param background image set by user
-     */
-    public void setBackgroundImage (int pathID, String backgroundImagePath);
 
     /**
      * @param pathImage set by the user
      */
-    public void setPathImage (String pathImagePath);
+    public void setPathImage (int pathID, String pathImagePath);
     
-    public void setNumberofColumns (int numColumns);
+    public void setNumberofColumns (int pathID, int numColumns);
     
-    public void setNumberofRows (int numRows);
+    public void setNumberofRows (int pathID, int numRows);
     
-    public void setPathName (String pathName);
+    public void setPathName (int pathID, String pathName);
     
-    public boolean setPathCoordinates (List<Coordinate> pathCoordinates);
+    public boolean setPathCoordinates (int pathID, List<Coordinate> pathCoordinates);
     
     public void clearPaths ();
     
-    public String getBackgroundImagePath ();
+    public String getPathImagePath (int pathID);
     
-    public String getPathImagePath ();
+    public int getNumberofColumns (int pathID);
     
-    public int getNumberofColumns ();
+    public int getNumberofRows (int pathID);
     
-    public int getNumberofRows ();
+    public String getPathName (int pathID);
     
-    public int getPathName ();
-    
-    public List<Coordinate> getPathCoordinates ();
-    
-    public void setActiveID(int pathId);
-    
-    public int getActiveID ();
-    
-    
+    public List<Coordinate> getPathCoordinates (int pathID);
     
     
 }

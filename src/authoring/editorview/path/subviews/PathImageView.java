@@ -17,11 +17,8 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
-//TODO: Combine with BackgroundImageView to reduce duplicated code
 
 
 public class PathImageView extends PhotoFileChooser{
@@ -30,6 +27,7 @@ public class PathImageView extends PhotoFileChooser{
 	private String pathImagePath;
 	private ImageView pathImageView;
 	private PathEditorViewDelegate delegate;
+	private int activePathID;
 	
 	private static final String RESOURCE_FILE_NAME = "resources/GameAuthoringPath";	
 	private ResourceBundle pathResource = ResourceBundle.getBundle(RESOURCE_FILE_NAME);
@@ -71,6 +69,7 @@ public class PathImageView extends PhotoFileChooser{
 						errorDialogueBox.show();
 					}
 				});
+		setPathImageButton.setTranslateY(5);
 		root.getChildren().add(setPathImageButton);
 	}
 
@@ -94,13 +93,17 @@ public class PathImageView extends PhotoFileChooser{
 	public void setDelegate(PathEditorViewDelegate delegate){
 		this.delegate = delegate;
 	}
+	
+	public void setActivePathId(int pathID){
+		this.activePathID = pathID;
+	}
 
 
 	private ImageView loadPathImage() {	
 		try {
 			Image image = new Image(pathImagePath);
 			pathImageView.setImage(image);
-			delegate.onUserEnteredBackgroundImage(pathImagePath);			
+			delegate.onUserEnteredPathImage(activePathID, pathImagePath);			
 		}
 		catch (Exception e){
 			Image defaultImage = new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_IMAGE_FILE_NAME));
