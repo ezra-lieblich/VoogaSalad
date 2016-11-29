@@ -1,6 +1,7 @@
 package engine.tower;
 
 import java.util.List;
+import com.oracle.webservices.internal.api.databinding.Databinding.Builder;
 import authoring.editorview.tower.ITowerUpdateView;
 import authoring.editorview.tower.TowerDataSource;
 
@@ -63,6 +64,10 @@ public class TowerTypeManagerController implements TowerDataSource {
         return towerManager.getEntityIds();
     }
 
+    private Tower createTower(ITowerUpdateView towerUpdater) {
+        return towerBuilder.build();
+    }
+    
     @Override
     public int createNewTower (ITowerUpdateView towerUpdater) {
         // TODO Auto-generated method stub
@@ -124,14 +129,15 @@ public class TowerTypeManagerController implements TowerDataSource {
         towerManager.getEntity(towerID).removeWeapon(towerChosenWeaponID);        
     }
 
+    //TODO - edit createNewTower to work with both versions
     @Override
     public int createTowerUpgrade (ITowerUpdateView towerUpdater, int parentTowerID) {
-        towerManager.getEntity(towerID).addWeapon(towerChosenWeaponID);
+        return towerManager.addUpgrade(createTower(towerUpdater), parentTowerID);
     }
 
     @Override
     public void removeTowerUpgrade (int parentTowerID, int childTowerID) {
-        towerManager.getEntity(towerID).removeWeapon(towerChosenWeaponID);                
+        towerManager.removeUpgrade(childTowerID, parentTowerID);               
     }
 
 }

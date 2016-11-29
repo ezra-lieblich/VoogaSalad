@@ -19,7 +19,7 @@ import engine.observer.ObservableMapProperty;
 
 public abstract class AbstractTypeManager<E extends Type> extends AbstractObservable<MethodData<?>> implements Manager<E> {
     //ManagerMediator managerMediator;
-    ObservableMap<Integer, E> data;
+    private ObservableMap<Integer, E> data;
     
     protected AbstractTypeManager() {
         this.data = new ObservableMapProperty<Integer, E>(new HashMap<Integer, E>());
