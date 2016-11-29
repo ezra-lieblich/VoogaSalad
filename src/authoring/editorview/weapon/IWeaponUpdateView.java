@@ -13,24 +13,24 @@ import java.util.List;
  */
 public interface IWeaponUpdateView extends IWeaponEditorView {
 
-    public void updateFireRateDisplay (int rate);
+    public void updateFireRateDisplay (double fireRate);
 
-    public void updateSpeedDisplay (int speed);
+    public void updateSpeedDisplay (double speed);
 
     public void updateCollisionEffectDisplay (String collisionEffect);
 
-    public void updateRangeDisplay (int range);
+    public void updateRangeDisplay (double range);
 
     public void updateWeaponImagePath (String imagePath);
 
     public void updateWeaponName (String weaponName);
 
-    public void updateDamageDisplay (int damage);
-
     public void updateWeaponBank (List<Integer> activeWeapons);
 
-    public void updateWeaponPath (String path);
+    public void updateTargetEnemies (List<Integer> targetEnemies);
 
-    public void createNewWeapon ();
+    public void updateWeaponTrajectory (String trajectory);
+
+    public void createNewWeapon (); // This is the method where I will go and update e'rthing
 
 }
