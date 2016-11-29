@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ResourceBundle;
 import authoring.editorview.EditorViewController;
 import authoring.utilityfactories.DialogueBoxFactory;
+import engine.enemy.*;
 
 
 /**
@@ -15,7 +16,7 @@ import authoring.utilityfactories.DialogueBoxFactory;
 public class EnemyEditorViewController extends EditorViewController
         implements EnemyEditorViewDelegate {
 
-    private EnemyDataSource enemyDataSource;
+    private EnemyManagerController enemyDataSource;
     private int currentEnemyID;
     private IEnemyUpdateView myView;
 
@@ -25,7 +26,7 @@ public class EnemyEditorViewController extends EditorViewController
         this.view = myView;
     }
 
-    public void setEnemyDataSource (EnemyDataSource source) {
+    public void setEnemyDataSource (EnemyManagerController source) {
         this.enemyDataSource = source;
     }
 
