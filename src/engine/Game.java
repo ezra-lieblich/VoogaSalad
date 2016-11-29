@@ -2,17 +2,17 @@ package engine;
 
 import java.util.List;
 
+
 /**
  * Created by ezra on 11/20/16.
  */
 public interface Game {
+	
     String getName();
 
     void setName(String name);
-
+    
     String getBackgroundImage();
-
-    void setBackgroundImage(String backgroundImage);
 
     List<String> getWinningConditions();
 

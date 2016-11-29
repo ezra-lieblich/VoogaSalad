@@ -8,6 +8,7 @@ import engine.AbstractType;
 import engine.ability.Ability;
 import engine.enemy.Enemy;
 import engine.enemy.EnemyType;
+import engine.observer.ObservableProperty;
 import engine.weapon.Weapon;
 import engine.weapon.WeaponType;
 import javafx.beans.property.DoubleProperty;
@@ -16,17 +17,17 @@ import javafx.beans.property.SimpleDoubleProperty;
 
 public class TowerType extends AbstractType implements Tower {
 
-    private List<Tower> upgrades;
-    private List<Weapon> weapons;
-    private List<Enemy> targets;
-    private List<Ability> abilities;
-    private double cost;
-    private double sellAmount;
-    private int unlockLevel;
+    private ObservableProperty<List<Integer>> weapons;
+    private ObservableProperty<List<Integer>> targets;
+    private ObservableProperty<List<Integer>> abilities;
+    private ObservableProperty<Integer> upgrade;
+    private ObservableProperty<Double> cost;
+    private ObservableProperty<Double> sellAmount;
+    private ObservableProperty<Integer> unlockLevel;
 
     protected TowerType (TowerInitializer towerInitializer) {
         super(towerInitializer);
-        this.upgrades = towerInitializer.getUpgrades();
+        this.upgrade = towerInitializer.getUpgrade();
         this.targets = towerInitializer.getTargets();
         this.weapons = towerInitializer.getWeapons();
         this.abilities = towerInitializer.getAbilities();
@@ -36,92 +37,87 @@ public class TowerType extends AbstractType implements Tower {
     }
 
     @Override
-    public void addUpgrade (Tower upgrade) {
-        upgrades.add(upgrade);
+    public void setUpgrade (int upgrade) {
+        this.upgrade.setProperty(upgrade);
+    }
+    
+    @Override
+    public int getUpgrade () {
+        return upgrade.getProperty();
     }
 
     @Override
-    public void removeUpgrade (Tower upgrade) {
-        upgrades.removeIf(a -> a.equals(upgrade));
+    public void addWeapon (int weapon) {
+        weapons.getProperty().add(weapon);
     }
 
     @Override
-    public List<Tower> getUpgrades () {
-        return Collections.unmodifiableList(upgrades);
+    public void removeWeapon (int weapon) {
+        weapons.getProperty().removeIf(a -> a.equals(weapon));
     }
 
     @Override
-    public void addWeapon (Weapon weapon) {
-        weapons.add(weapon);
+    public List<Integer> getWeapons () {
+        return Collections.unmodifiableList(weapons.getProperty());
     }
 
     @Override
-    public void removeWeapon (Weapon weapon) {
-        weapons.removeIf(a -> a.equals(weapon));
+    public void removeEnemy (int target) {
+        targets.getProperty().removeIf(a -> a.equals(target));
     }
 
     @Override
-    public List<Weapon> getWeapon () {
-        return Collections.unmodifiableList(weapons);
+    public void addTarget (int target) {
+        targets.getProperty().add(target);
     }
 
     @Override
-    public void removeEnemy (Enemy target) {
-        targets.removeIf(a -> a.equals(target));
+    public List<Integer> getTargets () {
+        return Collections.unmodifiableList(targets.getProperty());
     }
 
     @Override
-    public void addTarget (Enemy target) {
-        targets.add(target);
+    public void removeAbility (int ability) {
+        abilities.getProperty().removeIf(a -> a.equals(ability));
     }
 
     @Override
-    public List<Enemy> getTargets () {
-        return Collections.unmodifiableList(targets);
+    public void addAbility (int ability) {
+        abilities.getProperty().add(ability);
     }
 
     @Override
-    public void removeAbility (Ability ability) {
-        abilities.removeIf(a -> a.equals(ability));
-    }
-
-    @Override
-    public void addAbility (Ability ability) {
-        abilities.add(ability);
-    }
-
-    @Override
-    public List<Ability> getAbility () {
-        return Collections.unmodifiableList(abilities);
+    public List<Integer> getAbilities () {
+        return Collections.unmodifiableList(abilities.getProperty());
     }
 
     @Override
     public double getCost () {
-        return cost;
+        return cost.getProperty();
     }
 
     @Override
     public void setCost (double cost) {
-        this.cost = cost;
+        this.cost.setProperty(cost);;
     }
 
     @Override
     public double getSellAmount () {
-        return sellAmount;
+        return sellAmount.getProperty();
     }
 
     @Override
     public void setSellAmount (double sellAmount) {
-        this.sellAmount = sellAmount;
+        this.sellAmount.setProperty(sellAmount);;
     }
 
     @Override
     public int getUnlockLevel () {
-        return unlockLevel;
+        return unlockLevel.getProperty();
     }
 
     @Override
     public void setUnlockLevel (int unlockLevel) {
-        this.unlockLevel = unlockLevel;
+        this.unlockLevel.setProperty(unlockLevel);;
     }
 }

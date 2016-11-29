@@ -1,6 +1,5 @@
 package authoring.editortabpane;
 
-import java.util.Enumeration;
 import java.util.List;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;

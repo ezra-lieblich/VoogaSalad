@@ -10,29 +10,27 @@ import engine.weapon.Weapon;
 
 public interface Tower extends Type {
 
-    void addUpgrade (Tower upgrade);
+    void setUpgrade (int upgrade);
 
-    void removeUpgrade (Tower upgrade);
+    int getUpgrade ();
 
-    List<Tower> getUpgrades ();
+    void addWeapon (int weapon);
 
-    void addWeapon (Weapon weapon);
+    void removeWeapon (int weapon);
 
-    void removeWeapon (Weapon weapon);
+    List<Integer> getWeapons ();
 
-    List<Weapon> getWeapon ();
+    void removeEnemy (int target);
 
-    void removeEnemy (Enemy target);
+    void addTarget (int target);
 
-    void addTarget (Enemy target);
+    List<Integer> getTargets ();
 
-    List<Enemy> getTargets ();
+    void removeAbility (int ability);
 
-    void removeAbility (Ability ability);
+    void addAbility (int ability);
 
-    void addAbility (Ability ability);
-
-    List<Ability> getAbility ();
+    List<Integer> getAbilities ();
 
     double getCost ();
 
