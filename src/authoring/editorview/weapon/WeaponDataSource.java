@@ -12,40 +12,42 @@ public interface WeaponDataSource {
 
     public void setWeaponImagePath (int weaponID, String weaponImagePath);
 
-    public void setWeaponDamage (int weaponID, int weaponDamage);
+    public void setWeaponRange (int weaponID, double weaponRange);
 
-    public void setWeaponRange (int weaponID, int weaponRange);
+    public void setWeaponFireRate (int weaponID, double weaponFireRate);
 
-    public void setWeaponFireRate (int weaponID, int weaponFireRate);
-
-    public void setWeaponSpeed (int weaponID, int weaponSpeed);
+    public void setWeaponSpeed (int weaponID, double weaponSpeed);
 
     public void setWeaponCollisionEffect (int weaponID, String weaponCollisionEffect);
 
     public void setWeaponName (int weaponID, String weaponName);
 
-    public void setWeaponPath (int weaponID, String weaponPath);
+    public void setWeaponTrajectory (int weaponID, String weaponTrajectory);
 
-    public void createWeapon ();
+    public void setNewWeaponTargetEnemy (int weaponID, int enemyID);
 
-    public int getCreatedWeapon ();
+    public void removeWeaponTargetEnemy (int weaponID, int enemyID);
+
+    public int createWeapon ();
+
+    public void deleteWeapon (int weaponID);
 
     public String getWeaponImagePath (int weaponID);
 
-    public int getWeaponDamage (int weaponID);
+    public double getWeaponRange (int weaponID);
 
-    public int getWeaponRange (int weaponID);
+    public double getWeaponFireRate (int weaponID);
 
-    public int getWeaponFireRate (int weaponID);
-
-    public int getWeaponSpeed (int weaponID);
+    public double getWeaponSpeed (int weaponID);
 
     public String getWeaponCollisionEffect (int weaponID);
 
     public String getWeaponName (int weaponID);
 
-    public String getWeaponPath (int weaponID);
+    public String getWeaponTrajectory (int weaponID);
 
-    public List<Integer> getActiveWeaponIDs ();
+    public List<Integer> getCreatedWeaponIDs ();
+
+    public List<Integer> getTargetEnemies (int weaponID);
 
 }
