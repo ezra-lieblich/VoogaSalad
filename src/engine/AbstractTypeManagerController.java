@@ -1,8 +1,9 @@
 package engine;
 
 import java.util.List;
+import authoring.editorview.IUpdateView;
 
-public abstract class AbstractTypeManagerController<E extends Manager<T>, U extends TypeBuilder<T, U>, T extends Type> implements ManagerController<E, U, T> {
+public abstract class AbstractTypeManagerController<E extends Manager<T>, U extends TypeBuilder<T, U>, T extends Type, V extends IUpdateView> implements ManagerController<E, U, T, V> {
 
     private E typeManager;
     private U typeBuilder;
@@ -13,17 +14,17 @@ public abstract class AbstractTypeManagerController<E extends Manager<T>, U exte
     }
 
     @Override
-    public <V extends ViewFiller> int createType (V viewFiller) {
-        return typeManager.addEntry(constructType(viewFiller));
+    public int createType (V updateView) {
+        return typeManager.addEntry(constructType(updateView));
     }
 
-    protected <V extends ViewFiller> T constructType (V viewFiller) {
-        return constructTypeProperties(viewFiller, typeBuilder)
-                .addNameListener( (oldValue, newValue) -> viewFiller
+    protected T constructType (V updateView) {
+        return constructTypeProperties(updateView, typeBuilder)
+                .addNameListener( (oldValue, newValue) -> updateView
                         .updateNameDisplay(newValue))
-                .addImagePathListener( (oldValue, newValue) -> viewFiller
+                .addImagePathListener( (oldValue, newValue) -> updateView
                         .updateImagePathDisplay(newValue))
-                .addSizeListener( (oldValue, newValue) -> viewFiller
+                .addSizeListener( (oldValue, newValue) -> updateView
                         .updateSizeDisplay(newValue))
                 .build();
     }
@@ -77,7 +78,7 @@ public abstract class AbstractTypeManagerController<E extends Manager<T>, U exte
         return typeBuilder;
     }
 
-    protected abstract U constructTypeProperties (ViewFiller viewViller, U typeBuilder);
+    protected abstract U constructTypeProperties (V updateView, U typeBuilder);
 
     protected interface ViewFiller {
         void updateNameDisplay (String name);
