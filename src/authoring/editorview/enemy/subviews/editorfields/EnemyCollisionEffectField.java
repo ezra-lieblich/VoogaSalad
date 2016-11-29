@@ -1,5 +1,6 @@
 package authoring.editorview.enemy.subviews.editorfields;
 
+import java.util.ResourceBundle;
 import authoring.editorview.enemy.EnemyEditorViewDelegate;
 import authoring.editorview.enemy.IEnemyEditorView;
 import authoring.utilityfactories.TextFieldFactory;
@@ -17,9 +18,9 @@ public class EnemyCollisionEffectField implements IEnemyEditorView {
     private TextField enemyReactionsField;
     private EnemyEditorViewDelegate delegate;
 
-    public EnemyCollisionEffectField () {
+    public EnemyCollisionEffectField (ResourceBundle labelsResource) {
         enemyReactionsField =
-                TextFieldFactory.makeTextField("Set enemy reactions: ",
+                TextFieldFactory.makeTextField(labelsResource.getString("EnterString"),
                                                e -> delegate
                                                        .onUserEnteredEnemyCollisionEffect(enemyReactionsField
                                                                .getText()));

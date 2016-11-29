@@ -4,9 +4,9 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ResourceBundle;
 import javax.imageio.ImageIO;
-import authoring.ErrorBox;
 import authoring.editorview.tower.ITowerEditorView;
 import authoring.editorview.tower.TowerEditorViewDelegate;
+import authoring.utilityfactories.DialogueBoxFactory;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
@@ -25,11 +25,10 @@ public class TowerImageView implements ITowerEditorView {
     private TowerEditorViewDelegate delegate;
     private String imagePath;
     private ImageView towerImage;
+    private ResourceBundle labelsResource;
 
-    private static final String RESOURCE_FILE_NAME = "resources/GameAuthoringTower";
-    private ResourceBundle towerResources = ResourceBundle.getBundle(RESOURCE_FILE_NAME);
-
-    public TowerImageView () throws IOException {
+    public TowerImageView (ResourceBundle labelsResource) throws IOException {
+        this.labelsResource = labelsResource;
         towerImage = loadTowerImage();
     }
 
@@ -54,10 +53,12 @@ public class TowerImageView implements ITowerEditorView {
         catch (Exception e) {
             imageRead =
                     ImageIO.read(getClass().getClassLoader()
-                            .getResourceAsStream(towerResources.getString("DefaultImagePath")));
+                            .getResourceAsStream(labelsResource.getString("DefaultImagePath")));
             Image image2 = SwingFXUtils.toFXImage(imageRead, null);
             myImageView.setImage(image2);
-            //ErrorBox.createErrorBox("Unable to load tower image");
+            // TODO: Undo comment on this when model and view are connected
+            // DialogueBoxFactory.createErrorDialogueBox("Could not load file",
+            // "Try new photo");
         }
         return myImageView;
     }

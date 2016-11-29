@@ -14,12 +14,12 @@ public class AuthoringViewFactory {
 
     /**
      * 
-     * @param aWidth
-     * @param aHeight
+     * @param width
+     * @param height
      * @return Authoring View Interface
      */
-    public static IAuthoringView build (int aWidth, int aHeight) {
-        return new AuthoringView(aWidth, aHeight);
+    public static IAuthoringView build (int width, int height) {
+        return new AuthoringView(width, height);
     }
 
 }
