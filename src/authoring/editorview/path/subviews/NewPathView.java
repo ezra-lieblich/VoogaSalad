@@ -42,10 +42,7 @@ public class NewPathView {
 		Button createPathButton =
 				createButton(pathResource.getString("NewPathButton"),
                  e -> {
-					int id = delegate.onUserEnteredCreatePath();
-					delegate.onUserEnteredEditPath(id);
-					pathEditorView.setActiveId(id);
-					pathEditorView.setViewToEdit();				
+					//createNewPath();		
 				});
 	    root.getChildren().add(createPathButton);
 	    createPathButton.setTranslateY(5);
@@ -53,6 +50,12 @@ public class NewPathView {
 	    createPathButton.setFocusTraversable(false);
 	}
 	
+	public void createNewPath(){
+		int id = delegate.onUserEnteredCreatePath();		
+		pathEditorView.setActiveId(id);
+		delegate.onUserEnteredEditPath(id);
+		
+	}
 	 
     private Button createButton (String label, EventHandler<ActionEvent> event) {
         Button button = new Button(label);

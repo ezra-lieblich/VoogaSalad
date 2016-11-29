@@ -4,8 +4,8 @@ package authoring.editorview.path.subviews;
 
 import java.util.List;
 
+import authoring.editorview.path.PathEditorViewDelegate;
 import engine.path.Coordinate;
-import engine.path.GridCoordinate;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -26,6 +26,7 @@ public class PathGrid {
 	private int activePathID;
 	private Image cellImage;
 	private List<Coordinate<Integer>> pathCoordinates;
+	private PathEditorViewDelegate delegate;
 	
 	private Group grid;
 	
@@ -34,7 +35,7 @@ public class PathGrid {
 		this.gridHeight = height;
 		this.gridWidth = width;
 		this.grid = new Group();
-		setEmptyGrid();
+		setGrid();
 		setPathUpdater();
 	}
 
@@ -52,6 +53,10 @@ public class PathGrid {
 		return grid;
 	}
 	
+	public void setDelegate(PathEditorViewDelegate delegate){
+		this.delegate = delegate;
+	}
+	
 	public void setNumColumns(int numColumns){
 		cellWidth = gridWidth/numColumns;
 		this.numColumns = numColumns;
@@ -62,6 +67,7 @@ public class PathGrid {
 		this.numRows = numRows;
 		
 	}
+	
 	
 	public void setActivePathId(int pathID){
 		this.activePathID = pathID;
@@ -75,8 +81,14 @@ public class PathGrid {
 		this.pathCoordinates = pathCoordinates;
 	}
 	
-	private void setEmptyGrid(){
+	private void setGrid(){
 		
+		
+		
+		
+	}
+	
+	private void setCells(){
 		for (int i = 0; i < numColumns; i++){
 			for (int j = 0; j < numRows; j++){
 				Rectangle rect = new Rectangle();
@@ -89,6 +101,10 @@ public class PathGrid {
 				grid.getChildren().add(rect);
 			}			
 		}
+	}
+	
+	private void fillCells(){
+		
 	}
 	
 	public void setCellImage(Image image){
