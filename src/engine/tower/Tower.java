@@ -9,9 +9,11 @@ import engine.weapon.Weapon;
 
 public interface Tower extends Type {
 
-    void setUpgrade (int upgrade);
+    void addUpgrade (int upgrade);
 
-    int getUpgrade ();
+    void removeUpgrade (int upgrade);
+    
+    List<Integer> getUpgrades ();
 
     void addWeapon (int weapon);
 

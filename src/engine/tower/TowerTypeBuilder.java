@@ -23,7 +23,7 @@ public class TowerTypeBuilder extends AbstractTypeBuilder<Tower, TowerBuilder> i
      public static final List<Integer> DEFAULT_WEAPONS = Arrays.asList(new Integer[]{});
      public static final List<Integer> DEFAULT_TARGETS = Arrays.asList(new Integer[]{});
      public static final List<Integer> DEFAULT_ABILITIES = Arrays.asList(new Integer[]{});
-     public static final int DEFAULT_UPGRADE = -1;
+     public static final List<Integer> DEFAULT_UPGRADES = Arrays.asList(new Integer[]{});
      public static final double DEFAULT_COST = 100;
      public static final double DEFAULT_SELL_AMOUNT = DEFAULT_COST / 2;
      public static final int DEFAULT_UNLOCK_LEVEL = 0;
@@ -31,7 +31,7 @@ public class TowerTypeBuilder extends AbstractTypeBuilder<Tower, TowerBuilder> i
      private ObservableList<Integer> weapons;
      private ObservableList<Integer> targets;
      private ObservableList<Integer> abilities;
-     private ObservableProperty<Integer> upgrade;
+     private ObservableList<Integer> upgrades;
      private ObservableProperty<Double> cost;
      private ObservableProperty<Double> sellAmount;
      private ObservableProperty<Integer> unlockLevel;
@@ -39,13 +39,7 @@ public class TowerTypeBuilder extends AbstractTypeBuilder<Tower, TowerBuilder> i
      public TowerTypeBuilder() {
          super(DEFAULT_NAME, DEFAULT_IMAGE_PATH, DEFAULT_SIZE);
      }
-    
-    @Override
-    public TowerBuilder buildUpgrade(Integer upgrade) {
-        this.upgrade.setProperty(upgrade);
-        return this;
-    }
-    
+     
     @Override
     public TowerBuilder buildWeapons(Integer... weapons) {
         return buildWeapons(Arrays.asList(weapons));
@@ -76,6 +70,17 @@ public class TowerTypeBuilder extends AbstractTypeBuilder<Tower, TowerBuilder> i
     @Override
     public TowerBuilder buildAbilities(List<Integer> abilities) {
         this.abilities.setProperty(abilities);
+        return this;
+    }
+    
+    @Override
+    public TowerBuilder buildUpgrades(Integer... upgrades) {
+        return buildWeapons(Arrays.asList(upgrades));
+    }
+    
+    @Override
+    public TowerBuilder buildUpgrades(List<Integer> upgrades) {
+        this.upgrades.setProperty(upgrades);
         return this;
     }
     
@@ -118,8 +123,8 @@ public class TowerTypeBuilder extends AbstractTypeBuilder<Tower, TowerBuilder> i
     }
     
     @Override
-    public ObservableProperty<Integer> getUpgrade () {
-        return upgrade;
+    public ObservableList<Integer> getUpgrades () {
+        return upgrades;
     }
 
     @Override
@@ -142,7 +147,7 @@ public class TowerTypeBuilder extends AbstractTypeBuilder<Tower, TowerBuilder> i
         this.weapons = new ObservableListProperty<Integer>(DEFAULT_WEAPONS);
         this.targets = new ObservableListProperty<Integer>(DEFAULT_TARGETS);
         this.abilities = new ObservableListProperty<Integer>(DEFAULT_ABILITIES);
-        this.upgrade = new ObservableObjectProperty<Integer>(DEFAULT_UNLOCK_LEVEL);
+        this.upgrades = new ObservableListProperty<Integer>(DEFAULT_UPGRADES);
         this.cost = new ObservableObjectProperty<Double>(DEFAULT_COST);
         this.sellAmount = new ObservableObjectProperty<Double>(DEFAULT_SELL_AMOUNT);
         this.unlockLevel = new ObservableObjectProperty<Integer>(DEFAULT_UNLOCK_LEVEL);
@@ -170,6 +175,25 @@ public class TowerTypeBuilder extends AbstractTypeBuilder<Tower, TowerBuilder> i
         unlockLevel.addListener(listener);
         return this;
     }
+
+    @Override
+    public TowerBuilder addWeaponsListener (BiConsumer<List<Integer>, List<Integer>> listener) {
+        weapons.addListener(listener);
+        return this;
+    }
+
+    @Override
+    public TowerBuilder addAbilitiesListener (BiConsumer<List<Integer>, List<Integer>> listener) {
+        abilities.addListener(listener);
+        return this;
+    }
+
+    @Override
+    public TowerBuilder addUpgradesListener (BiConsumer<List<Integer>, List<Integer>> listener) {
+        upgrades.addListener(listener);
+        return this;
+    }
+    
 
     
 }

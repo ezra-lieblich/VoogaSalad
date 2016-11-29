@@ -20,14 +20,14 @@ public class TowerType extends AbstractType implements Tower {
 
     private ObservableList<Integer> weapons;
     private ObservableList<Integer> abilities;
-    private ObservableProperty<Integer> upgrade;
+    private ObservableList<Integer> upgrades;
     private ObservableProperty<Double> cost;
     private ObservableProperty<Double> sellAmount;
     private ObservableProperty<Integer> unlockLevel;
 
     protected TowerType (TowerInitializer towerInitializer) {
         super(towerInitializer);
-        this.upgrade = towerInitializer.getUpgrade();
+        this.upgrades = towerInitializer.getUpgrades();
         this.weapons = towerInitializer.getWeapons();
         this.abilities = towerInitializer.getAbilities();
         this.cost = towerInitializer.getCost();
@@ -36,15 +36,20 @@ public class TowerType extends AbstractType implements Tower {
     }
 
     @Override
-    public void setUpgrade (int upgrade) {
-        this.upgrade.setProperty(upgrade);
+    public void addUpgrade (int upgrade) {
+        upgrades.add(upgrade);
     }
     
     @Override
-    public int getUpgrade () {
-        return upgrade.getProperty();
+    public void removeUpgrade (int upgrade) {
+        upgrades.remove(upgrade);
     }
 
+    @Override
+    public List<Integer> getUpgrades () {
+        return Collections.unmodifiableList(weapons.getProperty());
+    }
+    
     @Override
     public void addWeapon (int weapon) {
         weapons.add(weapon);
