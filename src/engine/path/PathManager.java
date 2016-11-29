@@ -1,13 +1,7 @@
 package engine.path;
 
-import java.util.List;
-import engine.AbstractTypeManager;
-import engine.ManagerMediator;
+import engine.Manager;
 
-public class PathManager extends AbstractTypeManager<Path> {
-
-    protected PathManager (ManagerMediator managerMediator) {
-        // TODO Auto-generated constructor stub
-    }
+public interface PathManager extends Manager<Path> {
 
 }

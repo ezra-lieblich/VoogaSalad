@@ -11,6 +11,7 @@ import javafx.scene.Scene;
  * An interface to define the external API in regards to the creation of
  * the authoring screen.
  *
+ * @author Kayla Schulz
  */
 public interface IAuthoringView {
 

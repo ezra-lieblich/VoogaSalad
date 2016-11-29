@@ -14,12 +14,12 @@ public class ToolbarFactory {
 
     /**
      * 
-     * @param aWidth
-     * @param aHeight
+     * @param width
+     * @param height
      * @return Toolbar Interface
      */
-    public static IToolbar build (int aWidth, int aHeight) {
-        return new Toolbar(aWidth, aHeight);
+    public static IToolbar build (int width, int height) {
+        return new Toolbar(width, height);
     }
 
 }
