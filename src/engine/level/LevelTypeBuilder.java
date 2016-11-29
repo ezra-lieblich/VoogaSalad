@@ -5,6 +5,8 @@ import java.util.Map;
 import java.util.function.BiConsumer;
 
 import engine.AbstractTypeBuilder;
+import engine.observer.ObservableMap;
+import engine.observer.ObservableMapProperty;
 import engine.observer.ObservableObjectProperty;
 import engine.observer.ObservableProperty;
 
@@ -21,7 +23,7 @@ public class LevelTypeBuilder extends AbstractTypeBuilder<Level, LevelBuilder> i
     public static final double DEFAULT_DURATION_IN_SECONDS = 1;
 
     //TODO needs to be observable map
-    private ObservableProperty<Double> enemyCounts;
+    private ObservableMap<Integer, Integer> enemyCounts;
    	private ObservableProperty<Double> rewardHealth;
    	private ObservableProperty<Double> rewardMoney;
    	private ObservableProperty<Double> rewardPoints;
@@ -33,7 +35,7 @@ public class LevelTypeBuilder extends AbstractTypeBuilder<Level, LevelBuilder> i
 	}
 
 	@Override
-	public LevelBuilder addEnemyCountsListener(BiConsumer<Double, Double> listener) {
+	public LevelBuilder addEnemyCountsListener(BiConsumer<Map<Integer, Integer>, Map<Integer, Integer>> listener) {
 		enemyCounts.addListener(listener);
 		return this;
 	}
@@ -63,7 +65,7 @@ public class LevelTypeBuilder extends AbstractTypeBuilder<Level, LevelBuilder> i
 	}
 
 	@Override
-	public ObservableProperty<Double> getEnemyCounts() {
+	public ObservableMap<Integer, Integer> getEnemyCounts() {
 		return enemyCounts;
 	}
 
@@ -88,10 +90,11 @@ public class LevelTypeBuilder extends AbstractTypeBuilder<Level, LevelBuilder> i
 	}
 
 	@Override
-	public LevelBuilder buildEnemyCounts(double speed) {
-		// TODO Auto-generated method stub
+	public LevelBuilder buildEnemyCounts(Map<Integer, Integer> enemies) {
+		this.enemyCounts.setProperty(enemies);
 		return this;
 	}
+
 
 	@Override
 	public LevelBuilder buildRewardHealth(double rewardHealth) {
@@ -126,6 +129,7 @@ public class LevelTypeBuilder extends AbstractTypeBuilder<Level, LevelBuilder> i
 	protected void restoreTypeDefaults() {
 		// TODO enemyCounts
 		//this.enemyCounts;
+		this.enemyCounts = new ObservableMapProperty<Integer, Integer>(DEFAULT_ENEMY_COUNTS);
 		this.rewardHealth = new ObservableObjectProperty<Double>(DEFAULT_REWARD_HEALTH);
 		this.rewardMoney = new ObservableObjectProperty<Double>(DEFAULT_REWARD_MONEY);
 		this.rewardPoints = new ObservableObjectProperty<Double>(DEFAULT_REWARD_POINTS);
@@ -137,5 +141,6 @@ public class LevelTypeBuilder extends AbstractTypeBuilder<Level, LevelBuilder> i
 	protected LevelBuilder getThis() {
 		return this;
 	}
+
 
 }

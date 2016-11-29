@@ -1,6 +1,5 @@
 package engine.enemy;
 
-import java.util.ResourceBundle;
 import engine.AbstractType;
 import engine.TypeInitializer;
 import engine.observer.ObservableProperty;

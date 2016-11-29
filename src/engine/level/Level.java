@@ -11,18 +11,20 @@ public interface Level extends Type{
     Map<Integer, Integer> getEnemyCounts();
 
     void setEnemyCounts(int enemy, int enemyCount);
+    
+    void removeEnemy(int enemy);
 
     double getRewardHealth();
 
-    void setRewardHealth(int rewardHealth);
+    void setRewardHealth(double rewardHealth);
 
     double getRewardMoney();
 
-    void setRewardMoney(int rewardMoney);
+    void setRewardMoney(double rewardMoney);
 
     double getRewardPoints();
 
-    void setRewardPoints(int rewardPoints);
+    void setRewardPoints(double rewardPoints);
 
     double getDurationInSeconds();
 
