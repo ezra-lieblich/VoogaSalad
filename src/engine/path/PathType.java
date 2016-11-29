@@ -29,16 +29,6 @@ public class PathType extends AbstractType implements Path {
     public void setType (String type) {
         this.type.setProperty(type);
     }
-
-    @Override
-    public void addCoordinate(Coordinate<Integer> coordinate) {
-        coordinates.getProperty().add(coordinate);
-    }
-    
-    @Override
-    public void removeCoordinate(Coordinate<Integer> coordinate) {
-        coordinates.getProperty().remove(coordinate);
-    }
     
     @Override
     public List<Coordinate<Integer>> getCoordinates () {
@@ -64,5 +54,20 @@ public class PathType extends AbstractType implements Path {
     public void setGridColumns (int gridColumns) {
         this.gridRows.setProperty(gridColumns);        
     }
+
+    @Override
+    public void setCoordinates (List<Coordinate<Integer>> coordinates) {
+        this.coordinates.setProperty(coordinates);
+    }
+
+//  @Override
+//  public void addCoordinate(Coordinate<Integer> coordinate) {
+//      coordinates.getProperty().add(coordinate);
+//  }
+//  
+//  @Override
+//  public void removeCoordinate(Coordinate<Integer> coordinate) {
+//      coordinates.getProperty().remove(coordinate);
+//  }
     
 }

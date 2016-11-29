@@ -1,14 +1,15 @@
 package engine.path;
 
 import java.util.List;
-import authoring.editorview.path.Coordinate;
 import authoring.editorview.path.PathDataSource;
 
 public class PathTypeManagerController implements PathDataSource{
     private PathManager pathManager;
+    private PathBuilder pathBuilder;
     
     PathTypeManagerController(PathManager pathManager) {
         this.pathManager = pathManager;
+        this.pathBuilder = new PathTypeBuilder();
     }
 
     @Override
@@ -18,89 +19,58 @@ public class PathTypeManagerController implements PathDataSource{
     }
 
     @Override
-    public void setBackgroundImage (int pathID, String backgroundImagePath) {        
+    public void setPathImage (int pathID, String pathImagePath) {
+        pathManager.getEntity(pathID).setImagePath(pathImagePath);
     }
 
     @Override
-    public void setPathImage (String pathImagePath) {
-        pathManager.getActiveEntity().setImagePath(pathImagePath);
+    public void setNumberofColumns (int pathID, int numColumns) {
+        pathManager.getEntity(pathID).setGridColumns(numColumns);
     }
 
     @Override
-    public void setNumberofColumns (int numColumns) {
-        pathManager.getActiveEntity().setImagePath(pathImagePath);
+    public void setNumberofRows (int pathID, int numRows) {
+        pathManager.getEntity(pathID).setGridRows(numRows);
     }
 
     @Override
-    public void setNumberofRows (int numRows) {
-        // TODO Auto-generated method stub
-        
+    public void setPathName (int pathID, String pathName) {
+        pathManager.getEntity(pathID).setName(pathName);
     }
 
     @Override
-    public void setPathName (String pathName) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public boolean setPathCoordinates (List<Coordinate> pathCoordinates) {
-        // TODO Auto-generated method stub
-        return false;
+    public boolean setPathCoordinates (int pathID, List<Coordinate<Integer>> pathCoordinates) {
+        pathManager.getEntity(pathID).setCoordinates(pathCoordinates);
     }
 
     @Override
     public void clearPaths () {
-        // TODO Auto-generated method stub
-        
     }
 
     @Override
-    public String getBackgroundImagePath () {
-        // TODO Auto-generated method stub
-        return null;
+    public String getPathImagePath (int pathID) {
+        return pathManager.getEntity(pathID).getImagePath();
     }
 
     @Override
-    public String getPathImagePath () {
-        // TODO Auto-generated method stub
-        return null;
+    public int getNumberofColumns (int pathID) {
+        return pathManager.getEntity(pathID).getGridColumns();
     }
 
     @Override
-    public int getNumberofColumns () {
-        // TODO Auto-generated method stub
-        return 0;
+    public int getNumberofRows (int pathID) {
+        return pathManager.getEntity(pathID).getGridRows();
     }
 
     @Override
-    public int getNumberofRows () {
-        // TODO Auto-generated method stub
-        return 0;
+    public String getPathName (int pathID) {
+        return pathManager.getEntity(pathID).getName();
     }
 
     @Override
-    public int getPathName () {
-        // TODO Auto-generated method stub
-        return 0;
+    public List<Coordinate> getPathCoordinates (int pathID) {
+        return pathManager.getEntity(pathID).getCoordinates();
     }
 
-    @Override
-    public List<Coordinate> getPathCoordinates () {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public void setActiveID (int pathId) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public int getActiveID () {
-        // TODO Auto-generated method stub
-        return 0;
-    }
 
 }
