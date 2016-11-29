@@ -1,5 +1,6 @@
 package authoring.editorview.enemy.subviews.editorfields;
 
+import java.util.ResourceBundle;
 import authoring.editorview.enemy.EnemyEditorViewDelegate;
 import authoring.editorview.enemy.IEnemyEditorView;
 import authoring.utilityfactories.TextFieldFactory;
@@ -17,9 +18,9 @@ public class EnemyHealthField implements IEnemyEditorView {
     private EnemyEditorViewDelegate delegate;
     private TextField enemyHealthField;
 
-    public EnemyHealthField () {
+    public EnemyHealthField (ResourceBundle labelsResource) {
         enemyHealthField =
-                TextFieldFactory.makeTextField("Set enemy health: ",
+                TextFieldFactory.makeTextField(labelsResource.getString("EnterInt"),
                                                e -> delegate
                                                        .onUserEnteredEnemyHealth(enemyHealthField
                                                                .getText()));

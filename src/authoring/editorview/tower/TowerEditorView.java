@@ -1,6 +1,7 @@
 package authoring.editorview.tower;
 
 import java.io.IOException;
+import java.util.ResourceBundle;
 import authoring.editorview.tower.subviews.TowerEffectView;
 import authoring.editorview.tower.subviews.TowerImageBank;
 import authoring.editorview.tower.subviews.editorfields.TowerAbilityField;
@@ -45,25 +46,28 @@ public class TowerEditorView implements ITowerEditorView {
     public TowerEditorView () throws IOException {
         towerEditorView = new BorderPane();
 
-        towerName = new TowerNameField();
-        towerFrequency = new TowerFrequencyField();
-        towerImage = new TowerImageView();
-        towerRange = new TowerRangeField();
-        towerBuyPrice = new TowerBuyPriceField();
-        towerFireRate = new TowerFireRateField();
-        towerSellPrice = new TowerSellPriceField();
-        towerUnlockLevel = new TowerUnlockLevelField();
-        towerAbility = new TowerAbilityField();
-        towerChooseEnemy = new TowerChooseEnemyField();
-        towerChooseWeapon = new TowerChooseWeaponField();
-        towerUpgrade = new TowerUpgradeField();
+        ResourceBundle labelsResource = ResourceBundle.getBundle("resources/GameAuthoringTower");
+        ResourceBundle dialogueBoxResource = ResourceBundle.getBundle("resources/DialogueBox");
 
-        towerBank = new TowerImageBank();
+        towerName = new TowerNameField(labelsResource);
+        towerFrequency = new TowerFrequencyField(labelsResource);
+        towerImage = new TowerImageView(labelsResource);
+        towerRange = new TowerRangeField(labelsResource);
+        towerBuyPrice = new TowerBuyPriceField(labelsResource);
+        towerFireRate = new TowerFireRateField(labelsResource);
+        towerSellPrice = new TowerSellPriceField(labelsResource);
+        towerUnlockLevel = new TowerUnlockLevelField(labelsResource);
+        towerAbility = new TowerAbilityField(labelsResource);
+        towerChooseEnemy = new TowerChooseEnemyField(labelsResource);
+        towerChooseWeapon = new TowerChooseWeaponField(labelsResource);
+        towerUpgrade = new TowerUpgradeField(labelsResource);
+
+        towerBank = new TowerImageBank(labelsResource, dialogueBoxResource);
         towerEffectView =
                 new TowerEffectView(towerName, towerFrequency, towerImage, towerRange,
                                     towerBuyPrice, towerFireRate, towerSellPrice, towerUnlockLevel,
                                     towerAbility, towerChooseEnemy, towerChooseWeapon,
-                                    towerUpgrade);
+                                    towerUpgrade, labelsResource, dialogueBoxResource);
         setBorderPane();
     }
 

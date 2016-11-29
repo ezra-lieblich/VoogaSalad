@@ -11,6 +11,7 @@ import authoring.editorview.weapon.IWeaponEditorView;
 import authoring.editorview.weapon.WeaponEditorViewDelegate;
 import authoring.utilityfactories.BoxFactory;
 import authoring.utilityfactories.ButtonFactory;
+import authoring.utilityfactories.DialogueBoxFactory;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -39,10 +40,9 @@ public class WeaponImageBank extends PhotoFileChooser implements IWeaponEditorVi
     private VBox vbox;
 
     private ResourceBundle labelsResource;
-    private final String WEAPON_EFFECT_RESOURCE_PATH = "resources/GameAuthoringWeapon";
 
-    public WeaponImageBank () {
-        labelsResource = ResourceBundle.getBundle(WEAPON_EFFECT_RESOURCE_PATH);
+    public WeaponImageBank (ResourceBundle labelsResource) {
+        this.labelsResource = labelsResource;
         weaponBank = new ScrollPane();
         Button createWeaponButton =
                 ButtonFactory.makeButton("Create Weapon",
@@ -52,14 +52,20 @@ public class WeaponImageBank extends PhotoFileChooser implements IWeaponEditorVi
                                                             labelsResource.getString("NewWeapon"));
                                              }
                                              catch (IOException e1) {
-                                                 e1.printStackTrace();
-                                                 // ErrorBox.createErrorBox("Unable to load tower
-                                                 // image");
+                                                 DialogueBoxFactory
+                                                         .createErrorDialogueBox("Unable to open file chooser",
+                                                                                 "Try again");
                                              }
                                          });
         vbox = BoxFactory.createVBox(labelsResource.getString("WeaponBank"));
         vbox.getChildren().add(createWeaponButton);
         weaponBank.setContent(vbox);
+    }
+
+    public void setPaneSize (int width, int height) {
+        weaponBank.setMaxSize(width, height);
+        weaponBank.setMinSize(width, height);
+        weaponBank.setPrefSize(width, height);
     }
 
     @Override
@@ -87,10 +93,10 @@ public class WeaponImageBank extends PhotoFileChooser implements IWeaponEditorVi
                 imageRead = ImageIO.read(chosenFile);
                 Image image2 = SwingFXUtils.toFXImage(imageRead, null);
                 imageView.setImage(image2);
+                // delegate.onUserEnteredWeaponImage(chosenFile.toURI().toString());
                 // weaponBank.setContent(imageView);
                 // TODO: These should be correct but are erring out currently
                 // delegate.onUserPressedCreateWeapon();
-                // delegate.onUserEnteredWeaponImage(chosenFile.toURI().toString());
             }
             catch (Exception e) {
                 System.out.println("You failed");
