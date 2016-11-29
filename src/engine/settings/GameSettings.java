@@ -17,9 +17,14 @@ public class GameSettings extends AbstractType implements Game {
     private ObservableProperty<Double> initialLives;
     private ObservableProperty<Double> initialMoney;
 
-	protected GameSettings(TypeInitializer typeBuilder) {
-		super(typeBuilder);
-		// TODO Auto-generated constructor stub
+	protected GameSettings(GameInitializer gameInitializer) {
+		super(gameInitializer);
+		this.gameType = gameInitializer.getGameType();
+		this.winningConditions = gameInitializer.getWinningConditions();
+		this.losingConditions = gameInitializer.getLosingConditions();
+		this.initialLives = gameInitializer.getInitalLives();
+		this.initialMoney = gameInitializer.getInitialMoney();
+		
 	}
 	
 

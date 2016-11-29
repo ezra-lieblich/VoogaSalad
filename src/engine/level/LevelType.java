@@ -18,8 +18,13 @@ public class LevelType extends AbstractType implements Level {
 	private ObservableProperty<Double> durationInSeconds;
 
 
-    protected LevelType (TypeInitializer typeBuilder) {
-    	super(typeBuilder);	
+    protected LevelType (LevelInitializer levelInitializer) {
+    	super(levelInitializer);	
+    	this.enemyCounts = levelInitializer.getEnemyCounts();
+    	this.rewardHealth = levelInitializer.getRewardHealth();
+    	this.rewardMoney = levelInitializer.getRewardMoney();
+    	this.rewardPoints = levelInitializer.getRewardPoints();
+    	this.durationInSeconds = levelInitializer.getDurationInSeconds();
 	}
     
 

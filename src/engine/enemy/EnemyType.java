@@ -1,7 +1,6 @@
 package engine.enemy;
 
 import engine.AbstractType;
-import engine.TypeInitializer;
 import engine.observer.ObservableProperty;
 
 public class EnemyType extends AbstractType implements Enemy {
@@ -14,8 +13,14 @@ public class EnemyType extends AbstractType implements Enemy {
 	private ObservableProperty<String> collisionEffect;
 
 	
-    protected EnemyType (TypeInitializer typeBuilder) {
-        super(typeBuilder);
+    protected EnemyType (EnemyInitializer enemyInitializer) {
+        super(enemyInitializer);
+        this.speed = enemyInitializer.getSpeed();
+        this.health = enemyInitializer.getHealth();
+        this.damage = enemyInitializer.getDamage();
+        this.points = enemyInitializer.getMoney();
+        this.money = enemyInitializer.getMoney();
+        this.collisionEffect = enemyInitializer.getCollisionEffect();
     }
 	
 	
