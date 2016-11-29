@@ -1,10 +1,10 @@
 package authoring.editorview.enemy;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.ResourceBundle;
 import authoring.editorview.enemy.subviews.EnemyEffectView;
 import authoring.editorview.enemy.subviews.EnemyImageBank;
-import authoring.editorview.enemy.subviews.editorfields.EnemyFrequencyField;
 import authoring.editorview.enemy.subviews.editorfields.EnemyHealthField;
 import authoring.editorview.enemy.subviews.editorfields.EnemyImageView;
 import authoring.editorview.enemy.subviews.editorfields.EnemyNameField;
@@ -23,7 +23,7 @@ import javafx.scene.layout.BorderPane;
  * 
  */
 
-public class EnemyEditorView implements IEnemyEditorView {
+public class EnemyEditorView implements IEnemyEditorView, IEnemyUpdateView {
     private EnemyEditorViewDelegate delegate;
     private BorderPane enemyEditorView;
     private EnemyImageBank enemyBank;
@@ -31,7 +31,6 @@ public class EnemyEditorView implements IEnemyEditorView {
     private EnemySpeedField enemySpeed;
     private EnemyImageView enemyImage;
     private EnemyEffectView enemyEffectView;
-    private EnemyFrequencyField enemyFrequency;
     private EnemyCollisionEffectField enemyReactions;
     private EnemyDamageField enemyDamage;
     private EnemyHealthField enemyHealth;
@@ -47,7 +46,6 @@ public class EnemyEditorView implements IEnemyEditorView {
         enemyBank = new EnemyImageBank(labelsResource, dialogueBoxResource);
         enemyName = new EnemyNameField(labelsResource);
         enemySpeed = new EnemySpeedField(labelsResource);
-        enemyFrequency = new EnemyFrequencyField(labelsResource);
         enemyReactions = new EnemyCollisionEffectField(labelsResource);
         enemyImage = new EnemyImageView(labelsResource);
         enemyDamage = new EnemyDamageField(labelsResource);
@@ -55,7 +53,7 @@ public class EnemyEditorView implements IEnemyEditorView {
         enemyRewardMoney = new EnemyRewardMoneyField(labelsResource);
         enemyRewardPoints = new EnemyRewardPointsField(labelsResource);
         enemyEffectView =
-                new EnemyEffectView(enemyFrequency, enemyImage, enemyName, enemyReactions,
+                new EnemyEffectView(enemyImage, enemyName, enemyReactions,
                                     enemySpeed, enemyDamage, enemyHealth, enemyRewardMoney,
                                     enemyRewardPoints);
         setBorderPane();
@@ -78,13 +76,84 @@ public class EnemyEditorView implements IEnemyEditorView {
         enemyName.setDelegate(delegate);
         enemySpeed.setDelegate(delegate);
         enemyImage.setDelegate(delegate);
-        enemyFrequency.setDelegate(delegate);
         enemyReactions.setDelegate(delegate);
         enemyDamage.setDelegate(delegate);
         enemyHealth.setDelegate(delegate);
         enemyRewardMoney.setDelegate(delegate);
         enemyRewardPoints.setDelegate(delegate);
         enemyEffectView.setDelegate(delegate);
+    }
+
+    @Override
+    public void updateFrequencyDisplay (int frequency) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void updateEnemyImagePath (String imagePath) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void updateEnemyName (String enemyName) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void updateEnemyReactions (String enemyReactions) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void updateEnemySpeed (int speed) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void updateEnemyBank (List<Integer> activeEnemies) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void createNewEnemy () {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void updateEnemyHealthDisplay (int enemyHealth) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void updateEnemyDamage (int damage) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void updateEnemyRewardMoney (int rewardMoney) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void updateEnemyRewardPoints (int rewardPoints) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void updateEnemyCollisionEffect (String collisionEffect) {
+        // TODO Auto-generated method stub
+        
     }
 
 }

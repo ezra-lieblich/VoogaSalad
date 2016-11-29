@@ -26,4 +26,6 @@ public interface LevelDataSource {
 
     public void setRewardHealth (int levelIndex, int winHealth);
 
+    public void setEnemyFrequency (int enemyID, double enemyFrequency);
+
 }

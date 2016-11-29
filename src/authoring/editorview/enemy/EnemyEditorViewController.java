@@ -17,9 +17,10 @@ public class EnemyEditorViewController extends EditorViewController
 
     private EnemyDataSource enemyDataSource;
     private int currentEnemyID;
+    private IEnemyUpdateView myView;
 
     public EnemyEditorViewController (int editorWidth, int editorHeight) throws IOException {
-        IEnemyEditorView myView = EnemyEditorViewFactory.build(editorWidth, editorHeight);
+        myView = EnemyEditorViewFactory.build(editorWidth, editorHeight);
         myView.setDelegate(this);
         this.view = myView;
     }
@@ -30,7 +31,7 @@ public class EnemyEditorViewController extends EditorViewController
 
     @Override
     public void onUserPressedCreateEnemy () {
-        enemyDataSource.createEnemy();
+        enemyDataSource.createEnemy(myView);
     }
 
     @Override
@@ -105,21 +106,22 @@ public class EnemyEditorViewController extends EditorViewController
         enemyDataSource.setEnemyName(currentEnemyID, enemyName);
     }
 
-    @Override
-    public void onUserEnteredEnemyFrequency (String enemyFrequency) {
-        try {
-            Integer.parseInt(enemyFrequency);
-            enemyDataSource.setEnemyFrequency(currentEnemyID, Integer.parseInt(enemyFrequency));
-        }
-        catch (NumberFormatException e) {
-            createDialogueBox();
-        }
-    }
-
     private void createDialogueBox () {
         ResourceBundle dialogueBoxResource = ResourceBundle.getBundle("resources/DialogueBox");
         DialogueBoxFactory.createErrorDialogueBox(dialogueBoxResource.getString("Integer"),
                                                   dialogueBoxResource.getString("CheckInput"));
+    }
+
+    @Override
+    public void onUserPressedDeleteEnemy () {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void onUserEnteredEnemySize (String enemySize) {
+        // TODO Auto-generated method stub
+
     }
 
 }

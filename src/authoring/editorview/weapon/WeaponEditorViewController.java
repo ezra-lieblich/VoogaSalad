@@ -17,16 +17,17 @@ public class WeaponEditorViewController extends EditorViewController
 
     private WeaponDataSource weaponDataSource;
     private int currentWeaponID;
+    private IWeaponUpdateView myView;
 
     public WeaponEditorViewController (int editorWidth, int editorHeight) throws IOException {
-        IWeaponUpdateView myView = WeaponEditorViewFactory.build(editorWidth, editorHeight);
+        myView = WeaponEditorViewFactory.build(editorWidth, editorHeight);
         myView.setDelegate(this);
         this.view = myView;
     }
 
     private void updateWeaponID () {
         // How do I know which ID I'm working with?
-        currentWeaponID = weaponDataSource.getCreatedWeapon();
+        // currentWeaponID = weaponDataSource.getCreatedWeapon();
     }
 
     public void setWeaponDataSource (WeaponDataSource source) {
@@ -78,17 +79,6 @@ public class WeaponEditorViewController extends EditorViewController
     }
 
     @Override
-    public void onUserEnteredWeaponDamage (String weaponDamage) {
-        try {
-            Integer.parseInt(weaponDamage);
-            weaponDataSource.setWeaponDamage(currentWeaponID, Integer.parseInt(weaponDamage));
-        }
-        catch (NumberFormatException e) {
-            createDialogueBox();
-        }
-    }
-
-    @Override
     public void onUserPressedCreateWeapon () {
         weaponDataSource.createWeapon();
     }
@@ -99,13 +89,29 @@ public class WeaponEditorViewController extends EditorViewController
     }
 
     @Override
-    public void onUserEnteredWeaponPath (String weaponPath) {
-        weaponDataSource.setWeaponPath(currentWeaponID, weaponPath);
+    public void onUserEnteredWeaponTrajectory (String weaponTrajectory) {
+        weaponDataSource.setWeaponTrajectory(currentWeaponID, weaponTrajectory);
     }
 
     private void createDialogueBox () {
         ResourceBundle dialogueBoxResource = ResourceBundle.getBundle("resources/DialogueBox");
         DialogueBoxFactory.createErrorDialogueBox(dialogueBoxResource.getString("Integer"),
                                                   dialogueBoxResource.getString("CheckInput"));
+    }
+
+    @Override
+    public void onUserEnteredNewTargetEnemy (String enemyID) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void onUserPressedDeleteWeapon () {
+        // TODO Auto-generated method stub
+
+    }
+
+    public IWeaponUpdateView getWeaponUpdateView () {
+        return myView;
     }
 }
