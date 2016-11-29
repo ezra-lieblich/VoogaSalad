@@ -46,13 +46,13 @@ public class EnemyController implements Observer{
 	}
 	*/
 	
-	
-	private void updateEnemyViews(){
+	//called in timeline update
+	public void updateEnemyViews(){
 		ArrayList<Enemy> enemies = (ArrayList<Enemy>) this.model.getEnemyList();
 		//if (enemies.size()<this.enemyToView.size()){
 		//this.enemyToView.keySet().retainAll(enemies); //delete anything not used
 		//}
-		((Pane) this.grid.getGrid()).getChildren().clear();
+		//((Pane) this.grid.getGrid()).getChildren().clear();
 		for (int i=0; i<enemies.size(); i++){ //ALERT TODO: I don't think any keys will be the same bc as soon as the enemy object is 
 			//modified, it will no longer be the same key and no imageview will correspond to it, may need a unique id
 			Enemy enemy = enemies.get(i);
@@ -87,7 +87,7 @@ public class EnemyController implements Observer{
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
 		if (o instanceof EnemyModel){
-			updateEnemyViews();
+			//updateEnemyViews();
 		}
 		
 	}

@@ -11,6 +11,7 @@ import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -183,7 +184,10 @@ public class GamePlayerController implements Observer {
 
 	private void startAnimation() {
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> {
-
+			((Pane) this.view.getGrid().getGrid()).getChildren().clear(); //clear everything
+			this.enemyController.updateEnemyViews(); //update enemies
+			this.view.getGrid().populatePath(model.getGrid().getStartPoint()); //repopulate the path
+			
 		});
 		Timeline animation = new Timeline();
 		animation.setCycleCount(Timeline.INDEFINITE);
