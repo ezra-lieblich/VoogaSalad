@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 import javax.imageio.ImageIO;
 import authoring.editorview.enemy.EnemyEditorViewDelegate;
 import authoring.editorview.enemy.IEnemyEditorView;
+import authoring.utilityfactories.DialogueBoxFactory;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
@@ -20,15 +21,12 @@ import javafx.scene.image.ImageView;
 public class EnemyImageView implements IEnemyEditorView {
 
     private EnemyEditorViewDelegate delegate;
-    private ResourceBundle labelsResource;
     private String imagePath;
     private ImageView enemyImage;
+    private ResourceBundle labelsResource;
 
-    // TODO: Make this enemy
-    private final String ENEMY_EFFECT_RESOURCE_PATH = "resources/GameAuthoringEnemy";
-
-    public EnemyImageView () throws IOException {
-        labelsResource = ResourceBundle.getBundle(ENEMY_EFFECT_RESOURCE_PATH);
+    public EnemyImageView (ResourceBundle labelsResource) throws IOException {
+        this.labelsResource = labelsResource;
         enemyImage = loadEnemyImage();
     }
 
@@ -51,7 +49,9 @@ public class EnemyImageView implements IEnemyEditorView {
                             .getResourceAsStream(labelsResource.getString("DefaultImagePath")));
             Image image2 = SwingFXUtils.toFXImage(imageRead, null);
             myImageView.setImage(image2);
-            System.out.println("Unable to find picture in files");
+            // TODO: Undo comment on this when model and view are connected
+            // DialogueBoxFactory.createErrorDialogueBox("Could not load file",
+            // "Try new photo");
         }
         return myImageView;
     }

@@ -187,7 +187,7 @@ public class GamePlayModel extends Observable {
 
 	public Boolean placeTower(int type, int x, int y) {
 		// later check if is a valid location to place the tower
-		engine.tower.Tower tt = towerTypes.get(type);
+		engine.tower.Tower tt = towerTypes.get(type); //REFACTOR NAMES
 		System.out.println("Placed a tower");
 		System.out.println("Tower x: " + x + "; y:" + y);
 		// get weaponTypes

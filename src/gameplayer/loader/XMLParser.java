@@ -16,9 +16,11 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 import engine.enemy.EnemyType;
+import engine.enemy.EnemyTypeBuilder;
 import engine.tower.Tower;
 import engine.tower.TowerType;
 import engine.tower.TowerTypeBuilder;
+import engine.enemy.EnemyTypeBuilder;
 import gameplayer.model.Enemy;
 
 
@@ -35,11 +37,13 @@ public class XMLParser {
 	private Element rootElement;
 	private Document xmlDocument; 
 	private TowerTypeBuilder towerBuilder;
+	private EnemyTypeBuilder enemyBuilder;
 
 	public XMLParser(String xmlFilename){
 		parseNewXML(xmlFilename);
 		rootElement = getRootElement(); 
 		towerBuilder = new TowerTypeBuilder();
+		enemyBuilder = new EnemyTypeBuilder();
 	}
 	
     /**
@@ -124,7 +128,12 @@ public class XMLParser {
     			towerBuilder.buildCost(Double.parseDouble(((Element)(towerElement.getElementsByTagName("cost").item(0))).getFirstChild().getNodeValue()));
     			towerBuilder.buildSellAmount(Double.parseDouble(((Element)(towerElement.getElementsByTagName("sellAmount").item(0))).getFirstChild().getNodeValue()));
     			towerBuilder.buildUnlockLevel(Integer.parseInt(((Element)(towerElement.getElementsByTagName("unlockLevel").item(0))).getFirstChild().getNodeValue()));
-    			//TowerType towerType = new TowerType(name,imageLocation,cost,sellAmount,fireRate,unlockLevel);
+    			ArrayList<Integer> weapons = new ArrayList<Integer>();
+    			NodeList weaponNodes = towerElement.getElementsByTagName("weapons");
+    			for (int j = 0; j < weaponNodes.getLength(); j++) {
+    				weapons.add(Integer.parseInt(((Element)weaponNodes.item(j)).getFirstChild().getNodeValue()));
+    			}
+    			towerBuilder.buildWeapons(weapons);
     			Tower tower = towerBuilder.build();
     			ret.put(i, tower);
     		}
@@ -148,14 +157,14 @@ public class XMLParser {
 	
 	public List<Queue<Enemy>> getEnemy(int level){
 		ArrayList<Queue<Enemy>>enemyByLevel=new ArrayList<>(); 
-		HashMap<String,EnemyType> types = getEnemyTypes();
+		HashMap<String,engine.enemy.Enemy> types = getEnemyTypes(); //refactor names
 		String[]enemiesRawString = getTextValue("level"+level,"typeAmount").split(";");
 		for(int i=0;i<enemiesRawString.length;i++){
 			Queue<Enemy>enemiesInLevel= new LinkedList<Enemy>(); 
 			String[]enemies = enemiesRawString[i].split(",");
 			for(int k=0;k<Integer.parseInt(enemies[1]);k++){
-				EnemyType type = types.get(enemies[0]);
 
+				engine.enemy.Enemy type = types.get(enemies[0]); //refactor names
 				double width = 20; //for testing purposes
 				double height = 20; //for testing purposes
 		//+++++++++++++add enemy construction once game authoring is done++++++++++++++++	
@@ -167,24 +176,22 @@ public class XMLParser {
 	}
 	
 	
-	private HashMap<String, EnemyType> getEnemyTypes() {
-		HashMap<String,EnemyType>ret = new HashMap<>(); 
+	private HashMap<String, engine.enemy.Enemy> getEnemyTypes() { //refactor names
+		HashMap<String,engine.enemy.Enemy>ret = new HashMap<>(); //refactor names
     	try{
     		NodeList parentList = xmlDocument.getElementsByTagName("enemy");
     		for(int i=0;i<parentList.getLength();i++){
-    			Element enemy = (Element)parentList.item(i);
-    			String name = ((Element)(enemy.getElementsByTagName("name").item(0))).getFirstChild().getNodeValue();
-    			String imageLocation = ((Element)(enemy.getElementsByTagName("imageLocation").item(0))).getFirstChild().getNodeValue();
-    			double speed = Double.parseDouble(((Element)(enemy.getElementsByTagName("speed").item(0))).getFirstChild().getNodeValue());
-    			double health = Double.parseDouble(((Element)(enemy.getElementsByTagName("health").item(0))).getFirstChild().getNodeValue());
-    			double points = Double.parseDouble(((Element)(enemy.getElementsByTagName("points").item(0))).getFirstChild().getNodeValue());
-    			double money = Double.parseDouble(((Element)(enemy.getElementsByTagName("money").item(0))).getFirstChild().getNodeValue());
-    			String collisionEffect = ((Element)(enemy.getElementsByTagName("collisionEffect").item(0))).getFirstChild().getNodeValue();
-    			
-    			
-  //+++++++++++++talked to game engine for enemy type constructor what is the interface initializer????++++++
-    			//EnemyType enemyType = new EnemyType(name,imageLocation,speed,health,points,money,collisionEffect);
-    			EnemyType enemyType = new EnemyType(null);
+
+    			Element enemyElement = (Element)parentList.item(i);
+    			String name =((Element)(enemyElement.getElementsByTagName("name").item(0))).getFirstChild().getNodeValue();
+    			enemyBuilder.buildName(name);
+    			enemyBuilder.buildImagePath(((Element)(enemyElement.getElementsByTagName("imageLocation").item(0))).getFirstChild().getNodeValue());
+    			enemyBuilder.buildSpeed(Double.parseDouble(((Element)(enemyElement.getElementsByTagName("speed").item(0))).getFirstChild().getNodeValue()));
+    			enemyBuilder.buildHealth(Double.parseDouble(((Element)(enemyElement.getElementsByTagName("health").item(0))).getFirstChild().getNodeValue()));
+    			enemyBuilder.buildPoints(Double.parseDouble(((Element)(enemyElement.getElementsByTagName("points").item(0))).getFirstChild().getNodeValue()));
+    			enemyBuilder.buildMoney(Double.parseDouble(((Element)(enemyElement.getElementsByTagName("money").item(0))).getFirstChild().getNodeValue()));
+    			enemyBuilder.buildCollisionEffect(((Element)(enemyElement.getElementsByTagName("collisionEffect").item(0))).getFirstChild().getNodeValue());
+    			engine.enemy.Enemy enemyType = enemyBuilder.build(); //refactor names
     			ret.put(name, enemyType);
     		}
     	}

@@ -1,8 +1,11 @@
 package authoring.editorview.tower;
 
 import java.io.IOException;
-import authoring.ErrorBox;
+import java.util.ResourceBundle;
 import authoring.editorview.EditorViewController;
+import authoring.utilityfactories.DialogueBoxFactory;
+import engine.tower.TowerManagerController;
+import authoring.editorview.tower.ITowerUpdateView;
 
 
 /**
@@ -14,16 +17,17 @@ import authoring.editorview.EditorViewController;
 public class TowerEditorViewController extends EditorViewController
         implements TowerEditorViewDelegate {
 
-    private TowerDataSource towerDataSource;
+    private TowerManagerController towerDataSource;
     private int currentTowerID;
+    private ITowerUpdateView myView;
 
     public TowerEditorViewController (int editorWidth, int editorHeight) throws IOException {
-        ITowerEditorView myView = TowerEditorViewFactory.build(editorWidth, editorHeight);
+        myView = TowerEditorViewFactory.build(editorWidth, editorHeight);
         myView.setDelegate(this);
         this.view = myView;
     }
 
-    public void setTowerDataSource (TowerDataSource source) {
+    public void setTowerDataSource (TowerManagerController source) {
         this.towerDataSource = source;
     }
 
@@ -32,7 +36,7 @@ public class TowerEditorViewController extends EditorViewController
      */
     @Override
     public void onUserPressedCreateNewTower () {
-        towerDataSource.createNewTower();
+        towerDataSource.createNewTower(myView);
     }
 
     @Override
@@ -52,83 +56,83 @@ public class TowerEditorViewController extends EditorViewController
             towerDataSource.setTowerUnlockLevel(currentTowerID, Integer.parseInt(towerLevel));
         }
         catch (NumberFormatException e) {
-            ErrorBox.createErrorBox("This input is not an integer");
-        }
-    }
-
-    @Override
-    public void onUserEnteredTowerFireRate (String towerFireRate) {
-        try {
-            Integer.parseInt(towerFireRate);
-            towerDataSource.setTowerFireRate(currentTowerID, Integer.parseInt(towerFireRate));
-        }
-        catch (NumberFormatException e) {
-            ErrorBox.createErrorBox("This input is not an integer");
-        }
-    }
-
-    @Override
-    public void onUserEnteredTowerFrequency (String towerFrequency) {
-        try {
-            Integer.parseInt(towerFrequency);
-            towerDataSource.setTowerFrequency(currentTowerID, Integer.parseInt(towerFrequency));
-        }
-        catch (NumberFormatException e) {
-            ErrorBox.createErrorBox("This input is not an integer");
-        }
-    }
-
-    @Override
-    public void onUserEnteredTowerRange (String towerRange) {
-        try {
-            Integer.parseInt(towerRange);
-            towerDataSource.setTowerRange(currentTowerID, Integer.parseInt(towerRange));
-        }
-        catch (NumberFormatException e) {
-            ErrorBox.createErrorBox("This input is not an integer");
+            createDialogueBox();
         }
     }
 
     @Override
     public void onUserEnteredTowerBuyPrice (String towerBuyPrice) {
         try {
-            Integer.parseInt(towerBuyPrice);
-            towerDataSource.setTowerBuyPrice(currentTowerID, Integer.parseInt(towerBuyPrice));
+            Double.parseDouble(towerBuyPrice);
+            towerDataSource.setTowerBuyPrice(currentTowerID, Double.parseDouble(towerBuyPrice));
         }
         catch (NumberFormatException e) {
-            ErrorBox.createErrorBox("This input is not an integer");
+            createDialogueBox();
         }
     }
 
     @Override
     public void onUserEnteredTowerSellPrice (String towerSellPrice) {
         try {
-            Integer.parseInt(towerSellPrice);
-            towerDataSource.setTowerSellPrice(currentTowerID, Integer.parseInt(towerSellPrice));
+            Double.parseDouble(towerSellPrice);
+            towerDataSource.setTowerSellPrice(currentTowerID, Double.parseDouble(towerSellPrice));
         }
         catch (NumberFormatException e) {
-            ErrorBox.createErrorBox("This input is not an integer");
+            createDialogueBox();
         }
     }
 
     @Override
     public void onUserEnteredTowerAbility (String towerAbility) {
-        towerDataSource.setTowerAbility(currentTowerID, towerAbility);
+        towerDataSource.setTowerChosenAbility(currentTowerID, Integer.parseInt(towerAbility));
+    }
+
+    private void createDialogueBox () {
+        ResourceBundle dialogueBoxResource = ResourceBundle.getBundle("resources/DialogueBox");
+        DialogueBoxFactory.createErrorDialogueBox(dialogueBoxResource.getString("Integer"),
+                                                  dialogueBoxResource.getString("CheckInput"));
     }
 
     @Override
-    public void onUserEnteredTowerChosenEnemy (String towerChosenEnemy) {
-        towerDataSource.setTowerChosenEnemy(currentTowerID, towerChosenEnemy);
+    public void onUserPressedDeleteTower () {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void onUserDeletedTowerAbility (String towerAbility) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void onUserDeletedTowerWeapon (String towerChosenWeapon) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void onUserDeletedTowerUpgrade (String towerUpgrade) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void onUserEnteredTowerSize (String towerSize) {
+        // TODO Auto-generated method stub
+
     }
 
     @Override
     public void onUserEnteredTowerChosenWeapon (String towerChosenWeapon) {
-        towerDataSource.setTowerChosenWeapon(currentTowerID, towerChosenWeapon);
+        // TODO Auto-generated method stub
+
     }
 
     @Override
     public void onUserEnteredTowerUpgrade (String towerUpgrade) {
-        towerDataSource.setTowerUpgrade(currentTowerID, towerUpgrade);
+        // TODO Auto-generated method stub
+
     }
 
 }

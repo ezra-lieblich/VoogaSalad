@@ -1,8 +1,9 @@
 package authoring.editorview.enemy;
 
 import java.io.IOException;
-import authoring.ErrorBox;
+import java.util.ResourceBundle;
 import authoring.editorview.EditorViewController;
+import authoring.utilityfactories.DialogueBoxFactory;
 
 
 /**
@@ -16,9 +17,10 @@ public class EnemyEditorViewController extends EditorViewController
 
     private EnemyDataSource enemyDataSource;
     private int currentEnemyID;
+    private IEnemyUpdateView myView;
 
     public EnemyEditorViewController (int editorWidth, int editorHeight) throws IOException {
-        IEnemyEditorView myView = EnemyEditorViewFactory.build(editorWidth, editorHeight);
+        myView = EnemyEditorViewFactory.build(editorWidth, editorHeight);
         myView.setDelegate(this);
         this.view = myView;
     }
@@ -29,28 +31,29 @@ public class EnemyEditorViewController extends EditorViewController
 
     @Override
     public void onUserPressedCreateEnemy () {
-        enemyDataSource.createEnemy();
+        enemyDataSource.createEnemy(myView);
     }
 
     @Override
     public void onUserEnteredEnemySpeed (String enemySpeed) {
         try {
-            Integer.parseInt(enemySpeed);
-            enemyDataSource.setEnemySpeed(currentEnemyID, Integer.parseInt(enemySpeed));
+            Double.parseDouble(enemySpeed);
+            enemyDataSource.setEnemySpeed(currentEnemyID, Double.parseDouble(enemySpeed));
+
         }
         catch (NumberFormatException e) {
-            ErrorBox.createErrorBox("This input is not an integer");
+            createDialogueBox();
         }
     }
 
     @Override
     public void onUserEnteredEnemyHealth (String enemyHealth) {
         try {
-            Integer.parseInt(enemyHealth);
-            enemyDataSource.setEnemyHealth(currentEnemyID, Integer.parseInt(enemyHealth));
+            Double.parseDouble(enemyHealth);
+            enemyDataSource.setEnemyHealth(currentEnemyID, Double.parseDouble(enemyHealth));
         }
         catch (NumberFormatException e) {
-            ErrorBox.createErrorBox("This input is not an integer");
+            createDialogueBox();
         }
 
     }
@@ -58,34 +61,34 @@ public class EnemyEditorViewController extends EditorViewController
     @Override
     public void onUserEnteredEnemyDamage (String enemyDamage) {
         try {
-            Integer.parseInt(enemyDamage);
-            enemyDataSource.setEnemyDamage(currentEnemyID, Integer.parseInt(enemyDamage));
+            Double.parseDouble(enemyDamage);
+            enemyDataSource.setEnemyDamage(currentEnemyID, Double.parseDouble(enemyDamage));
         }
         catch (NumberFormatException e) {
-            ErrorBox.createErrorBox("This input is not an integer");
+            createDialogueBox();
         }
     }
 
     @Override
     public void onUserEnteredEnemyPoints (String enemyRewardPoints) {
         try {
-            Integer.parseInt(enemyRewardPoints);
+            Double.parseDouble(enemyRewardPoints);
             enemyDataSource.setEnemyRewardPoints(currentEnemyID,
-                                                 Integer.parseInt(enemyRewardPoints));
+                                                 Double.parseDouble(enemyRewardPoints));
         }
         catch (NumberFormatException e) {
-            ErrorBox.createErrorBox("This input is not an integer");
+            createDialogueBox();
         }
     }
 
     @Override
     public void onUserEnteredEnemyMoney (String enemyRewardMoney) {
         try {
-            Integer.parseInt(enemyRewardMoney);
-            enemyDataSource.setEnemyRewardMoney(currentEnemyID, Integer.parseInt(enemyRewardMoney));
+            Double.parseDouble(enemyRewardMoney);
+            enemyDataSource.setEnemyRewardMoney(currentEnemyID, Double.parseDouble(enemyRewardMoney));
         }
         catch (NumberFormatException e) {
-            ErrorBox.createErrorBox("This input is not an integer");
+            createDialogueBox();
         }
     }
 
@@ -104,15 +107,22 @@ public class EnemyEditorViewController extends EditorViewController
         enemyDataSource.setEnemyName(currentEnemyID, enemyName);
     }
 
+    private void createDialogueBox () {
+        ResourceBundle dialogueBoxResource = ResourceBundle.getBundle("resources/DialogueBox");
+        DialogueBoxFactory.createErrorDialogueBox(dialogueBoxResource.getString("Integer"),
+                                                  dialogueBoxResource.getString("CheckInput"));
+    }
+
     @Override
-    public void onUserEnteredEnemyFrequency (String enemyFrequency) {
-        try {
-            Integer.parseInt(enemyFrequency);
-            enemyDataSource.setEnemyFrequency(currentEnemyID, Integer.parseInt(enemyFrequency));
-        }
-        catch (NumberFormatException e) {
-            ErrorBox.createErrorBox("This input is not an integer");
-        }
+    public void onUserPressedDeleteEnemy () {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void onUserEnteredEnemySize (String enemySize) {
+        // TODO Auto-generated method stub
+
     }
 
 }
