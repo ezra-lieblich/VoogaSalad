@@ -1,5 +1,7 @@
 package engine.ability;
 
-public interface AbilityManager {
+import engine.Manager;
+
+public interface AbilityManager extends Manager<Ability>{
 
 }
