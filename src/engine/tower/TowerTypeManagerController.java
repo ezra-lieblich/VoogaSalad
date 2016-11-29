@@ -43,26 +43,6 @@ public class TowerTypeManagerController extends AbstractTypeManagerController<To
     }
 
     @Override
-    protected TowerBuilder constructTypeProperties (ViewFiller towerUpdater,
-                                                    TowerBuilder typeBuilder) {
-            return typeBuilder
-                .addWeaponsListener( (oldValue, newValue) -> towerUpdater
-                        .updateTowerChosenWeapon(newValue))
-                .addAbilitiesListener( (oldValue, newValue) -> towerUpdater
-                        .updateTowerAbility(newValue))
-                .addUpgradesListener( (oldValue, newValue) -> towerUpdater
-                        .updateTowerUpgradeBank(newValue))
-                .addCostListener((oldValue, newValue) -> towerUpdater
-                        .updateTowerBuyPriceDisplay(newValue))
-                .addSellAmountListener((oldValue, newValue) -> towerUpdater
-                        .updateTowerSellPriceDisplay(newValue))
-                .addUnlockLevelListener((oldValue, newValue) -> towerUpdater
-                        .updateUnlockLevelDisplay(newValue))
-                .build();
-    }
-
-
-    @Override
     public void setTowerBuyPrice (int towerID, double towerBuyPrice) {
         getTypeManager().getEntity(towerID).setCost(towerBuyPrice);
     }
@@ -107,6 +87,23 @@ public class TowerTypeManagerController extends AbstractTypeManagerController<To
     public void removeTowerUpgrade (int parentTowerID, int childTowerID) {
         getTypeManager().removeUpgrade(childTowerID, parentTowerID);
     }
-
+    
+    @Override
+    protected TowerBuilder constructTypeProperties (ViewFiller viewFiller,
+                                                    TowerBuilder typeBuilder) {
+            return typeBuilder
+                .addWeaponsListener( (oldValue, newValue) -> towerUpdater
+                        .updateTowerChosenWeapon(newValue))
+                .addAbilitiesListener( (oldValue, newValue) -> towerUpdater
+                        .updateTowerAbility(newValue))
+                .addUpgradesListener( (oldValue, newValue) -> towerUpdater
+                        .updateTowerUpgradeBank(newValue))
+                .addCostListener((oldValue, newValue) -> towerUpdater
+                        .updateTowerBuyPriceDisplay(newValue))
+                .addSellAmountListener((oldValue, newValue) -> towerUpdater
+                        .updateTowerSellPriceDisplay(newValue))
+                .addUnlockLevelListener((oldValue, newValue) -> towerUpdater
+                        .updateUnlockLevelDisplay(newValue));
+    }
 
 }

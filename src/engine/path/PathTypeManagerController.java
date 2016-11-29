@@ -2,87 +2,69 @@ package engine.path;
 
 import java.util.List;
 import authoring.editorview.path.IPathEditorView;
-import authoring.editorview.path.PathDataSource;
 import authoring.editorview.tower.ITowerUpdateView;
+import engine.AbstractTypeManagerController;
 import engine.tower.Tower;
 
 
-public class PathTypeManagerController implements PathDataSource {
-    private PathTypeManager pathManager;
-    private PathBuilder pathBuilder;
+public class PathTypeManagerController
+        extends AbstractTypeManagerController<PathManager, PathBuilder, Path> implements PathManagerController {
 
     PathTypeManagerController (PathTypeManager pathManager) {
-        this.pathManager = pathManager;
-        this.pathBuilder = new PathTypeBuilder();
+        super(pathManager, new PathTypeBuilder());
     }
 
     @Override
-    public void setPathImage (int pathID, String pathImagePath) {
-        pathManager.getEntity(pathID).setImagePath(pathImagePath);
+    public void setNumberofColumns (int pathID, int columns) {
+        getTypeManager().getEntity(pathID).setGridColumns(columns);
     }
 
     @Override
-    public void setNumberofColumns (int pathID, int numColumns) {
-        pathManager.getEntity(pathID).setGridColumns(numColumns);
+    public void setNumberofRows (int pathID, int rows) {
+        getTypeManager().getEntity(pathID).setGridRows(rows);
     }
-
-    @Override
-    public void setNumberofRows (int pathID, int numRows) {
-        pathManager.getEntity(pathID).setGridRows(numRows);
-    }
-
-    @Override
-    public void setPathName (int pathID, String pathName) {
-        pathManager.getEntity(pathID).setName(pathName);
-    }
-
-    @Override
-    public String getPathImagePath (int pathID) {
-        return pathManager.getEntity(pathID).getImagePath();
-    }
-
-    @Override
-    public int getNumberofColumns (int pathID) {
-        return pathManager.getEntity(pathID).getGridColumns();
-    }
-
-    @Override
-    public int getNumberofRows (int pathID) {
-        return pathManager.getEntity(pathID).getGridRows();
-    }
-
-    @Override
-    public String getPathName (int pathID) {
-        return pathManager.getEntity(pathID).getName();
-    }
-
-    private Path createPath (IPathEditorView iPathEditorView) {
-        return pathBuilder.addCoordinatesListener((oldValue, newValue) -> iPathEditorView.setPathCoordinates(newValue))
-        .addGridRowsListener((oldValue, newValue) -> iPathEditorView.setNumRows(newValue))
-        .addGridColumnsListener((oldValue, newValue) -> iPathEditorView.setNumColumns(newValue))
-        .build();
-    }
-
     
-    @Override//TODO - setType in iPath
-    public int createNewPath (IPathEditorView iPathEditorView) {
-        return pathManager.addEntry(createPath(iPathEditorView));
+    @Override
+    public void setType (int pathID, String type) {
+        getTypeManager().getEntity(pathID).setType(type);        
     }
-
+    
     @Override
     public boolean setPathCoordinates (int pathID, List<Coordinate<Integer>> pathCoordinates) {
-        pathManager.getEntity(pathID).setCoordinates(pathCoordinates);
+        getTypeManager().getEntity(pathID).setCoordinates(pathCoordinates);
         return true; // TODO - validate this
     }
 
     @Override
-    public void removePath (int pathID) {
-        pathManager.removeEntry(pathID);
+    public int getNumberofColumns (int pathID) {
+        return getTypeManager().getEntity(pathID).getGridColumns();
     }
 
     @Override
+    public int getNumberofRows (int pathID) {
+        return getTypeManager().getEntity(pathID).getGridRows();
+    }
+
+    @Override
+    public void getType (int pathID) {
+        getTypeManager().getEntity(pathID).getType();        
+    }
+    
+    @Override
     public List<Coordinate<Integer>> getPathCoordinates (int pathID) {
-        return pathManager.getEntity(pathID).getCoordinates();
+        return getTypeManager().getEntity(pathID).getCoordinates();
+    }
+    
+    @Override
+    protected PathBuilder constructTypeProperties (ViewFiller viewViller,
+                                                   PathBuilder typeBuilder) {
+        return typeBuilder
+                .addCoordinatesListener( (oldValue, newValue) -> viewViller
+                        .setPathCoordinates(newValue))
+                .addGridRowsListener( (oldValue, newValue) -> viewViller
+                        .setNumRows(newValue))
+                .addGridColumnsListener( (oldValue, newValue) -> viewViller
+                        .setNumColumns(newValue));
     }
 
 }
