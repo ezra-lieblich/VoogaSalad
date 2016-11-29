@@ -11,7 +11,6 @@ import engine.observer.ObservableProperty;
 
 
 public class LevelType extends AbstractType implements Level {
-	//TODO Make enemyCounts ObservableMap change to doubles
     private ObservableMap<Integer, Integer> enemyCounts;
 	private ObservableProperty<Double> rewardHealth;
 	private ObservableProperty<Double> rewardMoney;

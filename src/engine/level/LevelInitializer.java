@@ -6,7 +6,6 @@ import engine.observer.ObservableProperty;
 
 
 public interface LevelInitializer extends TypeInitializer {
-	//TODO Make enemyCounts of type ObservableMap
 	ObservableMap<Integer, Integer> getEnemyCounts();
 	ObservableProperty<Double> getRewardHealth();
     ObservableProperty<Double> getRewardMoney();

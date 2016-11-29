@@ -10,11 +10,6 @@ import engine.Type;
  */
 public interface Game extends Type{
 	
-    String getName();
-
-    void setName(String name);
-    
-    String getBackgroundImage();
 
     List<String> getWinningConditions();
 
@@ -27,4 +22,12 @@ public interface Game extends Type{
     String getGameType();
 
     void setGameType(String gameType);
+    
+    double getInitalLives();
+    
+    void setInitialLives(double lives);
+    
+    double getInitialMoney();
+    
+    void  setInitialMoney(double money);
 }

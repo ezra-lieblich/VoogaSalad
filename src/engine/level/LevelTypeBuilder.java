@@ -22,7 +22,6 @@ public class LevelTypeBuilder extends AbstractTypeBuilder<Level, LevelBuilder> i
     public static final double DEFAULT_REWARD_POINTS = 200;
     public static final double DEFAULT_DURATION_IN_SECONDS = 1;
 
-    //TODO needs to be observable map
     private ObservableMap<Integer, Integer> enemyCounts;
    	private ObservableProperty<Double> rewardHealth;
    	private ObservableProperty<Double> rewardMoney;
@@ -127,8 +126,6 @@ public class LevelTypeBuilder extends AbstractTypeBuilder<Level, LevelBuilder> i
 
 	@Override
 	protected void restoreTypeDefaults() {
-		// TODO enemyCounts
-		//this.enemyCounts;
 		this.enemyCounts = new ObservableMapProperty<Integer, Integer>(DEFAULT_ENEMY_COUNTS);
 		this.rewardHealth = new ObservableObjectProperty<Double>(DEFAULT_REWARD_HEALTH);
 		this.rewardMoney = new ObservableObjectProperty<Double>(DEFAULT_REWARD_MONEY);

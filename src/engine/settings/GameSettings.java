@@ -5,41 +5,27 @@ import java.util.List;
 
 import engine.AbstractType;
 import engine.TypeInitializer;
+import engine.observer.ObservableList;
+import engine.observer.ObservableProperty;
 
 public class GameSettings extends AbstractType implements Game {
 
 
-	private String name;
-    private String gameType;
-    private String backgroundImage;
-    private List<String> winningConditions;
-    private List<String> losingConditions;
-    private double initialHealth;
-    private double initialMoney;
+    private ObservableProperty<String> gameType;
+    private ObservableList<String> winningConditions;
+    private ObservableList<String> losingConditions;
+    private ObservableProperty<Double> initialLives;
+    private ObservableProperty<Double> initialMoney;
 
 	protected GameSettings(TypeInitializer typeBuilder) {
 		super(typeBuilder);
 		// TODO Auto-generated constructor stub
 	}
 	
-    public String getName() {
-        return name;
-    }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getBackgroundImage() {
-        return backgroundImage;
-    }
-
-    public void setBackgroundImage(String backgroundImage) {
-        this.backgroundImage = backgroundImage;
-    }
 
     public List<String> getWinningConditions() {
-        return Collections.unmodifiableList(winningConditions);
+        return Collections.unmodifiableList(winningConditions.getProperty());
     }
 
     public void setWinningConditions(String winningCondition) {
@@ -47,7 +33,7 @@ public class GameSettings extends AbstractType implements Game {
     }
 
     public List<String> getLosingConditions() {
-        return Collections.unmodifiableList(losingConditions);
+        return Collections.unmodifiableList(losingConditions.getProperty());
     }
 
     public void setLosingConditions(String losingCondition) {
@@ -55,10 +41,34 @@ public class GameSettings extends AbstractType implements Game {
     }
 
     public String getGameType() {
-        return gameType;
+        return gameType.getProperty();
     }
 
     public void setGameType(String gameType) {
-        this.gameType = gameType;
+        this.gameType.setProperty(gameType); 
     }
+
+	@Override
+	public double getInitalLives() {
+		return initialLives.getProperty();
+	}
+
+	@Override
+	public void setInitialLives(double lives) {
+		initialLives.setProperty(lives);
+	}
+
+
+
+	@Override
+	public double getInitialMoney() {
+		return initialMoney.getProperty();
+	}
+
+
+
+	@Override
+	public void setInitialMoney(double money) {
+		initialMoney.setProperty(money);
+	}
 }
