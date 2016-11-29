@@ -4,7 +4,7 @@ import gameplayer.loader.GamePlayerFactory;
 import gameplayer.loader.XMLParser;
 import gameplayer.main.main;
 import gameplayer.model.Enemy;
-import gameplayer.model.EnemyModel;
+import gameplayer.model.EnemyManager;
 import gameplayer.model.GamePlayModel;
 import gameplayer.view.GameGUI;
 import javafx.animation.KeyFrame;
@@ -40,8 +40,9 @@ public class GamePlayerController implements Observer {
 
 	private Timeline animation;
 	private EnemyController enemyController;
-	private EnemyModel enemyModel;
 	private DragDropController dropController;
+	
+	private EnemyManager enemyManager;
 
 	private Queue<Enemy> currentWave;
 
@@ -51,7 +52,7 @@ public class GamePlayerController implements Observer {
 
 		checkIfValid();
 		this.model = new GamePlayModel(this.loader);
-		this.enemyModel = new EnemyModel(this.model);
+		this.enemyManager = new EnemyManager(this.model);
 		this.model.addObserver(this);
 	}
 
@@ -71,7 +72,7 @@ public class GamePlayerController implements Observer {
 		HashMap<String, Double> settings = this.loader.getGameSetting();
 		System.out.println("Settings: " + settings);
 		initGUI();
-		this.enemyController = new EnemyController(this.enemyModel, this.view.getGrid());
+		this.enemyController = new EnemyController(this.enemyManager, this.view.getGrid());
 	}
 
 	// For testing only
@@ -154,21 +155,13 @@ public class GamePlayerController implements Observer {
 			if(currentWave.size()!=0){
 				Enemy test = currentWave.poll();
 				test.setCurrentCell(this.model.getGrid().getCell(0, 0));
-				this.enemyModel.spawnEnemy(test);
+				this.enemyManager.spawnEnemy(test);
 			}
-			this.enemyModel.update(); 
-//			List<Enemy> thingsOnGrid = this.enemyModel.getEnemyOnGrid();
-//			System.out.println(thingsOnGrid.size());
-//			for (int i = 0; i < thingsOnGrid.size(); i++) {
-//				System.out.println(i + ": " + thingsOnGrid.get(i).getX());
-//			}
-//			this.enemyModel.update();
-//			System.out.println("**********");
-//			for (int i = 0; i < thingsOnGrid.size(); i++) {
-//				System.out.println(i + ": " + thingsOnGrid.get(i).getX());
-//			}
+			this.enemyManager.update(); 
 //			this.view.getGrid().populatePath(model.getGrid().getStartPoint()); //THIS LINE CAUSES SLOW DOWN
-			this.view.reRender(enemyModel.getEnemyOnGrid());
+			List<Enemy>enemyRedraw = enemyManager.getEnemyOnGrid(); 
+			
+			this.view.reRender(enemyManager.getEnemyOnGrid());
 		});
 		Timeline animation = new Timeline();
 		animation.setCycleCount(Timeline.INDEFINITE);

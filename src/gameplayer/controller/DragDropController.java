@@ -15,6 +15,8 @@ public class DragDropController implements Observer{
 	private DragDrop dragDrop;
 	private GamePlayModel model;
 	private GameGUI game;
+	
+	
 	public DragDropController(GameGUI game, GamePlayModel model){
 		this.dragDrop = game.getDragDrop();
 		this.model = model;
@@ -24,6 +26,7 @@ public class DragDropController implements Observer{
 
 	@Override
 	public void update(Observable o, Object arg) {
+		System.out.println("here");
 		if (o instanceof DragDrop){
 			int x = (int)(dragDrop.getDroppedImage().getX() * (this.game.getGrid().getCellWidth()/GridGUI.GRID_WIDTH));
 			int y = (int)(dragDrop.getDroppedImage().getY() * (this.game.getGrid().getCellHeight()/GridGUI.GRID_HEIGHT));

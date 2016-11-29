@@ -2,7 +2,7 @@ package gameplayer.model;
 
 import java.util.ArrayList;
 
-public class Tower {
+public class Tower implements IDrawable {
 	
 	private double cost;
 	private ArrayList<Integer> weaponType;

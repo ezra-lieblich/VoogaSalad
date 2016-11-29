@@ -7,7 +7,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import gameplayer.model.Enemy;
-import gameplayer.model.EnemyModel;
+import gameplayer.model.EnemyManager;
 import gameplayer.model.GamePlayModel;
 import gameplayer.view.GridGUI;
 import gameplayer.view.entity.EnemyView;
@@ -15,14 +15,14 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
 public class EnemyController implements Observer{
-	private EnemyModel model;
+	private EnemyManager model;
 	//private List<EnemyView> enemyViews;
 	private HashMap<Enemy, EnemyView> enemyToView;
 	private GridGUI grid;
 	
 	
 	//TODO: enemy model instead of GamePlayModel
-	public EnemyController(EnemyModel model, GridGUI grid){
+	public EnemyController(EnemyManager model, GridGUI grid){
 		this.model = model;
 		this.model.addObserver(this);
 		//this.enemyViews = new ArrayList<EnemyView>();
@@ -30,7 +30,7 @@ public class EnemyController implements Observer{
 		this.enemyToView = new HashMap<Enemy, EnemyView>();
 	}
 	
-	public EnemyModel getEnemyModel(){
+	public EnemyManager getEnemyModel(){
 		return this.model;
 	}
 	
@@ -86,7 +86,7 @@ public class EnemyController implements Observer{
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
-		if (o instanceof EnemyModel){
+		if (o instanceof EnemyManager){
 			//updateEnemyViews();
 		}
 		
