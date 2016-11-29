@@ -28,7 +28,7 @@ public class EnemyTypeBuilder extends AbstractTypeBuilder<Enemy, EnemyBuilder> i
 	private ObservableProperty<Double> money;
 	private ObservableProperty<String> collisionEffect;
     
-	protected EnemyTypeBuilder() {
+	public EnemyTypeBuilder() {
 		super(DEFAULT_NAME, DEFAULT_IMAGE_PATH, DEFAULT_SIZE);
 	}
 
