@@ -6,7 +6,7 @@ import engine.enemy.EnemyManager;
 import engine.level.LevelTypeManager;
 import engine.path.PathManager;
 import engine.tower.TowerManager;
-import engine.weapon.WeaponTypeManager;
+import engine.weapon.WeaponManager;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 
@@ -14,7 +14,7 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
 public class Game {
 	private GameSettings settings;
 	private EnemyManager enemies;
-	private WeaponTypeManager weapons;
+	private WeaponManager weapons;
 	private TowerManager towers;
 	private PathManager path;
 	private LevelTypeManager levels;

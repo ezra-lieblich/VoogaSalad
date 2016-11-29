@@ -1,13 +1,15 @@
 package engine;
 
+import engine.observer.ObservableProperty;
+
 public interface TypeInitializer {
 
-    String getName ();
+    ObservableProperty<String> getName ();
 
-    String getImagePath ();
+    ObservableProperty<String> getImagePath ();
 
-    int getSize ();
+    ObservableProperty<Double> getSize ();
     
-    int getNextId ();
+    int getId ();
     
 }

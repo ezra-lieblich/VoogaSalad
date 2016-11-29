@@ -51,7 +51,7 @@ public class EnemyController implements Observer{
 			Enemy enemy = enemies.get(i);
 			if (this.enemyToView.containsKey(enemies.get(i))){ //update the coordinates
 				this.enemyToView.get(enemy).getEnemyView().setX(enemy.getxDirection());
-				this.enemyToView.get(enemy).getEnemyView().setX(enemy.getyDirection());
+				this.enemyToView.get(enemy).getEnemyView().setY(enemy.getyDirection());
 			}else{
 				EnemyView enemyView = new EnemyView(enemy.getImage(), enemy.getWidth(), enemy.getHeight(), enemy.getHealth());
 				enemyToView.put(enemy, enemyView);

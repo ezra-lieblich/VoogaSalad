@@ -13,13 +13,12 @@ public class Tower {
 	
 	
 	public Tower (int type, int ID, double cost, ArrayList<Integer> weaponTypes, String image, String name){
+
 		this.cost = cost;
 		this.weaponType = weaponTypes;
 		this.image = image;
 		this.ID = ID;
 	}
-	
-
 	
 	void setCoordinates(double x, double y){
 		coordinates[0] = x;
@@ -44,7 +43,6 @@ public class Tower {
 	public String getImage(){
 		return this.image;
 	}
-
 
 
 	double getCost() {

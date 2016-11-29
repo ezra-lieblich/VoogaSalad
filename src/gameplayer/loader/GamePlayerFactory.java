@@ -7,11 +7,11 @@ import java.util.Map;
 import java.util.Observable;
 import java.util.Queue;
 import engine.enemy.EnemyType;
+import engine.tower.Tower;
 import engine.tower.TowerType;
 import gameplayer.model.Cell;
 import gameplayer.model.Enemy;
 import gameplayer.model.Grid;
-import gameplayer.model.Tower;
 
 public class GamePlayerFactory{
 
@@ -74,7 +74,7 @@ public class GamePlayerFactory{
 	
 	
 	
-	public HashMap<Integer, TowerType> getTowers(){
+	public HashMap<Integer, Tower> getTowers(){
 
 		return authoringFileReader.getTowerTypes(); 
 	}

@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Queue;
-import engine.TowerType;
+import engine.tower.Tower;
 import gameplayer.loader.GamePlayerFactory;
 
 public class GamePlayModel extends Observable {
@@ -21,7 +21,7 @@ public class GamePlayModel extends Observable {
 	private int hitBuffer = 10; // initialize from xml
 
 	private Map<Integer, Weapon> weaponTypes; // initialize in xml
-	private Map<Integer, TowerType> towerTypes;
+	private Map<Integer, Tower> towerTypes;
 	private Cell[][] gridArray;
 
 	private Enemy nextEnteringEnemy;
@@ -187,7 +187,7 @@ public class GamePlayModel extends Observable {
 
 	public Boolean placeTower(int type, int x, int y) {
 		// later check if is a valid location to place the tower
-		TowerType tt = towerTypes.get(type);
+		engine.tower.Tower tt = towerTypes.get(type);
 		System.out.println("Placed a tower");
 		System.out.println("Tower x: " + x + "; y:" + y);
 		// get weaponTypes
@@ -233,8 +233,10 @@ public class GamePlayModel extends Observable {
 	}
 
 	private Boolean inShootingRange(Weapon w) {
-		Tower t = w.getShootingAgent();
-		return getDistance(w.getX(), w.getY(), t.getCoordinate()[0], t.getCoordinate()[1]) <= t.getAttackingRange();
+		gameplayer.model.Tower t = w.getShootingAgent();
+		//return getDistance(w.getX(), w.getY(), t.getCoordinate()[0], t.getCoordinate()[1]) <= t.getAttackingRange();
+		//TODO: Fix the way we tell if it's in shooting range
+		return true;
 
 	}
 
