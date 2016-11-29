@@ -7,6 +7,8 @@ import java.util.function.BiConsumer;
 import engine.AbstractTypeBuilder;
 import engine.ability.Ability;
 import engine.enemy.Enemy;
+import engine.observer.ObservableList;
+import engine.observer.ObservableListProperty;
 import engine.observer.ObservableObjectProperty;
 import engine.observer.ObservableProperty;
 import engine.tower.Tower;
@@ -26,9 +28,9 @@ public class TowerTypeBuilder extends AbstractTypeBuilder<Tower, TowerBuilder> i
      public static final double DEFAULT_SELL_AMOUNT = DEFAULT_COST / 2;
      public static final int DEFAULT_UNLOCK_LEVEL = 0;
      
-     private ObservableProperty<List<Integer>> weapons;
-     private ObservableProperty<List<Integer>> targets;
-     private ObservableProperty<List<Integer>> abilities;
+     private ObservableList<Integer> weapons;
+     private ObservableList<Integer> targets;
+     private ObservableList<Integer> abilities;
      private ObservableProperty<Integer> upgrade;
      private ObservableProperty<Double> cost;
      private ObservableProperty<Double> sellAmount;
@@ -101,17 +103,17 @@ public class TowerTypeBuilder extends AbstractTypeBuilder<Tower, TowerBuilder> i
     }
 
     @Override
-    public ObservableProperty<List<Integer>> getWeapons () {
+    public ObservableList<Integer> getWeapons () {
         return weapons;
     }
 
     @Override
-    public ObservableProperty<List<Integer>> getTargets () {
+    public ObservableList<Integer> getTargets () {
         return targets;
     }
 
     @Override
-    public ObservableProperty<List<Integer>> getAbilities () {
+    public ObservableList<Integer> getAbilities () {
         return abilities;
     }
     
@@ -137,9 +139,9 @@ public class TowerTypeBuilder extends AbstractTypeBuilder<Tower, TowerBuilder> i
 
     @Override
     protected void restoreTypeDefaults () {
-        this.weapons = new ObservableObjectProperty<List<Integer>>(DEFAULT_WEAPONS);
-        this.targets = new ObservableObjectProperty<List<Integer>>(DEFAULT_TARGETS);
-        this.abilities = new ObservableObjectProperty<List<Integer>>(DEFAULT_ABILITIES);
+        this.weapons = new ObservableListProperty<Integer>(DEFAULT_WEAPONS);
+        this.targets = new ObservableListProperty<Integer>(DEFAULT_TARGETS);
+        this.abilities = new ObservableListProperty<Integer>(DEFAULT_ABILITIES);
         this.upgrade = new ObservableObjectProperty<Integer>(DEFAULT_UNLOCK_LEVEL);
         this.cost = new ObservableObjectProperty<Double>(DEFAULT_COST);
         this.sellAmount = new ObservableObjectProperty<Double>(DEFAULT_SELL_AMOUNT);
