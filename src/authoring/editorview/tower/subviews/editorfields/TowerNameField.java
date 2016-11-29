@@ -1,5 +1,6 @@
 package authoring.editorview.tower.subviews.editorfields;
 
+import java.util.ResourceBundle;
 import authoring.editorview.tower.ITowerEditorView;
 import authoring.editorview.tower.TowerEditorViewDelegate;
 import authoring.utilityfactories.TextFieldFactory;
@@ -17,9 +18,9 @@ public class TowerNameField implements ITowerEditorView {
     private TextField towerNameField;
     private TowerEditorViewDelegate delegate;
 
-    public TowerNameField () {
+    public TowerNameField (ResourceBundle labelsResource) {
         towerNameField =
-                TextFieldFactory.makeTextField("Set tower name: ",
+                TextFieldFactory.makeTextField(labelsResource.getString("EnterString"),
                                                e -> delegate.onUserEnteredTowerName(towerNameField
                                                        .getText()));
     }

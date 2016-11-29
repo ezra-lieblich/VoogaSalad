@@ -1,8 +1,9 @@
 package authoring.editorview.tower;
 
 import java.io.IOException;
-import authoring.ErrorBox;
+import java.util.ResourceBundle;
 import authoring.editorview.EditorViewController;
+import authoring.utilityfactories.DialogueBoxFactory;
 
 
 /**
@@ -52,7 +53,7 @@ public class TowerEditorViewController extends EditorViewController
             towerDataSource.setTowerUnlockLevel(currentTowerID, Integer.parseInt(towerLevel));
         }
         catch (NumberFormatException e) {
-            ErrorBox.createErrorBox("This input is not an integer");
+            createDialogueBox();
         }
     }
 
@@ -63,7 +64,7 @@ public class TowerEditorViewController extends EditorViewController
             towerDataSource.setTowerFireRate(currentTowerID, Integer.parseInt(towerFireRate));
         }
         catch (NumberFormatException e) {
-            ErrorBox.createErrorBox("This input is not an integer");
+            createDialogueBox();
         }
     }
 
@@ -74,7 +75,7 @@ public class TowerEditorViewController extends EditorViewController
             towerDataSource.setTowerFrequency(currentTowerID, Integer.parseInt(towerFrequency));
         }
         catch (NumberFormatException e) {
-            ErrorBox.createErrorBox("This input is not an integer");
+            createDialogueBox();
         }
     }
 
@@ -85,7 +86,7 @@ public class TowerEditorViewController extends EditorViewController
             towerDataSource.setTowerRange(currentTowerID, Integer.parseInt(towerRange));
         }
         catch (NumberFormatException e) {
-            ErrorBox.createErrorBox("This input is not an integer");
+            createDialogueBox();
         }
     }
 
@@ -96,7 +97,7 @@ public class TowerEditorViewController extends EditorViewController
             towerDataSource.setTowerBuyPrice(currentTowerID, Integer.parseInt(towerBuyPrice));
         }
         catch (NumberFormatException e) {
-            ErrorBox.createErrorBox("This input is not an integer");
+            createDialogueBox();
         }
     }
 
@@ -107,7 +108,7 @@ public class TowerEditorViewController extends EditorViewController
             towerDataSource.setTowerSellPrice(currentTowerID, Integer.parseInt(towerSellPrice));
         }
         catch (NumberFormatException e) {
-            ErrorBox.createErrorBox("This input is not an integer");
+            createDialogueBox();
         }
     }
 
@@ -129,6 +130,12 @@ public class TowerEditorViewController extends EditorViewController
     @Override
     public void onUserEnteredTowerUpgrade (String towerUpgrade) {
         towerDataSource.setTowerUpgrade(currentTowerID, towerUpgrade);
+    }
+
+    private void createDialogueBox () {
+        ResourceBundle dialogueBoxResource = ResourceBundle.getBundle("resources/DialogueBox");
+        DialogueBoxFactory.createErrorDialogueBox(dialogueBoxResource.getString("Integer"),
+                                                  dialogueBoxResource.getString("CheckInput"));
     }
 
 }
