@@ -1,14 +1,16 @@
 package engine.path;
 
 import java.util.List;
+import authoring.editorview.IUpdateView;
 import authoring.editorview.path.IPathEditorView;
+import authoring.editorview.path.IPathUpdateView;
 import authoring.editorview.tower.ITowerUpdateView;
 import engine.AbstractTypeManagerController;
 import engine.tower.Tower;
 
 
 public class PathTypeManagerController
-        extends AbstractTypeManagerController<PathManager, PathBuilder, Path> implements PathManagerController {
+        extends AbstractTypeManagerController<PathManager, PathBuilder, Path, IPathUpdateView> implements PathManagerController {
 
     PathTypeManagerController (PathTypeManager pathManager) {
         super(pathManager, new PathTypeBuilder());
@@ -55,16 +57,17 @@ public class PathTypeManagerController
         return getTypeManager().getEntity(pathID).getCoordinates();
     }
     
+    
     @Override
-    protected PathBuilder constructTypeProperties (ViewFiller viewViller,
+    protected PathBuilder constructTypeProperties (IPathUpdateView updateView,
                                                    PathBuilder typeBuilder) {
         return typeBuilder
-                .addCoordinatesListener( (oldValue, newValue) -> viewViller
-                        .setPathCoordinates(newValue))
-                .addGridRowsListener( (oldValue, newValue) -> viewViller
-                        .setNumRows(newValue))
-                .addGridColumnsListener( (oldValue, newValue) -> viewViller
-                        .setNumColumns(newValue));
+                .addCoordinatesListener( (oldValue, newValue) -> updateView
+                        .updatePathCoordinates(newValue))
+                .addGridRowsListener( (oldValue, newValue) -> updateView
+                        .updateNumRows(newValue))
+                .addGridColumnsListener( (oldValue, newValue) -> updateView
+                        .updateNumColumns(newValue));
     }
 
 }

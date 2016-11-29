@@ -1,12 +1,13 @@
 package engine;
 
 import java.util.List;
+import authoring.editorview.IUpdateView;
 import engine.AbstractTypeManagerController.ViewFiller;
 
 
-public interface ManagerController<E extends Manager<T>, U extends TypeBuilder<T, U>, T extends Type> {
+public interface ManagerController<E extends Manager<T>, U extends TypeBuilder<T, U>, T extends Type, V extends IUpdateView> {
 
-    <V extends ViewFiller> int createType (V viewFiller);
+    int createType (V updateView);
 
     void deleteType (int id);
 
