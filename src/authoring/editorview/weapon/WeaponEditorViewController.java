@@ -36,10 +36,9 @@ public class WeaponEditorViewController extends EditorViewController
 
     @Override
     public void onUserEnteredWeaponFireRate (String weaponFireRate) {
-        // Should update currentWeaponID every time this is called
         try {
-            Integer.parseInt(weaponFireRate);
-            weaponDataSource.setWeaponFireRate(currentWeaponID, Integer.parseInt(weaponFireRate));
+            Double.parseDouble(weaponFireRate);
+            weaponDataSource.setWeaponFireRate(currentWeaponID, Double.parseDouble(weaponFireRate));
         }
         catch (NumberFormatException e) {
             createDialogueBox();
@@ -49,8 +48,8 @@ public class WeaponEditorViewController extends EditorViewController
     @Override
     public void onUserEnteredWeaponSpeed (String weaponSpeed) {
         try {
-            Integer.parseInt(weaponSpeed);
-            weaponDataSource.setWeaponSpeed(currentWeaponID, Integer.parseInt(weaponSpeed));
+            Double.parseDouble(weaponSpeed);
+            weaponDataSource.setWeaponSpeed(currentWeaponID, Double.parseDouble(weaponSpeed));
         }
         catch (NumberFormatException e) {
             createDialogueBox();
@@ -65,8 +64,8 @@ public class WeaponEditorViewController extends EditorViewController
     @Override
     public void onUserEnteredWeaponRange (String weaponRange) {
         try {
-            Integer.parseInt(weaponRange);
-            weaponDataSource.setWeaponRange(currentWeaponID, Integer.parseInt(weaponRange));
+            Double.parseDouble(weaponRange);
+            weaponDataSource.setWeaponRange(currentWeaponID, Double.parseDouble(weaponRange));
         }
         catch (NumberFormatException e) {
             createDialogueBox();
@@ -111,7 +110,4 @@ public class WeaponEditorViewController extends EditorViewController
 
     }
 
-    public IWeaponUpdateView getWeaponUpdateView () {
-        return myView;
-    }
 }

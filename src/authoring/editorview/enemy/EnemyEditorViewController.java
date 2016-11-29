@@ -37,8 +37,9 @@ public class EnemyEditorViewController extends EditorViewController
     @Override
     public void onUserEnteredEnemySpeed (String enemySpeed) {
         try {
-            Integer.parseInt(enemySpeed);
-            enemyDataSource.setEnemySpeed(currentEnemyID, Integer.parseInt(enemySpeed));
+            Double.parseDouble(enemySpeed);
+            enemyDataSource.setEnemySpeed(currentEnemyID, Double.parseDouble(enemySpeed));
+
         }
         catch (NumberFormatException e) {
             createDialogueBox();
@@ -48,8 +49,8 @@ public class EnemyEditorViewController extends EditorViewController
     @Override
     public void onUserEnteredEnemyHealth (String enemyHealth) {
         try {
-            Integer.parseInt(enemyHealth);
-            enemyDataSource.setEnemyHealth(currentEnemyID, Integer.parseInt(enemyHealth));
+            Double.parseDouble(enemyHealth);
+            enemyDataSource.setEnemyHealth(currentEnemyID, Double.parseDouble(enemyHealth));
         }
         catch (NumberFormatException e) {
             createDialogueBox();
@@ -60,8 +61,8 @@ public class EnemyEditorViewController extends EditorViewController
     @Override
     public void onUserEnteredEnemyDamage (String enemyDamage) {
         try {
-            Integer.parseInt(enemyDamage);
-            enemyDataSource.setEnemyDamage(currentEnemyID, Integer.parseInt(enemyDamage));
+            Double.parseDouble(enemyDamage);
+            enemyDataSource.setEnemyDamage(currentEnemyID, Double.parseDouble(enemyDamage));
         }
         catch (NumberFormatException e) {
             createDialogueBox();
@@ -71,9 +72,9 @@ public class EnemyEditorViewController extends EditorViewController
     @Override
     public void onUserEnteredEnemyPoints (String enemyRewardPoints) {
         try {
-            Integer.parseInt(enemyRewardPoints);
+            Double.parseDouble(enemyRewardPoints);
             enemyDataSource.setEnemyRewardPoints(currentEnemyID,
-                                                 Integer.parseInt(enemyRewardPoints));
+                                                 Double.parseDouble(enemyRewardPoints));
         }
         catch (NumberFormatException e) {
             createDialogueBox();
@@ -83,8 +84,8 @@ public class EnemyEditorViewController extends EditorViewController
     @Override
     public void onUserEnteredEnemyMoney (String enemyRewardMoney) {
         try {
-            Integer.parseInt(enemyRewardMoney);
-            enemyDataSource.setEnemyRewardMoney(currentEnemyID, Integer.parseInt(enemyRewardMoney));
+            Double.parseDouble(enemyRewardMoney);
+            enemyDataSource.setEnemyRewardMoney(currentEnemyID, Double.parseDouble(enemyRewardMoney));
         }
         catch (NumberFormatException e) {
             createDialogueBox();

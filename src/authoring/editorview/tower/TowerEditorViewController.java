@@ -62,8 +62,8 @@ public class TowerEditorViewController extends EditorViewController
     @Override
     public void onUserEnteredTowerBuyPrice (String towerBuyPrice) {
         try {
-            Integer.parseInt(towerBuyPrice);
-            towerDataSource.setTowerBuyPrice(currentTowerID, Integer.parseInt(towerBuyPrice));
+            Double.parseDouble(towerBuyPrice);
+            towerDataSource.setTowerBuyPrice(currentTowerID, Double.parseDouble(towerBuyPrice));
         }
         catch (NumberFormatException e) {
             createDialogueBox();
@@ -73,8 +73,8 @@ public class TowerEditorViewController extends EditorViewController
     @Override
     public void onUserEnteredTowerSellPrice (String towerSellPrice) {
         try {
-            Integer.parseInt(towerSellPrice);
-            towerDataSource.setTowerSellPrice(currentTowerID, Integer.parseInt(towerSellPrice));
+            Double.parseDouble(towerSellPrice);
+            towerDataSource.setTowerSellPrice(currentTowerID, Double.parseDouble(towerSellPrice));
         }
         catch (NumberFormatException e) {
             createDialogueBox();
