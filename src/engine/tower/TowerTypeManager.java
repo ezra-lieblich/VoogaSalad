@@ -27,7 +27,6 @@ public class TowerTypeManager extends AbstractTypeManager<Tower> implements Towe
     public void visitRemoveEntry(AbilityManager manager, Integer index) {
         applyToAllEntities(a -> a.removeAbility(index));
     }
-
         //TODO - Flatten hierarchy maybe?
 
 }

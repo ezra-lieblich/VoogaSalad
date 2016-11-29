@@ -38,7 +38,6 @@ public class WeaponTypeBuilder extends AbstractTypeBuilder<Weapon, WeaponBuilder
          super(DEFAULT_NAME, DEFAULT_IMAGE_PATH, DEFAULT_SIZE);
      }
     
-
      @Override
      public WeaponBuilder buildTargets (Integer ... targets) {
          return buildTargets(Arrays.asList(targets));
@@ -86,6 +85,11 @@ public class WeaponTypeBuilder extends AbstractTypeBuilder<Weapon, WeaponBuilder
     }
 
     @Override
+    public ObservableList<Integer> getTargets () {
+        return targets;
+    }
+    
+    @Override
     public ObservableProperty<Double> getFireRate () {
         return fireRate;
     }
@@ -125,6 +129,13 @@ public class WeaponTypeBuilder extends AbstractTypeBuilder<Weapon, WeaponBuilder
         return this;
     }
     
+
+    @Override
+    public WeaponBuilder addTargetsListener (BiConsumer<List<Integer>, List<Integer>> listener) {
+        targets.addListener(listener);
+        return this;
+    }
+    
     @Override
     public WeaponBuilder addFireRateListener(BiConsumer<Double, Double> listener) {
         fireRate.addListener(listener);
@@ -153,11 +164,6 @@ public class WeaponTypeBuilder extends AbstractTypeBuilder<Weapon, WeaponBuilder
     public WeaponBuilder addRangeListener(BiConsumer<Double, Double> listener) {
         range.addListener(listener);
         return this;
-    }
-
-    @Override
-    public ObservableList<Integer> getTargets () {
-        return targets;
     }
     
 }

@@ -14,7 +14,7 @@ public class WeaponTypeManager extends AbstractTypeManager<Weapon> implements We
     }
     
     public void visitRemoveEntry(EnemyManager manager, Integer index) {
-        applyToAllEntities(a -> a.removeEnemy(index));
+        applyToAllEntities(a -> a.removeTarget(index));
     }
 
 }
