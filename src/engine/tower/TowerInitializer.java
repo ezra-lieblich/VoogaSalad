@@ -18,7 +18,7 @@ public interface TowerInitializer extends TypeInitializer {
 
     ObservableList<Integer> getAbilities ();
     
-    ObservableProperty<Integer> getUpgrade ();
+    ObservableList<Integer> getUpgrades ();
 
     ObservableProperty<Double> getCost ();
 

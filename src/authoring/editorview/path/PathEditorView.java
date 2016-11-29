@@ -10,6 +10,7 @@ import authoring.editorview.path.subviews.PathBuilderView;
 import authoring.editorview.path.subviews.PathImageView;
 import authoring.editorview.path.subviews.PathNameView;
 import authoring.editorview.path.subviews.PathSizeView;
+import engine.path.Coordinate;
 import javafx.scene.Node;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -76,9 +77,6 @@ public class PathEditorView implements IPathEditorView {
     	
     }
     
-    public void setPathCoordinates(List<Coordinate> pathCoordinates){
-    	
-    }
     
     public void setActiveId(int pathID){
     	pathImageView.setActivePathId(pathID);
@@ -101,6 +99,12 @@ public class PathEditorView implements IPathEditorView {
         
             
     }
+
+	@Override
+	public void setPathCoordinates(List<Coordinate> pathCoordinates) {
+		// TODO Auto-generated method stub
+		
+	}
    
 
 }

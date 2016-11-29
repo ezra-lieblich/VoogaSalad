@@ -8,24 +8,25 @@ package authoring.editorview.enemy;
  */
 public interface EnemyEditorViewDelegate {
 
-    public void onUserPressedCreateEnemy ();
+    public void onUserPressedCreateEnemy ();//
 
-    public void onUserEnteredEnemySpeed (String enemySpeed);
+    public void onUserPressedDeleteEnemy ();//
 
-    public void onUserEnteredEnemyHealth (String enemyHealth);
+    public void onUserEnteredEnemySpeed (String enemySpeed);//
 
-    public void onUserEnteredEnemyDamage (String enemyDamage);
+    public void onUserEnteredEnemyHealth (String enemyHealth);//
 
-    public void onUserEnteredEnemyPoints (String enemyRewardPoints);
+    public void onUserEnteredEnemyDamage (String enemyDamage);//
 
-    public void onUserEnteredEnemyMoney (String enemyRewardMoney);
+    public void onUserEnteredEnemyPoints (String enemyRewardPoints);//
 
-    public void onUserEnteredEnemyCollisionEffect (String enemyCollisionEffect);
+    public void onUserEnteredEnemyMoney (String enemyRewardMoney);//
 
-    public void onUserEnteredEnemyImagePath (String enemyImagePath);
+    public void onUserEnteredEnemyCollisionEffect (String enemyCollisionEffect);//
 
-    public void onUserEnteredEnemyName (String enemyName);
+    public void onUserEnteredEnemyImagePath (String enemyImagePath);//
 
-    public void onUserEnteredEnemyFrequency (String enemyFrequency);
+    public void onUserEnteredEnemyName (String enemyName);//
 
+    public void onUserEnteredEnemySize (String enemySize);
 }

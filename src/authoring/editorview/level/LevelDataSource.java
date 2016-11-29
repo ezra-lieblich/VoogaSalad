@@ -12,36 +12,51 @@ import java.util.Map;
  */
 public interface LevelDataSource {
 
+	
+	public int createNewLevel ();
+	
+	public void removeLevel (int levelID);
+		
     /**
      * Sets creeps in the game engine
      * 
      * @param levelIndex
      * @param map of creeps, key = enemyID, value = number of that enemy
      */
-    public void setEnemies (int levelID, Map<Integer, Integer> enemyMap);
+   	
+	public void setLevelName (int levelID, String levelName);
+	
+	public void setEnemy (int levelID, int enemyID, int numEnemies);
 
-    public void setRewardPoints (int levelID, int winPoints);
+    public void setRewardPoints (int levelID, double winPoints);
 
-    public void setRewardMoney (int levelID, int winMoney);
+    public void setRewardMoney (int levelID, double winMoney);
 
-    public void setRewardHealth (int levelID, int winHealth);
+    public void setRewardHealth (int levelID, double winHealth);
     
     public void setPath (int levelID, int pathID);
     
-    public void setTowers (int levelID, List<Integer> towerIDList);
+    public void setTransitionTime (int levelID, double time);
+      
+    public Map<Integer, Integer> getEnemies (int levelID);
     
-    public void getEnemies (int levelID);
+    public double getRewardPoints (int levelID);
     
-    public void getRewardPoints (int levelID);
+    public double getRewardMoney (int levelID);
     
-    public void getRewardMoney (int levelID);
+    public double getRewardHealth (int levelID);
     
-    public void getRewardHealth (int levelID);
+    public int getPath (int levelID);
     
-    public void getPath (int levelID);
+    public String getLevelName (int levelID);
     
-    public void getTowers (int levelID);
+    public double getTransitionTime (int levelID);
+	
     
     
+    
+    
+
+    public void setEnemyFrequency (int enemyID, double enemyFrequency);
 
 }

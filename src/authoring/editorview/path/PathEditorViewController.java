@@ -46,7 +46,7 @@ public class PathEditorViewController extends EditorViewController implements Pa
 
 	@Override
 	public int onUserEnteredCreatePath() {
-		int pathID = pathDataSource.createNewPath();
+		int pathID = pathDataSource.createNewPath(pathView);
 		return pathID;
 		
 	}

@@ -8,32 +8,32 @@ package authoring.editorview.tower;
  */
 public interface TowerEditorViewDelegate {
 
-    public void onUserPressedCreateNewTower ();
+    public void onUserPressedCreateNewTower (); //
 
-    public void onUserEnteredTowerAbility (String towerAbility);
+    public void onUserPressedDeleteTower (); //
 
-    public void onUserEnteredTowerChosenEnemy (String towerChosenEnemy);
+    public void onUserEnteredTowerAbility (String towerAbility); //
 
-    public void onUserEnteredTowerChosenWeapon (String towerChosenWeapon);
+    public void onUserDeletedTowerAbility (String towerAbility); //
 
-    public void onUserEnteredTowerUpgrade (String towerUpgrade);
+    public void onUserEnteredTowerChosenWeapon (String towerChosenWeapon); //
 
-    public void onUserEnteredTowerName (String towerName);
+    public void onUserDeletedTowerWeapon (String towerChosenWeapon); //
 
-    public void onUserEnteredTowerImagePath (String towerImagePath);
+    public void onUserEnteredTowerUpgrade (String towerUpgrade); //
 
-    public void onUserEnteredTowerBuyPrice (String towerBuyPrice);
+    public void onUserDeletedTowerUpgrade (String towerUpgrade); //
 
-    public void onUserEnteredTowerSellPrice (String towerSellPrice);
+    public void onUserEnteredTowerName (String towerName); //
 
-    public void onUserEnteredTowerUnlockLevel (String towerLevel);
+    public void onUserEnteredTowerImagePath (String towerImagePath); //
 
-    public void onUserEnteredTowerFireRate (String towerFireRate);
+    public void onUserEnteredTowerBuyPrice (String towerBuyPrice);//
 
-    // TODO: Does tower need either of the below methods?
+    public void onUserEnteredTowerSellPrice (String towerSellPrice);//
 
-    public void onUserEnteredTowerFrequency (String towerFrequency);
+    public void onUserEnteredTowerUnlockLevel (String towerLevel);//
 
-    public void onUserEnteredTowerRange (String towerRange);
+    public void onUserEnteredTowerSize (String towerSize); //
 
 }

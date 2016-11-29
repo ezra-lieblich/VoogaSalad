@@ -3,6 +3,7 @@ package authoring.editorview.path;
 import java.util.List;
 
 import authoring.editorview.IEditorView;
+import engine.path.Coordinate;
 
 /**
  * 
