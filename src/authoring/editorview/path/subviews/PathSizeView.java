@@ -60,7 +60,7 @@ public class PathSizeView {
 		
 	}
 	
-	private void setNumColumns(String numColumns){
+	public void setNumColumns(String numColumns){
 		//TODO: catch user error
 		this.numColumns = Integer.parseInt(numColumns);
 	}
@@ -75,7 +75,7 @@ public class PathSizeView {
 		
 	}
 	
-	private void setNumRows(String numRows){
+	public void setNumRows(String numRows){
 		//TODO: catch user error
 		this.numRows = Integer.parseInt(numRows);
 	}

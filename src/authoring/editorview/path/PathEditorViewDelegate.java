@@ -1,5 +1,6 @@
 package authoring.editorview.path;
 
+
 public interface PathEditorViewDelegate {
 	
 	public void onUserEnteredNumberColumns(int pathID, int numColumns);
@@ -13,6 +14,8 @@ public interface PathEditorViewDelegate {
 	public int onUserEnteredCreatePath();
 	
 	public void onUserEnteredEditPath(int pathID);
+	
+	public void onUserEnteredPathCoordinate(int pathID, int x, int y);
 	
 	
 

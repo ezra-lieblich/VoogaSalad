@@ -1,6 +1,7 @@
-package authoring.editorview.weapon;
+package engine.weapon;
 
 import java.util.List;
+import engine.ManagerController;
 
 
 /**
@@ -8,9 +9,7 @@ import java.util.List;
  * 
  * @author Andrew Bihl
  */
-public interface WeaponDataSource {
-
-    public void setWeaponImagePath (int weaponID, String weaponImagePath);
+public interface WeaponManagerController extends ManagerController<WeaponManager, WeaponBuilder, Weapon> {
 
     public void setWeaponRange (int weaponID, double weaponRange);
 
@@ -20,19 +19,11 @@ public interface WeaponDataSource {
 
     public void setWeaponCollisionEffect (int weaponID, String weaponCollisionEffect);
 
-    public void setWeaponName (int weaponID, String weaponName);
-
     public void setWeaponTrajectory (int weaponID, String weaponTrajectory);
 
     public void setNewWeaponTargetEnemy (int weaponID, int enemyID);
 
     public void removeWeaponTargetEnemy (int weaponID, int enemyID);
-
-    public int createWeapon ();
-
-    public void deleteWeapon (int weaponID);
-
-    public String getWeaponImagePath (int weaponID);
 
     public double getWeaponRange (int weaponID);
 
@@ -42,11 +33,7 @@ public interface WeaponDataSource {
 
     public String getWeaponCollisionEffect (int weaponID);
 
-    public String getWeaponName (int weaponID);
-
     public String getWeaponTrajectory (int weaponID);
-
-    public List<Integer> getCreatedWeaponIDs ();
 
     public List<Integer> getTargetEnemies (int weaponID);
 

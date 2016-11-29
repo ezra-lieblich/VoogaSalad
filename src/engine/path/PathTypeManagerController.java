@@ -1,76 +1,73 @@
 package engine.path;
 
 import java.util.List;
-import authoring.editorview.path.PathDataSource;
+import authoring.editorview.IUpdateView;
+import authoring.editorview.path.IPathEditorView;
+import authoring.editorview.path.IPathUpdateView;
+import authoring.editorview.tower.ITowerUpdateView;
+import engine.AbstractTypeManagerController;
+import engine.tower.Tower;
 
-public class PathTypeManagerController implements PathDataSource{
-    private PathManager pathManager;
-    private PathBuilder pathBuilder;
+
+public class PathTypeManagerController
+        extends AbstractTypeManagerController<PathManager, PathBuilder, Path, IPathUpdateView> implements PathManagerController {
+
+    PathTypeManagerController (PathTypeManager pathManager) {
+        super(pathManager, new PathTypeBuilder());
+    }
+
+    @Override
+    public void setNumberofColumns (int pathID, int columns) {
+        getTypeManager().getEntity(pathID).setGridColumns(columns);
+    }
+
+    @Override
+    public void setNumberofRows (int pathID, int rows) {
+        getTypeManager().getEntity(pathID).setGridRows(rows);
+    }
     
-    PathTypeManagerController(PathManager pathManager) {
-        this.pathManager = pathManager;
-        this.pathBuilder = new PathTypeBuilder();
-    }
-
     @Override
-    public int createNewPath () {
-        // TODO Auto-generated method stub
-        return 0;
+    public void setType (int pathID, String type) {
+        getTypeManager().getEntity(pathID).setType(type);        
     }
-
+    
     @Override
-    public void setPathImage (int pathID, String pathImagePath) {
-        pathManager.getEntity(pathID).setImagePath(pathImagePath);
-    }
-
-    @Override
-    public void setNumberofColumns (int pathID, int numColumns) {
-        pathManager.getEntity(pathID).setGridColumns(numColumns);
-    }
-
-    @Override
-    public void setNumberofRows (int pathID, int numRows) {
-        pathManager.getEntity(pathID).setGridRows(numRows);
-    }
-
-    @Override
-    public void setPathName (int pathID, String pathName) {
-        pathManager.getEntity(pathID).setName(pathName);
-    }
-
-    @Override
-    public boolean setPathCoordinates (int pathID, List<Coordinate<Integer>> pathCoordinates) {
-        pathManager.getEntity(pathID).setCoordinates(pathCoordinates);
-    }
-
-    @Override
-    public void clearPaths () {
-    }
-
-    @Override
-    public String getPathImagePath (int pathID) {
-        return pathManager.getEntity(pathID).getImagePath();
+    public boolean setNewPathCoordinate (int pathID, int x, int y) {
+        getTypeManager().getEntity(pathID).addCoordinate(new GridCoordinate(x, y));
+        return true; // TODO - validate this
     }
 
     @Override
     public int getNumberofColumns (int pathID) {
-        return pathManager.getEntity(pathID).getGridColumns();
+        return getTypeManager().getEntity(pathID).getGridColumns();
     }
 
     @Override
     public int getNumberofRows (int pathID) {
-        return pathManager.getEntity(pathID).getGridRows();
+        return getTypeManager().getEntity(pathID).getGridRows();
     }
 
     @Override
-    public String getPathName (int pathID) {
-        return pathManager.getEntity(pathID).getName();
+    public void getType (int pathID) {
+        getTypeManager().getEntity(pathID).getType();        
     }
-
+    
     @Override
-    public List<Coordinate> getPathCoordinates (int pathID) {
-        return pathManager.getEntity(pathID).getCoordinates();
+    public List<Coordinate<Integer>> getPathCoordinates (int pathID) {
+        return getTypeManager().getEntity(pathID).getCoordinates();
     }
-
+    
+    
+    @Override
+    protected PathBuilder constructTypeProperties (IPathUpdateView updateView,
+                                                   PathBuilder typeBuilder) {
+        return typeBuilder
+                .addCoordinatesListener( (oldValue, newValue) -> updateView
+                        .updatePathCoordinates(newValue))
+                .addGridRowsListener( (oldValue, newValue) -> updateView
+                        .updateNumRows(newValue))
+                .addGridColumnsListener( (oldValue, newValue) -> updateView
+                        .updateNumColumns(newValue));
+    }
 
 }
