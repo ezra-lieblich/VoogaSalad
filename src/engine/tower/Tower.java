@@ -19,12 +19,6 @@ public interface Tower extends Type {
 
     List<Integer> getWeapons ();
 
-    void removeEnemy (int target);
-
-    void addTarget (int target);
-
-    List<Integer> getTargets ();
-
     void removeAbility (int ability);
 
     void addAbility (int ability);

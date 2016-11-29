@@ -1,14 +1,16 @@
 package engine.weapon;
 
+import java.util.Collections;
+import java.util.List;
 import engine.AbstractType;
 import engine.Type;
 import engine.TypeInitializer;
+import engine.observer.ObservableList;
 import engine.observer.ObservableProperty;
 
 public class WeaponType extends AbstractType implements Weapon {
     
-
-
+    private ObservableList<Integer> targets;
     private ObservableProperty<Double> fireRate;
     private ObservableProperty<String> trajectory;
     private ObservableProperty<String> effect;
@@ -18,9 +20,29 @@ public class WeaponType extends AbstractType implements Weapon {
     
     protected WeaponType (WeaponInitializer weaponInitializer) {
         super(weaponInitializer);
-        // TODO Auto-generated constructor stub
+        this.targets = weaponInitializer.getTargets();
+        this.fireRate = weaponInitializer.getFireRate();
+        this.trajectory = weaponInitializer.getTrajectory();
+        this.effect = weaponInitializer.getEffect();
+        this.speed = weaponInitializer.getSpeed();
+        this.range = weaponInitializer.getRange();
     }
 
+    @Override
+    public void removeTarget (int target) {
+        targets.remove(target);
+    }
+
+    @Override
+    public void addTarget (int target) {
+        targets.add(target);
+    }
+
+    @Override
+    public List<Integer> getTargets () {
+        return Collections.unmodifiableList(targets.getProperty());
+    }
+    
     @Override
     public double getFireRate () {
         return fireRate.getProperty();
@@ -61,9 +83,7 @@ public class WeaponType extends AbstractType implements Weapon {
     public void setSpeed (double speed) {
         this.speed.setProperty(speed);
     }
-    /* (non-Javadoc)
-     * @see engine.weapon.Weapon#getRange()
-     */
+
     @Override
     public double getRange () {
         return range.getProperty();

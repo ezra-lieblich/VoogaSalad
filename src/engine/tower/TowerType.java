@@ -19,7 +19,6 @@ import javafx.beans.property.SimpleDoubleProperty;
 public class TowerType extends AbstractType implements Tower {
 
     private ObservableList<Integer> weapons;
-    private ObservableList<Integer> targets;
     private ObservableList<Integer> abilities;
     private ObservableProperty<Integer> upgrade;
     private ObservableProperty<Double> cost;
@@ -29,7 +28,6 @@ public class TowerType extends AbstractType implements Tower {
     protected TowerType (TowerInitializer towerInitializer) {
         super(towerInitializer);
         this.upgrade = towerInitializer.getUpgrade();
-        this.targets = towerInitializer.getTargets();
         this.weapons = towerInitializer.getWeapons();
         this.abilities = towerInitializer.getAbilities();
         this.cost = towerInitializer.getCost();
@@ -60,21 +58,6 @@ public class TowerType extends AbstractType implements Tower {
     @Override
     public List<Integer> getWeapons () {
         return Collections.unmodifiableList(weapons.getProperty());
-    }
-
-    @Override
-    public void removeEnemy (int target) {
-        targets.remove(target);
-    }
-
-    @Override
-    public void addTarget (int target) {
-        targets.add(target);
-    }
-
-    @Override
-    public List<Integer> getTargets () {
-        return Collections.unmodifiableList(targets.getProperty());
     }
 
     @Override
