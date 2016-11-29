@@ -30,7 +30,7 @@ import engine.TowerType;
 public class GamePlayerController implements Observer {
 
 	public static final int FRAMES_PER_SECOND = 60;
-	public static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
+	public static final int MILLISECOND_DELAY = 50;
 	public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
 	
 	private GamePlayerFactory loader;
@@ -148,7 +148,6 @@ public class GamePlayerController implements Observer {
 
 	private void startAnimation() {
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> {
-			System.out.println("hello");
 			((Pane) this.view.getGrid().getGrid()).getChildren().clear(); //clear everything
 			this.currentWave = this.model.getPackOfEnemyComing();
 			
@@ -157,18 +156,19 @@ public class GamePlayerController implements Observer {
 				test.setCurrentCell(this.model.getGrid().getCell(0, 0));
 				this.enemyModel.spawnEnemy(test);
 			}
-			List<Enemy> thingsOnGrid = this.enemyModel.getEnemyOnGrid();
-			System.out.println(thingsOnGrid.size());
-			for (int i = 0; i < thingsOnGrid.size(); i++) {
-				System.out.println(i + ": " + thingsOnGrid.get(i).getX());
-			}
-			this.enemyModel.update();
-			System.out.println("**********");
-			for (int i = 0; i < thingsOnGrid.size(); i++) {
-				System.out.println(i + ": " + thingsOnGrid.get(i).getX());
-			}
-			this.view.getGrid().populatePath(model.getGrid().getStartPoint()); //repopulate the path
-			
+			this.enemyModel.update(); 
+//			List<Enemy> thingsOnGrid = this.enemyModel.getEnemyOnGrid();
+//			System.out.println(thingsOnGrid.size());
+//			for (int i = 0; i < thingsOnGrid.size(); i++) {
+//				System.out.println(i + ": " + thingsOnGrid.get(i).getX());
+//			}
+//			this.enemyModel.update();
+//			System.out.println("**********");
+//			for (int i = 0; i < thingsOnGrid.size(); i++) {
+//				System.out.println(i + ": " + thingsOnGrid.get(i).getX());
+//			}
+//			this.view.getGrid().populatePath(model.getGrid().getStartPoint()); //THIS LINE CAUSES SLOW DOWN
+			this.view.reRender(enemyModel.getEnemyOnGrid());
 		});
 		Timeline animation = new Timeline();
 		animation.setCycleCount(Timeline.INDEFINITE);

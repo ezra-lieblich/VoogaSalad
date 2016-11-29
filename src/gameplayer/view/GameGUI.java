@@ -2,6 +2,7 @@ package gameplayer.view;
 
 import java.util.List;
 
+import gameplayer.model.Enemy;
 import gameplayer.view.buttonPanel.ButtonPanel;
 import gameplayer.view.buttonPanel.GamePlayButtonPanel;
 import gameplayer.view.helper.GraphicsLibrary;
@@ -16,6 +17,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -132,8 +134,13 @@ public class GameGUI {
 	}
 	
 	//not sure if this goes here
-	public void reRender(){
-		
+	public void reRender(List<Enemy> redraw){//should be interface of drawables
+		for(Enemy enemy:redraw){
+			ImageView image = new ImageView(enemy.getImage());
+			image.setX(enemy.getX());
+			image.setY(enemy.getY());
+			this.grid.getGrid().getChildren().add(image);
+		}
 	}
 	
 	
