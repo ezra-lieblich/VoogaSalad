@@ -42,9 +42,9 @@ public interface LevelDataSource {
     
     public void getTowers ();
     
-    public void setActiveLevels (List<Integer> levelIDList);
+    public void setActiveLevel (int levelID);
     
-    public List<Integer> getActiveLevels ();
+    public int getActiveLevel ();
     
     
 

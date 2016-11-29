@@ -44,9 +44,9 @@ public interface PathDataSource {
     
     public List<Coordinate> getPathCoordinates ();
     
-    public void setActiveIDs(List<Integer> idList);
+    public void setActiveID(int pathId);
     
-    public List<Integer> getActiveIDs ();
+    public int getActiveID ();
     
     
     
