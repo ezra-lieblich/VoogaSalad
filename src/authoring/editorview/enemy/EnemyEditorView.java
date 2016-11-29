@@ -85,7 +85,7 @@ public class EnemyEditorView implements IEnemyEditorView, IEnemyUpdateView {
     }
 
     @Override
-    public void updateFrequencyDisplay (int frequency) {
+    public void updateFrequencyDisplay (double frequency) {
         // TODO Auto-generated method stub
         
     }
@@ -109,7 +109,7 @@ public class EnemyEditorView implements IEnemyEditorView, IEnemyUpdateView {
     }
 
     @Override
-    public void updateEnemySpeed (int speed) {
+    public void updateEnemySpeed (double speed) {
         // TODO Auto-generated method stub
         
     }
@@ -127,25 +127,25 @@ public class EnemyEditorView implements IEnemyEditorView, IEnemyUpdateView {
     }
 
     @Override
-    public void updateEnemyHealthDisplay (int enemyHealth) {
+    public void updateEnemyHealthDisplay (double enemyHealth) {
         // TODO Auto-generated method stub
         
     }
 
     @Override
-    public void updateEnemyDamage (int damage) {
+    public void updateEnemyDamage (double damage) {
         // TODO Auto-generated method stub
         
     }
 
     @Override
-    public void updateEnemyRewardMoney (int rewardMoney) {
+    public void updateEnemyRewardMoney (double rewardMoney) {
         // TODO Auto-generated method stub
         
     }
 
     @Override
-    public void updateEnemyRewardPoints (int rewardPoints) {
+    public void updateEnemyRewardPoints (double rewardPoints) {
         // TODO Auto-generated method stub
         
     }

@@ -85,7 +85,7 @@ public class TowerEditorView implements ITowerUpdateView {
     }
 
     @Override
-    public void updateFireRateDisplay (int towerFireRate) {
+    public void updateFireRateDisplay (double towerFireRate) {
         // TODO Auto-generated method stub
 
     }
@@ -97,7 +97,7 @@ public class TowerEditorView implements ITowerUpdateView {
     }
 
     @Override
-    public void updateRangeDisplay (int towerRange) {
+    public void updateRangeDisplay (double towerRange) {
         // TODO Auto-generated method stub
 
     }
@@ -115,25 +115,25 @@ public class TowerEditorView implements ITowerUpdateView {
     }
 
     @Override
-    public void updateTowerBuyPriceDisplay (int towerBuyPrice) {
+    public void updateTowerBuyPriceDisplay (double towerBuyPrice) {
         // TODO Auto-generated method stub
 
     }
 
     @Override
-    public void updateTowerSellPriceDisplay (int towerSellPrice) {
+    public void updateTowerSellPriceDisplay (double towerSellPrice) {
         // TODO Auto-generated method stub
 
     }
 
     @Override
-    public void updateTowerAbility (String towerAbility) {
+    public void updateTowerAbility (List<Integer> towerAbility) {
         // TODO Auto-generated method stub
 
     }
 
     @Override
-    public void updateTowerChosenWeapon (String towerChosenWeapon) {
+    public void updateTowerChosenWeapon (int towerChosenWeapon) {
         // TODO Auto-generated method stub
 
     }
