@@ -3,6 +3,7 @@ package authoring.editorview.enemy.subviews;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javax.imageio.ImageIO;
@@ -27,60 +28,91 @@ import javafx.stage.Stage;
 
 /**
  * 
- * @author Kayla Schulz
+ * @author Kayla Schulz, Andrew Bihl
  *
  */
 public class EnemyImageBank extends PhotoFileChooser {
-
+	private EnemyListDataSource dataSource;
     private EnemyEditorViewDelegate delegate;
-    private ListView<Node> enemyBank;
-    private ObservableList<Node> enemies;
+    private ListView<Node> enemyListView;
+    
+    
+    private ObservableList<Node> enemies;    
+    
     private VBox vbox;
     private File chosenFile;
     private final int CELL_HEIGHT = 60;
     private final int CELL_WIDTH = 60;
-    private final int TOWER_BANK_WIDTH = 160;
+    private final int TOWER_BANK_WIDTH = 120;
+    private final String DEFAULT_TOWER_IMAGE_PATH = "./Images/questionmark.png";
 
     public EnemyImageBank (ResourceBundle labelsResource, ResourceBundle dialogueBoxResource) {
-        enemyBank = new ListView<Node>();
-        enemyBank.setMaxWidth(TOWER_BANK_WIDTH);
+
+    	Button newEnemyButton = ButtonFactory.makeButton("New Enemy", e -> {
+    		delegate.onUserPressedCreateEnemy();
+    	});
+    	
+//        Button createNewEnemy =
+//                ButtonFactory.makeButton(labelsResource.getString("NewEnemy"),
+//                                         e -> {
+//                                             try {
+//                                                 selectFile(labelsResource.getString("Photos"),
+//                                                            labelsResource.getString("Image"));
+//                                             }
+//                                             catch (IOException e1) {
+//                                                 DialogueBoxFactory
+//                                                         .createErrorDialogueBox(dialogueBoxResource
+//                                                                 .getString("UnableToOpen"),
+//                                                                                 dialogueBoxResource
+//                                                                                         .getString("TryAgain"));
+//                                             }
+//                                         });
+        enemyListView = new ListView<Node>();
+        enemyListView.setMaxWidth(TOWER_BANK_WIDTH);
         enemies = FXCollections.observableArrayList();
-        Button createNewEnemy =
-                ButtonFactory.makeButton(labelsResource.getString("NewEnemy"),
-                                         e -> {
-                                             try {
-                                                 selectFile(labelsResource.getString("Photos"),
-                                                            labelsResource.getString("Image"));
-                                             }
-                                             catch (IOException e1) {
-                                                 DialogueBoxFactory
-                                                         .createErrorDialogueBox(dialogueBoxResource
-                                                                 .getString("UnableToOpen"),
-                                                                                 dialogueBoxResource
-                                                                                         .getString("TryAgain"));
-                                             }
-                                         });
-        enemies.add(createNewEnemy);
-        File file = new File("./Images/redballoon.jpg");
-        this.addImageToBank(new Image(file.toURI().toString()));
-        enemyBank.setItems(enemies);
-        vbox = BoxFactory.createVBox(labelsResource.getString("EnemyBank"));
-        vbox.getChildren().add(createNewEnemy);
+        //First cell is a button
+        enemies.add(newEnemyButton);
+        enemyListView.setItems(enemies);
+//        vbox = BoxFactory.createVBox(labelsResource.getString("EnemyBank"));
+//        vbox.getChildren().add(newEnemyButton);
 //        enemyBank.setContent(vbox);
     }
-
     public void setDelegate (EnemyEditorViewDelegate delegate) {
         this.delegate = delegate;
     }
+    
+    public void setListDataSource(EnemyListDataSource source){
+    	this.dataSource = source;
+    }
 
     public Node getInstanceAsNode () {
-        return enemyBank;
+        return enemyListView;
     }
 
     public void updateEnemyBank (List<Integer> activeEnemies) {
-        // update each enemy in bank
+    	this.enemies.remove(1, enemies.size()-1);
+    	for (int i = 0; i < activeEnemies.size(); i++) {
+    		EnemyListCellData cellData = dataSource.getCellDataForEnemy(activeEnemies.get(i));
+    		Node cell = createCellFromData(cellData);
+    		enemies.add(cell);
+    	}
     }
     
+    private Node createCellFromData(EnemyListCellData data){
+    	ImageView cell = new ImageView();
+    	String imageFilePath = data.getImagePath();
+    	if (imageFilePath.equals(null) || imageFilePath.length()<1){
+    		imageFilePath = DEFAULT_TOWER_IMAGE_PATH;
+    	}
+		File file = new File(data.getImagePath());
+		Image image = new Image(file.toURI().toString());
+    	cell.setImage(image);
+    	cell.setPreserveRatio(true);
+    	cell.setFitHeight(CELL_HEIGHT);
+    	cell.setFitWidth(CELL_WIDTH);
+    	return cell;
+    }
+
     private void addImageToBank(Image image){
     	ImageView cell = new ImageView();
     	cell.setImage(image);

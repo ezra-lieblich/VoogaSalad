@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ResourceBundle;
 import authoring.editorview.enemy.subviews.EnemyEffectView;
 import authoring.editorview.enemy.subviews.EnemyImageBank;
+import authoring.editorview.enemy.subviews.EnemyListDataSource;
 import authoring.editorview.enemy.subviews.editorfields.EnemyFrequencyField;
 import authoring.editorview.enemy.subviews.editorfields.EnemyHealthField;
 import authoring.editorview.enemy.subviews.editorfields.EnemyImageView;
@@ -86,5 +87,10 @@ public class EnemyEditorView implements IEnemyEditorView {
         enemyRewardPoints.setDelegate(delegate);
         enemyEffectView.setDelegate(delegate);
     }
+
+	@Override
+	public void setEnemyListDataSource(EnemyListDataSource source) {
+		this.enemyBank.setListDataSource(source);
+	}
 
 }

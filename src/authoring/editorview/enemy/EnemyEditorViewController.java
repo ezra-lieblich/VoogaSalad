@@ -3,6 +3,8 @@ package authoring.editorview.enemy;
 import java.io.IOException;
 import java.util.ResourceBundle;
 import authoring.editorview.EditorViewController;
+import authoring.editorview.enemy.subviews.EnemyListCellData;
+import authoring.editorview.enemy.subviews.EnemyListDataSource;
 import authoring.utilityfactories.DialogueBoxFactory;
 
 
@@ -13,7 +15,7 @@ import authoring.utilityfactories.DialogueBoxFactory;
  *
  */
 public class EnemyEditorViewController extends EditorViewController
-        implements EnemyEditorViewDelegate {
+        implements EnemyEditorViewDelegate, EnemyListDataSource {
 
     private EnemyDataSource enemyDataSource;
     private int currentEnemyID;
@@ -21,7 +23,8 @@ public class EnemyEditorViewController extends EditorViewController
     public EnemyEditorViewController (int editorWidth, int editorHeight) throws IOException {
         IEnemyEditorView myView = EnemyEditorViewFactory.build(editorWidth, editorHeight);
         myView.setDelegate(this);
-        this.view = myView;
+        myView.setEnemyListDataSource(this);
+        this.view = myView; 
     }
 
     public void setEnemyDataSource (EnemyDataSource source) {
@@ -121,5 +124,13 @@ public class EnemyEditorViewController extends EditorViewController
         DialogueBoxFactory.createErrorDialogueBox(dialogueBoxResource.getString("Integer"),
                                                   dialogueBoxResource.getString("CheckInput"));
     }
+
+	@Override
+	public EnemyListCellData getCellDataForEnemy(int enemyID) {
+		EnemyListCellData cellData = new EnemyListCellData();
+		cellData.setName(enemyDataSource.getEnemyName(enemyID));
+		cellData.setImagePath(enemyDataSource.getEnemyImage(enemyID));
+		return cellData;
+	}
 
 }
