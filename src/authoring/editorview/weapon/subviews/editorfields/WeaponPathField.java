@@ -36,7 +36,7 @@ public class WeaponPathField implements IWeaponEditorView {
     private void createField (ObservableList<Object> pathOptions) {
         weaponPathBox =
                 ComboBoxFactory.makeComboBox(labelsResource.getString("Path"), e -> delegate
-                        .onUserEnteredWeaponPath((String) weaponPathBox.getValue()), pathOptions);
+                        .onUserEnteredWeaponTrajectory((String) weaponPathBox.getValue()), pathOptions);
     }
 
     @Override

@@ -8,13 +8,9 @@ import authoring.editorview.tower.ITowerEditorView;
 import authoring.editorview.tower.TowerEditorViewDelegate;
 import authoring.editorview.tower.subviews.editorfields.TowerAbilityField;
 import authoring.editorview.tower.subviews.editorfields.TowerBuyPriceField;
-import authoring.editorview.tower.subviews.editorfields.TowerChooseEnemyField;
 import authoring.editorview.tower.subviews.editorfields.TowerChooseWeaponField;
-import authoring.editorview.tower.subviews.editorfields.TowerFireRateField;
-import authoring.editorview.tower.subviews.editorfields.TowerFrequencyField;
 import authoring.editorview.tower.subviews.editorfields.TowerImageView;
 import authoring.editorview.tower.subviews.editorfields.TowerNameField;
-import authoring.editorview.tower.subviews.editorfields.TowerRangeField;
 import authoring.editorview.tower.subviews.editorfields.TowerSellPriceField;
 import authoring.editorview.tower.subviews.editorfields.TowerUnlockLevelField;
 import authoring.editorview.tower.subviews.editorfields.TowerUpgradeField;
@@ -37,15 +33,11 @@ public class TowerEffectView extends PhotoFileChooser implements ITowerEditorVie
 
     private TowerEditorViewDelegate delegate;
     private TowerNameField towerName;
-    private TowerFrequencyField towerFrequency;
     private TowerImageView towerImage;
-    private TowerRangeField towerRange;
     private TowerBuyPriceField towerBuyPrice;
-    private TowerFireRateField towerFireRate;
     private TowerSellPriceField towerSellPrice;
     private TowerUnlockLevelField towerUnlockLevel;
     private TowerAbilityField towerAbility;
-    private TowerChooseEnemyField towerChooseEnemy;
     private TowerChooseWeaponField towerChooseWeapon;
     private TowerUpgradeField towerUpgrade;
 
@@ -57,15 +49,11 @@ public class TowerEffectView extends PhotoFileChooser implements ITowerEditorVie
     private ResourceBundle dialogueBoxResource;
 
     public TowerEffectView (TowerNameField towerName,
-                            TowerFrequencyField towerFrequency,
                             TowerImageView towerImage,
-                            TowerRangeField towerRange,
                             TowerBuyPriceField towerBuyPrice,
-                            TowerFireRateField towerFireRate,
                             TowerSellPriceField towerSellPrice,
                             TowerUnlockLevelField towerUnlockLevel,
                             TowerAbilityField towerAbility,
-                            TowerChooseEnemyField towerChooseEnemy,
                             TowerChooseWeaponField towerChooseWeapon,
                             TowerUpgradeField towerUpgrade,
                             ResourceBundle labelsResource,
@@ -75,15 +63,11 @@ public class TowerEffectView extends PhotoFileChooser implements ITowerEditorVie
         this.dialogueBoxResource = dialogueBoxResource;
 
         this.towerName = towerName;
-        this.towerFrequency = towerFrequency;
         this.towerImage = towerImage;
-        this.towerRange = towerRange;
         this.towerBuyPrice = towerBuyPrice;
-        this.towerFireRate = towerFireRate;
         this.towerSellPrice = towerSellPrice;
         this.towerUnlockLevel = towerUnlockLevel;
         this.towerAbility = towerAbility;
-        this.towerChooseEnemy = towerChooseEnemy;
         this.towerChooseWeapon = towerChooseWeapon;
         this.towerUpgrade = towerUpgrade;
 
@@ -118,15 +102,6 @@ public class TowerEffectView extends PhotoFileChooser implements ITowerEditorVie
                 .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Name"),
                                                            towerName.getInstanceAsNode()));
         vbox.getChildren()
-                .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("FireRate"),
-                                                           towerFireRate.getInstanceAsNode()));
-        vbox.getChildren()
-                .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Frequency"),
-                                                           towerFrequency.getInstanceAsNode()));
-        vbox.getChildren()
-                .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Range"),
-                                                           towerRange.getInstanceAsNode()));
-        vbox.getChildren()
                 .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("BuyPrice"),
                                                            towerBuyPrice.getInstanceAsNode()));
         vbox.getChildren()
@@ -136,7 +111,6 @@ public class TowerEffectView extends PhotoFileChooser implements ITowerEditorVie
                 .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("UnlockLevel"),
                                                            towerUnlockLevel.getInstanceAsNode()));
         vbox.getChildren().add(towerAbility.getInstanceAsNode());
-        vbox.getChildren().add(towerChooseEnemy.getInstanceAsNode());
         vbox.getChildren().add(towerChooseWeapon.getInstanceAsNode());
         vbox.getChildren().add(towerUpgrade.getInstanceAsNode());
     }

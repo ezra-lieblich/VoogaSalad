@@ -15,8 +15,6 @@ public interface ITowerUpdateView extends ITowerEditorView {
 
     public void updateUnlockLevelDisplay (int towerUnlockLevel);
 
-    public void updateFrequencyDisplay (int towerFrequency);
-
     public void updateRangeDisplay (int towerRange);
 
     public void updateTowerImagePath (String towerImagePath);
@@ -29,13 +27,11 @@ public interface ITowerUpdateView extends ITowerEditorView {
 
     public void updateTowerAbility (String towerAbility);
 
-    public void updateTowerChosenEnemy (String towerChosenEnemy);
-
     public void updateTowerChosenWeapon (String towerChosenWeapon);
 
-    public void updateTowerUpgrade (String towerUpgrade);
+    public void updateTowerUpgradeBank (List<Integer> towerUpgrades);
 
-    public void updateTowerBank (List<Integer> activeTowers);
+    public void updateTowerBank (List<Integer> createdTowers);
 
     public void createNewTower ();
 
