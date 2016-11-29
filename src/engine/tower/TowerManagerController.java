@@ -1,21 +1,17 @@
-package authoring.editorview.tower;
+package engine.tower;
 
 import java.util.List;
+import authoring.editorview.tower.ITowerUpdateView;
+import engine.ManagerController;
 
 
 /**
- * 
+ * @author Sean Hudson
  * @author Andrew Bihl
  * @author Kayla Schulz
  *
  */
-public interface TowerDataSource {
-
-    public String getTowerName (int towerID);
-
-    public double getTowerSize (int towerID);
-
-    public String getTowerImagePath (int towerID);
+public interface TowerManagerController extends ManagerController<TowerManager, TowerBuilder, Tower>{
 
     public double getTowerBuyPrice (int towerID);
 
@@ -28,23 +24,6 @@ public interface TowerDataSource {
     public List<Integer> getTowerChosenWeapons (int towerID);
 
     public List<Integer> getTowerAbilities (int towerID);
-
-    public List<Integer> getCreatedTowers ();
-
-    /**
-     * Create new tower with default values
-     * 
-     * @return tower id
-     */
-    public int createNewTower (ITowerUpdateView towerUpdater);
-
-    public void deleteTower (int towerID);
-
-    public void setTowerSize (int towerID, double towerSize);
-
-    public void setTowerName (int towerID, String towerName);
-
-    public void setTowerImagePath (int towerID, String towerImagePath);
 
     public void setTowerBuyPrice (int towerID, double towerBuyPrice);
 

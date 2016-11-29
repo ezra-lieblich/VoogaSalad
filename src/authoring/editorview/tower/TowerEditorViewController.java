@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ResourceBundle;
 import authoring.editorview.EditorViewController;
 import authoring.utilityfactories.DialogueBoxFactory;
+import engine.tower.TowerManagerController;
 import authoring.editorview.tower.ITowerUpdateView;
 
 
@@ -16,7 +17,7 @@ import authoring.editorview.tower.ITowerUpdateView;
 public class TowerEditorViewController extends EditorViewController
         implements TowerEditorViewDelegate {
 
-    private TowerDataSource towerDataSource;
+    private TowerManagerController towerDataSource;
     private int currentTowerID;
     private ITowerUpdateView myView;
 
@@ -26,7 +27,7 @@ public class TowerEditorViewController extends EditorViewController
         this.view = myView;
     }
 
-    public void setTowerDataSource (TowerDataSource source) {
+    public void setTowerDataSource (TowerManagerController source) {
         this.towerDataSource = source;
     }
 

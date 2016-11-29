@@ -72,6 +72,7 @@ public abstract class AbstractTypeManagerController<E extends Manager<T>, U exte
         return typeManager;
     }
 
+    //TODO - try and not need this
     protected U getTypeBuilder () {
         return typeBuilder;
     }
