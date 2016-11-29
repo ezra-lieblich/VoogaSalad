@@ -1,6 +1,7 @@
 package authoring.editorview.enemy;
 
 import java.util.List;
+import authoring.editorview.IUpdateView;
 
 
 /**
@@ -9,7 +10,7 @@ import java.util.List;
  * @author Kayla Schulz
  *
  */
-public interface IEnemyUpdateView extends IEnemyEditorView {
+public interface IEnemyUpdateView extends IEnemyEditorView, IUpdateView {
 
     public void updateFrequencyDisplay (double frequency);
 

@@ -1,6 +1,7 @@
 package authoring.editorview.weapon;
 
 import java.util.List;
+import authoring.editorview.IUpdateView;
 
 
 /**
@@ -11,7 +12,7 @@ import java.util.List;
  * @author Kayla Schulz
  *
  */
-public interface IWeaponUpdateView extends IWeaponEditorView {
+public interface IWeaponUpdateView extends IWeaponEditorView, IUpdateView {
 
     public void updateFireRateDisplay (double fireRate);
 

@@ -1,30 +1,34 @@
 package engine.weapon;
 
 import java.util.List;
+import authoring.editorview.weapon.IWeaponUpdateView;
 import engine.AbstractTypeManagerController;
 
-public class WeaponTypeManagerController extends AbstractTypeManagerController<WeaponManager, WeaponBuilder, Weapon> implements WeaponManagerController{
-    
-    WeaponTypeManagerController(WeaponManager weaponManager) {
+
+public class WeaponTypeManagerController extends
+        AbstractTypeManagerController<WeaponManager, WeaponBuilder, Weapon, IWeaponUpdateView>
+        implements WeaponManagerController {
+
+    WeaponTypeManagerController (WeaponManager weaponManager) {
         super(weaponManager, new WeaponTypeBuilder());
     }
 
     @Override
-    protected WeaponBuilder constructTypeProperties (engine.AbstractTypeManagerController.ViewFiller viewFiller,
+    protected WeaponBuilder constructTypeProperties (IWeaponUpdateView weaponUpdater,
                                                      WeaponBuilder typeBuilder) {
         return typeBuilder
-                .addEffectListener((oldValue, newValue) -> viewFiller
-                                   .updateEffect(newValue))
-                .addFireRateListener((oldValue, newValue) -> viewFiller
-                                     .updateFireRate(newValue))
-                .addRangeListener((oldValue, newValue) -> viewFiller
-                                     .updateRange(newValue))
-                .addSpeedListener((oldValue, newValue) -> viewFiller
-                                     .updateSpeed(newValue))
-                .addTargetsListener((oldValue, newValue) -> viewFiller
-                                     .updateTargets(newValue))
-                .addTrajectoryListener((oldValue, newValue) -> viewFiller
-                                       .updateTrajectory(newValue));     
+                .addEffectListener( (oldValue, newValue) -> weaponUpdater
+                        .updateCollisionEffectDisplay(newValue))
+                .addFireRateListener( (oldValue, newValue) -> weaponUpdater
+                        .updateFireRateDisplay(newValue))
+                .addRangeListener( (oldValue, newValue) -> weaponUpdater
+                        .updateRangeDisplay(newValue))
+                .addSpeedListener( (oldValue, newValue) -> weaponUpdater
+                        .updateSpeedDisplay(newValue))
+                .addTargetsListener( (oldValue, newValue) -> weaponUpdater
+                        .updateTargetEnemies(newValue))
+                .addTrajectoryListener( (oldValue, newValue) -> weaponUpdater
+                        .updateWeaponTrajectory(newValue));
     }
 
     @Override
@@ -34,61 +38,69 @@ public class WeaponTypeManagerController extends AbstractTypeManagerController<W
 
     @Override
     public void setWeaponFireRate (int weaponID, double weaponFireRate) {
-        getTypeManager().getEntity(weaponID).setFireRate(weaponFireRate);        
+        getTypeManager().getEntity(weaponID).setFireRate(weaponFireRate);
     }
 
     @Override
     public void setWeaponSpeed (int weaponID, double weaponSpeed) {
-        getTypeManager().getEntity(weaponID).setSpeed(weaponSpeed);                
+        getTypeManager().getEntity(weaponID).setSpeed(weaponSpeed);
     }
 
     @Override
     public void setWeaponCollisionEffect (int weaponID, String weaponCollisionEffect) {
-        getTypeManager().getEntity(weaponID).setEffect(weaponCollisionEffect);                
+        getTypeManager().getEntity(weaponID).setEffect(weaponCollisionEffect);
     }
 
     @Override
     public void setWeaponTrajectory (int weaponID, String weaponTrajectory) {
-        getTypeManager().getEntity(weaponID).setTrajectory(weaponTrajectory);                        
+        getTypeManager().getEntity(weaponID).setTrajectory(weaponTrajectory);
     }
 
     @Override
     public void setNewWeaponTargetEnemy (int weaponID, int enemyID) {
-        getTypeManager().getEntity(weaponID).addTarget(enemyID);;                                
+        getTypeManager().getEntity(weaponID).addTarget(enemyID);
+        ;
     }
 
     @Override
     public void removeWeaponTargetEnemy (int weaponID, int enemyID) {
-        getTypeManager().getEntity(weaponID).removeTarget(enemyID);;                                
+        getTypeManager().getEntity(weaponID).removeTarget(enemyID);
+        ;
     }
 
     @Override
     public double getWeaponRange (int weaponID) {
-        return getTypeManager().getEntity(weaponID).getRange();                             
+        return getTypeManager().getEntity(weaponID).getRange();
     }
 
     @Override
     public double getWeaponFireRate (int weaponID) {
-        return getTypeManager().getEntity(weaponID).getFireRate();                             
+        return getTypeManager().getEntity(weaponID).getFireRate();
     }
 
     @Override
     public double getWeaponSpeed (int weaponID) {
-        return getTypeManager().getEntity(weaponID).getSpeed();                             
+        return getTypeManager().getEntity(weaponID).getSpeed();
     }
 
     @Override
     public String getWeaponCollisionEffect (int weaponID) {
-        return getTypeManager().getEntity(weaponID).getEffect();                             
+        return getTypeManager().getEntity(weaponID).getEffect();
     }
 
     @Override
     public String getWeaponTrajectory (int weaponID) {
-        return getTypeManager().getEntity(weaponID).getTrajectory();                             
+        return getTypeManager().getEntity(weaponID).getTrajectory();
     }
 
     @Override
     public List<Integer> getTargetEnemies (int weaponID) {
-        return getTypeManager().getEntity(weaponID).getTargets();                             
+        return getTypeManager().getEntity(weaponID).getTargets();
+    }
+
+    @Override
+    public int createType (IWeaponUpdateView updateView) {
+        // TODO Auto-generated method stub
+        return 0;
     }
 }

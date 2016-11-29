@@ -133,12 +133,6 @@ public class TowerEditorView implements ITowerUpdateView {
     }
 
     @Override
-    public void updateTowerChosenWeapon (int towerChosenWeapon) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
     public void updateTowerUpgradeBank (List<Integer> towerUpgrades) {
         // TODO Auto-generated method stub
 
@@ -152,6 +146,30 @@ public class TowerEditorView implements ITowerUpdateView {
 
     @Override
     public void createNewTower () {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void updateNameDisplay (String name) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void updateImagePathDisplay (String imagePath) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void updateSizeDisplay (double size) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void updateTowerChosenWeapon (List<Integer> newValue) {
         // TODO Auto-generated method stub
 
     }

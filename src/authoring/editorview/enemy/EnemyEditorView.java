@@ -156,4 +156,22 @@ public class EnemyEditorView implements IEnemyUpdateView {
         
     }
 
+    @Override
+    public void updateNameDisplay (String name) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void updateImagePathDisplay (String imagePath) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void updateSizeDisplay (double size) {
+        // TODO Auto-generated method stub
+        
+    }
+
 }
