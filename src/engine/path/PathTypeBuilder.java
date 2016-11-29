@@ -70,7 +70,7 @@ public class PathTypeBuilder extends AbstractTypeBuilder<Path, PathBuilder> impl
     }
 
     @Override
-    public ObservableProperty<List<Coordinate<Integer>>> getCoordinates () {
+    public ObservableList<Coordinate<Integer>> getCoordinates () {
         return coordinates;
     }
     
