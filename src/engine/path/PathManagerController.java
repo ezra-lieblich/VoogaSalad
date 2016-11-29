@@ -2,9 +2,10 @@ package engine.path;
 
 import java.util.List;
 import authoring.editorview.path.IPathEditorView;
+import authoring.editorview.path.IPathUpdateView;
 import engine.ManagerController;
 
-public interface PathManagerController extends ManagerController<PathManager, PathBuilder, Path>{
+public interface PathManagerController extends ManagerController<PathManager, PathBuilder, Path, IPathUpdateView>{
 
     public boolean setNewPathCoordinate (int pathID, int x, int y);
 
