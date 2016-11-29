@@ -1,6 +1,7 @@
 package engine.weapon;
 
 import java.util.List;
+import authoring.editorview.weapon.IWeaponUpdateView;
 import engine.ManagerController;
 
 
@@ -9,7 +10,7 @@ import engine.ManagerController;
  * 
  * @author Andrew Bihl
  */
-public interface WeaponManagerController extends ManagerController<WeaponManager, WeaponBuilder, Weapon> {
+public interface WeaponManagerController extends ManagerController<WeaponManager, WeaponBuilder, Weapon, IWeaponUpdateView> {
 
     public void setWeaponRange (int weaponID, double weaponRange);
 

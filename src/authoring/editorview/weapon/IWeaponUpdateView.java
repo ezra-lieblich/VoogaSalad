@@ -1,6 +1,7 @@
 package authoring.editorview.weapon;
 
 import java.util.List;
+import authoring.editorview.IUpdateView;
 
 
 /**
@@ -11,7 +12,7 @@ import java.util.List;
  * @author Kayla Schulz
  *
  */
-public interface IWeaponUpdateView extends IWeaponEditorView {
+public interface IWeaponUpdateView extends IWeaponEditorView, IUpdateView {
 
     public void updateFireRateDisplay (double fireRate);
 
@@ -20,10 +21,6 @@ public interface IWeaponUpdateView extends IWeaponEditorView {
     public void updateCollisionEffectDisplay (String collisionEffect);
 
     public void updateRangeDisplay (double range);
-
-    public void updateWeaponImagePath (String imagePath);
-
-    public void updateWeaponName (String weaponName);
 
     public void updateWeaponBank (List<Integer> activeWeapons);
 

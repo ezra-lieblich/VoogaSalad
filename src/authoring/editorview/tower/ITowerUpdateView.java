@@ -1,6 +1,7 @@
 package authoring.editorview.tower;
 
 import java.util.List;
+import authoring.editorview.IUpdateView;
 
 
 /**
@@ -9,17 +10,9 @@ import java.util.List;
  * @author Kayla Schulz
  *
  */
-public interface ITowerUpdateView extends ITowerEditorView {
+public interface ITowerUpdateView extends ITowerEditorView, IUpdateView {
 
-    public void updateFireRateDisplay (double towerFireRate);
-
-    public void updateUnlockLevelDisplay (int towerUnlockLevel);
-
-    public void updateRangeDisplay (double towerRange);
-
-    public void updateTowerImagePath (String towerImagePath);
-
-    public void updateTowerName (String towerName);
+    public void updateUnlockLevelDisplay (int towerLevel);
 
     public void updateTowerBuyPriceDisplay (double towerBuyPrice);
 
@@ -27,7 +20,7 @@ public interface ITowerUpdateView extends ITowerEditorView {
 
     public void updateTowerAbility (List<Integer> towerAbility);
 
-    public void updateTowerChosenWeapon (int towerChosenWeapon);
+    public void updateTowerChosenWeapon (List<Integer> newValue);
 
     public void updateTowerUpgradeBank (List<Integer> towerUpgrades);
 

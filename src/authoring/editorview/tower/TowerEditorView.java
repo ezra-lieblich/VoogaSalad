@@ -85,55 +85,22 @@ public class TowerEditorView implements ITowerUpdateView {
     }
 
     @Override
-    public void updateFireRateDisplay (double towerFireRate) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void updateUnlockLevelDisplay (int towerUnlockLevel) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void updateRangeDisplay (double towerRange) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void updateTowerImagePath (String towerImagePath) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void updateTowerName (String towerName) {
-        // TODO Auto-generated method stub
-
+    public void updateUnlockLevelDisplay (int towerLevel) {
+        this.towerUnlockLevel.updateTowerUnlockLevel(Integer.toString(towerLevel));
     }
 
     @Override
     public void updateTowerBuyPriceDisplay (double towerBuyPrice) {
-        // TODO Auto-generated method stub
-
+        this.towerBuyPrice.updateTowerBuyPrice(Double.toString(towerBuyPrice));
     }
 
     @Override
     public void updateTowerSellPriceDisplay (double towerSellPrice) {
-        // TODO Auto-generated method stub
-
+        this.towerSellPrice.updateTowerSellPrice(Double.toString(towerSellPrice));
     }
 
     @Override
     public void updateTowerAbility (List<Integer> towerAbility) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void updateTowerChosenWeapon (int towerChosenWeapon) {
         // TODO Auto-generated method stub
 
     }
@@ -152,6 +119,28 @@ public class TowerEditorView implements ITowerUpdateView {
 
     @Override
     public void createNewTower () {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void updateNameDisplay (String name) {
+        this.towerName.updateTowerName(name);
+    }
+
+    @Override
+    public void updateImagePathDisplay (String imagePath) {
+        this.towerImage.updateTowerImagePath(imagePath);
+    }
+
+    @Override
+    public void updateSizeDisplay (double size) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void updateTowerChosenWeapon (List<Integer> newValue) {
         // TODO Auto-generated method stub
 
     }
