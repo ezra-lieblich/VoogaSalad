@@ -5,11 +5,12 @@ import com.oracle.webservices.internal.api.databinding.Databinding.Builder;
 import authoring.editorview.tower.ITowerUpdateView;
 import authoring.editorview.tower.TowerDataSource;
 
+
 public class TowerTypeManagerController implements TowerDataSource {
     private TowerManager towerManager;
     private TowerBuilder towerBuilder;
-    
-    TowerTypeManagerController(TowerManager towerManager, ITowerUpdateView towerView) {
+
+    TowerTypeManagerController (TowerManager towerManager, ITowerUpdateView towerView) {
         this.towerManager = towerManager;
         this.towerBuilder = new TowerTypeBuilder();
     }
@@ -64,14 +65,26 @@ public class TowerTypeManagerController implements TowerDataSource {
         return towerManager.getEntityIds();
     }
 
-    private Tower createTower(ITowerUpdateView towerUpdater) {
-        return towerBuilder.build();
+    private Tower createTower (ITowerUpdateView towerUpdater) {
+        return towerBuilder
+                .addWeaponsListener( (oldValue, newValue) -> towerUpdater
+                        .updateTowerChosenWeapon(newValue))
+                .addAbilitiesListener( (oldValue, newValue) -> towerUpdater
+                        .updateTowerAbility(newValue))
+                .addUpgradesListener( (oldValue, newValue) -> towerUpdater
+                        .updateTowerUpgradeBank(newValue))
+                .addCostListener((oldValue, newValue) -> towerUpdater
+                        .updateTowerBuyPriceDisplay(newValue))
+                .addSellAmountListener((oldValue, newValue) -> towerUpdater
+                        .updateTowerSellPriceDisplay(newValue))
+                .addUnlockLevelListener((oldValue, newValue) -> towerUpdater
+                        .updateUnlockLevelDisplay(newValue))
+                .build();
     }
-    
+
     @Override
     public int createNewTower (ITowerUpdateView towerUpdater) {
-        // TODO Auto-generated method stub
-        return 0;
+        return towerManager.addEntry(createTower(towerUpdater));
     }
 
     @Override
@@ -126,10 +139,10 @@ public class TowerTypeManagerController implements TowerDataSource {
 
     @Override
     public void removeTowerWeapon (int towerID, int towerChosenWeaponID) {
-        towerManager.getEntity(towerID).removeWeapon(towerChosenWeaponID);        
+        towerManager.getEntity(towerID).removeWeapon(towerChosenWeaponID);
     }
 
-    //TODO - edit createNewTower to work with both versions
+    // TODO - edit createNewTower to work with both versions
     @Override
     public int createTowerUpgrade (ITowerUpdateView towerUpdater, int parentTowerID) {
         return towerManager.addUpgrade(createTower(towerUpdater), parentTowerID);
@@ -137,7 +150,7 @@ public class TowerTypeManagerController implements TowerDataSource {
 
     @Override
     public void removeTowerUpgrade (int parentTowerID, int childTowerID) {
-        towerManager.removeUpgrade(childTowerID, parentTowerID);               
+        towerManager.removeUpgrade(childTowerID, parentTowerID);
     }
 
 }
