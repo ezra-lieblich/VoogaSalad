@@ -1,12 +1,14 @@
-package engine;
+package engine.settings;
 
 import java.util.List;
+
+import engine.Type;
 
 
 /**
  * Created by ezra on 11/20/16.
  */
-public interface Game {
+public interface Game extends Type{
 	
     String getName();
 

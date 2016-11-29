@@ -1,8 +1,10 @@
-package engine;
-import engine.level.Level;
+package engine.settings;
 
 import java.util.Collections;
 import java.util.List;
+
+import engine.AbstractType;
+import engine.TypeInitializer;
 
 public class GameSettings extends AbstractType implements Game {
 
@@ -12,6 +14,8 @@ public class GameSettings extends AbstractType implements Game {
     private String backgroundImage;
     private List<String> winningConditions;
     private List<String> losingConditions;
+    private double initialHealth;
+    private double initialMoney;
 
 	protected GameSettings(TypeInitializer typeBuilder) {
 		super(typeBuilder);
