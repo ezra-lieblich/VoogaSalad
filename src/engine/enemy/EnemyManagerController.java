@@ -38,6 +38,4 @@ public interface EnemyManagerController extends ManagerController<EnemyManager, 
 
     public String getEnemyCollisionEffect (int enemyID);
 
-    public List<Integer> getCreatedEnemyIDs ();
-
 }

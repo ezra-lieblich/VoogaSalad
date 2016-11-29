@@ -1,15 +1,9 @@
 package engine.enemy;
 
-import authoring.editorview.enemy.EnemyDataSource;
 import authoring.editorview.enemy.IEnemyUpdateView;
-import authoring.editorview.path.IPathUpdateView;
 import engine.AbstractTypeManagerController;
-import engine.path.Path;
-import engine.path.PathBuilder;
-import engine.path.PathManager;
-import engine.path.PathManagerController;
 
-import java.util.List;
+
 
 /**
  * Created by ezra on 11/29/16.
@@ -23,86 +17,73 @@ public class EnemyTypeManagerController
 
 	@Override
 	public void setEnemySpeed(int enemyID, double enemySpeed) {
-		// TODO Auto-generated method stub
-		
+		getTypeManager().getEntity(enemyID).setSpeed(enemySpeed);
 	}
 
 	@Override
 	public void setEnemyHealth(int enemyID, double enemyHealth) {
-		// TODO Auto-generated method stub
-		
+		getTypeManager().getEntity(enemyID).setHealth(enemyHealth);
 	}
 
 	@Override
 	public void setEnemyDamage(int enemyID, double enemyDamage) {
-		// TODO Auto-generated method stub
-		
+		getTypeManager().getEntity(enemyID).setDamage(enemyDamage);
 	}
 
 	@Override
 	public void setEnemyRewardMoney(int enemyID, double enemyRewardMoney) {
-		// TODO Auto-generated method stub
-		
+		getTypeManager().getEntity(enemyID).setMoney(enemyRewardMoney);
 	}
 
 	@Override
 	public void setEnemyRewardPoints(int enemyID, double enemyRewardPoints) {
-		// TODO Auto-generated method stub
-		
+		getTypeManager().getEntity(enemyID).setPoints(enemyRewardPoints);
 	}
 
 	@Override
 	public void setEnemyCollisionEffect(int enemyID, String enemyCollisionEffect) {
-		// TODO Auto-generated method stub
-		
+		getTypeManager().getEntity(enemyID).setCollisionEffect(enemyCollisionEffect);
 	}
 
 	@Override
 	public double getEnemySpeed(int enemyID) {
-		// TODO Auto-generated method stub
-		return 0;
+		return getTypeManager().getEntity(enemyID).getSpeed();
 	}
 
 	@Override
 	public double getEnemyHealth(int enemyID) {
-		// TODO Auto-generated method stub
-		return 0;
+		return getTypeManager().getEntity(enemyID).getHealth();
 	}
 
 	@Override
 	public double getEnemyDamage(int enemyID) {
-		// TODO Auto-generated method stub
-		return 0;
+		return getTypeManager().getEntity(enemyID).getDamage();
 	}
 
 	@Override
 	public double getEnemyRewardMoney(int enemyID) {
-		// TODO Auto-generated method stub
-		return 0;
+		return getTypeManager().getEntity(enemyID).getMoney();
 	}
 
 	@Override
 	public double getEnemyRewardPoints(int enemyID) {
-		// TODO Auto-generated method stub
-		return 0;
+		return getTypeManager().getEntity(enemyID).getPoints();
 	}
 
 	@Override
 	public String getEnemyCollisionEffect(int enemyID) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Integer> getCreatedEnemyIDs() {
-		// TODO Auto-generated method stub
-		return null;
+		return getTypeManager().getEntity(enemyID).getCollisionEffect();
 	}
 
 	@Override
 	protected EnemyBuilder constructTypeProperties(IEnemyUpdateView updateView, EnemyBuilder typeBuilder) {
-		// TODO Auto-generated method stub
-		return null;
+		return typeBuilder.addCollisionEffectListener((oldValue, newValue) -> updateView.updateEnemyCollisionEffect(newValue))
+				.addDamageListener((oldValue, newValue) -> updateView.updateEnemyDamage(newValue))
+				.addHealthListener((oldValue, newValue) -> updateView.updateEnemyHealthDisplay(newValue))
+				.addMoneyListener((oldValue, newValue) -> updateView.updateEnemyRewardMoney(newValue))
+				.addPointsListener((oldValue, newValue) -> updateView.updateEnemyRewardPoints(newValue))
+				.addSpeedListener((oldValue, newValue) -> updateView.updateEnemySpeed(newValue));
+		
 	}
    
 }
