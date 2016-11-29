@@ -44,4 +44,6 @@ public interface LevelDataSource {
     
     
 
+    public void setEnemyFrequency (int enemyID, double enemyFrequency);
+
 }

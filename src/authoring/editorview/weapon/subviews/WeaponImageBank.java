@@ -29,7 +29,7 @@ import javafx.stage.Stage;
  *
  */
 // TODO: This needs to implement IImageBank once I figure out how to get parameter correct
-public class WeaponImageBank extends PhotoFileChooser implements IWeaponEditorView {
+public class WeaponImageBank extends PhotoFileChooser {
 
     // TODO: I want to be able to load in a default weapon with default settings from model
     // What is our current plan with defaults?
@@ -68,12 +68,10 @@ public class WeaponImageBank extends PhotoFileChooser implements IWeaponEditorVi
         weaponBank.setPrefSize(width, height);
     }
 
-    @Override
     public Node getInstanceAsNode () {
         return weaponBank;
     }
 
-    @Override
     public void setDelegate (WeaponEditorViewDelegate delegate) {
         this.delegate = delegate;
     }

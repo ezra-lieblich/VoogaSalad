@@ -14,4 +14,5 @@ public interface IWeaponEditorView extends IEditorView {
 
     public void setDelegate (WeaponEditorViewDelegate delegate);
 
+    // public int getCurrentWeaponID ();
 }

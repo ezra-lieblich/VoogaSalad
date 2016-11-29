@@ -10,62 +10,58 @@ import java.util.List;
  *
  */
 public interface TowerDataSource {
+
     public String getTowerName (int towerID);
+
+    public double getTowerSize (int towerID);
 
     public String getTowerImagePath (int towerID);
 
-    public int getTowerBuyPrice (int towerID);
+    public double getTowerBuyPrice (int towerID);
 
-    public int getTowerSellPrice (int towerID);
+    public double getTowerSellPrice (int towerID);
 
     public int getTowerUnlockLevel (int towerID);
 
-    public int getTowerFireRate (int towerID);
+    public List<Integer> getTowerUpgrades (int towerID);
 
-    public int getTowerFrequency (int towerID);
+    public List<Integer> getTowerChosenWeapons (int towerID);
 
-    public int getTowerRange (int towerID);
+    public List<Integer> getTowerAbilities (int towerID);
 
-    public String getTowerUpgrade (int towerID);
-
-    public String getTowerChosenEnemy (int towerID);
-
-    public String getTowerChosenWeapon (int towerID);
-
-    public String getTowerAbility (int towerID);
-
-    public int getCreatedTower ();
-
-    public List<Integer> getActiveTowers ();
+    public List<Integer> getCreatedTowers ();
 
     /**
      * Create new tower with default values
      * 
      * @return tower id
      */
-    public void createNewTower ();
+    public int createNewTower (ITowerUpdateView towerUpdater);
+
+    public void deleteTower (int towerID);
+
+    public void setTowerSize (int towerID, double towerSize);
 
     public void setTowerName (int towerID, String towerName);
 
     public void setTowerImagePath (int towerID, String towerImagePath);
 
-    public void setTowerBuyPrice (int towerID, int towerBuyPrice);
+    public void setTowerBuyPrice (int towerID, double towerBuyPrice);
 
-    public void setTowerSellPrice (int towerID, int towerSellPrice);
+    public void setTowerSellPrice (int towerID, double towerSellPrice);
 
     public void setTowerUnlockLevel (int towerID, int towerLevel);
 
-    public void setTowerFireRate (int towerID, int towerFireRate);
+    public void setTowerChosenAbility (int towerID, int towerAbility);
 
-    public void setTowerFrequency (int towerID, int towerFrequency);
+    public void removeTowerChosenAbility (int towerID, int towerAbility);
 
-    public void setTowerRange (int towerID, int towerRange);
+    public void setTowerChosenWeapon (int towerID, int towerChosenWeaponID);
 
-    public void setTowerAbility (int towerID, String towerAbility);
+    public void removeTowerWeapon (int towerID, int towerChosenWeaponID);
 
-    public void setTowerChosenEnemy (int towerID, String towerChosenEnemy);
+    public int createTowerUpgrade (ITowerUpdateView towerUpdater, int parentTowerID);
 
-    public void setTowerChosenWeapon (int towerID, String towerChosenWeapon);
+    public void removeTowerUpgrade (int parentTowerID, int childTowerID);
 
-    public void setTowerUpgrade (int towerID, String towerUpgrade);
 }
