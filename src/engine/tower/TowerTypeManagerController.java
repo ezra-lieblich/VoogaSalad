@@ -6,7 +6,7 @@ import authoring.editorview.tower.ITowerUpdateView;
 import engine.AbstractTypeManagerController;
 
 
-public class TowerTypeManagerController extends AbstractTypeManagerController<TowerManager, TowerBuilder, Tower> implements TowerManagerController {
+public class TowerTypeManagerController extends AbstractTypeManagerController<TowerManager, TowerBuilder, Tower, ITowerUpdateView> implements TowerManagerController {
 
     TowerTypeManagerController (TowerManager towerManager) {
         super(towerManager, new TowerTypeBuilder());
@@ -89,7 +89,7 @@ public class TowerTypeManagerController extends AbstractTypeManagerController<To
     }
     
     @Override
-    protected TowerBuilder constructTypeProperties (ViewFiller viewFiller,
+    protected TowerBuilder constructTypeProperties (ITowerUpdateView towerUpdater,
                                                     TowerBuilder typeBuilder) {
             return typeBuilder
                 .addWeaponsListener( (oldValue, newValue) -> towerUpdater
@@ -105,5 +105,60 @@ public class TowerTypeManagerController extends AbstractTypeManagerController<To
                 .addUnlockLevelListener((oldValue, newValue) -> towerUpdater
                         .updateUnlockLevelDisplay(newValue));
     }
+
+    @Override
+    public int createType (ITowerUpdateView updateView) {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    public void deleteType (int id) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public String getName (int id) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public String getImagePath (int id) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Double getSize (int id) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public List<Integer> getCreatedTypeIds () {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public void setName (int id, String name) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void setImagePath (int id, String imagePath) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void setSize (int id, double size) {
+        // TODO Auto-generated method stub
+        
+    }
+
 
 }

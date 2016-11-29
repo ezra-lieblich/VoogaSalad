@@ -11,6 +11,7 @@ import authoring.editorview.tower.subviews.editorfields.TowerChooseWeaponField;
 import authoring.editorview.tower.subviews.editorfields.TowerImageView;
 import authoring.editorview.tower.subviews.editorfields.TowerNameField;
 import authoring.editorview.tower.subviews.editorfields.TowerSellPriceField;
+import authoring.editorview.tower.subviews.editorfields.TowerSizeField;
 import authoring.editorview.tower.subviews.editorfields.TowerUnlockLevelField;
 import authoring.editorview.tower.subviews.editorfields.TowerUpgradeField;
 import javafx.scene.Node;
@@ -35,6 +36,7 @@ public class TowerEditorView implements ITowerUpdateView {
     private TowerAbilityField towerAbility;
     private TowerChooseWeaponField towerChooseWeapon;
     private TowerUpgradeField towerUpgrade;
+    private TowerSizeField towerSize;
 
     public TowerEditorView () throws IOException {
         towerEditorView = new BorderPane();
@@ -50,11 +52,12 @@ public class TowerEditorView implements ITowerUpdateView {
         towerAbility = new TowerAbilityField(labelsResource);
         towerChooseWeapon = new TowerChooseWeaponField(labelsResource);
         towerUpgrade = new TowerUpgradeField(labelsResource);
+        towerSize = new TowerSizeField(labelsResource);
 
         towerBank = new TowerImageBank(labelsResource, dialogueBoxResource);
         towerEffectView =
                 new TowerEffectView(towerName, towerImage, towerBuyPrice, towerSellPrice,
-                                    towerUnlockLevel, towerAbility, towerChooseWeapon, towerUpgrade,
+                                    towerUnlockLevel, towerAbility, towerChooseWeapon, towerUpgrade, towerSize,
                                     labelsResource, dialogueBoxResource);
         setBorderPane();
     }
@@ -82,58 +85,26 @@ public class TowerEditorView implements ITowerUpdateView {
         towerAbility.setDelegate(delegate);
         towerChooseWeapon.setDelegate(delegate);
         towerUpgrade.setDelegate(delegate);
+        towerSize.setDelegate(delegate);
     }
 
     @Override
-    public void updateFireRateDisplay (double towerFireRate) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void updateUnlockLevelDisplay (int towerUnlockLevel) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void updateRangeDisplay (double towerRange) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void updateTowerImagePath (String towerImagePath) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void updateTowerName (String towerName) {
-        // TODO Auto-generated method stub
-
+    public void updateUnlockLevelDisplay (int towerLevel) {
+        this.towerUnlockLevel.updateTowerUnlockLevel(Integer.toString(towerLevel));
     }
 
     @Override
     public void updateTowerBuyPriceDisplay (double towerBuyPrice) {
-        // TODO Auto-generated method stub
-
+        this.towerBuyPrice.updateTowerBuyPrice(Double.toString(towerBuyPrice));
     }
 
     @Override
     public void updateTowerSellPriceDisplay (double towerSellPrice) {
-        // TODO Auto-generated method stub
-
+        this.towerSellPrice.updateTowerSellPrice(Double.toString(towerSellPrice));
     }
 
     @Override
     public void updateTowerAbility (List<Integer> towerAbility) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void updateTowerChosenWeapon (int towerChosenWeapon) {
         // TODO Auto-generated method stub
 
     }
@@ -152,6 +123,28 @@ public class TowerEditorView implements ITowerUpdateView {
 
     @Override
     public void createNewTower () {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void updateNameDisplay (String name) {
+        this.towerName.updateTowerName(name);
+    }
+
+    @Override
+    public void updateImagePathDisplay (String imagePath) {
+        this.towerImage.updateTowerImagePath(imagePath);
+    }
+
+    @Override
+    public void updateSizeDisplay (double size) {
+        this.towerSize.updateTowerSize(Double.toString(size));
+
+    }
+
+    @Override
+    public void updateTowerChosenWeapon (List<Integer> newValue) {
         // TODO Auto-generated method stub
 
     }
