@@ -22,4 +22,6 @@ public interface WeaponEditorViewDelegate {
 
     public void onUserPressedDeleteWeapon ();
 
+    public void onUserEnteredWeaponSize (String weaponSize);
+
 }

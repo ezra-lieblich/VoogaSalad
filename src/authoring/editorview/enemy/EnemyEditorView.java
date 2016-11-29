@@ -23,7 +23,7 @@ import javafx.scene.layout.BorderPane;
  * 
  */
 
-public class EnemyEditorView implements IEnemyEditorView, IEnemyUpdateView {
+public class EnemyEditorView implements IEnemyUpdateView {
     private EnemyEditorViewDelegate delegate;
     private BorderPane enemyEditorView;
     private EnemyImageBank enemyBank;
