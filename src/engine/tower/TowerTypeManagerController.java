@@ -1,137 +1,109 @@
 package engine.tower;
 
 import java.util.List;
+import com.oracle.webservices.internal.api.databinding.Databinding.Builder;
 import authoring.editorview.tower.ITowerUpdateView;
-import authoring.editorview.tower.TowerDataSource;
+import engine.AbstractTypeManagerController;
 
-public class TowerTypeManagerController implements TowerDataSource {
-    private TowerManager towerManager;
-    private TowerBuilder towerBuilder;
-    
-    TowerTypeManagerController(TowerManager towerManager, ITowerUpdateView towerView) {
-        this.towerManager = towerManager;
-        this.towerBuilder = new TowerTypeBuilder();
-    }
 
-    @Override
-    public String getTowerName (int towerID) {
-        return towerManager.getEntity(towerID).getName();
-    }
+public class TowerTypeManagerController extends AbstractTypeManagerController<TowerManager, TowerBuilder, Tower> implements TowerManagerController {
 
-    @Override
-    public double getTowerSize (int towerID) {
-        return towerManager.getEntity(towerID).getSize();
-    }
-
-    @Override
-    public String getTowerImagePath (int towerID) {
-        return towerManager.getEntity(towerID).getImagePath();
+    TowerTypeManagerController (TowerManager towerManager) {
+        super(towerManager, new TowerTypeBuilder());
     }
 
     @Override
     public double getTowerBuyPrice (int towerID) {
-        return towerManager.getEntity(towerID).getCost();
+        return getTypeManager().getEntity(towerID).getCost();
     }
 
     @Override
     public double getTowerSellPrice (int towerID) {
-        return towerManager.getEntity(towerID).getSellAmount();
+        return getTypeManager().getEntity(towerID).getSellAmount();
     }
 
     @Override
     public int getTowerUnlockLevel (int towerID) {
-        return towerManager.getEntity(towerID).getUnlockLevel();
+        return getTypeManager().getEntity(towerID).getUnlockLevel();
     }
 
     @Override
     public List<Integer> getTowerUpgrades (int towerID) {
-        return towerManager.getEntity(towerID).getUpgrades();
+        return getTypeManager().getEntity(towerID).getUpgrades();
     }
 
     @Override
     public List<Integer> getTowerChosenWeapons (int towerID) {
-        return towerManager.getEntity(towerID).getWeapons();
+        return getTypeManager().getEntity(towerID).getWeapons();
     }
 
     @Override
     public List<Integer> getTowerAbilities (int towerID) {
-        return towerManager.getEntity(towerID).getAbilities();
-    }
-
-    @Override
-    public List<Integer> getCreatedTowers () {
-        return towerManager.getEntityIds();
-    }
-
-    @Override
-    public int createNewTower (ITowerUpdateView towerUpdater) {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    @Override
-    public void deleteTower (int towerID) {
-        towerManager.removeEntry(towerID);
-    }
-
-    @Override
-    public void setTowerSize (int towerID, double towerSize) {
-        towerManager.getEntity(towerID).setSize(towerSize);
-    }
-
-    @Override
-    public void setTowerName (int towerID, String towerName) {
-        towerManager.getEntity(towerID).setName(towerName);
-    }
-
-    @Override
-    public void setTowerImagePath (int towerID, String towerImagePath) {
-        towerManager.getEntity(towerID).setImagePath(towerImagePath);
+        return getTypeManager().getEntity(towerID).getAbilities();
     }
 
     @Override
     public void setTowerBuyPrice (int towerID, double towerBuyPrice) {
-        towerManager.getEntity(towerID).setCost(towerBuyPrice);
+        getTypeManager().getEntity(towerID).setCost(towerBuyPrice);
     }
 
     @Override
     public void setTowerSellPrice (int towerID, double towerSellPrice) {
-        towerManager.getEntity(towerID).setSellAmount(towerSellPrice);
+        getTypeManager().getEntity(towerID).setSellAmount(towerSellPrice);
     }
 
     @Override
     public void setTowerUnlockLevel (int towerID, int towerLevel) {
-        towerManager.getEntity(towerID).setUnlockLevel(towerLevel);
+        getTypeManager().getEntity(towerID).setUnlockLevel(towerLevel);
     }
 
     @Override
     public void setTowerChosenAbility (int towerID, int towerAbility) {
-        towerManager.getEntity(towerID).addAbility(towerAbility);
+        getTypeManager().getEntity(towerID).addAbility(towerAbility);
     }
 
     @Override
     public void removeTowerChosenAbility (int towerID, int towerAbility) {
-        towerManager.getEntity(towerID).removeAbility(towerAbility);
+        getTypeManager().getEntity(towerID).removeAbility(towerAbility);
     }
 
     @Override
     public void setTowerChosenWeapon (int towerID, int towerChosenWeaponID) {
-        towerManager.getEntity(towerID).addWeapon(towerChosenWeaponID);
+        getTypeManager().getEntity(towerID).addWeapon(towerChosenWeaponID);
     }
 
     @Override
     public void removeTowerWeapon (int towerID, int towerChosenWeaponID) {
-        towerManager.getEntity(towerID).removeWeapon(towerChosenWeaponID);        
+        getTypeManager().getEntity(towerID).removeWeapon(towerChosenWeaponID);
     }
 
+    // TODO - edit createNewTower to work with both versions
     @Override
     public int createTowerUpgrade (ITowerUpdateView towerUpdater, int parentTowerID) {
-        towerManager.getEntity(towerID).addWeapon(towerChosenWeaponID);
+        return getTypeManager().addUpgrade(createType(towerUpdater), parentTowerID);
     }
 
     @Override
     public void removeTowerUpgrade (int parentTowerID, int childTowerID) {
-        towerManager.getEntity(towerID).removeWeapon(towerChosenWeaponID);                
+        getTypeManager().removeUpgrade(childTowerID, parentTowerID);
+    }
+    
+    @Override
+    protected TowerBuilder constructTypeProperties (ViewFiller viewFiller,
+                                                    TowerBuilder typeBuilder) {
+            return typeBuilder
+                .addWeaponsListener( (oldValue, newValue) -> towerUpdater
+                        .updateTowerChosenWeapon(newValue))
+                .addAbilitiesListener( (oldValue, newValue) -> towerUpdater
+                        .updateTowerAbility(newValue))
+                .addUpgradesListener( (oldValue, newValue) -> towerUpdater
+                        .updateTowerUpgradeBank(newValue))
+                .addCostListener((oldValue, newValue) -> towerUpdater
+                        .updateTowerBuyPriceDisplay(newValue))
+                .addSellAmountListener((oldValue, newValue) -> towerUpdater
+                        .updateTowerSellPriceDisplay(newValue))
+                .addUnlockLevelListener((oldValue, newValue) -> towerUpdater
+                        .updateUnlockLevelDisplay(newValue));
     }
 
 }

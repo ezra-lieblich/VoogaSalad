@@ -1,11 +1,12 @@
 package authoring.editorview.path;
 
 import authoring.editorview.EditorViewController;
+import engine.path.PathManagerController;
 
 
 public class PathEditorViewController extends EditorViewController implements PathEditorViewDelegate {
 	private IPathEditorView pathView;
-	private PathDataSource pathDataSource;
+	private PathManagerController pathDataSource;
 	
 	public PathEditorViewController(int editorWidth, int editorHeight){
 		this.pathView = PathEditorViewFactory.build(editorWidth, editorHeight);
@@ -15,7 +16,7 @@ public class PathEditorViewController extends EditorViewController implements Pa
 	}
 
 		
-	public void setPathDataSource(PathDataSource source){
+	public void setPathDataSource(PathManagerController source){
 		this.pathDataSource = source;
 	}
 

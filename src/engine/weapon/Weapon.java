@@ -15,9 +15,9 @@ public interface Weapon extends Type{
 
     void setFireRate (double fireRate);
 
-    String getPath ();
+    String getTrajectory ();
 
-    void setPath (String path);
+    void setTrajectory (String trajectory);
 
     String getEffect ();
 

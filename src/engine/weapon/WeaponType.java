@@ -55,13 +55,13 @@ public class WeaponType extends AbstractType implements Weapon {
 
     
     @Override
-    public String getPath () {
+    public String getTrajectory () {
         return trajectory.getProperty();
     }
 
     @Override
-    public void setPath (String path) {
-        this.trajectory.setProperty(path);
+    public void setTrajectory (String trajectory) {
+        this.trajectory.setProperty(trajectory);
     }
 
     @Override
