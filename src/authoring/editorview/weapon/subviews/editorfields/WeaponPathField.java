@@ -1,5 +1,6 @@
 package authoring.editorview.weapon.subviews.editorfields;
 
+import java.util.ResourceBundle;
 import authoring.editorview.weapon.IWeaponEditorView;
 import authoring.editorview.weapon.WeaponEditorViewDelegate;
 import authoring.utilityfactories.ComboBoxFactory;
@@ -7,6 +8,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
+
 
 /**
  * 
@@ -17,8 +19,10 @@ public class WeaponPathField implements IWeaponEditorView {
 
     private ComboBox<Object> weaponPathBox;
     private WeaponEditorViewDelegate delegate;
+    private ResourceBundle labelsResource;
 
-    public WeaponPathField () {
+    public WeaponPathField (ResourceBundle labelsResource) {
+        this.labelsResource = labelsResource;
         ObservableList<Object> pathOptions = setList();
         createField(pathOptions);
     }
@@ -31,7 +35,7 @@ public class WeaponPathField implements IWeaponEditorView {
 
     private void createField (ObservableList<Object> pathOptions) {
         weaponPathBox =
-                ComboBoxFactory.makeComboBox("Set weapon path: ", e -> delegate
+                ComboBoxFactory.makeComboBox(labelsResource.getString("Path"), e -> delegate
                         .onUserEnteredWeaponPath((String) weaponPathBox.getValue()), pathOptions);
     }
 

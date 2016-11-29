@@ -1,5 +1,6 @@
 package authoring.editorview.weapon.subviews.editorfields;
 
+import java.util.ResourceBundle;
 import authoring.editorview.weapon.IWeaponEditorView;
 import authoring.editorview.weapon.WeaponEditorViewDelegate;
 import authoring.utilityfactories.TextFieldFactory;
@@ -17,14 +18,16 @@ public class WeaponNameField implements IWeaponEditorView {
     private TextField weaponNameField;
     private WeaponEditorViewDelegate delegate;
 
-    public WeaponNameField () {
-        createField();
+    public WeaponNameField (ResourceBundle labelsResource) {
+        createField(labelsResource);
     }
 
-    private void createField () {
+    private void createField (ResourceBundle labelsResource) {
         weaponNameField =
-                TextFieldFactory.makeTextField("Set weapon name: ", e -> delegate
-                        .onUserEnteredWeaponName(weaponNameField.getText()));
+                TextFieldFactory.makeTextField(labelsResource.getString("EnterString"),
+                                               e -> delegate
+                                                       .onUserEnteredWeaponName(weaponNameField
+                                                               .getText()));
     }
 
     @Override
