@@ -1,9 +1,6 @@
 package authoring.editorview.path;
 
-import java.util.List;
-
 import authoring.editorview.IEditorView;
-import engine.path.Coordinate;
 
 /**
  * 
@@ -15,14 +12,5 @@ public interface IPathEditorView extends IEditorView {
 
 	public void setDelegate(PathEditorViewDelegate delegate);
 	
-	public void setPathImage(String pathImage);
-	
-	public void setNumColumns(int numColumns);
-	
-	public void setNumRows(int numRows);
-	
-	public void setPathName(String pathName);
-	
-	public void setPathCoordinates(List<Coordinate<Integer>> pathCoordinates);
 
 }

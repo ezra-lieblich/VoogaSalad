@@ -16,7 +16,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 
-public class PathEditorView implements IPathEditorView {
+public class PathEditorView implements IPathUpdateView {
    
 
 	private static final int BOX_SPACING = 10;
@@ -63,27 +63,12 @@ public class PathEditorView implements IPathEditorView {
     @Override
     public void setDelegate (PathEditorViewDelegate delegate) {
         pathChooser.setDelegate(delegate);
+        pathBuilderView.setDelegate(delegate);
     }
-    
-    public void setPathImage(String imagePath){
-    	pathImageView.setPathImagePath(imagePath);
-    }
-    
-    public void setNumColumns(int numColumns){
-    	
-    }
-    
-    public void setNumRows(int numRows){
-    	
-    }
-    
-    public void setPathName(String pathName){
-    	
-    }
-    
-    
+
     public void setActiveId(int pathID){
     	pathImageView.setActivePathId(pathID);
+    	pathBuilderView.setActivePathId(pathID);
     	
     }
     
@@ -108,10 +93,62 @@ public class PathEditorView implements IPathEditorView {
     }
 
 	@Override
-	public void setPathCoordinates(List<Coordinate> pathCoordinates) {
+	public void updatePathImage(String pathImage) {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void updateNumColumns(int numColumns) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateNumRows(int numRows) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updatePathName(String pathName) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updatePathCoordinates(List<Coordinate<Integer>> pathCoordinates) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateNameDisplay(String name) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateImagePathDisplay(String imagePath) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateSizeDisplay(double size) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateType(String pathType) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+
+	
    
 
 }

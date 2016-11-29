@@ -45,8 +45,7 @@ public class NewPathView {
 					int id = delegate.onUserEnteredCreatePath();
 					delegate.onUserEnteredEditPath(id);
 					pathEditorView.setActiveId(id);
-					pathEditorView.setViewToEdit();
-					
+					pathEditorView.setViewToEdit();				
 				});
 	    root.getChildren().add(createPathButton);
 	    createPathButton.setTranslateY(5);

@@ -1,11 +1,14 @@
 package authoring.editorview.path;
 
+import java.util.List;
+
 import authoring.editorview.EditorViewController;
+import engine.path.Coordinate;
 import engine.path.PathManagerController;
 
 
 public class PathEditorViewController extends EditorViewController implements PathEditorViewDelegate {
-	private IPathEditorView pathView;
+	private IPathUpdateView pathView;
 	private PathManagerController pathDataSource;
 	
 	public PathEditorViewController(int editorWidth, int editorHeight){
@@ -34,20 +37,20 @@ public class PathEditorViewController extends EditorViewController implements Pa
 
 	@Override
 	public void onUserEnteredPathImage(int pathID, String pathImagePath) {
-		pathDataSource.setPathImage(pathID, pathImagePath);
+		pathDataSource.setImagePath(pathID, pathImagePath);
 		
 	}
 
 	@Override
 	public void onUserEnteredPathName(int pathID, String pathName) {
-		pathDataSource.setPathName(pathID, pathName);
+		pathDataSource.setName(pathID, pathName);
 		
 	}
 	
 
 	@Override
 	public int onUserEnteredCreatePath() {
-		int pathID = pathDataSource.createNewPath(pathView);
+		int pathID = pathDataSource.createType(pathView);
 		return pathID;
 		
 	}
@@ -56,11 +59,18 @@ public class PathEditorViewController extends EditorViewController implements Pa
 
 	@Override
 	public void onUserEnteredEditPath(int pathID) {
-		pathView.setNumColumns(pathDataSource.getNumberofColumns(pathID));
-		pathView.setNumRows(pathDataSource.getNumberofRows(pathID));
-		pathView.setPathCoordinates(pathDataSource.getPathCoordinates(pathID));
-		pathView.setPathImage(pathDataSource.getPathImagePath(pathID));
-		pathView.setPathName(pathDataSource.getPathName(pathID));
+		pathView.updateNumColumns(pathDataSource.getNumberofColumns(pathID));
+		pathView.updateNumRows(pathDataSource.getNumberofRows(pathID));
+		pathView.updatePathCoordinates(pathDataSource.getPathCoordinates(pathID));
+		pathView.updatePathImage(pathDataSource.getImagePath(pathID));
+		pathView.updatePathName(pathDataSource.getName(pathID));
+		
+	}
+
+
+	@Override
+	public void onUserEnteredPathCoordinate(int pathID, int x, int y) {
+		pathDataSource.setPathCoordinates(pathID, int x, int y);
 		
 	}
 

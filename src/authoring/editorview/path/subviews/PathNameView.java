@@ -34,7 +34,7 @@ public class PathNameView {
 		root = BoxFactory.createHBoxWithLabelandNode(pathResource.getString("NameTextField"), nameTextField);
 	}
 	
-	private void setName(String name){
+	public void setName(String name){
 		this.name = name;
 	}
 	
