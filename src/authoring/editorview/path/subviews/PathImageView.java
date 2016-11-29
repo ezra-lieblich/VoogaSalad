@@ -90,6 +90,10 @@ public class PathImageView extends PhotoFileChooser{
 		return pathImagePath;
 	}
 	
+	public void setPathImagePath(String imagePath){
+		this.pathImagePath = imagePath;
+	}
+	
 	public void setDelegate(PathEditorViewDelegate delegate){
 		this.delegate = delegate;
 	}

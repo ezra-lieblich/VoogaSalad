@@ -30,8 +30,8 @@ public class PathTypeManagerController
     }
     
     @Override
-    public boolean setPathCoordinates (int pathID, List<Coordinate<Integer>> pathCoordinates) {
-        getTypeManager().getEntity(pathID).setCoordinates(pathCoordinates);
+    public boolean setNewPathCoordinate (int pathID, int x, int y) {
+        getTypeManager().getEntity(pathID).addCoordinate(new GridCoordinate(x, y));
         return true; // TODO - validate this
     }
 
