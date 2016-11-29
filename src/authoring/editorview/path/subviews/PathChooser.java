@@ -3,74 +3,43 @@ package authoring.editorview.path.subviews;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.stage.FileChooser;
+import javafx.scene.layout.VBox;
 
-import java.io.IOException;
 import java.util.ResourceBundle;
 
-import authoring.editorview.PhotoFileChooser;
-import authoring.utilityfactories.DialogueBoxFactory;
+import authoring.editorview.path.PathEditorViewDelegate;
 
-public class PathBank extends PhotoFileChooser {
+public class PathChooser{
 	
-	private ScrollPane pathBank;
+	private VBox root;
+	private PathEditorViewDelegate delegate;
 	
 	
 	private static final String RESOURCE_FILE_NAME = "resources/GameAuthoringPath";	
 	private ResourceBundle pathResource = ResourceBundle.getBundle(RESOURCE_FILE_NAME);
 	
 	
-	public PathBank(){
-		this.pathBank = new ScrollPane();
-		pathBank.setPrefHeight(640);
-		pathBank.setPrefWidth(135);
-		buildViewComponents();	   
-	}
-
-
-	private void buildViewComponents() {
-		//TODO: Fix event
-		Button createWeaponButton =
-				createButton(pathResource.getString("NewPathButton"),
-                 e -> {
-					try {
-						selectFile("Photos: ", "Select new path image");
-					} catch (IOException e1) {
-						Alert errorDialogueBox = 
-								DialogueBoxFactory.createErrorDialogueBox("Invalid File", "Error With File");
-						errorDialogueBox.show();
-					}
-				});
+	public PathChooser(){
+		this.root = new VBox();
+		buildViewComponents();
 		
-	    pathBank.setContent(createWeaponButton);
-	    createWeaponButton.setTranslateY(5);
-	    createWeaponButton.setTranslateX(5);
-	    createWeaponButton.setFocusTraversable(false);
+			   
 	}
 	
-	 
-    private Button createButton (String label, EventHandler<ActionEvent> event) {
-        Button button = new Button(label);
-        button.setOnAction(event);
-        return button;
-    }
+	public void setDelegate(PathEditorViewDelegate delegate){
+		this.delegate = delegate;
+	}
 	
 	public Node getInstanceAsNode () {
-		return pathBank;
+		return root;
 	}
 	
-	public void updatePathBank(){
+	public void updatePathComboBox(){
 		
 	}
-
-
-	@Override
-	public void openFileChooser(FileChooser chooseFile) {
-		// TODO Auto-generated method stub
-		
+	
+	private void buildViewComponents(){
+		//build combobox
 	}
 
 	
