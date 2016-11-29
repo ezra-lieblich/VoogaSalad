@@ -26,15 +26,13 @@ public interface PathDataSource {
     
     public void clearPaths ();
     
-    public String getBackgroundImagePath (int pathID);
-    
     public String getPathImagePath (int pathID);
     
     public int getNumberofColumns (int pathID);
     
     public int getNumberofRows (int pathID);
     
-    public int getPathName (int pathID);
+    public String getPathName (int pathID);
     
     public List<Coordinate> getPathCoordinates (int pathID);
     
