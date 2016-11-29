@@ -4,23 +4,26 @@ import java.util.List;
 import engine.TypeInitializer;
 import engine.ability.Ability;
 import engine.enemy.Enemy;
+import engine.observer.ObservableList;
+import engine.observer.ObservableListProperty;
+import engine.observer.ObservableProperty;
 import engine.weapon.Weapon;
 
 
 public interface TowerInitializer extends TypeInitializer {
 
-    List<Tower> getUpgrades ();
+    ObservableList<Integer> getWeapons ();
 
-    List<Weapon> getWeapons ();
+    ObservableList<Integer> getTargets ();
 
-    List<Enemy> getTargets ();
+    ObservableList<Integer> getAbilities ();
+    
+    ObservableList<Integer> getUpgrades ();
 
-    List<Ability> getAbilities ();
+    ObservableProperty<Double> getCost ();
 
-    double getCost ();
+    ObservableProperty<Double> getSellAmount ();
 
-    double getSellAmount ();
-
-    int getUnlockLevel ();
+    ObservableProperty<Integer> getUnlockLevel ();
 
 }

@@ -1,84 +1,97 @@
 package engine.weapon;
 
+import java.util.Collections;
+import java.util.List;
 import engine.AbstractType;
 import engine.Type;
 import engine.TypeInitializer;
+import engine.observer.ObservableList;
+import engine.observer.ObservableProperty;
 
 public class WeaponType extends AbstractType implements Weapon {
     
-
-
-    private double fireRate;
-    private String trajectory;
-    private String effect;
-    private double speed;
-    private double range;
+    private ObservableList<Integer> targets;
+    private ObservableProperty<Double> fireRate;
+    private ObservableProperty<String> trajectory;
+    private ObservableProperty<String> effect;
+    private ObservableProperty<Double> speed;
+    private ObservableProperty<Double> range;
     
     
-    protected WeaponType (TypeInitializer typeBuilder) {
-        super(typeBuilder);
-        // TODO Auto-generated constructor stub
+    protected WeaponType (WeaponInitializer weaponInitializer) {
+        super(weaponInitializer);
+        this.targets = weaponInitializer.getTargets();
+        this.fireRate = weaponInitializer.getFireRate();
+        this.trajectory = weaponInitializer.getTrajectory();
+        this.effect = weaponInitializer.getEffect();
+        this.speed = weaponInitializer.getSpeed();
+        this.range = weaponInitializer.getRange();
     }
-    
-//    WeaponType() {
-//        this.fireRate = Double.parseDouble(getResources("WeaponTypeFireRate"));
-//        this.trajectory = getResources("WeaponTypePath");
-//        this.effect = getResources("WeaponTypeEffect");
-//        this.speed = Double.parseDouble(getResources("WeaponTypeSpeed"));
-//        this.range = Double.parseDouble(getResources("WeaponTypeRange"));
-//    }
+
+    @Override
+    public void removeTarget (int target) {
+        targets.remove(target);
+    }
+
+    @Override
+    public void addTarget (int target) {
+        targets.add(target);
+    }
+
+    @Override
+    public List<Integer> getTargets () {
+        return Collections.unmodifiableList(targets.getProperty());
+    }
     
     @Override
     public double getFireRate () {
-        return fireRate;
+        return fireRate.getProperty();
     }
 
     @Override
     public void setFireRate (double fireRate) {
-        this.fireRate = fireRate;
+        this.fireRate.setProperty(fireRate);
     }
 
     
     @Override
-    public String getPath () {
-        return trajectory;
+    public String getTrajectory () {
+        return trajectory.getProperty();
     }
 
     @Override
-    public void setPath (String path) {
-        this.trajectory = path;
+    public void setTrajectory (String trajectory) {
+        this.trajectory.setProperty(trajectory);
     }
 
     @Override
     public String getEffect () {
-        return effect;
+        return effect.getProperty();
     }
 
     @Override
     public void setEffect (String effect) {
-        this.effect = effect;
+        this.effect.setProperty(effect);
     }
 
     @Override
     public double getSpeed () {
-        return speed;
+        return speed.getProperty();
     }
 
     @Override
     public void setSpeed (double speed) {
-        this.speed = speed;
+        this.speed.setProperty(speed);
     }
-    /* (non-Javadoc)
-     * @see engine.weapon.Weapon#getRange()
-     */
+
     @Override
     public double getRange () {
-        return range;
+        return range.getProperty();
     }
 
     @Override
     public void setRange (double range) {
-        this.range = range;
+        this.range.setProperty(range);
     }
 
 }

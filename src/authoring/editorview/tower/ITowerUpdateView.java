@@ -1,6 +1,7 @@
 package authoring.editorview.tower;
 
 import java.util.List;
+import authoring.editorview.IUpdateView;
 
 
 /**
@@ -9,33 +10,21 @@ import java.util.List;
  * @author Kayla Schulz
  *
  */
-public interface ITowerUpdateView extends ITowerEditorView {
+public interface ITowerUpdateView extends ITowerEditorView, IUpdateView {
 
-    public void updateFireRateDisplay (int towerFireRate);
+    public void updateUnlockLevelDisplay (int towerLevel);
 
-    public void updateUnlockLevelDisplay (int towerUnlockLevel);
+    public void updateTowerBuyPriceDisplay (double towerBuyPrice);
 
-    public void updateFrequencyDisplay (int towerFrequency);
+    public void updateTowerSellPriceDisplay (double towerSellPrice);
 
-    public void updateRangeDisplay (int towerRange);
+    public void updateTowerAbility (List<Integer> towerAbility);
 
-    public void updateTowerImagePath (String towerImagePath);
+    public void updateTowerChosenWeapon (List<Integer> newValue);
 
-    public void updateTowerName (String towerName);
+    public void updateTowerUpgradeBank (List<Integer> towerUpgrades);
 
-    public void updateTowerBuyPriceDisplay (int towerBuyPrice);
-
-    public void updateTowerSellPriceDisplay (int towerSellPrice);
-
-    public void updateTowerAbility (String towerAbility);
-
-    public void updateTowerChosenEnemy (String towerChosenEnemy);
-
-    public void updateTowerChosenWeapon (String towerChosenWeapon);
-
-    public void updateTowerUpgrade (String towerUpgrade);
-
-    public void updateTowerBank (List<Integer> activeTowers);
+    public void updateTowerBank (List<Integer> createdTowers);
 
     public void createNewTower ();
 

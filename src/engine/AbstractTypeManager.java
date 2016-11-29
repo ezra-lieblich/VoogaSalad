@@ -1,21 +1,28 @@
 package engine;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Observable;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
+import engine.observer.AbstractObservable;
+import engine.observer.ObservableMap;
+import engine.observer.ObservableMapProperty;
 
 
-public abstract class AbstractTypeManager<E extends Type> extends Observable implements Manager<E> {
-    ManagerMediator managerMediator;
-    Map<Integer, E> data;
-    int activeId;
-
-    protected AbstractTypeManager(ManagerMediator managerMediator) {
-        this.managerMediator = managerMediator;
+public abstract class AbstractTypeManager<E extends Type> extends AbstractObservable<MethodData<?>> implements Manager<E> {
+    //ManagerMediator managerMediator;
+    private ObservableMap<Integer, E> data;
+    
+    protected AbstractTypeManager() {
+        this.data = new ObservableMapProperty<Integer, E>(new HashMap<Integer, E>());
     }
     
     @Override
@@ -26,24 +33,33 @@ public abstract class AbstractTypeManager<E extends Type> extends Observable imp
 
     @Override
     public void removeEntry (int id) {
-        managerMediator.removeEntryReferences(data.get(id));
         data.remove(id);
-        //notifyObservers(data.remove(id));
-    }
-        
-    protected <U> U getFromEntity(Supplier<U> getter) {
-        return getter.get();
-    }
-
-    protected <U> void setForEntity(Consumer<U> setter, U newValue) {
-        setter.accept(newValue);
-        //notifyObservers(activeId);
+        notifyObservers(new MethodObjectData<Integer>("RemoveEntry", id));
     }
     
     @Override
     public void applyToAllEntities(Consumer<E> entry) {
-        data.values().stream().forEach(entry);
+        data.getProperty().values().stream().forEach(entry);
     }
+    
+    @Override
+    public void addEntitiesListener (BiConsumer<Map<Integer, E>, Map<Integer, E>> listener) {
+        data.addListener(listener);
+    }
+    
+    @Override
+    public List<Integer> getEntityIds() {
+        return Collections.unmodifiableList(new ArrayList<Integer>(data.getProperty().keySet()));
+    }
+        
+//    protected <U> U getFromEntity(Supplier<U> getter) {
+//        return getter.get();
+//    }
+//
+//    protected <U> void setForEntity(Consumer<U> setter, U newValue) {
+//        setter.accept(newValue);
+//        //notifyObservers(activeId);
+//    }
     
     /*public <U> Consumer<U> setForActiveEntity(Consumer<U> setter, U newValue) {
         //Apply Type::setName to activeEntity
@@ -56,34 +72,8 @@ public abstract class AbstractTypeManager<E extends Type> extends Observable imp
     
     @Override //TODO - hide in interface
     public E getEntity (int index) {
-        return data.get(index);
+        return data.getProperty().get(index);
     }
-
-    //TODO - Make this private and just pass in a functional static interface
-    /* (non-Javadoc)
-     * @see engine.Manager#getActiveEntity()
-     */
-    @Override
-    public E getActiveEntity () {
-        return getEntity(activeId);
-    }
-    
-    /* (non-Javadoc)
-     * @see engine.Manager#getActiveId()
-     */
-    @Override
-    public int getActiveId () {
-        return activeId;
-    }
-
-    /* (non-Javadoc)
-     * @see engine.Manager#setActiveId(int)
-     */
-    @Override
-    public void setActiveId (int activeId) {
-        this.activeId = activeId;
-    }
-
     
     /*
      * public void activate(int ... ids) {
@@ -95,5 +85,46 @@ public abstract class AbstractTypeManager<E extends Type> extends Observable imp
      * activeEntities.stream().forEach(function);
      * }
      */
+//    Method downPolymorphic = object.getClass().getMethod("visit",
+//                                                         new Class[] { object.getClass() });
+//
+//                                                 if (downPolymorphic == null) {
+//                                                         defaultVisit(object);
+//                                                 } else {
+//                                                         downPolymorphic.invoke(this, new Object[] {object});
+//                                                 }
+    //TODO - error might occur due to taking in a VisitableManager
+    @Override
+    public <U extends VisitableManager<MethodData<?>>> void visitManager(U visitableManager, MethodData<?> dataMethod) {
+        try {
+            Method visitMethod = this.getClass().getMethod("visit" + dataMethod.getMethod(), new Class[] {visitableManager.getClass()});
+            visitMethod.invoke(this, new Object[] {visitableManager, dataMethod.getValue()});
+        }
+        catch (NoSuchMethodException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        catch (SecurityException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        catch (IllegalAccessException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        catch (IllegalArgumentException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        catch (InvocationTargetException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+    
+    @Override
+    public <U extends VisitorManager<MethodData<?>>> void accept (U visitor, MethodData<?> methodData) {
+        visitor.visitManager(this, methodData);
+    }
     
 }

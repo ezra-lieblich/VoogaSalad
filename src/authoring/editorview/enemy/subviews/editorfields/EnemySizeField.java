@@ -8,21 +8,16 @@ import javafx.scene.Node;
 import javafx.scene.control.TextField;
 
 
-/**
- * 
- * @author Kayla Schulz
- *
- */
-public class EnemyFrequencyField implements IEnemyEditorView {
+public class EnemySizeField implements IEnemyEditorView {
 
     private EnemyEditorViewDelegate delegate;
-    private TextField enemyFrequencyField;
+    private TextField enemySizeField;
 
-    public EnemyFrequencyField (ResourceBundle labelsResource) {
-        enemyFrequencyField =
+    public EnemySizeField (ResourceBundle labelsResource) {
+        enemySizeField =
                 TextFieldFactory.makeTextField(labelsResource.getString("EnterInt"),
                                                e -> delegate
-                                                       .onUserEnteredEnemyFrequency(enemyFrequencyField
+                                                       .onUserEnteredEnemySize(enemySizeField
                                                                .getText()));
     }
 
@@ -33,10 +28,11 @@ public class EnemyFrequencyField implements IEnemyEditorView {
 
     @Override
     public Node getInstanceAsNode () {
-        return enemyFrequencyField;
+        return enemySizeField;
     }
 
-    public void updateEnemyFrequency (String enemyFrequency) {
-        enemyFrequencyField.setText(enemyFrequency);
+    public void updateEnemySize (String enemySize) {
+        enemySizeField.setText(enemySize);
     }
+
 }

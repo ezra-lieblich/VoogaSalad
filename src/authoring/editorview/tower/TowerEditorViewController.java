@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.ResourceBundle;
 import authoring.editorview.EditorViewController;
 import authoring.utilityfactories.DialogueBoxFactory;
+import engine.tower.TowerManagerController;
+import authoring.editorview.tower.ITowerUpdateView;
 
 
 /**
@@ -15,16 +17,17 @@ import authoring.utilityfactories.DialogueBoxFactory;
 public class TowerEditorViewController extends EditorViewController
         implements TowerEditorViewDelegate {
 
-    private TowerDataSource towerDataSource;
+    private TowerManagerController towerDataSource;
     private int currentTowerID;
+    private ITowerUpdateView myView;
 
     public TowerEditorViewController (int editorWidth, int editorHeight) throws IOException {
-        ITowerEditorView myView = TowerEditorViewFactory.build(editorWidth, editorHeight);
+        myView = TowerEditorViewFactory.build(editorWidth, editorHeight);
         myView.setDelegate(this);
         this.view = myView;
     }
 
-    public void setTowerDataSource (TowerDataSource source) {
+    public void setTowerDataSource (TowerManagerController source) {
         this.towerDataSource = source;
     }
 
@@ -33,17 +36,17 @@ public class TowerEditorViewController extends EditorViewController
      */
     @Override
     public void onUserPressedCreateNewTower () {
-        towerDataSource.createNewTower();
+        ///int myid = towerDataSource.createType(myView);
     }
 
     @Override
     public void onUserEnteredTowerName (String towerName) {
-        towerDataSource.setTowerName(currentTowerID, towerName);
+        towerDataSource.setName(currentTowerID, towerName);
     }
 
     @Override
     public void onUserEnteredTowerImagePath (String towerImagePath) {
-        towerDataSource.setTowerImagePath(currentTowerID, towerImagePath);
+        towerDataSource.setImagePath(currentTowerID, towerImagePath);
     }
 
     @Override
@@ -58,43 +61,10 @@ public class TowerEditorViewController extends EditorViewController
     }
 
     @Override
-    public void onUserEnteredTowerFireRate (String towerFireRate) {
-        try {
-            Integer.parseInt(towerFireRate);
-            towerDataSource.setTowerFireRate(currentTowerID, Integer.parseInt(towerFireRate));
-        }
-        catch (NumberFormatException e) {
-            createDialogueBox();
-        }
-    }
-
-    @Override
-    public void onUserEnteredTowerFrequency (String towerFrequency) {
-        try {
-            Integer.parseInt(towerFrequency);
-            towerDataSource.setTowerFrequency(currentTowerID, Integer.parseInt(towerFrequency));
-        }
-        catch (NumberFormatException e) {
-            createDialogueBox();
-        }
-    }
-
-    @Override
-    public void onUserEnteredTowerRange (String towerRange) {
-        try {
-            Integer.parseInt(towerRange);
-            towerDataSource.setTowerRange(currentTowerID, Integer.parseInt(towerRange));
-        }
-        catch (NumberFormatException e) {
-            createDialogueBox();
-        }
-    }
-
-    @Override
     public void onUserEnteredTowerBuyPrice (String towerBuyPrice) {
         try {
-            Integer.parseInt(towerBuyPrice);
-            towerDataSource.setTowerBuyPrice(currentTowerID, Integer.parseInt(towerBuyPrice));
+            Double.parseDouble(towerBuyPrice);
+            towerDataSource.setTowerBuyPrice(currentTowerID, Double.parseDouble(towerBuyPrice));
         }
         catch (NumberFormatException e) {
             createDialogueBox();
@@ -104,8 +74,8 @@ public class TowerEditorViewController extends EditorViewController
     @Override
     public void onUserEnteredTowerSellPrice (String towerSellPrice) {
         try {
-            Integer.parseInt(towerSellPrice);
-            towerDataSource.setTowerSellPrice(currentTowerID, Integer.parseInt(towerSellPrice));
+            Double.parseDouble(towerSellPrice);
+            towerDataSource.setTowerSellPrice(currentTowerID, Double.parseDouble(towerSellPrice));
         }
         catch (NumberFormatException e) {
             createDialogueBox();
@@ -114,28 +84,55 @@ public class TowerEditorViewController extends EditorViewController
 
     @Override
     public void onUserEnteredTowerAbility (String towerAbility) {
-        towerDataSource.setTowerAbility(currentTowerID, towerAbility);
-    }
-
-    @Override
-    public void onUserEnteredTowerChosenEnemy (String towerChosenEnemy) {
-        towerDataSource.setTowerChosenEnemy(currentTowerID, towerChosenEnemy);
-    }
-
-    @Override
-    public void onUserEnteredTowerChosenWeapon (String towerChosenWeapon) {
-        towerDataSource.setTowerChosenWeapon(currentTowerID, towerChosenWeapon);
-    }
-
-    @Override
-    public void onUserEnteredTowerUpgrade (String towerUpgrade) {
-        towerDataSource.setTowerUpgrade(currentTowerID, towerUpgrade);
+        towerDataSource.setTowerChosenAbility(currentTowerID, Integer.parseInt(towerAbility));
     }
 
     private void createDialogueBox () {
         ResourceBundle dialogueBoxResource = ResourceBundle.getBundle("resources/DialogueBox");
         DialogueBoxFactory.createErrorDialogueBox(dialogueBoxResource.getString("Integer"),
                                                   dialogueBoxResource.getString("CheckInput"));
+    }
+
+    @Override
+    public void onUserPressedDeleteTower () {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void onUserDeletedTowerAbility (String towerAbility) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void onUserDeletedTowerWeapon (String towerChosenWeapon) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void onUserDeletedTowerUpgrade (String towerUpgrade) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void onUserEnteredTowerSize (String towerSize) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void onUserEnteredTowerChosenWeapon (String towerChosenWeapon) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void onUserEnteredTowerUpgrade (String towerUpgrade) {
+        // TODO Auto-generated method stub
+
     }
 
 }

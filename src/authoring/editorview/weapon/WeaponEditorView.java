@@ -6,7 +6,6 @@ import java.util.ResourceBundle;
 import authoring.editorview.weapon.subviews.WeaponEffectView;
 import authoring.editorview.weapon.subviews.WeaponImageBank;
 import authoring.editorview.weapon.subviews.editorfields.WeaponCollisionEffectField;
-import authoring.editorview.weapon.subviews.editorfields.WeaponDamageField;
 import authoring.editorview.weapon.subviews.editorfields.WeaponFireRateField;
 import authoring.editorview.weapon.subviews.editorfields.WeaponImageView;
 import authoring.editorview.weapon.subviews.editorfields.WeaponNameField;
@@ -31,7 +30,6 @@ public class WeaponEditorView implements IWeaponUpdateView {
     private WeaponSpeedField weaponSpeedView;
     private WeaponFireRateField weaponFireRateView;
     private WeaponRangeField weaponRangeView;
-    private WeaponDamageField weaponDamageView;
     private WeaponCollisionEffectField weaponCollisionView;
     private WeaponPathField weaponPathView;
     private WeaponImageView weaponImageView;
@@ -56,13 +54,12 @@ public class WeaponEditorView implements IWeaponUpdateView {
         weaponSpeedView = new WeaponSpeedField(labelsResource);
         weaponRangeView = new WeaponRangeField(labelsResource);
         weaponFireRateView = new WeaponFireRateField(labelsResource);
-        weaponDamageView = new WeaponDamageField(labelsResource);
         weaponCollisionView = new WeaponCollisionEffectField(labelsResource);
         weaponPathView = new WeaponPathField(labelsResource);
         weaponImageView = new WeaponImageView(labelsResource);
         weaponEffectsView =
                 new WeaponEffectView(weaponNameView, weaponSpeedView, weaponFireRateView,
-                                     weaponRangeView, weaponDamageView, weaponCollisionView,
+                                     weaponRangeView, weaponCollisionView,
                                      weaponPathView, weaponImageView, labelsResource,
                                      dialogueBoxResource);
         setBorderPane();
@@ -88,20 +85,19 @@ public class WeaponEditorView implements IWeaponUpdateView {
         weaponSpeedView.setDelegate(delegate);
         weaponFireRateView.setDelegate(delegate);
         weaponRangeView.setDelegate(delegate);
-        weaponDamageView.setDelegate(delegate);
         weaponCollisionView.setDelegate(delegate);
         weaponEffectsView.setDelegate(delegate);
         weaponPathView.setDelegate(delegate);
     }
 
     @Override
-    public void updateFireRateDisplay (int rate) {
-        weaponFireRateView.updateWeaponFireRate(Integer.toString(rate));
+    public void updateFireRateDisplay (double fireRate) {
+        weaponFireRateView.updateWeaponFireRate(Double.toString(fireRate));
     }
 
     @Override
-    public void updateSpeedDisplay (int speed) {
-        weaponSpeedView.updateWeaponSpeed(Integer.toString(speed));
+    public void updateSpeedDisplay (double speed) {
+        weaponSpeedView.updateWeaponSpeed(Double.toString(speed));
     }
 
     @Override
@@ -110,19 +106,8 @@ public class WeaponEditorView implements IWeaponUpdateView {
     }
 
     @Override
-    public void updateRangeDisplay (int range) {
-        weaponRangeView.updateWeaponRange(Integer.toString(range));
-    }
-
-    @Override
-    public void updateWeaponImagePath (String imagePath) {
-        weaponImageView.updateWeaponImagePath(imagePath);
-
-    }
-
-    @Override
-    public void updateDamageDisplay (int damage) {
-        weaponDamageView.updateWeaponDamage(Integer.toString(damage));
+    public void updateRangeDisplay (double range) {
+        this.weaponRangeView.updateWeaponRange(Double.toString(range));
     }
 
     @Override
@@ -132,19 +117,37 @@ public class WeaponEditorView implements IWeaponUpdateView {
     }
 
     @Override
-    public void updateWeaponName (String weaponName) {
-        this.weaponNameView.updateWeaponName(weaponName);
-    }
-
-    @Override
-    public void updateWeaponPath (String path) {
-        weaponPathView.updateWeaponPath(path);
+    public void updateWeaponTrajectory (String path) {
+        this.weaponPathView.updateWeaponPath(path);
     }
 
     @Override
     public void createNewWeapon () {
         // TODO Auto-generated method stub
         // This will set all default values for the weapon
+
+    }
+
+    @Override
+    public void updateTargetEnemies (List<Integer> targetEnemies) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void updateNameDisplay (String name) {
+        this.weaponNameView.updateWeaponName(name);
+
+    }
+
+    @Override
+    public void updateImagePathDisplay (String imagePath) {
+        this.weaponImageView.updateWeaponImagePath(imagePath);
+    }
+
+    @Override
+    public void updateSizeDisplay (double size) {
+        // TODO Auto-generated method stub
 
     }
 

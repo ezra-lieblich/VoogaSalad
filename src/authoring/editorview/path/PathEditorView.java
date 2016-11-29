@@ -1,53 +1,59 @@
 package authoring.editorview.path;
 
 
-import authoring.editorview.path.subviews.BackgroundImageView;
-import authoring.editorview.path.subviews.PathBank;
+import authoring.editorview.path.subviews.PathChooser;
+
+import java.util.List;
+
+import authoring.editorview.path.subviews.NewPathView;
 import authoring.editorview.path.subviews.PathBuilderView;
 import authoring.editorview.path.subviews.PathImageView;
 import authoring.editorview.path.subviews.PathNameView;
 import authoring.editorview.path.subviews.PathSizeView;
+import engine.path.Coordinate;
 import javafx.scene.Node;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 
-public class PathEditorView implements IPathEditorView {
+public class PathEditorView implements IPathUpdateView {
    
 
 	private static final int BOX_SPACING = 10;
     
-    private BorderPane pathView;
+    private VBox pathView;
+    private HBox pathSettings;
     
-    private PathBank pathBank;
-    private BackgroundImageView backgroundImageView;
+    private PathChooser pathChooser;
     private PathImageView pathImageView;
     private PathSizeView pathSizeView;
     private PathBuilderView pathBuilderView;
     private PathNameView pathNameView;
+    private NewPathView newPathView;
     
    
 
     public PathEditorView (int aWidth, int aHeight) {
-        this.pathView = new BorderPane();
-        pathBank = new PathBank();       
-    	backgroundImageView = new BackgroundImageView();
-    	pathSizeView = new PathSizeView();
+        this.pathView = new VBox();
+        this.newPathView = new NewPathView();
+        newPathView.setPathEditorView(this);
+        this.pathChooser = new PathChooser();       
+    	this.pathSizeView = new PathSizeView();
     	
-    	pathImageView = new PathImageView();
-    	pathBuilderView = new PathBuilderView();
+    	this.pathImageView = new PathImageView();
+    	this.pathBuilderView = new PathBuilderView();
     	formatPathGrid();
     	
-    	pathNameView = new PathNameView();
-        setPathView();
+    	this.pathNameView = new PathNameView();
+        setView();
      
     }
 
 	private void formatPathGrid() {
 		pathBuilderView.setGridSize(pathSizeView.getNumberOfColumns(), pathSizeView.getNumberOfRows());	
-    	pathBuilderView.setBackgroundImage(backgroundImageView.getBackgroundImage());
 	}
+	
+	
 
     @Override
     public Node getInstanceAsNode () {
@@ -56,32 +62,93 @@ public class PathEditorView implements IPathEditorView {
 
     @Override
     public void setDelegate (PathEditorViewDelegate delegate) {
-        backgroundImageView.setDelegate(delegate);
+        pathChooser.setDelegate(delegate);
+        pathBuilderView.setDelegate(delegate);
+    }
+
+    public void setActiveId(int pathID){
+    	pathImageView.setActivePathId(pathID);
+    	pathBuilderView.setActivePathId(pathID);
+    	
     }
     
-    
-    private void setPathView(){
-    	     
-        BorderPane editor = new BorderPane();
-        editor.setCenter(pathBuilderView.getInstanceAsNode());
-        
-        VBox imageSettings = new VBox(10);
-        imageSettings.getChildren().addAll(backgroundImageView.getInstanceAsNode(),
-        		pathImageView.getInstanceAsNode());
-        
-        VBox textFieldSettings = new VBox(BOX_SPACING);
+    public void setViewToEdit(){
+    	VBox textFieldSettings = new VBox(BOX_SPACING);
         textFieldSettings.getChildren().addAll(pathSizeView.getInstanceAsNode(), 
         		pathNameView.getInstanceAsNode());
+        pathSettings.getChildren().addAll(pathImageView.getInstanceAsNode(), textFieldSettings);
         
-        HBox pathSettings = new HBox(20);
-        pathSettings.getChildren().addAll(imageSettings, textFieldSettings);
-        
-        editor.setTop(pathSettings);
-        
-        pathView.setCenter(editor);
-        pathView.setLeft(pathBank.getInstanceAsNode());
-            
     }
+    
+    public void updateViewToEdit(){
+    	
+    }
+    
+    private void setView(){  	            
+        VBox pathGetter = new VBox(BOX_SPACING);
+        pathGetter.getChildren().addAll(newPathView.getInstanceAsNode(), pathChooser.getInstanceAsNode());       
+        pathSettings = new HBox(BOX_SPACING*2);
+        pathSettings.getChildren().add(pathGetter);       
+        pathView.getChildren().addAll(pathSettings, pathBuilderView.getInstanceAsNode());            
+    }
+
+	@Override
+	public void updatePathImage(String pathImage) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateNumColumns(int numColumns) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateNumRows(int numRows) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updatePathName(String pathName) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updatePathCoordinates(List<Coordinate<Integer>> pathCoordinates) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateNameDisplay(String name) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateImagePathDisplay(String imagePath) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateSizeDisplay(double size) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateType(String pathType) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+
+	
    
 
 }
