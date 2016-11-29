@@ -16,8 +16,15 @@ import engine.weapon.WeaponType;
 
 public class TowerTypeManager extends AbstractTypeManager<Tower> implements TowerManager {
 
-    public TowerTypeManager (ManagerMediator managerMediator) {
-        // TODO Auto-generated constructor stub
+    private Map<Integer, Tower> upgrades;
+    
+    TowerTypeManager() {
+        this.upgrades = new HashMap<Integer, Tower>();
+    }
+    
+    @Override
+    public Tower getEntity(int id) {
+        return upgrades.containsKey(id) ? upgrades.get(id) : super.getEntity(id);
     }
     
     public void visitRemoveEntry(WeaponManager manager, Integer index) {
@@ -27,6 +34,19 @@ public class TowerTypeManager extends AbstractTypeManager<Tower> implements Towe
     public void visitRemoveEntry(AbilityManager manager, Integer index) {
         applyToAllEntities(a -> a.removeAbility(index));
     }
-        //TODO - Flatten hierarchy maybe?
+        //TODO - Flatten hierarchy maybe? void or int?
+
+    @Override
+    public int addUpgrade(Tower upgrade, int parentId) {
+        upgrades.put(upgrade.getId(), upgrade);
+        getEntity(parentId).addUpgrade(upgrade.getId());
+        return parentId;
+    }
+
+    @Override
+    public void removeUpgrade (int id, int parentId) {
+        upgrades.remove(id);
+        getEntity(parentId).removeUpgrade(id);
+    }
 
 }

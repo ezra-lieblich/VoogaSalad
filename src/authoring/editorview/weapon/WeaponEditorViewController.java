@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ResourceBundle;
 import authoring.editorview.EditorViewController;
 import authoring.utilityfactories.DialogueBoxFactory;
+import engine.weapon.WeaponManagerController;
 
 
 /**
@@ -15,7 +16,7 @@ import authoring.utilityfactories.DialogueBoxFactory;
 public class WeaponEditorViewController extends EditorViewController
         implements WeaponEditorViewDelegate {
 
-    private WeaponDataSource weaponDataSource;
+    private WeaponManagerController weaponDataSource;
     private int currentWeaponID;
     private IWeaponUpdateView myView;
 
@@ -30,7 +31,7 @@ public class WeaponEditorViewController extends EditorViewController
         // currentWeaponID = weaponDataSource.getCreatedWeapon();
     }
 
-    public void setWeaponDataSource (WeaponDataSource source) {
+    public void setWeaponDataSource (WeaponManagerController source) {
         this.weaponDataSource = source;
     }
 

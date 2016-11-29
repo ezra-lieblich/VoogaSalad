@@ -155,7 +155,7 @@ public class WeaponTypeBuilder extends AbstractTypeBuilder<Weapon, WeaponBuilder
     }
 
     @Override
-    public WeaponBuilder addSpeed(BiConsumer<Double, Double> listener) {
+    public WeaponBuilder addSpeedListener(BiConsumer<Double, Double> listener) {
         speed.addListener(listener);
         return this;
     }

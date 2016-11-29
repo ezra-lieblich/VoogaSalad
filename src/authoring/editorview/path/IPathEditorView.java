@@ -23,6 +23,6 @@ public interface IPathEditorView extends IEditorView {
 	
 	public void setPathName(String pathName);
 	
-	public void setPathCoordinates(List<Coordinate> pathCoordinates);
+	public void setPathCoordinates(List<Coordinate<Integer>> pathCoordinates);
 
 }
