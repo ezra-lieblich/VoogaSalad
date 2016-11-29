@@ -1,6 +1,5 @@
 package authoring.editorview.level;
 
-import java.util.List;
 import java.util.Map;
 
 
@@ -16,13 +15,6 @@ public interface LevelDataSource {
 	public int createNewLevel ();
 	
 	public void removeLevel (int levelID);
-		
-    /**
-     * Sets creeps in the game engine
-     * 
-     * @param levelIndex
-     * @param map of creeps, key = enemyID, value = number of that enemy
-     */
    	
 	public void setLevelName (int levelID, String levelName);
 	
@@ -51,11 +43,6 @@ public interface LevelDataSource {
     public String getLevelName (int levelID);
     
     public double getTransitionTime (int levelID);
-	
-    
-    
-    
-    
 
     public void setEnemyFrequency (int enemyID, double enemyFrequency);
 
