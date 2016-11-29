@@ -20,11 +20,11 @@ public abstract class AbstractTypeManagerController<E extends Manager<T>, U exte
     protected <V extends ViewFiller> T constructType (V viewFiller) {
         return constructTypeProperties(viewFiller, typeBuilder)
                 .addNameListener( (oldValue, newValue) -> viewFiller
-                        .updateName(newValue))
+                        .updateNameDisplay(newValue))
                 .addImagePathListener( (oldValue, newValue) -> viewFiller
-                        .updateImagePath(newValue))
+                        .updateImagePathDisplay(newValue))
                 .addSizeListener( (oldValue, newValue) -> viewFiller
-                        .updateSize(newValue))
+                        .updateSizeDisplay(newValue))
                 .build();
     }
 
@@ -80,10 +80,10 @@ public abstract class AbstractTypeManagerController<E extends Manager<T>, U exte
     protected abstract U constructTypeProperties (ViewFiller viewViller, U typeBuilder);
 
     protected interface ViewFiller {
-        void updateName (String name);
+        void updateNameDisplay (String name);
 
-        void updateImagePath (String imagePath);
+        void updateImagePathDisplay (String imagePath);
 
-        void updateSize (double size);
+        void updateSizeDisplay (double size);
     }
 }
