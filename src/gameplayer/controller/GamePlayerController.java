@@ -2,12 +2,14 @@ package gameplayer.controller;
 
 import gameplayer.loader.GamePlayerFactory;
 import gameplayer.loader.XMLParser;
+import gameplayer.main.main;
 import gameplayer.model.Enemy;
 import gameplayer.model.EnemyModel;
 import gameplayer.model.GamePlayModel;
 import gameplayer.view.GameGUI;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -30,7 +32,7 @@ public class GamePlayerController implements Observer {
 	public static final int FRAMES_PER_SECOND = 60;
 	public static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
 	public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
-
+	
 	private GamePlayerFactory loader;
 	private GameGUI view;
 	private Scene mainScene;
@@ -86,17 +88,7 @@ public class GamePlayerController implements Observer {
 		towerImages.add("penguin.jpg");
 		this.mainScene = view.init(settings.get("gold"), settings.get("lives"), settings.get("numLevels"), towerImages);
 		System.out.println("Start point: " + model.getGrid().getStartPoint());
-		this.view.getGrid().populatePath(model.getGrid().getStartPoint()); // TODO:
-																			// need
-																			// to
-																			// get
-																			// grid
-																			// from
-																			// model
-																			// to
-																			// get
-																			// starting
-																			// cell
+		this.view.getGrid().populatePath(model.getGrid().getStartPoint()); 
 	}
 
 	private void initGUI() {
@@ -109,39 +101,11 @@ public class GamePlayerController implements Observer {
 		this.view.bindAnimationStart(e -> {
 			// TODO: initialize animation
 			this.startAnimation();
-
-			// TESTING MANUALLY ADDING IN ONE ENEMY
-			this.currentWave = this.model.getPackOfEnemyComing();
-			Enemy test = currentWave.poll();
-			test.setCurrentCell(this.model.getGrid().getCell(0, 0));
-			System.out.println(test.getCurrentCell().getX());
-			this.enemyModel.spawnEnemy(currentWave.poll());
-			List<Enemy> thingsOnGrid = this.enemyModel.getEnemyOnGrid();
-			System.out.println(thingsOnGrid.size());
-			for (int i = 0; i < thingsOnGrid.size(); i++) {
-				System.out.println(i + ": " + thingsOnGrid.get(i).getX());
-			}
-			this.enemyModel.update();
-			System.out.println("**********");
-			for (int i = 0; i < thingsOnGrid.size(); i++) {
-				System.out.println(i + ": " + thingsOnGrid.get(i).getX());
-			}
-
 		});
 		System.out.println("Tower images: " + getTowerImages());
 		this.mainScene = view.init(this.model.getGold(), this.model.getLife(), this.model.getCurrentLevel(),
 				getTowerImages());
-		this.view.getGrid().populatePath(model.getGrid().getStartPoint()); // TODO:
-																			// need
-																			// to
-																			// get
-																			// grid
-																			// from
-																			// model
-																			// to
-																			// get
-																			// starting
-																			// cell
+		this.view.getGrid().populatePath(model.getGrid().getStartPoint()); 
 		this.dropController = new DragDropController(this.view, this.model);
 	}
 
@@ -184,20 +148,38 @@ public class GamePlayerController implements Observer {
 
 	private void startAnimation() {
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> {
+			System.out.println("hello");
 			((Pane) this.view.getGrid().getGrid()).getChildren().clear(); //clear everything
-			this.enemyController.updateEnemyViews(); //update enemies
+			this.currentWave = this.model.getPackOfEnemyComing();
+			
+			if(currentWave.size()!=0){
+				Enemy test = currentWave.poll();
+				test.setCurrentCell(this.model.getGrid().getCell(0, 0));
+				this.enemyModel.spawnEnemy(test);
+			}
+			List<Enemy> thingsOnGrid = this.enemyModel.getEnemyOnGrid();
+			System.out.println(thingsOnGrid.size());
+			for (int i = 0; i < thingsOnGrid.size(); i++) {
+				System.out.println(i + ": " + thingsOnGrid.get(i).getX());
+			}
+			this.enemyModel.update();
+			System.out.println("**********");
+			for (int i = 0; i < thingsOnGrid.size(); i++) {
+				System.out.println(i + ": " + thingsOnGrid.get(i).getX());
+			}
 			this.view.getGrid().populatePath(model.getGrid().getStartPoint()); //repopulate the path
 			
 		});
 		Timeline animation = new Timeline();
 		animation.setCycleCount(Timeline.INDEFINITE);
 		animation.getKeyFrames().add(frame);
-		// animation.play();
 		this.animation = animation;
+		animation.play();
 	}
 
 	public Timeline getTimeline() {
 		return this.animation;
 	}
+
 
 }

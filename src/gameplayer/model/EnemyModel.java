@@ -131,8 +131,31 @@ public class EnemyModel extends Observable {
 		}
 	
 	public void update(){
-		updateEnemy();
-		checkCollision();
+		//updateEnemy();
+		//checkCollision();
+		
+		moveEnemies();
 	}
+	
+	private void moveEnemies(){
+		for(Enemy enemy: enemyOnGrid){
+			moveIndividualEnemy(enemy);
+		}
+	}
+	
+	private void moveIndividualEnemy(Enemy enemy){
+		enemy.setX(enemy.getX()+enemy.getMovingSpeed());
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

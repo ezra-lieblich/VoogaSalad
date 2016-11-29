@@ -130,4 +130,14 @@ public class GameGUI {
 	public void updateStatsDisplay(double gold, double lives, double level){
 		this.statsDisplay.updateLevelUI(gold, lives, level);
 	}
+	
+	//not sure if this goes here
+	public void reRender(){
+		
+	}
+	
+	
+	
+	
+	
 }
