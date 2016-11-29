@@ -4,7 +4,8 @@ import authoring.editorview.EditorViewController;
 
 public class LevelEditorViewController extends EditorViewController implements LevelEditorViewDelegate {
 	
-	private LevelDataSource levelDataSource;
+	private ILevelUpdateView levelView;
+	private LevelManagerController levelDataSource;
 	
 	public LevelEditorViewController(int editorWidth, int editorHeight){
 		ILevelEditorView myView = LevelEditorViewFactory.build(editorWidth, editorHeight);

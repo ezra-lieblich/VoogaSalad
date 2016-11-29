@@ -18,7 +18,7 @@ import javafx.scene.shape.Rectangle;
 public class PathGrid {
 	
 	
-	//Empty path in back and image views on top so check in grid if imageview has an image
+	//Empty path in back and image views on top so check in grid if imageview has an image orrr just make visible/not visible
 	
 	
 	
@@ -31,7 +31,7 @@ public class PathGrid {
 	private int activePathID;
 	private Image cellImage;
 	//private PathCell[][] grid ;
-	private Node[][] grid;
+	private ImageView[][] grid;
 	
 	private List<Coordinate<Integer>> pathCoordinates;
 	private PathEditorViewDelegate delegate;
@@ -93,7 +93,7 @@ public class PathGrid {
 	private void setGrid(){
 		
 		//grid = new PathCell[numColumns][numRows];
-		grid = new Node[numColumns][numRows];
+		grid = new ImageView[numColumns][numRows];
 		
 		for (int i = 0; i < numColumns; i++){
 			for (int j = 0; j < numRows; j++){
@@ -195,7 +195,7 @@ public class PathGrid {
 	}
 	
 	private void updatePath(double x, double y){
-		if ()
+		if (grid[x][y].)
 	}
 	
 	
