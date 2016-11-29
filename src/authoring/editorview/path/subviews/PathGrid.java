@@ -6,10 +6,12 @@ import java.util.List;
 
 import engine.path.Coordinate;
 import engine.path.GridCoordinate;
+import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
@@ -21,6 +23,7 @@ public class PathGrid {
 	private int numRows;
 	private int cellHeight;
 	private int cellWidth;
+	private int activePathID;
 	private Image cellImage;
 	private List<Coordinate<Integer>> pathCoordinates;
 	
@@ -32,7 +35,17 @@ public class PathGrid {
 		this.gridWidth = width;
 		this.grid = new Group();
 		setEmptyGrid();
-		
+		setPathUpdater();
+	}
+
+	private void setPathUpdater() {
+		grid.setOnMouseClicked(new EventHandler<MouseEvent>() {  //http://stackoverflow.com/questions/27785917/javafx-mouseposition
+		    @Override
+		    public void handle(MouseEvent event) {
+		        event.getSceneX();
+		        event.getSceneY();
+		    }
+		});
 	}
 	
 	public Node getInstanceAsNode(){
@@ -50,8 +63,16 @@ public class PathGrid {
 		
 	}
 	
+	public void setActivePathId(int pathID){
+		this.activePathID = pathID;
+	}
+	
 	public List<Coordinate<Integer>> getPathCoordinates(){
 		return pathCoordinates;
+	}
+	
+	public void setPathCoordinates(List<Coordinate<Integer>> pathCoordinates){
+		this.pathCoordinates = pathCoordinates;
 	}
 	
 	private void setEmptyGrid(){
@@ -65,7 +86,6 @@ public class PathGrid {
 				rect.setY(j*cellHeight);
 				rect.setFill(Color.WHITE);
 				rect.setStroke(Color.BLACK);
-	//			rect.setOnMouseClicked(e -> addCellToPath(finalI, finalJ));
 				grid.getChildren().add(rect);
 			}			
 		}
