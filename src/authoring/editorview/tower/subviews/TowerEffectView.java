@@ -6,15 +6,15 @@ import java.util.ResourceBundle;
 import authoring.editorview.PhotoFileChooser;
 import authoring.editorview.tower.ITowerEditorView;
 import authoring.editorview.tower.TowerEditorViewDelegate;
-import authoring.editorview.tower.subviews.editorfields.TowerAbilityField;
+import authoring.editorview.tower.subviews.editorfields.TowerAbilityBank;
 import authoring.editorview.tower.subviews.editorfields.TowerBuyPriceField;
-import authoring.editorview.tower.subviews.editorfields.TowerChooseWeaponField;
+import authoring.editorview.tower.subviews.editorfields.TowerWeaponBank;
 import authoring.editorview.tower.subviews.editorfields.TowerImageView;
 import authoring.editorview.tower.subviews.editorfields.TowerNameField;
 import authoring.editorview.tower.subviews.editorfields.TowerSellPriceField;
 import authoring.editorview.tower.subviews.editorfields.TowerSizeField;
 import authoring.editorview.tower.subviews.editorfields.TowerUnlockLevelField;
-import authoring.editorview.tower.subviews.editorfields.TowerUpgradeField;
+import authoring.editorview.tower.subviews.editorfields.TowerUpgradeBank;
 import authoring.utilityfactories.BoxFactory;
 import authoring.utilityfactories.ButtonFactory;
 import authoring.utilityfactories.DialogueBoxFactory;
@@ -38,9 +38,9 @@ public class TowerEffectView extends PhotoFileChooser implements ITowerEditorVie
     private TowerBuyPriceField towerBuyPrice;
     private TowerSellPriceField towerSellPrice;
     private TowerUnlockLevelField towerUnlockLevel;
-    private TowerAbilityField towerAbility;
-    private TowerChooseWeaponField towerChooseWeapon;
-    private TowerUpgradeField towerUpgrade;
+    private TowerAbilityBank towerAbility;
+    private TowerWeaponBank towerChooseWeapon;
+    private TowerUpgradeBank towerUpgrade;
     private TowerSizeField towerSize;
 
     private VBox vbox;
@@ -55,9 +55,9 @@ public class TowerEffectView extends PhotoFileChooser implements ITowerEditorVie
                             TowerBuyPriceField towerBuyPrice,
                             TowerSellPriceField towerSellPrice,
                             TowerUnlockLevelField towerUnlockLevel,
-                            TowerAbilityField towerAbility,
-                            TowerChooseWeaponField towerChooseWeapon,
-                            TowerUpgradeField towerUpgrade,
+                            TowerAbilityBank towerAbility,
+                            TowerWeaponBank towerChooseWeapon,
+                            TowerUpgradeBank towerUpgrade,
                             TowerSizeField towerSize,
                             ResourceBundle labelsResource,
                             ResourceBundle dialogueBoxResource) {

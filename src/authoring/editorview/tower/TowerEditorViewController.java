@@ -119,8 +119,13 @@ public class TowerEditorViewController extends EditorViewController
 
     @Override
     public void onUserEnteredTowerSize (String towerSize) {
-        // TODO Auto-generated method stub
-
+        try {
+        Double.parseDouble(towerSize);
+        towerDataSource.setSize(currentTowerID, Double.parseDouble(towerSize));
+        }
+        catch (NumberFormatException e) {
+            createDialogueBox();
+        }
     }
 
     @Override

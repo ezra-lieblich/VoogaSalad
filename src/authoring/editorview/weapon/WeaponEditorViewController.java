@@ -26,11 +26,6 @@ public class WeaponEditorViewController extends EditorViewController
         this.view = myView;
     }
 
-    private void updateWeaponID () {
-        // How do I know which ID I'm working with?
-        // currentWeaponID = weaponDataSource.getCreatedWeapon();
-    }
-
     public void setWeaponDataSource (WeaponManagerController source) {
         this.weaponDataSource = source;
     }
@@ -80,7 +75,7 @@ public class WeaponEditorViewController extends EditorViewController
 
     @Override
     public void onUserPressedCreateWeapon () {
-        //weaponDataSource.createWeapon();
+        // weaponDataSource.createWeapon();
     }
 
     @Override
@@ -113,8 +108,13 @@ public class WeaponEditorViewController extends EditorViewController
 
     @Override
     public void onUserEnteredWeaponSize (String weaponSize) {
-        // TODO Auto-generated method stub
-        
+        try {
+            Double.parseDouble(weaponSize);
+            weaponDataSource.setSize(currentWeaponID, Double.parseDouble(weaponSize));
+        }
+        catch (NumberFormatException e) {
+            createDialogueBox();
+        }
     }
 
 }

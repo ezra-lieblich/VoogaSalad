@@ -5,15 +5,15 @@ import java.util.List;
 import java.util.ResourceBundle;
 import authoring.editorview.tower.subviews.TowerEffectView;
 import authoring.editorview.tower.subviews.TowerImageBank;
-import authoring.editorview.tower.subviews.editorfields.TowerAbilityField;
+import authoring.editorview.tower.subviews.editorfields.TowerAbilityBank;
 import authoring.editorview.tower.subviews.editorfields.TowerBuyPriceField;
-import authoring.editorview.tower.subviews.editorfields.TowerChooseWeaponField;
+import authoring.editorview.tower.subviews.editorfields.TowerWeaponBank;
 import authoring.editorview.tower.subviews.editorfields.TowerImageView;
 import authoring.editorview.tower.subviews.editorfields.TowerNameField;
 import authoring.editorview.tower.subviews.editorfields.TowerSellPriceField;
 import authoring.editorview.tower.subviews.editorfields.TowerSizeField;
 import authoring.editorview.tower.subviews.editorfields.TowerUnlockLevelField;
-import authoring.editorview.tower.subviews.editorfields.TowerUpgradeField;
+import authoring.editorview.tower.subviews.editorfields.TowerUpgradeBank;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
 
@@ -33,9 +33,9 @@ public class TowerEditorView implements ITowerUpdateView {
     private TowerBuyPriceField towerBuyPrice;
     private TowerSellPriceField towerSellPrice;
     private TowerUnlockLevelField towerUnlockLevel;
-    private TowerAbilityField towerAbility;
-    private TowerChooseWeaponField towerChooseWeapon;
-    private TowerUpgradeField towerUpgrade;
+    private TowerAbilityBank towerAbility;
+    private TowerWeaponBank towerChooseWeapon;
+    private TowerUpgradeBank towerUpgrade;
     private TowerSizeField towerSize;
 
     public TowerEditorView () throws IOException {
@@ -49,9 +49,9 @@ public class TowerEditorView implements ITowerUpdateView {
         towerBuyPrice = new TowerBuyPriceField(labelsResource);
         towerSellPrice = new TowerSellPriceField(labelsResource);
         towerUnlockLevel = new TowerUnlockLevelField(labelsResource);
-        towerAbility = new TowerAbilityField(labelsResource);
-        towerChooseWeapon = new TowerChooseWeaponField(labelsResource);
-        towerUpgrade = new TowerUpgradeField(labelsResource);
+        towerAbility = new TowerAbilityBank(labelsResource);
+        towerChooseWeapon = new TowerWeaponBank(labelsResource);
+        towerUpgrade = new TowerUpgradeBank(labelsResource);
         towerSize = new TowerSizeField(labelsResource);
 
         towerBank = new TowerImageBank(labelsResource, dialogueBoxResource);
