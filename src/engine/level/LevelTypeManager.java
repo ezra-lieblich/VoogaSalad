@@ -1,8 +1,8 @@
 package engine.level;
 
 import engine.AbstractTypeManager;
-import engine.ManagerMediator;
-import java.util.List;
+import engine.enemy.EnemyManager;
+
 
 /**
  *
@@ -10,8 +10,11 @@ import java.util.List;
  */
 public class LevelTypeManager extends AbstractTypeManager<Level> implements LevelManager{
     
-    protected LevelTypeManager (ManagerMediator managerMediator) {
-        // TODO Auto-generated constructor stub
-    }
+
+	@Override
+	public void visitRemoveEntry(EnemyManager manager, Integer index) {
+        applyToAllEntities(a -> a.removeEnemy(index));
+
+	}
 
 }

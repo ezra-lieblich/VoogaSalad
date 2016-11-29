@@ -6,15 +6,17 @@ import java.util.Map;
 
 import engine.AbstractType;
 import engine.TypeInitializer;
+import engine.observer.ObservableMap;
+import engine.observer.ObservableProperty;
 
 
 public class LevelType extends AbstractType implements Level {
 	//TODO Make enemyCounts ObservableMap change to doubles
-    private Map<Integer, Integer> enemyCounts;
-	private double rewardHealth;
-	private double rewardMoney;
-	private double rewardPoints;
-	private double durationInSeconds;
+    private ObservableMap<Integer, Integer> enemyCounts;
+	private ObservableProperty<Double> rewardHealth;
+	private ObservableProperty<Double> rewardMoney;
+	private ObservableProperty<Double> rewardPoints;
+	private ObservableProperty<Double> durationInSeconds;
 
 
     protected LevelType (TypeInitializer typeBuilder) {
@@ -22,10 +24,9 @@ public class LevelType extends AbstractType implements Level {
 	}
     
 
-
 	@Override
 	public Map<Integer, Integer> getEnemyCounts() {
-		return Collections.unmodifiableMap(enemyCounts);
+		return Collections.unmodifiableMap(enemyCounts.getProperty());
 	}
 
 	@Override
@@ -34,43 +35,48 @@ public class LevelType extends AbstractType implements Level {
 	}
 
 	@Override
+	public void removeEnemy(int enemy) {
+		enemyCounts.remove(enemy);
+	}
+	
+	@Override
 	public double getRewardHealth() {
-		return rewardHealth;
+		return rewardHealth.getProperty();
 	}
 
 	@Override
-	public void setRewardHealth(int rewardHealth) {
-		this.rewardHealth = rewardHealth;
+	public void setRewardHealth(double rewardHealth) {
+		this.rewardHealth.setProperty(rewardHealth);
 	}
 
 	@Override
 	public double getRewardMoney() {
-		return rewardMoney;
+		return rewardMoney.getProperty();
 	}
 
 	@Override
-	public void setRewardMoney(int rewardMoney) {
-		this.rewardMoney = rewardMoney;
+	public void setRewardMoney(double rewardMoney) {
+		this.rewardMoney.setProperty(rewardMoney);
 	}
 
 	@Override
 	public double getRewardPoints() {
-		return rewardPoints;
+		return rewardPoints.getProperty();
 	}
 
 	@Override
-	public void setRewardPoints(int rewardPoints) {
-		this.rewardPoints = rewardPoints;
+	public void setRewardPoints(double rewardPoints) {
+		this.rewardPoints.setProperty(rewardPoints);
 	}
 
 	@Override
 	public double getDurationInSeconds() {
-		return durationInSeconds;
+		return durationInSeconds.getProperty();
 	}
 
 	@Override
 	public void setDurationInSeconds(double durationInSeconds) {
-		this.durationInSeconds = durationInSeconds;
+		this.durationInSeconds.setProperty(durationInSeconds);
 	}
 
 }
