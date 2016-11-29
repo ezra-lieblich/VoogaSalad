@@ -2,14 +2,16 @@ package authoring.editorview.path;
 
 import java.util.List;
 
+import engine.path.Coordinate;
+
 public interface PathDataSource {
 
 	
 	/**
      * @return path id
      */
-    public int createNewPath();
-	
+    public int createNewPath(IPathEditorView iPathEditorView);
+    
 
     /**
      * @param pathImage set by the user
@@ -24,7 +26,7 @@ public interface PathDataSource {
     
     public boolean setPathCoordinates (int pathID, List<Coordinate> pathCoordinates);
     
-    public void clearPaths ();
+    public void removePath (int pathID);
     
     public String getPathImagePath (int pathID);
     
