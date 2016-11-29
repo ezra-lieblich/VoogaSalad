@@ -1,5 +1,7 @@
 package authoring.editorview.gamesettings;
 
+import java.util.List;
+
 public interface GameSettingsDataSource {
 	
 	public void getGameName ();
@@ -10,13 +12,29 @@ public interface GameSettingsDataSource {
 	
 	public int getNumberofLives ();
 	
-	public void setNumberofLevels (int numLevels);
+	public void setGameImage (String imagePath);
 	
-	public int getNumberofLevels ();
+	public String getGameImage ();
 	
-	public void setEffectBetweenLevels (String effectBetweenLevels);
+	public void setImageSize (double imageSize);
 	
-	public String getEffectBetweenLevels ();
+	public double getImageSize ();
+	
+	public void addWinningCondition (String winningCondition);
+    
+    public void addLosingCondition (String losingCondition);
+    
+    public void removeWinningCondition (String winningCondition);
+    
+    public void removeLosingCondition (String losingCondition);
+    
+    public List<String> getWinningConditions ();
+    
+    public List<String> getLosingConditons ();
 	
 	//TODO: Allow user to decide: if lives reset between levels?, if they want the game to include money?
+    
+//	public void setEffectBetweenLevels (String effectBetweenLevels);
+//	
+//	public String getEffectBetweenLevels ();
 }
