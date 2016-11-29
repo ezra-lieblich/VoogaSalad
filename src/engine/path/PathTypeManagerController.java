@@ -1,21 +1,19 @@
 package engine.path;
 
 import java.util.List;
+import authoring.editorview.path.IPathEditorView;
 import authoring.editorview.path.PathDataSource;
+import authoring.editorview.tower.ITowerUpdateView;
+import engine.tower.Tower;
 
-public class PathTypeManagerController implements PathDataSource{
-    private PathManager pathManager;
+
+public class PathTypeManagerController implements PathDataSource {
+    private PathTypeManager pathManager;
     private PathBuilder pathBuilder;
-    
-    PathTypeManagerController(PathManager pathManager) {
+
+    PathTypeManagerController (PathTypeManager pathManager) {
         this.pathManager = pathManager;
         this.pathBuilder = new PathTypeBuilder();
-    }
-
-    @Override
-    public int createNewPath () {
-        // TODO Auto-generated method stub
-        return 0;
     }
 
     @Override
@@ -39,15 +37,6 @@ public class PathTypeManagerController implements PathDataSource{
     }
 
     @Override
-    public boolean setPathCoordinates (int pathID, List<Coordinate<Integer>> pathCoordinates) {
-        pathManager.getEntity(pathID).setCoordinates(pathCoordinates);
-    }
-
-    @Override
-    public void clearPaths () {
-    }
-
-    @Override
     public String getPathImagePath (int pathID) {
         return pathManager.getEntity(pathID).getImagePath();
     }
@@ -67,10 +56,33 @@ public class PathTypeManagerController implements PathDataSource{
         return pathManager.getEntity(pathID).getName();
     }
 
-    @Override
-    public List<Coordinate> getPathCoordinates (int pathID) {
-        return pathManager.getEntity(pathID).getCoordinates();
+    private Path createPath (IPathEditorView iPathEditorView) {
+        return pathBuilder.addCoordinatesListener((oldValue, newValue) -> iPathEditorView.setPathCoordinates(newValue))
+        .addGridRowsListener((oldValue, newValue) -> iPathEditorView.setNumRows(newValue))
+        .addGridColumnsListener((oldValue, newValue) -> iPathEditorView.setNumColumns(newValue))
+        .build();
     }
 
+    
+    @Override//TODO - setType in iPath
+    public int createNewPath (IPathEditorView iPathEditorView) {
+        return pathManager.addEntry(createPath(iPathEditorView));
+    }
+
+    @Override
+    public boolean setPathCoordinates (int pathID, List<Coordinate<Integer>> pathCoordinates) {
+        pathManager.getEntity(pathID).setCoordinates(pathCoordinates);
+        return true; // TODO - validate this
+    }
+
+    @Override
+    public void removePath (int pathID) {
+        pathManager.removeEntry(pathID);
+    }
+
+    @Override
+    public List<Coordinate<Integer>> getPathCoordinates (int pathID) {
+        return pathManager.getEntity(pathID).getCoordinates();
+    }
 
 }

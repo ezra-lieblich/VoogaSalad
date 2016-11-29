@@ -24,7 +24,7 @@ public interface PathDataSource {
     
     public void setPathName (int pathID, String pathName);
     
-    public boolean setPathCoordinates (int pathID, List<Coordinate> pathCoordinates);
+    public boolean setPathCoordinates (int pathID, List<Coordinate<Integer>> pathCoordinates);
     
     public void removePath (int pathID);
     
@@ -36,7 +36,7 @@ public interface PathDataSource {
     
     public String getPathName (int pathID);
     
-    public List<Coordinate> getPathCoordinates (int pathID);
+    public List<Coordinate<Integer>> getPathCoordinates (int pathID);
     
     
 }
