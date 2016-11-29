@@ -20,29 +20,33 @@ public interface PathDataSource {
     /**
      * @param pathImage set by the user
      */
-    public void setPathImage (int pathID, String pathImagePath);
+    public void setPathImage (String pathImagePath);
     
-    public void setNumberofColumns (int pathID, int numColumns);
+    public void setNumberofColumns (int numColumns);
     
-    public void setNumberofRows (int pathID, int numRows);
+    public void setNumberofRows (int numRows);
     
-    public void setPathName (int pathID, String pathName);
+    public void setPathName (String pathName);
     
     public boolean setPathCoordinates (List<Coordinate> pathCoordinates);
     
     public void clearPaths ();
     
-    public String getBackgroundImagePath (int pathID);
+    public String getBackgroundImagePath ();
     
-    public String getPathImagePath (int pathID);
+    public String getPathImagePath ();
     
-    public int getNumberofColumns (int pathID);
+    public int getNumberofColumns ();
     
-    public int getNumberofRows (int pathID);
+    public int getNumberofRows ();
     
-    public int getPathName (int pathID);
+    public int getPathName ();
     
-    public List<Coordinate> getPathCoordinates (int pathID);
+    public List<Coordinate> getPathCoordinates ();
+    
+    public void setActiveIDs(List<Integer> idList);
+    
+    public List<Integer> getActiveIDs ();
     
     
     

@@ -18,29 +18,33 @@ public interface LevelDataSource {
      * @param levelIndex
      * @param map of creeps, key = enemyID, value = number of that enemy
      */
-    public void setEnemies (int levelIndex, Map<Integer, Integer> enemyMap);
+    public void setEnemies (Map<Integer, Integer> enemyMap);
 
-    public void setRewardPoints (int levelIndex, int winPoints);
+    public void setRewardPoints (int winPoints);
 
-    public void setRewardMoney (int levelIndex, int winMoney);
+    public void setRewardMoney (int winMoney);
 
-    public void setRewardHealth (int levelIndex, int winHealth);
+    public void setRewardHealth (int winHealth);
     
-    public void setPath (int levelIndex, int pathID);
+    public void setPath (int pathID);
     
-    public void setTowers (int levelIndex, List<Integer> towerIDList);
+    public void setTowers (List<Integer> towerIDList);
     
-    public void getEnemies (int levelIndex);
+    public void getEnemies ();
     
-    public void getRewardPoints (int levelIndex);
+    public void getRewardPoints ();
     
-    public void getRewardMoney (int levelIndex);
+    public void getRewardMoney ();
     
-    public void getRewardHealth (int levelIndex);
+    public void getRewardHealth ();
     
-    public void getPath (int levelIndex);
+    public void getPath ();
     
-    public void getTowers (int levelIndex);
+    public void getTowers ();
+    
+    public void setActiveLevels (List<Integer> levelIDList);
+    
+    public List<Integer> getActiveLevels ();
     
     
 
