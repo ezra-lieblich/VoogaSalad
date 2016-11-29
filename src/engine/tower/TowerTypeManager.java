@@ -19,10 +19,6 @@ public class TowerTypeManager extends AbstractTypeManager<Tower> implements Towe
     public TowerTypeManager (ManagerMediator managerMediator) {
         // TODO Auto-generated constructor stub
     }
-
-    public void visitRemoveEntry(EnemyManager manager, Integer index) {
-        applyToAllEntities(a -> a.removeEnemy(index));
-    }
     
     public void visitRemoveEntry(WeaponManager manager, Integer index) {
         applyToAllEntities(a -> a.removeWeapon(index));
@@ -31,7 +27,6 @@ public class TowerTypeManager extends AbstractTypeManager<Tower> implements Towe
     public void visitRemoveEntry(AbilityManager manager, Integer index) {
         applyToAllEntities(a -> a.removeAbility(index));
     }
-
         //TODO - Flatten hierarchy maybe?
 
 }

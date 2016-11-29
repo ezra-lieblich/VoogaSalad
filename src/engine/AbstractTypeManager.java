@@ -4,17 +4,26 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 import engine.observer.AbstractObservable;
+import engine.observer.ObservableMap;
+import engine.observer.ObservableMapProperty;
 
 
 public abstract class AbstractTypeManager<E extends Type> extends AbstractObservable<MethodData<?>> implements Manager<E> {
     //ManagerMediator managerMediator;
-    Map<Integer, E> data;
-    int activeId;
+    ObservableMap<Integer, E> data;
+    
+    protected AbstractTypeManager() {
+        this.data = new ObservableMapProperty<Integer, E>(new HashMap<Integer, E>());
+    }
     
     @Override
     public int addEntry (E entry) {
@@ -27,6 +36,21 @@ public abstract class AbstractTypeManager<E extends Type> extends AbstractObserv
         data.remove(id);
         notifyObservers(new MethodObjectData<Integer>("RemoveEntry", id));
     }
+    
+    @Override
+    public void applyToAllEntities(Consumer<E> entry) {
+        data.getProperty().values().stream().forEach(entry);
+    }
+    
+    @Override
+    public void addEntitiesListener (BiConsumer<Map<Integer, E>, Map<Integer, E>> listener) {
+        data.addListener(listener);
+    }
+    
+    @Override
+    public List<Integer> getEntityIds() {
+        return Collections.unmodifiableList(new ArrayList<Integer>(data.getProperty().keySet()));
+    }
         
 //    protected <U> U getFromEntity(Supplier<U> getter) {
 //        return getter.get();
@@ -37,11 +61,6 @@ public abstract class AbstractTypeManager<E extends Type> extends AbstractObserv
 //        //notifyObservers(activeId);
 //    }
     
-    @Override
-    public void applyToAllEntities(Consumer<E> entry) {
-        data.values().stream().forEach(entry);
-    }
-    
     /*public <U> Consumer<U> setForActiveEntity(Consumer<U> setter, U newValue) {
         //Apply Type::setName to activeEntity
         Consumer<U> blahtest = e - setter.accept(newValue);; //.setName(c); // Type::setName;
@@ -51,27 +70,10 @@ public abstract class AbstractTypeManager<E extends Type> extends AbstractObserv
         Consumer<AbstractTypeManager> eblah = c -> c.setForActiveEntity(getActiveEntity()::setter)
     }*/
     
-//    @Override //TODO - hide in interface
-    private E getEntity (int index) {
-        return data.get(index);
+    @Override //TODO - hide in interface
+    public E getEntity (int index) {
+        return data.getProperty().get(index);
     }
-
-    //TODO - Make this private and just pass in a functional static interface
-    @Override
-    public E getActiveEntity () {
-        return getEntity(activeId);
-    }
-    
-    @Override
-    public int getActiveId () {
-        return activeId;
-    }
-
-    @Override
-    public void setActiveId (int activeId) {
-        this.activeId = activeId;
-    }
-
     
     /*
      * public void activate(int ... ids) {
