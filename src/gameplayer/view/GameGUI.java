@@ -15,12 +15,16 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 /**
  * Overseer of game GUI
@@ -100,6 +104,19 @@ public class GameGUI {
 	private void createScene(){
 		this.scene = new Scene(mainScreen, SCENE_WIDTH, SCENE_HEIGHT);
 		this.scene.getStylesheets().add(this.getClass().getResource("/gameplayer/view/voogaStyle.css").toExternalForm());
+	}
+	
+	/**
+	 * Call this method when new level needs to be triggered
+	 * @param e
+	 */
+	public void newLevelPopUp(EventHandler<ActionEvent> e){
+		this.grid.getGrid().getChildren().clear();
+		Button btn = graphics.createButton("Next level", e);
+		ImageView stuff = graphics.createImageView(graphics.createImage("newlevel.png"));
+		graphics.setImageViewParams(stuff, GridGUI.GRID_WIDTH, GridGUI.GRID_HEIGHT);
+		this.grid.getGrid().getChildren().add(stuff);
+		this.grid.getGrid().getChildren().add(btn);
 	}
 	
 	

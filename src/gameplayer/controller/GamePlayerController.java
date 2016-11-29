@@ -11,6 +11,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
@@ -44,6 +45,9 @@ public class GamePlayerController implements Observer {
 	
 	private EnemyManager enemyManager;
 
+	private double oldLevel;
+
+
 	private Queue<Enemy> currentWave;
 
 	public GamePlayerController() {
@@ -54,6 +58,7 @@ public class GamePlayerController implements Observer {
 		this.model = new GamePlayModel(this.loader);
 		this.enemyManager = new EnemyManager(this.model);
 		this.model.addObserver(this);
+		this.oldLevel = 0;
 	}
 
 	/**
@@ -130,10 +135,20 @@ public class GamePlayerController implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		if (o instanceof GamePlayModel) {
+			double newLevel = ((GamePlayModel) o).getCurrentLevel();
 			// update level in display
 			this.view.updateStatsDisplay(((GamePlayModel) o).getGold(), ((GamePlayModel) o).getLife(),
 					((GamePlayModel) o).getCurrentLevel());
 			this.view.updateCurrentLevelStats(((GamePlayModel) o).getCurrentLevel());
+			if (this.oldLevel != newLevel){
+				//test level
+				this.oldLevel = newLevel;
+				this.view.newLevelPopUp(e->{
+					System.out.println("New level");
+					this.view.getGrid().getGrid().getChildren().clear();
+					//do something to trigger new level here!
+				});
+			}
 		}
 		/*
 		 * GamePlayModel model = (GamePlayModel) o; if (model.getLife() == 0) {
