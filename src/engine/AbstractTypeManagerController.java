@@ -1,5 +1,7 @@
 package engine;
 
+import java.util.List;
+
 public abstract class AbstractTypeManagerController<E extends Manager<T>, U extends TypeBuilder<T, U>, T extends Type> implements ManagerController<E, U, T> {
 
     private E typeManager;
@@ -11,11 +13,11 @@ public abstract class AbstractTypeManagerController<E extends Manager<T>, U exte
     }
 
     @Override
-    public int createType (ViewFiller viewFiller) {
+    public <V extends ViewFiller> int createType (V viewFiller) {
         return typeManager.addEntry(constructType(viewFiller));
     }
 
-    protected T constructType (ViewFiller viewFiller) {
+    protected <V extends ViewFiller> T constructType (V viewFiller) {
         return constructTypeProperties(viewFiller, typeBuilder)
                 .addNameListener( (oldValue, newValue) -> viewFiller
                         .updateName(newValue))
@@ -44,6 +46,11 @@ public abstract class AbstractTypeManagerController<E extends Manager<T>, U exte
     @Override
     public Double getSize (int id) {
         return typeManager.getEntity(id).getSize();
+    }
+    
+    @Override
+    public List<Integer> getCreatedTypeIds () {
+        return typeManager.getEntityIds();
     }
 
     @Override
