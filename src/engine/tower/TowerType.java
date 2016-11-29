@@ -8,6 +8,7 @@ import engine.AbstractType;
 import engine.ability.Ability;
 import engine.enemy.Enemy;
 import engine.enemy.EnemyType;
+import engine.observer.ObservableList;
 import engine.observer.ObservableProperty;
 import engine.weapon.Weapon;
 import engine.weapon.WeaponType;
@@ -17,9 +18,9 @@ import javafx.beans.property.SimpleDoubleProperty;
 
 public class TowerType extends AbstractType implements Tower {
 
-    private ObservableProperty<List<Integer>> weapons;
-    private ObservableProperty<List<Integer>> targets;
-    private ObservableProperty<List<Integer>> abilities;
+    private ObservableList<Integer> weapons;
+    private ObservableList<Integer> targets;
+    private ObservableList<Integer> abilities;
     private ObservableProperty<Integer> upgrade;
     private ObservableProperty<Double> cost;
     private ObservableProperty<Double> sellAmount;
@@ -48,12 +49,12 @@ public class TowerType extends AbstractType implements Tower {
 
     @Override
     public void addWeapon (int weapon) {
-        weapons.getProperty().add(weapon);
+        weapons.add(weapon);
     }
 
     @Override
     public void removeWeapon (int weapon) {
-        weapons.getProperty().removeIf(a -> a.equals(weapon));
+        weapons.remove(weapon);
     }
 
     @Override
@@ -63,12 +64,12 @@ public class TowerType extends AbstractType implements Tower {
 
     @Override
     public void removeEnemy (int target) {
-        targets.getProperty().removeIf(a -> a.equals(target));
+        targets.remove(target);
     }
 
     @Override
     public void addTarget (int target) {
-        targets.getProperty().add(target);
+        targets.add(target);
     }
 
     @Override
@@ -78,12 +79,12 @@ public class TowerType extends AbstractType implements Tower {
 
     @Override
     public void removeAbility (int ability) {
-        abilities.getProperty().removeIf(a -> a.equals(ability));
+        abilities.remove(ability);
     }
 
     @Override
     public void addAbility (int ability) {
-        abilities.getProperty().add(ability);
+        abilities.add(ability);
     }
 
     @Override
