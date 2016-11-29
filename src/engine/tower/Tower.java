@@ -7,6 +7,7 @@ import engine.enemy.Enemy;
 import engine.weapon.Weapon;
 
 
+
 public interface Tower extends Type {
 
     void setUpgrade (int upgrade);

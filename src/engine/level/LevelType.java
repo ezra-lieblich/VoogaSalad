@@ -6,40 +6,35 @@ import java.util.Map;
 
 import engine.AbstractType;
 import engine.TypeInitializer;
-import engine.enemy.EnemyType;
-import java.util.HashMap;
 
 
 public class LevelType extends AbstractType implements Level {
-
-    private Map<EnemyType, Integer> enemyCounts;
-	private int rewardHealth;
-	private int rewardMoney;
-	private int rewardPoints;
+	//TODO Make enemyCounts ObservableMap change to doubles
+    private Map<Integer, Integer> enemyCounts;
+	private double rewardHealth;
+	private double rewardMoney;
+	private double rewardPoints;
 	private double durationInSeconds;
 
 
     protected LevelType (TypeInitializer typeBuilder) {
-	super(typeBuilder);
-	 // TODO Auto-generated constructor stub
+    	super(typeBuilder);	
 	}
     
-//	public LevelType() {
-//		enemyCounts = new HashMap<>();
-//	}
+
 
 	@Override
-	public Map<EnemyType, Integer> getEnemyCounts() {
+	public Map<Integer, Integer> getEnemyCounts() {
 		return Collections.unmodifiableMap(enemyCounts);
 	}
 
 	@Override
-	public void setEnemyCounts(EnemyType enemy, int enemyCount) {
+	public void setEnemyCounts(int enemy, int enemyCount) {
 		enemyCounts.put(enemy, enemyCount);
 	}
 
 	@Override
-	public int getRewardHealth() {
+	public double getRewardHealth() {
 		return rewardHealth;
 	}
 
@@ -49,7 +44,7 @@ public class LevelType extends AbstractType implements Level {
 	}
 
 	@Override
-	public int getRewardMoney() {
+	public double getRewardMoney() {
 		return rewardMoney;
 	}
 
@@ -59,7 +54,7 @@ public class LevelType extends AbstractType implements Level {
 	}
 
 	@Override
-	public int getRewardPoints() {
+	public double getRewardPoints() {
 		return rewardPoints;
 	}
 
