@@ -2,6 +2,7 @@ package engine.path;
 
 import engine.AbstractType;
 import engine.TypeInitializer;
+import engine.observer.ObservableList;
 import engine.observer.ObservableProperty;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -10,7 +11,7 @@ import java.util.List;
 public class PathType extends AbstractType implements Path {
 
     private ObservableProperty<String> type;
-    private ObservableProperty<List<Coordinate<Integer>>> coordinates; 
+    private ObservableList<Coordinate<Integer>> coordinates; 
     private ObservableProperty<Integer> gridRows;
     private ObservableProperty<Integer> gridColumns;
 
@@ -55,19 +56,20 @@ public class PathType extends AbstractType implements Path {
         this.gridRows.setProperty(gridColumns);        
     }
 
-    @Override
-    public void setCoordinates (List<Coordinate<Integer>> coordinates) {
-        this.coordinates.setProperty(coordinates);
-    }
+  @Override
+  public void addCoordinate(Coordinate<Integer> coordinate) {
+      coordinates.add(coordinate);
+  }
+  
+  @Override
+  public void removeCoordinate(Coordinate<Integer> coordinate) {
+      coordinates.remove(coordinate);
+  }
+  
+//@Override
+//public void setCoordinates (List<Coordinate<Integer>> coordinates) {
+//    this.coordinates.setProperty(coordinates);
+//}
 
-//  @Override
-//  public void addCoordinate(Coordinate<Integer> coordinate) {
-//      coordinates.getProperty().add(coordinate);
-//  }
-//  
-//  @Override
-//  public void removeCoordinate(Coordinate<Integer> coordinate) {
-//      coordinates.getProperty().remove(coordinate);
-//  }
     
 }
