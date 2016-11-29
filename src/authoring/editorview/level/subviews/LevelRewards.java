@@ -25,6 +25,7 @@ public class LevelRewards {
 	private ResourceBundle levelResource = ResourceBundle.getBundle(RESOURCE_FILE_NAME);
 	
 	public LevelRewards(){
+		root = new VBox();
 		makeHealthRewardTextField();
 		makeMoneyRewardTextField();
 		makePointsRewardTextField();

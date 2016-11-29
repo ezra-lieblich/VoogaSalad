@@ -8,6 +8,7 @@ public class LevelChooser {
 	private HBox root;
 	
 	public LevelChooser(){
+		root = new HBox();
 		buildLevelComboBox();
 	}
 	

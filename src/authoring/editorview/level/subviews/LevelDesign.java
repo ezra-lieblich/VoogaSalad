@@ -9,6 +9,7 @@ public class LevelDesign {
 	
 	
 	public LevelDesign(){
+		root = new VBox();
 		makePathComboBox();
 	}
 	
