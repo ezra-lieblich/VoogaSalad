@@ -13,7 +13,7 @@ import engine.level.LevelInitializer;
 import engine.observer.ObservableList;
 import engine.observer.ObservableProperty;
 
-public class GameTypeBuilder extends AbstractTypeBuilder<Game, GameBuilder> implements GameBuilder, GameInitializer {
+public class GameModeTypeBuilder extends AbstractTypeBuilder<GameMode, GameModeBuilder> implements GameModeBuilder, GameModeInitializer {
 
 	public static final String DEFAULT_NAME = "New Game";
     public static final String DEFAULT_IMAGE_PATH = "Images.blacksquare.jpg";
@@ -30,36 +30,36 @@ public class GameTypeBuilder extends AbstractTypeBuilder<Game, GameBuilder> impl
     private ObservableProperty<Double> initialLives;
     private ObservableProperty<Double> initialMoney;
 	
-	protected GameTypeBuilder() {
+	protected GameModeTypeBuilder() {
 		super(DEFAULT_NAME, DEFAULT_IMAGE_PATH, DEFAULT_SIZE);
 	}
 
 	@Override
-	public GameBuilder addWinningConditionsListener(BiConsumer<List<String>, List<String>> listener) {
+	public GameModeBuilder addWinningConditionsListener(BiConsumer<List<String>, List<String>> listener) {
 		winningConditions.addListener(listener);
 		return this;
 	}
 
 	@Override
-	public GameBuilder addLosingConditionsListener(BiConsumer<List<String>, List<String>> listener) {
+	public GameModeBuilder addLosingConditionsListener(BiConsumer<List<String>, List<String>> listener) {
 		losingConditions.addListener(listener);
 		return this;
 	}
 
 	@Override
-	public GameBuilder addGameTypeListener(BiConsumer<String, String> listener) {
+	public GameModeBuilder addGameTypeListener(BiConsumer<String, String> listener) {
 		gameType.addListener(listener);
 		return this;
 	}
 
 	@Override
-	public GameBuilder addInitialLivesListener(BiConsumer<Double, Double> listener) {
+	public GameModeBuilder addInitialLivesListener(BiConsumer<Double, Double> listener) {
 		initialLives.addListener(listener);
 		return this;
 	}
 
 	@Override
-	public GameBuilder addInitialMoneyListener(BiConsumer<Double, Double> listener) {
+	public GameModeBuilder addInitialMoneyListener(BiConsumer<Double, Double> listener) {
 		initialMoney.addListener(listener);
 		return this;
 	}
@@ -90,38 +90,38 @@ public class GameTypeBuilder extends AbstractTypeBuilder<Game, GameBuilder> impl
 	}
 
 	@Override
-	public GameBuilder buildWinningConditions(List<String> winningConditions) {
+	public GameModeBuilder buildWinningConditions(List<String> winningConditions) {
 		this.winningConditions.setProperty(winningConditions);
 		return this;
 	}
 
 	@Override
-	public GameBuilder buildLosingConditions(List<String> losingConditions) {
+	public GameModeBuilder buildLosingConditions(List<String> losingConditions) {
 		this.losingConditions.setProperty(losingConditions);
 		return this;
 	}
 
 	@Override
-	public GameBuilder buildGameType(String gameType) {
+	public GameModeBuilder buildGameType(String gameType) {
 		this.gameType.setProperty(gameType);
 		return this;
 	}
 
 	@Override
-	public GameBuilder buildInitialLives(double lives) {
+	public GameModeBuilder buildInitialLives(double lives) {
 		this.initialLives.setProperty(lives);
 		return this;
 	}
 
 	@Override
-	public GameBuilder buildInitialMoney(double money) {
+	public GameModeBuilder buildInitialMoney(double money) {
 		this.initialMoney.setProperty(money);
 		return this;
 	}
 
 	@Override
-	protected Game create() {
-		return new GameSettings(this);
+	protected GameMode create() {
+		return new GameModeType(this);
 	}
 
 	@Override
@@ -134,7 +134,7 @@ public class GameTypeBuilder extends AbstractTypeBuilder<Game, GameBuilder> impl
 	}
 
 	@Override
-	protected GameBuilder getThis() {
+	protected GameModeBuilder getThis() {
 		return this;
 	}
 

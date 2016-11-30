@@ -7,6 +7,7 @@ import authoring.editorview.IUpdateView;
 
 public interface ILevelUpdateView  extends ILevelEditorView, IUpdateView {
 	
+	//UpdateEnemy should take in the map of enemy counts
 	public void updateEnemy (int enemyID, int numEnemies);
 	
 	public void updateRewardPoints (double winPoints);

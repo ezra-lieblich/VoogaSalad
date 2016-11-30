@@ -4,7 +4,7 @@ import engine.TypeInitializer;
 import engine.observer.ObservableList;
 import engine.observer.ObservableProperty;
 
-public interface GameInitializer extends TypeInitializer {
+public interface GameModeInitializer extends TypeInitializer {
 	ObservableList<String> getWinningConditions();
 	ObservableList<String> getLosingConditions();
 	ObservableProperty<Double> getInitalLives();

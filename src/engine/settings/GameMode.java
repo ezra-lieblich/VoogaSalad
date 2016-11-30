@@ -8,16 +8,20 @@ import engine.Type;
 /**
  * Created by ezra on 11/20/16.
  */
-public interface Game extends Type{
+public interface GameMode extends Type{
 	
 
     List<String> getWinningConditions();
 
-    void setWinningConditions(String winningConditions);
+    void setWinningCondition(String winningCondition);
+    
+    void removeWinningCondition(String winningCondition);
 
     List<String> getLosingConditions();
 
-    void setLosingConditions(String losingConditions);
+    void setLosingCondition(String losingCondition);
+    
+    void removeLosingCondition(String losingCondition);
 
     String getGameType();
 
