@@ -15,12 +15,11 @@ public class LevelNameView implements ILevelSetView {
     private HBox hbox;
     private LevelEditorViewDelegate delegate;
     private TextField nameTextField;
-    private String levelName;
 
     private static final String RESOURCE_FILE_NAME = "resources/GameAuthoringLevels";
     private ResourceBundle levelResource = ResourceBundle.getBundle(RESOURCE_FILE_NAME);
 
-    public LevelNameView () {
+    public LevelNameView (ResourceBundle levelsResource) {
         makeNameTextField();
     }
 
@@ -35,8 +34,7 @@ public class LevelNameView implements ILevelSetView {
     }
 
     public void setLevelName (String name) {
-        this.levelName = name;
-        nameTextField.setText(levelName);
+        nameTextField.setText(name);
     }
 
     private void makeNameTextField () {

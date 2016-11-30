@@ -1,5 +1,6 @@
 package authoring.editorview.level.subviews;
 
+import java.util.ResourceBundle;
 import authoring.editorview.level.ILevelSetView;
 import authoring.editorview.level.LevelEditorViewDelegate;
 import javafx.scene.Node;
@@ -14,7 +15,7 @@ public class LevelDesign implements ILevelSetView {
 
     private VBox vbox;
 
-    public LevelDesign () {
+    public LevelDesign (ResourceBundle levelsResource) {
         vbox = new VBox();
         // makePathComboBox();
     }
