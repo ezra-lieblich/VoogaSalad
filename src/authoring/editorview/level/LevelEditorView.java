@@ -1,5 +1,6 @@
 package authoring.editorview.level;
 
+import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import authoring.editorview.level.subviews.LevelChooserView;
@@ -121,5 +122,11 @@ public class LevelEditorView implements ILevelEditorView {
     public void updateSizeDisplay (double size) {
         // Don't worry about this right now
     }
+
+	@Override
+	public void updateBank(List<Integer> ids) {
+		// TODO Auto-generated method stub
+		System.out.println("No level bank currently implemented");
+	}
 
 }

@@ -153,4 +153,9 @@ public class TowerEditorView implements ITowerEditorView {
         // TODO Auto-generated method stub
 
     }
+
+	@Override
+	public void updateBank(List<Integer> ids) {
+		this.towerBank.updateBank(ids);
+	}
 }
