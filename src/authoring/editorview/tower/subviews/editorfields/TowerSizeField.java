@@ -15,7 +15,7 @@ public class TowerSizeField implements ITowerEditorView {
 
     public TowerSizeField (ResourceBundle labelsResource) {
         towerSizeField =
-                TextFieldFactory.makeTextField(labelsResource.getString("EnterString"),
+                TextFieldFactory.makeTextField(labelsResource.getString("EnterInt"),
                                                e -> delegate.onUserEnteredTowerSize(towerSizeField
                                                        .getText()));
     }

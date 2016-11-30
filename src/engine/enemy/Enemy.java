@@ -19,9 +19,9 @@ public interface Enemy extends Type {
 
     void setDamage(double damage);
 
-    double getPoints();
+    double getScore();
 
-    void setPoints(double points);
+    void setScore(double score);
 
     double getMoney();
 

@@ -12,6 +12,7 @@ import authoring.editorview.tower.subviews.editorfields.TowerChooseWeaponField;
 import authoring.editorview.tower.subviews.editorfields.TowerImageView;
 import authoring.editorview.tower.subviews.editorfields.TowerNameField;
 import authoring.editorview.tower.subviews.editorfields.TowerSellPriceField;
+import authoring.editorview.tower.subviews.editorfields.TowerSizeField;
 import authoring.editorview.tower.subviews.editorfields.TowerUnlockLevelField;
 import authoring.editorview.tower.subviews.editorfields.TowerUpgradeField;
 import authoring.utilityfactories.BoxFactory;
@@ -40,6 +41,7 @@ public class TowerEffectView extends PhotoFileChooser implements ITowerEditorVie
     private TowerAbilityField towerAbility;
     private TowerChooseWeaponField towerChooseWeapon;
     private TowerUpgradeField towerUpgrade;
+    private TowerSizeField towerSize;
 
     private VBox vbox;
     private ScrollPane completeView;
@@ -56,6 +58,7 @@ public class TowerEffectView extends PhotoFileChooser implements ITowerEditorVie
                             TowerAbilityField towerAbility,
                             TowerChooseWeaponField towerChooseWeapon,
                             TowerUpgradeField towerUpgrade,
+                            TowerSizeField towerSize,
                             ResourceBundle labelsResource,
                             ResourceBundle dialogueBoxResource) {
 
@@ -70,6 +73,7 @@ public class TowerEffectView extends PhotoFileChooser implements ITowerEditorVie
         this.towerAbility = towerAbility;
         this.towerChooseWeapon = towerChooseWeapon;
         this.towerUpgrade = towerUpgrade;
+        this.towerSize = towerSize;
 
         vbox = new VBox(10);
         completeView = new ScrollPane();
@@ -101,6 +105,9 @@ public class TowerEffectView extends PhotoFileChooser implements ITowerEditorVie
         vbox.getChildren()
                 .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Name"),
                                                            towerName.getInstanceAsNode()));
+        vbox.getChildren()
+        .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Size"),
+                                                   towerSize.getInstanceAsNode()));
         vbox.getChildren()
                 .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("BuyPrice"),
                                                            towerBuyPrice.getInstanceAsNode()));
