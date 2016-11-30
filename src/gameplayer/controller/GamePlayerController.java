@@ -162,10 +162,11 @@ public class GamePlayerController implements Observer {
 //			this.view.getGrid().populatePath(model.getGrid().getStartPoint()); //THIS LINE CAUSES SLOW DOWN
 			List<Enemy>enemyRedraw = this.enemyManager.getEnemyOnGrid(); 
 			List<Tower>towerRedraw = this.model.getTowerOnGrid();
-			List<IDrawable> reDraw = convertToDrawable(enemyRedraw,towerRedraw);//probably need to add bullets here too
+			List<IDrawable> reEnemyDraw = convertEnemyDrawable(enemyRedraw);//probably need to add bullets here too
+			List<IDrawable> reTowerDraw = convertTowerDrawable(towerRedraw);
 			
-			
-			this.view.reRender(reDraw);
+			this.view.reRender(reEnemyDraw);
+			this.view.reRenderTower(reTowerDraw);
 		});
 		Timeline animation = new Timeline();
 		animation.setCycleCount(Timeline.INDEFINITE);
@@ -183,6 +184,22 @@ public class GamePlayerController implements Observer {
 		for(Enemy e: enemies){
 			ret.add(e);
 		}
+		for(Tower t: towers){
+			ret.add(t);
+		}
+		return ret; 
+	}
+	
+	private List<IDrawable> convertEnemyDrawable(List<Enemy> enemies){
+		ArrayList<IDrawable> ret = new ArrayList<>(); 
+		for(Enemy e: enemies){
+			ret.add(e);
+		}
+		return ret; 
+	}
+	
+	private List<IDrawable> convertTowerDrawable(List<Tower>towers){
+		ArrayList<IDrawable> ret = new ArrayList<>(); 
 		for(Tower t: towers){
 			ret.add(t);
 		}
