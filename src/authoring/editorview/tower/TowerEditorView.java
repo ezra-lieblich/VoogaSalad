@@ -15,7 +15,6 @@ import authoring.editorview.tower.subviews.editorfields.TowerSizeField;
 import authoring.editorview.tower.subviews.editorfields.TowerUnlockLevelField;
 import authoring.editorview.tower.subviews.editorfields.TowerUpgradeBank;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 
 

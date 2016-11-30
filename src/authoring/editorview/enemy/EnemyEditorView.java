@@ -3,8 +3,6 @@ package authoring.editorview.enemy;
 import java.io.IOException;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.function.Consumer;
-
 import authoring.editorview.ListDataSource;
 import authoring.editorview.enemy.subviews.EnemyEffectView;
 import authoring.editorview.enemy.subviews.EnemyImageBank;
