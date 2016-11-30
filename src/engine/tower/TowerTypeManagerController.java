@@ -98,7 +98,7 @@ public class TowerTypeManagerController
                 .addWeaponsListener( (oldValue, newValue) -> towerUpdater
                         .updateTowerWeaponBank(newValue))
                 .addAbilitiesListener( (oldValue, newValue) -> towerUpdater
-                        .updateTowerAbility(newValue))
+                        .updateTowerAbilityBank(newValue))
                 .addUpgradesListener( (oldValue, newValue) -> towerUpdater
                         .updateTowerUpgradeBank(newValue))
                 .addCostListener( (oldValue, newValue) -> towerUpdater

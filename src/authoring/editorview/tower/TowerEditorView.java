@@ -34,8 +34,8 @@ public class TowerEditorView implements ITowerEditorView {
     private TowerSellPriceField towerSellPrice;
     private TowerUnlockLevelField towerUnlockLevel;
     private TowerAbilityBank towerAbility;
-    private TowerWeaponBank towerChooseWeapon;
-    private TowerUpgradeBank towerUpgrade;
+    private TowerWeaponBank towerWeaponBank;
+    private TowerUpgradeBank towerUpgradeBank;
     private TowerSizeField towerSize;
     private ResourceBundle labelsResource =
             ResourceBundle.getBundle("resources/GameAuthoringTower");
@@ -50,14 +50,15 @@ public class TowerEditorView implements ITowerEditorView {
         towerSellPrice = new TowerSellPriceField(labelsResource);
         towerUnlockLevel = new TowerUnlockLevelField(labelsResource);
         towerAbility = new TowerAbilityBank(labelsResource);
-        towerChooseWeapon = new TowerWeaponBank(labelsResource);
-        towerUpgrade = new TowerUpgradeBank(labelsResource);
+        towerWeaponBank = new TowerWeaponBank(labelsResource);
+        towerUpgradeBank = new TowerUpgradeBank(labelsResource);
         towerSize = new TowerSizeField(labelsResource);
 
         towerBank = new TowerImageBank(labelsResource, dialogueBoxResource);
         towerEffectView =
                 new TowerEffectView(towerName, towerImage, towerBuyPrice, towerSellPrice,
-                                    towerUnlockLevel, towerAbility, towerChooseWeapon, towerUpgrade,
+                                    towerUnlockLevel, towerAbility, towerWeaponBank,
+                                    towerUpgradeBank,
                                     towerSize,
                                     labelsResource, dialogueBoxResource);
         setBorderPane();
@@ -84,8 +85,8 @@ public class TowerEditorView implements ITowerEditorView {
         towerSellPrice.setDelegate(delegate);
         towerUnlockLevel.setDelegate(delegate);
         towerAbility.setDelegate(delegate);
-        towerChooseWeapon.setDelegate(delegate);
-        towerUpgrade.setDelegate(delegate);
+        towerWeaponBank.setDelegate(delegate);
+        towerUpgradeBank.setDelegate(delegate);
         towerSize.setDelegate(delegate);
     }
 
@@ -105,7 +106,7 @@ public class TowerEditorView implements ITowerEditorView {
     }
 
     @Override
-    public void updateTowerAbility (List<Integer> towerAbility) {
+    public void updateTowerAbilityBank (List<Integer> towerAbility) {
         // TODO Auto-generated method stub
 
     }
@@ -122,8 +123,7 @@ public class TowerEditorView implements ITowerEditorView {
 
     @Override
     public void createNewTower () {
-        // TODO Auto-generated method stub
-
+        // towerName.updateTowerName(towerName);
     }
 
     @Override
@@ -134,6 +134,7 @@ public class TowerEditorView implements ITowerEditorView {
     @Override
     public void updateImagePathDisplay (String imagePath) {
         this.towerImage.updateTowerImagePath(imagePath);
+        
     }
 
     @Override
@@ -152,14 +153,5 @@ public class TowerEditorView implements ITowerEditorView {
     public void deleteTower () {
         // TODO Auto-generated method stub
 
-    }
-
-    @Override
-    public void loadNewEffectsView () {
-        towerEffectView =
-                new TowerEffectView(towerName, towerImage, towerBuyPrice, towerSellPrice,
-                                    towerUnlockLevel, towerAbility, towerChooseWeapon, towerUpgrade,
-                                    towerSize,
-                                    labelsResource, dialogueBoxResource);
     }
 }
