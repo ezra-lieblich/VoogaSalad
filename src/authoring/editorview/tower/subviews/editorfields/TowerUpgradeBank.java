@@ -3,11 +3,7 @@ package authoring.editorview.tower.subviews.editorfields;
 import java.util.ResourceBundle;
 import authoring.editorview.tower.ITowerSetView;
 import authoring.editorview.tower.TowerEditorViewDelegate;
-import authoring.utilityfactories.ComboBoxFactory;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.scene.Node;
-import javafx.scene.control.ComboBox;
 import javafx.scene.layout.HBox;
 
 
@@ -24,7 +20,7 @@ public class TowerUpgradeBank implements ITowerSetView {
 
     public TowerUpgradeBank (ResourceBundle labelsResource) {
         this.labelsResource = labelsResource;
-        towerUpgradeBox= new HBox(5);
+        towerUpgradeBox = new HBox(5);
     }
 
     @Override
@@ -38,7 +34,7 @@ public class TowerUpgradeBank implements ITowerSetView {
     }
 
     public void addTowerUpgrade (String towerUpgrade) {
-        //towerUpgradeBox.setValue(towerUpgrade);
+        // towerUpgradeBox.setValue(towerUpgrade);
     }
 
     public void deleteTowerUpgrade (String towerUpgrade) {

@@ -25,9 +25,16 @@ public class LevelEditorViewController extends EditorViewController
     }
 
     @Override
-    public void onUserEnteredEditLevel () {
-        // TODO Auto-generated method stub
-
+    public void onUserEnteredEditLevel (String level) {
+        try {
+            Integer.parseInt(level);
+            currentLevelID = Integer.parseInt(level);
+            currentLevelID = levelDataSource.createType(levelView);
+        }
+        catch (Exception e) {
+            DialogueBoxFactory.createErrorDialogueBox("Not a correct level",
+                                                      "Choose an appropriate integer");
+        }
     }
 
     @Override
@@ -48,10 +55,10 @@ public class LevelEditorViewController extends EditorViewController
     }
 
     @Override
-    public void onUserEnteredTranstitionTime (String time) {
+    public void onUserEnteredTransitionTime (String time) {
         try {
             Double.parseDouble(time);
-            levelDataSource.setSize(currentLevelID, Double.parseDouble(time));
+            levelDataSource.setTransitionTime(currentLevelID, Double.parseDouble(time));
         }
         catch (NumberFormatException e) {
             createDialogueBox();
@@ -60,8 +67,14 @@ public class LevelEditorViewController extends EditorViewController
 
     @Override
     public void onUserEnteredEnemyFrequency (String frequency) {
-        // TODO Auto-generated method stub
-
+        try {
+            Double.parseDouble(frequency);
+            levelDataSource.setEnemyFrequency(currentLevelID, 0, Double.parseDouble(frequency));
+            // TODO: HUGE BTW - the second parameter is the enemy that is set
+        }
+        catch (NumberFormatException e) {
+            createDialogueBox();
+        }
     }
 
     @Override

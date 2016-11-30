@@ -8,7 +8,7 @@ public interface LevelEditorViewDelegate {
 
     public void onUserEnteredRewardHealth (String health);
 
-    public void onUserEnteredEditLevel ();
+    public void onUserEnteredEditLevel (String level);
 
     public void onUserEnteredLevelName (String levelName);
 
@@ -16,7 +16,7 @@ public interface LevelEditorViewDelegate {
 
     public void onUserEnteredDeleteLevel ();
 
-    public void onUserEnteredTranstitionTime (String time);
+    public void onUserEnteredTransitionTime (String time);
 
     public void onUserEnteredEnemyFrequency (String frequency);
 
