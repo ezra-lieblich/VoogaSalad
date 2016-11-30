@@ -88,6 +88,7 @@ public class PathImageView extends PhotoFileChooser{
 	}	
 	
 	private void addImageView() {
+		
 		Image image;
 		if (root.getChildren().contains(pathImageView)){
 			root.getChildren().remove(pathImageView);
