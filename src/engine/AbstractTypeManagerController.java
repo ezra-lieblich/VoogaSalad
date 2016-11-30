@@ -22,7 +22,7 @@ public abstract class AbstractTypeManagerController<E extends Manager<T>, U exte
     
     @Override
     public void addTypeBankListener(V updateView) {
-        //typeManager.addEntitiesListener((oldValue, newValue) -> updateView.updateBank(newValue));
+        typeManager.addEntitiesListener((oldValue, newValue) -> updateView.updateBank(newValue));
     }
 
     protected T constructType (V updateView) {
