@@ -6,7 +6,7 @@ import engine.ModelController;
 public class AuthoringController {
     private ModelController modelController;
     
-    AuthoringController() {
+    public AuthoringController() {
         modelController = new ModelAuthoringController();
     }
 }

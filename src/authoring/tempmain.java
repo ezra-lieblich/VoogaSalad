@@ -9,6 +9,7 @@ import authoring.editorview.level.LevelEditorViewController;
 import authoring.editorview.path.PathEditorViewController;
 import authoring.editorview.tower.TowerEditorViewController;
 import authoring.editorview.weapon.WeaponEditorViewController;
+import authoring.main.AuthoringController;
 import authoring.view.AuthoringViewController;
 import authoring.view.IAuthoringView;
 import javafx.application.Application;
@@ -31,12 +32,11 @@ public class tempmain extends Application {
     @Override
     public void start (Stage s) throws IOException {
     	
-    	ManagerTypeMediator mainMediator = new ManagerTypeMediator();
-    	
+        AuthoringController ac = new AuthoringController();
         AuthoringViewController mainVC = new AuthoringViewController(SIZE, SIZE);
         IAuthoringView mainView = mainVC.getView();
         
-    	this.createManagersAndControllers(mainMediator, mainVC);
+    	//this.createManagersAndControllers(mainMediator, mainVC);
         
         Scene scene = mainView.getScene();
         s.setTitle(TITLE);
@@ -72,11 +72,11 @@ public class tempmain extends Application {
 		EnemyEditorViewController enemyVC = (EnemyEditorViewController) editorVCs.get("enemy");
 		TowerEditorViewController towerVC = (TowerEditorViewController) editorVCs.get("tower");
 		
-		pathVC.setPathDataSource(pathController);
-		levelVC.setLevelDataSource(levelController);
-		weaponVC.setWeaponDataSource(weaponController);
-		enemyVC.setEnemyDataSource(enemyController);
-		towerVC.setTowerDataSource(towerController);
+//		pathVC.setPathDataSource(pathController);
+//		levelVC.setLevelDataSource(levelController);
+//		weaponVC.setWeaponDataSource(weaponController);
+//		enemyVC.setEnemyDataSource(enemyController);
+//		towerVC.setTowerDataSource(towerController);
 		
 	}
 
