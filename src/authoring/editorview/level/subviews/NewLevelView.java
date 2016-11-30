@@ -1,6 +1,7 @@
 package authoring.editorview.level.subviews;
 
 import java.util.ResourceBundle;
+import authoring.editorview.level.ILevelSetView;
 import authoring.editorview.level.LevelEditorViewDelegate;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -9,30 +10,27 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 
 
-public class NewLevelView {
+public class NewLevelView implements ILevelSetView {
 
     private static final String RESOURCE_FILE_NAME = "resources/GameAuthoringLevels";
     private ResourceBundle levelResource = ResourceBundle.getBundle(RESOURCE_FILE_NAME);
 
     private LevelEditorViewDelegate delegate;
     private VBox root;
-    private int activeLevelID;
 
     public NewLevelView () {
         this.root = new VBox();
         buildViewComponents();
     }
 
+    @Override
     public Node getInstanceAsNode () {
         return root;
     }
 
+    @Override
     public void setDelegate (LevelEditorViewDelegate delegate) {
         this.delegate = delegate;
-    }
-
-    public void setActiveLevelId (int levelID) {
-        this.activeLevelID = levelID;
     }
 
     private void buildViewComponents () {
@@ -50,8 +48,6 @@ public class NewLevelView {
 
     public void createNewLevel () {
         delegate.onUserEnteredCreateLevel();
-        delegate.onUserEnteredEditLevel(activeLevelID);
-
     }
 
     private Button createButton (String label, EventHandler<ActionEvent> event) {

@@ -1,22 +1,20 @@
 package authoring.editorview.level.subviews;
 
 import java.util.ResourceBundle;
+import authoring.editorview.level.ILevelSetView;
 import authoring.editorview.level.LevelEditorViewDelegate;
 import authoring.utilityfactories.BoxFactory;
-import authoring.utilityfactories.DialogueBoxFactory;
 import authoring.utilityfactories.TextFieldFactory;
 import javafx.scene.Node;
-import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 
-public class LevelRewardsView {
+public class LevelRewardsView implements ILevelSetView {
 
-    private VBox root;
+    private VBox vbox;
     private LevelEditorViewDelegate delegate;
-    private int activeLevelID;
 
     private TextField rewardHealthTextField;
     private TextField rewardMoneyTextField;
@@ -31,22 +29,20 @@ public class LevelRewardsView {
     private ResourceBundle levelResource = ResourceBundle.getBundle(RESOURCE_FILE_NAME);
 
     public LevelRewardsView () {
-        root = new VBox(10);
+        vbox = new VBox(10);
         makeHealthRewardTextField();
         makeMoneyRewardTextField();
         makePointsRewardTextField();
     }
 
+    @Override
     public Node getInstanceAsNode () {
-        return root;
+        return vbox;
     }
 
+    @Override
     public void setDelegate (LevelEditorViewDelegate delegate) {
         this.delegate = delegate;
-    }
-
-    public void setActiveLevelId (int levelID) {
-        this.activeLevelID = levelID;
     }
 
     private void makeHealthRewardTextField () {
@@ -60,7 +56,7 @@ public class LevelRewardsView {
                                                               .getString("RewardHealthTextField"),
                                                       rewardHealthTextField);
 
-        root.getChildren().add(rewardHealthBox);
+        vbox.getChildren().add(rewardHealthBox);
 
     }
 
@@ -74,7 +70,7 @@ public class LevelRewardsView {
                         .createHBoxWithLabelandNode(levelResource.getString("RewardMoneyTextField"),
                                                     rewardMoneyTextField);
 
-        root.getChildren().add(rewardMoneyBox);
+        vbox.getChildren().add(rewardMoneyBox);
 
     }
 
@@ -89,47 +85,20 @@ public class LevelRewardsView {
                                                               .getString("RewardPointsTextField"),
                                                       rewardPointsTextField);
 
-        root.getChildren().add(rewardPointsBox);
+        vbox.getChildren().add(rewardPointsBox);
 
     }
 
     private void submitRewardHealth (String healthString) {
-        try {
-            rewardHealth = Double.parseDouble(healthString);
-            delegate.onUserEnteredRewardHealth(activeLevelID, rewardHealth);
-        }
-        catch (NumberFormatException e) {
-            Alert inputError =
-                    DialogueBoxFactory.createErrorDialogueBox("Reward health must be a number",
-                                                              "Input error");
-            inputError.show();
-        }
+        delegate.onUserEnteredRewardHealth(healthString);
     }
 
     private void submitRewardMoney (String moneyString) {
-        try {
-            rewardMoney = Double.parseDouble(moneyString);
-            delegate.onUserEnteredRewardMoney(activeLevelID, rewardMoney);
-        }
-        catch (NumberFormatException e) {
-            Alert inputError =
-                    DialogueBoxFactory.createErrorDialogueBox("Reward money must be a number",
-                                                              "Input error");
-            inputError.show();
-        }
+        delegate.onUserEnteredRewardMoney(moneyString);
     }
 
     private void submitRewardPoints (String pointsString) {
-        try {
-            rewardPoints = Double.parseDouble(pointsString);
-            delegate.onUserEnteredRewardPoints(activeLevelID, rewardPoints);
-        }
-        catch (NumberFormatException e) {
-            Alert inputError =
-                    DialogueBoxFactory.createErrorDialogueBox("Reward points must be a number",
-                                                              "Input error");
-            inputError.show();
-        }
+        delegate.onUserEnteredRewardPoints(pointsString);
     }
 
     public void setRewardHealth (double rewardHealth) {

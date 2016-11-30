@@ -12,11 +12,10 @@ import javafx.scene.layout.HBox;
 
 public class LevelNameView implements ILevelSetView {
 
-    private HBox root;
+    private HBox hbox;
     private LevelEditorViewDelegate delegate;
     private TextField nameTextField;
     private String levelName;
-    private int activeLevelID;
 
     private static final String RESOURCE_FILE_NAME = "resources/GameAuthoringLevels";
     private ResourceBundle levelResource = ResourceBundle.getBundle(RESOURCE_FILE_NAME);
@@ -27,16 +26,12 @@ public class LevelNameView implements ILevelSetView {
 
     @Override
     public Node getInstanceAsNode () {
-        return root;
+        return hbox;
     }
 
     @Override
     public void setDelegate (LevelEditorViewDelegate delegate) {
         this.delegate = delegate;
-    }
-
-    public void setActiveLevelId (int levelID) {
-        this.activeLevelID = levelID;
     }
 
     public void setLevelName (String name) {
@@ -47,11 +42,11 @@ public class LevelNameView implements ILevelSetView {
     private void makeNameTextField () {
         nameTextField = TextFieldFactory.makeTextField("",
                                                        e -> delegate
-                                                               .onUserEnteredLevelName(activeLevelID,
+                                                               .onUserEnteredLevelName(
                                                                                        nameTextField
                                                                                                .getText()));
         nameTextField.setMaxWidth(75);
-        root =
+        hbox =
                 BoxFactory.createHBoxWithLabelandNode(levelResource.getString("NameTextField"),
                                                       nameTextField);
 

@@ -6,15 +6,15 @@ import javafx.scene.layout.HBox;
 
 public class LevelChooserView {
 
-    private HBox root;
+    private HBox hbox;
 
     public LevelChooserView () {
-        root = new HBox();
+        hbox = new HBox();
         buildLevelComboBox();
     }
 
     public Node getInstanceAsNode () {
-        return root;
+        return hbox;
     }
 
     private void buildLevelComboBox () {

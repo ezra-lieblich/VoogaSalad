@@ -11,14 +11,14 @@ import javafx.scene.layout.VBox;
 
 public class LevelEditorView implements ILevelEditorView {
 
-    private VBox root;
+    private VBox vbox;
     private LevelChooserView levelChooser;
     private LevelDesign levelDesign;
     private LevelRewardsView levelRewardsView;
     private LevelNameView levelNameView;
 
     LevelEditorView (int width, int height) {
-        this.root = new VBox(10);
+        this.vbox = new VBox(10);
         this.levelChooser = new LevelChooserView();
         this.levelDesign = new LevelDesign();
         this.levelRewardsView = new LevelRewardsView();
@@ -29,17 +29,18 @@ public class LevelEditorView implements ILevelEditorView {
 
     @Override
     public Node getInstanceAsNode () {
-        return root;
+        return vbox;
     }
 
     @Override
     public void setDelegate (LevelEditorViewDelegate delegate) {
         levelNameView.setDelegate(delegate);
+        levelRewardsView.setDelegate(delegate);
     }
 
     private void setLevelView () {
 
-        root.getChildren().addAll(levelChooser.getInstanceAsNode(),
+        vbox.getChildren().addAll(levelChooser.getInstanceAsNode(),
                                   levelNameView.getInstanceAsNode(),
                                   levelRewardsView.getInstanceAsNode(),
                                   levelDesign.getInstanceAsNode());
