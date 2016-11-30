@@ -3,8 +3,9 @@ package authoring.editorview.enemy;
 import java.io.IOException;
 import java.util.ResourceBundle;
 import authoring.editorview.EditorViewController;
+import authoring.editorview.ListCellData;
+import authoring.editorview.ListDataSource;
 import authoring.editorview.enemy.subviews.EnemyListCellData;
-import authoring.editorview.enemy.subviews.EnemyListDataSource;
 import authoring.utilityfactories.DialogueBoxFactory;
 import engine.enemy.*;
 
@@ -16,7 +17,7 @@ import engine.enemy.*;
  *
  */
 public class EnemyEditorViewController extends EditorViewController
-        implements EnemyEditorViewDelegate, EnemyListDataSource {
+        implements EnemyEditorViewDelegate, ListDataSource {
 
     private EnemyManagerController enemyDataSource;
     private int currentEnemyID;
@@ -132,11 +133,18 @@ public class EnemyEditorViewController extends EditorViewController
     }
 
     @Override
-    public EnemyListCellData getCellDataForEnemy (int enemyID) {
-        EnemyListCellData cellData = new EnemyListCellData();
+    public ListCellData getCellDataForSubject (int enemyID) {
+        ListCellData cellData = new EnemyListCellData();
         cellData.setName(enemyDataSource.getName(enemyID));
         cellData.setImagePath(enemyDataSource.getImagePath(enemyID));
+        cellData.setId(enemyID);
         return cellData;
     }
+
+	@Override
+	public void onUserSelectedEnemy(int enemyID) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

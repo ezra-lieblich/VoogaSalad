@@ -29,4 +29,6 @@ public interface EnemyEditorViewDelegate {
     public void onUserEnteredEnemyName (String enemyName);
 
     public void onUserEnteredEnemySize (String enemySize);
+    
+    public void onUserSelectedEnemy (int enemyID);
 }
