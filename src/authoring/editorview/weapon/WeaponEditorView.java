@@ -11,6 +11,7 @@ import authoring.editorview.weapon.subviews.editorfields.WeaponImageView;
 import authoring.editorview.weapon.subviews.editorfields.WeaponNameField;
 import authoring.editorview.weapon.subviews.editorfields.WeaponPathField;
 import authoring.editorview.weapon.subviews.editorfields.WeaponRangeField;
+import authoring.editorview.weapon.subviews.editorfields.WeaponSizeField;
 import authoring.editorview.weapon.subviews.editorfields.WeaponSpeedField;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
@@ -33,6 +34,7 @@ public class WeaponEditorView implements IWeaponUpdateView {
     private WeaponCollisionEffectField weaponCollisionView;
     private WeaponPathField weaponPathView;
     private WeaponImageView weaponImageView;
+    private WeaponSizeField weaponSizeView;
 
     private int width;
     private int height;
@@ -57,10 +59,12 @@ public class WeaponEditorView implements IWeaponUpdateView {
         weaponCollisionView = new WeaponCollisionEffectField(labelsResource);
         weaponPathView = new WeaponPathField(labelsResource);
         weaponImageView = new WeaponImageView(labelsResource);
+        weaponSizeView = new WeaponSizeField(labelsResource);
         weaponEffectsView =
                 new WeaponEffectView(weaponNameView, weaponSpeedView, weaponFireRateView,
                                      weaponRangeView, weaponCollisionView,
-                                     weaponPathView, weaponImageView, labelsResource,
+                                     weaponPathView, weaponImageView, weaponSizeView,
+                                     labelsResource,
                                      dialogueBoxResource);
         setBorderPane();
     }
@@ -88,6 +92,7 @@ public class WeaponEditorView implements IWeaponUpdateView {
         weaponCollisionView.setDelegate(delegate);
         weaponEffectsView.setDelegate(delegate);
         weaponPathView.setDelegate(delegate);
+        weaponSizeView.setDelegate(delegate);
     }
 
     @Override
@@ -107,13 +112,7 @@ public class WeaponEditorView implements IWeaponUpdateView {
 
     @Override
     public void updateRangeDisplay (double range) {
-        weaponRangeView.updateWeaponRange(Double.toString(range));
-    }
-
-    @Override
-    public void updateWeaponImagePath (String imagePath) {
-        weaponImageView.updateWeaponImagePath(imagePath);
-
+        this.weaponRangeView.updateWeaponRange(Double.toString(range));
     }
 
     @Override
@@ -123,13 +122,8 @@ public class WeaponEditorView implements IWeaponUpdateView {
     }
 
     @Override
-    public void updateWeaponName (String weaponName) {
-        this.weaponNameView.updateWeaponName(weaponName);
-    }
-
-    @Override
     public void updateWeaponTrajectory (String path) {
-        weaponPathView.updateWeaponPath(path);
+        this.weaponPathView.updateWeaponPath(path);
     }
 
     @Override
@@ -139,20 +133,26 @@ public class WeaponEditorView implements IWeaponUpdateView {
 
     }
 
-    // @Override
-    public int getCurrentWeaponID () {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
     @Override
     public void updateTargetEnemies (List<Integer> targetEnemies) {
         // TODO Auto-generated method stub
 
     }
 
-    public WeaponEditorView getTowerUpdater () {
-        return this;
+    @Override
+    public void updateNameDisplay (String name) {
+        this.weaponNameView.updateWeaponName(name);
+
+    }
+
+    @Override
+    public void updateImagePathDisplay (String imagePath) {
+        this.weaponImageView.updateWeaponImagePath(imagePath);
+    }
+
+    @Override
+    public void updateSizeDisplay (double size) {
+        this.weaponSizeView.updateWeaponSize(Double.toString(size));
     }
 
 }

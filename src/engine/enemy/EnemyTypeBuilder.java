@@ -15,7 +15,7 @@ public class EnemyTypeBuilder extends AbstractTypeBuilder<Enemy, EnemyBuilder> i
     public static final double DEFAULT_SPEED = 1;
     public static final double DEFAULT_HEALTH = 10;
     public static final double DEFAULT_DAMAGE = 2;
-    public static final double DEFAULT_POINTS = 10;
+    public static final double DEFAULT_SCORE = 10;
     public static final double DEFAULT_MONEY = 20;
     public static final String DEFAULT_COLLISION_EFFECT = "";
 
@@ -24,7 +24,7 @@ public class EnemyTypeBuilder extends AbstractTypeBuilder<Enemy, EnemyBuilder> i
     private ObservableProperty<Double> speed;
 	private ObservableProperty<Double> health;
 	private ObservableProperty<Double> damage;
-	private ObservableProperty<Double> points;
+	private ObservableProperty<Double> score;
 	private ObservableProperty<Double> money;
 	private ObservableProperty<String> collisionEffect;
     
@@ -51,8 +51,8 @@ public class EnemyTypeBuilder extends AbstractTypeBuilder<Enemy, EnemyBuilder> i
 	}
 
 	@Override
-	public EnemyBuilder addPointsListener(BiConsumer<Double, Double> listener) {
-		points.addListener(listener);
+	public EnemyBuilder addScoreListener(BiConsumer<Double, Double> listener) {
+		score.addListener(listener);
 		return this;
 	}
 
@@ -84,8 +84,8 @@ public class EnemyTypeBuilder extends AbstractTypeBuilder<Enemy, EnemyBuilder> i
 	}
 
 	@Override
-	public ObservableProperty<Double> getPoints() {
-		return points;
+	public ObservableProperty<Double> getScore() {
+		return score;
 	}
 
 	@Override
@@ -117,8 +117,8 @@ public class EnemyTypeBuilder extends AbstractTypeBuilder<Enemy, EnemyBuilder> i
 	}
 
 	@Override
-	public EnemyBuilder buildPoints(double points) {
-		this.points.setProperty(points);
+	public EnemyBuilder buildScore(double points) {
+		this.score.setProperty(points);
 		return this;
 	}
 
@@ -144,7 +144,7 @@ public class EnemyTypeBuilder extends AbstractTypeBuilder<Enemy, EnemyBuilder> i
 		this.speed = new ObservableObjectProperty<Double>(DEFAULT_SPEED);
 		this.health = new ObservableObjectProperty<Double>(DEFAULT_HEALTH);
 		this.damage = new ObservableObjectProperty<Double>(DEFAULT_DAMAGE);
-		this.points = new ObservableObjectProperty<Double>(DEFAULT_POINTS);
+		this.score = new ObservableObjectProperty<Double>(DEFAULT_SCORE);
 		this.money = new ObservableObjectProperty<Double>(DEFAULT_MONEY);
 		this.collisionEffect = new ObservableObjectProperty<String>(DEFAULT_COLLISION_EFFECT);
 	}

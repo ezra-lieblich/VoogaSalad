@@ -75,17 +75,17 @@ public class WeaponEditorViewController extends EditorViewController
 
     @Override
     public void onUserEnteredWeaponImage (String weaponImagePath) {
-        weaponDataSource.setWeaponImagePath(currentWeaponID, weaponImagePath);
+        weaponDataSource.setImagePath(currentWeaponID, weaponImagePath);
     }
 
     @Override
     public void onUserPressedCreateWeapon () {
-        weaponDataSource.createWeapon();
+        //weaponDataSource.createWeapon();
     }
 
     @Override
     public void onUserEnteredWeaponName (String weaponName) {
-        weaponDataSource.setWeaponName(currentWeaponID, weaponName);
+        weaponDataSource.setName(currentWeaponID, weaponName);
     }
 
     @Override
@@ -109,6 +109,12 @@ public class WeaponEditorViewController extends EditorViewController
     public void onUserPressedDeleteWeapon () {
         // TODO Auto-generated method stub
 
+    }
+
+    @Override
+    public void onUserEnteredWeaponSize (String weaponSize) {
+        // TODO Auto-generated method stub
+        
     }
 
 }

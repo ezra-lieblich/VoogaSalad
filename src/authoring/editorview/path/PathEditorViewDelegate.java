@@ -13,9 +13,13 @@ public interface PathEditorViewDelegate {
 	
 	public int onUserEnteredCreatePath();
 	
+	public void onUserEnteredDeletePath();
+	
 	public void onUserEnteredEditPath(int pathID);
 	
 	public void onUserEnteredPathCoordinate(int pathID, int x, int y);
+	
+	
 	
 	
 
