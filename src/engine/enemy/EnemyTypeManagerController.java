@@ -2,6 +2,7 @@ package engine.enemy;
 
 import authoring.editorview.enemy.IEnemyUpdateView;
 import engine.AbstractTypeManagerController;
+import engine.ManagerMediator;
 
 
 
@@ -11,8 +12,8 @@ import engine.AbstractTypeManagerController;
 public class EnemyTypeManagerController  
 	extends AbstractTypeManagerController<EnemyManager, EnemyBuilder, Enemy, IEnemyUpdateView> implements EnemyManagerController {
 
-	public EnemyTypeManagerController(EnemyManager enemyManager) {
-		super(enemyManager, new EnemyTypeBuilder());
+	public EnemyTypeManagerController(ManagerMediator managerMediator) {
+		super(new EnemyTypeManager(), new EnemyTypeBuilder(), managerMediator);
 	}
 
 	@Override

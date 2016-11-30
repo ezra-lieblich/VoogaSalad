@@ -7,8 +7,14 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 import engine.ability.AbilityManagerController;
 import engine.ability.AbilityTypeManagerController;
+import engine.enemy.EnemyManagerController;
+import engine.enemy.EnemyTypeManagerController;
+import engine.level.LevelManagerController;
+import engine.level.LevelTypeManagerController;
 import engine.path.PathManagerController;
 import engine.path.PathTypeManagerController;
+import engine.settings.GameModeManagerController;
+import engine.settings.GameModeTypeManagerController;
 import engine.tower.TowerManagerController;
 import engine.tower.TowerTypeManagerController;
 import engine.weapon.WeaponManagerController;
@@ -42,5 +48,9 @@ public class ModelAuthoringController implements ModelController {
         modelControllers.put(WeaponManagerController.class, new WeaponTypeManagerController(managerMediator));
         modelControllers.put(AbilityManagerController.class, new AbilityTypeManagerController(managerMediator));
         modelControllers.put(PathManagerController.class, new PathTypeManagerController(managerMediator));
+        modelControllers.put(EnemyManagerController.class, new EnemyTypeManagerController(managerMediator));
+        modelControllers.put(LevelManagerController.class, new LevelTypeManagerController(managerMediator));
+        modelControllers.put(GameModeManagerController.class, new GameModeTypeManagerController(managerMediator));
+
     }
 }
