@@ -2,7 +2,7 @@ package gameplayer.view;
 
 import java.util.List;
 
-import gameplayer.model.Enemy;
+import gameplayer.model.IDrawable;
 import gameplayer.view.buttonPanel.ButtonPanel;
 import gameplayer.view.buttonPanel.GamePlayButtonPanel;
 import gameplayer.view.helper.GraphicsLibrary;
@@ -133,8 +133,6 @@ public class GameGUI {
 	
 	private void initDragDropPane(List<String> imagePaths){
 		dragDrop.setDragTarget(grid.getGrid());
-		String[] testImages = {"butterfly.png","kaneki.jpg","penguin.jpg"};//TODO: get rid of 
-		String[] testImages2 = {"butterfly.png","kaneki.jpg"};//TODO: get rid of 
 		mainScreen.setRight(dragDrop.getDragDropPane());
 		Tab tab = dragDrop.createTab("Blah test");
 		dragDrop.populateImageViewsToTab(tab, imagePaths);
@@ -151,11 +149,11 @@ public class GameGUI {
 	}
 	
 	//not sure if this goes here
-	public void reRender(List<Enemy> redraw){//should be interface of drawables
-		for(Enemy enemy:redraw){
-			ImageView image = new ImageView(enemy.getImage());
-			image.setX(enemy.getX());
-			image.setY(enemy.getY());
+	public void reRender(List<IDrawable> redraw){//should be interface of drawables
+		for(IDrawable entity:redraw){
+			ImageView image = new ImageView(entity.getImage());
+			image.setX(entity.getX());
+			image.setY(entity.getY());
 			this.grid.getGrid().getChildren().add(image);
 		}
 	}

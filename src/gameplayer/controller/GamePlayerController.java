@@ -6,6 +6,8 @@ import gameplayer.main.main;
 import gameplayer.model.Enemy;
 import gameplayer.model.EnemyManager;
 import gameplayer.model.GamePlayModel;
+import gameplayer.model.IDrawable;
+import gameplayer.model.Tower;
 import gameplayer.view.GameGUI;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -95,7 +97,7 @@ public class GamePlayerController implements Observer {
 		this.mainScene = view.init(this.model.getGold(), this.model.getLife(), this.model.getCurrentLevel(),
 				getTowerImages());
 		this.view.getGrid().populatePath(model.getGrid().getStartPoint()); 
-		this.dropController = new DragDropController(this.view, this.model);
+		this.dropController = new DragDropController(this.view, this.model,this.model.getTowerTypes());
 	}
 	
 	private ArrayList<String> getTowerImages() {
@@ -158,9 +160,12 @@ public class GamePlayerController implements Observer {
 			this.enemyManager.update(); 
 
 //			this.view.getGrid().populatePath(model.getGrid().getStartPoint()); //THIS LINE CAUSES SLOW DOWN
-			List<Enemy>enemyRedraw = enemyManager.getEnemyOnGrid(); 
+			List<Enemy>enemyRedraw = this.enemyManager.getEnemyOnGrid(); 
+			List<Tower>towerRedraw = this.model.getTowerOnGrid();
+			List<IDrawable> reDraw = convertToDrawable(enemyRedraw,towerRedraw);//probably need to add bullets here too
 			
-			this.view.reRender(enemyManager.getEnemyOnGrid());
+			
+			this.view.reRender(reDraw);
 		});
 		Timeline animation = new Timeline();
 		animation.setCycleCount(Timeline.INDEFINITE);
@@ -171,6 +176,17 @@ public class GamePlayerController implements Observer {
 
 	public Timeline getTimeline() {
 		return this.animation;
+	}
+	
+	private List<IDrawable> convertToDrawable(List<Enemy> enemies, List<Tower>towers){
+		ArrayList<IDrawable> ret = new ArrayList<>(); 
+		for(Enemy e: enemies){
+			ret.add(e);
+		}
+		for(Tower t: towers){
+			ret.add(t);
+		}
+		return ret; 
 	}
 
 

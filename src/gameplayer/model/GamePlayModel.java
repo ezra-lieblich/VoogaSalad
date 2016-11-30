@@ -21,8 +21,8 @@ public class GamePlayModel extends Observable {
 	private List<Tower> towersOnGrid; 
 	private int hitBuffer = 10; // initialize from xml
 
-	private Map<Integer, Weapon> weaponTypes; // initialize in xml
-	private Map<Integer, TowerType> towerTypes;
+	private HashMap<Integer, Weapon> weaponTypes; // initialize in xml
+	private HashMap<Integer, TowerType> towerTypes;
 	private Cell[][] gridArray;
 
 	private Enemy nextEnteringEnemy;
@@ -97,6 +97,7 @@ public class GamePlayModel extends Observable {
 		this.lives = settingInfo.get("lives");
 		this.towerTypes = this.factory.getTowers();
 		this.gameTitle = this.factory.getGameTitle();
+		this.towersOnGrid= new ArrayList<>();
 		// this.weaponTypes = this.factory.getWeapon(); need from xml
 	}
 
@@ -115,6 +116,14 @@ public class GamePlayModel extends Observable {
 
 	}
 
+	public HashMap<Integer,TowerType> getTowerTypes(){
+		return this.towerTypes; 
+	}
+	
+	public List<Tower> getTowerOnGrid(){
+		return this.towersOnGrid;
+	}
+	
 	public Enemy getNextEnteringEnemy() {
 		return this.nextEnteringEnemy;
 	}
@@ -192,10 +201,11 @@ public class GamePlayModel extends Observable {
 
 	public Boolean placeTower(int type, int x, int y) {
 		// later check if is a valid location to place the tower
-		TowerType tt = towerTypes.get(type);
-		System.out.println("Placed a tower");
-		System.out.println("Tower x: " + x + "; y:" + y);
-		
+		TowerType towerType = towerTypes.get(type);
+		this.towersOnGrid.add(new Tower(type,towerType.getImageLocation(),towerType.getName(),x,y));
+		for(int i=0;i<towersOnGrid.size();i++){
+			System.out.println(towersOnGrid.get(i).getName());
+		}
 		return true;
 	}
 
