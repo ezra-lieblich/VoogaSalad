@@ -20,12 +20,14 @@ public interface ITowerEditorView extends ITowerSetView, IUpdateView {
 
     public void updateTowerAbility (List<Integer> towerAbility);
 
-    public void updateTowerChosenWeapon (List<Integer> newValue);
+    public void updateTowerWeaponBank (List<Integer> newValue);
 
     public void updateTowerUpgradeBank (List<Integer> towerUpgrades);
 
     public void updateTowerBank (List<Integer> createdTowers);
 
     public void createNewTower ();
+    
+    public void deleteTower ();
 
 }

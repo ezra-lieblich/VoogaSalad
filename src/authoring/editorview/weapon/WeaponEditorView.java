@@ -155,4 +155,10 @@ public class WeaponEditorView implements IWeaponEditorView {
         this.weaponSizeView.updateWeaponSize(Double.toString(size));
     }
 
+    @Override
+    public void deleteWeapon () {
+        // TODO Auto-generated method stub
+        
+    }
+
 }

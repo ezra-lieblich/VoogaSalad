@@ -29,5 +29,7 @@ public interface IWeaponEditorView extends IWeaponSetView, IUpdateView {
     public void updateWeaponTrajectory (String trajectory);
 
     public void createNewWeapon (); // This is the method where I will go and update e'rthing
+    
+    public void deleteWeapon ();
 
 }

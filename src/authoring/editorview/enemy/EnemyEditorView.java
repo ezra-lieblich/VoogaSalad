@@ -19,7 +19,6 @@ import javafx.scene.layout.BorderPane;
 import authoring.editorview.enemy.subviews.EnemyListDataSource;
 
 
-
 /**
  * @author Kayla Schulz
  * @author Diane Hadley
@@ -153,10 +152,15 @@ public class EnemyEditorView implements IEnemyEditorView {
         this.enemySize.updateEnemySize(Double.toString(size));
     }
 
-	@Override
-	public void setEnemyListDataSource(EnemyListDataSource source) {
-		this.enemyBank.setListDataSource(source);
-	}
+    @Override
+    public void setEnemyListDataSource (EnemyListDataSource source) {
+        this.enemyBank.setListDataSource(source);
+    }
 
+    @Override
+    public void deleteEnemy () {
+        // TODO Auto-generated method stub
+        
+    }
 
 }

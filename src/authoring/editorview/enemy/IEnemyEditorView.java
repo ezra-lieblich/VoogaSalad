@@ -21,6 +21,8 @@ public interface IEnemyEditorView extends IEnemySetView, IUpdateView {
 
     public void createNewEnemy ();
 
+    public void deleteEnemy ();
+
     public void updateEnemyHealthDisplay (double enemyHealth);
 
     public void updateEnemyDamage (double damage);
@@ -30,8 +32,7 @@ public interface IEnemyEditorView extends IEnemySetView, IUpdateView {
     public void updateEnemyRewardPoints (double rewardPoints);
 
     public void updateEnemyCollisionEffect (String collisionEffect);
-    
-    public void setEnemyListDataSource(EnemyListDataSource source);
 
+    public void setEnemyListDataSource (EnemyListDataSource source);
 
 }

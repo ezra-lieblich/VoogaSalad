@@ -57,7 +57,8 @@ public class TowerEditorView implements ITowerEditorView {
         towerBank = new TowerImageBank(labelsResource, dialogueBoxResource);
         towerEffectView =
                 new TowerEffectView(towerName, towerImage, towerBuyPrice, towerSellPrice,
-                                    towerUnlockLevel, towerAbility, towerChooseWeapon, towerUpgrade, towerSize,
+                                    towerUnlockLevel, towerAbility, towerChooseWeapon, towerUpgrade,
+                                    towerSize,
                                     labelsResource, dialogueBoxResource);
         setBorderPane();
     }
@@ -144,8 +145,14 @@ public class TowerEditorView implements ITowerEditorView {
     }
 
     @Override
-    public void updateTowerChosenWeapon (List<Integer> newValue) {
+    public void updateTowerWeaponBank (List<Integer> newValue) {
         // TODO Auto-generated method stub
 
+    }
+
+    @Override
+    public void deleteTower () {
+        // TODO Auto-generated method stub
+        
     }
 }
