@@ -134,7 +134,6 @@ public class TowerEditorView implements ITowerEditorView {
     @Override
     public void updateImagePathDisplay (String imagePath) {
         this.towerImage.updateTowerImagePath(imagePath);
-        
     }
 
     @Override
