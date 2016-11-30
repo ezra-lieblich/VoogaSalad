@@ -4,13 +4,14 @@ import java.util.List;
 
 import authoring.editorview.gamesettings.IGameUpdateView;
 import engine.AbstractTypeManagerController;
+import engine.ManagerMediator;
 
 
 public class GameModeTypeManagerController 
 	extends AbstractTypeManagerController<GameModeManager, GameModeBuilder, GameMode, IGameUpdateView> implements GameModeManagerController {
 
-	public GameModeTypeManagerController(GameModeManager typeManager) {
-		super(typeManager, new GameModeTypeBuilder());
+	public GameModeTypeManagerController(ManagerMediator managerMediator) {
+		super(new GameModeTypeManager(), new GameModeTypeBuilder(), managerMediator);
 	}
 
 	@Override
