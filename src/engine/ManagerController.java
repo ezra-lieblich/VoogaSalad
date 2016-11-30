@@ -7,6 +7,8 @@ import authoring.editorview.IUpdateView;
 public interface ManagerController<E extends Manager<T>, U extends TypeBuilder<T, U>, T extends Type, V extends IUpdateView> {
 
     int createType (V updateView);
+    
+    void addTypeBankListener(V updateView);
 
     void deleteType (int id);
 

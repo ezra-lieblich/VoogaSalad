@@ -18,6 +18,11 @@ public abstract class AbstractTypeManagerController<E extends Manager<T>, U exte
     public int createType (V updateView) {
         return typeManager.addEntry(constructType(updateView));
     }
+    
+    @Override
+    public void addTypeBankListener(V updateView) {
+        typeManager.addEntitiesListener((oldValue, newValue) -> updateView.updateBank(newValue));
+    }
 
     protected T constructType (V updateView) {
         return constructTypeProperties(updateView, typeBuilder)

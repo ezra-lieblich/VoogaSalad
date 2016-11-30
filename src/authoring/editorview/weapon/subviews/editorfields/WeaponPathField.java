@@ -29,7 +29,7 @@ public class WeaponPathField implements IWeaponSetView {
 
     private ObservableList<Object> setList () {
         ObservableList<Object> pathOptions =
-                FXCollections.observableArrayList("I still don't know", "Sorry");
+                FXCollections.observableArrayList("Straight", "Heat Follow");
         return pathOptions;
     }
 
