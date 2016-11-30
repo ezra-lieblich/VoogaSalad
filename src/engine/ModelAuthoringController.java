@@ -14,6 +14,7 @@ import engine.level.LevelTypeManagerController;
 import engine.path.PathManagerController;
 import engine.path.PathTypeManagerController;
 import engine.settings.GameModeManagerController;
+import engine.settings.GameModeTypeBuilder;
 import engine.settings.GameModeTypeManagerController;
 import engine.tower.TowerManagerController;
 import engine.tower.TowerTypeManagerController;
@@ -44,13 +45,13 @@ public class ModelAuthoringController implements ModelController {
     }
     
     private void initializeControllers(ManagerMediator managerMediator) {
+        modelControllers.put(GameModeManagerController.class, new GameModeTypeManagerController(managerMediator));
         modelControllers.put(TowerManagerController.class, new TowerTypeManagerController(managerMediator));
         modelControllers.put(WeaponManagerController.class, new WeaponTypeManagerController(managerMediator));
         modelControllers.put(AbilityManagerController.class, new AbilityTypeManagerController(managerMediator));
         modelControllers.put(PathManagerController.class, new PathTypeManagerController(managerMediator));
         modelControllers.put(EnemyManagerController.class, new EnemyTypeManagerController(managerMediator));
         modelControllers.put(LevelManagerController.class, new LevelTypeManagerController(managerMediator));
-        modelControllers.put(GameModeManagerController.class, new GameModeTypeManagerController(managerMediator));
 
     }
 }
