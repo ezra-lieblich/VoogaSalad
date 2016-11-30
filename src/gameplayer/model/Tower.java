@@ -52,7 +52,6 @@ public class Tower implements IDrawable {
 	public double getY() {
 		return yCoordinate;
 	}
-<<<<<<< HEAD
 	
 	
 	int getType(){
@@ -66,18 +65,7 @@ public class Tower implements IDrawable {
 	
 	
 	public String getImage(){
-=======
 
-	public String getName() {
-		return this.name;
-	}
-
-	public int getType() {
-		return this.ID;
-	}
-
-	public String getImage() {
->>>>>>> 8c409c3269db776e77bb08e3d9044ca4eec91998
 		return this.image;
 	}
 
