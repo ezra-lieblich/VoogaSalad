@@ -1,30 +1,13 @@
 package engine;
 
-import java.util.Arrays;
-import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.io.xml.DomDriver;
-import engine.enemy.EnemyManager;
-import engine.level.LevelManager;
-import engine.path.PathManager;
-import engine.tower.TowerManager;
-import engine.weapon.WeaponManager;
-import com.thoughtworks.xstream.annotations.XStreamOmitField;
+public interface GameData {
 
+    String getTitle ();
 
-public class GameData {
+    void setTitle (String title);
 
-    private String Title;
-    private ManagerMediator managerMediator;
-    
-    GameData(ManagerMediator managerMediator) {
-        this.managerMediator = managerMediator;
-    }
+    String getAuthor ();
 
-    public String getTitle () {
-        return Title;
-    }
+    void setAuthor (String author);
 
-    public void setTitle (String title) {
-        Title = title;
-    }
 }

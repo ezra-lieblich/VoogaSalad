@@ -29,7 +29,7 @@ public class ModelAuthoringController implements ModelController {
     public ModelAuthoringController() {
         modelControllers = new HashMap<Class<?>, ManagerController<?, ?, ?, ?>>();
         ManagerMediator managerMediator = new ManagerTypeMediator();
-        gameData = new GameData(managerMediator);
+        gameData = new GameAuthoringData(managerMediator);
         initializeControllers(managerMediator);
     }
     
