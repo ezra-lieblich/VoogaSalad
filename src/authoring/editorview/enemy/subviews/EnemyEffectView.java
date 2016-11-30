@@ -137,5 +137,4 @@ public class EnemyEffectView extends PhotoFileChooser implements IEnemyEditorVie
         chosenFile = chooseFile.showOpenDialog(new Stage());
 
     }
-
 }

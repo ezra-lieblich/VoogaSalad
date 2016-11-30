@@ -5,6 +5,11 @@ import java.util.List;
 import java.util.ResourceBundle;
 import authoring.editorview.enemy.subviews.EnemyEffectView;
 import authoring.editorview.enemy.subviews.EnemyImageBank;
+<<<<<<< HEAD
+import authoring.editorview.enemy.subviews.EnemyListDataSource;
+import authoring.editorview.enemy.subviews.editorfields.EnemyFrequencyField;
+=======
+>>>>>>> 6217326ed836bc61eeba0e324c0956bdea52d33c
 import authoring.editorview.enemy.subviews.editorfields.EnemyHealthField;
 import authoring.editorview.enemy.subviews.editorfields.EnemyImageView;
 import authoring.editorview.enemy.subviews.editorfields.EnemyNameField;
@@ -16,8 +21,6 @@ import authoring.editorview.enemy.subviews.editorfields.EnemyDamageField;
 import authoring.editorview.enemy.subviews.editorfields.EnemySpeedField;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
-import authoring.editorview.enemy.subviews.EnemyListDataSource;
-
 
 
 /**
@@ -157,6 +160,5 @@ public class EnemyEditorView implements IEnemyUpdateView {
 	public void setEnemyListDataSource(EnemyListDataSource source) {
 		this.enemyBank.setListDataSource(source);
 	}
-
 
 }

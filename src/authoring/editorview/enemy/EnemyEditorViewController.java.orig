@@ -6,7 +6,6 @@ import authoring.editorview.EditorViewController;
 import authoring.editorview.enemy.subviews.EnemyListCellData;
 import authoring.editorview.enemy.subviews.EnemyListDataSource;
 import authoring.utilityfactories.DialogueBoxFactory;
-import engine.enemy.*;
 
 
 /**
@@ -18,7 +17,7 @@ import engine.enemy.*;
 public class EnemyEditorViewController extends EditorViewController
         implements EnemyEditorViewDelegate, EnemyListDataSource {
 
-    private EnemyManagerController enemyDataSource;
+    private EnemyDataSource enemyDataSource;
     private int currentEnemyID;
     private IEnemyUpdateView myView;
 
@@ -29,7 +28,7 @@ public class EnemyEditorViewController extends EditorViewController
         this.view = myView; 
     }
 
-    public void setEnemyDataSource (EnemyManagerController source) {
+    public void setEnemyDataSource (EnemyDataSource source) {
         this.enemyDataSource = source;
     }
 
@@ -117,6 +116,15 @@ public class EnemyEditorViewController extends EditorViewController
                                                   dialogueBoxResource.getString("CheckInput"));
     }
 
+<<<<<<< HEAD
+	@Override
+	public EnemyListCellData getCellDataForEnemy(int enemyID) {
+		EnemyListCellData cellData = new EnemyListCellData();
+		cellData.setName(enemyDataSource.getEnemyName(enemyID));
+		cellData.setImagePath(enemyDataSource.getEnemyImage(enemyID));
+		return cellData;
+	}
+=======
     @Override
     public void onUserPressedDeleteEnemy () {
         // TODO Auto-generated method stub
@@ -128,14 +136,6 @@ public class EnemyEditorViewController extends EditorViewController
         // TODO Auto-generated method stub
 
     }
-
-	@Override
-	public EnemyListCellData getCellDataForEnemy(int enemyID) {
-		EnemyListCellData cellData = new EnemyListCellData();
-		cellData.setName(enemyDataSource.getEnemyName(enemyID));
-		cellData.setImagePath(enemyDataSource.getEnemyImage(enemyID));
-		return cellData;
-	}
-
+>>>>>>> 6217326ed836bc61eeba0e324c0956bdea52d33c
 
 }
