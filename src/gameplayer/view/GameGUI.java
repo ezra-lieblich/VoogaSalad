@@ -149,15 +149,25 @@ public class GameGUI {
 	}
 	
 	//not sure if this goes here
+	public void reRenderTower(List<IDrawable> redraw){//should be interface of drawables
+		for(IDrawable entity:redraw){
+			ImageView image = new ImageView(entity.getImage());
+			image.setX(entity.getX()+ this.dragDrop.getDragDrop().getxError());
+			image.setY(entity.getY()+this.dragDrop.getDragDrop().getyError());
+			graphics.setImageViewParams(image, DragDropView.DEFENSIVEWIDTH, DragDropView.DEFENSIVEHEIGHT);
+			this.grid.getGrid().getChildren().add(image);
+		}
+	}
+	
 	public void reRender(List<IDrawable> redraw){//should be interface of drawables
 		for(IDrawable entity:redraw){
 			ImageView image = new ImageView(entity.getImage());
 			image.setX(entity.getX());
 			image.setY(entity.getY());
+			graphics.setImageViewParams(image, DragDropView.DEFENSIVEWIDTH, DragDropView.DEFENSIVEHEIGHT);
 			this.grid.getGrid().getChildren().add(image);
 		}
 	}
-	
 	
 	
 	

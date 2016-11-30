@@ -43,6 +43,13 @@ public class DragDrop extends Observable{
 		this.yError = yError;
 	}
 	
+	public double getxError(){
+		return this.xError;
+	}
+	public double getyError(){
+		return this.yError;
+	}
+	
 	public ImageView getSource(){
 		return this.source;
 	}
