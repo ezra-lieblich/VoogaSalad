@@ -1,24 +1,19 @@
 package engine.weapon;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.function.BiConsumer;
 import engine.AbstractTypeBuilder;
-import engine.ability.Ability;
-import engine.enemy.Enemy;
 import engine.observer.ObservableList;
 import engine.observer.ObservableListProperty;
 import engine.observer.ObservableObjectProperty;
 import engine.observer.ObservableProperty;
-import engine.tower.Tower;
-import engine.tower.TowerType;
 import engine.weapon.Weapon;
 
 public class WeaponTypeBuilder extends AbstractTypeBuilder<Weapon, WeaponBuilder> implements WeaponBuilder, WeaponInitializer {
     
      public static final String DEFAULT_NAME = "New Weapon";
-     public static final String DEFAULT_IMAGE_PATH = "Images.penguin.jpg";
+     public static final String DEFAULT_IMAGE_PATH = "Images/penguin.jpg";
      public static final double DEFAULT_SIZE = 1;
      public static final List<Integer> DEFAULT_WEAPONS = Arrays.asList(new Integer[]{});
      public static final double DEFAULT_FIRE_RATE = 2;

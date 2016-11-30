@@ -1,87 +1,117 @@
 package authoring.editorview.level;
 
+import java.util.ResourceBundle;
 import authoring.editorview.EditorViewController;
+import authoring.utilityfactories.DialogueBoxFactory;
 import engine.level.LevelManagerController;
 
-public class LevelEditorViewController extends EditorViewController implements LevelEditorViewDelegate {
-	
-	private ILevelUpdateView levelView;
-	private LevelManagerController levelDataSource;
-	
-	public LevelEditorViewController(int editorWidth, int editorHeight){
-		ILevelEditorView myView = LevelEditorViewFactory.build(editorWidth, editorHeight);
-		myView.setDelegate(this);
-		this.view = myView;
-	}
-	
-	public void setLevelDataSource(LevelManagerController source){
-		this.levelDataSource = source;
-	}
 
+public class LevelEditorViewController extends EditorViewController
+        implements LevelEditorViewDelegate {
 
-	@Override
-	public void onUserEnteredEditLevel(int levelID) {
-		// TODO Auto-generated method stub
-		
-	}
+    private ILevelEditorView levelView;
+    private LevelManagerController levelDataSource;
+    private int currentLevelID;
 
-	@Override
-	public void onUserEnteredLevelName(int levelID, String levelName) {
-		levelDataSource.setName(levelID, levelName);
-		
-	}
+    public LevelEditorViewController (int editorWidth, int editorHeight) {
+        levelView = LevelEditorViewFactory.build(editorWidth, editorHeight);
+        levelView.setDelegate(this);
+        this.view = levelView;
+    }
 
-	@Override
-	public void onUserEnteredCreateLevel() {
-		int levelID = levelDataSource.createType(levelView);
-		
-	}
+    public void setLevelDataSource (LevelManagerController source) {
+        this.levelDataSource = source;
+        onUserEnteredCreateLevel();
+    }
 
-	@Override
-	public void onUserEnteredDeleteLevel() {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public void onUserEnteredEditLevel () {
+        // TODO Auto-generated method stub
 
-	@Override
-	public void onUserEnteredTranstitionTime(int levelID, double time) {
-		// TODO Auto-generated method stub
-		
-	}
+    }
 
-	@Override
-	public void onUserEnteredEnemyFrequency(int levelID, double frequency) {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public void onUserEnteredLevelName (String levelName) {
+        levelDataSource.setName(currentLevelID, levelName);
+    }
 
-	@Override
-	public void onUserEnteredAddEnemy(int levelID, int enemyId, int numEnemies) {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public void onUserEnteredCreateLevel () {
+        currentLevelID = levelDataSource.createType(levelView);
 
-	@Override
-	public void onUserEnteredRemoveEnemy(int levelID, int enemyID) {
-		// TODO Auto-generated method stub
-		
-	}
+    }
 
-	@Override
-	public void onUserEnteredRewardPoints(int levelID, double points) {
-		levelDataSource.setRewardScore(levelID, points);
-		
-	}
+    @Override
+    public void onUserEnteredDeleteLevel () {
+        // TODO Auto-generated method stub
 
-	@Override
-	public void onUserEnteredRewardMoney(int levelID, double money) {
-		levelDataSource.setRewardMoney(levelID, money);
-		
-	}
+    }
 
-	@Override
-	public void onUserEnteredRewardHealth(int levelID, double health) {
-		levelDataSource.setRewardHealth(levelID, health);
-		
-	}
+    @Override
+    public void onUserEnteredTranstitionTime (String time) {
+        try {
+            Double.parseDouble(time);
+            levelDataSource.setSize(currentLevelID, Double.parseDouble(time));
+        }
+        catch (NumberFormatException e) {
+            createDialogueBox();
+        }
+    }
+
+    @Override
+    public void onUserEnteredEnemyFrequency (String frequency) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void onUserEnteredAddEnemy (int enemyId, int numEnemies) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void onUserEnteredRemoveEnemy (int enemyID) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void onUserEnteredRewardPoints (String points) {
+        try {
+            Double.parseDouble(points);
+            levelDataSource.setRewardScore(currentLevelID, Double.parseDouble(points));
+        }
+        catch (NumberFormatException e) {
+            createDialogueBox();
+        }
+    }
+
+    @Override
+    public void onUserEnteredRewardMoney (String money) {
+        try {
+            Double.parseDouble(money);
+            levelDataSource.setRewardMoney(currentLevelID, Double.parseDouble(money));
+        }
+        catch (NumberFormatException e) {
+            createDialogueBox();
+        }
+    }
+
+    @Override
+    public void onUserEnteredRewardHealth (String health) {
+        try {
+            Double.parseDouble(health);
+            levelDataSource.setRewardHealth(currentLevelID, Double.parseDouble(health));
+        }
+        catch (NumberFormatException e) {
+            createDialogueBox();
+        }
+    }
+
+    private void createDialogueBox () {
+        ResourceBundle dialogueBoxResource = ResourceBundle.getBundle("resources/DialogueBox");
+        DialogueBoxFactory.createErrorDialogueBox(dialogueBoxResource.getString("Integer"),
+                                                  dialogueBoxResource.getString("CheckInput"));
+    }
 }

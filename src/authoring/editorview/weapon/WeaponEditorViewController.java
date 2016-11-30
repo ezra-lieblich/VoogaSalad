@@ -18,17 +18,17 @@ public class WeaponEditorViewController extends EditorViewController
 
     private WeaponManagerController weaponDataSource;
     private int currentWeaponID;
-    private IWeaponEditorView myView;
+    private IWeaponEditorView weaponView;
 
     public WeaponEditorViewController (int editorWidth, int editorHeight) throws IOException {
-        myView = WeaponEditorViewFactory.build(editorWidth, editorHeight);
-        myView.setDelegate(this);
-        this.view = myView;
+        weaponView = WeaponEditorViewFactory.build(editorWidth, editorHeight);
+        weaponView.setDelegate(this);
+        this.view = weaponView;
     }
 
     public void setWeaponDataSource (WeaponManagerController source) {
         this.weaponDataSource = source;
-        currentWeaponID = weaponDataSource.createType(myView);
+        onUserPressedCreateWeapon();
     }
 
     @Override
@@ -76,7 +76,13 @@ public class WeaponEditorViewController extends EditorViewController
 
     @Override
     public void onUserPressedCreateWeapon () {
-        // weaponDataSource.createWeapon();
+        currentWeaponID = weaponDataSource.createType(weaponView);
+        weaponView.updateImagePathDisplay(weaponDataSource.getImagePath(currentWeaponID));
+        weaponView.updateNameDisplay(weaponDataSource.getName(currentWeaponID));
+        weaponView.updateFireRateDisplay(weaponDataSource.getWeaponFireRate(currentWeaponID));
+        weaponView.updateRangeDisplay(weaponDataSource.getWeaponRange(currentWeaponID));
+        weaponView.updateSizeDisplay(weaponDataSource.getSize(currentWeaponID));
+        weaponView.updateSpeedDisplay(weaponDataSource.getWeaponSpeed(currentWeaponID));
     }
 
     @Override

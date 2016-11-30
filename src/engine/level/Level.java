@@ -1,32 +1,32 @@
 package engine.level;
 
 import engine.Type;
-
 import java.util.Map;
+
 
 /**
  * Created by ezra on 11/19/16.
  */
-public interface Level extends Type{
-    Map<Integer, Integer> getEnemyCounts();
+public interface Level extends Type {
+    Map<Integer, Integer> getEnemyCounts ();
 
-    void setEnemyCounts(int enemy, int enemyCount);
-    
-    void removeEnemy(int enemy);
+    void setEnemyCounts (int enemy, int enemyCount);
 
-    double getRewardHealth();
+    void removeEnemy (int enemy);
 
-    void setRewardHealth(double rewardHealth);
+    double getRewardHealth ();
 
-    double getRewardMoney();
+    void setRewardHealth (double rewardHealth);
 
-    void setRewardMoney(double rewardMoney);
+    double getRewardMoney ();
 
-    double getRewardScore();
+    void setRewardMoney (double rewardMoney);
 
-    void setRewardScore(double rewardScore);
+    double getRewardScore ();
 
-    double getDurationInSeconds();
+    void setRewardScore (double rewardScore);
 
-    void setDurationInSeconds(double durationInSeconds);
+    double getDurationInSeconds ();
+
+    void setDurationInSeconds (double durationInSeconds);
 }

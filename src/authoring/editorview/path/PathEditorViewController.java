@@ -52,7 +52,7 @@ public class PathEditorViewController extends EditorViewController implements Pa
 		int pathID = pathDataSource.createType(pathView);
 		
 		pathView.updateActiveID(pathID);
-		//pathView.createNewPath();	
+			
 	}
 
 
@@ -68,7 +68,7 @@ public class PathEditorViewController extends EditorViewController implements Pa
 		pathView.updatePathImage(pathDataSource.getImagePath(pathID));
 		pathView.updateNameDisplay(pathDataSource.getName(pathID));
 		System.out.println(pathDataSource.getName(pathID));
-		
+		pathView.createNewPath();
 	}
 
 

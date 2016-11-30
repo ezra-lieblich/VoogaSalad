@@ -88,8 +88,7 @@ public class WeaponEffectView extends PhotoFileChooser {
     }
 
     private void buildViewComponents () throws IOException {
-        Node myImageView = weaponImage.getInstanceAsNode();
-        vboxView.getChildren().add(myImageView);
+        vboxView.getChildren().add(weaponImage.getInstanceAsNode());
         vboxView.getChildren().add(ButtonFactory.makeButton(labelsResource.getString("Image"),
                                                             e -> {
                                                                 try {
@@ -138,7 +137,7 @@ public class WeaponEffectView extends PhotoFileChooser {
     public void openFileChooser (FileChooser chooseFile) {
         chosenFile = chooseFile.showOpenDialog(new Stage());
         if (chosenFile != null) {
-            delegate.onUserEnteredWeaponImage(chosenFile.toURI().toString());
+            delegate.onUserEnteredWeaponImage(chosenFile.toURI().getPath());
         }
         // if not null -> get imageFilePath and update the instance variable
         // then loadImage through the created method above
