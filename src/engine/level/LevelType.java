@@ -11,16 +11,20 @@ import engine.observer.ObservableProperty;
 
 
 public class LevelType extends AbstractType implements Level {
-	//TODO Make enemyCounts ObservableMap change to doubles
     private ObservableMap<Integer, Integer> enemyCounts;
 	private ObservableProperty<Double> rewardHealth;
 	private ObservableProperty<Double> rewardMoney;
-	private ObservableProperty<Double> rewardPoints;
+	private ObservableProperty<Double> rewardScore;
 	private ObservableProperty<Double> durationInSeconds;
 
 
-    protected LevelType (TypeInitializer typeBuilder) {
-    	super(typeBuilder);	
+    protected LevelType (LevelInitializer levelInitializer) {
+    	super(levelInitializer);	
+    	this.enemyCounts = levelInitializer.getEnemyCounts();
+    	this.rewardHealth = levelInitializer.getRewardHealth();
+    	this.rewardMoney = levelInitializer.getRewardMoney();
+    	this.rewardScore = levelInitializer.getRewardScore();
+    	this.durationInSeconds = levelInitializer.getDurationInSeconds();
 	}
     
 
@@ -60,13 +64,13 @@ public class LevelType extends AbstractType implements Level {
 	}
 
 	@Override
-	public double getRewardPoints() {
-		return rewardPoints.getProperty();
+	public double getRewardScore() {
+		return rewardScore.getProperty();
 	}
 
 	@Override
-	public void setRewardPoints(double rewardPoints) {
-		this.rewardPoints.setProperty(rewardPoints);
+	public void setRewardScore(double rewardPoints) {
+		this.rewardScore.setProperty(rewardPoints);
 	}
 
 	@Override

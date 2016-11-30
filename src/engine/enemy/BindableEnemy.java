@@ -9,7 +9,7 @@ public interface BindableEnemy extends BindableType<EnemyBuilder>{
 	EnemyBuilder addSpeedListener(BiConsumer<Double, Double> listener);
 	EnemyBuilder addHealthListener(BiConsumer<Double, Double> listener);
 	EnemyBuilder addDamageListener(BiConsumer<Double, Double> listener);
-	EnemyBuilder addPointsListener(BiConsumer<Double, Double> listener);
+	EnemyBuilder addScoreListener(BiConsumer<Double, Double> listener);
 	EnemyBuilder addMoneyListener(BiConsumer<Double, Double> listener);
 	EnemyBuilder addCollisionEffectListener(BiConsumer<String, String> listener);
 
