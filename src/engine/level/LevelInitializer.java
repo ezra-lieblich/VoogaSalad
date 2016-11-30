@@ -9,6 +9,6 @@ public interface LevelInitializer extends TypeInitializer {
 	ObservableMap<Integer, Integer> getEnemyCounts();
 	ObservableProperty<Double> getRewardHealth();
     ObservableProperty<Double> getRewardMoney();
-    ObservableProperty<Double> getRewardPoints();
+    ObservableProperty<Double> getRewardScore();
     ObservableProperty<Double> getDurationInSeconds();
 }

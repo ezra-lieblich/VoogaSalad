@@ -15,7 +15,7 @@ public interface EnemyManagerController extends ManagerController<EnemyManager, 
 
     public void setEnemyRewardMoney (int enemyID, double enemyRewardMoney);
 
-    public void setEnemyRewardPoints (int enemyID, double enemyRewardPoints);
+    public void setEnemyRewardScore (int enemyID, double enemyRewardScore);
 
     public void setEnemyCollisionEffect (int enemyID, String enemyCollisionEffect);
 
@@ -34,7 +34,7 @@ public interface EnemyManagerController extends ManagerController<EnemyManager, 
 
     public double getEnemyRewardMoney (int enemyID); //
 
-    public double getEnemyRewardPoints (int enemyID); //
+    public double getEnemyRewardScore (int enemyID); //
 
     public String getEnemyCollisionEffect (int enemyID);
 

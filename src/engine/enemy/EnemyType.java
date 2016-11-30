@@ -8,7 +8,7 @@ public class EnemyType extends AbstractType implements Enemy {
     private ObservableProperty<Double> speed;
 	private ObservableProperty<Double> health;
 	private ObservableProperty<Double> damage;
-	private ObservableProperty<Double> points;
+	private ObservableProperty<Double> score;
 	private ObservableProperty<Double> money;
 	private ObservableProperty<String> collisionEffect;
 
@@ -18,7 +18,7 @@ public class EnemyType extends AbstractType implements Enemy {
         this.speed = enemyInitializer.getSpeed();
         this.health = enemyInitializer.getHealth();
         this.damage = enemyInitializer.getDamage();
-        this.points = enemyInitializer.getMoney();
+        this.score = enemyInitializer.getScore();
         this.money = enemyInitializer.getMoney();
         this.collisionEffect = enemyInitializer.getCollisionEffect();
     }
@@ -49,12 +49,12 @@ public class EnemyType extends AbstractType implements Enemy {
 		this.damage.setProperty(damage);
 	}
 	@Override
-    public double getPoints() {
-		return points.getProperty();
+    public double getScore() {
+		return score.getProperty();
 	}
 	@Override
-    public void setPoints(double points) {
-		this.points.setProperty(points); 
+    public void setScore(double score) {
+		this.score.setProperty(score); 
 	}
 	@Override
     public double getMoney() {

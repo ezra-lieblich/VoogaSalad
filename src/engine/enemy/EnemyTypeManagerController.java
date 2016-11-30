@@ -36,8 +36,8 @@ public class EnemyTypeManagerController
 	}
 
 	@Override
-	public void setEnemyRewardPoints(int enemyID, double enemyRewardPoints) {
-		getTypeManager().getEntity(enemyID).setPoints(enemyRewardPoints);
+	public void setEnemyRewardScore(int enemyID, double enemyRewardPoints) {
+		getTypeManager().getEntity(enemyID).setScore(enemyRewardPoints);
 	}
 
 	@Override
@@ -66,8 +66,8 @@ public class EnemyTypeManagerController
 	}
 
 	@Override
-	public double getEnemyRewardPoints(int enemyID) {
-		return getTypeManager().getEntity(enemyID).getPoints();
+	public double getEnemyRewardScore(int enemyID) {
+		return getTypeManager().getEntity(enemyID).getScore();
 	}
 
 	@Override
@@ -81,7 +81,7 @@ public class EnemyTypeManagerController
 				.addDamageListener((oldValue, newValue) -> updateView.updateEnemyDamage(newValue))
 				.addHealthListener((oldValue, newValue) -> updateView.updateEnemyHealthDisplay(newValue))
 				.addMoneyListener((oldValue, newValue) -> updateView.updateEnemyRewardMoney(newValue))
-				.addPointsListener((oldValue, newValue) -> updateView.updateEnemyRewardPoints(newValue))
+				.addScoreListener((oldValue, newValue) -> updateView.updateEnemyRewardPoints(newValue))
 				.addSpeedListener((oldValue, newValue) -> updateView.updateEnemySpeed(newValue));
 		
 	}

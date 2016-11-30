@@ -74,7 +74,7 @@ public class EnemyEditorViewController extends EditorViewController
     public void onUserEnteredEnemyPoints (String enemyRewardPoints) {
         try {
             Double.parseDouble(enemyRewardPoints);
-            enemyDataSource.setEnemyRewardPoints(currentEnemyID,
+            enemyDataSource.setEnemyRewardScore(currentEnemyID,
                                                  Double.parseDouble(enemyRewardPoints));
         }
         catch (NumberFormatException e) {

@@ -19,13 +19,13 @@ public class LevelTypeBuilder extends AbstractTypeBuilder<Level, LevelBuilder> i
     public static final Map<Integer, Integer> DEFAULT_ENEMY_COUNTS = new HashMap<Integer, Integer>();
     public static final double DEFAULT_REWARD_HEALTH = 0;
     public static final double DEFAULT_REWARD_MONEY = 200;
-    public static final double DEFAULT_REWARD_POINTS = 200;
+    public static final double DEFAULT_REWARD_SCORE = 200;
     public static final double DEFAULT_DURATION_IN_SECONDS = 1;
 
     private ObservableMap<Integer, Integer> enemyCounts;
    	private ObservableProperty<Double> rewardHealth;
    	private ObservableProperty<Double> rewardMoney;
-   	private ObservableProperty<Double> rewardPoints;
+   	private ObservableProperty<Double> rewardScore;
    	private ObservableProperty<Double> durationInSeconds;
 
 	   
@@ -52,8 +52,8 @@ public class LevelTypeBuilder extends AbstractTypeBuilder<Level, LevelBuilder> i
 	}
 
 	@Override
-	public LevelBuilder addRewardPointsListener(BiConsumer<Double, Double> listener) {
-		rewardPoints.addListener(listener);
+	public LevelBuilder addRewardScoreListener(BiConsumer<Double, Double> listener) {
+		rewardScore.addListener(listener);
 		return this;
 	}
 
@@ -79,8 +79,8 @@ public class LevelTypeBuilder extends AbstractTypeBuilder<Level, LevelBuilder> i
 	}
 
 	@Override
-	public ObservableProperty<Double> getRewardPoints() {
-		return rewardPoints;
+	public ObservableProperty<Double> getRewardScore() {
+		return rewardScore;
 	}
 
 	@Override
@@ -108,8 +108,8 @@ public class LevelTypeBuilder extends AbstractTypeBuilder<Level, LevelBuilder> i
 	}
 
 	@Override
-	public LevelBuilder buildRewardPoints(double rewardPoints) {
-		this.rewardPoints.setProperty(rewardPoints);
+	public LevelBuilder buildRewardScore(double rewardPoints) {
+		this.rewardScore.setProperty(rewardPoints);
 		return this;
 	}
 
@@ -129,7 +129,7 @@ public class LevelTypeBuilder extends AbstractTypeBuilder<Level, LevelBuilder> i
 		this.enemyCounts = new ObservableMapProperty<Integer, Integer>(DEFAULT_ENEMY_COUNTS);
 		this.rewardHealth = new ObservableObjectProperty<Double>(DEFAULT_REWARD_HEALTH);
 		this.rewardMoney = new ObservableObjectProperty<Double>(DEFAULT_REWARD_MONEY);
-		this.rewardPoints = new ObservableObjectProperty<Double>(DEFAULT_REWARD_POINTS);
+		this.rewardScore = new ObservableObjectProperty<Double>(DEFAULT_REWARD_SCORE);
 		this.durationInSeconds = new ObservableObjectProperty<Double>(DEFAULT_DURATION_IN_SECONDS);
 
 	}
