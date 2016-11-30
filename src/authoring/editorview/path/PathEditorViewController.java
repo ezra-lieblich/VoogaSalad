@@ -13,6 +13,7 @@ public class PathEditorViewController extends EditorViewController implements Pa
 		this.pathView = PathEditorViewFactory.build(editorWidth, editorHeight);
 		pathView.setDelegate(this);
 		this.view = pathView;
+		
 
 	}
 
@@ -59,6 +60,7 @@ public class PathEditorViewController extends EditorViewController implements Pa
 
 	@Override
 	public void onUserEnteredEditPath(int pathID) {
+		pathView.updateActiveID(pathID);
 		pathView.updateNumColumns(pathDataSource.getNumberofColumns(pathID));
 		pathView.updateNumRows(pathDataSource.getNumberofRows(pathID));
 		pathView.updatePathCoordinates(pathDataSource.getPathCoordinates(pathID));

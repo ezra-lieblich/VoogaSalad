@@ -47,9 +47,10 @@ public class PathGrid {
 		this.gridRoot = new Group();
 		this.backgroundRoot = new Group();
 		
-		setBackground();
-		setPath();
+		
 		root.getChildren().addAll(backgroundRoot, gridRoot);
+//		setBackground();
+//		setPath();
 		setPathUpdater();
 				
 		
@@ -136,12 +137,12 @@ public class PathGrid {
 
 	private boolean setInPath(int x, int y) {
 		boolean inPath = false;	
-//		for (Coordinate<Integer> coordinate : pathCoordinates){
-//			if (coordinate.getX() == x && coordinate.getY() == y){
-//				inPath = true;
-//				break;
-//			}
-//		}
+		for (Coordinate<Integer> coordinate : pathCoordinates){
+			if (coordinate.getX() == x && coordinate.getY() == y){
+				inPath = true;
+				break;
+			}
+		}
 		return inPath;
 	}
 	

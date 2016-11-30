@@ -41,7 +41,7 @@ public class NewPathView {
 		Button createPathButton =
 				createButton(pathResource.getString("NewPathButton"),
                  e -> {
-					//createNewPath();		
+					createNewPath();		
 				});
 	    root.getChildren().add(createPathButton);
 	    createPathButton.setTranslateY(5);
@@ -50,8 +50,7 @@ public class NewPathView {
 	}
 	
 	public void createNewPath(){
-		delegate.onUserEnteredCreatePath();		
-		
+		delegate.onUserEnteredCreatePath();				
 		delegate.onUserEnteredEditPath(activePathID);
 		
 	}

@@ -14,7 +14,6 @@ import authoring.editorview.path.subviews.PathSizeView;
 import engine.path.Coordinate;
 import javafx.scene.Group;
 import javafx.scene.Node;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -25,7 +24,6 @@ public class PathEditorView implements IPathUpdateView {
 	private static final int BOX_SPACING = 10;
     
 	private Group root;
-    private VBox pathEditView;
     private HBox pathSettings;
     
     private PathChooser pathChooser;
@@ -40,7 +38,6 @@ public class PathEditorView implements IPathUpdateView {
 
     public PathEditorView (int aWidth, int aHeight) {
     	this.root = new Group();       
-    	this.pathEditView = new VBox(30);
     	
     	this.newPathView = new NewPathView();
         this.pathChooser = new PathChooser();       
@@ -48,6 +45,8 @@ public class PathEditorView implements IPathUpdateView {
     	this.pathNameView = new PathNameView();
     	this.pathImageView = new PathImageView();
     	this.pathInstructionsView = new PathInstructionsView();
+    	
+    	
     	this.pathGrid = new PathGrid(400, 400);   	
     	
     	formatPathGrid(); 	
@@ -81,6 +80,7 @@ public class PathEditorView implements IPathUpdateView {
     	pathImageView.setActivePathId(pathID);
     	pathGrid.setActivePathId(pathID);
     	pathSizeView.setActivePathId(pathID);
+    	pathChooser.setActivePathId(pathID);
 		
 	}
     
