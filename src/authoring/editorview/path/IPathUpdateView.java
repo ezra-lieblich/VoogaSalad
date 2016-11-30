@@ -18,5 +18,9 @@ public interface IPathUpdateView extends IPathEditorView, IUpdateView{
 	public void updatePathCoordinates(List<Coordinate<Integer>> pathCoordinates);
 	
 	public void updateType (String pathType);
+	
+	public void updateActiveID (int pathID);
+	
+	public void createNewPath ();
 
 }
