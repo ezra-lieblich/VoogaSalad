@@ -33,11 +33,11 @@ public class tempmain extends Application {
     @Override
     public void start (Stage s) throws IOException {
     	
-        AuthoringController ac = new AuthoringController();
+        ManagerTypeMediator mainMediator = new ManagerTypeMediator();
         AuthoringViewController mainVC = new AuthoringViewController(SIZE, SIZE);
         IAuthoringView mainView = mainVC.getView();
         
-    	//this.createManagersAndControllers(mainMediator, mainVC);
+    	this.createManagersAndControllers(mainMediator, mainVC);
         
         Scene scene = mainView.getScene();
         s.setTitle(TITLE);
