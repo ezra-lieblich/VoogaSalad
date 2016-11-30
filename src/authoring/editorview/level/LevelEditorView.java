@@ -1,5 +1,6 @@
 package authoring.editorview.level;
 
+import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import authoring.editorview.level.subviews.LevelChooserView;
@@ -120,6 +121,12 @@ public class LevelEditorView implements ILevelEditorView {
     @Override
     public void updateSizeDisplay (double size) {
         // Don't worry about this right now
+    }
+
+    @Override
+    public void updateLevels (List<Integer> activeLevels) {
+        // TODO Auto-generated method stub
+        
     }
 
 }

@@ -1,5 +1,6 @@
 package authoring.editorview.level;
 
+import java.util.List;
 import java.util.Map;
 import authoring.editorview.IUpdateView;
 
@@ -19,5 +20,7 @@ public interface ILevelEditorView extends ILevelSetView, IUpdateView {
     public void updateTransitionTime (double time);
 
     public void updateEnemyFrequency (double enemyFrequency);
+
+    public void updateLevels (List<Integer> activeLevels);
 
 }
