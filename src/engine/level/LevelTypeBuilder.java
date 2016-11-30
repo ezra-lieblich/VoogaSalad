@@ -14,7 +14,7 @@ import engine.observer.ObservableProperty;
 public class LevelTypeBuilder extends AbstractTypeBuilder<Level, LevelBuilder> implements LevelBuilder, LevelInitializer {
 
 	public static final String DEFAULT_NAME = "Level";
-    public static final String DEFAULT_IMAGE_PATH = "Images.blacksquare.jpg";
+    public static final String DEFAULT_IMAGE_PATH = "Images/blacksquarejpg";
     public static final double DEFAULT_SIZE = 1;
     public static final Map<Integer, Integer> DEFAULT_ENEMY_COUNTS = new HashMap<Integer, Integer>();
     public static final double DEFAULT_REWARD_HEALTH = 0;

@@ -10,7 +10,7 @@ import engine.observer.ObservableProperty;
 public class EnemyTypeBuilder extends AbstractTypeBuilder<Enemy, EnemyBuilder> implements EnemyBuilder, EnemyInitializer{
 
     public static final String DEFAULT_NAME = "New Enemy";
-    public static final String DEFAULT_IMAGE_PATH = "Images.redballoon.jpg";
+    public static final String DEFAULT_IMAGE_PATH = "Images/redballoon.jpg";
     public static final double DEFAULT_SIZE = 1;
     public static final double DEFAULT_SPEED = 1;
     public static final double DEFAULT_HEALTH = 10;
