@@ -116,8 +116,7 @@ public class WeaponEditorView implements IWeaponEditorView {
 
     @Override
     public void updateWeaponBank (List<Integer> activeWeapons) {
-        // weaponBank.
-
+        weaponBank.updateWeaponBank(activeWeapons);
     }
 
     @Override
@@ -157,7 +156,7 @@ public class WeaponEditorView implements IWeaponEditorView {
     @Override
     public void deleteWeapon () {
         // TODO Auto-generated method stub
-        
+
     }
 
 }

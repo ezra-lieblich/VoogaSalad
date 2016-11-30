@@ -1,7 +1,6 @@
 package authoring.editorview.enemy;
 
 import authoring.editorview.IEditorView;
-import authoring.editorview.enemy.subviews.EnemyListDataSource;
 
 
 /**
@@ -14,6 +13,5 @@ import authoring.editorview.enemy.subviews.EnemyListDataSource;
 public interface IEnemySetView extends IEditorView {
 
     public void setDelegate (EnemyEditorViewDelegate delegate);
-    
 
 }

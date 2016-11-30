@@ -37,12 +37,12 @@ public class TowerEditorView implements ITowerEditorView {
     private TowerWeaponBank towerChooseWeapon;
     private TowerUpgradeBank towerUpgrade;
     private TowerSizeField towerSize;
+    private ResourceBundle labelsResource =
+            ResourceBundle.getBundle("resources/GameAuthoringTower");
+    private ResourceBundle dialogueBoxResource = ResourceBundle.getBundle("resources/DialogueBox");
 
     public TowerEditorView () throws IOException {
         towerEditorView = new BorderPane();
-
-        ResourceBundle labelsResource = ResourceBundle.getBundle("resources/GameAuthoringTower");
-        ResourceBundle dialogueBoxResource = ResourceBundle.getBundle("resources/DialogueBox");
 
         towerName = new TowerNameField(labelsResource);
         towerImage = new TowerImageView(labelsResource);
@@ -112,14 +112,12 @@ public class TowerEditorView implements ITowerEditorView {
 
     @Override
     public void updateTowerUpgradeBank (List<Integer> towerUpgrades) {
-        // TODO Auto-generated method stub
 
     }
 
     @Override
     public void updateTowerBank (List<Integer> createdTowers) {
-        // TODO Auto-generated method stub
-
+        towerBank.updateTowerBank(createdTowers);
     }
 
     @Override
@@ -153,6 +151,15 @@ public class TowerEditorView implements ITowerEditorView {
     @Override
     public void deleteTower () {
         // TODO Auto-generated method stub
-        
+
+    }
+
+    @Override
+    public void loadNewEffectsView () {
+        towerEffectView =
+                new TowerEffectView(towerName, towerImage, towerBuyPrice, towerSellPrice,
+                                    towerUnlockLevel, towerAbility, towerChooseWeapon, towerUpgrade,
+                                    towerSize,
+                                    labelsResource, dialogueBoxResource);
     }
 }

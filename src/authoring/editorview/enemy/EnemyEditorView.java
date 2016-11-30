@@ -102,8 +102,7 @@ public class EnemyEditorView implements IEnemyEditorView {
 
     @Override
     public void updateEnemyBank (List<Integer> activeEnemies) {
-        // TODO Auto-generated method stub
-
+        enemyBank.updateEnemyBank(activeEnemies);
     }
 
     @Override
@@ -160,7 +159,7 @@ public class EnemyEditorView implements IEnemyEditorView {
     @Override
     public void deleteEnemy () {
         // TODO Auto-generated method stub
-        
+
     }
 
 }

@@ -36,7 +36,8 @@ public class TowerEditorViewController extends EditorViewController
      */
     @Override
     public void onUserPressedCreateNewTower () {
-        ///int myid = towerDataSource.createType(myView);
+        currentTowerID = towerDataSource.createType(myView);
+        // TODO everything
     }
 
     @Override
@@ -87,16 +88,9 @@ public class TowerEditorViewController extends EditorViewController
         towerDataSource.setTowerChosenAbility(currentTowerID, Integer.parseInt(towerAbility));
     }
 
-    private void createDialogueBox () {
-        ResourceBundle dialogueBoxResource = ResourceBundle.getBundle("resources/DialogueBox");
-        DialogueBoxFactory.createErrorDialogueBox(dialogueBoxResource.getString("Integer"),
-                                                  dialogueBoxResource.getString("CheckInput"));
-    }
-
     @Override
     public void onUserPressedDeleteTower () {
-        // TODO Auto-generated method stub
-
+        towerDataSource.deleteType(currentTowerID);
     }
 
     @Override
@@ -120,8 +114,8 @@ public class TowerEditorViewController extends EditorViewController
     @Override
     public void onUserEnteredTowerSize (String towerSize) {
         try {
-        Double.parseDouble(towerSize);
-        towerDataSource.setSize(currentTowerID, Double.parseDouble(towerSize));
+            Double.parseDouble(towerSize);
+            towerDataSource.setSize(currentTowerID, Double.parseDouble(towerSize));
         }
         catch (NumberFormatException e) {
             createDialogueBox();
@@ -138,6 +132,12 @@ public class TowerEditorViewController extends EditorViewController
     public void onUserEnteredTowerUpgrade (String towerUpgrade) {
         // TODO Auto-generated method stub
 
+    }
+
+    private void createDialogueBox () {
+        ResourceBundle dialogueBoxResource = ResourceBundle.getBundle("resources/DialogueBox");
+        DialogueBoxFactory.createErrorDialogueBox(dialogueBoxResource.getString("Integer"),
+                                                  dialogueBoxResource.getString("CheckInput"));
     }
 
 }
