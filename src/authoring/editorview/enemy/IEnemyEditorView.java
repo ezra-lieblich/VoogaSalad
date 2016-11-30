@@ -2,7 +2,7 @@ package authoring.editorview.enemy;
 
 import java.util.List;
 import authoring.editorview.IUpdateView;
-import authoring.editorview.enemy.subviews.EnemyListDataSource;
+import authoring.editorview.ListDataSource;
 
 
 /**
@@ -33,6 +33,6 @@ public interface IEnemyEditorView extends IEnemySetView, IUpdateView {
 
     public void updateEnemyCollisionEffect (String collisionEffect);
 
-    public void setEnemyListDataSource (EnemyListDataSource source);
+    public void setEnemyListDataSource (ListDataSource source);
 
 }

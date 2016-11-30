@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.function.Consumer;
 
+import authoring.editorview.ListDataSource;
 import authoring.editorview.enemy.subviews.EnemyEffectView;
 import authoring.editorview.enemy.subviews.EnemyImageBank;
 import authoring.editorview.enemy.subviews.editorfields.EnemyHealthField;
@@ -18,7 +19,6 @@ import authoring.editorview.enemy.subviews.editorfields.EnemyDamageField;
 import authoring.editorview.enemy.subviews.editorfields.EnemySpeedField;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
-import authoring.editorview.enemy.subviews.EnemyListDataSource;
 
 
 /**
@@ -154,7 +154,7 @@ public class EnemyEditorView implements IEnemyEditorView {
     }
 
     @Override
-    public void setEnemyListDataSource (EnemyListDataSource source) {
+    public void setEnemyListDataSource (ListDataSource source) {
         this.enemyBank.setListDataSource(source);
     }
 
