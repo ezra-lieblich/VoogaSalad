@@ -97,9 +97,4 @@ public class WeaponTypeManagerController extends
         return getTypeManager().getEntity(weaponID).getTargets();
     }
 
-    @Override
-    public int createType (IWeaponEditorView updateView) {
-        // TODO Auto-generated method stub
-        return 0;
-    }
 }
