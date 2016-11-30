@@ -1,6 +1,7 @@
 package authoring.editorview.tower.subviews;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import authoring.editorview.tower.TowerEditorViewDelegate;
@@ -26,13 +27,15 @@ public class TowerImageBank {
     private ListView<Node> towerListView;
 
     private ObservableList<Node> towers;
+    
+    private ArrayList<Integer> towerIDs;
 
     private final int CELL_HEIGHT = 60;
     private final int CELL_WIDTH = 60;
     private final int TOWER_BANK_WIDTH = 120;
     private final String DEFAULT_TOWER_IMAGE_PATH = "./Images/questionmark.png";
 
-    public TowerImageBank (ResourceBundle labelsResource, ResourceBundle dialogueBoxResource) {
+    public TowerImageBank () {
         Button createTowerButton =
                 ButtonFactory.makeButton("Create Tower",
                                          e -> {
