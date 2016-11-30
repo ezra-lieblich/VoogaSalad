@@ -1,9 +1,11 @@
 package engine.tower;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.BiConsumer;
+import java.util.stream.Collectors;
 import engine.AbstractTypeBuilder;
 import engine.ability.Ability;
 import engine.enemy.Enemy;
@@ -21,10 +23,10 @@ public class TowerTypeBuilder extends AbstractTypeBuilder<Tower, TowerBuilder> i
      public static final String DEFAULT_NAME = "New Tower";
      public static final String DEFAULT_IMAGE_PATH = "Images/penguin.jpg";
      public static final double DEFAULT_SIZE = 1;
-     public static final List<Integer> DEFAULT_WEAPONS = Arrays.asList(new Integer[]{});
-     public static final List<Integer> DEFAULT_TARGETS = Arrays.asList(new Integer[]{});
-     public static final List<Integer> DEFAULT_ABILITIES = Arrays.asList(new Integer[]{});
-     public static final List<Integer> DEFAULT_UPGRADES = Arrays.asList(new Integer[]{});
+     public static final List<Integer> DEFAULT_WEAPONS = Arrays.stream(new Integer[]{}).collect(Collectors.toList());
+     public static final List<Integer> DEFAULT_TARGETS = Arrays.stream(new Integer[]{}).collect(Collectors.toList());
+     public static final List<Integer> DEFAULT_ABILITIES = Arrays.stream(new Integer[]{}).collect(Collectors.toList());
+     public static final List<Integer> DEFAULT_UPGRADES = Arrays.stream(new Integer[]{}).collect(Collectors.toList());
      public static final double DEFAULT_COST = 100;
      public static final double DEFAULT_SELL_AMOUNT = DEFAULT_COST / 2;
      public static final int DEFAULT_UNLOCK_LEVEL = 0;
@@ -43,7 +45,7 @@ public class TowerTypeBuilder extends AbstractTypeBuilder<Tower, TowerBuilder> i
      
     @Override
     public TowerBuilder buildWeapons(Integer... weapons) {
-        return buildWeapons(Arrays.asList(weapons));
+        return buildWeapons(Arrays.stream(weapons).collect(Collectors.toList()));
     }
     
     @Override
@@ -54,7 +56,7 @@ public class TowerTypeBuilder extends AbstractTypeBuilder<Tower, TowerBuilder> i
     
     @Override
     public TowerBuilder buildTargets(Integer... targets) {
-        return buildTargets(Arrays.asList(targets));
+        return buildWeapons(Arrays.stream(targets).collect(Collectors.toList()));
     }
     
     @Override
@@ -65,7 +67,7 @@ public class TowerTypeBuilder extends AbstractTypeBuilder<Tower, TowerBuilder> i
     
     @Override
     public TowerBuilder buildAbilities(Integer... abilities) {
-        return buildAbilities(Arrays.asList(abilities));
+        return buildWeapons(Arrays.stream(abilities).collect(Collectors.toList()));
     }
     
     @Override
@@ -76,7 +78,7 @@ public class TowerTypeBuilder extends AbstractTypeBuilder<Tower, TowerBuilder> i
     
     @Override
     public TowerBuilder buildUpgrades(Integer... upgrades) {
-        return buildWeapons(Arrays.asList(upgrades));
+        return buildWeapons(Arrays.stream(upgrades).collect(Collectors.toList()));
     }
     
     @Override
