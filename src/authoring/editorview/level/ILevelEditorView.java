@@ -9,5 +9,6 @@ import javafx.scene.Node;
  *
  */
 public interface ILevelEditorView extends IEditorView {
+	
 	public void setDelegate(LevelEditorViewDelegate delegate);
 }

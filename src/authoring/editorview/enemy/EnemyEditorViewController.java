@@ -34,8 +34,8 @@ public class EnemyEditorViewController extends EditorViewController
     }
 
     @Override
-    public void onUserPressedCreateEnemy () {
-        enemyDataSource.createEnemy(myView);
+    public int onUserPressedCreateEnemy () {
+    	return enemyDataSource.createType(myView);
     }
 
     @Override
@@ -77,7 +77,7 @@ public class EnemyEditorViewController extends EditorViewController
     public void onUserEnteredEnemyPoints (String enemyRewardPoints) {
         try {
             Double.parseDouble(enemyRewardPoints);
-            enemyDataSource.setEnemyRewardPoints(currentEnemyID,
+            enemyDataSource.setEnemyRewardScore(currentEnemyID,
                                                  Double.parseDouble(enemyRewardPoints));
         }
         catch (NumberFormatException e) {
@@ -103,12 +103,12 @@ public class EnemyEditorViewController extends EditorViewController
 
     @Override
     public void onUserEnteredEnemyImagePath (String enemyImagePath) {
-        enemyDataSource.setEnemyImage(currentEnemyID, enemyImagePath);
+        enemyDataSource.setImagePath(currentEnemyID, enemyImagePath);
     }
 
     @Override
     public void onUserEnteredEnemyName (String enemyName) {
-        enemyDataSource.setEnemyName(currentEnemyID, enemyName);
+        enemyDataSource.setName(currentEnemyID, enemyName);
     }
 
     private void createDialogueBox () {

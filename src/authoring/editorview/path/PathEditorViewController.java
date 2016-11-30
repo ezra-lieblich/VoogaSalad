@@ -1,9 +1,7 @@
 package authoring.editorview.path;
 
-import java.util.List;
 
 import authoring.editorview.EditorViewController;
-import engine.path.Coordinate;
 import engine.path.PathManagerController;
 
 
@@ -71,6 +69,13 @@ public class PathEditorViewController extends EditorViewController implements Pa
 	@Override
 	public void onUserEnteredPathCoordinate(int pathID, int x, int y) {
 		pathDataSource.setNewPathCoordinate(pathID, x, y);
+		
+	}
+
+
+	@Override
+	public void onUserEnteredDeletePath() {
+		// TODO Auto-generated method stub
 		
 	}
 
