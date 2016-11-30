@@ -5,7 +5,7 @@ import engine.ManagerMediator;
 
 public class AbilityTypeManager extends AbstractTypeManager<Ability> implements AbilityManager {
 
-    protected AbilityTypeManager (ManagerMediator managerMediator) {
+    protected AbilityTypeManager () {
         // TODO Auto-generated constructor stub
     }
 
