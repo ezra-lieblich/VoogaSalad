@@ -2,15 +2,15 @@ package authoring.editorview.level;
 
 public interface LevelEditorViewDelegate {
 	
-	public void onUserEnteredRewardPoints (int levelID, String points);
+	public void onUserEnteredRewardPoints (int levelID, double points);
 
-    public void onUserEnteredRewardMoney (int levelID, String money);
+    public void onUserEnteredRewardMoney (int levelID, double money);
 
-    public void onUserEnteredRewardHealth (int levelID, String health);
+    public void onUserEnteredRewardHealth (int levelID, double health);
     
     public void onUserEnteredEditLevel (int levelID);
     
-    public void onUserEnteredLevelName (int levelID, String pathID);
+    public void onUserEnteredLevelName (int levelID, String levelName);
     
     public void onUserEnteredCreateLevel ();
     

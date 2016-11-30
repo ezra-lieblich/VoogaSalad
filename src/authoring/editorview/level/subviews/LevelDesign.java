@@ -23,7 +23,7 @@ public class LevelDesign {
 	
 	private void makePathComboBox(){
 		pathComboBox = ComboBoxFactory.makeComboBox("Select path",
-				e ->, 
+				e -> , 
 				options)
 	}
 	
