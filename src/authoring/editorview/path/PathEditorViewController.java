@@ -67,7 +67,13 @@ public class PathEditorViewController extends EditorViewController implements Pa
 
 
 	@Override
-	public void onUserEnteredPathCoordinate(int pathID, int x, int y) {
+	public void onUserEnteredAddPathCoordinate(int pathID, int x, int y) {
+		pathDataSource.setNewPathCoordinate(pathID, x, y);
+		
+	}
+	
+	@Override
+	public void onUserEnteredRemovePathCoordinate(int pathID, int x, int y) {
 		pathDataSource.setNewPathCoordinate(pathID, x, y);
 		
 	}

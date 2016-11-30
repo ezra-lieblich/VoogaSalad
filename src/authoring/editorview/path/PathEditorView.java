@@ -12,6 +12,7 @@ import authoring.editorview.path.subviews.PathImageView;
 import authoring.editorview.path.subviews.PathNameView;
 import authoring.editorview.path.subviews.PathSizeView;
 import engine.path.Coordinate;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -23,7 +24,7 @@ public class PathEditorView implements IPathUpdateView {
 
 	private static final int BOX_SPACING = 10;
     
-	private BorderPane root;
+	private Group root;
     private VBox pathEditView;
     private HBox pathSettings;
     
@@ -38,7 +39,7 @@ public class PathEditorView implements IPathUpdateView {
    
 
     public PathEditorView (int aWidth, int aHeight) {
-    	this.root = new BorderPane();       
+    	this.root = new Group();       
     	this.pathEditView = new VBox(30);
        
     	this.newPathView = new NewPathView();
@@ -83,20 +84,27 @@ public class PathEditorView implements IPathUpdateView {
 
     private void setViewForDefaultPath(){  	 
     	
+    	pathSettings = new HBox(20);
+    	 	
         VBox pathGetter = new VBox(BOX_SPACING);
         pathGetter.getChildren().addAll(newPathView.getInstanceAsNode(), pathChooser.getInstanceAsNode());   
-        root.setLeft(pathGetter);
-        
-        pathSettings = new HBox(BOX_SPACING*2);       
-    
+        pathSettings.getChildren().add(pathGetter);
+         
         VBox textFieldSettings = new VBox(BOX_SPACING);
         textFieldSettings.getChildren().addAll(pathSizeView.getInstanceAsNode(), 
         		pathNameView.getInstanceAsNode());
         pathSettings.getChildren().addAll(pathImageView.getInstanceAsNode(), textFieldSettings);  
         
-		pathEditView.getChildren().addAll(pathSettings, pathInstructionsView.getInstanceAsNode(), 
-				pathGrid.getInstanceAsNode());
-		root.setRight(pathEditView);
+        Node instructions = pathInstructionsView.getInstanceAsNode();
+        instructions.setLayoutX(20);
+        instructions.setLayoutY(150);
+        
+        Node grid = pathGrid.getInstanceAsNode();
+        grid.setLayoutX(100);
+        grid.setLayoutY(200);
+        
+		root.getChildren().addAll(pathSettings, instructions, 
+				grid);
     }
 
 	@Override

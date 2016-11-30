@@ -21,13 +21,12 @@ public class PathGrid {
 	
 	private int gridHeight;
 	private int gridWidth;
-	private int numColumns = 4;
-	private int numRows = 4;
+	private int numColumns;
+	private int numRows;
 	private int cellHeight;
 	private int cellWidth;
 	private int activePathID;
 	private Image cellImage = new Image(getClass().getClassLoader().getResourceAsStream("blacksquare.png"));
-	//private PathCell[][] grid ;
 	private ImageView[][] grid;
 	
 	//private List<Coordinate<Integer>> pathCoordinates;
@@ -46,8 +45,12 @@ public class PathGrid {
 	public PathGrid(int height, int width){
 		this.gridHeight = height;
 		this.gridWidth = width;
+		this.numColumns = 4;
+		this.numRows = 4;
 		this.cellHeight = gridHeight/numRows;
 		this.cellWidth = gridWidth/numColumns;
+		System.out.println(cellHeight);
+        System.out.println(cellWidth);
 		this.root = new Group();
 		this.gridRoot = new Group();
 		this.backgroundRoot = new Group();
@@ -127,21 +130,11 @@ public class PathGrid {
 	
 	
 	private void setPath(){
-		
-		//grid = new PathCell[numColumns][numRows];
 		grid = new ImageView[numColumns][numRows];
 		
 		for (int i = 0; i < numColumns; i++){
 			for (int j = 0; j < numRows; j++){
 				setCell(i, j);
-				
-				
-				
-//				setCell(i, j);
-//				fillCell(i, j);
-				
-				
-				
 			}			
 		}
 	}
@@ -199,59 +192,31 @@ public class PathGrid {
 	}
 	
 	private void updatePath(double x, double y){
-		
-		int j = (int) x/cellWidth;
-		int i = (int) y/cellHeight;
+		System.out.println(cellWidth);
+        System.out.println(cellHeight);
+		int i = (int) (x - 100)/100;
+		int j = (int) (y - 240)/100;
+		System.out.println(j);
+        System.out.println(i);
 		if (grid[i][j].isVisible()){
 			grid[i][j].setVisible(false);
+			removeCellFromPath(i, j);
 		}
 		else {
 			grid[i][j].setVisible(true);
+			addCellToPath(i, j);
 		}
 	}
 	
 	
 	private void addCellToPath(int x, int y){
+		delegate.onUserEnteredAddPathCoordinate(activePathID, x, y);
 
 	}
 	
 	private void removeCellFromPath(int x, int y){
-		
+		delegate.onUserEnteredRemovePathCoordinate(activePathID, x, y);
 	}
-	
-//	private void setCell(int x, int y){
-//		PathCell cell = new PathCell();
-//		for (Coordinate<Integer> coordinate : pathCoordinates){
-//			if (coordinate.getX() == x && coordinate.getY() == y){
-//				cell.setInPath(true);
-//				break;
-//			}
-//		}
-//		grid[x][y] = cell;
-//		
-//	}
-//	
-//	private void fillCell(int x, int y){
-//		if (grid[x][y].getInPathBoolean()){
-//			ImageView iv = new ImageView(cellImage);
-//			iv.setFitHeight(cellHeight);
-//			iv.setFitWidth(cellWidth);
-//			iv.setX(x*cellWidth);
-//			iv.setY(y*cellHeight);
-//			gridRoot.getChildren().add(iv);
-//			
-//		}	
-//		else {
-//			Rectangle rect = new Rectangle();			
-//			formatRectangle(x, y, rect);
-//			gridRoot.getChildren().add(rect);
-//		}
-//		
-//		
-//	}
-
-	
-	
 	
 
 }
