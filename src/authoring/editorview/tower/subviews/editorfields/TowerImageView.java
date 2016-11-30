@@ -1,13 +1,10 @@
 package authoring.editorview.tower.subviews.editorfields;
 
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ResourceBundle;
-import javax.imageio.ImageIO;
 import authoring.editorview.tower.ITowerSetView;
 import authoring.editorview.tower.TowerEditorViewDelegate;
 import authoring.utilityfactories.DialogueBoxFactory;
-import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -34,7 +31,6 @@ public class TowerImageView implements ITowerSetView {
         towerImage = new ImageView();
         towerImage.setFitHeight(CHARACTER_SIZE);
         towerImage.setFitWidth(CHARACTER_SIZE);
-        //loadTowerImage();
     }
 
     public void updateTowerImagePath (String imagePath) {
@@ -48,7 +44,6 @@ public class TowerImageView implements ITowerSetView {
     }
 
     private void loadTowerImage () {
-        BufferedImage imageRead;
         try {
             File file = new File(imagePath);
             Image image = new Image(file.toURI().toString());
