@@ -30,7 +30,7 @@ public class TowerEditorViewController extends EditorViewController
 
     public void setTowerDataSource (TowerManagerController source) {
         this.towerDataSource = source;
-        currentTowerID = towerDataSource.createType(towerView);
+        onUserPressedCreateNewTower();
     }
 
     /**
@@ -146,5 +146,11 @@ public class TowerEditorViewController extends EditorViewController
         DialogueBoxFactory.createErrorDialogueBox(dialogueBoxResource.getString("Integer"),
                                                   dialogueBoxResource.getString("CheckInput"));
     }
+
+	@Override
+	public void onUserSelectedTower(int towerID) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

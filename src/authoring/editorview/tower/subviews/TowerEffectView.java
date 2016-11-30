@@ -83,9 +83,7 @@ public class TowerEffectView extends PhotoFileChooser implements ITowerSetView {
     }
 
     private void buildViewComponents () {
-        Node myImageView = towerImage.getInstanceAsNode();
-
-        vbox.getChildren().add(myImageView);
+        vbox.getChildren().add(towerImage.getInstanceAsNode());
         vbox.getChildren().add(ButtonFactory.makeButton(labelsResource.getString("Image"),
                                                         e -> {
                                                             try {
@@ -106,8 +104,8 @@ public class TowerEffectView extends PhotoFileChooser implements ITowerSetView {
                 .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Name"),
                                                            towerName.getInstanceAsNode()));
         vbox.getChildren()
-        .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Size"),
-                                                   towerSize.getInstanceAsNode()));
+                .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Size"),
+                                                           towerSize.getInstanceAsNode()));
         vbox.getChildren()
                 .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("BuyPrice"),
                                                            towerBuyPrice.getInstanceAsNode()));
@@ -131,7 +129,8 @@ public class TowerEffectView extends PhotoFileChooser implements ITowerSetView {
     public void openFileChooser (FileChooser chooseFile) throws IOException {
         chosenFile = chooseFile.showOpenDialog(new Stage());
         if (chosenFile != null) {
-
+            //System.out.println(chosenFile.toURI().getPath());
+            delegate.onUserEnteredTowerImagePath(chosenFile.toURI().getPath());
         }
     }
 

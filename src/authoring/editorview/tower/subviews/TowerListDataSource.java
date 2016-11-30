@@ -1,7 +1,7 @@
 package authoring.editorview.tower.subviews;
 
-public interface TowerListDataSource {
+import authoring.editorview.ListDataSource;
 
-    public TowerListCellData getCellDataForTower (int towerID);
+public interface TowerListDataSource extends ListDataSource {
 
 }
