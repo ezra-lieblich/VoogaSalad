@@ -1,13 +1,17 @@
 package authoring.editorview.path.subviews;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
+import javafx.scene.control.ComboBox;
 import javafx.scene.layout.VBox;
 
 import java.util.ResourceBundle;
 
 import authoring.editorview.path.PathEditorViewDelegate;
+import authoring.utilityfactories.ComboBoxFactory;
 
 public class PathChooser{
 	
@@ -39,7 +43,16 @@ public class PathChooser{
 	}
 	
 	private void buildViewComponents(){
-		//build combobox
+		
+		ObservableList<Object> pathList= FXCollections.observableArrayList();
+		
+		//TODO: change event
+		ComboBox<Object> pathComboBox = ComboBoxFactory.makeComboBox(
+				pathResource.getString("ComboBoxText"), 
+				e -> updatePathComboBox(), 
+				pathList);
+		pathComboBox.setTranslateX(5);
+		root.getChildren().add(pathComboBox);
 	}
 
 	

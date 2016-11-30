@@ -41,9 +41,8 @@ public class PathEditorView implements IPathUpdateView {
     public PathEditorView (int aWidth, int aHeight) {
     	this.root = new Group();       
     	this.pathEditView = new VBox(30);
-       
+    	
     	this.newPathView = new NewPathView();
-        newPathView.setPathEditorView(this);
         this.pathChooser = new PathChooser();       
     	this.pathSizeView = new PathSizeView();
     	this.pathNameView = new PathNameView();
@@ -73,13 +72,17 @@ public class PathEditorView implements IPathUpdateView {
         pathChooser.setDelegate(delegate);
         pathGrid.setDelegate(delegate);
         newPathView.setDelegate(delegate);
+        pathSizeView.setDelegate(delegate);
     }
 
-    public void setActiveId(int pathID){
+    
+    @Override
+	public void updateActiveID(int pathID) {
     	pathImageView.setActivePathId(pathID);
     	pathGrid.setActivePathId(pathID);
-    	
-    }
+    	pathSizeView.setActivePathId(pathID);
+		
+	}
     
 
     private void setViewForDefaultPath(){  	 
@@ -110,18 +113,21 @@ public class PathEditorView implements IPathUpdateView {
 	@Override
 	public void updatePathImage(String pathImage) {
 		pathImageView.setPathImagePath(pathImage);
+	//	pathGrid.setCellImage();
 		
 	}
 
 	@Override
 	public void updateNumColumns(int numColumns) {
-		pathSizeView.setNumColumns(Integer.toString(numColumns));
+		pathSizeView.setNumberOfColumns(numColumns);
+		pathGrid.setNumColumns(numColumns);
 		
 	}
 
 	@Override
 	public void updateNumRows(int numRows) {
-		pathSizeView.setNumRows(Integer.toString(numRows));
+		pathSizeView.setNumberOfRows(numRows);
+		pathGrid.setNumRows(numRows);
 		
 	}
 
@@ -157,6 +163,14 @@ public class PathEditorView implements IPathUpdateView {
 
 	@Override
 	public void updateType(String pathType) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+
+	@Override
+	public void createNewPath() {
 		// TODO Auto-generated method stub
 		
 	}

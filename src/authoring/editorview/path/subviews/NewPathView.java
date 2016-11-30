@@ -2,7 +2,6 @@ package authoring.editorview.path.subviews;
 
 import java.util.ResourceBundle;
 
-import authoring.editorview.path.PathEditorView;
 import authoring.editorview.path.PathEditorViewDelegate;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -15,10 +14,9 @@ public class NewPathView {
 	private static final String RESOURCE_FILE_NAME = "resources/GameAuthoringPath";	
 	private ResourceBundle pathResource = ResourceBundle.getBundle(RESOURCE_FILE_NAME);
 	
-	private PathEditorView pathEditorView;
-	
 	private PathEditorViewDelegate delegate;
 	private VBox root;
+	private int activePathID;
 	
 	public NewPathView(){
 		this.root = new VBox();
@@ -33,9 +31,10 @@ public class NewPathView {
 		this.delegate = delegate;
 	}
 	
-	public void setPathEditorView(PathEditorView pathEditorView){
-		this.pathEditorView = pathEditorView;
+	public void setActivePathId(int pathID){
+		this.activePathID = pathID;
 	}
+	
 	
 	private void buildViewComponents() {
 		
@@ -51,9 +50,9 @@ public class NewPathView {
 	}
 	
 	public void createNewPath(){
-		int id = delegate.onUserEnteredCreatePath();		
-		pathEditorView.setActiveId(id);
-		delegate.onUserEnteredEditPath(id);
+		delegate.onUserEnteredCreatePath();		
+		
+		delegate.onUserEnteredEditPath(activePathID);
 		
 	}
 	 

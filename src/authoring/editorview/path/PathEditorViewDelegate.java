@@ -11,7 +11,7 @@ public interface PathEditorViewDelegate {
 	
 	public void onUserEnteredPathName(int pathID, String pathName);
 	
-	public int onUserEnteredCreatePath();
+	public void onUserEnteredCreatePath();
 	
 	public void onUserEnteredDeletePath();
 	
