@@ -9,7 +9,7 @@ import engine.AbstractTypeManagerController;
 public class GameModeTypeManagerController 
 	extends AbstractTypeManagerController<GameModeManager, GameModeBuilder, GameMode, IGameUpdateView> implements GameModeManagerController {
 
-	GameModeTypeManagerController(GameModeManager typeManager) {
+	public GameModeTypeManagerController(GameModeManager typeManager) {
 		super(typeManager, new GameModeTypeBuilder());
 	}
 

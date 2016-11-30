@@ -9,7 +9,7 @@ public class WeaponTypeManagerController extends
         AbstractTypeManagerController<WeaponManager, WeaponBuilder, Weapon, IWeaponUpdateView>
         implements WeaponManagerController {
 
-    WeaponTypeManagerController (WeaponManager weaponManager) {
+    public WeaponTypeManagerController (WeaponManager weaponManager) {
         super(weaponManager, new WeaponTypeBuilder());
     }
 
