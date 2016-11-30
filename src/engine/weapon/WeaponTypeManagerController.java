@@ -59,13 +59,11 @@ public class WeaponTypeManagerController extends
     @Override
     public void setNewWeaponTargetEnemy (int weaponID, int enemyID) {
         getTypeManager().getEntity(weaponID).addTarget(enemyID);
-        ;
     }
 
     @Override
     public void removeWeaponTargetEnemy (int weaponID, int enemyID) {
         getTypeManager().getEntity(weaponID).removeTarget(enemyID);
-        ;
     }
 
     @Override
@@ -96,11 +94,5 @@ public class WeaponTypeManagerController extends
     @Override
     public List<Integer> getTargetEnemies (int weaponID) {
         return getTypeManager().getEntity(weaponID).getTargets();
-    }
-
-    @Override
-    public int createType (IWeaponUpdateView updateView) {
-        // TODO Auto-generated method stub
-        return 0;
     }
 }
