@@ -3,8 +3,8 @@ package gameplayer.controller;
 import java.util.HashMap;
 import java.util.Observable;
 import java.util.Observer;
+import engine.tower.Tower;
 
-import engine.TowerType;
 import gameplayer.model.GamePlayModel;
 import gameplayer.view.GameGUI;
 import gameplayer.view.GridGUI;
@@ -17,10 +17,10 @@ public class DragDropController implements Observer{
 	private DragDrop dragDrop;
 	private GamePlayModel model;
 	private GameGUI game;
-	private HashMap<Integer,TowerType>towerTypes; 
+	private HashMap<Integer,Tower>towerTypes; 
 	
 	
-	public DragDropController(GameGUI game, GamePlayModel model, HashMap<Integer,TowerType>towerTypes){
+	public DragDropController(GameGUI game, GamePlayModel model, HashMap<Integer,Tower>towerTypes){
 		this.dragDrop = game.getDragDrop();
 		this.model = model;
 		this.dragDrop.addObserver(this);

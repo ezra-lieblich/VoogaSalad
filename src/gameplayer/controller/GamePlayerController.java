@@ -28,7 +28,6 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.Queue;
 
-import engine.tower.Tower;
 
 public class GamePlayerController implements Observer {
 
@@ -102,8 +101,8 @@ public class GamePlayerController implements Observer {
 	
 	private ArrayList<String> getTowerImages() {
 		ArrayList<String> towerImages = new ArrayList<String>();
-		HashMap<Integer, Tower> towers = this.loader.getTowers();
-		for (Tower tower : towers.values()) {
+		HashMap<Integer, engine.tower.Tower> towers = this.loader.getTowers(); //fix naming
+		for (engine.tower.Tower tower : towers.values()) { //fix naming
 			towerImages.add(tower.getImagePath());
 		}
 		return towerImages;

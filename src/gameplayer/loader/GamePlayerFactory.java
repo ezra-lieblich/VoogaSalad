@@ -74,19 +74,18 @@ public class GamePlayerFactory{
 	
 	
 	
-	public HashMap<Integer, Tower> getTowers(){
-
+	public HashMap<Integer, Tower> getTowers() {
 		return authoringFileReader.getTowerTypes(); 
 	}
 	
 	
-	public List<Queue<Enemy>> getEnemy(int level){
+	public List<Queue<Enemy>> getEnemy(int level) {
 		return authoringFileReader.getEnemy(level); 
 	}
 	
 	
 	
-	public String getGameTitle(){
+	public String getGameTitle() {
 		return this.authoringFileReader.getName();
 	}
 }
