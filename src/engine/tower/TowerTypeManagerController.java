@@ -80,7 +80,7 @@ public class TowerTypeManagerController extends AbstractTypeManagerController<To
     // TODO - edit createNewTower to work with both versions
     @Override
     public int createTowerUpgrade (ITowerUpdateView towerUpdater, int parentTowerID) {
-        return getTypeManager().addUpgrade(createType(towerUpdater), parentTowerID);
+        return getTypeManager().addUpgrade(constructType(towerUpdater), parentTowerID);
     }
 
     @Override
@@ -104,60 +104,6 @@ public class TowerTypeManagerController extends AbstractTypeManagerController<To
                         .updateTowerSellPriceDisplay(newValue))
                 .addUnlockLevelListener((oldValue, newValue) -> towerUpdater
                         .updateUnlockLevelDisplay(newValue));
-    }
-
-    @Override
-    public int createType (ITowerUpdateView updateView) {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    @Override
-    public void deleteType (int id) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public String getName (int id) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public String getImagePath (int id) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public Double getSize (int id) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public List<Integer> getCreatedTypeIds () {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public void setName (int id, String name) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void setImagePath (int id, String imagePath) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void setSize (int id, double size) {
-        // TODO Auto-generated method stub
-        
     }
 
 
