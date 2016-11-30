@@ -2,13 +2,13 @@ package engine.level;
 
 import java.util.Map;
 
-import authoring.editorview.level.ILevelUpdateView;
+import authoring.editorview.level.ILevelEditorView;
 import engine.AbstractTypeManagerController;
 import engine.ManagerMediator;
 
 
 public class LevelTypeManagerController 
-	extends AbstractTypeManagerController<LevelManager, LevelBuilder, Level, ILevelUpdateView> implements LevelManagerController {
+	extends AbstractTypeManagerController<LevelManager, LevelBuilder, Level, ILevelEditorView> implements LevelManagerController {
 
 	public LevelTypeManagerController(ManagerMediator managerMediator) {
 		super(new LevelTypeManager(), new LevelTypeBuilder(), managerMediator);
@@ -89,7 +89,7 @@ public class LevelTypeManagerController
 	}
 
 	@Override
-	protected LevelBuilder constructTypeProperties(ILevelUpdateView updateView, LevelBuilder typeBuilder) {
+	protected LevelBuilder constructTypeProperties(ILevelEditorView updateView, LevelBuilder typeBuilder) {
 		return typeBuilder.addDurationInSecondsListener((oldValue, newValue) -> updateView.updateTransitionTime(newValue))
 				//updateEnemy needs to take in the whole map and update everything
 				.addEnemyCountsListener((oldValue, newValue) -> updateView.updateEnemy(newValue))

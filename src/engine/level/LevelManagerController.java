@@ -2,11 +2,11 @@ package engine.level;
 
 import java.util.Map;
 
-import authoring.editorview.level.ILevelUpdateView;
+import authoring.editorview.level.ILevelEditorView;
 import engine.ManagerController;
 
 
-public interface LevelManagerController  extends ManagerController<LevelManager, LevelBuilder, Level, ILevelUpdateView>{
+public interface LevelManagerController  extends ManagerController<LevelManager, LevelBuilder, Level, ILevelEditorView>{
 	
 	public void setEnemy (int levelID, int enemyID, int numEnemies);
 
