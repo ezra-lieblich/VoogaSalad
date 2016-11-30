@@ -1,28 +1,36 @@
 package authoring.editorview.gamesettings;
 
 import authoring.editorview.EditorViewController;
+import authoring.editorview.gamesettings.subviews.GameNameView;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 
 
 public class GameSettingsEditorView extends EditorViewController
         implements IGameSettingsEditorView {
 
-    private GameSettingsEditorViewDelegate delegate;
-    private Pane gameConditionsPane;
+    
+    private VBox gameConditionsRoot;
+    private GameNameView gameNameView;
 
     public GameSettingsEditorView (int aWidth, int aHeight) {
-        this.gameConditionsPane = new Pane();
+        this.gameConditionsRoot = new VBox(10);
+        this.gameNameView = new GameNameView();
     }
 
     @Override
     public Node getInstanceAsNode () {
-        return gameConditionsPane;
+        return gameConditionsRoot;
     }
 
     @Override
     public void setDelegate (GameSettingsEditorViewDelegate delegate) {
-        this.delegate = delegate;
+        gameNameView.setDelegate(delegate);;
+    }
+    
+    private void addViewComponents(){
+    	gameConditionsRoot.getChildren().add(gameNameView.getInstanceAsNode());
     }
 
 }

@@ -26,6 +26,10 @@ public class ManagerTypeMediator implements ManagerMediator {
     
     private List<Manager<? extends Type>> allManagers;
    
+    public ManagerTypeMediator() {
+        allManagers = new ArrayList<Manager<? extends Type>>();
+    }
+    
     @Override
     public <R extends Manager<? extends Type>> void update (R observable, MethodData<?> value) {
         allManagers.forEach(a -> a.visitManager(observable, value));

@@ -18,21 +18,17 @@ public class WeaponEditorViewController extends EditorViewController
 
     private WeaponManagerController weaponDataSource;
     private int currentWeaponID;
-    private IWeaponUpdateView myView;
+    private IWeaponEditorView weaponView;
 
     public WeaponEditorViewController (int editorWidth, int editorHeight) throws IOException {
-        myView = WeaponEditorViewFactory.build(editorWidth, editorHeight);
-        myView.setDelegate(this);
-        this.view = myView;
-    }
-
-    private void updateWeaponID () {
-        // How do I know which ID I'm working with?
-        // currentWeaponID = weaponDataSource.getCreatedWeapon();
+        weaponView = WeaponEditorViewFactory.build(editorWidth, editorHeight);
+        weaponView.setDelegate(this);
+        this.view = weaponView;
     }
 
     public void setWeaponDataSource (WeaponManagerController source) {
         this.weaponDataSource = source;
+        onUserPressedCreateWeapon();
     }
 
     @Override
@@ -80,7 +76,13 @@ public class WeaponEditorViewController extends EditorViewController
 
     @Override
     public void onUserPressedCreateWeapon () {
-        //weaponDataSource.createWeapon();
+        currentWeaponID = weaponDataSource.createType(weaponView);
+        weaponView.updateImagePathDisplay(weaponDataSource.getImagePath(currentWeaponID));
+        weaponView.updateNameDisplay(weaponDataSource.getName(currentWeaponID));
+        weaponView.updateFireRateDisplay(weaponDataSource.getWeaponFireRate(currentWeaponID));
+        weaponView.updateRangeDisplay(weaponDataSource.getWeaponRange(currentWeaponID));
+        weaponView.updateSizeDisplay(weaponDataSource.getSize(currentWeaponID));
+        weaponView.updateSpeedDisplay(weaponDataSource.getWeaponSpeed(currentWeaponID));
     }
 
     @Override
@@ -113,8 +115,19 @@ public class WeaponEditorViewController extends EditorViewController
 
     @Override
     public void onUserEnteredWeaponSize (String weaponSize) {
-        // TODO Auto-generated method stub
-        
+        try {
+            Double.parseDouble(weaponSize);
+            weaponDataSource.setSize(currentWeaponID, Double.parseDouble(weaponSize));
+        }
+        catch (NumberFormatException e) {
+            createDialogueBox();
+        }
     }
+
+	@Override
+	public void onUserSelectedWeapon(int weaponID) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

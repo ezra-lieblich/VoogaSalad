@@ -11,6 +11,8 @@ import engine.level.Level;
 import engine.level.LevelBuilder;
 import engine.level.LevelInitializer;
 import engine.observer.ObservableList;
+import engine.observer.ObservableListProperty;
+import engine.observer.ObservableObjectProperty;
 import engine.observer.ObservableProperty;
 
 public class GameModeTypeBuilder extends AbstractTypeBuilder<GameMode, GameModeBuilder> implements GameModeBuilder, GameModeInitializer {
@@ -18,8 +20,8 @@ public class GameModeTypeBuilder extends AbstractTypeBuilder<GameMode, GameModeB
 	public static final String DEFAULT_NAME = "New Game";
     public static final String DEFAULT_IMAGE_PATH = "Images.blacksquare.jpg";
     public static final double DEFAULT_SIZE = 1;
-    public static final List<String> DEFAULT_WINNING_CONDITIONS = new ArrayList<>();
-    public static final List<String> DEFAULT_LOSING_CONDITIONS = new ArrayList<>();
+    public static final List<String> DEFAULT_WINNING_CONDITIONS = new ArrayList<String>();
+    public static final List<String> DEFAULT_LOSING_CONDITIONS = new ArrayList<String>();
     public static final String DEFAULT_GAME_TYPE = "Normal";
     public static final double DEFAULT_INITIAL_LIVES = 100;
     public static final double DEFAULT_INITIAL_MONEY = 500;
@@ -30,7 +32,7 @@ public class GameModeTypeBuilder extends AbstractTypeBuilder<GameMode, GameModeB
     private ObservableProperty<Double> initialLives;
     private ObservableProperty<Double> initialMoney;
 	
-	protected GameModeTypeBuilder() {
+	public GameModeTypeBuilder() {
 		super(DEFAULT_NAME, DEFAULT_IMAGE_PATH, DEFAULT_SIZE);
 	}
 
@@ -126,11 +128,11 @@ public class GameModeTypeBuilder extends AbstractTypeBuilder<GameMode, GameModeB
 
 	@Override
 	protected void restoreTypeDefaults() {
-		this.winningConditions.setProperty(DEFAULT_WINNING_CONDITIONS);
-		this.losingConditions.setProperty(DEFAULT_LOSING_CONDITIONS);
-		this.gameType.setProperty(DEFAULT_GAME_TYPE);
-		this.initialLives.setProperty(DEFAULT_INITIAL_LIVES);
-		this.initialMoney.setProperty(DEFAULT_INITIAL_MONEY);
+		this.winningConditions = new ObservableListProperty<String>(DEFAULT_WINNING_CONDITIONS);
+		this.losingConditions = new ObservableListProperty<String>(DEFAULT_LOSING_CONDITIONS);
+		this.gameType = new ObservableObjectProperty<String>(DEFAULT_GAME_TYPE);
+		this.initialLives = new ObservableObjectProperty<Double>(DEFAULT_INITIAL_LIVES);
+		this.initialMoney = new ObservableObjectProperty<Double>(DEFAULT_INITIAL_MONEY);
 	}
 
 	@Override

@@ -8,7 +8,7 @@ package authoring.editorview.enemy;
  */
 public interface EnemyEditorViewDelegate {
 
-    public int onUserPressedCreateEnemy ();
+    public void onUserPressedCreateEnemy ();
 
     public void onUserPressedDeleteEnemy ();
 
@@ -29,4 +29,6 @@ public interface EnemyEditorViewDelegate {
     public void onUserEnteredEnemyName (String enemyName);
 
     public void onUserEnteredEnemySize (String enemySize);
+    
+    public void onUserSelectedEnemy (int enemyID);
 }
