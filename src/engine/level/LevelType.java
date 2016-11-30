@@ -6,76 +6,81 @@ import java.util.Map;
 
 import engine.AbstractType;
 import engine.TypeInitializer;
-import engine.enemy.EnemyType;
-import java.util.HashMap;
+import engine.observer.ObservableMap;
+import engine.observer.ObservableProperty;
 
 
 public class LevelType extends AbstractType implements Level {
+    private ObservableMap<Integer, Integer> enemyCounts;
+	private ObservableProperty<Double> rewardHealth;
+	private ObservableProperty<Double> rewardMoney;
+	private ObservableProperty<Double> rewardScore;
+	private ObservableProperty<Double> durationInSeconds;
 
-    private Map<EnemyType, Integer> enemyCounts;
-	private int rewardHealth;
-	private int rewardMoney;
-	private int rewardPoints;
-	private double durationInSeconds;
 
-
-    protected LevelType (TypeInitializer typeBuilder) {
-	super(typeBuilder);
-	 // TODO Auto-generated constructor stub
+    protected LevelType (LevelInitializer levelInitializer) {
+    	super(levelInitializer);	
+    	this.enemyCounts = levelInitializer.getEnemyCounts();
+    	this.rewardHealth = levelInitializer.getRewardHealth();
+    	this.rewardMoney = levelInitializer.getRewardMoney();
+    	this.rewardScore = levelInitializer.getRewardScore();
+    	this.durationInSeconds = levelInitializer.getDurationInSeconds();
 	}
     
-//	public LevelType() {
-//		enemyCounts = new HashMap<>();
-//	}
 
 	@Override
-	public Map<EnemyType, Integer> getEnemyCounts() {
-		return Collections.unmodifiableMap(enemyCounts);
+	public Map<Integer, Integer> getEnemyCounts() {
+		return Collections.unmodifiableMap(enemyCounts.getProperty());
 	}
 
 	@Override
-	public void setEnemyCounts(EnemyType enemy, int enemyCount) {
+	public void setEnemyCounts(int enemy, int enemyCount) {
 		enemyCounts.put(enemy, enemyCount);
 	}
 
 	@Override
-	public int getRewardHealth() {
-		return rewardHealth;
+	public void removeEnemy(int enemy) {
+		enemyCounts.remove(enemy);
+	}
+	
+	@Override
+	public double getRewardHealth() {
+		return rewardHealth.getProperty();
 	}
 
 	@Override
-	public void setRewardHealth(int rewardHealth) {
-		this.rewardHealth = rewardHealth;
+	public void setRewardHealth(double rewardHealth) {
+		this.rewardHealth.setProperty(rewardHealth);
 	}
 
 	@Override
-	public int getRewardMoney() {
-		return rewardMoney;
+	public double getRewardMoney() {
+		return rewardMoney.getProperty();
 	}
 
 	@Override
-	public void setRewardMoney(int rewardMoney) {
-		this.rewardMoney = rewardMoney;
+	public void setRewardMoney(double rewardMoney) {
+		this.rewardMoney.setProperty(rewardMoney);
 	}
 
 	@Override
-	public int getRewardPoints() {
-		return rewardPoints;
+	public double getRewardScore() {
+		return rewardScore.getProperty();
 	}
 
 	@Override
-	public void setRewardPoints(int rewardPoints) {
-		this.rewardPoints = rewardPoints;
+	public void setRewardScore(double rewardPoints) {
+		this.rewardScore.setProperty(rewardPoints);
 	}
 
 	@Override
 	public double getDurationInSeconds() {
-		return durationInSeconds;
+		return durationInSeconds.getProperty();
 	}
 
 	@Override
 	public void setDurationInSeconds(double durationInSeconds) {
-		this.durationInSeconds = durationInSeconds;
+		this.durationInSeconds.setProperty(durationInSeconds);
 	}
 
 }

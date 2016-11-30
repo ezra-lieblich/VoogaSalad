@@ -1,18 +1,25 @@
 package authoring.editorview.path;
 
+
 public interface PathEditorViewDelegate {
 	
-	public void onUserEnteredNumberColumns(int numColumns);
+	public void onUserEnteredNumberColumns(int pathID, int numColumns);
 	
-	public void onUserEnteredNumberRows(int numRows);
+	public void onUserEnteredNumberRows(int pathID, int numRows);
 	
-	public void onUserEnteredBackgroundImage(String backgroundImagePath);
+	public void onUserEnteredPathImage(int pathID, String pathImagePath);
 	
-	public void onUserEnteredPathImage(String pathImagePath);
+	public void onUserEnteredPathName(int pathID, String pathName);
 	
-	public void onUserEnteredPathName(String pathName);
+	public int onUserEnteredCreatePath();
 	
-	public void onUserEnteredCreatePath();
+	public void onUserEnteredDeletePath();
+	
+	public void onUserEnteredEditPath(int pathID);
+	
+	public void onUserEnteredPathCoordinate(int pathID, int x, int y);
+	
+	
 	
 	
 

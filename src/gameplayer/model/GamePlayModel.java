@@ -86,7 +86,7 @@ public class GamePlayModel extends Observable {
 																		// and
 																		// current
 																		// level?
-		this.numLevels = settingInfo.get("numLevels");
+		this.numLevels = settingInfo.get("totalNumberOfLevels");
 		this.gold = settingInfo.get("gold");
 		this.lives = settingInfo.get("lives");
 		this.towerTypes = this.factory.getTowers();
@@ -195,12 +195,30 @@ public class GamePlayModel extends Observable {
 
 	public Boolean placeTower(int type, int x, int y) {
 		// later check if is a valid location to place the tower
+
 			TowerType towerType = towerTypes.get(type);
 			this.towersOnGrid.add(new Tower(type,towerType.getImageLocation(),towerType.getName(),x,y));
 			for(int i=0;i<towersOnGrid.size();i++){
 				System.out.println(towersOnGrid.get(i).getName());
 			}
 			return true;
+
+		engine.tower.Tower tt = towerTypes.get(type); //REFACTOR NAMES
+		System.out.println("Placed a tower");
+		System.out.println("Tower x: " + x + "; y:" + y);
+		// get weaponTypes
+		// actually implement the firing counter into each weapon types
+
+		// ++++++++++++++++++++++++++++fix this after weapon type is
+		// done+++++++++++++++++++++++++
+		/*
+		 * Tower t = new Tower(type, tt.getCost(),
+		 * tt.getWeapon(),tt.getImageLocation(),tt.getName()); if(this.gold -
+		 * t.getCost() < 0){ return false; } t.setCoordinates(x, y);
+		 * grid.placeTower(t, x, y); setGold(this.gold - t.getCost());
+		 * 
+		 * 
+		 */
 	}
 
 	public double cellToCoordinate(double d) {

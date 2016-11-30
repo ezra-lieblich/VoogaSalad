@@ -1,5 +1,6 @@
 package authoring.editorview.tower.subviews.editorfields;
 
+import java.util.ResourceBundle;
 import authoring.editorview.tower.ITowerEditorView;
 import authoring.editorview.tower.TowerEditorViewDelegate;
 import authoring.utilityfactories.ComboBoxFactory;
@@ -7,6 +8,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
+
 
 /**
  * 
@@ -17,8 +19,10 @@ public class TowerAbilityField implements ITowerEditorView {
 
     private ComboBox<Object> towerAbilityBox;
     private TowerEditorViewDelegate delegate;
+    private ResourceBundle labelsResource;
 
-    public TowerAbilityField () {
+    public TowerAbilityField (ResourceBundle labelsResource) {
+        this.labelsResource = labelsResource;
         ObservableList<Object> abilityOptions = setList();
         createComboBox(abilityOptions);
     }
@@ -31,7 +35,7 @@ public class TowerAbilityField implements ITowerEditorView {
 
     private void createComboBox (ObservableList<Object> abilityOptions) {
         towerAbilityBox =
-                ComboBoxFactory.makeComboBox("Set tower ability: ", e -> delegate
+                ComboBoxFactory.makeComboBox(labelsResource.getString("Ability"), e -> delegate
                         .onUserEnteredTowerAbility((String) towerAbilityBox.getValue()),
                                              abilityOptions);
     }

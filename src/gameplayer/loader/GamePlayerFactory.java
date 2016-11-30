@@ -30,7 +30,7 @@ public class GamePlayerFactory{
 	
 	public HashMap<String, Double> getGameSetting(){
 		HashMap<String,Double>settings = new HashMap<>(); 
-		settings.put("numLevels", Double.parseDouble(authoringFileReader.getVariableValues("numLevels")));
+		settings.put("totalNumberOfLevels", Double.parseDouble(authoringFileReader.getVariableValues("numLevels")));
 		settings.put("lives", Double.parseDouble(authoringFileReader.getVariableValues("lives")));
 		settings.put("gold",  Double.parseDouble(authoringFileReader.getVariableValues("gold")));
 		settings.put("levelnumber",  Double.parseDouble(authoringFileReader.getVariableValues("levelnumber")));

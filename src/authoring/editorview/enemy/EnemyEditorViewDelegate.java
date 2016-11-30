@@ -8,7 +8,9 @@ package authoring.editorview.enemy;
  */
 public interface EnemyEditorViewDelegate {
 
-    public void onUserPressedCreateEnemy ();
+    public int onUserPressedCreateEnemy ();
+
+    public void onUserPressedDeleteEnemy ();
 
     public void onUserEnteredEnemySpeed (String enemySpeed);
 
@@ -26,6 +28,5 @@ public interface EnemyEditorViewDelegate {
 
     public void onUserEnteredEnemyName (String enemyName);
 
-    public void onUserEnteredEnemyFrequency (String enemyFrequency);
-
+    public void onUserEnteredEnemySize (String enemySize);
 }

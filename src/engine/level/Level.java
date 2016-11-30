@@ -1,7 +1,6 @@
 package engine.level;
 
 import engine.Type;
-import engine.enemy.EnemyType;
 
 import java.util.Map;
 
@@ -9,21 +8,23 @@ import java.util.Map;
  * Created by ezra on 11/19/16.
  */
 public interface Level extends Type{
-    Map<EnemyType, Integer> getEnemyCounts();
+    Map<Integer, Integer> getEnemyCounts();
 
-    void setEnemyCounts(EnemyType enemy, int enemyCount);
+    void setEnemyCounts(int enemy, int enemyCount);
+    
+    void removeEnemy(int enemy);
 
-    int getRewardHealth();
+    double getRewardHealth();
 
-    void setRewardHealth(int rewardHealth);
+    void setRewardHealth(double rewardHealth);
 
-    int getRewardMoney();
+    double getRewardMoney();
 
-    void setRewardMoney(int rewardMoney);
+    void setRewardMoney(double rewardMoney);
 
-    int getRewardPoints();
+    double getRewardScore();
 
-    void setRewardPoints(int rewardPoints);
+    void setRewardScore(double rewardScore);
 
     double getDurationInSeconds();
 
