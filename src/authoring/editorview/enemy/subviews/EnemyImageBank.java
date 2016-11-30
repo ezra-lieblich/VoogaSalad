@@ -19,7 +19,6 @@ import javafx.scene.control.Button;
  *
  */
 public class EnemyImageBank extends ImageBank {
-    private ListDataSource dataSource;
     private EnemyEditorViewDelegate delegate;
 
     // TODO: Keep mapping in array of enemy IDs to list indices in order to be able to delete and
@@ -38,14 +37,7 @@ public class EnemyImageBank extends ImageBank {
     }
     
     public void updateEnemyBank (List<Integer> activeEnemies) {
-        this.subjects.remove(1, subjects.size() - 1);
-        subjectIDs = new ArrayList<Integer>();
-        for (int i = 0; i < activeEnemies.size(); i++) {
-            ListCellData cellData = dataSource.getCellDataForSubject(activeEnemies.get(i));
-            Node cell = createCellFromData(cellData);
-            subjects.add(cell);
-            subjectIDs.set(subjects.size()-1, cellData.getId());
-        }
+        super.updateBank(activeEnemies);
     }
 
 	@Override

@@ -54,7 +54,7 @@ public class TowerEditorView implements ITowerEditorView {
         towerUpgradeBank = new TowerUpgradeBank(labelsResource);
         towerSize = new TowerSizeField(labelsResource);
 
-        towerBank = new TowerImageBank(labelsResource, dialogueBoxResource);
+        towerBank = new TowerImageBank();
         towerEffectView =
                 new TowerEffectView(towerName, towerImage, towerBuyPrice, towerSellPrice,
                                     towerUnlockLevel, towerAbility, towerWeaponBank,

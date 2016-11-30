@@ -20,9 +20,9 @@ import javafx.scene.image.ImageView;
  */
 
 public abstract class ImageBank implements ChangeListener<Number> {
-	    private ListDataSource dataSource;
+	    protected ListDataSource dataSource;
+	    
 	    protected ListView<Node> listView;
-
 	    protected ObservableList<Node> subjects;
 	    
 	    //Index represents the enemies index in the list view, value represents the corresponding enemy's id
