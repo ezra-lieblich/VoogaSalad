@@ -29,7 +29,7 @@ public class WeaponCollisionEffectField implements IWeaponSetView {
 
     private ObservableList<Object> setList () {
         ObservableList<Object> effectOptions =
-                FXCollections.observableArrayList("IDK", "Sorry");
+                FXCollections.observableArrayList("Maximum Damage - Immediate Kill", "Medium Damage - Loss of half health");
         return effectOptions;
     }
 
