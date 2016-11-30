@@ -19,12 +19,12 @@ public class EnemyManager extends Observable {
 		this.grid = this.gamePlayModel.getGrid();
 
 	}
-	
-	public List<Enemy> getEnemyOnGrid(){
+
+	public List<Enemy> getEnemyOnGrid() {
 		return enemyOnGrid;
 	}
-	
-	public void spawnEnemy(Enemy enemy){
+
+	public void spawnEnemy(Enemy enemy) {
 		enemyOnGrid.add(enemy);
 	}
 
@@ -112,7 +112,7 @@ public class EnemyManager extends Observable {
 		this.gamePlayModel.setNextEnteringEnemy(this.gamePlayModel.getPackOfEnemyComing().poll());
 
 	}
-	
+
 	private void checkCollision() {
 		for (Enemy e : getEnemyList()) {
 			for (Weapon w : this.gamePlayModel.getWeaponOnGrid()) {
@@ -124,38 +124,29 @@ public class EnemyManager extends Observable {
 		setChanged();
 		notifyObservers();
 	}
-	
+
 	// TODO: move to EnemyModel
-		public List<Enemy> getEnemyList() {
-			return this.enemyOnGrid;
-		}
-	
-	public void update(){
-		//updateEnemy();
-		//checkCollision();
-		
+	public List<Enemy> getEnemyList() {
+		return this.enemyOnGrid;
+	}
+
+	public void update() {
+		// updateEnemy();
+		// checkCollision();
+
 		moveEnemies();
 	}
-	
-	private void moveEnemies(){
-		for(Enemy enemy: enemyOnGrid){
+
+	private void moveEnemies() {
+		for (Enemy enemy : enemyOnGrid) {
 			moveIndividualEnemy(enemy);
 		}
 	}
-	
-	private void moveIndividualEnemy(Enemy enemy){
-		enemy.setX(enemy.getX()+enemy.getMovingSpeed());
+
+	private void moveIndividualEnemy(Enemy enemy) {
+		if (!(enemy.getX() + enemy.getMovingSpeed() > GridGUI.GRID_WIDTH)) {
+			enemy.setX(enemy.getX() + enemy.getMovingSpeed());
+		}
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 }
