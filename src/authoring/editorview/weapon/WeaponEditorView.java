@@ -70,7 +70,6 @@ public class WeaponEditorView implements IWeaponEditorView {
     }
 
     private void setBorderPane () {
-        weaponBank.setPaneSize(width / 4, height);
         weaponEffectsView.setPaneSize(width * 3 / 4, height);
         weaponEditorView.setLeft(weaponBank.getInstanceAsNode());
         weaponEditorView.setCenter(weaponEffectsView.getInstanceAsNode());
