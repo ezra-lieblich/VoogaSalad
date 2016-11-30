@@ -60,8 +60,14 @@ public class LevelEditorViewController extends EditorViewController
 
     @Override
     public void onUserEnteredEnemyFrequency (String frequency) {
-        // TODO Auto-generated method stub
-
+        try {
+            Double.parseDouble(frequency);
+            levelDataSource.setEnemyFrequency(currentLevelID, 0, Double.parseDouble(frequency));
+            // TODO: HUGE BTW - the second parameter is the enemy that is set
+        }
+        catch (NumberFormatException e) {
+            createDialogueBox();
+        }
     }
 
     @Override

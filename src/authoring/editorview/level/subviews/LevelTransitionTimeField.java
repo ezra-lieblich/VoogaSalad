@@ -3,7 +3,6 @@ package authoring.editorview.level.subviews;
 import java.util.ResourceBundle;
 import authoring.editorview.level.ILevelSetView;
 import authoring.editorview.level.LevelEditorViewDelegate;
-import authoring.editorview.tower.TowerEditorViewDelegate;
 import authoring.utilityfactories.BoxFactory;
 import authoring.utilityfactories.TextFieldFactory;
 import javafx.scene.Node;
