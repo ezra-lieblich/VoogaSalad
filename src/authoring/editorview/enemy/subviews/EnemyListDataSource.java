@@ -1,5 +1,7 @@
 package authoring.editorview.enemy.subviews;
 
+import authoring.editorview.ListCellData;
+
 public interface EnemyListDataSource {
-	public EnemyListCellData getCellDataForEnemy(int enemyID);
+	public ListCellData getCellDataForEnemy(int enemyID);
 }

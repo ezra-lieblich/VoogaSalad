@@ -3,6 +3,8 @@ package authoring.editorview.enemy;
 import java.io.IOException;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.function.Consumer;
+
 import authoring.editorview.enemy.subviews.EnemyEffectView;
 import authoring.editorview.enemy.subviews.EnemyImageBank;
 import authoring.editorview.enemy.subviews.editorfields.EnemyHealthField;
@@ -46,7 +48,7 @@ public class EnemyEditorView implements IEnemyEditorView {
         ResourceBundle dialogueBoxResource = ResourceBundle.getBundle("resources/DialogueBox");
 
         enemyEditorView = new BorderPane();
-        enemyBank = new EnemyImageBank(labelsResource, dialogueBoxResource);
+        enemyBank = new EnemyImageBank();
         enemyName = new EnemyNameField(labelsResource);
         enemySpeed = new EnemySpeedField(labelsResource);
         enemyReactions = new EnemyCollisionEffectField(labelsResource);
