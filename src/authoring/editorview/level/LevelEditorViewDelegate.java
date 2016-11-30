@@ -8,7 +8,7 @@ public interface LevelEditorViewDelegate {
 
     public void onUserEnteredRewardHealth (String health);
 
-    public void onUserEnteredEditLevel ();
+    public void onUserEnteredEditLevel (String level);
 
     public void onUserEnteredLevelName (String levelName);
 

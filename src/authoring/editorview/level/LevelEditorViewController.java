@@ -25,9 +25,16 @@ public class LevelEditorViewController extends EditorViewController
     }
 
     @Override
-    public void onUserEnteredEditLevel () {
-        // TODO Auto-generated method stub
-
+    public void onUserEnteredEditLevel (String level) {
+        try {
+            Integer.parseInt(level);
+            currentLevelID = Integer.parseInt(level);
+            currentLevelID = levelDataSource.createType(levelView);
+        }
+        catch (Exception e) {
+            DialogueBoxFactory.createErrorDialogueBox("Not a correct level",
+                                                      "Choose an appropriate integer");
+        }
     }
 
     @Override
