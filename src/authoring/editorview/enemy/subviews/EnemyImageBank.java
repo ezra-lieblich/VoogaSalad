@@ -31,6 +31,8 @@ public class EnemyImageBank implements ChangeListener<Number> {
     private ListView<Node> enemyListView;
 
     private ObservableList<Node> enemies;
+    
+    //Index represents the enemies index in the list view, value represents the corresponding enemy's id
     private ArrayList<Integer> enemyIDs;
 
     private final int CELL_HEIGHT = 60;
