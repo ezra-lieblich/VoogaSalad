@@ -14,17 +14,17 @@ public class LevelDesign {
 	
 	public LevelDesign(){
 		root = new VBox();
-		makePathComboBox();
+//		makePathComboBox();
 	}
 	
 	public Node getInstanceAsNode(){
 		return root;
 	}
 	
-	private void makePathComboBox(){
-		pathComboBox = ComboBoxFactory.makeComboBox("Select path",
-				e -> , 
-				options)
-	}
-	
+//	private void makePathComboBox(){
+//		pathComboBox = ComboBoxFactory.makeComboBox("Select path",
+//				e -> , 
+//				options)
+//	}
+//	
 }

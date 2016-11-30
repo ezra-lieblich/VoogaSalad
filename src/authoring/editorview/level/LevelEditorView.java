@@ -19,7 +19,7 @@ public class LevelEditorView implements ILevelUpdateView {
     private LevelNameView levelNameView;
 
     LevelEditorView (int width, int height) {
-        this.root = new VBox();
+        this.root = new VBox(10);
         this.levelChooser = new LevelChooserView();
         this.levelDesign = new LevelDesign();
         this.levelRewardsView = new LevelRewardsView();
@@ -42,7 +42,8 @@ public class LevelEditorView implements ILevelUpdateView {
     
     private void setLevelView(){
 	       
-        root.getChildren().addAll(levelChooser.getInstanceAsNode(), levelRewardsView.getInstanceAsNode(),
+        root.getChildren().addAll(levelChooser.getInstanceAsNode(), levelNameView.getInstanceAsNode(), 
+        		levelRewardsView.getInstanceAsNode(),
         		levelDesign.getInstanceAsNode());
        
             

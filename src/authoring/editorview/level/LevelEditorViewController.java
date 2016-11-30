@@ -20,24 +20,6 @@ public class LevelEditorViewController extends EditorViewController implements L
 
 
 	@Override
-	public void onUserEnteredRewardPoints(int levelID, String points) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onUserEnteredRewardMoney(int levelID, String money) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onUserEnteredRewardHealth(int levelID, String health) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void onUserEnteredEditLevel(int levelID) {
 		// TODO Auto-generated method stub
 		
@@ -51,7 +33,7 @@ public class LevelEditorViewController extends EditorViewController implements L
 
 	@Override
 	public void onUserEnteredCreateLevel() {
-		// TODO Auto-generated method stub
+		int levelID = levelDataSource.createType(levelView);
 		
 	}
 
@@ -82,6 +64,24 @@ public class LevelEditorViewController extends EditorViewController implements L
 	@Override
 	public void onUserEnteredRemoveEnemy(int levelID, int enemyID) {
 		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onUserEnteredRewardPoints(int levelID, double points) {
+		levelDataSource.setRewardScore(levelID, points);
+		
+	}
+
+	@Override
+	public void onUserEnteredRewardMoney(int levelID, double money) {
+		levelDataSource.setRewardMoney(levelID, money);
+		
+	}
+
+	@Override
+	public void onUserEnteredRewardHealth(int levelID, double health) {
+		levelDataSource.setRewardHealth(levelID, health);
 		
 	}
 }
