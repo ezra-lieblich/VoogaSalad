@@ -8,7 +8,7 @@ import engine.AbstractTypeManagerController;
 
 public class TowerTypeManagerController extends AbstractTypeManagerController<TowerManager, TowerBuilder, Tower, ITowerUpdateView> implements TowerManagerController {
 
-    TowerTypeManagerController (TowerManager towerManager) {
+    public TowerTypeManagerController (TowerManager towerManager) {
         super(towerManager, new TowerTypeBuilder());
     }
 

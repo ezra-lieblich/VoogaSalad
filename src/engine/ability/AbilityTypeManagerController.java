@@ -6,7 +6,7 @@ import engine.ability.AbilityManager;
 
 public class AbilityTypeManagerController extends AbstractTypeManagerController<AbilityManager, AbilityBuilder, Ability, IUpdateView> implements AbilityManagerController {
     
-    AbilityTypeManagerController(AbilityManager abilityManager) {
+    public AbilityTypeManagerController(AbilityManager abilityManager) {
         super(abilityManager, new AbilityTypeBuilder());
     }
 
