@@ -2,12 +2,10 @@ package authoring.editorview.path.subviews;
 
 
 
-import java.util.ArrayList;
 import java.util.List;
 
 import authoring.editorview.path.PathEditorViewDelegate;
 import engine.path.Coordinate;
-import engine.path.GridCoordinate;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -29,11 +27,7 @@ public class PathGrid {
 	private Image cellImage = new Image(getClass().getClassLoader().getResourceAsStream("blacksquare.png"));
 	private ImageView[][] grid;
 	
-	//private List<Coordinate<Integer>> pathCoordinates;
-	
-	private List<GridCoordinate> pathCoordinates = new ArrayList<GridCoordinate>();
-	
-	
+	private List<Coordinate<Integer>> pathCoordinates;
 	
 	private PathEditorViewDelegate delegate;
 	
@@ -49,15 +43,10 @@ public class PathGrid {
 		this.numRows = 4;
 		this.cellHeight = gridHeight/numRows;
 		this.cellWidth = gridWidth/numColumns;
-		System.out.println(cellHeight);
-        System.out.println(cellWidth);
 		this.root = new Group();
 		this.gridRoot = new Group();
 		this.backgroundRoot = new Group();
 		
-		GridCoordinate c1 = new GridCoordinate(1,2);
-		
-		pathCoordinates.add(c1);
 		setBackground();
 		setPath();
 		root.getChildren().addAll(backgroundRoot, gridRoot);
@@ -72,8 +61,6 @@ public class PathGrid {
 		    public void handle(MouseEvent event) {
 		        double x = event.getSceneX();
 		        double y = event.getSceneY();
-		        System.out.println(x);
-		        System.out.println(y);
 		        updatePath(x, y);
 		    }
 		});
@@ -149,12 +136,12 @@ public class PathGrid {
 
 	private boolean setInPath(int x, int y) {
 		boolean inPath = false;	
-		for (Coordinate<Integer> coordinate : pathCoordinates){
-			if (coordinate.getX() == x && coordinate.getY() == y){
-				inPath = true;
-				break;
-			}
-		}
+//		for (Coordinate<Integer> coordinate : pathCoordinates){
+//			if (coordinate.getX() == x && coordinate.getY() == y){
+//				inPath = true;
+//				break;
+//			}
+//		}
 		return inPath;
 	}
 	
@@ -192,12 +179,8 @@ public class PathGrid {
 	}
 	
 	private void updatePath(double x, double y){
-		System.out.println(cellWidth);
-        System.out.println(cellHeight);
 		int i = (int) (x - 100)/100;
 		int j = (int) (y - 240)/100;
-		System.out.println(j);
-        System.out.println(i);
 		if (grid[i][j].isVisible()){
 			grid[i][j].setVisible(false);
 			removeCellFromPath(i, j);
