@@ -176,6 +176,8 @@ public class PathEditorView implements IPathUpdateView {
 
 	@Override
 	public void createNewPath() {
+		pathGrid.clearBackground();
+		pathGrid.clearPath();
 		pathGrid.setBackground();
 		pathGrid.setPath();
 		

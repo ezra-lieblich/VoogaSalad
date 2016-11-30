@@ -109,8 +109,12 @@ public class PathGrid {
 		}
 	}
 	
-	private void clearBackground(){
+	public void clearBackground(){
 		backgroundRoot.getChildren().clear();
+	}
+	
+	public void clearPath(){
+		gridRoot.getChildren().clear();
 	}
 	
 	
