@@ -11,6 +11,7 @@ import authoring.editorview.enemy.subviews.editorfields.EnemyImageView;
 import authoring.editorview.enemy.subviews.editorfields.EnemyNameField;
 import authoring.editorview.enemy.subviews.editorfields.EnemyRewardMoneyField;
 import authoring.editorview.enemy.subviews.editorfields.EnemyRewardPointsField;
+import authoring.editorview.enemy.subviews.editorfields.EnemySizeField;
 import authoring.editorview.enemy.subviews.editorfields.EnemyCollisionEffectField;
 import authoring.editorview.enemy.subviews.editorfields.EnemyDamageField;
 import authoring.editorview.enemy.subviews.editorfields.EnemySpeedField;
@@ -46,6 +47,7 @@ public class EnemyEffectView extends PhotoFileChooser implements IEnemyEditorVie
     private EnemyHealthField enemyHealth;
     private EnemyRewardMoneyField enemyRewardMoney;
     private EnemyRewardPointsField enemyRewardPoints;
+    private EnemySizeField enemySize;
 
     private ResourceBundle labelsResource;
     private final String ENEMY_EFFECT_RESOURCE_PATH = "resources/GameAuthoringEnemy";
@@ -57,7 +59,8 @@ public class EnemyEffectView extends PhotoFileChooser implements IEnemyEditorVie
                             EnemyDamageField enemyDamage,
                             EnemyHealthField enemyHealth,
                             EnemyRewardMoneyField enemyRewardMoney,
-                            EnemyRewardPointsField enemyRewardPoints) {
+                            EnemyRewardPointsField enemyRewardPoints,
+                            EnemySizeField enemySize) {
         enemyEffectView = new ScrollPane();
         vbox = new VBox(10);
         enemyEffectView.setContent(vbox);
@@ -70,6 +73,7 @@ public class EnemyEffectView extends PhotoFileChooser implements IEnemyEditorVie
         this.enemyHealth = enemyHealth;
         this.enemyRewardMoney = enemyRewardMoney;
         this.enemyRewardPoints = enemyRewardPoints;
+        this.enemySize = enemySize;
 
         labelsResource = ResourceBundle.getBundle(ENEMY_EFFECT_RESOURCE_PATH);
 
@@ -95,6 +99,9 @@ public class EnemyEffectView extends PhotoFileChooser implements IEnemyEditorVie
         vbox.getChildren()
                 .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Name"),
                                                            enemyName.getInstanceAsNode()));
+        vbox.getChildren()
+                .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Size"),
+                                                           enemySize.getInstanceAsNode()));
         vbox.getChildren()
                 .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Reaction"),
                                                            enemyReactions.getInstanceAsNode()));

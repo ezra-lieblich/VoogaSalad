@@ -11,7 +11,7 @@ import engine.ManagerController;
  * @author Kayla Schulz
  *
  */
-public interface TowerManagerController extends ManagerController<TowerManager, TowerBuilder, Tower>{
+public interface TowerManagerController extends ManagerController<TowerManager, TowerBuilder, Tower, ITowerUpdateView>{
 
     public double getTowerBuyPrice (int towerID);
 

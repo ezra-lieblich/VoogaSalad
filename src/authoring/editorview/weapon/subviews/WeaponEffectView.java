@@ -11,6 +11,7 @@ import authoring.editorview.weapon.subviews.editorfields.WeaponImageView;
 import authoring.editorview.weapon.subviews.editorfields.WeaponNameField;
 import authoring.editorview.weapon.subviews.editorfields.WeaponPathField;
 import authoring.editorview.weapon.subviews.editorfields.WeaponRangeField;
+import authoring.editorview.weapon.subviews.editorfields.WeaponSizeField;
 import authoring.editorview.weapon.subviews.editorfields.WeaponSpeedField;
 import authoring.utilityfactories.BoxFactory;
 import authoring.utilityfactories.ButtonFactory;
@@ -42,6 +43,7 @@ public class WeaponEffectView extends PhotoFileChooser {
     private WeaponCollisionEffectField weaponCollision;
     private WeaponPathField weaponPath;
     private WeaponImageView weaponImage;
+    private WeaponSizeField weaponSize;
 
     private ResourceBundle dialogueBoxResource;
 
@@ -52,6 +54,7 @@ public class WeaponEffectView extends PhotoFileChooser {
                              WeaponCollisionEffectField weaponCollision,
                              WeaponPathField weaponPath,
                              WeaponImageView weaponImage,
+                             WeaponSizeField weaponSize,
                              ResourceBundle labelsResource,
                              ResourceBundle dialogueBoxResource)
         throws IOException {
@@ -65,6 +68,7 @@ public class WeaponEffectView extends PhotoFileChooser {
         this.weaponCollision = weaponCollision;
         this.weaponPath = weaponPath;
         this.weaponImage = weaponImage;
+        this.weaponSize = weaponSize;
 
         vboxView = new VBox(10);
         completeView = new ScrollPane();
@@ -105,6 +109,9 @@ public class WeaponEffectView extends PhotoFileChooser {
         vboxView.getChildren()
                 .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Name"),
                                                            weaponName.getInstanceAsNode()));
+        vboxView.getChildren()
+        .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Size"),
+                                                   weaponSize.getInstanceAsNode()));
         vboxView.getChildren()
                 .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("FireRate"),
                                                            weaponFireRate.getInstanceAsNode()));

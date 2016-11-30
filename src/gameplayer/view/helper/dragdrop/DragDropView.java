@@ -33,6 +33,7 @@ public class DragDropView {
 	private Pane target;
 	private DragDrop dragDrop;
 	private List<ImageView> objects;
+	
 
 	public DragDropView(double xError, double yError) {
 		this.dragDropPane = new TabPane();
@@ -40,8 +41,11 @@ public class DragDropView {
 		this.graphicLib = new GraphicsLibrary();
 		this.dragDrop = new DragDrop(xError,yError);
 		this.objects = new ArrayList<ImageView>();
+		
 		setTabPaneStyle();
 	}
+	
+	
 	
 	private void setTabPaneStyle(){
 		this.dragDropPane.getStyleClass().add("dragDropPane");
@@ -86,8 +90,11 @@ public class DragDropView {
         root.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED); // Vertical scroll bar
         root.setFitToWidth(true);
         root.setContent(grid);
+        int idCount = 0;
 		for (String image:imageLocations){
 			ImageView currentImage = graphicLib.createImageView(graphicLib.createImage(image));
+			currentImage.setId(idCount+"");
+			idCount++;
 			dragDrop.init(currentImage, target);
 			objects.add(currentImage);//TODO: do I need this?
 			graphicLib.setImageViewParams(currentImage, DEFENSIVEWIDTH, DEFENSIVEHEIGHT);
@@ -97,5 +104,7 @@ public class DragDropView {
 		
 
 	}
+	
+	
 
 }

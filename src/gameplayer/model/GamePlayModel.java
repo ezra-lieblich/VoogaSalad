@@ -15,22 +15,22 @@ public class GamePlayModel extends Observable {
 	private Grid grid;
 	private int gridX;
 	private int gridY;
+<<<<<<< HEAD
 
 	private List<Enemy> enemyOnGrid;
+=======
+	// private List<Enemy> enemyOnGrid;
+>>>>>>> 8c409c3269db776e77bb08e3d9044ca4eec91998
 	private List<Weapon> weaponOnGrid;
+	private List<Tower> towersOnGrid; 
 	private int hitBuffer = 10; // initialize from xml
-
-	private Map<Integer, Weapon> weaponTypes; // initialize in xml
-	private Map<Integer, Tower> towerTypes;
+	private HashMap<Integer, Weapon> weaponTypes; // initialize in xml
+	private HashMap<Integer, TowerType> towerTypes;
 	private Cell[][] gridArray;
-
 	private Enemy nextEnteringEnemy;
 	private Queue<Enemy> packOfEnemyComing;
-
 	private List<Queue<Enemy>> enemyAtCurrentLevel;
-
 	private GamePlayerFactory factory;
-
 	private double gold;
 	private double lives;
 	private double numLevels; // reach level number winning the game
@@ -85,12 +85,23 @@ public class GamePlayModel extends Observable {
 	public void initializeGameSetting(GamePlayerFactory factory) {
 		this.factory = factory;
 		HashMap<String, Double> settingInfo = factory.getGameSetting();
+<<<<<<< HEAD
 		this.currentLevel = settingInfo.get("levelnumber").intValue(); // we should just set it to be 1 to start
 		this.numLevels = settingInfo.get("numLevels");
+=======
+		this.currentLevel = settingInfo.get("levelnumber").intValue(); // do we
+																		// need
+																		// levelnumber
+																		// and
+																		// current
+																		// level?
+		this.numLevels = settingInfo.get("totalNumberOfLevels");
+>>>>>>> 8c409c3269db776e77bb08e3d9044ca4eec91998
 		this.gold = settingInfo.get("gold");
 		this.lives = settingInfo.get("lives");
 		this.towerTypes = this.factory.getTowers();
 		this.gameTitle = this.factory.getGameTitle();
+		this.towersOnGrid= new ArrayList<>();
 		// this.weaponTypes = this.factory.getWeapon(); need from xml
 	}
 
@@ -110,6 +121,14 @@ public class GamePlayModel extends Observable {
 
 	}
 
+	public HashMap<Integer,TowerType> getTowerTypes(){
+		return this.towerTypes; 
+	}
+	
+	public List<Tower> getTowerOnGrid(){
+		return this.towersOnGrid;
+	}
+	
 	public Enemy getNextEnteringEnemy() {
 		return this.nextEnteringEnemy;
 	}
@@ -187,6 +206,14 @@ public class GamePlayModel extends Observable {
 
 	public Boolean placeTower(int type, int x, int y) {
 		// later check if is a valid location to place the tower
+
+			TowerType towerType = towerTypes.get(type);
+			this.towersOnGrid.add(new Tower(type,towerType.getImageLocation(),towerType.getName(),x,y));
+			for(int i=0;i<towersOnGrid.size();i++){
+				System.out.println(towersOnGrid.get(i).getName());
+			}
+			return true;
+
 		engine.tower.Tower tt = towerTypes.get(type); //REFACTOR NAMES
 		System.out.println("Placed a tower");
 		System.out.println("Tower x: " + x + "; y:" + y);
@@ -203,7 +230,6 @@ public class GamePlayModel extends Observable {
 		 * 
 		 * 
 		 */
-		return true;
 	}
 
 	public double cellToCoordinate(double d) {
