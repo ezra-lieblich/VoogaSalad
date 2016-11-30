@@ -36,17 +36,17 @@ public class TowerEditorViewController extends EditorViewController
      */
     @Override
     public void onUserPressedCreateNewTower () {
-        towerDataSource.createNewTower(myView);
+        ///int myid = towerDataSource.createType(myView);
     }
 
     @Override
     public void onUserEnteredTowerName (String towerName) {
-        towerDataSource.setTowerName(currentTowerID, towerName);
+        towerDataSource.setName(currentTowerID, towerName);
     }
 
     @Override
     public void onUserEnteredTowerImagePath (String towerImagePath) {
-        towerDataSource.setTowerImagePath(currentTowerID, towerImagePath);
+        towerDataSource.setImagePath(currentTowerID, towerImagePath);
     }
 
     @Override

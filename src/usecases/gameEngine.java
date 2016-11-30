@@ -1,7 +1,9 @@
+
 package usecases;
 
+
 public class gameEngine {
-    ILevelUpdater levelUpdater;
+   // ILevelUpdater levelUpdater;
     
     
     /**
@@ -11,10 +13,13 @@ public class gameEngine {
      * @param enemyType
      * @param amount
      */
+	/*
     public void setEnemiesPerLevel(String enemyType, int amount) {
         levelUpdater.setEnemiesPerLevel(enemyType, amount);
     }
+    */
     
     
     
 }
+

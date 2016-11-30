@@ -11,7 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-
+/*
 public class SelectNewEnemyImage implements EnemyDataSource {
 
     private File myFile;
@@ -64,3 +64,4 @@ public class SelectNewEnemyImage implements EnemyDataSource {
     }
 
 }
+*/
