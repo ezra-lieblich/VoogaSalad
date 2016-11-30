@@ -74,6 +74,7 @@ public class DragDrop extends Observable{
 
 	private void addImagetoDroppedLoc(double xpos, double ypos, Node target) {
 		ImageView copy = new ImageView(this.source.getImage());
+		copy.setId(this.source.getId()); 
 		this.droppedImage = copy;
 		graphicLib.setImageViewParams(copy, this.width, this.height);
 		((Pane) target).getChildren().add(copy);

@@ -2,40 +2,57 @@ package gameplayer.model;
 
 import java.util.ArrayList;
 
-public class Tower {
-	
+public class Tower implements IDrawable {
+
 	private double cost;
 	private ArrayList<Integer> weaponType;
-	private String image;
-	private int ID;  // towerType
-	private double[] coordinates;
-	
-	
-	public Tower (int ID, double cost, ArrayList<Integer> weaponTypes, String image, String name) {
+	private String image, name;
+	private int ID; // towerType
+	private double xCoordinate;
+	private double yCoordinate;
+
+	// TODO: need to implement weapon types. Refer to constructor below for the
+	// working tower
+	public Tower(int ID, double cost, ArrayList<Integer> weaponTypes, String image, String name) {
 		this.cost = cost;
 		this.weaponType = weaponTypes;
 		this.image = image;
 		this.ID = ID;
 	}
-	
-	void setCoordinates(double x, double y){
-		coordinates[0] = x;
-		coordinates[1] = y;
-	}
-	
-	double[] getCoordinate(){
-		return this.coordinates;
-	}
-	
-	
-	int getType(){
-		return this.ID;
-	}
-	
-	public String getImage(){
-		return this.image;
+
+	// Current Using and needs updating
+	public Tower(int ID, String image, String name, double xCoordinate, double yCoordinate) {
+		this.ID = ID;
+		this.image = image;
+		this.name = name;
+		this.xCoordinate = xCoordinate;
+		this.yCoordinate = yCoordinate;
 	}
 
+	public void setCoordinates(double x, double y) {
+		this.xCoordinate = x;
+		this.yCoordinate = y;
+	}
+
+	public double getX() {
+		return this.xCoordinate;
+	}
+
+	public double getY() {
+		return yCoordinate;
+	}
+
+	public String getName() {
+		return this.name;
+	}
+
+	public int getType() {
+		return this.ID;
+	}
+
+	public String getImage() {
+		return this.image;
+	}
 
 	double getCost() {
 		return cost;
@@ -48,10 +65,5 @@ public class Tower {
 	ArrayList<Integer> getWeaponType() {
 		return this.weaponType;
 	}
-
-
-
-
-	
 
 }

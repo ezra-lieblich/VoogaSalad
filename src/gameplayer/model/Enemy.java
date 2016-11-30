@@ -2,7 +2,7 @@ package gameplayer.model;
 
 import java.util.Observable;
 
-public class Enemy extends Observable{
+public class Enemy extends Observable implements IDrawable{
 	
 	private String name; 
 	private double movingSpeed;  

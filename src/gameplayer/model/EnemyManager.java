@@ -8,12 +8,12 @@ import java.util.Queue;
 import gameplayer.loader.GamePlayerFactory;
 import gameplayer.view.GridGUI;
 
-public class EnemyModel extends Observable {
+public class EnemyManager extends Observable {
 	private List<Enemy> enemyOnGrid;
 	private GamePlayModel gamePlayModel;
 	private Grid grid;
 
-	public EnemyModel(GamePlayModel model) {
+	public EnemyManager(GamePlayModel model) {
 		this.enemyOnGrid = new ArrayList<Enemy>();
 		this.gamePlayModel = model;
 		this.grid = this.gamePlayModel.getGrid();
@@ -131,8 +131,31 @@ public class EnemyModel extends Observable {
 		}
 	
 	public void update(){
-		updateEnemy();
-		checkCollision();
+		//updateEnemy();
+		//checkCollision();
+		
+		moveEnemies();
 	}
+	
+	private void moveEnemies(){
+		for(Enemy enemy: enemyOnGrid){
+			moveIndividualEnemy(enemy);
+		}
+	}
+	
+	private void moveIndividualEnemy(Enemy enemy){
+		enemy.setX(enemy.getX()+enemy.getMovingSpeed());
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

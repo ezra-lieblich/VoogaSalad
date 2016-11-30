@@ -15,22 +15,17 @@ public class GamePlayModel extends Observable {
 	private Grid grid;
 	private int gridX;
 	private int gridY;
-
 	// private List<Enemy> enemyOnGrid;
 	private List<Weapon> weaponOnGrid;
+	private List<Tower> towersOnGrid; 
 	private int hitBuffer = 10; // initialize from xml
-
-	private Map<Integer, Weapon> weaponTypes; // initialize in xml
-	private Map<Integer, Tower> towerTypes;
+	private HashMap<Integer, Weapon> weaponTypes; // initialize in xml
+	private HashMap<Integer, TowerType> towerTypes;
 	private Cell[][] gridArray;
-
 	private Enemy nextEnteringEnemy;
 	private Queue<Enemy> packOfEnemyComing;
-
 	private List<Queue<Enemy>> enemyAtCurrentLevel;
-
 	private GamePlayerFactory factory;
-
 	private double gold;
 	private double lives;
 	private double numLevels; // reach level number winning the game
@@ -96,6 +91,7 @@ public class GamePlayModel extends Observable {
 		this.lives = settingInfo.get("lives");
 		this.towerTypes = this.factory.getTowers();
 		this.gameTitle = this.factory.getGameTitle();
+		this.towersOnGrid= new ArrayList<>();
 		// this.weaponTypes = this.factory.getWeapon(); need from xml
 	}
 
@@ -114,6 +110,14 @@ public class GamePlayModel extends Observable {
 
 	}
 
+	public HashMap<Integer,TowerType> getTowerTypes(){
+		return this.towerTypes; 
+	}
+	
+	public List<Tower> getTowerOnGrid(){
+		return this.towersOnGrid;
+	}
+	
 	public Enemy getNextEnteringEnemy() {
 		return this.nextEnteringEnemy;
 	}
@@ -191,23 +195,12 @@ public class GamePlayModel extends Observable {
 
 	public Boolean placeTower(int type, int x, int y) {
 		// later check if is a valid location to place the tower
-		engine.tower.Tower tt = towerTypes.get(type);
-		System.out.println("Placed a tower");
-		System.out.println("Tower x: " + x + "; y:" + y);
-		// get weaponTypes
-		// actually implement the firing counter into each weapon types
-
-		// ++++++++++++++++++++++++++++fix this after weapon type is
-		// done+++++++++++++++++++++++++
-		/*
-		 * Tower t = new Tower(type, tt.getCost(),
-		 * tt.getWeapon(),tt.getImageLocation(),tt.getName()); if(this.gold -
-		 * t.getCost() < 0){ return false; } t.setCoordinates(x, y);
-		 * grid.placeTower(t, x, y); setGold(this.gold - t.getCost());
-		 * 
-		 * 
-		 */
-		return true;
+			TowerType towerType = towerTypes.get(type);
+			this.towersOnGrid.add(new Tower(type,towerType.getImageLocation(),towerType.getName(),x,y));
+			for(int i=0;i<towersOnGrid.size();i++){
+				System.out.println(towersOnGrid.get(i).getName());
+			}
+			return true;
 	}
 
 	public double cellToCoordinate(double d) {

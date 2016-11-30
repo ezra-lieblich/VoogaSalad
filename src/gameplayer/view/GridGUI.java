@@ -30,7 +30,7 @@ public class GridGUI {
 	private GraphicsLibrary graphicsLib;
 	private List<int[]> path;
 
-	public static final String TEST_URL = "https://images.designtrends.com/wp-content/uploads/2016/03/30060819/Elegant-Night-Stay-Anime-Background.jpg"; // TODO:
+	public static final String TEST_URL = "http://vignette2.wikia.nocookie.net/shingekinokyojin/images/7/77/Walls.png/revision/latest?cb=20130520140640"; // TODO:
 																																							// dummy
 																																							// url
 
