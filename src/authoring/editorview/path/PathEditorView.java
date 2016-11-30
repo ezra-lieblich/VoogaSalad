@@ -90,6 +90,7 @@ public class PathEditorView implements IPathUpdateView {
     	pathImageView.setActivePathId(pathID); 	
     	pathSizeView.setActivePathId(pathID);   	
     	pathNameView.setActivePathId(pathID);
+    	newPathView.setActivePathId(pathID);
 		
 	}
     
@@ -122,7 +123,7 @@ public class PathEditorView implements IPathUpdateView {
 	@Override
 	public void updatePathImage(String pathImage) {
 		pathImageView.setPathImagePath(pathImage);
-	//	pathGrid.setCellImage();
+		pathGrid.setCellImage(pathImage);
 		
 	}
 
@@ -175,6 +176,8 @@ public class PathEditorView implements IPathUpdateView {
 
 	@Override
 	public void createNewPath() {
+		pathGrid.setBackground();
+		pathGrid.setPath();
 		
 		
 	}
