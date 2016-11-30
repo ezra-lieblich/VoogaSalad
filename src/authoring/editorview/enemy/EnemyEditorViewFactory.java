@@ -11,7 +11,7 @@ import java.io.IOException;
 
 public class EnemyEditorViewFactory {
 
-    public static IEnemyUpdateView build (int width, int height) throws IOException {
+    public static IEnemyEditorView build (int width, int height) throws IOException {
         return new EnemyEditorView();
     }
 

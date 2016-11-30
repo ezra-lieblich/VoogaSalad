@@ -26,7 +26,7 @@ import authoring.editorview.enemy.subviews.EnemyListDataSource;
  * 
  */
 
-public class EnemyEditorView implements IEnemyUpdateView {
+public class EnemyEditorView implements IEnemyEditorView {
     private EnemyEditorViewDelegate delegate;
     private BorderPane enemyEditorView;
     private EnemyImageBank enemyBank;

@@ -1,13 +1,9 @@
 package authoring.editorview.tower.subviews.editorfields;
 
 import java.util.ResourceBundle;
-import authoring.editorview.tower.ITowerEditorView;
+import authoring.editorview.tower.ITowerSetView;
 import authoring.editorview.tower.TowerEditorViewDelegate;
-import authoring.utilityfactories.ComboBoxFactory;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.scene.Node;
-import javafx.scene.control.ComboBox;
 import javafx.scene.layout.HBox;
 
 
@@ -16,7 +12,7 @@ import javafx.scene.layout.HBox;
  * @author Kayla Schulz
  *
  */
-public class TowerWeaponBank implements ITowerEditorView {
+public class TowerWeaponBank implements ITowerSetView {
 
     private HBox towerChooseWeaponBox;
     private TowerEditorViewDelegate delegate;
@@ -24,7 +20,7 @@ public class TowerWeaponBank implements ITowerEditorView {
 
     public TowerWeaponBank (ResourceBundle labelsResource) {
         this.labelsResource = labelsResource;
-        // towerChooseWeaponBox=
+        towerChooseWeaponBox = new HBox(5);
     }
 
     @Override

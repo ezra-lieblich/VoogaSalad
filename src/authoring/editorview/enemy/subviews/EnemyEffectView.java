@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.ResourceBundle;
 import authoring.editorview.PhotoFileChooser;
 import authoring.editorview.enemy.EnemyEditorViewDelegate;
-import authoring.editorview.enemy.IEnemyEditorView;
+import authoring.editorview.enemy.IEnemySetView;
 import authoring.editorview.enemy.subviews.editorfields.EnemyHealthField;
 import authoring.editorview.enemy.subviews.editorfields.EnemyImageView;
 import authoring.editorview.enemy.subviews.editorfields.EnemyNameField;
@@ -32,7 +32,7 @@ import javafx.stage.Stage;
  *
  */
 
-public class EnemyEffectView extends PhotoFileChooser implements IEnemyEditorView {
+public class EnemyEffectView extends PhotoFileChooser implements IEnemySetView {
 
     private ScrollPane enemyEffectView;
     private VBox vbox;

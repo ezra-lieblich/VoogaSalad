@@ -1,7 +1,7 @@
 package authoring.editorview.tower.subviews.editorfields;
 
 import java.util.ResourceBundle;
-import authoring.editorview.tower.ITowerEditorView;
+import authoring.editorview.tower.ITowerSetView;
 import authoring.editorview.tower.TowerEditorViewDelegate;
 import authoring.utilityfactories.ComboBoxFactory;
 import javafx.collections.FXCollections;
@@ -16,7 +16,7 @@ import javafx.scene.layout.HBox;
  * @author Kayla Schulz
  *
  */
-public class TowerAbilityBank implements ITowerEditorView {
+public class TowerAbilityBank implements ITowerSetView {
 
     private HBox towerAbilityBox;
     private TowerEditorViewDelegate delegate;
@@ -24,7 +24,7 @@ public class TowerAbilityBank implements ITowerEditorView {
 
     public TowerAbilityBank (ResourceBundle labelsResource) {
         this.labelsResource = labelsResource;
-        // towerAbilityBox =
+        towerAbilityBox = new HBox(5);
     }
 
     @Override

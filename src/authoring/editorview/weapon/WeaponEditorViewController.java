@@ -18,7 +18,7 @@ public class WeaponEditorViewController extends EditorViewController
 
     private WeaponManagerController weaponDataSource;
     private int currentWeaponID;
-    private IWeaponUpdateView myView;
+    private IWeaponEditorView myView;
 
     public WeaponEditorViewController (int editorWidth, int editorHeight) throws IOException {
         myView = WeaponEditorViewFactory.build(editorWidth, editorHeight);

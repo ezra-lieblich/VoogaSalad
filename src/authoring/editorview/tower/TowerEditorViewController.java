@@ -5,7 +5,7 @@ import java.util.ResourceBundle;
 import authoring.editorview.EditorViewController;
 import authoring.utilityfactories.DialogueBoxFactory;
 import engine.tower.TowerManagerController;
-import authoring.editorview.tower.ITowerUpdateView;
+import authoring.editorview.tower.ITowerEditorView;
 
 
 /**
@@ -19,7 +19,7 @@ public class TowerEditorViewController extends EditorViewController
 
     private TowerManagerController towerDataSource;
     private int currentTowerID;
-    private ITowerUpdateView myView;
+    private ITowerEditorView myView;
 
     public TowerEditorViewController (int editorWidth, int editorHeight) throws IOException {
         myView = TowerEditorViewFactory.build(editorWidth, editorHeight);

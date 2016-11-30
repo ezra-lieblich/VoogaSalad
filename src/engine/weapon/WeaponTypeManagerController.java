@@ -1,12 +1,12 @@
 package engine.weapon;
 
 import java.util.List;
-import authoring.editorview.weapon.IWeaponUpdateView;
+import authoring.editorview.weapon.IWeaponEditorView;
 import engine.AbstractTypeManagerController;
 
 
 public class WeaponTypeManagerController extends
-        AbstractTypeManagerController<WeaponManager, WeaponBuilder, Weapon, IWeaponUpdateView>
+        AbstractTypeManagerController<WeaponManager, WeaponBuilder, Weapon, IWeaponEditorView>
         implements WeaponManagerController {
 
     WeaponTypeManagerController (WeaponManager weaponManager) {
@@ -14,7 +14,7 @@ public class WeaponTypeManagerController extends
     }
 
     @Override
-    protected WeaponBuilder constructTypeProperties (IWeaponUpdateView weaponUpdater,
+    protected WeaponBuilder constructTypeProperties (IWeaponEditorView weaponUpdater,
                                                      WeaponBuilder typeBuilder) {
         return typeBuilder
                 .addEffectListener( (oldValue, newValue) -> weaponUpdater
@@ -99,7 +99,7 @@ public class WeaponTypeManagerController extends
     }
 
     @Override
-    public int createType (IWeaponUpdateView updateView) {
+    public int createType (IWeaponEditorView updateView) {
         // TODO Auto-generated method stub
         return 0;
     }

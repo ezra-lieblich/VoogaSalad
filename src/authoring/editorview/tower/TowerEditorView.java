@@ -23,7 +23,7 @@ import javafx.scene.layout.BorderPane;
  * @author Diane Hadley
  *
  */
-public class TowerEditorView implements ITowerUpdateView {
+public class TowerEditorView implements ITowerEditorView {
     private TowerEditorViewDelegate delegate;
     private BorderPane towerEditorView;
     private TowerImageBank towerBank;

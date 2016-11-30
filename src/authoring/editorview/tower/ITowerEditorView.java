@@ -1,18 +1,31 @@
 package authoring.editorview.tower;
 
-import authoring.editorview.IEditorView;
+import java.util.List;
+import authoring.editorview.IUpdateView;
 
 
 /**
- * The Tower View interface will detail the components of the tower creation. The interface
- * determines a portion of our internal API.
- *
+ * 
+ * @author Andrew Bihl
  * @author Kayla Schulz
+ *
  */
-public interface ITowerEditorView extends IEditorView {
+public interface ITowerEditorView extends ITowerSetView, IUpdateView {
 
-    public void setDelegate (TowerEditorViewDelegate delegate);
+    public void updateUnlockLevelDisplay (int towerLevel);
 
-    // public int getCurrentTowerID ();
+    public void updateTowerBuyPriceDisplay (double towerBuyPrice);
+
+    public void updateTowerSellPriceDisplay (double towerSellPrice);
+
+    public void updateTowerAbility (List<Integer> towerAbility);
+
+    public void updateTowerChosenWeapon (List<Integer> newValue);
+
+    public void updateTowerUpgradeBank (List<Integer> towerUpgrades);
+
+    public void updateTowerBank (List<Integer> createdTowers);
+
+    public void createNewTower ();
 
 }

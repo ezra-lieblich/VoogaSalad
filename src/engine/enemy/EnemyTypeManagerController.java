@@ -1,6 +1,6 @@
 package engine.enemy;
 
-import authoring.editorview.enemy.IEnemyUpdateView;
+import authoring.editorview.enemy.IEnemyEditorView;
 import engine.AbstractTypeManagerController;
 
 
@@ -9,7 +9,7 @@ import engine.AbstractTypeManagerController;
  * Created by ezra on 11/29/16.
  */
 public class EnemyTypeManagerController  
-	extends AbstractTypeManagerController<EnemyManager, EnemyBuilder, Enemy, IEnemyUpdateView> implements EnemyManagerController {
+	extends AbstractTypeManagerController<EnemyManager, EnemyBuilder, Enemy, IEnemyEditorView> implements EnemyManagerController {
 
 	EnemyTypeManagerController(EnemyManager enemyManager) {
 		super(enemyManager, new EnemyTypeBuilder());
@@ -76,7 +76,7 @@ public class EnemyTypeManagerController
 	}
 
 	@Override
-	protected EnemyBuilder constructTypeProperties(IEnemyUpdateView updateView, EnemyBuilder typeBuilder) {
+	protected EnemyBuilder constructTypeProperties(IEnemyEditorView updateView, EnemyBuilder typeBuilder) {
 		return typeBuilder.addCollisionEffectListener((oldValue, newValue) -> updateView.updateEnemyCollisionEffect(newValue))
 				.addDamageListener((oldValue, newValue) -> updateView.updateEnemyDamage(newValue))
 				.addHealthListener((oldValue, newValue) -> updateView.updateEnemyHealthDisplay(newValue))

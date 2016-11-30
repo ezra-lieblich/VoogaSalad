@@ -2,11 +2,11 @@ package engine.tower;
 
 import java.util.List;
 import com.oracle.webservices.internal.api.databinding.Databinding.Builder;
-import authoring.editorview.tower.ITowerUpdateView;
+import authoring.editorview.tower.ITowerEditorView;
 import engine.AbstractTypeManagerController;
 
 
-public class TowerTypeManagerController extends AbstractTypeManagerController<TowerManager, TowerBuilder, Tower, ITowerUpdateView> implements TowerManagerController {
+public class TowerTypeManagerController extends AbstractTypeManagerController<TowerManager, TowerBuilder, Tower, ITowerEditorView> implements TowerManagerController {
 
     TowerTypeManagerController (TowerManager towerManager) {
         super(towerManager, new TowerTypeBuilder());
@@ -79,7 +79,7 @@ public class TowerTypeManagerController extends AbstractTypeManagerController<To
 
     // TODO - edit createNewTower to work with both versions
     @Override
-    public int createTowerUpgrade (ITowerUpdateView towerUpdater, int parentTowerID) {
+    public int createTowerUpgrade (ITowerEditorView towerUpdater, int parentTowerID) {
         return getTypeManager().addUpgrade(createType(towerUpdater), parentTowerID);
     }
 
@@ -89,7 +89,7 @@ public class TowerTypeManagerController extends AbstractTypeManagerController<To
     }
     
     @Override
-    protected TowerBuilder constructTypeProperties (ITowerUpdateView towerUpdater,
+    protected TowerBuilder constructTypeProperties (ITowerEditorView towerUpdater,
                                                     TowerBuilder typeBuilder) {
             return typeBuilder
                 .addWeaponsListener( (oldValue, newValue) -> towerUpdater
@@ -107,7 +107,7 @@ public class TowerTypeManagerController extends AbstractTypeManagerController<To
     }
 
     @Override
-    public int createType (ITowerUpdateView updateView) {
+    public int createType (ITowerEditorView updateView) {
         // TODO Auto-generated method stub
         return 0;
     }
