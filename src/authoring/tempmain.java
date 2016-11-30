@@ -72,11 +72,13 @@ public class tempmain extends Application {
 		EnemyEditorViewController enemyVC = (EnemyEditorViewController) editorVCs.get("enemy");
 		TowerEditorViewController towerVC = (TowerEditorViewController) editorVCs.get("tower");
 		
-		pathVC.setPathDataSource(pathController);
-		levelVC.setLevelDataSource(levelController);
-		weaponVC.setWeaponDataSource(weaponController);
-		enemyVC.setEnemyDataSource(enemyController);
-		towerVC.setTowerDataSource(towerController);
+		ModelAuthoringController modelController = new ModelAuthoringController();
+		
+		pathVC.setPathDataSource(modelController.getModelController(PathManagerController.class));
+		levelVC.setLevelDataSource(modelController.getModelController(LevelManagerController.class));
+		weaponVC.setWeaponDataSource(modelController.getModelController(WeaponManagerController.class));
+		enemyVC.setEnemyDataSource(modelController.getModelController(EnemyManagerController.class));
+		towerVC.setTowerDataSource(modelController.getModelController(TowerManagerController.class));
 		
 	}
 
