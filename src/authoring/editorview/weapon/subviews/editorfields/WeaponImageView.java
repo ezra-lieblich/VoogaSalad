@@ -1,13 +1,11 @@
 package authoring.editorview.weapon.subviews.editorfields;
 
-import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.util.ResourceBundle;
-import javax.imageio.ImageIO;
 import authoring.editorview.weapon.IWeaponSetView;
 import authoring.editorview.weapon.WeaponEditorViewDelegate;
 import authoring.utilityfactories.DialogueBoxFactory;
-import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -25,35 +23,33 @@ public class WeaponImageView implements IWeaponSetView {
     private String imagePath;
     private ImageView weaponImage;
 
+    private final int CHARACTER_SIZE = 250;
+
     public WeaponImageView (ResourceBundle labelsResource) throws IOException {
         this.labelsResource = labelsResource;
-        weaponImage = loadWeaponImage();
+        weaponImage = new ImageView();
+        weaponImage.setFitWidth(CHARACTER_SIZE);
+        weaponImage.setFitHeight(CHARACTER_SIZE);
     }
 
     public void updateWeaponImagePath (String imagePath) {
         this.imagePath = imagePath;
+        loadWeaponImage();
     }
 
-    private ImageView loadWeaponImage () throws IOException {
-        BufferedImage imageRead;
-        ImageView myImageView = new ImageView();
+    private void loadWeaponImage () {
         try {
-            imageRead = ImageIO.read(getClass().getClassLoader().getResourceAsStream(imagePath));
-            Image image2 = SwingFXUtils.toFXImage(imageRead, null);
-            myImageView.setImage(image2);
-            delegate.onUserEnteredWeaponImage(imagePath);
+            File file = new File(imagePath);
+            Image image = new Image(file.toURI().toString());
+            weaponImage.setImage(image);
         }
         catch (Exception e) {
-            imageRead =
-                    ImageIO.read(getClass().getClassLoader()
-                            .getResourceAsStream(labelsResource.getString("DefaultImagePath")));
-            Image image2 = SwingFXUtils.toFXImage(imageRead, null);
-            myImageView.setImage(image2);
-            // TODO: Undo comment on this when model and view are connected
-            // DialogueBoxFactory.createErrorDialogueBox("Could not load file",
-            // "Try new photo");
+            Image image2 =
+                    new Image(getClass().getClassLoader().getResourceAsStream("questionmark.png"));
+            weaponImage.setImage(image2);
+            DialogueBoxFactory.createErrorDialogueBox("Could not load file",
+                                                      "Try new photo");
         }
-        return myImageView;
     }
 
     @Override

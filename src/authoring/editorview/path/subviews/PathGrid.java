@@ -39,18 +39,14 @@ public class PathGrid {
 	public PathGrid(int height, int width){
 		this.gridHeight = height;
 		this.gridWidth = width;
-		this.numColumns = 4;
-		this.numRows = 4;
-		this.cellHeight = gridHeight/numRows;
-		this.cellWidth = gridWidth/numColumns;
+		
 		this.root = new Group();
 		this.gridRoot = new Group();
 		this.backgroundRoot = new Group();
 		
 		
 		root.getChildren().addAll(backgroundRoot, gridRoot);
-//		setBackground();
-//		setPath();
+		
 		setPathUpdater();
 				
 		
@@ -99,8 +95,9 @@ public class PathGrid {
 	}
 	
 	
-	private void setBackground(){
-		
+	public void setBackground(){
+		this.cellHeight = gridHeight/numRows;
+		this.cellWidth = gridWidth/numColumns;
 		for (int i = 0; i < numColumns; i++){
 			for (int j = 0; j < numRows; j++){
 				
@@ -112,12 +109,16 @@ public class PathGrid {
 		}
 	}
 	
-	private void clearBackground(){
+	public void clearBackground(){
 		backgroundRoot.getChildren().clear();
 	}
 	
+	public void clearPath(){
+		gridRoot.getChildren().clear();
+	}
 	
-	private void setPath(){
+	
+	public void setPath(){
 		grid = new ImageView[numColumns][numRows];
 		
 		for (int i = 0; i < numColumns; i++){
@@ -175,13 +176,20 @@ public class PathGrid {
 		return rect;
 	}
 	
-	public void setCellImage(Image image){
-		cellImage = image;
+	public void setCellImage(String imagePath){
+		
+		if (!imagePath.contains("file:") && !imagePath.contains("http:")) {
+			cellImage = new Image (getClass().getClassLoader().getResourceAsStream(imagePath));		
+		}
+		
+		else {
+			cellImage = new Image(imagePath);
+		}
 	}
 	
 	private void updatePath(double x, double y){
-		int i = (int) (x - 100)/100;
-		int j = (int) (y - 240)/100;
+		int i = (int) (x - 100)/cellWidth;
+		int j = (int) (y - 240)/cellHeight;
 		if (grid[i][j].isVisible()){
 			grid[i][j].setVisible(false);
 			removeCellFromPath(i, j);
