@@ -2,12 +2,14 @@ package authoring.editorview.level;
 
 
 
+import java.util.Map;
+
 import authoring.editorview.IUpdateView;
 
 
 public interface ILevelUpdateView  extends ILevelEditorView, IUpdateView {
 	
-	public void updateEnemy (int enemyID, int numEnemies);
+	public void updateEnemy (Map<Integer, Integer> enemyMap);
 	
 	public void updateRewardPoints (double winPoints);
 	
