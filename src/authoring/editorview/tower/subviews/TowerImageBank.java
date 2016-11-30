@@ -23,7 +23,7 @@ public class TowerImageBank extends ImageBank {
                                          e -> {
                                              delegate.onUserPressedCreateNewTower();
                                          });
-        subjects.add(createTowerButton);
+        items.add(createTowerButton);
     }
 
     public void setDelegate (TowerEditorViewDelegate delegate) {
@@ -40,7 +40,7 @@ public class TowerImageBank extends ImageBank {
 
 	@Override
 	protected void userSelectedRow(int index) {
-		int selectedTowerID = this.subjectIDs.get(index);
+		int selectedTowerID = this.itemIDs.get(index);
 		this.delegate.onUserSelectedTower(selectedTowerID);
 	}
 

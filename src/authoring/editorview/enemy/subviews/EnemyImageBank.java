@@ -29,7 +29,7 @@ public class EnemyImageBank extends ImageBank {
         Button newEnemyButton = ButtonFactory.makeButton("New Enemy", e -> {
             delegate.onUserPressedCreateEnemy();
         });
-        this.subjects.add(newEnemyButton);
+        this.items.add(newEnemyButton);
     }
 
     public void setDelegate(EnemyEditorViewDelegate delegate) {
@@ -42,7 +42,7 @@ public class EnemyImageBank extends ImageBank {
 
 	@Override
 	protected void userSelectedRow(int index) {
-		int selectedEnemy = this.subjectIDs.get(index);
+		int selectedEnemy = this.itemIDs.get(index);
 		this.delegate.onUserSelectedEnemy(selectedEnemy);
 	}
 }
