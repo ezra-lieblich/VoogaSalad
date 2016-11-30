@@ -124,9 +124,9 @@ public class LevelEditorView implements ILevelEditorView {
     }
 
     @Override
-    public void updateLevels (List<Integer> activeLevels) {
+    public void updateBank (List<Integer> ids) {
         // TODO Auto-generated method stub
-        
+        System.out.println("No level bank currently implemented");
     }
 
 }

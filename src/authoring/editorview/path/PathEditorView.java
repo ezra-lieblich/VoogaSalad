@@ -184,6 +184,12 @@ public class PathEditorView implements IPathUpdateView {
 		
 	}
 
+	@Override
+	public void updateBank(List<Integer> ids) {
+		// TODO Auto-generated method stub
+		System.out.println("There is no path bank implemented");
+	}
+
 	
 
 	

@@ -50,7 +50,7 @@ public abstract class ImageBank implements ChangeListener<Number> {
 	        return listView;
 	    }
 	    
-	    protected void updateBank (List<Integer> ids) {
+	    public void updateBank (List<Integer> ids) {
 	        this.items.remove(1, items.size() - 1);
 	        itemIDs = new ArrayList<Integer>();
 	        for (int i = 0; i < ids.size(); i++) {
