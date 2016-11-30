@@ -21,23 +21,34 @@ public class EnemyEditorViewController extends EditorViewController
 
     private EnemyManagerController enemyDataSource;
     private int currentEnemyID;
-    private IEnemyEditorView myView;
+    private IEnemyEditorView enemyView;
 
     public EnemyEditorViewController (int editorWidth, int editorHeight) throws IOException {
-        myView = EnemyEditorViewFactory.build(editorWidth, editorHeight);
-        myView.setDelegate(this);
-        myView.setEnemyListDataSource(this);
-        this.view = myView;
+        enemyView = EnemyEditorViewFactory.build(editorWidth, editorHeight);
+        enemyView.setDelegate(this);
+        //enemyView.setEnemyListDataSource(this);
+        this.view = enemyView;
     }
 
     public void setEnemyDataSource (EnemyManagerController source) {
         this.enemyDataSource = source;
-        currentEnemyID = enemyDataSource.createType(myView);
+        onUserPressedCreateEnemy();
     }
 
     @Override
     public void onUserPressedCreateEnemy () {
-        currentEnemyID =  enemyDataSource.createType(myView);
+        currentEnemyID = enemyDataSource.createType(enemyView);
+        enemyView.updateImagePathDisplay(enemyDataSource.getImagePath(currentEnemyID));
+        enemyView.updateNameDisplay(enemyDataSource.getName(currentEnemyID));
+        enemyView.updateSizeDisplay(enemyDataSource.getSize(currentEnemyID));
+        enemyView.updateEnemyDamage(enemyDataSource.getEnemyDamage(currentEnemyID));
+        enemyView.updateEnemyCollisionEffect(enemyDataSource
+                .getEnemyCollisionEffect(currentEnemyID));
+        enemyView.updateEnemySpeed(enemyDataSource.getEnemySpeed(currentEnemyID));
+        enemyView.updateEnemySpeed(enemyDataSource.getEnemySpeed(currentEnemyID));
+        enemyView.updateEnemyRewardMoney(enemyDataSource.getEnemyRewardMoney(currentEnemyID));
+        enemyView.updateEnemyRewardPoints(enemyDataSource.getEnemyRewardScore(currentEnemyID));
+        enemyView.updateEnemyHealthDisplay(enemyDataSource.getEnemyHealth(currentEnemyID));
     }
 
     @Override
@@ -141,10 +152,10 @@ public class EnemyEditorViewController extends EditorViewController
         return cellData;
     }
 
-	@Override
-	public void onUserSelectedEnemy(int enemyID) {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public void onUserSelectedEnemy (int enemyID) {
+        // TODO Auto-generated method stub
+
+    }
 
 }

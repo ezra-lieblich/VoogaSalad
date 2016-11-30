@@ -50,8 +50,9 @@ public class PathEditorViewController extends EditorViewController implements Pa
 	@Override
 	public void onUserEnteredCreatePath() {
 		int pathID = pathDataSource.createType(pathView);
+		
 		pathView.updateActiveID(pathID);
-		pathView.createNewPath();	
+		//pathView.createNewPath();	
 	}
 
 
@@ -60,10 +61,13 @@ public class PathEditorViewController extends EditorViewController implements Pa
 	public void onUserEnteredEditPath(int pathID) {
 		pathView.updateActiveID(pathID);
 		pathView.updateNumColumns(pathDataSource.getNumberofColumns(pathID));
+		System.out.println(pathDataSource.getNumberofColumns(pathID));
 		pathView.updateNumRows(pathDataSource.getNumberofRows(pathID));
+		System.out.println(pathDataSource.getNumberofRows(pathID));
 		pathView.updatePathCoordinates(pathDataSource.getPathCoordinates(pathID));
 		pathView.updatePathImage(pathDataSource.getImagePath(pathID));
-		pathView.updatePathName(pathDataSource.getName(pathID));
+		pathView.updateNameDisplay(pathDataSource.getName(pathID));
+		System.out.println(pathDataSource.getName(pathID));
 		
 	}
 
