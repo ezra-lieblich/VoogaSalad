@@ -10,22 +10,22 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 
 
-public class NewLevelView implements ILevelSetView {
+public class CreateNewLevelView implements ILevelSetView {
 
     private static final String RESOURCE_FILE_NAME = "resources/GameAuthoringLevels";
     private ResourceBundle levelResource = ResourceBundle.getBundle(RESOURCE_FILE_NAME);
 
     private LevelEditorViewDelegate delegate;
-    private VBox root;
+    private VBox vbox;
 
-    public NewLevelView () {
-        this.root = new VBox();
+    public CreateNewLevelView (ResourceBundle levelsResource) {
+        this.vbox = new VBox();
         buildViewComponents();
     }
 
     @Override
     public Node getInstanceAsNode () {
-        return root;
+        return vbox;
     }
 
     @Override
@@ -40,7 +40,7 @@ public class NewLevelView implements ILevelSetView {
                              e -> {
                                  createNewLevel();
                              });
-        root.getChildren().add(createLevelButton);
+        vbox.getChildren().add(createLevelButton);
         createLevelButton.setTranslateY(5);
         createLevelButton.setTranslateX(5);
         createLevelButton.setFocusTraversable(false);

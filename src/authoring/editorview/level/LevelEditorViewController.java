@@ -48,10 +48,10 @@ public class LevelEditorViewController extends EditorViewController
     }
 
     @Override
-    public void onUserEnteredTranstitionTime (String time) {
+    public void onUserEnteredTransitionTime (String time) {
         try {
             Double.parseDouble(time);
-            levelDataSource.setSize(currentLevelID, Double.parseDouble(time));
+            levelDataSource.setTransitionTime(currentLevelID, Double.parseDouble(time));
         }
         catch (NumberFormatException e) {
             createDialogueBox();

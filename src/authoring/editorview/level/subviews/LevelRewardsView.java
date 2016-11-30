@@ -19,16 +19,13 @@ public class LevelRewardsView implements ILevelSetView {
     private TextField rewardHealthTextField;
     private TextField rewardMoneyTextField;
     private TextField rewardPointsTextField;
-    private double rewardHealth;
-    private double rewardMoney;
-    private double rewardPoints;
 
     // TODO: reduce duplicated code
 
     private static final String RESOURCE_FILE_NAME = "resources/GameAuthoringLevels";
     private ResourceBundle levelResource = ResourceBundle.getBundle(RESOURCE_FILE_NAME);
 
-    public LevelRewardsView () {
+    public LevelRewardsView (ResourceBundle levelsResource) {
         vbox = new VBox(10);
         makeHealthRewardTextField();
         makeMoneyRewardTextField();
@@ -101,18 +98,15 @@ public class LevelRewardsView implements ILevelSetView {
         delegate.onUserEnteredRewardPoints(pointsString);
     }
 
-    public void setRewardHealth (double rewardHealth) {
-        this.rewardHealth = rewardHealth;
-        rewardHealthTextField.setText(Double.toString(rewardHealth));
+    public void setRewardHealth (String rewardHealth) {
+        rewardHealthTextField.setText(rewardHealth);
     }
 
-    public void setRewardMoney (double rewardMoney) {
-        this.rewardMoney = rewardMoney;
-        rewardMoneyTextField.setText(Double.toString(rewardMoney));
+    public void setRewardMoney (String rewardMoney) {
+        rewardMoneyTextField.setText(rewardMoney);
     }
 
-    public void setRewardPoints (double points) {
-        this.rewardPoints = points;
-        rewardPointsTextField.setText(Double.toString(rewardPoints));
+    public void setRewardPoints (String points) {
+        rewardPointsTextField.setText(points);
     }
 }

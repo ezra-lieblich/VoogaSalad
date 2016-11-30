@@ -16,7 +16,7 @@ public interface LevelEditorViewDelegate {
 
     public void onUserEnteredDeleteLevel ();
 
-    public void onUserEnteredTranstitionTime (String time);
+    public void onUserEnteredTransitionTime (String time);
 
     public void onUserEnteredEnemyFrequency (String frequency);
 
