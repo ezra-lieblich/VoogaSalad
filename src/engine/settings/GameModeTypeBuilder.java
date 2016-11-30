@@ -20,8 +20,8 @@ public class GameModeTypeBuilder extends AbstractTypeBuilder<GameMode, GameModeB
 	public static final String DEFAULT_NAME = "New Game";
     public static final String DEFAULT_IMAGE_PATH = "Images/blacksquare.jpg";
     public static final double DEFAULT_SIZE = 1;
-    public static final List<String> DEFAULT_WINNING_CONDITIONS = new ArrayList<>();
-    public static final List<String> DEFAULT_LOSING_CONDITIONS = new ArrayList<>();
+    public static final List<String> DEFAULT_WINNING_CONDITIONS = new ArrayList<String>();
+    public static final List<String> DEFAULT_LOSING_CONDITIONS = new ArrayList<String>();
     public static final String DEFAULT_GAME_TYPE = "Normal";
     public static final double DEFAULT_INITIAL_LIVES = 100;
     public static final double DEFAULT_INITIAL_MONEY = 500;

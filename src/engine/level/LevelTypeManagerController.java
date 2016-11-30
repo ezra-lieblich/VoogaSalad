@@ -93,7 +93,6 @@ public class LevelTypeManagerController
                                                     LevelBuilder typeBuilder) {
         return typeBuilder.addDurationInSecondsListener( (oldValue, newValue) -> updateView
                 .updateTransitionTime(newValue))
-                // updateEnemy needs to take in the whole map and update everything
                 .addEnemyCountsListener( (oldValue, newValue) -> updateView.updateEnemy(newValue))
                 .addRewardHealthListener( (oldValue, newValue) -> updateView
                         .updateRewardHealth(newValue))
@@ -101,6 +100,7 @@ public class LevelTypeManagerController
                         .updateRewardPoints(newValue))
                 .addRewardMoneyListener( (oldValue, newValue) -> updateView
                         .updateRewardMoney(newValue));
+        
     }
 
 }
