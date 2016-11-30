@@ -5,7 +5,7 @@ import java.util.ResourceBundle;
 import authoring.editorview.EditorViewController;
 import authoring.utilityfactories.DialogueBoxFactory;
 import engine.tower.TowerManagerController;
-import authoring.editorview.tower.ITowerUpdateView;
+import authoring.editorview.tower.ITowerEditorView;
 
 
 /**
@@ -19,16 +19,18 @@ public class TowerEditorViewController extends EditorViewController
 
     private TowerManagerController towerDataSource;
     private int currentTowerID;
-    private ITowerUpdateView myView;
+    private ITowerEditorView myView;
 
     public TowerEditorViewController (int editorWidth, int editorHeight) throws IOException {
         myView = TowerEditorViewFactory.build(editorWidth, editorHeight);
         myView.setDelegate(this);
         this.view = myView;
+        
     }
 
     public void setTowerDataSource (TowerManagerController source) {
         this.towerDataSource = source;
+        currentTowerID = towerDataSource.createType(myView);
     }
 
     /**
@@ -36,7 +38,8 @@ public class TowerEditorViewController extends EditorViewController
      */
     @Override
     public void onUserPressedCreateNewTower () {
-        ///int myid = towerDataSource.createType(myView);
+        currentTowerID = towerDataSource.createType(myView);
+        // TODO everything
     }
 
     @Override
@@ -87,16 +90,9 @@ public class TowerEditorViewController extends EditorViewController
         towerDataSource.setTowerChosenAbility(currentTowerID, Integer.parseInt(towerAbility));
     }
 
-    private void createDialogueBox () {
-        ResourceBundle dialogueBoxResource = ResourceBundle.getBundle("resources/DialogueBox");
-        DialogueBoxFactory.createErrorDialogueBox(dialogueBoxResource.getString("Integer"),
-                                                  dialogueBoxResource.getString("CheckInput"));
-    }
-
     @Override
     public void onUserPressedDeleteTower () {
-        // TODO Auto-generated method stub
-
+        towerDataSource.deleteType(currentTowerID);
     }
 
     @Override
@@ -119,8 +115,13 @@ public class TowerEditorViewController extends EditorViewController
 
     @Override
     public void onUserEnteredTowerSize (String towerSize) {
-        // TODO Auto-generated method stub
-
+        try {
+            Double.parseDouble(towerSize);
+            towerDataSource.setSize(currentTowerID, Double.parseDouble(towerSize));
+        }
+        catch (NumberFormatException e) {
+            createDialogueBox();
+        }
     }
 
     @Override
@@ -133,6 +134,12 @@ public class TowerEditorViewController extends EditorViewController
     public void onUserEnteredTowerUpgrade (String towerUpgrade) {
         // TODO Auto-generated method stub
 
+    }
+
+    private void createDialogueBox () {
+        ResourceBundle dialogueBoxResource = ResourceBundle.getBundle("resources/DialogueBox");
+        DialogueBoxFactory.createErrorDialogueBox(dialogueBoxResource.getString("Integer"),
+                                                  dialogueBoxResource.getString("CheckInput"));
     }
 
 }

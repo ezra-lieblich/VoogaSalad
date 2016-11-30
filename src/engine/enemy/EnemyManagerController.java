@@ -1,11 +1,11 @@
 package engine.enemy;
 import java.util.List;
 
-import authoring.editorview.enemy.IEnemyUpdateView;
+import authoring.editorview.enemy.IEnemyEditorView;
 import engine.ManagerController;
 
 //IEnemyUpdateView needs to extend IUpdateView
-public interface EnemyManagerController extends ManagerController<EnemyManager, EnemyBuilder, Enemy, IEnemyUpdateView> {
+public interface EnemyManagerController extends ManagerController<EnemyManager, EnemyBuilder, Enemy, IEnemyEditorView> {
 
     public void setEnemySpeed (int enemyID, double enemySpeed);
 

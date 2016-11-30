@@ -4,7 +4,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ResourceBundle;
 import javax.imageio.ImageIO;
-import authoring.editorview.weapon.IWeaponEditorView;
+import authoring.editorview.weapon.IWeaponSetView;
 import authoring.editorview.weapon.WeaponEditorViewDelegate;
 import authoring.utilityfactories.DialogueBoxFactory;
 import javafx.embed.swing.SwingFXUtils;
@@ -18,7 +18,7 @@ import javafx.scene.image.ImageView;
  * @author Kayla Schulz
  *
  */
-public class WeaponImageView implements IWeaponEditorView {
+public class WeaponImageView implements IWeaponSetView {
 
     private WeaponEditorViewDelegate delegate;
     private ResourceBundle labelsResource;
