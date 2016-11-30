@@ -132,8 +132,8 @@ public class EnemyEditorViewController extends EditorViewController
 	@Override
 	public EnemyListCellData getCellDataForEnemy(int enemyID) {
 		EnemyListCellData cellData = new EnemyListCellData();
-		cellData.setName(enemyDataSource.getEnemyName(enemyID));
-		cellData.setImagePath(enemyDataSource.getEnemyImage(enemyID));
+		cellData.setName(enemyDataSource.getName(enemyID));
+		cellData.setImagePath(enemyDataSource.getImagePath(enemyID));
 		return cellData;
 	}
 
