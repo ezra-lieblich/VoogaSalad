@@ -25,10 +25,12 @@ public class TowerEditorViewController extends EditorViewController
         myView = TowerEditorViewFactory.build(editorWidth, editorHeight);
         myView.setDelegate(this);
         this.view = myView;
+        
     }
 
     public void setTowerDataSource (TowerManagerController source) {
         this.towerDataSource = source;
+        currentTowerID = towerDataSource.createType(myView);
     }
 
     /**

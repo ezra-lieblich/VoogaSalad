@@ -28,6 +28,7 @@ public class WeaponEditorViewController extends EditorViewController
 
     public void setWeaponDataSource (WeaponManagerController source) {
         this.weaponDataSource = source;
+        currentWeaponID = weaponDataSource.createType(myView);
     }
 
     @Override

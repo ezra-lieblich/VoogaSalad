@@ -31,6 +31,7 @@ public class EnemyEditorViewController extends EditorViewController
 
     public void setEnemyDataSource (EnemyManagerController source) {
         this.enemyDataSource = source;
+        currentEnemyID = enemyDataSource.createType(myView);
     }
 
     @Override
