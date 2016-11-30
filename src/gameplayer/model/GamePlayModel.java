@@ -18,6 +18,7 @@ public class GamePlayModel extends Observable {
 
 	// private List<Enemy> enemyOnGrid;
 	private List<Weapon> weaponOnGrid;
+	private List<Tower> towersOnGrid; 
 	private int hitBuffer = 10; // initialize from xml
 
 	private Map<Integer, Weapon> weaponTypes; // initialize in xml
@@ -194,19 +195,7 @@ public class GamePlayModel extends Observable {
 		TowerType tt = towerTypes.get(type);
 		System.out.println("Placed a tower");
 		System.out.println("Tower x: " + x + "; y:" + y);
-		// get weaponTypes
-		// actually implement the firing counter into each weapon types
-
-		// ++++++++++++++++++++++++++++fix this after weapon type is
-		// done+++++++++++++++++++++++++
-		/*
-		 * Tower t = new Tower(type, tt.getCost(),
-		 * tt.getWeapon(),tt.getImageLocation(),tt.getName()); if(this.gold -
-		 * t.getCost() < 0){ return false; } t.setCoordinates(x, y);
-		 * grid.placeTower(t, x, y); setGold(this.gold - t.getCost());
-		 * 
-		 * 
-		 */
+		
 		return true;
 	}
 

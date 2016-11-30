@@ -80,23 +80,6 @@ public class GamePlayerController implements Observer {
 		this.enemyController = new EnemyController(this.enemyManager, this.view.getGrid());
 	}
 
-	// For testing only
-	@Deprecated
-	private void initGUIDummy(HashMap<String, Double> settings) {
-		int[] dimensions = model.getDimension();
-		int rows = dimensions[0];
-		int cols = dimensions[1];
-		this.view = new GameGUI(rows, cols); // just for testing, should be
-												// replaced by block above, 5
-												// rows, 5 columns
-		ArrayList<String> towerImages = new ArrayList<String>();
-		towerImages.add("kaneki.jpg");
-		towerImages.add("penguin.jpg");
-		this.mainScene = view.init(settings.get("gold"), settings.get("lives"), settings.get("numLevels"), towerImages);
-		System.out.println("Start point: " + model.getGrid().getStartPoint());
-		this.view.getGrid().populatePath(model.getGrid().getStartPoint()); 
-	}
-
 	private void initGUI() {
 		int[] dimensions = model.getDimension();
 		int rows = dimensions[0];
@@ -114,7 +97,7 @@ public class GamePlayerController implements Observer {
 		this.view.getGrid().populatePath(model.getGrid().getStartPoint()); 
 		this.dropController = new DragDropController(this.view, this.model);
 	}
-
+	
 	private ArrayList<String> getTowerImages() {
 		ArrayList<String> towerImages = new ArrayList<String>();
 		HashMap<Integer, TowerType> towers = this.loader.getTowers();
@@ -173,6 +156,7 @@ public class GamePlayerController implements Observer {
 				this.enemyManager.spawnEnemy(test);
 			}
 			this.enemyManager.update(); 
+
 //			this.view.getGrid().populatePath(model.getGrid().getStartPoint()); //THIS LINE CAUSES SLOW DOWN
 			List<Enemy>enemyRedraw = enemyManager.getEnemyOnGrid(); 
 			

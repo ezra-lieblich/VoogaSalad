@@ -26,14 +26,9 @@ public class DragDropController implements Observer{
 
 	@Override
 	public void update(Observable o, Object arg) {
-		System.out.println("here");
 		if (o instanceof DragDrop){
 			int x = (int)(dragDrop.getDroppedImage().getX() * (this.game.getGrid().getCellWidth()/GridGUI.GRID_WIDTH));
 			int y = (int)(dragDrop.getDroppedImage().getY() * (this.game.getGrid().getCellHeight()/GridGUI.GRID_HEIGHT));
-			System.out.println("Cell width: "+this.game.getGrid().getCellWidth());
-			System.out.println("Image source x: "+dragDrop.getDroppedImage().getX());
-			System.out.println("Cell height: "+this.game.getGrid().getCellHeight());
-			System.out.println("Image source y: "+dragDrop.getDroppedImage().getY());
 			boolean okToPlace = this.model.placeTower(0, x, y); //TODO: what is they tower type, how to get it? Using 0 for now as dummy
 			if (!okToPlace){
 				System.out.println("Not ok to place here!");
