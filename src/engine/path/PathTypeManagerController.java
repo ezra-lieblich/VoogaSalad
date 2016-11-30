@@ -6,14 +6,15 @@ import authoring.editorview.path.IPathEditorView;
 import authoring.editorview.path.IPathUpdateView;
 import authoring.editorview.tower.ITowerEditorView;
 import engine.AbstractTypeManagerController;
+import engine.ManagerMediator;
 import engine.tower.Tower;
 
 
 public class PathTypeManagerController
         extends AbstractTypeManagerController<PathManager, PathBuilder, Path, IPathUpdateView> implements PathManagerController {
 
-    public PathTypeManagerController (PathManager path) {
-        super(path, new PathTypeBuilder());
+    public PathTypeManagerController (ManagerMediator managerMediator) {
+        super(new PathTypeManager(), new PathTypeBuilder(), managerMediator);
     }
 
     @Override
