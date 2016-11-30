@@ -4,12 +4,13 @@ import java.util.List;
 import com.oracle.webservices.internal.api.databinding.Databinding.Builder;
 import authoring.editorview.tower.ITowerUpdateView;
 import engine.AbstractTypeManagerController;
+import engine.ManagerMediator;
 
 
 public class TowerTypeManagerController extends AbstractTypeManagerController<TowerManager, TowerBuilder, Tower, ITowerUpdateView> implements TowerManagerController {
 
-    public TowerTypeManagerController (TowerManager towerManager) {
-        super(towerManager, new TowerTypeBuilder());
+    public TowerTypeManagerController (ManagerMediator managerMediator) {
+        super(new TowerTypeManager(), new TowerTypeBuilder(), managerMediator);
     }
 
     @Override
