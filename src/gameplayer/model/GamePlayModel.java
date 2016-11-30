@@ -91,7 +91,7 @@ public class GamePlayModel extends Observable {
 																		// and
 																		// current
 																		// level?
-		this.numLevels = settingInfo.get("numLevels");
+		this.numLevels = settingInfo.get("totalNumberOfLevels");
 		this.gold = settingInfo.get("gold");
 		this.lives = settingInfo.get("lives");
 		this.towerTypes = this.factory.getTowers();

@@ -14,8 +14,14 @@ public class EnemyType extends AbstractType implements Enemy {
 	private ObservableProperty<String> collisionEffect;
 
 	
-    protected EnemyType (TypeInitializer typeBuilder) {
-        super(typeBuilder);
+    protected EnemyType (EnemyInitializer enemyInitializer) {
+        super(enemyInitializer);
+        this.speed = enemyInitializer.getSpeed();
+        this.health = enemyInitializer.getHealth();
+        this.damage = enemyInitializer.getDamage();
+        this.score = enemyInitializer.getScore();
+        this.money = enemyInitializer.getMoney();
+        this.collisionEffect = enemyInitializer.getCollisionEffect();
     }
 	
 	

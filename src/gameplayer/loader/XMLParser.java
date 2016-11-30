@@ -161,8 +161,11 @@ public class XMLParser {
 		for(int i=0;i<enemiesRawString.length;i++){
 			Queue<Enemy>enemiesInLevel= new LinkedList<Enemy>(); 
 			String[]enemies = enemiesRawString[i].split(",");
+			System.out.println("enemies[1] = " + enemies[1]);
 			for(int k=0;k<Integer.parseInt(enemies[1]);k++){
 				engine.enemy.Enemy type = types.get(enemies[0]); //refactor names
+				System.out.println(type.getName());
+				System.out.println(type.getSpeed());
 				double width = 20; //for testing purposes
 				double height = 20; //for testing purposes
 				enemiesInLevel.add(new Enemy(type.getName(),type.getSpeed(),(int)(type.getHealth()), type.getImagePath(), width ,height)); //for testing
