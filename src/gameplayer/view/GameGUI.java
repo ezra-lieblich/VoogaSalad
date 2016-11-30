@@ -1,5 +1,6 @@
 package gameplayer.view;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import gameplayer.model.IDrawable;
@@ -96,6 +97,10 @@ public class GameGUI {
 		this.buttonPanel.bindAnimationStart(handle);
 	}
 	
+	public List<Double[]> getDroppedTowerCoords(){
+		return getDragDrop().getCoordinates();
+	}
+	
 	private void addButtonPanel(){
 		this.buttonPanel.init();
 		mainScreen.setTop(this.buttonPanel.getPane());
@@ -150,16 +155,20 @@ public class GameGUI {
 	
 	//not sure if this goes here
 	public void reRenderTower(List<IDrawable> redraw){//should be interface of drawables
+		ArrayList<Double[]> towerCoords = (ArrayList<Double[]>) this.getDroppedTowerCoords();
+		int i = 0;
 		for(IDrawable entity:redraw){
 			ImageView image = new ImageView(entity.getImage());
-			image.setX(entity.getX()+ this.dragDrop.getDragDrop().getxError());
-			image.setY(entity.getY()+this.dragDrop.getDragDrop().getyError());
+			image.setX(towerCoords.get(i)[0]);
+			image.setY(towerCoords.get(i)[1]);
 			graphics.setImageViewParams(image, DragDropView.DEFENSIVEWIDTH, DragDropView.DEFENSIVEHEIGHT);
 			this.grid.getGrid().getChildren().add(image);
+			i++;
 		}
 	}
 	
 	public void reRender(List<IDrawable> redraw){//should be interface of drawables
+		
 		for(IDrawable entity:redraw){
 			ImageView image = new ImageView(entity.getImage());
 			image.setX(entity.getX());

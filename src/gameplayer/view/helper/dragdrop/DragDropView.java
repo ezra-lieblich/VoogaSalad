@@ -33,6 +33,7 @@ public class DragDropView {
 	private Pane target;
 	private DragDrop dragDrop;
 	private List<ImageView> objects;
+	
 
 	public DragDropView(double xError, double yError) {
 		this.dragDropPane = new TabPane();
@@ -40,8 +41,11 @@ public class DragDropView {
 		this.graphicLib = new GraphicsLibrary();
 		this.dragDrop = new DragDrop(xError,yError);
 		this.objects = new ArrayList<ImageView>();
+		
 		setTabPaneStyle();
 	}
+	
+	
 	
 	private void setTabPaneStyle(){
 		this.dragDropPane.getStyleClass().add("dragDropPane");
