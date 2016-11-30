@@ -4,13 +4,14 @@ import java.util.Map;
 
 import authoring.editorview.level.ILevelUpdateView;
 import engine.AbstractTypeManagerController;
+import engine.ManagerMediator;
 
 
 public class LevelTypeManagerController 
 	extends AbstractTypeManagerController<LevelManager, LevelBuilder, Level, ILevelUpdateView> implements LevelManagerController {
 
-	public LevelTypeManagerController(LevelManager typeManager) {
-		super(typeManager, new LevelTypeBuilder());
+	public LevelTypeManagerController(ManagerMediator managerMediator) {
+		super(new LevelTypeManager(), new LevelTypeBuilder(), managerMediator);
 	}
 
 	@Override
