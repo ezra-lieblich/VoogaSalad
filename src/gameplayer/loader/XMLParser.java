@@ -187,7 +187,7 @@ public class XMLParser {
     			enemyBuilder.buildImagePath(((Element)(enemyElement.getElementsByTagName("imageLocation").item(0))).getFirstChild().getNodeValue());
     			enemyBuilder.buildSpeed(Double.parseDouble(((Element)(enemyElement.getElementsByTagName("speed").item(0))).getFirstChild().getNodeValue()));
     			enemyBuilder.buildHealth(Double.parseDouble(((Element)(enemyElement.getElementsByTagName("health").item(0))).getFirstChild().getNodeValue()));
-    			enemyBuilder.buildPoints(Double.parseDouble(((Element)(enemyElement.getElementsByTagName("points").item(0))).getFirstChild().getNodeValue()));
+    			enemyBuilder.buildScore(Double.parseDouble(((Element)(enemyElement.getElementsByTagName("points").item(0))).getFirstChild().getNodeValue()));
     			enemyBuilder.buildMoney(Double.parseDouble(((Element)(enemyElement.getElementsByTagName("money").item(0))).getFirstChild().getNodeValue()));
     			enemyBuilder.buildCollisionEffect(((Element)(enemyElement.getElementsByTagName("collisionEffect").item(0))).getFirstChild().getNodeValue());
     			engine.enemy.Enemy enemyType = enemyBuilder.build(); //refactor names
