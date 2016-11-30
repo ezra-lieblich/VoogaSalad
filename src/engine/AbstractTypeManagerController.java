@@ -62,7 +62,7 @@ public abstract class AbstractTypeManagerController<E extends Manager<T>, U exte
 
     @Override
     public void setImagePath (int id, String imagePath) {
-        typeManager.getEntity(id).setName(imagePath);
+        typeManager.getEntity(id).setImagePath(imagePath);
     }
 
     @Override

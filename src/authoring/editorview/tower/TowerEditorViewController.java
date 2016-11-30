@@ -19,18 +19,18 @@ public class TowerEditorViewController extends EditorViewController
 
     private TowerManagerController towerDataSource;
     private int currentTowerID;
-    private ITowerEditorView myView;
+    private ITowerEditorView towerView;
 
     public TowerEditorViewController (int editorWidth, int editorHeight) throws IOException {
-        myView = TowerEditorViewFactory.build(editorWidth, editorHeight);
-        myView.setDelegate(this);
-        this.view = myView;
-        
+        towerView = TowerEditorViewFactory.build(editorWidth, editorHeight);
+        towerView.setDelegate(this);
+        this.view = towerView;
+
     }
 
     public void setTowerDataSource (TowerManagerController source) {
         this.towerDataSource = source;
-        currentTowerID = towerDataSource.createType(myView);
+        currentTowerID = towerDataSource.createType(towerView);
     }
 
     /**
@@ -38,8 +38,13 @@ public class TowerEditorViewController extends EditorViewController
      */
     @Override
     public void onUserPressedCreateNewTower () {
-        currentTowerID = towerDataSource.createType(myView);
-        // TODO everything
+        currentTowerID = towerDataSource.createType(towerView);
+        towerView.updateImagePathDisplay(towerDataSource.getImagePath(currentTowerID));
+        towerView.updateNameDisplay(towerDataSource.getName(currentTowerID));
+        towerView.updateSizeDisplay(towerDataSource.getSize(currentTowerID));
+        towerView.updateTowerBuyPriceDisplay(towerDataSource.getTowerBuyPrice(currentTowerID));
+        towerView.updateTowerSellPriceDisplay(towerDataSource.getTowerSellPrice(currentTowerID));
+        towerView.updateUnlockLevelDisplay(towerDataSource.getTowerUnlockLevel(currentTowerID));
     }
 
     @Override

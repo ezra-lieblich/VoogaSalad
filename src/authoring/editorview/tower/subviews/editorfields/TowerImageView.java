@@ -1,7 +1,6 @@
 package authoring.editorview.tower.subviews.editorfields;
 
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.util.ResourceBundle;
 import javax.imageio.ImageIO;
 import authoring.editorview.tower.ITowerSetView;
@@ -27,13 +26,15 @@ public class TowerImageView implements ITowerSetView {
     private ImageView towerImage;
     private ResourceBundle labelsResource;
 
-    public TowerImageView (ResourceBundle labelsResource) throws IOException {
+    public TowerImageView (ResourceBundle labelsResource) {
         this.labelsResource = labelsResource;
-        towerImage = loadTowerImage();
+        towerImage = new ImageView();
+        loadTowerImage();
     }
 
     public void updateTowerImagePath (String imagePath) {
         this.imagePath = imagePath;
+        loadTowerImage();
     }
 
     @Override
@@ -41,26 +42,21 @@ public class TowerImageView implements ITowerSetView {
         this.delegate = delegate;
     }
 
-    private ImageView loadTowerImage () throws IOException {
+    private void loadTowerImage () {
         BufferedImage imageRead;
-        ImageView myImageView = new ImageView();
         try {
             imageRead = ImageIO.read(getClass().getClassLoader().getResourceAsStream(imagePath));
             Image image2 = SwingFXUtils.toFXImage(imageRead, null);
-            myImageView.setImage(image2);
-            delegate.onUserEnteredTowerImagePath(imagePath);
+            towerImage.setImage(image2);
+            //delegate.onUserEnteredTowerImagePath(imagePath);
         }
         catch (Exception e) {
-            imageRead =
-                    ImageIO.read(getClass().getClassLoader()
-                            .getResourceAsStream(labelsResource.getString("DefaultImagePath")));
-            Image image2 = SwingFXUtils.toFXImage(imageRead, null);
-            myImageView.setImage(image2);
-            // TODO: Undo comment on this when model and view are connected
-            // DialogueBoxFactory.createErrorDialogueBox("Could not load file",
-            // "Try new photo");
+            System.out.println("Here");
+            Image image2 = new Image(getClass().getClassLoader().getResourceAsStream("questionmark.png"));
+            towerImage.setImage(image2);
+            DialogueBoxFactory.createErrorDialogueBox("Could not load file",
+            "Try new photo");
         }
-        return myImageView;
     }
 
     @Override

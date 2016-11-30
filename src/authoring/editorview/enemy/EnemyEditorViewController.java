@@ -35,8 +35,8 @@ public class EnemyEditorViewController extends EditorViewController
     }
 
     @Override
-    public int onUserPressedCreateEnemy () {
-        return enemyDataSource.createType(myView);
+    public void onUserPressedCreateEnemy () {
+        currentEnemyID =  enemyDataSource.createType(myView);
     }
 
     @Override
