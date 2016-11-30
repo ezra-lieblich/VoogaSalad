@@ -147,4 +147,10 @@ public class TowerEditorViewController extends EditorViewController
                                                   dialogueBoxResource.getString("CheckInput"));
     }
 
+	@Override
+	public void onUserSelectedTower(int towerID) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

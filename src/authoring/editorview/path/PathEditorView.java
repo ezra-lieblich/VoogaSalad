@@ -79,15 +79,16 @@ public class PathEditorView implements IPathUpdateView {
         newPathView.setDelegate(delegate);
         pathSizeView.setDelegate(delegate);
         pathNameView.setDelegate(delegate);
+        pathImageView.setDelegate(delegate);
     }
 
     
     @Override
 	public void updateActiveID(int pathID) {
-    	pathImageView.setActivePathId(pathID);
-    	pathGrid.setActivePathId(pathID);
-    	pathSizeView.setActivePathId(pathID);
     	pathChooser.setActivePathId(pathID);
+    	pathGrid.setActivePathId(pathID);
+    	pathImageView.setActivePathId(pathID); 	
+    	pathSizeView.setActivePathId(pathID);   	
     	pathNameView.setActivePathId(pathID);
 		
 	}
@@ -136,12 +137,6 @@ public class PathEditorView implements IPathUpdateView {
 	public void updateNumRows(int numRows) {
 		pathSizeView.setNumberOfRows(numRows);
 		pathGrid.setNumRows(numRows);
-		
-	}
-
-	@Override
-	public void updatePathName(String pathName) {
-		pathNameView.setName(pathName);
 		
 	}
 

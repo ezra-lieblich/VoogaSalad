@@ -20,13 +20,13 @@ import javafx.scene.image.ImageView;
  */
 
 public abstract class ImageBank implements ChangeListener<Number> {
-	    private ListDataSource dataSource;
+	    protected ListDataSource dataSource;
+	    
 	    protected ListView<Node> listView;
-
-	    protected ObservableList<Node> subjects;
+	    protected ObservableList<Node> items;
 	    
 	    //Index represents the enemies index in the list view, value represents the corresponding enemy's id
-	    protected ArrayList<Integer> subjectIDs;
+	    protected ArrayList<Integer> itemIDs;
 
 	    protected final int DEFAULT_CELL_HEIGHT = 60;
 	    protected final int DEFAULT_CELL_WIDTH = 60;
@@ -34,10 +34,10 @@ public abstract class ImageBank implements ChangeListener<Number> {
 	    protected final String DEFAULT_SUBJECT_IMAGE_PATH = "./Images/questionmark.png";
 
 	    public ImageBank () {
-	        subjects = FXCollections.observableArrayList();
-	        subjectIDs = new ArrayList<Integer>();
+	        items = FXCollections.observableArrayList();
+	        itemIDs = new ArrayList<Integer>();
 	        listView = new ListView<Node>();
-	        listView.setItems(subjects);
+	        listView.setItems(items);
 	        listView.setPrefWidth(DEFAULT_BANK_WIDTH);
 	        listView.getSelectionModel().selectedIndexProperty().addListener(this);
 	    }
@@ -51,13 +51,13 @@ public abstract class ImageBank implements ChangeListener<Number> {
 	    }
 	    
 	    protected void updateBank (List<Integer> ids) {
-	        this.subjects.remove(1, subjects.size() - 1);
-	        subjectIDs = new ArrayList<Integer>();
+	        this.items.remove(1, items.size() - 1);
+	        itemIDs = new ArrayList<Integer>();
 	        for (int i = 0; i < ids.size(); i++) {
 	            ListCellData cellData = dataSource.getCellDataForSubject(ids.get(i));
 	            Node cell = createCellFromData(cellData);
-	            subjects.add(cell);
-	            subjectIDs.set(subjects.size()-1, cellData.getId());
+	            items.add(cell);
+	            itemIDs.set(items.size()-1, cellData.getId());
 	        }
 	    }
 

@@ -3,11 +3,11 @@ package authoring.editorview.level.subviews;
 import javafx.scene.Node;
 import javafx.scene.layout.HBox;
 
-public class LevelChooser {
+public class LevelChooserView {
 	
 	private HBox root;
 	
-	public LevelChooser(){
+	public LevelChooserView(){
 		root = new HBox();
 		buildLevelComboBox();
 	}

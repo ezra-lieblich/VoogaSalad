@@ -35,5 +35,7 @@ public interface TowerEditorViewDelegate {
     public void onUserEnteredTowerUnlockLevel (String towerLevel);
 
     public void onUserEnteredTowerSize (String towerSize);
+    
+    public void onUserSelectedTower (int towerID);
 
 }
