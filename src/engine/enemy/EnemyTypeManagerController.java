@@ -11,7 +11,7 @@ import engine.AbstractTypeManagerController;
 public class EnemyTypeManagerController  
 	extends AbstractTypeManagerController<EnemyManager, EnemyBuilder, Enemy, IEnemyEditorView> implements EnemyManagerController {
 
-	EnemyTypeManagerController(EnemyManager enemyManager) {
+	public EnemyTypeManagerController(EnemyManager enemyManager) {
 		super(enemyManager, new EnemyTypeBuilder());
 	}
 

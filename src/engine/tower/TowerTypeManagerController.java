@@ -6,9 +6,10 @@ import authoring.editorview.tower.ITowerEditorView;
 import engine.AbstractTypeManagerController;
 
 
-public class TowerTypeManagerController extends AbstractTypeManagerController<TowerManager, TowerBuilder, Tower, ITowerEditorView> implements TowerManagerController {
-
-    TowerTypeManagerController (TowerManager towerManager) {
+public class TowerTypeManagerController
+        extends AbstractTypeManagerController<TowerManager, TowerBuilder, Tower, ITowerEditorView>
+        implements TowerManagerController {
+    public TowerTypeManagerController (TowerManager towerManager) {
         super(towerManager, new TowerTypeBuilder());
     }
 
@@ -80,85 +81,29 @@ public class TowerTypeManagerController extends AbstractTypeManagerController<To
     // TODO - edit createNewTower to work with both versions
     @Override
     public int createTowerUpgrade (ITowerEditorView towerUpdater, int parentTowerID) {
-        return getTypeManager().addUpgrade(createType(towerUpdater), parentTowerID);
+        return getTypeManager().addUpgrade(constructType(towerUpdater), parentTowerID);
     }
 
     @Override
     public void removeTowerUpgrade (int parentTowerID, int childTowerID) {
         getTypeManager().removeUpgrade(childTowerID, parentTowerID);
     }
-    
+
     @Override
     protected TowerBuilder constructTypeProperties (ITowerEditorView towerUpdater,
                                                     TowerBuilder typeBuilder) {
-            return typeBuilder
+        return typeBuilder
                 .addWeaponsListener( (oldValue, newValue) -> towerUpdater
-                        .updateTowerChosenWeapon(newValue))
+                        .updateTowerWeaponBank(newValue))
                 .addAbilitiesListener( (oldValue, newValue) -> towerUpdater
                         .updateTowerAbility(newValue))
                 .addUpgradesListener( (oldValue, newValue) -> towerUpdater
                         .updateTowerUpgradeBank(newValue))
-                .addCostListener((oldValue, newValue) -> towerUpdater
+                .addCostListener( (oldValue, newValue) -> towerUpdater
                         .updateTowerBuyPriceDisplay(newValue))
-                .addSellAmountListener((oldValue, newValue) -> towerUpdater
+                .addSellAmountListener( (oldValue, newValue) -> towerUpdater
                         .updateTowerSellPriceDisplay(newValue))
-                .addUnlockLevelListener((oldValue, newValue) -> towerUpdater
+                .addUnlockLevelListener( (oldValue, newValue) -> towerUpdater
                         .updateUnlockLevelDisplay(newValue));
     }
-
-    @Override
-    public int createType (ITowerEditorView updateView) {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    @Override
-    public void deleteType (int id) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public String getName (int id) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public String getImagePath (int id) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public Double getSize (int id) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public List<Integer> getCreatedTypeIds () {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public void setName (int id, String name) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void setImagePath (int id, String imagePath) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void setSize (int id, double size) {
-        // TODO Auto-generated method stub
-        
-    }
-
-
 }

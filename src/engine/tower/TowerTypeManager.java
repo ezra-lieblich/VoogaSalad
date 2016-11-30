@@ -18,7 +18,7 @@ public class TowerTypeManager extends AbstractTypeManager<Tower> implements Towe
 
     private Map<Integer, Tower> upgrades;
     
-    TowerTypeManager() {
+    public TowerTypeManager() {
         this.upgrades = new HashMap<Integer, Tower>();
     }
     

@@ -9,7 +9,7 @@ import engine.AbstractTypeManagerController;
 public class LevelTypeManagerController 
 	extends AbstractTypeManagerController<LevelManager, LevelBuilder, Level, ILevelUpdateView> implements LevelManagerController {
 
-	LevelTypeManagerController(LevelManager typeManager) {
+	public LevelTypeManagerController(LevelManager typeManager) {
 		super(typeManager, new LevelTypeBuilder());
 	}
 

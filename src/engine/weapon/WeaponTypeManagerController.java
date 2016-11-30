@@ -9,7 +9,7 @@ public class WeaponTypeManagerController extends
         AbstractTypeManagerController<WeaponManager, WeaponBuilder, Weapon, IWeaponEditorView>
         implements WeaponManagerController {
 
-    WeaponTypeManagerController (WeaponManager weaponManager) {
+    public WeaponTypeManagerController (WeaponManager weaponManager) {
         super(weaponManager, new WeaponTypeBuilder());
     }
 
@@ -59,13 +59,11 @@ public class WeaponTypeManagerController extends
     @Override
     public void setNewWeaponTargetEnemy (int weaponID, int enemyID) {
         getTypeManager().getEntity(weaponID).addTarget(enemyID);
-        ;
     }
 
     @Override
     public void removeWeaponTargetEnemy (int weaponID, int enemyID) {
         getTypeManager().getEntity(weaponID).removeTarget(enemyID);
-        ;
     }
 
     @Override
