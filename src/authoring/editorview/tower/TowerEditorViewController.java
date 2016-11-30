@@ -30,7 +30,7 @@ public class TowerEditorViewController extends EditorViewController
 
     public void setTowerDataSource (TowerManagerController source) {
         this.towerDataSource = source;
-        currentTowerID = towerDataSource.createType(towerView);
+        onUserPressedCreateNewTower();
     }
 
     /**
