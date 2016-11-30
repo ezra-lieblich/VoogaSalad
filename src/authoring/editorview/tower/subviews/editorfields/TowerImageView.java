@@ -34,7 +34,7 @@ public class TowerImageView implements ITowerSetView {
         towerImage = new ImageView();
         towerImage.setFitHeight(CHARACTER_SIZE);
         towerImage.setFitWidth(CHARACTER_SIZE);
-        loadTowerImage();
+        //loadTowerImage();
     }
 
     public void updateTowerImagePath (String imagePath) {
