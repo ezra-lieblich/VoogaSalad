@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import authoring.editorview.EditorViewController;
 import authoring.editorview.enemy.EnemyEditorViewController;
+import authoring.editorview.gamesettings.GameSettingsEditorViewController;
 import authoring.editorview.level.LevelEditorViewController;
 import authoring.editorview.path.PathEditorViewController;
 import authoring.editorview.tower.TowerEditorViewController;
@@ -16,6 +17,7 @@ import engine.ModelController;
 import engine.enemy.EnemyManagerController;
 import engine.level.LevelManagerController;
 import engine.path.PathManagerController;
+import engine.settings.GameModeManagerController;
 import engine.tower.TowerManagerController;
 import engine.weapon.WeaponManagerController;
 import javafx.scene.Scene;
@@ -31,6 +33,7 @@ public class AuthoringController {
 	        connectDataInterfaces(mainVC);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
+		    
 			e.printStackTrace();
 		}
         
@@ -44,6 +47,7 @@ public class AuthoringController {
 		WeaponEditorViewController weaponVC = (WeaponEditorViewController) editorVCs.get("weapon");
 		EnemyEditorViewController enemyVC = (EnemyEditorViewController) editorVCs.get("enemy");
 		TowerEditorViewController towerVC = (TowerEditorViewController) editorVCs.get("tower");
+		GameSettingsEditorViewController settingsVC = (GameSettingsEditorViewController) editorVCs.get("settings");
 		
 		ModelAuthoringController modelController = new ModelAuthoringController();
 		
@@ -52,6 +56,6 @@ public class AuthoringController {
 		weaponVC.setWeaponDataSource(modelController.getModelController(WeaponManagerController.class));
 		enemyVC.setEnemyDataSource(modelController.getModelController(EnemyManagerController.class));
 		towerVC.setTowerDataSource(modelController.getModelController(TowerManagerController.class));
-		
+		settingsVC.setGameSettingsDataSource(modelController.getModelController(GameModeManagerController.class));
 	}
 }

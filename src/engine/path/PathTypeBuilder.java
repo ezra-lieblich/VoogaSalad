@@ -1,9 +1,11 @@
 package engine.path;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.BiConsumer;
+import java.util.stream.Collectors;
 import engine.AbstractTypeBuilder;
 import engine.ability.Ability;
 import engine.enemy.Enemy;
@@ -22,7 +24,7 @@ public class PathTypeBuilder extends AbstractTypeBuilder<Path, PathBuilder> impl
      
      public static final double DEFAULT_SIZE = 1;
      public static final String DEFAULT_TYPE = "direct";
-     public static final List<Coordinate<Integer>> DEFAULT_COORDINATES = Arrays.asList(new GridCoordinate[]{});
+     public static final List<Coordinate<Integer>> DEFAULT_COORDINATES = Arrays.stream(new GridCoordinate[]{}).collect(Collectors.toList());
      public static final Integer DEFAULT_GRID_ROWS = 10;
      public static final Integer DEFAULT_GRID_COLUMNS = 10;
      

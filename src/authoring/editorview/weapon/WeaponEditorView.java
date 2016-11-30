@@ -96,17 +96,17 @@ public class WeaponEditorView implements IWeaponEditorView {
 
     @Override
     public void updateFireRateDisplay (double fireRate) {
-        weaponFireRateView.updateWeaponFireRate(Double.toString(fireRate));
+        this.weaponFireRateView.updateWeaponFireRate(Double.toString(fireRate));
     }
 
     @Override
     public void updateSpeedDisplay (double speed) {
-        weaponSpeedView.updateWeaponSpeed(Double.toString(speed));
+        this.weaponSpeedView.updateWeaponSpeed(Double.toString(speed));
     }
 
     @Override
     public void updateCollisionEffectDisplay (String collisionEffect) {
-        weaponCollisionView.updateWeaponCollisionEffect(collisionEffect);
+        this.weaponCollisionView.updateWeaponCollisionEffect(collisionEffect);
     }
 
     @Override
@@ -116,7 +116,7 @@ public class WeaponEditorView implements IWeaponEditorView {
 
     @Override
     public void updateWeaponBank (List<Integer> activeWeapons) {
-        weaponBank.updateWeaponBank(activeWeapons);
+        this.weaponBank.updateWeaponBank(activeWeapons);
     }
 
     @Override

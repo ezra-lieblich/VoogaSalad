@@ -1,7 +1,7 @@
 package authoring.editorview.gamesettings;
 
 import authoring.editorview.EditorViewController;
-import authoring.editorview.level.ILevelUpdateView;
+import authoring.editorview.level.ILevelEditorView;
 import engine.settings.GameModeManagerController;
 
 public class GameSettingsEditorViewController extends EditorViewController implements GameSettingsEditorViewDelegate {

@@ -61,8 +61,8 @@ public class PathChooser{
 	
 	public void updatePathComboBox(String pathName){
 		
-		boolean duplicateName = checkIfDuplicateName(pathName);
-		if (!duplicateName){
+		//boolean duplicateName = checkIfDuplicateName(pathName);
+		//if (!duplicateName){
 			pathList.add(pathName);
 			NameIdPair newPair = new NameIdPair(pathName, activePathID);
 			nameIdList.add(newPair);
@@ -72,26 +72,26 @@ public class PathChooser{
 					pathList.remove(pair.getName());
 				}
 			}		
-		}
-		else {
-			Alert duplicateNameAlert = DialogueBoxFactory.createErrorDialogueBox("This path name is already used", "Duplicate name");
-			duplicateNameAlert.show();
-		}
+		//}
+		//else {
+			//Alert duplicateNameAlert = DialogueBoxFactory.createErrorDialogueBox("This path name is already used", "Duplicate name");
+			//duplicateNameAlert.show();
+		//}
 			
 		
 		
 	}
 	
-	private boolean checkIfDuplicateName(String pathName){
-		boolean duplicate = false;
-		for (NameIdPair pair : nameIdList){
-			if (pair.getName() == pathName){
-				duplicate = true;
-				break;
-			}
-		}
-		return duplicate;
-	}
+//	private boolean checkIfDuplicateName(String pathName){
+//		boolean duplicate = false;
+//		for (NameIdPair pair : nameIdList){
+//			if (pair.getName() == pathName){
+//				duplicate = true;
+//				break;
+//			}
+//		}
+//		return duplicate;
+//	}
 	
 	private void setEditView(String pathName){
 		for (NameIdPair pair : nameIdList){
