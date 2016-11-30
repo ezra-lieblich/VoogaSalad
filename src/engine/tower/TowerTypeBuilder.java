@@ -14,6 +14,7 @@ import engine.observer.ObservableProperty;
 import engine.tower.Tower;
 import engine.tower.TowerType;
 import engine.weapon.Weapon;
+import javafx.beans.property.DoubleProperty;
 
 public class TowerTypeBuilder extends AbstractTypeBuilder<Tower, TowerBuilder> implements TowerBuilder, TowerInitializer {
     

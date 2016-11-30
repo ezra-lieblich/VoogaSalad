@@ -15,6 +15,8 @@ import java.util.function.Supplier;
 import engine.observer.AbstractObservable;
 import engine.observer.ObservableMap;
 import engine.observer.ObservableMapProperty;
+import engine.tower.TowerTypeManager;
+import engine.weapon.WeaponTypeManager;
 
 
 public abstract class AbstractTypeManager<E extends Type> extends AbstractObservable<MethodData<?>>
@@ -97,30 +99,33 @@ public abstract class AbstractTypeManager<E extends Type> extends AbstractObserv
     // downPolymorphic.invoke(this, new Object[] {object});
     // }
     // TODO - error might occur due to taking in a VisitableManager
+    // TODO - get specific interface
     @Override
     public <U extends VisitableManager<MethodData<?>>> void visitManager (U visitableManager,
                                                                           MethodData<?> dataMethod) {
         try {
             Method visitMethod =
                     this.getClass().getMethod("visit" + dataMethod.getMethod(),
-                                              new Class[] { visitableManager.getClass() });
+                                              new Class[] { visitableManager.getClass().getInterfaces()[0], Integer.class });
             visitMethod.invoke(this, new Object[] { visitableManager, dataMethod.getValue() });
         }
         catch (NoSuchMethodException e) {
             // This means that the class does not depend on the visitor and so does not have the subsequent handling methods
-            return;
+            System.out.print(e);
+            //return;
         }
         catch (SecurityException | IllegalAccessException | IllegalArgumentException
                 | InvocationTargetException e) {
             // This error should arise due to user input. TODO handle differently?
             e.printStackTrace();
-            return;
+            //return;
         }
     }
 
     @Override
     public <U extends VisitorManager<MethodData<?>>> void accept (U visitor,
                                                                   MethodData<?> methodData) {
+        System.out.println("Here");
         visitor.visitManager(this, methodData);
     }
 
