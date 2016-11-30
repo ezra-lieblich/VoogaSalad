@@ -8,6 +8,7 @@ import authoring.editorview.level.LevelEditorViewController;
 import authoring.editorview.path.PathEditorViewController;
 import authoring.editorview.tower.TowerEditorViewController;
 import authoring.editorview.weapon.WeaponEditorViewController;
+import authoring.main.AuthoringController;
 import authoring.view.AuthoringViewController;
 import authoring.view.IAuthoringView;
 import javafx.application.Application;
@@ -69,6 +70,7 @@ public class tempmain extends Application {
                 .getModelController(TowerManagerController.class));
 
     }
+
 
     public static void main (String[] args) {
         launch(args);

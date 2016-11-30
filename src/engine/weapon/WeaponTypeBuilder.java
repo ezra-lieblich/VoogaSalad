@@ -1,8 +1,10 @@
 package engine.weapon;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.BiConsumer;
+import java.util.stream.Collectors;
 import engine.AbstractTypeBuilder;
 import engine.observer.ObservableList;
 import engine.observer.ObservableListProperty;
@@ -15,7 +17,7 @@ public class WeaponTypeBuilder extends AbstractTypeBuilder<Weapon, WeaponBuilder
      public static final String DEFAULT_NAME = "New Weapon";
      public static final String DEFAULT_IMAGE_PATH = "Images/penguin.jpg";
      public static final double DEFAULT_SIZE = 1;
-     public static final List<Integer> DEFAULT_WEAPONS = Arrays.asList(new Integer[]{});
+     public static final List<Integer> DEFAULT_WEAPONS = Arrays.stream(new Integer[]{}).collect(Collectors.toList());
      public static final double DEFAULT_FIRE_RATE = 2;
      public static final String DEFAULT_TRAJECTORY = "Straight";
      public static final String DEFAULT_EFFECT = "";
@@ -35,7 +37,7 @@ public class WeaponTypeBuilder extends AbstractTypeBuilder<Weapon, WeaponBuilder
     
      @Override
      public WeaponBuilder buildTargets (Integer ... targets) {
-         return buildTargets(Arrays.asList(targets));
+         return buildTargets(Arrays.stream(targets).collect(Collectors.toList()));
      }
 
      @Override
