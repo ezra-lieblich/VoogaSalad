@@ -56,10 +56,12 @@ public class PathSizeView {
 	
 	public void setNumberOfColumns(int numColumns){
 		this.numColumns = numColumns;
+		columnsTextField.setText(Integer.toString(numColumns));
 	}
 	
 	public void setNumberOfRows(int numRows){
 		this.numRows = numRows;
+		rowsTextField.setText(Integer.toString(numRows));
 	}
 	
 	public void setDelegate(PathEditorViewDelegate delegate){
@@ -72,7 +74,7 @@ public class PathSizeView {
 	
 	
 	private void makeGridColumnsTextField(){
-		columnsTextField = TextFieldFactory.makeTextField("4", 
+		columnsTextField = TextFieldFactory.makeTextField("", 
 				e -> submitNumColumns(columnsTextField.getText()));
 		columnsTextField.setMaxWidth(75);
 		columnsBox = BoxFactory.createHBoxWithLabelandNode(pathResource.getString("ColumnTextField"), columnsTextField);
@@ -95,7 +97,7 @@ public class PathSizeView {
 	
 	
 	private void makeGridRowsTextField(){
-		rowsTextField = TextFieldFactory.makeTextField("4", 
+		rowsTextField = TextFieldFactory.makeTextField("", 
 				e -> submitNumRows(rowsTextField.getText()));
 		rowsTextField.setMaxWidth(75);
 		rowsBox = BoxFactory.createHBoxWithLabelandNode(pathResource.getString("RowTextField"), rowsTextField);

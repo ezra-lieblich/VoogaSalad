@@ -4,6 +4,7 @@ package authoring.editorview.path;
 import authoring.editorview.path.subviews.PathChooser;
 import authoring.editorview.path.subviews.PathGrid;
 
+import java.io.File;
 import java.util.List;
 
 import authoring.editorview.path.subviews.NewPathView;
@@ -14,6 +15,7 @@ import authoring.editorview.path.subviews.PathSizeView;
 import engine.path.Coordinate;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -47,6 +49,10 @@ public class PathEditorView implements IPathUpdateView {
     	this.pathInstructionsView = new PathInstructionsView();
     	
     	
+    	//System.out.println(f.toURI().toString());
+    	
+    	
+    	
     	this.pathGrid = new PathGrid(400, 400);   	
     	
     	formatPathGrid(); 	
@@ -72,6 +78,7 @@ public class PathEditorView implements IPathUpdateView {
         pathGrid.setDelegate(delegate);
         newPathView.setDelegate(delegate);
         pathSizeView.setDelegate(delegate);
+        pathNameView.setDelegate(delegate);
     }
 
     
@@ -81,6 +88,7 @@ public class PathEditorView implements IPathUpdateView {
     	pathGrid.setActivePathId(pathID);
     	pathSizeView.setActivePathId(pathID);
     	pathChooser.setActivePathId(pathID);
+    	pathNameView.setActivePathId(pathID);
 		
 	}
     
@@ -96,7 +104,7 @@ public class PathEditorView implements IPathUpdateView {
         VBox textFieldSettings = new VBox(BOX_SPACING);
         textFieldSettings.getChildren().addAll(pathSizeView.getInstanceAsNode(), 
         		pathNameView.getInstanceAsNode());
-        pathSettings.getChildren().addAll(pathImageView.getInstanceAsNode(), textFieldSettings);  
+        pathSettings.getChildren().addAll(textFieldSettings, pathImageView.getInstanceAsNode());  
         
         Node instructions = pathInstructionsView.getInstanceAsNode();
         instructions.setLayoutX(20);
@@ -146,6 +154,7 @@ public class PathEditorView implements IPathUpdateView {
 	@Override
 	public void updateNameDisplay(String name) {
 		pathNameView.setName(name);
+		pathChooser.updatePathComboBox(name);
 		
 	}
 
@@ -171,7 +180,7 @@ public class PathEditorView implements IPathUpdateView {
 
 	@Override
 	public void createNewPath() {
-		// TODO Auto-generated method stub
+		
 		
 	}
 

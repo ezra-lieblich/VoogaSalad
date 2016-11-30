@@ -25,7 +25,7 @@ public class LevelRewards {
 	private ResourceBundle levelResource = ResourceBundle.getBundle(RESOURCE_FILE_NAME);
 	
 	public LevelRewards(){
-		root = new VBox();
+		root = new VBox(10);
 		makeHealthRewardTextField();
 		makeMoneyRewardTextField();
 		makePointsRewardTextField();
@@ -38,7 +38,7 @@ public class LevelRewards {
 	
 	
 	private void makeHealthRewardTextField(){
-		rewardHealthTextField = TextFieldFactory.makeTextField("0", 
+		rewardHealthTextField = TextFieldFactory.makeTextField("", 
 				e -> setRewardHealth(rewardHealthTextField.getText()));
 		rewardHealthTextField.setMaxWidth(75);
 		HBox rewardHealthBox = BoxFactory.createHBoxWithLabelandNode(levelResource.getString("RewardHealthTextField"), rewardHealthTextField);
@@ -48,7 +48,7 @@ public class LevelRewards {
 	}
 	
 	private void makeMoneyRewardTextField(){
-		rewardMoneyTextField = TextFieldFactory.makeTextField("0", 
+		rewardMoneyTextField = TextFieldFactory.makeTextField("", 
 				e -> setRewardMoney(rewardMoneyTextField.getText()));
 		rewardMoneyTextField.setMaxWidth(75);
 		HBox rewardMoneyBox = BoxFactory.createHBoxWithLabelandNode(levelResource.getString("RewardMoneyTextField"), rewardMoneyTextField);
@@ -58,7 +58,7 @@ public class LevelRewards {
 	}
 	
 	private void makePointsRewardTextField(){
-		rewardPointsTextField = TextFieldFactory.makeTextField("0", 
+		rewardPointsTextField = TextFieldFactory.makeTextField("", 
 				e -> setRewardPoints(rewardPointsTextField.getText()));
 		rewardPointsTextField.setMaxWidth(75);
 		HBox rewardPointsBox = BoxFactory.createHBoxWithLabelandNode(levelResource.getString("RewardPointsTextField"), rewardPointsTextField);

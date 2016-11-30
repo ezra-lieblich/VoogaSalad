@@ -36,6 +36,8 @@ public class PathChooser{
 	private static final String RESOURCE_FILE_NAME = "resources/GameAuthoringPath";	
 	private ResourceBundle pathResource = ResourceBundle.getBundle(RESOURCE_FILE_NAME);
 	
+	//TODO: delete path
+	
 	public PathChooser(){
 		this.root = new VBox();
 		buildViewComponents();
