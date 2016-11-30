@@ -45,6 +45,7 @@ public class TowerImageView implements ITowerSetView {
         BufferedImage imageRead;
         ImageView myImageView = new ImageView();
         try {
+            System.out.println(imagePath);
             imageRead = ImageIO.read(getClass().getClassLoader().getResourceAsStream(imagePath));
             Image image2 = SwingFXUtils.toFXImage(imageRead, null);
             myImageView.setImage(image2);

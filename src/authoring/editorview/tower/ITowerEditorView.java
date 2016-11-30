@@ -18,7 +18,7 @@ public interface ITowerEditorView extends ITowerSetView, IUpdateView {
 
     public void updateTowerSellPriceDisplay (double towerSellPrice);
 
-    public void updateTowerAbility (List<Integer> towerAbility);
+    public void updateTowerAbilityBank (List<Integer> towerAbility);
 
     public void updateTowerWeaponBank (List<Integer> newValue);
 
@@ -29,7 +29,5 @@ public interface ITowerEditorView extends ITowerSetView, IUpdateView {
     public void createNewTower ();
     
     public void deleteTower ();
-    
-    public void loadNewEffectsView ();
 
 }
