@@ -2,11 +2,12 @@ package authoring.editorview.gamesettings;
 
 import authoring.editorview.EditorViewController;
 import authoring.editorview.level.ILevelUpdateView;
+import engine.settings.GameModeManagerController;
 
 public class GameSettingsEditorViewController extends EditorViewController implements GameSettingsEditorViewDelegate {
 	
 	private IGameUpdateView gameView;
-	private GameSettingsController gameSettingsDataSource;
+	private GameModeManagerController gameSettingsDataSource;
 	
 	public GameSettingsEditorViewController(int editorWidth, int editorHeight){
 		IGameSettingsEditorView myView = GameSettingsEditorViewFactory.build(editorWidth, editorHeight);
@@ -14,7 +15,7 @@ public class GameSettingsEditorViewController extends EditorViewController imple
 		this.view = myView;
 	}
 	
-	public void setGameSettingsDataSource(GameSettingsDataSource source){
+	public void setGameSettingsDataSource(GameModeManagerController source){
 		this.gameSettingsDataSource = source;
 	}
 

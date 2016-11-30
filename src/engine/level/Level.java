@@ -22,9 +22,9 @@ public interface Level extends Type{
 
     void setRewardMoney(double rewardMoney);
 
-    double getRewardPoints();
+    double getRewardScore();
 
-    void setRewardPoints(double rewardPoints);
+    void setRewardScore(double rewardScore);
 
     double getDurationInSeconds();
 

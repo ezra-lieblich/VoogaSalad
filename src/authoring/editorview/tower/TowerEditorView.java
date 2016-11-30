@@ -11,6 +11,7 @@ import authoring.editorview.tower.subviews.editorfields.TowerChooseWeaponField;
 import authoring.editorview.tower.subviews.editorfields.TowerImageView;
 import authoring.editorview.tower.subviews.editorfields.TowerNameField;
 import authoring.editorview.tower.subviews.editorfields.TowerSellPriceField;
+import authoring.editorview.tower.subviews.editorfields.TowerSizeField;
 import authoring.editorview.tower.subviews.editorfields.TowerUnlockLevelField;
 import authoring.editorview.tower.subviews.editorfields.TowerUpgradeField;
 import javafx.scene.Node;
@@ -35,6 +36,7 @@ public class TowerEditorView implements ITowerUpdateView {
     private TowerAbilityField towerAbility;
     private TowerChooseWeaponField towerChooseWeapon;
     private TowerUpgradeField towerUpgrade;
+    private TowerSizeField towerSize;
 
     public TowerEditorView () throws IOException {
         towerEditorView = new BorderPane();
@@ -50,11 +52,12 @@ public class TowerEditorView implements ITowerUpdateView {
         towerAbility = new TowerAbilityField(labelsResource);
         towerChooseWeapon = new TowerChooseWeaponField(labelsResource);
         towerUpgrade = new TowerUpgradeField(labelsResource);
+        towerSize = new TowerSizeField(labelsResource);
 
         towerBank = new TowerImageBank(labelsResource, dialogueBoxResource);
         towerEffectView =
                 new TowerEffectView(towerName, towerImage, towerBuyPrice, towerSellPrice,
-                                    towerUnlockLevel, towerAbility, towerChooseWeapon, towerUpgrade,
+                                    towerUnlockLevel, towerAbility, towerChooseWeapon, towerUpgrade, towerSize,
                                     labelsResource, dialogueBoxResource);
         setBorderPane();
     }
@@ -82,6 +85,7 @@ public class TowerEditorView implements ITowerUpdateView {
         towerAbility.setDelegate(delegate);
         towerChooseWeapon.setDelegate(delegate);
         towerUpgrade.setDelegate(delegate);
+        towerSize.setDelegate(delegate);
     }
 
     @Override
@@ -135,7 +139,7 @@ public class TowerEditorView implements ITowerUpdateView {
 
     @Override
     public void updateSizeDisplay (double size) {
-        // TODO Auto-generated method stub
+        this.towerSize.updateTowerSize(Double.toString(size));
 
     }
 

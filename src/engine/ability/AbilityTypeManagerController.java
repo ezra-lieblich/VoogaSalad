@@ -1,22 +1,23 @@
 package engine.ability;
 
+import authoring.editorview.IUpdateView;
 import engine.AbstractTypeManagerController;
 import engine.ability.AbilityManager;
 
-public class AbilityTypeManagerController extends AbstractTypeManagerController<AbilityManager, AbilityBuilder, Ability> implements AbilityManagerController {
+public class AbilityTypeManagerController extends AbstractTypeManagerController<AbilityManager, AbilityBuilder, Ability, IUpdateView> implements AbilityManagerController {
     
-    AbilityTypeManagerController(AbilityManager abilityManager) {
+    public AbilityTypeManagerController(AbilityManager abilityManager) {
         super(abilityManager, new AbilityTypeBuilder());
     }
 
     @Override
-    protected AbilityBuilder constructTypeProperties (engine.AbstractTypeManagerController.ViewFiller viewFiller,
+    protected AbilityBuilder constructTypeProperties (IUpdateView viewFiller,
                                                       AbilityBuilder typeBuilder) {
-        return typeBuilder
-                .addEffectListener((oldValue, newValue) -> viewFiller
-                                   .updateEffect(newValue))
-                .addRateListener((oldValue, newValue) -> viewFiller
-                                   .updateRate(newValue));
+        return typeBuilder;
+//                .addEffectListener((oldValue, newValue) -> viewFiller
+//                                   .updateEffect(newValue))
+//                .addRateListener((oldValue, newValue) -> viewFiller
+//                                   .updateRate(newValue));
     }
 
     @Override

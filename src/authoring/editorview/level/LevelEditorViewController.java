@@ -1,6 +1,7 @@
 package authoring.editorview.level;
 
 import authoring.editorview.EditorViewController;
+import engine.level.LevelManagerController;
 
 public class LevelEditorViewController extends EditorViewController implements LevelEditorViewDelegate {
 	
@@ -13,7 +14,7 @@ public class LevelEditorViewController extends EditorViewController implements L
 		this.view = myView;
 	}
 	
-	public void setLevelDataSource(LevelDataSource source){
+	public void setLevelDataSource(LevelManagerController source){
 		this.levelDataSource = source;
 	}
 
