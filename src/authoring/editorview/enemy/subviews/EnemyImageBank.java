@@ -1,10 +1,16 @@
 package authoring.editorview.enemy.subviews;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.function.Consumer;
+
+import authoring.editorview.ListCellData;
 import authoring.editorview.enemy.EnemyEditorViewDelegate;
 import authoring.utilityfactories.ButtonFactory;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
@@ -19,12 +25,15 @@ import javafx.scene.image.ImageView;
  * @author Kayla Schulz, Andrew Bihl
  *
  */
-public class EnemyImageBank {
+public class EnemyImageBank implements ChangeListener<Number> {
     private EnemyListDataSource dataSource;
     private EnemyEditorViewDelegate delegate;
     private ListView<Node> enemyListView;
 
     private ObservableList<Node> enemies;
+    
+    //Index represents the enemies index in the list view, value represents the corresponding enemy's id
+    private ArrayList<Integer> enemyIDs;
 
     private final int CELL_HEIGHT = 60;
     private final int CELL_WIDTH = 60;
@@ -34,22 +43,17 @@ public class EnemyImageBank {
     // TODO: Keep mapping in array of enemy IDs to list indices in order to be able to delete and
     // maintain order
 
-    public EnemyImageBank (ResourceBundle labelsResource, ResourceBundle dialogueBoxResource) {
-
+    public EnemyImageBank () {
+        enemies = FXCollections.observableArrayList();
+        enemyIDs = new ArrayList<Integer>();
+        enemyListView = new ListView<Node>();
+        enemyListView.setItems(enemies);
+        enemyListView.setPrefWidth(ENEMY_BANK_WIDTH);
+        enemyListView.getSelectionModel().selectedIndexProperty().addListener(this);
         Button newEnemyButton = ButtonFactory.makeButton("New Enemy", e -> {
             delegate.onUserPressedCreateEnemy();
         });
-
-        enemyListView = new ListView<Node>();
-        enemyListView.setMaxWidth(ENEMY_BANK_WIDTH);
-        enemies = FXCollections.observableArrayList();
-        // First cell is a button
-        enemies.add(newEnemyButton);
-        enemyListView.setItems(enemies);
-    }
-
-    public void setDelegate (EnemyEditorViewDelegate delegate) {
-        this.delegate = delegate;
+        this.enemies.add(newEnemyButton);
     }
 
     public void setListDataSource (EnemyListDataSource source) {
@@ -60,16 +64,22 @@ public class EnemyImageBank {
         return enemyListView;
     }
 
+    public void setDelegate(EnemyEditorViewDelegate delegate) {
+    	this.delegate = delegate;
+    }
+    
     public void updateEnemyBank (List<Integer> activeEnemies) {
         this.enemies.remove(1, enemies.size() - 1);
+        enemyIDs = new ArrayList<Integer>();
         for (int i = 0; i < activeEnemies.size(); i++) {
-            EnemyListCellData cellData = dataSource.getCellDataForEnemy(activeEnemies.get(i));
+            ListCellData cellData = dataSource.getCellDataForEnemy(activeEnemies.get(i));
             Node cell = createCellFromData(cellData);
             enemies.add(cell);
+            enemyIDs.set(enemies.size()-1, cellData.getId());
         }
     }
 
-    private Node createCellFromData (EnemyListCellData data) {
+    private Node createCellFromData (ListCellData data) {
         ImageView cell = new ImageView();
         String imageFilePath = data.getImagePath();
         if (imageFilePath.equals(null) || imageFilePath.length() < 1) {
@@ -83,14 +93,19 @@ public class EnemyImageBank {
         cell.setFitWidth(CELL_WIDTH);
         return cell;
     }
+//
+//    private void addImageToBank (Image image) {
+//        ImageView cell = new ImageView();
+//        cell.setImage(image);
+//        cell.setPreserveRatio(true);
+//        cell.setFitHeight(CELL_HEIGHT);
+//        cell.setFitWidth(CELL_WIDTH);
+//        enemies.add(cell);
+//    }
 
-    private void addImageToBank (Image image) {
-        ImageView cell = new ImageView();
-        cell.setImage(image);
-        cell.setPreserveRatio(true);
-        cell.setFitHeight(CELL_HEIGHT);
-        cell.setFitWidth(CELL_WIDTH);
-        enemies.add(cell);
-    }
-
+	@Override
+	public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+		int selectedEnemy = this.enemyIDs.get(newValue.intValue());
+		this.delegate.onUserSelectedEnemy(selectedEnemy);
+	}
 }

@@ -17,8 +17,9 @@ import engine.weapon.Weapon;
 
 public class PathTypeBuilder extends AbstractTypeBuilder<Path, PathBuilder> implements PathBuilder, PathInitializer {
     
-     public static final String DEFAULT_NAME = "New Weapon";
-     public static final String DEFAULT_IMAGE_PATH = "Images.penguin.jpg";
+     public static final String DEFAULT_NAME = "New Path";
+     public static final String DEFAULT_IMAGE_PATH = "Images/blacksquare.jpg";
+     
      public static final double DEFAULT_SIZE = 1;
      public static final String DEFAULT_TYPE = "direct";
      public static final List<Coordinate<Integer>> DEFAULT_COORDINATES = Arrays.asList(new GridCoordinate[]{});
