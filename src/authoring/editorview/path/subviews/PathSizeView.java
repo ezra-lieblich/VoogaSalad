@@ -2,9 +2,12 @@ package authoring.editorview.path.subviews;
 
 import java.util.ResourceBundle;
 
+import authoring.editorview.path.PathEditorViewDelegate;
 import authoring.utilityfactories.BoxFactory;
+import authoring.utilityfactories.DialogueBoxFactory;
 import authoring.utilityfactories.TextFieldFactory;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -13,14 +16,17 @@ import javafx.scene.layout.VBox;
 public class PathSizeView {
 	
 	private VBox root;
-	private int numColumns = 1;
-	private int numRows = 1;
+	private int numColumns = 4;
+	private int numRows = 4;
+	
+	private int activePathID;
 	
 	private TextField columnsTextField;
 	private HBox columnsBox;
 	
 	private TextField rowsTextField;
 	private HBox rowsBox;
+	private PathEditorViewDelegate delegate;
 	
 	
 	
@@ -48,11 +54,28 @@ public class PathSizeView {
 		return numRows;
 	}
 	
+	public void setNumberOfColumns(int numColumns){
+		this.numColumns = numColumns;
+		columnsTextField.setText(Integer.toString(numColumns));
+	}
+	
+	public void setNumberOfRows(int numRows){
+		this.numRows = numRows;
+		rowsTextField.setText(Integer.toString(numRows));
+	}
+	
+	public void setDelegate(PathEditorViewDelegate delegate){
+		this.delegate = delegate;
+	}
+	
+	public void setActivePathId(int pathID){
+		this.activePathID = pathID;
+	}
 	
 	
 	private void makeGridColumnsTextField(){
-		columnsTextField = TextFieldFactory.makeTextField("1", 
-				e -> setNumColumns(columnsTextField.getText()));
+		columnsTextField = TextFieldFactory.makeTextField("", 
+				e -> submitNumColumns(columnsTextField.getText()));
 		columnsTextField.setMaxWidth(75);
 		columnsBox = BoxFactory.createHBoxWithLabelandNode(pathResource.getString("ColumnTextField"), columnsTextField);
 		
@@ -60,14 +83,22 @@ public class PathSizeView {
 		
 	}
 	
-	public void setNumColumns(String numColumns){
-		//TODO: catch user error
-		this.numColumns = Integer.parseInt(numColumns);
+	private void submitNumColumns(String numColumnsString){
+		try {
+			int numColumns = Integer.parseInt(numColumnsString);
+			delegate.onUserEnteredNumberColumns(activePathID, numColumns);
+		}
+		catch (NumberFormatException e){
+			Alert inputError = DialogueBoxFactory.createErrorDialogueBox("The number of columns must be an integer.", "Input error");
+			inputError.show();
+		}
 	}
 	
+	
+	
 	private void makeGridRowsTextField(){
-		rowsTextField = TextFieldFactory.makeTextField("1", 
-				e -> setNumRows(rowsTextField.getText()));
+		rowsTextField = TextFieldFactory.makeTextField("", 
+				e -> submitNumRows(rowsTextField.getText()));
 		rowsTextField.setMaxWidth(75);
 		rowsBox = BoxFactory.createHBoxWithLabelandNode(pathResource.getString("RowTextField"), rowsTextField);
 		
@@ -75,9 +106,16 @@ public class PathSizeView {
 		
 	}
 	
-	public void setNumRows(String numRows){
-		//TODO: catch user error
-		this.numRows = Integer.parseInt(numRows);
+	private void submitNumRows(String numRowsString){
+		try {
+			int numRows = Integer.parseInt(numRowsString);
+			delegate.onUserEnteredNumberRows(activePathID, numRows);
+		}
+		catch (NumberFormatException e){
+			Alert inputError = DialogueBoxFactory.createErrorDialogueBox("The number of rows must be an integer.", "Input error");
+			inputError.show();
+		}
 	}
+	
 
 }

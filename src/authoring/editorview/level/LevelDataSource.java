@@ -44,6 +44,8 @@ public interface LevelDataSource {
     
     public double getTransitionTime (int levelID);
 
-    public void setEnemyFrequency (int enemyID, double enemyFrequency);
+    public void setEnemyFrequency (int levelID, int enemyID, double enemyFrequency);
+    
+    public double getEnemyFrequency (int levelID, int enemyID);
 
 }

@@ -3,6 +3,7 @@ package authoring.editorview.enemy;
 import java.io.IOException;
 import java.util.List;
 import java.util.ResourceBundle;
+import authoring.editorview.ListDataSource;
 import authoring.editorview.enemy.subviews.EnemyEffectView;
 import authoring.editorview.enemy.subviews.EnemyImageBank;
 import authoring.editorview.enemy.subviews.editorfields.EnemyHealthField;
@@ -24,7 +25,7 @@ import javafx.scene.layout.BorderPane;
  * 
  */
 
-public class EnemyEditorView implements IEnemyUpdateView {
+public class EnemyEditorView implements IEnemyEditorView {
     private EnemyEditorViewDelegate delegate;
     private BorderPane enemyEditorView;
     private EnemyImageBank enemyBank;
@@ -45,7 +46,7 @@ public class EnemyEditorView implements IEnemyUpdateView {
         ResourceBundle dialogueBoxResource = ResourceBundle.getBundle("resources/DialogueBox");
 
         enemyEditorView = new BorderPane();
-        enemyBank = new EnemyImageBank(labelsResource, dialogueBoxResource);
+        enemyBank = new EnemyImageBank();
         enemyName = new EnemyNameField(labelsResource);
         enemySpeed = new EnemySpeedField(labelsResource);
         enemyReactions = new EnemyCollisionEffectField(labelsResource);
@@ -101,8 +102,7 @@ public class EnemyEditorView implements IEnemyUpdateView {
 
     @Override
     public void updateEnemyBank (List<Integer> activeEnemies) {
-        // TODO Auto-generated method stub
-
+        enemyBank.updateEnemyBank(activeEnemies);
     }
 
     @Override
@@ -149,6 +149,17 @@ public class EnemyEditorView implements IEnemyUpdateView {
     @Override
     public void updateSizeDisplay (double size) {
         this.enemySize.updateEnemySize(Double.toString(size));
+    }
+
+    @Override
+    public void setEnemyListDataSource (ListDataSource source) {
+        this.enemyBank.setListDataSource(source);
+    }
+
+    @Override
+    public void deleteEnemy () {
+        // TODO Auto-generated method stub
+
     }
 
 }

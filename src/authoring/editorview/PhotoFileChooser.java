@@ -21,7 +21,7 @@ public abstract class PhotoFileChooser {
         FileChooser choose = new FileChooser();
         choose.setTitle(chooserTitle);
         FileChooser.ExtensionFilter extFilter =
-                new FileChooser.ExtensionFilter(fieldText, "*.png", "*.jpg", "*.gif");
+                new FileChooser.ExtensionFilter(fieldText, "*.png", "*.jpg", "*.gif", "*.jpeg");
         choose.getExtensionFilters().add(extFilter);
         openFileChooser(choose);
     }

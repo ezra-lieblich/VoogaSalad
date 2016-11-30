@@ -8,7 +8,7 @@ public interface EnemyBuilder extends TypeBuilder<Enemy, EnemyBuilder>, Bindable
 	EnemyBuilder buildSpeed(double speed);
 	EnemyBuilder buildHealth(double health);
 	EnemyBuilder buildDamage(double damage);
-	EnemyBuilder buildPoints(double points);
+	EnemyBuilder buildScore(double score);
 	EnemyBuilder buildMoney(double money);
 	EnemyBuilder buildCollisionEffect(String collisionEffect);
 }

@@ -28,6 +28,10 @@ public class AuthoringViewController implements EditorTabPaneDelegate {
         view.setEditorView(editors.values().iterator().next().getView());
     }
 
+    public HashMap<String, EditorViewController> getControllers(){
+    	return this.editors;
+    }
+    
     private void createScene (int width, int height) {
     	checkNullTabs();
         view = AuthoringViewFactory.build(width, height);

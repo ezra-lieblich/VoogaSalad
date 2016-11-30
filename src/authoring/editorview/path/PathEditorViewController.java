@@ -1,9 +1,7 @@
 package authoring.editorview.path;
 
-import java.util.List;
 
 import authoring.editorview.EditorViewController;
-import engine.path.Coordinate;
 import engine.path.PathManagerController;
 
 
@@ -15,6 +13,7 @@ public class PathEditorViewController extends EditorViewController implements Pa
 		this.pathView = PathEditorViewFactory.build(editorWidth, editorHeight);
 		pathView.setDelegate(this);
 		this.view = pathView;
+		
 
 	}
 
@@ -49,28 +48,46 @@ public class PathEditorViewController extends EditorViewController implements Pa
 	
 
 	@Override
-	public int onUserEnteredCreatePath() {
+	public void onUserEnteredCreatePath() {
 		int pathID = pathDataSource.createType(pathView);
-		return pathID;
 		
+		pathView.updateActiveID(pathID);
+		//pathView.createNewPath();	
 	}
 
 
 
 	@Override
 	public void onUserEnteredEditPath(int pathID) {
+		pathView.updateActiveID(pathID);
 		pathView.updateNumColumns(pathDataSource.getNumberofColumns(pathID));
+		System.out.println(pathDataSource.getNumberofColumns(pathID));
 		pathView.updateNumRows(pathDataSource.getNumberofRows(pathID));
+		System.out.println(pathDataSource.getNumberofRows(pathID));
 		pathView.updatePathCoordinates(pathDataSource.getPathCoordinates(pathID));
 		pathView.updatePathImage(pathDataSource.getImagePath(pathID));
-		pathView.updatePathName(pathDataSource.getName(pathID));
+		pathView.updateNameDisplay(pathDataSource.getName(pathID));
+		System.out.println(pathDataSource.getName(pathID));
 		
 	}
 
 
 	@Override
-	public void onUserEnteredPathCoordinate(int pathID, int x, int y) {
+	public void onUserEnteredAddPathCoordinate(int pathID, int x, int y) {
 		pathDataSource.setNewPathCoordinate(pathID, x, y);
+		
+	}
+	
+	@Override
+	public void onUserEnteredRemovePathCoordinate(int pathID, int x, int y) {
+		pathDataSource.setNewPathCoordinate(pathID, x, y);
+		
+	}
+
+
+	@Override
+	public void onUserEnteredDeletePath() {
+		// TODO Auto-generated method stub
 		
 	}
 

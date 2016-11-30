@@ -11,11 +11,17 @@ public interface PathEditorViewDelegate {
 	
 	public void onUserEnteredPathName(int pathID, String pathName);
 	
-	public int onUserEnteredCreatePath();
+	public void onUserEnteredCreatePath();
+	
+	public void onUserEnteredDeletePath();
 	
 	public void onUserEnteredEditPath(int pathID);
 	
-	public void onUserEnteredPathCoordinate(int pathID, int x, int y);
+	public void onUserEnteredAddPathCoordinate(int pathID, int x, int y);
+	
+	public void onUserEnteredRemovePathCoordinate(int pathID, int x, int y);
+	
+	
 	
 	
 

@@ -11,6 +11,7 @@ import authoring.editorview.weapon.subviews.editorfields.WeaponImageView;
 import authoring.editorview.weapon.subviews.editorfields.WeaponNameField;
 import authoring.editorview.weapon.subviews.editorfields.WeaponPathField;
 import authoring.editorview.weapon.subviews.editorfields.WeaponRangeField;
+import authoring.editorview.weapon.subviews.editorfields.WeaponSizeField;
 import authoring.editorview.weapon.subviews.editorfields.WeaponSpeedField;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
@@ -21,7 +22,7 @@ import javafx.scene.layout.BorderPane;
  * @author Kayla Schulz
  *
  */
-public class WeaponEditorView implements IWeaponUpdateView {
+public class WeaponEditorView implements IWeaponEditorView {
     private WeaponEditorViewDelegate delegate;
     private BorderPane weaponEditorView;
     private WeaponImageBank weaponBank;
@@ -33,6 +34,7 @@ public class WeaponEditorView implements IWeaponUpdateView {
     private WeaponCollisionEffectField weaponCollisionView;
     private WeaponPathField weaponPathView;
     private WeaponImageView weaponImageView;
+    private WeaponSizeField weaponSizeView;
 
     private int width;
     private int height;
@@ -57,16 +59,17 @@ public class WeaponEditorView implements IWeaponUpdateView {
         weaponCollisionView = new WeaponCollisionEffectField(labelsResource);
         weaponPathView = new WeaponPathField(labelsResource);
         weaponImageView = new WeaponImageView(labelsResource);
+        weaponSizeView = new WeaponSizeField(labelsResource);
         weaponEffectsView =
                 new WeaponEffectView(weaponNameView, weaponSpeedView, weaponFireRateView,
                                      weaponRangeView, weaponCollisionView,
-                                     weaponPathView, weaponImageView, labelsResource,
+                                     weaponPathView, weaponImageView, weaponSizeView,
+                                     labelsResource,
                                      dialogueBoxResource);
         setBorderPane();
     }
 
     private void setBorderPane () {
-        weaponBank.setPaneSize(width / 4, height);
         weaponEffectsView.setPaneSize(width * 3 / 4, height);
         weaponEditorView.setLeft(weaponBank.getInstanceAsNode());
         weaponEditorView.setCenter(weaponEffectsView.getInstanceAsNode());
@@ -88,6 +91,7 @@ public class WeaponEditorView implements IWeaponUpdateView {
         weaponCollisionView.setDelegate(delegate);
         weaponEffectsView.setDelegate(delegate);
         weaponPathView.setDelegate(delegate);
+        weaponSizeView.setDelegate(delegate);
     }
 
     @Override
@@ -112,8 +116,7 @@ public class WeaponEditorView implements IWeaponUpdateView {
 
     @Override
     public void updateWeaponBank (List<Integer> activeWeapons) {
-        // weaponBank.
-
+        weaponBank.updateWeaponBank(activeWeapons);
     }
 
     @Override
@@ -147,6 +150,11 @@ public class WeaponEditorView implements IWeaponUpdateView {
 
     @Override
     public void updateSizeDisplay (double size) {
+        this.weaponSizeView.updateWeaponSize(Double.toString(size));
+    }
+
+    @Override
+    public void deleteWeapon () {
         // TODO Auto-generated method stub
 
     }

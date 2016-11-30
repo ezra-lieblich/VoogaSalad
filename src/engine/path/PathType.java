@@ -19,6 +19,8 @@ public class PathType extends AbstractType implements Path {
         super(pathInitializer);
         this.type = pathInitializer.getType();
         this.coordinates = pathInitializer.getCoordinates();
+        this.gridRows = pathInitializer.getGridRows();
+        this.gridColumns = pathInitializer.getGridColumns();
     }
     
     @Override
