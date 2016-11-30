@@ -94,9 +94,6 @@ public class PathEditorView implements IPathUpdateView {
         		pathNameView.getInstanceAsNode());
         pathSettings.getChildren().addAll(pathImageView.getInstanceAsNode(), textFieldSettings);  
         
-//		Node gridNode = pathGrid.getInstanceAsNode();
-//		gridNode.setLayoutX(75);
-//		gridNode.setLayoutY(20);
 		pathEditView.getChildren().addAll(pathSettings, pathInstructionsView.getInstanceAsNode(), 
 				pathGrid.getInstanceAsNode());
 		root.setRight(pathEditView);

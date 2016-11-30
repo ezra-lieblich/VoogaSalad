@@ -2,10 +2,12 @@ package authoring.editorview.path.subviews;
 
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import authoring.editorview.path.PathEditorViewDelegate;
 import engine.path.Coordinate;
+import engine.path.GridCoordinate;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -19,16 +21,21 @@ public class PathGrid {
 	
 	private int gridHeight;
 	private int gridWidth;
-	private int numColumns;
-	private int numRows;
+	private int numColumns = 4;
+	private int numRows = 4;
 	private int cellHeight;
 	private int cellWidth;
 	private int activePathID;
-	private Image cellImage;
+	private Image cellImage = new Image(getClass().getClassLoader().getResourceAsStream("blacksquare.png"));
 	//private PathCell[][] grid ;
 	private ImageView[][] grid;
 	
-	private List<Coordinate<Integer>> pathCoordinates;
+	//private List<Coordinate<Integer>> pathCoordinates;
+	
+	private List<GridCoordinate> pathCoordinates = new ArrayList<GridCoordinate>();
+	
+	
+	
 	private PathEditorViewDelegate delegate;
 	
 	private Group root;
@@ -39,20 +46,31 @@ public class PathGrid {
 	public PathGrid(int height, int width){
 		this.gridHeight = height;
 		this.gridWidth = width;
+		this.cellHeight = gridHeight/numRows;
+		this.cellWidth = gridWidth/numColumns;
 		this.root = new Group();
 		this.gridRoot = new Group();
 		this.backgroundRoot = new Group();
-		root.getChildren().addAll(backgroundRoot, gridRoot);
-		setBackground();		
+		
+		GridCoordinate c1 = new GridCoordinate(1,2);
+		
+		pathCoordinates.add(c1);
+		setBackground();
 		setPath();
+		root.getChildren().addAll(backgroundRoot, gridRoot);
+		setPathUpdater();
+				
+		
 	}
 
 	private void setPathUpdater() {
-		gridRoot.setOnMouseClicked(new EventHandler<MouseEvent>() {  //http://stackoverflow.com/questions/27785917/javafx-mouseposition
+		root.setOnMouseClicked(new EventHandler<MouseEvent>() {  //http://stackoverflow.com/questions/27785917/javafx-mouseposition
 		    @Override
 		    public void handle(MouseEvent event) {
 		        double x = event.getSceneX();
 		        double y = event.getSceneY();
+		        System.out.println(x);
+		        System.out.println(y);
 		        updatePath(x, y);
 		    }
 		});
@@ -91,11 +109,14 @@ public class PathGrid {
 	
 	
 	private void setBackground(){
+		
 		for (int i = 0; i < numColumns; i++){
 			for (int j = 0; j < numRows; j++){
+				
 				Rectangle rect = new Rectangle();			
 				rect = formatRectangle(i, j, rect);
 				backgroundRoot.getChildren().add(rect);
+				
 			}
 		}
 	}
@@ -178,8 +199,9 @@ public class PathGrid {
 	}
 	
 	private void updatePath(double x, double y){
-		int i = (int) x/cellWidth;
-		int j = (int) y/cellHeight;
+		
+		int j = (int) x/cellWidth;
+		int i = (int) y/cellHeight;
 		if (grid[i][j].isVisible()){
 			grid[i][j].setVisible(false);
 		}
