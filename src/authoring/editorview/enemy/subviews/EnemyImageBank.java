@@ -39,43 +39,26 @@ public class EnemyImageBank extends PhotoFileChooser {
     
     private ObservableList<Node> enemies;    
     
-    private VBox vbox;
     private File chosenFile;
     private final int CELL_HEIGHT = 60;
     private final int CELL_WIDTH = 60;
     private final int TOWER_BANK_WIDTH = 120;
     private final String DEFAULT_TOWER_IMAGE_PATH = "./Images/questionmark.png";
+    
+    //TODO: Keep mapping in array of enemy IDs to list indices in order to be able to delete and maintain order
 
     public EnemyImageBank (ResourceBundle labelsResource, ResourceBundle dialogueBoxResource) {
 
     	Button newEnemyButton = ButtonFactory.makeButton("New Enemy", e -> {
     		delegate.onUserPressedCreateEnemy();
     	});
-    	
-//        Button createNewEnemy =
-//                ButtonFactory.makeButton(labelsResource.getString("NewEnemy"),
-//                                         e -> {
-//                                             try {
-//                                                 selectFile(labelsResource.getString("Photos"),
-//                                                            labelsResource.getString("Image"));
-//                                             }
-//                                             catch (IOException e1) {
-//                                                 DialogueBoxFactory
-//                                                         .createErrorDialogueBox(dialogueBoxResource
-//                                                                 .getString("UnableToOpen"),
-//                                                                                 dialogueBoxResource
-//                                                                                         .getString("TryAgain"));
-//                                             }
-//                                         });
+
         enemyListView = new ListView<Node>();
         enemyListView.setMaxWidth(TOWER_BANK_WIDTH);
         enemies = FXCollections.observableArrayList();
         //First cell is a button
         enemies.add(newEnemyButton);
         enemyListView.setItems(enemies);
-//        vbox = BoxFactory.createVBox(labelsResource.getString("EnemyBank"));
-//        vbox.getChildren().add(newEnemyButton);
-//        enemyBank.setContent(vbox);
     }
     public void setDelegate (EnemyEditorViewDelegate delegate) {
         this.delegate = delegate;

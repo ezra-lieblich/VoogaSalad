@@ -15,6 +15,5 @@ public interface IEnemyEditorView extends IEditorView {
 
     public void setDelegate (EnemyEditorViewDelegate delegate);
     
-    public void setEnemyListDataSource(EnemyListDataSource source);
 
 }
