@@ -3,14 +3,15 @@ package engine.weapon;
 import java.util.List;
 import authoring.editorview.weapon.IWeaponUpdateView;
 import engine.AbstractTypeManagerController;
+import engine.ManagerMediator;
 
 
 public class WeaponTypeManagerController extends
         AbstractTypeManagerController<WeaponManager, WeaponBuilder, Weapon, IWeaponUpdateView>
         implements WeaponManagerController {
 
-    public WeaponTypeManagerController (WeaponManager weaponManager) {
-        super(weaponManager, new WeaponTypeBuilder());
+    public WeaponTypeManagerController (ManagerMediator managerMediator) {
+        super(new WeaponTypeManager(), new WeaponTypeBuilder(), managerMediator);
     }
 
     @Override
