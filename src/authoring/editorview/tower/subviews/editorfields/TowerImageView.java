@@ -1,6 +1,7 @@
 package authoring.editorview.tower.subviews.editorfields;
 
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.ResourceBundle;
 import javax.imageio.ImageIO;
 import authoring.editorview.tower.ITowerSetView;
@@ -26,9 +27,13 @@ public class TowerImageView implements ITowerSetView {
     private ImageView towerImage;
     private ResourceBundle labelsResource;
 
+    private final int CHARACTER_SIZE = 250;
+
     public TowerImageView (ResourceBundle labelsResource) {
         this.labelsResource = labelsResource;
         towerImage = new ImageView();
+        towerImage.setFitHeight(CHARACTER_SIZE);
+        towerImage.setFitWidth(CHARACTER_SIZE);
         loadTowerImage();
     }
 
@@ -45,17 +50,16 @@ public class TowerImageView implements ITowerSetView {
     private void loadTowerImage () {
         BufferedImage imageRead;
         try {
-            imageRead = ImageIO.read(getClass().getClassLoader().getResourceAsStream(imagePath));
-            Image image2 = SwingFXUtils.toFXImage(imageRead, null);
-            towerImage.setImage(image2);
-            //delegate.onUserEnteredTowerImagePath(imagePath);
+            File file = new File(imagePath);
+            Image image = new Image(file.toURI().toString());
+            towerImage.setImage(image);
         }
         catch (Exception e) {
-            System.out.println("Here");
-            Image image2 = new Image(getClass().getClassLoader().getResourceAsStream("questionmark.png"));
+            Image image2 =
+                    new Image(getClass().getClassLoader().getResourceAsStream("questionmark.png"));
             towerImage.setImage(image2);
             DialogueBoxFactory.createErrorDialogueBox("Could not load file",
-            "Try new photo");
+                                                      "Try new photo");
         }
     }
 
