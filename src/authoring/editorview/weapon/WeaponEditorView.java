@@ -22,7 +22,7 @@ import javafx.scene.layout.BorderPane;
  * @author Kayla Schulz
  *
  */
-public class WeaponEditorView implements IWeaponUpdateView {
+public class WeaponEditorView implements IWeaponEditorView {
     private WeaponEditorViewDelegate delegate;
     private BorderPane weaponEditorView;
     private WeaponImageBank weaponBank;
@@ -70,7 +70,6 @@ public class WeaponEditorView implements IWeaponUpdateView {
     }
 
     private void setBorderPane () {
-        weaponBank.setPaneSize(width / 4, height);
         weaponEffectsView.setPaneSize(width * 3 / 4, height);
         weaponEditorView.setLeft(weaponBank.getInstanceAsNode());
         weaponEditorView.setCenter(weaponEffectsView.getInstanceAsNode());
@@ -117,8 +116,7 @@ public class WeaponEditorView implements IWeaponUpdateView {
 
     @Override
     public void updateWeaponBank (List<Integer> activeWeapons) {
-        // weaponBank.
-
+        weaponBank.updateWeaponBank(activeWeapons);
     }
 
     @Override
@@ -153,6 +151,12 @@ public class WeaponEditorView implements IWeaponUpdateView {
     @Override
     public void updateSizeDisplay (double size) {
         this.weaponSizeView.updateWeaponSize(Double.toString(size));
+    }
+
+    @Override
+    public void deleteWeapon () {
+        // TODO Auto-generated method stub
+
     }
 
 }

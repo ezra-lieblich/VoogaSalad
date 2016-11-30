@@ -1,26 +1,17 @@
 package authoring.editorview.weapon.subviews;
 
-import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
 import java.util.ResourceBundle;
-import javax.imageio.ImageIO;
-import authoring.editorview.PhotoFileChooser;
-import authoring.editorview.weapon.IWeaponEditorView;
 import authoring.editorview.weapon.WeaponEditorViewDelegate;
-import authoring.utilityfactories.BoxFactory;
 import authoring.utilityfactories.ButtonFactory;
-import authoring.utilityfactories.DialogueBoxFactory;
-import javafx.embed.swing.SwingFXUtils;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.VBox;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 
 
 /**
@@ -28,84 +19,77 @@ import javafx.stage.Stage;
  * @author Kayla Schulz
  *
  */
-// TODO: This needs to implement IImageBank once I figure out how to get parameter correct
-public class WeaponImageBank extends PhotoFileChooser {
 
-    // TODO: I want to be able to load in a default weapon with default settings from model
-    // What is our current plan with defaults?
+public class WeaponImageBank {
 
-    private File chosenFile;
-    private ScrollPane weaponBank;
+    private WeaponListDataSource dataSource;
     private WeaponEditorViewDelegate delegate;
-    private VBox vbox;
+    private ListView<Node> weaponListView;
 
-    private ResourceBundle labelsResource;
+    private ObservableList<Node> weapons;
+
+    private final int CELL_HEIGHT = 60;
+    private final int CELL_WIDTH = 60;
+    private final int WEAPON_BANK_WIDTH = 120;
+    private final String DEFAULT_WEAPON_IMAGE_PATH = "./Images/questionmark.png";
 
     public WeaponImageBank (ResourceBundle labelsResource) {
-        this.labelsResource = labelsResource;
-        weaponBank = new ScrollPane();
         Button createWeaponButton =
                 ButtonFactory.makeButton("Create Weapon",
                                          e -> {
-                                             try {
-                                                 selectFile(labelsResource.getString("Photos"),
-                                                            labelsResource.getString("NewWeapon"));
-                                             }
-                                             catch (IOException e1) {
-                                                 DialogueBoxFactory
-                                                         .createErrorDialogueBox("Unable to open file chooser",
-                                                                                 "Try again");
-                                             }
+                                             delegate.onUserPressedCreateWeapon();
                                          });
-        vbox = BoxFactory.createVBox(labelsResource.getString("WeaponBank"));
-        vbox.getChildren().add(createWeaponButton);
-        weaponBank.setContent(vbox);
-    }
-
-    public void setPaneSize (int width, int height) {
-        weaponBank.setMaxSize(width, height);
-        weaponBank.setMinSize(width, height);
-        weaponBank.setPrefSize(width, height);
+        weaponListView = new ListView<Node>();
+        weaponListView.setMaxWidth(WEAPON_BANK_WIDTH);
+        weapons = FXCollections.observableArrayList();
+        // First cell is a button
+        weapons.add(createWeaponButton);
+        weaponListView.setItems(weapons);
     }
 
     public Node getInstanceAsNode () {
-        return weaponBank;
+        return weaponListView;
     }
 
     public void setDelegate (WeaponEditorViewDelegate delegate) {
         this.delegate = delegate;
     }
 
-    public void updateWeaponBank (List<Integer> activeWeapons) {
-        // update each weapon in bank
+    public void setListDataSource (WeaponListDataSource source) {
+        this.dataSource = source;
     }
 
-    @Override
-    public void openFileChooser (FileChooser chooseFile) throws IOException {
-        chosenFile = chooseFile.showOpenDialog(new Stage());
-        if (chosenFile != null) {
-            // give this image an id, keep it in bank
-            BufferedImage imageRead;
-            ImageView imageView = new ImageView();
-            try {
-                imageRead = ImageIO.read(chosenFile);
-                Image image2 = SwingFXUtils.toFXImage(imageRead, null);
-                imageView.setImage(image2);
-                // delegate.onUserEnteredWeaponImage(chosenFile.toURI().toString());
-                // weaponBank.setContent(imageView);
-                // TODO: These should be correct but are erring out currently
-                // delegate.onUserPressedCreateWeapon();
-            }
-            catch (Exception e) {
-                System.out.println("You failed");
-                imageRead =
-                        ImageIO.read(getClass().getClassLoader()
-                                .getResourceAsStream("butterfly.png"));
-                Image image2 = SwingFXUtils.toFXImage(imageRead, null);
-                imageView.setImage(image2);
-                // TODO: Fix this output to be better for the user
-            }
+    public void updateWeaponBank (List<Integer> activeWeapons) {
+        this.weapons.remove(1, weapons.size() - 1);
+        for (int i = 0; i < activeWeapons.size(); i++) {
+            WeaponListCellData cellData = dataSource.getCellDataForWeapon(activeWeapons.get(i));
+            Node cell = createCellFromData(cellData);
+            weapons.add(cell);
         }
+    }
+
+    private Node createCellFromData (WeaponListCellData data) {
+        ImageView cell = new ImageView();
+        String imageFilePath = data.getImagePath();
+        if (imageFilePath.equals(null) || imageFilePath.length() < 1) {
+            imageFilePath = DEFAULT_WEAPON_IMAGE_PATH;
+        }
+        File file = new File(data.getImagePath());
+        Image image = new Image(file.toURI().toString());
+        cell.setImage(image);
+        cell.setPreserveRatio(true);
+        cell.setFitHeight(CELL_HEIGHT);
+        cell.setFitWidth(CELL_WIDTH);
+        return cell;
+    }
+
+    private void addImageToBank (Image image) {
+        ImageView cell = new ImageView();
+        cell.setImage(image);
+        cell.setPreserveRatio(true);
+        cell.setFitHeight(CELL_HEIGHT);
+        cell.setFitWidth(CELL_WIDTH);
+        weapons.add(cell);
     }
 
 }

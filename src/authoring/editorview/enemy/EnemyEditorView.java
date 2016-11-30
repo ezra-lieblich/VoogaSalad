@@ -19,14 +19,13 @@ import javafx.scene.layout.BorderPane;
 import authoring.editorview.enemy.subviews.EnemyListDataSource;
 
 
-
 /**
  * @author Kayla Schulz
  * @author Diane Hadley
  * 
  */
 
-public class EnemyEditorView implements IEnemyUpdateView {
+public class EnemyEditorView implements IEnemyEditorView {
     private EnemyEditorViewDelegate delegate;
     private BorderPane enemyEditorView;
     private EnemyImageBank enemyBank;
@@ -103,8 +102,7 @@ public class EnemyEditorView implements IEnemyUpdateView {
 
     @Override
     public void updateEnemyBank (List<Integer> activeEnemies) {
-        // TODO Auto-generated method stub
-
+        enemyBank.updateEnemyBank(activeEnemies);
     }
 
     @Override
@@ -153,10 +151,15 @@ public class EnemyEditorView implements IEnemyUpdateView {
         this.enemySize.updateEnemySize(Double.toString(size));
     }
 
-	@Override
-	public void setEnemyListDataSource(EnemyListDataSource source) {
-		this.enemyBank.setListDataSource(source);
-	}
+    @Override
+    public void setEnemyListDataSource (EnemyListDataSource source) {
+        this.enemyBank.setListDataSource(source);
+    }
 
+    @Override
+    public void deleteEnemy () {
+        // TODO Auto-generated method stub
+
+    }
 
 }

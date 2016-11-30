@@ -1,19 +1,17 @@
 package authoring.editorview.tower.subviews;
 
 import java.io.File;
-import java.io.IOException;
+import java.util.List;
 import java.util.ResourceBundle;
-import authoring.editorview.PhotoFileChooser;
 import authoring.editorview.tower.TowerEditorViewDelegate;
-import authoring.utilityfactories.BoxFactory;
 import authoring.utilityfactories.ButtonFactory;
-import authoring.utilityfactories.DialogueBoxFactory;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.VBox;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
+import javafx.scene.control.ListView;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 
 /**
@@ -21,49 +19,76 @@ import javafx.stage.Stage;
  * @author Kayla Schulz
  *
  */
-public class TowerImageBank extends PhotoFileChooser {
+public class TowerImageBank {
 
+    private TowerListDataSource dataSource;
     private TowerEditorViewDelegate delegate;
-    private ScrollPane towerBank;
-    private VBox vbox;
-    private File chosenFile;
+    private ListView<Node> towerListView;
+
+    private ObservableList<Node> towers;
+
+    private final int CELL_HEIGHT = 60;
+    private final int CELL_WIDTH = 60;
+    private final int TOWER_BANK_WIDTH = 120;
+    private final String DEFAULT_TOWER_IMAGE_PATH = "./Images/questionmark.png";
 
     public TowerImageBank (ResourceBundle labelsResource, ResourceBundle dialogueBoxResource) {
-        towerBank = new ScrollPane();
         Button createTowerButton =
                 ButtonFactory.makeButton("Create Tower",
                                          e -> {
-                                             try {
-                                                 selectFile(labelsResource.getString("Photos"),
-                                                            labelsResource.getString("Image"));
-                                             }
-                                             catch (IOException e1) {
-                                                 DialogueBoxFactory
-                                                         .createErrorDialogueBox(dialogueBoxResource
-                                                                 .getString("UnableToOpen"),
-                                                                                 dialogueBoxResource
-                                                                                         .getString("TryAgain"));
-                                             }
+                                             delegate.onUserPressedCreateNewTower();
                                          });
-        vbox = BoxFactory.createVBox(labelsResource.getString("TowerBank"));
-        vbox.getChildren().add(createTowerButton);
-        towerBank.setContent(vbox);
+        towerListView = new ListView<Node>();
+        towerListView.setMaxWidth(TOWER_BANK_WIDTH);
+        towers = FXCollections.observableArrayList();
+
+        towers.add(createTowerButton);
+        towerListView.setItems(towers);
     }
 
     public void setDelegate (TowerEditorViewDelegate delegate) {
         this.delegate = delegate;
     }
 
-    public Node getInstanceAsNode () {
-        return towerBank;
+    public void setListDataSource (TowerListDataSource source) {
+        this.dataSource = source;
     }
 
-    @Override
-    public void openFileChooser (FileChooser chooseFile) throws IOException {
-        chosenFile = chooseFile.showOpenDialog(new Stage());
-        if (chosenFile != null) {
+    public Node getInstanceAsNode () {
+        return towerListView;
+    }
 
+    public void updateTowerBank (List<Integer> activeTowers) {
+        this.towers.remove(1, towers.size() - 1);
+        for (int i = 0; i < activeTowers.size(); i++) {
+            TowerListCellData cellData = dataSource.getCellDataForTower(activeTowers.get(i));
+            Node cell = createCellFromData(cellData);
+            towers.add(cell);
         }
+    }
+
+    private Node createCellFromData (TowerListCellData data) {
+        ImageView cell = new ImageView();
+        String imageFilePath = data.getImagePath();
+        if (imageFilePath.equals(null) || imageFilePath.length() < 1) {
+            imageFilePath = DEFAULT_TOWER_IMAGE_PATH;
+        }
+        File file = new File(data.getImagePath());
+        Image image = new Image(file.toURI().toString());
+        cell.setImage(image);
+        cell.setPreserveRatio(true);
+        cell.setFitHeight(CELL_HEIGHT);
+        cell.setFitWidth(CELL_WIDTH);
+        return cell;
+    }
+
+    private void addImageToBank (Image image) {
+        ImageView cell = new ImageView();
+        cell.setImage(image);
+        cell.setPreserveRatio(true);
+        cell.setFitHeight(CELL_HEIGHT);
+        cell.setFitWidth(CELL_WIDTH);
+        towers.add(cell);
     }
 
 }

@@ -1,7 +1,7 @@
 package authoring.editorview.weapon.subviews.editorfields;
 
 import java.util.ResourceBundle;
-import authoring.editorview.weapon.IWeaponEditorView;
+import authoring.editorview.weapon.IWeaponSetView;
 import authoring.editorview.weapon.WeaponEditorViewDelegate;
 import authoring.utilityfactories.ComboBoxFactory;
 import javafx.collections.FXCollections;
@@ -15,7 +15,7 @@ import javafx.scene.control.ComboBox;
  * @author Kayla Schulz
  *
  */
-public class WeaponPathField implements IWeaponEditorView {
+public class WeaponPathField implements IWeaponSetView {
 
     private ComboBox<Object> weaponPathBox;
     private WeaponEditorViewDelegate delegate;

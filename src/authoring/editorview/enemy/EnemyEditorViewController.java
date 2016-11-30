@@ -20,22 +20,23 @@ public class EnemyEditorViewController extends EditorViewController
 
     private EnemyManagerController enemyDataSource;
     private int currentEnemyID;
-    private IEnemyUpdateView myView;
+    private IEnemyEditorView myView;
 
     public EnemyEditorViewController (int editorWidth, int editorHeight) throws IOException {
         myView = EnemyEditorViewFactory.build(editorWidth, editorHeight);
         myView.setDelegate(this);
         myView.setEnemyListDataSource(this);
-        this.view = myView; 
+        this.view = myView;
     }
 
     public void setEnemyDataSource (EnemyManagerController source) {
         this.enemyDataSource = source;
+        currentEnemyID = enemyDataSource.createType(myView);
     }
 
     @Override
     public int onUserPressedCreateEnemy () {
-    	return enemyDataSource.createType(myView);
+        return enemyDataSource.createType(myView);
     }
 
     @Override
@@ -78,7 +79,7 @@ public class EnemyEditorViewController extends EditorViewController
         try {
             Double.parseDouble(enemyRewardPoints);
             enemyDataSource.setEnemyRewardScore(currentEnemyID,
-                                                 Double.parseDouble(enemyRewardPoints));
+                                                Double.parseDouble(enemyRewardPoints));
         }
         catch (NumberFormatException e) {
             createDialogueBox();
@@ -89,7 +90,8 @@ public class EnemyEditorViewController extends EditorViewController
     public void onUserEnteredEnemyMoney (String enemyRewardMoney) {
         try {
             Double.parseDouble(enemyRewardMoney);
-            enemyDataSource.setEnemyRewardMoney(currentEnemyID, Double.parseDouble(enemyRewardMoney));
+            enemyDataSource.setEnemyRewardMoney(currentEnemyID,
+                                                Double.parseDouble(enemyRewardMoney));
         }
         catch (NumberFormatException e) {
             createDialogueBox();
@@ -129,13 +131,12 @@ public class EnemyEditorViewController extends EditorViewController
 
     }
 
-	@Override
-	public EnemyListCellData getCellDataForEnemy(int enemyID) {
-		EnemyListCellData cellData = new EnemyListCellData();
-		cellData.setName(enemyDataSource.getName(enemyID));
-		cellData.setImagePath(enemyDataSource.getImagePath(enemyID));
-		return cellData;
-	}
-
+    @Override
+    public EnemyListCellData getCellDataForEnemy (int enemyID) {
+        EnemyListCellData cellData = new EnemyListCellData();
+        cellData.setName(enemyDataSource.getName(enemyID));
+        cellData.setImagePath(enemyDataSource.getImagePath(enemyID));
+        return cellData;
+    }
 
 }

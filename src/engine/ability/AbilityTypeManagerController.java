@@ -2,12 +2,13 @@ package engine.ability;
 
 import authoring.editorview.IUpdateView;
 import engine.AbstractTypeManagerController;
+import engine.ManagerMediator;
 import engine.ability.AbilityManager;
 
 public class AbilityTypeManagerController extends AbstractTypeManagerController<AbilityManager, AbilityBuilder, Ability, IUpdateView> implements AbilityManagerController {
     
-    public AbilityTypeManagerController(AbilityManager abilityManager) {
-        super(abilityManager, new AbilityTypeBuilder());
+    public AbilityTypeManagerController(ManagerMediator managerMediator) {
+        super(new AbilityTypeManager(), new AbilityTypeBuilder(), managerMediator);
     }
 
     @Override

@@ -14,16 +14,17 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
 public class GameData {
 
     private String Title;
-    private ManagerMediator typeManagerMediator;
+    private ManagerMediator managerMediator;
     
-    @XStreamOmitField
-    private XStream Serializer = new XStream(new DomDriver());
-
-    GameData(Manager<? extends Type>... managers) {
-        Arrays.asList(managers).forEach(a -> typeManagerMediator.addManager(a));
+    GameData(ManagerMediator managerMediator) {
+        this.managerMediator = managerMediator;
     }
-    
-    public String SaveData () {
-        return Serializer.toXML(this);
+
+    public String getTitle () {
+        return Title;
+    }
+
+    public void setTitle (String title) {
+        Title = title;
     }
 }

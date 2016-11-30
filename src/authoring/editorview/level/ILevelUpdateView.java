@@ -10,8 +10,9 @@ import authoring.editorview.IUpdateView;
 public interface ILevelUpdateView  extends ILevelEditorView, IUpdateView {
 	
 
-	public void updateEnemy (Map<Integer, Integer> enemyMap);
-
+	//UpdateEnemy should take in the map of enemy counts
+	public void updateEnemy (Map<Integer, Integer> enemyCounts);
+	
 	public void updateRewardPoints (double winPoints);
 	
 	public void updateRewardHealth (double winHealth);

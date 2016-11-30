@@ -8,9 +8,10 @@ public abstract class AbstractTypeManagerController<E extends Manager<T>, U exte
     private E typeManager;
     private U typeBuilder;
 
-    protected AbstractTypeManagerController (E typeManager, U typeBuilder) {
+    protected AbstractTypeManagerController (E typeManager, U typeBuilder, ManagerMediator managerMediator) {
         this.typeManager = typeManager;
         this.typeBuilder = typeBuilder;
+        managerMediator.addManager(typeManager);
     }
 
     @Override

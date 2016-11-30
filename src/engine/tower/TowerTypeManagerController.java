@@ -2,14 +2,17 @@ package engine.tower;
 
 import java.util.List;
 import com.oracle.webservices.internal.api.databinding.Databinding.Builder;
-import authoring.editorview.tower.ITowerUpdateView;
+import authoring.editorview.tower.ITowerEditorView;
 import engine.AbstractTypeManagerController;
+import engine.ManagerMediator;
 
 
-public class TowerTypeManagerController extends AbstractTypeManagerController<TowerManager, TowerBuilder, Tower, ITowerUpdateView> implements TowerManagerController {
+public class TowerTypeManagerController
+        extends AbstractTypeManagerController<TowerManager, TowerBuilder, Tower, ITowerEditorView>
+        implements TowerManagerController {
 
-    public TowerTypeManagerController (TowerManager towerManager) {
-        super(towerManager, new TowerTypeBuilder());
+    public TowerTypeManagerController (ManagerMediator managerMediator) {
+        super(new TowerTypeManager(), new TowerTypeBuilder(), managerMediator);
     }
 
     @Override
@@ -79,7 +82,7 @@ public class TowerTypeManagerController extends AbstractTypeManagerController<To
 
     // TODO - edit createNewTower to work with both versions
     @Override
-    public int createTowerUpgrade (ITowerUpdateView towerUpdater, int parentTowerID) {
+    public int createTowerUpgrade (ITowerEditorView towerUpdater, int parentTowerID) {
         return getTypeManager().addUpgrade(constructType(towerUpdater), parentTowerID);
     }
 
@@ -87,24 +90,22 @@ public class TowerTypeManagerController extends AbstractTypeManagerController<To
     public void removeTowerUpgrade (int parentTowerID, int childTowerID) {
         getTypeManager().removeUpgrade(childTowerID, parentTowerID);
     }
-    
+
     @Override
-    protected TowerBuilder constructTypeProperties (ITowerUpdateView towerUpdater,
+    protected TowerBuilder constructTypeProperties (ITowerEditorView towerUpdater,
                                                     TowerBuilder typeBuilder) {
-            return typeBuilder
+        return typeBuilder
                 .addWeaponsListener( (oldValue, newValue) -> towerUpdater
-                        .updateTowerChosenWeapon(newValue))
+                        .updateTowerWeaponBank(newValue))
                 .addAbilitiesListener( (oldValue, newValue) -> towerUpdater
                         .updateTowerAbility(newValue))
                 .addUpgradesListener( (oldValue, newValue) -> towerUpdater
                         .updateTowerUpgradeBank(newValue))
-                .addCostListener((oldValue, newValue) -> towerUpdater
+                .addCostListener( (oldValue, newValue) -> towerUpdater
                         .updateTowerBuyPriceDisplay(newValue))
-                .addSellAmountListener((oldValue, newValue) -> towerUpdater
+                .addSellAmountListener( (oldValue, newValue) -> towerUpdater
                         .updateTowerSellPriceDisplay(newValue))
-                .addUnlockLevelListener((oldValue, newValue) -> towerUpdater
+                .addUnlockLevelListener( (oldValue, newValue) -> towerUpdater
                         .updateUnlockLevelDisplay(newValue));
     }
-
-
 }

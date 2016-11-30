@@ -11,7 +11,7 @@ import java.io.IOException;
 
 public class TowerEditorViewFactory {
 
-    public static ITowerUpdateView build (int width, int height) throws IOException {
+    public static ITowerEditorView build (int width, int height) throws IOException {
         return new TowerEditorView();
     }
 

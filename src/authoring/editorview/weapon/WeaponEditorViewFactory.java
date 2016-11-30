@@ -11,7 +11,7 @@ import java.io.IOException;
 
 public class WeaponEditorViewFactory {
 
-    public static IWeaponUpdateView build (int width, int height) throws IOException {
+    public static IWeaponEditorView build (int width, int height) throws IOException {
         return new WeaponEditorView(width, height);
     }
 

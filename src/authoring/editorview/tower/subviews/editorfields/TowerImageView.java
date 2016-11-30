@@ -4,7 +4,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ResourceBundle;
 import javax.imageio.ImageIO;
-import authoring.editorview.tower.ITowerEditorView;
+import authoring.editorview.tower.ITowerSetView;
 import authoring.editorview.tower.TowerEditorViewDelegate;
 import authoring.utilityfactories.DialogueBoxFactory;
 import javafx.embed.swing.SwingFXUtils;
@@ -20,7 +20,7 @@ import javafx.scene.image.ImageView;
  *
  */
 
-public class TowerImageView implements ITowerEditorView {
+public class TowerImageView implements ITowerSetView {
 
     private TowerEditorViewDelegate delegate;
     private String imagePath;
