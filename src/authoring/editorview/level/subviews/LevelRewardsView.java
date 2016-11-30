@@ -9,7 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-public class LevelRewards {
+public class LevelRewardsView {
 	
 	private VBox root;
 	
@@ -24,7 +24,7 @@ public class LevelRewards {
 	private static final String RESOURCE_FILE_NAME = "resources/GameAuthoringLevels";	
 	private ResourceBundle levelResource = ResourceBundle.getBundle(RESOURCE_FILE_NAME);
 	
-	public LevelRewards(){
+	public LevelRewardsView(){
 		root = new VBox(10);
 		makeHealthRewardTextField();
 		makeMoneyRewardTextField();
