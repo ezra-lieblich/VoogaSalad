@@ -50,21 +50,6 @@ public class tempmain extends Application {
     }
 
     private void createManagersAndControllers(ManagerTypeMediator mainMediator, AuthoringViewController authoringVC) {
-		TowerManager tower = new TowerTypeManager();
-		WeaponManager weapon = new WeaponTypeManager();
-		PathManager path = new PathTypeManager();
-		EnemyManager enemy = new EnemyTypeManager();
-		LevelManager level = new LevelTypeManager();
-		AbilityManager ability = new AbilityTypeManager();
-		GameModeManager gameMode = new GameModeTypeManager();
-		
-//		TowerManagerController towerController = new TowerTypeManagerController(managerMediator);
-//		WeaponManagerController weaponController = new WeaponTypeManagerController(weapon);
-//		PathManagerController pathController = new PathTypeManagerController(path);
-//		EnemyManagerController enemyController = new EnemyTypeManagerController(enemy);
-//		LevelManagerController levelController = new LevelTypeManagerController(level);
-//		AbilityManagerController abilityController = new AbilityTypeManagerController(ability);
-//		GameModeManagerController gameModeController = new GameModeTypeManagerController(gameMode);
 
 		HashMap<String, EditorViewController> editorVCs = authoringVC.getControllers();
 		PathEditorViewController pathVC = (PathEditorViewController) editorVCs.get("path");

@@ -3,6 +3,8 @@ package authoring.editorview.weapon.subviews;
 import java.io.File;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import authoring.editorview.ImageBank;
 import authoring.editorview.weapon.WeaponEditorViewDelegate;
 import authoring.utilityfactories.ButtonFactory;
 import javafx.collections.FXCollections;
@@ -16,80 +18,39 @@ import javafx.scene.image.ImageView;
 
 /**
  * 
- * @author Kayla Schulz
+ * @author Kayla Schulz, Andrew Bihl
  *
  */
 
-public class WeaponImageBank {
+public class WeaponImageBank extends ImageBank {
 
-    private WeaponListDataSource dataSource;
     private WeaponEditorViewDelegate delegate;
-    private ListView<Node> weaponListView;
-
-    private ObservableList<Node> weapons;
-
-    private final int CELL_HEIGHT = 60;
-    private final int CELL_WIDTH = 60;
-    private final int WEAPON_BANK_WIDTH = 120;
-    private final String DEFAULT_WEAPON_IMAGE_PATH = "./Images/questionmark.png";
 
     public WeaponImageBank (ResourceBundle labelsResource) {
+    	super();
         Button createWeaponButton =
                 ButtonFactory.makeButton("Create Weapon",
                                          e -> {
                                              delegate.onUserPressedCreateWeapon();
                                          });
-        weaponListView = new ListView<Node>();
-        weaponListView.setMaxWidth(WEAPON_BANK_WIDTH);
-        weapons = FXCollections.observableArrayList();
-        // First cell is a button
-        weapons.add(createWeaponButton);
-        weaponListView.setItems(weapons);
-    }
 
-    public Node getInstanceAsNode () {
-        return weaponListView;
+        // First cell is a button
+        items.add(createWeaponButton);
     }
 
     public void setDelegate (WeaponEditorViewDelegate delegate) {
         this.delegate = delegate;
     }
 
-    public void setListDataSource (WeaponListDataSource source) {
-        this.dataSource = source;
-    }
-
     public void updateWeaponBank (List<Integer> activeWeapons) {
-        this.weapons.remove(1, weapons.size() - 1);
-        for (int i = 0; i < activeWeapons.size(); i++) {
-            WeaponListCellData cellData = dataSource.getCellDataForWeapon(activeWeapons.get(i));
-            Node cell = createCellFromData(cellData);
-            weapons.add(cell);
-        }
+        super.updateBank(activeWeapons);
     }
 
-    private Node createCellFromData (WeaponListCellData data) {
-        ImageView cell = new ImageView();
-        String imageFilePath = data.getImagePath();
-        if (imageFilePath.equals(null) || imageFilePath.length() < 1) {
-            imageFilePath = DEFAULT_WEAPON_IMAGE_PATH;
-        }
-        File file = new File(data.getImagePath());
-        Image image = new Image(file.toURI().toString());
-        cell.setImage(image);
-        cell.setPreserveRatio(true);
-        cell.setFitHeight(CELL_HEIGHT);
-        cell.setFitWidth(CELL_WIDTH);
-        return cell;
-    }
 
-    private void addImageToBank (Image image) {
-        ImageView cell = new ImageView();
-        cell.setImage(image);
-        cell.setPreserveRatio(true);
-        cell.setFitHeight(CELL_HEIGHT);
-        cell.setFitWidth(CELL_WIDTH);
-        weapons.add(cell);
-    }
+	@Override
+	protected void userSelectedRow(int index) {
+		int selectedWeaponID = this.itemIDs.get(index);
+		this.delegate.onUserSelectedWeapon(selectedWeaponID);
+	}
 
 }

@@ -15,6 +15,7 @@ import authoring.editorview.tower.subviews.editorfields.TowerSizeField;
 import authoring.editorview.tower.subviews.editorfields.TowerUnlockLevelField;
 import authoring.editorview.tower.subviews.editorfields.TowerUpgradeBank;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 
 
@@ -54,7 +55,7 @@ public class TowerEditorView implements ITowerEditorView {
         towerUpgradeBank = new TowerUpgradeBank(labelsResource);
         towerSize = new TowerSizeField(labelsResource);
 
-        towerBank = new TowerImageBank(labelsResource, dialogueBoxResource);
+        towerBank = new TowerImageBank();
         towerEffectView =
                 new TowerEffectView(towerName, towerImage, towerBuyPrice, towerSellPrice,
                                     towerUnlockLevel, towerAbility, towerWeaponBank,
@@ -77,8 +78,8 @@ public class TowerEditorView implements ITowerEditorView {
     @Override
     public void setDelegate (TowerEditorViewDelegate delegate) {
         this.delegate = delegate;
-        towerBank.setDelegate(delegate);
         towerEffectView.setDelegate(delegate);
+        towerBank.setDelegate(delegate);
         towerName.setDelegate(delegate);
         towerImage.setDelegate(delegate);
         towerBuyPrice.setDelegate(delegate);
