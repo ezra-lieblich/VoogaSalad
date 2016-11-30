@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.ResourceBundle;
 import javax.imageio.ImageIO;
 import authoring.editorview.enemy.EnemyEditorViewDelegate;
-import authoring.editorview.enemy.IEnemyEditorView;
+import authoring.editorview.enemy.IEnemySetView;
 import authoring.utilityfactories.DialogueBoxFactory;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.Node;
@@ -18,7 +18,7 @@ import javafx.scene.image.ImageView;
  * @author Kayla Schulz
  *
  */
-public class EnemyImageView implements IEnemyEditorView {
+public class EnemyImageView implements IEnemySetView {
 
     private EnemyEditorViewDelegate delegate;
     private String imagePath;

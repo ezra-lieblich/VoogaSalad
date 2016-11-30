@@ -29,6 +29,7 @@ public class tempmain extends Application {
     public static final String TITLE = "VOOGASquad";
     private static final int SIZE = 700;
 
+    
     @Override
     public void start (Stage s) throws IOException {
     	

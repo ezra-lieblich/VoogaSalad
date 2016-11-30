@@ -4,7 +4,7 @@ import java.util.List;
 import authoring.editorview.IUpdateView;
 import authoring.editorview.path.IPathEditorView;
 import authoring.editorview.path.IPathUpdateView;
-import authoring.editorview.tower.ITowerUpdateView;
+import authoring.editorview.tower.ITowerEditorView;
 import engine.AbstractTypeManagerController;
 import engine.ManagerMediator;
 import engine.tower.Tower;

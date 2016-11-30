@@ -5,15 +5,15 @@ import java.util.List;
 import java.util.ResourceBundle;
 import authoring.editorview.tower.subviews.TowerEffectView;
 import authoring.editorview.tower.subviews.TowerImageBank;
-import authoring.editorview.tower.subviews.editorfields.TowerAbilityField;
+import authoring.editorview.tower.subviews.editorfields.TowerAbilityBank;
 import authoring.editorview.tower.subviews.editorfields.TowerBuyPriceField;
-import authoring.editorview.tower.subviews.editorfields.TowerChooseWeaponField;
+import authoring.editorview.tower.subviews.editorfields.TowerWeaponBank;
 import authoring.editorview.tower.subviews.editorfields.TowerImageView;
 import authoring.editorview.tower.subviews.editorfields.TowerNameField;
 import authoring.editorview.tower.subviews.editorfields.TowerSellPriceField;
 import authoring.editorview.tower.subviews.editorfields.TowerSizeField;
 import authoring.editorview.tower.subviews.editorfields.TowerUnlockLevelField;
-import authoring.editorview.tower.subviews.editorfields.TowerUpgradeField;
+import authoring.editorview.tower.subviews.editorfields.TowerUpgradeBank;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
 
@@ -23,7 +23,7 @@ import javafx.scene.layout.BorderPane;
  * @author Diane Hadley
  *
  */
-public class TowerEditorView implements ITowerUpdateView {
+public class TowerEditorView implements ITowerEditorView {
     private TowerEditorViewDelegate delegate;
     private BorderPane towerEditorView;
     private TowerImageBank towerBank;
@@ -33,31 +33,33 @@ public class TowerEditorView implements ITowerUpdateView {
     private TowerBuyPriceField towerBuyPrice;
     private TowerSellPriceField towerSellPrice;
     private TowerUnlockLevelField towerUnlockLevel;
-    private TowerAbilityField towerAbility;
-    private TowerChooseWeaponField towerChooseWeapon;
-    private TowerUpgradeField towerUpgrade;
+    private TowerAbilityBank towerAbility;
+    private TowerWeaponBank towerWeaponBank;
+    private TowerUpgradeBank towerUpgradeBank;
     private TowerSizeField towerSize;
+    private ResourceBundle labelsResource =
+            ResourceBundle.getBundle("resources/GameAuthoringTower");
+    private ResourceBundle dialogueBoxResource = ResourceBundle.getBundle("resources/DialogueBox");
 
     public TowerEditorView () throws IOException {
         towerEditorView = new BorderPane();
-
-        ResourceBundle labelsResource = ResourceBundle.getBundle("resources/GameAuthoringTower");
-        ResourceBundle dialogueBoxResource = ResourceBundle.getBundle("resources/DialogueBox");
 
         towerName = new TowerNameField(labelsResource);
         towerImage = new TowerImageView(labelsResource);
         towerBuyPrice = new TowerBuyPriceField(labelsResource);
         towerSellPrice = new TowerSellPriceField(labelsResource);
         towerUnlockLevel = new TowerUnlockLevelField(labelsResource);
-        towerAbility = new TowerAbilityField(labelsResource);
-        towerChooseWeapon = new TowerChooseWeaponField(labelsResource);
-        towerUpgrade = new TowerUpgradeField(labelsResource);
+        towerAbility = new TowerAbilityBank(labelsResource);
+        towerWeaponBank = new TowerWeaponBank(labelsResource);
+        towerUpgradeBank = new TowerUpgradeBank(labelsResource);
         towerSize = new TowerSizeField(labelsResource);
 
         towerBank = new TowerImageBank(labelsResource, dialogueBoxResource);
         towerEffectView =
                 new TowerEffectView(towerName, towerImage, towerBuyPrice, towerSellPrice,
-                                    towerUnlockLevel, towerAbility, towerChooseWeapon, towerUpgrade, towerSize,
+                                    towerUnlockLevel, towerAbility, towerWeaponBank,
+                                    towerUpgradeBank,
+                                    towerSize,
                                     labelsResource, dialogueBoxResource);
         setBorderPane();
     }
@@ -83,8 +85,8 @@ public class TowerEditorView implements ITowerUpdateView {
         towerSellPrice.setDelegate(delegate);
         towerUnlockLevel.setDelegate(delegate);
         towerAbility.setDelegate(delegate);
-        towerChooseWeapon.setDelegate(delegate);
-        towerUpgrade.setDelegate(delegate);
+        towerWeaponBank.setDelegate(delegate);
+        towerUpgradeBank.setDelegate(delegate);
         towerSize.setDelegate(delegate);
     }
 
@@ -104,27 +106,24 @@ public class TowerEditorView implements ITowerUpdateView {
     }
 
     @Override
-    public void updateTowerAbility (List<Integer> towerAbility) {
+    public void updateTowerAbilityBank (List<Integer> towerAbility) {
         // TODO Auto-generated method stub
 
     }
 
     @Override
     public void updateTowerUpgradeBank (List<Integer> towerUpgrades) {
-        // TODO Auto-generated method stub
 
     }
 
     @Override
     public void updateTowerBank (List<Integer> createdTowers) {
-        // TODO Auto-generated method stub
-
+        towerBank.updateTowerBank(createdTowers);
     }
 
     @Override
     public void createNewTower () {
-        // TODO Auto-generated method stub
-
+        // towerName.updateTowerName(towerName);
     }
 
     @Override
@@ -144,7 +143,13 @@ public class TowerEditorView implements ITowerUpdateView {
     }
 
     @Override
-    public void updateTowerChosenWeapon (List<Integer> newValue) {
+    public void updateTowerWeaponBank (List<Integer> newValue) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void deleteTower () {
         // TODO Auto-generated method stub
 
     }

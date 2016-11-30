@@ -5,7 +5,7 @@ import java.util.ResourceBundle;
 import authoring.editorview.EditorViewController;
 import authoring.utilityfactories.DialogueBoxFactory;
 import engine.tower.TowerManagerController;
-import authoring.editorview.tower.ITowerUpdateView;
+import authoring.editorview.tower.ITowerEditorView;
 
 
 /**
@@ -19,16 +19,18 @@ public class TowerEditorViewController extends EditorViewController
 
     private TowerManagerController towerDataSource;
     private int currentTowerID;
-    private ITowerUpdateView myView;
+    private ITowerEditorView towerView;
 
     public TowerEditorViewController (int editorWidth, int editorHeight) throws IOException {
-        myView = TowerEditorViewFactory.build(editorWidth, editorHeight);
-        myView.setDelegate(this);
-        this.view = myView;
+        towerView = TowerEditorViewFactory.build(editorWidth, editorHeight);
+        towerView.setDelegate(this);
+        this.view = towerView;
+
     }
 
     public void setTowerDataSource (TowerManagerController source) {
         this.towerDataSource = source;
+        currentTowerID = towerDataSource.createType(towerView);
     }
 
     /**
@@ -36,7 +38,13 @@ public class TowerEditorViewController extends EditorViewController
      */
     @Override
     public void onUserPressedCreateNewTower () {
-        ///int myid = towerDataSource.createType(myView);
+        currentTowerID = towerDataSource.createType(towerView);
+        towerView.updateImagePathDisplay(towerDataSource.getImagePath(currentTowerID));
+        towerView.updateNameDisplay(towerDataSource.getName(currentTowerID));
+        towerView.updateSizeDisplay(towerDataSource.getSize(currentTowerID));
+        towerView.updateTowerBuyPriceDisplay(towerDataSource.getTowerBuyPrice(currentTowerID));
+        towerView.updateTowerSellPriceDisplay(towerDataSource.getTowerSellPrice(currentTowerID));
+        towerView.updateUnlockLevelDisplay(towerDataSource.getTowerUnlockLevel(currentTowerID));
     }
 
     @Override
@@ -87,16 +95,9 @@ public class TowerEditorViewController extends EditorViewController
         towerDataSource.setTowerChosenAbility(currentTowerID, Integer.parseInt(towerAbility));
     }
 
-    private void createDialogueBox () {
-        ResourceBundle dialogueBoxResource = ResourceBundle.getBundle("resources/DialogueBox");
-        DialogueBoxFactory.createErrorDialogueBox(dialogueBoxResource.getString("Integer"),
-                                                  dialogueBoxResource.getString("CheckInput"));
-    }
-
     @Override
     public void onUserPressedDeleteTower () {
-        // TODO Auto-generated method stub
-
+        towerDataSource.deleteType(currentTowerID);
     }
 
     @Override
@@ -119,8 +120,13 @@ public class TowerEditorViewController extends EditorViewController
 
     @Override
     public void onUserEnteredTowerSize (String towerSize) {
-        // TODO Auto-generated method stub
-
+        try {
+            Double.parseDouble(towerSize);
+            towerDataSource.setSize(currentTowerID, Double.parseDouble(towerSize));
+        }
+        catch (NumberFormatException e) {
+            createDialogueBox();
+        }
     }
 
     @Override
@@ -133,6 +139,12 @@ public class TowerEditorViewController extends EditorViewController
     public void onUserEnteredTowerUpgrade (String towerUpgrade) {
         // TODO Auto-generated method stub
 
+    }
+
+    private void createDialogueBox () {
+        ResourceBundle dialogueBoxResource = ResourceBundle.getBundle("resources/DialogueBox");
+        DialogueBoxFactory.createErrorDialogueBox(dialogueBoxResource.getString("Integer"),
+                                                  dialogueBoxResource.getString("CheckInput"));
     }
 
 }

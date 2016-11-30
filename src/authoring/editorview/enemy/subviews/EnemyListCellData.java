@@ -1,20 +1,7 @@
 package authoring.editorview.enemy.subviews;
 
-import javafx.scene.image.Image;
+import authoring.editorview.ListCellData;
 
-public class EnemyListCellData {
-	private String name;
-	private String imagePath;
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getImagePath() {
-		return imagePath;
-	}
-	public void setImagePath(String imageFilePath) {
-		this.imagePath = imageFilePath;
-	}
+public class EnemyListCellData extends ListCellData {
+
 }
