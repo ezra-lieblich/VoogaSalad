@@ -4,7 +4,7 @@ public interface Type {
 
     String getName ();
 
-    void setName (String name);
+    boolean setName (String name);
 
     String getImagePath ();
 
