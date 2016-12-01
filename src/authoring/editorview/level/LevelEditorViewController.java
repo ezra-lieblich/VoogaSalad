@@ -3,6 +3,7 @@ package authoring.editorview.level;
 import java.util.ResourceBundle;
 import authoring.editorview.EditorViewController;
 import authoring.utilityfactories.DialogueBoxFactory;
+import engine.enemy.EnemyManagerController;
 import engine.level.LevelManagerController;
 
 
@@ -11,6 +12,7 @@ public class LevelEditorViewController extends EditorViewController
 
     private ILevelEditorView levelView;
     private LevelManagerController levelDataSource;
+    private EnemyManagerController enemyDataSource;
     private int currentLevelID;
 
     public LevelEditorViewController (int editorWidth, int editorHeight) {
@@ -21,7 +23,12 @@ public class LevelEditorViewController extends EditorViewController
 
     public void setLevelDataSource (LevelManagerController source) {
         this.levelDataSource = source;
+        this.levelDataSource.addTypeBankListener(this.levelView);
         onUserEnteredCreateLevel();
+    }
+
+    public void setEnemyDataSource (EnemyManagerController source) {
+        this.enemyDataSource = source;
     }
 
     @Override
@@ -45,7 +52,13 @@ public class LevelEditorViewController extends EditorViewController
     @Override
     public void onUserEnteredCreateLevel () {
         currentLevelID = levelDataSource.createType(levelView);
-
+        levelView.updateTransitionTime(levelDataSource.getTransitionTime(currentLevelID));
+        // levelView.updateEnemyFrequency(levelDataSource.getEnemyFrequency(currentLevelID,
+        // enemyID));
+        levelView.updateRewardHealth(levelDataSource.getRewardHealth(currentLevelID));
+        levelView.updateRewardMoney(levelDataSource.getRewardMoney(currentLevelID));
+        levelView.updateRewardPoints(levelDataSource.getRewardScore(currentLevelID));
+        levelView.updateNameDisplay(levelDataSource.getName(currentLevelID));
     }
 
     @Override
@@ -78,9 +91,16 @@ public class LevelEditorViewController extends EditorViewController
     }
 
     @Override
-    public void onUserEnteredAddEnemy (int enemyId, int numEnemies) {
-        // TODO Auto-generated method stub
-
+    public void onUserEnteredAddEnemy (String enemyID, String numEnemies) {
+        try {
+            Integer.parseInt(enemyID);
+            Integer.parseInt(numEnemies);
+            levelDataSource.setEnemy(currentLevelID, Integer.parseInt(enemyID),
+                                     Integer.parseInt(numEnemies));
+        }
+        catch (NumberFormatException e) {
+            createDialogueBox();
+        }
     }
 
     @Override

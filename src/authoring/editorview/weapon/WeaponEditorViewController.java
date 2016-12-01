@@ -28,6 +28,7 @@ public class WeaponEditorViewController extends EditorViewController
 
     public void setWeaponDataSource (WeaponManagerController source) {
         this.weaponDataSource = source;
+        this.weaponDataSource.addTypeBankListener(this.weaponView);
         onUserPressedCreateWeapon();
     }
 
@@ -124,10 +125,10 @@ public class WeaponEditorViewController extends EditorViewController
         }
     }
 
-	@Override
-	public void onUserSelectedWeapon(int weaponID) {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public void onUserSelectedWeapon (int weaponID) {
+        // TODO Auto-generated method stub
+
+    }
 
 }

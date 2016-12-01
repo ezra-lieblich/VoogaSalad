@@ -26,12 +26,13 @@ public class EnemyEditorViewController extends EditorViewController
     public EnemyEditorViewController (int editorWidth, int editorHeight) throws IOException {
         enemyView = EnemyEditorViewFactory.build(editorWidth, editorHeight);
         enemyView.setDelegate(this);
-        //enemyView.setEnemyListDataSource(this);
+        // enemyView.setEnemyListDataSource(this);
         this.view = enemyView;
     }
 
     public void setEnemyDataSource (EnemyManagerController source) {
         this.enemyDataSource = source;
+        this.enemyDataSource.addTypeBankListener(this.enemyView);
         onUserPressedCreateEnemy();
     }
 
@@ -139,8 +140,14 @@ public class EnemyEditorViewController extends EditorViewController
 
     @Override
     public void onUserEnteredEnemySize (String enemySize) {
-        // TODO Auto-generated method stub
-
+        try {
+            Double.parseDouble(enemySize);
+            enemyDataSource.setSize(currentEnemyID,
+                                    Double.parseDouble(enemySize));
+        }
+        catch (NumberFormatException e) {
+            createDialogueBox();
+        }
     }
 
     @Override

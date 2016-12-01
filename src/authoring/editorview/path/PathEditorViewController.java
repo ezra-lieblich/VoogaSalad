@@ -20,6 +20,7 @@ public class PathEditorViewController extends EditorViewController implements Pa
 		
 	public void setPathDataSource(PathManagerController source){
 		this.pathDataSource = source;
+		this.pathDataSource.addTypeBankListener(this.pathView);
 	}
 
 	@Override
