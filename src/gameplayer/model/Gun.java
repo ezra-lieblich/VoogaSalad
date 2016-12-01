@@ -27,8 +27,7 @@ public class Gun {
 		 double speedX = 10;  // how trajectory translates into x y speed???? talk to engine people
 		 double speedY = 10;
 		 String image = weaponType.getImagePath();
-		 double[] initialCoordinates = {shootingAgent.getX(), shootingAgent.getY()};
-		 return new Weapon (name, ID, demage, speedX, speedY, image, initialCoordinates, this.attackingRange);
+		 return new Weapon (name, ID, demage, speedX, speedY, image, this.attackingRange);
 	}
 	
 	

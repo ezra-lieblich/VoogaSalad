@@ -17,7 +17,7 @@ public class Weapon extends Observable{
 	private double range;
 	
 	
-	public Weapon(String name, int ID, double demage, double speedX, double speedY, String image, double[] initialCoordinate, double range) {
+	public Weapon(String name, int ID, double demage, double speedX, double speedY, String image,  double range) {
 		this.name = name;
 		this.ID = ID;
 		this.damage = demage;
@@ -25,8 +25,7 @@ public class Weapon extends Observable{
 		this.speedY  = speedY;
 		this.image = image;
 		this.distanceTravelled = 0;
-		this.xCoordinate = initialCoordinate[0];
-		this.yCoordinate = initialCoordinate[1];
+
 		this.range = range;
 	}
 	
