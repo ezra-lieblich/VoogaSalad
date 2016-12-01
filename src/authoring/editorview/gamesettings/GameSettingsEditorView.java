@@ -4,6 +4,7 @@ import java.util.List;
 
 import authoring.editorview.EditorViewController;
 import authoring.editorview.IUpdateView;
+import authoring.editorview.ListDataSource;
 import authoring.editorview.gamesettings.subviews.GameNameView;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
@@ -129,11 +130,19 @@ public class GameSettingsEditorView implements IGameUpdateView, IGameSettingsEdi
 
 
 
-
 	@Override
 	public void updateLosingConditions(List<String> losingConditions) {
 		// TODO Auto-generated method stub
 		
+	}
+
+
+
+
+	@Override
+	public void setGameSettingsListDataSource(ListDataSource source) {
+		// TODO Auto-generated method stub
+		System.out.println("Game settings doesn't have an image bank implemented!");
 	}
 
 }
