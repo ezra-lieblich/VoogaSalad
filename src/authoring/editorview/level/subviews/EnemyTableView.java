@@ -39,9 +39,10 @@ public class EnemyTableView implements ILevelSetView {
         numEnemiesCol.setEditable(true);
         enemyFrequencyCol.setEditable(true);
         enemyNameCol.setCellValueFactory(
-                                      new PropertyValueFactory<Enemy, String>("enemyName"));
+                                         new PropertyValueFactory<Enemy, String>("enemyName"));
         numEnemiesCol.setCellValueFactory(new PropertyValueFactory<Enemy, String>("numOfEnemies"));
-        enemyFrequencyCol.setCellValueFactory(new PropertyValueFactory<Enemy, String>("enemyFrequency"));
+        enemyFrequencyCol
+                .setCellValueFactory(new PropertyValueFactory<Enemy, String>("enemyFrequency"));
     }
 
     @Override
@@ -53,56 +54,56 @@ public class EnemyTableView implements ILevelSetView {
     public void setDelegate (LevelEditorViewDelegate delegate) {
         this.delegate = delegate;
     }
-    
-    private void setData(List<NameIdPair> enemies) {
+
+    private void setData (List<NameIdPair> enemies) {
         data.clear();
-        for (NameIdPair n: enemies) {
-            Enemy temp = new Enemy (n.getName(), "0", "0");
+        for (NameIdPair n : enemies) {
+            Enemy temp = new Enemy(n.getName(), "0", "0");
             data.add(temp);
         }
     }
 
-    public void updateEnemyTableView(List<NameIdPair> enemies) {
+    public void updateEnemyTableView (List<NameIdPair> enemies) {
         setData(enemies);
         enemyTable.getColumns().clear();
         enemyTable.setItems(data);
         enemyTable.getColumns().addAll(enemyNameCol, numEnemiesCol, enemyFrequencyCol);
         enemyTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     }
-    
+
     public static class Enemy {
-        
+
         private final SimpleStringProperty enemyName;
         private final SimpleStringProperty enemyFrequency;
         private final SimpleStringProperty numOfEnemies;
- 
-        private Enemy(String enemyName, String enemyFrequency, String numOfEnemies) {
+
+        private Enemy (String enemyName, String enemyFrequency, String numOfEnemies) {
             this.enemyName = new SimpleStringProperty(enemyName);
             this.enemyFrequency = new SimpleStringProperty(enemyFrequency);
             this.numOfEnemies = new SimpleStringProperty(numOfEnemies);
         }
- 
-        public String getEnemyName() {
+
+        public String getEnemyName () {
             return enemyName.get();
         }
- 
-        public void setEnemyName(String enemyName) {
+
+        public void setEnemyName (String enemyName) {
             this.enemyName.set(enemyName);
         }
- 
-        public String getEnemyFrequency() {
+
+        public String getEnemyFrequency () {
             return enemyFrequency.get();
         }
- 
-        public void setEnemyFrequency(String enemyFrequency) {
+
+        public void setEnemyFrequency (String enemyFrequency) {
             this.enemyFrequency.set(enemyFrequency);
         }
- 
-        public String getNumOfEnemies() {
+
+        public String getNumOfEnemies () {
             return numOfEnemies.get();
         }
- 
-        public void setNumOfEnemies(String numOfEnemies) {
+
+        public void setNumOfEnemies (String numOfEnemies) {
             this.numOfEnemies.set(numOfEnemies);
         }
     }

@@ -10,6 +10,12 @@ import engine.enemy.EnemyManagerController;
 import engine.level.LevelManagerController;
 
 
+/**
+ * 
+ * @author Kayla Schulz
+ * @author Diane Hadley
+ *
+ */
 public class LevelEditorViewController extends EditorViewController
         implements LevelEditorViewDelegate {
 
@@ -35,7 +41,7 @@ public class LevelEditorViewController extends EditorViewController
     public void setEnemyDataSource (EnemyManagerController source) {
         this.enemyDataSource = source;
     }
-    
+
     private void getCreatedEnemies () {
         List<Integer> enemyCreatedIDs = enemyDataSource.getCreatedTypeIds();
         nameIDList.clear();
@@ -45,8 +51,8 @@ public class LevelEditorViewController extends EditorViewController
             nameIDList.add(newPair);
         }
     }
-    
-    private List<NameIdPair> getNameIDList() {
+
+    private List<NameIdPair> getNameIDList () {
         getCreatedEnemies();
         return nameIDList;
     }

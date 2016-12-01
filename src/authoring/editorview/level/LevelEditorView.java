@@ -15,7 +15,12 @@ import authoring.editorview.level.subviews.EnemyTableView;
 import javafx.scene.Node;
 import javafx.scene.layout.VBox;
 
-
+/**
+ * 
+ * @author Kayla Schulz
+ * @author Diane Hadley
+ *
+ */
 public class LevelEditorView implements ILevelEditorView {
 
     private VBox vbox;
