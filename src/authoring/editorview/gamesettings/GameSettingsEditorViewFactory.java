@@ -1,5 +1,10 @@
 package authoring.editorview.gamesettings;
 
+/**
+ * 
+ * @author Kayla Schulz
+ *
+ */
 public class GameSettingsEditorViewFactory {
 
     private GameSettingsEditorViewFactory () {
