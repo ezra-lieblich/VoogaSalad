@@ -184,6 +184,7 @@ public class GamePlayerController implements Observer {
 			}
 			
 			this.enemyManager.update(); 
+			this.model.updateInLevel();
 			redrawEverything();
 /*
 			List<Enemy>enemyRedraw = this.enemyManager.getEnemyOnGrid(); 

@@ -310,7 +310,9 @@ public class GamePlayModel extends Observable {
 	}
 
 	private void updateWeapon() {
+		System.out.println("Weapons on grid: " + weaponOnGrid.size());
 		for (Weapon w : weaponOnGrid) {
+			System.out.println("Weapon x: " + w.getX());
 			w.setX(w.getSpeedX() + w.getX());
 			w.setY(w.getSpeedY() + w.getY());
 
@@ -399,7 +401,7 @@ public class GamePlayModel extends Observable {
 
 	public void updateInLevel() {
 		// checkCollision();
-		// updateWeapon();
+		 updateWeapon();
 		// this.enemyModel.update();
 
 	}
