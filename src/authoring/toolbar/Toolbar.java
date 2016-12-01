@@ -47,7 +47,7 @@ public class Toolbar implements IToolbar {
     public void saveFile (String content) {
         FileChooser choose = new FileChooser();
         choose.setTitle("Save game");
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("XML Files (*.xml)", "*.xml");
         choose.getExtensionFilters().add(extFilter);
         File newFile = choose.showSaveDialog(new Stage());
 		if (newFile != null){
