@@ -52,7 +52,7 @@ public class GraphicsLibrary {
 		image.setFitHeight(height);
 		image.setFitWidth(width);
 	}
-
+	
 	public Button createButton(String label) {
 		Button button = new Button(label);
 		return button;

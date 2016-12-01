@@ -81,6 +81,14 @@
 			<coordinate>4,3;</coordinate>
 			<coordinate>5,3;</coordinate>
 			<coordinate>6,3;</coordinate>
+			<coordinate>6,4;</coordinate>
+			<coordinate>6,5;</coordinate>
+			<coordinate>7,5;</coordinate>
+			<coordinate>8,5;</coordinate>
+			<coordinate>9,5;</coordinate>
+			<coordinate>9,6;</coordinate>
+			<coordinate>9,7;</coordinate>
+			<coordinate>9,8;</coordinate>
 		</path>
 		<enemies></enemies>
 	</level1>
