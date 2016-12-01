@@ -23,10 +23,7 @@ public class TowerTypeBuilder extends AbstractTypeBuilder<Tower, TowerBuilder> i
      public static final String DEFAULT_NAME = "New Tower";
      public static final String DEFAULT_IMAGE_PATH = "Images/penguin.jpg";
      public static final double DEFAULT_SIZE = 1;
-<<<<<<< HEAD
-=======
 
->>>>>>> 3b4fd8df8df15462c6b5d2be4bd4b226d86b0956
      public static final List<Integer> DEFAULT_WEAPONS = Arrays.asList(new Integer[]{0});
      public static final List<Integer> DEFAULT_TARGETS = Arrays.asList(new Integer[]{});
      public static final List<Integer> DEFAULT_ABILITIES = Arrays.asList(new Integer[]{});

@@ -182,9 +182,9 @@ public class GamePlayerController implements Observer {
 				Enemy enemy = currentWave.poll();
 				this.enemyManager.spawnEnemy(enemy);
 			}
-			
-			this.enemyManager.update(); 
 			this.model.updateInLevel();
+			this.enemyManager.update(); 
+			
 			redrawEverything();
 /*
 			List<Enemy>enemyRedraw = this.enemyManager.getEnemyOnGrid(); 

@@ -303,11 +303,6 @@ public class GamePlayModel extends Observable {
 
 
 	private void updateWeapon() {
-<<<<<<< HEAD
-		
-=======
-		System.out.println("Weapons on grid: " + weaponOnGrid.size());
->>>>>>> 3e3df098181f12aabb9299d9e7aeaf4be6d62820
 		for (Weapon w : weaponOnGrid) {
 			System.out.println("Weapon x: " + w.getX());
 			w.setX(w.getSpeedX() + w.getX());
