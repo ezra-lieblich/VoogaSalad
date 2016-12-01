@@ -2,8 +2,6 @@ package authoring.editorview.enemy.subviews;
 
 import java.util.ArrayList;
 import java.util.List;
-
-
 import authoring.editorview.ImageBank;
 import authoring.editorview.ListCellData;
 import authoring.editorview.ListDataSource;
@@ -32,17 +30,17 @@ public class EnemyImageBank extends ImageBank {
         this.items.add(newEnemyButton);
     }
 
-    public void setDelegate(EnemyEditorViewDelegate delegate) {
-    	this.delegate = delegate;
+    public void setDelegate (EnemyEditorViewDelegate delegate) {
+        this.delegate = delegate;
     }
-    
+
     public void updateEnemyBank (List<Integer> activeEnemies) {
         super.updateBank(activeEnemies);
     }
 
-	@Override
-	protected void userSelectedRow(int index) {
-		int selectedEnemy = this.itemIDs.get(index);
-		this.delegate.onUserSelectedEnemy(selectedEnemy);
-	}
+    @Override
+    protected void userSelectedRow (int index) {
+        int selectedEnemy = this.itemIDs.get(index);
+        this.delegate.onUserSelectedEnemy(selectedEnemy);
+    }
 }
