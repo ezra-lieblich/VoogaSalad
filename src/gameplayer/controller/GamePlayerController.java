@@ -155,22 +155,10 @@ public class GamePlayerController implements Observer {
 			this.currentWave = this.model.getPackOfEnemyComing();
 			
 			//trying to get this to work but null pointer
-			/*
-			while(currentWave.size()!=0){
-				double[] coords = generateRandomEnemyStartingPoints();
-				Enemy enemy = currentWave.poll();
-				//System.out.println("Coordinates of enemy: "+coords[0]+","+coords[1]);
-				
-				//System.out.println("IS the cell null?"+this.model.getGrid().getCell((int)coords[0], (int)coords[1]));
-				enemy.setCurrentCell(enemy.getCurrentCell());
-				this.enemyManager.spawnEnemy(enemy);
-			}
-			*/
 			
 			while(currentWave.size()!=0){
-				Enemy test = currentWave.poll();
-				test.setCurrentCell(this.model.getGrid().getCell(0, 0));
-				this.enemyManager.spawnEnemy(test);
+				Enemy enemy = currentWave.poll();
+				this.enemyManager.spawnEnemy(enemy);
 			}
 			
 			this.enemyManager.update(); 
