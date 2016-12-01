@@ -19,7 +19,6 @@ public class GamePlayModel extends Observable {
 	private int gridX;
 	private int gridY;
 
-	private List<Enemy> enemyOnGrid;
 	private List<Weapon> weaponOnGrid;
 	private List<gameplayer.model.Tower> towersOnGrid; //fix naming
 	private int hitBuffer = 10; // initialize from xml
@@ -145,7 +144,6 @@ public class GamePlayModel extends Observable {
 		this.gridX = this.gridArray.length;
 		this.gridY = this.gridArray[0].length;
 		weaponOnGrid = new ArrayList<Weapon>();
-		enemyOnGrid = new ArrayList<Enemy>();
 		weaponMap = this.factory.getWeaponBank();
 		
 

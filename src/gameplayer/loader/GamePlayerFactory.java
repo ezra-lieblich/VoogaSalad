@@ -1,6 +1,7 @@
 package gameplayer.loader;
 
 import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,7 +28,7 @@ public class GamePlayerFactory{
 		return authoringFileReader.isValid();
 	}
 	
-	public HashMap<Integer, Weapon> getWeaponBank() {
+	public HashMap<Integer, engine.weapon.Weapon> getWeaponBank() {
 		WeaponTypeBuilder weaponBuilder = new WeaponTypeBuilder();
 		HashMap<Integer, Weapon> bank = new HashMap<Integer, Weapon>();
 		bank.put(0, weaponBuilder.build());
