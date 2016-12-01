@@ -66,6 +66,7 @@ public class AuthoringController {
 
 		pathVC.setPathDataSource(pathModel);
 		levelVC.setLevelDataSource(levelModel);
+		levelVC.setEnemyDataSource(enemyModel);
 		weaponVC.setWeaponDataSource(weaponModel);
 		enemyVC.setEnemyDataSource(enemyModel);
 		towerVC.setTowerDataSource(towerModel);
