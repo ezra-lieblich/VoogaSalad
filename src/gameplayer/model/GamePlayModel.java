@@ -147,6 +147,7 @@ public class GamePlayModel extends Observable {
 		weaponOnGrid = new ArrayList<Weapon>();
 		enemyOnGrid = new ArrayList<Enemy>();
 		weaponMap = this.factory.getWeaponBank();
+		
 
 
 	}
@@ -243,12 +244,15 @@ public class GamePlayModel extends Observable {
 			gameplayer.model.Tower newlyPlaced = null;
 			List<Integer> weaponTypes = towerType.getWeapons();
 			ArrayList <Gun> gunsForTower = new ArrayList<Gun>();
+			System.out.println("all the int weapons: " + gunsForTower.size());
 			for (int i: weaponTypes){
 				engine.weapon.Weapon weaponForGun = this.weaponMap.get(i);
 				gunsForTower.add(new Gun(weaponForGun.getFireRate(), weaponForGun, weaponForGun.getRange(),newlyPlaced));
 
 			}
-		
+			
+			System.out.println("all the gun s: " + gunsForTower.size());
+
 			newlyPlaced = new gameplayer.model.Tower(type,this.uniqueTowerID, towerType.getCost(),gunsForTower, towerType.getImagePath(),towerType.getName());
 			newlyPlaced.setCoordinates(cellToCoordinate(x), cellToCoordinate(y));
 			uniqueTowerID ++;
@@ -258,6 +262,8 @@ public class GamePlayModel extends Observable {
 			setGold(this.gold - newlyPlaced.getCost());
 			System.out.println("Calculation time: x:"+x+", Grid width: "+GridGUI.GRID_WIDTH+", cellwidth: "+this.getCellWidth()+",cellheight:"+this.getCellHeight());
 			grid.placeTower(newlyPlaced, (int)(GridGUI.GRID_WIDTH/x), (int)(GridGUI.GRID_HEIGHT/y));
+			
+			System.out.println("towers on grid: " + this.towersOnGrid.size()); 
 
 		return true;
 		// get weaponTypes
@@ -331,7 +337,6 @@ public class GamePlayModel extends Observable {
 
 
 	private void updateWeapon() {
-		//System.out.println("Weapons on grid: " + weaponOnGrid.size());
 
 		for (Weapon w : weaponOnGrid) {
 			//System.out.println("Weapon x: " + w.getX());
@@ -347,7 +352,10 @@ public class GamePlayModel extends Observable {
 
 		// check all the weapon types
 		for (gameplayer.model.Tower t: towersOnGrid){
+			System.out.println("towerID: " + t.getID());
 			ArrayList<Gun> guns = t.getGuns();
+			System.out.println("gun size: " + guns.size());
+
 			for (Gun g : guns){
 				if(g.isFiring()){
 					Weapon currentWeapon = g.getWeapon();
@@ -419,6 +427,7 @@ public class GamePlayModel extends Observable {
 	 */
 
 	public void updateInLevel() {
+		System.out.println("+++++++++++++++++checking +++++++++++++");
 		// checkCollision();
 		 updateWeapon();
 		// this.enemyModel.update();
