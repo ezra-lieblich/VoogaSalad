@@ -289,10 +289,10 @@ public class GamePlayModel extends Observable {
 		
 		System.out.println("starting cell x: "+current.getX()+"; y: "+current.getY());
 		while (current != null){
-			double x_min =current.getX()* GridGUI.GRID_WIDTH/this.getColumns();
-			double x =current.getX()* GridGUI.GRID_WIDTH/this.getColumns() + this.getCellWidth();
-			double y = current.getY() * GridGUI.GRID_WIDTH/this.getRow() + GridGUI.GRID_WIDTH/this.getRow();
-			double y_min = current.getY() * GridGUI.GRID_WIDTH/this.getRow() ;
+			double x_min =current.getX();/** GridGUI.GRID_WIDTH/this.getColumns();*/
+			double x =current.getX();/** GridGUI.GRID_WIDTH/this.getColumns() + this.getCellWidth();*/
+			double y = current.getY();/* * GridGUI.GRID_WIDTH/this.getRow() + GridGUI.GRID_WIDTH/this.getRow();*/
+			double y_min = current.getY(); /** GridGUI.GRID_WIDTH/this.getRow() ;*/
 			current = current.getNext();
 			System.out.println("Startcell: "+x+","+y+". Candropimage: "+xcoord+","+ycoord);
 			if (xcoord<x && xcoord>x_min && ycoord<y && ycoord>y_min){

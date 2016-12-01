@@ -164,6 +164,8 @@ public class EnemyManager extends Observable {
 		int x =(int)(this.gamePlayModel.getCellWidth()*pixelx/GridGUI.GRID_WIDTH);
 		int y= (int)(this.gamePlayModel.getCellHeight()*pixely/GridGUI.GRID_HEIGHT);
 		int[] cell  = {x,y};
+		System.out.println();
+		System.out.println("Results of coordinate to cell: "+x+","+y);
 		return cell;
 	}
 	
@@ -184,19 +186,32 @@ public class EnemyManager extends Observable {
 				// System.out.println("Both should move");
 				enemy.setX(enemy.getX() + enemy.getMovingSpeed());
 				enemy.setY(enemy.getY() + enemy.getMovingSpeed());
+				/*
 				int[] coords = coordinateToCell(enemy.getX(),enemy.getY());
 				enemy.setCell(this.gamePlayModel.getGrid().getCell(coords[0], coords[1]));
+				*/
 			} else if (enemy.getX() < (current.getX() * this.gamePlayModel.getCellWidth())
 					&& !(enemy.getY() < (current.getY() * this.gamePlayModel.getCellHeight()))) {
 				enemy.setX(enemy.getX() + enemy.getMovingSpeed());
+				/*
 				int[] coords = coordinateToCell(enemy.getX(),enemy.getY());
 				enemy.setCell(this.gamePlayModel.getGrid().getCell(coords[0], coords[1]));
+				*/
 			} else if (enemy.getY() > (current.getY() * this.gamePlayModel.getCellHeight()) && enemy.getY()<(current.getY() * (this.gamePlayModel.getCellHeight()+1))
 					&& !(enemy.getX() < (current.getX() * this.gamePlayModel.getCellWidth()))) {
 				enemy.setY(enemy.getY() + enemy.getMovingSpeed());
+				/*
 				int[] coords = coordinateToCell(enemy.getX(),enemy.getY());
 				enemy.setCell(this.gamePlayModel.getGrid().getCell(coords[0], coords[1]));
+				*/
 			}
+			
+		/*
+			if (enemy.getCell()==null || enemy.getCell().getNext()==null){
+				System.out.println("Leave path!");
+				this.enemyOnGrid.remove(enemy); 
+			}*/
+		
 			
 			/*
 			 * if (!(enemy.getX() + enemy.getMovingSpeed() >
