@@ -5,14 +5,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
-import authoring.editorview.enemy.IEnemyEditorView;
+import authoring.editorview.enemy.EnemyDataSource;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 
-public class SelectNewEnemyImage {
+public class SelectNewEnemyImage implements EnemyDataSource {
 
     private File myFile;
     private ResourceBundle myExtensionBundle;
@@ -49,6 +49,18 @@ public class SelectNewEnemyImage {
         myEnemyImageView.setFitHeight(ENEMY_SIZE);
         myEnemyImageView.setFitWidth(ENEMY_SIZE);
         myEnemyImages.put(count, myFile);
+    }
+
+    @Override
+    public void setEnemyImage (int enemyImageID) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void initNewEnemy () {
+        // TODO Auto-generated method stub
+        
     }
 
 }

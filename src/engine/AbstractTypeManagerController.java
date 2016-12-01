@@ -2,8 +2,6 @@ package engine;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Function;
-import java.util.function.Supplier;
 import authoring.editorview.IUpdateView;
 
 
@@ -69,8 +67,8 @@ public abstract class AbstractTypeManagerController<E extends Manager<T>, U exte
     }
 
     @Override
-    public boolean setName (int id, String name) {
-        return isUnique(Type::getName, name) ? typeManager.getEntity(id).setName(name) : typeManager.getEntity(id).setName(typeManager.getEntity(id).getName());
+    public void setName (int id, String name) {
+        typeManager.getEntity(id).setName(name);
     }
 
     @Override
@@ -100,9 +98,5 @@ public abstract class AbstractTypeManagerController<E extends Manager<T>, U exte
         void updateImagePathDisplay (String imagePath);
 
         void updateSizeDisplay (double size);
-    }
-    
-    protected <R> boolean isUnique(Function<T, R> getter, R value) {
-        return !typeManager.getEntityIds().stream().map(a -> typeManager.getEntity(a)).anyMatch(b -> getter.apply(b).equals(value));
     }
 }
