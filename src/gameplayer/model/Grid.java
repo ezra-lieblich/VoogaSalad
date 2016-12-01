@@ -57,6 +57,7 @@ public class Grid {
 	}
 	
 	public void placeTower(Tower t, int x, int y){
+		System.out.println("Place tower coords: "+x+","+y);
 		t.setCoordinates(x, y);
 		grid[x][y].addTower(t);
 	}
