@@ -1,9 +1,11 @@
 package engine.path;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.BiConsumer;
+import java.util.stream.Collectors;
 import engine.AbstractTypeBuilder;
 import engine.ability.Ability;
 import engine.enemy.Enemy;
@@ -17,11 +19,12 @@ import engine.weapon.Weapon;
 
 public class PathTypeBuilder extends AbstractTypeBuilder<Path, PathBuilder> implements PathBuilder, PathInitializer {
     
-     public static final String DEFAULT_NAME = "New Weapon";
-     public static final String DEFAULT_IMAGE_PATH = "Images.penguin.jpg";
+     public static final String DEFAULT_NAME = "New Path";
+     public static final String DEFAULT_IMAGE_PATH = "blacksquare.png";
+     
      public static final double DEFAULT_SIZE = 1;
      public static final String DEFAULT_TYPE = "direct";
-     public static final List<Coordinate<Integer>> DEFAULT_COORDINATES = Arrays.asList(new GridCoordinate[]{});
+     public static final List<Coordinate<Integer>> DEFAULT_COORDINATES = Arrays.stream(new GridCoordinate[]{}).collect(Collectors.toList());
      public static final Integer DEFAULT_GRID_ROWS = 10;
      public static final Integer DEFAULT_GRID_COLUMNS = 10;
      

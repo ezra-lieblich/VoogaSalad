@@ -2,14 +2,17 @@ package engine.tower;
 
 import java.util.List;
 import com.oracle.webservices.internal.api.databinding.Databinding.Builder;
-import authoring.editorview.tower.ITowerUpdateView;
+import authoring.editorview.tower.ITowerEditorView;
 import engine.AbstractTypeManagerController;
+import engine.ManagerMediator;
 
 
-public class TowerTypeManagerController extends AbstractTypeManagerController<TowerManager, TowerBuilder, Tower, ITowerUpdateView> implements TowerManagerController {
+public class TowerTypeManagerController
+        extends AbstractTypeManagerController<TowerManager, TowerBuilder, Tower, ITowerEditorView>
+        implements TowerManagerController {
 
-    TowerTypeManagerController (TowerManager towerManager) {
-        super(towerManager, new TowerTypeBuilder());
+    public TowerTypeManagerController (ManagerMediator managerMediator) {
+        super(new TowerTypeManager(), new TowerTypeBuilder(), managerMediator);
     }
 
     @Override
@@ -79,86 +82,30 @@ public class TowerTypeManagerController extends AbstractTypeManagerController<To
 
     // TODO - edit createNewTower to work with both versions
     @Override
-    public int createTowerUpgrade (ITowerUpdateView towerUpdater, int parentTowerID) {
-        return getTypeManager().addUpgrade(createType(towerUpdater), parentTowerID);
+    public int createTowerUpgrade (ITowerEditorView towerUpdater, int parentTowerID) {
+        return getTypeManager().addUpgrade(constructType(towerUpdater), parentTowerID);
     }
 
     @Override
     public void removeTowerUpgrade (int parentTowerID, int childTowerID) {
         getTypeManager().removeUpgrade(childTowerID, parentTowerID);
     }
-    
+
     @Override
-    protected TowerBuilder constructTypeProperties (ITowerUpdateView towerUpdater,
+    protected TowerBuilder constructTypeProperties (ITowerEditorView towerUpdater,
                                                     TowerBuilder typeBuilder) {
-            return typeBuilder
+        return typeBuilder
                 .addWeaponsListener( (oldValue, newValue) -> towerUpdater
-                        .updateTowerChosenWeapon(newValue))
+                        .updateTowerWeaponBank(newValue))
                 .addAbilitiesListener( (oldValue, newValue) -> towerUpdater
-                        .updateTowerAbility(newValue))
+                        .updateTowerAbilityBank(newValue))
                 .addUpgradesListener( (oldValue, newValue) -> towerUpdater
                         .updateTowerUpgradeBank(newValue))
-                .addCostListener((oldValue, newValue) -> towerUpdater
+                .addCostListener( (oldValue, newValue) -> towerUpdater
                         .updateTowerBuyPriceDisplay(newValue))
-                .addSellAmountListener((oldValue, newValue) -> towerUpdater
+                .addSellAmountListener( (oldValue, newValue) -> towerUpdater
                         .updateTowerSellPriceDisplay(newValue))
-                .addUnlockLevelListener((oldValue, newValue) -> towerUpdater
+                .addUnlockLevelListener( (oldValue, newValue) -> towerUpdater
                         .updateUnlockLevelDisplay(newValue));
     }
-
-    @Override
-    public int createType (ITowerUpdateView updateView) {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    @Override
-    public void deleteType (int id) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public String getName (int id) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public String getImagePath (int id) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public Double getSize (int id) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public List<Integer> getCreatedTypeIds () {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public void setName (int id, String name) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void setImagePath (int id, String imagePath) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void setSize (int id, double size) {
-        // TODO Auto-generated method stub
-        
-    }
-
-
 }

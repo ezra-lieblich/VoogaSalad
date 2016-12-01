@@ -1,69 +1,47 @@
 package authoring.editorview.tower.subviews;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ResourceBundle;
-import authoring.editorview.PhotoFileChooser;
-import authoring.editorview.tower.TowerEditorViewDelegate;
-import authoring.utilityfactories.BoxFactory;
-import authoring.utilityfactories.ButtonFactory;
-import authoring.utilityfactories.DialogueBoxFactory;
-import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.VBox;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
+import java.util.List;
 
+import authoring.editorview.ImageBank;
+import authoring.editorview.tower.TowerEditorViewDelegate;
+import authoring.utilityfactories.ButtonFactory;
+import javafx.scene.control.Button;
 
 /**
  * 
- * @author Kayla Schulz
+ * @author Kayla Schulz, Andrew Bihl
  *
  */
-public class TowerImageBank extends PhotoFileChooser {
+public class TowerImageBank extends ImageBank {
 
     private TowerEditorViewDelegate delegate;
-    private ScrollPane towerBank;
-    private VBox vbox;
-    private File chosenFile;
 
-    public TowerImageBank (ResourceBundle labelsResource, ResourceBundle dialogueBoxResource) {
-        towerBank = new ScrollPane();
+    public TowerImageBank () {
+    	super();
         Button createTowerButton =
-                ButtonFactory.makeButton("Create Tower",
+                ButtonFactory.makeButton("New Tower",
                                          e -> {
-                                             try {
-                                                 selectFile(labelsResource.getString("Photos"),
-                                                            labelsResource.getString("Image"));
-                                             }
-                                             catch (IOException e1) {
-                                                 DialogueBoxFactory
-                                                         .createErrorDialogueBox(dialogueBoxResource
-                                                                 .getString("UnableToOpen"),
-                                                                                 dialogueBoxResource
-                                                                                         .getString("TryAgain"));
-                                             }
+                                             delegate.onUserPressedCreateNewTower();
                                          });
-        vbox = BoxFactory.createVBox(labelsResource.getString("TowerBank"));
-        vbox.getChildren().add(createTowerButton);
-        towerBank.setContent(vbox);
+        items.add(createTowerButton);
     }
 
     public void setDelegate (TowerEditorViewDelegate delegate) {
         this.delegate = delegate;
     }
 
-    public Node getInstanceAsNode () {
-        return towerBank;
+    public void setListDataSource (TowerListDataSource source) {
+        this.dataSource = source;
+    }
+    
+    public void updateTowerBank (List<Integer> createdTowers) {
+    	super.updateBank(createdTowers);
     }
 
-    @Override
-    public void openFileChooser (FileChooser chooseFile) throws IOException {
-        chosenFile = chooseFile.showOpenDialog(new Stage());
-        if (chosenFile != null) {
-
-        }
-    }
+	@Override
+	protected void userSelectedRow(int index) {
+		int selectedTowerID = this.itemIDs.get(index);
+		this.delegate.onUserSelectedTower(selectedTowerID);
+	}
 
 }

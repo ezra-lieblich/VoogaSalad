@@ -1,5 +1,5 @@
 package usecases;
-
+/*
 import java.io.File;
 import java.util.List;
 import java.util.Map;
@@ -11,7 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-/*
+
 public class SelectNewEnemyImage implements EnemyDataSource {
 
     private File myFile;

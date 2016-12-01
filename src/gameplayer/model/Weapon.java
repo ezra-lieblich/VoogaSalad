@@ -8,51 +8,38 @@ public class Weapon extends Observable{
 	private double damage;
 	private double speedX;
 	private double speedY;
-
 	private String name;
 	private String image;
 	private double xCoordinate;
 	private double yCoordinate;
 	private Tower shootingAgent;
-	private double firingRate;
-	private double attackingRange;
 	private int fireCounter;
 	private double distanceTravelled;
 	
 	
-	public Weapon(String name, int ID, double firingRate, double attackingRange, double damage, double speedX, double speedY, String image) {
+	public Weapon(String name, int ID, double demage, double speedX, double speedY, String image) {
 		this.name = name;
 		this.ID = ID;
-		this.firingRate = firingRate;
-		this.attackingRange = attackingRange;
-		this.damage = damage;
+		this.damage = demage;
+
 		this.speedX = speedX;
 		this.speedY  = speedY;
 		this.image = image;
-		this.fireCounter = 0;
+		//this.fireCounter = 0;
 	}
 	
 	public String getName(){
 		return this.name;
 	}
 	
-	Boolean isFiring(){
-		if(fireCounter % this.firingRate == 0){
-			fireCounter++;
-			return true;
-		}
-		fireCounter++;
-		return false;
-	}
+
 	
 	
 	public void incrementDistanceTravelled(double x, double y) {
 		this.distanceTravelled += Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
 	}
 	
-	Boolean outOfRange(){
-		return distanceTravelled > this.attackingRange;
-	}
+
 	
 	public void setShootingAgent(Tower t){
 		this.shootingAgent = t;

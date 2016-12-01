@@ -52,6 +52,10 @@ public class GamePlayerController implements Observer {
 
 
 	private Queue<Enemy> currentWave;
+	
+	
+
+
 
 	public GamePlayerController() {
 		// use xml parser to create classes.
@@ -103,8 +107,10 @@ public class GamePlayerController implements Observer {
 	
 	private ArrayList<String> getTowerImages() {
 		ArrayList<String> towerImages = new ArrayList<String>();
+
 		HashMap<Integer, engine.tower.Tower> towers = this.loader.getTowers(); //fix naming
 		for (engine.tower.Tower tower : towers.values()) { //fix naming
+
 			towerImages.add(tower.getImagePath());
 		}
 		return towerImages;

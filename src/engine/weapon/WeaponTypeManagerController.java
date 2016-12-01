@@ -1,20 +1,21 @@
 package engine.weapon;
 
 import java.util.List;
-import authoring.editorview.weapon.IWeaponUpdateView;
+import authoring.editorview.weapon.IWeaponEditorView;
 import engine.AbstractTypeManagerController;
+import engine.ManagerMediator;
 
 
 public class WeaponTypeManagerController extends
-        AbstractTypeManagerController<WeaponManager, WeaponBuilder, Weapon, IWeaponUpdateView>
+        AbstractTypeManagerController<WeaponManager, WeaponBuilder, Weapon, IWeaponEditorView>
         implements WeaponManagerController {
 
-    WeaponTypeManagerController (WeaponManager weaponManager) {
-        super(weaponManager, new WeaponTypeBuilder());
+    public WeaponTypeManagerController (ManagerMediator managerMediator) {
+        super(new WeaponTypeManager(), new WeaponTypeBuilder(), managerMediator);
     }
 
     @Override
-    protected WeaponBuilder constructTypeProperties (IWeaponUpdateView weaponUpdater,
+    protected WeaponBuilder constructTypeProperties (IWeaponEditorView weaponUpdater,
                                                      WeaponBuilder typeBuilder) {
         return typeBuilder
                 .addEffectListener( (oldValue, newValue) -> weaponUpdater
@@ -59,13 +60,11 @@ public class WeaponTypeManagerController extends
     @Override
     public void setNewWeaponTargetEnemy (int weaponID, int enemyID) {
         getTypeManager().getEntity(weaponID).addTarget(enemyID);
-        ;
     }
 
     @Override
     public void removeWeaponTargetEnemy (int weaponID, int enemyID) {
         getTypeManager().getEntity(weaponID).removeTarget(enemyID);
-        ;
     }
 
     @Override
@@ -98,9 +97,4 @@ public class WeaponTypeManagerController extends
         return getTypeManager().getEntity(weaponID).getTargets();
     }
 
-    @Override
-    public int createType (IWeaponUpdateView updateView) {
-        // TODO Auto-generated method stub
-        return 0;
-    }
 }

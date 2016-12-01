@@ -1,7 +1,7 @@
 package authoring.editorview.tower.subviews.editorfields;
 
 import java.util.ResourceBundle;
-import authoring.editorview.tower.ITowerEditorView;
+import authoring.editorview.tower.ITowerSetView;
 import authoring.editorview.tower.TowerEditorViewDelegate;
 import authoring.utilityfactories.TextFieldFactory;
 import javafx.scene.Node;
@@ -13,7 +13,7 @@ import javafx.scene.control.TextField;
  * @author Kayla Schulz
  *
  */
-public class TowerUnlockLevelField implements ITowerEditorView {
+public class TowerUnlockLevelField implements ITowerSetView {
 
     private TextField towerLevelField;
     private TowerEditorViewDelegate delegate;

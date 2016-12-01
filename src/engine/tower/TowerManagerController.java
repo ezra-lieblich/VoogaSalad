@@ -1,7 +1,7 @@
 package engine.tower;
 
 import java.util.List;
-import authoring.editorview.tower.ITowerUpdateView;
+import authoring.editorview.tower.ITowerEditorView;
 import engine.ManagerController;
 
 
@@ -11,7 +11,8 @@ import engine.ManagerController;
  * @author Kayla Schulz
  *
  */
-public interface TowerManagerController extends ManagerController<TowerManager, TowerBuilder, Tower, ITowerUpdateView>{
+public interface TowerManagerController
+        extends ManagerController<TowerManager, TowerBuilder, Tower, ITowerEditorView> {
 
     public double getTowerBuyPrice (int towerID);
 
@@ -39,7 +40,7 @@ public interface TowerManagerController extends ManagerController<TowerManager, 
 
     public void removeTowerWeapon (int towerID, int towerChosenWeaponID);
 
-    public int createTowerUpgrade (ITowerUpdateView towerUpdater, int parentTowerID);
+    public int createTowerUpgrade (ITowerEditorView towerUpdater, int parentTowerID);
 
     public void removeTowerUpgrade (int parentTowerID, int childTowerID);
 

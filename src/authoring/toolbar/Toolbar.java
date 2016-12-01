@@ -10,6 +10,8 @@ public class Toolbar implements IToolbar {
     private ToolBar toolbar;
 
     public Toolbar (int aWidth, int aHeight) {
+    	
+    	
         this.toolbar = new ToolBar(
                                 new Button("New"),
                                 new Button("Open"));
