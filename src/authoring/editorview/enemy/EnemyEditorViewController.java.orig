@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 import authoring.editorview.EditorViewController;
 import authoring.editorview.ListCellData;
 import authoring.editorview.ListDataSource;
+import authoring.editorview.enemy.subviews.EnemyListCellData;
 import authoring.utilityfactories.DialogueBoxFactory;
 import engine.enemy.*;
 
@@ -25,7 +26,11 @@ public class EnemyEditorViewController extends EditorViewController
     public EnemyEditorViewController (int editorWidth, int editorHeight) throws IOException {
         enemyView = EnemyEditorViewFactory.build(editorWidth, editorHeight);
         enemyView.setDelegate(this);
+<<<<<<< HEAD
         enemyView.setEnemyListDataSource(this);
+=======
+        // enemyView.setEnemyListDataSource(this);
+>>>>>>> 4bc2c31305b3c8927dd51d1f29237e032434cbec
         this.view = enemyView;
     }
 
@@ -151,7 +156,7 @@ public class EnemyEditorViewController extends EditorViewController
 
     @Override
     public ListCellData getCellDataForSubject (int enemyID) {
-        ListCellData cellData = new ListCellData();
+        ListCellData cellData = new EnemyListCellData();
         cellData.setName(enemyDataSource.getName(enemyID));
         cellData.setImagePath(enemyDataSource.getImagePath(enemyID));
         cellData.setId(enemyID);

@@ -2,6 +2,7 @@ package authoring.editorview.weapon;
 
 import java.util.List;
 import authoring.editorview.IUpdateView;
+import authoring.editorview.ListDataSource;
 
 
 /**
@@ -31,5 +32,7 @@ public interface IWeaponEditorView extends IWeaponSetView, IUpdateView {
     public void createNewWeapon (); // This is the method where I will go and update e'rthing
     
     public void deleteWeapon ();
+    
+    public void setWeaponListDataSource (ListDataSource source);
 
 }

@@ -3,6 +3,7 @@ package authoring.editorview.path;
 import java.util.List;
 
 import authoring.editorview.IUpdateView;
+import authoring.editorview.ListDataSource;
 import engine.path.Coordinate;
 
 public interface IPathUpdateView extends IPathEditorView, IUpdateView{
@@ -19,6 +20,8 @@ public interface IPathUpdateView extends IPathEditorView, IUpdateView{
 	
 	public void createNewPath ();
 	
-	public void redrawPath ();
+	public void updatePath ();
+
+	public void setPathListDataSource (ListDataSource source);
 
 }

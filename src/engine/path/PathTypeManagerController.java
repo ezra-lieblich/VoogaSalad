@@ -39,6 +39,12 @@ public class PathTypeManagerController
     }
 
     @Override
+    public boolean removePathCoordinate (int pathID, int x, int y) {
+        getTypeManager().getEntity(pathID).removeCoordinate(new GridCoordinate(x, y));
+        return true; // TODO - validate this
+    }
+    
+    @Override
     public int getNumberofColumns (int pathID) {
         return getTypeManager().getEntity(pathID).getGridColumns();
     }

@@ -71,7 +71,7 @@ public class PathEditorViewController extends EditorViewController implements Pa
 		pathView.updatePathCoordinates(pathDataSource.getPathCoordinates(pathID));
 		pathView.updateImagePathDisplay(pathDataSource.getImagePath(pathID));
 		pathView.updateNameDisplay(pathDataSource.getName(pathID));
-		pathView.redrawPath();
+		pathView.updatePath();
 	}
 
 

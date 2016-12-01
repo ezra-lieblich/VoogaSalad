@@ -7,6 +7,7 @@ import authoring.editorview.path.subviews.PathGrid;
 import java.io.File;
 import java.util.List;
 
+import authoring.editorview.ListDataSource;
 import authoring.editorview.path.subviews.NewPathView;
 import authoring.editorview.path.subviews.PathInstructionsView;
 import authoring.editorview.path.subviews.PathImageView;
@@ -176,13 +177,19 @@ public class PathEditorView implements IPathUpdateView {
 	}
 
 	@Override
-	public void redrawPath() {
+	public void updatePath() {
 		pathGrid.redrawPath();
 		
 	}
 
 	@Override
 	public void updateBank(List<Integer> ids) {
+		// TODO Auto-generated method stub
+		System.out.println("There is no path bank implemented");
+	}
+
+	@Override
+	public void setPathListDataSource(ListDataSource source) {
 		// TODO Auto-generated method stub
 		System.out.println("There is no path bank implemented");
 	}

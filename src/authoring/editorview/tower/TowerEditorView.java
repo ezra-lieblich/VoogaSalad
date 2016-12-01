@@ -3,6 +3,8 @@ package authoring.editorview.tower;
 import java.io.IOException;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import authoring.editorview.ListDataSource;
 import authoring.editorview.tower.subviews.TowerEffectView;
 import authoring.editorview.tower.subviews.TowerImageBank;
 import authoring.editorview.tower.subviews.editorfields.TowerAbilityBank;
@@ -157,5 +159,10 @@ public class TowerEditorView implements ITowerEditorView {
 	@Override
 	public void updateBank(List<Integer> ids) {
 		this.towerBank.updateBank(ids);
+	}
+
+	@Override
+	public void setTowerListDataSource(ListDataSource source) {
+		this.towerBank.setListDataSource(source);
 	}
 }
