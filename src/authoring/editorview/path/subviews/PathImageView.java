@@ -63,7 +63,7 @@ public class PathImageView extends PhotoFileChooser{
 		File chosenFile = chooseFile.showOpenDialog(new Stage());
 		if (chosenFile != null){
 			BufferedImage image = ImageIO.read(chosenFile) ;
-			pathImagePath = chosenFile.getPath();
+			pathImagePath = chosenFile.toURI().toString();
 			delegate.onUserEnteredPathImage(activePathID, pathImagePath);
 				
 			

@@ -55,7 +55,7 @@ public class PathType extends AbstractType implements Path {
 
     @Override
     public void setGridColumns (int gridColumns) {
-        this.gridRows.setProperty(gridColumns);        
+        this.gridColumns.setProperty(gridColumns);        
     }
 
   @Override
