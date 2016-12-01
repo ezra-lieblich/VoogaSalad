@@ -147,6 +147,7 @@ public class GamePlayModel extends Observable {
 		weaponOnGrid = new ArrayList<Weapon>();
 		enemyOnGrid = new ArrayList<Enemy>();
 		weaponMap = this.factory.getWeaponBank();
+		System.out.println("weapon map" + weaponMap.get(0).getName());
 		
 
 
@@ -427,7 +428,6 @@ public class GamePlayModel extends Observable {
 	 */
 
 	public void updateInLevel() {
-		System.out.println("+++++++++++++++++checking +++++++++++++");
 		// checkCollision();
 		 updateWeapon();
 		// this.enemyModel.update();

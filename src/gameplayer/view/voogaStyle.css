@@ -15,6 +15,7 @@
 	-fx-padding: 10 0 0 0;
     -fx-border-insets: 0px;
     -fx-background-insets: 0px;
+    -fx-background-color: #48795D;
 }
 
 /* tab pane default */
@@ -22,9 +23,28 @@
     my-tab-header-background: derive(-fx-text-box-border, 30%) ;
 }
 
+.tab {
+	-fx-background-color: #8da899;
+}
+
+.tab-label{
+	-fx-text-fill: white;
+}
+.towersScrollPane > .viewport{
+	-fx-background-color: transparent;
+}
+
+.towersScrollPane {
+	-fx-background-color: #8da899;
+	-fx-border-color: black;
+	-fx-border-width: 2.0;
+}
+
 .tab-pane > .tab-header-area > .tab-header-background {
-    -fx-background-color: -fx-outer-border, -fx-text-box-border, 
+     -fx-background-color: -fx-outer-border, -fx-text-box-border, 
         linear-gradient(from 0px 0px to 0px 5px, -fx-text-box-border, my-tab-header-background) ;
+        -fx-opacity:0; 
+        
 }
 
 
@@ -49,7 +69,6 @@
 .ipad-dark-grey Text {
     -fx-effect: dropshadow( one-pass-box , black , 0, 0.0 , 0 , -1 );
 }
-
 
 
 .scoreLabel{

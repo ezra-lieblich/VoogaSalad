@@ -99,8 +99,6 @@ public class XMLParser {
     
     public String getTextValue(String parent, String tagName) {
         String textVal = "";
-        System.out.println("parent: " + parent);
-        System.out.println("tag name: " + tagName);
         try{
         	NodeList parentList = xmlDocument.getElementsByTagName(parent);
 	        NodeList nl = ((Element)parentList.item(0)).getElementsByTagName(tagName);
@@ -130,14 +128,16 @@ public class XMLParser {
     			towerBuilder.buildCost(Double.parseDouble(((Element)(towerElement.getElementsByTagName("cost").item(0))).getFirstChild().getNodeValue()));
     			towerBuilder.buildSellAmount(Double.parseDouble(((Element)(towerElement.getElementsByTagName("sellAmount").item(0))).getFirstChild().getNodeValue()));
     			towerBuilder.buildUnlockLevel(Integer.parseInt(((Element)(towerElement.getElementsByTagName("unlockLevel").item(0))).getFirstChild().getNodeValue()));
+    			/**
     			ArrayList<Integer> weapons = new ArrayList<Integer>();
     			NodeList weaponNodes = towerElement.getElementsByTagName("weapons");
-    			System.out.println("Weapons: " + weaponNodes.getLength());
     			for (int j = 0; j < weaponNodes.getLength(); j++) {
     				weapons.add(Integer.parseInt(((Element)weaponNodes.item(j)).getFirstChild().getNodeValue()));
     			}
     			towerBuilder.buildWeapons(weapons);
-    			System.out.println("-----------WEAPONS: -----------------"+weapons);
+    			**/
+    			
+    			//System.out.println("-----------WEAPONS: -----------------"+weapons);
     			Tower tower = towerBuilder.build();
     			ret.put(i, tower);
     		}
@@ -166,12 +166,9 @@ public class XMLParser {
 		for(int i=0;i<enemiesRawString.length;i++){
 			Queue<Enemy>enemiesInLevel= new LinkedList<Enemy>(); 
 			String[]enemies = enemiesRawString[i].split(",");
-			System.out.println("enemies[1] = " + enemies[1]);
 			for(int k=0;k<Integer.parseInt(enemies[1]);k++){
 
 				engine.enemy.Enemy type = types.get(enemies[0]); //refactor names
-				System.out.println(type.getName());
-				System.out.println(type.getSpeed());
 				double width = 20; //for testing purposes
 				double height = 20; //for testing purposes
 		//+++++++++++++add enemy construction once game authoring is done++++++++++++++++	
