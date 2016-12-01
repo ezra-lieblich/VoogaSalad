@@ -51,6 +51,8 @@ public class GameGUI {
 	private double currentLevel;
 	private List path;
 	private EventHandler animationBind;
+	private int rows;
+	private int columns;
 	
 	public GameGUI(int rows, int columns){
 		this.mainScreen = new BorderPane();
@@ -59,6 +61,8 @@ public class GameGUI {
 		this.dragDrop = new DragDropView(xError, yError); 
 		this.buttonPanel = new GamePlayButtonPanel();
 		this.currentLevel = 0;
+		this.rows = rows;
+		this.columns = columns;
 	}
 	
 	public Scene init(double gold, double lives, double level, List<String> imagePaths){
@@ -71,6 +75,13 @@ public class GameGUI {
 		return this.scene;
 	}
 	
+	public int getRows(){
+		return this.rows;
+	}
+	
+	public int getColumns(){
+		return this.columns;
+	}
 	/**
 	 * MIGHT NOT BE NECESSARY
 	 * Update the current level in the stats display only
@@ -153,7 +164,7 @@ public class GameGUI {
 		this.statsDisplay.updateLevelUI(gold, lives, level);
 	}
 	
-	//not sure if this goes here
+
 	public void reRenderTower(List<IDrawable> redraw){//should be interface of drawables
 		ArrayList<Double[]> towerCoords = (ArrayList<Double[]>) this.getDroppedTowerCoords();
 		int i = 0;

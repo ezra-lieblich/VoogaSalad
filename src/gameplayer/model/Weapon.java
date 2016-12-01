@@ -5,10 +5,9 @@ import java.util.Observable;
 public class Weapon extends Observable{
 	
 	private int ID;
-	private double demage;
+	private double damage;
 	private double speedX;
 	private double speedY;
-
 	private String name;
 	private String image;
 	private double xCoordinate;
@@ -21,8 +20,8 @@ public class Weapon extends Observable{
 	public Weapon(String name, int ID, double demage, double speedX, double speedY, String image) {
 		this.name = name;
 		this.ID = ID;
+		this.damage = demage;
 
-		this.demage = demage;
 		this.speedX = speedX;
 		this.speedY  = speedY;
 		this.image = image;
@@ -36,7 +35,7 @@ public class Weapon extends Observable{
 
 	
 	
-	void incrementDistanceTravelled(double x, double y) {
+	public void incrementDistanceTravelled(double x, double y) {
 		this.distanceTravelled += Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
 	}
 	
@@ -65,13 +64,13 @@ public class Weapon extends Observable{
 		return xCoordinate;
 	}
 
-	void setX(double xCoordinate) {
+	public void setX(double xCoordinate) {
 		this.xCoordinate = xCoordinate;
 		setChanged();
 		notifyObservers();
 	}
 
-	double getY() {
+	public double getY() {
 		return yCoordinate;
 	}
 
@@ -93,12 +92,12 @@ public class Weapon extends Observable{
 		ID = iD;
 	}
 
-	double getDemage() {
-		return demage;
+	double getDamage() {
+		return damage;
 	}
 
-	void setDemage(double demage) {
-		this.demage = demage;
+	void setDamage(double damage) {
+		this.damage = damage;
 	}
 
 
