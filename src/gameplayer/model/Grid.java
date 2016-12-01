@@ -56,10 +56,10 @@ public class Grid {
 		return this.grid;
 	}
 	
-	public void placeTower(Tower t, int x, int y){
+	public void placeTower(Tower t, int x, int y, int coordx, int coordy){
 		System.out.println("Place tower coords: "+x+","+y);
 		t.setCoordinates(x, y);
-		grid[x][y].addTower(t);
+		grid[coordx][coordy].addTower(t);
 	}
 	
 	/*

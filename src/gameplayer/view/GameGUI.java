@@ -133,7 +133,7 @@ public class GameGUI {
 	 */
 	public void newLevelPopUp(EventHandler<ActionEvent> e) {
 		this.grid.getGrid().getChildren().clear();
-		//this.grid.getPathGrid().getChildren().clear();
+		// this.grid.getPathGrid().getChildren().clear();
 		Button btn = graphics.createButton("Next level", e);
 		ImageView stuff = graphics.createImageView(graphics.createImage("newlevel.png"));
 		graphics.setImageViewParams(stuff, GridGUI.GRID_WIDTH, GridGUI.GRID_HEIGHT);
@@ -143,7 +143,7 @@ public class GameGUI {
 
 	private void createGrid() {
 		styleGrid();
-		//this.mainScreen.setLeft(grid.getPathGrid());
+		// this.mainScreen.setLeft(grid.getPathGrid());
 		this.mainScreen.setLeft(grid.getGrid());
 		grid.init();
 	}
@@ -177,13 +177,13 @@ public class GameGUI {
 
 		for (IDrawable entity : redraw) {
 			ImageView image = new ImageView(entity.getImage());
-			if (i<towerCoords.size() && towerCoords.get(i).length > 1) {
+			if (i < towerCoords.size() && towerCoords.get(i).length > 1) {
 				System.out.println("TOWER BEING RENDERED?!");
 				image.setX(towerCoords.get(i)[0]);
 				image.setY(towerCoords.get(i)[1]);
 				graphics.setImageViewParams(image, DragDropView.DEFENSIVEWIDTH, DragDropView.DEFENSIVEHEIGHT);
 				this.grid.getGrid().getChildren().add(image);
-				if(entity instanceof Tower){
+				if (entity instanceof Tower) {
 					((Tower) entity).getTowerInfo().setLayoutX(image.getX());
 					((Tower) entity).getTowerInfo().setLayoutY(image.getY() + image.getFitHeight());
 					this.grid.getGrid().getChildren().add(((Tower) entity).getTowerInfo());
@@ -200,7 +200,36 @@ public class GameGUI {
 			ImageView image = new ImageView(entity.getImage());
 			image.setX(entity.getX());
 			image.setY(entity.getY());
-			graphics.setImageViewParams(image, DragDropView.DEFENSIVEWIDTH*0.9, DragDropView.DEFENSIVEHEIGHT*0.9);
+			graphics.setImageViewParams(image, DragDropView.DEFENSIVEWIDTH * 0.9, DragDropView.DEFENSIVEHEIGHT * 0.9);
+			this.grid.getGrid().getChildren().add(image);
+		}
+	}
+
+	public void reRenderWeapon(List<IDrawable> redraw) {// should be interface
+														// of
+		// drawables
+
+		for (IDrawable entity : redraw) {
+			ImageView image = new ImageView(entity.getImage());
+			//System.out.println("weapon coord: x:"+entity.getX()+", y:"+entity.getY());
+			image.setX(entity.getX());
+			image.setY(entity.getY());
+			graphics.setImageViewParams(image, DragDropView.DEFENSIVEWIDTH * 0.5, DragDropView.DEFENSIVEHEIGHT * 0.5);
+			this.grid.getGrid().getChildren().add(image);
+		}
+	}
+
+	public void reRender(List<IDrawable> redraw, double width, double height) {// should
+																				// be
+																				// interface
+																				// of
+		// drawables
+
+		for (IDrawable entity : redraw) {
+			ImageView image = new ImageView(entity.getImage());
+			image.setX(entity.getX());
+			image.setY(entity.getY());
+			graphics.setImageViewParams(image, width, height);
 			this.grid.getGrid().getChildren().add(image);
 		}
 	}

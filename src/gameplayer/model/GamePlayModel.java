@@ -22,7 +22,7 @@ public class GamePlayModel extends Observable {
 	private int gridY;
 
 	private List<Weapon> weaponOnGrid;
-	private List<gameplayer.model.Tower> towersOnGrid; //fix naming
+	private List<gameplayer.model.Tower> towersOnGrid; // fix naming
 	private int hitBuffer = 10; // initialize from xml
 	private HashMap<Integer, engine.tower.Tower> towerTypes;
 	private Cell[][] gridArray;
@@ -40,32 +40,28 @@ public class GamePlayModel extends Observable {
 	private HashMap<Integer, engine.weapon.Weapon> weaponMap;
 	private GraphicsLibrary graphicLib;
 
-
 	// private EnemyModel enemyModel;
-	
-	
 
 	public GamePlayModel(GamePlayerFactory factory) {
 		graphicLib = new GraphicsLibrary();
 		initializeGameSetting(factory);
 		// this.enemyModel = new EnemyModel(this);
 	}
-	
-	
-	public void createDummyEnemies(){
+
+	public void createDummyEnemies() {
 		Queue<Enemy> myQueue = new LinkedList<Enemy>();
 		Queue<Enemy> myQueue1 = new LinkedList<Enemy>();
-		Enemy enem1 = new Enemy(1,"Izaya", 4, 7, "questionmark.png", 50.0, 50.0);
+		Enemy enem1 = new Enemy(1, "Izaya", 4, 7, "questionmark.png", 50.0, 50.0);
 		enem1.setCurrentCell(this.getGrid().getCell(0, 0));
-		Enemy enem2 = new Enemy(2,"Shizuo", 4, 7, "questionmark.png", 50.0, 50.0);
+		Enemy enem2 = new Enemy(2, "Shizuo", 4, 7, "questionmark.png", 50.0, 50.0);
 		enem2.setCurrentCell(this.getGrid().getCell(0, 0));
-		Enemy enem3 = new Enemy(3,"Mikado", 4, 7, "kaneki.jpg", 50.0, 50.0);
+		Enemy enem3 = new Enemy(3, "Mikado", 4, 7, "kaneki.jpg", 50.0, 50.0);
 		enem3.setCurrentCell(this.getGrid().getCell(0, 0));
-		Enemy enem4 = new Enemy(4,"Kanra", 4, 7, "penguin.jpg", 50.0, 50.0);
+		Enemy enem4 = new Enemy(4, "Kanra", 4, 7, "penguin.jpg", 50.0, 50.0);
 		enem4.setCurrentCell(this.getGrid().getCell(0, 0));
 		myQueue.add(enem1);
-		//myQueue.add(enem2);
-		//myQueue.add(enem3);
+		// myQueue.add(enem2);
+		// myQueue.add(enem3);
 		myQueue.add(enem4);
 		myQueue1.add(enem1);
 		myQueue1.add(enem2);
@@ -73,17 +69,16 @@ public class GamePlayModel extends Observable {
 		myQueue1.add(enem4);
 		List<Queue<Enemy>> stuff = new ArrayList<Queue<Enemy>>();
 		stuff.add(myQueue);
-		//stuff.add(myQueue1);
+		// stuff.add(myQueue1);
 		this.enemyAtCurrentLevel = stuff;
 		setPackOfEnemyComing(myQueue);
-		System.out.println("Enemy at current level: "+enemyAtCurrentLevel);
+		System.out.println("Enemy at current level: " + enemyAtCurrentLevel);
 	}
 
-	
-	public  HashMap<Integer, engine.tower.Tower> getAllTowerTypes(){
+	public HashMap<Integer, engine.tower.Tower> getAllTowerTypes() {
 		return this.towerTypes;
 	}
-	
+
 	public List<Weapon> getWeaponOnGrid() {
 		return this.weaponOnGrid;
 	}
@@ -125,13 +120,13 @@ public class GamePlayModel extends Observable {
 		this.factory = factory;
 		HashMap<String, Double> settingInfo = factory.getGameSetting();
 
-		this.currentLevel = settingInfo.get("levelnumber").intValue(); 
+		this.currentLevel = settingInfo.get("levelnumber").intValue();
 		this.numLevels = settingInfo.get("totalNumberOfLevels");
 		this.gold = settingInfo.get("gold");
 		this.lives = settingInfo.get("lives");
 		this.towerTypes = this.factory.getTowers();
 		this.gameTitle = this.factory.getGameTitle();
-		this.towersOnGrid= new ArrayList<>();
+		this.towersOnGrid = new ArrayList<>();
 		// this.weaponTypes = this.factory.getWeapon(); need from xml
 	}
 
@@ -151,19 +146,17 @@ public class GamePlayModel extends Observable {
 		weaponOnGrid = new ArrayList<Weapon>();
 		weaponMap = this.factory.getWeaponBank();
 		System.out.println("weapon map" + weaponMap.get(0).getName());
-		
-
 
 	}
 
-	public HashMap<Integer,engine.tower.Tower> getTowerTypes(){
-		return this.towerTypes; 
+	public HashMap<Integer, engine.tower.Tower> getTowerTypes() {
+		return this.towerTypes;
 	}
-	
-	public List<gameplayer.model.Tower> getTowerOnGrid(){ //fix naming
+
+	public List<gameplayer.model.Tower> getTowerOnGrid() { // fix naming
 		return this.towersOnGrid;
 	}
-	
+
 	public Enemy getNextEnteringEnemy() {
 		return this.nextEnteringEnemy;
 	}
@@ -240,80 +233,85 @@ public class GamePlayModel extends Observable {
 	 */
 
 	public Boolean placeTower(int type, int x, int y) {
-		System.out.println("Placetower: x:"+x+",y:"+y);
+		System.out.println("Placetower: x:" + x + ",y:" + y);
 
 		// later check if is a valid location to place the tower
-			engine.tower.Tower towerType = towerTypes.get(type);
-			if(!canPlaceTower(x, y, towerType.getCost())){
-				return false;
-			}
-			gameplayer.model.Tower newlyPlaced = null;
-			List<Integer> weaponTypes = towerType.getWeapons();
-			ArrayList <Gun> gunsForTower = new ArrayList<Gun>();
-			System.out.println("all the int weapons: " + gunsForTower.size());
-			for (int i: weaponTypes){
-				engine.weapon.Weapon weaponForGun = this.weaponMap.get(i);
-				gunsForTower.add(new Gun(weaponForGun.getFireRate(), weaponForGun, weaponForGun.getRange(),newlyPlaced));
+		engine.tower.Tower towerType = towerTypes.get(type);
+		if (!canPlaceTower(x, y, towerType.getCost())) {
+			return false;
+		}
+		int x1= (int)(x/this.getCellWidth());
+		int y1 =(int)( y/this.getCellHeight());
+		gameplayer.model.Tower newlyPlaced = null;
+		List<Integer> weaponTypes = towerType.getWeapons();
+		ArrayList<Gun> gunsForTower = new ArrayList<Gun>();
+		// System.out.println("all the int weapons: " + gunsForTower.size());
+		for (int i : weaponTypes) {
+			engine.weapon.Weapon weaponForGun = this.weaponMap.get(i);
+			gunsForTower.add(new Gun(weaponForGun.getFireRate(), weaponForGun, weaponForGun.getRange(), newlyPlaced));
 
-			}
-			
-			System.out.println("all the gun s: " + gunsForTower.size());
+		}
 
-			newlyPlaced = new gameplayer.model.Tower(type,this.uniqueTowerID, towerType.getCost(),gunsForTower, towerType.getImagePath(),towerType.getName());
-			newlyPlaced.setCoordinates(x, y);
-			uniqueTowerID ++;
+		// System.out.println("all the gun s: " + gunsForTower.size());
+
+		newlyPlaced = new gameplayer.model.Tower(type, this.uniqueTowerID, towerType.getCost(), gunsForTower,
+				towerType.getImagePath(), towerType.getName());
+		newlyPlaced.setCoordinates(x1, y1);
+		uniqueTowerID++;
+
+		this.towersOnGrid.add(newlyPlaced);
+
+		setGold(this.gold - newlyPlaced.getCost());
+		// System.out.println("Calculation time: x:"+x+", Grid width:
+		// "+GridGUI.GRID_WIDTH+", cellwidth:
+		// "+this.getCellWidth()+",cellheight:"+this.getCellHeight());
 		
-			this.towersOnGrid.add(newlyPlaced); 
-			
-			setGold(this.gold - newlyPlaced.getCost());
-			//System.out.println("Calculation time: x:"+x+", Grid width: "+GridGUI.GRID_WIDTH+", cellwidth: "+this.getCellWidth()+",cellheight:"+this.getCellHeight());
-			grid.placeTower(newlyPlaced, (int)(GridGUI.GRID_WIDTH/x), (int)(GridGUI.GRID_HEIGHT/y));
-			
-			//System.out.println("towers on grid: " + this.towersOnGrid.size()); 
+		grid.placeTower(newlyPlaced, (int) x, (int) y, (int)x1, (int)y1);
+		//grid.placeTower(newlyPlaced, (int) (GridGUI.GRID_WIDTH / x), (int) (GridGUI.GRID_HEIGHT / y));
+
+		// System.out.println("towers on grid: " + this.towersOnGrid.size());
 
 		return true;
 
 	}
-	
-	
-	public boolean canPlaceTower(int xcoord, int ycoord, double cost){
-		
+
+	public boolean canPlaceTower(int xcoord, int ycoord, double cost) {
+
 		Cell current = this.grid.getStartPoint();
 		/*
-		System.out.println("xcoord: "+xcoord);
-		System.out.println("yccord: "+ycoord);
-		if(this.gridArray[xcoord][ycoord].getNext() != null){
-			return false;
-		}
-		*/
-		
-		System.out.println("starting cell x: "+current.getX()+"; y: "+current.getY());
-		while (current != null){
-			double x_min =current.getX()* GridGUI.GRID_WIDTH/this.getColumns();
-			double x =current.getX()* GridGUI.GRID_WIDTH/this.getColumns() + this.getCellWidth();
-			double y = current.getY() * GridGUI.GRID_WIDTH/this.getRow() + GridGUI.GRID_WIDTH/this.getRow();
-			double y_min = current.getY() * GridGUI.GRID_WIDTH/this.getRow() ;
+		 * System.out.println("xcoord: "+xcoord);
+		 * System.out.println("yccord: "+ycoord);
+		 * if(this.gridArray[xcoord][ycoord].getNext() != null){ return false; }
+		 */
+
+		System.out.println("starting cell x: " + current.getX() + "; y: " + current.getY());
+		while (current != null) {
+			double x_min = current.getX()* GridGUI.GRID_WIDTH / this.getColumns();
+			double x = current.getX()* GridGUI.GRID_WIDTH / this.getColumns() + this.getCellWidth() + this.getCellWidth() ;
+			double y = current.getY() * GridGUI.GRID_WIDTH / this.getRow() + this.getCellHeight();
+			double y_min = current.getY()* GridGUI.GRID_WIDTH / this.getRow();
 			current = current.getNext();
-			System.out.println("Startcell: "+x+","+y+". Candropimage: "+xcoord+","+ycoord);
-			if (xcoord<x && xcoord>x_min && ycoord<y && ycoord>y_min){
+			System.out.println("Startcell: " + x + "," + y + ". Candropimage: " + xcoord + "," + ycoord);
+			if (xcoord < x && xcoord > x_min && ycoord < y && ycoord > y_min) {
 				System.out.println("CAN'T ADD TOWER IN CANPLACETOWER");
 				return false;
 			}
 		}
-		
+
 		if (this.gold - cost < 0)
 			return false;
-		
+
 		return true;
 	}
-	
-	public double getCellWidth(){
-		return GridGUI.GRID_WIDTH/this.getColumns();
+
+	public double getCellWidth() {
+		return GridGUI.GRID_WIDTH / this.getColumns();
 	}
-	
-	public double getCellHeight(){
-		return GridGUI.GRID_WIDTH/this.getRow();
+
+	public double getCellHeight() {
+		return GridGUI.GRID_WIDTH / this.getRow();
 	}
+
 	public double cellToCoordinate(double d) {
 		return (d + 0.5) * cellSize;
 	}
@@ -340,19 +338,19 @@ public class GamePlayModel extends Observable {
 		return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
 	}
 
-
-
 	private void updateWeapon() {
-		System.out.println("+++++++++++++++++++++++++++++++++++");
-		System.out.println("weapon number on grid: " + this.weaponOnGrid.size());
-		
+		/*
+		 * System.out.println("+++++++++++++++++++++++++++++++++++");
+		 * System.out.println("weapon number on grid: " +
+		 * this.weaponOnGrid.size());
+		 */
 		for (Weapon w : weaponOnGrid) {
-			//System.out.println("Weapon x: " + w.getX());
+			// System.out.println("Weapon x: " + w.getX());
 			w.setX(w.getSpeedX() + w.getX());
 			w.setY(w.getSpeedY() + w.getY());
-			System.out.println("==============================");
+			// System.out.println("==============================");
 
-			System.out.println("x and y: " + w.getX() + " " + w.getY());
+			// System.out.println("x and y: " + w.getX() + " " + w.getY());
 
 			// update distance travelled
 			// update in shooting range function
@@ -361,25 +359,27 @@ public class GamePlayModel extends Observable {
 			}
 		}
 
-		//creating all the new firing
-		for (gameplayer.model.Tower t: towersOnGrid){
-			System.out.println("towerID: " + t.getID());
+		// creating all the new firing
+		for (gameplayer.model.Tower t : this.getTowerOnGrid()) {
+			System.out.println("Tower in weapon method: x:" + t.getX() + ", y:" + t.getY());
+			// System.out.println("towerID: " + t.getID());
 			ArrayList<Gun> guns = t.getGuns();
-			System.out.println("gun size: " + guns.size());
+			// System.out.println("gun size: " + guns.size());
 
-			for (Gun g : guns){
-				if(g.isFiring()){
+			for (Gun g : guns) {
+				if (g.isFiring()) {
 					Weapon currentWeapon = g.getWeapon();
 					currentWeapon.setX(t.getX());
 					currentWeapon.setY(t.getY());
 
-					System.out.println("x and y: " + currentWeapon.getX() + " " + currentWeapon.getSpeedY());
+					// System.out.println("x and y: " + currentWeapon.getX() + "
+					// " + currentWeapon.getSpeedY());
 					currentWeapon.setID(this.uniqueWeaponID);
-					uniqueWeaponID ++;
+					uniqueWeaponID++;
 					this.weaponOnGrid.add(currentWeapon);
 				}
 			}
-			
+
 		}
 
 		setChanged();

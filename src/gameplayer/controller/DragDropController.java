@@ -32,8 +32,8 @@ public class DragDropController implements Observer{
 	public void update(Observable o, Object arg) {
 		if (o instanceof DragDrop){
 			String towerId = dragDrop.getDroppedImage().getId();
-			int x = (int)(dragDrop.getDroppedImage().getX()); //* (this.model.getCellWidth()));
-			int y = (int)(dragDrop.getDroppedImage().getY());// * (this.model.getCellHeight()));
+			int x = (int)(dragDrop.getDroppedImage().getX());//* (this.model.getCellWidth()));
+			int y = (int)(dragDrop.getDroppedImage().getY());//* (this.model.getCellHeight()));
 			boolean canPlace = this.model.placeTower(Integer.parseInt(towerId), x, y);
 			System.out.println("Can place? :"+canPlace);
 			if (!canPlace){

@@ -11,6 +11,9 @@ import gameplayer.model.IDrawable;
 import gameplayer.model.Tower;
 import gameplayer.model.Weapon;
 import gameplayer.view.GameGUI;
+import gameplayer.view.GridGUI;
+import gameplayer.view.helper.GraphicsLibrary;
+import gameplayer.view.helper.dragdrop.DragDropView;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
@@ -18,6 +21,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -51,6 +55,7 @@ public class GamePlayerController implements Observer {
 
 	private double oldLevel;
 	private int timer = 1;
+	private GraphicsLibrary graphics = new GraphicsLibrary();
 	
 
 
@@ -132,6 +137,7 @@ public class GamePlayerController implements Observer {
 		List<Tower> towersOnGrid = this.model.getTowerOnGrid();
 		for(Tower t: towersOnGrid){
 			if((t.getX() -20 < x || x < t.getX()+20)  && (t.getY()-20 < y || y <t.getY() + 20)){
+				//System.out.println("Tower x: "+x+", Tower y:"+y);
 				t.toggleInfoVisibility();
 			}
 		}
@@ -236,19 +242,21 @@ public class GamePlayerController implements Observer {
 		List<Enemy>enemyRedraw = this.enemyManager.getEnemyOnGrid(); 
 		List<Tower>towerRedraw = this.model.getTowerOnGrid();
 		List<Weapon>bulletRedraw = this.model.getWeaponOnGrid();
-		
+		/*
 		System.out.println(bulletRedraw.size());
 		for(int i=0;i<bulletRedraw.size();i++){
 			System.out.println("bullet "+i+": "+bulletRedraw.get(i).getImage());
 		}
+		*/
 		
 		
 		List<IDrawable> reEnemyDraw = convertEnemyDrawable(enemyRedraw);//probably need to add bullets here too
 		List<IDrawable> reTowerDraw = convertTowerDrawable(towerRedraw);
 		List<IDrawable> reBulletDraw = convertWeaponDrawable(bulletRedraw);
+		//convertWeaponImageView(bulletRedraw);
 		
 		this.view.reRender(reEnemyDraw);
-		this.view.reRender(reBulletDraw);
+		this.view.reRenderWeapon(reBulletDraw);
 		this.view.reRenderTower(reTowerDraw);
 	}
 	
@@ -271,6 +279,20 @@ public class GamePlayerController implements Observer {
 		ArrayList<IDrawable> ret = new ArrayList<>(); 
 		for(Weapon w: weapons){
 			ret.add(w);
+		}
+		return ret; 
+	}
+	
+	@Deprecated
+	private List<ImageView>convertWeaponImageView(List<Weapon>weapons){
+		ArrayList<ImageView> ret = new ArrayList<>(); 
+		for(Weapon w: weapons){
+			ImageView weaponImage = graphics.createImageView(graphics.createImage(w.getImage()));
+			graphics.setImageViewParams(weaponImage, 0.5*DragDropView.DEFENSIVEWIDTH, 0.5*DragDropView.DEFENSIVEHEIGHT);
+			weaponImage.setX(w.getX()*GridGUI.GRID_WIDTH/this.model.getRow());
+			weaponImage.setY(w.getY()*GridGUI.GRID_HEIGHT/this.model.getColumns());
+			ret.add(graphics.createImageView(graphics.createImage(w.getImage())));
+			this.view.getGrid().getGrid().getChildren().add(weaponImage);
 		}
 		return ret; 
 	}
