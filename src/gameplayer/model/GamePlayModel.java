@@ -9,6 +9,7 @@ import java.util.Queue;
 import engine.tower.Tower;
 import engine.weapon.*;
 import gameplayer.loader.GamePlayerFactory;
+import gameplayer.view.GridGUI;
 
 public class GamePlayModel extends Observable {
 
@@ -238,7 +239,29 @@ public class GamePlayModel extends Observable {
 		 * 
 		 */
 	}
-
+	
+	public boolean canPlaceTower(int xcoord, int ycoord, Cell startingCell){
+		Cell current = startingCell;
+		//System.out.println("starting cell x: "+current.getX()+"; y: "+current.getY());
+		while (current != null){
+			double x =current.getX()* GridGUI.GRID_WIDTH/this.getColumns();
+			double y = current.getY() * GridGUI.GRID_WIDTH/this.getRow() + GridGUI.GRID_WIDTH/this.getRow();
+			current = current.getNext();
+			System.out.println("Startcell: "+x+","+y+". Candropimage: "+xcoord+","+ycoord);
+			if (xcoord<x && ycoord<y){
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public double getCellWidth(){
+		return GridGUI.GRID_WIDTH/this.getColumns();
+	}
+	
+	public double getCellHeight(){
+		return GridGUI.GRID_WIDTH/this.getRow();
+	}
 	public double cellToCoordinate(double d) {
 		return (d + 0.5) * cellSize;
 	}

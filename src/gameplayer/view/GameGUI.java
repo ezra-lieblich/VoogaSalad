@@ -168,12 +168,14 @@ public class GameGUI {
 	public void reRenderTower(List<IDrawable> redraw){//should be interface of drawables
 		ArrayList<Double[]> towerCoords = (ArrayList<Double[]>) this.getDroppedTowerCoords();
 		int i = 0;
+		
 		for(IDrawable entity:redraw){
 			ImageView image = new ImageView(entity.getImage());
 			image.setX(towerCoords.get(i)[0]);
 			image.setY(towerCoords.get(i)[1]);
 			graphics.setImageViewParams(image, DragDropView.DEFENSIVEWIDTH, DragDropView.DEFENSIVEHEIGHT);
 			this.grid.getGrid().getChildren().add(image);
+			//System.out.println("Not rerendering my tower?");
 			i++;
 		}
 	}
