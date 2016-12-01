@@ -64,8 +64,8 @@ public class GamePlayModel extends Observable {
 		Enemy enem4 = new Enemy(4,"Kanra", 4, 7, "penguin.jpg", 50.0, 50.0);
 		enem4.setCurrentCell(this.getGrid().getCell(0, 0));
 		myQueue.add(enem1);
-		myQueue.add(enem2);
-		myQueue.add(enem3);
+		//myQueue.add(enem2);
+		//myQueue.add(enem3);
 		myQueue.add(enem4);
 		myQueue1.add(enem1);
 		myQueue1.add(enem2);
@@ -73,7 +73,7 @@ public class GamePlayModel extends Observable {
 		myQueue1.add(enem4);
 		List<Queue<Enemy>> stuff = new ArrayList<Queue<Enemy>>();
 		stuff.add(myQueue);
-		stuff.add(myQueue1);
+		//stuff.add(myQueue1);
 		this.enemyAtCurrentLevel = stuff;
 		setPackOfEnemyComing(myQueue);
 		System.out.println("Enemy at current level: "+enemyAtCurrentLevel);
@@ -240,6 +240,7 @@ public class GamePlayModel extends Observable {
 	 */
 
 	public Boolean placeTower(int type, int x, int y) {
+		System.out.println("Placetower: x:"+x+",y:"+y);
 
 		// later check if is a valid location to place the tower
 			engine.tower.Tower towerType = towerTypes.get(type);
@@ -344,10 +345,14 @@ public class GamePlayModel extends Observable {
 	private void updateWeapon() {
 		System.out.println("+++++++++++++++++++++++++++++++++++");
 		System.out.println("weapon number on grid: " + this.weaponOnGrid.size());
+		
 		for (Weapon w : weaponOnGrid) {
 			//System.out.println("Weapon x: " + w.getX());
 			w.setX(w.getSpeedX() + w.getX());
 			w.setY(w.getSpeedY() + w.getY());
+			System.out.println("==============================");
+
+			System.out.println("x and y: " + w.getX() + " " + w.getY());
 
 			// update distance travelled
 			// update in shooting range function
@@ -439,6 +444,7 @@ public class GamePlayModel extends Observable {
 	public void updateInLevel() {
 		// checkCollision();
 		updateWeapon();
+
 		// this.enemyModel.update();
 
 	}

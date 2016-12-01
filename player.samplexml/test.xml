@@ -24,6 +24,36 @@
 				</upgrade>
 			</tower>
 			<tower>
+				<name>SHELTER</name>
+				<imageLocation>shelter-cover.png</imageLocation>
+				<isDestroyable>false</isDestroyable>
+				<range>5</range>
+				<fireRate>5</fireRate>
+				<cost>500</cost>
+				<sellAmount>200</sellAmount>
+				<unlockLevel>0</unlockLevel>
+				<weaponType>cannon</weaponType>
+				<upgrade>
+					<cost>200</cost>
+					<type>tower</type>
+				</upgrade>
+			</tower>
+			<tower>
+				<name>BLAH</name>
+				<imageLocation>KenCentipede.gif</imageLocation>
+				<isDestroyable>false</isDestroyable>
+				<range>5</range>
+				<fireRate>5</fireRate>
+				<cost>500</cost>
+				<sellAmount>200</sellAmount>
+				<unlockLevel>0</unlockLevel>
+				<weaponType>cannon</weaponType>
+				<upgrade>
+					<cost>200</cost>
+					<type>tower</type>
+				</upgrade>
+			</tower>
+			<tower>
 				<name>test monkey</name>
 				<imageLocation>butterfly.png</imageLocation>
 				<isDestroyable>false</isDestroyable>
