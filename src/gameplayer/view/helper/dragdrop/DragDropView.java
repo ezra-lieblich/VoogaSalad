@@ -103,7 +103,6 @@ public class DragDropView {
 			grid.getChildren().add(currentImage);// ,cIndex, rIndex);
 		}
 		tab.setContent(root);
-		
 
 	}
 	
