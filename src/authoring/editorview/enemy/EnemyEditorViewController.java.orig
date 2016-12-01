@@ -26,7 +26,11 @@ public class EnemyEditorViewController extends EditorViewController
     public EnemyEditorViewController (int editorWidth, int editorHeight) throws IOException {
         enemyView = EnemyEditorViewFactory.build(editorWidth, editorHeight);
         enemyView.setDelegate(this);
+<<<<<<< HEAD
         enemyView.setEnemyListDataSource(this);
+=======
+        // enemyView.setEnemyListDataSource(this);
+>>>>>>> 4bc2c31305b3c8927dd51d1f29237e032434cbec
         this.view = enemyView;
     }
 
