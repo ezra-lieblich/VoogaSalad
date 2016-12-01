@@ -18,10 +18,10 @@ public class GamePlayModel extends Observable {
 	private int gridY;
 	// private List<Enemy> enemyOnGrid;
 	private List<Weapon> weaponOnGrid;
-	private List<Tower> towersOnGrid; 
+	private List<gameplayer.model.Tower> towersOnGrid; //fix naming
 	private int hitBuffer = 10; // initialize from xml
 	private HashMap<Integer, Weapon> weaponTypes; // initialize in xml
-	private HashMap<Integer, TowerType> towerTypes;
+	private HashMap<Integer, Tower> towerTypes;
 	private Cell[][] gridArray;
 	private Enemy nextEnteringEnemy;
 	private Queue<Enemy> packOfEnemyComing;
@@ -111,11 +111,11 @@ public class GamePlayModel extends Observable {
 
 	}
 
-	public HashMap<Integer,TowerType> getTowerTypes(){
+	public HashMap<Integer,Tower> getTowerTypes(){
 		return this.towerTypes; 
 	}
 	
-	public List<Tower> getTowerOnGrid(){
+	public List<gameplayer.model.Tower> getTowerOnGrid(){ //fix naming
 		return this.towersOnGrid;
 	}
 	
@@ -197,16 +197,17 @@ public class GamePlayModel extends Observable {
 	public Boolean placeTower(int type, int x, int y) {
 		// later check if is a valid location to place the tower
 
-			TowerType towerType = towerTypes.get(type);
-			this.towersOnGrid.add(new Tower(type,towerType.getImageLocation(),towerType.getName(),x,y));
+			Tower towerType = towerTypes.get(type);
+			this.towersOnGrid.add(new gameplayer.model.Tower(type,towerType.getImagePath(),towerType.getName(),x,y)); //fix naming
 			for(int i=0;i<towersOnGrid.size();i++){
 				System.out.println(towersOnGrid.get(i).getName());
 			}
-			return true;
+			
 
 		engine.tower.Tower tt = towerTypes.get(type); //REFACTOR NAMES
 		System.out.println("Placed a tower");
 		System.out.println("Tower x: " + x + "; y:" + y);
+		return true;
 		// get weaponTypes
 		// actually implement the firing counter into each weapon types
 
