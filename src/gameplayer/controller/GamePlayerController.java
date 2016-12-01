@@ -117,12 +117,23 @@ public class GamePlayerController implements Observer {
 		});
 		this.mainScene = view.init(this.model.getGold(), this.model.getLife(), this.model.getCurrentLevel(),
 				getTowerImages());
+		this.mainScene.setOnMouseClicked(e -> handleMouseClicked(e.getX(), e.getY()));
+		
 		this.view.getGrid().populatePath(model.getGrid().getStartPoint()); 
 		this.dropController = new DragDropController(this.view, this.model,this.getTowerImageMap());
 		
 		
 		//testing stuff
 		this.model.createDummyEnemies();
+	}
+	
+	private void handleMouseClicked(double x, double y){
+		List<Tower> towersOnGrid = this.model.getTowerOnGrid();
+		for(Tower t: towersOnGrid){
+			if((t.getX() -20 < x || x < t.getX()+20)  && (t.getY()-20 < y || y <t.getY() + 20)){
+				t.toggleInfoVisibility();
+			}
+		}
 	}
 	
 	private ArrayList<String> getTowerImages() {
