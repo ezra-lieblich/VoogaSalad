@@ -428,7 +428,6 @@ public class GamePlayModel extends Observable {
 	 */
 
 	public void updateInLevel() {
-		System.out.println("+++++++++++++++++checking +++++++++++++");
 		// checkCollision();
 		 updateWeapon();
 		// this.enemyModel.update();
