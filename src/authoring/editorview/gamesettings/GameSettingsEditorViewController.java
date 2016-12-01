@@ -7,11 +7,11 @@ import engine.settings.GameModeManagerController;
 public class GameSettingsEditorViewController extends EditorViewController
         implements GameSettingsEditorViewDelegate {
 
-    private IGameUpdateView gameView;
+    private IGameSettingsEditorView gameView;
     private GameModeManagerController gameSettingsDataSource;
 
     public GameSettingsEditorViewController (int editorWidth, int editorHeight) {
-        IGameSettingsEditorView myView =
+        IGameSettingsSetView myView =
                 GameSettingsEditorViewFactory.build(editorWidth, editorHeight);
         myView.setDelegate(this);
         this.view = myView;

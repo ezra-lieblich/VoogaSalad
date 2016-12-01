@@ -9,7 +9,7 @@ import authoring.editorview.IUpdateView;
 import authoring.editorview.enemy.EnemyEditorViewController;
 import authoring.editorview.enemy.IEnemyEditorView;
 import authoring.editorview.gamesettings.GameSettingsEditorViewController;
-import authoring.editorview.gamesettings.IGameUpdateView;
+import authoring.editorview.gamesettings.IGameSettingsEditorView;
 import authoring.editorview.level.ILevelEditorView;
 import authoring.editorview.level.LevelEditorViewController;
 import authoring.editorview.path.IPathEditorView;

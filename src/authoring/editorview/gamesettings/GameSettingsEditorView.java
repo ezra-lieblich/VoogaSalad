@@ -8,7 +8,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 
 
-public class GameSettingsEditorView implements IGameUpdateView, IGameSettingsEditorView {
+public class GameSettingsEditorView implements IGameSettingsEditorView, IGameSettingsSetView {
 
     private VBox gameConditionsRoot;
     private GameNameView gameNameView;
