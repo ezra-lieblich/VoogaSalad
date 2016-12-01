@@ -3,6 +3,7 @@ package gameplayer.controller;
 import gameplayer.loader.GamePlayerFactory;
 import gameplayer.loader.XMLParser;
 import gameplayer.main.main;
+import gameplayer.model.Cell;
 import gameplayer.model.Enemy;
 import gameplayer.model.EnemyManager;
 import gameplayer.model.GamePlayModel;
@@ -161,8 +162,8 @@ public class GamePlayerController implements Observer {
 			}
 			
 			this.enemyManager.update(); 
-
-//			this.view.getGrid().populatePath(model.getGrid().getStartPoint()); //THIS LINE CAUSES SLOW DOWN
+			redrawEverything();
+/*
 			List<Enemy>enemyRedraw = this.enemyManager.getEnemyOnGrid(); 
 			List<Tower>towerRedraw = this.model.getTowerOnGrid();
 			List<IDrawable> reEnemyDraw = convertEnemyDrawable(enemyRedraw);//probably need to add bullets here too
@@ -170,12 +171,27 @@ public class GamePlayerController implements Observer {
 			
 			this.view.reRender(reEnemyDraw);
 			this.view.reRenderTower(reTowerDraw);
+			
+			this.view.getGrid().populatePath(this.model.getGrid().getStartPoint());
+			*/
 		});
 		Timeline animation = new Timeline();
 		animation.setCycleCount(Timeline.INDEFINITE);
 		animation.getKeyFrames().add(frame);
 		this.animation = animation;
 		animation.play();
+	}
+	
+	private void redrawEverything(){
+		//redraw path
+		//this.view.getGrid().populatePath(this.model.getGrid().getStartPoint());
+		List<Enemy>enemyRedraw = this.enemyManager.getEnemyOnGrid(); 
+		List<Tower>towerRedraw = this.model.getTowerOnGrid();
+		List<IDrawable> reEnemyDraw = convertEnemyDrawable(enemyRedraw);//probably need to add bullets here too
+		List<IDrawable> reTowerDraw = convertTowerDrawable(towerRedraw);
+		
+		this.view.reRender(reEnemyDraw);
+		this.view.reRenderTower(reTowerDraw);
 	}
 	
 	private double[] generateRandomEnemyStartingPoints(){
