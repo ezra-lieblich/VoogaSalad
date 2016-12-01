@@ -13,6 +13,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 import engine.enemy.EnemyType;
@@ -121,6 +122,7 @@ public class XMLParser {
     	try{
     		NodeList parentList = xmlDocument.getElementsByTagName("tower");
     		for(int i=0;i<parentList.getLength();i++){
+    			
     			Element towerElement= (Element)parentList.item(i);
     			towerBuilder.buildName(((Element)(towerElement.getElementsByTagName("name").item(0))).getFirstChild().getNodeValue());
     			towerBuilder.buildImagePath(((Element)(towerElement.getElementsByTagName("imageLocation").item(0))).getFirstChild().getNodeValue());
@@ -133,6 +135,7 @@ public class XMLParser {
     				weapons.add(Integer.parseInt(((Element)weaponNodes.item(j)).getFirstChild().getNodeValue()));
     			}
     			towerBuilder.buildWeapons(weapons);
+    			
     			Tower tower = towerBuilder.build();
     			ret.put(i, tower);
     		}
@@ -180,6 +183,7 @@ public class XMLParser {
 		HashMap<String,engine.enemy.Enemy>ret = new HashMap<>(); //refactor names
     	try{
     		NodeList parentList = xmlDocument.getElementsByTagName("enemy");
+    		Node data = parentList.item(1);
     		for(int i=0;i<parentList.getLength();i++){
     			Element enemyElement = (Element)parentList.item(i);
     			String name =((Element)(enemyElement.getElementsByTagName("name").item(0))).getFirstChild().getNodeValue();

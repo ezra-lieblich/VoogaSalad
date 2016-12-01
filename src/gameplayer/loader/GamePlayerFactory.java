@@ -9,15 +9,15 @@ import java.util.Queue;
 import engine.enemy.EnemyType;
 import engine.tower.Tower;
 import engine.tower.TowerType;
+import engine.weapon.WeaponTypeBuilder;
+import engine.weapon.Weapon;
 import gameplayer.model.Cell;
 import gameplayer.model.Enemy;
 import gameplayer.model.Grid;
 
 public class GamePlayerFactory{
 
-	XMLParser authoringFileReader;
-
-
+	XMLParser authoringFileReader;	
 
 	public GamePlayerFactory(XMLParser parser){
 		this.authoringFileReader = parser;
@@ -25,6 +25,14 @@ public class GamePlayerFactory{
 	
 	public boolean xmlIsValid() {
 		return authoringFileReader.isValid();
+	}
+	
+	public HashMap<Integer, Weapon> getWeaponBank() {
+		WeaponTypeBuilder weaponBuilder = new WeaponTypeBuilder();
+		HashMap<Integer, Weapon> bank = new HashMap<Integer, Weapon>();
+		bank.put(0, weaponBuilder.build());
+		return bank;
+		
 	}
 
 	
