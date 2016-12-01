@@ -2,6 +2,7 @@ package authoring.editorview.tower;
 
 import java.util.List;
 import authoring.editorview.IUpdateView;
+import authoring.editorview.ListDataSource;
 
 
 /**
@@ -29,5 +30,7 @@ public interface ITowerEditorView extends ITowerSetView, IUpdateView {
     public void createNewTower ();
     
     public void deleteTower ();
+    
+    public void setTowerListDataSource (ListDataSource source);
 
 }

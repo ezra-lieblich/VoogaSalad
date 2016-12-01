@@ -3,6 +3,8 @@ package authoring.editorview.weapon;
 import java.io.IOException;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import authoring.editorview.ListDataSource;
 import authoring.editorview.weapon.subviews.WeaponEffectView;
 import authoring.editorview.weapon.subviews.WeaponImageBank;
 import authoring.editorview.weapon.subviews.editorfields.WeaponCollisionEffectField;
@@ -164,5 +166,13 @@ public class WeaponEditorView implements IWeaponEditorView {
 		// TODO Auto-generated method stub
 		this.weaponBank.updateBank(ids);
 	}
+
+	@Override
+	public void setWeaponListDataSource(ListDataSource source) {
+		// TODO Auto-generated method stub
+		this.weaponBank.setListDataSource(source);
+	}
+	
+	
 
 }

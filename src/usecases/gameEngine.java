@@ -1,7 +1,9 @@
 package usecases;
 
+import engine.level.LevelManagerController;
+
 public class gameEngine {
-    ILevelUpdater levelUpdater;
+    LevelManagerController dataSource;
     
     
     /**
@@ -11,8 +13,8 @@ public class gameEngine {
      * @param enemyType
      * @param amount
      */
-    public void setEnemiesPerLevel(String enemyType, int amount) {
-        levelUpdater.setEnemiesPerLevel(enemyType, amount);
+    public void setEnemiesPerLevel(int levelID, int enemyID, int amount) {
+        dataSource.setEnemy(levelID, enemyID, amount);
     }
     
     

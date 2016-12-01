@@ -25,8 +25,9 @@ public abstract class AbstractType implements Type {
     }
 
     @Override
-    public void setName (String name) {
+    public boolean setName (String name) {
         this.name.setProperty(name);
+        return true;
     }
 
     @Override

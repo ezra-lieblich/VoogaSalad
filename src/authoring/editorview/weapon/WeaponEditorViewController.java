@@ -3,6 +3,8 @@ package authoring.editorview.weapon;
 import java.io.IOException;
 import java.util.ResourceBundle;
 import authoring.editorview.EditorViewController;
+import authoring.editorview.ListCellData;
+import authoring.editorview.ListDataSource;
 import authoring.utilityfactories.DialogueBoxFactory;
 import engine.weapon.WeaponManagerController;
 
@@ -14,7 +16,7 @@ import engine.weapon.WeaponManagerController;
  *
  */
 public class WeaponEditorViewController extends EditorViewController
-        implements WeaponEditorViewDelegate {
+        implements WeaponEditorViewDelegate, ListDataSource {
 
     private WeaponManagerController weaponDataSource;
     private int currentWeaponID;
@@ -125,10 +127,19 @@ public class WeaponEditorViewController extends EditorViewController
         }
     }
 
+    @Override
+    public void onUserSelectedWeapon (int weaponID) {
+        // TODO Auto-generated method stub
+
+    }
+
 	@Override
-	public void onUserSelectedWeapon(int weaponID) {
-		// TODO Auto-generated method stub
-		
+	public ListCellData getCellDataForSubject(int id) {
+		ListCellData cellData = new ListCellData();
+        cellData.setName(weaponDataSource.getName(id));
+        cellData.setImagePath(weaponDataSource.getImagePath(id));
+        cellData.setId(id);
+        return cellData;
 	}
 
 }
