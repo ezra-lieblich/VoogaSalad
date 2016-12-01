@@ -2,12 +2,15 @@ package gameplayer.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Queue;
 import engine.tower.Tower;
+import engine.weapon.*;
 import gameplayer.loader.GamePlayerFactory;
+import gameplayer.view.GridGUI;
 
 public class GamePlayModel extends Observable {
 
@@ -15,12 +18,12 @@ public class GamePlayModel extends Observable {
 	private Grid grid;
 	private int gridX;
 	private int gridY;
-	// private List<Enemy> enemyOnGrid;
+
+	private List<Enemy> enemyOnGrid;
 	private List<Weapon> weaponOnGrid;
 	private List<gameplayer.model.Tower> towersOnGrid; //fix naming
 	private int hitBuffer = 10; // initialize from xml
-	private HashMap<Integer, Weapon> weaponTypes; // initialize in xml
-	private HashMap<Integer, Tower> towerTypes;
+	private HashMap<Integer, engine.tower.Tower> towerTypes;
 	private Cell[][] gridArray;
 	private Enemy nextEnteringEnemy;
 	private Queue<Enemy> packOfEnemyComing;
@@ -32,14 +35,51 @@ public class GamePlayModel extends Observable {
 	private int currentLevel;
 	private int waveOfEnemy;
 	private String gameTitle;
+	private int uniqueTowerID, uniqueEnemyID, uniqueWeaponID;
+	private HashMap<Integer, engine.weapon.Weapon> weaponMap;
+
 
 	// private EnemyModel enemyModel;
+	
+	
 
 	public GamePlayModel(GamePlayerFactory factory) {
 		initializeGameSetting(factory);
 		// this.enemyModel = new EnemyModel(this);
 	}
+	
+	public void createDummyEnemies(){
+		Queue<Enemy> myQueue = new LinkedList<Enemy>();
+		Queue<Enemy> myQueue1 = new LinkedList<Enemy>();
+		Enemy enem1 = new Enemy(1,"Izaya", 4, 7, "questionmark.png", 50.0, 50.0);
+		enem1.setCurrentCell(this.getGrid().getCell(0, 0));
+		Enemy enem2 = new Enemy(2,"Shizuo", 4, 7, "questionmark.png", 50.0, 50.0);
+		enem2.setCurrentCell(this.getGrid().getCell(0, 0));
+		Enemy enem3 = new Enemy(3,"Mikado", 4, 7, "kaneki.jpg", 50.0, 50.0);
+		enem3.setCurrentCell(this.getGrid().getCell(0, 0));
+		Enemy enem4 = new Enemy(4,"Kanra", 4, 7, "penguin.jpg", 50.0, 50.0);
+		enem4.setCurrentCell(this.getGrid().getCell(0, 0));
+		myQueue.add(enem1);
+		myQueue.add(enem2);
+		myQueue.add(enem3);
+		myQueue.add(enem4);
+		myQueue1.add(enem1);
+		myQueue1.add(enem2);
+		myQueue1.add(enem3);
+		myQueue1.add(enem4);
+		List<Queue<Enemy>> stuff = new ArrayList<Queue<Enemy>>();
+		stuff.add(myQueue);
+		stuff.add(myQueue1);
+		this.enemyAtCurrentLevel = stuff;
+		setPackOfEnemyComing(myQueue);
+		System.out.println("Enemy at current level: "+enemyAtCurrentLevel);
+	}
 
+	
+	public  HashMap<Integer, engine.tower.Tower> getAllTowerTypes(){
+		return this.towerTypes;
+	}
+	
 	public List<Weapon> getWeaponOnGrid() {
 		return this.weaponOnGrid;
 	}
@@ -80,12 +120,8 @@ public class GamePlayModel extends Observable {
 	public void initializeGameSetting(GamePlayerFactory factory) {
 		this.factory = factory;
 		HashMap<String, Double> settingInfo = factory.getGameSetting();
-		this.currentLevel = settingInfo.get("levelnumber").intValue(); // do we
-																		// need
-																		// levelnumber
-																		// and
-																		// current
-																		// level?
+
+		this.currentLevel = settingInfo.get("levelnumber").intValue(); 
 		this.numLevels = settingInfo.get("totalNumberOfLevels");
 		this.gold = settingInfo.get("gold");
 		this.lives = settingInfo.get("lives");
@@ -96,6 +132,9 @@ public class GamePlayModel extends Observable {
 	}
 
 	public void initializeLevelInfo() {
+		this.uniqueEnemyID = 0;
+		this.uniqueTowerID = 0;
+		this.uniqueWeaponID = 0;
 		this.enemyAtCurrentLevel = this.factory.getEnemy(this.currentLevel);
 		this.waveOfEnemy = 0;
 		packOfEnemyComing = this.enemyAtCurrentLevel.get(waveOfEnemy);
@@ -105,12 +144,16 @@ public class GamePlayModel extends Observable {
 		gridArray = this.grid.getGrid();
 		this.gridX = this.gridArray.length;
 		this.gridY = this.gridArray[0].length;
-		// enemyOnGrid = new ArrayList<Enemy>();
 		weaponOnGrid = new ArrayList<Weapon>();
+		enemyOnGrid = new ArrayList<Enemy>();
+		weaponMap = this.factory.getWeaponBank();
+		System.out.println("weapon map" + weaponMap.get(0).getName());
+		
+
 
 	}
 
-	public HashMap<Integer,Tower> getTowerTypes(){
+	public HashMap<Integer,engine.tower.Tower> getTowerTypes(){
 		return this.towerTypes; 
 	}
 	
@@ -195,17 +238,34 @@ public class GamePlayModel extends Observable {
 
 	public Boolean placeTower(int type, int x, int y) {
 		// later check if is a valid location to place the tower
+			engine.tower.Tower towerType = towerTypes.get(type);
+			if(!canPlaceTower(x, y, towerType.getCost())){
+				return false;
+			}
+			gameplayer.model.Tower newlyPlaced = null;
+			List<Integer> weaponTypes = towerType.getWeapons();
+			ArrayList <Gun> gunsForTower = new ArrayList<Gun>();
+			System.out.println("all the int weapons: " + gunsForTower.size());
+			for (int i: weaponTypes){
+				engine.weapon.Weapon weaponForGun = this.weaponMap.get(i);
+				gunsForTower.add(new Gun(weaponForGun.getFireRate(), weaponForGun, weaponForGun.getRange(),newlyPlaced));
 
-			Tower towerType = towerTypes.get(type);
-			this.towersOnGrid.add(new gameplayer.model.Tower(type,towerType.getImagePath(),towerType.getName(),x,y)); //fix naming
-			for(int i=0;i<towersOnGrid.size();i++){
-				System.out.println(towersOnGrid.get(i).getName());
 			}
 			
+			System.out.println("all the gun s: " + gunsForTower.size());
 
-		engine.tower.Tower tt = towerTypes.get(type); //REFACTOR NAMES
-		System.out.println("Placed a tower");
-		System.out.println("Tower x: " + x + "; y:" + y);
+			newlyPlaced = new gameplayer.model.Tower(type,this.uniqueTowerID, towerType.getCost(),gunsForTower, towerType.getImagePath(),towerType.getName());
+			newlyPlaced.setCoordinates(cellToCoordinate(x), cellToCoordinate(y));
+			uniqueTowerID ++;
+		
+			this.towersOnGrid.add(newlyPlaced); 
+			
+			setGold(this.gold - newlyPlaced.getCost());
+			System.out.println("Calculation time: x:"+x+", Grid width: "+GridGUI.GRID_WIDTH+", cellwidth: "+this.getCellWidth()+",cellheight:"+this.getCellHeight());
+			grid.placeTower(newlyPlaced, (int)(GridGUI.GRID_WIDTH/x), (int)(GridGUI.GRID_HEIGHT/y));
+			
+			System.out.println("towers on grid: " + this.towersOnGrid.size()); 
+
 		return true;
 		// get weaponTypes
 		// actually implement the firing counter into each weapon types
@@ -221,14 +281,41 @@ public class GamePlayModel extends Observable {
 		 * 
 		 */
 	}
-
+	
+	
+	public boolean canPlaceTower(int xcoord, int ycoord, double cost){
+		Cell current = this.grid.getStartPoint();
+		//System.out.println("starting cell x: "+current.getX()+"; y: "+current.getY());
+		while (current != null){
+			double x =current.getX()* GridGUI.GRID_WIDTH/this.getColumns();
+			double y = current.getY() * GridGUI.GRID_WIDTH/this.getRow() + GridGUI.GRID_WIDTH/this.getRow();
+			current = current.getNext();
+			//System.out.println("Startcell: "+x+","+y+". Candropimage: "+xcoord+","+ycoord);
+			if (xcoord<x && ycoord<y){
+				return false;
+			}
+		}
+		
+		if (this.gold - cost < 0)
+			return false;
+		
+		return true;
+	}
+	
+	public double getCellWidth(){
+		return GridGUI.GRID_WIDTH/this.getColumns();
+	}
+	
+	public double getCellHeight(){
+		return GridGUI.GRID_WIDTH/this.getRow();
+	}
 	public double cellToCoordinate(double d) {
 		return (d + 0.5) * cellSize;
 	}
 
 	public void singleCollision(Enemy e, Weapon w) {
 		if (Math.abs(w.getX() - e.getX()) < hitBuffer && Math.abs(w.getY() - e.getY()) < hitBuffer) {
-			e.setHealth(e.getHealth() - w.getDemage());
+			e.setHealth(e.getHealth() - w.getDamage());
 		}
 	}
 
@@ -248,39 +335,37 @@ public class GamePlayModel extends Observable {
 		return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
 	}
 
-	private Boolean inShootingRange(Weapon w) {
-		gameplayer.model.Tower t = w.getShootingAgent();
-		//return getDistance(w.getX(), w.getY(), t.getCoordinate()[0], t.getCoordinate()[1]) <= t.getAttackingRange();
-		//TODO: Fix the way we tell if it's in shooting range
-		return true;
 
-	}
 
 	private void updateWeapon() {
+
 		for (Weapon w : weaponOnGrid) {
+			//System.out.println("Weapon x: " + w.getX());
 			w.setX(w.getSpeedX() + w.getX());
 			w.setY(w.getSpeedY() + w.getY());
 
 			// update distance travelled
-
 			// update in shooting range function
-			if (!coordinateInBound(w.getX(), w.getY()) && !inShootingRange(w)) {
+			if (!coordinateInBound(w.getX(), w.getY()) && !w.inRange()) {
 				this.weaponOnGrid.remove(w);
 			}
 		}
 
 		// check all the weapon types
-		for (int i = 0; i < gridX; i++) {
-			for (int j = 0; j < gridY; j++) {
-				int weaponType = gridArray[i][j].fireWeapon();
-				if (weaponType != -1) {
-					Weapon toAdd = this.weaponTypes.get(weaponType);
-					toAdd.setX(cellToCoordinate(i));
-					toAdd.setY(cellToCoordinate(j));
-					toAdd.setShootingAgent(gridArray[i][j].getTower());
-					weaponOnGrid.add(toAdd);
+		for (gameplayer.model.Tower t: towersOnGrid){
+			System.out.println("towerID: " + t.getID());
+			ArrayList<Gun> guns = t.getGuns();
+			System.out.println("gun size: " + guns.size());
+
+			for (Gun g : guns){
+				if(g.isFiring()){
+					Weapon currentWeapon = g.getWeapon();
+					currentWeapon.setID(this.uniqueWeaponID);
+					uniqueWeaponID ++;
+					this.weaponOnGrid.add(currentWeapon);
 				}
 			}
+			
 		}
 
 		setChanged();
@@ -344,7 +429,7 @@ public class GamePlayModel extends Observable {
 
 	public void updateInLevel() {
 		// checkCollision();
-		// updateWeapon();
+		 updateWeapon();
 		// this.enemyModel.update();
 
 	}

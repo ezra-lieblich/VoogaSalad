@@ -2,7 +2,6 @@ package engine;
 
 import java.util.List;
 import authoring.editorview.IUpdateView;
-import engine.AbstractTypeManagerController.ViewFiller;
 
 
 public interface ManagerController<E extends Manager<T>, U extends TypeBuilder<T, U>, T extends Type, V extends IUpdateView> {
@@ -16,8 +15,8 @@ public interface ManagerController<E extends Manager<T>, U extends TypeBuilder<T
     String getImagePath (int id);
 
     Double getSize (int id);
-    
-    List<Integer> getCreatedTypeIds();
+
+    List<Integer> getCreatedTypeIds ();
 
     void setName (int id, String name);
 

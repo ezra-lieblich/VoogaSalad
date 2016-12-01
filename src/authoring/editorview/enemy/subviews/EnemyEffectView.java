@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.ResourceBundle;
 import authoring.editorview.PhotoFileChooser;
 import authoring.editorview.enemy.EnemyEditorViewDelegate;
-import authoring.editorview.enemy.IEnemyEditorView;
+import authoring.editorview.enemy.IEnemySetView;
 import authoring.editorview.enemy.subviews.editorfields.EnemyHealthField;
 import authoring.editorview.enemy.subviews.editorfields.EnemyImageView;
 import authoring.editorview.enemy.subviews.editorfields.EnemyNameField;
@@ -32,7 +32,7 @@ import javafx.stage.Stage;
  *
  */
 
-public class EnemyEffectView extends PhotoFileChooser implements IEnemyEditorView {
+public class EnemyEffectView extends PhotoFileChooser implements IEnemySetView {
 
     private ScrollPane enemyEffectView;
     private VBox vbox;
@@ -81,9 +81,7 @@ public class EnemyEffectView extends PhotoFileChooser implements IEnemyEditorVie
     }
 
     private void buildViewComponents () {
-        Node myImageView = enemyImage.getInstanceAsNode();
-
-        vbox.getChildren().add(myImageView);
+        vbox.getChildren().add(enemyImage.getInstanceAsNode());
         vbox.getChildren().add(ButtonFactory.makeButton(labelsResource.getString("Image"),
                                                         e -> {
                                                             try {
@@ -135,7 +133,8 @@ public class EnemyEffectView extends PhotoFileChooser implements IEnemyEditorVie
     @Override
     public void openFileChooser (FileChooser chooseFile) throws IOException {
         chosenFile = chooseFile.showOpenDialog(new Stage());
-
+        if (chosenFile != null) {
+            delegate.onUserEnteredEnemyImagePath(chosenFile.toURI().getPath());
+        }
     }
-
 }

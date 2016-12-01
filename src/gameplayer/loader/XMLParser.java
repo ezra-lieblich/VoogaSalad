@@ -99,8 +99,6 @@ public class XMLParser {
     
     public String getTextValue(String parent, String tagName) {
         String textVal = "";
-        System.out.println("parent: " + parent);
-        System.out.println("tag name: " + tagName);
         try{
         	NodeList parentList = xmlDocument.getElementsByTagName(parent);
 	        NodeList nl = ((Element)parentList.item(0)).getElementsByTagName(tagName);
@@ -122,7 +120,8 @@ public class XMLParser {
     	try{
     		NodeList parentList = xmlDocument.getElementsByTagName("tower");
     		for(int i=0;i<parentList.getLength();i++){
-    			
+
+
     			Element towerElement= (Element)parentList.item(i);
     			towerBuilder.buildName(((Element)(towerElement.getElementsByTagName("name").item(0))).getFirstChild().getNodeValue());
     			towerBuilder.buildImagePath(((Element)(towerElement.getElementsByTagName("imageLocation").item(0))).getFirstChild().getNodeValue());
@@ -138,6 +137,7 @@ public class XMLParser {
     			towerBuilder.buildWeapons(weapons);
     			**/
     			
+    			//System.out.println("-----------WEAPONS: -----------------"+weapons);
     			Tower tower = towerBuilder.build();
     			ret.put(i, tower);
     		}
@@ -166,14 +166,13 @@ public class XMLParser {
 		for(int i=0;i<enemiesRawString.length;i++){
 			Queue<Enemy>enemiesInLevel= new LinkedList<Enemy>(); 
 			String[]enemies = enemiesRawString[i].split(",");
-			System.out.println("enemies[1] = " + enemies[1]);
 			for(int k=0;k<Integer.parseInt(enemies[1]);k++){
+
 				engine.enemy.Enemy type = types.get(enemies[0]); //refactor names
-				System.out.println(type.getName());
-				System.out.println(type.getSpeed());
 				double width = 20; //for testing purposes
 				double height = 20; //for testing purposes
-				enemiesInLevel.add(new Enemy(type.getName(),type.getSpeed(),(int)(type.getHealth()), type.getImagePath(), width ,height)); //for testing
+		//+++++++++++++add enemy construction once game authoring is done++++++++++++++++	
+				//		enemiesInLevel.add(new Enemy(type.getName(),type.getSpeed(),(int)(type.getHealth()), type.getImagePath(), width ,height)); //for testing
 			}
 			enemyByLevel.add(enemiesInLevel);
 		}
@@ -187,6 +186,7 @@ public class XMLParser {
     		NodeList parentList = xmlDocument.getElementsByTagName("enemy");
     		Node data = parentList.item(1);
     		for(int i=0;i<parentList.getLength();i++){
+
     			Element enemyElement = (Element)parentList.item(i);
     			String name =((Element)(enemyElement.getElementsByTagName("name").item(0))).getFirstChild().getNodeValue();
     			enemyBuilder.buildName(name);

@@ -3,6 +3,9 @@ package authoring.editorview.enemy;
 import java.io.IOException;
 import java.util.ResourceBundle;
 import authoring.editorview.EditorViewController;
+import authoring.editorview.ListCellData;
+import authoring.editorview.ListDataSource;
+import authoring.editorview.enemy.subviews.EnemyListCellData;
 import authoring.utilityfactories.DialogueBoxFactory;
 import engine.enemy.*;
 
@@ -14,25 +17,38 @@ import engine.enemy.*;
  *
  */
 public class EnemyEditorViewController extends EditorViewController
-        implements EnemyEditorViewDelegate {
+        implements EnemyEditorViewDelegate, ListDataSource {
 
     private EnemyManagerController enemyDataSource;
     private int currentEnemyID;
-    private IEnemyUpdateView myView;
+    private IEnemyEditorView enemyView;
 
     public EnemyEditorViewController (int editorWidth, int editorHeight) throws IOException {
-        myView = EnemyEditorViewFactory.build(editorWidth, editorHeight);
-        myView.setDelegate(this);
-        this.view = myView;
+        enemyView = EnemyEditorViewFactory.build(editorWidth, editorHeight);
+        enemyView.setDelegate(this);
+        //enemyView.setEnemyListDataSource(this);
+        this.view = enemyView;
     }
 
     public void setEnemyDataSource (EnemyManagerController source) {
         this.enemyDataSource = source;
+        onUserPressedCreateEnemy();
     }
 
     @Override
-    public int onUserPressedCreateEnemy () {
-    	return enemyDataSource.createType(myView);
+    public void onUserPressedCreateEnemy () {
+        currentEnemyID = enemyDataSource.createType(enemyView);
+        enemyView.updateImagePathDisplay(enemyDataSource.getImagePath(currentEnemyID));
+        enemyView.updateNameDisplay(enemyDataSource.getName(currentEnemyID));
+        enemyView.updateSizeDisplay(enemyDataSource.getSize(currentEnemyID));
+        enemyView.updateEnemyDamage(enemyDataSource.getEnemyDamage(currentEnemyID));
+        enemyView.updateEnemyCollisionEffect(enemyDataSource
+                .getEnemyCollisionEffect(currentEnemyID));
+        enemyView.updateEnemySpeed(enemyDataSource.getEnemySpeed(currentEnemyID));
+        enemyView.updateEnemySpeed(enemyDataSource.getEnemySpeed(currentEnemyID));
+        enemyView.updateEnemyRewardMoney(enemyDataSource.getEnemyRewardMoney(currentEnemyID));
+        enemyView.updateEnemyRewardPoints(enemyDataSource.getEnemyRewardScore(currentEnemyID));
+        enemyView.updateEnemyHealthDisplay(enemyDataSource.getEnemyHealth(currentEnemyID));
     }
 
     @Override
@@ -75,7 +91,7 @@ public class EnemyEditorViewController extends EditorViewController
         try {
             Double.parseDouble(enemyRewardPoints);
             enemyDataSource.setEnemyRewardScore(currentEnemyID,
-                                                 Double.parseDouble(enemyRewardPoints));
+                                                Double.parseDouble(enemyRewardPoints));
         }
         catch (NumberFormatException e) {
             createDialogueBox();
@@ -86,7 +102,8 @@ public class EnemyEditorViewController extends EditorViewController
     public void onUserEnteredEnemyMoney (String enemyRewardMoney) {
         try {
             Double.parseDouble(enemyRewardMoney);
-            enemyDataSource.setEnemyRewardMoney(currentEnemyID, Double.parseDouble(enemyRewardMoney));
+            enemyDataSource.setEnemyRewardMoney(currentEnemyID,
+                                                Double.parseDouble(enemyRewardMoney));
         }
         catch (NumberFormatException e) {
             createDialogueBox();
@@ -122,6 +139,21 @@ public class EnemyEditorViewController extends EditorViewController
 
     @Override
     public void onUserEnteredEnemySize (String enemySize) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public ListCellData getCellDataForSubject (int enemyID) {
+        ListCellData cellData = new EnemyListCellData();
+        cellData.setName(enemyDataSource.getName(enemyID));
+        cellData.setImagePath(enemyDataSource.getImagePath(enemyID));
+        cellData.setId(enemyID);
+        return cellData;
+    }
+
+    @Override
+    public void onUserSelectedEnemy (int enemyID) {
         // TODO Auto-generated method stub
 
     }

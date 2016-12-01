@@ -2,13 +2,13 @@ package authoring.editorview.enemy.subviews.editorfields;
 
 import java.util.ResourceBundle;
 import authoring.editorview.enemy.EnemyEditorViewDelegate;
-import authoring.editorview.enemy.IEnemyEditorView;
+import authoring.editorview.enemy.IEnemySetView;
 import authoring.utilityfactories.TextFieldFactory;
 import javafx.scene.Node;
 import javafx.scene.control.TextField;
 
 
-public class EnemySizeField implements IEnemyEditorView {
+public class EnemySizeField implements IEnemySetView {
 
     private EnemyEditorViewDelegate delegate;
     private TextField enemySizeField;

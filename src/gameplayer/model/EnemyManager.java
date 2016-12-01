@@ -12,12 +12,20 @@ public class EnemyManager extends Observable {
 	private List<Enemy> enemyOnGrid;
 	private GamePlayModel gamePlayModel;
 	private Grid grid;
+	private Cell current;
+	private Cell currentCopy;
 
 	public EnemyManager(GamePlayModel model) {
 		this.enemyOnGrid = new ArrayList<Enemy>();
 		this.gamePlayModel = model;
 		this.grid = this.gamePlayModel.getGrid();
 
+	}
+	
+	public void setCurrentCell(Cell cell){
+		System.out.println("CURRENT CELL SET: "+cell.getX()+", "+cell.getY());
+		this.current = cell;
+		this.currentCopy = cell;
 	}
 
 	public List<Enemy> getEnemyOnGrid() {
@@ -144,9 +152,31 @@ public class EnemyManager extends Observable {
 	}
 
 	private void moveIndividualEnemy(Enemy enemy) {
-		if (!(enemy.getX() + enemy.getMovingSpeed() > GridGUI.GRID_WIDTH)) {
-			enemy.setX(enemy.getX() + enemy.getMovingSpeed());
+		System.out.println("Cell width: "+this.gamePlayModel.getCellWidth());
+		System.out.println("Current.getX();"+this.current.getX()+", Current.getY(): "+this.current.getY());
+		if (this.current.getNext() != null) {
+			if (enemy.getX() < (current.getX()*this.gamePlayModel.getCellWidth()) && (enemy.getY()+this.gamePlayModel.getCellHeight()) < current.getY()*this.gamePlayModel.getCellHeight()) {
+				//System.out.println("Both should move");
+				enemy.setX(enemy.getX() + enemy.getMovingSpeed());
+				enemy.setY(enemy.getY() + enemy.getMovingSpeed());
+			}
+			else if (enemy.getX() < (current.getX()*this.gamePlayModel.getCellWidth()) && !(enemy.getY() < (current.getY()*this.gamePlayModel.getCellHeight()))) {
+				enemy.setX(enemy.getX() + enemy.getMovingSpeed());
+				//System.out.println("Just x should move");
+			}
+			else if (enemy.getY() < (current.getY()*this.gamePlayModel.getCellHeight()) && !(enemy.getX() < (current.getX()*this.gamePlayModel.getCellWidth()))) {
+				enemy.setY(enemy.getY() + enemy.getMovingSpeed());
+			}
+			/*
+			 * if (!(enemy.getX() + enemy.getMovingSpeed() >
+			 * GridGUI.GRID_WIDTH)) { enemy.setX(enemy.getX() +
+			 * enemy.getMovingSpeed()); }
+			 */
+			this.current = this.current.getNext();
+		}else{
+			this.current = currentCopy;
 		}
+
 	}
 
 }

@@ -8,9 +8,10 @@ public abstract class AbstractTypeManagerController<E extends Manager<T>, U exte
     private E typeManager;
     private U typeBuilder;
 
-    protected AbstractTypeManagerController (E typeManager, U typeBuilder) {
+    protected AbstractTypeManagerController (E typeManager, U typeBuilder, ManagerMediator managerMediator) {
         this.typeManager = typeManager;
         this.typeBuilder = typeBuilder;
+        managerMediator.addManager(typeManager);
     }
 
     @Override
@@ -61,7 +62,7 @@ public abstract class AbstractTypeManagerController<E extends Manager<T>, U exte
 
     @Override
     public void setImagePath (int id, String imagePath) {
-        typeManager.getEntity(id).setName(imagePath);
+        typeManager.getEntity(id).setImagePath(imagePath);
     }
 
     @Override
