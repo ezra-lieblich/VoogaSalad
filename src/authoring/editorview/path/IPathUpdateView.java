@@ -6,8 +6,6 @@ import authoring.editorview.IUpdateView;
 import engine.path.Coordinate;
 
 public interface IPathUpdateView extends IPathEditorView, IUpdateView{
-
-	public void updatePathImage(String pathImage);
 	
 	public void updateNumColumns(int numColumns);
 	
@@ -20,5 +18,7 @@ public interface IPathUpdateView extends IPathEditorView, IUpdateView{
 	public void updateActiveID (int pathID);
 	
 	public void createNewPath ();
+	
+	public void redrawPath ();
 
 }
