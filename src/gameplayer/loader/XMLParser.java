@@ -132,6 +132,7 @@ public class XMLParser {
     			towerBuilder.buildUnlockLevel(Integer.parseInt(((Element)(towerElement.getElementsByTagName("unlockLevel").item(0))).getFirstChild().getNodeValue()));
     			ArrayList<Integer> weapons = new ArrayList<Integer>();
     			NodeList weaponNodes = towerElement.getElementsByTagName("weapons");
+    			System.out.println("Weapons: " + weaponNodes.getLength());
     			for (int j = 0; j < weaponNodes.getLength(); j++) {
     				weapons.add(Integer.parseInt(((Element)weaponNodes.item(j)).getFirstChild().getNodeValue()));
     			}

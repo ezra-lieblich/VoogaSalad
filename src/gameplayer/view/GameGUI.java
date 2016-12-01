@@ -64,6 +64,7 @@ public class GameGUI {
 		this.currentLevel = 0;
 		this.rows = rows;
 		this.columns = columns;
+		System.out.println("Rows: "+rows+", Columns: "+columns);
 	}
 
 	public Scene init(double gold, double lives, double level, List<String> imagePaths) {
