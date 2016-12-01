@@ -5,7 +5,20 @@ Our group will be implementing a game authoring and playing environment for towe
 At a high level, this project is divided into the "game authoring environment" and the "game player". The authoring environment will allow users to create their tower defense game and define settings. These settings and specifications will be recorded in an XML file (run by the game engine).
 Once the user decides the play the game, the game player will accept the XML file from the game engine and load the game. With this design, the primary means of communication between these two parts is the XML file. The only information the game player program needs to load the game is the game data, which the game authoring environment provides in the XML file. 
 ##### Game Player
+###### Overview
 In the game player, we are dividing the work into parsing the xml file, using the data to create the game logic (back end), and displaying the game to the user (front end). The back and front ends will communicate through controllers. There will be many controllers, each of which represent a type of view. Each of these controllers will pass data and modifications between the model and the view (using observables). 
+##### Back End high level design
+###### XML parser
+- sharing basics with game authoring
+
+###### Model
+- basic structure: Tower, Weapon, Enemy
+- use the type classes in the authoring part for contructing instance
+- manager classes
+- observable binding with front end
+- controller for each moving object
+
+
 ##### Game Authoring
 The game authoring environment will communicate to the game engine through interfaces. When game authoring needs to set an item in the game engine, it will call the set interface, passing the necessary information to the game engine. The game authoring environment will not communicate with the game player.
 # User Interface
@@ -233,4 +246,7 @@ the view how we implement the changes in the backend and by using the Observer p
 necessary front end components.
 
 ### Game Authoring Environment considerations
-One design choice we considered was how to determine the different attributes of each level. For example, an enemy could have a different frequency at each level, but we had to decide if that frequency will be determined in the enemy class (with a combo box for the user to set which level they were adding an attribute to) or in a new Design Level class. At this point, we have decided to use a DesignLevel class. After looking at the way the xml file is formatted, we decided that it would be easier for the backend to interpret information if we send it by level. Also, this design allows the user to make a new level by only working in one or two tabs of the user interface. Another design consideration was how often the view should be updating the model (also discussed in game engine considerations). One reason to constantly update the model is to allow for the future extension of allowing two people to create a game together, at the same time. However, this could cause invalid data to be passed to the backend if the user is in the middle of creating something, like an enemy.   
+One design choice we considered was how to determine the different attributes of each level. For example, an enemy could have a different frequency at each level, but we had to decide if that frequency will be determined in the enemy class (with a combo box for the user to set which level they were adding an attribute to) or in a new Design Level class. At this point, we have decided to use a DesignLevel class. After looking at the way the xml file is formatted, we decided that it would be easier for the backend to interpret information if we send it by level. Also, this design allows the user to make a new level by only working in one or two tabs of the user interface. Another design consideration was how often the view should be updating the model (also discussed in game engine considerations). One reason to constantly update the model is to allow for the future extension of allowing two people to create a game together, at the same time. However, this could cause invalid data to be passed to the backend if the user is in the middle of creating something, like an enemy. 
+
+### Frontend
+![Gameplay frontend](data/frontendgameplay.jpg "High Level Design of Frontend")  
