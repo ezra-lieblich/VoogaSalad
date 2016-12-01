@@ -118,6 +118,10 @@ public class GamePlayerController implements Observer {
 				getTowerImages());
 		this.view.getGrid().populatePath(model.getGrid().getStartPoint()); 
 		this.dropController = new DragDropController(this.view, this.model,this.getTowerImageMap());
+		
+		
+		//testing stuff
+		this.model.createDummyEnemies();
 	}
 	
 	private ArrayList<String> getTowerImages() {

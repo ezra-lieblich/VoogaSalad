@@ -82,9 +82,7 @@
 			<coordinate>8,0;</coordinate>
 			<coordinate>9,0;</coordinate>
 		</path>
-		<enemies>
-			
-		</enemies>
+		<enemies></enemies>
 	</level1>
 	<level2>
 		<width>10</width>
