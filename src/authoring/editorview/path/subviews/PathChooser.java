@@ -27,8 +27,8 @@ public class PathChooser{
 	private VBox root;
 	private PathEditorViewDelegate delegate;
 	private List<NameIdPair> nameIdList;
-	private ObservableList<Object> pathList;
-	private ComboBox<Object> pathComboBox;
+	private ObservableList<String> pathList;
+	private ComboBox<String> pathComboBox;
 	private int activePathID;
 	
 	
@@ -70,6 +70,7 @@ public class PathChooser{
 				if (pair != newPair && pair.getId() == activePathID){
 					nameIdList.remove(pair);
 					pathList.remove(pair.getName());
+					break;
 				}
 			}		
 		//}
@@ -101,14 +102,22 @@ public class PathChooser{
 				break;
 			}
 		}	
+		System.out.println(pathComboBox.getValue());
+		System.out.println(pathList);
 	}
 	
 	private void buildViewComponents(){
 		
 		pathList = FXCollections.observableArrayList();
 		
-		pathComboBox = ComboBoxFactory.makeComboBox(pathResource.getString("ComboBoxText"), 
-				e -> setEditView(pathComboBox.getValue().toString()), pathList);
+		pathComboBox = new ComboBox<String>(pathList);
+		pathComboBox.setOnAction(e -> setEditView(pathComboBox.getValue()));
+        pathComboBox.setPromptText(pathResource.getString("ComboBoxText"));
+		
+		
+//		pathComboBox = ComboBoxFactory.makeComboBox(pathResource.getString("ComboBoxText"), 
+//				e -> setEditView(pathComboBox.getValue().toString()), pathList);
+		
 		pathComboBox.setTranslateX(5);
 		root.getChildren().add(pathComboBox);
 	}

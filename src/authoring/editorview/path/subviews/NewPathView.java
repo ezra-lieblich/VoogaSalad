@@ -49,7 +49,7 @@ public class NewPathView {
 	    createPathButton.setFocusTraversable(false);
 	}
 	
-	public void createNewPath(){
+	private void createNewPath(){
 		delegate.onUserEnteredCreatePath();				
 		delegate.onUserEnteredEditPath(activePathID);
 		

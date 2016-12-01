@@ -8,6 +8,7 @@ import engine.path.PathManagerController;
 public class PathEditorViewController extends EditorViewController implements PathEditorViewDelegate {
 	private IPathUpdateView pathView;
 	private PathManagerController pathDataSource;
+	private int activeID;
 	
 	public PathEditorViewController(int editorWidth, int editorHeight){
 		this.pathView = PathEditorViewFactory.build(editorWidth, editorHeight);
@@ -20,6 +21,10 @@ public class PathEditorViewController extends EditorViewController implements Pa
 		
 	public void setPathDataSource(PathManagerController source){
 		this.pathDataSource = source;
+		this.pathDataSource.addTypeBankListener(this.pathView);
+		onUserEnteredCreatePath();
+		onUserEnteredEditPath(activeID);
+		
 	}
 
 	@Override
@@ -49,9 +54,9 @@ public class PathEditorViewController extends EditorViewController implements Pa
 
 	@Override
 	public void onUserEnteredCreatePath() {
-		int pathID = pathDataSource.createType(pathView);
-		
-		pathView.updateActiveID(pathID);
+		activeID = pathDataSource.createType(pathView);
+		pathView.updateActiveID(activeID);
+		pathView.createNewPath();
 			
 	}
 
@@ -59,16 +64,14 @@ public class PathEditorViewController extends EditorViewController implements Pa
 
 	@Override
 	public void onUserEnteredEditPath(int pathID) {
+		activeID = pathID;
 		pathView.updateActiveID(pathID);
 		pathView.updateNumColumns(pathDataSource.getNumberofColumns(pathID));
-		System.out.println(pathDataSource.getNumberofColumns(pathID));
 		pathView.updateNumRows(pathDataSource.getNumberofRows(pathID));
-		System.out.println(pathDataSource.getNumberofRows(pathID));
 		pathView.updatePathCoordinates(pathDataSource.getPathCoordinates(pathID));
-		pathView.updatePathImage(pathDataSource.getImagePath(pathID));
+		pathView.updateImagePathDisplay(pathDataSource.getImagePath(pathID));
 		pathView.updateNameDisplay(pathDataSource.getName(pathID));
-		System.out.println(pathDataSource.getName(pathID));
-		pathView.createNewPath();
+		pathView.updatePath();
 	}
 
 
@@ -87,7 +90,7 @@ public class PathEditorViewController extends EditorViewController implements Pa
 
 	@Override
 	public void onUserEnteredDeletePath() {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
