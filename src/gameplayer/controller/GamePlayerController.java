@@ -69,7 +69,7 @@ public class GamePlayerController implements Observer {
 		this.model = new GamePlayModel(this.loader);
 		this.enemyManager = new EnemyManager(this.model);
 		this.model.addObserver(this);
-		this.oldLevel = 0;
+		this.oldLevel = 1;
 		this.towerToId = new HashMap<String, Integer>();
 		populateTowerToId();
 	}
