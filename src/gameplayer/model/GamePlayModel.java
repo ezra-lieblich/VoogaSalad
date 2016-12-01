@@ -11,6 +11,8 @@ import engine.tower.Tower;
 import engine.weapon.*;
 import gameplayer.loader.GamePlayerFactory;
 import gameplayer.view.GridGUI;
+import gameplayer.view.helper.GraphicsLibrary;
+import javafx.scene.image.ImageView;
 
 public class GamePlayModel extends Observable {
 
@@ -37,6 +39,7 @@ public class GamePlayModel extends Observable {
 	private String gameTitle;
 	private int uniqueTowerID, uniqueEnemyID, uniqueWeaponID;
 	private HashMap<Integer, engine.weapon.Weapon> weaponMap;
+	private GraphicsLibrary graphicLib;
 
 
 	// private EnemyModel enemyModel;
@@ -44,9 +47,11 @@ public class GamePlayModel extends Observable {
 	
 
 	public GamePlayModel(GamePlayerFactory factory) {
+		graphicLib = new GraphicsLibrary();
 		initializeGameSetting(factory);
 		// this.enemyModel = new EnemyModel(this);
 	}
+	
 	
 	public void createDummyEnemies(){
 		Queue<Enemy> myQueue = new LinkedList<Enemy>();
@@ -429,7 +434,7 @@ public class GamePlayModel extends Observable {
 
 	public void updateInLevel() {
 		// checkCollision();
-		 updateWeapon();
+		 //updateWeapon();
 		// this.enemyModel.update();
 
 	}

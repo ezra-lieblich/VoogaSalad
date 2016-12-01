@@ -193,7 +193,7 @@ public class GameGUI {
 			ImageView image = new ImageView(entity.getImage());
 			image.setX(entity.getX());
 			image.setY(entity.getY());
-			graphics.setImageViewParams(image, DragDropView.DEFENSIVEWIDTH, DragDropView.DEFENSIVEHEIGHT);
+			graphics.setImageViewParams(image, DragDropView.DEFENSIVEWIDTH*0.9, DragDropView.DEFENSIVEHEIGHT*0.9);
 			this.grid.getGrid().getChildren().add(image);
 		}
 	}
