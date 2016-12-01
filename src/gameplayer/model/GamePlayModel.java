@@ -228,7 +228,7 @@ public class GamePlayModel extends Observable {
 
 	public void singleCollision(Enemy e, Weapon w) {
 		if (Math.abs(w.getX() - e.getX()) < hitBuffer && Math.abs(w.getY() - e.getY()) < hitBuffer) {
-			e.setHealth(e.getHealth() - w.getDemage());
+			e.setHealth(e.getHealth() - w.getDamage());
 		}
 	}
 
@@ -257,7 +257,9 @@ public class GamePlayModel extends Observable {
 	}
 
 	private void updateWeapon() {
+		System.out.println("Weapons on grid: " + weaponOnGrid.size());
 		for (Weapon w : weaponOnGrid) {
+			System.out.println("Weapon x: " + w.getX());
 			w.setX(w.getSpeedX() + w.getX());
 			w.setY(w.getSpeedY() + w.getY());
 
@@ -344,7 +346,7 @@ public class GamePlayModel extends Observable {
 
 	public void updateInLevel() {
 		// checkCollision();
-		// updateWeapon();
+		 updateWeapon();
 		// this.enemyModel.update();
 
 	}
