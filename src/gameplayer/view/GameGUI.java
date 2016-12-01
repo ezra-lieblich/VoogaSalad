@@ -177,6 +177,7 @@ public class GameGUI {
 		for (IDrawable entity : redraw) {
 			ImageView image = new ImageView(entity.getImage());
 			if (i<towerCoords.size() && towerCoords.get(i).length > 1) {
+				System.out.println("TOWER BEING RENDERED?!");
 				image.setX(towerCoords.get(i)[0]);
 				image.setY(towerCoords.get(i)[1]);
 				graphics.setImageViewParams(image, DragDropView.DEFENSIVEWIDTH, DragDropView.DEFENSIVEHEIGHT);

@@ -17,12 +17,14 @@ public class EnemyManager extends Observable {
 	private Cell current;
 	private Cell currentCopy;
 	private GraphicsLibrary graphicLib;
+	private int pastEnemyId;
 
 	public EnemyManager(GamePlayModel model) {
 		this.enemyOnGrid = new ArrayList<Enemy>();
 		this.gamePlayModel = model;
 		this.grid = this.gamePlayModel.getGrid();
 		this.graphicLib = new GraphicsLibrary();
+		this.pastEnemyId = 0;
 
 	}
 
@@ -158,9 +160,15 @@ public class EnemyManager extends Observable {
 		graphicLib.setImageViewParams(enemyImage, this.gamePlayModel.getCellWidth(),  this.gamePlayModel.getCellHeight());
 	}
 	private void moveIndividualEnemy(Enemy enemy) {
+		/*
+		if (enemy.getUniqueID() != this.pastEnemyId){
+			this.current = currentCopy; //reset if a new enemy (prob won't work)
+			this.pastEnemyId = enemy.getUniqueID();
+		}
+		*/
 		//System.out.println("Cell width: " + this.gamePlayModel.getCellWidth());
 		//System.out.println("Current.getX();" + this.current.getX() + ", Current.getY(): " + this.current.getY());
-		if (this.current.getNext() != null) {
+		if (this.current != null) {
 			if (enemy.getX() < (current.getX() * this.gamePlayModel.getCellWidth())
 					&& (enemy.getY() /*+ this.gamePlayModel.getCellHeight()*/) < current.getY()
 							* this.gamePlayModel.getCellHeight()) {

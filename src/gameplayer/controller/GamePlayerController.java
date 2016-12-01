@@ -90,7 +90,7 @@ public class GamePlayerController implements Observer {
 	 */
 	public void checkIfValid() {
 		if (!loader.xmlIsValid()) {
-			System.out.println("XML is invalid, game cannot be created");
+			//System.out.println("XML is invalid, game cannot be created");
 			// TODO: actually throw an error
 		}
 	}
@@ -157,7 +157,7 @@ public class GamePlayerController implements Observer {
 				/*
 				this.oldLevel = newLevel;
 				this.view.newLevelPopUp(e->{
-					System.out.println("New level");
+					//System.out.println("New level");
 					this.view.getGrid().getGrid().getChildren().clear();
 					//do something to trigger new level here!
 				});
@@ -181,12 +181,12 @@ public class GamePlayerController implements Observer {
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> {
 			((Pane) this.view.getGrid().getGrid()).getChildren().clear(); //clear everything
 			this.currentWave = this.model.getPackOfEnemyComing();
-			System.out.println(currentWave.size()); 
+			//System.out.println(currentWave.size()); 
 			
 			//trying to get this to work but null pointer
 			if(currentWave.size()!=0){
 				if(timer%15==0){
-					System.out.println("here");
+					//System.out.println("here");
 					Enemy enemy = currentWave.poll();
 					this.enemyManager.spawnEnemy(enemy);
 					timer = 1; 
@@ -226,8 +226,8 @@ public class GamePlayerController implements Observer {
 		List<IDrawable> reEnemyDraw = convertEnemyDrawable(enemyRedraw);//probably need to add bullets here too
 		List<IDrawable> reTowerDraw = convertTowerDrawable(towerRedraw);
 
-		//System.out.println("List of enemies?");
-		//System.out.println(enemyRedraw);
+		////System.out.println("List of enemies?");
+		////System.out.println(enemyRedraw);
 		this.view.reRender(reEnemyDraw);
 		this.view.reRenderTower(reTowerDraw);
 	}

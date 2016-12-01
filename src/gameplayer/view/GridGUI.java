@@ -21,7 +21,7 @@ import javafx.scene.layout.Pane;
 public class GridGUI {
 
 	private Pane grid;
-	private Pane pathGrid;
+	//private Pane pathGrid;
 	public static final int GRID_WIDTH = 600;
 	public static final int GRID_HEIGHT = 600;
 	private double rows;
@@ -39,7 +39,7 @@ public class GridGUI {
 	public GridGUI(int rows, int columns/*, List<int[]> path*/) {
 		//System.out.println("Rows: "+rows+"; columns: "+columns);
 		this.grid = new Pane();
-		this.pathGrid = new Pane();
+		//this.pathGrid = new Pane();
 		this.graphicsLib = new GraphicsLibrary();
 		this.rows = rows;
 		this.cols = columns;
@@ -88,9 +88,6 @@ public class GridGUI {
 		return this.grid;
 	}
 	
-	public Pane getPathGrid(){
-		return this.pathGrid;
-	}
 
 	private void styleGrid(String terrainURL) {
 		setTerrain(terrainURL);
@@ -98,10 +95,6 @@ public class GridGUI {
 		grid.setMinWidth(GRID_WIDTH);
 		grid.setMinHeight(GRID_HEIGHT);
 		
-		this.pathGrid.getStyleClass().add("grid");
-		this.pathGrid.setStyle("-fx-background-color: rgba(100, 100, 100, 0);");
-		pathGrid.setMinWidth(GRID_WIDTH);
-		pathGrid.setMinHeight(GRID_HEIGHT);
 	}
 
 	private void setTerrain(String imageURL) {
