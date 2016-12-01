@@ -106,7 +106,7 @@ public class GamePlayerController implements Observer {
 	
 	private ArrayList<String> getTowerImages() {
 		ArrayList<String> towerImages = new ArrayList<String>();
-		HashMap<Integer, Tower> towers = this.loader.getTowers();
+		HashMap<Integer, engine.tower.Tower> towers = this.loader.getTowers();
 		for (Tower tower : towers.values()) {
 			towerImages.add(tower.getImagePath());
 		}

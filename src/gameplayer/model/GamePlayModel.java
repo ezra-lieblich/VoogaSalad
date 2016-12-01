@@ -15,12 +15,9 @@ public class GamePlayModel extends Observable {
 	private Grid grid;
 	private int gridX;
 	private int gridY;
-<<<<<<< HEAD
 
 	private List<Enemy> enemyOnGrid;
-=======
-	// private List<Enemy> enemyOnGrid;
->>>>>>> 8c409c3269db776e77bb08e3d9044ca4eec91998
+
 	private List<Weapon> weaponOnGrid;
 	private List<Tower> towersOnGrid; 
 	private int hitBuffer = 10; // initialize from xml
