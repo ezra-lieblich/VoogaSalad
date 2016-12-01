@@ -3,6 +3,7 @@ package authoring.editorview.gamesettings;
 import java.util.List;
 
 import authoring.editorview.IUpdateView;
+import authoring.editorview.ListDataSource;
 
 public interface IGameUpdateView extends IGameSettingsEditorView, IUpdateView{
 	
@@ -18,5 +19,6 @@ public interface IGameUpdateView extends IGameSettingsEditorView, IUpdateView{
 	
 	public void updateLosingConditions (List<String> losingConditions);
 	
+	public void setGameSettingsListDataSource (ListDataSource source);
 
 }

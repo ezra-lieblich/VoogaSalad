@@ -5,7 +5,6 @@ import java.util.ResourceBundle;
 import authoring.editorview.EditorViewController;
 import authoring.editorview.ListCellData;
 import authoring.editorview.ListDataSource;
-import authoring.editorview.enemy.subviews.EnemyListCellData;
 import authoring.utilityfactories.DialogueBoxFactory;
 import engine.enemy.*;
 
@@ -152,7 +151,7 @@ public class EnemyEditorViewController extends EditorViewController
 
     @Override
     public ListCellData getCellDataForSubject (int enemyID) {
-        ListCellData cellData = new EnemyListCellData();
+        ListCellData cellData = new ListCellData();
         cellData.setName(enemyDataSource.getName(enemyID));
         cellData.setImagePath(enemyDataSource.getImagePath(enemyID));
         cellData.setId(enemyID);
