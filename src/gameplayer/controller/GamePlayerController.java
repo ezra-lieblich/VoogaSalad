@@ -90,7 +90,7 @@ public class GamePlayerController implements Observer {
 	 */
 	public void checkIfValid() {
 		if (!loader.xmlIsValid()) {
-			System.out.println("XML is invalid, game cannot be created");
+			//System.out.println("XML is invalid, game cannot be created");
 			// TODO: actually throw an error
 		}
 	}
@@ -117,12 +117,23 @@ public class GamePlayerController implements Observer {
 		});
 		this.mainScene = view.init(this.model.getGold(), this.model.getLife(), this.model.getCurrentLevel(),
 				getTowerImages());
+		this.mainScene.setOnMouseClicked(e -> handleMouseClicked(e.getX(), e.getY()));
+		
 		this.view.getGrid().populatePath(model.getGrid().getStartPoint()); 
 		this.dropController = new DragDropController(this.view, this.model,this.getTowerImageMap());
 		
 		
 		//testing stuff
 		this.model.createDummyEnemies();
+	}
+	
+	private void handleMouseClicked(double x, double y){
+		List<Tower> towersOnGrid = this.model.getTowerOnGrid();
+		for(Tower t: towersOnGrid){
+			if((t.getX() -20 < x || x < t.getX()+20)  && (t.getY()-20 < y || y <t.getY() + 20)){
+				t.toggleInfoVisibility();
+			}
+		}
 	}
 	
 	private ArrayList<String> getTowerImages() {
@@ -157,7 +168,7 @@ public class GamePlayerController implements Observer {
 				/*
 				this.oldLevel = newLevel;
 				this.view.newLevelPopUp(e->{
-					System.out.println("New level");
+					//System.out.println("New level");
 					this.view.getGrid().getGrid().getChildren().clear();
 					//do something to trigger new level here!
 				});
@@ -181,12 +192,12 @@ public class GamePlayerController implements Observer {
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> {
 			((Pane) this.view.getGrid().getGrid()).getChildren().clear(); //clear everything
 			this.currentWave = this.model.getPackOfEnemyComing();
-			System.out.println(currentWave.size()); 
+			//System.out.println(currentWave.size()); 
 			
 			//trying to get this to work but null pointer
 			if(currentWave.size()!=0){
 				if(timer%15==0){
-					System.out.println("here");
+					//System.out.println("here");
 					Enemy enemy = currentWave.poll();
 					this.enemyManager.spawnEnemy(enemy);
 					timer = 1; 
@@ -226,8 +237,8 @@ public class GamePlayerController implements Observer {
 		List<IDrawable> reEnemyDraw = convertEnemyDrawable(enemyRedraw);//probably need to add bullets here too
 		List<IDrawable> reTowerDraw = convertTowerDrawable(towerRedraw);
 
-		//System.out.println("List of enemies?");
-		//System.out.println(enemyRedraw);
+		////System.out.println("List of enemies?");
+		////System.out.println(enemyRedraw);
 		this.view.reRender(reEnemyDraw);
 		this.view.reRenderTower(reTowerDraw);
 	}

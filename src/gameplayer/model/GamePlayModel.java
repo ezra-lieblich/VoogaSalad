@@ -266,10 +266,10 @@ public class GamePlayModel extends Observable {
 			this.towersOnGrid.add(newlyPlaced); 
 			
 			setGold(this.gold - newlyPlaced.getCost());
-			System.out.println("Calculation time: x:"+x+", Grid width: "+GridGUI.GRID_WIDTH+", cellwidth: "+this.getCellWidth()+",cellheight:"+this.getCellHeight());
+			//System.out.println("Calculation time: x:"+x+", Grid width: "+GridGUI.GRID_WIDTH+", cellwidth: "+this.getCellWidth()+",cellheight:"+this.getCellHeight());
 			grid.placeTower(newlyPlaced, (int)(GridGUI.GRID_WIDTH/x), (int)(GridGUI.GRID_HEIGHT/y));
 			
-			System.out.println("towers on grid: " + this.towersOnGrid.size()); 
+			//System.out.println("towers on grid: " + this.towersOnGrid.size()); 
 
 		return true;
 
@@ -277,14 +277,26 @@ public class GamePlayModel extends Observable {
 	
 	
 	public boolean canPlaceTower(int xcoord, int ycoord, double cost){
+		
 		Cell current = this.grid.getStartPoint();
-		//System.out.println("starting cell x: "+current.getX()+"; y: "+current.getY());
+		/*
+		System.out.println("xcoord: "+xcoord);
+		System.out.println("yccord: "+ycoord);
+		if(this.gridArray[xcoord][ycoord].getNext() != null){
+			return false;
+		}
+		*/
+		
+		System.out.println("starting cell x: "+current.getX()+"; y: "+current.getY());
 		while (current != null){
-			double x =current.getX()* GridGUI.GRID_WIDTH/this.getColumns();
+			double x_min =current.getX()* GridGUI.GRID_WIDTH/this.getColumns();
+			double x =current.getX()* GridGUI.GRID_WIDTH/this.getColumns() + this.getCellWidth();
 			double y = current.getY() * GridGUI.GRID_WIDTH/this.getRow() + GridGUI.GRID_WIDTH/this.getRow();
+			double y_min = current.getY() * GridGUI.GRID_WIDTH/this.getRow() ;
 			current = current.getNext();
-			//System.out.println("Startcell: "+x+","+y+". Candropimage: "+xcoord+","+ycoord);
-			if (xcoord<x && ycoord<y){
+			System.out.println("Startcell: "+x+","+y+". Candropimage: "+xcoord+","+ycoord);
+			if (xcoord<x && xcoord>x_min && ycoord<y && ycoord>y_min){
+				System.out.println("CAN'T ADD TOWER IN CANPLACETOWER");
 				return false;
 			}
 		}
