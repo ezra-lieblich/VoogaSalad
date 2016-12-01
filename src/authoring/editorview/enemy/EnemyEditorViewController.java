@@ -32,6 +32,7 @@ public class EnemyEditorViewController extends EditorViewController
 
     public void setEnemyDataSource (EnemyManagerController source) {
         this.enemyDataSource = source;
+        this.enemyDataSource.addTypeBankListener(this.enemyView);
         onUserPressedCreateEnemy();
     }
 
@@ -49,7 +50,7 @@ public class EnemyEditorViewController extends EditorViewController
         enemyView.updateEnemyRewardMoney(enemyDataSource.getEnemyRewardMoney(currentEnemyID));
         enemyView.updateEnemyRewardPoints(enemyDataSource.getEnemyRewardScore(currentEnemyID));
         enemyView.updateEnemyHealthDisplay(enemyDataSource.getEnemyHealth(currentEnemyID));
-    }
+     }
 
     @Override
     public void onUserEnteredEnemySpeed (String enemySpeed) {

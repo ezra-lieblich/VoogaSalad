@@ -21,6 +21,7 @@ public class LevelEditorViewController extends EditorViewController
 
     public void setLevelDataSource (LevelManagerController source) {
         this.levelDataSource = source;
+        this.levelDataSource.addTypeBankListener(this.levelView);
         onUserEnteredCreateLevel();
     }
 

@@ -63,14 +63,7 @@ public class AuthoringController {
 		EnemyManagerController enemyModel = modelController.getModelController(EnemyManagerController.class);
 		TowerManagerController towerModel = modelController.getModelController(TowerManagerController.class);
 		GameModeManagerController settingsModel = modelController.getModelController(GameModeManagerController.class);		
-			
-		pathModel.addTypeBankListener((IPathUpdateView) pathVC.getUpdateView());
-		levelModel.addTypeBankListener((ILevelEditorView) levelVC.getUpdateView());
-		weaponModel.addTypeBankListener((IWeaponEditorView) weaponVC.getUpdateView());
-		enemyModel.addTypeBankListener((IEnemyEditorView) enemyVC.getUpdateView());
-		towerModel.addTypeBankListener((ITowerEditorView) towerVC.getUpdateView());
-		settingsModel.addTypeBankListener((IGameUpdateView) settingsVC.getUpdateView());
-		
+
 		pathVC.setPathDataSource(pathModel);
 		levelVC.setLevelDataSource(levelModel);
 		weaponVC.setWeaponDataSource(weaponModel);

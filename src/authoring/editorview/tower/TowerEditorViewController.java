@@ -30,6 +30,7 @@ public class TowerEditorViewController extends EditorViewController
 
     public void setTowerDataSource (TowerManagerController source) {
         this.towerDataSource = source;
+        this.towerDataSource.addTypeBankListener(this.towerView);
         onUserPressedCreateNewTower();
     }
 
