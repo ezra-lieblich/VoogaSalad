@@ -4,14 +4,22 @@ import java.io.IOException;
 import java.util.HashMap;
 
 import authoring.editorview.EditorViewController;
+import authoring.editorview.IEditorView;
+import authoring.editorview.IUpdateView;
 import authoring.editorview.enemy.EnemyEditorViewController;
+import authoring.editorview.enemy.IEnemyEditorView;
 import authoring.editorview.gamesettings.GameSettingsEditorViewController;
+import authoring.editorview.gamesettings.IGameUpdateView;
+import authoring.editorview.level.ILevelEditorView;
 import authoring.editorview.level.LevelEditorViewController;
+import authoring.editorview.path.IPathEditorView;
+import authoring.editorview.path.IPathUpdateView;
 import authoring.editorview.path.PathEditorViewController;
+import authoring.editorview.tower.ITowerEditorView;
 import authoring.editorview.tower.TowerEditorViewController;
+import authoring.editorview.weapon.IWeaponEditorView;
 import authoring.editorview.weapon.WeaponEditorViewController;
 import authoring.view.AuthoringViewController;
-import engine.ManagerTypeMediator;
 import engine.ModelAuthoringController;
 import engine.ModelController;
 import engine.enemy.EnemyManagerController;
@@ -24,13 +32,13 @@ import javafx.scene.Scene;
 
 public class AuthoringController {
     private ModelController modelController;
+    private AuthoringViewController viewController;
     
     AuthoringController(int size) {
         modelController = new ModelAuthoringController();
-        AuthoringViewController mainVC;
 		try {
-			mainVC = new AuthoringViewController(size, size);
-	        connectDataInterfaces(mainVC);
+			viewController = new AuthoringViewController(size, size);
+	        connectDataInterfaces(viewController);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 		    
@@ -49,13 +57,29 @@ public class AuthoringController {
 		TowerEditorViewController towerVC = (TowerEditorViewController) editorVCs.get("tower");
 		GameSettingsEditorViewController settingsVC = (GameSettingsEditorViewController) editorVCs.get("settings");
 		
-		ModelAuthoringController modelController = new ModelAuthoringController();
+		PathManagerController pathModel = modelController.getModelController(PathManagerController.class);
+		LevelManagerController levelModel = modelController.getModelController(LevelManagerController.class);
+		WeaponManagerController weaponModel = modelController.getModelController(WeaponManagerController.class);
+		EnemyManagerController enemyModel = modelController.getModelController(EnemyManagerController.class);
+		TowerManagerController towerModel = modelController.getModelController(TowerManagerController.class);
+		GameModeManagerController settingsModel = modelController.getModelController(GameModeManagerController.class);		
+			
+		pathModel.addTypeBankListener((IPathUpdateView) pathVC.getUpdateView());
+		levelModel.addTypeBankListener((ILevelEditorView) levelVC.getUpdateView());
+		weaponModel.addTypeBankListener((IWeaponEditorView) weaponVC.getUpdateView());
+		enemyModel.addTypeBankListener((IEnemyEditorView) enemyVC.getUpdateView());
+		towerModel.addTypeBankListener((ITowerEditorView) towerVC.getUpdateView());
+		settingsModel.addTypeBankListener((IGameUpdateView) settingsVC.getUpdateView());
 		
-		pathVC.setPathDataSource(modelController.getModelController(PathManagerController.class));
-		levelVC.setLevelDataSource(modelController.getModelController(LevelManagerController.class));
-		weaponVC.setWeaponDataSource(modelController.getModelController(WeaponManagerController.class));
-		enemyVC.setEnemyDataSource(modelController.getModelController(EnemyManagerController.class));
-		towerVC.setTowerDataSource(modelController.getModelController(TowerManagerController.class));
-		settingsVC.setGameSettingsDataSource(modelController.getModelController(GameModeManagerController.class));
+		pathVC.setPathDataSource(pathModel);
+		levelVC.setLevelDataSource(levelModel);
+		weaponVC.setWeaponDataSource(weaponModel);
+		enemyVC.setEnemyDataSource(enemyModel);
+		towerVC.setTowerDataSource(towerModel);
+		settingsVC.setGameSettingsDataSource(settingsModel);
 	}
+    
+    public Scene getScene(){
+    	return this.viewController.getView().getScene();
+    }
 }

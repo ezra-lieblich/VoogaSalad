@@ -1,5 +1,6 @@
 package engine;
 
+import java.util.ArrayList;
 import java.util.List;
 import authoring.editorview.IUpdateView;
 
@@ -21,7 +22,7 @@ public abstract class AbstractTypeManagerController<E extends Manager<T>, U exte
     
     @Override
     public void addTypeBankListener(V updateView) {
-        typeManager.addEntitiesListener((oldValue, newValue) -> updateView.updateBank(newValue));
+        typeManager.addEntitiesListener((oldValue, newValue) -> updateView.updateBank(new ArrayList<Integer>(newValue.keySet())));
     }
 
     protected T constructType (V updateView) {
