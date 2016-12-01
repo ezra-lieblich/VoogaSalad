@@ -40,12 +40,19 @@ public class GamePlayModel extends Observable {
 
 
 	// private EnemyModel enemyModel;
+	
+	
 
 	public GamePlayModel(GamePlayerFactory factory) {
 		initializeGameSetting(factory);
 		// this.enemyModel = new EnemyModel(this);
 	}
 
+	
+	public  HashMap<Integer, engine.tower.Tower> getAllTowerTypes(){
+		return this.towerTypes;
+	}
+	
 	public List<Weapon> getWeaponOnGrid() {
 		return this.weaponOnGrid;
 	}
@@ -203,7 +210,7 @@ public class GamePlayModel extends Observable {
 	public Boolean placeTower(int type, int x, int y) {
 		// later check if is a valid location to place the tower
 			engine.tower.Tower towerType = towerTypes.get(type);
-			if(this.gold - towerType.getCost() < 0){
+			if(!canPlaceTower(x, y, towerType.getCost())){
 				return false;
 			}
 			
@@ -240,8 +247,8 @@ public class GamePlayModel extends Observable {
 		 */
 	}
 	
-	public boolean canPlaceTower(int xcoord, int ycoord, Cell startingCell){
-		Cell current = startingCell;
+	public boolean canPlaceTower(int xcoord, int ycoord, double cost){
+		Cell current = this.grid.getStartPoint();
 		//System.out.println("starting cell x: "+current.getX()+"; y: "+current.getY());
 		while (current != null){
 			double x =current.getX()* GridGUI.GRID_WIDTH/this.getColumns();
@@ -252,6 +259,10 @@ public class GamePlayModel extends Observable {
 				return false;
 			}
 		}
+		
+		if (this.gold - cost < 0)
+			return false;
+		
 		return true;
 	}
 	
