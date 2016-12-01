@@ -346,10 +346,14 @@ public class GamePlayModel extends Observable {
 	private void updateWeapon() {
 		System.out.println("+++++++++++++++++++++++++++++++++++");
 		System.out.println("weapon number on grid: " + this.weaponOnGrid.size());
+		
 		for (Weapon w : weaponOnGrid) {
 			//System.out.println("Weapon x: " + w.getX());
 			w.setX(w.getSpeedX() + w.getX());
 			w.setY(w.getSpeedY() + w.getY());
+			System.out.println("==============================");
+
+			System.out.println("x and y: " + w.getX() + " " + w.getY());
 
 			// update distance travelled
 			// update in shooting range function
@@ -369,7 +373,7 @@ public class GamePlayModel extends Observable {
 					Weapon currentWeapon = g.getWeapon();
 					currentWeapon.setX(t.getX());
 					currentWeapon.setY(t.getY());
-					System.out.println("x and y: " + currentWeapon.getX() + " " + currentWeapon.getSpeedY());
+					System.out.println("x and y: " + currentWeapon.getX() + " " + currentWeapon.getY());
 					currentWeapon.setID(this.uniqueWeaponID);
 					uniqueWeaponID ++;
 					this.weaponOnGrid.add(currentWeapon);
@@ -439,7 +443,7 @@ public class GamePlayModel extends Observable {
 
 	public void updateInLevel() {
 		// checkCollision();
-		 //updateWeapon();
+		 updateWeapon();
 		// this.enemyModel.update();
 
 	}
