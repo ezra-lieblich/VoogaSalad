@@ -181,12 +181,10 @@ public class GamePlayerController implements Observer {
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> {
 			((Pane) this.view.getGrid().getGrid()).getChildren().clear(); //clear everything
 			this.currentWave = this.model.getPackOfEnemyComing();
-			System.out.println(currentWave.size()); 
 			
 			//trying to get this to work but null pointer
 			if(currentWave.size()!=0){
 				if(timer%15==0){
-					System.out.println("here");
 					Enemy enemy = currentWave.poll();
 					this.enemyManager.spawnEnemy(enemy);
 					timer = 1; 
@@ -225,7 +223,7 @@ public class GamePlayerController implements Observer {
 		List<Tower>towerRedraw = this.model.getTowerOnGrid();
 		List<IDrawable> reEnemyDraw = convertEnemyDrawable(enemyRedraw);//probably need to add bullets here too
 		List<IDrawable> reTowerDraw = convertTowerDrawable(towerRedraw);
-
+		
 		//System.out.println("List of enemies?");
 		//System.out.println(enemyRedraw);
 		this.view.reRender(reEnemyDraw);
