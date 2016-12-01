@@ -337,10 +337,9 @@ public class GamePlayModel extends Observable {
 
 
 	private void updateWeapon() {
-		System.out.println(this.towersOnGrid.size() + " Weapons on grid: " + weaponOnGrid.size());
 
 		for (Weapon w : weaponOnGrid) {
-			System.out.println("Weapon x: " + w.getX());
+			//System.out.println("Weapon x: " + w.getX());
 			w.setX(w.getSpeedX() + w.getX());
 			w.setY(w.getSpeedY() + w.getY());
 
