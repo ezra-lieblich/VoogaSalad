@@ -369,6 +369,7 @@ public class GamePlayModel extends Observable {
 					Weapon currentWeapon = g.getWeapon();
 					currentWeapon.setX(t.getX());
 					currentWeapon.setY(t.getY());
+					System.out.println("x and y: " + currentWeapon.getX() + " " + currentWeapon.getSpeedY());
 					currentWeapon.setID(this.uniqueWeaponID);
 					uniqueWeaponID ++;
 					this.weaponOnGrid.add(currentWeapon);
