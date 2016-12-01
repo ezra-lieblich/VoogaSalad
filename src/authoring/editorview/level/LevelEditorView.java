@@ -35,7 +35,7 @@ public class LevelEditorView implements ILevelEditorView {
         this.levelNameView = new LevelNameView(levelsResource);
         this.createNewLevelView = new CreateNewLevelView(levelsResource);
         this.transitionTimeField = new LevelTransitionTimeField(levelsResource);
-        this.enemyTableView = new EnemyTableView(levelsResource);
+        this.enemyTableView = new EnemyTableView(levelsResource, width);
         setLevelView();
     }
 
