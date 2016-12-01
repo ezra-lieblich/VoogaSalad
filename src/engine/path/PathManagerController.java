@@ -8,6 +8,8 @@ import engine.ManagerController;
 public interface PathManagerController extends ManagerController<PathManager, PathBuilder, Path, IPathUpdateView>{
 
     public boolean setNewPathCoordinate (int pathID, int x, int y);
+    
+    public boolean removePathCoordinate (int pathID, int x, int y);
 
     public void setType(int pathID, String type);
     

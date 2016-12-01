@@ -28,11 +28,12 @@ public class ObservableObjectProperty<U> extends AbstractObservable<U> implement
         return property;
     }
 
+    //TODO - create a temp
     @Override
     public void setProperty (U property) {
-        listeners.forEach(a -> a.accept(this.property, property));
+        U temp = this.property;
         this.property = property;
-        notifyObservers(property);
+        notifyListenersAndObservers(temp, property);
     }
     
     @Override
@@ -45,4 +46,14 @@ public class ObservableObjectProperty<U> extends AbstractObservable<U> implement
         listeners.remove(listener);
     }
     
+    protected void notifyListenersAndObservers(U oldValue, U newValue) {
+        listeners.forEach(a -> a.accept(oldValue, newValue));
+        super.notifyObservers(newValue);
+    }
+    
+    
+    @Override
+    public void notifyObservers (U value) {
+        notifyListenersAndObservers(property, value);
+    }
 }
