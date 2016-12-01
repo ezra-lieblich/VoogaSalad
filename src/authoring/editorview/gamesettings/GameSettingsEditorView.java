@@ -3,15 +3,19 @@ package authoring.editorview.gamesettings;
 import java.util.List;
 import authoring.editorview.gamesettings.subviews.GameNameView;
 import javafx.scene.Node;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 
 
 public class GameSettingsEditorView implements IGameSettingsEditorView {
 
+    private BorderPane gameSettingsView;
     private VBox gameConditionsRoot;
     private GameNameView gameNameView;
+    private GameSettingsEditorViewDelegate delegate;
 
     public GameSettingsEditorView (int aWidth, int aHeight) {
+        gameSettingsView = new BorderPane();
         this.gameConditionsRoot = new VBox(10);
         this.gameNameView = new GameNameView();
     }
@@ -22,14 +26,12 @@ public class GameSettingsEditorView implements IGameSettingsEditorView {
 
     @Override
     public Node getInstanceAsNode () {
-        // TODO Auto-generated method stub
-        return null;
+        return gameSettingsView;
     }
 
     @Override
     public void setDelegate (GameSettingsEditorViewDelegate delegate) {
-        // TODO Auto-generated method stub
-
+        this.delegate = delegate;
     }
 
     @Override

@@ -11,10 +11,9 @@ public class GameSettingsEditorViewController extends EditorViewController
     private GameModeManagerController gameSettingsDataSource;
 
     public GameSettingsEditorViewController (int editorWidth, int editorHeight) {
-        IGameSettingsSetView myView =
-                GameSettingsEditorViewFactory.build(editorWidth, editorHeight);
-        myView.setDelegate(this);
-        this.view = myView;
+        gameView = GameSettingsEditorViewFactory.build(editorWidth, editorHeight);
+        gameView.setDelegate(this);
+        this.view = gameView;
     }
 
     public void setGameSettingsDataSource (GameModeManagerController source) {
