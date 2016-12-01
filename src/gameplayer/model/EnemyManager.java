@@ -184,19 +184,26 @@ public class EnemyManager extends Observable {
 				// System.out.println("Both should move");
 				enemy.setX(enemy.getX() + enemy.getMovingSpeed());
 				enemy.setY(enemy.getY() + enemy.getMovingSpeed());
+				/*
 				int[] coords = coordinateToCell(enemy.getX(),enemy.getY());
 				enemy.setCell(this.gamePlayModel.getGrid().getCell(coords[0], coords[1]));
+				*/
 			} else if (enemy.getX() < (current.getX() * this.gamePlayModel.getCellWidth())
 					&& !(enemy.getY() < (current.getY() * this.gamePlayModel.getCellHeight()))) {
 				enemy.setX(enemy.getX() + enemy.getMovingSpeed());
+				/*
 				int[] coords = coordinateToCell(enemy.getX(),enemy.getY());
 				enemy.setCell(this.gamePlayModel.getGrid().getCell(coords[0], coords[1]));
+				*/
 			} else if (enemy.getY() > (current.getY() * this.gamePlayModel.getCellHeight()) && enemy.getY()<(current.getY() * (this.gamePlayModel.getCellHeight()+1))
 					&& !(enemy.getX() < (current.getX() * this.gamePlayModel.getCellWidth()))) {
 				enemy.setY(enemy.getY() + enemy.getMovingSpeed());
+				/*
 				int[] coords = coordinateToCell(enemy.getX(),enemy.getY());
 				enemy.setCell(this.gamePlayModel.getGrid().getCell(coords[0], coords[1]));
+				*/
 			}
+			
 			
 			/*
 			 * if (!(enemy.getX() + enemy.getMovingSpeed() >
