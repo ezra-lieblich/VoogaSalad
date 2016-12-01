@@ -10,13 +10,14 @@ In the game player, we are dividing the work into parsing the xml file, using th
 ##### Back End high level design
 ###### XML parser
 - sharing basics with game authoring
+
 ###### Model
 - basic structure: Tower, Weapon, Enemy
 - use the type classes in the authoring part for contructing instance
 - manager classes
 - observable binding with front end
 - controller for each moving object
-- 
+
 
 ##### Game Authoring
 The game authoring environment will communicate to the game engine through interfaces. When game authoring needs to set an item in the game engine, it will call the set interface, passing the necessary information to the game engine. The game authoring environment will not communicate with the game player.
