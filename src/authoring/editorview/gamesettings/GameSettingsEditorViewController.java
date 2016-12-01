@@ -17,6 +17,7 @@ public class GameSettingsEditorViewController extends EditorViewController imple
 	
 	public void setGameSettingsDataSource(GameModeManagerController source){
 		this.gameSettingsDataSource = source;
+		this.gameSettingsDataSource.addTypeBankListener(this.gameView);
 	}
 
 	@Override
