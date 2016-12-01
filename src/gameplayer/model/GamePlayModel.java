@@ -355,7 +355,8 @@ public class GamePlayModel extends Observable {
 
 
 	private void updateWeapon() {
-
+		System.out.println("+++++++++++++++++++++++++++++++++++");
+		System.out.println("weapon number on grid: " + this.weaponOnGrid.size());
 		for (Weapon w : weaponOnGrid) {
 			//System.out.println("Weapon x: " + w.getX());
 			w.setX(w.getSpeedX() + w.getX());
@@ -368,7 +369,7 @@ public class GamePlayModel extends Observable {
 			}
 		}
 
-		// check all the weapon types
+		//creating all the new firing
 		for (gameplayer.model.Tower t: towersOnGrid){
 			System.out.println("towerID: " + t.getID());
 			ArrayList<Gun> guns = t.getGuns();
@@ -377,6 +378,8 @@ public class GamePlayModel extends Observable {
 			for (Gun g : guns){
 				if(g.isFiring()){
 					Weapon currentWeapon = g.getWeapon();
+					currentWeapon.setX(t.getX());
+					currentWeapon.setY(t.getY());
 					currentWeapon.setID(this.uniqueWeaponID);
 					uniqueWeaponID ++;
 					this.weaponOnGrid.add(currentWeapon);
