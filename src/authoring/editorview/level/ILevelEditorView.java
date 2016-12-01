@@ -21,4 +21,6 @@ public interface ILevelEditorView extends ILevelSetView, IUpdateView {
 
     public void updateEnemyFrequency (double enemyFrequency);
 
+    public void updateLevelOptions (List<Integer> levelOptions);
+
 }
