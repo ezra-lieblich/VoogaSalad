@@ -67,7 +67,8 @@ public abstract class ImageBank implements ChangeListener<Number> {
 	            ListCellData cellData = dataSource.getCellDataForSubject(ids.get(i));
 	            Node cell = createCellFromData(cellData);
 	            items.add(cell);
-	            itemIDs.set(items.size()-1, cellData.getId());
+	            itemIDs.set(cellData.getId(), items.size()-1);
+//	            itemIDs.set(items.size()-1, cellData.getId());
 	        }
 	    }
 
