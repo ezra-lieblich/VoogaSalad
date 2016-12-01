@@ -19,6 +19,7 @@ import authoring.editorview.tower.ITowerEditorView;
 import authoring.editorview.tower.TowerEditorViewController;
 import authoring.editorview.weapon.IWeaponEditorView;
 import authoring.editorview.weapon.WeaponEditorViewController;
+import authoring.toolbar.IToolbar;
 import authoring.view.AuthoringViewController;
 import engine.ModelAuthoringController;
 import engine.ModelController;
@@ -33,6 +34,7 @@ import javafx.scene.Scene;
 public class AuthoringController {
     private ModelController modelController;
     private AuthoringViewController viewController;
+    private IToolbar toolbar;
     
     AuthoringController(int size) {
         modelController = new ModelAuthoringController();
@@ -44,7 +46,19 @@ public class AuthoringController {
 		    
 			e.printStackTrace();
 		}
+		configureToolbar();
         
+    }
+    
+    private void configureToolbar(){
+    	toolbar = this.viewController.getView().getMyToolbar();
+    	toolbar.setOnPressedSave(e -> saveAsXMLFile());
+    	
+    }
+    
+    private void saveAsXMLFile(){
+    	String fileContent = this.modelController.SaveData();
+    	toolbar.saveFile(fileContent);
     }
     
     private void connectDataInterfaces(AuthoringViewController authoringVC) {
