@@ -21,6 +21,7 @@ import javafx.scene.layout.Pane;
 public class GridGUI {
 
 	private Pane grid;
+	private Pane pathGrid;
 	public static final int GRID_WIDTH = 600;
 	public static final int GRID_HEIGHT = 600;
 	private double rows;
@@ -29,6 +30,7 @@ public class GridGUI {
 	private double cellHeight;
 	private GraphicsLibrary graphicsLib;
 	private List<int[]> path;
+	private List<ImageView> imagePath;
 
 	public static final String TEST_URL = "http://vignette2.wikia.nocookie.net/shingekinokyojin/images/7/77/Walls.png/revision/latest?cb=20130520140640"; // TODO:
 																																							// dummy
@@ -37,11 +39,13 @@ public class GridGUI {
 	public GridGUI(int rows, int columns/*, List<int[]> path*/) {
 		//System.out.println("Rows: "+rows+"; columns: "+columns);
 		this.grid = new Pane();
+		this.pathGrid = new Pane();
 		this.graphicsLib = new GraphicsLibrary();
 		this.rows = rows;
 		this.cols = columns;
 		this.cellWidth = GRID_WIDTH / cols;
 		this.cellHeight = GRID_HEIGHT / this.rows;
+		this.imagePath = new ArrayList<ImageView>();
 		//System.out.println("Cell width: "+cellWidth+", "+cellHeight);
 		//this.path = path;
 	}
@@ -54,6 +58,9 @@ public class GridGUI {
 		return this.cellHeight;
 	}
 
+	public List<ImageView> getPathImages(){
+		return this.imagePath;
+	}
 	//for testing
 	@Deprecated
 	private void initDummyPath(){
@@ -80,12 +87,21 @@ public class GridGUI {
 	public Pane getGrid() {
 		return this.grid;
 	}
+	
+	public Pane getPathGrid(){
+		return this.pathGrid;
+	}
 
 	private void styleGrid(String terrainURL) {
 		setTerrain(terrainURL);
 		grid.getStyleClass().add("grid");
 		grid.setMinWidth(GRID_WIDTH);
 		grid.setMinHeight(GRID_HEIGHT);
+		
+		this.pathGrid.getStyleClass().add("grid");
+		this.pathGrid.setStyle("-fx-background-color: rgba(100, 100, 100, 0);");
+		pathGrid.setMinWidth(GRID_WIDTH);
+		pathGrid.setMinHeight(GRID_HEIGHT);
 	}
 
 	private void setTerrain(String imageURL) {
@@ -110,6 +126,7 @@ public class GridGUI {
 			//System.out.println("path cell x: "+x+"; y: "+y);
 			graphicsLib.setImageViewParams(pathImage, x*cellWidth, y*cellHeight,cellWidth, cellHeight);
 			this.grid.getChildren().add(pathImage);
+			this.imagePath.add(pathImage);
 			current = current.getNext();
 		}
 	}

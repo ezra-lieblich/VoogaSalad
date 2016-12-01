@@ -11,6 +11,8 @@ import engine.tower.Tower;
 import engine.weapon.*;
 import gameplayer.loader.GamePlayerFactory;
 import gameplayer.view.GridGUI;
+import gameplayer.view.helper.GraphicsLibrary;
+import javafx.scene.image.ImageView;
 
 public class GamePlayModel extends Observable {
 
@@ -36,6 +38,7 @@ public class GamePlayModel extends Observable {
 	private String gameTitle;
 	private int uniqueTowerID, uniqueEnemyID, uniqueWeaponID;
 	private HashMap<Integer, engine.weapon.Weapon> weaponMap;
+	private GraphicsLibrary graphicLib;
 
 
 	// private EnemyModel enemyModel;
@@ -43,9 +46,11 @@ public class GamePlayModel extends Observable {
 	
 
 	public GamePlayModel(GamePlayerFactory factory) {
+		graphicLib = new GraphicsLibrary();
 		initializeGameSetting(factory);
 		// this.enemyModel = new EnemyModel(this);
 	}
+	
 	
 	public void createDummyEnemies(){
 		Queue<Enemy> myQueue = new LinkedList<Enemy>();
@@ -145,6 +150,7 @@ public class GamePlayModel extends Observable {
 		this.gridY = this.gridArray[0].length;
 		weaponOnGrid = new ArrayList<Weapon>();
 		weaponMap = this.factory.getWeaponBank();
+		System.out.println("weapon map" + weaponMap.get(0).getName());
 		
 
 
@@ -335,7 +341,8 @@ public class GamePlayModel extends Observable {
 
 
 	private void updateWeapon() {
-
+		System.out.println("+++++++++++++++++++++++++++++++++++");
+		System.out.println("weapon number on grid: " + this.weaponOnGrid.size());
 		for (Weapon w : weaponOnGrid) {
 			//System.out.println("Weapon x: " + w.getX());
 			w.setX(w.getSpeedX() + w.getX());
@@ -348,7 +355,7 @@ public class GamePlayModel extends Observable {
 			}
 		}
 
-		// check all the weapon types
+		//creating all the new firing
 		for (gameplayer.model.Tower t: towersOnGrid){
 			System.out.println("towerID: " + t.getID());
 			ArrayList<Gun> guns = t.getGuns();
@@ -357,6 +364,8 @@ public class GamePlayModel extends Observable {
 			for (Gun g : guns){
 				if(g.isFiring()){
 					Weapon currentWeapon = g.getWeapon();
+					currentWeapon.setX(t.getX());
+					currentWeapon.setY(t.getY());
 					currentWeapon.setID(this.uniqueWeaponID);
 					uniqueWeaponID ++;
 					this.weaponOnGrid.add(currentWeapon);
@@ -426,7 +435,7 @@ public class GamePlayModel extends Observable {
 
 	public void updateInLevel() {
 		// checkCollision();
-		 updateWeapon();
+		 //updateWeapon();
 		// this.enemyModel.update();
 
 	}

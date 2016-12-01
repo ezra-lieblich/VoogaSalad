@@ -220,6 +220,7 @@ public class GamePlayerController implements Observer {
 	private void redrawEverything(){
 		//redraw path
 		//this.view.getGrid().populatePath(this.model.getGrid().getStartPoint());
+		this.view.getGrid().getGrid().getChildren().addAll(this.view.getGrid().getPathImages());
 		List<Enemy>enemyRedraw = this.enemyManager.getEnemyOnGrid(); 
 		List<Tower>towerRedraw = this.model.getTowerOnGrid();
 		List<IDrawable> reEnemyDraw = convertEnemyDrawable(enemyRedraw);//probably need to add bullets here too

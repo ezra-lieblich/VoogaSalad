@@ -7,6 +7,8 @@ import java.util.Queue;
 
 import gameplayer.loader.GamePlayerFactory;
 import gameplayer.view.GridGUI;
+import gameplayer.view.helper.GraphicsLibrary;
+import javafx.scene.image.ImageView;
 
 public class EnemyManager extends Observable {
 	private List<Enemy> enemyOnGrid;
@@ -14,16 +16,18 @@ public class EnemyManager extends Observable {
 	private Grid grid;
 	private Cell current;
 	private Cell currentCopy;
+	private GraphicsLibrary graphicLib;
 
 	public EnemyManager(GamePlayModel model) {
 		this.enemyOnGrid = new ArrayList<Enemy>();
 		this.gamePlayModel = model;
 		this.grid = this.gamePlayModel.getGrid();
+		this.graphicLib = new GraphicsLibrary();
 
 	}
-	
-	public void setCurrentCell(Cell cell){
-		System.out.println("CURRENT CELL SET: "+cell.getX()+", "+cell.getY());
+
+	public void setCurrentCell(Cell cell) {
+		System.out.println("CURRENT CELL SET: " + cell.getX() + ", " + cell.getY());
 		this.current = cell;
 		this.currentCopy = cell;
 	}
@@ -150,21 +154,25 @@ public class EnemyManager extends Observable {
 			moveIndividualEnemy(enemy);
 		}
 	}
-
+	private void setEnemyImageSize(ImageView enemyImage){
+		graphicLib.setImageViewParams(enemyImage, this.gamePlayModel.getCellWidth(),  this.gamePlayModel.getCellHeight());
+	}
 	private void moveIndividualEnemy(Enemy enemy) {
-		System.out.println("Cell width: "+this.gamePlayModel.getCellWidth());
-		System.out.println("Current.getX();"+this.current.getX()+", Current.getY(): "+this.current.getY());
+		//System.out.println("Cell width: " + this.gamePlayModel.getCellWidth());
+		//System.out.println("Current.getX();" + this.current.getX() + ", Current.getY(): " + this.current.getY());
 		if (this.current.getNext() != null) {
-			if (enemy.getX() < (current.getX()*this.gamePlayModel.getCellWidth()) && (enemy.getY()+this.gamePlayModel.getCellHeight()) < current.getY()*this.gamePlayModel.getCellHeight()) {
-				//System.out.println("Both should move");
+			if (enemy.getX() < (current.getX() * this.gamePlayModel.getCellWidth())
+					&& (enemy.getY() /*+ this.gamePlayModel.getCellHeight()*/) < current.getY()
+							* this.gamePlayModel.getCellHeight()) {
+				// System.out.println("Both should move");
 				enemy.setX(enemy.getX() + enemy.getMovingSpeed());
 				enemy.setY(enemy.getY() + enemy.getMovingSpeed());
-			}
-			else if (enemy.getX() < (current.getX()*this.gamePlayModel.getCellWidth()) && !(enemy.getY() < (current.getY()*this.gamePlayModel.getCellHeight()))) {
+			} else if (enemy.getX() < (current.getX() * this.gamePlayModel.getCellWidth())
+					&& !(enemy.getY() < (current.getY() * this.gamePlayModel.getCellHeight()))) {
 				enemy.setX(enemy.getX() + enemy.getMovingSpeed());
-				//System.out.println("Just x should move");
-			}
-			else if (enemy.getY() < (current.getY()*this.gamePlayModel.getCellHeight()) && !(enemy.getX() < (current.getX()*this.gamePlayModel.getCellWidth()))) {
+				// System.out.println("Just x should move");
+			} else if (enemy.getY() < (current.getY() * this.gamePlayModel.getCellHeight())
+					&& !(enemy.getX() < (current.getX() * this.gamePlayModel.getCellWidth()))) {
 				enemy.setY(enemy.getY() + enemy.getMovingSpeed());
 			}
 			/*
@@ -172,8 +180,11 @@ public class EnemyManager extends Observable {
 			 * GridGUI.GRID_WIDTH)) { enemy.setX(enemy.getX() +
 			 * enemy.getMovingSpeed()); }
 			 */
-			this.current = this.current.getNext();
-		}else{
+
+			else {
+				this.current = this.current.getNext();
+			}
+		} else {
 			this.current = currentCopy;
 		}
 

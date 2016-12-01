@@ -90,6 +90,7 @@ public class DragDropView {
         root.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED); // Vertical scroll bar
         root.setFitToWidth(true);
         root.setContent(grid);
+    	root.getStyleClass().add("towersScrollPane");
         //int idCount = 0;
 		for (String image:imageLocations){
 			ImageView currentImage = graphicLib.createImageView(graphicLib.createImage(image));

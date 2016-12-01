@@ -132,6 +132,7 @@ public class GameGUI {
 	 */
 	public void newLevelPopUp(EventHandler<ActionEvent> e) {
 		this.grid.getGrid().getChildren().clear();
+		//this.grid.getPathGrid().getChildren().clear();
 		Button btn = graphics.createButton("Next level", e);
 		ImageView stuff = graphics.createImageView(graphics.createImage("newlevel.png"));
 		graphics.setImageViewParams(stuff, GridGUI.GRID_WIDTH, GridGUI.GRID_HEIGHT);
@@ -141,6 +142,7 @@ public class GameGUI {
 
 	private void createGrid() {
 		styleGrid();
+		//this.mainScreen.setLeft(grid.getPathGrid());
 		this.mainScreen.setLeft(grid.getGrid());
 		grid.init();
 	}
@@ -191,7 +193,7 @@ public class GameGUI {
 			ImageView image = new ImageView(entity.getImage());
 			image.setX(entity.getX());
 			image.setY(entity.getY());
-			graphics.setImageViewParams(image, DragDropView.DEFENSIVEWIDTH, DragDropView.DEFENSIVEHEIGHT);
+			graphics.setImageViewParams(image, DragDropView.DEFENSIVEWIDTH*0.9, DragDropView.DEFENSIVEHEIGHT*0.9);
 			this.grid.getGrid().getChildren().add(image);
 		}
 	}
