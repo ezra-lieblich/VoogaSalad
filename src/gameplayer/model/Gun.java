@@ -1,11 +1,11 @@
 package gameplayer.model;
-import engine.weapon.WeaponType;
+import engine.weapon.*;
 
 public class Gun {
 	private int fireCounter = 0;
 	private double firingRate, attackingRange;  // need to figure out the firing rate int or double!!!
-	private WeaponType weaponType;
-	public Gun(double firingRate, WeaponType weaponType, double attackingRange) {
+	private engine.weapon.Weapon weaponType;
+	public Gun(double firingRate, engine.weapon.Weapon weaponType, double attackingRange) {
 		this.firingRate = firingRate;
 		this.weaponType = weaponType; 
 		this.attackingRange = attackingRange;

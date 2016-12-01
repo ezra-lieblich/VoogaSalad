@@ -22,7 +22,7 @@ public class GamePlayModel extends Observable {
 	private List<Tower> towersOnGrid; 
 	private int hitBuffer = 10; // initialize from xml
 	private HashMap<Integer, Weapon> weaponTypes; // initialize in xml
-	private HashMap<Integer, TowerType> towerTypes;
+	private HashMap<Integer, engine.tower.Tower> towerTypes;
 	private Cell[][] gridArray;
 	private Enemy nextEnteringEnemy;
 	private Queue<Enemy> packOfEnemyComing;
@@ -82,18 +82,9 @@ public class GamePlayModel extends Observable {
 	public void initializeGameSetting(GamePlayerFactory factory) {
 		this.factory = factory;
 		HashMap<String, Double> settingInfo = factory.getGameSetting();
-<<<<<<< HEAD
-		this.currentLevel = settingInfo.get("levelnumber").intValue(); // we should just set it to be 1 to start
-		this.numLevels = settingInfo.get("numLevels");
-=======
-		this.currentLevel = settingInfo.get("levelnumber").intValue(); // do we
-																		// need
-																		// levelnumber
-																		// and
-																		// current
-																		// level?
+
+		this.currentLevel = settingInfo.get("levelnumber").intValue(); 
 		this.numLevels = settingInfo.get("totalNumberOfLevels");
->>>>>>> 8c409c3269db776e77bb08e3d9044ca4eec91998
 		this.gold = settingInfo.get("gold");
 		this.lives = settingInfo.get("lives");
 		this.towerTypes = this.factory.getTowers();
@@ -118,7 +109,7 @@ public class GamePlayModel extends Observable {
 
 	}
 
-	public HashMap<Integer,TowerType> getTowerTypes(){
+	public HashMap<Integer,engine.tower.Tower> getTowerTypes(){
 		return this.towerTypes; 
 	}
 	
@@ -204,8 +195,8 @@ public class GamePlayModel extends Observable {
 	public Boolean placeTower(int type, int x, int y) {
 		// later check if is a valid location to place the tower
 
-			TowerType towerType = towerTypes.get(type);
-			this.towersOnGrid.add(new Tower(type,towerType.getImageLocation(),towerType.getName(),x,y));
+			engine.tower.Tower towerType = towerTypes.get(type);
+			this.towersOnGrid.add(new Tower(type,towerType.getImagePath(),towerType.getName(),x,y));
 			for(int i=0;i<towersOnGrid.size();i++){
 				System.out.println(towersOnGrid.get(i).getName());
 			}
@@ -235,7 +226,7 @@ public class GamePlayModel extends Observable {
 
 	public void singleCollision(Enemy e, Weapon w) {
 		if (Math.abs(w.getX() - e.getX()) < hitBuffer && Math.abs(w.getY() - e.getY()) < hitBuffer) {
-			e.setHealth(e.getHealth() - w.getDemage());
+			e.setHealth(e.getHealth() - w.getDamage());
 		}
 	}
 
