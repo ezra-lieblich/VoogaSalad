@@ -9,6 +9,7 @@ import gameplayer.model.EnemyManager;
 import gameplayer.model.GamePlayModel;
 import gameplayer.model.IDrawable;
 import gameplayer.model.Tower;
+import gameplayer.model.Weapon;
 import gameplayer.view.GameGUI;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -207,6 +208,8 @@ public class GamePlayerController implements Observer {
 			}
 			this.model.updateInLevel();
 			this.enemyManager.update(); 
+			
+			
 			redrawEverything();
 /*
 			List<Enemy>enemyRedraw = this.enemyManager.getEnemyOnGrid(); 
@@ -233,10 +236,20 @@ public class GamePlayerController implements Observer {
 		this.view.getGrid().getGrid().getChildren().addAll(this.view.getGrid().getPathImages());
 		List<Enemy>enemyRedraw = this.enemyManager.getEnemyOnGrid(); 
 		List<Tower>towerRedraw = this.model.getTowerOnGrid();
+		List<Weapon>bulletRedraw = this.model.getWeaponOnGrid();
+		
+		System.out.println(bulletRedraw.size());
+		for(int i=0;i<bulletRedraw.size();i++){
+			System.out.println("bullet "+i+": "+bulletRedraw.get(i).getImage());
+		}
+		
+		
 		List<IDrawable> reEnemyDraw = convertEnemyDrawable(enemyRedraw);//probably need to add bullets here too
 		List<IDrawable> reTowerDraw = convertTowerDrawable(towerRedraw);
+		List<IDrawable> reBulletDraw = convertWeaponDrawable(bulletRedraw);
 		
 		this.view.reRender(reEnemyDraw);
+		this.view.reRender(reBulletDraw);
 		this.view.reRenderTower(reTowerDraw);
 	}
 	
@@ -251,6 +264,14 @@ public class GamePlayerController implements Observer {
 		}
 		for(Tower t: towers){
 			ret.add(t);
+		}
+		return ret; 
+	}
+	
+	private List<IDrawable>convertWeaponDrawable(List<Weapon>weapons){
+		ArrayList<IDrawable> ret = new ArrayList<>(); 
+		for(Weapon w: weapons){
+			ret.add(w);
 		}
 		return ret; 
 	}

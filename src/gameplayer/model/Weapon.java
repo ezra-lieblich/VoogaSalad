@@ -2,7 +2,7 @@ package gameplayer.model;
 
 import java.util.Observable;
 
-public class Weapon extends Observable{
+public class Weapon extends Observable implements IDrawable{
 	
 	private int ID;
 	private double damage;
@@ -64,7 +64,7 @@ public class Weapon extends Observable{
 	/*
 	 * can factor out to a moving object class with enemy class
 	 */
-	double getX() {
+	public double getX() {
 		return xCoordinate;
 	}
 
@@ -84,7 +84,7 @@ public class Weapon extends Observable{
 		notifyObservers();
 	}
 	
-	String getImage(){
+	public String getImage(){
 		return this.image;
 	}
 
