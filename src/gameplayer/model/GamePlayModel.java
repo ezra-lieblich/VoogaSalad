@@ -353,6 +353,7 @@ public class GamePlayModel extends Observable {
 
 			if (!coordinateInBound(w.getX(), w.getY()) && !w.inRange()) {
 				this.weaponOnGrid.remove(w);
+				System.out.println("removed");
 			}
 		}
 

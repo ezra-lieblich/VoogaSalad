@@ -18,7 +18,7 @@ public class WeaponTypeBuilder extends AbstractTypeBuilder<Weapon, WeaponBuilder
      public static final String DEFAULT_IMAGE_PATH = "penguin.jpg";
      public static final double DEFAULT_SIZE = 1;
      public static final List<Integer> DEFAULT_WEAPONS = Arrays.stream(new Integer[]{}).collect(Collectors.toList());
-     public static final double DEFAULT_FIRE_RATE = 2;
+     public static final double DEFAULT_FIRE_RATE = 15;
      public static final String DEFAULT_TRAJECTORY = "Straight";
      public static final String DEFAULT_EFFECT = "";
      public static final double DEFAULT_SPEED = 10;
