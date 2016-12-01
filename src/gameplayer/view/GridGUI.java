@@ -30,7 +30,7 @@ public class GridGUI {
 	private GraphicsLibrary graphicsLib;
 	private List<int[]> path;
 
-	public static final String TEST_URL = "https://images.designtrends.com/wp-content/uploads/2016/03/30060819/Elegant-Night-Stay-Anime-Background.jpg"; // TODO:
+	public static final String TEST_URL = "http://vignette2.wikia.nocookie.net/shingekinokyojin/images/7/77/Walls.png/revision/latest?cb=20130520140640"; // TODO:
 																																							// dummy
 																																							// url
 
@@ -45,9 +45,19 @@ public class GridGUI {
 		//System.out.println("Cell width: "+cellWidth+", "+cellHeight);
 		//this.path = path;
 	}
+	
+	public double getCellWidth(){
+		return this.cellWidth;
+	}
+	
+	public double getCellHeight(){
+		return this.cellHeight;
+	}
 
 	//for testing
+	@Deprecated
 	private void initDummyPath(){
+		
 		int[] stuff  = {0,0};
 		int []stuff1 = {1,1};
 		int []stuff2 = {2,2};
@@ -62,9 +72,9 @@ public class GridGUI {
 	}
 	
 	public void init(){
-		initDummyPath(); //TODO: get rid of
+		//initDummyPath(); //TODO: get rid of
 		styleGrid(TEST_URL);
-		populatePath(this.path);
+		//populatePath(this.path);
 		
 	}
 	public Pane getGrid() {
@@ -79,11 +89,6 @@ public class GridGUI {
 	}
 
 	private void setTerrain(String imageURL) {
-		// Image background = graphicsLib.createImage("kaneki.jpg");
-		// graphicsLib.createImageView(graphicsLib.createImage("kaneki.jpg"));
-
-		// String image =
-		// this.getClass().getResource("kaneki.jpg").toExternalForm();
 		grid.setStyle("-fx-background-image: url('" + imageURL + "'); " + "-fx-background-position: center center; "
 				+ "-fx-background-repeat: stretch;");
 	}
@@ -94,6 +99,22 @@ public class GridGUI {
 		this.grid.getChildren().add(towerImage);
 	}
 
+	public void populatePath(Cell startingCell){
+		//ImageView pathImage = graphicsLib.createImageView(graphicsLib.createImage("kaneki.jpg")); //TODO: replace with whatever shows the path
+		Cell current = startingCell;
+		//System.out.println("starting cell x: "+current.getX()+"; y: "+current.getY());
+		while (current != null){
+			ImageView pathImage = graphicsLib.createImageView(graphicsLib.createImage("kaneki.jpg"));
+			double x =current.getX();
+			double y = current.getY();
+			System.out.println("path cell x: "+x+"; y: "+y);
+			graphicsLib.setImageViewParams(pathImage, x*cellWidth, y*cellHeight,cellWidth, cellHeight);
+			this.grid.getChildren().add(pathImage);
+			current = current.getNext();
+		}
+	}
+	
+	@Deprecated
 	private void populatePath( List<int[]> path) { //TODO: change how path is being sent
 		//System.out.println("Populate path!");
 		for (int i = 0; i < path.size(); i++) {

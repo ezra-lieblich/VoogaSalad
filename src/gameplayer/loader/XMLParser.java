@@ -13,10 +13,15 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 import engine.enemy.EnemyType;
+import engine.enemy.EnemyTypeBuilder;
+import engine.tower.Tower;
 import engine.tower.TowerType;
+import engine.tower.TowerTypeBuilder;
+import engine.enemy.EnemyTypeBuilder;
 import gameplayer.model.Enemy;
 
 
@@ -32,10 +37,14 @@ public class XMLParser {
 	
 	private Element rootElement;
 	private Document xmlDocument; 
+	private TowerTypeBuilder towerBuilder;
+	private EnemyTypeBuilder enemyBuilder;
 
 	public XMLParser(String xmlFilename){
 		parseNewXML(xmlFilename);
-		rootElement = getRootElement(); 		
+		rootElement = getRootElement(); 
+		towerBuilder = new TowerTypeBuilder();
+		enemyBuilder = new EnemyTypeBuilder();
 	}
 	
     /**
@@ -62,6 +71,7 @@ public class XMLParser {
     	DOCUMENT_BUILDER.reset(); 
     }
 
+    
     // Helper method to do the boilerplate code needed to make a documentBuilder.
     private static DocumentBuilder getDocumentBuilder () {
         try {
@@ -72,6 +82,15 @@ public class XMLParser {
         }
     }
     
+    public boolean isValid() {
+    	NodeList nodeList = rootElement.getElementsByTagName("isValid");
+    	//System.out.println("node" + nodeList.item(0).getTextContent());
+    	if (nodeList != null && nodeList.getLength() > 0) {
+			return Boolean.parseBoolean(nodeList.item(0).getTextContent().trim()); //check if the string can actually be parsed as a boolean
+		}
+    	return false;
+    	
+    }
     
     //This returns the TYPE of the xml
     public String getName(){
@@ -80,6 +99,8 @@ public class XMLParser {
     
     public String getTextValue(String parent, String tagName) {
         String textVal = "";
+        System.out.println("parent: " + parent);
+        System.out.println("tag name: " + tagName);
         try{
         	NodeList parentList = xmlDocument.getElementsByTagName(parent);
 	        NodeList nl = ((Element)parentList.item(0)).getElementsByTagName(tagName);
@@ -96,20 +117,27 @@ public class XMLParser {
         return textVal;
     }
     
-    public HashMap<Integer,TowerType> getTowerTypes(){
-    	HashMap<Integer,TowerType>ret = new HashMap<>(); 
+    public HashMap<Integer,Tower> getTowerTypes(){
+    	HashMap<Integer,Tower>ret = new HashMap<>(); 
     	try{
     		NodeList parentList = xmlDocument.getElementsByTagName("tower");
     		for(int i=0;i<parentList.getLength();i++){
-    			Element tower = (Element)parentList.item(i);
-    			String name = ((Element)(tower.getElementsByTagName("name").item(0))).getFirstChild().getNodeValue();
-    			String imageLocation = ((Element)(tower.getElementsByTagName("imageLocation").item(0))).getFirstChild().getNodeValue();
-    			double cost = Double.parseDouble(((Element)(tower.getElementsByTagName("cost").item(0))).getFirstChild().getNodeValue());
-    			double sellAmount = Double.parseDouble(((Element)(tower.getElementsByTagName("sellAmount").item(0))).getFirstChild().getNodeValue());
-    			int fireRate = Integer.parseInt(((Element)(tower.getElementsByTagName("fireRate").item(0))).getFirstChild().getNodeValue());
-    			int unlockLevel = Integer.parseInt(((Element)(tower.getElementsByTagName("unlockLevel").item(0))).getFirstChild().getNodeValue());
-    			TowerType towerType = new TowerType(name,imageLocation,cost,sellAmount,fireRate,unlockLevel);
-    			ret.put(i, towerType);
+    			
+    			Element towerElement= (Element)parentList.item(i);
+    			towerBuilder.buildName(((Element)(towerElement.getElementsByTagName("name").item(0))).getFirstChild().getNodeValue());
+    			towerBuilder.buildImagePath(((Element)(towerElement.getElementsByTagName("imageLocation").item(0))).getFirstChild().getNodeValue());
+    			towerBuilder.buildCost(Double.parseDouble(((Element)(towerElement.getElementsByTagName("cost").item(0))).getFirstChild().getNodeValue()));
+    			towerBuilder.buildSellAmount(Double.parseDouble(((Element)(towerElement.getElementsByTagName("sellAmount").item(0))).getFirstChild().getNodeValue()));
+    			towerBuilder.buildUnlockLevel(Integer.parseInt(((Element)(towerElement.getElementsByTagName("unlockLevel").item(0))).getFirstChild().getNodeValue()));
+    			ArrayList<Integer> weapons = new ArrayList<Integer>();
+    			NodeList weaponNodes = towerElement.getElementsByTagName("weapons");
+    			for (int j = 0; j < weaponNodes.getLength(); j++) {
+    				weapons.add(Integer.parseInt(((Element)weaponNodes.item(j)).getFirstChild().getNodeValue()));
+    			}
+    			towerBuilder.buildWeapons(weapons);
+    			
+    			Tower tower = towerBuilder.build();
+    			ret.put(i, tower);
     		}
     	}
     	catch(Exception e){
@@ -129,41 +157,44 @@ public class XMLParser {
     	}
     }
 	
-	public List<Queue<Enemy>> getEnemy(){
+	public List<Queue<Enemy>> getEnemy(int level){
 		ArrayList<Queue<Enemy>>enemyByLevel=new ArrayList<>(); 
-		HashMap<String,EnemyType> types = getEnemyTypes();
-		int numLevels = Integer.parseInt(getVariableValues("numLevels"));
-		for(int i=1;i<=numLevels;i++){
+		HashMap<String,engine.enemy.Enemy> types = getEnemyTypes(); //refactor names
+		String[]enemiesRawString = getTextValue("level"+level,"typeAmount").split(";");
+		for(int i=0;i<enemiesRawString.length;i++){
 			Queue<Enemy>enemiesInLevel= new LinkedList<Enemy>(); 
-			String[]enemiesRawString = getTextValue("level"+i,"typeAmount").split(";");
-			for(int j=0;j<enemiesRawString.length;j++){
-				String[]enemies=enemiesRawString[j].split(",");
-				for(int k=0;k<Integer.parseInt(enemies[1]);k++){
-					EnemyType type = types.get(enemies[0]);
-					enemiesInLevel.add(new Enemy(type.getName(),type.getSpeed(),(int)(type.getHealth()),type.getImageLocation()));
-				}
+			String[]enemies = enemiesRawString[i].split(",");
+			System.out.println("enemies[1] = " + enemies[1]);
+			for(int k=0;k<Integer.parseInt(enemies[1]);k++){
+				engine.enemy.Enemy type = types.get(enemies[0]); //refactor names
+				System.out.println(type.getName());
+				System.out.println(type.getSpeed());
+				double width = 20; //for testing purposes
+				double height = 20; //for testing purposes
+				enemiesInLevel.add(new Enemy(type.getName(),type.getSpeed(),(int)(type.getHealth()), type.getImagePath(), width ,height)); //for testing
 			}
 			enemyByLevel.add(enemiesInLevel);
 		}
-		
 		return enemyByLevel; 
-		
 	}
 	
-	private HashMap<String, EnemyType> getEnemyTypes() {
-		HashMap<String,EnemyType>ret = new HashMap<>(); 
+	
+	private HashMap<String, engine.enemy.Enemy> getEnemyTypes() { //refactor names
+		HashMap<String,engine.enemy.Enemy>ret = new HashMap<>(); //refactor names
     	try{
     		NodeList parentList = xmlDocument.getElementsByTagName("enemy");
+    		Node data = parentList.item(1);
     		for(int i=0;i<parentList.getLength();i++){
-    			Element enemy = (Element)parentList.item(i);
-    			String name = ((Element)(enemy.getElementsByTagName("name").item(0))).getFirstChild().getNodeValue();
-    			String imageLocation = ((Element)(enemy.getElementsByTagName("imageLocation").item(0))).getFirstChild().getNodeValue();
-    			double speed = Double.parseDouble(((Element)(enemy.getElementsByTagName("speed").item(0))).getFirstChild().getNodeValue());
-    			double health = Double.parseDouble(((Element)(enemy.getElementsByTagName("health").item(0))).getFirstChild().getNodeValue());
-    			double points = Double.parseDouble(((Element)(enemy.getElementsByTagName("points").item(0))).getFirstChild().getNodeValue());
-    			double money = Double.parseDouble(((Element)(enemy.getElementsByTagName("money").item(0))).getFirstChild().getNodeValue());
-    			String collisionEffect = ((Element)(enemy.getElementsByTagName("collisionEffect").item(0))).getFirstChild().getNodeValue();
-    			EnemyType enemyType = new EnemyType(name,imageLocation,speed,health,points,money,collisionEffect);
+    			Element enemyElement = (Element)parentList.item(i);
+    			String name =((Element)(enemyElement.getElementsByTagName("name").item(0))).getFirstChild().getNodeValue();
+    			enemyBuilder.buildName(name);
+    			enemyBuilder.buildImagePath(((Element)(enemyElement.getElementsByTagName("imageLocation").item(0))).getFirstChild().getNodeValue());
+    			enemyBuilder.buildSpeed(Double.parseDouble(((Element)(enemyElement.getElementsByTagName("speed").item(0))).getFirstChild().getNodeValue()));
+    			enemyBuilder.buildHealth(Double.parseDouble(((Element)(enemyElement.getElementsByTagName("health").item(0))).getFirstChild().getNodeValue()));
+    			enemyBuilder.buildScore(Double.parseDouble(((Element)(enemyElement.getElementsByTagName("points").item(0))).getFirstChild().getNodeValue()));
+    			enemyBuilder.buildMoney(Double.parseDouble(((Element)(enemyElement.getElementsByTagName("money").item(0))).getFirstChild().getNodeValue()));
+    			enemyBuilder.buildCollisionEffect(((Element)(enemyElement.getElementsByTagName("collisionEffect").item(0))).getFirstChild().getNodeValue());
+    			engine.enemy.Enemy enemyType = enemyBuilder.build(); //refactor names
     			ret.put(name, enemyType);
     		}
     	}

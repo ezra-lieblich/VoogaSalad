@@ -2,7 +2,7 @@ package gameplayer.model;
 
 import java.util.Observable;
 
-public class Enemy extends Observable{
+public class Enemy extends Observable implements IDrawable{
 	
 	private String name; 
 	private double movingSpeed;  
@@ -13,12 +13,39 @@ public class Enemy extends Observable{
 	private Cell currentCell;
 	private int xDirection; //-1 if moving left, 1 if moving right
 	private int yDirection; //-1 if moving down, 1 if moving up	
-
-	public Enemy(String name, double movingSpeed, int health, String image){
+	private double width, height;
+	private int uniqueID;
+	
+	public Enemy(String name, double movingSpeed, int health, String image, double width, double height){
 		this.name = name; 
 		this.movingSpeed = movingSpeed;
 		this.health = health;	
 		this.image = image;
+		this.width = width;
+		this.height = height;
+				
+	}
+	/*
+	public double[] getWidthAndHeight(){
+		double[] weidthAndHeight = {this.width, this.height};
+		return weidthAndHeight;
+	}
+	*/
+	
+	public void setUniqueID(int id){
+		this.uniqueID = id;
+	}
+	
+	public int getUniqueID(){
+		return this.uniqueID;
+	}
+	
+	public double getWidth(){
+		return this.width;
+	}
+	
+	public double getHeight(){
+		return this.height;
 	}
 	
 	public String getName(){
@@ -29,6 +56,7 @@ public class Enemy extends Observable{
 		return xDirection;
 	}
 
+	
 	public void setxDirection(int xDirection) { //heading
 		this.xDirection = xDirection;
 		setChanged();
@@ -46,37 +74,38 @@ public class Enemy extends Observable{
 	}
 
 
-	void setCurrentCell(Cell c){ //don't think we need to notify observers of this change
+	public void setCurrentCell(Cell c){ //don't think we need to notify observers of this change
 		this.currentCell = c;
+		System.out.println("does the cell have a next?"+c.getNext().getX()+", "+c.getNext().getY());
 		this.xDirection = c.getNext().getX() - c.getX();
 		this.yDirection = c.getNext().getY() - c.getY();
 	}
 	
-	Cell getCurrentCell(){
+	public Cell getCurrentCell(){
 		return this.currentCell;
 	}
 	
-	double getX() {
+	public double getX() {
 		return xCoordinate;
 	}
 
-	void setX(double xCoordinate) {
+	public void setX(double xCoordinate) {
 		this.xCoordinate = xCoordinate;
 		setChanged();
 		notifyObservers();
 	}
 
-	double getY() {
+	public double getY() {
 		return yCoordinate;
 	}
 
-	void setY(double yCoordinate) {
+	public void setY(double yCoordinate) {
 		this.yCoordinate = yCoordinate;
 		setChanged();
 		notifyObservers();
 	}
 
-	void setImage(String image) { //might not need to notify observers here
+	public void setImage(String image) { //might not need to notify observers here
 		this.image = image;
 		setChanged();
 		notifyObservers();
@@ -87,21 +116,21 @@ public class Enemy extends Observable{
 		return this.image;
 	}
 
-	double getMovingSpeed() {
+	public double getMovingSpeed() {
 		return movingSpeed;
 	}
 
-	void setMovingSpeed(double movingSpeed) {
+	public void setMovingSpeed(double movingSpeed) {
 		this.movingSpeed = movingSpeed;
 		setChanged();
 		notifyObservers();
 	}
 
-	double getHealth() {
+	public double getHealth() {
 		return health;
 	}
 
-	void setHealth(double d) {
+	public void setHealth(double d) {
 		this.health = d;
 		setChanged();
 		notifyObservers();

@@ -1,5 +1,9 @@
 package gameplayer.view.helper.dragdrop;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Observable;
+
 import gameplayer.view.helper.GraphicsLibrary;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
@@ -18,7 +22,7 @@ import javafx.scene.layout.Pane;
  * @author lucyzhang
  *
  */
-public class DragDrop {
+public class DragDrop extends Observable{
 
 	private ImageView source;
 	private double width;
@@ -26,17 +30,45 @@ public class DragDrop {
 	private GraphicsLibrary graphicLib;
 	private double yError;
 	private double xError;
+	private Node target;
+	private ImageView droppedImage;
+	private List<Double[]> coordinates;
 
 	public DragDrop() {
 		this.graphicLib = new GraphicsLibrary();
 		this.xError = 0;
 		this.yError = 0;
+		this.coordinates = new ArrayList<Double[]>();
 	}
 	
 	public DragDrop(double xError, double yError) {
 		this.graphicLib = new GraphicsLibrary();
 		this.xError = xError;
 		this.yError = yError;
+		this.coordinates = new ArrayList<Double[]>();
+	}
+	
+	public List<Double[]> getCoordinates(){
+		return this.coordinates;
+	}
+	
+	public double getxError(){
+		return this.xError;
+	}
+	public double getyError(){
+		return this.yError;
+	}
+	
+	public ImageView getSource(){
+		return this.source;
+	}
+	
+	public Node getTarget(){
+		return this.target;
+	}
+	
+	public ImageView getDroppedImage(){
+		return this.droppedImage;
 	}
 
 	/**
@@ -45,6 +77,7 @@ public class DragDrop {
 	 * @param target This is the target that the image is to be dropped into
 	 */
 	public void init(ImageView source, Node target) {
+		this.target = target;
 		detectDrag(source, target);
 	}
 
@@ -57,10 +90,16 @@ public class DragDrop {
 
 	private void addImagetoDroppedLoc(double xpos, double ypos, Node target) {
 		ImageView copy = new ImageView(this.source.getImage());
+		copy.setId(this.source.getId()); 
+		this.droppedImage = copy;
 		graphicLib.setImageViewParams(copy, this.width, this.height);
 		((Pane) target).getChildren().add(copy);
 		copy.setX(xpos+this.xError);
 		copy.setY(ypos+this.yError);
+		Double[] coords = {xpos+this.xError,ypos+this.yError};
+		this.coordinates.add(coords);
+		setChanged();
+		notifyObservers();
 	}
 
 	private void setSourceInfo(ImageView source) {

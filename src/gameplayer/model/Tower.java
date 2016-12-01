@@ -1,68 +1,57 @@
 package gameplayer.model;
 
-public class Tower {
-	
-	private double attackingRange;
-	private int fireRate; // number of interation or update
+import java.util.ArrayList;
+
+public class Tower implements IDrawable {
+
 	private double cost;
-	private int weaponType;
-	private String image;
-	private int ID;  // towerType
-	private int counter;
-	private double[] coordinates;
-	
-	
-	public Tower (int ID, double attackingRange,int fireRate, double cost, int weapon, String image){
-		this.attackingRange = attackingRange;
-		this.fireRate = fireRate;
+	private ArrayList<Integer> weaponType;
+	private String image, name;
+	private int ID; // towerType
+	private double xCoordinate;
+	private double yCoordinate;
+
+	// TODO: need to implement weapon types. Refer to constructor below for the
+	// working tower
+	public Tower(int ID, double cost, ArrayList<Integer> weaponTypes, String image, String name) {
 		this.cost = cost;
-		this.weaponType = weapon;
+		this.weaponType = weaponTypes;
 		this.image = image;
 		this.ID = ID;
-		this.counter = 0;
 	}
-	
-	Boolean isFiring(){
-		if(counter % fireRate == 0){
-			counter++;
-			return true;
-		}
-		counter++;
-		return false;
+
+	// Current Using and needs updating
+	public Tower(int ID, String image, String name, double xCoordinate, double yCoordinate) {
+		this.ID = ID;
+		this.image = image;
+		this.name = name;
+		this.xCoordinate = xCoordinate;
+		this.yCoordinate = yCoordinate;
 	}
-	
-	void setCoordinates(double x, double y){
-		coordinates[0] = x;
-		coordinates[1] = y;
+
+	public void setCoordinates(double x, double y) {
+		this.xCoordinate = x;
+		this.yCoordinate = y;
 	}
-	
-	double[] getCoordinate(){
-		return this.coordinates;
+
+	public double getX() {
+		return this.xCoordinate;
 	}
-	
-	
-	int getType(){
+
+	public double getY() {
+		return yCoordinate;
+	}
+
+	public String getName() {
+		return this.name;
+	}
+
+	public int getType() {
 		return this.ID;
 	}
-	
-	public String getImage(){
+
+	public String getImage() {
 		return this.image;
-	}
-
-	double getAttackingRange() {
-		return attackingRange;
-	}
-
-	void setAttackingRange(double attackingRange) {
-		this.attackingRange = attackingRange;
-	}
-
-	int getFireRate() {
-		return fireRate;
-	}
-
-	void setFireRate(int fireRate) {
-		this.fireRate = fireRate;
 	}
 
 	double getCost() {
@@ -73,16 +62,8 @@ public class Tower {
 		this.cost = cost;
 	}
 
-	int getWeaponType() {
-		return weaponType;
+	ArrayList<Integer> getWeaponType() {
+		return this.weaponType;
 	}
-
-	void setWeaponType(int weaponType) {
-		this.weaponType = weaponType;
-	}
-
-
-
-	
 
 }
