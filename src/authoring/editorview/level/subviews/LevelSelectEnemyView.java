@@ -1,8 +1,10 @@
 package authoring.editorview.level.subviews;
 
+import java.util.List;
 import authoring.editorview.level.ILevelSetView;
 import authoring.editorview.level.LevelEditorViewDelegate;
 import authoring.utilityfactories.ComboBoxFactory;
+import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 
@@ -30,6 +32,10 @@ public class LevelSelectEnemyView implements ILevelSetView {
     @Override
     public void setDelegate (LevelEditorViewDelegate delegate) {
         this.delegate = delegate;
+    }
+    
+    public void updateEnemyList (ObservableList<Object> enemiesList) {
+        enemyChooser = new ComboBox<Object>(enemiesList);
     }
 
 }

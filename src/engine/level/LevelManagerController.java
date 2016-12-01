@@ -41,5 +41,5 @@ public interface LevelManagerController
 
     public int getLevelNumber (int levelID);
     
-    public List<Integer> getLevelOptions();
+    public List<Integer> getCreatedLevels();
 }

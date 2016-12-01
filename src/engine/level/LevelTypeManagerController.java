@@ -117,7 +117,7 @@ public class LevelTypeManagerController
     }
 
     @Override
-    public List<Integer> getLevelOptions () {
+    public List<Integer> getCreatedLevels () {
         // TODO Auto-generated method stub
         return null;
     }
