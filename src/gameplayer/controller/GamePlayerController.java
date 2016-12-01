@@ -96,7 +96,7 @@ public class GamePlayerController implements Observer {
 	 */
 	public void checkIfValid() {
 		if (!loader.xmlIsValid()) {
-			//System.out.println("XML is invalid, game cannot be created");
+			////System.out.println("XML is invalid, game cannot be created");
 			// TODO: actually throw an error
 		}
 	}
@@ -137,7 +137,7 @@ public class GamePlayerController implements Observer {
 		List<Tower> towersOnGrid = this.model.getTowerOnGrid();
 		for(Tower t: towersOnGrid){
 			if((t.getX() -20 < x || x < t.getX()+20)  && (t.getY()-20 < y || y <t.getY() + 20)){
-				//System.out.println("Tower x: "+x+", Tower y:"+y);
+				////System.out.println("Tower x: "+x+", Tower y:"+y);
 				t.toggleInfoVisibility();
 			}
 		}
@@ -174,7 +174,7 @@ public class GamePlayerController implements Observer {
 				
 				this.oldLevel = newLevel;
 				this.view.newLevelPopUp(e->{
-					//System.out.println("New level");
+					////System.out.println("New level");
 					this.view.getGrid().getGrid().getChildren().clear();
 					//do something to trigger new level here!
 				});
@@ -216,17 +216,6 @@ public class GamePlayerController implements Observer {
 			
 			
 			redrawEverything();
-/*
-			List<Enemy>enemyRedraw = this.enemyManager.getEnemyOnGrid(); 
-			List<Tower>towerRedraw = this.model.getTowerOnGrid();
-			List<IDrawable> reEnemyDraw = convertEnemyDrawable(enemyRedraw);//probably need to add bullets here too
-			List<IDrawable> reTowerDraw = convertTowerDrawable(towerRedraw);
-			
-			this.view.reRender(reEnemyDraw);
-			this.view.reRenderTower(reTowerDraw);
-			
-			this.view.getGrid().populatePath(this.model.getGrid().getStartPoint());
-			*/
 		});
 		Timeline animation = new Timeline();
 		animation.setCycleCount(Timeline.INDEFINITE);
@@ -243,9 +232,9 @@ public class GamePlayerController implements Observer {
 		List<Tower>towerRedraw = this.model.getTowerOnGrid();
 		List<Weapon>bulletRedraw = this.model.getWeaponOnGrid();
 		/*
-		System.out.println(bulletRedraw.size());
+		//System.out.println(bulletRedraw.size());
 		for(int i=0;i<bulletRedraw.size();i++){
-			System.out.println("bullet "+i+": "+bulletRedraw.get(i).getImage());
+			//System.out.println("bullet "+i+": "+bulletRedraw.get(i).getImage());
 		}
 		*/
 		

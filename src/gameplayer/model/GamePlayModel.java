@@ -145,7 +145,7 @@ public class GamePlayModel extends Observable {
 		this.gridY = this.gridArray[0].length;
 		weaponOnGrid = new ArrayList<Weapon>();
 		weaponMap = this.factory.getWeaponBank();
-		System.out.println("weapon map" + weaponMap.get(0).getName());
+		//System.out.println("weapon map" + weaponMap.get(0).getName());
 
 	}
 
@@ -240,8 +240,8 @@ public class GamePlayModel extends Observable {
 		if (!canPlaceTower(x, y, towerType.getCost())) {
 			return false;
 		}
-		int x1= (int)(x/this.getCellWidth());
-		int y1 =(int)( y/this.getCellHeight());
+		int x1 = (int) (x / this.getCellWidth());
+		int y1 = (int) (y / this.getCellHeight());
 		gameplayer.model.Tower newlyPlaced = null;
 		List<Integer> weaponTypes = towerType.getWeapons();
 		ArrayList<Gun> gunsForTower = new ArrayList<Gun>();
@@ -265,9 +265,10 @@ public class GamePlayModel extends Observable {
 		// System.out.println("Calculation time: x:"+x+", Grid width:
 		// "+GridGUI.GRID_WIDTH+", cellwidth:
 		// "+this.getCellWidth()+",cellheight:"+this.getCellHeight());
-		
-		grid.placeTower(newlyPlaced, (int) x, (int) y, (int)x1, (int)y1);
-		//grid.placeTower(newlyPlaced, (int) (GridGUI.GRID_WIDTH / x), (int) (GridGUI.GRID_HEIGHT / y));
+
+		grid.placeTower(newlyPlaced, (int) x, (int) y, (int) x1, (int) y1);
+		// grid.placeTower(newlyPlaced, (int) (GridGUI.GRID_WIDTH / x), (int)
+		// (GridGUI.GRID_HEIGHT / y));
 
 		// System.out.println("towers on grid: " + this.towersOnGrid.size());
 
@@ -286,14 +287,16 @@ public class GamePlayModel extends Observable {
 
 		System.out.println("starting cell x: " + current.getX() + "; y: " + current.getY());
 		while (current != null) {
-			double x_min = current.getX()* GridGUI.GRID_WIDTH / this.getColumns();
-			double x = current.getX()* GridGUI.GRID_WIDTH / this.getColumns() + this.getCellWidth() + this.getCellWidth() ;
+			double x_min = current.getX() * GridGUI.GRID_WIDTH / this.getColumns();
+			double x = current.getX() * GridGUI.GRID_WIDTH / this.getColumns() + this.getCellWidth()
+					+ this.getCellWidth();
 			double y = current.getY() * GridGUI.GRID_WIDTH / this.getRow() + this.getCellHeight();
-			double y_min = current.getY()* GridGUI.GRID_WIDTH / this.getRow();
+			double y_min = current.getY() * GridGUI.GRID_WIDTH / this.getRow();
 			current = current.getNext();
-			System.out.println("Startcell: " + x + "," + y + ". Candropimage: " + xcoord + "," + ycoord);
+			// System.out.println("Startcell: " + x + "," + y + ". Candropimage:
+			// " + xcoord + "," + ycoord);
 			if (xcoord < x && xcoord > x_min && ycoord < y && ycoord > y_min) {
-				System.out.println("CAN'T ADD TOWER IN CANPLACETOWER");
+				// System.out.println("CAN'T ADD TOWER IN CANPLACETOWER");
 				return false;
 			}
 		}
@@ -339,21 +342,15 @@ public class GamePlayModel extends Observable {
 	}
 
 	private void updateWeapon() {
-		/*
-		 * System.out.println("+++++++++++++++++++++++++++++++++++");
-		 * System.out.println("weapon number on grid: " +
-		 * this.weaponOnGrid.size());
-		 */
+
 		for (Weapon w : weaponOnGrid) {
-			// System.out.println("Weapon x: " + w.getX());
-			w.setX(w.getSpeedX() + w.getX());
-			w.setY(w.getSpeedY() + w.getY());
-			// System.out.println("==============================");
+			if (w.getX() < GridGUI.GRID_WIDTH) {
+				w.setX(w.getSpeedX() + w.getX());
+			}
+			if (w.getY() < GridGUI.GRID_HEIGHT) {
+				w.setY(w.getSpeedY() + w.getY());
+			}
 
-			// System.out.println("x and y: " + w.getX() + " " + w.getY());
-
-			// update distance travelled
-			// update in shooting range function
 			if (!coordinateInBound(w.getX(), w.getY()) && !w.inRange()) {
 				this.weaponOnGrid.remove(w);
 			}
@@ -361,7 +358,7 @@ public class GamePlayModel extends Observable {
 
 		// creating all the new firing
 		for (gameplayer.model.Tower t : this.getTowerOnGrid()) {
-			System.out.println("Tower in weapon method: x:" + t.getX() + ", y:" + t.getY());
+			//System.out.println("Tower in weapon method: x:" + t.getX() + ", y:" + t.getY());
 			// System.out.println("towerID: " + t.getID());
 			ArrayList<Gun> guns = t.getGuns();
 			// System.out.println("gun size: " + guns.size());

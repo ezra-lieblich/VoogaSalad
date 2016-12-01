@@ -35,7 +35,7 @@ public class DragDropController implements Observer{
 			int x = (int)(dragDrop.getDroppedImage().getX());//* (this.model.getCellWidth()));
 			int y = (int)(dragDrop.getDroppedImage().getY());//* (this.model.getCellHeight()));
 			boolean canPlace = this.model.placeTower(Integer.parseInt(towerId), x, y);
-			System.out.println("Can place? :"+canPlace);
+			//System.out.println("Can place? :"+canPlace);
 			if (!canPlace){
 				this.dragDrop.getCoordinates().remove(this.dragDrop.getCoordinates().size() - 1);
 				((Pane) this.game.getGrid().getGrid()).getChildren().remove(dragDrop.getDroppedImage());// remove((Node) dragDrop.getDroppedImage());
