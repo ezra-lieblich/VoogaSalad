@@ -20,7 +20,7 @@ public interface LevelEditorViewDelegate {
 
     public void onUserEnteredEnemyFrequency (String frequency);
 
-    public void onUserEnteredAddEnemy (int enemyId, int numEnemies);
+    public void onUserEnteredAddEnemy (String enemyID, String numEnemies);
 
     public void onUserEnteredRemoveEnemy (int enemyID);
 

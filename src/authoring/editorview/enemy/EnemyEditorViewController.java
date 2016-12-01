@@ -26,7 +26,7 @@ public class EnemyEditorViewController extends EditorViewController
     public EnemyEditorViewController (int editorWidth, int editorHeight) throws IOException {
         enemyView = EnemyEditorViewFactory.build(editorWidth, editorHeight);
         enemyView.setDelegate(this);
-        //enemyView.setEnemyListDataSource(this);
+        // enemyView.setEnemyListDataSource(this);
         this.view = enemyView;
     }
 
@@ -50,7 +50,7 @@ public class EnemyEditorViewController extends EditorViewController
         enemyView.updateEnemyRewardMoney(enemyDataSource.getEnemyRewardMoney(currentEnemyID));
         enemyView.updateEnemyRewardPoints(enemyDataSource.getEnemyRewardScore(currentEnemyID));
         enemyView.updateEnemyHealthDisplay(enemyDataSource.getEnemyHealth(currentEnemyID));
-     }
+    }
 
     @Override
     public void onUserEnteredEnemySpeed (String enemySpeed) {
@@ -140,8 +140,14 @@ public class EnemyEditorViewController extends EditorViewController
 
     @Override
     public void onUserEnteredEnemySize (String enemySize) {
-        // TODO Auto-generated method stub
-
+        try {
+            Double.parseDouble(enemySize);
+            enemyDataSource.setSize(currentEnemyID,
+                                    Double.parseDouble(enemySize));
+        }
+        catch (NumberFormatException e) {
+            createDialogueBox();
+        }
     }
 
     @Override

@@ -6,23 +6,27 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 import authoring.editorview.IUpdateView;
 
-public abstract class AbstractTypeManagerController<E extends Manager<T>, U extends TypeBuilder<T, U>, T extends Type, V extends IUpdateView> implements ManagerController<E, U, T, V> {
+
+public abstract class AbstractTypeManagerController<E extends Manager<T>, U extends TypeBuilder<T, U>, T extends Type, V extends IUpdateView>
+        implements ManagerController<E, U, T, V> {
 
     private E typeManager;
     private U typeBuilder;
 
-    protected AbstractTypeManagerController (E typeManager, U typeBuilder, ManagerMediator managerMediator) {
+    protected AbstractTypeManagerController (E typeManager,
+                                             U typeBuilder,
+                                             ManagerMediator managerMediator) {
         this.typeManager = typeManager;
         this.typeBuilder = typeBuilder;
         managerMediator.addManager(typeManager);
-        //typeManager.addEntry(typeBuilder.build()); //Testing XML
+        // typeManager.addEntry(typeBuilder.build()); //Testing XML
     }
 
     @Override
     public int createType (V updateView) {
         return typeManager.addEntry(constructType(updateView));
     }
-    
+
     @Override
     public void addTypeBankListener(V updateView) {
         typeManager.addEntitiesListener((oldValue, newValue) -> updateView.updateBank(new ArrayList<Integer>(newValue.keySet())));
@@ -58,7 +62,7 @@ public abstract class AbstractTypeManagerController<E extends Manager<T>, U exte
     public Double getSize (int id) {
         return typeManager.getEntity(id).getSize();
     }
-    
+
     @Override
     public List<Integer> getCreatedTypeIds () {
         return typeManager.getEntityIds();
@@ -83,7 +87,7 @@ public abstract class AbstractTypeManagerController<E extends Manager<T>, U exte
         return typeManager;
     }
 
-    //TODO - try and not need this
+    // TODO - try and not need this
     protected U getTypeBuilder () {
         return typeBuilder;
     }

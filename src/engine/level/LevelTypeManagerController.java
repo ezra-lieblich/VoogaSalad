@@ -1,5 +1,6 @@
 package engine.level;
 
+import java.util.List;
 import java.util.Map;
 import authoring.editorview.level.ILevelEditorView;
 import engine.AbstractTypeManagerController;
@@ -101,6 +102,24 @@ public class LevelTypeManagerController
                         .updateRewardPoints(newValue))
                 .addRewardMoneyListener( (oldValue, newValue) -> updateView
                         .updateRewardMoney(newValue));
+    }
+
+    @Override
+    public void setLevelNumber (int levelID, int levelNumber) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public int getLevelNumber (int levelID) {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    public List<Integer> getLevelOptions () {
+        // TODO Auto-generated method stub
+        return null;
     }
 
 }
