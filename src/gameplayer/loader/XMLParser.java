@@ -129,12 +129,14 @@ public class XMLParser {
     			towerBuilder.buildCost(Double.parseDouble(((Element)(towerElement.getElementsByTagName("cost").item(0))).getFirstChild().getNodeValue()));
     			towerBuilder.buildSellAmount(Double.parseDouble(((Element)(towerElement.getElementsByTagName("sellAmount").item(0))).getFirstChild().getNodeValue()));
     			towerBuilder.buildUnlockLevel(Integer.parseInt(((Element)(towerElement.getElementsByTagName("unlockLevel").item(0))).getFirstChild().getNodeValue()));
+    			/**
     			ArrayList<Integer> weapons = new ArrayList<Integer>();
     			NodeList weaponNodes = towerElement.getElementsByTagName("weapons");
     			for (int j = 0; j < weaponNodes.getLength(); j++) {
     				weapons.add(Integer.parseInt(((Element)weaponNodes.item(j)).getFirstChild().getNodeValue()));
     			}
     			towerBuilder.buildWeapons(weapons);
+    			**/
     			
     			Tower tower = towerBuilder.build();
     			ret.put(i, tower);
