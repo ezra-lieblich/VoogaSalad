@@ -49,6 +49,8 @@ public class GamePlayerController implements Observer {
 	private EnemyManager enemyManager;
 
 	private double oldLevel;
+	private int timer = 1;
+	
 
 
 	private Queue<Enemy> currentWave;
@@ -96,7 +98,8 @@ public class GamePlayerController implements Observer {
 	public void init() {
 		this.model.initializeLevelInfo();
 		HashMap<String, Double> settings = this.loader.getGameSetting();
-		System.out.println("Settings: " + settings);
+		//initGUIDummy(settings);
+		this.enemyManager.setCurrentCell(this.model.getGrid().getStartPoint());
 		initGUI();
 		//this.enemyController = new EnemyController(this.enemyManager, this.view.getGrid());
 	}
@@ -112,11 +115,14 @@ public class GamePlayerController implements Observer {
 			// TODO: initialize animation
 			this.startAnimation();
 		});
-		System.out.println("Tower images: " + getTowerImages());
 		this.mainScene = view.init(this.model.getGold(), this.model.getLife(), this.model.getCurrentLevel(),
 				getTowerImages());
 		this.view.getGrid().populatePath(model.getGrid().getStartPoint()); 
 		this.dropController = new DragDropController(this.view, this.model,this.getTowerImageMap());
+		
+		
+		//testing stuff
+		this.model.createDummyEnemies();
 	}
 	
 	private ArrayList<String> getTowerImages() {
@@ -175,16 +181,22 @@ public class GamePlayerController implements Observer {
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> {
 			((Pane) this.view.getGrid().getGrid()).getChildren().clear(); //clear everything
 			this.currentWave = this.model.getPackOfEnemyComing();
+			System.out.println(currentWave.size()); 
 			
 			//trying to get this to work but null pointer
-			
-			while(currentWave.size()!=0){
-				Enemy enemy = currentWave.poll();
-				this.enemyManager.spawnEnemy(enemy);
+			if(currentWave.size()!=0){
+				if(timer%15==0){
+					System.out.println("here");
+					Enemy enemy = currentWave.poll();
+					this.enemyManager.spawnEnemy(enemy);
+					timer = 1; 
+				}
+				else{
+					timer++;
+				}
 			}
 			this.model.updateInLevel();
 			this.enemyManager.update(); 
-			
 			redrawEverything();
 /*
 			List<Enemy>enemyRedraw = this.enemyManager.getEnemyOnGrid(); 
@@ -212,8 +224,9 @@ public class GamePlayerController implements Observer {
 		List<Tower>towerRedraw = this.model.getTowerOnGrid();
 		List<IDrawable> reEnemyDraw = convertEnemyDrawable(enemyRedraw);//probably need to add bullets here too
 		List<IDrawable> reTowerDraw = convertTowerDrawable(towerRedraw);
-		System.out.println("List of enemies?");
-		System.out.println(enemyRedraw);
+
+		//System.out.println("List of enemies?");
+		//System.out.println(enemyRedraw);
 		this.view.reRender(reEnemyDraw);
 		this.view.reRenderTower(reTowerDraw);
 	}
