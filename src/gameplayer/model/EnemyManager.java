@@ -205,8 +205,6 @@ public class EnemyManager extends Observable {
 			}
 			
 			
-			
-			
 			/*
 			 * if (!(enemy.getX() + enemy.getMovingSpeed() >
 			 * GridGUI.GRID_WIDTH)) { enemy.setX(enemy.getX() +
