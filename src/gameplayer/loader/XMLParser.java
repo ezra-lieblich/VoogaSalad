@@ -137,7 +137,7 @@ public class XMLParser {
     				weapons.add(Integer.parseInt(((Element)weaponNodes.item(j)).getFirstChild().getNodeValue()));
     			}
     			towerBuilder.buildWeapons(weapons);
-    			
+    			System.out.println("-----------WEAPONS: -----------------"+weapons);
     			Tower tower = towerBuilder.build();
     			ret.put(i, tower);
     		}

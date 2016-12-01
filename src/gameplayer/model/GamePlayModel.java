@@ -2,6 +2,7 @@ package gameplayer.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Observable;
@@ -45,6 +46,33 @@ public class GamePlayModel extends Observable {
 	public GamePlayModel(GamePlayerFactory factory) {
 		initializeGameSetting(factory);
 		// this.enemyModel = new EnemyModel(this);
+	}
+	
+	public void createDummyEnemies(){
+		Queue<Enemy> myQueue = new LinkedList<Enemy>();
+		Queue<Enemy> myQueue1 = new LinkedList<Enemy>();
+		Enemy enem1 = new Enemy(1,"Izaya", 4, 7, "questionmark.png", 50.0, 50.0);
+		enem1.setCurrentCell(this.getGrid().getCell(0, 0));
+		Enemy enem2 = new Enemy(2,"Shizuo", 4, 7, "questionmark.png", 50.0, 50.0);
+		enem2.setCurrentCell(this.getGrid().getCell(0, 0));
+		Enemy enem3 = new Enemy(3,"Mikado", 4, 7, "kaneki.jpg", 50.0, 50.0);
+		enem3.setCurrentCell(this.getGrid().getCell(0, 0));
+		Enemy enem4 = new Enemy(4,"Kanra", 4, 7, "penguin.jpg", 50.0, 50.0);
+		enem4.setCurrentCell(this.getGrid().getCell(0, 0));
+		myQueue.add(enem1);
+		myQueue.add(enem2);
+		myQueue.add(enem3);
+		myQueue.add(enem4);
+		myQueue1.add(enem1);
+		myQueue1.add(enem2);
+		myQueue1.add(enem3);
+		myQueue1.add(enem4);
+		List<Queue<Enemy>> stuff = new ArrayList<Queue<Enemy>>();
+		stuff.add(myQueue);
+		stuff.add(myQueue1);
+		this.enemyAtCurrentLevel = stuff;
+		setPackOfEnemyComing(myQueue);
+		System.out.println("Enemy at current level: "+enemyAtCurrentLevel);
 	}
 
 	
