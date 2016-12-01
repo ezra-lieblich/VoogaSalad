@@ -1,12 +1,21 @@
 package authoring.editorview.level;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import authoring.editorview.EditorViewController;
+import authoring.editorview.path.NameIdPair;
 import authoring.utilityfactories.DialogueBoxFactory;
 import engine.enemy.EnemyManagerController;
 import engine.level.LevelManagerController;
 
 
+/**
+ * 
+ * @author Kayla Schulz
+ * @author Diane Hadley
+ *
+ */
 public class LevelEditorViewController extends EditorViewController
         implements LevelEditorViewDelegate {
 
@@ -14,8 +23,10 @@ public class LevelEditorViewController extends EditorViewController
     private LevelManagerController levelDataSource;
     private EnemyManagerController enemyDataSource;
     private int currentLevelID;
+    private List<NameIdPair> nameIDList;
 
     public LevelEditorViewController (int editorWidth, int editorHeight) {
+        nameIDList = new ArrayList<NameIdPair>();
         levelView = LevelEditorViewFactory.build(editorWidth, editorHeight);
         levelView.setDelegate(this);
         this.view = levelView;
@@ -29,6 +40,21 @@ public class LevelEditorViewController extends EditorViewController
 
     public void setEnemyDataSource (EnemyManagerController source) {
         this.enemyDataSource = source;
+    }
+
+    private void getCreatedEnemies () {
+        List<Integer> enemyCreatedIDs = enemyDataSource.getCreatedTypeIds();
+        nameIDList.clear();
+        for (int id : enemyCreatedIDs) {
+            String curName = enemyDataSource.getName(id);
+            NameIdPair newPair = new NameIdPair(curName, id);
+            nameIDList.add(newPair);
+        }
+    }
+
+    private List<NameIdPair> getNameIDList () {
+        getCreatedEnemies();
+        return nameIDList;
     }
 
     @Override
@@ -53,12 +79,11 @@ public class LevelEditorViewController extends EditorViewController
     public void onUserEnteredCreateLevel () {
         currentLevelID = levelDataSource.createType(levelView);
         levelView.updateTransitionTime(levelDataSource.getTransitionTime(currentLevelID));
-        // levelView.updateEnemyFrequency(levelDataSource.getEnemyFrequency(currentLevelID,
-        // enemyID));
         levelView.updateRewardHealth(levelDataSource.getRewardHealth(currentLevelID));
         levelView.updateRewardMoney(levelDataSource.getRewardMoney(currentLevelID));
         levelView.updateRewardPoints(levelDataSource.getRewardScore(currentLevelID));
         levelView.updateNameDisplay(levelDataSource.getName(currentLevelID));
+        levelView.updateEnemyNames(getNameIDList());
     }
 
     @Override
