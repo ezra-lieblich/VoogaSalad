@@ -1,88 +1,95 @@
 package gameplayer.model;
 
-public class Tower {
-	
-	private double attackingRange;
-	private int fireRate; // number of interation or update
+import java.util.ArrayList;
+
+import javafx.scene.control.Label;
+
+public class Tower implements IDrawable {
+
 	private double cost;
-	private int weaponType;
-	private String image;
-	private int ID;  // towerType
-	private int counter;
-	private double[] coordinates;
+	private ArrayList<Gun> guns;
+	private String image, name;
+	private int ID, type; // towerType
+	private double xCoordinate;
+	private double yCoordinate;	
+	private Label towerInfo;
+	private boolean showInfo;
 	
 	
-	public Tower (int ID, double attackingRange,int fireRate, double cost, int weapon, String image){
-		this.attackingRange = attackingRange;
-		this.fireRate = fireRate;
+	public Tower (int type, int ID, double cost, ArrayList<Gun> guns, String image, String name){
 		this.cost = cost;
-		this.weaponType = weapon;
+		this.guns = guns;
 		this.image = image;
 		this.ID = ID;
-		this.counter = 0;
+		this.showInfo = true;
+		this.towerInfo = new Label("Type: " + type + "\n ID: " + ID + "\n Cost: " + 
+				cost + "\n Image: " + image + "\n Name: " + name);
+		this.towerInfo.setVisible(showInfo);
 	}
-	
-	Boolean isFiring(){
-		if(counter % fireRate == 0){
-			counter++;
-			return true;
-		}
-		counter++;
-		return false;
+
+	/*
+// +++++++++++++get rid of this after fixing weapon Current Using and needs updating+++++++++++++
+	public Tower(int ID, String image, String name, double xCoordinate, double yCoordinate) {
+		this.ID = ID;
+		this.image = image;
+		this.name = name;
+		this.xCoordinate = xCoordinate;
+		this.yCoordinate = yCoordinate;
 	}
-	
-	void setCoordinates(double x, double y){
-		coordinates[0] = x;
-		coordinates[1] = y;
+
+*/ 
+	public void setCoordinates(double x, double y) {
+		this.xCoordinate = x;
+		this.yCoordinate = y;
 	}
-	
-	double[] getCoordinate(){
-		return this.coordinates;
+
+	public double getX() {
+		return this.xCoordinate;
+	}
+
+	public double getY() {
+		return yCoordinate;
 	}
 	
 	
 	int getType(){
+		return this.type;
+	}
+	
+	
+	int getID(){
 		return this.ID;
 	}
 	
+	
 	public String getImage(){
+
 		return this.image;
-	}
-
-	double getAttackingRange() {
-		return attackingRange;
-	}
-
-	void setAttackingRange(double attackingRange) {
-		this.attackingRange = attackingRange;
-	}
-
-	int getFireRate() {
-		return fireRate;
-	}
-
-	void setFireRate(int fireRate) {
-		this.fireRate = fireRate;
 	}
 
 	double getCost() {
 		return cost;
+	}
+	
+	String getName(){
+		return this.name;
 	}
 
 	void setCost(double cost) {
 		this.cost = cost;
 	}
 
-	int getWeaponType() {
-		return weaponType;
+	ArrayList<Gun> getGuns() {
+		return this.guns;
 	}
-
-	void setWeaponType(int weaponType) {
-		this.weaponType = weaponType;
-	}
-
-
-
 	
+	public void toggleInfoVisibility(){
+		this.showInfo = !showInfo;
+		this.towerInfo.setVisible(showInfo);
+	}
+
+	public Label getTowerInfo() {
+		return towerInfo;
+	}
 
 }

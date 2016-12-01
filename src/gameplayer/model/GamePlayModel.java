@@ -2,290 +2,453 @@ package gameplayer.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Queue;
-
+import engine.tower.Tower;
+import engine.weapon.*;
 import gameplayer.loader.GamePlayerFactory;
-import javafx.beans.property.SimpleListProperty;
-import javafx.collections.ObservableList;
+import gameplayer.view.GridGUI;
+import gameplayer.view.helper.GraphicsLibrary;
+import javafx.scene.image.ImageView;
 
-public class GamePlayModel extends Observable{
+public class GamePlayModel extends Observable {
 
 	private int cellSize;
 	private Grid grid;
 	private int gridX;
 	private int gridY;
 
-	private List<Enemy> enemyOnGrid;
 	private List<Weapon> weaponOnGrid;
+	private List<gameplayer.model.Tower> towersOnGrid; // fix naming
 	private int hitBuffer = 10; // initialize from xml
-	
-	private Map<Integer, Weapon> weaponTypes; // initialize in xml
-	private Map<Integer, Tower> towerTypes;  // initialize in xml
+	private HashMap<Integer, engine.tower.Tower> towerTypes;
 	private Cell[][] gridArray;
-	
-	
-	private Enemy nextEnteringEnemy; 
+	private Enemy nextEnteringEnemy;
 	private Queue<Enemy> packOfEnemyComing;
-	
-	private List<Queue<Enemy>> enemyAtCurrentLevel; 
-	
+	private List<Queue<Enemy>> enemyAtCurrentLevel;
 	private GamePlayerFactory factory;
-	
 	private double gold;
 	private double lives;
-	private double levelnumber;  // reach level number winning the game
-	private double currentLevel;
-	private int waveOfEnemy;
-	
-	
-	//number of gold
-	
+	private double numLevels; // reach level number winning the game
+	private int currentLevel;
+	int waveOfEnemy;
+	private String gameTitle;
+	private int uniqueTowerID, uniqueEnemyID, uniqueWeaponID;
+	private HashMap<Integer, engine.weapon.Weapon> weaponMap;
+	private GraphicsLibrary graphicLib;
 
-	public GamePlayModel(GamePlayerFactory factory){
+	// private EnemyModel enemyModel;
+
+	public GamePlayModel(GamePlayerFactory factory) {
+		graphicLib = new GraphicsLibrary();
 		initializeGameSetting(factory);
+		// this.enemyModel = new EnemyModel(this);
 	}
-	
-	
+
+	public void createDummyEnemies() {
+		Queue<Enemy> myQueue = new LinkedList<Enemy>();
+		Queue<Enemy> myQueue1 = new LinkedList<Enemy>();
+		Enemy enem1 = new Enemy(1, "Izaya", 4, 7, "questionmark.png", 50.0, 50.0);
+		enem1.setCurrentCell(this.getGrid().getCell(0, 0));
+		Enemy enem2 = new Enemy(2, "Shizuo", 4, 7, "questionmark.png", 50.0, 50.0);
+		enem2.setCurrentCell(this.getGrid().getCell(0, 0));
+		Enemy enem3 = new Enemy(3, "Mikado", 4, 7, "kaneki.jpg", 50.0, 50.0);
+		enem3.setCurrentCell(this.getGrid().getCell(0, 0));
+		Enemy enem4 = new Enemy(4, "Kanra", 4, 7, "penguin.jpg", 50.0, 50.0);
+		enem4.setCurrentCell(this.getGrid().getCell(0, 0));
+		myQueue.add(enem1);
+		// myQueue.add(enem2);
+		// myQueue.add(enem3);
+		myQueue.add(enem4);
+		myQueue1.add(enem1);
+		myQueue1.add(enem2);
+		myQueue1.add(enem3);
+		myQueue1.add(enem4);
+		List<Queue<Enemy>> stuff = new ArrayList<Queue<Enemy>>();
+		stuff.add(myQueue);
+		// stuff.add(myQueue1);
+		this.enemyAtCurrentLevel = stuff;
+		setPackOfEnemyComing(myQueue);
+		System.out.println("Enemy at current level: " + enemyAtCurrentLevel);
+	}
+
+	public HashMap<Integer, engine.tower.Tower> getAllTowerTypes() {
+		return this.towerTypes;
+	}
+
+	public List<Weapon> getWeaponOnGrid() {
+		return this.weaponOnGrid;
+	}
+
+	public Queue<Enemy> getPackOfEnemyComing() {
+		return packOfEnemyComing;
+	}
+
+	public void setPackOfEnemyComing(Queue<Enemy> packOfEnemyComing) {
+		this.packOfEnemyComing = packOfEnemyComing;
+	}
+
+	public List<Queue<Enemy>> getEnemyAtCurrentLevel() {
+		return enemyAtCurrentLevel;
+	}
+
+	public void setEnemyAtCurrentLevel(List<Queue<Enemy>> enemyAtCurrentLevel) {
+		this.enemyAtCurrentLevel = enemyAtCurrentLevel;
+	}
+
+	public int getWaveOfEnemy() {
+		return waveOfEnemy;
+	}
+
+	public void setWaveOfEnemy(int waveOfEnemy) {
+		this.waveOfEnemy = waveOfEnemy;
+	}
+
+	public void setNextEnteringEnemy(Enemy nextEnteringEnemy) {
+		this.nextEnteringEnemy = nextEnteringEnemy;
+	}
+
 	/**
 	 * could be used when start another game
+	 * 
 	 * @param factory
 	 */
-	public void initializeGameSetting(GamePlayerFactory factory){	
+	public void initializeGameSetting(GamePlayerFactory factory) {
 		this.factory = factory;
 		HashMap<String, Double> settingInfo = factory.getGameSetting();
-		this.levelnumber = settingInfo.get("levelnumber");
+
+		this.currentLevel = settingInfo.get("levelnumber").intValue();
+		this.numLevels = settingInfo.get("totalNumberOfLevels");
 		this.gold = settingInfo.get("gold");
 		this.lives = settingInfo.get("lives");
+		this.towerTypes = this.factory.getTowers();
+		this.gameTitle = this.factory.getGameTitle();
+		this.towersOnGrid = new ArrayList<>();
+		// this.weaponTypes = this.factory.getWeapon(); need from xml
 	}
-	
-	
-	public void initializeLevelInfo(){
-		this.enemyAtCurrentLevel = this.factory.getEnemy();
-		//this.towerTypes = this.factory.getTowers();
-		//this.weaponTypes = this.factory.getWeapon();
+
+	public void initializeLevelInfo() {
+		this.uniqueEnemyID = 0;
+		this.uniqueTowerID = 0;
+		this.uniqueWeaponID = 0;
+		this.enemyAtCurrentLevel = this.factory.getEnemy(this.currentLevel);
 		this.waveOfEnemy = 0;
-		
+		packOfEnemyComing = this.enemyAtCurrentLevel.get(waveOfEnemy);
+		this.waveOfEnemy++;
+		nextEnteringEnemy = this.packOfEnemyComing.poll();
+		this.grid = this.factory.getGrid(this.currentLevel);
+		gridArray = this.grid.getGrid();
+		this.gridX = this.gridArray.length;
+		this.gridY = this.gridArray[0].length;
+		weaponOnGrid = new ArrayList<Weapon>();
+		weaponMap = this.factory.getWeaponBank();
+		//System.out.println("weapon map" + weaponMap.get(0).getName());
+
 	}
-	
-	
-	
-	int[] getDimension(){
-		int[] dimension = {this.gridX, this.gridY};
+
+	public HashMap<Integer, engine.tower.Tower> getTowerTypes() {
+		return this.towerTypes;
+	}
+
+	public List<gameplayer.model.Tower> getTowerOnGrid() { // fix naming
+		return this.towersOnGrid;
+	}
+
+	public Enemy getNextEnteringEnemy() {
+		return this.nextEnteringEnemy;
+	}
+
+	public void setCellSize(int size) {
+		this.cellSize = size;
+	}
+
+	public int getCellSize() {
+		return this.cellSize;
+	}
+
+	public int[] getDimension() {
+		int[] dimension = { this.gridX, this.gridY };
 		return dimension;
 	}
-	
+
+	public int getRow() {
+		int[] dimensions = this.getDimension();
+		return dimensions[0];
+	}
+
+	public int getColumns() {
+		int[] dimensions = this.getDimension();
+		return dimensions[1];
+	}
+
+	public String getGameTitle() {
+		return this.gameTitle;
+	}
+
+	public Grid getGrid() {
+		return this.grid;
+	}
+
+	public int getLevelNumber() {
+		return (int) this.numLevels;
+	}
 
 	public double getGold() {
 		return gold;
 	}
 
-
-	void setGold(double gold) {
+	private void setGold(double gold) {
+		this.gold = gold;
 		setChanged();
 		notifyObservers();
-		this.gold = gold;
 	}
-
 
 	public double getLife() {
 		return this.lives;
 	}
 
-
-	void setLife(double life) {
-		setChanged();
-		notifyObservers();
+	// used by enemymodel
+	public void setLife(double life) {
 		this.lives = life;
-	}
-
-
-	void setLevel(double d) {
 		setChanged();
 		notifyObservers();
-		this.currentLevel = d;
 	}
-	
-	public double getCurrentLevel(){
+
+	public void setLevel(int d) {
+		this.currentLevel = d;
+		setChanged();
+		notifyObservers();
+	}
+
+	public int getCurrentLevel() {
 		return this.currentLevel;
 	}
 
-	
-	public Boolean placeTower(int type, int x, int y){	
-		//later check if is a valid location to place the tower
-		Tower t  = towerTypes.get(type);
-		if(this.gold - t.getCost() < 0){
+	// TODO: move to EnemyModel
+	/*
+	 * public List<Enemy> getEnemyList() { return this.enemyOnGrid; }
+	 */
+
+	public Boolean placeTower(int type, int x, int y) {
+		System.out.println("Placetower: x:" + x + ",y:" + y);
+
+		// later check if is a valid location to place the tower
+		engine.tower.Tower towerType = towerTypes.get(type);
+		if (!canPlaceTower(x, y, towerType.getCost())) {
 			return false;
 		}
-		grid.placeTower(towerTypes.get(type), x, y);
-		setGold(this.gold - t.getCost());
+		int x1 = (int) (x / this.getCellWidth());
+		int y1 = (int) (y / this.getCellHeight());
+		gameplayer.model.Tower newlyPlaced = null;
+		List<Integer> weaponTypes = towerType.getWeapons();
+		ArrayList<Gun> gunsForTower = new ArrayList<Gun>();
+		// System.out.println("all the int weapons: " + gunsForTower.size());
+		for (int i : weaponTypes) {
+			engine.weapon.Weapon weaponForGun = this.weaponMap.get(i);
+			gunsForTower.add(new Gun(weaponForGun.getFireRate(), weaponForGun, weaponForGun.getRange(), newlyPlaced));
+
+		}
+
+		// System.out.println("all the gun s: " + gunsForTower.size());
+
+		newlyPlaced = new gameplayer.model.Tower(type, this.uniqueTowerID, towerType.getCost(), gunsForTower,
+				towerType.getImagePath(), towerType.getName());
+		newlyPlaced.setCoordinates(x1, y1);
+		uniqueTowerID++;
+
+		this.towersOnGrid.add(newlyPlaced);
+
+		setGold(this.gold - newlyPlaced.getCost());
+		// System.out.println("Calculation time: x:"+x+", Grid width:
+		// "+GridGUI.GRID_WIDTH+", cellwidth:
+		// "+this.getCellWidth()+",cellheight:"+this.getCellHeight());
+
+		grid.placeTower(newlyPlaced, (int) x, (int) y, (int) x1, (int) y1);
+		// grid.placeTower(newlyPlaced, (int) (GridGUI.GRID_WIDTH / x), (int)
+		// (GridGUI.GRID_HEIGHT / y));
+
+		// System.out.println("towers on grid: " + this.towersOnGrid.size());
+
+		return true;
+
+	}
+
+	public boolean canPlaceTower(int xcoord, int ycoord, double cost) {
+
+		Cell current = this.grid.getStartPoint();
+		/*
+		 * System.out.println("xcoord: "+xcoord);
+		 * System.out.println("yccord: "+ycoord);
+		 * if(this.gridArray[xcoord][ycoord].getNext() != null){ return false; }
+		 */
+
+		System.out.println("starting cell x: " + current.getX() + "; y: " + current.getY());
+		while (current != null) {
+			double x_min = current.getX() * GridGUI.GRID_WIDTH / this.getColumns();
+			double x = current.getX() * GridGUI.GRID_WIDTH / this.getColumns() + this.getCellWidth()
+					+ this.getCellWidth();
+			double y = current.getY() * GridGUI.GRID_WIDTH / this.getRow() + this.getCellHeight();
+			double y_min = current.getY() * GridGUI.GRID_WIDTH / this.getRow();
+			current = current.getNext();
+			// System.out.println("Startcell: " + x + "," + y + ". Candropimage:
+			// " + xcoord + "," + ycoord);
+			if (xcoord < x && xcoord > x_min && ycoord < y && ycoord > y_min) {
+				// System.out.println("CAN'T ADD TOWER IN CANPLACETOWER");
+				return false;
+			}
+		}
+
+		if (this.gold - cost < 0)
+			return false;
+
 		return true;
 	}
-	
-	private double cellToCoordinate(int cellNumber){
-		return (cellNumber + 0.5) * cellSize;
+
+	public double getCellWidth() {
+		return GridGUI.GRID_WIDTH / this.getColumns();
 	}
-	
-	
-	private void singleCollision(Enemy e, Weapon w){		
-		if(Math.abs(w.getX() -e.getX()) < hitBuffer && Math.abs(w.getY()- e.getY()) < hitBuffer){
-			e.setHealth(e.getHealth() - w.getDemage());			
-		}			
+
+	public double getCellHeight() {
+		return GridGUI.GRID_WIDTH / this.getRow();
 	}
-	
-	
-	private void checkCollision(){
-		for (Enemy e: enemyOnGrid){
-			for (Weapon w : weaponOnGrid){
-				singleCollision(e, w);
-			}
-			if(e.getHealth()< 0)
-				enemyOnGrid.remove(e);
+
+	public double cellToCoordinate(double d) {
+		return (d + 0.5) * cellSize;
+	}
+
+	public void singleCollision(Enemy e, Weapon w) {
+		if (Math.abs(w.getX() - e.getX()) < hitBuffer && Math.abs(w.getY() - e.getY()) < hitBuffer) {
+			e.setHealth(e.getHealth() - w.getDamage());
 		}
-		setChanged();
-		notifyObservers();
 	}
-	
-	private Boolean coordinateInBound(double d, double e){
-		return (d < this.gridX * cellSize && e < this.gridY *cellSize);
+
+	// Moved to EnemyModel
+	/*
+	 * private void checkCollision() { for (Enemy e :
+	 * this.enemyModel.getEnemyList()) { for (Weapon w : weaponOnGrid) {
+	 * singleCollision(e, w); } if (e.getHealth() < 0)
+	 * this.enemyModel.getEnemyList().remove(e); } setChanged();
+	 * notifyObservers(); }
+	 */
+	private Boolean coordinateInBound(double d, double e) {
+		return (d < this.gridX * cellSize && e < this.gridY * cellSize);
 	}
-	
-	
-	private double getDistance(double x1, double y1, double x2, double y2){
-		return Math.sqrt(Math.pow(x2-x1, 2) + Math.pow(y2-y1, 2));
+
+	private double getDistance(double x1, double y1, double x2, double y2) {
+		return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
 	}
-	
-	private Boolean inShootingRange(Weapon w){
-		Tower t = w.getShootingAgent();
-		return getDistance(w.getX(), w.getY(), t.getCoordinate()[0], t.getCoordinate()[1]) <= t.getAttackingRange();	
-		
-	}
-	
-	private void updateWeapon(){
-		for(Weapon w: weaponOnGrid){
-			w.setX(w.getSpeedX() + w.getX());
-			w.setY(w.getSpeedY() + w.getY());
-			
-			if(!coordinateInBound(w.getX(), w.getY()) && !inShootingRange(w)){
+
+	private void updateWeapon() {
+
+		for (Weapon w : weaponOnGrid) {
+			if (w.getX() < GridGUI.GRID_WIDTH) {
+				w.setX(w.getSpeedX() + w.getX());
+			}
+			if (w.getY() < GridGUI.GRID_HEIGHT) {
+				w.setY(w.getSpeedY() + w.getY());
+			}
+
+			if (!coordinateInBound(w.getX(), w.getY()) && !w.inRange()) {
 				this.weaponOnGrid.remove(w);
 			}
-		}
-		
-		for (int i = 0; i < gridX; i++){
-			for(int j = 0; j < gridY; j++){
-				int weaponType = gridArray[i][j].fireWeapon();
-				if(weaponType != -1){
-					Weapon toAdd = this.weaponTypes.get(weaponType);
-					toAdd.setX(cellToCoordinate(i));
-					toAdd.setY(cellToCoordinate(j));
-					toAdd.setShootingAgent(gridArray[i][j].getTower());
-					weaponOnGrid.add(toAdd);
-				}
-			}
-		}
-		
-		setChanged();
-		notifyObservers();
-	}
-	
-	//get direction
-	
-	
-	private void moveSingleEnemy(Enemy e) {
-		//to make it easier, only updating enemy's current cell once it reaches the center point of the next cell
-		double distToMove;
-		boolean willReachBase = false;
-		
-		double moveDist = e.getMovingSpeed();
-		
-		while (moveDist > 0) {
-			try {
-				distToMove = (Math.abs(cellToCoordinate(e.getCurrentCell().getNext().getX()) - e.getX()) + 
-						Math.abs(cellToCoordinate(e.getCurrentCell().getNext().getY()) - e.getY()));
-			}
-			catch(NullPointerException exception) { //enemy is currently at last cell on path
-				double destinationXpos = e.getCurrentCell().getX() + e.getxDirection() * cellSize/2; //midpoint + width/2 = edge
-				double destinationYpos = e.getCurrentCell().getY() + e.getyDirection() * cellSize/2;
-				distToMove = Math.abs(destinationXpos - e.getX()) 
-						+ Math.abs(destinationYpos - e.getY());
-				willReachBase = true;
-			}
-			if (moveDist >= distToMove) { //can move to center of next cell
-				e.setX(e.getX() + e.getxDirection() * distToMove);
-				e.setY(e.getY() + e.getyDirection() * distToMove);
-				if (willReachBase) {
-					setLife(this.lives-1);
-				}
-				e.setCurrentCell(e.getCurrentCell().getNext());
-				e.setxDirection(e.getCurrentCell().getNext().getX() - e.getCurrentCell().getX()); //-1, 0, or 1
-				e.setyDirection(e.getCurrentCell().getNext().getY() - e.getCurrentCell().getY());
-				moveDist -= distToMove;
-			}
-			else {
-				e.setX(e.getX() + e.getxDirection() * moveDist);
-				e.setY(e.getY() + e.getyDirection() * moveDist);
-				moveDist -= moveDist;
-			}	
-		}
-		
-		
-		//sub lives if enemy got into base
-	}
-	
-	private void updateEnemy(){
-		// move on Grid Enemy
-		for (Enemy e: enemyOnGrid){		
-			moveSingleEnemy(e);
-		}
-		
-		
-		//enter new enemy
-		if(this.nextEnteringEnemy != null) {
-			enemyOnGrid.add(this.nextEnteringEnemy);
-			this.nextEnteringEnemy.setCurrentCell(this.grid.getStartPoint());
-		}
-		
-		if(packOfEnemyComing.isEmpty() && enemyOnGrid.isEmpty() ){
-			if(waveOfEnemy < enemyAtCurrentLevel.size()){
-				packOfEnemyComing = enemyAtCurrentLevel.get(waveOfEnemy);
-				waveOfEnemy++;
-			}
-			else{
-				setLevel(this.currentLevel+1);  
+			
+			if (w.getX() == 606.0 && w.getY() == 601.0) {
+				this.weaponOnGrid.remove(w);
 			}
 			
 		}
-		
-		this.nextEnteringEnemy = packOfEnemyComing.poll();
-		
+
+		// creating all the new firing
+		for (gameplayer.model.Tower t : this.getTowerOnGrid()) {
+			//System.out.println("Tower in weapon method: x:" + t.getX() + ", y:" + t.getY());
+			// System.out.println("towerID: " + t.getID());
+			ArrayList<Gun> guns = t.getGuns();
+			// System.out.println("gun size: " + guns.size());
+
+			for (Gun g : guns) {
+				if (g.isFiring()) {
+					Weapon currentWeapon = g.getWeapon();
+					currentWeapon.setX(t.getX());
+					currentWeapon.setY(t.getY());
+
+					// System.out.println("x and y: " + currentWeapon.getX() + "
+					// " + currentWeapon.getSpeedY());
+					currentWeapon.setID(this.uniqueWeaponID);
+					uniqueWeaponID++;
+					this.weaponOnGrid.add(currentWeapon);
+				}
+			}
+
+		}
+
 		setChanged();
 		notifyObservers();
-		
 	}
-	
 
+	// get direction
+	/*
+	 * //TODO: move to EnemyModel private void moveSingleEnemy(Enemy e) { //to
+	 * make it easier, only updating enemy's current cell once it reaches the
+	 * center point of the next cell double distToMove; boolean onLastCell =
+	 * false;
+	 * 
+	 * double moveDist = e.getMovingSpeed();
+	 * 
+	 * while (moveDist > 0) { try { distToMove =
+	 * (Math.abs(cellToCoordinate(e.getCurrentCell().getNext().getX()) -
+	 * e.getX()) +
+	 * Math.abs(cellToCoordinate(e.getCurrentCell().getNext().getY()) -
+	 * e.getY())); } catch(NullPointerException exception) { //enemy is
+	 * currently at last cell on path double destinationXpos =
+	 * e.getCurrentCell().getX() + e.getxDirection() * cellSize/2; //midpoint +
+	 * width/2 = edge double destinationYpos = e.getCurrentCell().getY() +
+	 * e.getyDirection() * cellSize/2; distToMove = Math.abs(destinationXpos -
+	 * e.getX()) + Math.abs(destinationYpos - e.getY()); onLastCell = true; } if
+	 * (moveDist >= distToMove) { //can move to center of next cell
+	 * e.setX(e.getX() + e.getxDirection() * distToMove); e.setY(e.getY() +
+	 * e.getyDirection() * distToMove); if (onLastCell) { setLife(this.lives-1);
+	 * } e.setCurrentCell(e.getCurrentCell().getNext());
+	 * e.setxDirection(e.getCurrentCell().getNext().getX() -
+	 * e.getCurrentCell().getX()); //-1, 0, or 1
+	 * e.setyDirection(e.getCurrentCell().getNext().getY() -
+	 * e.getCurrentCell().getY()); moveDist -= distToMove; } else {
+	 * e.setX(e.getX() + e.getxDirection() * moveDist); e.setY(e.getY() +
+	 * e.getyDirection() * moveDist); moveDist -= moveDist; } }
+	 * 
+	 * 
+	 * //sub lives if enemy got into base }
+	 * 
+	 * //TODO: move to EnemyModel private void updateEnemy(){ // move on Grid
+	 * Enemy for (Enemy e: enemyOnGrid){ moveSingleEnemy(e); }
+	 * 
+	 * 
+	 * //enter new enemy if(this.nextEnteringEnemy != null) {
+	 * enemyOnGrid.add(this.nextEnteringEnemy);
+	 * this.nextEnteringEnemy.setCurrentCell(this.grid.getStartPoint()); }
+	 * 
+	 * if(packOfEnemyComing.isEmpty() && enemyOnGrid.isEmpty() ){ if(waveOfEnemy
+	 * < enemyAtCurrentLevel.size()){ packOfEnemyComing =
+	 * enemyAtCurrentLevel.get(waveOfEnemy); waveOfEnemy++; } else{
+	 * setLevel(this.currentLevel+1); }
+	 * 
+	 * }
+	 * 
+	 * this.nextEnteringEnemy = packOfEnemyComing.poll();
+	 * 
+	 * setChanged(); notifyObservers();
+	 * 
+	 * }
+	 */
 
+	public void updateInLevel() {
+		// checkCollision();
+		updateWeapon();
 
-	public void updateInLevel(){
-		checkCollision();
-		updateWeapon();		
-		updateEnemy();
-		
+		// this.enemyModel.update();
+
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 }
