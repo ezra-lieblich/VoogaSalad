@@ -9,15 +9,15 @@ import java.util.Queue;
 import engine.enemy.EnemyType;
 import engine.tower.Tower;
 import engine.tower.TowerType;
+import engine.weapon.WeaponTypeBuilder;
+import engine.weapon.Weapon;
 import gameplayer.model.Cell;
 import gameplayer.model.Enemy;
 import gameplayer.model.Grid;
 
 public class GamePlayerFactory{
 
-	XMLParser authoringFileReader;
-
-
+	XMLParser authoringFileReader;	
 
 	public GamePlayerFactory(XMLParser parser){
 		this.authoringFileReader = parser;
@@ -26,11 +26,19 @@ public class GamePlayerFactory{
 	public boolean xmlIsValid() {
 		return authoringFileReader.isValid();
 	}
+	
+	public HashMap<Integer, Weapon> getWeaponBank() {
+		WeaponTypeBuilder weaponBuilder = new WeaponTypeBuilder();
+		HashMap<Integer, Weapon> bank = new HashMap<Integer, Weapon>();
+		bank.put(0, weaponBuilder.build());
+		return bank;
+		
+	}
 
 	
 	public HashMap<String, Double> getGameSetting(){
 		HashMap<String,Double>settings = new HashMap<>(); 
-		settings.put("numLevels", Double.parseDouble(authoringFileReader.getVariableValues("numLevels")));
+		settings.put("totalNumberOfLevels", Double.parseDouble(authoringFileReader.getVariableValues("numLevels")));
 		settings.put("lives", Double.parseDouble(authoringFileReader.getVariableValues("lives")));
 		settings.put("gold",  Double.parseDouble(authoringFileReader.getVariableValues("gold")));
 		settings.put("levelnumber",  Double.parseDouble(authoringFileReader.getVariableValues("levelnumber")));
@@ -74,19 +82,18 @@ public class GamePlayerFactory{
 	
 	
 	
-	public HashMap<Integer, Tower> getTowers(){
-
+	public HashMap<Integer, Tower> getTowers() {
 		return authoringFileReader.getTowerTypes(); 
 	}
 	
 	
-	public List<Queue<Enemy>> getEnemy(int level){
+	public List<Queue<Enemy>> getEnemy(int level) {
 		return authoringFileReader.getEnemy(level); 
 	}
 	
 	
 	
-	public String getGameTitle(){
+	public String getGameTitle() {
 		return this.authoringFileReader.getName();
 	}
 }

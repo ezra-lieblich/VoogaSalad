@@ -1,8 +1,10 @@
 package authoring.editorview.weapon;
 
 import java.io.IOException;
-import authoring.ErrorBox;
+import java.util.ResourceBundle;
 import authoring.editorview.EditorViewController;
+import authoring.utilityfactories.DialogueBoxFactory;
+import engine.weapon.WeaponManagerController;
 
 
 /**
@@ -14,44 +16,40 @@ import authoring.editorview.EditorViewController;
 public class WeaponEditorViewController extends EditorViewController
         implements WeaponEditorViewDelegate {
 
-    private WeaponDataSource weaponDataSource;
+    private WeaponManagerController weaponDataSource;
     private int currentWeaponID;
+    private IWeaponEditorView weaponView;
 
     public WeaponEditorViewController (int editorWidth, int editorHeight) throws IOException {
-        IWeaponUpdateView myView = WeaponEditorViewFactory.build(editorWidth, editorHeight);
-        myView.setDelegate(this);
-        this.view = myView;
+        weaponView = WeaponEditorViewFactory.build(editorWidth, editorHeight);
+        weaponView.setDelegate(this);
+        this.view = weaponView;
     }
 
-    private void updateWeaponID () {
-        // How do I know which ID I'm working with?
-        // currentWeaponID = weaponDataSource.getWeap
-    }
-
-    public void setWeaponDataSource (WeaponDataSource source) {
+    public void setWeaponDataSource (WeaponManagerController source) {
         this.weaponDataSource = source;
+        onUserPressedCreateWeapon();
     }
 
     @Override
     public void onUserEnteredWeaponFireRate (String weaponFireRate) {
-        // Should update currentWeaponID every time this is called
         try {
-            Integer.parseInt(weaponFireRate);
-            weaponDataSource.setWeaponFireRate(currentWeaponID, Integer.parseInt(weaponFireRate));
+            Double.parseDouble(weaponFireRate);
+            weaponDataSource.setWeaponFireRate(currentWeaponID, Double.parseDouble(weaponFireRate));
         }
         catch (NumberFormatException e) {
-            ErrorBox.createErrorBox("This input is not an integer");
+            createDialogueBox();
         }
     }
 
     @Override
     public void onUserEnteredWeaponSpeed (String weaponSpeed) {
         try {
-            Integer.parseInt(weaponSpeed);
-            weaponDataSource.setWeaponSpeed(currentWeaponID, Integer.parseInt(weaponSpeed));
+            Double.parseDouble(weaponSpeed);
+            weaponDataSource.setWeaponSpeed(currentWeaponID, Double.parseDouble(weaponSpeed));
         }
         catch (NumberFormatException e) {
-            ErrorBox.createErrorBox("This input is not an integer");
+            createDialogueBox();
         }
     }
 
@@ -63,42 +61,73 @@ public class WeaponEditorViewController extends EditorViewController
     @Override
     public void onUserEnteredWeaponRange (String weaponRange) {
         try {
-            Integer.parseInt(weaponRange);
-            weaponDataSource.setWeaponRange(currentWeaponID, Integer.parseInt(weaponRange));
+            Double.parseDouble(weaponRange);
+            weaponDataSource.setWeaponRange(currentWeaponID, Double.parseDouble(weaponRange));
         }
         catch (NumberFormatException e) {
-            ErrorBox.createErrorBox("This input is not an integer");
+            createDialogueBox();
         }
     }
 
     @Override
     public void onUserEnteredWeaponImage (String weaponImagePath) {
-        weaponDataSource.setWeaponImagePath(currentWeaponID, weaponImagePath);
-    }
-
-    @Override
-    public void onUserEnteredWeaponDamage (String weaponDamage) {
-        try {
-            Integer.parseInt(weaponDamage);
-            weaponDataSource.setWeaponDamage(currentWeaponID, Integer.parseInt(weaponDamage));
-        }
-        catch (NumberFormatException e) {
-            ErrorBox.createErrorBox("This input is not an integer");
-        }
+        weaponDataSource.setImagePath(currentWeaponID, weaponImagePath);
     }
 
     @Override
     public void onUserPressedCreateWeapon () {
-        weaponDataSource.createWeapon();
+        currentWeaponID = weaponDataSource.createType(weaponView);
+        weaponView.updateImagePathDisplay(weaponDataSource.getImagePath(currentWeaponID));
+        weaponView.updateNameDisplay(weaponDataSource.getName(currentWeaponID));
+        weaponView.updateFireRateDisplay(weaponDataSource.getWeaponFireRate(currentWeaponID));
+        weaponView.updateRangeDisplay(weaponDataSource.getWeaponRange(currentWeaponID));
+        weaponView.updateSizeDisplay(weaponDataSource.getSize(currentWeaponID));
+        weaponView.updateSpeedDisplay(weaponDataSource.getWeaponSpeed(currentWeaponID));
     }
 
     @Override
     public void onUserEnteredWeaponName (String weaponName) {
-        weaponDataSource.setWeaponName(currentWeaponID, weaponName);
+        weaponDataSource.setName(currentWeaponID, weaponName);
     }
 
     @Override
-    public void onUserEnteredWeaponPath (String weaponPath) {
-        weaponDataSource.setWeaponPath(currentWeaponID, weaponPath);
+    public void onUserEnteredWeaponTrajectory (String weaponTrajectory) {
+        weaponDataSource.setWeaponTrajectory(currentWeaponID, weaponTrajectory);
     }
+
+    private void createDialogueBox () {
+        ResourceBundle dialogueBoxResource = ResourceBundle.getBundle("resources/DialogueBox");
+        DialogueBoxFactory.createErrorDialogueBox(dialogueBoxResource.getString("Integer"),
+                                                  dialogueBoxResource.getString("CheckInput"));
+    }
+
+    @Override
+    public void onUserEnteredNewTargetEnemy (String enemyID) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void onUserPressedDeleteWeapon () {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void onUserEnteredWeaponSize (String weaponSize) {
+        try {
+            Double.parseDouble(weaponSize);
+            weaponDataSource.setSize(currentWeaponID, Double.parseDouble(weaponSize));
+        }
+        catch (NumberFormatException e) {
+            createDialogueBox();
+        }
+    }
+
+	@Override
+	public void onUserSelectedWeapon(int weaponID) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

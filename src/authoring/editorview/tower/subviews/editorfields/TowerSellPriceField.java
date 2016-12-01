@@ -1,6 +1,7 @@
 package authoring.editorview.tower.subviews.editorfields;
 
-import authoring.editorview.tower.ITowerEditorView;
+import java.util.ResourceBundle;
+import authoring.editorview.tower.ITowerSetView;
 import authoring.editorview.tower.TowerEditorViewDelegate;
 import authoring.utilityfactories.TextFieldFactory;
 import javafx.scene.Node;
@@ -12,14 +13,14 @@ import javafx.scene.control.TextField;
  * @author Kayla Schulz
  *
  */
-public class TowerSellPriceField implements ITowerEditorView {
+public class TowerSellPriceField implements ITowerSetView {
 
     private TextField towerSellField;
     private TowerEditorViewDelegate delegate;
 
-    public TowerSellPriceField () {
+    public TowerSellPriceField (ResourceBundle labelsResource) {
         towerSellField =
-                TextFieldFactory.makeTextField("Set tower sell price: ",
+                TextFieldFactory.makeTextField(labelsResource.getString("EnterInt"),
                                                e -> delegate
                                                        .onUserEnteredTowerSellPrice(towerSellField
                                                                .getText()));

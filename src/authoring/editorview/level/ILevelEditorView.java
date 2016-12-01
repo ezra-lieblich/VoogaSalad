@@ -1,13 +1,23 @@
 package authoring.editorview.level;
 
-import authoring.editorview.IEditorView;
-import javafx.scene.Node;
+import java.util.Map;
+import authoring.editorview.IUpdateView;
 
-/**
- * 
- * Communicates with the model to indicate when a new level was chosen
- *
- */
-public interface ILevelEditorView extends IEditorView {
-	public void setDelegate(LevelEditorViewDelegate delegate);
+
+public interface ILevelEditorView extends ILevelSetView, IUpdateView {
+
+    public void updateEnemy (Map<Integer, Integer> enemyCounts);
+
+    public void updateRewardPoints (double winPoints);
+
+    public void updateRewardHealth (double winHealth);
+
+    public void updateRewardMoney (double winMoney);
+
+    public void updatePath (int pathID);
+
+    public void updateTransitionTime (double time);
+
+    public void updateEnemyFrequency (double enemyFrequency);
+
 }

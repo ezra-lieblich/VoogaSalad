@@ -1,6 +1,7 @@
 package authoring.editorview.weapon.subviews.editorfields;
 
-import authoring.editorview.weapon.IWeaponEditorView;
+import java.util.ResourceBundle;
+import authoring.editorview.weapon.IWeaponSetView;
 import authoring.editorview.weapon.WeaponEditorViewDelegate;
 import authoring.utilityfactories.ComboBoxFactory;
 import javafx.collections.FXCollections;
@@ -8,31 +9,34 @@ import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 
+
 /**
  * 
  * @author Kayla Schulz
  *
  */
-public class WeaponPathField implements IWeaponEditorView {
+public class WeaponPathField implements IWeaponSetView {
 
     private ComboBox<Object> weaponPathBox;
     private WeaponEditorViewDelegate delegate;
+    private ResourceBundle labelsResource;
 
-    public WeaponPathField () {
+    public WeaponPathField (ResourceBundle labelsResource) {
+        this.labelsResource = labelsResource;
         ObservableList<Object> pathOptions = setList();
         createField(pathOptions);
     }
 
     private ObservableList<Object> setList () {
         ObservableList<Object> pathOptions =
-                FXCollections.observableArrayList("I still don't know", "Sorry");
+                FXCollections.observableArrayList("Straight", "Heat Follow");
         return pathOptions;
     }
 
     private void createField (ObservableList<Object> pathOptions) {
         weaponPathBox =
-                ComboBoxFactory.makeComboBox("Set weapon path: ", e -> delegate
-                        .onUserEnteredWeaponPath((String) weaponPathBox.getValue()), pathOptions);
+                ComboBoxFactory.makeComboBox(labelsResource.getString("Path"), e -> delegate
+                        .onUserEnteredWeaponTrajectory((String) weaponPathBox.getValue()), pathOptions);
     }
 
     @Override

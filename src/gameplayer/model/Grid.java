@@ -21,6 +21,16 @@ public class Grid {
 		}	
 	}
 	
+	//testing
+	public void printGrid(){
+		System.out.println("Grid");
+		for(int i = 0; i < grid.length;i++){
+			for(int j = 0; j < grid[0].length; j++){
+				System.out.println(grid[i][j].getX()+","+grid[i][j].getY());
+			}
+		}
+	}
+	
 	public int getRows(){
 		return this.row;
 	}
@@ -47,6 +57,7 @@ public class Grid {
 	}
 	
 	public void placeTower(Tower t, int x, int y){
+		System.out.println("Place tower coords: "+x+","+y);
 		t.setCoordinates(x, y);
 		grid[x][y].addTower(t);
 	}

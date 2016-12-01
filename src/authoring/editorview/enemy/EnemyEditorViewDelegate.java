@@ -10,6 +10,8 @@ public interface EnemyEditorViewDelegate {
 
     public void onUserPressedCreateEnemy ();
 
+    public void onUserPressedDeleteEnemy ();
+
     public void onUserEnteredEnemySpeed (String enemySpeed);
 
     public void onUserEnteredEnemyHealth (String enemyHealth);
@@ -26,6 +28,7 @@ public interface EnemyEditorViewDelegate {
 
     public void onUserEnteredEnemyName (String enemyName);
 
-    public void onUserEnteredEnemyFrequency (String enemyFrequency);
-
+    public void onUserEnteredEnemySize (String enemySize);
+    
+    public void onUserSelectedEnemy (int enemyID);
 }

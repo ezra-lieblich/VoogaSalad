@@ -1,30 +1,30 @@
 package engine.weapon;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.function.BiConsumer;
+import java.util.stream.Collectors;
 import engine.AbstractTypeBuilder;
-import engine.ability.Ability;
-import engine.enemy.Enemy;
+import engine.observer.ObservableList;
+import engine.observer.ObservableListProperty;
 import engine.observer.ObservableObjectProperty;
 import engine.observer.ObservableProperty;
-import engine.tower.Tower;
-import engine.tower.TowerType;
 import engine.weapon.Weapon;
 
 public class WeaponTypeBuilder extends AbstractTypeBuilder<Weapon, WeaponBuilder> implements WeaponBuilder, WeaponInitializer {
     
      public static final String DEFAULT_NAME = "New Weapon";
-     public static final String DEFAULT_IMAGE_PATH = "Images.penguin.jpg";
+     public static final String DEFAULT_IMAGE_PATH = "Images/penguin.jpg";
      public static final double DEFAULT_SIZE = 1;
+     public static final List<Integer> DEFAULT_WEAPONS = Arrays.stream(new Integer[]{}).collect(Collectors.toList());
      public static final double DEFAULT_FIRE_RATE = 2;
      public static final String DEFAULT_TRAJECTORY = "Straight";
      public static final String DEFAULT_EFFECT = "";
      public static final double DEFAULT_SPEED = 10;
      public static final double DEFAULT_RANGE = 50;
      
-     
+     private ObservableList<Integer> targets;
      private ObservableProperty<Double> fireRate;
      private ObservableProperty<String> trajectory;
      private ObservableProperty<String> effect;
@@ -35,6 +35,17 @@ public class WeaponTypeBuilder extends AbstractTypeBuilder<Weapon, WeaponBuilder
          super(DEFAULT_NAME, DEFAULT_IMAGE_PATH, DEFAULT_SIZE);
      }
     
+     @Override
+     public WeaponBuilder buildTargets (Integer ... targets) {
+         return buildTargets(Arrays.stream(targets).collect(Collectors.toList()));
+     }
+
+     @Override
+     public WeaponBuilder buildTargets (List<Integer> targets) {
+         this.targets.setProperty(targets);
+         return this;
+     }
+     
     @Override
     public WeaponBuilder buildFireRate(double fireRate) {
         this.fireRate.setProperty(fireRate);
@@ -71,6 +82,11 @@ public class WeaponTypeBuilder extends AbstractTypeBuilder<Weapon, WeaponBuilder
     }
 
     @Override
+    public ObservableList<Integer> getTargets () {
+        return targets;
+    }
+    
+    @Override
     public ObservableProperty<Double> getFireRate () {
         return fireRate;
     }
@@ -97,6 +113,7 @@ public class WeaponTypeBuilder extends AbstractTypeBuilder<Weapon, WeaponBuilder
 
     @Override
     protected void restoreTypeDefaults () {
+        this.targets = new ObservableListProperty<Integer>(DEFAULT_WEAPONS);
         this.fireRate = new ObservableObjectProperty<Double>(DEFAULT_FIRE_RATE);
         this.trajectory = new ObservableObjectProperty<String>(DEFAULT_TRAJECTORY);
         this.effect = new ObservableObjectProperty<String>(DEFAULT_EFFECT);
@@ -106,6 +123,13 @@ public class WeaponTypeBuilder extends AbstractTypeBuilder<Weapon, WeaponBuilder
 
     @Override
     protected WeaponBuilder getThis () {
+        return this;
+    }
+    
+
+    @Override
+    public WeaponBuilder addTargetsListener (BiConsumer<List<Integer>, List<Integer>> listener) {
+        targets.addListener(listener);
         return this;
     }
     
@@ -128,7 +152,7 @@ public class WeaponTypeBuilder extends AbstractTypeBuilder<Weapon, WeaponBuilder
     }
 
     @Override
-    public WeaponBuilder addSpeed(BiConsumer<Double, Double> listener) {
+    public WeaponBuilder addSpeedListener(BiConsumer<Double, Double> listener) {
         speed.addListener(listener);
         return this;
     }

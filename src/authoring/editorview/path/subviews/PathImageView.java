@@ -17,11 +17,8 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
-//TODO: Combine with BackgroundImageView to reduce duplicated code
 
 
 public class PathImageView extends PhotoFileChooser{
@@ -30,16 +27,15 @@ public class PathImageView extends PhotoFileChooser{
 	private String pathImagePath;
 	private ImageView pathImageView;
 	private PathEditorViewDelegate delegate;
+	private int activePathID;
 	
 	private static final String RESOURCE_FILE_NAME = "resources/GameAuthoringPath";	
 	private ResourceBundle pathResource = ResourceBundle.getBundle(RESOURCE_FILE_NAME);
-	private static final String DEFAULT_IMAGE_FILE_NAME = "blacksquare.png";
 	
 	public PathImageView(){
 		root = new HBox(10);
 		makeChooseImageButton();
 		formatPathImageView();
-		addPathImageView();
 	}
 	
 	public Node getInstanceAsNode(){		
@@ -47,19 +43,6 @@ public class PathImageView extends PhotoFileChooser{
 		
 	}
 	
-	private void formatPathImageView() {
-		pathImageView = new ImageView();
-		pathImageView.setFitHeight(100);
-		pathImageView.setFitWidth(100);
-	}	
-	
-	private void addPathImageView() {
-		if (root.getChildren().contains(pathImageView)){
-			root.getChildren().remove(pathImageView);
-		}
-		pathImageView = loadPathImage();
-		root.getChildren().add(pathImageView);
-	}
 	
 	private void makeChooseImageButton(){
 		Button setPathImageButton = ButtonFactory.makeButton(pathResource.getString("PathImageButton"), 
@@ -71,6 +54,7 @@ public class PathImageView extends PhotoFileChooser{
 						errorDialogueBox.show();
 					}
 				});
+		setPathImageButton.setTranslateY(5);
 		root.getChildren().add(setPathImageButton);
 	}
 
@@ -80,7 +64,7 @@ public class PathImageView extends PhotoFileChooser{
 		if (chosenFile != null){
 			BufferedImage image = ImageIO.read(chosenFile) ;
 			pathImagePath = chosenFile.getPath();
-			addPathImageView();
+			delegate.onUserEnteredPathImage(activePathID, pathImagePath);
 				
 			
 		}
@@ -91,24 +75,61 @@ public class PathImageView extends PhotoFileChooser{
 		return pathImagePath;
 	}
 	
+	public void setPathImagePath(String imagePath){
+		this.pathImagePath = imagePath;
+		addImageView();
+		
+	}
+	
+	private void formatPathImageView() {
+		pathImageView = new ImageView();
+		pathImageView.setFitHeight(100);
+		pathImageView.setFitWidth(100);
+	}	
+	
+	private void addImageView() {
+		
+		Image image;
+		if (root.getChildren().contains(pathImageView)){
+			root.getChildren().remove(pathImageView);
+		}
+		
+		if (!pathImagePath.contains("file:") && !pathImagePath.contains("http:")) {
+			image = new Image (getClass().getClassLoader().getResourceAsStream(pathImagePath));		
+		}
+		
+		else {
+			image = new Image(pathImagePath);
+		}
+			
+		pathImageView.setImage(image);
+		root.getChildren().add(pathImageView);
+	
+		
+	}
+	
+	
 	public void setDelegate(PathEditorViewDelegate delegate){
 		this.delegate = delegate;
 	}
-
-
-	private ImageView loadPathImage() {	
-		try {
-			Image image = new Image(pathImagePath);
-			pathImageView.setImage(image);
-			delegate.onUserEnteredBackgroundImage(pathImagePath);			
-		}
-		catch (Exception e){
-			Image defaultImage = new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_IMAGE_FILE_NAME));
-			pathImageView.setImage(defaultImage);	
-		}		
-		return pathImageView;
-		
+	
+	public void setActivePathId(int pathID){
+		this.activePathID = pathID;
 	}
+
+
+//	private void loadPathImage() {	
+//		try {
+//			Image image = new Image(pathImagePath);
+//			pathImageView.setImage(image);
+//			delegate.onUserEnteredPathImage(activePathID, pathImagePath);			
+//		}
+//		catch (Exception e){
+//			Alert errorDialogueBox = DialogueBoxFactory.createErrorDialogueBox("Invalid image.", "Error With Image");
+//			errorDialogueBox.show();
+//		}		
+//		
+//	}
 	
 	
 }

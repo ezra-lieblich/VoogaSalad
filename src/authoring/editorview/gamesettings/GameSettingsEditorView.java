@@ -1,38 +1,36 @@
 package authoring.editorview.gamesettings;
 
 import authoring.editorview.EditorViewController;
+import authoring.editorview.gamesettings.subviews.GameNameView;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 
 
-public class GameSettingsEditorView extends EditorViewController implements IGameSettingsEditorView {
-	private GameSettingsEditorViewDelegate delegate;
-    private Pane gameConditionsPane;
+public class GameSettingsEditorView extends EditorViewController
+        implements IGameSettingsEditorView {
+
+    
+    private VBox gameConditionsRoot;
+    private GameNameView gameNameView;
 
     public GameSettingsEditorView (int aWidth, int aHeight) {
-        this.gameConditionsPane = new Pane();
-        makeTextField("Number of Columns: ");
-    }
-
-    private void makeTextField (String label) {
-        HBox hbox = new HBox();
-        Label labelBox = new Label(label);
-        TextField textField = new TextField();
-        hbox.getChildren().addAll(labelBox, textField);
-        gameConditionsPane.getChildren().add(hbox);
+        this.gameConditionsRoot = new VBox(10);
+        this.gameNameView = new GameNameView();
     }
 
     @Override
     public Node getInstanceAsNode () {
-        return gameConditionsPane;
+        return gameConditionsRoot;
     }
 
-	@Override
-	public void setDelegate(GameSettingsEditorViewDelegate delegate) {
-		this.delegate = delegate;
-	}
+    @Override
+    public void setDelegate (GameSettingsEditorViewDelegate delegate) {
+        gameNameView.setDelegate(delegate);;
+    }
+    
+    private void addViewComponents(){
+    	gameConditionsRoot.getChildren().add(gameNameView.getInstanceAsNode());
+    }
 
 }

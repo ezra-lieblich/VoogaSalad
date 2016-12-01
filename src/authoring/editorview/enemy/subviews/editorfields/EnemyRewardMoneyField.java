@@ -1,20 +1,21 @@
 package authoring.editorview.enemy.subviews.editorfields;
 
+import java.util.ResourceBundle;
 import authoring.editorview.enemy.EnemyEditorViewDelegate;
-import authoring.editorview.enemy.IEnemyEditorView;
+import authoring.editorview.enemy.IEnemySetView;
 import authoring.utilityfactories.TextFieldFactory;
 import javafx.scene.Node;
 import javafx.scene.control.TextField;
 
 
-public class EnemyRewardMoneyField implements IEnemyEditorView {
+public class EnemyRewardMoneyField implements IEnemySetView {
 
     private EnemyEditorViewDelegate delegate;
     private TextField enemyRewardMoneyField;
 
-    public EnemyRewardMoneyField () {
+    public EnemyRewardMoneyField (ResourceBundle labelsResource) {
         enemyRewardMoneyField =
-                TextFieldFactory.makeTextField("Set enemy reward money: ",
+                TextFieldFactory.makeTextField(labelsResource.getString("EnterInt"),
                                                e -> delegate
                                                        .onUserEnteredEnemyMoney(enemyRewardMoneyField
                                                                .getText()));

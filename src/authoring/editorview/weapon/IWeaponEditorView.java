@@ -1,17 +1,35 @@
 package authoring.editorview.weapon;
 
-import authoring.editorview.IEditorView;
+import java.util.List;
+import authoring.editorview.IUpdateView;
 
 
 /**
- * The interface for all weapon views. Allows those classes to implement setDelegate and
- * getInstanceAsNode
+ * The Weapon View interface will detail the components of the weapon creation. The interface
+ * determines a portion of our internal API.
  * 
+ * @author Andrew Bihl
  * @author Kayla Schulz
  *
  */
-public interface IWeaponEditorView extends IEditorView {
+public interface IWeaponEditorView extends IWeaponSetView, IUpdateView {
 
-    public void setDelegate (WeaponEditorViewDelegate delegate);
+    public void updateFireRateDisplay (double fireRate);
+
+    public void updateSpeedDisplay (double speed);
+
+    public void updateCollisionEffectDisplay (String collisionEffect);
+
+    public void updateRangeDisplay (double range);
+
+    public void updateWeaponBank (List<Integer> activeWeapons);
+
+    public void updateTargetEnemies (List<Integer> targetEnemies);
+
+    public void updateWeaponTrajectory (String trajectory);
+
+    public void createNewWeapon (); // This is the method where I will go and update e'rthing
+    
+    public void deleteWeapon ();
 
 }

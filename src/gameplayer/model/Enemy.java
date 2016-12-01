@@ -2,7 +2,7 @@ package gameplayer.model;
 
 import java.util.Observable;
 
-public class Enemy extends Observable{
+public class Enemy extends Observable implements IDrawable{
 	
 	private String name; 
 	private double movingSpeed;  
@@ -16,7 +16,8 @@ public class Enemy extends Observable{
 	private double width, height;
 	private int uniqueID;
 	
-	public Enemy(String name, double movingSpeed, int health, String image, double width, double height){
+	public Enemy(int ID, String name, double movingSpeed, int health, String image, double width, double height){
+		this.uniqueID = ID;
 		this.name = name; 
 		this.movingSpeed = movingSpeed;
 		this.health = health;	
@@ -76,6 +77,7 @@ public class Enemy extends Observable{
 
 	public void setCurrentCell(Cell c){ //don't think we need to notify observers of this change
 		this.currentCell = c;
+		System.out.println("does the cell have a next?"+c.getNext().getX()+", "+c.getNext().getY());
 		this.xDirection = c.getNext().getX() - c.getX();
 		this.yDirection = c.getNext().getY() - c.getY();
 	}

@@ -90,7 +90,7 @@ public class BackgroundImageView extends PhotoFileChooser{
 	private void createBackgroundImage() {	
 		try {
 			backgroundImage = new Image(backgroundImagePath);
-			delegate.onUserEnteredBackgroundImage(backgroundImagePath);			
+					
 		}
 		catch (Exception e){
 			backgroundImage = new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_IMAGE_FILE_NAME));

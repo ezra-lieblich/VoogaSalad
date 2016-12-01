@@ -1,12 +1,11 @@
 package authoring.editorview.enemy.subviews.editorfields;
 
-import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.util.ResourceBundle;
-import javax.imageio.ImageIO;
 import authoring.editorview.enemy.EnemyEditorViewDelegate;
-import authoring.editorview.enemy.IEnemyEditorView;
-import javafx.embed.swing.SwingFXUtils;
+import authoring.editorview.enemy.IEnemySetView;
+import authoring.utilityfactories.DialogueBoxFactory;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -17,43 +16,40 @@ import javafx.scene.image.ImageView;
  * @author Kayla Schulz
  *
  */
-public class EnemyImageView implements IEnemyEditorView {
+public class EnemyImageView implements IEnemySetView {
 
     private EnemyEditorViewDelegate delegate;
-    private ResourceBundle labelsResource;
     private String imagePath;
     private ImageView enemyImage;
+    private ResourceBundle labelsResource;
+    
+    private final int CHARACTER_SIZE = 250;
 
-    // TODO: Make this enemy
-    private final String ENEMY_EFFECT_RESOURCE_PATH = "resources/GameAuthoringEnemy";
-
-    public EnemyImageView () throws IOException {
-        labelsResource = ResourceBundle.getBundle(ENEMY_EFFECT_RESOURCE_PATH);
-        enemyImage = loadEnemyImage();
+    public EnemyImageView (ResourceBundle labelsResource) throws IOException {
+        this.labelsResource = labelsResource;
+        enemyImage = new ImageView();
+        enemyImage.setFitHeight(CHARACTER_SIZE);
+        enemyImage.setFitWidth(CHARACTER_SIZE);
     }
 
     public void updateEnemyImagePath (String imagePath) {
         this.imagePath = imagePath;
+        loadEnemyImage();
     }
 
-    private ImageView loadEnemyImage () throws IOException {
-        BufferedImage imageRead;
-        ImageView myImageView = new ImageView();
+    private void loadEnemyImage () {
         try {
-            imageRead = ImageIO.read(getClass().getClassLoader().getResourceAsStream(imagePath));
-            Image image2 = SwingFXUtils.toFXImage(imageRead, null);
-            myImageView.setImage(image2);
-            delegate.onUserEnteredEnemyImagePath(imagePath);
+            File file = new File(imagePath);
+            Image image = new Image(file.toURI().toString());
+            enemyImage.setImage(image);
         }
         catch (Exception e) {
-            imageRead =
-                    ImageIO.read(getClass().getClassLoader()
-                            .getResourceAsStream(labelsResource.getString("DefaultImagePath")));
-            Image image2 = SwingFXUtils.toFXImage(imageRead, null);
-            myImageView.setImage(image2);
-            System.out.println("Unable to find picture in files");
+            Image image2 =
+                    new Image(getClass().getClassLoader().getResourceAsStream("questionmark.png"));
+            enemyImage.setImage(image2);
+            DialogueBoxFactory.createErrorDialogueBox("Could not load file",
+                                                      "Try new photo");
         }
-        return myImageView;
     }
 
     @Override

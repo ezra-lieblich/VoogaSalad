@@ -1,7 +1,8 @@
 package authoring.editorview.enemy.subviews.editorfields;
 
+import java.util.ResourceBundle;
 import authoring.editorview.enemy.EnemyEditorViewDelegate;
-import authoring.editorview.enemy.IEnemyEditorView;
+import authoring.editorview.enemy.IEnemySetView;
 import authoring.utilityfactories.TextFieldFactory;
 import javafx.scene.Node;
 import javafx.scene.control.TextField;
@@ -12,14 +13,14 @@ import javafx.scene.control.TextField;
  * @author Kayla Schulz
  *
  */
-public class EnemyDamageField implements IEnemyEditorView {
+public class EnemyDamageField implements IEnemySetView {
 
     private EnemyEditorViewDelegate delegate;
     private TextField enemyDamageField;
 
-    public EnemyDamageField () {
+    public EnemyDamageField (ResourceBundle labelsResource) {
         enemyDamageField =
-                TextFieldFactory.makeTextField("Set enemy damage: ",
+                TextFieldFactory.makeTextField(labelsResource.getString("EnterInt"),
                                                e -> delegate
                                                        .onUserEnteredEnemyDamage(enemyDamageField
                                                                .getText()));

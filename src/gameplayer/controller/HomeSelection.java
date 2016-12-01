@@ -65,7 +65,7 @@ public class HomeSelection {
 
 	//TODO: create game from xml (no game class?)
 	/*
-	private Game createGameFromXML(String fileName) {
+	private GameData createGameFromXML(String fileName) {
 		DataSetup data = new DataSetup(fileName);
 		HashMap<String, String> generalInfo = data.getGeneralInfo();
 		slogoView = new SlogoView(generalInfo.get("title"), generalInfo.get("background_color").toUpperCase(),

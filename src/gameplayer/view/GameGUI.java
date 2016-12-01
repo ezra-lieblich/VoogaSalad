@@ -1,7 +1,9 @@
 package gameplayer.view;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import gameplayer.model.IDrawable;
 import gameplayer.view.buttonPanel.ButtonPanel;
 import gameplayer.view.buttonPanel.GamePlayButtonPanel;
 import gameplayer.view.helper.GraphicsLibrary;
@@ -14,24 +16,30 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 /**
  * Overseer of game GUI
+ * 
  * @author lucyzhang
  *
  */
 public class GameGUI {
-	
+
 	public static final int SCENE_WIDTH = 1200;
 	public static final int SCENE_HEIGHT = 700;
 	public static final double xError = -20;
 	public static final double yError = -60;
-	
+
 	private BorderPane mainScreen;
 	private Scene scene;
 	private VBox leftPane;
@@ -44,17 +52,22 @@ public class GameGUI {
 	private double currentLevel;
 	private List path;
 	private EventHandler animationBind;
-	
-	public GameGUI(int rows, int columns){
+	private int rows;
+	private int columns;
+
+	public GameGUI(int rows, int columns) {
 		this.mainScreen = new BorderPane();
 		this.graphics = new GraphicsLibrary();
-		this.grid = new GridGUI(rows, columns/*, path*/); 
-		this.dragDrop = new DragDropView(xError, yError); 
+		this.grid = new GridGUI(rows, columns/* , path */);
+		this.dragDrop = new DragDropView(xError, yError);
 		this.buttonPanel = new GamePlayButtonPanel();
 		this.currentLevel = 0;
+		this.rows = rows;
+		this.columns = columns;
+		System.out.println("Rows: "+rows+", Columns: "+columns);
 	}
-	
-	public Scene init(double gold, double lives, double level, List<String> imagePaths){
+
+	public Scene init(double gold, double lives, double level, List<String> imagePaths) {
 		this.numLevels = level;
 		createScene();
 		createGrid();
@@ -63,71 +76,125 @@ public class GameGUI {
 		initStatsDisplay(gold, lives, currentLevel);
 		return this.scene;
 	}
-	
+
+	public int getRows() {
+		return this.rows;
+	}
+
+	public int getColumns() {
+		return this.columns;
+	}
+
 	/**
-	 * MIGHT NOT BE NECESSARY
-	 * Update the current level in the stats display only
+	 * MIGHT NOT BE NECESSARY Update the current level in the stats display only
+	 * 
 	 * @param newLevel
 	 */
-	public void updateCurrentLevelStats(double newLevel){
+	public void updateCurrentLevelStats(double newLevel) {
 		this.currentLevel = newLevel;
 		this.statsDisplay.updateLevel(newLevel);
 	}
-	
-	public void setPath(List<int[]> path){
+
+	public void setPath(List<int[]> path) {
 		this.path = path;
 	}
-	
-	public GridGUI getGrid(){
+
+	public GridGUI getGrid() {
 		return this.grid;
 	}
-	
-	public DragDrop getDragDrop(){
+
+	public DragDrop getDragDrop() {
 		return this.dragDrop.getDragDrop();
 	}
-	
-	public void bindAnimationStart(EventHandler<ActionEvent> handle){
+
+	public void bindAnimationStart(EventHandler<ActionEvent> handle) {
 		this.buttonPanel.bindAnimationStart(handle);
 	}
-	
-	private void addButtonPanel(){
+
+	public List<Double[]> getDroppedTowerCoords() {
+		return getDragDrop().getCoordinates();
+	}
+
+	private void addButtonPanel() {
 		this.buttonPanel.init();
 		mainScreen.setTop(this.buttonPanel.getPane());
 	}
-	
-	private void createScene(){
+
+	private void createScene() {
 		this.scene = new Scene(mainScreen, SCENE_WIDTH, SCENE_HEIGHT);
-		this.scene.getStylesheets().add(this.getClass().getResource("/gameplayer/view/voogaStyle.css").toExternalForm());
+		this.scene.getStylesheets()
+				.add(this.getClass().getResource("/gameplayer/view/voogaStyle.css").toExternalForm());
 	}
-	
-	
-	private void createGrid(){
+
+	/**
+	 * Call this method when new level needs to be triggered
+	 * 
+	 * @param e
+	 */
+	public void newLevelPopUp(EventHandler<ActionEvent> e) {
+		this.grid.getGrid().getChildren().clear();
+		Button btn = graphics.createButton("Next level", e);
+		ImageView stuff = graphics.createImageView(graphics.createImage("newlevel.png"));
+		graphics.setImageViewParams(stuff, GridGUI.GRID_WIDTH, GridGUI.GRID_HEIGHT);
+		this.grid.getGrid().getChildren().add(stuff);
+		this.grid.getGrid().getChildren().add(btn);
+	}
+
+	private void createGrid() {
 		styleGrid();
 		this.mainScreen.setLeft(grid.getGrid());
 		grid.init();
 	}
-	
-	private void styleGrid(){
+
+	private void styleGrid() {
 		BorderPane.setAlignment(this.grid.getGrid(), Pos.CENTER);
-		//BorderPane.setMargin(this.grid.getGrid(), new Insets(10,50,10,0));
+		// BorderPane.setMargin(this.grid.getGrid(), new Insets(10,50,10,0));
 	}
-	
-	private void initDragDropPane(List<String> imagePaths){
+
+	private void initDragDropPane(List<String> imagePaths) {
 		dragDrop.setDragTarget(grid.getGrid());
-		String[] testImages = {"butterfly.png","kaneki.jpg","penguin.jpg"};//TODO: get rid of 
-		String[] testImages2 = {"butterfly.png","kaneki.jpg"};//TODO: get rid of 
 		mainScreen.setRight(dragDrop.getDragDropPane());
 		Tab tab = dragDrop.createTab("Blah test");
 		dragDrop.populateImageViewsToTab(tab, imagePaths);
 	}
-	
-	private void initStatsDisplay(double gold, double lives, double level){
-		this.statsDisplay = new StatsDisplay(gold,lives,level);
+
+	private void initStatsDisplay(double gold, double lives, double level) {
+		this.statsDisplay = new StatsDisplay(gold, lives, level);
 		statsDisplay.init();
 		this.mainScreen.setBottom(statsDisplay.getScorePane());
 	}
-	
-	public void updateStatsDisplay(double gold, double lives, double level){
+
+	public void updateStatsDisplay(double gold, double lives, double level) {
 		this.statsDisplay.updateLevelUI(gold, lives, level);
 	}
+
+	public void reRenderTower(List<IDrawable> redraw) {// should be interface of
+														// drawables
+		ArrayList<Double[]> towerCoords = (ArrayList<Double[]>) this.getDroppedTowerCoords();
+		int i = 0;
+
+		for (IDrawable entity : redraw) {
+			ImageView image = new ImageView(entity.getImage());
+			if (i<towerCoords.size() && towerCoords.get(i).length > 1) {
+				image.setX(towerCoords.get(i)[0]);
+				image.setY(towerCoords.get(i)[1]);
+				graphics.setImageViewParams(image, DragDropView.DEFENSIVEWIDTH, DragDropView.DEFENSIVEHEIGHT);
+				this.grid.getGrid().getChildren().add(image);
+				i++;
+			}
+		}
+	}
+
+	public void reRender(List<IDrawable> redraw) {// should be interface of
+													// drawables
+
+		for (IDrawable entity : redraw) {
+			ImageView image = new ImageView(entity.getImage());
+			image.setX(entity.getX());
+			image.setY(entity.getY());
+			graphics.setImageViewParams(image, DragDropView.DEFENSIVEWIDTH, DragDropView.DEFENSIVEHEIGHT);
+			this.grid.getGrid().getChildren().add(image);
+		}
+	}
+
 }

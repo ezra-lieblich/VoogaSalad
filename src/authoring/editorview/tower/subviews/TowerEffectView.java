@@ -4,22 +4,20 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ResourceBundle;
 import authoring.editorview.PhotoFileChooser;
-import authoring.editorview.tower.ITowerEditorView;
+import authoring.editorview.tower.ITowerSetView;
 import authoring.editorview.tower.TowerEditorViewDelegate;
-import authoring.editorview.tower.subviews.editorfields.TowerAbilityField;
+import authoring.editorview.tower.subviews.editorfields.TowerAbilityBank;
 import authoring.editorview.tower.subviews.editorfields.TowerBuyPriceField;
-import authoring.editorview.tower.subviews.editorfields.TowerChooseEnemyField;
-import authoring.editorview.tower.subviews.editorfields.TowerChooseWeaponField;
-import authoring.editorview.tower.subviews.editorfields.TowerFireRateField;
-import authoring.editorview.tower.subviews.editorfields.TowerFrequencyField;
+import authoring.editorview.tower.subviews.editorfields.TowerWeaponBank;
 import authoring.editorview.tower.subviews.editorfields.TowerImageView;
 import authoring.editorview.tower.subviews.editorfields.TowerNameField;
-import authoring.editorview.tower.subviews.editorfields.TowerRangeField;
 import authoring.editorview.tower.subviews.editorfields.TowerSellPriceField;
+import authoring.editorview.tower.subviews.editorfields.TowerSizeField;
 import authoring.editorview.tower.subviews.editorfields.TowerUnlockLevelField;
-import authoring.editorview.tower.subviews.editorfields.TowerUpgradeField;
+import authoring.editorview.tower.subviews.editorfields.TowerUpgradeBank;
 import authoring.utilityfactories.BoxFactory;
 import authoring.utilityfactories.ButtonFactory;
+import authoring.utilityfactories.DialogueBoxFactory;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
@@ -32,56 +30,51 @@ import javafx.stage.Stage;
  * @author Kayla Schulz
  *
  */
-public class TowerEffectView extends PhotoFileChooser implements ITowerEditorView {
+public class TowerEffectView extends PhotoFileChooser implements ITowerSetView {
 
     private TowerEditorViewDelegate delegate;
     private TowerNameField towerName;
-    private TowerFrequencyField towerFrequency;
     private TowerImageView towerImage;
-    private TowerRangeField towerRange;
     private TowerBuyPriceField towerBuyPrice;
-    private TowerFireRateField towerFireRate;
     private TowerSellPriceField towerSellPrice;
     private TowerUnlockLevelField towerUnlockLevel;
-    private TowerAbilityField towerAbility;
-    private TowerChooseEnemyField towerChooseEnemy;
-    private TowerChooseWeaponField towerChooseWeapon;
-    private TowerUpgradeField towerUpgrade;
+    private TowerAbilityBank towerAbility;
+    private TowerWeaponBank towerChooseWeapon;
+    private TowerUpgradeBank towerUpgrade;
+    private TowerSizeField towerSize;
 
     private VBox vbox;
     private ScrollPane completeView;
     private File chosenFile;
 
     private ResourceBundle labelsResource;
-    private final String TOWER_EFFECT_RESOURCE_PATH = "resources/GameAuthoringTower";
+    private ResourceBundle dialogueBoxResource;
 
     public TowerEffectView (TowerNameField towerName,
-                            TowerFrequencyField towerFrequency,
                             TowerImageView towerImage,
-                            TowerRangeField towerRange,
                             TowerBuyPriceField towerBuyPrice,
-                            TowerFireRateField towerFireRate,
                             TowerSellPriceField towerSellPrice,
                             TowerUnlockLevelField towerUnlockLevel,
-                            TowerAbilityField towerAbility,
-                            TowerChooseEnemyField towerChooseEnemy,
-                            TowerChooseWeaponField towerChooseWeapon,
-                            TowerUpgradeField towerUpgrade) {
+                            TowerAbilityBank towerAbility,
+                            TowerWeaponBank towerChooseWeapon,
+                            TowerUpgradeBank towerUpgrade,
+                            TowerSizeField towerSize,
+                            ResourceBundle labelsResource,
+                            ResourceBundle dialogueBoxResource) {
+
+        this.labelsResource = labelsResource;
+        this.dialogueBoxResource = dialogueBoxResource;
 
         this.towerName = towerName;
-        this.towerFrequency = towerFrequency;
         this.towerImage = towerImage;
-        this.towerRange = towerRange;
         this.towerBuyPrice = towerBuyPrice;
-        this.towerFireRate = towerFireRate;
         this.towerSellPrice = towerSellPrice;
         this.towerUnlockLevel = towerUnlockLevel;
         this.towerAbility = towerAbility;
-        this.towerChooseEnemy = towerChooseEnemy;
         this.towerChooseWeapon = towerChooseWeapon;
         this.towerUpgrade = towerUpgrade;
+        this.towerSize = towerSize;
 
-        labelsResource = ResourceBundle.getBundle(TOWER_EFFECT_RESOURCE_PATH);
         vbox = new VBox(10);
         completeView = new ScrollPane();
         completeView.setContent(vbox);
@@ -90,33 +83,29 @@ public class TowerEffectView extends PhotoFileChooser implements ITowerEditorVie
     }
 
     private void buildViewComponents () {
-        Node myImageView = towerImage.getInstanceAsNode();
-
-        vbox.getChildren().add(myImageView);
+        vbox.getChildren().add(towerImage.getInstanceAsNode());
         vbox.getChildren().add(ButtonFactory.makeButton(labelsResource.getString("Image"),
                                                         e -> {
                                                             try {
-                                                                selectFile("Select new tower image",
-                                                                           "Photos: ");
+                                                                selectFile(labelsResource
+                                                                        .getString("Image"),
+                                                                           labelsResource
+                                                                                   .getString("Photos"));
                                                             }
                                                             catch (IOException e1) {
-                                                                // TODO Fix this for better user
-                                                                // output
-                                                                e1.printStackTrace();
+                                                                DialogueBoxFactory
+                                                                        .createErrorDialogueBox(dialogueBoxResource
+                                                                                .getString("UnableToOpen"),
+                                                                                                dialogueBoxResource
+                                                                                                        .getString("TryAgain"));
                                                             }
                                                         }));
         vbox.getChildren()
                 .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Name"),
                                                            towerName.getInstanceAsNode()));
         vbox.getChildren()
-                .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Rate"),
-                                                           towerFireRate.getInstanceAsNode()));
-        vbox.getChildren()
-                .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Frequency"),
-                                                           towerFrequency.getInstanceAsNode()));
-        vbox.getChildren()
-                .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Range"),
-                                                           towerRange.getInstanceAsNode()));
+                .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Size"),
+                                                           towerSize.getInstanceAsNode()));
         vbox.getChildren()
                 .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("BuyPrice"),
                                                            towerBuyPrice.getInstanceAsNode()));
@@ -127,7 +116,6 @@ public class TowerEffectView extends PhotoFileChooser implements ITowerEditorVie
                 .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("UnlockLevel"),
                                                            towerUnlockLevel.getInstanceAsNode()));
         vbox.getChildren().add(towerAbility.getInstanceAsNode());
-        vbox.getChildren().add(towerChooseEnemy.getInstanceAsNode());
         vbox.getChildren().add(towerChooseWeapon.getInstanceAsNode());
         vbox.getChildren().add(towerUpgrade.getInstanceAsNode());
     }
@@ -140,6 +128,10 @@ public class TowerEffectView extends PhotoFileChooser implements ITowerEditorVie
     @Override
     public void openFileChooser (FileChooser chooseFile) throws IOException {
         chosenFile = chooseFile.showOpenDialog(new Stage());
+        if (chosenFile != null) {
+            //System.out.println(chosenFile.toURI().getPath());
+            delegate.onUserEnteredTowerImagePath(chosenFile.toURI().getPath());
+        }
     }
 
     @Override

@@ -1,52 +1,53 @@
 package engine.tower;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.BiConsumer;
+import java.util.stream.Collectors;
 import engine.AbstractTypeBuilder;
 import engine.ability.Ability;
 import engine.enemy.Enemy;
+import engine.observer.ObservableList;
+import engine.observer.ObservableListProperty;
 import engine.observer.ObservableObjectProperty;
 import engine.observer.ObservableProperty;
 import engine.tower.Tower;
 import engine.tower.TowerType;
 import engine.weapon.Weapon;
+import javafx.beans.property.DoubleProperty;
 
 public class TowerTypeBuilder extends AbstractTypeBuilder<Tower, TowerBuilder> implements TowerBuilder, TowerInitializer {
     
      public static final String DEFAULT_NAME = "New Tower";
-     public static final String DEFAULT_IMAGE_PATH = "Images.penguin.jpg";
+     public static final String DEFAULT_IMAGE_PATH = "Images/penguin.jpg";
      public static final double DEFAULT_SIZE = 1;
-     public static final List<Integer> DEFAULT_WEAPONS = Arrays.asList(new Integer[]{});
+
+     public static final List<Integer> DEFAULT_WEAPONS = Arrays.asList(new Integer[]{0});
      public static final List<Integer> DEFAULT_TARGETS = Arrays.asList(new Integer[]{});
      public static final List<Integer> DEFAULT_ABILITIES = Arrays.asList(new Integer[]{});
-     public static final int DEFAULT_UPGRADE = -1;
+     public static final List<Integer> DEFAULT_UPGRADES = Arrays.asList(new Integer[]{});
      public static final double DEFAULT_COST = 100;
      public static final double DEFAULT_SELL_AMOUNT = DEFAULT_COST / 2;
      public static final int DEFAULT_UNLOCK_LEVEL = 0;
      
-     private ObservableProperty<List<Integer>> weapons;
-     private ObservableProperty<List<Integer>> targets;
-     private ObservableProperty<List<Integer>> abilities;
-     private ObservableProperty<Integer> upgrade;
+     private ObservableList<Integer> weapons;
+     private ObservableList<Integer> targets;
+     private ObservableList<Integer> abilities;
+     private ObservableList<Integer> upgrades;
      private ObservableProperty<Double> cost;
      private ObservableProperty<Double> sellAmount;
      private ObservableProperty<Integer> unlockLevel;
      
      public TowerTypeBuilder() {
          super(DEFAULT_NAME, DEFAULT_IMAGE_PATH, DEFAULT_SIZE);
+         
      }
-    
-    @Override
-    public TowerBuilder buildUpgrade(Integer upgrade) {
-        this.upgrade.setProperty(upgrade);
-        return this;
-    }
-    
+     
     @Override
     public TowerBuilder buildWeapons(Integer... weapons) {
-        return buildWeapons(Arrays.asList(weapons));
+        return buildWeapons(Arrays.stream(weapons).collect(Collectors.toList()));
     }
     
     @Override
@@ -57,7 +58,7 @@ public class TowerTypeBuilder extends AbstractTypeBuilder<Tower, TowerBuilder> i
     
     @Override
     public TowerBuilder buildTargets(Integer... targets) {
-        return buildTargets(Arrays.asList(targets));
+        return buildWeapons(Arrays.stream(targets).collect(Collectors.toList()));
     }
     
     @Override
@@ -68,12 +69,23 @@ public class TowerTypeBuilder extends AbstractTypeBuilder<Tower, TowerBuilder> i
     
     @Override
     public TowerBuilder buildAbilities(Integer... abilities) {
-        return buildAbilities(Arrays.asList(abilities));
+        return buildWeapons(Arrays.stream(abilities).collect(Collectors.toList()));
     }
     
     @Override
     public TowerBuilder buildAbilities(List<Integer> abilities) {
         this.abilities.setProperty(abilities);
+        return this;
+    }
+    
+    @Override
+    public TowerBuilder buildUpgrades(Integer... upgrades) {
+        return buildWeapons(Arrays.stream(upgrades).collect(Collectors.toList()));
+    }
+    
+    @Override
+    public TowerBuilder buildUpgrades(List<Integer> upgrades) {
+        this.upgrades.setProperty(upgrades);
         return this;
     }
     
@@ -101,23 +113,23 @@ public class TowerTypeBuilder extends AbstractTypeBuilder<Tower, TowerBuilder> i
     }
 
     @Override
-    public ObservableProperty<List<Integer>> getWeapons () {
+    public ObservableList<Integer> getWeapons () {
         return weapons;
     }
 
     @Override
-    public ObservableProperty<List<Integer>> getTargets () {
+    public ObservableList<Integer> getTargets () {
         return targets;
     }
 
     @Override
-    public ObservableProperty<List<Integer>> getAbilities () {
+    public ObservableList<Integer> getAbilities () {
         return abilities;
     }
     
     @Override
-    public ObservableProperty<Integer> getUpgrade () {
-        return upgrade;
+    public ObservableList<Integer> getUpgrades () {
+        return upgrades;
     }
 
     @Override
@@ -137,10 +149,10 @@ public class TowerTypeBuilder extends AbstractTypeBuilder<Tower, TowerBuilder> i
 
     @Override
     protected void restoreTypeDefaults () {
-        this.weapons = new ObservableObjectProperty<List<Integer>>(DEFAULT_WEAPONS);
-        this.targets = new ObservableObjectProperty<List<Integer>>(DEFAULT_TARGETS);
-        this.abilities = new ObservableObjectProperty<List<Integer>>(DEFAULT_ABILITIES);
-        this.upgrade = new ObservableObjectProperty<Integer>(DEFAULT_UNLOCK_LEVEL);
+        this.weapons = new ObservableListProperty<Integer>(DEFAULT_WEAPONS);
+        this.targets = new ObservableListProperty<Integer>(DEFAULT_TARGETS);
+        this.abilities = new ObservableListProperty<Integer>(DEFAULT_ABILITIES);
+        this.upgrades = new ObservableListProperty<Integer>(DEFAULT_UPGRADES);
         this.cost = new ObservableObjectProperty<Double>(DEFAULT_COST);
         this.sellAmount = new ObservableObjectProperty<Double>(DEFAULT_SELL_AMOUNT);
         this.unlockLevel = new ObservableObjectProperty<Integer>(DEFAULT_UNLOCK_LEVEL);
@@ -168,6 +180,25 @@ public class TowerTypeBuilder extends AbstractTypeBuilder<Tower, TowerBuilder> i
         unlockLevel.addListener(listener);
         return this;
     }
+
+    @Override
+    public TowerBuilder addWeaponsListener (BiConsumer<List<Integer>, List<Integer>> listener) {
+        weapons.addListener(listener);
+        return this;
+    }
+
+    @Override
+    public TowerBuilder addAbilitiesListener (BiConsumer<List<Integer>, List<Integer>> listener) {
+        abilities.addListener(listener);
+        return this;
+    }
+
+    @Override
+    public TowerBuilder addUpgradesListener (BiConsumer<List<Integer>, List<Integer>> listener) {
+        upgrades.addListener(listener);
+        return this;
+    }
+    
 
     
 }

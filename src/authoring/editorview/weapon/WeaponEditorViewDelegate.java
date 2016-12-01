@@ -12,12 +12,18 @@ public interface WeaponEditorViewDelegate {
 
     public void onUserEnteredWeaponImage (String weaponImagePath);
 
-    public void onUserEnteredWeaponDamage (String weaponDamage);
-
     public void onUserEnteredWeaponName (String weaponName);
 
-    public void onUserEnteredWeaponPath (String weaponPath);
+    public void onUserEnteredWeaponTrajectory (String weaponTrajectory);
+
+    public void onUserEnteredNewTargetEnemy (String enemyID);
 
     public void onUserPressedCreateWeapon ();
+
+    public void onUserPressedDeleteWeapon ();
+
+    public void onUserEnteredWeaponSize (String weaponSize);
+    
+    public void onUserSelectedWeapon (int weaponID);
 
 }

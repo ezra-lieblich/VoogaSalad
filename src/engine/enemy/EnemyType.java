@@ -1,105 +1,76 @@
 package engine.enemy;
 
-import java.util.ResourceBundle;
 import engine.AbstractType;
-import engine.TypeInitializer;
+import engine.observer.ObservableProperty;
 
 public class EnemyType extends AbstractType implements Enemy {
 
-    private double speed;
-	private double health;
-	private double damage;
-	private double points;
-	private double money;
-	private String collisionEffect;
+    private ObservableProperty<Double> speed;
+	private ObservableProperty<Double> health;
+	private ObservableProperty<Double> damage;
+	private ObservableProperty<Double> score;
+	private ObservableProperty<Double> money;
+	private ObservableProperty<String> collisionEffect;
 
 	
-    protected EnemyType (TypeInitializer typeBuilder) {
-        super(typeBuilder);
-        // TODO Auto-generated constructor stub
+    protected EnemyType (EnemyInitializer enemyInitializer) {
+        super(enemyInitializer);
+        this.speed = enemyInitializer.getSpeed();
+        this.health = enemyInitializer.getHealth();
+        this.damage = enemyInitializer.getDamage();
+        this.score = enemyInitializer.getScore();
+        this.money = enemyInitializer.getMoney();
+        this.collisionEffect = enemyInitializer.getCollisionEffect();
     }
 	
 	
-//	public EnemyType() {
-//		//possible hold a resource file that has default values for an enemy
-//        super.setName(super.getResources("EnemyTypeName"));
-//		super.setImagePath(super.getResources("EnemyTypeImage"));
-//		speed = Double.parseDouble(super.getResources("EnemyTypeSpeed"));
-//        health = Double.parseDouble(super.getResources("EnemyTypeHealth"));
-//		damage = Double.parseDouble(super.getResources("EnemyTypeDamage"));
-//        points = Double.parseDouble(super.getResources("EnemyTypePoints"));
-//        money = Double.parseDouble(super.getResources("EnemyTypeMoney"));
-//        collisionEffect = super.getResources("EnemyTypeCollisionEffect");
-////		speed = 5;
-////		health = 10;
-////		points = 50;
-////		money = 50;
-////        collisionEffect = "normal";
-//
-//	}
-//	
-//	public EnemyType(String name, String imageLocation, double speed, 
-//			double health, double points, double money, String collisionEffect){
-//		
-//		super.setName(name);
-//		super.setImagePath(imageLocation);
-//		this.speed = speed; 
-//		this.health = health; 
-//		this.points = points; 
-//		this.money = money; 
-//		this.collisionEffect = collisionEffect; 
-//		
-//	}
-	
-
-	
 	@Override
     public double getSpeed() {
-		return speed;
+		return speed.getProperty();
 	}
 	@Override
     public void setSpeed(double speed) {
-		this.speed = speed;
+		this.speed.setProperty(speed);
 	}
 	@Override
     public double getHealth() {
-		return health;
+		return health.getProperty();
 	}
 	@Override
     public void setHealth(double health) {
-		this.health = health;
+		this.health.setProperty(health);
 	}
 	@Override
     public double getDamage(){
-		return damage;
+		return damage.getProperty();
 	}
 	@Override
     public void setDamage(double damage) {
-		this.damage = damage;
+		this.damage.setProperty(damage);
 	}
 	@Override
-    public double getPoints() {
-		return points;
+    public double getScore() {
+		return score.getProperty();
 	}
 	@Override
-    public void setPoints(double points) {
-		this.points = points;
+    public void setScore(double score) {
+		this.score.setProperty(score); 
 	}
 	@Override
     public double getMoney() {
-		return money;
+		return money.getProperty();
 	}
 	@Override
     public void setMoney(double money) {
-		this.money = money;
+		this.money.setProperty(money);
 	}
 	@Override
     public String getCollisionEffect() {
-		return collisionEffect;
+		return collisionEffect.getProperty();
 	}
 	@Override
     public void setCollisionEffect(String collisionEffect) {
-		this.collisionEffect = collisionEffect;
+		this.collisionEffect.setProperty(collisionEffect);
 	}
 	
 }

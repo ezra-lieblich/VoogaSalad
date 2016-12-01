@@ -1,13 +1,10 @@
 package authoring.editorview.tower.subviews.editorfields;
 
-import java.awt.image.BufferedImage;
-import java.io.IOException;
+import java.io.File;
 import java.util.ResourceBundle;
-import javax.imageio.ImageIO;
-import authoring.ErrorBox;
-import authoring.editorview.tower.ITowerEditorView;
+import authoring.editorview.tower.ITowerSetView;
 import authoring.editorview.tower.TowerEditorViewDelegate;
-import javafx.embed.swing.SwingFXUtils;
+import authoring.utilityfactories.DialogueBoxFactory;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -20,21 +17,25 @@ import javafx.scene.image.ImageView;
  *
  */
 
-public class TowerImageView implements ITowerEditorView {
+public class TowerImageView implements ITowerSetView {
 
     private TowerEditorViewDelegate delegate;
     private String imagePath;
     private ImageView towerImage;
+    private ResourceBundle labelsResource;
 
-    private static final String RESOURCE_FILE_NAME = "resources/GameAuthoringTower";
-    private ResourceBundle towerResources = ResourceBundle.getBundle(RESOURCE_FILE_NAME);
+    private final int CHARACTER_SIZE = 250;
 
-    public TowerImageView () throws IOException {
-        towerImage = loadTowerImage();
+    public TowerImageView (ResourceBundle labelsResource) {
+        this.labelsResource = labelsResource;
+        towerImage = new ImageView();
+        towerImage.setFitHeight(CHARACTER_SIZE);
+        towerImage.setFitWidth(CHARACTER_SIZE);
     }
 
     public void updateTowerImagePath (String imagePath) {
         this.imagePath = imagePath;
+        loadTowerImage();
     }
 
     @Override
@@ -42,24 +43,19 @@ public class TowerImageView implements ITowerEditorView {
         this.delegate = delegate;
     }
 
-    private ImageView loadTowerImage () throws IOException {
-        BufferedImage imageRead;
-        ImageView myImageView = new ImageView();
+    private void loadTowerImage () {
         try {
-            imageRead = ImageIO.read(getClass().getClassLoader().getResourceAsStream(imagePath));
-            Image image2 = SwingFXUtils.toFXImage(imageRead, null);
-            myImageView.setImage(image2);
-            delegate.onUserEnteredTowerImagePath(imagePath);
+            File file = new File(imagePath);
+            Image image = new Image(file.toURI().toString());
+            towerImage.setImage(image);
         }
         catch (Exception e) {
-            imageRead =
-                    ImageIO.read(getClass().getClassLoader()
-                            .getResourceAsStream(towerResources.getString("DefaultImagePath")));
-            Image image2 = SwingFXUtils.toFXImage(imageRead, null);
-            myImageView.setImage(image2);
-            //ErrorBox.createErrorBox("Unable to load tower image");
+            Image image2 =
+                    new Image(getClass().getClassLoader().getResourceAsStream("questionmark.png"));
+            towerImage.setImage(image2);
+            DialogueBoxFactory.createErrorDialogueBox("Could not load file",
+                                                      "Try new photo");
         }
-        return myImageView;
     }
 
     @Override

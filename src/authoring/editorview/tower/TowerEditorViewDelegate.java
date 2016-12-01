@@ -10,13 +10,19 @@ public interface TowerEditorViewDelegate {
 
     public void onUserPressedCreateNewTower ();
 
+    public void onUserPressedDeleteTower ();
+
     public void onUserEnteredTowerAbility (String towerAbility);
 
-    public void onUserEnteredTowerChosenEnemy (String towerChosenEnemy);
+    public void onUserDeletedTowerAbility (String towerAbility);
 
     public void onUserEnteredTowerChosenWeapon (String towerChosenWeapon);
 
+    public void onUserDeletedTowerWeapon (String towerChosenWeapon);
+
     public void onUserEnteredTowerUpgrade (String towerUpgrade);
+
+    public void onUserDeletedTowerUpgrade (String towerUpgrade);
 
     public void onUserEnteredTowerName (String towerName);
 
@@ -28,12 +34,8 @@ public interface TowerEditorViewDelegate {
 
     public void onUserEnteredTowerUnlockLevel (String towerLevel);
 
-    public void onUserEnteredTowerFireRate (String towerFireRate);
-
-    // TODO: Does tower need either of the below methods?
-
-    public void onUserEnteredTowerFrequency (String towerFrequency);
-
-    public void onUserEnteredTowerRange (String towerRange);
+    public void onUserEnteredTowerSize (String towerSize);
+    
+    public void onUserSelectedTower (int towerID);
 
 }

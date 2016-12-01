@@ -2,15 +2,22 @@ package gameplayer.controller;
 
 import gameplayer.loader.GamePlayerFactory;
 import gameplayer.loader.XMLParser;
+import gameplayer.main.main;
+import gameplayer.model.Cell;
 import gameplayer.model.Enemy;
-import gameplayer.model.EnemyModel;
+import gameplayer.model.EnemyManager;
 import gameplayer.model.GamePlayModel;
+import gameplayer.model.IDrawable;
+import gameplayer.model.Tower;
 import gameplayer.view.GameGUI;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Application;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -21,15 +28,15 @@ import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Queue;
+import java.util.Random;
 
-import engine.tower.Tower;
 
 public class GamePlayerController implements Observer {
 
 	public static final int FRAMES_PER_SECOND = 60;
-	public static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
+	public static final int MILLISECOND_DELAY = 50;
 	public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
-
+	
 	private GamePlayerFactory loader;
 	private GameGUI view;
 	private Scene mainScene;
@@ -37,10 +44,20 @@ public class GamePlayerController implements Observer {
 
 	private Timeline animation;
 	private EnemyController enemyController;
-	private EnemyModel enemyModel;
 	private DragDropController dropController;
+	
+	private EnemyManager enemyManager;
+
+	private double oldLevel;
+
 
 	private Queue<Enemy> currentWave;
+	
+	private HashMap<String, Integer> towerToId;
+	
+	
+
+
 
 	public GamePlayerController() {
 		// use xml parser to create classes.
@@ -48,10 +65,23 @@ public class GamePlayerController implements Observer {
 
 		checkIfValid();
 		this.model = new GamePlayModel(this.loader);
-		this.enemyModel = new EnemyModel(this.model);
+		this.enemyManager = new EnemyManager(this.model);
 		this.model.addObserver(this);
+		this.oldLevel = 0;
+		this.towerToId = new HashMap<String, Integer>();
+		populateTowerToId();
 	}
 
+	private void populateTowerToId(){
+		HashMap<Integer, engine.tower.Tower> mapping = this.model.getAllTowerTypes();
+		for (int key:mapping.keySet()){
+			this.towerToId.put(mapping.get(key).getImagePath(),key);
+		}
+	}
+	
+	public HashMap<String, Integer> getTowerImageMap(){
+		return this.towerToId;
+	}
 	/**
 	 * Checks to see if XML is valid If not, it will not create a game and it
 	 * will throw an error
@@ -69,34 +99,7 @@ public class GamePlayerController implements Observer {
 		System.out.println("Settings: " + settings);
 		//initGUIDummy(settings);
 		initGUI();
-		this.enemyController = new EnemyController(this.enemyModel, this.view.getGrid());
-	}
-
-	// For testing only
-	@Deprecated
-	private void initGUIDummy(HashMap<String, Double> settings) {
-		int[] dimensions = model.getDimension();
-		int rows = dimensions[0];
-		int cols = dimensions[1];
-		this.view = new GameGUI(rows, cols); // just for testing, should be
-												// replaced by block above, 5
-												// rows, 5 columns
-		ArrayList<String> towerImages = new ArrayList<String>();
-		towerImages.add("kaneki.jpg");
-		towerImages.add("penguin.jpg");
-		this.mainScene = view.init(settings.get("gold"), settings.get("lives"), settings.get("numLevels"), towerImages);
-		System.out.println("Start point: " + model.getGrid().getStartPoint());
-		this.view.getGrid().populatePath(model.getGrid().getStartPoint()); // TODO:
-																			// need
-																			// to
-																			// get
-																			// grid
-																			// from
-																			// model
-																			// to
-																			// get
-																			// starting
-																			// cell
+		//this.enemyController = new EnemyController(this.enemyManager, this.view.getGrid());
 	}
 
 	private void initGUI() {
@@ -109,46 +112,20 @@ public class GamePlayerController implements Observer {
 		this.view.bindAnimationStart(e -> {
 			// TODO: initialize animation
 			this.startAnimation();
-
-			// TESTING MANUALLY ADDING IN ONE ENEMY
-			this.currentWave = this.model.getPackOfEnemyComing();
-			Enemy test = currentWave.poll();
-			test.setCurrentCell(this.model.getGrid().getCell(0, 0));
-			System.out.println(test.getCurrentCell().getX());
-			this.enemyModel.spawnEnemy(currentWave.poll());
-			List<Enemy> thingsOnGrid = this.enemyModel.getEnemyOnGrid();
-			System.out.println(thingsOnGrid.size());
-			for (int i = 0; i < thingsOnGrid.size(); i++) {
-				System.out.println(i + ": " + thingsOnGrid.get(i).getX());
-			}
-			this.enemyModel.update();
-			System.out.println("**********");
-			for (int i = 0; i < thingsOnGrid.size(); i++) {
-				System.out.println(i + ": " + thingsOnGrid.get(i).getX());
-			}
-
 		});
 		System.out.println("Tower images: " + getTowerImages());
 		this.mainScene = view.init(this.model.getGold(), this.model.getLife(), this.model.getCurrentLevel(),
 				getTowerImages());
-		this.view.getGrid().populatePath(model.getGrid().getStartPoint()); // TODO:
-																			// need
-																			// to
-																			// get
-																			// grid
-																			// from
-																			// model
-																			// to
-																			// get
-																			// starting
-																			// cell
-		this.dropController = new DragDropController(this.view, this.model);
+		this.view.getGrid().populatePath(model.getGrid().getStartPoint()); 
+		this.dropController = new DragDropController(this.view, this.model,this.getTowerImageMap());
 	}
-
+	
 	private ArrayList<String> getTowerImages() {
 		ArrayList<String> towerImages = new ArrayList<String>();
-		HashMap<Integer, Tower> towers = this.loader.getTowers();
-		for (Tower tower : towers.values()) {
+
+		HashMap<Integer, engine.tower.Tower> towers = this.loader.getTowers(); //fix naming
+		for (engine.tower.Tower tower : towers.values()) { //fix naming
+
 			towerImages.add(tower.getImagePath());
 		}
 		return towerImages;
@@ -165,10 +142,22 @@ public class GamePlayerController implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		if (o instanceof GamePlayModel) {
+			double newLevel = ((GamePlayModel) o).getCurrentLevel();
 			// update level in display
 			this.view.updateStatsDisplay(((GamePlayModel) o).getGold(), ((GamePlayModel) o).getLife(),
 					((GamePlayModel) o).getCurrentLevel());
 			this.view.updateCurrentLevelStats(((GamePlayModel) o).getCurrentLevel());
+			if (this.oldLevel != newLevel){
+				//test level
+				/*
+				this.oldLevel = newLevel;
+				this.view.newLevelPopUp(e->{
+					System.out.println("New level");
+					this.view.getGrid().getGrid().getChildren().clear();
+					//do something to trigger new level here!
+				});
+				*/
+			}
 		}
 		/*
 		 * GamePlayModel model = (GamePlayModel) o; if (model.getLife() == 0) {
@@ -183,18 +172,82 @@ public class GamePlayerController implements Observer {
 	 */
 
 	private void startAnimation() {
+		this.model.getGrid().printGrid();
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> {
-
+			((Pane) this.view.getGrid().getGrid()).getChildren().clear(); //clear everything
+			this.currentWave = this.model.getPackOfEnemyComing();
+			
+			//trying to get this to work but null pointer
+			
+			while(currentWave.size()!=0){
+				Enemy enemy = currentWave.poll();
+				this.enemyManager.spawnEnemy(enemy);
+			}
+			
+			this.enemyManager.update(); 
+			redrawEverything();
+/*
+			List<Enemy>enemyRedraw = this.enemyManager.getEnemyOnGrid(); 
+			List<Tower>towerRedraw = this.model.getTowerOnGrid();
+			List<IDrawable> reEnemyDraw = convertEnemyDrawable(enemyRedraw);//probably need to add bullets here too
+			List<IDrawable> reTowerDraw = convertTowerDrawable(towerRedraw);
+			
+			this.view.reRender(reEnemyDraw);
+			this.view.reRenderTower(reTowerDraw);
+			
+			this.view.getGrid().populatePath(this.model.getGrid().getStartPoint());
+			*/
 		});
 		Timeline animation = new Timeline();
 		animation.setCycleCount(Timeline.INDEFINITE);
 		animation.getKeyFrames().add(frame);
-		// animation.play();
 		this.animation = animation;
+		animation.play();
 	}
-
+	
+	private void redrawEverything(){
+		//redraw path
+		//this.view.getGrid().populatePath(this.model.getGrid().getStartPoint());
+		List<Enemy>enemyRedraw = this.enemyManager.getEnemyOnGrid(); 
+		List<Tower>towerRedraw = this.model.getTowerOnGrid();
+		List<IDrawable> reEnemyDraw = convertEnemyDrawable(enemyRedraw);//probably need to add bullets here too
+		List<IDrawable> reTowerDraw = convertTowerDrawable(towerRedraw);
+		System.out.println("List of enemies?");
+		System.out.println(enemyRedraw);
+		this.view.reRender(reEnemyDraw);
+		this.view.reRenderTower(reTowerDraw);
+	}
+	
 	public Timeline getTimeline() {
 		return this.animation;
 	}
+	
+	private List<IDrawable> convertToDrawable(List<Enemy> enemies, List<Tower>towers){
+		ArrayList<IDrawable> ret = new ArrayList<>(); 
+		for(Enemy e: enemies){
+			ret.add(e);
+		}
+		for(Tower t: towers){
+			ret.add(t);
+		}
+		return ret; 
+	}
+	
+	private List<IDrawable> convertEnemyDrawable(List<Enemy> enemies){
+		ArrayList<IDrawable> ret = new ArrayList<>(); 
+		for(Enemy e: enemies){
+			ret.add(e);
+		}
+		return ret; 
+	}
+	
+	private List<IDrawable> convertTowerDrawable(List<Tower>towers){
+		ArrayList<IDrawable> ret = new ArrayList<>(); 
+		for(Tower t: towers){
+			ret.add(t);
+		}
+		return ret; 
+	}
+
 
 }

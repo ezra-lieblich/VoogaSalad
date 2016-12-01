@@ -9,6 +9,8 @@ import authoring.toolbar.ToolbarFactory;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 
@@ -23,13 +25,14 @@ public class AuthoringView implements IAuthoringView {
     private static final int SIZE = 700;
     private BorderPane authoringView;
     private Pane editorView;
+    private ScrollPane mainEditorView;
 
     public AuthoringView (int editorWidth, int edit) {
         this.root = new Group();
         this.scene = new Scene(root, SIZE, SIZE);
-        this.toolbar = ToolbarFactory.build(SIZE, SIZE / 20);
+        this.toolbar = ToolbarFactory.build(SIZE, SIZE);
         this.authoringView = new BorderPane();
-        
+
         root.getChildren().add(authoringView);
         initScene();
     }
@@ -41,14 +44,16 @@ public class AuthoringView implements IAuthoringView {
 
     private void initScene () {
         authoringView.setTop(toolbar.getInstanceAsNode());
-        authoringView.setCenter(editorView);
-        
-        
+        authoringView.setCenter(mainEditorView);
+
     }
 
     private void createEditorView (Node editor) {
         editorView = new Pane();
-        editorView.setPrefHeight(SIZE);
+        mainEditorView = new ScrollPane();
+        mainEditorView.setVbarPolicy(ScrollBarPolicy.ALWAYS);
+        mainEditorView.setPrefHeight(SIZE * 19 / 20);
+        editorView.setPrefHeight(SIZE * 19 / 20);
         editorView.setPrefWidth(SIZE);
 
     }
@@ -64,9 +69,10 @@ public class AuthoringView implements IAuthoringView {
             createEditorView(editor);
         }
 
+        mainEditorView.setContent(editorView);
         editorView.getChildren().clear();
         editorView.getChildren().add(editor);
-        authoringView.setCenter(editorView);
+        authoringView.setCenter(mainEditorView);
     }
 
     @Override

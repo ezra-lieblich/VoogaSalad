@@ -30,7 +30,7 @@ public class GridGUI {
 	private GraphicsLibrary graphicsLib;
 	private List<int[]> path;
 
-	public static final String TEST_URL = "https://images.designtrends.com/wp-content/uploads/2016/03/30060819/Elegant-Night-Stay-Anime-Background.jpg"; // TODO:
+	public static final String TEST_URL = "http://vignette2.wikia.nocookie.net/shingekinokyojin/images/7/77/Walls.png/revision/latest?cb=20130520140640"; // TODO:
 																																							// dummy
 																																							// url
 
@@ -100,14 +100,14 @@ public class GridGUI {
 	}
 
 	public void populatePath(Cell startingCell){
-		//ImageView pathImage = graphicsLib.createImageView(graphicsLib.createImage("kaneki.jpg")); //TODO: replace with whatever shows the path
+		//System.out.println("populate path!");
 		Cell current = startingCell;
-		System.out.println("starting cell x: "+current.getX()+"; y: "+current.getY());
+		//System.out.println("starting cell x: "+current.getX()+"; y: "+current.getY());
 		while (current != null){
 			ImageView pathImage = graphicsLib.createImageView(graphicsLib.createImage("kaneki.jpg"));
 			double x =current.getX();
 			double y = current.getY();
-			System.out.println("path cell x: "+x+"; y: "+y);
+			//System.out.println("path cell x: "+x+"; y: "+y);
 			graphicsLib.setImageViewParams(pathImage, x*cellWidth, y*cellHeight,cellWidth, cellHeight);
 			this.grid.getChildren().add(pathImage);
 			current = current.getNext();
