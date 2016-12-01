@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import gameplayer.model.IDrawable;
+import gameplayer.model.Tower;
 import gameplayer.view.buttonPanel.ButtonPanel;
 import gameplayer.view.buttonPanel.GamePlayButtonPanel;
 import gameplayer.view.helper.GraphicsLibrary;
@@ -179,6 +180,11 @@ public class GameGUI {
 				image.setY(towerCoords.get(i)[1]);
 				graphics.setImageViewParams(image, DragDropView.DEFENSIVEWIDTH, DragDropView.DEFENSIVEHEIGHT);
 				this.grid.getGrid().getChildren().add(image);
+				if(entity instanceof Tower){
+					((Tower) entity).getTowerInfo().setLayoutX(image.getX());
+					((Tower) entity).getTowerInfo().setLayoutY(image.getY() + image.getFitHeight());
+					this.grid.getGrid().getChildren().add(((Tower) entity).getTowerInfo());
+				}
 				i++;
 			}
 		}

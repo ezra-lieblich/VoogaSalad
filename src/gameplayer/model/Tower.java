@@ -2,6 +2,8 @@ package gameplayer.model;
 
 import java.util.ArrayList;
 
+import javafx.scene.control.Label;
+
 public class Tower implements IDrawable {
 
 	private double cost;
@@ -10,6 +12,8 @@ public class Tower implements IDrawable {
 	private int ID, type; // towerType
 	private double xCoordinate;
 	private double yCoordinate;	
+	private Label towerInfo;
+	private boolean showInfo;
 	
 	
 	public Tower (int type, int ID, double cost, ArrayList<Gun> guns, String image, String name){
@@ -17,6 +21,10 @@ public class Tower implements IDrawable {
 		this.guns = guns;
 		this.image = image;
 		this.ID = ID;
+		this.showInfo = true;
+		this.towerInfo = new Label("Type: " + type + "\n ID: " + ID + "\n Cost: " + 
+				cost + "\n Image: " + image + "\n Name: " + name);
+		this.towerInfo.setVisible(showInfo);
 	}
 
 	/*
@@ -73,6 +81,15 @@ public class Tower implements IDrawable {
 
 	ArrayList<Gun> getGuns() {
 		return this.guns;
+	}
+	
+	public void toggleInfoVisibility(){
+		this.showInfo = !showInfo;
+		this.towerInfo.setVisible(showInfo);
+	}
+
+	public Label getTowerInfo() {
+		return towerInfo;
 	}
 
 }

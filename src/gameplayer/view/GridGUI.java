@@ -96,7 +96,7 @@ public class GridGUI {
 	private void addTowerToGrid(Tower tower, int row, int col) {
 		ImageView towerImage = graphicsLib.createImageView(graphicsLib.createImage(tower.getImage()));
 		graphicsLib.setImageViewParams(towerImage, cellWidth * col, cellHeight * row, cellWidth, cellHeight);
-		this.grid.getChildren().add(towerImage);
+		this.grid.getChildren().addAll(towerImage, tower.getTowerInfo());
 	}
 
 	public void populatePath(Cell startingCell){
