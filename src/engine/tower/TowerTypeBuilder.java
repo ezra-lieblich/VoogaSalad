@@ -13,6 +13,8 @@ import engine.observer.ObservableList;
 import engine.observer.ObservableListProperty;
 import engine.observer.ObservableObjectProperty;
 import engine.observer.ObservableProperty;
+import engine.path.Coordinate;
+import engine.path.GridCoordinate;
 import engine.tower.Tower;
 import engine.tower.TowerType;
 import engine.weapon.Weapon;
@@ -23,10 +25,11 @@ public class TowerTypeBuilder extends AbstractTypeBuilder<Tower, TowerBuilder> i
      public static final String DEFAULT_NAME = "New Tower";
      public static final String DEFAULT_IMAGE_PATH = "Images/penguin.jpg";
      public static final double DEFAULT_SIZE = 1;
-     public static final List<Integer> DEFAULT_WEAPONS = Arrays.stream(new Integer[]{}).collect(Collectors.toList());
-     public static final List<Integer> DEFAULT_TARGETS = Arrays.stream(new Integer[]{}).collect(Collectors.toList());
-     public static final List<Integer> DEFAULT_ABILITIES = Arrays.stream(new Integer[]{}).collect(Collectors.toList());
-     public static final List<Integer> DEFAULT_UPGRADES = Arrays.stream(new Integer[]{}).collect(Collectors.toList());
+     //public static final List<Integer> DEFAULT_WEAPONS = Arrays.stream(new Integer[]{}).collect(Collectors.toList());
+     public static final Integer[] DEFAULT_WEAPONS = new Integer[]{0};
+     public static final Integer[] DEFAULT_TARGETS = new Integer[]{};
+     public static final Integer[] DEFAULT_ABILITIES = new Integer[]{};
+     public static final Integer[] DEFAULT_UPGRADES = new Integer[]{};
      public static final double DEFAULT_COST = 100;
      public static final double DEFAULT_SELL_AMOUNT = DEFAULT_COST / 2;
      public static final int DEFAULT_UNLOCK_LEVEL = 0;
@@ -147,10 +150,11 @@ public class TowerTypeBuilder extends AbstractTypeBuilder<Tower, TowerBuilder> i
 
     @Override
     protected void restoreTypeDefaults () {
-        this.weapons = new ObservableListProperty<Integer>(DEFAULT_WEAPONS);
-        this.targets = new ObservableListProperty<Integer>(DEFAULT_TARGETS);
-        this.abilities = new ObservableListProperty<Integer>(DEFAULT_ABILITIES);
-        this.upgrades = new ObservableListProperty<Integer>(DEFAULT_UPGRADES);
+        //this.weapons = new ObservableListProperty<Integer>(DEFAULT_WEAPONS);
+        this.weapons = new ObservableListProperty<Integer>(Arrays.stream(DEFAULT_WEAPONS).collect(Collectors.toList()));
+        this.targets = new ObservableListProperty<Integer>(Arrays.stream(DEFAULT_TARGETS).collect(Collectors.toList()));
+        this.abilities = new ObservableListProperty<Integer>(Arrays.stream(DEFAULT_ABILITIES).collect(Collectors.toList()));
+        this.upgrades = new ObservableListProperty<Integer>(Arrays.stream(DEFAULT_UPGRADES).collect(Collectors.toList()));
         this.cost = new ObservableObjectProperty<Double>(DEFAULT_COST);
         this.sellAmount = new ObservableObjectProperty<Double>(DEFAULT_SELL_AMOUNT);
         this.unlockLevel = new ObservableObjectProperty<Integer>(DEFAULT_UNLOCK_LEVEL);

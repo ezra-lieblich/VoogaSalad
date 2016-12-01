@@ -1,4 +1,4 @@
-package authoring;
+package authoring.main;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -8,7 +8,6 @@ import authoring.editorview.level.LevelEditorViewController;
 import authoring.editorview.path.PathEditorViewController;
 import authoring.editorview.tower.TowerEditorViewController;
 import authoring.editorview.weapon.WeaponEditorViewController;
-import authoring.main.AuthoringController;
 import authoring.view.AuthoringViewController;
 import authoring.view.IAuthoringView;
 import javafx.application.Application;
@@ -30,14 +29,15 @@ public class tempmain extends Application {
     @Override
     public void start (Stage s) throws IOException {
 
-        ManagerTypeMediator mainMediator = new ManagerTypeMediator();
+//        ManagerTypeMediator mainMediator = new ManagerTypeMediator();
+//
+//        AuthoringViewController mainVC = new AuthoringViewController(SIZE, SIZE);
+//        IAuthoringView mainView = mainVC.getView();
+//
+//        this.createManagersAndControllers(mainMediator, mainVC);
+    	AuthoringController generalController = new AuthoringController(SIZE);
 
-        AuthoringViewController mainVC = new AuthoringViewController(SIZE, SIZE);
-        IAuthoringView mainView = mainVC.getView();
-
-        this.createManagersAndControllers(mainMediator, mainVC);
-
-        Scene scene = mainView.getScene();
+        Scene scene = generalController.getScene();
         s.setTitle(TITLE);
         s.setScene(scene);
         s.setResizable(true);

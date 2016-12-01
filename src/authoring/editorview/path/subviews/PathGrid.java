@@ -19,8 +19,8 @@ public class PathGrid {
 	
 	private int gridHeight;
 	private int gridWidth;
-	private int numColumns;
-	private int numRows;
+	private int numColumns = -1;
+	private int numRows = -1;
 	private int cellHeight;
 	private int cellWidth;
 	private int activePathID;
@@ -74,11 +74,18 @@ public class PathGrid {
 	public void setNumColumns(int numColumns){
 		cellWidth = gridWidth/numColumns;
 		this.numColumns = numColumns;
+		if (numRows > 0 && pathCoordinates != null){
+			redrawPath();
+		}
+		
 	}
 	
 	public void setNumRows(int numRows){
 		cellHeight = gridHeight/numRows;
-		this.numRows = numRows;		
+		this.numRows = numRows;	
+		if (numColumns > 0 && pathCoordinates != null){
+			redrawPath();
+		}
 	}
 	
 	
@@ -116,6 +123,15 @@ public class PathGrid {
 	public void clearPath(){
 		gridRoot.getChildren().clear();
 	}
+	
+	
+	public void redrawPath() {
+		clearBackground();
+		clearPath();
+		setBackground();
+		setPath();
+	}
+
 	
 	
 	public void setPath(){
@@ -185,6 +201,11 @@ public class PathGrid {
 		else {
 			cellImage = new Image(imagePath);
 		}
+		if (numColumns > 0 && pathCoordinates != null && numRows > 0){
+			redrawPath();
+		}
+		
+		
 	}
 	
 	private void updatePath(double x, double y){

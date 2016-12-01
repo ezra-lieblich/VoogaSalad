@@ -1,5 +1,10 @@
 package authoring.editorview.level;
 
+/**
+ * 
+ * @author Kayla Schulz, Andrew Bihl, Diane Hadley
+ *
+ */
 public interface LevelEditorViewDelegate {
 
     public void onUserEnteredRewardPoints (String points);
@@ -20,7 +25,7 @@ public interface LevelEditorViewDelegate {
 
     public void onUserEnteredEnemyFrequency (String frequency);
 
-    public void onUserEnteredAddEnemy (int enemyId, int numEnemies);
+    public void onUserEnteredAddEnemy (String enemyID, String numEnemies);
 
     public void onUserEnteredRemoveEnemy (int enemyID);
 
