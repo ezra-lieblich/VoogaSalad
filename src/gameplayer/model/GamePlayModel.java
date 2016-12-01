@@ -35,7 +35,7 @@ public class GamePlayModel extends Observable {
 	private double lives;
 	private double numLevels; // reach level number winning the game
 	private int currentLevel;
-	private int waveOfEnemy;
+	int waveOfEnemy;
 	private String gameTitle;
 	private int uniqueTowerID, uniqueEnemyID, uniqueWeaponID;
 	private HashMap<Integer, engine.weapon.Weapon> weaponMap;
@@ -242,6 +242,7 @@ public class GamePlayModel extends Observable {
 	 */
 
 	public Boolean placeTower(int type, int x, int y) {
+
 		// later check if is a valid location to place the tower
 			engine.tower.Tower towerType = towerTypes.get(type);
 			if(!canPlaceTower(x, y, towerType.getCost())){
@@ -260,7 +261,7 @@ public class GamePlayModel extends Observable {
 			System.out.println("all the gun s: " + gunsForTower.size());
 
 			newlyPlaced = new gameplayer.model.Tower(type,this.uniqueTowerID, towerType.getCost(),gunsForTower, towerType.getImagePath(),towerType.getName());
-			newlyPlaced.setCoordinates(cellToCoordinate(x), cellToCoordinate(y));
+			newlyPlaced.setCoordinates(x, y);
 			uniqueTowerID ++;
 		
 			this.towersOnGrid.add(newlyPlaced); 
