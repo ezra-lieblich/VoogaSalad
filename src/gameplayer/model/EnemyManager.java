@@ -108,7 +108,7 @@ public class EnemyManager extends Observable {
 			notifyObservers();
 		}
 
-		if (this.gamePlayModel.getPackOfEnemyComing().isEmpty() && enemyOnGrid.isEmpty()) {
+		if (this.gamePlayModel.getPackOfEnemyComing().isEmpty() && enemyOnGrid.isEmpty()&& this.gamePlayModel.getNextEnteringEnemy() == null  ) {
 			if (this.gamePlayModel.getWaveOfEnemy() < this.gamePlayModel.getEnemyAtCurrentLevel().size()) {
 				this.gamePlayModel.setPackOfEnemyComing(
 						this.gamePlayModel.getEnemyAtCurrentLevel().get(this.gamePlayModel.getWaveOfEnemy()));
