@@ -12,21 +12,32 @@ public class Weapon extends Observable{
 	private String image;
 	private double xCoordinate;
 	private double yCoordinate;
-	private Tower shootingAgent;
-	private int fireCounter;
 	private double distanceTravelled;
+	//private double initialX, initialY;
+	private double range;
 	
 	
-	public Weapon(String name, int ID, double demage, double speedX, double speedY, String image) {
+	public Weapon(String name, int ID, double demage, double speedX, double speedY, String image, double[] initialCoordinate, double range) {
 		this.name = name;
 		this.ID = ID;
 		this.damage = demage;
-
 		this.speedX = speedX;
 		this.speedY  = speedY;
 		this.image = image;
-		//this.fireCounter = 0;
+		this.distanceTravelled = 0;
+		this.xCoordinate = initialCoordinate[0];
+		this.yCoordinate = initialCoordinate[1];
+		this.range = range;
 	}
+	
+	
+	
+	// add boolean method out of range
+	
+	public Boolean inRange(){
+		return this.range >= this.distanceTravelled;
+	}
+	
 	
 	public String getName(){
 		return this.name;
@@ -41,13 +52,7 @@ public class Weapon extends Observable{
 	
 
 	
-	public void setShootingAgent(Tower t){
-		this.shootingAgent = t;
-	}
-	
-	public Tower getShootingAgent(){
-		return this.shootingAgent;
-	}
+
 	
 	double getSpeedX(){
 		return this.speedX;

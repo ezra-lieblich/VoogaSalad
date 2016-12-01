@@ -19,7 +19,6 @@ public class GamePlayModel extends Observable {
 	private int gridY;
 
 	private List<Enemy> enemyOnGrid;
-
 	private List<Weapon> weaponOnGrid;
 	private List<gameplayer.model.Tower> towersOnGrid; //fix naming
 	private int hitBuffer = 10; // initialize from xml
@@ -213,17 +212,17 @@ public class GamePlayModel extends Observable {
 			if(!canPlaceTower(x, y, towerType.getCost())){
 				return false;
 			}
-			
+			gameplayer.model.Tower newlyPlaced = null;
 			List<Integer> weaponTypes = towerType.getWeapons();
 			ArrayList <Gun> gunsForTower = new ArrayList<Gun>();
 			for (int i: weaponTypes){
 				engine.weapon.Weapon weaponForGun = this.weaponMap.get(i);
-				gunsForTower.add(new Gun(weaponForGun.getFireRate(), weaponForGun, weaponForGun.getRange()));
+				gunsForTower.add(new Gun(weaponForGun.getFireRate(), weaponForGun, weaponForGun.getRange(),newlyPlaced));
 
 			}
 		
-			gameplayer.model.Tower newlyPlaced = new gameplayer.model.Tower(type,this.uniqueTowerID, towerType.getCost(),gunsForTower, towerType.getImagePath(),towerType.getName());
-			newlyPlaced.setCoordinates(x, y);
+			newlyPlaced = new gameplayer.model.Tower(type,this.uniqueTowerID, towerType.getCost(),gunsForTower, towerType.getImagePath(),towerType.getName());
+			newlyPlaced.setCoordinates(cellToCoordinate(x), cellToCoordinate(y));
 			uniqueTowerID ++;
 		
 			this.towersOnGrid.add(newlyPlaced); 
@@ -299,41 +298,33 @@ public class GamePlayModel extends Observable {
 		return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
 	}
 
-	private Boolean inShootingRange(Weapon w) {
-		gameplayer.model.Tower t = w.getShootingAgent();
-		//return getDistance(w.getX(), w.getY(), t.getCoordinate()[0], t.getCoordinate()[1]) <= t.getAttackingRange();
-		//TODO: Fix the way we tell if it's in shooting range
-		return true;
 
-	}
 
 	private void updateWeapon() {
+		
 		for (Weapon w : weaponOnGrid) {
 			w.setX(w.getSpeedX() + w.getX());
 			w.setY(w.getSpeedY() + w.getY());
 
 			// update distance travelled
-
 			// update in shooting range function
-			if (!coordinateInBound(w.getX(), w.getY()) && !inShootingRange(w)) {
+			if (!coordinateInBound(w.getX(), w.getY()) && !w.inRange()) {
 				this.weaponOnGrid.remove(w);
 			}
 		}
 
 		// check all the weapon types
-		for (int i = 0; i < gridX; i++) {
-			for (int j = 0; j < gridY; j++) {
-				int weaponType = gridArray[i][j].fireWeapon();
-				if (weaponType != -1) {
-					/*
-					engine.weapon.Weapon toAdd = this.weaponMap.get(weaponType);
-					toAdd.setX(cellToCoordinate(i));
-					toAdd.setY(cellToCoordinate(j));
-					toAdd.setShootingAgent(gridArray[i][j].getTower());
-					weaponOnGrid.add(toAdd);
-					*/
+		for (gameplayer.model.Tower t: towersOnGrid){
+			ArrayList<Gun> guns = t.getGuns();
+			for (Gun g : guns){
+				if(g.isFiring()){
+					Weapon currentWeapon = g.getWeapon();
+					currentWeapon.setID(this.uniqueWeaponID);
+					uniqueWeaponID ++;
+					this.weaponOnGrid.add(currentWeapon);
 				}
 			}
+			
 		}
 
 		setChanged();
