@@ -272,19 +272,7 @@ public class GamePlayModel extends Observable {
 			System.out.println("towers on grid: " + this.towersOnGrid.size()); 
 
 		return true;
-		// get weaponTypes
-		// actually implement the firing counter into each weapon types
 
-		// ++++++++++++++++++++++++++++fix this after weapon type is
-		// done+++++++++++++++++++++++++
-		/*
-		 * Tower t = new Tower(type, tt.getCost(),
-		 * tt.getWeapon(),tt.getImageLocation(),tt.getName()); if(this.gold -
-		 * t.getCost() < 0){ return false; } t.setCoordinates(x, y);
-		 * grid.placeTower(t, x, y); setGold(this.gold - t.getCost());
-		 * 
-		 * 
-		 */
 	}
 	
 	
