@@ -1,6 +1,7 @@
 package gameplayer.view.helper.dragdrop;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Observable;
 
@@ -33,6 +34,7 @@ public class DragDrop extends Observable{
 	private Node target;
 	private ImageView droppedImage;
 	private List<Double[]> coordinates;
+	private HashMap<String, Integer> towerMap;
 
 	public DragDrop() {
 		this.graphicLib = new GraphicsLibrary();
@@ -50,6 +52,10 @@ public class DragDrop extends Observable{
 	
 	public List<Double[]> getCoordinates(){
 		return this.coordinates;
+	}
+	
+	public void setTowerMap(HashMap<String, Integer> tower){
+		this.towerMap= tower;
 	}
 	
 	public double getxError(){
@@ -91,7 +97,9 @@ public class DragDrop extends Observable{
 
 	private void addImagetoDroppedLoc(double xpos, double ypos, Node target) {
 		ImageView copy = new ImageView(this.source.getImage());
-		copy.setId(this.source.getId()); 
+		Integer newId = this.towerMap.get(this.source.getId());
+		
+		copy.setId(Integer.toString(newId)); 
 		this.droppedImage = copy;
 		graphicLib.setImageViewParams(copy, this.width, this.height);
 		((Pane) target).getChildren().add(copy);

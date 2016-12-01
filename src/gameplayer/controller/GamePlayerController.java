@@ -53,6 +53,8 @@ public class GamePlayerController implements Observer {
 
 	private Queue<Enemy> currentWave;
 	
+	private HashMap<String, Integer> towerToId;
+	
 	
 
 
@@ -66,8 +68,20 @@ public class GamePlayerController implements Observer {
 		this.enemyManager = new EnemyManager(this.model);
 		this.model.addObserver(this);
 		this.oldLevel = 0;
+		this.towerToId = new HashMap<String, Integer>();
+		populateTowerToId();
 	}
 
+	private void populateTowerToId(){
+		HashMap<Integer, engine.tower.Tower> mapping = this.model.getAllTowerTypes();
+		for (int key:mapping.keySet()){
+			this.towerToId.put(mapping.get(key).getImagePath(),key);
+		}
+	}
+	
+	public HashMap<String, Integer> getTowerImageMap(){
+		return this.towerToId;
+	}
 	/**
 	 * Checks to see if XML is valid If not, it will not create a game and it
 	 * will throw an error
@@ -102,7 +116,7 @@ public class GamePlayerController implements Observer {
 		this.mainScene = view.init(this.model.getGold(), this.model.getLife(), this.model.getCurrentLevel(),
 				getTowerImages());
 		this.view.getGrid().populatePath(model.getGrid().getStartPoint()); 
-		this.dropController = new DragDropController(this.view, this.model,this.model.getTowerTypes());
+		this.dropController = new DragDropController(this.view, this.model,this.getTowerImageMap());
 	}
 	
 	private ArrayList<String> getTowerImages() {
@@ -134,12 +148,14 @@ public class GamePlayerController implements Observer {
 			this.view.updateCurrentLevelStats(((GamePlayModel) o).getCurrentLevel());
 			if (this.oldLevel != newLevel){
 				//test level
+				/*
 				this.oldLevel = newLevel;
 				this.view.newLevelPopUp(e->{
 					System.out.println("New level");
 					this.view.getGrid().getGrid().getChildren().clear();
 					//do something to trigger new level here!
 				});
+				*/
 			}
 		}
 		/*
@@ -195,21 +211,12 @@ public class GamePlayerController implements Observer {
 		List<Tower>towerRedraw = this.model.getTowerOnGrid();
 		List<IDrawable> reEnemyDraw = convertEnemyDrawable(enemyRedraw);//probably need to add bullets here too
 		List<IDrawable> reTowerDraw = convertTowerDrawable(towerRedraw);
-		
+		System.out.println("List of enemies?");
+		System.out.println(enemyRedraw);
 		this.view.reRender(reEnemyDraw);
 		this.view.reRenderTower(reTowerDraw);
 	}
 	
-	private double[] generateRandomEnemyStartingPoints(){
-		Random rand = new Random();
-
-		double x = rand.nextInt(this.model.getRow());// * this.view.getGrid().getCellWidth();
-		double y = rand.nextInt(this.model.getColumns());//* this.view.getGrid().getCellHeight();
-		
-		double[] coords = {x,y};
-		return coords;
-	}
-
 	public Timeline getTimeline() {
 		return this.animation;
 	}

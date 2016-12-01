@@ -229,7 +229,8 @@ public class GamePlayModel extends Observable {
 			this.towersOnGrid.add(newlyPlaced); 
 			
 			setGold(this.gold - newlyPlaced.getCost());
-			grid.placeTower(newlyPlaced, x, y);
+			System.out.println("Calculation time: x:"+x+", Grid width: "+GridGUI.GRID_WIDTH+", cellwidth: "+this.getCellWidth()+",cellheight:"+this.getCellHeight());
+			grid.placeTower(newlyPlaced, (int)(GridGUI.GRID_WIDTH/x), (int)(GridGUI.GRID_HEIGHT/y));
 
 		return true;
 		// get weaponTypes
@@ -247,6 +248,7 @@ public class GamePlayModel extends Observable {
 		 */
 	}
 	
+	
 	public boolean canPlaceTower(int xcoord, int ycoord, double cost){
 		Cell current = this.grid.getStartPoint();
 		//System.out.println("starting cell x: "+current.getX()+"; y: "+current.getY());
@@ -254,7 +256,7 @@ public class GamePlayModel extends Observable {
 			double x =current.getX()* GridGUI.GRID_WIDTH/this.getColumns();
 			double y = current.getY() * GridGUI.GRID_WIDTH/this.getRow() + GridGUI.GRID_WIDTH/this.getRow();
 			current = current.getNext();
-			System.out.println("Startcell: "+x+","+y+". Candropimage: "+xcoord+","+ycoord);
+			//System.out.println("Startcell: "+x+","+y+". Candropimage: "+xcoord+","+ycoord);
 			if (xcoord<x && ycoord<y){
 				return false;
 			}
