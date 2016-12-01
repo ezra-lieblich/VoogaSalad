@@ -24,7 +24,8 @@ public class PathTypeBuilder extends AbstractTypeBuilder<Path, PathBuilder> impl
      
      public static final double DEFAULT_SIZE = 1;
      public static final String DEFAULT_TYPE = "direct";
-     public static final List<Coordinate<Integer>> DEFAULT_COORDINATES = Arrays.stream(new GridCoordinate[]{}).collect(Collectors.toList());
+     //public static final List<Coordinate<Integer>> DEFAULT_COORDINATES = Arrays.stream(new GridCoordinate[]{}).collect(Collectors.toList());
+     public static final GridCoordinate[] DEFAULT_COORDINATES = new GridCoordinate[]{};
      public static final Integer DEFAULT_GRID_ROWS = 10;
      public static final Integer DEFAULT_GRID_COLUMNS = 10;
      
@@ -90,7 +91,7 @@ public class PathTypeBuilder extends AbstractTypeBuilder<Path, PathBuilder> impl
     @Override
     protected void restoreTypeDefaults () {
         this.type = new ObservableObjectProperty<String>(DEFAULT_TYPE);
-        this.coordinates = new ObservableListProperty<Coordinate<Integer>>(DEFAULT_COORDINATES);
+        this.coordinates = new ObservableListProperty<Coordinate<Integer>>(Arrays.stream(DEFAULT_COORDINATES).collect(Collectors.toList()));
         this.gridRows = new ObservableObjectProperty<Integer>(DEFAULT_GRID_ROWS);
         this.gridColumns = new ObservableObjectProperty<Integer>(DEFAULT_GRID_COLUMNS);
     }
