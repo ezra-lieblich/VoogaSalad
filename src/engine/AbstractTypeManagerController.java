@@ -13,6 +13,7 @@ public abstract class AbstractTypeManagerController<E extends Manager<T>, U exte
         this.typeManager = typeManager;
         this.typeBuilder = typeBuilder;
         managerMediator.addManager(typeManager);
+        //typeManager.addEntry(typeBuilder.build()); //Testing XML
     }
 
     @Override
