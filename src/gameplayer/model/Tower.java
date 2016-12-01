@@ -5,21 +5,22 @@ import java.util.ArrayList;
 public class Tower implements IDrawable {
 
 	private double cost;
-	private ArrayList<Integer> weaponType;
+	private ArrayList<Gun> guns;
 	private String image, name;
 	private int ID, type; // towerType
 	private double xCoordinate;
 	private double yCoordinate;	
 	
 	
-	public Tower (int type, int ID, double cost, ArrayList<Integer> weaponTypes, String image, String name){
+	public Tower (int type, int ID, double cost, ArrayList<Gun> guns, String image, String name){
 		this.cost = cost;
-		this.weaponType = weaponTypes;
+		this.guns = guns;
 		this.image = image;
 		this.ID = ID;
 	}
 
-// +++++++++++++get rid of this after fixing weapon Current Using and needs updating
+	/*
+// +++++++++++++get rid of this after fixing weapon Current Using and needs updating+++++++++++++
 	public Tower(int ID, String image, String name, double xCoordinate, double yCoordinate) {
 		this.ID = ID;
 		this.image = image;
@@ -28,6 +29,7 @@ public class Tower implements IDrawable {
 		this.yCoordinate = yCoordinate;
 	}
 
+*/ 
 	public void setCoordinates(double x, double y) {
 		this.xCoordinate = x;
 		this.yCoordinate = y;
@@ -60,13 +62,17 @@ public class Tower implements IDrawable {
 	double getCost() {
 		return cost;
 	}
+	
+	String getName(){
+		return this.name;
+	}
 
 	void setCost(double cost) {
 		this.cost = cost;
 	}
 
-	ArrayList<Integer> getWeaponType() {
-		return this.weaponType;
+	ArrayList<Gun> getGuns() {
+		return this.guns;
 	}
 
 }
