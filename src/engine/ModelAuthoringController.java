@@ -55,8 +55,9 @@ public class ModelAuthoringController implements ModelController {
         modelControllers.put(LevelManagerController.class, new LevelTypeManagerController(managerMediator));
     }
     
-    public static void main (String[] args) {
-        ModelController test = new ModelAuthoringController();
-        test.SaveData();
-    }
+// XML testing
+//    public static void main (String[] args) {
+//        ModelController test = new ModelAuthoringController();
+//        test.SaveData();
+//    }
 }
