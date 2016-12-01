@@ -11,13 +11,13 @@ public class ObservableListProperty<E> extends ObservableObjectProperty<List<E>>
     @Override
     public void add(E value) {
         getProperty().add(value);
-        notifyObservers(getProperty());
+        notifyListenersAndObservers(getProperty(), getProperty());
     }
 
     @Override
     public void remove(E value) {
         getProperty().removeIf(a -> a.equals(value));
-        notifyObservers(getProperty());
+        notifyListenersAndObservers(getProperty(), getProperty());
     }
     
 }
