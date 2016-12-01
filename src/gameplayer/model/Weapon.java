@@ -5,7 +5,7 @@ import java.util.Observable;
 public class Weapon extends Observable{
 	
 	private int ID;
-	private double demage;
+	private double damage;
 	private double speedX;
 	private double speedY;
 
@@ -20,12 +20,12 @@ public class Weapon extends Observable{
 	private double distanceTravelled;
 	
 	
-	public Weapon(String name, int ID, double firingRate, double attackingRange, double demage, double speedX, double speedY, String image) {
+	public Weapon(String name, int ID, double firingRate, double attackingRange, double damage, double speedX, double speedY, String image) {
 		this.name = name;
 		this.ID = ID;
 		this.firingRate = firingRate;
 		this.attackingRange = attackingRange;
-		this.demage = demage;
+		this.damage = damage;
 		this.speedX = speedX;
 		this.speedY  = speedY;
 		this.image = image;
@@ -105,12 +105,12 @@ public class Weapon extends Observable{
 		ID = iD;
 	}
 
-	double getDemage() {
-		return demage;
+	double getDamage() {
+		return damage;
 	}
 
-	void setDemage(double demage) {
-		this.demage = demage;
+	void setDamage(double damage) {
+		this.damage = damage;
 	}
 
 

@@ -153,7 +153,7 @@ public class GameGUI {
 		this.statsDisplay.updateLevelUI(gold, lives, level);
 	}
 	
-	//not sure if this goes here
+
 	public void reRenderTower(List<IDrawable> redraw){//should be interface of drawables
 		ArrayList<Double[]> towerCoords = (ArrayList<Double[]>) this.getDroppedTowerCoords();
 		int i = 0;
