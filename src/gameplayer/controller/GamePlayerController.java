@@ -98,6 +98,7 @@ public class GamePlayerController implements Observer {
 		HashMap<String, Double> settings = this.loader.getGameSetting();
 		System.out.println("Settings: " + settings);
 		//initGUIDummy(settings);
+		this.enemyManager.setCurrentCell(this.model.getGrid().getStartPoint());
 		initGUI();
 		//this.enemyController = new EnemyController(this.enemyManager, this.view.getGrid());
 	}
@@ -217,8 +218,8 @@ public class GamePlayerController implements Observer {
 		List<Tower>towerRedraw = this.model.getTowerOnGrid();
 		List<IDrawable> reEnemyDraw = convertEnemyDrawable(enemyRedraw);//probably need to add bullets here too
 		List<IDrawable> reTowerDraw = convertTowerDrawable(towerRedraw);
-		System.out.println("List of enemies?");
-		System.out.println(enemyRedraw);
+		//System.out.println("List of enemies?");
+		//System.out.println(enemyRedraw);
 		this.view.reRender(reEnemyDraw);
 		this.view.reRenderTower(reTowerDraw);
 	}
