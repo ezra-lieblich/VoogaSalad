@@ -27,6 +27,7 @@ import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Queue;
+import java.util.Random;
 
 import engine.TowerType;
 
@@ -79,7 +80,7 @@ public class GamePlayerController implements Observer {
 		HashMap<String, Double> settings = this.loader.getGameSetting();
 		System.out.println("Settings: " + settings);
 		initGUI();
-		this.enemyController = new EnemyController(this.enemyManager, this.view.getGrid());
+		//this.enemyController = new EnemyController(this.enemyManager, this.view.getGrid());
 	}
 
 	private void initGUI() {
@@ -148,15 +149,30 @@ public class GamePlayerController implements Observer {
 	 */
 
 	private void startAnimation() {
+		this.model.getGrid().printGrid();
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> {
 			((Pane) this.view.getGrid().getGrid()).getChildren().clear(); //clear everything
 			this.currentWave = this.model.getPackOfEnemyComing();
 			
-			if(currentWave.size()!=0){
+			//trying to get this to work but null pointer
+			/*
+			while(currentWave.size()!=0){
+				double[] coords = generateRandomEnemyStartingPoints();
+				Enemy enemy = currentWave.poll();
+				//System.out.println("Coordinates of enemy: "+coords[0]+","+coords[1]);
+				
+				//System.out.println("IS the cell null?"+this.model.getGrid().getCell((int)coords[0], (int)coords[1]));
+				enemy.setCurrentCell(enemy.getCurrentCell());
+				this.enemyManager.spawnEnemy(enemy);
+			}
+			*/
+			
+			while(currentWave.size()!=0){
 				Enemy test = currentWave.poll();
 				test.setCurrentCell(this.model.getGrid().getCell(0, 0));
 				this.enemyManager.spawnEnemy(test);
 			}
+			
 			this.enemyManager.update(); 
 
 //			this.view.getGrid().populatePath(model.getGrid().getStartPoint()); //THIS LINE CAUSES SLOW DOWN
@@ -173,6 +189,16 @@ public class GamePlayerController implements Observer {
 		animation.getKeyFrames().add(frame);
 		this.animation = animation;
 		animation.play();
+	}
+	
+	private double[] generateRandomEnemyStartingPoints(){
+		Random rand = new Random();
+
+		double x = rand.nextInt(this.model.getRow());// * this.view.getGrid().getCellWidth();
+		double y = rand.nextInt(this.model.getColumns());//* this.view.getGrid().getCellHeight();
+		
+		double[] coords = {x,y};
+		return coords;
 	}
 
 	public Timeline getTimeline() {

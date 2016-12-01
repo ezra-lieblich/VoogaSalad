@@ -46,7 +46,7 @@ public class Weapon extends Observable{
 	}
 	
 	
-	void incrementDistanceTravelled(double x, double y) {
+	public void incrementDistanceTravelled(double x, double y) {
 		this.distanceTravelled += Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
 	}
 	
@@ -77,13 +77,13 @@ public class Weapon extends Observable{
 		return xCoordinate;
 	}
 
-	void setX(double xCoordinate) {
+	public void setX(double xCoordinate) {
 		this.xCoordinate = xCoordinate;
 		setChanged();
 		notifyObservers();
 	}
 
-	double getY() {
+	public double getY() {
 		return yCoordinate;
 	}
 

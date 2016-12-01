@@ -11,9 +11,6 @@ public class AnimateWeapon {
 		this.tower = tower;
 	}
 	
-	
-	
-	
 	public void throwWeapon(ImageView weapon, double x, double y){
 		weapon.setX(tower.getX());
 		weapon.setY(tower.getY());
