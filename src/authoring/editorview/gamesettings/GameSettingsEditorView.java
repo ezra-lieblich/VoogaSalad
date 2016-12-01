@@ -8,11 +8,18 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 
 
+/**
+ * 
+ * @author Kayla Schulz
+ * @author Diane Hadley
+ *
+ */
 public class GameSettingsEditorView implements IGameSettingsEditorView, IGameSettingsSetView {
 
     private VBox gameConditionsRoot;
     private GameNameView gameNameView;
     private BorderPane gameSettingsView;
+    private GameSettingsEditorViewDelegate delegate;
 
     public GameSettingsEditorView (int aWidth, int aHeight) {
         gameSettingsView = new BorderPane();
@@ -26,32 +33,12 @@ public class GameSettingsEditorView implements IGameSettingsEditorView, IGameSet
 
     @Override
     public Node getInstanceAsNode () {
-        // TODO Auto-generated method stub
         return gameSettingsView;
     }
 
     @Override
     public void setDelegate (GameSettingsEditorViewDelegate delegate) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void updateNameDisplay (String name) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void updateImagePathDisplay (String imagePath) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void updateSizeDisplay (double size) {
-        // TODO Auto-generated method stub
-
+        this.delegate = delegate;
     }
 
     @Override
@@ -100,6 +87,21 @@ public class GameSettingsEditorView implements IGameSettingsEditorView, IGameSet
     public void setGameSettingsListDataSource (ListDataSource source) {
         // TODO Auto-generated method stub
         System.out.println("Game settings doesn't have an image bank implemented!");
+    }
+
+    @Override
+    public void updateNameDisplay (String name) {
+        // Don't worry about this
+    }
+
+    @Override
+    public void updateImagePathDisplay (String imagePath) {
+        // Don't worry about this
+    }
+
+    @Override
+    public void updateSizeDisplay (double size) {
+        // Don't worry about this
     }
 
 }

@@ -8,9 +8,15 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 
 
+/**
+ * 
+ * @author Diane Hadley
+ * @author Kayla Schulz
+ *
+ */
 public class GameNameView {
 
-    private HBox root;
+    private HBox hbox;
     private TextField nameTextField;
     GameSettingsEditorViewDelegate delegate;
 
@@ -20,7 +26,7 @@ public class GameNameView {
     }
 
     public Node getInstanceAsNode () {
-        return root;
+        return hbox;
     }
 
     public void setDelegate (GameSettingsEditorViewDelegate delegate) {
@@ -32,7 +38,7 @@ public class GameNameView {
                                                        e -> delegate
                                                                .onUserEnteredGameNames(nameTextField
                                                                        .getText()));
-        root = BoxFactory.createHBoxWithLabelandNode("Choose game name:", nameTextField);
+        hbox = BoxFactory.createHBoxWithLabelandNode("Choose game name:", nameTextField);
 
     }
 

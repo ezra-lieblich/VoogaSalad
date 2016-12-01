@@ -33,4 +33,28 @@ public class GameSettingsEditorViewController extends EditorViewController
         // TODO Auto-generated method stub
 
     }
+
+    @Override
+    public void onUserEnteredGameImage (String imagePath) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void onUserEnteredImageSize (String imageSize) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void onUserEnteredWinningConditions (String winConditions) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void onUserEnteredLosingConditions (String loseConditions) {
+        // TODO Auto-generated method stub
+        
+    }
 }
