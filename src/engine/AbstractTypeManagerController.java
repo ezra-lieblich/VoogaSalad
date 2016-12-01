@@ -1,5 +1,6 @@
 package engine;
 
+import java.util.ArrayList;
 import java.util.List;
 import authoring.editorview.IUpdateView;
 
@@ -12,11 +13,17 @@ public abstract class AbstractTypeManagerController<E extends Manager<T>, U exte
         this.typeManager = typeManager;
         this.typeBuilder = typeBuilder;
         managerMediator.addManager(typeManager);
+        //typeManager.addEntry(typeBuilder.build()); //Testing XML
     }
 
     @Override
     public int createType (V updateView) {
         return typeManager.addEntry(constructType(updateView));
+    }
+    
+    @Override
+    public void addTypeBankListener(V updateView) {
+        typeManager.addEntitiesListener((oldValue, newValue) -> updateView.updateBank(new ArrayList<Integer>(newValue.keySet())));
     }
 
     protected T constructType (V updateView) {

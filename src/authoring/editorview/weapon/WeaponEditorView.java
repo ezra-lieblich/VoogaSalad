@@ -159,4 +159,10 @@ public class WeaponEditorView implements IWeaponEditorView {
 
     }
 
+	@Override
+	public void updateBank(List<Integer> ids) {
+		// TODO Auto-generated method stub
+		this.weaponBank.updateBank(ids);
+	}
+
 }

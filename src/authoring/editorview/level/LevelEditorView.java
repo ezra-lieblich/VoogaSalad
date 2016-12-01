@@ -1,9 +1,11 @@
 package authoring.editorview.level;
 
+import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import authoring.editorview.level.subviews.LevelChooserView;
 import authoring.editorview.level.subviews.LevelDesign;
+import authoring.editorview.level.subviews.LevelEnemyFrequencyField;
 import authoring.editorview.level.subviews.LevelNameView;
 import authoring.editorview.level.subviews.LevelRewardsView;
 import authoring.editorview.level.subviews.LevelTransitionTimeField;
@@ -21,7 +23,9 @@ public class LevelEditorView implements ILevelEditorView {
     private LevelNameView levelNameView;
     private CreateNewLevelView createNewLevelView;
     private LevelTransitionTimeField transitionTimeField;
-    private ResourceBundle levelsResource = ResourceBundle.getBundle("resources/GameAuthoringLevels");
+    private LevelEnemyFrequencyField enemyFrequencyField;
+    private ResourceBundle levelsResource =
+            ResourceBundle.getBundle("resources/GameAuthoringLevels");
 
     LevelEditorView (int width, int height) {
         this.vbox = new VBox(10);
@@ -31,6 +35,7 @@ public class LevelEditorView implements ILevelEditorView {
         this.levelNameView = new LevelNameView(levelsResource);
         this.createNewLevelView = new CreateNewLevelView(levelsResource);
         this.transitionTimeField = new LevelTransitionTimeField(levelsResource);
+        this.enemyFrequencyField = new LevelEnemyFrequencyField(levelsResource);
         setLevelView();
     }
 
@@ -47,6 +52,7 @@ public class LevelEditorView implements ILevelEditorView {
         levelDesign.setDelegate(delegate);
         createNewLevelView.setDelegate(delegate);
         transitionTimeField.setDelegate(delegate);
+        enemyFrequencyField.setDelegate(delegate);
     }
 
     private void setLevelView () {
@@ -55,8 +61,8 @@ public class LevelEditorView implements ILevelEditorView {
                                   levelNameView.getInstanceAsNode(),
                                   levelRewardsView.getInstanceAsNode(),
                                   levelDesign.getInstanceAsNode(),
-                                  transitionTimeField.getInstanceAsNode());
-
+                                  transitionTimeField.getInstanceAsNode(),
+                                  enemyFrequencyField.getInstanceAsNode());
     }
 
     @Override
@@ -103,8 +109,7 @@ public class LevelEditorView implements ILevelEditorView {
 
     @Override
     public void updateEnemyFrequency (double enemyFrequency) {
-        // TODO Auto-generated method stub
-
+        enemyFrequencyField.updateEnemyFrequencyField(Double.toString(enemyFrequency));
     }
 
     @Override
@@ -117,5 +122,11 @@ public class LevelEditorView implements ILevelEditorView {
     public void updateSizeDisplay (double size) {
         // Don't worry about this right now
     }
+
+	@Override
+	public void updateBank(List<Integer> ids) {
+		// TODO Auto-generated method stub
+		System.out.println("No level bank currently implemented");
+	}
 
 }
