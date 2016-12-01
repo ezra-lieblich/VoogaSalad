@@ -98,13 +98,14 @@ public class DragDrop extends Observable{
 	private void addImagetoDroppedLoc(double xpos, double ypos, Node target) {
 		ImageView copy = new ImageView(this.source.getImage());
 		Integer newId = this.towerMap.get(this.source.getId());
-		
+		System.out.println("ADDED TOWER IN DRAGDROP CLASS");
+		System.out.println("Tower coords: "+xpos+","+ypos);
 		copy.setId(Integer.toString(newId)); 
 		this.droppedImage = copy;
 		graphicLib.setImageViewParams(copy, this.width, this.height);
-		((Pane) target).getChildren().add(copy);
 		copy.setX(xpos+this.xError);
 		copy.setY(ypos+this.yError);
+		((Pane) target).getChildren().add(copy);
 		Double[] coords = {xpos+this.xError,ypos+this.yError};
 		this.coordinates.add(coords);
 		setChanged();
