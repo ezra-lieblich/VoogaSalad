@@ -88,6 +88,7 @@ public class DragDrop extends Observable{
 		db.setContent(content);
 	}
 
+
 	private void addImagetoDroppedLoc(double xpos, double ypos, Node target) {
 		ImageView copy = new ImageView(this.source.getImage());
 		copy.setId(this.source.getId()); 
