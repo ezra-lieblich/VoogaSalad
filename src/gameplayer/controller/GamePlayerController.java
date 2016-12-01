@@ -70,7 +70,7 @@ public class GamePlayerController implements Observer {
 		this.model = new GamePlayModel(this.loader);
 		this.enemyManager = new EnemyManager(this.model);
 		this.model.addObserver(this);
-		this.oldLevel = 0;
+		this.oldLevel = 1;
 		this.towerToId = new HashMap<String, Integer>();
 		populateTowerToId();
 	}
@@ -165,15 +165,14 @@ public class GamePlayerController implements Observer {
 					((GamePlayModel) o).getCurrentLevel());
 			this.view.updateCurrentLevelStats(((GamePlayModel) o).getCurrentLevel());
 			if (this.oldLevel != newLevel){
-				//test level
-				/*
+				
 				this.oldLevel = newLevel;
 				this.view.newLevelPopUp(e->{
 					//System.out.println("New level");
 					this.view.getGrid().getGrid().getChildren().clear();
 					//do something to trigger new level here!
 				});
-				*/
+				
 			}
 		}
 		/*

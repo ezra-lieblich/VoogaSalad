@@ -15,6 +15,7 @@ public class Enemy extends Observable implements IDrawable{
 	private int yDirection; //-1 if moving down, 1 if moving up	
 	private double width, height;
 	private int uniqueID;
+	private Cell enemyCell;
 	
 	public Enemy(int ID, String name, double movingSpeed, int health, String image, double width, double height){
 		this.uniqueID = ID;
@@ -32,6 +33,13 @@ public class Enemy extends Observable implements IDrawable{
 		return weidthAndHeight;
 	}
 	*/
+	public void setCell(Cell c){
+		this.enemyCell = c; 
+	}
+	
+	public Cell getCell(){
+		return this.enemyCell;
+	}
 	
 	public void setUniqueID(int id){
 		this.uniqueID = id;

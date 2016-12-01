@@ -108,7 +108,7 @@ public class EnemyManager extends Observable {
 			notifyObservers();
 		}
 
-		if (this.gamePlayModel.getPackOfEnemyComing().isEmpty() && enemyOnGrid.isEmpty()) {
+		if (this.gamePlayModel.getPackOfEnemyComing().isEmpty() && enemyOnGrid.isEmpty()&& this.gamePlayModel.getNextEnteringEnemy() == null  ) {
 			if (this.gamePlayModel.getWaveOfEnemy() < this.gamePlayModel.getEnemyAtCurrentLevel().size()) {
 				this.gamePlayModel.setPackOfEnemyComing(
 						this.gamePlayModel.getEnemyAtCurrentLevel().get(this.gamePlayModel.getWaveOfEnemy()));
@@ -159,6 +159,15 @@ public class EnemyManager extends Observable {
 	private void setEnemyImageSize(ImageView enemyImage){
 		graphicLib.setImageViewParams(enemyImage, this.gamePlayModel.getCellWidth(),  this.gamePlayModel.getCellHeight());
 	}
+	
+	private int[] coordinateToCell(double pixelx, double pixely){
+		int x =(int)(this.gamePlayModel.getCellWidth()*pixelx/GridGUI.GRID_WIDTH);
+		int y= (int)(this.gamePlayModel.getCellHeight()*pixely/GridGUI.GRID_HEIGHT);
+		int[] cell  = {x,y};
+		return cell;
+	}
+	
+	
 	private void moveIndividualEnemy(Enemy enemy) {
 		/*
 		if (enemy.getUniqueID() != this.pastEnemyId){
@@ -175,14 +184,20 @@ public class EnemyManager extends Observable {
 				// System.out.println("Both should move");
 				enemy.setX(enemy.getX() + enemy.getMovingSpeed());
 				enemy.setY(enemy.getY() + enemy.getMovingSpeed());
+				int[] coords = coordinateToCell(enemy.getX(),enemy.getY());
+				enemy.setCell(this.gamePlayModel.getGrid().getCell(coords[0], coords[1]));
 			} else if (enemy.getX() < (current.getX() * this.gamePlayModel.getCellWidth())
 					&& !(enemy.getY() < (current.getY() * this.gamePlayModel.getCellHeight()))) {
 				enemy.setX(enemy.getX() + enemy.getMovingSpeed());
-				// System.out.println("Just x should move");
-			} else if (enemy.getY() < (current.getY() * this.gamePlayModel.getCellHeight())
+				int[] coords = coordinateToCell(enemy.getX(),enemy.getY());
+				enemy.setCell(this.gamePlayModel.getGrid().getCell(coords[0], coords[1]));
+			} else if (enemy.getY() > (current.getY() * this.gamePlayModel.getCellHeight()) && enemy.getY()<(current.getY() * (this.gamePlayModel.getCellHeight()+1))
 					&& !(enemy.getX() < (current.getX() * this.gamePlayModel.getCellWidth()))) {
 				enemy.setY(enemy.getY() + enemy.getMovingSpeed());
+				int[] coords = coordinateToCell(enemy.getX(),enemy.getY());
+				enemy.setCell(this.gamePlayModel.getGrid().getCell(coords[0], coords[1]));
 			}
+			
 			/*
 			 * if (!(enemy.getX() + enemy.getMovingSpeed() >
 			 * GridGUI.GRID_WIDTH)) { enemy.setX(enemy.getX() +

@@ -4,7 +4,7 @@
 	<init>	
 		<numLevels>2</numLevels>
 		<lives>50</lives>
-		<gold>1000</gold>
+		<gold>10000000000</gold>
 		<levelnumber>1</levelnumber>
 	</init>
 	<towerList>
@@ -20,6 +20,36 @@
 				<weaponType>cannon</weaponType>
 				<upgrade>
 					<cost>200</cost>
+					<type>tower</type>
+				</upgrade>
+			</tower>
+			<tower>
+				<name>cheapo</name>
+				<imageLocation>shelter_maru.png</imageLocation>
+				<isDestroyable>false</isDestroyable>
+				<range>5</range>
+				<fireRate>5</fireRate>
+				<cost>500</cost>
+				<sellAmount>200</sellAmount>
+				<unlockLevel>0</unlockLevel>
+				<weaponType>cannon</weaponType>
+				<upgrade>
+					<cost>1</cost>
+					<type>tower</type>
+				</upgrade>
+			</tower>
+			<tower>
+				<name>creep</name>
+				<imageLocation>KenCentipede.gif</imageLocation>
+				<isDestroyable>false</isDestroyable>
+				<range>5</range>
+				<fireRate>5</fireRate>
+				<cost>500</cost>
+				<sellAmount>200</sellAmount>
+				<unlockLevel>0</unlockLevel>
+				<weaponType>cannon</weaponType>
+				<upgrade>
+					<cost>1</cost>
 					<type>tower</type>
 				</upgrade>
 			</tower>
