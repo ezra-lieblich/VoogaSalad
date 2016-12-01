@@ -76,6 +76,7 @@ public class Enemy extends Observable implements IDrawable{
 
 	public void setCurrentCell(Cell c){ //don't think we need to notify observers of this change
 		this.currentCell = c;
+		System.out.println("does the cell have a next?"+c.getNext().getX()+", "+c.getNext().getY());
 		this.xDirection = c.getNext().getX() - c.getX();
 		this.yDirection = c.getNext().getY() - c.getY();
 	}

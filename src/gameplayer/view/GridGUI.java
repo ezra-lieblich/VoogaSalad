@@ -102,7 +102,7 @@ public class GridGUI {
 	public void populatePath(Cell startingCell){
 		//ImageView pathImage = graphicsLib.createImageView(graphicsLib.createImage("kaneki.jpg")); //TODO: replace with whatever shows the path
 		Cell current = startingCell;
-		System.out.println("starting cell x: "+current.getX()+"; y: "+current.getY());
+		//System.out.println("starting cell x: "+current.getX()+"; y: "+current.getY());
 		while (current != null){
 			ImageView pathImage = graphicsLib.createImageView(graphicsLib.createImage("kaneki.jpg"));
 			double x =current.getX();
