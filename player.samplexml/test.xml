@@ -10,7 +10,7 @@
 	<towerList>
 			<tower>
 				<name>ninja monkey</name>
-				<imageLocation>images/penguin.jpg</imageLocation>
+				<imageLocation>penguin.jpg</imageLocation>
 				<isDestroyable>false</isDestroyable>
 				<range>5</range>
 				<fireRate>5</fireRate>
@@ -25,7 +25,7 @@
 			</tower>
 			<tower>
 				<name>test monkey</name>
-				<imageLocation>images/kaneki.jpg</imageLocation>
+				<imageLocation>kaneki.jpg</imageLocation>
 				<isDestroyable>false</isDestroyable>
 				<range>10</range>
 				<fireRate>2</fireRate>
@@ -42,7 +42,7 @@
 	<enemyList>
 		<enemy>
 			<name>redballoon</name>
-			<imageLocation>images/redbaloon.jpg</imageLocation>
+			<imageLocation>redbaloon.jpg</imageLocation>
 			<widthOfImage> 20 </widthOfImage>
 			<heightOfImage> 20 </heightOfImage>
 			<speed>5</speed>
@@ -53,7 +53,7 @@
 		</enemy>
 		<enemy>
 			<name>redmoab</name>
-			<imageLocation>images/redmoab.jpg</imageLocation>
+			<imageLocation>redmoab.jpg</imageLocation>
 			<widthOfImage>50</widthOfImage>
 			<heightOfImage>50</heightOfImage>
 			<speed>3</speed>
