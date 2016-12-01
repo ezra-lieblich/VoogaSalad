@@ -55,6 +55,7 @@ public class EnemyTableView implements ILevelSetView {
     }
     
     private void setData(List<NameIdPair> enemies) {
+        data.clear();
         for (NameIdPair n: enemies) {
             Enemy temp = new Enemy (n.getName(), "0", "0");
             data.add(temp);
@@ -63,6 +64,7 @@ public class EnemyTableView implements ILevelSetView {
 
     public void updateEnemyTableView(List<NameIdPair> enemies) {
         setData(enemies);
+        enemyTable.getColumns().clear();
         enemyTable.setItems(data);
         enemyTable.getColumns().addAll(enemyNameCol, numEnemiesCol, enemyFrequencyCol);
         enemyTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
