@@ -26,7 +26,7 @@ public class TowerTypeBuilder extends AbstractTypeBuilder<Tower, TowerBuilder> i
      public static final String DEFAULT_IMAGE_PATH = "Images/penguin.jpg";
      public static final double DEFAULT_SIZE = 1;
      //public static final List<Integer> DEFAULT_WEAPONS = Arrays.stream(new Integer[]{}).collect(Collectors.toList());
-     public static final Integer[] DEFAULT_WEAPONS = new Integer[]{};
+     public static final Integer[] DEFAULT_WEAPONS = new Integer[]{0};
      public static final Integer[] DEFAULT_TARGETS = new Integer[]{};
      public static final Integer[] DEFAULT_ABILITIES = new Integer[]{};
      public static final Integer[] DEFAULT_UPGRADES = new Integer[]{};
