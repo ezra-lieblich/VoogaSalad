@@ -5,6 +5,7 @@ import java.util.List;
 import authoring.editorview.IUpdateView;
 import authoring.editorview.ListDataSource;
 
+
 public interface IGameUpdateView extends IGameSettingsEditorView, IUpdateView{
 	
 	public void updateGameName (String name);
