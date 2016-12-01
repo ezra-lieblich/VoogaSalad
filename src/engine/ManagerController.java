@@ -20,7 +20,7 @@ public interface ManagerController<E extends Manager<T>, U extends TypeBuilder<T
 
     List<Integer> getCreatedTypeIds ();
 
-    boolean setName (int id, String name);
+    void setName (int id, String name);
 
     void setImagePath (int id, String imagePath);
 

@@ -113,10 +113,10 @@ public abstract class AbstractTypeBuilder<E extends Type, R extends TypeBuilder<
     }
     
     private void restoreDefaults() {
-        this.id = nextId;
-        this.name = new ObservableObjectProperty<String>(DEFAULT_NAME + " (" + id + ")");
+        this.name = new ObservableObjectProperty<String>(DEFAULT_NAME);
         this.imagePath = new ObservableObjectProperty<String>(DEFAULT_IMAGE_PATH);
         this.size = new ObservableObjectProperty<Double>(DEFAULT_SIZE);
+        this.id = nextId;
         restoreTypeDefaults();
     }
     
