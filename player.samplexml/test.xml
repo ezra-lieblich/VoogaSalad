@@ -73,14 +73,14 @@
 		<path>
 			<coordinate>0,0;</coordinate>
 			<coordinate>1,0;</coordinate>
-			<coordinate>2,0;</coordinate>
-			<coordinate>3,0;</coordinate>
-			<coordinate>4,0;</coordinate>
-			<coordinate>5,0;</coordinate>
-			<coordinate>6,0;</coordinate>
-			<coordinate>7,0;</coordinate>
-			<coordinate>8,0;</coordinate>
-			<coordinate>9,0;</coordinate>
+			<coordinate>1,1;</coordinate>
+			<coordinate>2,1;</coordinate>
+			<coordinate>3,1;</coordinate>
+			<coordinate>3,2;</coordinate>
+			<coordinate>3,3;</coordinate>
+			<coordinate>4,3;</coordinate>
+			<coordinate>5,3;</coordinate>
+			<coordinate>6,3;</coordinate>
 		</path>
 		<enemies></enemies>
 	</level1>
@@ -94,14 +94,14 @@
 		<path>
 			<coordinate>0,0;</coordinate>
 			<coordinate>1,0;</coordinate>
-			<coordinate>2,0;</coordinate>
-			<coordinate>3,0;</coordinate>
-			<coordinate>4,0;</coordinate>
-			<coordinate>5,0;</coordinate>
-			<coordinate>6,0;</coordinate>
-			<coordinate>7,0;</coordinate>
-			<coordinate>8,0;</coordinate>
-			<coordinate>9,0;</coordinate>
+			<coordinate>1,1;</coordinate>
+			<coordinate>2,1;</coordinate>
+			<coordinate>3,1;</coordinate>
+			<coordinate>3,2;</coordinate>
+			<coordinate>3,3;</coordinate>
+			<coordinate>4,3;</coordinate>
+			<coordinate>5,3;</coordinate>
+			<coordinate>6,3;</coordinate>
 		</path>
 	</level2>
 </GameSetting>
