@@ -50,9 +50,7 @@ public class PathEditorView implements IPathUpdateView {
     	this.pathInstructionsView = new PathInstructionsView();
     	
     	
-    	//System.out.println(f.toURI().toString());
-    	
-    	
+
     	
     	this.pathGrid = new PathGrid(400, 400);   	
     	
@@ -121,17 +119,12 @@ public class PathEditorView implements IPathUpdateView {
 				grid);
     }
 
-	@Override
-	public void updatePathImage(String pathImage) {
-		pathImageView.setPathImagePath(pathImage);
-		pathGrid.setCellImage(pathImage);
-		
-	}
 
 	@Override
 	public void updateNumColumns(int numColumns) {
 		pathSizeView.setNumberOfColumns(numColumns);
 		pathGrid.setNumColumns(numColumns);
+		
 		
 	}
 
@@ -158,6 +151,8 @@ public class PathEditorView implements IPathUpdateView {
 	@Override
 	public void updateImagePathDisplay(String imagePath) {
 		pathImageView.setPathImagePath(imagePath);
+		pathGrid.setCellImage(imagePath);
+		
 		
 	}
 
@@ -177,11 +172,13 @@ public class PathEditorView implements IPathUpdateView {
 
 	@Override
 	public void createNewPath() {
-		pathGrid.clearBackground();
-		pathGrid.clearPath();
-		pathGrid.setBackground();
-		pathGrid.setPath();
 		
+	
+	}
+
+	@Override
+	public void updatePath() {
+		pathGrid.redrawPath();
 		
 	}
 

@@ -42,7 +42,7 @@ public class PathNameView {
 	private void makeNameTextField(){
 		nameTextField = TextFieldFactory.makeTextField("", 
 				e -> delegate.onUserEnteredPathName(activePathID, nameTextField.getText()));
-		nameTextField.setMaxWidth(75);
+		nameTextField.setMaxWidth(100);
 		root = BoxFactory.createHBoxWithLabelandNode(pathResource.getString("NameTextField"), nameTextField);
 	}
 	
