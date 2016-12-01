@@ -8,7 +8,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
-import javafx.scene.layout.HBox;
 
 
 public class LevelChooserView implements ILevelSetView {
@@ -25,7 +24,7 @@ public class LevelChooserView implements ILevelSetView {
     public Node getInstanceAsNode () {
         return levelChooser;
     }
-    
+
     private ObservableList<Object> setList () {
         ObservableList<Object> effectOptions =
                 FXCollections.observableArrayList("1", "2");
@@ -34,8 +33,8 @@ public class LevelChooserView implements ILevelSetView {
 
     private void buildLevelComboBox (ObservableList<Object> effectOptions) {
         levelChooser = ComboBoxFactory.makeComboBox("Select level to edit", e -> delegate
-                                     .onUserEnteredEditLevel((String) levelChooser
-                                                                .getValue()), effectOptions);
+                .onUserEnteredEditLevel((String) levelChooser
+                        .getValue()), effectOptions);
     }
 
     @Override

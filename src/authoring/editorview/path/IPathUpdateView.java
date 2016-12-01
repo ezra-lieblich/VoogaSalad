@@ -3,11 +3,10 @@ package authoring.editorview.path;
 import java.util.List;
 
 import authoring.editorview.IUpdateView;
+import authoring.editorview.ListDataSource;
 import engine.path.Coordinate;
 
 public interface IPathUpdateView extends IPathEditorView, IUpdateView{
-
-	public void updatePathImage(String pathImage);
 	
 	public void updateNumColumns(int numColumns);
 	
@@ -20,5 +19,9 @@ public interface IPathUpdateView extends IPathEditorView, IUpdateView{
 	public void updateActiveID (int pathID);
 	
 	public void createNewPath ();
+	
+	public void updatePath ();
+
+	public void setPathListDataSource (ListDataSource source);
 
 }

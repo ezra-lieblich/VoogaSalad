@@ -1,6 +1,8 @@
 package authoring.view;
 
 import authoring.editortabpane.IEditorTabPane;
+import authoring.toolbar.IToolbar;
+
 import java.util.List;
 import authoring.editortabpane.EditorTabPaneDelegate;
 import javafx.scene.Node;
@@ -29,5 +31,7 @@ public interface IAuthoringView {
     public void setEditorTabPaneDelegate (EditorTabPaneDelegate delegate);
 
     public IEditorTabPane getMySideTabbedToolbar ();
+    
+    public IToolbar getMyToolbar();
 
 }

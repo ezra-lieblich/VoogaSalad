@@ -3,6 +3,8 @@ package authoring.editorview.tower;
 import java.io.IOException;
 import java.util.ResourceBundle;
 import authoring.editorview.EditorViewController;
+import authoring.editorview.ListCellData;
+import authoring.editorview.ListDataSource;
 import authoring.utilityfactories.DialogueBoxFactory;
 import engine.tower.TowerManagerController;
 import authoring.editorview.tower.ITowerEditorView;
@@ -15,7 +17,7 @@ import authoring.editorview.tower.ITowerEditorView;
  *
  */
 public class TowerEditorViewController extends EditorViewController
-        implements TowerEditorViewDelegate {
+        implements TowerEditorViewDelegate, ListDataSource {
 
     private TowerManagerController towerDataSource;
     private int currentTowerID;
@@ -24,12 +26,14 @@ public class TowerEditorViewController extends EditorViewController
     public TowerEditorViewController (int editorWidth, int editorHeight) throws IOException {
         towerView = TowerEditorViewFactory.build(editorWidth, editorHeight);
         towerView.setDelegate(this);
+        towerView.setTowerListDataSource(this);
         this.view = towerView;
 
     }
 
     public void setTowerDataSource (TowerManagerController source) {
         this.towerDataSource = source;
+        this.towerDataSource.addTypeBankListener(this.towerView);
         onUserPressedCreateNewTower();
     }
 
@@ -151,6 +155,15 @@ public class TowerEditorViewController extends EditorViewController
 	public void onUserSelectedTower(int towerID) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public ListCellData getCellDataForSubject(int id) {
+		ListCellData cellData = new ListCellData();
+        cellData.setName(towerDataSource.getName(id));
+        cellData.setImagePath(towerDataSource.getImagePath(id));
+        cellData.setId(id);
+        return cellData;
 	}
 
 }

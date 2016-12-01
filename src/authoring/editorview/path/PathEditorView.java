@@ -7,6 +7,7 @@ import authoring.editorview.path.subviews.PathGrid;
 import java.io.File;
 import java.util.List;
 
+import authoring.editorview.ListDataSource;
 import authoring.editorview.path.subviews.NewPathView;
 import authoring.editorview.path.subviews.PathInstructionsView;
 import authoring.editorview.path.subviews.PathImageView;
@@ -49,9 +50,7 @@ public class PathEditorView implements IPathUpdateView {
     	this.pathInstructionsView = new PathInstructionsView();
     	
     	
-    	//System.out.println(f.toURI().toString());
-    	
-    	
+
     	
     	this.pathGrid = new PathGrid(400, 400);   	
     	
@@ -120,17 +119,12 @@ public class PathEditorView implements IPathUpdateView {
 				grid);
     }
 
-	@Override
-	public void updatePathImage(String pathImage) {
-		pathImageView.setPathImagePath(pathImage);
-		pathGrid.setCellImage(pathImage);
-		
-	}
 
 	@Override
 	public void updateNumColumns(int numColumns) {
 		pathSizeView.setNumberOfColumns(numColumns);
 		pathGrid.setNumColumns(numColumns);
+		
 		
 	}
 
@@ -157,6 +151,8 @@ public class PathEditorView implements IPathUpdateView {
 	@Override
 	public void updateImagePathDisplay(String imagePath) {
 		pathImageView.setPathImagePath(imagePath);
+		pathGrid.setCellImage(imagePath);
+		
 		
 	}
 
@@ -176,12 +172,26 @@ public class PathEditorView implements IPathUpdateView {
 
 	@Override
 	public void createNewPath() {
-		pathGrid.clearBackground();
-		pathGrid.clearPath();
-		pathGrid.setBackground();
-		pathGrid.setPath();
 		
+	
+	}
+
+	@Override
+	public void updatePath() {
+		pathGrid.redrawPath();
 		
+	}
+
+	@Override
+	public void updateBank(List<Integer> ids) {
+		// TODO Auto-generated method stub
+		System.out.println("There is no path bank implemented");
+	}
+
+	@Override
+	public void setPathListDataSource(ListDataSource source) {
+		// TODO Auto-generated method stub
+		System.out.println("There is no path bank implemented");
 	}
 
 	

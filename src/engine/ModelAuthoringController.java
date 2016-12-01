@@ -41,6 +41,7 @@ public class ModelAuthoringController implements ModelController {
     
     @Override
     public String SaveData () {
+        //System.out.print(Serializer.toXML(gameData)); //Test XML
         return Serializer.toXML(gameData);
     }
     
@@ -52,6 +53,11 @@ public class ModelAuthoringController implements ModelController {
         modelControllers.put(PathManagerController.class, new PathTypeManagerController(managerMediator));
         modelControllers.put(EnemyManagerController.class, new EnemyTypeManagerController(managerMediator));
         modelControllers.put(LevelManagerController.class, new LevelTypeManagerController(managerMediator));
-
     }
+    
+// XML testing
+//    public static void main (String[] args) {
+//        ModelController test = new ModelAuthoringController();
+//        test.SaveData();
+//    }
 }

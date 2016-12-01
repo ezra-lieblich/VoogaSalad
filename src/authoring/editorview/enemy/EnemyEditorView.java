@@ -162,4 +162,10 @@ public class EnemyEditorView implements IEnemyEditorView {
 
     }
 
+	@Override
+	public void updateBank(List<Integer> ids) {
+		// TODO Auto-generated method stub
+		this.enemyBank.updateBank(ids);
+	}
+
 }

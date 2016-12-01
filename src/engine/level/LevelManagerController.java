@@ -1,5 +1,6 @@
 package engine.level;
 
+import java.util.List;
 import java.util.Map;
 import authoring.editorview.level.ILevelEditorView;
 import engine.ManagerController;
@@ -35,4 +36,10 @@ public interface LevelManagerController
     public void setEnemyFrequency (int levelID, int enemyID, double enemyFrequency);
 
     public double getEnemyFrequency (int levelID, int enemyID);
+
+    public void setLevelNumber (int levelID, int levelNumber);
+
+    public int getLevelNumber (int levelID);
+    
+    public List<Integer> getLevelOptions();
 }
