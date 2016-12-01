@@ -164,15 +164,14 @@ public class GamePlayerController implements Observer {
 					((GamePlayModel) o).getCurrentLevel());
 			this.view.updateCurrentLevelStats(((GamePlayModel) o).getCurrentLevel());
 			if (this.oldLevel != newLevel){
-				//test level
-				/*
+				
 				this.oldLevel = newLevel;
 				this.view.newLevelPopUp(e->{
 					//System.out.println("New level");
 					this.view.getGrid().getGrid().getChildren().clear();
 					//do something to trigger new level here!
 				});
-				*/
+				
 			}
 		}
 		/*
