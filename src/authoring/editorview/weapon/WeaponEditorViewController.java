@@ -73,7 +73,7 @@ public class WeaponEditorViewController extends EditorViewController
     }
 
     @Override
-    public void onUserEnteredWeaponImage (String weaponImagePath) {
+    public void onUserEnteredWeaponImagePath (String weaponImagePath) {
         weaponDataSource.setImagePath(currentWeaponID, weaponImagePath);
     }
 
@@ -133,13 +133,13 @@ public class WeaponEditorViewController extends EditorViewController
 
     }
 
-	@Override
-	public ListCellData getCellDataForSubject(int id) {
-		ListCellData cellData = new ListCellData();
+    @Override
+    public ListCellData getCellDataForSubject (int id) {
+        ListCellData cellData = new ListCellData();
         cellData.setName(weaponDataSource.getName(id));
         cellData.setImagePath(weaponDataSource.getImagePath(id));
         cellData.setId(id);
         return cellData;
-	}
+    }
 
 }
