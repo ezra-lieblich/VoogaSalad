@@ -21,6 +21,7 @@ import javafx.scene.layout.Pane;
 public class GridGUI {
 
 	private Pane grid;
+	//private Pane pathGrid;
 	public static final int GRID_WIDTH = 600;
 	public static final int GRID_HEIGHT = 600;
 	private double rows;
@@ -29,25 +30,41 @@ public class GridGUI {
 	private double cellHeight;
 	private GraphicsLibrary graphicsLib;
 	private List<int[]> path;
+	private List<ImageView> imagePath;
 
-	public static final String TEST_URL = "https://images.designtrends.com/wp-content/uploads/2016/03/30060819/Elegant-Night-Stay-Anime-Background.jpg"; // TODO:
+	public static final String TEST_URL = "http://vignette2.wikia.nocookie.net/shingekinokyojin/images/7/77/Walls.png/revision/latest?cb=20130520140640"; // TODO:
 																																							// dummy
 																																							// url
 
 	public GridGUI(int rows, int columns/*, List<int[]> path*/) {
 		//System.out.println("Rows: "+rows+"; columns: "+columns);
 		this.grid = new Pane();
+		//this.pathGrid = new Pane();
 		this.graphicsLib = new GraphicsLibrary();
 		this.rows = rows;
 		this.cols = columns;
 		this.cellWidth = GRID_WIDTH / cols;
 		this.cellHeight = GRID_HEIGHT / this.rows;
+		this.imagePath = new ArrayList<ImageView>();
 		//System.out.println("Cell width: "+cellWidth+", "+cellHeight);
 		//this.path = path;
 	}
+	
+	public double getCellWidth(){
+		return this.cellWidth;
+	}
+	
+	public double getCellHeight(){
+		return this.cellHeight;
+	}
 
+	public List<ImageView> getPathImages(){
+		return this.imagePath;
+	}
 	//for testing
+	@Deprecated
 	private void initDummyPath(){
+		
 		int[] stuff  = {0,0};
 		int []stuff1 = {1,1};
 		int []stuff2 = {2,2};
@@ -62,28 +79,25 @@ public class GridGUI {
 	}
 	
 	public void init(){
-		initDummyPath(); //TODO: get rid of
+		//initDummyPath(); //TODO: get rid of
 		styleGrid(TEST_URL);
-		populatePath(this.path);
+		//populatePath(this.path);
 		
 	}
 	public Pane getGrid() {
 		return this.grid;
 	}
+	
 
 	private void styleGrid(String terrainURL) {
 		setTerrain(terrainURL);
 		grid.getStyleClass().add("grid");
 		grid.setMinWidth(GRID_WIDTH);
 		grid.setMinHeight(GRID_HEIGHT);
+		
 	}
 
 	private void setTerrain(String imageURL) {
-		// Image background = graphicsLib.createImage("kaneki.jpg");
-		// graphicsLib.createImageView(graphicsLib.createImage("kaneki.jpg"));
-
-		// String image =
-		// this.getClass().getResource("kaneki.jpg").toExternalForm();
 		grid.setStyle("-fx-background-image: url('" + imageURL + "'); " + "-fx-background-position: center center; "
 				+ "-fx-background-repeat: stretch;");
 	}
@@ -91,9 +105,26 @@ public class GridGUI {
 	private void addTowerToGrid(Tower tower, int row, int col) {
 		ImageView towerImage = graphicsLib.createImageView(graphicsLib.createImage(tower.getImage()));
 		graphicsLib.setImageViewParams(towerImage, cellWidth * col, cellHeight * row, cellWidth, cellHeight);
-		this.grid.getChildren().add(towerImage);
+		this.grid.getChildren().addAll(towerImage, tower.getTowerInfo());
 	}
 
+	public void populatePath(Cell startingCell){
+		//System.out.println("populate path!");
+		Cell current = startingCell;
+		//System.out.println("starting cell x: "+current.getX()+"; y: "+current.getY());
+		while (current != null){
+			ImageView pathImage = graphicsLib.createImageView(graphicsLib.createImage("kaneki.jpg"));
+			double x =current.getX();
+			double y = current.getY();
+			//System.out.println("path cell x: "+x+"; y: "+y);
+			graphicsLib.setImageViewParams(pathImage, x*cellWidth, y*cellHeight,cellWidth, cellHeight);
+			this.grid.getChildren().add(pathImage);
+			this.imagePath.add(pathImage);
+			current = current.getNext();
+		}
+	}
+	
+	@Deprecated
 	private void populatePath( List<int[]> path) { //TODO: change how path is being sent
 		//System.out.println("Populate path!");
 		for (int i = 0; i < path.size(); i++) {

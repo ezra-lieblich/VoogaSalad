@@ -23,7 +23,6 @@ public class LevelSelectEnemyView implements ILevelSetView {
 
     @Override
     public Node getInstanceAsNode () {
-        // TODO Auto-generated method stub
         return enemyChooser;
     }
 

@@ -3,20 +3,17 @@ package gameplayer.view.animate;
 import javafx.animation.Timeline;
 import javafx.scene.image.ImageView;
 
-public class Animate {
+public class AnimateWeapon {
 	
-	public Animate(){
-		
-	}
+	private ImageView tower;
 	
-	public void updateEnemy(ImageView enemy, double x, double y){
-		enemy.setX(x);
-		enemy.setY(y);
+	public AnimateWeapon(ImageView tower){
+		this.tower = tower;
 	}
 	
 	public void throwWeapon(ImageView weapon, double x, double y){
-		weapon.setX(x);
-		weapon.setY(y);
+		weapon.setX(tower.getX());
+		weapon.setY(tower.getY());
 	}
 
 }

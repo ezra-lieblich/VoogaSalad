@@ -57,9 +57,11 @@ public class Cell {
 	}
 	
 	public int fireWeapon(){
-		if (this.tower != null && tower.isFiring()){
-			return this.tower.getWeaponType();
-		}
+		
+		//+++++++++++++++++++++++++++++++++++++++++need to be fixed+++++++++++++++++++++++
+		//if (this.tower != null && tower.isFiring()){
+			//return this.tower.getWeaponType();
+		//}
 		return -1;
 	}
 	

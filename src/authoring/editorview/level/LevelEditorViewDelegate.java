@@ -1,5 +1,10 @@
 package authoring.editorview.level;
 
+/**
+ * 
+ * @author Kayla Schulz, Andrew Bihl, Diane Hadley
+ *
+ */
 public interface LevelEditorViewDelegate {
 
     public void onUserEnteredRewardPoints (String points);

@@ -4,13 +4,43 @@
 	<init>	
 		<numLevels>2</numLevels>
 		<lives>50</lives>
-		<gold>1000</gold>
-		<levelnumber>10</levelnumber>
+		<gold>10000000000</gold>
+		<levelnumber>1</levelnumber>
 	</init>
 	<towerList>
 			<tower>
 				<name>ninja monkey</name>
-				<imageLocation>images/penguin.jpg</imageLocation>
+				<imageLocation>penguin.jpg</imageLocation>
+				<isDestroyable>false</isDestroyable>
+				<range>5</range>
+				<fireRate>5</fireRate>
+				<cost>500</cost>
+				<sellAmount>200</sellAmount>
+				<unlockLevel>0</unlockLevel>
+				<weaponType>cannon</weaponType>
+				<upgrade>
+					<cost>200</cost>
+					<type>tower</type>
+				</upgrade>
+			</tower>
+			<tower>
+				<name>SHELTER</name>
+				<imageLocation>shelter-cover.png</imageLocation>
+				<isDestroyable>false</isDestroyable>
+				<range>5</range>
+				<fireRate>5</fireRate>
+				<cost>500</cost>
+				<sellAmount>200</sellAmount>
+				<unlockLevel>0</unlockLevel>
+				<weaponType>cannon</weaponType>
+				<upgrade>
+					<cost>200</cost>
+					<type>tower</type>
+				</upgrade>
+			</tower>
+			<tower>
+				<name>BLAH</name>
+				<imageLocation>KenCentipede.gif</imageLocation>
 				<isDestroyable>false</isDestroyable>
 				<range>5</range>
 				<fireRate>5</fireRate>
@@ -25,7 +55,7 @@
 			</tower>
 			<tower>
 				<name>test monkey</name>
-				<imageLocation>images/kaneki.jpg</imageLocation>
+				<imageLocation>butterfly.png</imageLocation>
 				<isDestroyable>false</isDestroyable>
 				<range>10</range>
 				<fireRate>2</fireRate>
@@ -42,7 +72,7 @@
 	<enemyList>
 		<enemy>
 			<name>redballoon</name>
-			<imageLocation>images/redbaloon.jpg</imageLocation>
+			<imageLocation>redballoon.jpg</imageLocation>
 			<widthOfImage> 20 </widthOfImage>
 			<heightOfImage> 20 </heightOfImage>
 			<speed>5</speed>
@@ -53,7 +83,7 @@
 		</enemy>
 		<enemy>
 			<name>redmoab</name>
-			<imageLocation>images/redmoab.jpg</imageLocation>
+			<imageLocation>redmoab.jpg</imageLocation>
 			<widthOfImage>50</widthOfImage>
 			<heightOfImage>50</heightOfImage>
 			<speed>3</speed>
@@ -72,19 +102,25 @@
 		</wave>
 		<path>
 			<coordinate>0,0;</coordinate>
-			<coordinate>0,1;</coordinate>
-			<coordinate>0,2;</coordinate>
-			<coordinate>0,3;</coordinate>
-			<coordinate>0,4;</coordinate>
-			<coordinate>0,5;</coordinate>
-			<coordinate>0,6;</coordinate>
-			<coordinate>0,7;</coordinate>
-			<coordinate>0,8;</coordinate>
-			<coordinate>0,9;</coordinate>
+			<coordinate>1,0;</coordinate>
+			<coordinate>1,1;</coordinate>
+			<coordinate>2,1;</coordinate>
+			<coordinate>3,1;</coordinate>
+			<coordinate>3,2;</coordinate>
+			<coordinate>3,3;</coordinate>
+			<coordinate>4,3;</coordinate>
+			<coordinate>5,3;</coordinate>
+			<coordinate>6,3;</coordinate>
+			<coordinate>6,4;</coordinate>
+			<coordinate>6,5;</coordinate>
+			<coordinate>7,5;</coordinate>
+			<coordinate>8,5;</coordinate>
+			<coordinate>9,5;</coordinate>
+			<coordinate>9,6;</coordinate>
+			<coordinate>9,7;</coordinate>
+			<coordinate>9,8;</coordinate>
 		</path>
-		<enemies>
-			
-		</enemies>
+		<enemies></enemies>
 	</level1>
 	<level2>
 		<width>10</width>
@@ -95,15 +131,15 @@
 		</wave>
 		<path>
 			<coordinate>0,0;</coordinate>
-			<coordinate>0,1;</coordinate>
-			<coordinate>0,2;</coordinate>
-			<coordinate>0,3;</coordinate>
-			<coordinate>0,4;</coordinate>
-			<coordinate>0,5;</coordinate>
-			<coordinate>0,6;</coordinate>
-			<coordinate>0,7;</coordinate>
-			<coordinate>0,8;</coordinate>
-			<coordinate>0,9;</coordinate>
+			<coordinate>1,0;</coordinate>
+			<coordinate>1,1;</coordinate>
+			<coordinate>2,1;</coordinate>
+			<coordinate>3,1;</coordinate>
+			<coordinate>3,2;</coordinate>
+			<coordinate>3,3;</coordinate>
+			<coordinate>4,3;</coordinate>
+			<coordinate>5,3;</coordinate>
+			<coordinate>6,3;</coordinate>
 		</path>
 	</level2>
 </GameSetting>

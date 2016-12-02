@@ -2,13 +2,13 @@ package engine.settings;
 
 import java.util.List;
 
-import authoring.editorview.gamesettings.IGameUpdateView;
+import authoring.editorview.gamesettings.IGameSettingsEditorView;
 import engine.AbstractTypeManagerController;
 import engine.ManagerMediator;
 
 
 public class GameModeTypeManagerController 
-	extends AbstractTypeManagerController<GameModeManager, GameModeBuilder, GameMode, IGameUpdateView> implements GameModeManagerController {
+	extends AbstractTypeManagerController<GameModeManager, GameModeBuilder, GameMode, IGameSettingsEditorView> implements GameModeManagerController {
 
 	public GameModeTypeManagerController(ManagerMediator managerMediator) {
 		super(new GameModeTypeManager(), new GameModeTypeBuilder(), managerMediator);
@@ -65,7 +65,7 @@ public class GameModeTypeManagerController
 	}
 
 	@Override
-	protected GameModeBuilder constructTypeProperties(IGameUpdateView updateView, GameModeBuilder typeBuilder) {
+	protected GameModeBuilder constructTypeProperties(IGameSettingsEditorView updateView, GameModeBuilder typeBuilder) {
 		// TODO NEED methods in IGAMEUPDATEVIEW
 		return null;
 	}
