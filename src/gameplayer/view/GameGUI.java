@@ -25,6 +25,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -72,6 +74,7 @@ public class GameGUI {
 		createScene();
 		createGrid();
 		initDragDropPane(imagePaths);
+		initChat();
 		addButtonPanel();
 		initStatsDisplay(gold, lives, currentLevel);
 		return this.scene;
@@ -158,6 +161,14 @@ public class GameGUI {
 		mainScreen.setRight(dragDrop.getDragDropPane());
 		Tab tab = dragDrop.createTab("Blah test");
 		dragDrop.populateImageViewsToTab(tab, imagePaths);
+	}
+	
+	private void initChat(){
+		WebView browser = new WebView();
+		WebEngine webEngine = browser.getEngine();
+		webEngine.load("http://voogachat.herokuapp.com");
+		Tab tab = dragDrop.createTab("Chat");
+		tab.setContent(browser);
 	}
 
 	private void initStatsDisplay(double gold, double lives, double level) {
