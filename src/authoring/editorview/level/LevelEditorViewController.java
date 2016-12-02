@@ -116,16 +116,8 @@ public class LevelEditorViewController extends EditorViewController
     }
 
     @Override
-    public void onUserEnteredAddEnemy (String enemyID, String numEnemies) {
-        try {
-            Integer.parseInt(enemyID);
-            Integer.parseInt(numEnemies);
-            levelDataSource.setEnemy(currentLevelID, Integer.parseInt(enemyID),
-                                     Integer.parseInt(numEnemies));
-        }
-        catch (NumberFormatException e) {
-            createDialogueBox();
-        }
+    public void onUserEnteredAddEnemy (Enemy enemyData) {
+        // TODO: Fill this in and discuss with Ezra
     }
 
     @Override

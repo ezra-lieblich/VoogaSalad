@@ -2,10 +2,10 @@ package authoring.editorview.level.subviews;
 
 import java.util.List;
 import java.util.ResourceBundle;
+import authoring.editorview.level.Enemy;
 import authoring.editorview.level.ILevelSetView;
 import authoring.editorview.level.LevelEditorViewDelegate;
 import authoring.editorview.path.NameIdPair;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
@@ -69,43 +69,6 @@ public class EnemyTableView implements ILevelSetView {
         enemyTable.setItems(data);
         enemyTable.getColumns().addAll(enemyNameCol, numEnemiesCol, enemyFrequencyCol);
         enemyTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-    }
-
-    public static class Enemy {
-
-        private final SimpleStringProperty enemyName;
-        private final SimpleStringProperty enemyFrequency;
-        private final SimpleStringProperty numOfEnemies;
-
-        private Enemy (String enemyName, String enemyFrequency, String numOfEnemies) {
-            this.enemyName = new SimpleStringProperty(enemyName);
-            this.enemyFrequency = new SimpleStringProperty(enemyFrequency);
-            this.numOfEnemies = new SimpleStringProperty(numOfEnemies);
-        }
-
-        public String getEnemyName () {
-            return enemyName.get();
-        }
-
-        public void setEnemyName (String enemyName) {
-            this.enemyName.set(enemyName);
-        }
-
-        public String getEnemyFrequency () {
-            return enemyFrequency.get();
-        }
-
-        public void setEnemyFrequency (String enemyFrequency) {
-            this.enemyFrequency.set(enemyFrequency);
-        }
-
-        public String getNumOfEnemies () {
-            return numOfEnemies.get();
-        }
-
-        public void setNumOfEnemies (String numOfEnemies) {
-            this.numOfEnemies.set(numOfEnemies);
-        }
     }
 
 }

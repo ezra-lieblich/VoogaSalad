@@ -22,7 +22,6 @@ public class GameNameView {
 
     public GameNameView () {
         makeNameTextField();
-
     }
 
     public Node getInstanceAsNode () {
@@ -38,8 +37,12 @@ public class GameNameView {
                                                        e -> delegate
                                                                .onUserEnteredGameNames(nameTextField
                                                                        .getText()));
-        hbox = BoxFactory.createHBoxWithLabelandNode("Choose game name:", nameTextField);
+        hbox = BoxFactory.createHBoxWithLabelandNode("Choose game name: ", nameTextField);
 
+    }
+
+    public void updateGameName (String name) {
+        nameTextField.setText(name);
     }
 
 }
