@@ -1,8 +1,10 @@
 package authoring.editorview.level.subviews;
 
+import java.util.ArrayList;
 import java.util.List;
 import authoring.editorview.level.ILevelSetView;
 import authoring.editorview.level.LevelEditorViewDelegate;
+import authoring.editorview.path.NameIdPair;
 import authoring.utilityfactories.ComboBoxFactory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -26,9 +28,11 @@ public class LevelSelectEnemyView implements ILevelSetView {
     }
 
     private ComboBox<Object> setComboBox (ObservableList<Object> enemyOptions) {
-        ComboBoxFactory.makeComboBox("Add enemy", e -> getEnemyID((String) enemyChooser.getValue()),
-                                     enemyOptions);
-        return null;
+        ComboBox<Object> enemyChooser =
+                ComboBoxFactory.makeComboBox("Add enemy",
+                                             e -> getEnemyID((String) this.enemyChooser.getValue()),
+                                             enemyOptions);
+        return enemyChooser;
     }
 
     private void getEnemyID (String enemyName) {
@@ -46,8 +50,12 @@ public class LevelSelectEnemyView implements ILevelSetView {
         this.delegate = delegate;
     }
 
-    public void updateEnemyList (List<String> fullEnemyList) {
-        enemyChooser.getItems().add(fullEnemyList);
+    public void updateEnemyList (List<NameIdPair> fullEnemyList) {
+        List<String> enemyNames = new ArrayList<>();
+        for (NameIdPair n : fullEnemyList) {
+            enemyNames.add(n.getName());
+        }
+        enemyChooser.getItems().add(enemyNames);
     }
 
 }
