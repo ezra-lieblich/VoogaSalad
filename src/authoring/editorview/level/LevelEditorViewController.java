@@ -116,7 +116,7 @@ public class LevelEditorViewController extends EditorViewController
     }
 
     @Override
-    public void onUserEnteredAddEnemy (Enemy enemyData) {
+    public void onUserEnteredAddEnemy (WaveObject enemyData) {
         // TODO: Fill this in and discuss with Ezra
     }
 
