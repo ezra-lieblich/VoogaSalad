@@ -27,10 +27,8 @@ public interface ITowerEditorView extends ITowerSetView, IUpdateView {
 
     public void updateTowerBank (List<Integer> createdTowers);
 
-    public void createNewTower ();
-    
     public void deleteTower ();
-    
+
     public void setTowerListDataSource (ListDataSource source);
 
 }
