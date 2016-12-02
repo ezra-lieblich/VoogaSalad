@@ -1,13 +1,9 @@
 package authoring.editorview.enemy.subviews;
 
-import java.util.ArrayList;
 import java.util.List;
 import authoring.editorview.ImageBank;
-import authoring.editorview.ListCellData;
-import authoring.editorview.ListDataSource;
 import authoring.editorview.enemy.EnemyEditorViewDelegate;
 import authoring.utilityfactories.ButtonFactory;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 
 
@@ -41,6 +37,7 @@ public class EnemyImageBank extends ImageBank {
     @Override
     protected void userSelectedRow (int index) {
         int selectedEnemy = this.itemIDs.get(index);
-        this.delegate.onUserSelectedEnemy(selectedEnemy);
+        if (selectedEnemy != -1) 
+            this.delegate.onUserSelectedEnemy(selectedEnemy);
     }
 }
