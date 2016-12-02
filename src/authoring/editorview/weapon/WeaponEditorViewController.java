@@ -80,6 +80,10 @@ public class WeaponEditorViewController extends EditorViewController
     @Override
     public void onUserPressedCreateWeapon () {
         currentWeaponID = weaponDataSource.createType(weaponView);
+        refreshWeaponView();
+    }
+
+    private void refreshWeaponView () {
         weaponView.updateImagePathDisplay(weaponDataSource.getImagePath(currentWeaponID));
         weaponView.updateNameDisplay(weaponDataSource.getName(currentWeaponID));
         weaponView.updateFireRateDisplay(weaponDataSource.getWeaponFireRate(currentWeaponID));
@@ -129,8 +133,8 @@ public class WeaponEditorViewController extends EditorViewController
 
     @Override
     public void onUserSelectedWeapon (int weaponID) {
-        // TODO Auto-generated method stub
-
+        currentWeaponID = weaponID;
+        refreshWeaponView();
     }
 
     @Override

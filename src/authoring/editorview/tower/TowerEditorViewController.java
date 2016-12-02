@@ -43,6 +43,10 @@ public class TowerEditorViewController extends EditorViewController
     @Override
     public void onUserPressedCreateNewTower () {
         currentTowerID = towerDataSource.createType(towerView);
+        refreshTowerView();
+    }
+
+    private void refreshTowerView () {
         towerView.updateImagePathDisplay(towerDataSource.getImagePath(currentTowerID));
         towerView.updateNameDisplay(towerDataSource.getName(currentTowerID));
         towerView.updateSizeDisplay(towerDataSource.getSize(currentTowerID));
@@ -151,19 +155,19 @@ public class TowerEditorViewController extends EditorViewController
                                                   dialogueBoxResource.getString("CheckInput"));
     }
 
-	@Override
-	public void onUserSelectedTower(int towerID) {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public void onUserSelectedTower (int towerID) {
+        currentTowerID = towerID;
+        refreshTowerView();
+    }
 
-	@Override
-	public ListCellData getCellDataForSubject(int id) {
-		ListCellData cellData = new ListCellData();
+    @Override
+    public ListCellData getCellDataForSubject (int id) {
+        ListCellData cellData = new ListCellData();
         cellData.setName(towerDataSource.getName(id));
         cellData.setImagePath(towerDataSource.getImagePath(id));
         cellData.setId(id);
         return cellData;
-	}
+    }
 
 }
