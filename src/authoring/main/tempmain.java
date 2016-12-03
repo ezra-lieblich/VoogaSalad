@@ -9,7 +9,6 @@ import authoring.editorview.path.PathEditorViewController;
 import authoring.editorview.tower.TowerEditorViewController;
 import authoring.editorview.weapon.WeaponEditorViewController;
 import authoring.view.AuthoringViewController;
-import authoring.view.IAuthoringView;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -29,13 +28,13 @@ public class tempmain extends Application {
     @Override
     public void start (Stage s) throws IOException {
 
-//        ManagerTypeMediator mainMediator = new ManagerTypeMediator();
-//
-//        AuthoringViewController mainVC = new AuthoringViewController(SIZE, SIZE);
-//        IAuthoringView mainView = mainVC.getView();
-//
-//        this.createManagersAndControllers(mainMediator, mainVC);
-    	AuthoringController generalController = new AuthoringController(SIZE);
+        // ManagerTypeMediator mainMediator = new ManagerTypeMediator();
+        //
+        // AuthoringViewController mainVC = new AuthoringViewController(SIZE, SIZE);
+        // IAuthoringView mainView = mainVC.getView();
+        //
+        // this.createManagersAndControllers(mainMediator, mainVC);
+        AuthoringController generalController = new AuthoringController(SIZE);
 
         Scene scene = generalController.getScene();
         s.setTitle(TITLE);
@@ -70,7 +69,6 @@ public class tempmain extends Application {
                 .getModelController(TowerManagerController.class));
 
     }
-
 
     public static void main (String[] args) {
         launch(args);

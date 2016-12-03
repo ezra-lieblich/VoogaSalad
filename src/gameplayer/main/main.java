@@ -1,4 +1,5 @@
 package gameplayer.main;
+
 import gameplayer.controller.GamePlayerController;
 import gameplayer.view.GameGUI;
 import javafx.application.Application;

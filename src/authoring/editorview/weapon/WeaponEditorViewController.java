@@ -73,13 +73,17 @@ public class WeaponEditorViewController extends EditorViewController
     }
 
     @Override
-    public void onUserEnteredWeaponImage (String weaponImagePath) {
+    public void onUserEnteredWeaponImagePath (String weaponImagePath) {
         weaponDataSource.setImagePath(currentWeaponID, weaponImagePath);
     }
 
     @Override
     public void onUserPressedCreateWeapon () {
         currentWeaponID = weaponDataSource.createType(weaponView);
+        refreshWeaponView();
+    }
+
+    private void refreshWeaponView () {
         weaponView.updateImagePathDisplay(weaponDataSource.getImagePath(currentWeaponID));
         weaponView.updateNameDisplay(weaponDataSource.getName(currentWeaponID));
         weaponView.updateFireRateDisplay(weaponDataSource.getWeaponFireRate(currentWeaponID));
@@ -129,17 +133,17 @@ public class WeaponEditorViewController extends EditorViewController
 
     @Override
     public void onUserSelectedWeapon (int weaponID) {
-        // TODO Auto-generated method stub
-
+        currentWeaponID = weaponID;
+        refreshWeaponView();
     }
 
-	@Override
-	public ListCellData getCellDataForSubject(int id) {
-		ListCellData cellData = new ListCellData();
+    @Override
+    public ListCellData getCellDataForSubject (int id) {
+        ListCellData cellData = new ListCellData();
         cellData.setName(weaponDataSource.getName(id));
         cellData.setImagePath(weaponDataSource.getImagePath(id));
         cellData.setId(id);
         return cellData;
-	}
+    }
 
 }

@@ -60,14 +60,14 @@ public class WeaponEffectView extends PhotoFileChooser {
         throws IOException {
         this.labelsResource = labelsResource;
         this.dialogueBoxResource = dialogueBoxResource;
-
+        this.weaponImage = weaponImage;
         this.weaponName = weaponName;
         this.weaponSpeed = weaponSpeed;
         this.weaponFireRate = weaponFireRate;
         this.weaponRange = weaponRange;
         this.weaponCollision = weaponCollision;
         this.weaponPath = weaponPath;
-        this.weaponImage = weaponImage;
+
         this.weaponSize = weaponSize;
 
         vboxView = new VBox(10);
@@ -137,7 +137,7 @@ public class WeaponEffectView extends PhotoFileChooser {
     public void openFileChooser (FileChooser chooseFile) {
         chosenFile = chooseFile.showOpenDialog(new Stage());
         if (chosenFile != null) {
-            delegate.onUserEnteredWeaponImage(chosenFile.toURI().getPath());
+            delegate.onUserEnteredWeaponImagePath(chosenFile.toURI().getPath());
         }
         // if not null -> get imageFilePath and update the instance variable
         // then loadImage through the created method above

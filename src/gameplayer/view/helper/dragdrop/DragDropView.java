@@ -33,6 +33,7 @@ public class DragDropView {
 	private Pane target;
 	private DragDrop dragDrop;
 	private List<ImageView> objects;
+	
 
 	public DragDropView(double xError, double yError) {
 		this.dragDropPane = new TabPane();
@@ -40,8 +41,11 @@ public class DragDropView {
 		this.graphicLib = new GraphicsLibrary();
 		this.dragDrop = new DragDrop(xError,yError);
 		this.objects = new ArrayList<ImageView>();
+		
 		setTabPaneStyle();
 	}
+	
+	
 	
 	private void setTabPaneStyle(){
 		this.dragDropPane.getStyleClass().add("dragDropPane");
@@ -53,6 +57,10 @@ public class DragDropView {
 	
 	public TabPane getDragDropPane(){
 		return this.dragDropPane;
+	}
+	
+	public DragDrop getDragDrop(){
+		return this.dragDrop;
 	}
 	
 	/**
@@ -73,7 +81,7 @@ public class DragDropView {
 	 * Populates a tab with images to later drag and drop
 	 * @param imageLocations Array of the image location names
 	 */
-	public void populateImageViewsToTab(Tab tab, String[] imageLocations) {
+	public void populateImageViewsToTab(Tab tab, List<String> imageLocations) {
 		ScrollPane root = new ScrollPane();
 		TilePane grid = new TilePane(); //TODO: change, would be set by the xml file
 		grid.setHgap(20);
@@ -82,16 +90,22 @@ public class DragDropView {
         root.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED); // Vertical scroll bar
         root.setFitToWidth(true);
         root.setContent(grid);
+    	root.getStyleClass().add("towersScrollPane");
+        //int idCount = 0;
 		for (String image:imageLocations){
 			ImageView currentImage = graphicLib.createImageView(graphicLib.createImage(image));
+			currentImage.setId(image);
+			//currentImage.setId(idCount+"");
+			//idCount++;
 			dragDrop.init(currentImage, target);
 			objects.add(currentImage);//TODO: do I need this?
 			graphicLib.setImageViewParams(currentImage, DEFENSIVEWIDTH, DEFENSIVEHEIGHT);
 			grid.getChildren().add(currentImage);// ,cIndex, rIndex);
 		}
 		tab.setContent(root);
-		
 
 	}
+	
+	
 
 }

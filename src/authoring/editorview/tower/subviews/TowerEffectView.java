@@ -129,7 +129,7 @@ public class TowerEffectView extends PhotoFileChooser implements ITowerSetView {
     public void openFileChooser (FileChooser chooseFile) throws IOException {
         chosenFile = chooseFile.showOpenDialog(new Stage());
         if (chosenFile != null) {
-            //System.out.println(chosenFile.toURI().getPath());
+            // System.out.println(chosenFile.toURI().getPath());
             delegate.onUserEnteredTowerImagePath(chosenFile.toURI().getPath());
         }
     }

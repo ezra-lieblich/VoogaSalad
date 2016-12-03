@@ -99,7 +99,7 @@ public class LevelEditorViewController extends EditorViewController
             levelDataSource.setTransitionTime(currentLevelID, Double.parseDouble(time));
         }
         catch (NumberFormatException e) {
-            createDialogueBox();
+            createIntCheckDialogueBox();
         }
     }
 
@@ -111,21 +111,13 @@ public class LevelEditorViewController extends EditorViewController
             // TODO: HUGE BTW - the second parameter is the enemy that is set
         }
         catch (NumberFormatException e) {
-            createDialogueBox();
+            createIntCheckDialogueBox();
         }
     }
 
     @Override
-    public void onUserEnteredAddEnemy (String enemyID, String numEnemies) {
-        try {
-            Integer.parseInt(enemyID);
-            Integer.parseInt(numEnemies);
-            levelDataSource.setEnemy(currentLevelID, Integer.parseInt(enemyID),
-                                     Integer.parseInt(numEnemies));
-        }
-        catch (NumberFormatException e) {
-            createDialogueBox();
-        }
+    public void onUserEnteredAddEnemy (WaveObject enemyData) {
+        // TODO: Fill this in and discuss with Ezra
     }
 
     @Override
@@ -141,7 +133,7 @@ public class LevelEditorViewController extends EditorViewController
             levelDataSource.setRewardScore(currentLevelID, Double.parseDouble(points));
         }
         catch (NumberFormatException e) {
-            createDialogueBox();
+            createIntCheckDialogueBox();
         }
     }
 
@@ -152,7 +144,7 @@ public class LevelEditorViewController extends EditorViewController
             levelDataSource.setRewardMoney(currentLevelID, Double.parseDouble(money));
         }
         catch (NumberFormatException e) {
-            createDialogueBox();
+            createIntCheckDialogueBox();
         }
     }
 
@@ -163,11 +155,11 @@ public class LevelEditorViewController extends EditorViewController
             levelDataSource.setRewardHealth(currentLevelID, Double.parseDouble(health));
         }
         catch (NumberFormatException e) {
-            createDialogueBox();
+            createIntCheckDialogueBox();
         }
     }
 
-    private void createDialogueBox () {
+    private void createIntCheckDialogueBox () {
         ResourceBundle dialogueBoxResource = ResourceBundle.getBundle("resources/DialogueBox");
         DialogueBoxFactory.createErrorDialogueBox(dialogueBoxResource.getString("Integer"),
                                                   dialogueBoxResource.getString("CheckInput"));
