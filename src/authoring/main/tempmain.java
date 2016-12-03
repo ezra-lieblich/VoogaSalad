@@ -46,7 +46,7 @@ public class tempmain extends Application {
 
     }
 
-    private void createManagersAndControllers (ManagerTypeMediator mainMediator,
+    private void createManagersAndControllers (MediatorData mainMediator,
                                                AuthoringViewController authoringVC) {
 
         HashMap<String, EditorViewController> editorVCs = authoringVC.getControllers();

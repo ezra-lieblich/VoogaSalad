@@ -9,10 +9,12 @@ import engine.tower.Tower;
 import engine.weapon.Weapon;
 
 
-public interface ManagerMediator extends Observer<Manager<? extends Type>, MethodData<?>>{
+public interface ManagerMediator extends Observer<Manager<? extends Type>, MethodData<?>> {
 
     void addManager(Manager<? extends Type> manager);
 
     void removeManager(Manager<? extends Type> manager);
+    
+    <R> R getManager (Class<R> key);
 
 }

@@ -10,4 +10,5 @@ public interface GameData {
 
     void setAuthor (String author);
 
+    ManagerMediator getManagerMediator();
 }

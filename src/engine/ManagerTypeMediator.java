@@ -1,8 +1,10 @@
 package engine;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -22,17 +24,17 @@ import engine.weapon.Weapon;
 //TODO - maybe implement observer pattern with each manager as both observer/observable
 //TODO - use generics
 //TODO - override each manager's hashcode (to make it unique) or give managers an index (support multiple);
-public class ManagerTypeMediator implements ManagerMediator {
+public class ManagerTypeMediator implements ManagerMediator{
     
-    private List<Manager<? extends Type>> allManagers;
+    private Map<Class<?>, Manager<? extends Type>> allManagers;
    
     public ManagerTypeMediator() {
-        allManagers = new ArrayList<Manager<? extends Type>>();
+        allManagers = new HashMap<Class<?>, Manager<? extends Type>>();
     }
     
     @Override
     public <R extends Manager<? extends Type>> void update (R observable, MethodData<?> value) {
-        allManagers.forEach(a -> a.visitManager(observable, value));
+        allManagers.values().forEach(a -> a.visitManager(observable, value));
     }
     
 //    @Override
@@ -43,14 +45,18 @@ public class ManagerTypeMediator implements ManagerMediator {
     
     @Override
     public void addManager(Manager<? extends Type> manager) {
-        allManagers.add(manager);
+        allManagers.put(manager.getClass().getInterfaces()[0], manager);
     }
     
     @Override
     public void removeManager(Manager<? extends Type> manager) {
-        allManagers.remove(manager);
+        allManagers.remove(manager.getClass());
     }
 
+    @Override
+    public <R> R getManager(Class<R> key) {
+        return key.cast(allManagers.get(key));
+    }
     
 //    @Override
 //    public Enemy getEnemy(int id) {

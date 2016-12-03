@@ -1,6 +1,7 @@
 package engine;
 
 import java.util.List;
+import java.util.Map;
 import java.util.function.Consumer;
 import engine.observer.Observable;
 
@@ -15,4 +16,7 @@ public interface Manager<E extends Type> extends VisitorManager<MethodData<?>>, 
     void applyToAllEntities (Consumer<E> entry);
     
     List<Integer> getEntityIds();
+    
+    Map<Integer, E> getEntities ();
+
 }
