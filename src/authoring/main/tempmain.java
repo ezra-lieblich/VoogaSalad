@@ -46,29 +46,29 @@ public class tempmain extends Application {
 
     }
 
-    private void createManagersAndControllers (MediatorData mainMediator,
-                                               AuthoringViewController authoringVC) {
-
-        HashMap<String, EditorViewController> editorVCs = authoringVC.getControllers();
-        PathEditorViewController pathVC = (PathEditorViewController) editorVCs.get("path");
-        LevelEditorViewController levelVC = (LevelEditorViewController) editorVCs.get("level");
-        WeaponEditorViewController weaponVC = (WeaponEditorViewController) editorVCs.get("weapon");
-        EnemyEditorViewController enemyVC = (EnemyEditorViewController) editorVCs.get("enemy");
-        TowerEditorViewController towerVC = (TowerEditorViewController) editorVCs.get("tower");
-
-        ModelAuthoringController modelController = new ModelAuthoringController();
-
-        pathVC.setPathDataSource(modelController.getModelController(PathManagerController.class));
-        levelVC.setLevelDataSource(modelController
-                .getModelController(LevelManagerController.class));
-        weaponVC.setWeaponDataSource(modelController
-                .getModelController(WeaponManagerController.class));
-        enemyVC.setEnemyDataSource(modelController
-                .getModelController(EnemyManagerController.class));
-        towerVC.setTowerDataSource(modelController
-                .getModelController(TowerManagerController.class));
-
-    }
+//    private void createManagersAndControllers (MediatorManager mainMediator,
+//                                               AuthoringViewController authoringVC) {
+//
+//        HashMap<String, EditorViewController> editorVCs = authoringVC.getControllers();
+//        PathEditorViewController pathVC = (PathEditorViewController) editorVCs.get("path");
+//        LevelEditorViewController levelVC = (LevelEditorViewController) editorVCs.get("level");
+//        WeaponEditorViewController weaponVC = (WeaponEditorViewController) editorVCs.get("weapon");
+//        EnemyEditorViewController enemyVC = (EnemyEditorViewController) editorVCs.get("enemy");
+//        TowerEditorViewController towerVC = (TowerEditorViewController) editorVCs.get("tower");
+//
+//        ModelAuthoringController modelController = new ModelAuthoringController();
+//
+//        pathVC.setPathDataSource(modelController.getModelController(PathManagerController.class));
+//        levelVC.setLevelDataSource(modelController
+//                .getModelController(LevelManagerController.class));
+//        weaponVC.setWeaponDataSource(modelController
+//                .getModelController(WeaponManagerController.class));
+//        enemyVC.setEnemyDataSource(modelController
+//                .getModelController(EnemyManagerController.class));
+//        towerVC.setTowerDataSource(modelController
+//                .getModelController(TowerManagerController.class));
+//
+//    }
 
     public static void main (String[] args) {
         launch(args);
