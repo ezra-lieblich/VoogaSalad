@@ -38,6 +38,7 @@ import java.util.Random;
 
 public class GamePlayerController implements Observer {
 
+	private static final int ENTITY_SIZE = 70;
 	public static final int FRAMES_PER_SECOND = 60;
 	public static final int MILLISECOND_DELAY = 50;
 	public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
@@ -138,16 +139,19 @@ public class GamePlayerController implements Observer {
 	}
 	
 	private void handleMouseClicked(double x, double y){
+	System.out.println(" x: "+x+", y:"+y);
 		List<Tower> towersOnGrid = this.model.getTowerOnGrid();
 		for(Tower t: towersOnGrid){
-			if((t.getX() -20 < x || x < t.getX()+20)  && (t.getY()-20 < y || y <t.getY() + 20)){
-				////System.out.println("Tower x: "+x+", Tower y:"+y);
+			System.out.println("Tower x: " + t.getX() + "  " + "Tower y: " + t.getY());
+			if((t.getX() +ENTITY_SIZE >= x && t.getY() + ENTITY_SIZE <= y+54)){
 				t.toggleInfoVisibility();
 			}
 		}
 		List<Enemy> enemiesOnGrid = this.enemyManager.getEnemyOnGrid();
 		for(Enemy e: enemiesOnGrid){
-			if((e.getX() - 20 < x || e.getY() +20 > x) && (e.getX() - 20 < y || e.getY() +20 > y)){
+			
+			if(e.getX() +ENTITY_SIZE >= x && e.getY() + ENTITY_SIZE <=y){
+				System.out.println("clicked enemy");
 				e.toggleInfoVisibility();
 			}
 		}
