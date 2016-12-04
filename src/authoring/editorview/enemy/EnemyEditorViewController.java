@@ -35,9 +35,7 @@ public class EnemyEditorViewController extends EditorViewController
         onUserPressedCreateEnemy();
     }
 
-    @Override
-    public void onUserPressedCreateEnemy () {
-        currentEnemyID = enemyDataSource.createType(enemyView);
+    private void refreshEnemyView () {
         enemyView.updateImagePathDisplay(enemyDataSource.getImagePath(currentEnemyID));
         enemyView.updateNameDisplay(enemyDataSource.getName(currentEnemyID));
         enemyView.updateSizeDisplay(enemyDataSource.getSize(currentEnemyID));
@@ -45,10 +43,15 @@ public class EnemyEditorViewController extends EditorViewController
         enemyView.updateEnemyCollisionEffect(enemyDataSource
                 .getEnemyCollisionEffect(currentEnemyID));
         enemyView.updateEnemySpeed(enemyDataSource.getEnemySpeed(currentEnemyID));
-        enemyView.updateEnemySpeed(enemyDataSource.getEnemySpeed(currentEnemyID));
         enemyView.updateEnemyRewardMoney(enemyDataSource.getEnemyRewardMoney(currentEnemyID));
         enemyView.updateEnemyRewardPoints(enemyDataSource.getEnemyRewardScore(currentEnemyID));
         enemyView.updateEnemyHealthDisplay(enemyDataSource.getEnemyHealth(currentEnemyID));
+    }
+
+    @Override
+    public void onUserPressedCreateEnemy () {
+        currentEnemyID = enemyDataSource.createType(enemyView);
+        refreshEnemyView();
     }
 
     @Override
@@ -160,8 +163,8 @@ public class EnemyEditorViewController extends EditorViewController
 
     @Override
     public void onUserSelectedEnemy (int enemyID) {
-        // TODO Auto-generated method stub
-
+        currentEnemyID = enemyID;
+        refreshEnemyView();
     }
 
 }

@@ -25,10 +25,12 @@ public class GameSettingsEditorView implements IGameSettingsEditorView, IGameSet
         gameSettingsView = new BorderPane();
         this.gameConditionsRoot = new VBox(10);
         this.gameNameView = new GameNameView();
+        addViewComponents();
     }
 
     private void addViewComponents () {
         gameConditionsRoot.getChildren().add(gameNameView.getInstanceAsNode());
+        gameSettingsView.setTop(gameConditionsRoot);
     }
 
     @Override
@@ -39,6 +41,7 @@ public class GameSettingsEditorView implements IGameSettingsEditorView, IGameSet
     @Override
     public void setDelegate (GameSettingsEditorViewDelegate delegate) {
         this.delegate = delegate;
+        gameNameView.setDelegate(delegate);
     }
 
     @Override
@@ -49,8 +52,7 @@ public class GameSettingsEditorView implements IGameSettingsEditorView, IGameSet
 
     @Override
     public void updateGameName (String name) {
-        // TODO Auto-generated method stub
-
+        this.gameNameView.updateGameName(name);
     }
 
     @Override

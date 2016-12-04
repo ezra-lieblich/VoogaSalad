@@ -2,7 +2,6 @@ package authoring.editorview;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import javafx.beans.value.ChangeListener;
@@ -59,17 +58,15 @@ public abstract class ImageBank implements ChangeListener<Number> {
             return;
         }
         this.items.remove(1, items.size());
-        System.out.println(Collections.max(ids) + 1);
         itemIDs = new ArrayList<Integer>();
         for (int i = 0; i <= Collections.max(ids) + 1; i++)
             itemIDs.add(-1);
-        System.out.println(itemIDs.size());
         for (int i = 0; i < ids.size(); i++) {
             ListCellData cellData = dataSource.getCellDataForSubject(ids.get(i));
             Node cell = createCellFromData(cellData);
             items.add(cell);
-            itemIDs.set(cellData.getId(), items.size() - 1);
-            // itemIDs.set(items.size()-1, cellData.getId());
+            //itemIDs.set(cellData.getId(), items.size()-1);
+            itemIDs.set(items.size()-1, cellData.getId());
         }
     }
 

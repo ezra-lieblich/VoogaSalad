@@ -10,7 +10,7 @@ public interface WeaponEditorViewDelegate {
 
     public void onUserEnteredWeaponRange (String weaponRange);
 
-    public void onUserEnteredWeaponImage (String weaponImagePath);
+    public void onUserEnteredWeaponImagePath (String weaponImagePath);
 
     public void onUserEnteredWeaponName (String weaponName);
 
