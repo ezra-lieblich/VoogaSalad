@@ -40,9 +40,10 @@ public class Wrapper {
 	
 	public void createGame(String xmlData) throws IOException{
 		String endpoint = "creategame";
-		String test = "TEST GAME";
+		//String test = "TEST GAME";
 		URL url = new URL(baseURL + endpoint);
-		String json = "{\"game\": \"" + test + "\"}";
+		String newXML = xmlData.replaceAll("\"", "");
+		String json = "{\"game\": \"" + newXML + "\"}";
 		System.out.println(json);
 		executeRequest(url, json, true);
 	}
