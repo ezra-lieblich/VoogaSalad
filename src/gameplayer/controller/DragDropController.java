@@ -41,6 +41,7 @@ public class DragDropController implements Observer{
 				this.dragDrop.getCoordinates().remove(this.dragDrop.getCoordinates().size() - 1);
 				(this.game.getGrid().getGrid()).getChildren().remove(dragDrop.getDroppedImage());// remove((Node) dragDrop.getDroppedImage());
 			}
+
 		}
 		
 	}
