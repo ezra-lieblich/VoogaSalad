@@ -11,7 +11,6 @@ import gameplayer.model.EnemyManager;
 import gameplayer.model.GamePlayModel;
 import gameplayer.view.GridGUI;
 import gameplayer.view.entity.EnemyView;
-import gameplayer.view.helper.GraphicsLibrary;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
@@ -56,11 +55,10 @@ public class EnemyController implements Observer{
 		//((Pane) this.grid.getGrid()).getChildren().clear();
 		for (int i=0; i<enemies.size(); i++){ //ALERT TODO: I don't think any keys will be the same bc as soon as the enemy object is 
 			//modified, it will no longer be the same key and no imageview will correspond to it, may need a unique id
-			GraphicsLibrary graphics = new GraphicsLibrary(); 
 			Enemy enemy = enemies.get(i);
-			ImageView imageview = graphics.createImageView(graphics.createImage(enemy.getImage()));
-			graphics.setImageViewParams(imageview, enemy.getWidth(), enemy.getHeight());
-			this.grid.getContext().drawImage(imageview.getImage(),enemy.getX(),enemy.getY());
+			EnemyView enemyView = new EnemyView(enemy.getImage(), enemy.getWidth(), enemy.getHeight(), enemy.getHealth());
+		
+			((Pane) this.grid.getGrid()).getChildren().add(enemyView.getEnemyView());
 			/*
 			Enemy enemy = enemies.get(i);
 			if (this.enemyToView.containsKey(enemies.get(i))){ //update the coordinates
