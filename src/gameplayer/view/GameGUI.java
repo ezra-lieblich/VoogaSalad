@@ -1,6 +1,7 @@
 package gameplayer.view;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import gameplayer.model.IDrawable;
@@ -220,17 +221,10 @@ public class GameGUI {
 		}
 	}
 
-	public void reRenderWeapon(List<IDrawable> redraw) {// should be interface
-														// of
-		// drawables
-
-		for (IDrawable entity : redraw) {
-			ImageView image = new ImageView(entity.getImage());
-			//System.out.println("weapon coord: x:"+entity.getX()+", y:"+entity.getY());
-			image.setX(entity.getX());
-			image.setY(entity.getY());
-			graphics.setImageViewParams(image, DragDropView.DEFENSIVEWIDTH * 0.5, DragDropView.DEFENSIVEHEIGHT * 0.5);
-			this.grid.getGrid().getChildren().add(image);
+	public void reRenderWeapon(HashMap<Integer,ImageView>weaponsOnScreen) {
+	
+		for(Integer weapon:weaponsOnScreen.keySet()){
+			this.grid.getGrid().getChildren().add(weaponsOnScreen.get(weapon));
 		}
 	}
 
