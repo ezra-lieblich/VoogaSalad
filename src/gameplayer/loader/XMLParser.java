@@ -1,6 +1,10 @@
 package gameplayer.loader;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -16,12 +20,17 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.DomDriver;
+
 import engine.enemy.EnemyType;
 import engine.enemy.EnemyTypeBuilder;
 import engine.tower.Tower;
 import engine.tower.TowerType;
 import engine.tower.TowerTypeBuilder;
 import engine.enemy.EnemyTypeBuilder;
+import engine.ManagerTypeMediator;
 import gameplayer.model.Enemy;
 
 
@@ -39,12 +48,40 @@ public class XMLParser {
 	private Document xmlDocument; 
 	private TowerTypeBuilder towerBuilder;
 	private EnemyTypeBuilder enemyBuilder;
+	private XStream serializer;
 
-	public XMLParser(String xmlFilename){
+	public XMLParser(String xmlFilename) {
+		serializer = new XStream(new DomDriver());
+		/*
 		parseNewXML(xmlFilename);
 		rootElement = getRootElement(); 
 		towerBuilder = new TowerTypeBuilder();
 		enemyBuilder = new EnemyTypeBuilder();
+		*/
+	}
+	
+	private ManagerTypeMediator getGameManager(String xmlFilename) {
+		File xmlFile = new File(xmlFilename);
+		ObjectInputStream objectStream;
+		try {
+			FileInputStream fileInput = new FileInputStream(xmlFilename);
+			objectStream = serializer.createObjectInputStream(fileInput);
+			ManagerTypeMediator gameManager = (ManagerTypeMediator) objectStream.readObject();
+			return gameManager;
+
+		} catch (IOException i) {
+			//TODO: actually handle the file
+			System.out.println("Input file could not be read");
+		} catch (ClassNotFoundException c) {
+			//TODO: actually handle the file
+			System.out.println("Input file not valid");
+		}
+		return null;
+
+		
+		
+		
+
 	}
 	
     /**
@@ -70,6 +107,8 @@ public class XMLParser {
     private void reset(){
     	DOCUMENT_BUILDER.reset(); 
     }
+    
+    
 
     
     // Helper method to do the boilerplate code needed to make a documentBuilder.
@@ -181,6 +220,9 @@ public class XMLParser {
 	
 	
 	private HashMap<String, engine.enemy.Enemy> getEnemyTypes() { //refactor names
+		
+		
+		/*
 		HashMap<String,engine.enemy.Enemy>ret = new HashMap<>(); //refactor names
     	try{
     		NodeList parentList = xmlDocument.getElementsByTagName("enemy");
@@ -204,6 +246,7 @@ public class XMLParser {
     		throw new XMLParserException(e);
     	}
     	return ret; 
+    	*/
 	}
 	
 
