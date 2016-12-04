@@ -24,7 +24,7 @@ public class WeaponPathField implements IWeaponSetView {
     public WeaponPathField (ResourceBundle labelsResource) {
         this.labelsResource = labelsResource;
         ObservableList<Object> pathOptions = setList();
-        createField(pathOptions);
+        createBox(pathOptions);
     }
 
     private ObservableList<Object> setList () {
@@ -33,7 +33,7 @@ public class WeaponPathField implements IWeaponSetView {
         return pathOptions;
     }
 
-    private void createField (ObservableList<Object> pathOptions) {
+    private void createBox (ObservableList<Object> pathOptions) {
         weaponPathBox =
                 ComboBoxFactory.makeComboBox(labelsResource.getString("Path"), e -> delegate
                         .onUserEnteredWeaponTrajectory((String) weaponPathBox.getValue()), pathOptions);

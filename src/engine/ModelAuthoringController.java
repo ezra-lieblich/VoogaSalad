@@ -16,6 +16,8 @@ import engine.path.PathTypeManagerController;
 import engine.settings.GameModeManagerController;
 import engine.settings.GameModeTypeBuilder;
 import engine.settings.GameModeTypeManagerController;
+import engine.tower.Tower;
+import engine.tower.TowerManager;
 import engine.tower.TowerManagerController;
 import engine.tower.TowerTypeManagerController;
 import engine.weapon.WeaponManagerController;
@@ -55,9 +57,15 @@ public class ModelAuthoringController implements ModelController {
         modelControllers.put(LevelManagerController.class, new LevelTypeManagerController(managerMediator));
     }
     
-// XML testing
+//    public void testXML() {
+//        String xml = Serializer.toXML(gameData);
+//        GameData test = (GameData)Serializer.fromXML(xml);
+//        Map<Integer, Tower>  data = test.getManagerMediator().getManager(TowerManager.class).getEntities();
+//    }
+    
 //    public static void main (String[] args) {
-//        ModelController test = new ModelAuthoringController();
-//        test.SaveData();
+//        ModelAuthoringController test = new ModelAuthoringController();
+//        test.testXML();
+//        
 //    }
 }

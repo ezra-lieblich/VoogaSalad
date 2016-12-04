@@ -3,9 +3,11 @@ package authoring.editorview.enemy.subviews.editorfields;
 import java.util.ResourceBundle;
 import authoring.editorview.enemy.EnemyEditorViewDelegate;
 import authoring.editorview.enemy.IEnemySetView;
-import authoring.utilityfactories.TextFieldFactory;
+import authoring.utilityfactories.ComboBoxFactory;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.Node;
-import javafx.scene.control.TextField;
+import javafx.scene.control.ComboBox;
 
 
 /**
@@ -15,15 +17,29 @@ import javafx.scene.control.TextField;
  */
 public class EnemyCollisionEffectField implements IEnemySetView {
 
-    private TextField enemyReactionsField;
+    private ComboBox<Object> enemyReactionsBox;
     private EnemyEditorViewDelegate delegate;
+    private ResourceBundle labelsResource;
 
     public EnemyCollisionEffectField (ResourceBundle labelsResource) {
-        enemyReactionsField =
-                TextFieldFactory.makeTextField(labelsResource.getString("EnterString"),
-                                               e -> delegate
-                                                       .onUserEnteredEnemyCollisionEffect(enemyReactionsField
-                                                               .getText()));
+        this.labelsResource = labelsResource;
+        ObservableList<Object> collisionOptions = setList();
+        createBox(collisionOptions);
+    }
+
+    private ObservableList<Object> setList () {
+        ObservableList<Object> collisionOptions =
+                FXCollections.observableArrayList("Immediate Death", "Remove a life");
+        return collisionOptions;
+    }
+
+    private void createBox (ObservableList<Object> collisionOptions) {
+        enemyReactionsBox =
+                ComboBoxFactory.makeComboBox(labelsResource.getString("EnterString"),
+                                             e -> delegate
+                                                     .onUserEnteredEnemyCollisionEffect((String) enemyReactionsBox
+                                                             .getValue()),
+                                             collisionOptions);
     }
 
     @Override
@@ -33,11 +49,11 @@ public class EnemyCollisionEffectField implements IEnemySetView {
 
     @Override
     public Node getInstanceAsNode () {
-        return enemyReactionsField;
+        return enemyReactionsBox;
     }
 
     public void updateEnemyReaction (String enemyReaction) {
-        enemyReactionsField.setText(enemyReaction);
+        enemyReactionsBox.setValue(enemyReaction);
     }
 
 }
