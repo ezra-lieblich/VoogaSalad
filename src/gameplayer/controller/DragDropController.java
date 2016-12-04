@@ -10,6 +10,7 @@ import gameplayer.view.GridGUI;
 import gameplayer.view.helper.dragdrop.DragDrop;
 import gameplayer.view.helper.dragdrop.DragDropView;
 import javafx.scene.Node;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.Pane;
 
 public class DragDropController implements Observer{
@@ -38,7 +39,7 @@ public class DragDropController implements Observer{
 			//System.out.println("Can place? :"+canPlace);
 			if (!canPlace){
 				this.dragDrop.getCoordinates().remove(this.dragDrop.getCoordinates().size() - 1);
-				((Pane) this.game.getGrid().getGrid()).getChildren().remove(dragDrop.getDroppedImage());// remove((Node) dragDrop.getDroppedImage());
+				(this.game.getGrid().getGrid()).getChildren().remove(dragDrop.getDroppedImage());// remove((Node) dragDrop.getDroppedImage());
 			}
 		}
 		
