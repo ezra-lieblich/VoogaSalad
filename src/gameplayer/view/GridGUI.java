@@ -7,6 +7,8 @@ import gameplayer.model.Cell;
 import gameplayer.model.Grid;
 import gameplayer.model.Tower;
 import gameplayer.view.helper.GraphicsLibrary;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -20,7 +22,8 @@ import javafx.scene.layout.Pane;
  */
 public class GridGUI {
 
-	private Pane grid;
+	private Canvas grid;
+	private GraphicsContext gc;
 	//private Pane pathGrid;
 	public static final int GRID_WIDTH = 600;
 	public static final int GRID_HEIGHT = 600;
@@ -38,7 +41,8 @@ public class GridGUI {
 
 	public GridGUI(int rows, int columns/*, List<int[]> path*/) {
 		//System.out.println("Rows: "+rows+"; columns: "+columns);
-		this.grid = new Pane();
+		this.grid = new Canvas(GRID_WIDTH,GRID_HEIGHT);
+		this.gc = grid.getGraphicsContext2D();
 		//this.pathGrid = new Pane();
 		this.graphicsLib = new GraphicsLibrary();
 		this.rows = rows;
@@ -84,17 +88,18 @@ public class GridGUI {
 		//populatePath(this.path);
 		
 	}
-	public Pane getGrid() {
+	public Canvas getGrid() {
 		return this.grid;
+	}
+	
+	public GraphicsContext getContext(){
+		return this.gc; 
 	}
 	
 
 	private void styleGrid(String terrainURL) {
 		setTerrain(terrainURL);
 		grid.getStyleClass().add("grid");
-		grid.setMinWidth(GRID_WIDTH);
-		grid.setMinHeight(GRID_HEIGHT);
-		
 	}
 
 	private void setTerrain(String imageURL) {
@@ -103,9 +108,11 @@ public class GridGUI {
 	}
 
 	private void addTowerToGrid(Tower tower, int row, int col) {
-		ImageView towerImage = graphicsLib.createImageView(graphicsLib.createImage(tower.getImage()));
-		graphicsLib.setImageViewParams(towerImage, cellWidth * col, cellHeight * row, cellWidth, cellHeight);
-		this.grid.getChildren().addAll(towerImage, tower.getTowerInfo());
+//		ImageView towerImage = graphicsLib.createImageView(graphicsLib.createImage(tower.getImage()));
+//		graphicsLib.setImageViewParams(towerImage, cellWidth * col, cellHeight * row, cellWidth, cellHeight);
+//		this.grid.getChildren().addAll(towerImage, tower.getTowerInfo());
+		Image towerImage = new Image(tower.getImage());
+		this.gc.drawImage(towerImage, cellWidth*col, cellHeight*row);
 	}
 
 	public void populatePath(Cell startingCell){
@@ -118,7 +125,8 @@ public class GridGUI {
 			double y = current.getY();
 			//System.out.println("path cell x: "+x+"; y: "+y);
 			graphicsLib.setImageViewParams(pathImage, x*cellWidth, y*cellHeight,cellWidth, cellHeight);
-			this.grid.getChildren().add(pathImage);
+			Image toDraw = pathImage.getImage();
+			this.gc.drawImage(toDraw,x*cellWidth,y*cellHeight);
 			this.imagePath.add(pathImage);
 			current = current.getNext();
 		}
@@ -135,7 +143,8 @@ public class GridGUI {
 			//System.out.println("Path image: "+pathImage);
 			graphicsLib.setImageViewParams(pathImage, x*cellWidth, y*cellHeight,cellWidth, cellHeight);
 			//System.out.println("Image width and height: "+pathImage.getFitWidth()+","+pathImage.getFitHeight());
-			this.grid.getChildren().add(pathImage);
+			Image toDraw = pathImage.getImage();
+			this.gc.drawImage(toDraw, x*cellWidth, y*cellHeight);
 			//pathImage.setX(x*cellWidth);
 			//pathImage.setY(x*cellWidth);
 			//pathImage.relocate(x*cellWidth, y*cellHeight);

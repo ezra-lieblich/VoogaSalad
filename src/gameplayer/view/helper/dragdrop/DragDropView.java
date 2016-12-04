@@ -8,6 +8,7 @@ import gameplayer.view.GridGUI;
 import gameplayer.view.helper.GraphicsLibrary;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -30,7 +31,7 @@ public class DragDropView {
 	private GraphicsLibrary graphicLib;
 	public static final int DEFENSIVEWIDTH = 70;
 	public static final int DEFENSIVEHEIGHT = 70;
-	private Pane target;
+	private Canvas target;
 	private DragDrop dragDrop;
 	private List<ImageView> objects;
 	
@@ -51,7 +52,7 @@ public class DragDropView {
 		this.dragDropPane.getStyleClass().add("dragDropPane");
 	}
 	
-	public void setDragTarget(Pane target){
+	public void setDragTarget(Canvas target){
 		this.target = target; 
 	}
 	
