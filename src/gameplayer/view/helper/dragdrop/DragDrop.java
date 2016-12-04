@@ -90,6 +90,7 @@ public class DragDrop extends Observable{
 	private void initDragDetectionIcon(ImageView source) {
 		Dragboard db = source.startDragAndDrop(TransferMode.MOVE);
 		ClipboardContent content = new ClipboardContent();
+		db.setDragView(source.getImage());
 		content.putString("blahy poo");
 		db.setContent(content);
 	}

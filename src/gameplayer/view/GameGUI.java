@@ -113,6 +113,10 @@ public class GameGUI {
 	public void bindAnimationStart(EventHandler<ActionEvent> handle) {
 		this.buttonPanel.bindAnimationStart(handle);
 	}
+	
+	public void bindAnimationStop(EventHandler<ActionEvent> handle){
+		this.buttonPanel.bindAnimationStop(handle);
+	}
 
 	public List<Double[]> getDroppedTowerCoords() {
 		return getDragDrop().getCoordinates();

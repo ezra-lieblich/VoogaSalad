@@ -77,6 +77,7 @@ public class GamePlayerController implements Observer {
 		this.model.addObserver(this);
 		this.oldLevel = 1;
 		this.towerToId = new HashMap<String, Integer>();
+		this.animation = new Timeline();
 		populateTowerToId();
 	}
 
@@ -121,6 +122,9 @@ public class GamePlayerController implements Observer {
 			// TODO: initialize animation
 			this.startAnimation();
 		});
+		this.view.bindAnimationStop(e -> {
+			animation.pause();
+		});
 		this.mainScene = view.init(this.model.getGold(), this.model.getLife(), this.model.getCurrentLevel(),
 				getTowerImages());
 		this.mainScene.setOnMouseClicked(e -> handleMouseClicked(e.getX(), e.getY()));
@@ -139,6 +143,12 @@ public class GamePlayerController implements Observer {
 			if((t.getX() -20 < x || x < t.getX()+20)  && (t.getY()-20 < y || y <t.getY() + 20)){
 				////System.out.println("Tower x: "+x+", Tower y:"+y);
 				t.toggleInfoVisibility();
+			}
+		}
+		List<Enemy> enemiesOnGrid = this.enemyManager.getEnemyOnGrid();
+		for(Enemy e: enemiesOnGrid){
+			if((e.getX() - 20 < x || e.getY() +20 > x) && (e.getX() - 20 < y || e.getY() +20 > y)){
+				e.toggleInfoVisibility();
 			}
 		}
 	}
@@ -217,7 +227,7 @@ public class GamePlayerController implements Observer {
 			
 			redrawEverything();
 		});
-		Timeline animation = new Timeline();
+		
 		animation.setCycleCount(Timeline.INDEFINITE);
 		animation.getKeyFrames().add(frame);
 		this.animation = animation;
