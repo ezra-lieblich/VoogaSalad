@@ -3,7 +3,6 @@ package authoring.editorview.weapon.subviews;
 import java.io.File;
 import java.util.List;
 import java.util.ResourceBundle;
-
 import authoring.editorview.ImageBank;
 import authoring.editorview.weapon.WeaponEditorViewDelegate;
 import authoring.utilityfactories.ButtonFactory;
@@ -27,7 +26,7 @@ public class WeaponImageBank extends ImageBank {
     private WeaponEditorViewDelegate delegate;
 
     public WeaponImageBank (ResourceBundle labelsResource) {
-    	super();
+        super();
         Button createWeaponButton =
                 ButtonFactory.makeButton("Create Weapon",
                                          e -> {
@@ -46,11 +45,11 @@ public class WeaponImageBank extends ImageBank {
         super.updateBank(activeWeapons);
     }
 
-
-	@Override
-	protected void userSelectedRow(int index) {
-		int selectedWeaponID = this.itemIDs.get(index);
-		this.delegate.onUserSelectedWeapon(selectedWeaponID);
-	}
+    @Override
+    protected void userSelectedRow (int index) {
+        int selectedWeaponID = this.itemIDs.get(index);
+        if (selectedWeaponID != -1) 
+            this.delegate.onUserSelectedWeapon(selectedWeaponID);
+    }
 
 }

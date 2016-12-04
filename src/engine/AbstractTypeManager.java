@@ -128,5 +128,10 @@ public abstract class AbstractTypeManager<E extends Type> extends AbstractObserv
         System.out.println("Here");
         visitor.visitManager(this, methodData);
     }
+    
+    @Override
+    public Map<Integer, E> getEntities() {
+        return data.getProperty();
+    }
 
 }

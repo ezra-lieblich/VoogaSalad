@@ -68,9 +68,10 @@ public abstract class AbstractTypeManagerController<E extends Manager<T>, U exte
         return typeManager.getEntityIds();
     }
 
+    //TODO - is this ok?
     @Override
     public boolean setName (int id, String name) {
-        return isUnique(Type::getName, name) ? typeManager.getEntity(id).setName(name) : typeManager.getEntity(id).setName(typeManager.getEntity(id).getName());
+        return isUnique(Type::getName, name) ? typeManager.getEntity(id).setName(name) : false;
     }
 
     @Override

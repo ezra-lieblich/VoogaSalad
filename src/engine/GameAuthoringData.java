@@ -40,4 +40,9 @@ public class GameAuthoringData implements GameData {
     public void setAuthor (String author) {
         Author = author;
     }
+
+    @Override
+    public ManagerMediator getManagerMediator () {
+        return managerMediator;
+    }
 }

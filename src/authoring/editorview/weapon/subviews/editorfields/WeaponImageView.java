@@ -25,7 +25,7 @@ public class WeaponImageView implements IWeaponSetView {
 
     private final int CHARACTER_SIZE = 250;
 
-    public WeaponImageView (ResourceBundle labelsResource) throws IOException {
+    public WeaponImageView (ResourceBundle labelsResource) {
         this.labelsResource = labelsResource;
         weaponImage = new ImageView();
         weaponImage.setFitWidth(CHARACTER_SIZE);
