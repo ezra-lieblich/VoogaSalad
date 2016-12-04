@@ -21,6 +21,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -175,7 +176,7 @@ public class GamePlayerController implements Observer {
 				this.oldLevel = newLevel;
 				this.view.newLevelPopUp(e->{
 					////System.out.println("New level");
-					this.view.getGrid().getGrid().getChildren().clear();
+					((GraphicsContext) this.view.getGrid().getContext()).clearRect(0, 0, 600, 600);; //clear everything
 					//do something to trigger new level here!
 				});
 				
@@ -196,7 +197,7 @@ public class GamePlayerController implements Observer {
 	private void startAnimation() {
 		this.model.getGrid().printGrid();
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> {
-			((Pane) this.view.getGrid().getGrid()).getChildren().clear(); //clear everything
+			((GraphicsContext) this.view.getGrid().getContext()).clearRect(0, 0, 600, 600);; //clear everything
 			this.currentWave = this.model.getPackOfEnemyComing();
 
 			
@@ -227,7 +228,11 @@ public class GamePlayerController implements Observer {
 	private void redrawEverything(){
 		//redraw path
 		//this.view.getGrid().populatePath(this.model.getGrid().getStartPoint());
-		this.view.getGrid().getGrid().getChildren().addAll(this.view.getGrid().getPathImages());
+		List<ImageView> pathRedraw=this.view.getGrid().getPathImages();
+		for(int i=0;i<pathRedraw.size();i++){
+			ImageView imageview = pathRedraw.get(i);
+			this.view.getGrid().getContext().drawImage(imageview.getImage(), imageview.getX(), imageview.getY());
+		}
 		List<Enemy>enemyRedraw = this.enemyManager.getEnemyOnGrid(); 
 		List<Tower>towerRedraw = this.model.getTowerOnGrid();
 		List<Weapon>bulletRedraw = this.model.getWeaponOnGrid();
@@ -272,19 +277,19 @@ public class GamePlayerController implements Observer {
 		return ret; 
 	}
 	
-	@Deprecated
-	private List<ImageView>convertWeaponImageView(List<Weapon>weapons){
-		ArrayList<ImageView> ret = new ArrayList<>(); 
-		for(Weapon w: weapons){
-			ImageView weaponImage = graphics.createImageView(graphics.createImage(w.getImage()));
-			graphics.setImageViewParams(weaponImage, 0.5*DragDropView.DEFENSIVEWIDTH, 0.5*DragDropView.DEFENSIVEHEIGHT);
-			weaponImage.setX(w.getX()*GridGUI.GRID_WIDTH/this.model.getRow());
-			weaponImage.setY(w.getY()*GridGUI.GRID_HEIGHT/this.model.getColumns());
-			ret.add(graphics.createImageView(graphics.createImage(w.getImage())));
-			this.view.getGrid().getGrid().getChildren().add(weaponImage);
-		}
-		return ret; 
-	}
+//	@Deprecated
+//	private List<ImageView>convertWeaponImageView(List<Weapon>weapons){
+//		ArrayList<ImageView> ret = new ArrayList<>(); 
+//		for(Weapon w: weapons){
+//			ImageView weaponImage = graphics.createImageView(graphics.createImage(w.getImage()));
+//			graphics.setImageViewParams(weaponImage, 0.5*DragDropView.DEFENSIVEWIDTH, 0.5*DragDropView.DEFENSIVEHEIGHT);
+//			weaponImage.setX(w.getX()*GridGUI.GRID_WIDTH/this.model.getRow());
+//			weaponImage.setY(w.getY()*GridGUI.GRID_HEIGHT/this.model.getColumns());
+//			ret.add(graphics.createImageView(graphics.createImage(w.getImage())));
+//			this.view.getGrid().getGrid().getChildren().add(weaponImage);
+//		}
+//		return ret; 
+//	}
 	
 	private List<IDrawable> convertEnemyDrawable(List<Enemy> enemies){
 		ArrayList<IDrawable> ret = new ArrayList<>(); 
