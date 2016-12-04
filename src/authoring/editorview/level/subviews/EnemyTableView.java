@@ -2,7 +2,7 @@ package authoring.editorview.level.subviews;
 
 import java.util.List;
 import java.util.ResourceBundle;
-import authoring.editorview.level.Enemy;
+import authoring.editorview.level.WaveObject;
 import authoring.editorview.level.ILevelSetView;
 import authoring.editorview.level.LevelEditorViewDelegate;
 import authoring.editorview.path.NameIdPair;
@@ -16,16 +16,16 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 public class EnemyTableView implements ILevelSetView {
 
-    private TableView<Enemy> enemyTable;
+    private TableView<WaveObject> enemyTable;
     private TableColumn enemyNameCol;
     private TableColumn numEnemiesCol;
     private TableColumn enemyFrequencyCol;
-    private ObservableList<Enemy> data;
+    private ObservableList<WaveObject> data;
 
     private LevelEditorViewDelegate delegate;
 
     public EnemyTableView (ResourceBundle labelsResource, int width) {
-        enemyTable = new TableView<Enemy>();
+        enemyTable = new TableView<WaveObject>();
         data = FXCollections.observableArrayList();
         enemyTable.setPrefWidth(width);
         createTableColumns();
@@ -39,10 +39,11 @@ public class EnemyTableView implements ILevelSetView {
         numEnemiesCol.setEditable(true);
         enemyFrequencyCol.setEditable(true);
         enemyNameCol.setCellValueFactory(
-                                         new PropertyValueFactory<Enemy, String>("enemyName"));
-        numEnemiesCol.setCellValueFactory(new PropertyValueFactory<Enemy, String>("numOfEnemies"));
+                                         new PropertyValueFactory<WaveObject, String>("enemyName"));
+        numEnemiesCol
+                .setCellValueFactory(new PropertyValueFactory<WaveObject, String>("numOfEnemies"));
         enemyFrequencyCol
-                .setCellValueFactory(new PropertyValueFactory<Enemy, String>("enemyFrequency"));
+                .setCellValueFactory(new PropertyValueFactory<WaveObject, String>("enemyFrequency"));
     }
 
     @Override
@@ -58,8 +59,8 @@ public class EnemyTableView implements ILevelSetView {
     private void setData (List<NameIdPair> enemies) {
         data.clear();
         for (NameIdPair n : enemies) {
-            Enemy temp = new Enemy(n.getName(), "0", "0");
-            data.add(temp);
+            // WaveObject temp = new WaveObject(n.getName(), "0", "0");
+            // data.add(temp);
         }
     }
 
