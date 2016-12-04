@@ -3,6 +3,8 @@ package splashscreen;
 import java.io.IOException;
 
 import authoring.main.AuthoringController;
+import gameplayer.controller.GamePlayerController;
+import gameplayer.view.helper.GraphicsLibrary;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -22,6 +24,7 @@ import javafx.stage.Stage;
 import statswrapper.Wrapper;
 
 public class SplashScreen {
+	private GraphicsLibrary graphics = new GraphicsLibrary();
 	public static final String TITLE = "VOOGASquad";
 	private static final int SIZE = 700;
 	private Stage stage;
@@ -82,12 +85,25 @@ public class SplashScreen {
 			actiontarget.setText("Sign in button pressed");
 			try {
 				Wrapper.getInstance().login(userfield.getText(), passField.getText());
-				startAuthoringEnv();
+				createPlayGameOrMakeGameOptions();
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		});
+	}
+	
+	private void createPlayGameOrMakeGameOptions(){
+		Button btn1 = graphics.createButton("Make a game", e ->{
+			startAuthoringEnv();
+		});
+		Button btn2 = graphics.createButton("Play a game", e -> {
+			startGame();
+		});
+		HBox hbBtn = new HBox(10);
+		hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
+		hbBtn.getChildren().addAll(btn1, btn2);
+		mainScreen.add(hbBtn, 1, 5);
 	}
 
 	private void addCreateAccountButtons(TextField userfield, TextField passField) {
@@ -122,6 +138,15 @@ public class SplashScreen {
 		s.setWidth(SIZE + 145);
 		s.show();
 
+	}
+	
+	private void startGame(){
+		Stage s = new Stage();
+		GamePlayerController playerController = new GamePlayerController();
+		playerController.init();
+		s.setTitle(TITLE);
+		s.setScene(playerController.getMainScene());
+		s.show();
 	}
 
 }
