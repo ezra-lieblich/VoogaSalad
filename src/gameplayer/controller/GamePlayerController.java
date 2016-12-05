@@ -4,10 +4,10 @@ import gameplayer.loader.GamePlayerFactory;
 import gameplayer.loader.XMLParser;
 import gameplayer.main.main;
 import gameplayer.model.Cell;
-import gameplayer.model.Enemy;
-import gameplayer.model.EnemyManager;
 import gameplayer.model.GamePlayModel;
 import gameplayer.model.IDrawable;
+import gameplayer.model.enemy.Enemy;
+import gameplayer.model.enemy.EnemyManager;
 import gameplayer.model.tower.Tower;
 import gameplayer.model.weapon.Weapon;
 import gameplayer.view.GameGUI;
@@ -74,7 +74,6 @@ public class GamePlayerController implements Observer {
 
 		checkIfValid();
 		this.model = new GamePlayModel(this.loader);
-		this.enemyManager = new EnemyManager(this.model);
 		this.model.addObserver(this);
 		this.oldLevel = 1;
 		this.towerToId = new HashMap<String, Integer>();
@@ -82,7 +81,7 @@ public class GamePlayerController implements Observer {
 	}
 
 	private void populateTowerToId(){
-		HashMap<Integer, engine.tower.Tower> mapping = this.model.getAllTowerTypes();
+		HashMap<Integer, engine.tower.Tower> mapping = this.model.getTowerManager().getAvailableTower();
 		for (int key:mapping.keySet()){
 			this.towerToId.put(mapping.get(key).getImagePath(),key);
 		}
@@ -106,15 +105,14 @@ public class GamePlayerController implements Observer {
 		this.model.initializeLevelInfo();
 		HashMap<String, Double> settings = this.loader.getGameSetting();
 		//initGUIDummy(settings);
-		this.enemyManager.setCurrentCell(this.model.getGrid().getStartPoint());
+		this.enemyManager.setCurrentCell(this.model.getData().getGrid().getStartPoint());
 		initGUI();
 		//this.enemyController = new EnemyController(this.enemyManager, this.view.getGrid());
 	}
 
 	private void initGUI() {
-		int[] dimensions = model.getDimension();
-		int rows = dimensions[0];
-		int cols = dimensions[1];
+		int rows = model.getData().getRow();
+		int cols = model.getData().getColumns();
 		this.view = new GameGUI(rows, cols); // just for testing, should be
 												// replaced by block above, 5
 												// rows, 5 columns
@@ -122,16 +120,16 @@ public class GamePlayerController implements Observer {
 			// TODO: initialize animation
 			this.startAnimation();
 		});
-		this.mainScene = view.init(this.model.getGold(), this.model.getLife(), this.model.getCurrentLevel(),
+		this.mainScene = view.init(this.model.getData().getGold(), this.model.getData().getLife(), this.model.getData().getCurrentLevel(),
 				getTowerImages());
 		this.mainScene.setOnMouseClicked(e -> handleMouseClicked(e.getX(), e.getY()));
 		
-		this.view.getGrid().populatePath(model.getGrid().getStartPoint()); 
+		this.view.getGrid().populatePath(model.getData().getGrid().getStartPoint()); 
 		this.dropController = new DragDropController(this.view, this.model,this.getTowerImageMap());
 		
 		
 		//testing stuff
-		this.model.createDummyEnemies();
+		//this.model.createDummyEnemies();
 	}
 	
 	private void handleMouseClicked(double x, double y){
@@ -166,11 +164,11 @@ public class GamePlayerController implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		if (o instanceof GamePlayModel) {
-			double newLevel = ((GamePlayModel) o).getCurrentLevel();
+			double newLevel = ((GamePlayModel) o).getData().getCurrentLevel();
 			// update level in display
-			this.view.updateStatsDisplay(((GamePlayModel) o).getGold(), ((GamePlayModel) o).getLife(),
-					((GamePlayModel) o).getCurrentLevel());
-			this.view.updateCurrentLevelStats(((GamePlayModel) o).getCurrentLevel());
+			this.view.updateStatsDisplay(((GamePlayModel) o).getData().getGold(), ((GamePlayModel) o).getData().getLife(),
+					((GamePlayModel) o).getData().getCurrentLevel());
+			this.view.updateCurrentLevelStats(((GamePlayModel) o).getData().getCurrentLevel());
 			if (this.oldLevel != newLevel){
 				
 				this.oldLevel = newLevel;
@@ -195,10 +193,10 @@ public class GamePlayerController implements Observer {
 	 */
 
 	private void startAnimation() {
-		this.model.getGrid().printGrid();
+		this.model.getData().getGrid().printGrid();
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> {
 			((GraphicsContext) this.view.getGrid().getContext()).clearRect(0, 0, 600, 600);; //clear everything
-			this.currentWave = this.model.getPackOfEnemyComing();
+			this.currentWave = this.model.getEnemyManager().getPackOfEnemyComing();
 
 			
 			//trying to get this to work but null pointer

@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-import gameplayer.model.Enemy;
-import gameplayer.model.EnemyManager;
 import gameplayer.model.GamePlayModel;
+import gameplayer.model.enemy.Enemy;
+import gameplayer.model.enemy.EnemyManager;
 import gameplayer.view.GridGUI;
 import gameplayer.view.entity.EnemyView;
 import javafx.scene.image.ImageView;

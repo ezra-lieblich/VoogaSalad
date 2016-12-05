@@ -11,6 +11,8 @@ import engine.tower.Tower;
 import engine.weapon.*;
 import engine.weapon.WeaponManager;
 import gameplayer.loader.GamePlayerFactory;
+import gameplayer.model.enemy.Enemy;
+import gameplayer.model.enemy.EnemyManager;
 import gameplayer.model.tower.TowerManager;
 import gameplayer.model.weapon.Weapon;
 import gameplayer.view.GridGUI;
@@ -23,14 +25,9 @@ public class GamePlayModel extends Observable {
 	private String gameTitle;
 	private GamePlayData gameData;
 
-	private int hitBuffer = 10; // initialize from xml
-	private Enemy nextEnteringEnemy;
-	private Queue<Enemy> packOfEnemyComing;
-	private List<Queue<Enemy>> enemyAtCurrentLevel;
+	//private int hitBuffer = 10; // initialize from xml
 
-	//private int currentLevel;
-	int waveOfEnemy;
-	private int uniqueEnemyID;
+
 	private HashMap<Integer, engine.weapon.Weapon> weaponMap;
 	private GraphicsLibrary graphicLib;
 	private TowerManager towerManager;
@@ -62,6 +59,21 @@ public class GamePlayModel extends Observable {
 		this.gameTitle = this.factory.getGameTitle();
 	}
 
+	public GamePlayData getData(){
+		return this.gameData;
+	}
+	
+	public TowerManager getTowerManager(){
+		return this.towerManager;
+	}
+	
+	public EnemyManager getEnemyManager(){
+		return this.enemyManager;
+	}
+	
+	public gameplayer.model.weapon.WeaponManager getWeaponManager(){
+		return this.weaponManager;
+	}
 
 
 	public HashMap<Integer, engine.tower.Tower> getAvailableTower(){
@@ -72,25 +84,7 @@ public class GamePlayModel extends Observable {
 		return this.weaponManager.getWeaponOnGrid();
 	}
 
-	public Queue<Enemy> getPackOfEnemyComing() {
-		return packOfEnemyComing;
-	}
 
-	public void setPackOfEnemyComing(Queue<Enemy> packOfEnemyComing) {
-		this.packOfEnemyComing = packOfEnemyComing;
-	}
-
-	public List<Queue<Enemy>> getEnemyAtCurrentLevel() {
-		return enemyAtCurrentLevel;
-	}
-
-	public void setEnemyAtCurrentLevel(List<Queue<Enemy>> enemyAtCurrentLevel) {
-		this.enemyAtCurrentLevel = enemyAtCurrentLevel;
-	}
-
-	public int getWaveOfEnemy() {
-		return waveOfEnemy;
-	}
 
 
 
@@ -105,12 +99,11 @@ public class GamePlayModel extends Observable {
 	}
 
 
+	/*
+	 * should just get this in towerController
+	 */
 	public List<gameplayer.model.tower.Tower> getTowerOnGrid() { // fix naming
 		return this.towerManager.getTowerOnGrid();
-	}
-
-	public Enemy getNextEnteringEnemy() {
-		return this.nextEnteringEnemy;
 	}
 
 

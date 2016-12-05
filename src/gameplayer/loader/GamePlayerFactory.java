@@ -13,8 +13,8 @@ import engine.tower.TowerType;
 import engine.weapon.WeaponTypeBuilder;
 import engine.weapon.Weapon;
 import gameplayer.model.Cell;
-import gameplayer.model.Enemy;
 import gameplayer.model.Grid;
+import gameplayer.model.enemy.Enemy;
 
 public class GamePlayerFactory{
 

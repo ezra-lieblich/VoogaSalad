@@ -21,8 +21,8 @@ import engine.enemy.EnemyTypeBuilder;
 import engine.tower.Tower;
 import engine.tower.TowerType;
 import engine.tower.TowerTypeBuilder;
+import gameplayer.model.enemy.Enemy;
 import engine.enemy.EnemyTypeBuilder;
-import gameplayer.model.Enemy;
 
 
 

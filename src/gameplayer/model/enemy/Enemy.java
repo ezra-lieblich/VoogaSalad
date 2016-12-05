@@ -1,6 +1,9 @@
-package gameplayer.model;
+package gameplayer.model.enemy;
 
 import java.util.Observable;
+
+import gameplayer.model.Cell;
+import gameplayer.model.IDrawable;
 
 public class Enemy extends Observable implements IDrawable{
 	

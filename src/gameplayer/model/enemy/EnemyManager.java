@@ -1,4 +1,4 @@
-package gameplayer.model;
+package gameplayer.model.enemy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,6 +6,9 @@ import java.util.Observable;
 import java.util.Queue;
 
 import gameplayer.loader.GamePlayerFactory;
+import gameplayer.model.Cell;
+import gameplayer.model.GamePlayData;
+import gameplayer.model.Grid;
 import gameplayer.model.weapon.Weapon;
 import gameplayer.view.GridGUI;
 import gameplayer.view.helper.GraphicsLibrary;
@@ -238,6 +241,10 @@ public class EnemyManager extends Observable {
 			this.current = currentCopy;
 		}
 
+	}
+
+	public Queue<Enemy> getPackOfEnemyComing() {
+		return this.currentWave;
 	}
 
 }
