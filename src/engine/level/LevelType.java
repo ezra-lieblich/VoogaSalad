@@ -8,29 +8,31 @@ import engine.observer.ObservableProperty;
 
 
 public class LevelType extends AbstractType implements Level {
-    private ObservableMap<Integer, Integer> enemyCounts;
+    private ObservableMap<Integer, WaveType> enemyCounts;
     private ObservableProperty<Double> rewardHealth;
     private ObservableProperty<Double> rewardMoney;
     private ObservableProperty<Double> rewardScore;
     private ObservableProperty<Double> durationInSeconds;
+    private ObservableProperty<Double> time;
 
     protected LevelType (LevelInitializer levelInitializer) {
         super(levelInitializer);
-        this.enemyCounts = levelInitializer.getEnemyCounts();
+        this.enemyCounts = levelInitializer.getWaves();
         this.rewardHealth = levelInitializer.getRewardHealth();
         this.rewardMoney = levelInitializer.getRewardMoney();
         this.rewardScore = levelInitializer.getRewardScore();
         this.durationInSeconds = levelInitializer.getDurationInSeconds();
+        this.time = levelInitializer.getLevelTime();
     }
 
     @Override
-    public Map<Integer, Integer> getEnemyCounts () {
+    public Map<Integer, WaveType> getEnemyCounts () {
         return Collections.unmodifiableMap(enemyCounts.getProperty());
     }
 
     @Override
-    public void setEnemyCounts (int enemy, int enemyCount) {
-        enemyCounts.put(enemy, enemyCount);
+    public void setEnemyCounts (int enemy, WaveType wave) {
+        enemyCounts.put(enemy, wave);
     }
 
     @Override
@@ -77,5 +79,22 @@ public class LevelType extends AbstractType implements Level {
     public void setDurationInSeconds (double durationInSeconds) {
         this.durationInSeconds.setProperty(durationInSeconds);
     }
+
+	@Override
+	public double getLevelTime() {
+		return time.getProperty();
+	}
+
+	@Override
+	public double createWave() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public WaveType getWave(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

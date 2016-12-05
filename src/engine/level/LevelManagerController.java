@@ -9,9 +9,9 @@ import engine.ManagerController;
 public interface LevelManagerController
         extends ManagerController<LevelManager, LevelBuilder, Level, ILevelEditorView> {
 
-    public void setEnemy (int levelID, int enemyID, int numEnemies);
+    public void setEnemy (int levelID, int enemyID, WaveType wave);
 
-    public Map<Integer, Integer> getEnemies (int levelID);
+    public Map<Integer, WaveType> getEnemies (int levelID);
 
     public void setRewardScore (int levelID, double winScore);
 
@@ -42,4 +42,6 @@ public interface LevelManagerController
     public int getLevelNumber (int levelID);
     
     public List<Integer> getLevelOptions();
+    
+    public double getLevelTime (int levelID);
 }

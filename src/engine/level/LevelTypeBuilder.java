@@ -16,25 +16,26 @@ public class LevelTypeBuilder extends AbstractTypeBuilder<Level, LevelBuilder>
 	public static final String DEFAULT_NAME = "Level";
     public static final String DEFAULT_IMAGE_PATH = "Images/blacksquarejpg";
     public static final double DEFAULT_SIZE = 1;
-    public static final Map<Integer, Integer> DEFAULT_ENEMY_COUNTS =
-            new HashMap<Integer, Integer>();
+    public static final Map<Integer, WaveType> DEFAULT_ENEMY_COUNTS = new HashMap<Integer, WaveType>();
     public static final double DEFAULT_REWARD_HEALTH = 0;
     public static final double DEFAULT_REWARD_MONEY = 200;
     public static final double DEFAULT_REWARD_SCORE = 200;
     public static final double DEFAULT_DURATION_IN_SECONDS = 1;
+    public static final double DEFAULT_LEVEL_TIME = 0;
 
-    private ObservableMap<Integer, Integer> enemyCounts;
+    private ObservableMap<Integer, WaveType> enemyCounts;
     private ObservableProperty<Double> rewardHealth;
     private ObservableProperty<Double> rewardMoney;
     private ObservableProperty<Double> rewardScore;
     private ObservableProperty<Double> durationInSeconds;
+    private ObservableProperty<Double> time;
 
     protected LevelTypeBuilder () {
         super(DEFAULT_NAME, DEFAULT_IMAGE_PATH, DEFAULT_SIZE);
     }
 
     @Override
-    public LevelBuilder addEnemyCountsListener (BiConsumer<Map<Integer, Integer>, Map<Integer, Integer>> listener) {
+    public LevelBuilder addWaveListener (BiConsumer<Map<Integer, WaveType>, Map<Integer, WaveType>> listener) {
         enemyCounts.addListener(listener);
         return this;
     }
@@ -64,7 +65,7 @@ public class LevelTypeBuilder extends AbstractTypeBuilder<Level, LevelBuilder>
     }
 
     @Override
-    public ObservableMap<Integer, Integer> getEnemyCounts () {
+    public ObservableMap<Integer, WaveType> getWaves () {
         return enemyCounts;
     }
 
@@ -89,7 +90,7 @@ public class LevelTypeBuilder extends AbstractTypeBuilder<Level, LevelBuilder>
     }
 
     @Override
-    public LevelBuilder buildEnemyCounts (Map<Integer, Integer> enemies) {
+    public LevelBuilder buildWaves (Map<Integer, WaveType> enemies) {
         this.enemyCounts.setProperty(enemies);
         return this;
     }
@@ -125,11 +126,12 @@ public class LevelTypeBuilder extends AbstractTypeBuilder<Level, LevelBuilder>
 
     @Override
     protected void restoreTypeDefaults () {
-        this.enemyCounts = new ObservableMapProperty<Integer, Integer>(DEFAULT_ENEMY_COUNTS);
+        this.enemyCounts = new ObservableMapProperty<Integer, WaveType>(DEFAULT_ENEMY_COUNTS);
         this.rewardHealth = new ObservableObjectProperty<Double>(DEFAULT_REWARD_HEALTH);
         this.rewardMoney = new ObservableObjectProperty<Double>(DEFAULT_REWARD_MONEY);
         this.rewardScore = new ObservableObjectProperty<Double>(DEFAULT_REWARD_SCORE);
         this.durationInSeconds = new ObservableObjectProperty<Double>(DEFAULT_DURATION_IN_SECONDS);
+        this.time = new ObservableObjectProperty<Double>(DEFAULT_LEVEL_TIME);
 
     }
 
@@ -137,5 +139,23 @@ public class LevelTypeBuilder extends AbstractTypeBuilder<Level, LevelBuilder>
     protected LevelBuilder getThis () {
         return this;
     }
+
+	@Override
+	public LevelBuilder addLevelTimeListener(BiConsumer<Double, Double> listener) {
+		this.time.addListener(listener);
+		return this;
+	}
+
+	@Override
+	public ObservableProperty<Double> getLevelTime() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public LevelBuilder buildLevelTime(double time) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

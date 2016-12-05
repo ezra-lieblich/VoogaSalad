@@ -6,7 +6,7 @@ import engine.observer.ObservableProperty;
 
 
 public interface LevelInitializer extends TypeInitializer {
-    ObservableMap<Integer, Integer> getEnemyCounts ();
+    ObservableMap<Integer, WaveType> getWaves ();
 
     ObservableProperty<Double> getRewardHealth ();
 
@@ -15,4 +15,6 @@ public interface LevelInitializer extends TypeInitializer {
     ObservableProperty<Double> getRewardScore ();
 
     ObservableProperty<Double> getDurationInSeconds ();
+    
+    ObservableProperty<Double> getLevelTime ();
 }

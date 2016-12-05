@@ -6,7 +6,7 @@ import engine.BindableType;
 
 
 public interface BindableLevel extends BindableType<LevelBuilder> {
-    LevelBuilder addEnemyCountsListener (BiConsumer<Map<Integer, Integer>, Map<Integer, Integer>> listener);
+    LevelBuilder addWaveListener (BiConsumer<Map<Integer, WaveType>, Map<Integer, WaveType>> listener);
 
     LevelBuilder addRewardHealthListener (BiConsumer<Double, Double> listener);
 
@@ -15,5 +15,7 @@ public interface BindableLevel extends BindableType<LevelBuilder> {
     LevelBuilder addRewardScoreListener (BiConsumer<Double, Double> listener);
 
     LevelBuilder addDurationInSecondsListener (BiConsumer<Double, Double> listener);
+    
+    LevelBuilder addLevelTimeListener (BiConsumer<Double, Double> listener);
 
 }

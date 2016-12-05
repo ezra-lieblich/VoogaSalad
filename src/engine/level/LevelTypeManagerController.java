@@ -11,13 +11,16 @@ public class LevelTypeManagerController
         extends AbstractTypeManagerController<LevelManager, LevelBuilder, Level, ILevelEditorView>
         implements LevelManagerController {
 
+	//TODO probably need to move this
+	private int waveID = 0;
+	
     public LevelTypeManagerController (ManagerMediator managerMediator) {
         super(new LevelTypeManager(), new LevelTypeBuilder(), managerMediator);
     }
 
     @Override
-    public void setEnemy (int levelID, int enemyID, int numEnemies) {
-        getTypeManager().getEntity(levelID).setEnemyCounts(enemyID, numEnemies);
+    public void setEnemy (int levelID, int enemyID, WaveType wave) {
+        getTypeManager().getEntity(levelID).setEnemyCounts(enemyID, wave);
     }
 
     @Override
@@ -47,7 +50,7 @@ public class LevelTypeManagerController
     }
 
     @Override
-    public Map<Integer, Integer> getEnemies (int levelID) {
+    public Map<Integer, WaveType> getEnemies (int levelID) {
         return getTypeManager().getEntity(levelID).getEnemyCounts();
     }
 
@@ -94,13 +97,15 @@ public class LevelTypeManagerController
                                                     LevelBuilder typeBuilder) {
         return typeBuilder.addDurationInSecondsListener( (oldValue, newValue) -> updateView
                 .updateTransitionTime(newValue))
-                .addEnemyCountsListener( (oldValue, newValue) -> updateView.updateEnemy(newValue))
+                //.addWaveListener( (oldValue, newValue) -> updateView.updateEnemy(newValue))
                 .addRewardHealthListener( (oldValue, newValue) -> updateView
                         .updateRewardHealth(newValue))
                 .addRewardScoreListener( (oldValue, newValue) -> updateView
                         .updateRewardPoints(newValue))
                 .addRewardMoneyListener( (oldValue, newValue) -> updateView
                         .updateRewardMoney(newValue));
+                //TODO add listener .addLevelTimeListener()
+        		
         
     }
 
@@ -121,5 +126,10 @@ public class LevelTypeManagerController
         // TODO Auto-generated method stub
         return null;
     }
+
+	@Override
+	public double getLevelTime(int levelID) {
+		return getTypeManager().getEntity(levelID).getLevelTime();
+	}
 
 }

@@ -8,11 +8,9 @@ import java.util.Map;
  * Created by ezra on 11/19/16.
  */
 public interface Level extends Type {
-    Map<Integer, Integer> getEnemyCounts ();
+    Map<Integer, WaveType> getEnemyCounts ();
 
-    void setEnemyCounts (int enemy, int enemyCount);
-
-    void removeEnemy (int enemy);
+    
 
     double getRewardHealth ();
 
@@ -29,4 +27,15 @@ public interface Level extends Type {
     double getDurationInSeconds ();
 
     void setDurationInSeconds (double durationInSeconds);
+    
+    double getLevelTime ();
+    
+    void setEnemyCounts (int enemy, WaveType wave);
+
+    void removeEnemy (int enemy);
+    
+    double createWave ();
+    
+    WaveType getWave (int id);
+    
 }

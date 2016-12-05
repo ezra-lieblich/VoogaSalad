@@ -9,7 +9,7 @@ public interface LevelBuilder extends TypeBuilder<Level, LevelBuilder>, Bindable
                                                                                         // bindable
                                                                                         // interface
 
-    LevelBuilder buildEnemyCounts (Map<Integer, Integer> enemies);
+    LevelBuilder buildWaves (Map<Integer, WaveType> enemies);
 
     LevelBuilder buildRewardHealth (double rewardHealth);
 
@@ -18,5 +18,7 @@ public interface LevelBuilder extends TypeBuilder<Level, LevelBuilder>, Bindable
     LevelBuilder buildRewardScore (double rewardScore);
 
     LevelBuilder buildDurationInSeconds (double durationInSeconds);
+    
+    LevelBuilder buildLevelTime (double time);
 
 }
