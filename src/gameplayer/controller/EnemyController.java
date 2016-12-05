@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-import gameplayer.model.Enemy;
-import gameplayer.model.EnemyManager;
 import gameplayer.model.GamePlayModel;
+import gameplayer.model.enemy.Enemy;
+import gameplayer.model.enemy.EnemyManager;
 import gameplayer.view.GridGUI;
 import gameplayer.view.entity.EnemyView;
 import javafx.scene.image.ImageView;
@@ -37,7 +37,7 @@ public class EnemyController implements Observer{
 	
 	//called in timeline update
 	public void updateEnemyViews(){
-		ArrayList<Enemy> enemies = (ArrayList<Enemy>) this.model.getEnemyList();
+		ArrayList<Enemy> enemies = (ArrayList<Enemy>) this.getEnemyModel().getEnemyOnGrid();
 		for (int i=0; i<enemies.size(); i++){ //ALERT TODO: I don't think any keys will be the same bc as soon as the enemy object is 
 			//modified, it will no longer be the same key and no imageview will correspond to it, may need a unique id
 			Enemy enemy = enemies.get(i);

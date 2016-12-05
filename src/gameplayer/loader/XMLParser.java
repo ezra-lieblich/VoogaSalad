@@ -42,6 +42,8 @@ import engine.tower.Tower;
 import engine.tower.TowerManager;
 import engine.tower.TowerType;
 import engine.tower.TowerTypeBuilder;
+import gameplayer.model.enemy.Enemy;
+import engine.enemy.EnemyTypeBuilder;
 import engine.tower.TowerTypeManager;
 import engine.weapon.Weapon;
 import engine.weapon.WeaponManager;
@@ -50,7 +52,6 @@ import engine.GameAuthoringData;
 import engine.ManagerMediator;
 import engine.ManagerTypeMediator;
 
-import gameplayer.model.Enemy;
 
 
 

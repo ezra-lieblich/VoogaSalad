@@ -4,12 +4,12 @@ import gameplayer.loader.GamePlayerFactory;
 import gameplayer.loader.XMLParser;
 import gameplayer.main.main;
 import gameplayer.model.Cell;
-import gameplayer.model.Enemy;
-import gameplayer.model.EnemyManager;
 import gameplayer.model.GamePlayModel;
 import gameplayer.model.IDrawable;
-import gameplayer.model.Tower;
-import gameplayer.model.Weapon;
+import gameplayer.model.enemy.Enemy;
+import gameplayer.model.enemy.EnemyManager;
+import gameplayer.model.tower.Tower;
+import gameplayer.model.weapon.Weapon;
 import gameplayer.view.GameGUI;
 import gameplayer.view.GridGUI;
 import gameplayer.view.helper.GraphicsLibrary;
@@ -43,7 +43,7 @@ public class GamePlayerController implements Observer {
 	public static final int FRAMES_PER_SECOND = 60;
 	public static final int MILLISECOND_DELAY = 50;
 	public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
-	
+
 	private GamePlayerFactory loader;
 	private GameGUI view;
 	private Scene mainScene;
@@ -51,8 +51,11 @@ public class GamePlayerController implements Observer {
 
 	private Timeline animation;
 	private EnemyController enemyController;
+	private TowerController towerController;
+	private WeaponController weaponController;
+
 	private DragDropController dropController;
-	
+
 	private EnemyManager enemyManager;
 
 	private double oldLevel;
@@ -61,13 +64,13 @@ public class GamePlayerController implements Observer {
 	private GraphicsLibrary graphics; 
 
 	private Queue<Enemy> currentWave;
-	
+
 	private HashMap<String, Integer> towerToId;
-	
+
 	//Might need to be refactored into a different class
 	private HashMap<Integer,ImageView> weaponsOnScreen; 
-	
-	
+
+
 
 
 
@@ -77,23 +80,27 @@ public class GamePlayerController implements Observer {
 
 		checkIfValid();
 		this.model = new GamePlayModel(this.loader);
-		this.enemyManager = new EnemyManager(this.model);
+		this.enemyController = new EnemyController(this.model.getEnemyManager(), null);// Second arg should be gridGUI
+		this.towerController = new TowerController(this.model.getTowerManager());
+		this.weaponController = new WeaponController(this.model.getWeaponManager());
 		this.model.addObserver(this);
 		this.oldLevel = 1;
 		this.towerToId = new HashMap<String, Integer>();
 		this.weaponsOnScreen = new HashMap<Integer,ImageView>();
 		this.animation = new Timeline();
-		this.graphics = new GraphicsLibrary(); 
-		populateTowerToId();
+		this.graphics = new GraphicsLibrary();
+		this.enemyManager = this.enemyController.getEnemyModel();
 	}
 
 	private void populateTowerToId(){
-		HashMap<Integer, engine.tower.Tower> mapping = this.model.getAllTowerTypes();
+		HashMap<Integer, engine.tower.Tower> mapping = this.model.getTowerManager().getAvailableTower();
+		System.out.println("tower mapping:");
+		System.out.println(mapping);
 		for (int key:mapping.keySet()){
 			this.towerToId.put(mapping.get(key).getImagePath(),key);
 		}
 	}
-	
+
 	public HashMap<String, Integer> getTowerImageMap(){
 		return this.towerToId;
 	}
@@ -112,39 +119,44 @@ public class GamePlayerController implements Observer {
 		this.model.initializeLevelInfo();
 		HashMap<String, Double> settings = this.loader.getGameSetting();
 		//initGUIDummy(settings);
-		this.enemyManager.setCurrentCell(this.model.getGrid().getStartPoint());
+		System.out.println("In init:");
+		System.out.println(this.model.getData().getGrid().getStartPoint());
+		this.enemyManager.setCurrentCell(this.model.getData().getGrid().getStartPoint());
+		System.out.println("In init");
+		this.model.getTowerManager().populateAvailableTower();
+		populateTowerToId();
 		initGUI();
 		//this.enemyController = new EnemyController(this.enemyManager, this.view.getGrid());
 	}
 
 	private void initGUI() {
-		int[] dimensions = model.getDimension();
-		int rows = dimensions[0];
-		int cols = dimensions[1];
+		int rows = model.getData().getRow();
+		int cols = model.getData().getColumns();
 		this.view = new GameGUI(rows, cols); // just for testing, should be
-												// replaced by block above, 5
-												// rows, 5 columns
+		// replaced by block above, 5
+		// rows, 5 columns
 		this.view.bindAnimationStart(e -> {
 			// TODO: initialize animation
 			this.startAnimation();
 		});
+
 		this.view.bindAnimationStop(e -> {
 			animation.pause();
 		});
-		this.mainScene = view.init(this.model.getGold(), this.model.getLife(), this.model.getCurrentLevel(),
+		this.mainScene = view.init(this.model.getData().getGold(), this.model.getData().getLife(), this.model.getData().getCurrentLevel(),
 				getTowerImages());
 		this.mainScene.setOnMouseClicked(e -> handleMouseClicked(e.getX(), e.getY()));
-		
-		this.view.getGrid().populatePath(model.getGrid().getStartPoint()); 
+
+		this.view.getGrid().populatePath(model.getData().getGrid().getStartPoint()); 
 		this.dropController = new DragDropController(this.view, this.model,this.getTowerImageMap());
-		
-		
+
+
 		//testing stuff
-		this.model.createDummyEnemies();
+		//this.model.createDummyEnemies();
 	}
-	
+
 	private void handleMouseClicked(double x, double y){
-	System.out.println(" x: "+x+", y:"+y);
+		System.out.println(" x: "+x+", y:"+y);
 		List<Tower> towersOnGrid = this.model.getTowerOnGrid();
 		for(Tower t: towersOnGrid){
 			System.out.println("Tower x: " + t.getX() + "  " + "Tower y: " + t.getY());
@@ -154,14 +166,14 @@ public class GamePlayerController implements Observer {
 		}
 		List<Enemy> enemiesOnGrid = this.enemyManager.getEnemyOnGrid();
 		for(Enemy e: enemiesOnGrid){
-			
+
 			if(e.getX() +ENTITY_SIZE >= x && e.getY() + ENTITY_SIZE <=y){
 				System.out.println("clicked enemy");
 				e.toggleInfoVisibility();
 			}
 		}
 	}
-	
+
 	private ArrayList<String> getTowerImages() {
 		ArrayList<String> towerImages = new ArrayList<String>();
 
@@ -184,20 +196,20 @@ public class GamePlayerController implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		if (o instanceof GamePlayModel) {
-			double newLevel = ((GamePlayModel) o).getCurrentLevel();
+			double newLevel = ((GamePlayModel) o).getData().getCurrentLevel();
 			// update level in display
-			this.view.updateStatsDisplay(((GamePlayModel) o).getGold(), ((GamePlayModel) o).getLife(),
-					((GamePlayModel) o).getCurrentLevel());
-			this.view.updateCurrentLevelStats(((GamePlayModel) o).getCurrentLevel());
+			this.view.updateStatsDisplay(((GamePlayModel) o).getData().getGold(), ((GamePlayModel) o).getData().getLife(),
+					((GamePlayModel) o).getData().getCurrentLevel());
+			this.view.updateCurrentLevelStats(((GamePlayModel) o).getData().getCurrentLevel());
 			if (this.oldLevel != newLevel){
-				
+
 				this.oldLevel = newLevel;
 				this.view.newLevelPopUp(e->{
 					////System.out.println("New level");
 					this.view.getGrid().getGrid().getChildren().clear();
 					//do something to trigger new level here!
 				});
-				
+
 			}
 		}
 		/*
@@ -213,12 +225,10 @@ public class GamePlayerController implements Observer {
 	 */
 
 	private void startAnimation() {
-		this.model.getGrid().printGrid();
+		this.model.getData().getGrid().printGrid();
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> {
-			((Pane) this.view.getGrid().getGrid()).getChildren().clear(); //clear everything
-			this.currentWave = this.model.getPackOfEnemyComing();
-
-			
+					((Pane) this.view.getGrid().getGrid()).getChildren().clear(); //clear everything
+			this.currentWave = this.enemyController.getEnemyModel().getPackOfEnemyComing();
 			//trying to get this to work but null pointer
 			if(currentWave.size()!=0){
 				if(timer%15==0){
@@ -232,17 +242,17 @@ public class GamePlayerController implements Observer {
 			}
 			this.model.updateInLevel();
 			this.enemyManager.update(); 
-			
-			
+
+
 			redrawEverything();
 		});
-		
+
 		animation.setCycleCount(Timeline.INDEFINITE);
 		animation.getKeyFrames().add(frame);
 		this.animation = animation;
 		animation.play();
 	}
-	
+
 	private void redrawEverything(){
 		//redraw path
 		//this.view.getGrid().populatePath(this.model.getGrid().getStartPoint());
@@ -266,21 +276,21 @@ public class GamePlayerController implements Observer {
 				weaponsOnScreen.get(bulletRedraw.get(i).getID()).setY(bulletRedraw.get(i).getY());
 			}
 		}
-		
+
 		List<IDrawable> reEnemyDraw = convertEnemyDrawable(enemyRedraw);//probably need to add bullets here too
 		List<IDrawable> reTowerDraw = convertTowerDrawable(towerRedraw);
-//		List<IDrawable> reBulletDraw = convertWeaponDrawable(bulletRedraw);
+		//		List<IDrawable> reBulletDraw = convertWeaponDrawable(bulletRedraw);
 		//convertWeaponImageView(bulletRedraw);
-		
+
 		this.view.reRender(reEnemyDraw);
 		this.view.reRenderWeapon(weaponsOnScreen);
 		this.view.reRenderTower(reTowerDraw);
 	}
-	
+
 	public Timeline getTimeline() {
 		return this.animation;
 	}
-	
+
 	private List<IDrawable> convertToDrawable(List<Enemy> enemies, List<Tower>towers){
 		ArrayList<IDrawable> ret = new ArrayList<>(); 
 		for(Enemy e: enemies){
@@ -291,7 +301,7 @@ public class GamePlayerController implements Observer {
 		}
 		return ret; 
 	}
-	
+
 	private List<IDrawable>convertWeaponDrawable(List<Weapon>weapons){
 		ArrayList<IDrawable> ret = new ArrayList<>(); 
 		for(Weapon w: weapons){
@@ -299,21 +309,21 @@ public class GamePlayerController implements Observer {
 		}
 		return ret; 
 	}
-	
+
 	@Deprecated
 	private List<ImageView>convertWeaponImageView(List<Weapon>weapons){
 		ArrayList<ImageView> ret = new ArrayList<>(); 
 		for(Weapon w: weapons){
 			ImageView weaponImage = graphics.createImageView(graphics.createImage(w.getImage()));
 			graphics.setImageViewParams(weaponImage, 0.5*DragDropView.DEFENSIVEWIDTH, 0.5*DragDropView.DEFENSIVEHEIGHT);
-			weaponImage.setX(w.getX()*GridGUI.GRID_WIDTH/this.model.getRow());
-			weaponImage.setY(w.getY()*GridGUI.GRID_HEIGHT/this.model.getColumns());
+			weaponImage.setX(w.getX()*GridGUI.GRID_WIDTH/this.model.getData().getRow());
+			weaponImage.setY(w.getY()*GridGUI.GRID_HEIGHT/this.model.getData().getColumns());
 			ret.add(graphics.createImageView(graphics.createImage(w.getImage())));
 			this.view.getGrid().getGrid().getChildren().add(weaponImage);
 		}
 		return ret; 
 	}
-	
+
 	private List<IDrawable> convertEnemyDrawable(List<Enemy> enemies){
 		ArrayList<IDrawable> ret = new ArrayList<>(); 
 		for(Enemy e: enemies){
@@ -321,7 +331,7 @@ public class GamePlayerController implements Observer {
 		}
 		return ret; 
 	}
-	
+
 	private List<IDrawable> convertTowerDrawable(List<Tower>towers){
 		ArrayList<IDrawable> ret = new ArrayList<>(); 
 		for(Tower t: towers){

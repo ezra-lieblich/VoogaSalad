@@ -21,8 +21,8 @@ import engine.tower.TowerType;
 import engine.weapon.WeaponTypeBuilder;
 import engine.weapon.Weapon;
 import gameplayer.model.Cell;
-import gameplayer.model.Enemy;
 import gameplayer.model.Grid;
+import gameplayer.model.enemy.Enemy;
 
 public class GamePlayerFactory{
 
@@ -86,8 +86,19 @@ public class GamePlayerFactory{
 			Coordinate<Integer> nextCoordinate = coordinates.get(i);
 			Cell next = gameGrid.getCell(nextCoordinate.getX().intValue(), nextCoordinate.getY().intValue());
 			current.setNext(next);
+			//System.out.println("in gameplayerfactory: is there a next?");
+			//System.out.println(current.getNext());
 			current = next; 
 		}
+		/*
+		Cell blah = gameGrid.getStartPoint();
+		System.out.println("Alright let's check if path is there");
+		while (blah!=null){
+			System.out.println(blah.getNext());
+			blah = blah.getNext();
+		}
+		*/
+		
 		return gameGrid;
 	}
 	
@@ -99,9 +110,13 @@ public class GamePlayerFactory{
 	
 	
 	public List<Queue<Enemy>> getEnemy(int level) {
+		//System.out.println("Grid, is this empty? : ");
+		//System.out.println(this.getGrid(0).getCell(0, 0));
 		Queue<Enemy> myQueue = new LinkedList<Enemy>();
 		Queue<Enemy> myQueue1 = new LinkedList<Enemy>();
 		Enemy enem1 = new Enemy(1, "Izaya", 4, 7, "questionmark.png", 50.0, 50.0);
+		System.out.println("enem1: ");
+		System.out.println(enem1);
 		enem1.setCurrentCell(this.getGrid(0).getCell(0, 0));
 		Enemy enem2 = new Enemy(2, "Shizuo", 4, 7, "questionmark.png", 50.0, 50.0);
 		enem2.setCurrentCell(this.getGrid(0).getCell(0, 0));
