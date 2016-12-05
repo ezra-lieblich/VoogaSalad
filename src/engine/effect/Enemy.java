@@ -1,5 +1,7 @@
 package engine.effect;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 import gameplayer.model.Cell;
 import gameplayer.model.IDrawable;
@@ -18,17 +20,21 @@ public class Enemy extends SuperEnemy implements IDrawable{
 	private double width, height;
 	private int uniqueID;
 	private Cell enemyCell;
+	private List<Effect> effects;
 	
-	public Enemy(int ID, String name, double movingSpeed, int health, String image, double width, double height){
-		this.uniqueID = ID;
-		this.name = name; 
-		this.movingSpeed = movingSpeed;
-		this.health = health;	
-		this.image = image;
-		this.width = width;
-		this.height = height;
-				
+	public Enemy() {
+		this.effects = new ArrayList<Effect>();			
 	}
+	
+	
+	public void addEffect(Effect effect) {
+	    effects.add(effect);
+	}
+	
+	public int getEffectsSize() {
+	    return effects.size();
+	}
+	
 	/*
 	public double[] getWidthAndHeight(){
 		double[] weidthAndHeight = {this.width, this.height};

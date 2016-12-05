@@ -30,7 +30,7 @@ public class EffectManager {
     }
     
     public void add(Class<?> annotatedClass) {
-        annotatedClassMethods.put(annotatedClass.getName(), getAnnotatedMethods(annotatedClass, EffectMethod.class));
+        annotatedClassMethods.put(annotatedClass.getName(), generateAnnotatedMethods(annotatedClass, EffectMethod.class));
     }
     
     //TODO - Stream this
@@ -47,8 +47,12 @@ public class EffectManager {
 //        return annotatedMethods;
 //    }
     
-    public <T extends Annotation> List<Method> getAnnotatedMethods(Class<?> annotatedClass, Class<T> annotationType) {
+    public <T extends Annotation> List<Method> generateAnnotatedMethods(Class<?> annotatedClass, Class<T> annotationType) {
         return Stream.of(annotatedClass.getMethods()).filter(a -> a.isAnnotationPresent(annotationType)).collect(Collectors.toList());
+    }
+    
+    public List<Method> getAnnotatedClassMethods(String className) {
+        return annotatedClassMethods.get(className);
     }
     
 //    private <T extends Annotation> List<Method> getAnnotatedMethods(Class<?> annotatedClass, Class<T> annotationType, List<Method> annotatedMethods) {
