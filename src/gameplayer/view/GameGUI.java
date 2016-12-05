@@ -1,6 +1,7 @@
 package gameplayer.view;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import gameplayer.model.IDrawable;
@@ -20,7 +21,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -114,6 +114,10 @@ public class GameGUI {
 	public void bindAnimationStart(EventHandler<ActionEvent> handle) {
 		this.buttonPanel.bindAnimationStart(handle);
 	}
+	
+	public void bindAnimationStop(EventHandler<ActionEvent> handle){
+		this.buttonPanel.bindAnimationStop(handle);
+	}
 
 	public List<Double[]> getDroppedTowerCoords() {
 		return getDragDrop().getCoordinates();
@@ -136,13 +140,13 @@ public class GameGUI {
 	 * @param e
 	 */
 	public void newLevelPopUp(EventHandler<ActionEvent> e) {
-//		this.grid.getGrid().getChildren().clear();
-//		// this.grid.getPathGrid().getChildren().clear();
-//		Button btn = graphics.createButton("Next level", e);
-//		ImageView stuff = graphics.createImageView(graphics.createImage("newlevel.png"));
-//		graphics.setImageViewParams(stuff, GridGUI.GRID_WIDTH, GridGUI.GRID_HEIGHT);
-//		this.grid.getGrid().getChildren().add(stuff);
-//		this.grid.getGrid().getChildren().add(btn);
+		this.grid.getGrid().getChildren().clear();
+		// this.grid.getPathGrid().getChildren().clear();
+		Button btn = graphics.createButton("Next level", e);
+		ImageView stuff = graphics.createImageView(graphics.createImage("newlevel.png"));
+		graphics.setImageViewParams(stuff, GridGUI.GRID_WIDTH, GridGUI.GRID_HEIGHT);
+		this.grid.getGrid().getChildren().add(stuff);
+		this.grid.getGrid().getChildren().add(btn);
 	}
 
 	private void createGrid() {
@@ -194,13 +198,11 @@ public class GameGUI {
 				image.setX(towerCoords.get(i)[0]);
 				image.setY(towerCoords.get(i)[1]);
 				graphics.setImageViewParams(image, DragDropView.DEFENSIVEWIDTH, DragDropView.DEFENSIVEHEIGHT);
-				Image toDraw = image.getImage();
-				this.grid.getContext().drawImage(toDraw, image.getX(), image.getY());
+				this.grid.getGrid().getChildren().add(image);
 				if (entity instanceof Tower) {
-//					((Tower) entity).getTowerInfo().setLayoutX(image.getX());
-//					((Tower) entity).getTowerInfo().setLayoutY(image.getY() + image.getFitHeight());
-//					this.grid.getContext().drawImage(img, x, y);
-//					this.grid.getGrid().getChildren().add(((Tower) entity).getTowerInfo());
+					((Tower) entity).getTowerInfo().setLayoutX(image.getX());
+					((Tower) entity).getTowerInfo().setLayoutY(image.getY() + image.getFitHeight());
+					this.grid.getGrid().getChildren().add(((Tower) entity).getTowerInfo());
 				}
 				i++;
 			}
@@ -215,23 +217,15 @@ public class GameGUI {
 			image.setX(entity.getX());
 			image.setY(entity.getY());
 			graphics.setImageViewParams(image, DragDropView.DEFENSIVEWIDTH * 0.9, DragDropView.DEFENSIVEHEIGHT * 0.9);
-			Image toDraw = image.getImage();
-			this.grid.getContext().drawImage(toDraw,image.getX(),image.getY());
+			this.grid.getGrid().getChildren().add(image);
 		}
 	}
 
-	public void reRenderWeapon(List<IDrawable> redraw) {// should be interface
-														// of
-		// drawables
-
-		for (IDrawable entity : redraw) {
-			ImageView image = new ImageView(entity.getImage());
-			//System.out.println("weapon coord: x:"+entity.getX()+", y:"+entity.getY());
-			image.setX(entity.getX());
-			image.setY(entity.getY());
-			graphics.setImageViewParams(image, DragDropView.DEFENSIVEWIDTH * 0.5, DragDropView.DEFENSIVEHEIGHT * 0.5);
-			Image toDraw = image.getImage();
-			this.grid.getContext().drawImage(toDraw,image.getX(),image.getY());		}
+	public void reRenderWeapon(HashMap<Integer,ImageView>weaponsOnScreen) {
+	
+		for(Integer weapon:weaponsOnScreen.keySet()){
+			this.grid.getGrid().getChildren().add(weaponsOnScreen.get(weapon));
+		}
 	}
 
 	public void reRender(List<IDrawable> redraw, double width, double height) {// should
@@ -245,8 +239,8 @@ public class GameGUI {
 			image.setX(entity.getX());
 			image.setY(entity.getY());
 			graphics.setImageViewParams(image, width, height);
-			Image toDraw = image.getImage();
-			this.grid.getContext().drawImage(toDraw,image.getX(),image.getY());		}
+			this.grid.getGrid().getChildren().add(image);
+		}
 	}
 
 }

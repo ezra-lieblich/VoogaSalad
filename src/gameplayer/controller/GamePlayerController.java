@@ -19,6 +19,7 @@ import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.CacheHint;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
@@ -38,6 +39,7 @@ import java.util.Random;
 
 public class GamePlayerController implements Observer {
 
+	private static final int ENTITY_SIZE = 70;
 	public static final int FRAMES_PER_SECOND = 60;
 	public static final int MILLISECOND_DELAY = 50;
 	public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
@@ -54,14 +56,16 @@ public class GamePlayerController implements Observer {
 	private EnemyManager enemyManager;
 
 	private double oldLevel;
-	private int timer = 1;
-	private GraphicsLibrary graphics = new GraphicsLibrary();
-	
+	private int timer = 1;	
 
+	private GraphicsLibrary graphics; 
 
 	private Queue<Enemy> currentWave;
 	
 	private HashMap<String, Integer> towerToId;
+	
+	//Might need to be refactored into a different class
+	private HashMap<Integer,ImageView> weaponsOnScreen; 
 	
 	
 
@@ -77,6 +81,9 @@ public class GamePlayerController implements Observer {
 		this.model.addObserver(this);
 		this.oldLevel = 1;
 		this.towerToId = new HashMap<String, Integer>();
+		this.weaponsOnScreen = new HashMap<Integer,ImageView>();
+		this.animation = new Timeline();
+		this.graphics = new GraphicsLibrary(); 
 		populateTowerToId();
 	}
 
@@ -121,6 +128,9 @@ public class GamePlayerController implements Observer {
 			// TODO: initialize animation
 			this.startAnimation();
 		});
+		this.view.bindAnimationStop(e -> {
+			animation.pause();
+		});
 		this.mainScene = view.init(this.model.getGold(), this.model.getLife(), this.model.getCurrentLevel(),
 				getTowerImages());
 		this.mainScene.setOnMouseClicked(e -> handleMouseClicked(e.getX(), e.getY()));
@@ -134,11 +144,20 @@ public class GamePlayerController implements Observer {
 	}
 	
 	private void handleMouseClicked(double x, double y){
+	System.out.println(" x: "+x+", y:"+y);
 		List<Tower> towersOnGrid = this.model.getTowerOnGrid();
 		for(Tower t: towersOnGrid){
-			if((t.getX() -20 < x || x < t.getX()+20)  && (t.getY()-20 < y || y <t.getY() + 20)){
-				////System.out.println("Tower x: "+x+", Tower y:"+y);
+			System.out.println("Tower x: " + t.getX() + "  " + "Tower y: " + t.getY());
+			if((t.getX() +ENTITY_SIZE >= x && t.getY() + ENTITY_SIZE <= y+54)){
 				t.toggleInfoVisibility();
+			}
+		}
+		List<Enemy> enemiesOnGrid = this.enemyManager.getEnemyOnGrid();
+		for(Enemy e: enemiesOnGrid){
+			
+			if(e.getX() +ENTITY_SIZE >= x && e.getY() + ENTITY_SIZE <=y){
+				System.out.println("clicked enemy");
+				e.toggleInfoVisibility();
 			}
 		}
 	}
@@ -217,7 +236,7 @@ public class GamePlayerController implements Observer {
 			
 			redrawEverything();
 		});
-		Timeline animation = new Timeline();
+		
 		animation.setCycleCount(Timeline.INDEFINITE);
 		animation.getKeyFrames().add(frame);
 		this.animation = animation;
@@ -231,21 +250,30 @@ public class GamePlayerController implements Observer {
 		List<Enemy>enemyRedraw = this.enemyManager.getEnemyOnGrid(); 
 		List<Tower>towerRedraw = this.model.getTowerOnGrid();
 		List<Weapon>bulletRedraw = this.model.getWeaponOnGrid();
-		/*
-		//System.out.println(bulletRedraw.size());
 		for(int i=0;i<bulletRedraw.size();i++){
-			//System.out.println("bullet "+i+": "+bulletRedraw.get(i).getImage());
+			if(!weaponsOnScreen.containsKey(bulletRedraw.get(i).getID())){
+				ImageView image = new ImageView(bulletRedraw.get(i).getImage());
+				image.setCache(true);
+				image.setCacheHint(CacheHint.SPEED);
+				//System.out.println("weapon coord: x:"+entity.getX()+", y:"+entity.getY());
+				image.setX(bulletRedraw.get(i).getX());
+				image.setY(bulletRedraw.get(i).getY());
+				graphics.setImageViewParams(image, DragDropView.DEFENSIVEWIDTH * 0.5, DragDropView.DEFENSIVEHEIGHT * 0.5);
+				weaponsOnScreen.put(bulletRedraw.get(i).getID(),image);
+			}
+			else{
+				weaponsOnScreen.get(bulletRedraw.get(i).getID()).setX(bulletRedraw.get(i).getX());
+				weaponsOnScreen.get(bulletRedraw.get(i).getID()).setY(bulletRedraw.get(i).getY());
+			}
 		}
-		*/
-		
 		
 		List<IDrawable> reEnemyDraw = convertEnemyDrawable(enemyRedraw);//probably need to add bullets here too
 		List<IDrawable> reTowerDraw = convertTowerDrawable(towerRedraw);
-		List<IDrawable> reBulletDraw = convertWeaponDrawable(bulletRedraw);
+//		List<IDrawable> reBulletDraw = convertWeaponDrawable(bulletRedraw);
 		//convertWeaponImageView(bulletRedraw);
 		
 		this.view.reRender(reEnemyDraw);
-		this.view.reRenderWeapon(reBulletDraw);
+		this.view.reRenderWeapon(weaponsOnScreen);
 		this.view.reRenderTower(reTowerDraw);
 	}
 	
