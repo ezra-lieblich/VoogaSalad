@@ -68,7 +68,6 @@ public class XMLParser {
 	public XMLParser(String xmlFilename) {
 		serializer = new XStream(new DomDriver());
 		gameManager = getGameManager(xmlFilename);
-
 	}
 	
 	private ManagerMediator getGameManager(String xmlFilename) {
@@ -89,7 +88,6 @@ public class XMLParser {
     public Map<Integer,Tower> getTowerTypes(){
     	TowerManager towerManager = gameManager.getManager(TowerManager.class);
     	Map<Integer, Tower> towerTypes = towerManager.getEntities();
-    	System.out.println(towerTypes.get(0).getName());
     	return towerTypes;
     }
     
@@ -109,7 +107,6 @@ public class XMLParser {
 	protected Map<Integer, engine.enemy.Enemy> getEnemyTypes() { //refactor names
 		EnemyManager enemyManager = gameManager.getManager(EnemyManager.class);
 		Map<Integer, engine.enemy.Enemy> enemyTypes = enemyManager.getEntities();
-		System.out.println(enemyTypes.get(0).getName());
 		return enemyTypes;
 	}
 	
