@@ -30,7 +30,9 @@ import engine.enemy.EnemyManager;
 import engine.enemy.EnemyType;
 import engine.enemy.EnemyTypeBuilder;
 import engine.enemy.EnemyTypeManager;
+import engine.level.LevelManager;
 import engine.level.LevelTypeManager;
+import engine.path.PathManager;
 import engine.path.PathTypeManager;
 import engine.settings.GameMode;
 import engine.settings.GameModeManager;
@@ -111,17 +113,18 @@ public class XMLParser {
 		return enemyTypes;
 	}
 	
+	//currently, the xml files do not have GameModeManagers, must ask sean/ezra to fix
 	protected GameMode getGameMode() {
 		GameModeManager gameModeManager = gameManager.getManager(GameModeManager.class);
 		return gameModeManager.getEntity(0);
 	}
 	
-	protected LevelTypeManager getLevelManager() {
-		return gameManager.getManager(LevelTypeManager.class);
+	protected LevelManager getLevelManager() {
+		return gameManager.getManager(LevelManager.class);
 	}
 	
-	protected PathTypeManager getPathManager() {
-		return gameManager.getManager(PathTypeManager.class);
+	protected PathManager getPathManager() {
+		return gameManager.getManager(PathManager.class);
 	}
 	
 	
@@ -135,7 +138,8 @@ public class XMLParser {
     //This returns the TYPE of the xml
     public String getName(){
     	GameMode gameMode = getGameMode();
-    	return gameMode.getGameType(); //type or name?
+    	//change when xml file has gameMode
+    	return "TempGame"; //type or name?
     }
     
 	

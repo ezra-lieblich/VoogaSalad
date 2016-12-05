@@ -73,7 +73,7 @@ public class GamePlayerController implements Observer {
 
 	public GamePlayerController() {
 		// use xml parser to create classes.
-		this.loader = new GamePlayerFactory(new XMLParser("player.samplexml/sample.xml"));// hardcoded
+		this.loader = new GamePlayerFactory(new XMLParser("player.samplexml/sample1.xml"));// hardcoded
 
 		checkIfValid();
 		this.model = new GamePlayModel(this.loader);

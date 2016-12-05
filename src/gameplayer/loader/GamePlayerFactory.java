@@ -9,9 +9,11 @@ import java.util.Map;
 import java.util.Observable;
 import java.util.Queue;
 import engine.enemy.EnemyType;
+import engine.level.LevelManager;
 import engine.level.LevelTypeManager;
 import engine.path.Coordinate;
 import engine.path.Path;
+import engine.path.PathManager;
 import engine.path.PathTypeManager;
 import engine.settings.GameMode;
 import engine.tower.Tower;
@@ -46,10 +48,12 @@ public class GamePlayerFactory{
 	public HashMap<String, Double> getGameSetting(){
 		HashMap<String,Double>settings = new HashMap<>(); 
 		GameMode gameSettings = authoringFileReader.getGameMode();
-		LevelTypeManager levelManager = authoringFileReader.getLevelManager();
-		settings.put("lives", gameSettings.getInitalLives());
-		settings.put("gold", gameSettings.getInitialMoney());
-		settings.put("totalNumberOfLevels", (double) levelManager.getEntities().size());
+		LevelManager levelManager = authoringFileReader.getLevelManager();
+		//refactor b/c current exml has no GameModeManager
+		settings.put("levelnumber", 0.0); //take this out
+		settings.put("lives", 5.0);
+		settings.put("gold", 100.0);
+		settings.put("totalNumberOfLevels", 3.0);
 		return settings; 
 	}
 	
@@ -65,7 +69,7 @@ public class GamePlayerFactory{
 	
 	
 	public Grid getGrid(int level){
-		PathTypeManager pathManager = authoringFileReader.getPathManager();
+		PathManager pathManager = authoringFileReader.getPathManager();
 		Map<Integer, Path> paths = pathManager.getEntities();
 		Path currPath = paths.get(0); //refactor to be the path for current level
 		int width = currPath.getGridColumns();
