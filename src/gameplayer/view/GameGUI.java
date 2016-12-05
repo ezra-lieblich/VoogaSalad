@@ -113,8 +113,8 @@ public class GameGUI {
 	public void bindAnimationStart(EventHandler<ActionEvent> handle) {
 		this.buttonPanel.bindAnimationStart(handle);
 	}
-	
-	public void bindAnimationStop(EventHandler<ActionEvent> handle){
+
+	public void bindAnimationStop(EventHandler<ActionEvent> handle) {
 		this.buttonPanel.bindAnimationStop(handle);
 	}
 
@@ -166,8 +166,8 @@ public class GameGUI {
 		Tab tab = dragDrop.createTab("Blah test");
 		dragDrop.populateImageViewsToTab(tab, imagePaths);
 	}
-	
-	private void initChat(){
+
+	private void initChat() {
 		WebView browser = new WebView();
 		WebEngine webEngine = browser.getEngine();
 		webEngine.load("http://voogachat.herokuapp.com");
@@ -193,7 +193,7 @@ public class GameGUI {
 		for (IDrawable entity : redraw) {
 			ImageView image = new ImageView(entity.getImage());
 			if (i < towerCoords.size() && towerCoords.get(i).length > 1) {
-				//System.out.println("TOWER BEING RENDERED?!");
+				// System.out.println("TOWER BEING RENDERED?!");
 				image.setX(towerCoords.get(i)[0]);
 				image.setY(towerCoords.get(i)[1]);
 				graphics.setImageViewParams(image, DragDropView.DEFENSIVEWIDTH, DragDropView.DEFENSIVEHEIGHT);
@@ -226,7 +226,8 @@ public class GameGUI {
 
 		for (IDrawable entity : redraw) {
 			ImageView image = new ImageView(entity.getImage());
-			//System.out.println("weapon coord: x:"+entity.getX()+", y:"+entity.getY());
+			// System.out.println("weapon coord: x:"+entity.getX()+",
+			// y:"+entity.getY());
 			image.setX(entity.getX());
 			image.setY(entity.getY());
 			graphics.setImageViewParams(image, DragDropView.DEFENSIVEWIDTH * 0.5, DragDropView.DEFENSIVEHEIGHT * 0.5);

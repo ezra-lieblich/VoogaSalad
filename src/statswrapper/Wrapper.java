@@ -51,7 +51,7 @@ public class Wrapper {
 		//String test = "TEST GAME";
 		URL url = new URL(baseURL + endpoint);
 		String newXML = xmlData.replaceAll("\"", "");
-		String json = "{\"game\": \"" + newXML + "\"}";
+		String json = "{\"type\":\"game\",\"game\": \"" + newXML + "\"}";
 		System.out.println(json);
 		executeRequest(url, json, true);
 	}

@@ -22,7 +22,7 @@ public class main extends Application {
 
 	@Override
 	public void start(Stage s) throws IOException{
-		wrapper.createAccount("creategamefail", "password");
+		//wrapper.createAccount("creategamefail", "password");
 		this.stage = s;
 		SplashScreen splash = new SplashScreen(s);
 		splash.init();
