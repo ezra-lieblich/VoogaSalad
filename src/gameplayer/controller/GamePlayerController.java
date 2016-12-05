@@ -220,15 +220,8 @@ public class GamePlayerController implements Observer {
 	private void startAnimation() {
 		this.model.getData().getGrid().printGrid();
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> {
-			<<<<<<< HEAD
-			((GraphicsContext) this.view.getGrid().getContext()).clearRect(0, 0, 600, 600);; //clear everything
-			this.currentWave = this.model.getEnemyManager().getPackOfEnemyComing();
-			=======
 					((Pane) this.view.getGrid().getGrid()).getChildren().clear(); //clear everything
-			this.currentWave = this.model.getPackOfEnemyComing();
-			>>>>>>> ea09e32a1e55e8fa4e393b593b5cb22dbf2804c0
-
-
+			this.currentWave = this.enemyController.getEnemyModel().getPackOfEnemyComing();
 			//trying to get this to work but null pointer
 			if(currentWave.size()!=0){
 				if(timer%15==0){
