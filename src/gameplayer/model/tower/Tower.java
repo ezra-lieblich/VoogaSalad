@@ -3,32 +3,43 @@ package gameplayer.model.tower;
 import java.util.ArrayList;
 import javafx.scene.control.Label;
 import engine.tower.*;
+import engine.weapon.WeaponType;
 import gameplayer.model.IDrawable;
-import gameplayer.model.weapon.Gun;
 
 public class Tower implements IDrawable {
 
-	private double cost;
-	private ArrayList<Gun> guns;
+	private double cost, sellAmount;
+	private ArrayList<WeaponType> weaponTypes;
 	private String image, name;
-	private int ID, type; // towerType
+	private int uniqueID, type; // towerType
 	private double xCoordinate;
 	private double yCoordinate;	
 	private Label towerInfo;
 	private boolean showInfo;
 	
 	
-	public Tower (TowerType tt, ArrayList<Gun> guns){
+	
+	public Tower (engine.tower.Tower tt, ArrayList<WeaponType> weaponTypes, int uniqueID){
 		this.cost = tt.getCost();
-		this.guns = guns;
+		this.weaponTypes = weaponTypes;
 		this.image = tt.getImagePath();
-		this.ID = ID;
+		this.uniqueID = uniqueID;
+		this.sellAmount = tt.getSellAmount();
 		this.showInfo = true;
-		this.towerInfo = new Label("Type: " + this.type + "\n ID: " + ID + "\n Cost: " + 
+		this.towerInfo = new Label("Type: " + this.type + "\n ID: " + this.uniqueID + "\n Cost: " + 
 				this.cost + "\n Image: " + this.image + "\n Name: " + this.name);
 		this.towerInfo.setVisible(showInfo);
 	}
 
+	/**
+	 * important method for controller/front end
+	 * getting all the weapon types for this tower
+	 * each weaponType has the method called getFireRate
+	 * @return
+	 */
+	public ArrayList<WeaponType> getAllWeaponTypes(){
+		return this.weaponTypes;
+	}
  
 	public void setCoordinates(double x, double y) {
 		this.xCoordinate = x;
@@ -43,6 +54,9 @@ public class Tower implements IDrawable {
 		return yCoordinate;
 	}
 	
+	double sellTower(){
+		return this.sellAmount;
+	}
 	
 	int getType(){
 		return this.type;
@@ -51,8 +65,8 @@ public class Tower implements IDrawable {
 
 	
 	
-	int getID(){
-		return this.ID;
+	int getUnqueID(){
+		return this.uniqueID;
 	}
 	
 	
@@ -73,9 +87,7 @@ public class Tower implements IDrawable {
 		this.cost = cost;
 	}
 
-	ArrayList<Gun> getGuns() {
-		return this.guns;
-	}
+
 	
 	public void toggleInfoVisibility(){
 		this.showInfo = !showInfo;
