@@ -19,6 +19,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.image.ImageView;
@@ -76,6 +77,7 @@ public class GameGUI {
 		createGrid();
 		initDragDropPane(imagePaths);
 		initChat();
+		initStatsTab();
 		addButtonPanel();
 		initStatsDisplay(gold, lives, currentLevel);
 		return this.scene;
@@ -174,6 +176,16 @@ public class GameGUI {
 		webEngine.load("http://voogachat.herokuapp.com");
 		Tab tab = dragDrop.createTab("Chat");
 		tab.setContent(browser);
+	}
+	
+	private void initStatsTab(){
+		WebView browser = new WebView();
+		WebEngine webEngine = browser.getEngine();
+		webEngine.load("http://voogasquad.herokuapp.com/home");
+		ScrollPane scroll = new ScrollPane();
+		scroll.setContent(browser);
+		Tab tab = dragDrop.createTab("Your Stats");
+		tab.setContent(scroll);
 	}
 
 	private void initStatsDisplay(double gold, double lives, double level) {
