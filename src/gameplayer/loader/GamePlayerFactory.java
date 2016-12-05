@@ -8,6 +8,8 @@ import java.util.Map;
 import java.util.Observable;
 import java.util.Queue;
 import engine.enemy.EnemyType;
+import engine.level.LevelTypeManager;
+import engine.settings.GameMode;
 import engine.tower.Tower;
 import engine.tower.TowerType;
 import engine.weapon.WeaponTypeBuilder;
@@ -39,10 +41,11 @@ public class GamePlayerFactory{
 	
 	public HashMap<String, Double> getGameSetting(){
 		HashMap<String,Double>settings = new HashMap<>(); 
-		settings.put("totalNumberOfLevels", Double.parseDouble(authoringFileReader.getVariableValues("numLevels")));
-		settings.put("lives", Double.parseDouble(authoringFileReader.getVariableValues("lives")));
-		settings.put("gold",  Double.parseDouble(authoringFileReader.getVariableValues("gold")));
-		settings.put("levelnumber",  Double.parseDouble(authoringFileReader.getVariableValues("levelnumber")));
+		GameMode gameSettings = authoringFileReader.getGameMode();
+		LevelTypeManager levelManager = authoringFileReader.getLevelManager();
+		settings.put("lives", gameSettings.getInitalLives());
+		settings.put("gold", gameSettings.getInitialMoney());
+		settings.put("totalNumberOfLevels", (double) levelManager.getEntities().size());
 		return settings; 
 	}
 	
@@ -81,7 +84,7 @@ public class GamePlayerFactory{
 	
 	
 	public HashMap<Integer, Tower> getTowers() {
-		return authoringFileReader.getTowerTypes(); 
+		return (HashMap<Integer, Tower>) authoringFileReader.getTowerTypes(); 
 	}
 	
 	
