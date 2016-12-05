@@ -22,7 +22,7 @@ public class EnemyManager extends Observable {
 	private Cell currentCopy;
 	private GraphicsLibrary graphicLib;
 	private int uniqueEnemyID;
-	
+
 	private List<Queue<Enemy>> allEnemyAtCurrentLevel;
 	private Queue<Enemy> currentWave;
 	private int waveNumber;
@@ -35,7 +35,7 @@ public class EnemyManager extends Observable {
 		this.graphicLib = new GraphicsLibrary();
 
 	}
-	
+
 	public void initializeNewLevel(){
 		this.grid = this.gameData.getGrid();
 		this.uniqueEnemyID = 0;
@@ -77,13 +77,13 @@ public class EnemyManager extends Observable {
 				distToMove = (Math.abs(gameData.cellToCoordinate(e.getCurrentCell().getNext().getX()) - e.getX())
 						+ Math.abs(gameData.cellToCoordinate(e.getCurrentCell().getNext().getY() - e.getY())));
 			} catch (NullPointerException exception) { // enemy is currently at
-														// last cell on path
+				// last cell on path
 				double destinationXpos = e.getCurrentCell().getX()
 						+ e.getxDirection() * gameData.getCellSize() / 2; // midpoint
-																				// +
-																				// width/2
-																				// =
-																				// edge
+				// +
+				// width/2
+				// =
+				// edge
 				double destinationYpos = e.getCurrentCell().getY()
 						+ e.getyDirection() * gameData.getCellSize() / 2;
 				distToMove = Math.abs(destinationXpos - e.getX()) + Math.abs(destinationYpos - e.getY());
@@ -97,9 +97,9 @@ public class EnemyManager extends Observable {
 				}
 				e.setCurrentCell(e.getCurrentCell().getNext());
 				e.setxDirection(e.getCurrentCell().getNext().getX() - e.getCurrentCell().getX()); // -1,
-																									// 0,
-																									// or
-																									// 1
+				// 0,
+				// or
+				// 1
 				e.setyDirection(e.getCurrentCell().getNext().getY() - e.getCurrentCell().getY());
 				moveDist -= distToMove;
 			} else {
@@ -130,7 +130,8 @@ public class EnemyManager extends Observable {
 			notifyObservers();
 		}
 
-		if (this.gamePlayModel.getPackOfEnemyComing().isEmpty() && enemyOnGrid.isEmpty()&& this.gamePlayModel.getNextEnteringEnemy() == null  ) {
+		if (this.gamePlayModel.getPackOfEnemyComing().isEmpty() && enemyOnGrid.isEmpty()
+				&& this.gamePlayModel.getNextEnteringEnemy() == null) {
 			if (this.gamePlayModel.getWaveOfEnemy() < this.gamePlayModel.getEnemyAtCurrentLevel().size()) {
 				this.gamePlayModel.setPackOfEnemyComing(
 						this.gamePlayModel.getEnemyAtCurrentLevel().get(this.gamePlayModel.getWaveOfEnemy()));
@@ -148,7 +149,7 @@ public class EnemyManager extends Observable {
 		this.gamePlayModel.setNextEnteringEnemy(this.gamePlayModel.getPackOfEnemyComing().poll());
 
 	}
-	*/
+	 */
 
 	/*
 	private void checkCollision() {
@@ -162,7 +163,7 @@ public class EnemyManager extends Observable {
 		setChanged();
 		notifyObservers();
 	}
-	*/
+	 */
 
 
 
@@ -174,77 +175,77 @@ public class EnemyManager extends Observable {
 		moveEnemies();
 	}
 
+	
 	private void moveEnemies() {
 		for (Enemy enemy : enemyOnGrid) {
 			moveIndividualEnemy(enemy);
+
 		}
 	}
+
 	private void setEnemyImageSize(ImageView enemyImage){
 		graphicLib.setImageViewParams(enemyImage, this.gameData.getCellWidth(),  this.gameData.getCellHeight());
 	}
-	
-	private int[] coordinateToCell(double pixelx, double pixely){
-		int x =(int)(this.gameData.getCellWidth()*pixelx/GridGUI.GRID_WIDTH);
-		int y= (int)(this.gameData.getCellHeight()*pixely/GridGUI.GRID_HEIGHT);
-		int[] cell  = {x,y};
-		return cell;
-	}
-	
-	
-	private void moveIndividualEnemy(Enemy enemy) {
-		/*
-		if (enemy.getUniqueID() != this.pastEnemyId){
-			this.current = currentCopy; //reset if a new enemy (prob won't work)
-			this.pastEnemyId = enemy.getUniqueID();
-		}
-		*/
-		//System.out.println("Cell width: " + this.gamePlayModel.getCellWidth());
-		//System.out.println("Current.getX();" + this.current.getX() + ", Current.getY(): " + this.current.getY());
-		if (this.current != null) {
-			if (enemy.getX() < (current.getX() * this.gameData.getCellWidth())
-					&& (enemy.getY() /*+ this.gamePlayModel.getCellHeight()*/) < current.getY()
-							* this.gameData.getCellHeight()) {
-				// System.out.println("Both should move");
-				enemy.setX(enemy.getX() + enemy.getMovingSpeed());
-				enemy.setY(enemy.getY() + enemy.getMovingSpeed());
-				/*
-				int[] coords = coordinateToCell(enemy.getX(),enemy.getY());
-				enemy.setCell(this.gamePlayModel.getGrid().getCell(coords[0], coords[1]));
-				*/
-			} else if (enemy.getX() < (current.getX() * this.gameData.getCellWidth())
-					&& !(enemy.getY() < (current.getY() * this.gameData.getCellHeight()))) {
-				enemy.setX(enemy.getX() + enemy.getMovingSpeed());
-				/*
-				int[] coords = coordinateToCell(enemy.getX(),enemy.getY());
-				enemy.setCell(this.gamePlayModel.getGrid().getCell(coords[0], coords[1]));
-				*/
-			} else if (enemy.getY() > (current.getY() * this.gameData.getCellHeight()) && enemy.getY()<(current.getY() * (this.gameData.getCellHeight()+1))
-					&& !(enemy.getX() < (current.getX() * this.gameData.getCellWidth()))) {
-				enemy.setY(enemy.getY() + enemy.getMovingSpeed());
-				/*
-				int[] coords = coordinateToCell(enemy.getX(),enemy.getY());
-				enemy.setCell(this.gamePlayModel.getGrid().getCell(coords[0], coords[1]));
-				*/
-			}
-			
-			
+
+
+		private void moveIndividualEnemy(Enemy enemy) {
 			/*
-			 * if (!(enemy.getX() + enemy.getMovingSpeed() >
-			 * GridGUI.GRID_WIDTH)) { enemy.setX(enemy.getX() +
-			 * enemy.getMovingSpeed()); }
+			 * if (enemy.getUniqueID() != this.pastEnemyId){ this.current =
+			 * currentCopy; //reset if a new enemy (prob won't work)
+			 * this.pastEnemyId = enemy.getUniqueID(); }
 			 */
+			// System.out.println("Cell width: " +
+			// this.gamePlayModel.getCellWidth());
+			// System.out.println("Current.getX();" + this.current.getX() + ",
+			// Current.getY(): " + this.current.getY());
+			if (this.current != null) {
+				if (enemy.getX() < (current.getX() * this.gameData.getCellWidth())
+						&& (enemy.getY() /*+ this.gamePlayModel.getCellHeight()*/) < current.getY()
+						* this.gameData.getCellHeight()) {
+								// System.out.println("Both should move");
+				enemy.setX(enemy.getX() + enemy.getMovingSpeed());
+				enemy.setY(enemy.getY() + enemy.getMovingSpeed());
+				/*
+<<<<<<< HEAD:src/gameplayer/model/enemy/EnemyManager.java
+				int[] coords = coordinateToCell(enemy.getX(),enemy.getY());
+				enemy.setCell(this.gamePlayModel.getGrid().getCell(coords[0], coords[1]));
+				 */
+							} else if (enemy.getX() < (current.getX() * this.gameData.getCellWidth())
+									&& !(enemy.getY() < (current.getY() * this.gameData.getCellHeight()))) {
+								enemy.setX(enemy.getX() + enemy.getMovingSpeed());
+								/*
+				int[] coords = coordinateToCell(enemy.getX(),enemy.getY());
+				enemy.setCell(this.gamePlayModel.getGrid().getCell(coords[0], coords[1]));
+								 */
+							} else if (enemy.getY() > (current.getY() * this.gameData.getCellHeight()) && enemy.getY()<(current.getY() * (this.gameData.getCellHeight()+1))
+									&& !(enemy.getX() < (current.getX() * this.gameData.getCellWidth()))) {
+							
+									enemy.setY(enemy.getY() + enemy.getMovingSpeed());
+							/*
+							 * int[] coords = coordinateToCell(enemy.getX(),enemy.getY());
+							 * enemy.setCell(this.gamePlayModel.getGrid().getCell(coords[0],
+							 * coords[1]));
+							 */
+							}
 
-			else {
-				this.current = this.current.getNext();
+
+					/*
+					 * if (!(enemy.getX() + enemy.getMovingSpeed() >
+					 * GridGUI.GRID_WIDTH)) { enemy.setX(enemy.getX() +
+					 * enemy.getMovingSpeed()); }
+					 */
+
+							else {
+								this.current = this.current.getNext();
+							}
+				} else {
+					this.current = currentCopy;
+				}
+
 			}
-		} else {
-			this.current = currentCopy;
+
+			public Queue<Enemy> getPackOfEnemyComing() {
+				return this.currentWave;
+			}
+
 		}
-
-	}
-
-	public Queue<Enemy> getPackOfEnemyComing() {
-		return this.currentWave;
-	}
-
-}

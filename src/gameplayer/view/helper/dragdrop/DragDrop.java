@@ -90,6 +90,7 @@ public class DragDrop extends Observable{
 	private void initDragDetectionIcon(ImageView source) {
 		Dragboard db = source.startDragAndDrop(TransferMode.MOVE);
 		ClipboardContent content = new ClipboardContent();
+		db.setDragView(source.getImage());
 		content.putString("blahy poo");
 		db.setContent(content);
 	}
@@ -105,7 +106,8 @@ public class DragDrop extends Observable{
 		graphicLib.setImageViewParams(copy, this.width, this.height);
 		copy.setX(xpos+this.xError);
 		copy.setY(ypos+this.yError);
-		((Pane) target).getChildren().add(copy);
+		System.out.println("Thing: " + ypos+this.yError);
+			((Pane) target).getChildren().add(copy);
 		Double[] coords = {xpos+this.xError,ypos+this.yError};
 		this.coordinates.add(coords);
 		setChanged();

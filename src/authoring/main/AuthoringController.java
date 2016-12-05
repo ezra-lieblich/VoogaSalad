@@ -39,9 +39,8 @@ public class AuthoringController {
     private ModelController modelController;
     private AuthoringViewController viewController;
     private IToolbar toolbar;
-    private Wrapper wrapper = new Wrapper();
 
-    AuthoringController (int size) {
+    public AuthoringController (int size) {
         modelController = new ModelAuthoringController();
         try {
             viewController = new AuthoringViewController(size, size);
@@ -74,7 +73,7 @@ public class AuthoringController {
         toolbar.saveFile(fileContent);
         //TODO Lucy: add api call to record game in web app
         String gameData = xmlToString(fileContent);
-        wrapper.createGame(gameData);
+        Wrapper.getInstance().createGame(gameData);
     }
     
     private String xmlToString(String textContent) throws IOException{

@@ -55,11 +55,11 @@ public class Weapon extends Observable implements IDrawable{
 	
 
 	
-	double getSpeedX(){
+	public double getSpeedX(){
 		return this.speedX;
 	}
 	
-	double getSpeedY(){
+	public double getSpeedY(){
 		return this.speedY;
 	}
 	
@@ -80,7 +80,7 @@ public class Weapon extends Observable implements IDrawable{
 		return yCoordinate;
 	}
 
-	void setY(double yCoordinate) {
+	public void setY(double yCoordinate) {
 		this.yCoordinate = yCoordinate;
 		setChanged();
 		notifyObservers();
@@ -90,19 +90,19 @@ public class Weapon extends Observable implements IDrawable{
 		return this.image;
 	}
 
-	int getID() {
+	public int getID() {
 		return ID;
 	}
 
-	void setID(int iD) {
+	public void setID(int iD) {
 		ID = iD;
 	}
 
-	double getDamage() {
+	public double getDamage() {
 		return damage;
 	}
 
-	void setDamage(double damage) {
+	public void setDamage(double damage) {
 		this.damage = damage;
 	}
 
