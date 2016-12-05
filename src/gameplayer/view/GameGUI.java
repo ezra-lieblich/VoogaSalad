@@ -19,6 +19,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.image.ImageView;
@@ -76,6 +77,7 @@ public class GameGUI {
 		createGrid();
 		initDragDropPane(imagePaths);
 		initChat();
+		initStatsTab();
 		addButtonPanel();
 		initStatsDisplay(gold, lives, currentLevel);
 		return this.scene;
@@ -114,8 +116,8 @@ public class GameGUI {
 	public void bindAnimationStart(EventHandler<ActionEvent> handle) {
 		this.buttonPanel.bindAnimationStart(handle);
 	}
-	
-	public void bindAnimationStop(EventHandler<ActionEvent> handle){
+
+	public void bindAnimationStop(EventHandler<ActionEvent> handle) {
 		this.buttonPanel.bindAnimationStop(handle);
 	}
 
@@ -167,13 +169,23 @@ public class GameGUI {
 		Tab tab = dragDrop.createTab("Blah test");
 		dragDrop.populateImageViewsToTab(tab, imagePaths);
 	}
-	
-	private void initChat(){
+
+	private void initChat() {
 		WebView browser = new WebView();
 		WebEngine webEngine = browser.getEngine();
 		webEngine.load("http://voogachat.herokuapp.com");
 		Tab tab = dragDrop.createTab("Chat");
 		tab.setContent(browser);
+	}
+	
+	private void initStatsTab(){
+		WebView browser = new WebView();
+		WebEngine webEngine = browser.getEngine();
+		webEngine.load("http://voogasquad.herokuapp.com/home");
+		ScrollPane scroll = new ScrollPane();
+		scroll.setContent(browser);
+		Tab tab = dragDrop.createTab("Your Stats");
+		tab.setContent(scroll);
 	}
 
 	private void initStatsDisplay(double gold, double lives, double level) {
@@ -194,7 +206,7 @@ public class GameGUI {
 		for (IDrawable entity : redraw) {
 			ImageView image = new ImageView(entity.getImage());
 			if (i < towerCoords.size() && towerCoords.get(i).length > 1) {
-				//System.out.println("TOWER BEING RENDERED?!");
+				// System.out.println("TOWER BEING RENDERED?!");
 				image.setX(towerCoords.get(i)[0]);
 				image.setY(towerCoords.get(i)[1]);
 				graphics.setImageViewParams(image, DragDropView.DEFENSIVEWIDTH, DragDropView.DEFENSIVEHEIGHT);
@@ -221,10 +233,12 @@ public class GameGUI {
 		}
 	}
 
+
 	public void reRenderWeapon(HashMap<Integer,ImageView>weaponsOnScreen) {
 	
 		for(Integer weapon:weaponsOnScreen.keySet()){
 			this.grid.getGrid().getChildren().add(weaponsOnScreen.get(weapon));
+
 		}
 	}
 
