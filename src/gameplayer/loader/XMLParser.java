@@ -29,6 +29,7 @@ import engine.enemy.EnemyType;
 import engine.enemy.EnemyTypeBuilder;
 import engine.enemy.EnemyTypeManager;
 import engine.level.LevelTypeManager;
+import engine.path.PathTypeManager;
 import engine.settings.GameMode;
 import engine.settings.GameModeType;
 import engine.settings.GameModeTypeManager;
@@ -52,9 +53,6 @@ import gameplayer.model.Enemy;
 public class XMLParser {
 	
 	private Element rootElement;
-	private Document xmlDocument; 
-	private TowerTypeBuilder towerBuilder;
-	private EnemyTypeBuilder enemyBuilder;
 	private XStream serializer;
 	private ManagerTypeMediator gameManager;
 
@@ -62,12 +60,7 @@ public class XMLParser {
 		serializer = new XStream(new DomDriver());
 		gameManager = getGameManager(xmlFilename);
 		getEnemyTypes();
-		/*
-		parseNewXML(xmlFilename);
-		rootElement = getRootElement(); 
-		towerBuilder = new TowerTypeBuilder();
-		enemyBuilder = new EnemyTypeBuilder();
-		*/
+
 	}
 	
 	private ManagerTypeMediator getGameManager(String xmlFilename) {
@@ -123,6 +116,10 @@ public class XMLParser {
 	
 	protected LevelTypeManager getLevelManager() {
 		return gameManager.getManager(LevelTypeManager.class);
+	}
+	
+	protected PathTypeManager getPathManager() {
+		return gameManager.getManager(PathTypeManager.class);
 	}
 	
     //refactor to get it out of from xml (waiting for ezra)

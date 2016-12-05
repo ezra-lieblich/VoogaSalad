@@ -9,6 +9,9 @@ import java.util.Observable;
 import java.util.Queue;
 import engine.enemy.EnemyType;
 import engine.level.LevelTypeManager;
+import engine.path.Coordinate;
+import engine.path.Path;
+import engine.path.PathTypeManager;
 import engine.settings.GameMode;
 import engine.tower.Tower;
 import engine.tower.TowerType;
@@ -61,24 +64,26 @@ public class GamePlayerFactory{
 	
 	
 	public Grid getGrid(int level){
-		String width = authoringFileReader.getTextValue("level"+level,"width");
-		String height = authoringFileReader.getTextValue("level"+level,"height");
-		Grid gameGrid = new Grid(Integer.parseInt(width),Integer.parseInt(height));
-		String coordinates = authoringFileReader.getTextValue("level"+level, "coordinate");
+		PathTypeManager pathManager = authoringFileReader.getPathManager();
+		Map<Integer, Path> paths = pathManager.getEntities();
+		Path currPath = paths.get(0); //refactor to be the path for current level
+		int width = currPath.getGridColumns();
+		int height = currPath.getGridRows();
+		Grid gameGrid = new Grid(width, height);
+		List<Coordinate<Integer>> coordinates = currPath.getCoordinates();
 		//String coordinates = authoringFileReader.getTextValue("level"+level, "path");
-		String[] splitCoordinates = coordinates.split(";");
-		String[] start = splitCoordinates[0].split(",");
-		Cell current = gameGrid.getCell(Integer.parseInt(start[0]), Integer.parseInt(start[1]));
+		Coordinate<Integer> start = coordinates.get(0);
+		Cell current = gameGrid.getCell(start.getX().intValue(), start.getY().intValue());
 		
 		gameGrid.setStart(current);
 		
-		for(int i=1;i<splitCoordinates.length;i++){
-			String[] nextLocations = splitCoordinates[i].split(",");
-			Cell next = gameGrid.getCell(Integer.parseInt(nextLocations[0]), Integer.parseInt(nextLocations[1]));
+		for(int i=1; i< coordinates.size(); i++){
+			Coordinate<Integer> nextCoordinate = coordinates.get(i);
+			Cell next = gameGrid.getCell(nextCoordinate.getX().intValue(), nextCoordinate.getY().intValue());
 			current.setNext(next);
 			current = next; 
 		}
-		return gameGrid; 	
+		return gameGrid;
 	}
 	
 	
