@@ -42,8 +42,7 @@ public class EnemyController implements Observer{
 			//modified, it will no longer be the same key and no imageview will correspond to it, may need a unique id
 			Enemy enemy = enemies.get(i);
 			EnemyView enemyView = new EnemyView(enemy.getImage(), enemy.getWidth(), enemy.getHeight(), enemy.getHealth());
-		
-			((Pane) this.grid.getGrid()).getChildren().add(enemyView.getEnemyView());
+			((Pane) this.grid.getGrid()).getChildren().addAll(enemyView.getEnemyView(), enemy.getEnemyInfo());
 
 		}
 

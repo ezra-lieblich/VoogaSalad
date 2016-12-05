@@ -25,7 +25,7 @@ public class Tower implements IDrawable {
 		this.image = tt.getImagePath();
 		this.uniqueID = uniqueID;
 		this.sellAmount = tt.getSellAmount();
-		this.showInfo = true;
+		this.showInfo = false;
 		this.towerInfo = new Label("Type: " + this.type + "\n ID: " + this.uniqueID + "\n Cost: " + 
 				this.cost + "\n Image: " + this.image + "\n Name: " + this.name);
 		this.towerInfo.setVisible(showInfo);

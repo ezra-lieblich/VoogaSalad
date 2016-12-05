@@ -318,7 +318,6 @@
                       <null/>
                     </listeners>
                     <property class="string">penguin.jpg</property>
-
                   </imagePath>
                   <size class="engine.observer.ObservableObjectProperty">
                     <observers/>
@@ -387,11 +386,7 @@
                     <listeners>
                       <null/>
                     </listeners>
-<<<<<<< HEAD
-                    <property class="string">Images/penguin.jpg</property>
-=======
                     <property class="string">penguin.jpg</property>
->>>>>>> refactoredgameplay
                   </imagePath>
                   <size class="engine.observer.ObservableObjectProperty">
                     <observers/>
@@ -487,11 +482,7 @@
                     <listeners>
                       <null/>
                     </listeners>
-<<<<<<< HEAD
-                    <property class="string">Images/penguin.jpg</property>
-=======
                     <property class="string">penguin.jpg</property>
->>>>>>> refactoredgameplay
                   </imagePath>
                   <size class="engine.observer.ObservableObjectProperty">
                     <observers/>
@@ -562,11 +553,7 @@
                     <listeners>
                       <null/>
                     </listeners>
-<<<<<<< HEAD
-                    <property class="string">Images/penguin.jpg</property>
-=======
                     <property class="string">penguin.jpg</property>
->>>>>>> refactoredgameplay
                   </imagePath>
                   <size class="engine.observer.ObservableObjectProperty">
                     <observers/>
@@ -652,11 +639,7 @@
                     <listeners>
                       <null/>
                     </listeners>
-<<<<<<< HEAD
-                    <property class="string">Images/butterfly.png</property>
-=======
                     <property class="string">butterfly.png</property>
->>>>>>> refactoredgameplay
                   </imagePath>
                   <size class="engine.observer.ObservableObjectProperty">
                     <observers/>
@@ -725,11 +708,7 @@
                     <listeners>
                       <null/>
                     </listeners>
-<<<<<<< HEAD
-                    <property class="string">Images/butterfly.png</property>
-=======
                     <property class="string">butterfly.png</property>
->>>>>>> refactoredgameplay
                   </imagePath>
                   <size class="engine.observer.ObservableObjectProperty">
                     <observers/>
@@ -798,11 +777,7 @@
                     <listeners>
                       <null/>
                     </listeners>
-<<<<<<< HEAD
-                    <property class="string">Images/butterfly.png</property>
-=======
                     <property class="string">butterfly.png</property>
->>>>>>> refactoredgameplay
                   </imagePath>
                   <size class="engine.observer.ObservableObjectProperty">
                     <observers/>
@@ -896,11 +871,7 @@
                     <listeners>
                       <null/>
                     </listeners>
-<<<<<<< HEAD
-                    <property class="string">Images.blacksquare.jpg</property>
-=======
                     <property class="string">blacksquare.jpg</property>
->>>>>>> refactoredgameplay
                   </imagePath>
                   <size class="engine.observer.ObservableObjectProperty">
                     <observers/>
