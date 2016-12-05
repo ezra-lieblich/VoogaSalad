@@ -5,6 +5,7 @@ import java.util.Observable;
 import gameplayer.model.Cell;
 import gameplayer.model.IDrawable;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 
 public class Enemy extends Observable implements IDrawable {
 
@@ -31,11 +32,16 @@ public class Enemy extends Observable implements IDrawable {
 		this.image = image;
 		this.width = width;
 		this.height = height;
-		this.showInfo = true;
-		this.enemyInfo = new Label("Name: " + name + "\n Health: " + health);
-		this.enemyInfo.setVisible(showInfo);
+		this.showInfo = false;
+		this.enemyInfo = new Label("Name: " + name + "\nHealth: " + health);
+		initLabel();
 	}
 
+	private void initLabel(){
+		this.enemyInfo.setLayoutX(getX());
+		this.enemyInfo.setLayoutY(getY() + new ImageView(getImage()).getFitHeight());
+		this.enemyInfo.setVisible(showInfo);
+	}
 	/*
 	 * public double[] getWidthAndHeight(){ double[] weidthAndHeight =
 	 * {this.width, this.height}; return weidthAndHeight; }
