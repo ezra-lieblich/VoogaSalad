@@ -5,6 +5,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,6 +26,7 @@ public class EffectManager {
     
     EffectManager() {
         annotatedClassMethods = new HashMap<String, List<Method>>();
+        add(Enemy.class);
     }
     
     public void add(Class<?> annotatedClass) {
@@ -59,13 +61,17 @@ public class EffectManager {
 //        }
 //    }
     
+    public List<String> getAnnotatedClasses() {
+        return new ArrayList<String>(annotatedClassMethods.keySet());
+    }
+    
     public void printTest() {
         annotatedClassMethods.values().forEach(a -> a.forEach(b -> System.out.println(b.getName())));
     }
     
-    public static void main (String[] args) {
-        EffectManager test = new EffectManager();
-        test.add(Enemy.class);
-        test.printTest();
-    }
+//    public static void main (String[] args) {
+//        EffectManager test = new EffectManager();
+//        test.add(Enemy.class);
+//        test.printTest();
+//    }
 }

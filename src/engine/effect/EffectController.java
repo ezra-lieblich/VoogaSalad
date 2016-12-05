@@ -5,18 +5,16 @@ import javafx.scene.Scene;
 import javafx.scene.shape.Rectangle;
 
 public class EffectController {
-    Group root;
-    Scene scene;
+    EffectManagerController modelController;
+    EffectViewController viewController;
     
     EffectController(int size) {
-        this.root = new Group();
-        this.scene = new Scene(root, size, size);
-        root.getChildren().add(new Rectangle());
-        EffectView view = new EffectView();
-        root.getChildren().add(view.getNode());
+        this.modelController = new EffectManagerController();
+        this.viewController = new EffectViewController(size, modelController);
     }
     
     public Scene getScene() {
-        return scene;
+        return viewController.getScene();
     }
+    
 }
