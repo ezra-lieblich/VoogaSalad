@@ -17,9 +17,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 public class EnemyTableView implements ILevelSetView {
 
     private TableView<WaveObject> enemyTable;
+    private TableColumn waveNumberCol;
     private TableColumn enemyNameCol;
     private TableColumn numEnemiesCol;
     private TableColumn enemyFrequencyCol;
+    private TableColumn pathCol;
+    private TableColumn timeDelayCol;
     private ObservableList<WaveObject> data;
 
     private LevelEditorViewDelegate delegate;
@@ -32,18 +35,28 @@ public class EnemyTableView implements ILevelSetView {
     }
 
     private void createTableColumns () {
+        waveNumberCol = new TableColumn("Wave Number");
         enemyNameCol = new TableColumn("Enemy Name");
         numEnemiesCol = new TableColumn("Number of Enemies");
         enemyFrequencyCol = new TableColumn("Enemy Frequency");
-        enemyNameCol.setEditable(false);
+        pathCol = new TableColumn("Path");
+        timeDelayCol = new TableColumn("Time Delay");
+        waveNumberCol.setEditable(false);
+        enemyNameCol.setEditable(true);
         numEnemiesCol.setEditable(true);
         enemyFrequencyCol.setEditable(true);
+        waveNumberCol.setCellValueFactory(
+                                          new PropertyValueFactory<WaveObject, String>("waveNumber"));
         enemyNameCol.setCellValueFactory(
                                          new PropertyValueFactory<WaveObject, String>("enemyName"));
         numEnemiesCol
                 .setCellValueFactory(new PropertyValueFactory<WaveObject, String>("numOfEnemies"));
         enemyFrequencyCol
                 .setCellValueFactory(new PropertyValueFactory<WaveObject, String>("enemyFrequency"));
+        pathCol
+                .setCellValueFactory(new PropertyValueFactory<WaveObject, String>("path"));
+        timeDelayCol
+                .setCellValueFactory(new PropertyValueFactory<WaveObject, String>("timeDelay"));
     }
 
     @Override
@@ -68,7 +81,8 @@ public class EnemyTableView implements ILevelSetView {
         setData(enemies);
         enemyTable.getColumns().clear();
         enemyTable.setItems(data);
-        enemyTable.getColumns().addAll(enemyNameCol, numEnemiesCol, enemyFrequencyCol);
+        enemyTable.getColumns().addAll(waveNumberCol, enemyNameCol, numEnemiesCol,
+                                       enemyFrequencyCol, pathCol, timeDelayCol);
         enemyTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     }
 
