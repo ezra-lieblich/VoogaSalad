@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import gameplayer.model.Enemy;
 import gameplayer.model.IDrawable;
 import gameplayer.model.Tower;
 import gameplayer.view.buttonPanel.ButtonPanel;
@@ -215,6 +216,11 @@ public class GameGUI {
 					((Tower) entity).getTowerInfo().setLayoutX(image.getX());
 					((Tower) entity).getTowerInfo().setLayoutY(image.getY() + image.getFitHeight());
 					this.grid.getGrid().getChildren().add(((Tower) entity).getTowerInfo());
+				}
+				else if(entity instanceof Enemy){
+					((Enemy) entity).getEnemyInfo().setLayoutX(image.getX());
+					((Enemy) entity).getEnemyInfo().setLayoutY(image.getY() + image.getFitHeight());
+					this.grid.getGrid().getChildren().add(((Enemy) entity).getEnemyInfo());
 				}
 				i++;
 			}
