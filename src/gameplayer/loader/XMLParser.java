@@ -144,20 +144,16 @@ public class XMLParser {
 	}
 	
 	
-	//refactor to make it up to date with new xml format
+	//TODO: get rid of this method
     public boolean isValid() {
-    	NodeList nodeList = rootElement.getElementsByTagName("isValid");
-    	//System.out.println("node" + nodeList.item(0).getTextContent());
-    	if (nodeList != null && nodeList.getLength() > 0) {
-			return Boolean.parseBoolean(nodeList.item(0).getTextContent().trim()); //check if the string can actually be parsed as a boolean
-		}
-    	return false;
+    	return true;
     	
     }
     
     //This returns the TYPE of the xml
     public String getName(){
-    	return rootElement.getAttribute("Title");
+    	GameMode gameMode = getGameMode();
+    	return gameMode.getGameType(); //type or name?
     }
 	
 
