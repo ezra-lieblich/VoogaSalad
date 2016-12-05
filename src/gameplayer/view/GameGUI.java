@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import gameplayer.model.IDrawable;
-import gameplayer.model.Tower;
+import gameplayer.model.tower.Tower;
 import gameplayer.view.buttonPanel.ButtonPanel;
 import gameplayer.view.buttonPanel.GamePlayButtonPanel;
 import gameplayer.view.helper.GraphicsLibrary;

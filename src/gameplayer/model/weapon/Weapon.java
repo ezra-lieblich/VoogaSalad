@@ -1,6 +1,8 @@
-package gameplayer.model;
+package gameplayer.model.weapon;
 
 import java.util.Observable;
+
+import gameplayer.model.IDrawable;
 
 public class Weapon extends Observable implements IDrawable{
 	

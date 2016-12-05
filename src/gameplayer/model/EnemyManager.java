@@ -6,6 +6,7 @@ import java.util.Observable;
 import java.util.Queue;
 
 import gameplayer.loader.GamePlayerFactory;
+import gameplayer.model.weapon.Weapon;
 import gameplayer.view.GridGUI;
 import gameplayer.view.helper.GraphicsLibrary;
 import javafx.scene.image.ImageView;

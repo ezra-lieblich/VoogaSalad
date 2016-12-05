@@ -1,6 +1,6 @@
 package usecases;
 
-import gameplayer.model.Weapon;
+import gameplayer.model.weapon.Weapon;
 
 /*
 public class UpdateWeapon {

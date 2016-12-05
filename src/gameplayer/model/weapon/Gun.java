@@ -1,5 +1,6 @@
-package gameplayer.model;
+package gameplayer.model.weapon;
 import engine.weapon.*;
+import gameplayer.model.tower.Tower;
 
 public class Gun {
 	private int fireCounter = 0;

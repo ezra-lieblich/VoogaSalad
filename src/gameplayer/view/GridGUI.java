@@ -5,7 +5,7 @@ import java.util.List;
 
 import gameplayer.model.Cell;
 import gameplayer.model.Grid;
-import gameplayer.model.Tower;
+import gameplayer.model.tower.Tower;
 import gameplayer.view.helper.GraphicsLibrary;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;

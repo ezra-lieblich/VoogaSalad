@@ -1,8 +1,10 @@
-package gameplayer.model;
+package gameplayer.model.tower;
 
 import java.util.ArrayList;
-
 import javafx.scene.control.Label;
+import engine.tower.*;
+import gameplayer.model.IDrawable;
+import gameplayer.model.weapon.Gun;
 
 public class Tower implements IDrawable {
 
@@ -16,28 +18,18 @@ public class Tower implements IDrawable {
 	private boolean showInfo;
 	
 	
-	public Tower (int type, int ID, double cost, ArrayList<Gun> guns, String image, String name){
-		this.cost = cost;
+	public Tower (TowerType tt, ArrayList<Gun> guns){
+		this.cost = tt.getCost();
 		this.guns = guns;
-		this.image = image;
+		this.image = tt.getImagePath();
 		this.ID = ID;
 		this.showInfo = true;
-		this.towerInfo = new Label("Type: " + type + "\n ID: " + ID + "\n Cost: " + 
-				cost + "\n Image: " + image + "\n Name: " + name);
+		this.towerInfo = new Label("Type: " + this.type + "\n ID: " + ID + "\n Cost: " + 
+				this.cost + "\n Image: " + this.image + "\n Name: " + this.name);
 		this.towerInfo.setVisible(showInfo);
 	}
 
-	/*
-// +++++++++++++get rid of this after fixing weapon Current Using and needs updating+++++++++++++
-	public Tower(int ID, String image, String name, double xCoordinate, double yCoordinate) {
-		this.ID = ID;
-		this.image = image;
-		this.name = name;
-		this.xCoordinate = xCoordinate;
-		this.yCoordinate = yCoordinate;
-	}
-
-*/ 
+ 
 	public void setCoordinates(double x, double y) {
 		this.xCoordinate = x;
 		this.yCoordinate = y;
@@ -55,6 +47,8 @@ public class Tower implements IDrawable {
 	int getType(){
 		return this.type;
 	}
+	
+
 	
 	
 	int getID(){
