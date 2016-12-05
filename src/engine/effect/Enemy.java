@@ -59,6 +59,7 @@ public class Enemy extends SuperEnemy implements IDrawable{
 		return this.height;
 	}
 	
+	
 	@EffectMethod
 	public String getName(){
 		return name; 

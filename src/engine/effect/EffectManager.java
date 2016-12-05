@@ -21,14 +21,14 @@ import java.util.stream.Stream;
 
 public class EffectManager {
     //private Map<String, Class<?>> annotatedClasses;
-    private Map<String, List<Method>> annotatedClasses; //Return type : methods of that type
+    private Map<String, List<Method>> annotatedClassMethods; //Return type : methods of that type
     
     EffectManager() {
-        annotatedClasses = new HashMap<String, List<Method>>();
+        annotatedClassMethods = new HashMap<String, List<Method>>();
     }
     
     public void add(Class<?> annotatedClass) {
-        annotatedClasses.put(annotatedClass.getName(), getAnnotatedMethods(annotatedClass, EffectMethod.class));
+        annotatedClassMethods.put(annotatedClass.getName(), getAnnotatedMethods(annotatedClass, EffectMethod.class));
     }
     
     //TODO - Stream this
@@ -60,7 +60,7 @@ public class EffectManager {
 //    }
     
     public void printTest() {
-        annotatedClasses.values().forEach(a -> a.forEach(b -> System.out.println(b.getName())));
+        annotatedClassMethods.values().forEach(a -> a.forEach(b -> System.out.println(b.getName())));
     }
     
     public static void main (String[] args) {
