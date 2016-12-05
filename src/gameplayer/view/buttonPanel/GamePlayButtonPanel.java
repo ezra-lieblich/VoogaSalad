@@ -10,6 +10,7 @@ import javafx.scene.layout.HBox;
 public class GamePlayButtonPanel{
 	
 	private EventHandler<ActionEvent> startOnPress; 
+	private EventHandler<ActionEvent> pauseOnPress;
 	private ButtonPanel panel;
 	private GraphicsLibrary graphicsLib;
 	
@@ -30,15 +31,23 @@ public class GamePlayButtonPanel{
 		this.startOnPress = handle; 
 	}
 	
+	public void bindAnimationStop(EventHandler<ActionEvent> handle){
+		this.pauseOnPress = handle;
+	}
+	
 	private Button[] createButtons(){
-		Button[] buttonArr = {createPlayButton()};
+		Button[] buttonArr = {createPlayButton(), createPauseButton()};
 		return buttonArr;
 	}
 	
 	private Button createPlayButton(){
-		Button play = graphicsLib.createButton("Play");
-		play.setOnAction(startOnPress);
+		Button play = graphicsLib.createButton("Play", startOnPress);
 		return play;
+	}
+	
+	private Button createPauseButton(){
+		Button pause = graphicsLib.createButton("Pause", pauseOnPress);
+		return pause;
 	}
 	
 

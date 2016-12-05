@@ -2,6 +2,8 @@ package gameplayer.model;
 
 import java.util.Observable;
 
+import javafx.scene.control.Label;
+
 public class Enemy extends Observable implements IDrawable{
 	
 	private String name; 
@@ -16,6 +18,8 @@ public class Enemy extends Observable implements IDrawable{
 	private double width, height;
 	private int uniqueID;
 	private Cell enemyCell;
+	private Label enemyInfo;
+	private boolean showInfo;
 	
 	public Enemy(int ID, String name, double movingSpeed, int health, String image, double width, double height){
 		this.uniqueID = ID;
@@ -25,7 +29,9 @@ public class Enemy extends Observable implements IDrawable{
 		this.image = image;
 		this.width = width;
 		this.height = height;
-				
+		this.showInfo = true;
+		this.enemyInfo = new Label("Name: " + name + "\n Health: " + health);
+		this.enemyInfo.setVisible(showInfo);
 	}
 	/*
 	public double[] getWidthAndHeight(){
@@ -144,5 +150,15 @@ public class Enemy extends Observable implements IDrawable{
 		setChanged();
 		notifyObservers();
 	}
+	public Label getEnemyInfo() {
+		return enemyInfo;
+	}
+	
+	public void toggleInfoVisibility(){
+		this.showInfo = !showInfo;
+		this.enemyInfo.setVisible(showInfo);
+	}
+	
+	
 
 }

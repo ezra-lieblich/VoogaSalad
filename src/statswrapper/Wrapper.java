@@ -17,7 +17,14 @@ import javax.ws.rs.core.Response;
 public class Wrapper {
 	
 	private final String baseURL = "http://voogasquad.herokuapp.com/";
+	private String username;
+	private static final Wrapper instance = new Wrapper();
 
+	
+	public static Wrapper getInstance() {
+		return instance;
+	}
+	
 	public void addStates(String endpoint) {
 		Client client = ClientBuilder.newClient();
 		Response response = client.target(baseURL + endpoint)
@@ -25,6 +32,7 @@ public class Wrapper {
 	}
 	
 	public void login(String username, String password) throws IOException{
+		this.username = username;
 		String endpoint = "login";
 		URL url = new URL(baseURL + endpoint);
 		String json = "{\"username\": \"" + username + "\",\"password\":\""+password+"\"}";
@@ -40,9 +48,10 @@ public class Wrapper {
 	
 	public void createGame(String xmlData) throws IOException{
 		String endpoint = "creategame";
-		String test = "TEST GAME";
+		//String test = "TEST GAME";
 		URL url = new URL(baseURL + endpoint);
-		String json = "{\"game\": \"" + test + "\"}";
+		String newXML = xmlData.replaceAll("\"", "");
+		String json = "{\"game\": \"" + newXML + "\"}";
 		System.out.println(json);
 		executeRequest(url, json, true);
 	}
