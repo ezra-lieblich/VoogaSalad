@@ -23,11 +23,11 @@ public class Weapon extends Observable implements IDrawable{
 		this.name = name;
 		this.ID = ID;
 		this.damage = demage;
+		this.damage = 50; // later change this from collision clas
 		this.speedX = speedX;
 		this.speedY  = speedY;
 		this.image = image;
 		this.distanceTravelled = 0;
-
 		this.range = range;
 	}
 	

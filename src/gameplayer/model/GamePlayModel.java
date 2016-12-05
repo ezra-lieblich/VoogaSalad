@@ -9,46 +9,49 @@ import java.util.Observable;
 import java.util.Queue;
 import engine.tower.Tower;
 import engine.weapon.*;
+import engine.weapon.WeaponManager;
 import gameplayer.loader.GamePlayerFactory;
 import gameplayer.model.tower.TowerManager;
-import gameplayer.model.weapon.Gun;
 import gameplayer.model.weapon.Weapon;
 import gameplayer.view.GridGUI;
 import gameplayer.view.helper.GraphicsLibrary;
 import javafx.scene.image.ImageView;
+import gameplayer.model.weapon.*;
 
 public class GamePlayModel extends Observable {
 	private GamePlayerFactory factory;
 	private String gameTitle;
 	private GamePlayData gameData;
 
-	private List<Weapon> weaponOnGrid;
 	private int hitBuffer = 10; // initialize from xml
 	private Enemy nextEnteringEnemy;
 	private Queue<Enemy> packOfEnemyComing;
 	private List<Queue<Enemy>> enemyAtCurrentLevel;
-	
+
 	//private int currentLevel;
 	int waveOfEnemy;
-	private int uniqueEnemyID, uniqueWeaponID;
+	private int uniqueEnemyID;
 	private HashMap<Integer, engine.weapon.Weapon> weaponMap;
 	private GraphicsLibrary graphicLib;
 	private TowerManager towerManager;
-
+	private gameplayer.model.weapon.WeaponManager weaponManager;
+	private EnemyManager enemyManager;
 	// private EnemyModel enemyModel;
-	
-	
-	
+
+
+
 
 	public GamePlayModel(GamePlayerFactory factory) {
 		graphicLib = new GraphicsLibrary();
 		initializeGameSetting(factory);
 		this.gameData = new GamePlayData(factory);
 		this.gameData.initializeGameSetting();
-		this.towerManager = new TowerManager(gameData);
+		this.enemyManager = new EnemyManager(this.gameData);
+		this.weaponManager = new gameplayer.model.weapon.WeaponManager(gameData);
+		this.towerManager = new TowerManager(gameData, this.weaponManager);
 
 	}
-	
+
 	/**
 	 * could be used when start another game
 	 * 
@@ -66,7 +69,7 @@ public class GamePlayModel extends Observable {
 	}
 
 	public List<Weapon> getWeaponOnGrid() {
-		return this.weaponOnGrid;
+		return this.weaponManager.getWeaponOnGrid();
 	}
 
 	public Queue<Enemy> getPackOfEnemyComing() {
@@ -89,30 +92,16 @@ public class GamePlayModel extends Observable {
 		return waveOfEnemy;
 	}
 
-	public void setWaveOfEnemy(int waveOfEnemy) {
-		this.waveOfEnemy = waveOfEnemy;
-	}
 
-	public void setNextEnteringEnemy(Enemy nextEnteringEnemy) {
-		this.nextEnteringEnemy = nextEnteringEnemy;
-	}
 
 
 
 	public void initializeLevelInfo() {
 		this.gameData.initializeLevelInfo();
-		this.uniqueEnemyID = 0;
-		//this.uniqueTowerID = 0;
-		this.uniqueWeaponID = 0;
-		this.enemyAtCurrentLevel = this.factory.getEnemy(this.gameData.getCurrentLevel());
-		this.waveOfEnemy = 0;
-		packOfEnemyComing = this.enemyAtCurrentLevel.get(waveOfEnemy);
-		this.waveOfEnemy++;
-		nextEnteringEnemy = this.packOfEnemyComing.poll();
-		weaponOnGrid = new ArrayList<Weapon>();
-		weaponMap = this.factory.getWeaponBank();
-		//System.out.println("weapon map" + weaponMap.get(0).getName());
-
+		this.weaponManager.initializeNewLevel();
+		this.towerManager.updateAvailableTower();
+		this.enemyManager.initializeNewLevel();
+		
 	}
 
 
@@ -125,26 +114,25 @@ public class GamePlayModel extends Observable {
 	}
 
 
-	// TODO: move to EnemyModel
-	/*
-	 * public List<Enemy> getEnemyList() { return this.enemyOnGrid; }
-	 */
-	
+
 
 	public Boolean placeTower(int type, int x, int y) {
 		return this.towerManager.placeTower(type, x, y);
 	}
 
-	
-
-	
 
 
+
+
+
+	/*
 	public void singleCollision(Enemy e, Weapon w) {
 		if (Math.abs(w.getX() - e.getX()) < hitBuffer && Math.abs(w.getY() - e.getY()) < hitBuffer) {
 			e.setHealth(e.getHealth() - w.getDamage());
 		}
 	}
+
+	 */
 
 	// Moved to EnemyModel
 	/*
@@ -157,7 +145,7 @@ public class GamePlayModel extends Observable {
 
 
 
-	
+
 	/*
 	public void createDummyEnemies() {
 		Queue<Enemy> myQueue = new LinkedList<Enemy>();
@@ -185,7 +173,7 @@ public class GamePlayModel extends Observable {
 		setPackOfEnemyComing(myQueue);
 		System.out.println("Enemy at current level: " + enemyAtCurrentLevel);
 	}
-	*/
+	 */
 
 	// get direction
 	/*

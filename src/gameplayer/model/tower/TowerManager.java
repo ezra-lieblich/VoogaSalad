@@ -14,7 +14,6 @@ import gameplayer.view.GridGUI;
 
 /**
  * FOR FRONT END: availableTowerTpyes would be changed by level changes
- * updateAvailableTower() method should be called in TowerController when getting into a newLevel
  * updateAvailableTower() is notify observer method
  * 
  * @author yuminzhang
@@ -45,7 +44,7 @@ public class TowerManager extends Observable{
 	
 
 
-	private void updateAvailableTower(){
+	public void updateAvailableTower(){
 		int level = gameData.getCurrentLevel();
 		for(int i: allTowerTypes.keySet()){
 			if(allTowerTypes.get(i).getUnlockLevel() == level){

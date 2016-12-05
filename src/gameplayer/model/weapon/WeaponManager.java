@@ -10,21 +10,23 @@ import gameplayer.view.GridGUI;
 
 public class WeaponManager extends Observable{
 	private GamePlayData gameData;
-	private TowerManager towerManager;
 	private List<Weapon> weaponOnGrid;
 	private int uniqueWeaponID;
 
 
 
-	public WeaponManager(GamePlayData gameData, TowerManager towerManager) {
+	public WeaponManager(GamePlayData gameData) {
 		this.gameData = gameData;
-		this.towerManager = towerManager;
 		initializeNewLevel();
 	}
 
 	public void initializeNewLevel(){
 		weaponOnGrid = new ArrayList<Weapon>();
 		uniqueWeaponID = 0;
+	}
+	
+	public List<Weapon> getWeaponOnGrid(){
+		return this.weaponOnGrid;
 	}
 
 
