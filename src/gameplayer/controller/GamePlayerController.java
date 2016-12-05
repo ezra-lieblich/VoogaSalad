@@ -117,14 +117,14 @@ public class GamePlayerController implements Observer {
 	}
 
 	public void init() {
-		this.model.initializeLevelInfo();
+		this.model.initializeGameSetting(this.loader);
 		HashMap<String, Double> settings = this.loader.getGameSetting();
 		//initGUIDummy(settings);
 		System.out.println("In init:");
 		System.out.println(this.model.getData().getGrid().getStartPoint());
 		this.enemyManager.setCurrentCell(this.model.getData().getGrid().getStartPoint());
 		System.out.println("In init");
-		this.model.getTowerManager().populateAvailableTower();
+		//this.model.getTowerManager().populateAvailableTower();
 		populateTowerToId();
 		initGUI();
 		//this.enemyController = new EnemyController(this.enemyManager, this.view.getGrid());

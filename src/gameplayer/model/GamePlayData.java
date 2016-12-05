@@ -34,7 +34,7 @@ public class GamePlayData  extends Observable{
 		this.numLevels = settingInfo.get("totalNumberOfLevels");  // put into property file
 		this.gold = settingInfo.get("gold");
 		this.lives = settingInfo.get("lives");
-		this.currentLevel = 1;
+		this.currentLevel = 0;
 	}
 	
 	public void initializeLevelInfo() {
