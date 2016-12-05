@@ -59,6 +59,7 @@ public class GamePlayData  extends Observable{
 
 
 	public Grid getGrid() {
+		System.out.println("Successfully got grid");
 		return this.grid;
 	}
 	

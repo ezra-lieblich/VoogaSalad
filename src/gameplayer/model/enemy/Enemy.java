@@ -6,28 +6,28 @@ import gameplayer.model.Cell;
 import gameplayer.model.IDrawable;
 import javafx.scene.control.Label;
 
-public class Enemy extends Observable implements IDrawable{
-	
-	private String name; 
-	private double movingSpeed;  
+public class Enemy extends Observable implements IDrawable {
+
+	private String name;
+	private double movingSpeed;
 	private double health;
 	private String image;
 	private double xCoordinate;
 	private double yCoordinate;
 	private Cell currentCell;
-	private int xDirection; //-1 if moving left, 1 if moving right
-	private int yDirection; //-1 if moving down, 1 if moving up	
+	private int xDirection; // -1 if moving left, 1 if moving right
+	private int yDirection; // -1 if moving down, 1 if moving up
 	private double width, height;
 	private int uniqueID;
 	private Cell enemyCell;
 	private Label enemyInfo;
 	private boolean showInfo;
-	
-	public Enemy(int ID, String name, double movingSpeed, int health, String image, double width, double height){
+
+	public Enemy(int ID, String name, double movingSpeed, int health, String image, double width, double height) {
 		this.uniqueID = ID;
-		this.name = name; 
+		this.name = name;
 		this.movingSpeed = movingSpeed;
-		this.health = health;	
+		this.health = health;
 		this.image = image;
 		this.width = width;
 		this.height = height;
@@ -35,46 +35,44 @@ public class Enemy extends Observable implements IDrawable{
 		this.enemyInfo = new Label("Name: " + name + "\n Health: " + health);
 		this.enemyInfo.setVisible(showInfo);
 	}
+
 	/*
-	public double[] getWidthAndHeight(){
-		double[] weidthAndHeight = {this.width, this.height};
-		return weidthAndHeight;
+	 * public double[] getWidthAndHeight(){ double[] weidthAndHeight =
+	 * {this.width, this.height}; return weidthAndHeight; }
+	 */
+	public void setCell(Cell c) {
+		this.enemyCell = c;
 	}
-	*/
-	public void setCell(Cell c){
-		this.enemyCell = c; 
-	}
-	
-	public Cell getCell(){
+
+	public Cell getCell() {
 		return this.enemyCell;
 	}
-	
-	public void setUniqueID(int id){
+
+	public void setUniqueID(int id) {
 		this.uniqueID = id;
 	}
-	
-	public int getUniqueID(){
+
+	public int getUniqueID() {
 		return this.uniqueID;
 	}
-	
-	public double getWidth(){
+
+	public double getWidth() {
 		return this.width;
 	}
-	
-	public double getHeight(){
+
+	public double getHeight() {
 		return this.height;
 	}
-	
-	public String getName(){
-		return name; 
+
+	public String getName() {
+		return name;
 	}
-	
-	public int getxDirection() { //heading
+
+	public int getxDirection() { // heading
 		return xDirection;
 	}
 
-	
-	public void setxDirection(int xDirection) { //heading
+	public void setxDirection(int xDirection) { // heading
 		this.xDirection = xDirection;
 		setChanged();
 		notifyObservers();
@@ -90,18 +88,17 @@ public class Enemy extends Observable implements IDrawable{
 		notifyObservers();
 	}
 
-
-	public void setCurrentCell(Cell c){ //don't think we need to notify observers of this change
+	public void setCurrentCell(Cell c) { // don't think we need to notify
+											// observers of this change
 		this.currentCell = c;
-		System.out.println("does the cell have a next?"+c.getNext().getX()+", "+c.getNext().getY());
-		this.xDirection = c.getNext().getX() - c.getX();
-		this.yDirection = c.getNext().getY() - c.getY();
+		//this.xDirection = c.getNext().getX() - c.getX();
+		//this.yDirection = c.getNext().getY() - c.getY();
 	}
-	
-	public Cell getCurrentCell(){
+
+	public Cell getCurrentCell() {
 		return this.currentCell;
 	}
-	
+
 	public double getX() {
 		return xCoordinate;
 	}
@@ -122,14 +119,14 @@ public class Enemy extends Observable implements IDrawable{
 		notifyObservers();
 	}
 
-	public void setImage(String image) { //might not need to notify observers here
+	public void setImage(String image) { // might not need to notify observers
+											// here
 		this.image = image;
 		setChanged();
 		notifyObservers();
 	}
 
-	
-	public String getImage(){
+	public String getImage() {
 		return this.image;
 	}
 
@@ -152,15 +149,14 @@ public class Enemy extends Observable implements IDrawable{
 		setChanged();
 		notifyObservers();
 	}
+
 	public Label getEnemyInfo() {
 		return enemyInfo;
 	}
-	
-	public void toggleInfoVisibility(){
+
+	public void toggleInfoVisibility() {
 		this.showInfo = !showInfo;
 		this.enemyInfo.setVisible(showInfo);
 	}
-	
-	
 
 }

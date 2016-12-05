@@ -88,12 +88,14 @@ public class GamePlayerController implements Observer {
 		this.towerToId = new HashMap<String, Integer>();
 		this.weaponsOnScreen = new HashMap<Integer,ImageView>();
 		this.animation = new Timeline();
-		this.graphics = new GraphicsLibrary(); 
-		populateTowerToId();
+		this.graphics = new GraphicsLibrary();
+		this.enemyManager = this.enemyController.getEnemyModel();
 	}
 
 	private void populateTowerToId(){
 		HashMap<Integer, engine.tower.Tower> mapping = this.model.getTowerManager().getAvailableTower();
+		System.out.println("tower mapping:");
+		System.out.println(mapping);
 		for (int key:mapping.keySet()){
 			this.towerToId.put(mapping.get(key).getImagePath(),key);
 		}
@@ -117,7 +119,12 @@ public class GamePlayerController implements Observer {
 		this.model.initializeLevelInfo();
 		HashMap<String, Double> settings = this.loader.getGameSetting();
 		//initGUIDummy(settings);
+		System.out.println("In init:");
+		System.out.println(this.model.getData().getGrid().getStartPoint());
 		this.enemyManager.setCurrentCell(this.model.getData().getGrid().getStartPoint());
+		System.out.println("In init");
+		this.model.getTowerManager().populateAvailableTower();
+		populateTowerToId();
 		initGUI();
 		//this.enemyController = new EnemyController(this.enemyManager, this.view.getGrid());
 	}

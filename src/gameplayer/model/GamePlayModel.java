@@ -60,6 +60,7 @@ public class GamePlayModel extends Observable {
 	}
 
 	public GamePlayData getData(){
+		System.out.println("Successfully got data");
 		return this.gameData;
 	}
 	

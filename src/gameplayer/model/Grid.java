@@ -50,6 +50,8 @@ public class Grid {
 	}
 	
 	public Cell getStartPoint(){
+		System.out.println("start point:");
+		System.out.println(this.start);
 		return this.start;
 	}
 	

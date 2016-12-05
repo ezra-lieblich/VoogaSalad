@@ -50,12 +50,15 @@ public class EnemyManager extends Observable {
 	}
 
 	public void setCurrentCell(Cell cell) {
-		System.out.println("CURRENT CELL SET: " + cell.getX() + ", " + cell.getY());
+		System.out.println("CURRENT CELL SET: ");
+		//System.out.println(cell.getX() + ", " + cell.getY());
 		this.current = cell;
 		this.currentCopy = cell;
 	}
 
 	public List<Enemy> getEnemyOnGrid() {
+		System.out.println("are there enemies in enemymnager?");
+		System.out.println(enemyOnGrid);
 		return this.enemyOnGrid;
 	}
 
