@@ -154,6 +154,7 @@ public class EnemyManager extends Observable {
 	private void moveEnemies() {
 		for (Enemy enemy : enemyOnGrid) {
 			moveIndividualEnemy(enemy);
+			
 		}
 	}
 	private void setEnemyImageSize(ImageView enemyImage){
