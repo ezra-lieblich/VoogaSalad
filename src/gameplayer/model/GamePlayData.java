@@ -20,6 +20,7 @@ public class GamePlayData  extends Observable{
 	
 
 
+
 	public GamePlayData(GamePlayerFactory factory){
 		this.factory = factory;
 	}
@@ -76,6 +77,7 @@ public class GamePlayData  extends Observable{
 	}
 
 	public void setGold(double gold) {
+		System.out.println("Setting gold");
 		this.gold = gold;
 		setChanged();
 		notifyObservers();
