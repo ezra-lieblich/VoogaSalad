@@ -29,6 +29,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -166,7 +167,7 @@ public class GamePlayerController implements Observer {
 				t.toggleInfoVisibility();
 			}
 		}
-		List<Enemy> enemiesOnGrid = this.enemyManager.getEnemyOnGrid();
+		List<Enemy> enemiesOnGrid = this.enemyManager.getEnemyListOnGrid();
 		for(Enemy e: enemiesOnGrid){
 
 			if(e.getX() <= x && e.getX() +ENTITY_SIZE >= x && e.getY() <= y-Y_OFFSET &&
@@ -259,7 +260,7 @@ public class GamePlayerController implements Observer {
 		//redraw path
 		//this.view.getGrid().populatePath(this.model.getGrid().getStartPoint());
 		this.view.getGrid().getGrid().getChildren().addAll(this.view.getGrid().getPathImages());
-		List<Enemy>enemyRedraw = this.enemyManager.getEnemyOnGrid(); 
+		List<Enemy>enemyRedraw = this.enemyManager.getEnemyListOnGrid(); //refactor so no casting? @lucy
 		List<Tower>towerRedraw = this.model.getTowerOnGrid();
 		List<Weapon>bulletRedraw = this.model.getWeaponOnGrid();
 		for(int i=0;i<bulletRedraw.size();i++){

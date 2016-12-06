@@ -1,7 +1,9 @@
 package gameplayer.model.enemy;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Observable;
 import java.util.Queue;
 
@@ -15,11 +17,12 @@ import gameplayer.view.helper.GraphicsLibrary;
 import javafx.scene.image.ImageView;
 
 public class EnemyManager extends Observable {
-	private List<Enemy> enemyOnGrid;
+	private Map<Integer,Enemy> enemyOnGrid;
 	private GamePlayData gameData;
 	private Grid grid;
 	private Cell current;
 	private Cell currentCopy;
+	private Cell startCell;
 	private GraphicsLibrary graphicLib;
 	private int uniqueEnemyID;
 
@@ -33,37 +36,42 @@ public class EnemyManager extends Observable {
 		this.gameData = gameData;
 		initializeNewLevel();
 		this.graphicLib = new GraphicsLibrary();
-
+		this.startCell = gameData.getGrid().getStartPoint();
 	}
 
 	public void initializeNewLevel(){
 		this.grid = this.gameData.getGrid();
 		this.uniqueEnemyID = 0;
-		this.enemyOnGrid = new ArrayList<Enemy>();
+		this.enemyOnGrid = new HashMap<Integer, Enemy>();
 		waveNumber = 0;
 		this.allEnemyAtCurrentLevel = this.gameData.getFactory().getEnemy(this.gameData.getCurrentLevel());
 		currentWave = this.allEnemyAtCurrentLevel.get(waveNumber);
 		this.waveNumber++;
 		upComingEnemy = this.currentWave.poll();
-		enemyOnGrid = new ArrayList<Enemy>();
-
 	}
 
 	public void setCurrentCell(Cell cell) {
 		System.out.println("CURRENT CELL SET: ");
-		//System.out.println(cell.getX() + ", " + cell.getY());
+		System.out.println(cell.getX() + ", " + cell.getY());
 		this.current = cell;
 		this.currentCopy = cell;
 	}
 
-	public List<Enemy> getEnemyOnGrid() {
+	public Map<Integer, Enemy> getEnemyOnGrid() {
 		System.out.println("are there enemies in enemymnager?");
 		System.out.println(enemyOnGrid);
 		return this.enemyOnGrid;
 	}
+	
+	public List<Enemy> getEnemyListOnGrid() {
+		List<Enemy> enemies = new ArrayList<Enemy>();
+		enemies.addAll(enemyOnGrid.values());
+		return enemies;
+	}
 
 	public void spawnEnemy(Enemy enemy) {
-		enemyOnGrid.add(enemy);
+		enemyOnGrid.put(uniqueEnemyID, enemy);
+		uniqueEnemyID++;
 	}
 
 	// this method not being called??????
@@ -74,8 +82,10 @@ public class EnemyManager extends Observable {
 		boolean onLastCell = false;
 
 		double moveDist = e.getMovingSpeed();
+		
 
 		while (moveDist > 0) {
+			System.out.println(e.getCurrentCell().getX() + " currentCell " + e.getCurrentCell().getY()); //testing
 			try {
 				distToMove = (Math.abs(gameData.cellToCoordinate(e.getCurrentCell().getNext().getX()) - e.getX())
 						+ Math.abs(gameData.cellToCoordinate(e.getCurrentCell().getNext().getY() - e.getY())));
@@ -98,6 +108,7 @@ public class EnemyManager extends Observable {
 				if (onLastCell) {
 					gameData.setLife(gameData.getLife() - 1);
 				}
+				if (onLastCell) return;
 				e.setCurrentCell(e.getCurrentCell().getNext());
 				e.setxDirection(e.getCurrentCell().getNext().getX() - e.getCurrentCell().getX()); // -1,
 				// 0,
@@ -111,7 +122,8 @@ public class EnemyManager extends Observable {
 				moveDist -= moveDist;
 			}
 		}
-
+		setChanged();
+		notifyObservers();
 		// sub lives if enemy got into base
 	}
 
@@ -180,8 +192,8 @@ public class EnemyManager extends Observable {
 
 	
 	private void moveEnemies() {
-		for (Enemy enemy : enemyOnGrid) {
-			moveIndividualEnemy(enemy);
+		for (Enemy enemy : enemyOnGrid.values()) {
+			moveSingleEnemy(enemy);
 
 		}
 	}

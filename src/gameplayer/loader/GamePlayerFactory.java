@@ -117,13 +117,13 @@ public class GamePlayerFactory{
 		Enemy enem1 = new Enemy(1, "Izaya", 4, 7, "questionmark.png", 50.0, 50.0);
 		System.out.println("enem1: ");
 		System.out.println(enem1);
-		enem1.setCurrentCell(this.getGrid(0).getCell(0, 0));
+		enem1.setCurrentCell(this.getGrid(0).getStartPoint());
 		Enemy enem2 = new Enemy(2, "Shizuo", 4, 7, "questionmark.png", 50.0, 50.0);
-		enem2.setCurrentCell(this.getGrid(0).getCell(0, 0));
+		enem2.setCurrentCell(this.getGrid(0).getStartPoint());
 		Enemy enem3 = new Enemy(3, "Mikado", 4, 7, "kaneki.jpg", 50.0, 50.0);
-		enem3.setCurrentCell(this.getGrid(0).getCell(0, 0));
+		enem3.setCurrentCell(this.getGrid(0).getStartPoint());
 		Enemy enem4 = new Enemy(4, "Kanra", 4, 7, "penguin.jpg", 50.0, 50.0);
-		enem4.setCurrentCell(this.getGrid(0).getCell(0, 0));
+		enem4.setCurrentCell(this.getGrid(0).getStartPoint());
 		myQueue.add(enem1);
 		// myQueue.add(enem2);
 		// myQueue.add(enem3);
