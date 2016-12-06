@@ -86,6 +86,9 @@ public class SplashScreen {
 			try {
 				Wrapper.getInstance().login(userfield.getText(), passField.getText());
 				createPlayGameOrMakeGameOptions();
+				
+				//TESTING
+				Wrapper.getInstance().recordGameScores("50", "3", "0");
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();

@@ -21,7 +21,7 @@ public class main extends Application {
 
 	@Override
 	public void start(Stage s) throws IOException{
-		Wrapper.getInstance().recordGameScores("50", "3", "0");
+		
 		this.stage = s;
 		SplashScreen splash = new SplashScreen(s);
 		splash.init();
