@@ -1,5 +1,6 @@
 package gameplayer.model.collision;
 
+import gameplayer.model.GamePlayData;
 import gameplayer.model.enemy.Enemy;
 import gameplayer.model.enemy.EnemyManager;
 import gameplayer.model.weapon.Weapon;
@@ -9,7 +10,7 @@ public class CollisionManager {
 	EnemyManager enemyManager;
 	WeaponManager weaponManager;
 	
-	public CollisionManager(EnemyManager eManager, WeaponManager wManager) {
+	public CollisionManager(GamePlayData gameData, WeaponManager wManager, EnemyManager eManager) {
 		enemyManager = eManager;
 		weaponManager = wManager;
 	}

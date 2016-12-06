@@ -54,6 +54,7 @@ public class GamePlayerController implements Observer {
 	private EnemyController enemyController;
 	private TowerController towerController;
 	private WeaponController weaponController;
+	private CollisionController collisionController;
 
 	private DragDropController dropController;
 
@@ -84,6 +85,7 @@ public class GamePlayerController implements Observer {
 		this.enemyController = new EnemyController(this.model.getEnemyManager(), null);// Second arg should be gridGUI
 		this.towerController = new TowerController(this.model.getTowerManager());
 		this.weaponController = new WeaponController(this.model.getWeaponManager());
+		this.collisionController = new CollisionController(this.model.getCollisionManager());
 		this.model.addObserver(this);
 		this.oldLevel = 1;
 		this.towerToId = new HashMap<String, Integer>();
