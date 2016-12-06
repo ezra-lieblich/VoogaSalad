@@ -37,11 +37,11 @@ public class EnemyManager extends Observable {
 		this.gameData = gameData;
 		initializeNewLevel();
 		this.graphicLib = new GraphicsLibrary();
-		this.startCell = gameData.getGrid().getStartPoint();
 	}
 
 	public void initializeNewLevel(){
 		this.grid = this.gameData.getGrid();
+		this.startCell = this.grid.getStartPoint();
 		this.uniqueEnemyID = 0;
 		this.enemyOnGrid = new HashMap<Integer, Enemy>();
 		waveNumber = 0;
@@ -73,6 +73,9 @@ public class EnemyManager extends Observable {
 	}
 
 	public void spawnEnemy(Enemy enemy) {
+		enemy.setxDirection(enemy.getCurrentCell().getNext().getX() - enemy.getCurrentCell().getX());
+		enemy.setyDirection(enemy.getCurrentCell().getNext().getY() - enemy.getCurrentCell().getY());
+		//enemy.setX(enemy.getCurrentCell().);
 		enemyOnGrid.put(enemy.getUniqueID(), enemy);
 
 	}
@@ -90,6 +93,9 @@ public class EnemyManager extends Observable {
 		while (moveDist > 0) {
 			System.out.println(e.getCurrentCell().getX() + " currentCell " + e.getCurrentCell().getY()); //testing
 			try {
+				System.out.println("***CellTOCoordTest " + gameData.cellToCoordinate(1.0));
+				//System.out.println("nextCellXCoor" + e.getCurrentCell().getNext().getX());
+				System.out.println("enemyXCoor" + e.getX());
 				distToMove = (Math.abs(gameData.cellToCoordinate(e.getCurrentCell().getNext().getX()) - e.getX())
 						+ Math.abs(gameData.cellToCoordinate(e.getCurrentCell().getNext().getY() - e.getY())));
 			} catch (NullPointerException exception) { // enemy is currently at
