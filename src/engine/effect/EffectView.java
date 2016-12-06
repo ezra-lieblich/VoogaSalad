@@ -22,17 +22,19 @@ public class EffectView {
         this.scene = new Scene(node, size, size);
         
         this.triggers = new ComboBox<String>(FXCollections.observableArrayList(new ArrayList<String>()));
-        triggers.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                triggers.getSelectionModel().getSelectedItem();
-            }
-        });
         
         this.triggerConditions = new ComboBox<String>(FXCollections.observableArrayList(new ArrayList<String>()));
 
         node.getChildren().add(triggers);
         node.getChildren().add(triggerConditions);
+    }
+    
+    public ComboBox<String> getTriggers() {
+        return triggers;
+    }
+    
+    public ComboBox<String> getTriggerConditions() {
+        return triggerConditions;
     }
     
     public void updateTriggers(List<String> methods) {
