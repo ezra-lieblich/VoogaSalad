@@ -24,7 +24,6 @@ public class PathGrid {
 	private int numRows = -1;
 	private int cellHeight;
 	private int cellWidth;
-	private int activePathID;
 	private Image cellImage = new Image(getClass().getClassLoader().getResourceAsStream("blacksquare.png"));
 	private ImageView[][] pathGrid;
 	private Rectangle[][] backgroundGrid;
@@ -86,11 +85,6 @@ public class PathGrid {
 		}
 	}
 	
-	
-	public void setActivePathId(int pathID){
-		this.activePathID = pathID;
-	}
-	
 	public List<Coordinate<Integer>> getPathCoordinates(){
 		return pathCoordinates;
 	}
@@ -112,28 +106,21 @@ public class PathGrid {
 				
 				Rectangle rect = new Rectangle();			
 				rect = formatRectangle(i, j, rect);
-				backgroundGrid[i][j] = rect;
-				backgroundGrid[i][j].setOnMouseEntered(new EventHandler<MouseEvent>() {  
+				
+				
+				rect.setOnMouseEntered(new EventHandler<MouseEvent>() {  
 				    @Override
 				    public void handle(MouseEvent event) {
 				    	Rectangle node = (Rectangle) event.getTarget();
-				    	node.setFill(Color.LIGHTGRAY);
-//				    	double x = event.getSceneX();
-//				        double y = event.getSceneY();
-//				        highlightCell(x,y);
-				        
+				    	node.setFill(Color.LIGHTGRAY);		        
 				    }
 					});
+				
 				rect.setOnMouseExited(new EventHandler<MouseEvent>() {  
 				    @Override
 				    public void handle(MouseEvent event) {
 				    	Rectangle node = (Rectangle) event.getTarget();
-				    	node.setFill(Color.WHITE);
-//				    	double x = event.getSceneX();
-//				        double y = event.getSceneY();
-//				        unHighlightCell(x,y);
-//				        backgroundGrid[i][j].setFill(Color.WHITE);
-				       
+				    	node.setFill(Color.WHITE);			       
 				    }
 				});
 				backgroundGrid[i][j] = rect;
@@ -247,25 +234,8 @@ public class PathGrid {
 		}
 	}
 	
-	private void highlightCell(double x, double y){
-		int i = (int) (x - 100)/cellWidth;
-		int j = (int) (y - 240)/cellHeight;
-		backgroundGrid[i][j].setFill(Color.GRAY);		
-		backgroundGrid[i][j].setStyle("opacity: 0.1;");
-		
-	}
-	
-	private void unHighlightCell(double x, double y){
-		int i = (int) (x - 100)/cellWidth;
-		int j = (int) (y - 240)/cellHeight;
-		backgroundGrid[i][j].setFill(Color.WHITE);		
-		backgroundGrid[i][j].setStyle("opacity: 1.0;");
-		
-	}
-	
-	
 	private void addCellToPath(int x, int y){
-		boolean validCoordinate = delegate.onUserEnteredAddPathCoordinate(activePathID, x, y);
+		boolean validCoordinate = delegate.onUserEnteredAddPathCoordinate(x, y);
 		if (validCoordinate){
 			pathGrid[x][y].setVisible(true);
 		}
@@ -273,11 +243,10 @@ public class PathGrid {
 	}
 	
 	private void removeCellFromPath(int x, int y){
-		boolean validCoordinate = delegate.onUserEnteredRemovePathCoordinate(activePathID, x, y);
+		boolean validCoordinate = delegate.onUserEnteredRemovePathCoordinate(x, y);
 		if (validCoordinate){
 			pathGrid[x][y].setVisible(false);
-		}
-		
+		}		
 	}
 	
 

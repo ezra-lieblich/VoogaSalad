@@ -4,7 +4,6 @@ package authoring.editorview.path;
 import authoring.editorview.path.subviews.PathChooser;
 import authoring.editorview.path.subviews.PathGrid;
 
-import java.io.File;
 import java.util.List;
 
 import authoring.editorview.ListDataSource;
@@ -16,7 +15,6 @@ import authoring.editorview.path.subviews.PathSizeView;
 import engine.path.Coordinate;
 import javafx.scene.Group;
 import javafx.scene.Node;
-import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -85,12 +83,6 @@ public class PathEditorView implements IPathUpdateView {
     @Override
 	public void updateActiveID(int pathID) {
     	pathChooser.setActivePathId(pathID);
-    	pathGrid.setActivePathId(pathID);
-    	pathImageView.setActivePathId(pathID); 	
-    	pathSizeView.setActivePathId(pathID);   	
-    	pathNameView.setActivePathId(pathID);
-    	newPathView.setActivePathId(pathID);
-		
 	}
     
 

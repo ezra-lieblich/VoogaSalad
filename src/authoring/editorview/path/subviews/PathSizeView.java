@@ -19,8 +19,6 @@ public class PathSizeView {
 	private int numColumns = 10;
 	private int numRows = 10;
 	
-	private int activePathID;
-	
 	private TextField columnsTextField;
 	private HBox columnsBox;
 	
@@ -67,12 +65,7 @@ public class PathSizeView {
 	public void setDelegate(PathEditorViewDelegate delegate){
 		this.delegate = delegate;
 	}
-	
-	public void setActivePathId(int pathID){
-		this.activePathID = pathID;
-	}
-	
-	
+
 	private void makeGridColumnsTextField(){
 		columnsTextField = TextFieldFactory.makeTextField("", 
 				e -> submitNumColumns(columnsTextField.getText()));
@@ -86,7 +79,7 @@ public class PathSizeView {
 	private void submitNumColumns(String numColumnsString){
 		try {
 			numColumns = Integer.parseInt(numColumnsString);
-			delegate.onUserEnteredNumberColumns(activePathID, numColumns);
+			delegate.onUserEnteredNumberColumns(numColumns);
 		}
 		catch (NumberFormatException e){
 			setNumberOfColumns(numColumns);
@@ -109,7 +102,7 @@ public class PathSizeView {
 	private void submitNumRows(String numRowsString){
 		try {
 			numRows = Integer.parseInt(numRowsString);
-			delegate.onUserEnteredNumberRows(activePathID, numRows);
+			delegate.onUserEnteredNumberRows(numRows);
 		}
 		catch (NumberFormatException e){
 			setNumberOfRows(numRows);

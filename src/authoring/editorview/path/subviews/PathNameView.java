@@ -15,7 +15,6 @@ public class PathNameView {
 	private TextField nameTextField;
 	private String name;
 	private PathEditorViewDelegate delegate;
-	private int activePathID;
 	
 	
 	private static final String RESOURCE_FILE_NAME = "resources/GameAuthoringPath";	
@@ -35,13 +34,9 @@ public class PathNameView {
 		this.delegate = delegate;
 	}
 	
-	public void setActivePathId(int pathID){
-		this.activePathID = pathID;
-	}
-	
 	private void makeNameTextField(){
 		nameTextField = TextFieldFactory.makeTextField("", 
-				e -> delegate.onUserEnteredPathName(activePathID, nameTextField.getText()));
+				e -> delegate.onUserEnteredPathName(nameTextField.getText()));
 		nameTextField.setMaxWidth(100);
 		root = BoxFactory.createHBoxWithLabelandNode(pathResource.getString("NameTextField"), nameTextField);
 	}

@@ -14,53 +14,45 @@ public class PathEditorViewController extends EditorViewController implements Pa
 		this.pathView = PathEditorViewFactory.build(editorWidth, editorHeight);
 		pathView.setDelegate(this);
 		this.view = pathView;
-		
-
 	}
-
-		
+	
 	public void setPathDataSource(PathManagerController source){
 		this.pathDataSource = source;
 		this.pathDataSource.addTypeBankListener(this.pathView);
 		onUserEnteredCreatePath();
-		onUserEnteredEditPath(activeID);
+		onUserEnteredEditPath(activeID);	
+	}
+
+	@Override
+	public void onUserEnteredNumberColumns(int numColumns) {
+		this.pathDataSource.setNumberofColumns(activeID, numColumns);
 		
 	}
 
 	@Override
-	public void onUserEnteredNumberColumns(int pathID, int numColumns) {
-		this.pathDataSource.setNumberofColumns(pathID, numColumns);
+	public void onUserEnteredNumberRows(int numRows) {
+		pathDataSource.setNumberofRows(activeID, numRows);
 		
 	}
 
 	@Override
-	public void onUserEnteredNumberRows(int pathID, int numRows) {
-		pathDataSource.setNumberofRows(pathID, numRows);
+	public void onUserEnteredPathImage(String pathImagePath) {
+		pathDataSource.setImagePath(activeID, pathImagePath);
 		
 	}
 
 	@Override
-	public void onUserEnteredPathImage(int pathID, String pathImagePath) {
-		pathDataSource.setImagePath(pathID, pathImagePath);
-		
-	}
-
-	@Override
-	public void onUserEnteredPathName(int pathID, String pathName) {
-		pathDataSource.setName(pathID, pathName);
+	public void onUserEnteredPathName(String pathName) {
+		pathDataSource.setName(activeID, pathName);
 		
 	}
 	
 
 	@Override
-	public void onUserEnteredCreatePath() {
-		activeID = pathDataSource.createType(pathView);
-		pathView.updateActiveID(activeID);
-		pathView.createNewPath();
-			
+	public int onUserEnteredCreatePath() {
+		pathView.createNewPath();	
+		return pathDataSource.createType(pathView);		
 	}
-
-
 
 	@Override
 	public void onUserEnteredEditPath(int pathID) {
@@ -76,16 +68,14 @@ public class PathEditorViewController extends EditorViewController implements Pa
 
 
 	@Override
-	public boolean onUserEnteredAddPathCoordinate(int pathID, int x, int y) {
-		boolean validCoordinate = pathDataSource.setNewPathCoordinate(pathID, x, y);
-		return validCoordinate;
+	public boolean onUserEnteredAddPathCoordinate(int x, int y) {
+		return pathDataSource.setNewPathCoordinate(activeID, x, y);
 		
 	}
 	
 	@Override
-	public boolean onUserEnteredRemovePathCoordinate(int pathID, int x, int y) {
-		boolean validCoordinate = pathDataSource.setNewPathCoordinate(pathID, x, y);
-		return validCoordinate;
+	public boolean onUserEnteredRemovePathCoordinate(int x, int y) {
+		return pathDataSource.setNewPathCoordinate(activeID, x, y);
 	}
 
 

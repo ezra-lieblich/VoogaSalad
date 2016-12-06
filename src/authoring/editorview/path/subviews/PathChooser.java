@@ -3,7 +3,6 @@ package authoring.editorview.path.subviews;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
-import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.VBox;
 
@@ -13,8 +12,6 @@ import java.util.ResourceBundle;
 
 import authoring.editorview.path.NameIdPair;
 import authoring.editorview.path.PathEditorViewDelegate;
-import authoring.utilityfactories.ComboBoxFactory;
-import authoring.utilityfactories.DialogueBoxFactory;
 
 /**
  * 
@@ -61,38 +58,17 @@ public class PathChooser{
 	
 	public void updatePathComboBox(String pathName){
 		
-		//boolean duplicateName = checkIfDuplicateName(pathName);
-		//if (!duplicateName){
-			pathList.add(pathName);
-			NameIdPair newPair = new NameIdPair(pathName, activePathID);
-			nameIdList.add(newPair);
-			for (NameIdPair pair : nameIdList){
-				if (pair != newPair && pair.getId() == activePathID){
-					nameIdList.remove(pair);
-					pathList.remove(pair.getName());
-					break;
-				}
-			}		
-		//}
-		//else {
-			//Alert duplicateNameAlert = DialogueBoxFactory.createErrorDialogueBox("This path name is already used", "Duplicate name");
-			//duplicateNameAlert.show();
-		//}
-			
-		
-		
+		pathList.add(pathName);
+		NameIdPair newPair = new NameIdPair(pathName, activePathID);
+		nameIdList.add(newPair);
+		for (NameIdPair pair : nameIdList){
+			if (pair != newPair && pair.getId() == activePathID){
+				nameIdList.remove(pair);
+				pathList.remove(pair.getName());
+				break;
+			}
+		}		
 	}
-	
-//	private boolean checkIfDuplicateName(String pathName){
-//		boolean duplicate = false;
-//		for (NameIdPair pair : nameIdList){
-//			if (pair.getName() == pathName){
-//				duplicate = true;
-//				break;
-//			}
-//		}
-//		return duplicate;
-//	}
 	
 	private void setEditView(String pathName){
 		for (NameIdPair pair : nameIdList){
