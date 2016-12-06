@@ -17,9 +17,9 @@ public interface PathEditorViewDelegate {
 	
 	public void onUserEnteredEditPath(int pathID);
 	
-	public void onUserEnteredAddPathCoordinate(int pathID, int x, int y);
+	public boolean onUserEnteredAddPathCoordinate(int pathID, int x, int y);
 	
-	public void onUserEnteredRemovePathCoordinate(int pathID, int x, int y);
+	public boolean onUserEnteredRemovePathCoordinate(int pathID, int x, int y);
 	
 	
 	

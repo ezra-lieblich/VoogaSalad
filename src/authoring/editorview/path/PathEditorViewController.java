@@ -65,26 +65,27 @@ public class PathEditorViewController extends EditorViewController implements Pa
 	@Override
 	public void onUserEnteredEditPath(int pathID) {
 		activeID = pathID;
-		pathView.updateActiveID(pathID);
-		pathView.updateNumColumns(pathDataSource.getNumberofColumns(pathID));
-		pathView.updateNumRows(pathDataSource.getNumberofRows(pathID));
-		pathView.updatePathCoordinates(pathDataSource.getPathCoordinates(pathID));
-		pathView.updateImagePathDisplay(pathDataSource.getImagePath(pathID));
-		pathView.updateNameDisplay(pathDataSource.getName(pathID));
+		pathView.updateActiveID(activeID);
+		pathView.updateNumColumns(pathDataSource.getNumberofColumns(activeID));
+		pathView.updateNumRows(pathDataSource.getNumberofRows(activeID));
+		pathView.updatePathCoordinates(pathDataSource.getPathCoordinates(activeID));
+		pathView.updateImagePathDisplay(pathDataSource.getImagePath(activeID));
+		pathView.updateNameDisplay(pathDataSource.getName(activeID));
 		pathView.updatePath();
 	}
 
 
 	@Override
-	public void onUserEnteredAddPathCoordinate(int pathID, int x, int y) {
-		pathDataSource.setNewPathCoordinate(pathID, x, y);
+	public boolean onUserEnteredAddPathCoordinate(int pathID, int x, int y) {
+		boolean validCoordinate = pathDataSource.setNewPathCoordinate(pathID, x, y);
+		return validCoordinate;
 		
 	}
 	
 	@Override
-	public void onUserEnteredRemovePathCoordinate(int pathID, int x, int y) {
-		pathDataSource.setNewPathCoordinate(pathID, x, y);
-		
+	public boolean onUserEnteredRemovePathCoordinate(int pathID, int x, int y) {
+		boolean validCoordinate = pathDataSource.setNewPathCoordinate(pathID, x, y);
+		return validCoordinate;
 	}
 
 
