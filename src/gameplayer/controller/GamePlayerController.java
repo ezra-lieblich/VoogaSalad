@@ -80,7 +80,9 @@ public class GamePlayerController implements Observer {
 	public GamePlayerController() {
 		// use xml parser to create classes.
 		this.loader = new GamePlayerFactory(new XMLParser("player.samplexml/blahhh.xml"));// hardcoded
-
+		// "player.samplexml/game2.xml"
+		// does not work because of the image path
+		
 		checkIfValid();
 		this.model = new GamePlayModel(this.loader);
 		this.enemyController = new EnemyController(this.model.getEnemyManager(), null);// Second arg should be gridGUI
