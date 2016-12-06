@@ -38,6 +38,7 @@ public interface Level extends Type {
     
     double createWave ();
     
+    //List of Waves
     WaveType getWave (int id);
     
 }

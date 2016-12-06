@@ -5,16 +5,20 @@ import java.util.Map;
 import authoring.editorview.level.ILevelEditorView;
 import engine.AbstractTypeManagerController;
 import engine.ManagerMediator;
+import engine.level.wave.WaveBuilder;
 import engine.level.wave.WaveType;
+import engine.level.wave.WaveTypeBuilder;
 
 
 public class LevelTypeManagerController
         extends AbstractTypeManagerController<LevelManager, LevelBuilder, Level, ILevelEditorView>
         implements LevelManagerController {
 
+	private WaveBuilder waveBuilder;
 	
     public LevelTypeManagerController (ManagerMediator managerMediator) {
         super(new LevelTypeManager(), new LevelTypeBuilder(), managerMediator);
+        waveBuilder = new WaveTypeBuilder();
     }
 
     @Override
@@ -133,7 +137,24 @@ public class LevelTypeManagerController
 
 	@Override
 	public int createWave(int levelID, ILevelEditorView updateView) {
-		// TODO Auto-generated method stub
+		//TODO view methods need to actually go to right thing also need to add to level
+		waveBuilder.addNameListener( (oldValue, newValue) -> updateView
+                .updateNameDisplay(newValue))
+        .addImagePathListener( (oldValue, newValue) -> updateView
+                .updateImagePathDisplay(newValue))
+        .addSizeListener( (oldValue, newValue) -> updateView
+                .updateSizeDisplay(newValue))
+        .addEnemyCountListener((oldValue, newValue) -> updateView
+                .updateSizeDisplay(newValue))
+        .addEnemyIDListener((oldValue, newValue) -> updateView
+                .updateSizeDisplay(newValue))
+        .addFrequencyListener((oldValue, newValue) -> updateView
+                .updateSizeDisplay(newValue))
+        .addPathIDListener((oldValue, newValue) -> updateView
+                .updateSizeDisplay(newValue))
+        .addStartTimeListener((oldValue, newValue) -> updateView
+                .updateSizeDisplay(newValue))
+        .build();
 		return 0;
 	}
 
