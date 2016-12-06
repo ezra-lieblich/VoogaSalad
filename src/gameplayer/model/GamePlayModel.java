@@ -11,6 +11,7 @@ import engine.tower.Tower;
 import engine.weapon.*;
 import engine.weapon.WeaponManager;
 import gameplayer.loader.GamePlayerFactory;
+import gameplayer.model.collision.CollisionManager;
 import gameplayer.model.enemy.Enemy;
 import gameplayer.model.enemy.EnemyManager;
 import gameplayer.model.tower.TowerManager;
@@ -33,6 +34,7 @@ public class GamePlayModel extends Observable {
 	private TowerManager towerManager;
 	private gameplayer.model.weapon.WeaponManager weaponManager;
 	private EnemyManager enemyManager;
+	private CollisionManager collisionManager;
 	// private EnemyModel enemyModel;
 
 
@@ -45,6 +47,7 @@ public class GamePlayModel extends Observable {
 		this.enemyManager = new EnemyManager(this.gameData);
 		this.weaponManager = new gameplayer.model.weapon.WeaponManager(gameData);
 		this.towerManager = new TowerManager(gameData, this.weaponManager);
+		this.collisionManager = new CollisionManager(gameData, this.weaponManager, this.enemyManager);
 		initializeGameSetting(factory);
 
 	}
@@ -70,6 +73,10 @@ public class GamePlayModel extends Observable {
 	
 	public EnemyManager getEnemyManager(){
 		return this.enemyManager;
+	}
+	
+	public CollisionManager getCollisionManager() {
+		return this.collisionManager;
 	}
 	
 	public gameplayer.model.weapon.WeaponManager getWeaponManager(){

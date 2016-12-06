@@ -4,6 +4,7 @@ import gameplayer.loader.GamePlayerFactory;
 import gameplayer.loader.XMLParser;
 import gameplayer.main.main;
 import gameplayer.model.Cell;
+import gameplayer.model.GamePlayData;
 import gameplayer.model.GamePlayModel;
 import gameplayer.model.IDrawable;
 import gameplayer.model.enemy.Enemy;
@@ -54,6 +55,7 @@ public class GamePlayerController implements Observer {
 	private EnemyController enemyController;
 	private TowerController towerController;
 	private WeaponController weaponController;
+	private CollisionController collisionController;
 
 	private DragDropController dropController;
 
@@ -84,7 +86,8 @@ public class GamePlayerController implements Observer {
 		this.enemyController = new EnemyController(this.model.getEnemyManager(), null);// Second arg should be gridGUI
 		this.towerController = new TowerController(this.model.getTowerManager());
 		this.weaponController = new WeaponController(this.model.getWeaponManager());
-		this.model.addObserver(this);
+		this.collisionController = new CollisionController(this.model.getCollisionManager());
+		this.model.getData().addObserver(this);
 		this.oldLevel = 1;
 		this.towerToId = new HashMap<String, Integer>();
 		this.weaponsOnScreen = new HashMap<Integer,ImageView>();
@@ -117,7 +120,7 @@ public class GamePlayerController implements Observer {
 	}
 
 	public void init() {
-		this.model.initializeGameSetting(this.loader);
+		//this.model.initializeGameSetting(this.loader);
 		HashMap<String, Double> settings = this.loader.getGameSetting();
 		//initGUIDummy(settings);
 		System.out.println("In init:");
@@ -137,12 +140,11 @@ public class GamePlayerController implements Observer {
 		// replaced by block above, 5
 		// rows, 5 columns
 		this.view.bindAnimationStart(e -> {
-			// TODO: initialize animation
 			this.startAnimation();
 		});
 
 		this.view.bindAnimationStop(e -> {
-			animation.pause();
+			this.animation.pause();
 		});
 		this.mainScene = view.init(this.model.getData().getGold(), this.model.getData().getLife(), this.model.getData().getCurrentLevel(),
 				getTowerImages());
@@ -195,12 +197,12 @@ public class GamePlayerController implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		if (o instanceof GamePlayModel) {
-			double newLevel = ((GamePlayModel) o).getData().getCurrentLevel();
+		if (o instanceof GamePlayData) {
+			double newLevel = ((GamePlayData)o).getCurrentLevel();
 			// update level in display
-			this.view.updateStatsDisplay(((GamePlayModel) o).getData().getGold(), ((GamePlayModel) o).getData().getLife(),
-					((GamePlayModel) o).getData().getCurrentLevel());
-			this.view.updateCurrentLevelStats(((GamePlayModel) o).getData().getCurrentLevel());
+			this.view.updateStatsDisplay(((GamePlayData)o).getGold(), ((GamePlayData)o).getLife(),
+					((GamePlayData)o).getCurrentLevel());
+			this.view.updateCurrentLevelStats(((GamePlayData)o).getCurrentLevel());
 			if (this.oldLevel != newLevel){
 
 				this.oldLevel = newLevel;

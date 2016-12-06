@@ -17,6 +17,7 @@ public class Weapon extends Observable implements IDrawable{
 	private double distanceTravelled;
 	//private double initialX, initialY;
 	private double range;
+	private int targetEnemyID;
 	
 	
 	public Weapon(String name, int ID, double demage, double speedX, double speedY, String image,  double range) {
@@ -35,6 +36,12 @@ public class Weapon extends Observable implements IDrawable{
 	
 	// add boolean method out of range
 	
+	public int getTargetEnemyID() {
+		return targetEnemyID;
+	}
+
+
+
 	public Boolean inRange(){
 		return this.range >= this.distanceTravelled;
 	}
