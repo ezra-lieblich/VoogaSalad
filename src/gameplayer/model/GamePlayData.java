@@ -114,7 +114,7 @@ public class GamePlayData  extends Observable{
 	}
 
 	public double cellToCoordinate(double d) {
-		return (d + 0.5) * cellSize;
+		return (d) * getCellWidth();
 	}
 	
 	

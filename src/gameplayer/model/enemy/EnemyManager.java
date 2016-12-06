@@ -49,7 +49,6 @@ public class EnemyManager extends Observable {
 		currentWave = this.allEnemyAtCurrentLevel.get(waveNumber);
 		this.waveNumber++;
 		upComingEnemy = this.currentWave.poll();
-
 	}
 
 	public void setCurrentCell(Cell cell) {
@@ -61,8 +60,9 @@ public class EnemyManager extends Observable {
 
 
 	public HashMap<Integer, Enemy> getEnemyOnGrid() {
-		System.out.println("are there enemies in enemymnager?");
-		System.out.println(enemyOnGrid);
+		//System.out.println("are there enemies in enemymnager?");
+		//System.out.println(enemyOnGrid);
+
 		return this.enemyOnGrid;
 	}
 	
@@ -75,7 +75,8 @@ public class EnemyManager extends Observable {
 	public void spawnEnemy(Enemy enemy) {
 		enemy.setxDirection(enemy.getCurrentCell().getNext().getX() - enemy.getCurrentCell().getX());
 		enemy.setyDirection(enemy.getCurrentCell().getNext().getY() - enemy.getCurrentCell().getY());
-		//enemy.setX(enemy.getCurrentCell().);
+		enemy.setX(gameData.cellToCoordinate(enemy.getCurrentCell().getX()));
+		enemy.setY(gameData.cellToCoordinate(enemy.getCurrentCell().getY()));
 		enemyOnGrid.put(enemy.getUniqueID(), enemy);
 
 	}
@@ -91,10 +92,10 @@ public class EnemyManager extends Observable {
 		
 
 		while (moveDist > 0) {
-			System.out.println(e.getCurrentCell().getX() + " currentCell " + e.getCurrentCell().getY()); //testing
 			try {
-				distToMove = (Math.abs(gameData.cellToCoordinate(e.getCurrentCell().getNext().getX()) - e.getX())
-						+ Math.abs(gameData.cellToCoordinate(e.getCurrentCell().getNext().getY() - e.getY())));
+				double deltaX = Math.abs(gameData.cellToCoordinate(e.getCurrentCell().getNext().getX()) - e.getX());
+				double deltaY = Math.abs(gameData.cellToCoordinate(e.getCurrentCell().getNext().getY()) - e.getY());
+				distToMove = deltaX + deltaY;
 			} catch (NullPointerException exception) { // enemy is currently at
 				// last cell on path
 				double destinationXpos = e.getCurrentCell().getX()
@@ -135,44 +136,6 @@ public class EnemyManager extends Observable {
 
 
 	/*
-	private void updateEnemy() {
-		// move on Grid Enemy
-		for (Enemy e : enemyOnGrid) {
-			moveSingleEnemy(e);
-			setChanged();
-			notifyObservers();
-		}
-
-		// enter new enemy
-		if (this.gameData.getFactory().getNextEnteringEnemy() != null) {
-			enemyOnGrid.add(this.gamePlayModel.getNextEnteringEnemy());
-			this.gameData.getNextEnteringEnemy().setCurrentCell(this.grid.getStartPoint());
-			setChanged();
-			notifyObservers();
-		}
-
-		if (this.gamePlayModel.getPackOfEnemyComing().isEmpty() && enemyOnGrid.isEmpty()
-				&& this.gamePlayModel.getNextEnteringEnemy() == null) {
-			if (this.gamePlayModel.getWaveOfEnemy() < this.gamePlayModel.getEnemyAtCurrentLevel().size()) {
-				this.gamePlayModel.setPackOfEnemyComing(
-						this.gamePlayModel.getEnemyAtCurrentLevel().get(this.gamePlayModel.getWaveOfEnemy()));
-				this.gamePlayModel.setWaveOfEnemy(this.gamePlayModel.getWaveOfEnemy() + 1);
-				setChanged();
-				notifyObservers();
-			} else {
-				gamePlayModel.setLevel(gamePlayModel.getCurrentLevel() + 1);
-				setChanged();
-				notifyObservers();
-			}
-
-		}
-
-		this.gamePlayModel.setNextEnteringEnemy(this.gamePlayModel.getPackOfEnemyComing().poll());
-
-	}
-	 */
-
-	/*
 	private void checkCollision() {
 		for (Enemy e : getEnemyList()) {
 			for (Weapon w : this.gamePlayModel.getWeaponOnGrid()) {
@@ -192,7 +155,6 @@ public class EnemyManager extends Observable {
 	public void update() {
 		// updateEnemy();
 		// checkCollision();
-
 		moveEnemies();
 	}
 
@@ -200,8 +162,6 @@ public class EnemyManager extends Observable {
 	private void moveEnemies() {
 		for (Enemy enemy : enemyOnGrid.values()) {
 			moveSingleEnemy(enemy);
-
-
 		}
 	}
 
@@ -210,64 +170,8 @@ public class EnemyManager extends Observable {
 	}
 
 
-		private void moveIndividualEnemy(Enemy enemy) {
-			/*
-			 * if (enemy.getUniqueID() != this.pastEnemyId){ this.current =
-			 * currentCopy; //reset if a new enemy (prob won't work)
-			 * this.pastEnemyId = enemy.getUniqueID(); }
-			 */
-			// System.out.println("Cell width: " +
-			// this.gamePlayModel.getCellWidth());
-			// System.out.println("Current.getX();" + this.current.getX() + ",
-			// Current.getY(): " + this.current.getY());
-			if (this.current != null) {
-				if (enemy.getX() < (current.getX() * this.gameData.getCellWidth())
-						&& (enemy.getY() /*+ this.gamePlayModel.getCellHeight()*/) < current.getY()
-						* this.gameData.getCellHeight()) {
-								// System.out.println("Both should move");
-				enemy.setX(enemy.getX() + enemy.getMovingSpeed());
-				enemy.setY(enemy.getY() + enemy.getMovingSpeed());
-				/*
-<<<<<<< HEAD:src/gameplayer/model/enemy/EnemyManager.java
-				int[] coords = coordinateToCell(enemy.getX(),enemy.getY());
-				enemy.setCell(this.gamePlayModel.getGrid().getCell(coords[0], coords[1]));
-				 */
-							} else if (enemy.getX() < (current.getX() * this.gameData.getCellWidth())
-									&& !(enemy.getY() < (current.getY() * this.gameData.getCellHeight()))) {
-								enemy.setX(enemy.getX() + enemy.getMovingSpeed());
-								/*
-				int[] coords = coordinateToCell(enemy.getX(),enemy.getY());
-				enemy.setCell(this.gamePlayModel.getGrid().getCell(coords[0], coords[1]));
-								 */
-							} else if (enemy.getY() > (current.getY() * this.gameData.getCellHeight()) && enemy.getY()<(current.getY() * (this.gameData.getCellHeight()+1))
-									&& !(enemy.getX() < (current.getX() * this.gameData.getCellWidth()))) {
-							
-									enemy.setY(enemy.getY() + enemy.getMovingSpeed());
-							/*
-							 * int[] coords = coordinateToCell(enemy.getX(),enemy.getY());
-							 * enemy.setCell(this.gamePlayModel.getGrid().getCell(coords[0],
-							 * coords[1]));
-							 */
-							}
+	public Queue<Enemy> getPackOfEnemyComing() {
+		return this.currentWave;
+	}
 
-
-					/*
-					 * if (!(enemy.getX() + enemy.getMovingSpeed() >
-					 * GridGUI.GRID_WIDTH)) { enemy.setX(enemy.getX() +
-					 * enemy.getMovingSpeed()); }
-					 */
-
-							else {
-								this.current = this.current.getNext();
-							}
-				} else {
-					this.current = currentCopy;
-				}
-
-			}
-
-			public Queue<Enemy> getPackOfEnemyComing() {
-				return this.currentWave;
-			}
-
-		}
+}
