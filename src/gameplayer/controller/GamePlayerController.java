@@ -138,12 +138,11 @@ public class GamePlayerController implements Observer {
 		// replaced by block above, 5
 		// rows, 5 columns
 		this.view.bindAnimationStart(e -> {
-			// TODO: initialize animation
 			this.startAnimation();
 		});
 
 		this.view.bindAnimationStop(e -> {
-			animation.pause();
+			this.animation.pause();
 		});
 		this.mainScene = view.init(this.model.getData().getGold(), this.model.getData().getLife(), this.model.getData().getCurrentLevel(),
 				getTowerImages());
