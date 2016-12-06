@@ -16,8 +16,8 @@ import javafx.scene.layout.VBox;
 public class PathSizeView {
 	
 	private VBox root;
-	private int numColumns = 4;
-	private int numRows = 4;
+	private int numColumns = 10;
+	private int numRows = 10;
 	
 	private int activePathID;
 	
@@ -85,12 +85,12 @@ public class PathSizeView {
 	
 	private void submitNumColumns(String numColumnsString){
 		try {
-			int numColumns = Integer.parseInt(numColumnsString);
+			numColumns = Integer.parseInt(numColumnsString);
 			delegate.onUserEnteredNumberColumns(activePathID, numColumns);
 		}
 		catch (NumberFormatException e){
+			setNumberOfColumns(numColumns);
 			Alert inputError = DialogueBoxFactory.createErrorDialogueBox("The number of columns must be an integer.", "Input error");
-			inputError.show();
 		}
 	}
 	
@@ -108,12 +108,14 @@ public class PathSizeView {
 	
 	private void submitNumRows(String numRowsString){
 		try {
-			int numRows = Integer.parseInt(numRowsString);
+			numRows = Integer.parseInt(numRowsString);
 			delegate.onUserEnteredNumberRows(activePathID, numRows);
 		}
 		catch (NumberFormatException e){
+			setNumberOfRows(numRows);
 			Alert inputError = DialogueBoxFactory.createErrorDialogueBox("The number of rows must be an integer.", "Input error");
-			inputError.show();
+			
+			
 		}
 	}
 	
