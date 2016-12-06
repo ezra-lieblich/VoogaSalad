@@ -25,7 +25,7 @@ public class CollisionManager {
 			if (xInRange && yInRange) {
 				Collision collision = new Collision(weapon, targetEnemy);
 				collision.processCollision();
-				weaponManager.getWeaponOnGrid().remove(weapon.getID()); //is this the right ID?
+				weaponManager.getWeaponOnGrid().remove(weapon.getUniqueID()); //is this the right ID?
 				if (targetEnemy.getHealth() <= 0) {
 					enemyManager.getEnemyOnGrid().remove(targetUniqueID);
 				}
