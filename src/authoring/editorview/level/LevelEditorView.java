@@ -9,11 +9,13 @@ import authoring.editorview.level.subviews.LevelNameView;
 import authoring.editorview.level.subviews.LevelRewardsView;
 import authoring.editorview.level.subviews.LevelTransitionTimeField;
 import authoring.editorview.path.NameIdPair;
+import authoring.utilityfactories.ButtonFactory;
 import authoring.editorview.ListDataSource;
 import authoring.editorview.level.subviews.CreateNewLevelView;
-import authoring.editorview.level.subviews.EnemyTableView;
+import authoring.editorview.level.subviews.WaveTableView;
 import javafx.scene.Node;
 import javafx.scene.layout.VBox;
+
 
 /**
  * 
@@ -30,7 +32,7 @@ public class LevelEditorView implements ILevelEditorView {
     private LevelNameView levelNameView;
     private CreateNewLevelView createNewLevelView;
     private LevelTransitionTimeField transitionTimeField;
-    private EnemyTableView enemyTableView;
+    private WaveTableView waveTableView;
     private ResourceBundle levelsResource =
             ResourceBundle.getBundle("resources/GameAuthoringLevels");
 
@@ -42,7 +44,7 @@ public class LevelEditorView implements ILevelEditorView {
         this.levelNameView = new LevelNameView(levelsResource);
         this.createNewLevelView = new CreateNewLevelView(levelsResource);
         this.transitionTimeField = new LevelTransitionTimeField(levelsResource);
-        this.enemyTableView = new EnemyTableView(levelsResource, width);
+        this.waveTableView = new WaveTableView(levelsResource, width);
         setLevelView();
     }
 
@@ -59,7 +61,7 @@ public class LevelEditorView implements ILevelEditorView {
         levelDesign.setDelegate(delegate);
         createNewLevelView.setDelegate(delegate);
         transitionTimeField.setDelegate(delegate);
-        enemyTableView.setDelegate(delegate);
+        waveTableView.setDelegate(delegate);
     }
 
     private void setLevelView () {
@@ -69,7 +71,10 @@ public class LevelEditorView implements ILevelEditorView {
                                   levelRewardsView.getInstanceAsNode(),
                                   levelDesign.getInstanceAsNode(),
                                   transitionTimeField.getInstanceAsNode(),
-                                  enemyTableView.getInstanceAsNode());
+                                  // TODO - Fix this
+                                  ButtonFactory.makeButton("New Wave",
+                                                           e -> waveTableView.createNewWave()),
+                                  waveTableView.getInstanceAsNode());
     }
 
     @Override
@@ -150,7 +155,7 @@ public class LevelEditorView implements ILevelEditorView {
 
     @Override
     public void updateEnemyNames (List<NameIdPair> enemyNames) {
-        enemyTableView.updateEnemyTableView(enemyNames);
+        waveTableView.updateWaveTableView(enemyNames);
     }
 
 }
