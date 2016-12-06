@@ -112,9 +112,15 @@ public class TowerManager extends Observable {
 
 		// add error checking later to see if no such type available
 		engine.tower.Tower towerType = availableTowerTypes.get(type);
+		//System.out.println("========================");
+		//System.out.println("contains weapon: " + towerType.getWeapons().get(0));
+		//System.out.println("number of tower on grid: " + this.towersOnGrid.size());
+		
+		
 		int x1 = (int) (x / this.gameData.getCellWidth());
 		int y1 = (int) (y / this.gameData.getCellHeight());
 		if (!canPlaceTower(x1, y1, towerType.getCost())) {
+			//System.out.println("cannot be placed!!!!!!");
 			return false;
 		}
 
