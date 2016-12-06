@@ -2,36 +2,29 @@ package engine.effect;
 
 import java.lang.reflect.Method;
 import java.util.List;
+import engine.AbstractType;
+import engine.TypeInitializer;
 import engine.observer.ObservableList;
 import engine.observer.ObservableProperty;
 
-public class Effect {
-    private ObservableProperty<String> triggerClass;
-    private ObservableList<Condition> triggerConditions;
-    private ObservableProperty<Class<?>> destinationClass;
-    private ObservableList<Condition> destinationConditions;
-    private ObservableProperty<Method> destinationMethod;
-    private ObservableProperty<Object> value;
+public class EffectType extends AbstractType implements Effect {
+
+    private EffectParticipant trigger;
+    private EffectParticipant destination;
     
+    protected EffectType (EffectInitializer typeBuilder) {
+        super(typeBuilder);
+        this.trigger = typeBuilder.getTrigger();
+        this.destination = typeBuilder.getDestination();
+    }
+
     
+    public EffectParticipant getTrigger() {
+        return trigger;
+    }
     
-    public void setTriggerClass (ObservableProperty<String> triggerClass) {
-        this.triggerClass = triggerClass;
-    }
-    public void setTriggerConditions (ObservableList<Condition> triggerConditions) {
-        this.triggerConditions = triggerConditions;
-    }
-    public void setDestinationClass (ObservableProperty<Class<?>> destinationClass) {
-        this.destinationClass = destinationClass;
-    }
-    public void setDestinationConditions (ObservableList<Condition> destinationConditions) {
-        this.destinationConditions = destinationConditions;
-    }
-    public void setDestinationMethod (ObservableProperty<Method> destinationMethod) {
-        this.destinationMethod = destinationMethod;
-    }
-    public void setValue (ObservableProperty<Object> value) {
-        this.value = value;
+    public EffectParticipant getDestination() {
+        return destination;
     }
     
 //    private Class<?> triggerClass;
