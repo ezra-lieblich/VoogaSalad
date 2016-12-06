@@ -37,8 +37,10 @@ public class EnemyController implements Observer{
 	
 	//called in timeline update
 	public void updateEnemyViews(){
-		List<Enemy> enemies = this.getEnemyModel().getEnemyListOnGrid();
-		for (int i=0; i<enemies.size(); i++){ //ALERT TODO: I don't think any keys will be the same bc as soon as the enemy object is 
+
+		HashMap<Integer, Enemy> enemies = this.getEnemyModel().getEnemyOnGrid();
+		for(int i: enemies.keySet()){
+		 //ALERT TODO: I don't think any keys will be the same bc as soon as the enemy object is 
 			//modified, it will no longer be the same key and no imageview will correspond to it, may need a unique id
 			Enemy enemy = enemies.get(i);
 			EnemyView enemyView = new EnemyView(enemy.getImage(), enemy.getWidth(), enemy.getHeight(), enemy.getHealth());
