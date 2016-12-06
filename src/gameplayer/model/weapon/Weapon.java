@@ -6,7 +6,7 @@ import gameplayer.model.IDrawable;
 
 public class Weapon extends Observable implements IDrawable{
 	
-	private int ID;
+	private int uniqueID;
 	private double damage;
 	private double speedX;
 	private double speedY;
@@ -20,16 +20,18 @@ public class Weapon extends Observable implements IDrawable{
 	private int targetEnemyID;
 	
 	
-	public Weapon(String name, int ID, double demage, double speedX, double speedY, String image,  double range) {
+	public Weapon(String name,  double demage, double targetX, double targetY, String image,  double range, int targetID, double x, double y) {
 		this.name = name;
-		this.ID = ID;
 		this.damage = demage;
-		this.damage = 50; // later change this from collision clas
-		this.speedX = speedX;
-		this.speedY  = speedY;
+		this.damage = 50;
+		this.speedX = targetX - x;
+		this.speedY  = targetY - y;
 		this.image = image;
 		this.distanceTravelled = 0;
 		this.range = range;
+		this.xCoordinate = x;
+		this.yCoordinate = y;
+		this.targetEnemyID = targetID;
 	}
 	
 	
@@ -97,12 +99,12 @@ public class Weapon extends Observable implements IDrawable{
 		return this.image;
 	}
 
-	public int getID() {
-		return ID;
+	public int getUniqueID() {
+		return this.uniqueID;
 	}
 
-	public void setID(int iD) {
-		ID = iD;
+	public void setUniqueID(int iD) {
+		this.uniqueID = iD;
 	}
 
 	public double getDamage() {

@@ -17,7 +17,8 @@ import gameplayer.view.helper.GraphicsLibrary;
 import javafx.scene.image.ImageView;
 
 public class EnemyManager extends Observable {
-	private Map<Integer,Enemy> enemyOnGrid;
+
+	private HashMap<Integer, Enemy> enemyOnGrid; 
 	private GamePlayData gameData;
 	private Grid grid;
 	private Cell current;
@@ -48,6 +49,7 @@ public class EnemyManager extends Observable {
 		currentWave = this.allEnemyAtCurrentLevel.get(waveNumber);
 		this.waveNumber++;
 		upComingEnemy = this.currentWave.poll();
+
 	}
 
 	public void setCurrentCell(Cell cell) {
@@ -57,7 +59,8 @@ public class EnemyManager extends Observable {
 		this.currentCopy = cell;
 	}
 
-	public Map<Integer, Enemy> getEnemyOnGrid() {
+
+	public HashMap<Integer, Enemy> getEnemyOnGrid() {
 		System.out.println("are there enemies in enemymnager?");
 		System.out.println(enemyOnGrid);
 		return this.enemyOnGrid;
@@ -70,8 +73,8 @@ public class EnemyManager extends Observable {
 	}
 
 	public void spawnEnemy(Enemy enemy) {
-		enemyOnGrid.put(uniqueEnemyID, enemy);
-		uniqueEnemyID++;
+		enemyOnGrid.put(enemy.getUniqueID(), enemy);
+
 	}
 
 	// this method not being called??????
@@ -194,6 +197,7 @@ public class EnemyManager extends Observable {
 	private void moveEnemies() {
 		for (Enemy enemy : enemyOnGrid.values()) {
 			moveSingleEnemy(enemy);
+
 
 		}
 	}

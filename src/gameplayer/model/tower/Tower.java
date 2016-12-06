@@ -9,7 +9,7 @@ import gameplayer.model.IDrawable;
 public class Tower implements IDrawable {
 
 	private double cost, sellAmount;
-	private ArrayList<WeaponType> weaponTypes;
+	private ArrayList<Gun> weaponTypes;
 	private String image, name;
 	private int uniqueID, type; // towerType
 	private double xCoordinate;
@@ -19,7 +19,7 @@ public class Tower implements IDrawable {
 	
 	
 	
-	public Tower (engine.tower.Tower tt, ArrayList<WeaponType> weaponTypes, int uniqueID){
+	public Tower (engine.tower.Tower tt, ArrayList<Gun> weaponTypes, int uniqueID){
 		this.cost = tt.getCost();
 		this.weaponTypes = weaponTypes;
 		this.image = tt.getImagePath();
@@ -37,7 +37,7 @@ public class Tower implements IDrawable {
 	 * each weaponType has the method called getFireRate
 	 * @return
 	 */
-	public ArrayList<WeaponType> getAllWeaponTypes(){
+	public ArrayList<Gun> getAllWeaponTypes(){
 		return this.weaponTypes;
 	}
  

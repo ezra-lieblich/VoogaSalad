@@ -67,10 +67,12 @@ public class Grid {
 		return this.grid;
 	}
 	
-	public void placeTower(Tower t, int x, int y, int coordx, int coordy){
-		System.out.println("Place tower coords: "+x+","+y);
-		t.setCoordinates(x, y);
+	public void placeTower(Tower t,  int coordx, int coordy){
 		grid[coordx][coordy].addTower(t);
+	}
+	
+	public void removeTower(int xcoord, int ycoord){
+		grid[xcoord][ycoord].removeTower();
 	}
 	
 	/*

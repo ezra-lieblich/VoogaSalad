@@ -45,8 +45,8 @@ public class GamePlayModel extends Observable {
 		this.gameData = new GamePlayData(factory);
 		this.gameData.initializeGameSetting();
 		this.enemyManager = new EnemyManager(this.gameData);
-		this.weaponManager = new gameplayer.model.weapon.WeaponManager(gameData);
-		this.towerManager = new TowerManager(gameData, this.weaponManager);
+		this.towerManager = new TowerManager(gameData, this.enemyManager);
+		this.weaponManager = new gameplayer.model.weapon.WeaponManager(this.gameData, this.towerManager);
 		this.collisionManager = new CollisionManager(gameData, this.weaponManager, this.enemyManager);
 		initializeGameSetting(factory);
 
@@ -88,7 +88,7 @@ public class GamePlayModel extends Observable {
 		return this.towerManager.getAvailableTower();
 	}
 
-	public List<Weapon> getWeaponOnGrid() {
+	public HashMap<Integer, Weapon> getWeaponOnGrid() {
 		return this.weaponManager.getWeaponOnGrid();
 	}
 
@@ -105,7 +105,7 @@ public class GamePlayModel extends Observable {
 	/*
 	 * should just get this in towerController
 	 */
-	public List<gameplayer.model.tower.Tower> getTowerOnGrid() { // fix naming
+	public Map<Integer,gameplayer.model.tower.Tower> getTowerOnGrid() { // fix naming
 		return this.towerManager.getTowerOnGrid();
 	}
 
