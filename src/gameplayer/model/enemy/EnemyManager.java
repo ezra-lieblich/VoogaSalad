@@ -93,9 +93,6 @@ public class EnemyManager extends Observable {
 		while (moveDist > 0) {
 			System.out.println(e.getCurrentCell().getX() + " currentCell " + e.getCurrentCell().getY()); //testing
 			try {
-				System.out.println("***CellTOCoordTest " + gameData.cellToCoordinate(1.0));
-				//System.out.println("nextCellXCoor" + e.getCurrentCell().getNext().getX());
-				System.out.println("enemyXCoor" + e.getX());
 				distToMove = (Math.abs(gameData.cellToCoordinate(e.getCurrentCell().getNext().getX()) - e.getX())
 						+ Math.abs(gameData.cellToCoordinate(e.getCurrentCell().getNext().getY() - e.getY())));
 			} catch (NullPointerException exception) { // enemy is currently at
