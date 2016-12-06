@@ -15,7 +15,7 @@ import gameplayer.view.helper.GraphicsLibrary;
 import javafx.scene.image.ImageView;
 
 public class EnemyManager extends Observable {
-	private List<Enemy> enemyOnGrid;
+	private List<Enemy> enemyOnGrid; // change to Hashset
 	private GamePlayData gameData;
 	private Grid grid;
 	private Cell current;

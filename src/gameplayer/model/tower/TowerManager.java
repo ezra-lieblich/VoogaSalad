@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Observable;
 
 import engine.weapon.Weapon;
+import engine.weapon.WeaponType;
 import gameplayer.model.Cell;
 import gameplayer.model.GamePlayData;
 import gameplayer.model.weapon.WeaponManager;
@@ -24,8 +25,9 @@ public class TowerManager extends Observable {
 	private HashMap<Integer, engine.tower.Tower> allTowerTypes;
 	private HashMap<Integer, engine.tower.Tower> availableTowerTypes;
 	private HashMap<Integer, engine.weapon.Weapon> allWeapons;
-	private List<gameplayer.model.tower.Tower> towersOnGrid; // fix naming
+	private List<gameplayer.model.tower.Tower> towersOnGrid; // change to hashMAP
 	private int uniqueTowerID;
+	private int timeInterval;
 
 	public TowerManager(GamePlayData gameData, WeaponManager weaponManager) {
 		this.gameData = gameData;
@@ -41,6 +43,9 @@ public class TowerManager extends Observable {
 		return this.availableTowerTypes;
 	}
 
+	/**
+	 * this method should not be called !!!
+	 */
 	public void populateAvailableTower() {
 		int level = gameData.getCurrentLevel();
 		System.out.println("in updateAvailableTower: level:" + level);
@@ -55,6 +60,7 @@ public class TowerManager extends Observable {
 		System.out.println("All available tower types: ");
 		System.out.println(this.availableTowerTypes);
 	}
+
 
 	//this method does not populate available towers for the initial round, so available towers 
 	//stays null
@@ -127,6 +133,33 @@ public class TowerManager extends Observable {
 			return false;
 
 		return true;
+	}
+	
+	private void calculateTimeInterval(){
+		ArrayList<Long> allFireRate = new ArrayList<Long>();
+		
+	}
+	
+	public int getTimeInterval(){
+		return this.timeInterval;
+	}
+	
+	
+	/**
+	 * check all the weaponTypes of each Tower
+	 */
+	private ArrayList<Weapon> generateNewWeapons(){
+		ArrayList<Weapon> newlyFired = new ArrayList<Weapon>();
+		
+		for(Tower t: this.towersOnGrid){
+			for(WeaponType w:t.getAllWeaponTypes()){
+				w.getFireRate();
+				
+				// do some math to fire rate to decide if fire at the moment
+				// add to newlyFired list
+			}
+		}
+		return newlyFired;
 	}
 
 }

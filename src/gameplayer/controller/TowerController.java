@@ -26,22 +26,7 @@ public class TowerController {
 		this.towerManager = towerManager;		
 	}
 	
-	/**
-	 * check all the weaponTypes of each Tower
-	 */
-	private ArrayList<Weapon> generateNewWeapons(){
-		ArrayList<Weapon> newlyFired = new ArrayList<Weapon>();
-		
-		for(Tower t: this.towerManager.getTowerOnGrid()){
-			for(WeaponType w:t.getAllWeaponTypes()){
-				w.getFireRate();
-				
-				// do some math to fire rate to decide if fire at the moment
-				// add to newlyFired list
-			}
-		}
-		return newlyFired;
-	}
+
 	
 	
 	/**
