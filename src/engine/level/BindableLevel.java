@@ -3,6 +3,7 @@ package engine.level;
 import java.util.Map;
 import java.util.function.BiConsumer;
 import engine.BindableType;
+import engine.level.wave.WaveType;
 
 
 public interface BindableLevel extends BindableType<LevelBuilder> {

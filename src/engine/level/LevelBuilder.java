@@ -2,12 +2,10 @@ package engine.level;
 
 import java.util.Map;
 import engine.TypeBuilder;
+import engine.level.wave.WaveType;
 
 
-public interface LevelBuilder extends TypeBuilder<Level, LevelBuilder>, BindableLevel { // TODO -
-                                                                                        // Add
-                                                                                        // bindable
-                                                                                        // interface
+public interface LevelBuilder extends TypeBuilder<Level, LevelBuilder>, BindableLevel {
 
     LevelBuilder buildWaves (Map<Integer, WaveType> enemies);
 

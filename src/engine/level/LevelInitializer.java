@@ -1,6 +1,7 @@
 package engine.level;
 
 import engine.TypeInitializer;
+import engine.level.wave.WaveType;
 import engine.observer.ObservableMap;
 import engine.observer.ObservableProperty;
 

@@ -3,6 +3,7 @@ package engine.level;
 import java.util.Collections;
 import java.util.Map;
 import engine.AbstractType;
+import engine.level.wave.WaveType;
 import engine.observer.ObservableMap;
 import engine.observer.ObservableProperty;
 

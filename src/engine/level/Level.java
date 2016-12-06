@@ -1,6 +1,8 @@
 package engine.level;
 
 import engine.Type;
+import engine.level.wave.WaveType;
+
 import java.util.Map;
 
 

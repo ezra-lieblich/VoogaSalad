@@ -1,10 +1,15 @@
-package engine.level;
+package engine.level.wave;
 
 public class WaveType {
+	//ID for type of enemy
 	private int enemyID;
+	//ID for path of wave
 	private int pathID;
+	//Number of enemies in wave
 	private int enemyCount;
-	private double startTime;
+	//Time in seconds that wave starts to come out
+	private double delay;
+	//Time in seconds between each enemy spawned
 	private double frequency;
 	
 	public int getEnemyID() {
@@ -26,10 +31,10 @@ public class WaveType {
 		this.enemyCount = enemyCount;
 	}
 	public double getStartTime() {
-		return startTime;
+		return delay;
 	}
 	public void setStartTime(double startTime) {
-		this.startTime = startTime;
+		this.delay = startTime;
 	}
 	public double getFrequency() {
 		return frequency;

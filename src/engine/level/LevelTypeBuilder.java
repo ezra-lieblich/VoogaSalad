@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.BiConsumer;
 import engine.AbstractTypeBuilder;
+import engine.level.wave.WaveType;
 import engine.observer.ObservableMap;
 import engine.observer.ObservableMapProperty;
 import engine.observer.ObservableObjectProperty;

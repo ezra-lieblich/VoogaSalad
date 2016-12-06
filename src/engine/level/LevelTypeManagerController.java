@@ -5,6 +5,7 @@ import java.util.Map;
 import authoring.editorview.level.ILevelEditorView;
 import engine.AbstractTypeManagerController;
 import engine.ManagerMediator;
+import engine.level.wave.WaveType;
 
 
 public class LevelTypeManagerController
