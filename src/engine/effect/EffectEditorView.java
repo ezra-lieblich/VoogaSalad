@@ -11,13 +11,13 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
 
-public class EffectView {
+public class EffectEditorView implements EffectView {
     Group node;
     Scene scene;
     ComboBox<String> triggers = new ComboBox<String>();
     ComboBox<String> triggerConditions = new ComboBox<String>();
     
-    EffectView(int size) {
+    EffectEditorView(int size) {
         this.node = new Group();
         this.scene = new Scene(node, size, size);
         
@@ -29,27 +29,75 @@ public class EffectView {
         node.getChildren().add(triggerConditions);
     }
     
+    /* (non-Javadoc)
+     * @see engine.effect.EffectView#getTriggers()
+     */
+    @Override
     public ComboBox<String> getTriggers() {
         return triggers;
     }
     
+    /* (non-Javadoc)
+     * @see engine.effect.EffectView#getTriggerConditions()
+     */
+    @Override
     public ComboBox<String> getTriggerConditions() {
         return triggerConditions;
     }
     
+    /* (non-Javadoc)
+     * @see engine.effect.EffectView#updateTriggers(java.util.List)
+     */
+    @Override
     public void updateTriggers(List<String> methods) {
         triggers.getItems().setAll(methods);
     }
     
+    /* (non-Javadoc)
+     * @see engine.effect.EffectView#updateTriggerConditions(java.util.List)
+     */
+    @Override
     public void updateTriggerConditions(List<String> methods) {
         triggerConditions.getItems().setAll(methods);
     }
     
+    /* (non-Javadoc)
+     * @see engine.effect.EffectView#getNode()
+     */
+    @Override
     public Group getNode() {
         return node;
     }
     
+    /* (non-Javadoc)
+     * @see engine.effect.EffectView#getScene()
+     */
+    @Override
     public Scene getScene() {
         return scene;
+    }
+
+    @Override
+    public void updateNameDisplay (String name) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void updateImagePathDisplay (String imagePath) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void updateSizeDisplay (double size) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void updateBank (List<Integer> ids) {
+        // TODO Auto-generated method stub
+        
     }
 }

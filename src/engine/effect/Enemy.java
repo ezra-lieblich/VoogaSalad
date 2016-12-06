@@ -20,14 +20,14 @@ public class Enemy extends SuperEnemy implements IDrawable{
 	private double width, height;
 	private int uniqueID;
 	private Cell enemyCell;
-	private List<Effect> effects;
+	private List<EffectType> effects;
 	
 	public Enemy() {
-		this.effects = new ArrayList<Effect>();			
+		this.effects = new ArrayList<EffectType>();			
 	}
 	
 	
-	public void addEffect(Effect effect) {
+	public void addEffect(EffectType effect) {
 	    effects.add(effect);
 	}
 	
