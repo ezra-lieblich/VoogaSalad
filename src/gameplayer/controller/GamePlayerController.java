@@ -88,7 +88,7 @@ public class GamePlayerController implements Observer {
 		this.weaponController = new WeaponController(this.model.getWeaponManager());
 		this.collisionController = new CollisionController(this.model.getCollisionManager());
 		this.model.getData().addObserver(this);
-		this.oldLevel = 1;
+		this.oldLevel = 0;
 		this.towerToId = new HashMap<String, Integer>();
 		this.weaponsOnScreen = new HashMap<Integer,ImageView>();
 		this.animation = new Timeline();
