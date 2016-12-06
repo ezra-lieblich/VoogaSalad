@@ -3,18 +3,21 @@ package gameplayer.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import gameplayer.model.tower.Tower;
+import gameplayer.model.weapon.Weapon;
+
 public class Cell {
 
-	List<Enemy> enemies;
-	List<Weapon> weapons;
+	//List<Enemy> enemies;
+	//List<Weapon> weapons;
 	private int  xCoordinate;
 	private int yCoordinate;
 	private Cell next;
 	private Tower tower;
 
 	public Cell(int x, int y) {
-		enemies = new ArrayList<Enemy>();
-		weapons = new ArrayList<Weapon>();
+		//enemies = new ArrayList<Enemy>();
+		//weapons = new ArrayList<Weapon>();
 		this.xCoordinate = x;
 		this.yCoordinate = y;
 		this.next = null;
@@ -56,15 +59,9 @@ public class Cell {
 		this.tower = t;
 	}
 	
-	public int fireWeapon(){
-		
-		//+++++++++++++++++++++++++++++++++++++++++need to be fixed+++++++++++++++++++++++
-		//if (this.tower != null && tower.isFiring()){
-			//return this.tower.getWeaponType();
-		//}
-		return -1;
+	public void removeTower(){
+		this.tower = null;
 	}
-	
 
 	public Tower getTower(){
 		return this.tower;
@@ -81,21 +78,10 @@ public class Cell {
 	}
 	
 	
-	/*
-	private void singleCollision(Enemy enemy, Weapon weapon){
-		enemy.setHealth(enemy.getHealth() - weapon.getDemage());
+	public Boolean equalTo(Cell another){
+		if(another.getX() == this.getX() && another.getY() == this.getY())
+			return true;
+		return false;
 	}
-	
-	public void manageCollision(){
-		if(!enemies.isEmpty() && !weapons.isEmpty()){
-			for(Enemy e: enemies){
-				for (Weapon w: weapons){
-					singleCollision(e, w);
-				}
-			}
-		}
-		
-	}
-	*/
 	
 }

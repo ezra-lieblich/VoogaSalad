@@ -2,6 +2,8 @@ package gameplayer.model;
 
 import java.util.List;
 
+import gameplayer.model.tower.Tower;
+
 public class Grid {
 
 	private Cell[][] grid;
@@ -48,18 +50,29 @@ public class Grid {
 	}
 	
 	public Cell getStartPoint(){
+		System.out.println("start point:");
+		System.out.println(this.start);
 		return this.start;
 	}
 	
+	public Cell getPathEndPoint(){
+		Cell current = this.start;
+		while(current.getNext() != null){
+			current = current.getNext();
+		}
+		return current;
+	}
 	
 	public Cell[][] getGrid(){
 		return this.grid;
 	}
 	
-	public void placeTower(Tower t, int x, int y, int coordx, int coordy){
-		System.out.println("Place tower coords: "+x+","+y);
-		t.setCoordinates(x, y);
+	public void placeTower(Tower t,  int coordx, int coordy){
 		grid[coordx][coordy].addTower(t);
+	}
+	
+	public void removeTower(int xcoord, int ycoord){
+		grid[xcoord][ycoord].removeTower();
 	}
 	
 	/*

@@ -1,6 +1,9 @@
 package authoring.main;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.StringReader;
 import java.util.HashMap;
 import authoring.editorview.EditorViewController;
 import authoring.editorview.IEditorView;
@@ -29,6 +32,7 @@ import engine.settings.GameModeManagerController;
 import engine.tower.TowerManagerController;
 import engine.weapon.WeaponManagerController;
 import javafx.scene.Scene;
+import statswrapper.Wrapper;
 
 
 public class AuthoringController {
@@ -36,7 +40,7 @@ public class AuthoringController {
     private AuthoringViewController viewController;
     private IToolbar toolbar;
 
-    AuthoringController (int size) {
+    public AuthoringController (int size) {
         modelController = new ModelAuthoringController();
         try {
             viewController = new AuthoringViewController(size, size);
@@ -53,13 +57,34 @@ public class AuthoringController {
 
     private void configureToolbar () {
         toolbar = this.viewController.getView().getMyToolbar();
-        toolbar.setOnPressedSave(e -> saveAsXMLFile());
+        toolbar.setOnPressedSave(e -> {
+			try {
+				saveAsXMLFile();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		});
 
     }
 
-    private void saveAsXMLFile () {
+    private void saveAsXMLFile () throws IOException {
         String fileContent = this.modelController.SaveData();
         toolbar.saveFile(fileContent);
+        //TODO Lucy: add api call to record game in web app
+        String gameData = xmlToString(fileContent);
+        Wrapper.getInstance().createGame(gameData);
+    }
+    
+    private String xmlToString(String textContent) throws IOException{
+    	BufferedReader br = new BufferedReader(new StringReader(textContent));
+    	String line;
+    	StringBuilder sb = new StringBuilder();
+
+    	while((line=br.readLine())!= null){
+    	    sb.append(line.trim());
+    	}
+    	return sb.toString();
     }
 
     private void connectDataInterfaces (AuthoringViewController authoringVC) {
