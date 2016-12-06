@@ -12,8 +12,6 @@ public class LevelTypeManagerController
         extends AbstractTypeManagerController<LevelManager, LevelBuilder, Level, ILevelEditorView>
         implements LevelManagerController {
 
-	//TODO probably need to move this
-	private int waveID = 0;
 	
     public LevelTypeManagerController (ManagerMediator managerMediator) {
         super(new LevelTypeManager(), new LevelTypeBuilder(), managerMediator);
@@ -131,6 +129,72 @@ public class LevelTypeManagerController
 	@Override
 	public double getLevelTime(int levelID) {
 		return getTypeManager().getEntity(levelID).getLevelTime();
+	}
+
+	@Override
+	public int createWave(int levelID, ILevelEditorView updateView) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void removeWave(int levelID, int waveID) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setWaveEnemy(int levelID, int waveID, int enemyID) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int getWaveEnemy(int levelID, int waveID) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setWaveCount(int levelID, int waveID, int count) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int getWaveCount(int levelID, int waveID) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setWaveFrequency(int levelID, int waveID, double frequency) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public double getWaveFrequency(int levelID, int waveID) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setWavePath(int levelID, int waveID, int pathID) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int getWavePath(int levelID, int waveID) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setWaveDelay(int levelID, int waveID, double delay) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

@@ -9,7 +9,6 @@ public interface BindableWave extends BindableType<WaveBuilder>{
     WaveBuilder addEnemyIDListener (BiConsumer<Integer, Integer> listener);
     WaveBuilder addPathIDListener (BiConsumer<Integer, Integer> listener);
     WaveBuilder addEnemyCountListener (BiConsumer<Integer, Integer> listener);
-    WaveBuilder addListener (BiConsumer<Integer, Integer> listener);
     WaveBuilder addStartTimeListener (BiConsumer<Double, Double> listener);
     WaveBuilder addFrequencyListener (BiConsumer<Double, Double> listener);
 

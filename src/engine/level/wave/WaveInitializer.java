@@ -8,7 +8,7 @@ public interface WaveInitializer extends TypeInitializer {
     ObservableProperty<Integer> getPathID ();
     ObservableProperty<Integer> getEnemyCount ();
     ObservableProperty<Double> getStartTime ();
-    ObservableProperty<Integer> getFrequency ();
+    ObservableProperty<Double> getFrequency ();
 
 
 

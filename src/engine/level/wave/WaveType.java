@@ -1,46 +1,58 @@
 package engine.level.wave;
 
-public class WaveType {
+import engine.AbstractType;
+import engine.observer.ObservableProperty;
+
+public class WaveType extends AbstractType implements Wave{
 	//ID for type of enemy
-	private int enemyID;
+	private ObservableProperty<Integer> enemyID;
 	//ID for path of wave
-	private int pathID;
+	private ObservableProperty<Integer> pathID;
 	//Number of enemies in wave
-	private int enemyCount;
+	private ObservableProperty<Integer> enemyCount;
 	//Time in seconds that wave starts to come out
-	private double delay;
+	private ObservableProperty<Double> delay;
 	//Time in seconds between each enemy spawned
-	private double frequency;
+	private ObservableProperty<Double> frequency;
+	
+	public WaveType(WaveInitializer initializer) {
+		super(initializer);
+		this.enemyCount = initializer.getEnemyCount();
+		this.enemyID = initializer.getEnemyID();
+		this.pathID = initializer.getPathID();
+		this.delay = initializer.getStartTime();
+		this.frequency = initializer.getFrequency();
+	}
 	
 	public int getEnemyID() {
-		return enemyID;
+		return enemyID.getProperty();
 	}
 	public void setEnemyID(int enemyID) {
-		this.enemyID = enemyID;
+		this.enemyID.setProperty(enemyID);
 	}
 	public int getPathID() {
-		return pathID;
+		return pathID.getProperty();
 	}
 	public void setPathID(int pathID) {
-		this.pathID = pathID;
+		this.pathID.setProperty(pathID);
 	}
 	public int getEnemyCount() {
-		return enemyCount;
+		return enemyCount.getProperty();
 	}
 	public void setEnemyCount(int enemyCount) {
-		this.enemyCount = enemyCount;
+		this.enemyCount.setProperty(enemyCount);
 	}
 	public double getStartTime() {
-		return delay;
+		return delay.getProperty();
 	}
 	public void setStartTime(double startTime) {
-		this.delay = startTime;
+		this.delay.setProperty(startTime);
 	}
 	public double getFrequency() {
-		return frequency;
+		return frequency.getProperty();
 	}
 	public void setFrequency(double frequency) {
-		this.frequency = frequency;
+		this.frequency.setProperty(frequency);
 	}
 	
 }
