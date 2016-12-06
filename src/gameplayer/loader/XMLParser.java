@@ -57,7 +57,7 @@ import engine.ManagerTypeMediator;
 
 /**
  * This class is an xml parser that is able to read xml files and grab the appropriate values from them. 
- * @author Naijiao
+ * @author Aaron, Naijiao
  *
  */
 public class XMLParser {

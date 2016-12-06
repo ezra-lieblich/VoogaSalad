@@ -26,10 +26,10 @@ public class Grid {
 	//testing
 	public void printGrid(){
 		System.out.println("Grid");
-		for(int i = 0; i < grid.length;i++){
-			for(int j = 0; j < grid[0].length; j++){
-				System.out.println(grid[i][j].getX()+","+grid[i][j].getY());
-			}
+		Cell current = this.start;
+		while (current != null) {
+			System.out.println(current.getX() + ", " + current.getY());
+			current = current.getNext();
 		}
 	}
 	

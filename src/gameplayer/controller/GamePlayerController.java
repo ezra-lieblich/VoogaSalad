@@ -29,6 +29,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -169,6 +170,7 @@ public class GamePlayerController implements Observer {
 				t.toggleInfoVisibility();
 			}
 		}
+
 		HashMap<Integer, Enemy> enemiesOnGrid = this.enemyManager.getEnemyOnGrid();
 		for(int i: enemiesOnGrid.keySet()){
 			Enemy e = enemiesOnGrid.get(i);
@@ -262,6 +264,7 @@ public class GamePlayerController implements Observer {
 		//redraw path
 		//this.view.getGrid().populatePath(this.model.getGrid().getStartPoint());
 		this.view.getGrid().getGrid().getChildren().addAll(this.view.getGrid().getPathImages());
+
 		HashMap<Integer, Enemy>enemyRedraw = this.enemyManager.getEnemyOnGrid(); 
 		Map<Integer, Tower>towerRedraw = this.model.getTowerOnGrid();
 		HashMap<Integer, Weapon>bulletRedraw = this.model.getWeaponOnGrid();

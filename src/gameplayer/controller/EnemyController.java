@@ -37,6 +37,7 @@ public class EnemyController implements Observer{
 	
 	//called in timeline update
 	public void updateEnemyViews(){
+
 		HashMap<Integer, Enemy> enemies = this.getEnemyModel().getEnemyOnGrid();
 		for(int i: enemies.keySet()){
 		 //ALERT TODO: I don't think any keys will be the same bc as soon as the enemy object is 
