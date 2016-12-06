@@ -40,12 +40,12 @@ public class GamePlayModel extends Observable {
 
 	public GamePlayModel(GamePlayerFactory factory) {
 		graphicLib = new GraphicsLibrary();
-		initializeGameSetting(factory);
 		this.gameData = new GamePlayData(factory);
 		this.gameData.initializeGameSetting();
 		this.enemyManager = new EnemyManager(this.gameData);
 		this.weaponManager = new gameplayer.model.weapon.WeaponManager(gameData);
 		this.towerManager = new TowerManager(gameData, this.weaponManager);
+		initializeGameSetting(factory);
 
 	}
 
@@ -57,10 +57,10 @@ public class GamePlayModel extends Observable {
 	public void initializeGameSetting(GamePlayerFactory factory) {
 		this.factory = factory;
 		this.gameTitle = this.factory.getGameTitle();
+		initializeLevelInfo();
 	}
 
 	public GamePlayData getData(){
-		System.out.println("Successfully got data");
 		return this.gameData;
 	}
 	
@@ -84,11 +84,6 @@ public class GamePlayModel extends Observable {
 	public List<Weapon> getWeaponOnGrid() {
 		return this.weaponManager.getWeaponOnGrid();
 	}
-
-
-
-
-
 
 
 	public void initializeLevelInfo() {

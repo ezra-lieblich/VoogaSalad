@@ -56,7 +56,7 @@ public class TowerManager extends Observable {
 		System.out.println(this.availableTowerTypes);
 	}
 
-	//this method does not populate available towers for the iniial round, so available towers 
+	//this method does not populate available towers for the initial round, so available towers 
 	//stays null
 	public void updateAvailableTower() {
 		int level = gameData.getCurrentLevel();
