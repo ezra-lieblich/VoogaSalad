@@ -132,7 +132,7 @@ public class GamePlayData  extends Observable{
 		return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
 	}
 	
-	private static long gcd(long a, long b)
+	private long gcd(long a, long b)
 	{
 	    while (b > 0)
 	    {
@@ -143,22 +143,22 @@ public class GamePlayData  extends Observable{
 	    return a;
 	}
 
-	private static long gcd(long[] input)
+	private long gcd(long[] input)
 	{
 	    long result = input[0];
 	    for(int i = 1; i < input.length; i++) result = gcd(result, input[i]);
 	    return result;
 	}
 	
-	private static long lcm(long a, long b)
+	private long lcm(long a, long b)
 	{
 	    return a * (b / gcd(a, b));
 	}
 
-	public static long lcm(long[] input)
+	public long lcm(Long[] allFireRates)
 	{
-	    long result = input[0];
-	    for(int i = 1; i < input.length; i++) result = lcm(result, input[i]);
+	    long result = allFireRates[0];
+	    for(int i = 1; i < allFireRates.length; i++) result = lcm(result, allFireRates[i]);
 	    return result;
 	}
 

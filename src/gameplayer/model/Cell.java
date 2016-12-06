@@ -59,6 +59,9 @@ public class Cell {
 		this.tower = t;
 	}
 	
+	public void removeTower(){
+		this.tower = null;
+	}
 
 	public Tower getTower(){
 		return this.tower;

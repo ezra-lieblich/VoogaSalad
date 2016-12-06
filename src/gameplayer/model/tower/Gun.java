@@ -7,15 +7,26 @@ public class Gun {
 	private int fireCounter = 0;
 	private double firingRate, attackingRange;  // need to figure out the firing rate int or double!!!
 	private engine.weapon.Weapon weaponType;
-	private double xcoor, ycoor;
+	private double xcoor, ycoor; // in pixel
 	
-	public Gun(double firingRate, engine.weapon.Weapon weaponType, double attackingRange, int x, int y) {
+	public Gun(int firingRate, engine.weapon.Weapon weaponType,  double x, double y) {
 		this.firingRate = firingRate;
 		this.weaponType = weaponType; 
-		this.attackingRange = attackingRange;
+		this.attackingRange = weaponType.getRange();
 		this.xcoor = x;
 		this.ycoor = y; 
-
+	}
+	
+	double getx(){
+		return this.xcoor;
+	}
+	
+	double gety(){
+		return this.ycoor;
+	}
+	
+	double getRange(){
+		return this.attackingRange;
 	}
 	
 	boolean isFiring(){
@@ -25,14 +36,11 @@ public class Gun {
 		return false;
 	}
 	
-	Weapon getWeapon(){
+	Weapon getWeapon(int targetID, double targetX, double targetY){
 		 String name = weaponType.getName(); 
-		 int ID = weaponType.getId(); 
-		 double demage = 10; // get from weapon type later
-		 double speedX = 10;  // how trajectory translates into x y speed???? talk to engine people
-		 double speedY = 10;
+		 double demage = 50; // get from weapon type later
 		 String image = weaponType.getImagePath();
-		 return new Weapon (name, ID, demage, speedX, speedY, image, this.attackingRange);
+		 return new Weapon (name,  demage, targetX, targetY, image, this.attackingRange,targetID, this.xcoor,this.ycoor);
 	}
 
 }

@@ -1,6 +1,7 @@
 package gameplayer.model.weapon;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Observable;
 
@@ -10,29 +11,32 @@ import gameplayer.view.GridGUI;
 
 public class WeaponManager extends Observable{
 	private GamePlayData gameData;
-	private List<Weapon> weaponOnGrid;
+	private TowerManager towerManager;
+	private HashMap<Integer, Weapon> weaponOnGrid;
 	private int uniqueWeaponID;
+	
 
 
-
-	public WeaponManager(GamePlayData gameData) {
+	public WeaponManager(GamePlayData gameData, TowerManager towerManager) {
 		this.gameData = gameData;
+		this.towerManager = towerManager;
 		initializeNewLevel();
 	}
 
 	public void initializeNewLevel(){
-		weaponOnGrid = new ArrayList<Weapon>();
+		weaponOnGrid = new HashMap<Integer, Weapon>();
 		uniqueWeaponID = 0;
 	}
 	
-	public List<Weapon> getWeaponOnGrid(){
+	public HashMap<Integer, Weapon> getWeaponOnGrid(){
 		return this.weaponOnGrid;
 	}
 
 
-	public void updateWeapon(ArrayList<Weapon> newlyGeneratedWeapons) {
+	public void updateWeapon() {
 
-		for (Weapon w : weaponOnGrid) {
+		for (int i : weaponOnGrid.keySet()) {
+			Weapon w = weaponOnGrid.get(i);
 			if (w.getX() < GridGUI.GRID_WIDTH) {
 				w.setX(w.getSpeedX() + w.getX());
 			}
@@ -45,12 +49,12 @@ public class WeaponManager extends Observable{
 			}
 		}
 
-		// all all the new firing
-		for (int i = 0; i <newlyGeneratedWeapons.size(); i++){
-			newlyGeneratedWeapons.get(i).setID(this.uniqueWeaponID);
+		//newly fired weapon
+		ArrayList<Weapon> newlyGeneratedWeapons = this.towerManager.generateNewWeapons();
+		for (int i = 0; i < newlyGeneratedWeapons.size(); i++){
+			newlyGeneratedWeapons.get(i).setUniqueID(this.uniqueWeaponID);
+			this.weaponOnGrid.put(uniqueWeaponID, newlyGeneratedWeapons.get(i));
 			uniqueWeaponID++;
-			this.weaponOnGrid.add(newlyGeneratedWeapons.get(i));
-
 		}
 
 		setChanged();

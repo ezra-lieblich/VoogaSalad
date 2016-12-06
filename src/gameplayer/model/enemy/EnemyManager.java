@@ -1,6 +1,7 @@
 package gameplayer.model.enemy;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Observable;
 import java.util.Queue;
@@ -15,7 +16,7 @@ import gameplayer.view.helper.GraphicsLibrary;
 import javafx.scene.image.ImageView;
 
 public class EnemyManager extends Observable {
-	private List<Enemy> enemyOnGrid; // change to Hashset
+	private HashMap<Integer, Enemy> enemyOnGrid; 
 	private GamePlayData gameData;
 	private Grid grid;
 	private Cell current;
@@ -39,13 +40,12 @@ public class EnemyManager extends Observable {
 	public void initializeNewLevel(){
 		this.grid = this.gameData.getGrid();
 		this.uniqueEnemyID = 0;
-		this.enemyOnGrid = new ArrayList<Enemy>();
+		this.enemyOnGrid = new HashMap<Integer, Enemy>();
 		waveNumber = 0;
 		this.allEnemyAtCurrentLevel = this.gameData.getFactory().getEnemy(this.gameData.getCurrentLevel());
 		currentWave = this.allEnemyAtCurrentLevel.get(waveNumber);
 		this.waveNumber++;
 		upComingEnemy = this.currentWave.poll();
-		enemyOnGrid = new ArrayList<Enemy>();
 
 	}
 
@@ -56,14 +56,14 @@ public class EnemyManager extends Observable {
 		this.currentCopy = cell;
 	}
 
-	public List<Enemy> getEnemyOnGrid() {
+	public HashMap<Integer, Enemy> getEnemyOnGrid() {
 		System.out.println("are there enemies in enemymnager?");
 		System.out.println(enemyOnGrid);
 		return this.enemyOnGrid;
 	}
 
 	public void spawnEnemy(Enemy enemy) {
-		enemyOnGrid.add(enemy);
+		enemyOnGrid.put(enemy.getUniqueID(), enemy);
 	}
 
 	// this method not being called??????
@@ -180,8 +180,8 @@ public class EnemyManager extends Observable {
 
 	
 	private void moveEnemies() {
-		for (Enemy enemy : enemyOnGrid) {
-			moveIndividualEnemy(enemy);
+		for (int enemy : enemyOnGrid.keySet()) {
+			moveIndividualEnemy(enemyOnGrid.get(enemy));
 
 		}
 	}
