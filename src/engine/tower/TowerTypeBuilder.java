@@ -23,7 +23,7 @@ import javafx.beans.property.DoubleProperty;
 public class TowerTypeBuilder extends AbstractTypeBuilder<Tower, TowerBuilder> implements TowerBuilder, TowerInitializer {
     
      public static final String DEFAULT_NAME = "New Tower";
-     public static final String DEFAULT_IMAGE_PATH = "Images/penguin.jpg";
+     public static final String DEFAULT_IMAGE_PATH = "Images/tower.png";
      public static final double DEFAULT_SIZE = 1;
 
      //public static final List<Integer> DEFAULT_WEAPONS = Arrays.stream(new Integer[]{}).collect(Collectors.toList());

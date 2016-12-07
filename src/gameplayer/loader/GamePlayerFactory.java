@@ -37,10 +37,7 @@ public class GamePlayerFactory{
 	}
 	
 	public HashMap<Integer, engine.weapon.Weapon> getWeaponBank() {
-		WeaponTypeBuilder weaponBuilder = new WeaponTypeBuilder();
-		HashMap<Integer, Weapon> bank = new HashMap<Integer, Weapon>();
-		bank.put(0, weaponBuilder.build());
-		return bank;
+		return (HashMap<Integer, Weapon>) authoringFileReader.getWeaponTypes();
 		
 	}
 
@@ -105,6 +102,11 @@ public class GamePlayerFactory{
 	
 	
 	public HashMap<Integer, Tower> getTowers() {
+		for (Tower t : authoringFileReader.getTowerTypes().values()) {
+			System.out.println("TOWER IMAGE PATH");
+			System.out.println(t.getImagePath());
+		}
+		
 		return (HashMap<Integer, Tower>) authoringFileReader.getTowerTypes(); 
 	}
 	
