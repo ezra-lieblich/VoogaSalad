@@ -111,7 +111,7 @@ public class PathTypeManagerController
                 .addCoordinatesListener( (oldValue, newValue) -> updateView
                         .updatePathCoordinates(newValue))
                 .addGridRowsListener( (oldValue, newValue) -> updateView
-                        .updateDimensions(newValue));
+                        .updateGridDimensions(newValue));
     }
 
 }

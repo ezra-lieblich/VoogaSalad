@@ -52,8 +52,7 @@ public class PathEditorViewController extends EditorViewController implements Pa
 	public void onUserEnteredEditPath(int pathID) {
 		activeID = pathID;
 		pathView.updateActiveID(activeID);
-		//TODO: pathView.updateGridSize(pathDataSource.set);
-		
+		pathView.updateGridDimensions(pathDataSource.getNumberofRows(activeID));	
 		pathView.updatePathCoordinates(pathDataSource.getPathCoordinates(activeID));
 		pathView.updateImagePathDisplay(pathDataSource.getImagePath(activeID));
 		pathView.updateNameDisplay(pathDataSource.getName(activeID));
