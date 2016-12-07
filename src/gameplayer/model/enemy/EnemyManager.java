@@ -99,28 +99,34 @@ public class EnemyManager extends Observable {
 			} catch (NullPointerException exception) { // enemy is currently at
 				// last cell on path
 				double destinationXpos = e.getCurrentCell().getX()
-						+ e.getxDirection() * gameData.getCellSize() / 2; // midpoint
+						+ e.getxDirection() * gameData.getCellWidth() / 2; // midpoint
 				// +
 				// width/2
 				// =
 				// edge
 				double destinationYpos = e.getCurrentCell().getY()
-						+ e.getyDirection() * gameData.getCellSize() / 2;
+						+ e.getyDirection() * gameData.getCellWidth() / 2;
 				distToMove = Math.abs(destinationXpos - e.getX()) + Math.abs(destinationYpos - e.getY());
 				onLastCell = true;
 			}
+			
+			
 			if (moveDist >= distToMove) { // can move to center of next cell
 				e.setX(e.getX() + e.getxDirection() * distToMove);
 				e.setY(e.getY() + e.getyDirection() * distToMove);
-				if (onLastCell) {
-					gameData.setLife(gameData.getLife() - 1);
-				}
-				if (onLastCell) return;
 				e.setCurrentCell(e.getCurrentCell().getNext());
+				if (e.getCurrentCell().getNext() == null) {
+					gameData.setLife(gameData.getLife() - 1);
+					handleEnemyEnteringBase(e);
+					return;
+				}
 				e.setxDirection(e.getCurrentCell().getNext().getX() - e.getCurrentCell().getX()); // -1,
+	
+				
 				// 0,
 				// or
 				// 1
+				
 				e.setyDirection(e.getCurrentCell().getNext().getY() - e.getCurrentCell().getY());
 				moveDist -= distToMove;
 			} else {
@@ -131,7 +137,15 @@ public class EnemyManager extends Observable {
 		}
 		setChanged();
 		notifyObservers();
-		// sub lives if enemy got into base
+	}
+	
+	private void handleEnemyEnteringBase(Enemy e){
+		gameData.setLife(gameData.getLife()-1);
+		removeEnemyFromGrid(e);
+	}
+	
+	private void removeEnemyFromGrid(Enemy e) {
+		this.enemyOnGrid.remove(e.getUniqueID());
 	}
 
 
