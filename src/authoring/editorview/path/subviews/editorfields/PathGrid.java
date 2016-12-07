@@ -1,4 +1,4 @@
-package authoring.editorview.path.subviews;
+package authoring.editorview.path.subviews.editorfields;
 
 
 
@@ -226,19 +226,17 @@ public class PathGrid {
 	private void updatePath(double x, double y){
 		int i = (int) (x - 100)/cellWidth;
 		int j = (int) (y - 240)/cellHeight;
-		if (pathGrid[i][j].isVisible()){		
+		if (!addCellToPath(i, j)){
 			removeCellFromPath(i, j);
-		}
-		else {		
-			addCellToPath(i, j);
 		}
 	}
 	
-	private void addCellToPath(int x, int y){
+	private boolean addCellToPath(int x, int y){
 		boolean validCoordinate = delegate.onUserEnteredAddPathCoordinate(x, y);
 		if (validCoordinate){
 			pathGrid[x][y].setVisible(true);
 		}
+		return validCoordinate;
 
 	}
 	
