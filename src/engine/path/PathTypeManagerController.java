@@ -76,7 +76,12 @@ public class PathTypeManagerController
 //        return isValidRemove; // TODO - validate this
     }
     
-    
+    @Override
+    public void setSquareGridDimensions (int pathID, int size) {
+        setNumberofColumns(pathID, size);
+        setNumberofRows(pathID, size);
+    }
+
     
     @Override
     public int getNumberofColumns (int pathID) {
@@ -106,9 +111,7 @@ public class PathTypeManagerController
                 .addCoordinatesListener( (oldValue, newValue) -> updateView
                         .updatePathCoordinates(newValue))
                 .addGridRowsListener( (oldValue, newValue) -> updateView
-                        .updateNumRows(newValue))
-                .addGridColumnsListener( (oldValue, newValue) -> updateView
-                        .updateNumColumns(newValue));
+                        .updateDimensions(newValue));
     }
 
 }
