@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import authoring.main.AuthoringController;
 import gameplayer.controller.GamePlayerController;
+import gameplayer.controller.HomeSelection;
 import gameplayer.view.helper.GraphicsLibrary;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -67,7 +68,7 @@ public class SplashScreen {
 		PasswordField pwBox = new PasswordField();
 		mainScreen.add(pwBox, 1, 2);
 
-		System.out.println("textfield input: "+userTextField.getText()+","+ pwBox.getText());
+		//System.out.println("textfield input: "+userTextField.getText()+","+ pwBox.getText());
 		addLoginButtons(userTextField, pwBox);
 		addCreateAccountButtons(userTextField, pwBox);
 	}
@@ -88,7 +89,7 @@ public class SplashScreen {
 				createPlayGameOrMakeGameOptions();
 				
 				//TESTING
-				Wrapper.getInstance().recordGameScores("50", "3", "0");
+				//Wrapper.getInstance().recordGameScores("50", "3", "0");
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -145,11 +146,17 @@ public class SplashScreen {
 	
 	private void startGame(){
 		Stage s = new Stage();
+		
+		HomeSelection file = new HomeSelection(s);
+		file.initHomeScreen();
+		
+		/*
 		GamePlayerController playerController = new GamePlayerController();
 		playerController.init();
 		s.setTitle(TITLE);
 		s.setScene(playerController.getMainScene());
 		s.show();
+		*/
 	}
 
 }
