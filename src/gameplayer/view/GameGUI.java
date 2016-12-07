@@ -205,6 +205,7 @@ public class GameGUI {
 		int i = 0;
 
 		for (IDrawable entity : redraw) {
+			System.out.println("Invalid image?"+entity.getImage().toString());
 			ImageView image = new ImageView(entity.getImage());
 			if (i < towerCoords.size() && towerCoords.get(i).length > 1) {
 				// System.out.println("TOWER BEING RENDERED?!");
