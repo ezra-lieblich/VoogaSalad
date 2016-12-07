@@ -23,11 +23,6 @@ public class LevelTypeManagerController
     }
 
     @Override
-    public void setEnemy (int levelID, int enemyID, WaveType wave) {
-        getTypeManager().getEntity(levelID).setEnemyCounts(enemyID, wave);
-    }
-
-    @Override
     public void setRewardScore (int levelID, double winScore) {
         getTypeManager().getEntity(levelID).setRewardScore(winScore);
     }
@@ -53,12 +48,12 @@ public class LevelTypeManagerController
         getTypeManager().getEntity(levelID).setDurationInSeconds(time);
     }
 
-    @Override
-    //Probably remove
-    public Map<Integer, Wave> getEnemies (int levelID) {
-        //return getTypeManager().getEntity(levelID).getEnemyCounts()
-    	return null;
-    }
+//    @Override
+//    //Probably remove
+//    public Map<Integer, Wave> getEnemies (int levelID) {
+//        //return getTypeManager().getEntity(levelID).getEnemyCounts()
+//    	return null;
+//    }
 
     @Override
     public double getRewardScore (int levelID) {
@@ -84,18 +79,6 @@ public class LevelTypeManagerController
     @Override
     public double getTransitionTime (int levelID) {
         return getTypeManager().getEntity(levelID).getDurationInSeconds();
-    }
-
-    @Override
-    public void setEnemyFrequency (int levelID, int enemyID, double enemyFrequency) {
-        // TODO Need to implement
-
-    }
-
-    @Override
-    public double getEnemyFrequency (int levelID, int enemyID) {
-        // TODO Need to implement
-        return 0;
     }
 
     @Override
@@ -127,12 +110,6 @@ public class LevelTypeManagerController
         return 0;
     }
 
-    @Override
-    public List<Integer> getLevelOptions () {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
 	@Override
 	public double getLevelTime(int levelID) {
 		return getTypeManager().getEntity(levelID).getLevelTime();
@@ -140,9 +117,8 @@ public class LevelTypeManagerController
 
 	@Override
 	public int createWave(int levelID, ILevelEditorView updateView) {
-		getTypeManager().getEntity(levelID).createWave(buildWave(updateView));
+		return  getTypeManager().getEntity(levelID).createWave(buildWave(updateView));
 		//TODO view methods need to actually go to right thing also need to add to level
-		return 0;
 	}
 	
 	private Wave buildWave(ILevelEditorView updateView) {
@@ -168,7 +144,7 @@ public class LevelTypeManagerController
 	@Override
 	public void removeWave(int levelID, int waveID) {
 		// TODO Auto-generated method stub
-		getTypeManager().getEntity(levelID).removeEnemy(waveID);
+		getTypeManager().getEntity(levelID).removeWave(waveID);
 	}
 
 	@Override
@@ -225,6 +201,4 @@ public class LevelTypeManagerController
 	public Wave getWave(int levelID, int waveID) {
 		return getTypeManager().getEntity(levelID).getWave(waveID);
 	}
-	
-
 }

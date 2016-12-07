@@ -15,7 +15,6 @@ public interface Level extends Type {
 	
     List<Wave> getWaves();
 
-
     double getRewardHealth ();
 
     void setRewardHealth (double rewardHealth);
@@ -34,9 +33,9 @@ public interface Level extends Type {
     
     double getLevelTime ();
     
-    void setEnemyCounts (int enemy, WaveType wave);
-
-    void removeEnemy (int enemy);
+    void calculateLevelTime (int waveID);
+    
+    void removeWave (int waveID);
     
     int createWave (Wave wave);
     

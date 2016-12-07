@@ -3,16 +3,14 @@ package engine.level;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import engine.AbstractType;
 import engine.level.wave.Wave;
-import engine.level.wave.WaveType;
 import engine.observer.ObservableMap;
 import engine.observer.ObservableProperty;
 
 
 public class LevelType extends AbstractType implements Level {
-    private ObservableMap<Integer, Wave> enemyCounts;
+    private ObservableMap<Integer, Wave> waves;
     private ObservableProperty<Double> rewardHealth;
     private ObservableProperty<Double> rewardMoney;
     private ObservableProperty<Double> rewardScore;
@@ -21,7 +19,7 @@ public class LevelType extends AbstractType implements Level {
 
     protected LevelType (LevelInitializer levelInitializer) {
         super(levelInitializer);
-        this.enemyCounts = levelInitializer.getWaves();
+        this.waves = levelInitializer.getWaves();
         this.rewardHealth = levelInitializer.getRewardHealth();
         this.rewardMoney = levelInitializer.getRewardMoney();
         this.rewardScore = levelInitializer.getRewardScore();
@@ -31,18 +29,13 @@ public class LevelType extends AbstractType implements Level {
 
     @Override
     public List<Wave> getWaves () {
-    	List<Wave> a = new ArrayList<Wave>(enemyCounts.getProperty().values()); 
+    	List<Wave> a = new ArrayList<Wave>(waves.getProperty().values()); 
         return Collections.unmodifiableList(a);
     }
 
     @Override
-    public void setEnemyCounts (int enemy, WaveType wave) {
-        enemyCounts.put(enemy, wave);
-    }
-
-    @Override
-    public void removeEnemy (int enemy) {
-        enemyCounts.remove(enemy);
+    public void removeWave (int enemy) {
+        waves.remove(enemy);
     }
 
     @Override
@@ -92,13 +85,21 @@ public class LevelType extends AbstractType implements Level {
 
 	@Override
 	public int createWave(Wave wave) {
-		enemyCounts.put(wave.getId(), wave);
+		waves.put(wave.getId(), wave);
 		return wave.getId();
 	}
 
 	@Override
 	public Wave getWave(int id) {
-		return enemyCounts.getProperty().get(id);
+		return waves.getProperty().get(id);
+	}
+
+	@Override
+	public void calculateLevelTime(int waveID) {
+		Wave wave = waves.getProperty().get(waveID);
+		if (wave.getEnemyCount() * wave.getFrequency() + wave.getStartTime() > time.getProperty()) {
+			time.setProperty(wave.getEnemyCount() * wave.getFrequency() + wave.getStartTime());
+		}
 	}
 
 }

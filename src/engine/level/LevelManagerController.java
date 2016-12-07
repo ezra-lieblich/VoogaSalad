@@ -11,9 +11,7 @@ import engine.level.wave.WaveType;
 public interface LevelManagerController
         extends ManagerController<LevelManager, LevelBuilder, Level, ILevelEditorView> {
 
-    public void setEnemy (int levelID, int enemyID, WaveType wave);
-
-    public Map<Integer, Wave> getEnemies (int levelID);
+    //public Map<Integer, Wave> getEnemies (int levelID);
 
     public void setRewardScore (int levelID, double winScore);
 
@@ -35,15 +33,9 @@ public interface LevelManagerController
 
     public double getTransitionTime (int levelID);
 
-    public void setEnemyFrequency (int levelID, int enemyID, double enemyFrequency);
-
-    public double getEnemyFrequency (int levelID, int enemyID);
-
     public void setLevelNumber (int levelID, int levelNumber);
 
     public int getLevelNumber (int levelID);
-    
-    public List<Integer> getLevelOptions();
     
     public double getLevelTime (int levelID);
     
