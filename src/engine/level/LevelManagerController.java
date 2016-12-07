@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import authoring.editorview.level.ILevelEditorView;
 import engine.ManagerController;
+import engine.level.wave.Wave;
 import engine.level.wave.WaveType;
 
 
@@ -12,7 +13,7 @@ public interface LevelManagerController
 
     public void setEnemy (int levelID, int enemyID, WaveType wave);
 
-    public Map<Integer, WaveType> getEnemies (int levelID);
+    public Map<Integer, Wave> getEnemies (int levelID);
 
     public void setRewardScore (int levelID, double winScore);
 
@@ -47,6 +48,10 @@ public interface LevelManagerController
     public double getLevelTime (int levelID);
     
     public int createWave (int levelID, ILevelEditorView updateView);
+    
+    public List<Wave> getWaves(int levelID);
+    
+    public Wave getWave(int levelID, int waveID);
     
     public void removeWave(int levelID, int waveID);
     

@@ -1,8 +1,10 @@
 package engine.level;
 
 import engine.Type;
+import engine.level.wave.Wave;
 import engine.level.wave.WaveType;
 
+import java.util.List;
 import java.util.Map;
 
 
@@ -10,9 +12,9 @@ import java.util.Map;
  * Created by ezra on 11/19/16.
  */
 public interface Level extends Type {
-    Map<Integer, WaveType> getEnemyCounts ();
+	
+    List<Wave> getWaves();
 
-    
 
     double getRewardHealth ();
 
@@ -36,9 +38,9 @@ public interface Level extends Type {
 
     void removeEnemy (int enemy);
     
-    double createWave ();
+    int createWave (Wave wave);
     
     //List of Waves
-    WaveType getWave (int id);
+    Wave getWave (int id);
     
 }

@@ -5,6 +5,7 @@ import java.util.Map;
 import authoring.editorview.level.ILevelEditorView;
 import engine.AbstractTypeManagerController;
 import engine.ManagerMediator;
+import engine.level.wave.Wave;
 import engine.level.wave.WaveBuilder;
 import engine.level.wave.WaveType;
 import engine.level.wave.WaveTypeBuilder;
@@ -53,8 +54,10 @@ public class LevelTypeManagerController
     }
 
     @Override
-    public Map<Integer, WaveType> getEnemies (int levelID) {
-        return getTypeManager().getEntity(levelID).getEnemyCounts();
+    //Probably remove
+    public Map<Integer, Wave> getEnemies (int levelID) {
+        //return getTypeManager().getEntity(levelID).getEnemyCounts()
+    	return null;
     }
 
     @Override
@@ -137,8 +140,13 @@ public class LevelTypeManagerController
 
 	@Override
 	public int createWave(int levelID, ILevelEditorView updateView) {
+		getTypeManager().getEntity(levelID).createWave(buildWave(updateView));
 		//TODO view methods need to actually go to right thing also need to add to level
-		waveBuilder.addNameListener( (oldValue, newValue) -> updateView
+		return 0;
+	}
+	
+	private Wave buildWave(ILevelEditorView updateView) {
+		return waveBuilder.addNameListener( (oldValue, newValue) -> updateView
                 .updateNameDisplay(newValue))
         .addImagePathListener( (oldValue, newValue) -> updateView
                 .updateImagePathDisplay(newValue))
@@ -155,67 +163,68 @@ public class LevelTypeManagerController
         .addStartTimeListener((oldValue, newValue) -> updateView
                 .updateSizeDisplay(newValue))
         .build();
-		return 0;
 	}
 
 	@Override
 	public void removeWave(int levelID, int waveID) {
 		// TODO Auto-generated method stub
-		
+		getTypeManager().getEntity(levelID).removeEnemy(waveID);
 	}
 
 	@Override
 	public void setWaveEnemy(int levelID, int waveID, int enemyID) {
-		// TODO Auto-generated method stub
-		
+		getWave(levelID, waveID).setEnemyID(enemyID);
 	}
 
 	@Override
 	public int getWaveEnemy(int levelID, int waveID) {
-		// TODO Auto-generated method stub
-		return 0;
+		return getWave(levelID, waveID).getEnemyID();
 	}
 
 	@Override
 	public void setWaveCount(int levelID, int waveID, int count) {
-		// TODO Auto-generated method stub
-		
+		getWave(levelID, waveID).setEnemyCount(count);
 	}
 
 	@Override
 	public int getWaveCount(int levelID, int waveID) {
-		// TODO Auto-generated method stub
-		return 0;
+		return getWave(levelID, waveID).getEnemyCount();
 	}
 
 	@Override
 	public void setWaveFrequency(int levelID, int waveID, double frequency) {
-		// TODO Auto-generated method stub
-		
+		getWave(levelID, waveID).setFrequency(frequency);
 	}
 
 	@Override
 	public double getWaveFrequency(int levelID, int waveID) {
-		// TODO Auto-generated method stub
-		return 0;
+		return getWave(levelID, waveID).getFrequency();
 	}
 
 	@Override
 	public void setWavePath(int levelID, int waveID, int pathID) {
-		// TODO Auto-generated method stub
-		
+		getWave(levelID, waveID).setPathID(pathID);
 	}
 
 	@Override
 	public int getWavePath(int levelID, int waveID) {
-		// TODO Auto-generated method stub
-		return 0;
+		return getWave(levelID, waveID).getPathID();
 	}
 
 	@Override
 	public void setWaveDelay(int levelID, int waveID, double delay) {
-		// TODO Auto-generated method stub
-		
+		getWave(levelID, waveID).setStartTime(delay);
 	}
+
+	@Override
+	public List<Wave> getWaves(int levelID) {
+		return getTypeManager().getEntity(levelID).getWaves();
+	}
+
+	@Override
+	public Wave getWave(int levelID, int waveID) {
+		return getTypeManager().getEntity(levelID).getWave(waveID);
+	}
+	
 
 }

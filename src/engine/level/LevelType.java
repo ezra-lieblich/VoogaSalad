@@ -1,15 +1,18 @@
 package engine.level;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import engine.AbstractType;
+import engine.level.wave.Wave;
 import engine.level.wave.WaveType;
 import engine.observer.ObservableMap;
 import engine.observer.ObservableProperty;
 
 
 public class LevelType extends AbstractType implements Level {
-    private ObservableMap<Integer, WaveType> enemyCounts;
+    private ObservableMap<Integer, Wave> enemyCounts;
     private ObservableProperty<Double> rewardHealth;
     private ObservableProperty<Double> rewardMoney;
     private ObservableProperty<Double> rewardScore;
@@ -27,8 +30,9 @@ public class LevelType extends AbstractType implements Level {
     }
 
     @Override
-    public Map<Integer, WaveType> getEnemyCounts () {
-        return Collections.unmodifiableMap(enemyCounts.getProperty());
+    public List<Wave> getWaves () {
+    	List<Wave> a = new ArrayList<Wave>(enemyCounts.getProperty().values()); 
+        return Collections.unmodifiableList(a);
     }
 
     @Override
@@ -87,15 +91,14 @@ public class LevelType extends AbstractType implements Level {
 	}
 
 	@Override
-	public double createWave() {
-		// TODO Auto-generated method stub
-		return 0;
+	public int createWave(Wave wave) {
+		enemyCounts.put(wave.getId(), wave);
+		return wave.getId();
 	}
 
 	@Override
-	public WaveType getWave(int id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Wave getWave(int id) {
+		return enemyCounts.getProperty().get(id);
 	}
 
 }
