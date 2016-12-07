@@ -27,7 +27,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import statswrapper.Wrapper;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -209,7 +211,13 @@ public class GamePlayerController implements Observer {
 					((GamePlayData)o).getCurrentLevel());
 			this.view.updateCurrentLevelStats(((GamePlayData)o).getCurrentLevel());
 			if (this.oldLevel != newLevel){
-
+				//record the data to log to web app
+				try {
+					Wrapper.getInstance().recordGameScores(""+((GamePlayData)o).getGold(), ""+((GamePlayData)o).getLife(), ""+((GamePlayData)o).getCurrentLevel());
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				this.oldLevel = newLevel;
 				this.view.newLevelPopUp(e->{
 					////System.out.println("New level");
