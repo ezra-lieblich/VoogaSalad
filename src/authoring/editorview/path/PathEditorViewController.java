@@ -6,7 +6,7 @@ import engine.path.PathManagerController;
 
 
 public class PathEditorViewController extends EditorViewController implements PathEditorViewDelegate {
-	private IPathUpdateView pathView;
+	private IPathEditorView pathView;
 	private PathManagerController pathDataSource;
 	private int activeID;
 	
@@ -24,17 +24,11 @@ public class PathEditorViewController extends EditorViewController implements Pa
 	}
 
 	@Override
-	public void onUserEnteredNumberColumns(int numColumns) {
-		this.pathDataSource.setNumberofColumns(activeID, numColumns);
+	public void onUserEnteredGridDimensions(int dimensions) {
+		//TODO
 		
 	}
-
-	@Override
-	public void onUserEnteredNumberRows(int numRows) {
-		pathDataSource.setNumberofRows(activeID, numRows);
-		
-	}
-
+	
 	@Override
 	public void onUserEnteredPathImage(String pathImagePath) {
 		pathDataSource.setImagePath(activeID, pathImagePath);
@@ -58,8 +52,8 @@ public class PathEditorViewController extends EditorViewController implements Pa
 	public void onUserEnteredEditPath(int pathID) {
 		activeID = pathID;
 		pathView.updateActiveID(activeID);
-		pathView.updateNumColumns(pathDataSource.getNumberofColumns(activeID));
-		pathView.updateNumRows(pathDataSource.getNumberofRows(activeID));
+		//TODO: pathView.updateGridSize(pathDataSource.set);
+		
 		pathView.updatePathCoordinates(pathDataSource.getPathCoordinates(activeID));
 		pathView.updateImagePathDisplay(pathDataSource.getImagePath(activeID));
 		pathView.updateNameDisplay(pathDataSource.getName(activeID));
@@ -84,6 +78,8 @@ public class PathEditorViewController extends EditorViewController implements Pa
 		
 		
 	}
+
+	
 
 	
 

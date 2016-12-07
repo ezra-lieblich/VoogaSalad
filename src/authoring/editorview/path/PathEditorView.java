@@ -1,17 +1,17 @@
 package authoring.editorview.path;
 
 
+import authoring.editorview.path.subviews.NewPathView;
 import authoring.editorview.path.subviews.PathChooser;
-import authoring.editorview.path.subviews.PathGrid;
 
 import java.util.List;
 
 import authoring.editorview.ListDataSource;
-import authoring.editorview.path.subviews.NewPathView;
 import authoring.editorview.path.subviews.PathInstructionsView;
-import authoring.editorview.path.subviews.PathImageView;
-import authoring.editorview.path.subviews.PathNameView;
-import authoring.editorview.path.subviews.PathSizeView;
+import authoring.editorview.path.subviews.editorfields.PathGrid;
+import authoring.editorview.path.subviews.editorfields.PathImageView;
+import authoring.editorview.path.subviews.editorfields.PathNameView;
+import authoring.editorview.path.subviews.editorfields.PathDimensionsView;
 import engine.path.Coordinate;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -19,7 +19,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 
-public class PathEditorView implements IPathUpdateView {
+public class PathEditorView implements IPathEditorView {
    
 
 	private static final int BOX_SPACING = 10;
@@ -29,7 +29,7 @@ public class PathEditorView implements IPathUpdateView {
     
     private PathChooser pathChooser;
     private PathImageView pathImageView;
-    private PathSizeView pathSizeView;
+    private PathDimensionsView pathDimensionsView;
     private PathInstructionsView pathInstructionsView;
     private PathNameView pathNameView;
     private NewPathView newPathView;
@@ -42,24 +42,18 @@ public class PathEditorView implements IPathUpdateView {
     	
     	this.newPathView = new NewPathView();
         this.pathChooser = new PathChooser();       
-    	this.pathSizeView = new PathSizeView();
+    	this.pathDimensionsView = new PathDimensionsView();
     	this.pathNameView = new PathNameView();
     	this.pathImageView = new PathImageView();
     	this.pathInstructionsView = new PathInstructionsView();
-    	
-    	
-
-    	
-    	this.pathGrid = new PathGrid(400, 400);   	
-    	
-    	formatPathGrid(); 	
+    	this.pathGrid = new PathGrid(400);   	
+   
         setViewForDefaultPath();
      
     }
 
 	private void formatPathGrid() {
-		pathGrid.setNumColumns(pathSizeView.getNumberOfColumns());	
-		pathGrid.setNumRows(pathSizeView.getNumberOfRows());
+		pathGrid.setGridDimensions(pathDimensionsView.getGridDimensions());	
 	}
 	
 	
@@ -74,7 +68,7 @@ public class PathEditorView implements IPathUpdateView {
         pathChooser.setDelegate(delegate);
         pathGrid.setDelegate(delegate);
         newPathView.setDelegate(delegate);
-        pathSizeView.setDelegate(delegate);
+        pathDimensionsView.setDelegate(delegate);
         pathNameView.setDelegate(delegate);
         pathImageView.setDelegate(delegate);
     }
@@ -95,7 +89,7 @@ public class PathEditorView implements IPathUpdateView {
         pathSettings.getChildren().add(pathGetter);
          
         VBox textFieldSettings = new VBox(BOX_SPACING);
-        textFieldSettings.getChildren().addAll(pathSizeView.getInstanceAsNode(), 
+        textFieldSettings.getChildren().addAll(pathDimensionsView.getInstanceAsNode(), 
         		pathNameView.getInstanceAsNode());
         pathSettings.getChildren().addAll(textFieldSettings, pathImageView.getInstanceAsNode());  
         
@@ -110,20 +104,12 @@ public class PathEditorView implements IPathUpdateView {
 		root.getChildren().addAll(pathSettings, instructions, 
 				grid);
     }
-
-
+	
 	@Override
-	public void updateNumColumns(int numColumns) {
-		pathSizeView.setNumberOfColumns(numColumns);
-		pathGrid.setNumColumns(numColumns);
-		
-		
-	}
-
-	@Override
-	public void updateNumRows(int numRows) {
-		pathSizeView.setNumberOfRows(numRows);
-		pathGrid.setNumRows(numRows);
+	public void updateGridDimensions(int dimensions) {
+		pathDimensionsView.setGridDimensions(dimensions);
+		pathGrid.setGridDimensions(dimensions);
+	
 		
 	}
 
@@ -135,7 +121,7 @@ public class PathEditorView implements IPathUpdateView {
 
 	@Override
 	public void updateNameDisplay(String name) {
-		pathNameView.setName(name);
+		pathNameView.updateName(name);
 		pathChooser.updatePathComboBox(name);
 		
 	}
@@ -143,9 +129,7 @@ public class PathEditorView implements IPathUpdateView {
 	@Override
 	public void updateImagePathDisplay(String imagePath) {
 		pathImageView.setPathImagePath(imagePath);
-		pathGrid.setCellImage(imagePath);
-		
-		
+		pathGrid.setCellImage(imagePath);		
 	}
 
 	@Override
@@ -159,8 +143,6 @@ public class PathEditorView implements IPathUpdateView {
 		// TODO Auto-generated method stub
 		
 	}
-
-	
 
 	@Override
 	public void createNewPath() {
@@ -186,9 +168,7 @@ public class PathEditorView implements IPathUpdateView {
 		System.out.println("There is no path bank implemented");
 	}
 
-	
 
 	
-   
 
 }
