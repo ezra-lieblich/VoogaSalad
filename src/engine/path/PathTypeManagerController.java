@@ -1,6 +1,7 @@
 package engine.path;
 
 import java.util.List;
+import java.util.function.Predicate;
 import authoring.editorview.IUpdateView;
 import authoring.editorview.path.IPathEditorView;
 import authoring.editorview.path.IPathUpdateView;
@@ -35,34 +36,47 @@ public class PathTypeManagerController
     @Override
     public boolean setNewPathCoordinate (int pathID, int x, int y) {
         GridCoordinate newCoordinate = new GridCoordinate(x, y);
-        boolean isPathValid = validatePath(pathID, newCoordinate);
-        if(isPathValid) {
-            getTypeManager().getEntity(pathID).addCoordinate(newCoordinate);
-        }
-        //System.out.println(getTypeManager().getEntity(pathID).getCoordinates().size());
-        return isPathValid;
-        //return validatePath(pathID, newCoordinate) ? getTypeManager().getEntity(pathID).addCoordinate(newCoordinate) : false;
+        return handleRequest(validatePath(pathID, a -> newCoordinate.isCardinalTo(a) , true), a -> a.getEntity(pathID).addCoordinate(newCoordinate));
     }
     
-    protected boolean validatePath(int pathID, GridCoordinate gridCoordinate) {
+//    private boolean validatePathAddition(int pathID, GridCoordinate gridCoordinate) {
+//        List<Coordinate<Integer>> coordinates = getTypeManager().getEntity(pathID).getCoordinates();
+//        if(coordinates.size()==0){
+//            return true;
+//        }
+//        Coordinate<Integer> lastCoordinate = coordinates.get(coordinates.size()-1);
+//        return gridCoordinate.isCardinalTo(lastCoordinate);
+//    }
+
+    private boolean validatePath(int pathID, Predicate<Coordinate<Integer>> condition, boolean isEmptyFlag) {
         List<Coordinate<Integer>> coordinates = getTypeManager().getEntity(pathID).getCoordinates();
         if(coordinates.size()==0){
-            return true;
+            return isEmptyFlag;
         }
         Coordinate<Integer> lastCoordinate = coordinates.get(coordinates.size()-1);
-        return gridCoordinate.isCardinalTo(lastCoordinate);
+        return condition.test(lastCoordinate);
     }
-
+    
+//    private boolean validatePathRemoval(int pathID, int x, int y) {
+//        List<Coordinate<Integer>> coordinates = getTypeManager().getEntity(pathID).getCoordinates();
+//        Coordinate<Integer> lastCoordinate = coordinates.get(coordinates.size()-1);
+//        return lastCoordinate.getX() == x && lastCoordinate.getY() == y;  
+//    }
+    
     @Override
     public boolean removePathCoordinate (int pathID, int x, int y) {
-        List<Coordinate<Integer>> coordinates = getTypeManager().getEntity(pathID).getCoordinates();
-        boolean isValidRemove  = coordinates.get(coordinates.size()-1).getX() == x && coordinates.get(coordinates.size()-1).getY() == y;
-        if(isValidRemove){
-            getTypeManager().getEntity(pathID).removeCoordinate(new GridCoordinate(x, y));
-        }
-        //System.out.println(getTypeManager().getEntity(pathID).getCoordinates().size());
-        return isValidRemove; // TODO - validate this
+        GridCoordinate newCoordinate = new GridCoordinate(x, y);
+        return handleRequest(validatePath(pathID, a -> a.equals(newCoordinate), false), a -> a.getEntity(pathID).removeCoordinate(newCoordinate));
+//        List<Coordinate<Integer>> coordinates = getTypeManager().getEntity(pathID).getCoordinates();
+//        boolean isValidRemove  = coordinates.get(coordinates.size()-1).getX() == x && coordinates.get(coordinates.size()-1).getY() == y;
+//        if(isValidRemove){
+//            getTypeManager().getEntity(pathID).removeCoordinate(new GridCoordinate(x, y));
+//        }
+//        //System.out.println(getTypeManager().getEntity(pathID).getCoordinates().size());
+//        return isValidRemove; // TODO - validate this
     }
+    
+    
     
     @Override
     public int getNumberofColumns (int pathID) {
