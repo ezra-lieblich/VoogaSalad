@@ -18,12 +18,15 @@ import gameplayer.view.helper.dragdrop.DragDropView;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.embed.swing.JFXPanel;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.CacheHint;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
@@ -31,6 +34,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import statswrapper.Wrapper;
 
+import java.awt.BorderLayout;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -41,6 +45,11 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.Queue;
 import java.util.Random;
+
+import javax.swing.BorderFactory;
+import javax.swing.JPanel;
+
+import chrriis.dj.nativeswing.swtimpl.components.JWebBrowser;
 
 
 public class GamePlayerController implements Observer {
@@ -208,9 +217,12 @@ public class GamePlayerController implements Observer {
 		WebView browser = new WebView();
 		WebEngine webEngine = browser.getEngine();
 		webEngine.load("http://people.duke.edu/~lz107/voogaTemplates/gameover.html");
-		this.view.getMainScreen().getChildren().clear();
-		this.view.getMainScreen().getChildren().add(browser);
-		
+		Pane scroll = new Pane();
+		scroll.getChildren().add(browser);
+		Scene s = new Scene(scroll);
+		Stage stage = new Stage();
+		stage.setScene(s);
+		stage.show();
 	}
 
 	@Override
@@ -223,7 +235,7 @@ public class GamePlayerController implements Observer {
 			this.view.updateCurrentLevelStats(((GamePlayData)o).getCurrentLevel());
 			
 			//check for game over condition
-			if (((GamePlayData)o).getLife()<=0){
+			if (((GamePlayData)o).getLife()<5){
 				gameOver();
 			}
 			
@@ -282,7 +294,6 @@ public class GamePlayerController implements Observer {
 
 		animation.setCycleCount(Timeline.INDEFINITE);
 		animation.getKeyFrames().add(frame);
-		this.animation = animation;
 		animation.play();
 	}
 

@@ -596,7 +596,7 @@
                     <listeners>
                       <null/>
                     </listeners>
-                    <property class="double">2.0</property>
+                    <property class="double">15.0</property>
                   </damage>
                   <score class="engine.observer.ObservableObjectProperty">
                     <observers/>
