@@ -8,7 +8,7 @@ import authoring.editorview.IEditorView;
  * and the public methods defining what components the path view should contain.
  *
  */
-public interface IPathEditorView extends IEditorView {
+public interface IPathSetView extends IEditorView {
 
 	public void setDelegate(PathEditorViewDelegate delegate);
 	

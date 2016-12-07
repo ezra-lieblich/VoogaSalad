@@ -1,22 +1,20 @@
-package authoring.editorview.path.subviews;
+package authoring.editorview.path.subviews.editorfields;
 
 import java.util.ResourceBundle;
 
+import authoring.editorview.NameView;
+import authoring.editorview.path.IPathSetView;
 import authoring.editorview.path.PathEditorViewDelegate;
 import authoring.utilityfactories.BoxFactory;
 import authoring.utilityfactories.TextFieldFactory;
 import javafx.scene.Node;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 
-public class PathNameView {
+public class PathNameView extends NameView implements IPathSetView {
 	
 	private HBox root;
-	private TextField nameTextField;
-	private String name;
 	private PathEditorViewDelegate delegate;
-	
-	
+		
 	private static final String RESOURCE_FILE_NAME = "resources/GameAuthoringPath";	
 	private ResourceBundle pathResource = ResourceBundle.getBundle(RESOURCE_FILE_NAME);
 	
@@ -25,11 +23,13 @@ public class PathNameView {
 		
 	}
 	
+	@Override
 	public Node getInstanceAsNode(){
 		return root;
 		
 	}
 	
+	@Override
 	public void setDelegate(PathEditorViewDelegate delegate){
 		this.delegate = delegate;
 	}
@@ -41,11 +41,6 @@ public class PathNameView {
 		root = BoxFactory.createHBoxWithLabelandNode(pathResource.getString("NameTextField"), nameTextField);
 	}
 	
-	public void setName(String name){
-		this.name = name;
-		nameTextField.setText(name);
-		
-	}
 	
 
 }

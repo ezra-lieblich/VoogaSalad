@@ -1,4 +1,4 @@
-package authoring.editorview.path.subviews;
+package authoring.editorview.path.subviews.editorfields;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
