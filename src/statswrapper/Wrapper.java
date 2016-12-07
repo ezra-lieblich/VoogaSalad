@@ -56,11 +56,23 @@ public class Wrapper {
 		executeRequest(url, json, true);
 	}
 	
-	
+	/*
+	 * Record for every new level
+	 */
 	public void recordGameScores(String gold, String lives, String level) throws IOException{
 		String endpoint = "recordscore";
 		URL url = new URL(baseURL + endpoint);
-		String json = "{\"gold\": \"" + gold + "\",\"lives\":\""+lives+"\",\"level\":\""+level+"\"}";
+		String json = "{\"gold\": [\"" + gold + "\"],\"lives\":[\""+lives+"\"],\"level\":[\""+level+"\"]}";
+		executeRequest(url, json, true);
+	}
+	
+	/*
+	 * Updated game score within the level
+	 */
+	public void updateGameScores(String field, String level, String value) throws IOException{
+		String endpoint = "updatescore";
+		URL url = new URL(baseURL + endpoint);
+		String json = "{\"updated_field\": \"" + field + "\",\"value\":\""+value+"\",\"level\":[\""+level+"\"]}";
 		executeRequest(url, json, true);
 	}
 	

@@ -307,6 +307,7 @@ public class GamePlayerController implements Observer {
 		return this.animation;
 	}
 
+	@Deprecated
 	private List<IDrawable> convertToDrawable(List<Enemy> enemies, List<Tower>towers){
 		ArrayList<IDrawable> ret = new ArrayList<>(); 
 		for(Enemy e: enemies){
@@ -318,6 +319,7 @@ public class GamePlayerController implements Observer {
 		return ret; 
 	}
 
+	@Deprecated
 	private List<IDrawable>convertWeaponDrawable(List<Weapon>weapons){
 		ArrayList<IDrawable> ret = new ArrayList<>(); 
 		for(Weapon w: weapons){

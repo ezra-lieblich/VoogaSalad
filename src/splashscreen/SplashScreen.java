@@ -86,6 +86,9 @@ public class SplashScreen {
 			actiontarget.setText("Sign in button pressed");
 			try {
 				Wrapper.getInstance().login(userfield.getText(), passField.getText());
+				
+				//testing
+				//Wrapper.getInstance().updateGameScores("gold", "0", "777");
 				createPlayGameOrMakeGameOptions();
 				
 				//TESTING
