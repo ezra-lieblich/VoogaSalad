@@ -214,16 +214,22 @@ public class GamePlayerController implements Observer {
 	}
 	
 	private void gameOver(){
+		this.view.getMainScreen().getChildren().clear();
 		WebView browser = new WebView();
 		WebEngine webEngine = browser.getEngine();
 		webEngine.load("http://people.duke.edu/~lz107/voogaTemplates/gameover.html");
+		this.view.getMainScreen().setCenter(browser);
+		/*
 		Pane scroll = new Pane();
 		scroll.getChildren().add(browser);
 		Scene s = new Scene(scroll);
 		Stage stage = new Stage();
 		stage.setScene(s);
 		stage.show();
+		*/
+		
 	}
+	
 
 	@Override
 	public void update(Observable o, Object arg) {
@@ -235,7 +241,7 @@ public class GamePlayerController implements Observer {
 			this.view.updateCurrentLevelStats(((GamePlayData)o).getCurrentLevel());
 			
 			//check for game over condition
-			if (((GamePlayData)o).getLife()<5){
+			if (((GamePlayData)o).getLife()<5){ //TODO: change 5 to 0
 				gameOver();
 			}
 			
