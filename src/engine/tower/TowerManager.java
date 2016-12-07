@@ -17,4 +17,6 @@ public interface TowerManager extends Manager<Tower> {
     int addUpgrade(Tower upgrade, int parentId);
     
     void removeUpgrade(int id, int parentId);
+    
+    Map<Integer, Tower> getUpgrades();
 }
