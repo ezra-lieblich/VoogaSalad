@@ -16,4 +16,9 @@ public interface EffectParticipant  {
 
     void setParticipantMethod (Method participantMethod);
 
+    Class<?> getParticipantClass ();
+
+    List<EffectFunction> getParticipantConditions ();
+    
+    Method getParticipantMethod ();
 }

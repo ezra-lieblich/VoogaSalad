@@ -103,13 +103,13 @@ public abstract class AbstractTypeManagerController<E extends Manager<T>, U exte
 
     protected abstract U constructTypeProperties (V updateView, U typeBuilder);
 
-    protected interface ViewFiller {
-        void updateNameDisplay (String name);
-
-        void updateImagePathDisplay (String imagePath);
-
-        void updateSizeDisplay (double size);
-    }
+//    protected interface ViewFiller {
+//        void updateNameDisplay (String name);
+//
+//        void updateImagePathDisplay (String imagePath);
+//
+//        void updateSizeDisplay (double size);
+//    }
     
     protected <R> boolean isUnique(Function<T, R> getter, R value) {
         return !typeManager.getEntityIds().stream().map(a -> typeManager.getEntity(a)).anyMatch(b -> getter.apply(b).equals(value));

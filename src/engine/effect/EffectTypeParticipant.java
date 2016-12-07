@@ -75,4 +75,19 @@ public class EffectTypeParticipant implements BindableEffectParticipant {
     public void setParticipantMethod (Method participantMethod) {
         this.participantMethod.setProperty(participantMethod);
     }
+
+    @Override
+    public Class<?> getParticipantClass () {
+        return participantClass.getProperty();
+    }
+
+    @Override
+    public List<EffectFunction> getParticipantConditions () {
+        return participantConditions.getProperty();
+    }
+
+    @Override
+    public Method getParticipantMethod () {
+        return participantMethod.getProperty();
+    }
 }
