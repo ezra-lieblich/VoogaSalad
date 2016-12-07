@@ -34,6 +34,11 @@ public class WeaponManager extends Observable{
 
 
 	public void updateWeapon() {
+		
+		System.out.println("+++++++++++++++++++++");
+		System.out.println("=====================");
+
+		System.out.println("number of weapon fired: " + this.weaponOnGrid.size());
 
 		for (int i : weaponOnGrid.keySet()) {
 			Weapon w = weaponOnGrid.get(i);
@@ -45,7 +50,7 @@ public class WeaponManager extends Observable{
 			}
 
 			if (!this.gameData.coordinateInBound(w.getX(), w.getY()) || !w.inRange()) {
-				this.weaponOnGrid.remove(w);
+				this.weaponOnGrid.remove(i);
 			}
 		}
 
