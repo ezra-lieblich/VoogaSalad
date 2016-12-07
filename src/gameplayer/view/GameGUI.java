@@ -91,6 +91,16 @@ public class GameGUI {
 	public int getColumns() {
 		return this.columns;
 	}
+	
+	
+
+	public BorderPane getMainScreen() {
+		return mainScreen;
+	}
+
+	public void setMainScreen(BorderPane mainScreen) {
+		this.mainScreen = mainScreen;
+	}
 
 	/**
 	 * MIGHT NOT BE NECESSARY Update the current level in the stats display only

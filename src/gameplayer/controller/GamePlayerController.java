@@ -25,6 +25,8 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import statswrapper.Wrapper;
@@ -201,6 +203,15 @@ public class GamePlayerController implements Observer {
 	public GameGUI getView() {
 		return view;
 	}
+	
+	private void gameOver(){
+		WebView browser = new WebView();
+		WebEngine webEngine = browser.getEngine();
+		webEngine.load("http://people.duke.edu/~lz107/voogaTemplates/gameover.html");
+		this.view.getMainScreen().getChildren().clear();
+		this.view.getMainScreen().getChildren().add(browser);
+		
+	}
 
 	@Override
 	public void update(Observable o, Object arg) {
@@ -210,6 +221,13 @@ public class GamePlayerController implements Observer {
 			this.view.updateStatsDisplay(((GamePlayData)o).getGold(), ((GamePlayData)o).getLife(),
 					((GamePlayData)o).getCurrentLevel());
 			this.view.updateCurrentLevelStats(((GamePlayData)o).getCurrentLevel());
+			
+			//check for game over condition
+			if (((GamePlayData)o).getLife()<=0){
+				gameOver();
+			}
+			
+			//new level condition
 			if (this.oldLevel != newLevel){
 				//record the data to log to web app
 				try {

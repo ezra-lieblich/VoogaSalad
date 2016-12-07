@@ -120,7 +120,7 @@
                     <listeners>
                       <null/>
                     </listeners>
-                    <property class="string">file:/Users/yuminzhang/Documents/CS/voogasalad_voogasquad/Images/greensquare.png</property>
+                    <property class="string">greensquare.png</property>
                   </imagePath>
                   <size class="engine.observer.ObservableObjectProperty">
                     <observers/>
@@ -256,7 +256,7 @@
                     <listeners>
                       <null/>
                     </listeners>
-                    <property class="string">/Users/yuminzhang/Documents/CS/voogasalad_voogasquad/Images/tower.png</property>
+                    <property class="string">tower.png</property>
                   </imagePath>
                   <size class="engine.observer.ObservableObjectProperty">
                     <observers/>
@@ -327,7 +327,7 @@
                     <listeners>
                       <null/>
                     </listeners>
-                    <property class="string">/Users/yuminzhang/Documents/CS/voogasalad_voogasquad/Images/tower2.jpg</property>
+                    <property class="string">tower2.jpg</property>
                   </imagePath>
                   <size class="engine.observer.ObservableObjectProperty">
                     <observers/>
@@ -484,7 +484,7 @@
                     <listeners>
                       <null/>
                     </listeners>
-                    <property class="string">/Users/yuminzhang/Documents/CS/voogasalad_voogasquad/Images/bullet.png</property>
+                    <property class="string">bullet.png</property>
                   </imagePath>
                   <size class="engine.observer.ObservableObjectProperty">
                     <observers/>
@@ -567,7 +567,7 @@
                     <listeners>
                       <null/>
                     </listeners>
-                    <property class="string">/Users/yuminzhang/Documents/CS/voogasalad_voogasquad/Images/penguin.jpg</property>
+                    <property class="string">penguin.jpg</property>
                   </imagePath>
                   <size class="engine.observer.ObservableObjectProperty">
                     <observers/>
