@@ -1,25 +1,34 @@
 package authoring.editorview;
 
+import java.util.ResourceBundle;
+
 import javafx.scene.Node;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 
-public class NameView implements IEditorView {
+public abstract class NameView implements IEditorView {
 
+	protected HBox root;
 	protected TextField nameTextField;
 	
-	public NameView(){
+	protected ResourceBundle resource;
+	
+	public NameView(ResourceBundle resource){
+		this.resource = resource;
+		makeNameTextField();
 		
 	}
 
 	@Override
-	public Node getInstanceAsNode() {
-		
-		return nameTextField;
+	public Node getInstanceAsNode() {		
+		return root;
 	}
 	
 	public void updateName(String name){
 		nameTextField.setText(name);		
 	}
+	
+	protected abstract void makeNameTextField();
 	
 	
 	

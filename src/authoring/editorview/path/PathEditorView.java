@@ -5,6 +5,7 @@ import authoring.editorview.path.subviews.NewPathView;
 import authoring.editorview.path.subviews.PathChooser;
 
 import java.util.List;
+import java.util.ResourceBundle;
 
 import authoring.editorview.ListDataSource;
 import authoring.editorview.path.subviews.PathInstructionsView;
@@ -22,6 +23,9 @@ import javafx.scene.layout.VBox;
 public class PathEditorView implements IPathEditorView {
    
 
+	private static final String RESOURCE_FILE_NAME = "resources/GameAuthoringPath";	
+	private ResourceBundle pathResource = ResourceBundle.getBundle(RESOURCE_FILE_NAME);
+	
 	private static final int BOX_SPACING = 10;
     
 	private Group root;
@@ -43,7 +47,7 @@ public class PathEditorView implements IPathEditorView {
     	this.newPathView = new NewPathView();
         this.pathChooser = new PathChooser();       
     	this.pathDimensionsView = new PathDimensionsView();
-    	this.pathNameView = new PathNameView();
+    	this.pathNameView = new PathNameView(pathResource);
     	this.pathImageView = new PathImageView();
     	this.pathInstructionsView = new PathInstructionsView();
     	this.pathGrid = new PathGrid(400);   	
