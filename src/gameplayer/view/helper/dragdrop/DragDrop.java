@@ -106,6 +106,7 @@ public class DragDrop extends Observable{
 		graphicLib.setImageViewParams(copy, this.width, this.height);
 		copy.setX(xpos+this.xError);
 		copy.setY(ypos+this.yError);
+		/*
 		copy.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 
 		     @Override
@@ -114,6 +115,7 @@ public class DragDrop extends Observable{
 		         event.consume();
 		     }
 		});
+		*/
 		//System.out.println("Thing: " + ypos+this.yError);
 		((Pane) target).getChildren().add(copy);
 		Double[] coords = {xpos+this.xError,ypos+this.yError};
