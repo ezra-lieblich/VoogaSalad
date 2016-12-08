@@ -1,7 +1,6 @@
 package authoring.editorview.level;
 
 import java.util.List;
-import java.util.Map;
 import java.util.ResourceBundle;
 import authoring.editorview.level.subviews.LevelChooserView;
 import authoring.editorview.level.subviews.LevelDesign;
@@ -74,7 +73,6 @@ public class LevelEditorView implements ILevelEditorView {
                                   levelRewardsView.getInstanceAsNode(),
                                   levelDesign.getInstanceAsNode(),
                                   transitionTimeField.getInstanceAsNode(),
-                                  // TODO - Fix this
                                   ButtonFactory.makeButton("New Wave",
                                                            e -> delegate.onUserEnteredAddWave()),
                                   waveTableView.getInstanceAsNode());
@@ -88,38 +86,29 @@ public class LevelEditorView implements ILevelEditorView {
     }
 
     @Override
-    public void updateEnemy (Map<Integer, Integer> enemyCounts) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
     public void updateRewardScore (double winScore) {
         levelRewardsView.setRewardScore(Double.toString(winScore));
-
     }
 
     @Override
     public void updateRewardHealth (double winHealth) {
         levelRewardsView.setRewardHealth(Double.toString(winHealth));
-
     }
 
     @Override
     public void updateRewardMoney (double winMoney) {
         levelRewardsView.setRewardMoney(Double.toString(winMoney));
-
-    }
-
-    @Override
-    public void updatePath (int pathID) {
-        // TODO Auto-generated method stub
-
     }
 
     @Override
     public void updateTransitionTime (double time) {
         transitionTimeField.updateTransitionTimeField(Double.toString(time));
+    }
+
+    @Override
+    public void updateWavePath (int pathID) {
+        // TODO Auto-generated method stub
+
     }
 
     @Override
@@ -140,7 +129,6 @@ public class LevelEditorView implements ILevelEditorView {
 
     @Override
     public void updateBank (List<Integer> ids) {
-        // TODO Auto-generated method stub
         System.out.println("No level bank currently implemented");
     }
 
@@ -159,6 +147,24 @@ public class LevelEditorView implements ILevelEditorView {
     @Override
     public void updateEnemyNames (List<NameIdPair> enemyNames) {
         waveTableView.updateWaveTableView(enemyNames);
+    }
+
+    @Override
+    public void updateWaveNumber (int waveNumber) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void updateNumberOfEnemies (int numEnemies) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void updateWaveTimeDelay (double timeDelay) {
+        // TODO Auto-generated method stub
+
     }
 
 }

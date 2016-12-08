@@ -119,7 +119,8 @@ public class LevelEditorViewController extends EditorViewController
     @Override
     public void onUserEnteredAddWave () {
         currentWaveID = levelDataSource.createWave(currentLevelID, levelView);
-        // TODO -Set default values for this created wave
+        levelView.updateEnemyFrequency(levelDataSource.getWaveFrequency(currentLevelID,
+                                                                        currentWaveID));
     }
 
     @Override

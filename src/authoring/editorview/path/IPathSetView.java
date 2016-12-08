@@ -2,6 +2,7 @@ package authoring.editorview.path;
 
 import authoring.editorview.IEditorView;
 
+
 /**
  * 
  * This interface details the components of the path tab. The interface defines our internal API
@@ -10,8 +11,6 @@ import authoring.editorview.IEditorView;
  */
 public interface IPathSetView extends IEditorView {
 
-	public void setDelegate(PathEditorViewDelegate delegate);
-	
-	
+    public void setDelegate (PathEditorViewDelegate delegate);
 
 }
