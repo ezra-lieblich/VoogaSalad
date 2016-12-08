@@ -1,4 +1,4 @@
-package gameplayer.controller;
+package gameplayer.controller;	
 
 import java.util.ArrayList;
 import gameplayer.model.weapon.Weapon;
