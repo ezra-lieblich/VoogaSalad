@@ -4,34 +4,51 @@ import java.lang.reflect.Method;
 import java.util.List;
 import engine.AbstractType;
 import engine.TypeInitializer;
+import engine.effect.depreciated.EffectParticipant;
 import engine.observer.ObservableList;
 import engine.observer.ObservableProperty;
 
 public class EffectType extends AbstractType implements Effect {
 
-    private EffectParticipant trigger;
-    private EffectParticipant destination;
+    private ObservableProperty<String> triggerClass;
+    private ObservableProperty<String> triggerConditionGroovy;
+    private ObservableProperty<String> effectGroovy;
     
-    protected EffectType (EffectInitializer typeBuilder) {
-        super(typeBuilder);
-        this.trigger = typeBuilder.getTrigger();
-        this.destination = typeBuilder.getDestination();
+    protected EffectType (EffectInitializer effectInitializer) {
+        super(effectInitializer);
+        this.triggerClass = effectInitializer.getTriggerClass();
+        this.triggerConditionGroovy = effectInitializer.getTriggerConditionGroovy();
+        this.effectGroovy = effectInitializer.getEffectGroovy();
     }
 
-    
-    public EffectParticipant getTrigger() {
-        return trigger;
+    @Override
+    public String getTriggerClass () {
+        return triggerClass.getProperty();
     }
-    
-    public EffectParticipant getDestination() {
-        return destination;
+
+    @Override
+    public String getTriggerConditionGroovy () {
+        return triggerConditionGroovy.getProperty();
     }
-    
-//    private Class<?> triggerClass;
-//    private List<Condition> triggerConditions;
-//    private Class<?> destinationClass;
-//    private List<Condition> destinationConditions;
-//    private Method destinationMethod;
-//    private Object value;
+
+    @Override
+    public String getEffectGroovy () {
+        return effectGroovy.getProperty();
+    }
+
+    @Override
+    public void setTriggerClass (String triggerClass) {
+        this.triggerClass.setProperty(triggerClass);
+    }
+
+    @Override
+    public void setTriggerConditionGroovy (String triggerConditionGroovy) {
+        this.triggerConditionGroovy.setProperty(triggerConditionGroovy);        
+    }
+
+    @Override
+    public void setEffectGroovy (String effectGroovy) {
+        this.effectGroovy.setProperty(effectGroovy);        
+    }
     
 }
