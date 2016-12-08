@@ -1,6 +1,11 @@
 package authoring.editorview.gamesettings.subviews;
 
+import java.util.ResourceBundle;
+import authoring.editorview.NameView;
+import authoring.editorview.enemy.EnemyEditorViewDelegate;
+import authoring.editorview.enemy.IEnemySetView;
 import authoring.editorview.gamesettings.GameSettingsEditorViewDelegate;
+import authoring.editorview.gamesettings.IGameSettingsSetView;
 import authoring.utilityfactories.BoxFactory;
 import authoring.utilityfactories.TextFieldFactory;
 import javafx.scene.Node;
@@ -14,35 +19,27 @@ import javafx.scene.layout.HBox;
  * @author Kayla Schulz
  *
  */
-public class GameNameView {
+public class GameNameView extends NameView implements IGameSettingsSetView {
 
-    private HBox hbox;
-    private TextField nameTextField;
-    GameSettingsEditorViewDelegate delegate;
+    private GameSettingsEditorViewDelegate delegate;
 
-    public GameNameView () {
-        makeNameTextField();
+    public GameNameView (ResourceBundle labelsResource) {
+        super(labelsResource);
     }
 
-    public Node getInstanceAsNode () {
-        return hbox;
+    @Override
+    protected void makeNameTextField () {
+        nameTextField =
+                TextFieldFactory.makeTextField(resource.getString("EnterString"),
+                                               e -> delegate.onUserEnteredGameNames(nameTextField
+                                                       .getText()));
+        hbox = BoxFactory.createHBoxWithLabelandNode(resource.getString("NameTextField"),
+                                                     nameTextField);
     }
 
+    @Override
     public void setDelegate (GameSettingsEditorViewDelegate delegate) {
         this.delegate = delegate;
-    }
-
-    private void makeNameTextField () {
-        nameTextField = TextFieldFactory.makeTextField("",
-                                                       e -> delegate
-                                                               .onUserEnteredGameNames(nameTextField
-                                                                       .getText()));
-        hbox = BoxFactory.createHBoxWithLabelandNode("Choose game name: ", nameTextField);
-
-    }
-
-    public void updateGameName (String name) {
-        nameTextField.setText(name);
     }
 
 }

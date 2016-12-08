@@ -8,7 +8,7 @@ import javafx.scene.layout.HBox;
 
 public abstract class NameView implements IEditorView {
 
-    protected HBox root;
+    protected HBox hbox;
     protected TextField nameTextField;
 
     protected ResourceBundle resource;
@@ -20,7 +20,7 @@ public abstract class NameView implements IEditorView {
 
     @Override
     public Node getInstanceAsNode () {
-        return root;
+        return hbox;
     }
 
     public void updateName (String name) {

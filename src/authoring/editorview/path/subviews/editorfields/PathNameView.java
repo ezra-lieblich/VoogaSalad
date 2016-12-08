@@ -28,7 +28,7 @@ public class PathNameView extends NameView implements IPathSetView {
                                                                .onUserEnteredPathName(nameTextField
                                                                        .getText()));
         nameTextField.setMaxWidth(100);
-        root =
+        hbox =
                 BoxFactory.createHBoxWithLabelandNode(resource.getString("NameTextField"),
                                                       nameTextField);
     }
