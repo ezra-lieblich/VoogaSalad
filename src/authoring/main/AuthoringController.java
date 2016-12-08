@@ -1,25 +1,15 @@
 package authoring.main;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.HashMap;
 import authoring.editorview.EditorViewController;
-import authoring.editorview.IEditorView;
-import authoring.editorview.IUpdateView;
 import authoring.editorview.enemy.EnemyEditorViewController;
-import authoring.editorview.enemy.IEnemyEditorView;
 import authoring.editorview.gamesettings.GameSettingsEditorViewController;
-import authoring.editorview.gamesettings.IGameSettingsEditorView;
-import authoring.editorview.level.ILevelEditorView;
 import authoring.editorview.level.LevelEditorViewController;
-import authoring.editorview.path.IPathSetView;
-import authoring.editorview.path.IPathEditorView;
 import authoring.editorview.path.PathEditorViewController;
-import authoring.editorview.tower.ITowerEditorView;
 import authoring.editorview.tower.TowerEditorViewController;
-import authoring.editorview.weapon.IWeaponEditorView;
 import authoring.editorview.weapon.WeaponEditorViewController;
 import authoring.toolbar.IToolbar;
 import authoring.view.AuthoringViewController;
@@ -58,33 +48,34 @@ public class AuthoringController {
     private void configureToolbar () {
         toolbar = this.viewController.getView().getMyToolbar();
         toolbar.setOnPressedSave(e -> {
-			try {
-				saveAsXMLFile();
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-		});
+            try {
+                saveAsXMLFile();
+            }
+            catch (IOException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+        });
 
     }
 
     private void saveAsXMLFile () throws IOException {
         String fileContent = this.modelController.SaveData();
         toolbar.saveFile(fileContent);
-        //TODO Lucy: add api call to record game in web app
+        // TODO Lucy: add api call to record game in web app
         String gameData = xmlToString(fileContent);
         Wrapper.getInstance().createGame(gameData);
     }
-    
-    private String xmlToString(String textContent) throws IOException{
-    	BufferedReader br = new BufferedReader(new StringReader(textContent));
-    	String line;
-    	StringBuilder sb = new StringBuilder();
 
-    	while((line=br.readLine())!= null){
-    	    sb.append(line.trim());
-    	}
-    	return sb.toString();
+    private String xmlToString (String textContent) throws IOException {
+        BufferedReader br = new BufferedReader(new StringReader(textContent));
+        String line;
+        StringBuilder sb = new StringBuilder();
+
+        while ((line = br.readLine()) != null) {
+            sb.append(line.trim());
+        }
+        return sb.toString();
     }
 
     private void connectDataInterfaces (AuthoringViewController authoringVC) {

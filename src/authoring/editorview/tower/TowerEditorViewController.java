@@ -1,6 +1,5 @@
 package authoring.editorview.tower;
 
-import java.io.IOException;
 import java.util.ResourceBundle;
 import authoring.editorview.EditorViewController;
 import authoring.editorview.ListCellData;
@@ -23,7 +22,7 @@ public class TowerEditorViewController extends EditorViewController
     private int currentTowerID;
     private ITowerEditorView towerView;
 
-    public TowerEditorViewController (int editorWidth, int editorHeight) throws IOException {
+    public TowerEditorViewController (int editorWidth, int editorHeight) {
         towerView = TowerEditorViewFactory.build(editorWidth, editorHeight);
         towerView.setDelegate(this);
         towerView.setTowerListDataSource(this);

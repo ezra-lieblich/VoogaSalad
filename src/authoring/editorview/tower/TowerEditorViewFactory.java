@@ -1,8 +1,5 @@
 package authoring.editorview.tower;
 
-import java.io.IOException;
-
-
 /**
  * 
  * @author Diane Hadley
@@ -11,7 +8,7 @@ import java.io.IOException;
 
 public class TowerEditorViewFactory {
 
-    public static ITowerEditorView build (int width, int height) throws IOException {
+    public static ITowerEditorView build (int width, int height) {
 
         return new TowerEditorView();
     }
