@@ -39,18 +39,22 @@ public class TowerManager extends Observable {
 	private HashMap<Integer, engine.tower.Tower> allTowerTypes;
 	private HashMap<Integer, engine.tower.Tower> availableTowerTypes;
 	private HashMap<Integer, engine.weapon.Weapon> allWeapons;	
-	private HashMap<Integer, gameplayer.model.tower.Tower> towersOnGrid; // change to hashMAP
+	private HashMap<Integer, gameplayer.model.tower.Tower> towersOnGrid; 
+	private HashMap<Integer, engine.tower.Tower> upgradeTowerTypes;
 	private int uniqueTowerID;
 	private long timeInterval;
+	
 
 	public TowerManager(GamePlayData gameData, EnemyManager enemyManager) {
 		this.gameData = gameData;
 		this.enemyManager = enemyManager;
 		this.allTowerTypes = this.gameData.getFactory().getTowers();
 		this.allWeapons = this.gameData.getFactory().getWeaponBank();
+		//this.upgradeTowerTypes = this.gameData.getFactory().getUpgradeTowers(); need this map from factory class
 		this.towersOnGrid =  new HashMap<Integer, gameplayer.model.tower.Tower>();
 		this.uniqueTowerID = 0;
 		this.availableTowerTypes = new HashMap<Integer, engine.tower.Tower>();
+		
 	}
 
 	public HashMap<Integer, engine.tower.Tower> getAvailableTower() {
@@ -190,12 +194,30 @@ public class TowerManager extends Observable {
 		//don't need this
 		//setChanged();
 		//notifyObservers();
-
 	}
 
-
 	/**
-	 * check all the weaponTypes of each Tower
+	 * add a ungrade queue into the tower class with reverse order from ArrayList
+	 * talk to front end when queue is empty disable the upgrade buttom 
+	 * display upgrade cost on front end
+	 *
+	 * 
+	 * @param UniqueID
+	 */
+	public void upgradeTower(int UniqueID){
+		Tower toBeUpgraded = this.towersOnGrid.get(UniqueID);
+		/**
+		 * create a new tower
+		 * substract the upgrade cost from gold amount
+		 * place the new tower on the same location, make sure set on the cell as well
+		 * remove old tower
+		 * 
+		 */
+		
+	}
+	
+	/**
+	 * get all the weapons fired by the towers currently on Grid
 	 */
 	public ArrayList<gameplayer.model.weapon.Weapon> generateNewWeapons(){
 		ArrayList<gameplayer.model.weapon.Weapon> newlyFired = new ArrayList<gameplayer.model.weapon.Weapon>();
