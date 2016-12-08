@@ -27,7 +27,6 @@ public class PathImageView extends PhotoFileChooser{
 	private String pathImagePath;
 	private ImageView pathImageView;
 	private PathEditorViewDelegate delegate;
-	private int activePathID;
 	
 	private static final String RESOURCE_FILE_NAME = "resources/GameAuthoringPath";	
 	private ResourceBundle pathResource = ResourceBundle.getBundle(RESOURCE_FILE_NAME);
@@ -64,7 +63,7 @@ public class PathImageView extends PhotoFileChooser{
 		if (chosenFile != null){
 			BufferedImage image = ImageIO.read(chosenFile) ;
 			pathImagePath = chosenFile.toURI().toString();
-			delegate.onUserEnteredPathImage(activePathID, pathImagePath);
+			delegate.onUserEnteredPathImage(pathImagePath);
 				
 			
 		}
@@ -111,10 +110,6 @@ public class PathImageView extends PhotoFileChooser{
 	
 	public void setDelegate(PathEditorViewDelegate delegate){
 		this.delegate = delegate;
-	}
-	
-	public void setActivePathId(int pathID){
-		this.activePathID = pathID;
 	}
 
 

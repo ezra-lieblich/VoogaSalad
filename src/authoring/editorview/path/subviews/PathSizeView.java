@@ -16,10 +16,8 @@ import javafx.scene.layout.VBox;
 public class PathSizeView {
 	
 	private VBox root;
-	private int numColumns = 4;
-	private int numRows = 4;
-	
-	private int activePathID;
+	private int numColumns = 10;
+	private int numRows = 10;
 	
 	private TextField columnsTextField;
 	private HBox columnsBox;
@@ -67,12 +65,7 @@ public class PathSizeView {
 	public void setDelegate(PathEditorViewDelegate delegate){
 		this.delegate = delegate;
 	}
-	
-	public void setActivePathId(int pathID){
-		this.activePathID = pathID;
-	}
-	
-	
+
 	private void makeGridColumnsTextField(){
 		columnsTextField = TextFieldFactory.makeTextField("", 
 				e -> submitNumColumns(columnsTextField.getText()));
@@ -85,12 +78,12 @@ public class PathSizeView {
 	
 	private void submitNumColumns(String numColumnsString){
 		try {
-			int numColumns = Integer.parseInt(numColumnsString);
-			delegate.onUserEnteredNumberColumns(activePathID, numColumns);
+			numColumns = Integer.parseInt(numColumnsString);
+			delegate.onUserEnteredNumberColumns(numColumns);
 		}
 		catch (NumberFormatException e){
+			setNumberOfColumns(numColumns);
 			Alert inputError = DialogueBoxFactory.createErrorDialogueBox("The number of columns must be an integer.", "Input error");
-			inputError.show();
 		}
 	}
 	
@@ -108,12 +101,14 @@ public class PathSizeView {
 	
 	private void submitNumRows(String numRowsString){
 		try {
-			int numRows = Integer.parseInt(numRowsString);
-			delegate.onUserEnteredNumberRows(activePathID, numRows);
+			numRows = Integer.parseInt(numRowsString);
+			delegate.onUserEnteredNumberRows(numRows);
 		}
 		catch (NumberFormatException e){
+			setNumberOfRows(numRows);
 			Alert inputError = DialogueBoxFactory.createErrorDialogueBox("The number of rows must be an integer.", "Input error");
-			inputError.show();
+			
+			
 		}
 	}
 	

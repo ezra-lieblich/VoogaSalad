@@ -14,77 +14,68 @@ public class PathEditorViewController extends EditorViewController implements Pa
 		this.pathView = PathEditorViewFactory.build(editorWidth, editorHeight);
 		pathView.setDelegate(this);
 		this.view = pathView;
-		
-
 	}
-
-		
+	
 	public void setPathDataSource(PathManagerController source){
 		this.pathDataSource = source;
 		this.pathDataSource.addTypeBankListener(this.pathView);
 		onUserEnteredCreatePath();
-		onUserEnteredEditPath(activeID);
+		onUserEnteredEditPath(activeID);	
+	}
+
+	@Override
+	public void onUserEnteredNumberColumns(int numColumns) {
+		this.pathDataSource.setNumberofColumns(activeID, numColumns);
 		
 	}
 
 	@Override
-	public void onUserEnteredNumberColumns(int pathID, int numColumns) {
-		this.pathDataSource.setNumberofColumns(pathID, numColumns);
+	public void onUserEnteredNumberRows(int numRows) {
+		pathDataSource.setNumberofRows(activeID, numRows);
 		
 	}
 
 	@Override
-	public void onUserEnteredNumberRows(int pathID, int numRows) {
-		pathDataSource.setNumberofRows(pathID, numRows);
+	public void onUserEnteredPathImage(String pathImagePath) {
+		pathDataSource.setImagePath(activeID, pathImagePath);
 		
 	}
 
 	@Override
-	public void onUserEnteredPathImage(int pathID, String pathImagePath) {
-		pathDataSource.setImagePath(pathID, pathImagePath);
-		
-	}
-
-	@Override
-	public void onUserEnteredPathName(int pathID, String pathName) {
-		pathDataSource.setName(pathID, pathName);
+	public void onUserEnteredPathName(String pathName) {
+		pathDataSource.setName(activeID, pathName);
 		
 	}
 	
 
 	@Override
-	public void onUserEnteredCreatePath() {
-		activeID = pathDataSource.createType(pathView);
-		pathView.updateActiveID(activeID);
-		pathView.createNewPath();
-			
+	public int onUserEnteredCreatePath() {
+		pathView.createNewPath();	
+		return pathDataSource.createType(pathView);		
 	}
-
-
 
 	@Override
 	public void onUserEnteredEditPath(int pathID) {
 		activeID = pathID;
-		pathView.updateActiveID(pathID);
-		pathView.updateNumColumns(pathDataSource.getNumberofColumns(pathID));
-		pathView.updateNumRows(pathDataSource.getNumberofRows(pathID));
-		pathView.updatePathCoordinates(pathDataSource.getPathCoordinates(pathID));
-		pathView.updateImagePathDisplay(pathDataSource.getImagePath(pathID));
-		pathView.updateNameDisplay(pathDataSource.getName(pathID));
+		pathView.updateActiveID(activeID);
+		pathView.updateNumColumns(pathDataSource.getNumberofColumns(activeID));
+		pathView.updateNumRows(pathDataSource.getNumberofRows(activeID));
+		pathView.updatePathCoordinates(pathDataSource.getPathCoordinates(activeID));
+		pathView.updateImagePathDisplay(pathDataSource.getImagePath(activeID));
+		pathView.updateNameDisplay(pathDataSource.getName(activeID));
 		pathView.updatePath();
 	}
 
 
 	@Override
-	public void onUserEnteredAddPathCoordinate(int pathID, int x, int y) {
-		pathDataSource.setNewPathCoordinate(pathID, x, y);
+	public boolean onUserEnteredAddPathCoordinate(int x, int y) {
+		return pathDataSource.setNewPathCoordinate(activeID, x, y);
 		
 	}
 	
 	@Override
-	public void onUserEnteredRemovePathCoordinate(int pathID, int x, int y) {
-		pathDataSource.setNewPathCoordinate(pathID, x, y);
-		
+	public boolean onUserEnteredRemovePathCoordinate(int x, int y) {
+		return pathDataSource.setNewPathCoordinate(activeID, x, y);
 	}
 
 
