@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 import javax.imageio.ImageIO;
 
 import authoring.editorview.PhotoFileChooser;
+import authoring.editorview.path.IPathSetView;
 import authoring.editorview.path.PathEditorViewDelegate;
 import authoring.utilityfactories.ButtonFactory;
 import authoring.utilityfactories.DialogueBoxFactory;
@@ -21,7 +22,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 
-public class PathImageView extends PhotoFileChooser{
+public class PathImageView extends PhotoFileChooser implements IPathSetView{
 
 	private HBox root;
 	private String pathImagePath;

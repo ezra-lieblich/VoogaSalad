@@ -2,11 +2,12 @@ package authoring.editorview.path.subviews;
 
 import java.util.ResourceBundle;
 
+import authoring.editorview.IEditorView;
 import javafx.scene.Node;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
-public class PathInstructionsView {
+public class PathInstructionsView implements IEditorView{
 	
 	private VBox root;
 	

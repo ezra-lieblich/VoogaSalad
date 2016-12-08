@@ -142,11 +142,9 @@ public class PathEditorView implements IPathEditorView {
 		
 	}
 
-
 	@Override
 	public void updatePath() {
-		pathGrid.redrawPath();
-		
+		pathGrid.redrawPath();		
 	}
 
 	@Override

@@ -78,8 +78,6 @@ public class PathEditorViewController extends EditorViewController implements Pa
 		
 	}
 
-	
 
-	
 
 }

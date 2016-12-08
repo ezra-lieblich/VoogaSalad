@@ -30,6 +30,4 @@ public abstract class NameView implements IEditorView {
 	
 	protected abstract void makeNameTextField();
 	
-	
-	
 }
