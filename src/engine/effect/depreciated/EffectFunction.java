@@ -1,4 +1,4 @@
-package engine.effect;
+package engine.effect.depreciated;
 
 public interface EffectFunction {
 

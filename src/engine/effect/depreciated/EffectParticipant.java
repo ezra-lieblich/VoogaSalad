@@ -1,4 +1,4 @@
-package engine.effect;
+package engine.effect.depreciated;
 
 import java.lang.reflect.Method;
 import java.util.List;
