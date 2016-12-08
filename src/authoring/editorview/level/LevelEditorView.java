@@ -25,6 +25,8 @@ import javafx.scene.layout.VBox;
  */
 public class LevelEditorView implements ILevelEditorView {
 
+    private LevelEditorViewDelegate delegate;
+
     private VBox vbox;
     private LevelChooserView levelChooser;
     private LevelDesign levelDesign;
@@ -55,6 +57,7 @@ public class LevelEditorView implements ILevelEditorView {
 
     @Override
     public void setDelegate (LevelEditorViewDelegate delegate) {
+        this.delegate = delegate;
         levelNameView.setDelegate(delegate);
         levelRewardsView.setDelegate(delegate);
         levelChooser.setDelegate(delegate);
@@ -73,7 +76,7 @@ public class LevelEditorView implements ILevelEditorView {
                                   transitionTimeField.getInstanceAsNode(),
                                   // TODO - Fix this
                                   ButtonFactory.makeButton("New Wave",
-                                                           e -> waveTableView.createNewWave()),
+                                                           e -> delegate.onUserEnteredAddWave()),
                                   waveTableView.getInstanceAsNode());
     }
 
