@@ -1,10 +1,12 @@
 package gameplayer.controller;
 
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
+import splashscreen.SplashScreen;
 
 import java.io.File;
 import java.util.HashMap;
@@ -53,13 +55,14 @@ public class HomeSelection {
 		chooser.setInitialDirectory(directory);
 		chooser.setTitle("Choose File");
 		File temp = chooser.showOpenDialog(new Stage());
-		if (temp != null & directory.equals(INITIAL_DIRECTORY)) {
+		if (temp != null) {
 			fileName = temp.toString();
-			
-			//TODO: get data from xml and create game
-
-		}else if (temp != null & directory.equals(IMAGE_DIRECTORY)){
-			//TODO: change turtle image
+			System.out.println("File name: "+fileName);
+			GamePlayerController playerController = new GamePlayerController(fileName);
+			playerController.init();
+			s.setTitle(SplashScreen.TITLE);
+			s.setScene(playerController.getMainScene());
+			s.show();
 		}
 	}
 

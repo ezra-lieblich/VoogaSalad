@@ -1,10 +1,12 @@
-package gameplayer.model;
+package gameplayer.model.weapon;
 
 import java.util.Observable;
 
+import gameplayer.model.IDrawable;
+
 public class Weapon extends Observable implements IDrawable{
 	
-	private int ID;
+	private int uniqueID;
 	private double damage;
 	private double speedX;
 	private double speedY;
@@ -15,24 +17,33 @@ public class Weapon extends Observable implements IDrawable{
 	private double distanceTravelled;
 	//private double initialX, initialY;
 	private double range;
+	private int targetEnemyID;
 	
 	
-	public Weapon(String name, int ID, double demage, double speedX, double speedY, String image,  double range) {
+	public Weapon(String name,  double demage, double targetX, double targetY, String image,  double range, int targetID, double x, double y) {
 		this.name = name;
-		this.ID = ID;
 		this.damage = demage;
-		this.speedX = speedX;
-		this.speedY  = speedY;
+		this.damage = 50;
+		this.speedX = targetX - x;
+		this.speedY  = targetY - y;
 		this.image = image;
 		this.distanceTravelled = 0;
-
 		this.range = range;
+		this.xCoordinate = x;
+		this.yCoordinate = y;
+		this.targetEnemyID = targetID;
 	}
 	
 	
 	
 	// add boolean method out of range
 	
+	public int getTargetEnemyID() {
+		return targetEnemyID;
+	}
+
+
+
 	public Boolean inRange(){
 		return this.range >= this.distanceTravelled;
 	}
@@ -53,11 +64,11 @@ public class Weapon extends Observable implements IDrawable{
 	
 
 	
-	double getSpeedX(){
+	public double getSpeedX(){
 		return this.speedX;
 	}
 	
-	double getSpeedY(){
+	public double getSpeedY(){
 		return this.speedY;
 	}
 	
@@ -78,7 +89,7 @@ public class Weapon extends Observable implements IDrawable{
 		return yCoordinate;
 	}
 
-	void setY(double yCoordinate) {
+	public void setY(double yCoordinate) {
 		this.yCoordinate = yCoordinate;
 		setChanged();
 		notifyObservers();
@@ -88,19 +99,19 @@ public class Weapon extends Observable implements IDrawable{
 		return this.image;
 	}
 
-	int getID() {
-		return ID;
+	public int getUniqueID() {
+		return this.uniqueID;
 	}
 
-	void setID(int iD) {
-		ID = iD;
+	public void setUniqueID(int iD) {
+		this.uniqueID = iD;
 	}
 
-	double getDamage() {
+	public double getDamage() {
 		return damage;
 	}
 
-	void setDamage(double damage) {
+	public void setDamage(double damage) {
 		this.damage = damage;
 	}
 

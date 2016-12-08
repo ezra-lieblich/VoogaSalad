@@ -1,41 +1,46 @@
 package engine.level;
 
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Map;
+import java.util.List;
 import engine.AbstractType;
+import engine.level.wave.Wave;
+import engine.level.wave.WaveTypeComparator;
+import engine.observer.ObservableList;
 import engine.observer.ObservableMap;
 import engine.observer.ObservableProperty;
 
 
 public class LevelType extends AbstractType implements Level {
-    private ObservableMap<Integer, Integer> enemyCounts;
+    private ObservableMap<Integer, Wave> waves;
     private ObservableProperty<Double> rewardHealth;
     private ObservableProperty<Double> rewardMoney;
     private ObservableProperty<Double> rewardScore;
     private ObservableProperty<Double> durationInSeconds;
+    private ObservableProperty<Double> time;
+    private ObservableList<Integer> paths;
 
     protected LevelType (LevelInitializer levelInitializer) {
         super(levelInitializer);
-        this.enemyCounts = levelInitializer.getEnemyCounts();
+        this.waves = levelInitializer.getWaves();
         this.rewardHealth = levelInitializer.getRewardHealth();
         this.rewardMoney = levelInitializer.getRewardMoney();
         this.rewardScore = levelInitializer.getRewardScore();
         this.durationInSeconds = levelInitializer.getDurationInSeconds();
+        this.time = levelInitializer.getLevelTime();
+        this.paths = levelInitializer.getPaths();
     }
 
     @Override
-    public Map<Integer, Integer> getEnemyCounts () {
-        return Collections.unmodifiableMap(enemyCounts.getProperty());
+    public List<Wave> getWaves () {
+    	List<Wave> sortedWaves = new ArrayList<Wave>(waves.getProperty().values());
+    	Collections.sort(sortedWaves, new WaveTypeComparator());
+        return Collections.unmodifiableList(sortedWaves);
     }
 
     @Override
-    public void setEnemyCounts (int enemy, int enemyCount) {
-        enemyCounts.put(enemy, enemyCount);
-    }
-
-    @Override
-    public void removeEnemy (int enemy) {
-        enemyCounts.remove(enemy);
+    public void removeWave (int enemy) {
+        waves.remove(enemy);
     }
 
     @Override
@@ -77,5 +82,44 @@ public class LevelType extends AbstractType implements Level {
     public void setDurationInSeconds (double durationInSeconds) {
         this.durationInSeconds.setProperty(durationInSeconds);
     }
+
+	@Override
+	public double getLevelTime() {
+		return time.getProperty();
+	}
+
+	@Override
+	public int createWave(Wave wave) {
+		waves.put(wave.getId(), wave);
+		return wave.getId();
+	}
+
+	@Override
+	public Wave getWave(int id) {
+		return waves.getProperty().get(id);
+	}
+
+	@Override
+	public void calculateLevelTime(int waveID) {
+		Wave wave = waves.getProperty().get(waveID);
+		if (wave.getEnemyCount() * wave.getFrequency() + wave.getStartTime() > time.getProperty()) {
+			time.setProperty(wave.getEnemyCount() * wave.getFrequency() + wave.getStartTime());
+		}
+	}
+
+	@Override
+	public void addPath(int pathID) {
+		paths.add(pathID);
+	}
+
+	@Override
+	public void removePath(int pathID) {
+		paths.remove(pathID);
+	}
+
+	@Override
+	public List<Integer> getPaths() {
+		return Collections.unmodifiableList(paths.getProperty());
+	}
 
 }
