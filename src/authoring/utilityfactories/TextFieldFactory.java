@@ -11,9 +11,9 @@ import javafx.scene.control.TextField;
  * @author Kayla Schulz
  *
  */
-public class TextFieldFactory {
+public final class TextFieldFactory {
 
-    public TextFieldFactory () {
+    private TextFieldFactory () {
 
     }
 

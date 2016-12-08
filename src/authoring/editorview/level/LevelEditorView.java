@@ -80,7 +80,7 @@ public class LevelEditorView implements ILevelEditorView {
 
     @Override
     public void updateNameDisplay (String name) {
-        levelNameView.setLevelName(name);
+        levelNameView.updateName(name);
         // also level chooser
 
     }
