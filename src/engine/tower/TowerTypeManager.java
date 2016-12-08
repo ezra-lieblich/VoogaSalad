@@ -48,5 +48,10 @@ public class TowerTypeManager extends AbstractTypeManager<Tower> implements Towe
         upgrades.remove(id);
         getEntity(parentId).removeUpgrade(id);
     }
+    
+    @Override
+    public Map<Integer, Tower> getUpgrades() {
+        return upgrades;
+    }
 
 }

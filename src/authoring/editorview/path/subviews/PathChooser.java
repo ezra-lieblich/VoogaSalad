@@ -3,7 +3,6 @@ package authoring.editorview.path.subviews;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
-import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.VBox;
 
@@ -14,7 +13,6 @@ import java.util.ResourceBundle;
 import authoring.editorview.path.NameIdPair;
 import authoring.editorview.path.PathEditorViewDelegate;
 import authoring.utilityfactories.ComboBoxFactory;
-import authoring.utilityfactories.DialogueBoxFactory;
 
 /**
  * 
@@ -27,8 +25,9 @@ public class PathChooser{
 	private VBox root;
 	private PathEditorViewDelegate delegate;
 	private List<NameIdPair> nameIdList;
-	private ObservableList<String> pathList;
-	private ComboBox<String> pathComboBox;
+	private ObservableList<Object> pathList;
+	private ComboBox<Object> pathComboBox;
+	
 	private int activePathID;
 	
 	
@@ -58,41 +57,24 @@ public class PathChooser{
 	public Node getInstanceAsNode () {
 		return root;
 	}
-	
-	public void updatePathComboBox(String pathName){
 		
-		//boolean duplicateName = checkIfDuplicateName(pathName);
-		//if (!duplicateName){
+	public void updatePathComboBox(String pathName){		
+		NameIdPair newPair = new NameIdPair(pathName, activePathID);
+		boolean newPath = true;
+		for (NameIdPair pair : nameIdList){		
+			if (pair.getId() == activePathID){
+				newPath = false;
+				nameIdList.set(nameIdList.indexOf(pair), newPair);
+				pathList.set(pathList.indexOf(pair.getName()), pathName);				
+				break;
+			}
+		}	
+		if (newPath){
 			pathList.add(pathName);
-			NameIdPair newPair = new NameIdPair(pathName, activePathID);
 			nameIdList.add(newPair);
-			for (NameIdPair pair : nameIdList){
-				if (pair != newPair && pair.getId() == activePathID){
-					nameIdList.remove(pair);
-					pathList.remove(pair.getName());
-					break;
-				}
-			}		
-		//}
-		//else {
-			//Alert duplicateNameAlert = DialogueBoxFactory.createErrorDialogueBox("This path name is already used", "Duplicate name");
-			//duplicateNameAlert.show();
-		//}
-			
-		
-		
+		}
+		pathComboBox.setValue(pathName);
 	}
-	
-//	private boolean checkIfDuplicateName(String pathName){
-//		boolean duplicate = false;
-//		for (NameIdPair pair : nameIdList){
-//			if (pair.getName() == pathName){
-//				duplicate = true;
-//				break;
-//			}
-//		}
-//		return duplicate;
-//	}
 	
 	private void setEditView(String pathName){
 		for (NameIdPair pair : nameIdList){
@@ -102,21 +84,12 @@ public class PathChooser{
 				break;
 			}
 		}	
-		System.out.println(pathComboBox.getValue());
-		System.out.println(pathList);
 	}
 	
-	private void buildViewComponents(){
-		
+	private void buildViewComponents(){		
 		pathList = FXCollections.observableArrayList();
-		
-		pathComboBox = new ComboBox<String>(pathList);
-		pathComboBox.setOnAction(e -> setEditView(pathComboBox.getValue()));
-        pathComboBox.setPromptText(pathResource.getString("ComboBoxText"));
-		
-		
-//		pathComboBox = ComboBoxFactory.makeComboBox(pathResource.getString("ComboBoxText"), 
-//				e -> setEditView(pathComboBox.getValue().toString()), pathList);
+		pathComboBox = ComboBoxFactory.makeComboBox(pathResource.getString("ComboBoxText"), 
+				e -> setEditView(pathComboBox.getValue().toString()), pathList);
 		
 		pathComboBox.setTranslateX(5);
 		root.getChildren().add(pathComboBox);

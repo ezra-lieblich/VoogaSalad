@@ -81,7 +81,7 @@ public class LevelEditorViewController extends EditorViewController
         levelView.updateTransitionTime(levelDataSource.getTransitionTime(currentLevelID));
         levelView.updateRewardHealth(levelDataSource.getRewardHealth(currentLevelID));
         levelView.updateRewardMoney(levelDataSource.getRewardMoney(currentLevelID));
-        levelView.updateRewardPoints(levelDataSource.getRewardScore(currentLevelID));
+        levelView.updateRewardScore(levelDataSource.getRewardScore(currentLevelID));
         levelView.updateNameDisplay(levelDataSource.getName(currentLevelID));
         levelView.updateEnemyNames(getNameIDList());
     }
@@ -107,7 +107,7 @@ public class LevelEditorViewController extends EditorViewController
     public void onUserEnteredEnemyFrequency (String frequency) {
         try {
             Double.parseDouble(frequency);
-            levelDataSource.setEnemyFrequency(currentLevelID, 0, Double.parseDouble(frequency));
+            //levelDataSource.setEnemyFrequency(currentLevelID, 0, Double.parseDouble(frequency));
             // TODO: HUGE BTW - the second parameter is the enemy that is set
         }
         catch (NumberFormatException e) {
@@ -127,10 +127,10 @@ public class LevelEditorViewController extends EditorViewController
     }
 
     @Override
-    public void onUserEnteredRewardPoints (String points) {
+    public void onUserEnteredRewardScore (String score) {
         try {
-            Double.parseDouble(points);
-            levelDataSource.setRewardScore(currentLevelID, Double.parseDouble(points));
+            Double.parseDouble(score);
+            levelDataSource.setRewardScore(currentLevelID, Double.parseDouble(score));
         }
         catch (NumberFormatException e) {
             createIntCheckDialogueBox();

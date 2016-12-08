@@ -140,7 +140,7 @@ public class WeaponEditorView implements IWeaponEditorView {
 
     @Override
     public void updateNameDisplay (String name) {
-        this.weaponNameView.updateWeaponName(name);
+        this.weaponNameView.updateName(name);
 
     }
 
