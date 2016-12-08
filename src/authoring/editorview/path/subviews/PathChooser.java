@@ -12,6 +12,7 @@ import java.util.ResourceBundle;
 
 import authoring.editorview.path.NameIdPair;
 import authoring.editorview.path.PathEditorViewDelegate;
+import authoring.utilityfactories.ComboBoxFactory;
 
 /**
  * 
@@ -24,8 +25,9 @@ public class PathChooser{
 	private VBox root;
 	private PathEditorViewDelegate delegate;
 	private List<NameIdPair> nameIdList;
-	private ObservableList<String> pathList;
-	private ComboBox<String> pathComboBox;
+	private ObservableList<Object> pathList;
+	private ComboBox<Object> pathComboBox;
+	
 	private int activePathID;
 	
 	
@@ -71,6 +73,7 @@ public class PathChooser{
 			pathList.add(pathName);
 			nameIdList.add(newPair);
 		}
+		pathComboBox.setValue(pathName);
 	}
 	
 	private void setEditView(String pathName){
@@ -83,17 +86,10 @@ public class PathChooser{
 		}	
 	}
 	
-	private void buildViewComponents(){
-		
+	private void buildViewComponents(){		
 		pathList = FXCollections.observableArrayList();
-		
-		pathComboBox = new ComboBox<String>(pathList);
-		pathComboBox.setOnAction(e -> setEditView(pathComboBox.getValue()));
-        pathComboBox.setPromptText(pathResource.getString("ComboBoxText"));
-		
-		
-//		pathComboBox = ComboBoxFactory.makeComboBox(pathResource.getString("ComboBoxText"), 
-//				e -> setEditView(pathComboBox.getValue().toString()), pathList);
+		pathComboBox = ComboBoxFactory.makeComboBox(pathResource.getString("ComboBoxText"), 
+				e -> setEditView(pathComboBox.getValue().toString()), pathList);
 		
 		pathComboBox.setTranslateX(5);
 		root.getChildren().add(pathComboBox);
