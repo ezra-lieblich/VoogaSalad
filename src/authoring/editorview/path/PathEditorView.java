@@ -142,8 +142,7 @@ public class PathEditorView implements IPathEditorView {
 
     @Override
     public void updateBank (List<Integer> ids) {
-        // TODO Auto-generated method stub
-        System.out.println("There is no path bank implemented");
+        
     }
 
     @Override
@@ -151,5 +150,8 @@ public class PathEditorView implements IPathEditorView {
         // TODO Auto-generated method stub
         System.out.println("There is no path bank implemented");
     }
+
+
+
 
 }

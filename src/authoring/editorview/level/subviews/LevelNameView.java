@@ -7,18 +7,11 @@ import authoring.editorview.level.LevelEditorViewDelegate;
 import authoring.utilityfactories.BoxFactory;
 import authoring.utilityfactories.TextFieldFactory;
 import javafx.scene.Node;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
 
 
 public class LevelNameView extends NameView implements ILevelSetView {
 
-    private HBox hbox;
     private LevelEditorViewDelegate delegate;
-    private TextField nameTextField;
-
-    private static final String RESOURCE_FILE_NAME = "resources/GameAuthoringLevels";
-    private ResourceBundle levelResource = ResourceBundle.getBundle(RESOURCE_FILE_NAME);
 
     public LevelNameView (ResourceBundle levelsResource) {
         super(levelsResource);
@@ -26,7 +19,7 @@ public class LevelNameView extends NameView implements ILevelSetView {
 
     @Override
     public Node getInstanceAsNode () {
-        return hbox;
+        return root;
     }
 
     @Override
@@ -34,6 +27,7 @@ public class LevelNameView extends NameView implements ILevelSetView {
         this.delegate = delegate;
     }
 
+    @Override
     protected void makeNameTextField () {
         nameTextField = TextFieldFactory.makeTextField("",
                                                        e -> delegate
@@ -41,8 +35,8 @@ public class LevelNameView extends NameView implements ILevelSetView {
                                                                                        nameTextField
                                                                                                .getText()));
         nameTextField.setMaxWidth(75);
-        hbox =
-                BoxFactory.createHBoxWithLabelandNode(levelResource.getString("NameTextField"),
+        root =
+                BoxFactory.createHBoxWithLabelandNode(resource.getString("NameTextField"),
                                                       nameTextField);
 
     }

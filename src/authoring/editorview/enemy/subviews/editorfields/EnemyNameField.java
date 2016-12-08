@@ -33,7 +33,7 @@ public class EnemyNameField extends NameView implements IEnemySetView {
                 TextFieldFactory.makeTextField(resource.getString("EnterString"),
                                                e -> delegate.onUserEnteredEnemyName(nameTextField
                                                        .getText()));
-        hbox = BoxFactory.createHBoxWithLabelandNode(resource.getString("NameTextField"),
+        root = BoxFactory.createHBoxWithLabelandNode(resource.getString("NameTextField"),
                                                      nameTextField);
     }
 
