@@ -40,12 +40,12 @@ public class WeaponManager extends Observable{
 
 
 	public void updateWeapon() {
-		
+		/*
 		System.out.println("+++++++++++++++++++++");
 		System.out.println("=====================");
 
 		System.out.println("number of weapon fired: " + this.weaponOnGrid.size());
-
+	*/
 		for (int i : weaponOnGrid.keySet()) {
 			Weapon w = weaponOnGrid.get(i);
 			if (w.getX() < GridGUI.GRID_WIDTH) {

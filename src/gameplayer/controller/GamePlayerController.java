@@ -269,9 +269,11 @@ public class GamePlayerController implements Observer {
 	}
 
 	private void updateWebAppStats(double newLevel, GamePlayData gdata) throws IOException {
+		/*
 		System.out.println("~~~~~trying to update web app stats~~~~~");
 		System.out.println("Gold: "+this.model.getData().getGold());
 		System.out.println("Gold from observable: "+gdata.getGold());
+		*/
 		Wrapper.getInstance().updateGameScores("lives", Integer.toString((int)newLevel), Double.toString(gdata.getLife()));
 		Wrapper.getInstance().updateGameScores("gold", Integer.toString((int)newLevel), Double.toString(gdata.getGold()));
 		Wrapper.getInstance().updateGameScores("level", Integer.toString((int)newLevel),
@@ -319,8 +321,8 @@ public class GamePlayerController implements Observer {
 		HashMap<Integer, Enemy> enemyRedraw = this.enemyManager.getEnemyOnGrid();
 		Map<Integer, Tower> towerRedraw = this.model.getTowerOnGrid();
 		HashMap<Integer, Weapon> bulletRedraw = this.model.getWeaponOnGrid();
-		System.out.println("are there weapons?");
-		System.out.println(bulletRedraw);
+		//System.out.println("are there weapons?");
+		//System.out.println(bulletRedraw);
 		for (int i : bulletRedraw.keySet()) {
 			if (!weaponsOnScreen.containsKey(bulletRedraw.get(i).getUniqueID())) {
 				ImageView image = new ImageView(bulletRedraw.get(i).getImage());
