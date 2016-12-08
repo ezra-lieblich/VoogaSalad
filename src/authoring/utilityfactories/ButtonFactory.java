@@ -11,9 +11,9 @@ import javafx.scene.control.Button;
  * @author Kayla Schulz
  *
  */
-public class ButtonFactory {
+public final class ButtonFactory {
 
-    public ButtonFactory () {
+    private ButtonFactory () {
 
     }
 
