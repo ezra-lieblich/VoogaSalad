@@ -1,6 +1,7 @@
 package authoring.editorview.enemy.subviews.editorfields;
 
 import java.util.ResourceBundle;
+import authoring.editorview.NameView;
 import authoring.editorview.enemy.EnemyEditorViewDelegate;
 import authoring.editorview.enemy.IEnemySetView;
 import authoring.utilityfactories.TextFieldFactory;
@@ -13,16 +14,13 @@ import javafx.scene.control.TextField;
  * @author Kayla Schulz
  *
  */
-public class EnemyNameField implements IEnemySetView {
+public class EnemyNameField extends NameView implements IEnemySetView {
 
     private TextField nameTextField;
     private EnemyEditorViewDelegate delegate;
 
     public EnemyNameField (ResourceBundle labelsResource) {
-        nameTextField =
-                TextFieldFactory.makeTextField(labelsResource.getString("EnterString"),
-                                               e -> delegate.onUserEnteredEnemyName(nameTextField
-                                                       .getText()));
+        super(labelsResource);
     }
 
     @Override
@@ -37,6 +35,14 @@ public class EnemyNameField implements IEnemySetView {
 
     public void updateName (String name) {
         nameTextField.setText(name);
+    }
+
+    @Override
+    protected void makeNameTextField () {
+        nameTextField =
+                TextFieldFactory.makeTextField(resource.getString("EnterString"),
+                                               e -> delegate.onUserEnteredEnemyName(nameTextField
+                                                       .getText()));
     }
 
 }
