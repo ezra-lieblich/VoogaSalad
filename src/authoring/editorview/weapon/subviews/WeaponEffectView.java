@@ -16,7 +16,6 @@ import authoring.editorview.weapon.subviews.editorfields.WeaponSpeedField;
 import authoring.utilityfactories.BoxFactory;
 import authoring.utilityfactories.ButtonFactory;
 import authoring.utilityfactories.DialogueBoxFactory;
-import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
@@ -109,8 +108,8 @@ public class WeaponEffectView extends PhotoFileChooser {
                 .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Name"),
                                                            weaponName.getInstanceAsNode()));
         vboxView.getChildren()
-        .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Size"),
-                                                   weaponSize.getInstanceAsNode()));
+                .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Size"),
+                                                           weaponSize.getInstanceAsNode()));
         vboxView.getChildren()
                 .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("FireRate"),
                                                            weaponFireRate.getInstanceAsNode()));

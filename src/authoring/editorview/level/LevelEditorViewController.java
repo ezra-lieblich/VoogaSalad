@@ -23,6 +23,7 @@ public class LevelEditorViewController extends EditorViewController
     private LevelManagerController levelDataSource;
     private EnemyManagerController enemyDataSource;
     private int currentLevelID;
+    private int currentWaveID;
     private List<NameIdPair> nameIDList;
 
     public LevelEditorViewController (int editorWidth, int editorHeight) {
@@ -52,7 +53,7 @@ public class LevelEditorViewController extends EditorViewController
         }
     }
 
-    private List<NameIdPair> getNameIDList () {
+    private List<NameIdPair> getWaveList () {
         getCreatedEnemies();
         return nameIDList;
     }
@@ -83,7 +84,7 @@ public class LevelEditorViewController extends EditorViewController
         levelView.updateRewardMoney(levelDataSource.getRewardMoney(currentLevelID));
         levelView.updateRewardScore(levelDataSource.getRewardScore(currentLevelID));
         levelView.updateNameDisplay(levelDataSource.getName(currentLevelID));
-        levelView.updateEnemyNames(getNameIDList());
+        levelView.updateEnemyNames(getWaveList());
     }
 
     @Override
@@ -107,8 +108,8 @@ public class LevelEditorViewController extends EditorViewController
     public void onUserEnteredEnemyFrequency (String frequency) {
         try {
             Double.parseDouble(frequency);
-            //levelDataSource.setEnemyFrequency(currentLevelID, 0, Double.parseDouble(frequency));
-            // TODO: HUGE BTW - the second parameter is the enemy that is set
+            levelDataSource.setWaveFrequency(currentLevelID, currentWaveID,
+                                             Double.parseDouble(frequency));
         }
         catch (NumberFormatException e) {
             createIntCheckDialogueBox();
@@ -116,12 +117,15 @@ public class LevelEditorViewController extends EditorViewController
     }
 
     @Override
-    public void onUserEnteredAddEnemy (WaveObject enemyData) {
-        // TODO: Fill this in and discuss with Ezra
+    public void onUserEnteredAddWave () {
+        currentWaveID = levelDataSource.createWave(currentLevelID, levelView);
+        // levelView.updateNumberOfEnemies(levelDataSource.getenem);
+        levelView.updateEnemyFrequency(levelDataSource.getWaveFrequency(currentLevelID,
+                                                                        currentWaveID));
     }
 
     @Override
-    public void onUserEnteredRemoveEnemy (int enemyID) {
+    public void onUserEnteredRemoveWave (int waveID) {
         // TODO Auto-generated method stub
 
     }
@@ -163,5 +167,47 @@ public class LevelEditorViewController extends EditorViewController
         ResourceBundle dialogueBoxResource = ResourceBundle.getBundle("resources/DialogueBox");
         DialogueBoxFactory.createErrorDialogueBox(dialogueBoxResource.getString("Integer"),
                                                   dialogueBoxResource.getString("CheckInput"));
+    }
+
+    @Override
+    public void onUserEnteredEnemy (int enemyID) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void onUserEnteredNumofEnemies (String numEnemies) {
+        try {
+            Integer.parseInt(numEnemies);
+            levelDataSource.setWaveCount(currentLevelID, currentWaveID,
+                                         Integer.parseInt(numEnemies));
+        }
+        catch (NumberFormatException e) {
+            createIntCheckDialogueBox();
+        }
+    }
+
+    @Override
+    public void onUserEnteredSpawnPoint (String spawnPoint) {
+        try {
+            Integer.parseInt(spawnPoint);
+            levelDataSource.setWavePath(currentLevelID, currentWaveID,
+                                        Integer.parseInt(spawnPoint));
+        }
+        catch (NumberFormatException e) {
+            createIntCheckDialogueBox();
+        }
+    }
+
+    @Override
+    public void onUserEnteredWaveTimeDelay (String timeDelay) {
+        try {
+            Double.parseDouble(timeDelay);
+            levelDataSource.setWaveDelay(currentLevelID, currentWaveID,
+                                         Double.parseDouble(timeDelay));
+        }
+        catch (NumberFormatException e) {
+            createIntCheckDialogueBox();
+        }
     }
 }
