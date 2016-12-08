@@ -25,13 +25,19 @@ public class Toolbar implements IToolbar {
 
     private Button saveButton;
     
+    private Button loadButton;
+    
     public Toolbar (int aWidth, int aHeight) {
     	
     	saveButton = new Button("Save");
     	
+    	loadButton = new Button("Load");
+    	
         this.toolbar = new ToolBar(
         						saveButton
+        						
                                 );
+        
     }
 
     @Override
