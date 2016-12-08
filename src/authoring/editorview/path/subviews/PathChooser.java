@@ -81,8 +81,6 @@ public class PathChooser{
 				break;
 			}
 		}	
-		System.out.println(pathComboBox.getValue());
-		System.out.println(pathList);
 	}
 	
 	private void buildViewComponents(){
