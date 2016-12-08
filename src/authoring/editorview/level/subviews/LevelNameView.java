@@ -1,6 +1,7 @@
 package authoring.editorview.level.subviews;
 
 import java.util.ResourceBundle;
+import authoring.editorview.NameView;
 import authoring.editorview.level.ILevelSetView;
 import authoring.editorview.level.LevelEditorViewDelegate;
 import authoring.utilityfactories.BoxFactory;
@@ -10,7 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 
 
-public class LevelNameView implements ILevelSetView {
+public class LevelNameView extends NameView implements ILevelSetView {
 
     private HBox hbox;
     private LevelEditorViewDelegate delegate;
@@ -20,7 +21,7 @@ public class LevelNameView implements ILevelSetView {
     private ResourceBundle levelResource = ResourceBundle.getBundle(RESOURCE_FILE_NAME);
 
     public LevelNameView (ResourceBundle levelsResource) {
-        makeNameTextField();
+        super(levelsResource);
     }
 
     @Override
@@ -33,11 +34,7 @@ public class LevelNameView implements ILevelSetView {
         this.delegate = delegate;
     }
 
-    public void setLevelName (String name) {
-        nameTextField.setText(name);
-    }
-
-    private void makeNameTextField () {
+    protected void makeNameTextField () {
         nameTextField = TextFieldFactory.makeTextField("",
                                                        e -> delegate
                                                                .onUserEnteredLevelName(

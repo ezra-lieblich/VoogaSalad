@@ -80,7 +80,7 @@ public class LevelEditorView implements ILevelEditorView {
 
     @Override
     public void updateNameDisplay (String name) {
-        levelNameView.setLevelName(name);
+        levelNameView.updateName(name);
         // also level chooser
 
     }
@@ -145,7 +145,7 @@ public class LevelEditorView implements ILevelEditorView {
 
     @Override
     public void updateEnemyNames (List<NameIdPair> enemyNames) {
-        waveTableView.updateWaveTableView(enemyNames);
+        // waveTableView.updateWaveTableView(enemyNames);
     }
 
     @Override
@@ -164,6 +164,11 @@ public class LevelEditorView implements ILevelEditorView {
     public void updateWaveTimeDelay (double timeDelay) {
         // TODO Auto-generated method stub
 
+    }
+
+    @Override
+    public void updateWaves (List<WaveObject> waves) {
+        waveTableView.updateWaveTableView(waves);
     }
 
 }
