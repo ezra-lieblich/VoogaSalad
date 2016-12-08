@@ -93,6 +93,7 @@ public class DragDropView {
     	root.getStyleClass().add("towersScrollPane");
         //int idCount = 0;
 		for (String image:imageLocations){
+			System.out.println("image: "+ image);
 			ImageView currentImage = graphicLib.createImageView(graphicLib.createImage(image));
 			currentImage.setId(image);
 			//currentImage.setId(idCount+"");

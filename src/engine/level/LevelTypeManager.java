@@ -12,7 +12,7 @@ public class LevelTypeManager extends AbstractTypeManager<Level> implements Leve
 
     @Override
     public void visitRemoveEntry (EnemyManager manager, Integer index) {
-        applyToAllEntities(a -> a.removeEnemy(index));
+        applyToAllEntities(a -> a.removeWave(index));
 
     }
 

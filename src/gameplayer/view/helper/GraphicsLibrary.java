@@ -18,7 +18,9 @@ import javafx.stage.Screen;
 
 public class GraphicsLibrary {
 	public Image createImage(String imageLocation) {
-		Image image = new Image(getClass().getClassLoader().getResourceAsStream(imageLocation));
+		int index=imageLocation.lastIndexOf("/")+1;
+		String loc = imageLocation.substring(index, imageLocation.length());
+		Image image = new Image(getClass().getClassLoader().getResourceAsStream(loc));
 		return image;
 	}
 
