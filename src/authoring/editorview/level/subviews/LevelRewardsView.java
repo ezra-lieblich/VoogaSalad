@@ -18,7 +18,7 @@ public class LevelRewardsView implements ILevelSetView {
 
     private TextField rewardHealthTextField;
     private TextField rewardMoneyTextField;
-    private TextField rewardPointsTextField;
+    private TextField rewardScoreTextField;
 
     // TODO: reduce duplicated code
 
@@ -29,7 +29,7 @@ public class LevelRewardsView implements ILevelSetView {
         vbox = new VBox(10);
         makeHealthRewardTextField();
         makeMoneyRewardTextField();
-        makePointsRewardTextField();
+        makeScoreRewardTextField();
     }
 
     @Override
@@ -71,18 +71,18 @@ public class LevelRewardsView implements ILevelSetView {
 
     }
 
-    private void makePointsRewardTextField () {
-        rewardPointsTextField = TextFieldFactory.makeTextField("",
-                                                               e -> submitRewardPoints(rewardPointsTextField
+    private void makeScoreRewardTextField () {
+        rewardScoreTextField = TextFieldFactory.makeTextField("",
+                                                               e -> submitRewardScore(rewardScoreTextField
                                                                        .getText()));
-        rewardPointsTextField.setMaxWidth(75);
-        HBox rewardPointsBox =
+        rewardScoreTextField.setMaxWidth(75);
+        HBox rewardScoreBox =
                 BoxFactory.createHBoxWithLabelandNode(
                                                       levelResource
-                                                              .getString("RewardPointsTextField"),
-                                                      rewardPointsTextField);
+                                                              .getString("RewardScoreTextField"),
+                                                      rewardScoreTextField);
 
-        vbox.getChildren().add(rewardPointsBox);
+        vbox.getChildren().add(rewardScoreBox);
 
     }
 
@@ -94,8 +94,8 @@ public class LevelRewardsView implements ILevelSetView {
         delegate.onUserEnteredRewardMoney(moneyString);
     }
 
-    private void submitRewardPoints (String pointsString) {
-        delegate.onUserEnteredRewardPoints(pointsString);
+    private void submitRewardScore (String ScoreString) {
+        delegate.onUserEnteredRewardScore(ScoreString);
     }
 
     public void setRewardHealth (String rewardHealth) {
@@ -106,7 +106,7 @@ public class LevelRewardsView implements ILevelSetView {
         rewardMoneyTextField.setText(rewardMoney);
     }
 
-    public void setRewardPoints (String points) {
-        rewardPointsTextField.setText(points);
+    public void setRewardScore (String Score) {
+        rewardScoreTextField.setText(Score);
     }
 }

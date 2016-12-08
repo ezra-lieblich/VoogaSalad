@@ -37,4 +37,15 @@ public class GridCoordinate implements Coordinate<Integer>{
         return Math.abs(neighbor.getX() - x) + Math.abs(neighbor.getY() - y) == 1;     
     }
     
+    @Override
+    public boolean equals (Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (obj == null || !(obj instanceof GridCoordinate)) {
+            return false;
+        }
+        return (x == ((GridCoordinate) obj).getX()) && (y == ((GridCoordinate) obj).getY());
+    }
+    
 }

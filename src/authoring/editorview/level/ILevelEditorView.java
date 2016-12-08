@@ -13,7 +13,7 @@ public interface ILevelEditorView extends ILevelSetView, IUpdateView {
 
     public void updateEnemyNames (List<NameIdPair> list);
 
-    public void updateRewardPoints (double winPoints);
+    public void updateRewardScore (double winPoints);
 
     public void updateRewardHealth (double winHealth);
 

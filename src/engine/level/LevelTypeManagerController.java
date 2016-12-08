@@ -87,7 +87,7 @@ public class LevelTypeManagerController
         		.addRewardHealthListener( (oldValue, newValue) -> updateView
                         .updateRewardHealth(newValue))
                 .addRewardScoreListener( (oldValue, newValue) -> updateView
-                        .updateRewardPoints(newValue))
+                        .updateRewardScore(newValue))
                 .addRewardMoneyListener( (oldValue, newValue) -> updateView
                         .updateRewardMoney(newValue));
                 //TODO add listener .addLevelTimeListener()

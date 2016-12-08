@@ -86,8 +86,8 @@ public class LevelEditorView implements ILevelEditorView {
     }
 
     @Override
-    public void updateRewardPoints (double winPoints) {
-        levelRewardsView.setRewardPoints(Double.toString(winPoints));
+    public void updateRewardScore (double winScore) {
+        levelRewardsView.setRewardScore(Double.toString(winScore));
 
     }
 

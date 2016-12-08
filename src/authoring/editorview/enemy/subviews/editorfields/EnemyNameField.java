@@ -15,13 +15,13 @@ import javafx.scene.control.TextField;
  */
 public class EnemyNameField implements IEnemySetView {
 
-    private TextField enemyNameField;
+    private TextField nameTextField;
     private EnemyEditorViewDelegate delegate;
 
     public EnemyNameField (ResourceBundle labelsResource) {
-        enemyNameField =
+        nameTextField =
                 TextFieldFactory.makeTextField(labelsResource.getString("EnterString"),
-                                               e -> delegate.onUserEnteredEnemyName(enemyNameField
+                                               e -> delegate.onUserEnteredEnemyName(nameTextField
                                                        .getText()));
     }
 
@@ -32,11 +32,11 @@ public class EnemyNameField implements IEnemySetView {
 
     @Override
     public Node getInstanceAsNode () {
-        return enemyNameField;
+        return nameTextField;
     }
 
-    public void updateEnemyName (String enemyName) {
-        enemyNameField.setText(enemyName);
+    public void updateName (String name) {
+        nameTextField.setText(name);
     }
 
 }
