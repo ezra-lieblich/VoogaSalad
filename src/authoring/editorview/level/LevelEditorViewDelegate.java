@@ -25,8 +25,16 @@ public interface LevelEditorViewDelegate {
 
     public void onUserEnteredEnemyFrequency (String frequency);
 
-    public void onUserEnteredAddEnemy (WaveObject enemyData);
+    public void onUserEnteredAddWave (WaveObject enemyData);
 
-    public void onUserEnteredRemoveEnemy (int enemyID);
+    public void onUserEnteredRemoveWave (int waveID);
+
+    public void onUserEnteredEnemy (int enemyID);
+
+    public void onUserEnteredNumofEnemies (int numEnemies);
+
+    public void onUserEnteredSpawnPoint (int spawnPoint);
+
+    public void onUserEnteredWaveTimeDelay (int timeDelay);
 
 }

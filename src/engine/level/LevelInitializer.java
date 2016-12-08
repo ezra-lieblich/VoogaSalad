@@ -8,8 +8,8 @@ import engine.observer.ObservableProperty;
 
 
 public interface LevelInitializer extends TypeInitializer {
-	ObservableList<Integer> getPaths ();
-	
+    ObservableList<Integer> getPaths ();
+
     ObservableMap<Integer, Wave> getWaves ();
 
     ObservableProperty<Double> getRewardHealth ();
@@ -19,6 +19,6 @@ public interface LevelInitializer extends TypeInitializer {
     ObservableProperty<Double> getRewardScore ();
 
     ObservableProperty<Double> getDurationInSeconds ();
-    
+
     ObservableProperty<Double> getLevelTime ();
 }

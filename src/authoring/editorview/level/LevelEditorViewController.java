@@ -23,6 +23,7 @@ public class LevelEditorViewController extends EditorViewController
     private LevelManagerController levelDataSource;
     private EnemyManagerController enemyDataSource;
     private int currentLevelID;
+    private int currentWaveID;
     private List<NameIdPair> nameIDList;
 
     public LevelEditorViewController (int editorWidth, int editorHeight) {
@@ -107,8 +108,8 @@ public class LevelEditorViewController extends EditorViewController
     public void onUserEnteredEnemyFrequency (String frequency) {
         try {
             Double.parseDouble(frequency);
-            //levelDataSource.setEnemyFrequency(currentLevelID, 0, Double.parseDouble(frequency));
-            // TODO: HUGE BTW - the second parameter is the enemy that is set
+            levelDataSource.setWaveFrequency(currentLevelID, currentWaveID,
+                                             Double.parseDouble(frequency));
         }
         catch (NumberFormatException e) {
             createIntCheckDialogueBox();
@@ -116,12 +117,13 @@ public class LevelEditorViewController extends EditorViewController
     }
 
     @Override
-    public void onUserEnteredAddEnemy (WaveObject enemyData) {
-        // TODO: Fill this in and discuss with Ezra
+    public void onUserEnteredAddWave (WaveObject enemyData) {
+        currentWaveID = levelDataSource.createWave(currentLevelID, levelView);
+        // TODO -Set default values for this created wave
     }
 
     @Override
-    public void onUserEnteredRemoveEnemy (int enemyID) {
+    public void onUserEnteredRemoveWave (int waveID) {
         // TODO Auto-generated method stub
 
     }
@@ -163,5 +165,29 @@ public class LevelEditorViewController extends EditorViewController
         ResourceBundle dialogueBoxResource = ResourceBundle.getBundle("resources/DialogueBox");
         DialogueBoxFactory.createErrorDialogueBox(dialogueBoxResource.getString("Integer"),
                                                   dialogueBoxResource.getString("CheckInput"));
+    }
+
+    @Override
+    public void onUserEnteredEnemy (int enemyID) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void onUserEnteredNumofEnemies (int numEnemies) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void onUserEnteredSpawnPoint (int spawnPoint) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void onUserEnteredWaveTimeDelay (int timeDelay) {
+        // TODO Auto-generated method stub
+
     }
 }
