@@ -94,9 +94,7 @@ public class EnemyEffectView extends PhotoFileChooser implements IEnemySetView {
                                                                                                 "Try again");
                                                             }
                                                         }));
-        vbox.getChildren()
-                .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Name"),
-                                                           enemyName.getInstanceAsNode()));
+        vbox.getChildren().add(enemyName.getInstanceAsNode());
         vbox.getChildren()
                 .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Size"),
                                                            enemySize.getInstanceAsNode()));

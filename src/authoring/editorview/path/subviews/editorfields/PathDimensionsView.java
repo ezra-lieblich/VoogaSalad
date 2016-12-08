@@ -2,7 +2,9 @@ package authoring.editorview.path.subviews.editorfields;
 
 import java.util.ResourceBundle;
 
+
 import authoring.editorview.path.IPathSetView;
+
 import authoring.editorview.path.PathEditorViewDelegate;
 import authoring.utilityfactories.BoxFactory;
 import authoring.utilityfactories.DialogueBoxFactory;
@@ -12,6 +14,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+
 
 
 public class PathDimensionsView implements IPathSetView{
@@ -77,5 +80,6 @@ public class PathDimensionsView implements IPathSetView{
 			Alert inputError = DialogueBoxFactory.createErrorDialogueBox("The dimensions of the grid must be an integer.", "Input error");
 		}
 	}
+
 
 }

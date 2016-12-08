@@ -52,6 +52,7 @@ public class NewPathView implements IPathSetView {
 		
 	}
 	 
+
     private Button createButton (String label, EventHandler<ActionEvent> event) {
         Button button = new Button(label);
         button.setOnAction(event);

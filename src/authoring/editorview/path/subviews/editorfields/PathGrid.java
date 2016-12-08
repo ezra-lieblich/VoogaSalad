@@ -1,7 +1,5 @@
 package authoring.editorview.path.subviews.editorfields;
 
-
-
 import java.util.List;
 
 import authoring.editorview.path.IPathSetView;

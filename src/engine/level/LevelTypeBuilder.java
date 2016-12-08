@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
-
 import engine.AbstractTypeBuilder;
 import engine.level.wave.Wave;
 import engine.observer.ObservableList;
@@ -20,7 +19,7 @@ import engine.observer.ObservableProperty;
 public class LevelTypeBuilder extends AbstractTypeBuilder<Level, LevelBuilder>
         implements LevelBuilder, LevelInitializer {
 
-	public static final String DEFAULT_NAME = "Level";
+    public static final String DEFAULT_NAME = "Level";
     public static final String DEFAULT_IMAGE_PATH = "Images/blacksquarejpg";
     public static final double DEFAULT_SIZE = 1;
     public static final Map<Integer, Wave> DEFAULT_ENEMY_COUNTS = new HashMap<Integer, Wave>();
@@ -29,7 +28,7 @@ public class LevelTypeBuilder extends AbstractTypeBuilder<Level, LevelBuilder>
     public static final double DEFAULT_REWARD_SCORE = 200;
     public static final double DEFAULT_DURATION_IN_SECONDS = 1;
     public static final double DEFAULT_LEVEL_TIME = 0;
-    public static final Integer[] DEFAULT_PATHS = new Integer[]{};
+    public static final Integer[] DEFAULT_PATHS = new Integer[] {};
 
     private ObservableList<Integer> paths;
     private ObservableMap<Integer, Wave> enemyCounts;
@@ -43,19 +42,18 @@ public class LevelTypeBuilder extends AbstractTypeBuilder<Level, LevelBuilder>
         super(DEFAULT_NAME, DEFAULT_IMAGE_PATH, DEFAULT_SIZE);
     }
 
-	@Override
-	public LevelBuilder addLevelTimeListener(BiConsumer<Double, Double> listener) {
-		this.time.addListener(listener);
-		return this;
-	}
+    @Override
+    public LevelBuilder addLevelTimeListener (BiConsumer<Double, Double> listener) {
+        this.time.addListener(listener);
+        return this;
+    }
 
+    @Override
+    public LevelBuilder addPathListener (BiConsumer<List<Integer>, List<Integer>> listener) {
+        paths.addListener(listener);
+        return this;
+    }
 
-	@Override
-	public LevelBuilder addPathListener(BiConsumer<List<Integer>, List<Integer>> listener) {
-		paths.addListener(listener);
-		return this;
-	}
-    
     @Override
     public LevelBuilder addWaveListener (BiConsumer<Map<Integer, Wave>, Map<Integer, Wave>> listener) {
         enemyCounts.addListener(listener);
@@ -110,17 +108,17 @@ public class LevelTypeBuilder extends AbstractTypeBuilder<Level, LevelBuilder>
     public ObservableProperty<Double> getDurationInSeconds () {
         return durationInSeconds;
     }
-    
-	@Override
-	public ObservableProperty<Double> getLevelTime() {
-		return time;
-	}
 
-	@Override
-	public ObservableList<Integer> getPaths() {
-		return paths;
-	}
-	
+    @Override
+    public ObservableProperty<Double> getLevelTime () {
+        return time;
+    }
+
+    @Override
+    public ObservableList<Integer> getPaths () {
+        return paths;
+    }
+
     @Override
     public LevelBuilder buildWaves (Map<Integer, Wave> enemies) {
         this.enemyCounts.setProperty(enemies);
@@ -150,19 +148,19 @@ public class LevelTypeBuilder extends AbstractTypeBuilder<Level, LevelBuilder>
         this.durationInSeconds.setProperty(durationInSeconds);
         return this;
     }
-    
-	@Override
-	public LevelBuilder buildPaths(List<Integer> paths) {
-		this.paths.setProperty(paths);
-		return this;
-	}
-    
-	@Override
-	public LevelBuilder buildLevelTime(double time) {
-		this.time.setProperty(time);
-		return this;
-	}
-	
+
+    @Override
+    public LevelBuilder buildPaths (List<Integer> paths) {
+        this.paths.setProperty(paths);
+        return this;
+    }
+
+    @Override
+    public LevelBuilder buildLevelTime (double time) {
+        this.time.setProperty(time);
+        return this;
+    }
+
     @Override
     protected Level create () {
         return new LevelType(this);
@@ -176,7 +174,9 @@ public class LevelTypeBuilder extends AbstractTypeBuilder<Level, LevelBuilder>
         this.rewardScore = new ObservableObjectProperty<Double>(DEFAULT_REWARD_SCORE);
         this.durationInSeconds = new ObservableObjectProperty<Double>(DEFAULT_DURATION_IN_SECONDS);
         this.time = new ObservableObjectProperty<Double>(DEFAULT_LEVEL_TIME);
-        this.paths = new ObservableListProperty<Integer>(Arrays.stream(DEFAULT_PATHS).collect(Collectors.toList()));
+        this.paths =
+                new ObservableListProperty<Integer>(Arrays.stream(DEFAULT_PATHS)
+                        .collect(Collectors.toList()));
 
     }
 

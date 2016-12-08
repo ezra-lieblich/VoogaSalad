@@ -9,8 +9,8 @@ import engine.level.wave.Wave;
 public interface LevelBuilder extends TypeBuilder<Level, LevelBuilder>, BindableLevel {
 
     LevelBuilder buildPaths (List<Integer> paths);
-	
-	LevelBuilder buildWaves (Map<Integer, Wave> enemies);
+
+    LevelBuilder buildWaves (Map<Integer, Wave> enemies);
 
     LevelBuilder buildRewardHealth (double rewardHealth);
 
@@ -19,7 +19,7 @@ public interface LevelBuilder extends TypeBuilder<Level, LevelBuilder>, Bindable
     LevelBuilder buildRewardScore (double rewardScore);
 
     LevelBuilder buildDurationInSeconds (double durationInSeconds);
-    
+
     LevelBuilder buildLevelTime (double time);
 
 }

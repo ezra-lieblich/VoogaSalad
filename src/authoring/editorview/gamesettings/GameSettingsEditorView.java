@@ -26,6 +26,9 @@ public class GameSettingsEditorView implements IGameSettingsEditorView, IGameSet
     private static final String RESOURCE_FILE_NAME = "resources/GameAuthoringSettings";	
 	private ResourceBundle settingsResource = ResourceBundle.getBundle(RESOURCE_FILE_NAME);
 
+
+
+
     public GameSettingsEditorView (int aWidth, int aHeight) {
         gameSettingsView = new BorderPane();
         this.gameConditionsRoot = new VBox(10);

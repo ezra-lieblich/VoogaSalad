@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
+
 public class PathInstructionsView implements IEditorView{
 	
 	private VBox root;
@@ -35,4 +36,5 @@ public class PathInstructionsView implements IEditorView{
 	}
 
 	
+
 }
