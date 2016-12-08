@@ -14,12 +14,14 @@ public class WeaponManager extends Observable{
 	private TowerManager towerManager;
 	private HashMap<Integer, Weapon> weaponOnGrid;
 	private int uniqueWeaponID;
+	private long timeInterval;
 	
 
 
 	public WeaponManager(GamePlayData gameData, TowerManager towerManager) {
 		this.gameData = gameData;
 		this.towerManager = towerManager;
+		this.timeInterval = this.towerManager.getTimeInterval();
 		initializeNewLevel();
 	}
 
@@ -30,6 +32,10 @@ public class WeaponManager extends Observable{
 	
 	public HashMap<Integer, Weapon> getWeaponOnGrid(){
 		return this.weaponOnGrid;
+	}
+	
+	public long timeInterval(){
+		return this.timeInterval;
 	}
 
 
