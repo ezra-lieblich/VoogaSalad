@@ -29,6 +29,7 @@ public class PathInstructionsView {
 	
 	private void addInstructionsText(){
 		Text instructions = new Text(pathResource.getString("PathBuilderInstructions"));
+		instructions.setWrappingWidth(650);
 		root.getChildren().add(instructions);
 	}
 

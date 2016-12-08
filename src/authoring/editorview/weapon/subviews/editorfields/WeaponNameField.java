@@ -40,7 +40,7 @@ public class WeaponNameField implements IWeaponSetView {
         return weaponNameField;
     }
 
-    public void updateWeaponName (String weaponName) {
+    public void updateName (String weaponName) {
         weaponNameField.setText(weaponName);
     }
 
