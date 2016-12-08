@@ -60,7 +60,7 @@ public class GamePlayData  extends Observable{
 
 
 	public Grid getGrid() {
-		System.out.println("Successfully got grid");
+		//System.out.println("Successfully got grid");
 		this.grid = this.factory.getGrid(this.currentLevel);
 		return this.grid;
 	}

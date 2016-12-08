@@ -52,8 +52,8 @@ public class EnemyManager extends Observable {
 	}
 
 	public void setCurrentCell(Cell cell) {
-		System.out.println("CURRENT CELL SET: ");
-		System.out.println(cell.getX() + ", " + cell.getY());
+		//System.out.println("CURRENT CELL SET: ");
+		//System.out.println(cell.getX() + ", " + cell.getY());
 		this.current = cell;
 		this.currentCopy = cell;
 	}

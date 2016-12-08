@@ -70,6 +70,7 @@ public class Wrapper {
 	 * Updated game score within the level
 	 */
 	public void updateGameScores(String field, String level, String value) throws IOException{
+		System.out.println("Update game scores: "+field+": "+value);
 		String endpoint = "updatescore";
 		URL url = new URL(baseURL + endpoint);
 		String json = "{\"updated_field\": \"" + field + "\",\"value\":\""+value+"\",\"level\":[\""+level+"\"]}";
