@@ -17,19 +17,19 @@ public class Gun {
 		this.ycoor = y; 
 	}
 	
-	double getx(){
+	public double getX(){
 		return this.xcoor;
 	}
 	
-	double gety(){
+	public double getY(){
 		return this.ycoor;
 	}
 	
-	double getRange(){
+	public double getRange(){
 		return this.attackingRange;
 	}
 	
-	boolean isFiring(){
+	public boolean isFiring(){
 		fireCounter++;
 		if(fireCounter % firingRate == 0)
 			return true;

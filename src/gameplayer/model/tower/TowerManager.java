@@ -137,6 +137,7 @@ public class TowerManager extends Observable {
 			double x2 = this.gameData.cellToCoordinate(x1);
 			double y2 = this.gameData.cellToCoordinate(y1);
 			Gun tempGun = new Gun(fireRate ,weaponForGun, x2, y2 );// change fire rate 
+			gunForTower.add(tempGun);
 		}
 
 		gameplayer.model.tower.Tower newlyPlaced = new gameplayer.model.tower.Tower(towerType, gunForTower,
@@ -228,11 +229,9 @@ public class TowerManager extends Observable {
 				if(g.isFiring()){
 					for(int j : enemyOnGrid.keySet()){
 						Enemy e = enemyOnGrid.get(j);
-						double distance = this.gameData.getDistance(g.getx(), g.gety(), e.getX(), e.getY());
-						if(distance < g.getRange()){
-							Enemy target = enemyOnGrid.get(j);
-							newlyFired.add(g.getWeapon(j,target.getX(), target.getY()));							
-						}
+						double distance = this.gameData.getDistance(g.getX(), g.getY(), e.getX(), e.getY());//this doesnt work?
+						Enemy target = enemyOnGrid.get(j);
+						newlyFired.add(g.getWeapon(j,target.getX(), target.getY()));							
 						break;
 					}
 				}
@@ -243,6 +242,7 @@ public class TowerManager extends Observable {
 		System.out.println("=====================");
 
 		System.out.println("number of weapon fired: " + newlyFired.size());
+		System.out.println("newlyFired"+newlyFired.size());
 		return newlyFired;
 	}
 

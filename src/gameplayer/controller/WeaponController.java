@@ -1,6 +1,8 @@
-package gameplayer.controller;
+package gameplayer.controller;	
 
 import java.util.ArrayList;
+import java.util.HashMap;
+
 import gameplayer.model.weapon.Weapon;
 import gameplayer.model.weapon.WeaponManager;
 
@@ -12,7 +14,6 @@ public class WeaponController {
 	public WeaponController(WeaponManager weaponManager) {
 		this.weaponManager = weaponManager;
 		this.updateRate = weaponManager.timeInterval();
-		
 	}
 	
 	
@@ -23,6 +24,9 @@ public class WeaponController {
 	 * weaponOnGrid is a hashMap mapping from uniqueID to actual weapon object
 	 * 
 	 */
+	public HashMap<Integer,Weapon> getWeaponOnGrid(){
+		return this.weaponManager.getWeaponOnGrid();
+	}
 
 
 }

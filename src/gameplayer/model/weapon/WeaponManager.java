@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Observable;
 
 import gameplayer.model.GamePlayData;
+import gameplayer.model.tower.Gun;
 import gameplayer.model.tower.TowerManager;
 import gameplayer.view.GridGUI;
 
@@ -40,13 +41,17 @@ public class WeaponManager extends Observable{
 
 
 	public void updateWeapon() {
-		/*
-		System.out.println("+++++++++++++++++++++");
-		System.out.println("=====================");
-
-		System.out.println("number of weapon fired: " + this.weaponOnGrid.size());
-	*/
+	
+		//newly fired weapon
+		ArrayList<Weapon> newlyGeneratedWeapons = this.towerManager.generateNewWeapons();
+		for (int i = 0; i < newlyGeneratedWeapons.size(); i++){
+			newlyGeneratedWeapons.get(i).setUniqueID(this.uniqueWeaponID);
+			this.weaponOnGrid.put(uniqueWeaponID, newlyGeneratedWeapons.get(i));
+			uniqueWeaponID++;
+		}
+		
 		for (int i : weaponOnGrid.keySet()) {
+			System.out.println("weaponsOnGrid Size: "+weaponOnGrid.size());
 			Weapon w = weaponOnGrid.get(i);
 			if (w.getX() < GridGUI.GRID_WIDTH) {
 				w.setX(w.getSpeedX() + w.getX());
@@ -55,17 +60,9 @@ public class WeaponManager extends Observable{
 				w.setY(w.getSpeedY() + w.getY());
 			}
 
-			if (!this.gameData.coordinateInBound(w.getX(), w.getY()) || !w.inRange()) {
-				this.weaponOnGrid.remove(i);
-			}
-		}
-
-		//newly fired weapon
-		ArrayList<Weapon> newlyGeneratedWeapons = this.towerManager.generateNewWeapons();
-		for (int i = 0; i < newlyGeneratedWeapons.size(); i++){
-			newlyGeneratedWeapons.get(i).setUniqueID(this.uniqueWeaponID);
-			this.weaponOnGrid.put(uniqueWeaponID, newlyGeneratedWeapons.get(i));
-			uniqueWeaponID++;
+//			if (!this.gameData.coordinateInBound(w.getX(), w.getY()) || !w.inRange()) {
+//				this.weaponOnGrid.remove(i);
+//			}
 		}
 
 		setChanged();
