@@ -11,5 +11,7 @@ public interface IToolbar {
 	public void setOnPressedSave(EventHandler<MouseEvent> e);
 	
 	public void saveFile (String fileContent);
+	
+	public void setOnPressedLoad(EventHandler<MouseEvent> e);
     
 }

@@ -34,10 +34,15 @@ public class Toolbar implements IToolbar {
     	loadButton = new Button("Load");
     	
         this.toolbar = new ToolBar(
-        						saveButton
-        						
+        						saveButton,
+        						loadButton
                                 );
         
+    }
+    
+    @Override
+    public void setOnPressedLoad(EventHandler<MouseEvent> e) {
+    	loadButton.setOnMouseClicked(e);
     }
 
     @Override
