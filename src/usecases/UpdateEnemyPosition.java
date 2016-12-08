@@ -1,6 +1,6 @@
 package usecases;
 
-import gameplayer.model.Enemy;
+import gameplayer.model.enemy.Enemy;
 
 /*
 public class UpdateEnemyPosition {
