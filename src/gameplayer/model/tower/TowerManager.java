@@ -242,6 +242,7 @@ public class TowerManager extends Observable {
 		System.out.println("=====================");
 
 		System.out.println("number of weapon fired: " + newlyFired.size());
+		System.out.println("newlyFired"+newlyFired.size());
 		return newlyFired;
 	}
 

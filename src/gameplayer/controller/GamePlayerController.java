@@ -329,16 +329,13 @@ public class GamePlayerController implements Observer {
 
 		HashMap<Integer, Enemy> enemyRedraw = this.enemyManager.getEnemyOnGrid();
 		Map<Integer, Tower> towerRedraw = this.model.getTowerOnGrid();
-		HashMap<Integer, Weapon> bulletRedraw = this.model.getWeaponOnGrid();
-		//System.out.println("are there weapons?");
-		//System.out.println(bulletRedraw);
+		HashMap<Integer, Weapon> bulletRedraw = this.model.getWeaponManager().getWeaponOnGrid();
 		for (int i : bulletRedraw.keySet()) {
+			System.out.println("bulletRedraw");
 			if (!weaponsOnScreen.containsKey(bulletRedraw.get(i).getUniqueID())) {
 				ImageView image = new ImageView(bulletRedraw.get(i).getImage());
 				image.setCache(true);
 				image.setCacheHint(CacheHint.SPEED);
-				// System.out.println("weapon coord: x:"+entity.getX()+",
-				// y:"+entity.getY());
 				image.setX(bulletRedraw.get(i).getX());
 				image.setY(bulletRedraw.get(i).getY());
 				graphics.setImageViewParams(image, DragDropView.DEFENSIVEWIDTH * 0.5,

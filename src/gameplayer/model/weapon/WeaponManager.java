@@ -60,9 +60,9 @@ public class WeaponManager extends Observable{
 				w.setY(w.getSpeedY() + w.getY());
 			}
 
-			if (!this.gameData.coordinateInBound(w.getX(), w.getY()) || !w.inRange()) {
-				this.weaponOnGrid.remove(i);
-			}
+//			if (!this.gameData.coordinateInBound(w.getX(), w.getY()) || !w.inRange()) {
+//				this.weaponOnGrid.remove(i);
+//			}
 		}
 
 		setChanged();
