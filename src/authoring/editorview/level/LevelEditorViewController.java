@@ -119,6 +119,7 @@ public class LevelEditorViewController extends EditorViewController
     @Override
     public void onUserEnteredAddWave () {
         currentWaveID = levelDataSource.createWave(currentLevelID, levelView);
+        // levelView.updateNumberOfEnemies(levelDataSource.getenem);
         levelView.updateEnemyFrequency(levelDataSource.getWaveFrequency(currentLevelID,
                                                                         currentWaveID));
     }
@@ -175,20 +176,38 @@ public class LevelEditorViewController extends EditorViewController
     }
 
     @Override
-    public void onUserEnteredNumofEnemies (int numEnemies) {
-        // TODO Auto-generated method stub
-
+    public void onUserEnteredNumofEnemies (String numEnemies) {
+        try {
+            Integer.parseInt(numEnemies);
+            levelDataSource.setWaveCount(currentLevelID, currentWaveID,
+                                         Integer.parseInt(numEnemies));
+        }
+        catch (NumberFormatException e) {
+            createIntCheckDialogueBox();
+        }
     }
 
     @Override
-    public void onUserEnteredSpawnPoint (int spawnPoint) {
-        // TODO Auto-generated method stub
-
+    public void onUserEnteredSpawnPoint (String spawnPoint) {
+        try {
+            Integer.parseInt(spawnPoint);
+            levelDataSource.setWavePath(currentLevelID, currentWaveID,
+                                        Integer.parseInt(spawnPoint));
+        }
+        catch (NumberFormatException e) {
+            createIntCheckDialogueBox();
+        }
     }
 
     @Override
-    public void onUserEnteredWaveTimeDelay (int timeDelay) {
-        // TODO Auto-generated method stub
-
+    public void onUserEnteredWaveTimeDelay (String timeDelay) {
+        try {
+            Double.parseDouble(timeDelay);
+            levelDataSource.setWaveDelay(currentLevelID, currentWaveID,
+                                         Double.parseDouble(timeDelay));
+        }
+        catch (NumberFormatException e) {
+            createIntCheckDialogueBox();
+        }
     }
 }

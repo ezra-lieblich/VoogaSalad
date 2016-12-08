@@ -31,10 +31,10 @@ public interface LevelEditorViewDelegate {
 
     public void onUserEnteredEnemy (int enemyID);
 
-    public void onUserEnteredNumofEnemies (int numEnemies);
+    public void onUserEnteredNumofEnemies (String numEnemies);
 
-    public void onUserEnteredSpawnPoint (int spawnPoint);
+    public void onUserEnteredSpawnPoint (String spawnPoint);
 
-    public void onUserEnteredWaveTimeDelay (int timeDelay);
+    public void onUserEnteredWaveTimeDelay (String timeDelay);
 
 }

@@ -20,7 +20,7 @@ public interface ILevelEditorView extends ILevelSetView, IUpdateView {
 
     public void setLevelListDataSource (ListDataSource source);
 
-    // Wave Object
+    // Wave Object Updates
 
     public void updateWaveNumber (int waveNumber);
 

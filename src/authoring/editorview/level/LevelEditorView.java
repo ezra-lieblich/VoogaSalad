@@ -140,7 +140,6 @@ public class LevelEditorView implements ILevelEditorView {
 
     @Override
     public void setLevelListDataSource (ListDataSource source) {
-        // TODO Auto-generated method stub
         System.out.println("No level bank currently implemented");
     }
 
