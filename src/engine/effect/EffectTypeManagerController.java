@@ -41,7 +41,7 @@ public class EffectTypeManagerController extends
      */
     @Override
     public List<String> getTriggerMethods (String trigger) {
-        return getTypeManager().getAnnotatedClassMethods(trigger).stream().map(Method::getName)
+        return getTypeManager().getAnnotatedClassMethods(trigger).stream().map(a -> a.toGenericString())
                 .collect(Collectors.toList());
     }
 
@@ -88,7 +88,8 @@ public class EffectTypeManagerController extends
                 .addTriggerClassListener( (oldValue, newValue) -> updateView
                         .updateTriggerConditions(getTypeManager()
                                 .getAnnotatedClassMethods(newValue.getName()).stream()
-                                .map(Method::getName).collect(Collectors.toList())));
+                                .map(a -> a.toString()).collect(Collectors.toList())));
     }
+
 
 }
