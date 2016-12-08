@@ -55,19 +55,22 @@ public class PathChooser{
 	public Node getInstanceAsNode () {
 		return root;
 	}
-	
-	public void updatePathComboBox(String pathName){
 		
-		pathList.add(pathName);
+	public void updatePathComboBox(String pathName){		
 		NameIdPair newPair = new NameIdPair(pathName, activePathID);
-		nameIdList.add(newPair);
-		for (NameIdPair pair : nameIdList){
-			if (pair != newPair && pair.getId() == activePathID){
-				nameIdList.remove(pair);
-				pathList.remove(pair.getName());
+		boolean newPath = true;
+		for (NameIdPair pair : nameIdList){		
+			if (pair.getId() == activePathID){
+				newPath = false;
+				nameIdList.set(nameIdList.indexOf(pair), newPair);
+				pathList.set(pathList.indexOf(pair.getName()), pathName);				
 				break;
 			}
-		}		
+		}	
+		if (newPath){
+			pathList.add(pathName);
+			nameIdList.add(newPair);
+		}
 	}
 	
 	private void setEditView(String pathName){
