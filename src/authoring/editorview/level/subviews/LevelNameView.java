@@ -6,7 +6,6 @@ import authoring.editorview.level.ILevelSetView;
 import authoring.editorview.level.LevelEditorViewDelegate;
 import authoring.utilityfactories.BoxFactory;
 import authoring.utilityfactories.TextFieldFactory;
-import javafx.scene.Node;
 
 
 public class LevelNameView extends NameView implements ILevelSetView {
@@ -15,11 +14,6 @@ public class LevelNameView extends NameView implements ILevelSetView {
 
     public LevelNameView (ResourceBundle levelsResource) {
         super(levelsResource);
-    }
-
-    @Override
-    public Node getInstanceAsNode () {
-        return root;
     }
 
     @Override
