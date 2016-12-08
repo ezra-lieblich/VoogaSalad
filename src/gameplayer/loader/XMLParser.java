@@ -94,8 +94,7 @@ public class XMLParser {
     
     public Map<Integer,Tower> getTowerUpgrades() {
     	TowerManager towerManager = gameManager.getManager(TowerManager.class);
-    	//return towerManager.getUpgrades(); need sean to add getUpgrades method to TowerTypeManager
-    	return null;
+    	return towerManager.getUpgrades();
     }
     
     

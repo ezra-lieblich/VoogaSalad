@@ -35,7 +35,7 @@ public class TowerNameField implements ITowerSetView {
         return towerNameField;
     }
 
-    public void updateTowerName (String towerName) {
+    public void updateName (String towerName) {
         towerNameField.setText(towerName);
     }
 

@@ -9,6 +9,7 @@ import engine.enemy.EnemyManager;
  */
 public interface LevelManager extends Manager<Level> {
 
-    void visitRemoveEntry (EnemyManager manager, Integer index);
+    // TODO Need to go into waves and remove this 
+	void visitRemoveEntry (EnemyManager manager, Integer index);
 
 }

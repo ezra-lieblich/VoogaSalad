@@ -7,7 +7,7 @@ package authoring.editorview.level;
  */
 public interface LevelEditorViewDelegate {
 
-    public void onUserEnteredRewardPoints (String points);
+    public void onUserEnteredRewardScore (String score);
 
     public void onUserEnteredRewardMoney (String money);
 

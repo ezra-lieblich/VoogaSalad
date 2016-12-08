@@ -1,15 +1,12 @@
 package engine.settings;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.function.BiConsumer;
+import java.util.stream.Collectors;
 
 import engine.AbstractTypeBuilder;
-import engine.level.Level;
-import engine.level.LevelBuilder;
-import engine.level.LevelInitializer;
+
 import engine.observer.ObservableList;
 import engine.observer.ObservableListProperty;
 import engine.observer.ObservableObjectProperty;
@@ -18,10 +15,10 @@ import engine.observer.ObservableProperty;
 public class GameModeTypeBuilder extends AbstractTypeBuilder<GameMode, GameModeBuilder> implements GameModeBuilder, GameModeInitializer {
 
 	public static final String DEFAULT_NAME = "New Game";
-    public static final String DEFAULT_IMAGE_PATH = "Images.blacksquare.jpg";
+    public static final String DEFAULT_IMAGE_PATH = "Images/blacksquare.jpg";
     public static final double DEFAULT_SIZE = 1;
-    public static final List<String> DEFAULT_WINNING_CONDITIONS = new ArrayList<String>();
-    public static final List<String> DEFAULT_LOSING_CONDITIONS = new ArrayList<String>();
+    public static final String[] DEFAULT_WINNING_CONDITIONS = new String[]{};
+    public static final String[] DEFAULT_LOSING_CONDITIONS = new String[]{};
     public static final String DEFAULT_GAME_TYPE = "Normal";
     public static final double DEFAULT_INITIAL_LIVES = 1;
     public static final double DEFAULT_INITIAL_MONEY = 5000;
@@ -128,8 +125,8 @@ public class GameModeTypeBuilder extends AbstractTypeBuilder<GameMode, GameModeB
 
 	@Override
 	protected void restoreTypeDefaults() {
-		this.winningConditions = new ObservableListProperty<String>(DEFAULT_WINNING_CONDITIONS);
-		this.losingConditions = new ObservableListProperty<String>(DEFAULT_LOSING_CONDITIONS);
+		this.winningConditions = new ObservableListProperty<String>(Arrays.stream(DEFAULT_WINNING_CONDITIONS).collect(Collectors.toList()));
+		this.losingConditions = new ObservableListProperty<String>(Arrays.stream(DEFAULT_LOSING_CONDITIONS).collect(Collectors.toList()));
 		this.gameType = new ObservableObjectProperty<String>(DEFAULT_GAME_TYPE);
 		this.initialLives = new ObservableObjectProperty<Double>(DEFAULT_INITIAL_LIVES);
 		this.initialMoney = new ObservableObjectProperty<Double>(DEFAULT_INITIAL_MONEY);

@@ -2,6 +2,7 @@ package engine;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import authoring.editorview.IUpdateView;
@@ -71,9 +72,16 @@ public abstract class AbstractTypeManagerController<E extends Manager<T>, U exte
     //TODO - is this ok?
     @Override
     public boolean setName (int id, String name) {
-        return isUnique(Type::getName, name) ? typeManager.getEntity(id).setName(name) : false;
+        return handleRequest(isUnique(Type::getName, name), a -> a.getEntity(id).setName(name));
     }
 
+    protected boolean handleRequest(boolean isValid, Consumer<E> request) {
+        if(isValid) {
+            request.accept(typeManager);
+        }
+        return isValid;
+    }
+    
     @Override
     public void setImagePath (int id, String imagePath) {
         typeManager.getEntity(id).setImagePath(imagePath);
@@ -95,13 +103,13 @@ public abstract class AbstractTypeManagerController<E extends Manager<T>, U exte
 
     protected abstract U constructTypeProperties (V updateView, U typeBuilder);
 
-    protected interface ViewFiller {
-        void updateNameDisplay (String name);
-
-        void updateImagePathDisplay (String imagePath);
-
-        void updateSizeDisplay (double size);
-    }
+//    protected interface ViewFiller {
+//        void updateNameDisplay (String name);
+//
+//        void updateImagePathDisplay (String imagePath);
+//
+//        void updateSizeDisplay (double size);
+//    }
     
     protected <R> boolean isUnique(Function<T, R> getter, R value) {
         return !typeManager.getEntityIds().stream().map(a -> typeManager.getEntity(a)).anyMatch(b -> getter.apply(b).equals(value));
