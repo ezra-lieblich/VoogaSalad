@@ -186,8 +186,10 @@ public class TowerManager extends Observable {
 		this.gameData.setGold(this.gameData.getGold() + t.sellTower());
 		this.gameData.getGrid().removeTower((int)t.getX(),(int)t.getX());
 		this.towersOnGrid.remove(uniqueTowerID);
-		setChanged();
-		notifyObservers();
+		
+		//don't need this
+		//setChanged();
+		//notifyObservers();
 
 	}
 

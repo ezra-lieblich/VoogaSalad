@@ -53,8 +53,8 @@ import chrriis.dj.nativeswing.swtimpl.components.JWebBrowser;
 
 public class GamePlayerController implements Observer {
 
-	private static final int Y_OFFSET = 54;
-	private static final int ENTITY_SIZE = 70;
+	public static final int Y_OFFSET = 54;
+	public static final int ENTITY_SIZE = 70;
 	public static final int FRAMES_PER_SECOND = 60;
 	public static final int MILLISECOND_DELAY = 50;
 	public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
@@ -99,7 +99,7 @@ public class GamePlayerController implements Observer {
 																						// should
 																						// be
 																						// gridGUI
-		this.towerController = new TowerController(this.model.getTowerManager());
+		
 		this.weaponController = new WeaponController(this.model.getWeaponManager());
 		this.collisionController = new CollisionController(this.model.getCollisionManager());
 		this.model.getData().addObserver(this);
@@ -144,6 +144,7 @@ public class GamePlayerController implements Observer {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		this.towerController = new TowerController(this.model.getTowerManager(), this.view.getGrid());
 		
 	}
 
@@ -163,7 +164,7 @@ public class GamePlayerController implements Observer {
 		this.mainScene = view.init(this.model.getData().getGold(), this.model.getData().getLife(),
 				this.model.getData().getCurrentLevel(), getTowerImages());
 		this.mainScene.setOnMouseClicked(e -> handleMouseClicked(e.getX(), e.getY()));
-
+		
 		this.view.getGrid().populatePath(model.getData().getGrid().getStartPoint());
 		this.dropController = new DragDropController(this.view, this.model, this.getTowerImageMap());
 
@@ -189,6 +190,8 @@ public class GamePlayerController implements Observer {
 				e.toggleInfoVisibility();
 			}
 		}
+		
+		this.towerController.handleSellTowerClick(x, y);
 	}
 
 	private ArrayList<String> getTowerImages() {
