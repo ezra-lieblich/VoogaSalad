@@ -140,7 +140,6 @@ public class EnemyManager extends Observable {
 	}
 	
 	private void handleEnemyEnteringBase(Enemy e){
-		gameData.setLife(gameData.getLife()-1);
 		removeEnemyFromGrid(e);
 	}
 	
