@@ -9,6 +9,7 @@ public class EffectFactory {
     public Object create(Effect effect) {
         Class<?> clazz = effect.getTrigger().getClass();
         Method method = effect.getTrigger().getParticipantMethod();
-        method.invoke(obj, args)
+        //method.invoke(obj, args)
+        return null;
     }
 }
