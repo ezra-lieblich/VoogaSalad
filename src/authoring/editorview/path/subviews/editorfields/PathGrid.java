@@ -67,7 +67,10 @@ public class PathGrid {
 	public void setGridDimensions(int dimensions){
 		cellSize = gridSize/dimensions;
 		this.gridDimensions = dimensions;
-		redrawPath();
+		if (pathCoordinates != null){
+			redrawPath();
+		}
+		
 	}
 	
 	public List<Coordinate<Integer>> getPathCoordinates(){
@@ -131,7 +134,7 @@ public class PathGrid {
 
 	
 	
-	public void setPath(){
+	private void setPath(){
 		pathGrid = new ImageView[gridDimensions][gridDimensions];		
 		for (int i = 0; i < gridDimensions; i++){
 			for (int j = 0; j < gridDimensions; j++){

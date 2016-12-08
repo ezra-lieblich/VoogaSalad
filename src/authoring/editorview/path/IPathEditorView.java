@@ -16,8 +16,6 @@ public interface IPathEditorView extends IPathSetView, IUpdateView{
 	
 	public void updateActiveID (int pathID);
 	
-	public void createNewPath ();
-	
 	public void updatePath ();
 
 	public void setPathListDataSource (ListDataSource source);

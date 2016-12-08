@@ -25,7 +25,7 @@ public class PathEditorViewController extends EditorViewController implements Pa
 
 	@Override
 	public void onUserEnteredGridDimensions(int dimensions) {
-		//TODO
+		pathDataSource.setSquareGridDimensions(activeID, dimensions);
 		
 	}
 	
@@ -37,15 +37,15 @@ public class PathEditorViewController extends EditorViewController implements Pa
 
 	@Override
 	public void onUserEnteredPathName(String pathName) {
-		pathDataSource.setName(activeID, pathName);
-		
+		pathDataSource.setName(activeID, pathName);	
 	}
 	
 
 	@Override
 	public int onUserEnteredCreatePath() {
-		pathView.createNewPath();	
-		return pathDataSource.createType(pathView);		
+		activeID = pathDataSource.createType(pathView);	
+		pathView.updateActiveID(activeID);
+		return activeID;
 	}
 
 	@Override

@@ -52,12 +52,6 @@ public class PathEditorView implements IPathEditorView {
      
     }
 
-	private void formatPathGrid() {
-		pathGrid.setGridDimensions(pathDimensionsView.getGridDimensions());	
-	}
-	
-	
-
     @Override
     public Node getInstanceAsNode () {
         return root;
@@ -144,11 +138,6 @@ public class PathEditorView implements IPathEditorView {
 		
 	}
 
-	@Override
-	public void createNewPath() {
-		
-	
-	}
 
 	@Override
 	public void updatePath() {
