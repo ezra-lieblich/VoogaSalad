@@ -114,8 +114,6 @@ public class GamePlayerController implements Observer {
 
 	private void populateTowerToId(){
 		HashMap<Integer, engine.tower.Tower> mapping = this.model.getTowerManager().getAvailableTower();
-		System.out.println("tower mapping:");
-		System.out.println(mapping);
 		for (int key:mapping.keySet()){
 			this.towerToId.put(mapping.get(key).getImagePath(),key);
 		}
@@ -138,12 +136,7 @@ public class GamePlayerController implements Observer {
 	public void init() {
 		//this.model.initializeGameSetting(this.loader);
 		HashMap<String, Double> settings = this.loader.getGameSetting();
-		//initGUIDummy(settings);
-		System.out.println("In init:");
-		System.out.println(this.model.getData().getGrid().getStartPoint());
 		this.enemyManager.setCurrentCell(this.model.getData().getGrid().getStartPoint());
-		System.out.println("In init");
-		//this.model.getTowerManager().populateAvailableTower();
 		populateTowerToId();
 		initGUI();
 		//this.enemyController = new EnemyController(this.enemyManager, this.view.getGrid());
@@ -219,14 +212,6 @@ public class GamePlayerController implements Observer {
 		WebEngine webEngine = browser.getEngine();
 		webEngine.load("http://people.duke.edu/~lz107/voogaTemplates/gameover.html");
 		this.view.getMainScreen().setCenter(browser);
-		/*
-		Pane scroll = new Pane();
-		scroll.getChildren().add(browser);
-		Scene s = new Scene(scroll);
-		Stage stage = new Stage();
-		stage.setScene(s);
-		stage.show();
-		*/
 		
 	}
 	
@@ -239,6 +224,13 @@ public class GamePlayerController implements Observer {
 			this.view.updateStatsDisplay(((GamePlayData)o).getGold(), ((GamePlayData)o).getLife(),
 					((GamePlayData)o).getCurrentLevel());
 			this.view.updateCurrentLevelStats(((GamePlayData)o).getCurrentLevel());
+			
+			try {
+				this.updateWebAppStats(newLevel, ((GamePlayData)o));
+			} catch (IOException e2) {
+				// TODO Auto-generated catch block
+				e2.printStackTrace();
+			}
 			
 			//check for game over condition
 			if (((GamePlayData)o).getLife()<5){ //TODO: change 5 to 0
@@ -268,6 +260,13 @@ public class GamePlayerController implements Observer {
 		 * updateLevel(); }
 		 */
 
+	}
+	
+	private void updateWebAppStats(double newLevel, GamePlayData gdata) throws IOException{
+		Wrapper.getInstance().updateGameScores("lives", Double.toString(newLevel),Double.toString(gdata.getLife()));
+		Wrapper.getInstance().updateGameScores("gold", Double.toString(newLevel), Double.toString(gdata.getGold()));
+		Wrapper.getInstance().updateGameScores("level", Double.toString(newLevel),Double.toString(gdata.getCurrentLevel()));
+		
 	}
 
 	/*
@@ -311,6 +310,8 @@ public class GamePlayerController implements Observer {
 		HashMap<Integer, Enemy>enemyRedraw = this.enemyManager.getEnemyOnGrid(); 
 		Map<Integer, Tower>towerRedraw = this.model.getTowerOnGrid();
 		HashMap<Integer, Weapon>bulletRedraw = this.model.getWeaponOnGrid();
+		System.out.println("are there weapons?");
+		System.out.println(bulletRedraw);
 		for(int i: bulletRedraw.keySet()){
 			if(!weaponsOnScreen.containsKey(bulletRedraw.get(i).getUniqueID())){
 				ImageView image = new ImageView(bulletRedraw.get(i).getImage());
