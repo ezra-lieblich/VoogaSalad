@@ -107,7 +107,7 @@ public class LevelEditorViewController extends EditorViewController
     public void onUserEnteredEnemyFrequency (String frequency) {
         try {
             Double.parseDouble(frequency);
-            levelDataSource.setEnemyFrequency(currentLevelID, 0, Double.parseDouble(frequency));
+            //levelDataSource.setEnemyFrequency(currentLevelID, 0, Double.parseDouble(frequency));
             // TODO: HUGE BTW - the second parameter is the enemy that is set
         }
         catch (NumberFormatException e) {

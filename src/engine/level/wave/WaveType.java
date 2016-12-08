@@ -54,5 +54,10 @@ public class WaveType extends AbstractType implements Wave{
 	public void setFrequency(double frequency) {
 		this.frequency.setProperty(frequency);
 	}
+
+	@Override
+	public double calculateTime() {
+		return enemyCount.getProperty() * frequency.getProperty() + delay.getProperty();
+	}
 	
 }

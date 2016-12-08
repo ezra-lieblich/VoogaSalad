@@ -1,11 +1,9 @@
 package engine.level;
 
 import java.util.List;
-import java.util.Map;
 import authoring.editorview.level.ILevelEditorView;
 import engine.ManagerController;
 import engine.level.wave.Wave;
-import engine.level.wave.WaveType;
 
 
 public interface LevelManagerController
@@ -25,9 +23,11 @@ public interface LevelManagerController
 
     public double getRewardHealth (int levelID);
 
-    public void setPath (int levelID, int pathID);
+    public void addPath (int levelID, int pathID);
 
-    public int getPath (int levelID);
+    public List<Integer> getPaths (int levelID);
+    
+    public void removePath (int levelID, int pathID);
 
     public void setTransitionTime (int levelID, double time);
 

@@ -14,4 +14,5 @@ public interface Wave extends Type {
 	public void setStartTime(double startTime);
 	public double getFrequency();
 	public void setFrequency(double frequency);
+	public double calculateTime();
 }

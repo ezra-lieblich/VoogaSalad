@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.List;
 import engine.AbstractType;
 import engine.level.wave.Wave;
+import engine.level.wave.WaveTypeComparator;
+import engine.observer.ObservableList;
 import engine.observer.ObservableMap;
 import engine.observer.ObservableProperty;
 
@@ -16,6 +18,7 @@ public class LevelType extends AbstractType implements Level {
     private ObservableProperty<Double> rewardScore;
     private ObservableProperty<Double> durationInSeconds;
     private ObservableProperty<Double> time;
+    private ObservableList<Integer> paths;
 
     protected LevelType (LevelInitializer levelInitializer) {
         super(levelInitializer);
@@ -25,12 +28,14 @@ public class LevelType extends AbstractType implements Level {
         this.rewardScore = levelInitializer.getRewardScore();
         this.durationInSeconds = levelInitializer.getDurationInSeconds();
         this.time = levelInitializer.getLevelTime();
+        this.paths = levelInitializer.getPaths();
     }
 
     @Override
     public List<Wave> getWaves () {
-    	List<Wave> a = new ArrayList<Wave>(waves.getProperty().values()); 
-        return Collections.unmodifiableList(a);
+    	List<Wave> sortedWaves = new ArrayList<Wave>(waves.getProperty().values());
+    	Collections.sort(sortedWaves, new WaveTypeComparator());
+        return Collections.unmodifiableList(sortedWaves);
     }
 
     @Override
@@ -100,6 +105,21 @@ public class LevelType extends AbstractType implements Level {
 		if (wave.getEnemyCount() * wave.getFrequency() + wave.getStartTime() > time.getProperty()) {
 			time.setProperty(wave.getEnemyCount() * wave.getFrequency() + wave.getStartTime());
 		}
+	}
+
+	@Override
+	public void addPath(int pathID) {
+		paths.add(pathID);
+	}
+
+	@Override
+	public void removePath(int pathID) {
+		paths.remove(pathID);
+	}
+
+	@Override
+	public List<Integer> getPaths() {
+		return Collections.unmodifiableList(paths.getProperty());
 	}
 
 }

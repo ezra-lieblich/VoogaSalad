@@ -3,9 +3,6 @@ package engine.level.wave;
 import java.util.function.BiConsumer;
 
 import engine.AbstractTypeBuilder;
-import engine.level.Level;
-import engine.level.LevelBuilder;
-import engine.level.LevelInitializer;
 import engine.observer.ObservableObjectProperty;
 import engine.observer.ObservableProperty;
 

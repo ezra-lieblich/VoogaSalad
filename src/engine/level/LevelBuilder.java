@@ -1,14 +1,16 @@
 package engine.level;
 
+import java.util.List;
 import java.util.Map;
 import engine.TypeBuilder;
 import engine.level.wave.Wave;
-import engine.level.wave.WaveType;
 
 
 public interface LevelBuilder extends TypeBuilder<Level, LevelBuilder>, BindableLevel {
 
-    LevelBuilder buildWaves (Map<Integer, Wave> enemies);
+    LevelBuilder buildPaths (List<Integer> paths);
+	
+	LevelBuilder buildWaves (Map<Integer, Wave> enemies);
 
     LevelBuilder buildRewardHealth (double rewardHealth);
 

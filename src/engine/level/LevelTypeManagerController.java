@@ -1,13 +1,11 @@
 package engine.level;
 
 import java.util.List;
-import java.util.Map;
 import authoring.editorview.level.ILevelEditorView;
 import engine.AbstractTypeManagerController;
 import engine.ManagerMediator;
 import engine.level.wave.Wave;
 import engine.level.wave.WaveBuilder;
-import engine.level.wave.WaveType;
 import engine.level.wave.WaveTypeBuilder;
 
 
@@ -38,9 +36,8 @@ public class LevelTypeManagerController
     }
 
     @Override
-    public void setPath (int levelID, int pathID) {
-        // TODO Implement Path
-
+    public void addPath (int levelID, int pathID) {
+    	getTypeManager().getEntity(levelID).addPath(pathID);
     }
 
     @Override
@@ -71,9 +68,8 @@ public class LevelTypeManagerController
     }
 
     @Override
-    public int getPath (int levelID) {
-        // TODO Implement Path
-        return 0;
+    public List<Integer> getPaths (int levelID) {
+        return getTypeManager().getEntity(levelID).getPaths();
     }
 
     @Override
@@ -87,7 +83,8 @@ public class LevelTypeManagerController
         return typeBuilder.addDurationInSecondsListener( (oldValue, newValue) -> updateView
                 .updateTransitionTime(newValue))
                 //.addWaveListener( (oldValue, newValue) -> updateView.updateEnemy(newValue))
-                .addRewardHealthListener( (oldValue, newValue) -> updateView
+                //.addPathListener(listener)
+        		.addRewardHealthListener( (oldValue, newValue) -> updateView
                         .updateRewardHealth(newValue))
                 .addRewardScoreListener( (oldValue, newValue) -> updateView
                         .updateRewardPoints(newValue))
@@ -143,7 +140,6 @@ public class LevelTypeManagerController
 
 	@Override
 	public void removeWave(int levelID, int waveID) {
-		// TODO Auto-generated method stub
 		getTypeManager().getEntity(levelID).removeWave(waveID);
 	}
 
@@ -200,5 +196,10 @@ public class LevelTypeManagerController
 	@Override
 	public Wave getWave(int levelID, int waveID) {
 		return getTypeManager().getEntity(levelID).getWave(waveID);
+	}
+
+	@Override
+	public void removePath(int levelID, int pathID) {
+		getTypeManager().getEntity(levelID).removePath(pathID);
 	}
 }

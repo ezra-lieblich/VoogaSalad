@@ -2,12 +2,14 @@ package engine.level;
 
 import engine.TypeInitializer;
 import engine.level.wave.Wave;
-import engine.level.wave.WaveType;
+import engine.observer.ObservableList;
 import engine.observer.ObservableMap;
 import engine.observer.ObservableProperty;
 
 
 public interface LevelInitializer extends TypeInitializer {
+	ObservableList<Integer> getPaths ();
+	
     ObservableMap<Integer, Wave> getWaves ();
 
     ObservableProperty<Double> getRewardHealth ();
