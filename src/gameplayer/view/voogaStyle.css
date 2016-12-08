@@ -5,7 +5,7 @@
 }
 
 .root {
-	-fx-background-image: url(https://images.alphacoders.com/224/thumb-1920-224763.jpg);
+	-fx-background-image: url(../../../Images/steinsgate.jpg);
 	-fx-background-position: center center;
 }
 
@@ -77,6 +77,12 @@
 .scoreLabel{
 	-fx-font-size: 20;
 	-fx-text-fill: white;
+}
+
+.gridGUI {
+	-fx-background-image: url(../../../Images/gridBackground.png);
+	-fx-background-position: center center;
+	-fx-background-repeat: stretch;
 }
 
 .statsHBox {

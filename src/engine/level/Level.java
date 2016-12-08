@@ -1,18 +1,17 @@
 package engine.level;
 
 import engine.Type;
-import java.util.Map;
+import engine.level.wave.Wave;
+
+import java.util.List;
 
 
 /**
  * Created by ezra on 11/19/16.
  */
 public interface Level extends Type {
-    Map<Integer, Integer> getEnemyCounts ();
-
-    void setEnemyCounts (int enemy, int enemyCount);
-
-    void removeEnemy (int enemy);
+	
+    List<Wave> getWaves();
 
     double getRewardHealth ();
 
@@ -29,4 +28,22 @@ public interface Level extends Type {
     double getDurationInSeconds ();
 
     void setDurationInSeconds (double durationInSeconds);
+    
+    double getLevelTime ();
+    
+    void calculateLevelTime (int waveID);
+    
+    void removeWave (int waveID);
+    
+    int createWave (Wave wave);
+    
+    //List of Waves
+    Wave getWave (int id);
+    
+    void addPath (int pathID);
+    
+    void removePath (int pathID);
+    
+    List<Integer> getPaths();
+    
 }

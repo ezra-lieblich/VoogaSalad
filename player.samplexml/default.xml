@@ -73,7 +73,7 @@
                 <imagePath class="engine.observer.ObservableObjectProperty">
                   <observers/>
                   <listeners/>
-                  <property class="string">Images/penguin.jpg</property>
+                  <property class="string">penguin.jpg</property>
                 </imagePath>
                 <size class="engine.observer.ObservableObjectProperty">
                   <observers/>
@@ -134,7 +134,7 @@
                 <imagePath class="engine.observer.ObservableObjectProperty">
                   <observers/>
                   <listeners/>
-                  <property class="string">Images/penguin.jpg</property>
+                  <property class="string">penguin.jpg</property>
                 </imagePath>
                 <size class="engine.observer.ObservableObjectProperty">
                   <observers/>

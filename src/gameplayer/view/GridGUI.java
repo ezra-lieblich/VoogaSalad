@@ -5,7 +5,7 @@ import java.util.List;
 
 import gameplayer.model.Cell;
 import gameplayer.model.Grid;
-import gameplayer.model.Tower;
+import gameplayer.model.tower.Tower;
 import gameplayer.view.helper.GraphicsLibrary;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -32,13 +32,14 @@ public class GridGUI {
 	private List<int[]> path;
 	private List<ImageView> imagePath;
 
-	public static final String TEST_URL = "http://vignette2.wikia.nocookie.net/shingekinokyojin/images/7/77/Walls.png/revision/latest?cb=20130520140640"; // TODO:
+	public static final String TEST_URL = "../../../Images/gridBackground.png"; 
 																																							// dummy
 																																							// url
 
 	public GridGUI(int rows, int columns/*, List<int[]> path*/) {
 		//System.out.println("Rows: "+rows+"; columns: "+columns);
 		this.grid = new Pane();
+		this.grid.getStyleClass().add("gridGUI"); //for setting background in css file
 		//this.pathGrid = new Pane();
 		this.graphicsLib = new GraphicsLibrary();
 		this.rows = rows;
@@ -97,9 +98,10 @@ public class GridGUI {
 		
 	}
 
+	//right now, background is set in the css file
 	private void setTerrain(String imageURL) {
-		grid.setStyle("-fx-background-image: url('" + imageURL + "'); " + "-fx-background-position: center center; "
-				+ "-fx-background-repeat: stretch;");
+		//grid.setStyle("-fx-background-image: url(" + imageURL + "); " + "-fx-background-position: center center;"
+				//+ "-fx-background-repeat: stretch;");
 	}
 
 	private void addTowerToGrid(Tower tower, int row, int col) {
