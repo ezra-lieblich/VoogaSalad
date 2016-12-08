@@ -3,32 +3,21 @@ package engine.effect;
 import java.lang.reflect.Method;
 import java.util.List;
 import java.util.function.BiConsumer;
+import engine.effect.depreciated.EffectFunction;
 
 
 public interface BindableEffect {
 
-    EffectBuilder addTriggerClassListener (BiConsumer<Class<?>, Class<?>> listener);
+    EffectBuilder addTriggerClassListener (BiConsumer<String, String> listener);
 
-    EffectBuilder addTriggerConditionsListener (BiConsumer<List<EffectFunction>, List<EffectFunction>> listener);
+    EffectBuilder addTriggerConditionGroovyListener (BiConsumer<String, String> listener);
 
-    EffectBuilder addTriggerMethodListener (BiConsumer<Method, Method> listener);
+    EffectBuilder addEffectGroovyListener (BiConsumer<String, String> listener);
 
-    EffectBuilder removeTriggerClassListener (BiConsumer<Class<?>, Class<?>> listener);
+    EffectBuilder removeTriggerClassListener (BiConsumer<String, String> listener);
 
-    EffectBuilder removeTriggerConditionsListener (BiConsumer<List<EffectFunction>, List<EffectFunction>> listener);
+    EffectBuilder removeTriggerConditionGroovyListener (BiConsumer<String, String> listener);
 
-    EffectBuilder removeTriggerMethodListener (BiConsumer<Method, Method> listener);
-
-    EffectBuilder addDestinationClassListener (BiConsumer<Class<?>, Class<?>> listener);
-
-    EffectBuilder addDestinationConditionsListener (BiConsumer<List<EffectFunction>, List<EffectFunction>> listener);
-
-    EffectBuilder addDestinationMethodListener (BiConsumer<Method, Method> listener);
-
-    EffectBuilder removeDestinationClassListener (BiConsumer<Class<?>, Class<?>> listener);
-
-    EffectBuilder removeDestinationConditionsListener (BiConsumer<List<EffectFunction>, List<EffectFunction>> listener);
-
-    EffectBuilder removeDestinationMethodListener (BiConsumer<Method, Method> listener);
+    EffectBuilder removeEffectGroovyListener (BiConsumer<String, String> listener);
 
 }
