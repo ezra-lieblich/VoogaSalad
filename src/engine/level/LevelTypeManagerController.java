@@ -20,9 +20,21 @@ public class LevelTypeManagerController
         waveBuilder = new WaveTypeBuilder();
     }
 
+    //remove second line
     @Override
     public void setRewardScore (int levelID, double winScore) {
         getTypeManager().getEntity(levelID).setRewardScore(winScore);
+        getTypeManager().getEntity(levelID).createWave(xmlWave(winScore));
+    }
+    
+    //Remove this once testing is done
+    private Wave xmlWave (double a) {
+    	return waveBuilder.buildEnemyCount((int)(Math.random() * 5)+2)
+    	.buildEnemyID(0)
+    	.buildFrequency(1)
+    	.buildPathID(0)
+    	.buildStartTime(a* Math.random() *5)
+    	.build();
     }
 
     @Override

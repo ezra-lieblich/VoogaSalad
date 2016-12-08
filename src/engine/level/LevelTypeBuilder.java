@@ -170,7 +170,7 @@ public class LevelTypeBuilder extends AbstractTypeBuilder<Level, LevelBuilder>
 
     @Override
     protected void restoreTypeDefaults () {
-        this.enemyCounts = new ObservableMapProperty<Integer, Wave>(DEFAULT_ENEMY_COUNTS);
+        this.enemyCounts = new ObservableMapProperty<Integer, Wave>(new HashMap<>(DEFAULT_ENEMY_COUNTS));
         this.rewardHealth = new ObservableObjectProperty<Double>(DEFAULT_REWARD_HEALTH);
         this.rewardMoney = new ObservableObjectProperty<Double>(DEFAULT_REWARD_MONEY);
         this.rewardScore = new ObservableObjectProperty<Double>(DEFAULT_REWARD_SCORE);
