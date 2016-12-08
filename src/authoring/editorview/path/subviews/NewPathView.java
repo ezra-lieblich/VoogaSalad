@@ -16,7 +16,6 @@ public class NewPathView {
 	
 	private PathEditorViewDelegate delegate;
 	private VBox root;
-	private int activePathID;
 	
 	public NewPathView(){
 		this.root = new VBox();
@@ -30,12 +29,7 @@ public class NewPathView {
 	public void setDelegate(PathEditorViewDelegate delegate){
 		this.delegate = delegate;
 	}
-	
-	public void setActivePathId(int pathID){
-		this.activePathID = pathID;
-	}
-	
-	
+
 	private void buildViewComponents() {
 		
 		Button createPathButton =
@@ -50,8 +44,8 @@ public class NewPathView {
 	}
 	
 	private void createNewPath(){
-		delegate.onUserEnteredCreatePath();				
-		delegate.onUserEnteredEditPath(activePathID);
+		int activeID = delegate.onUserEnteredCreatePath();				
+		delegate.onUserEnteredEditPath(activeID);
 		
 	}
 	 

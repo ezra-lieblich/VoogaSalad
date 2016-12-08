@@ -27,8 +27,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import statswrapper.Wrapper;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -77,10 +80,12 @@ public class GamePlayerController implements Observer {
 
 
 
-	public GamePlayerController() {
+	public GamePlayerController(String xmlFilePath) {
 		// use xml parser to create classes.
-		this.loader = new GamePlayerFactory(new XMLParser("player.samplexml/blahhh.xml"));// hardcoded
-
+		this.loader = new GamePlayerFactory(new XMLParser(xmlFilePath));// hardcoded
+		// "player.samplexml/game2.xml"
+		// does not work because of the image path
+		
 		checkIfValid();
 		this.model = new GamePlayModel(this.loader);
 		this.enemyController = new EnemyController(this.model.getEnemyManager(), null);// Second arg should be gridGUI
@@ -88,7 +93,7 @@ public class GamePlayerController implements Observer {
 		this.weaponController = new WeaponController(this.model.getWeaponManager());
 		this.collisionController = new CollisionController(this.model.getCollisionManager());
 		this.model.getData().addObserver(this);
-		this.oldLevel = 1;
+		this.oldLevel = 0;
 		this.towerToId = new HashMap<String, Integer>();
 		this.weaponsOnScreen = new HashMap<Integer,ImageView>();
 		this.animation = new Timeline();
@@ -167,6 +172,7 @@ public class GamePlayerController implements Observer {
 				t.toggleInfoVisibility();
 			}
 		}
+
 		HashMap<Integer, Enemy> enemiesOnGrid = this.enemyManager.getEnemyOnGrid();
 		for(int i: enemiesOnGrid.keySet()){
 			Enemy e = enemiesOnGrid.get(i);
@@ -205,7 +211,13 @@ public class GamePlayerController implements Observer {
 					((GamePlayData)o).getCurrentLevel());
 			this.view.updateCurrentLevelStats(((GamePlayData)o).getCurrentLevel());
 			if (this.oldLevel != newLevel){
-
+				//record the data to log to web app
+				try {
+					Wrapper.getInstance().recordGameScores(""+((GamePlayData)o).getGold(), ""+((GamePlayData)o).getLife(), ""+((GamePlayData)o).getCurrentLevel());
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				this.oldLevel = newLevel;
 				this.view.newLevelPopUp(e->{
 					////System.out.println("New level");
@@ -260,6 +272,7 @@ public class GamePlayerController implements Observer {
 		//redraw path
 		//this.view.getGrid().populatePath(this.model.getGrid().getStartPoint());
 		this.view.getGrid().getGrid().getChildren().addAll(this.view.getGrid().getPathImages());
+
 		HashMap<Integer, Enemy>enemyRedraw = this.enemyManager.getEnemyOnGrid(); 
 		Map<Integer, Tower>towerRedraw = this.model.getTowerOnGrid();
 		HashMap<Integer, Weapon>bulletRedraw = this.model.getWeaponOnGrid();

@@ -138,7 +138,7 @@ public class EnemyEditorView implements IEnemyEditorView {
 
     @Override
     public void updateNameDisplay (String name) {
-        this.enemyName.updateEnemyName(name);
+        this.enemyName.updateName(name);
     }
 
     @Override

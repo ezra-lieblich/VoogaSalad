@@ -12,7 +12,6 @@ public class main extends Application {
 
 	public static final String TITLE = "VOOGASquad";
 	private Stage stage;
-	private Wrapper wrapper = new Wrapper();
 	
 
 	
@@ -22,7 +21,7 @@ public class main extends Application {
 
 	@Override
 	public void start(Stage s) throws IOException{
-		//wrapper.createAccount("creategamefail", "password");
+		
 		this.stage = s;
 		SplashScreen splash = new SplashScreen(s);
 		splash.init();

@@ -1,4 +1,4 @@
-package authoring.editorview.path.subviews;
+package authoring.editorview.gamesettings.subviews;
 
 
 import java.awt.image.BufferedImage;
