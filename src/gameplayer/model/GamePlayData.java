@@ -19,7 +19,7 @@ public class GamePlayData  extends Observable{
 	private double numLevels; // reach level number winning the game
 	
 
-
+	//CELL SIZE MUST BE INITIATED
 
 	public GamePlayData(GamePlayerFactory factory){
 		this.factory = factory;
@@ -60,7 +60,8 @@ public class GamePlayData  extends Observable{
 
 
 	public Grid getGrid() {
-		System.out.println("Successfully got grid");
+		//System.out.println("Successfully got grid");
+		this.grid = this.factory.getGrid(this.currentLevel);
 		return this.grid;
 	}
 	
@@ -113,7 +114,7 @@ public class GamePlayData  extends Observable{
 	}
 
 	public double cellToCoordinate(double d) {
-		return (d + 0.5) * cellSize;
+		return (d) * getCellWidth();
 	}
 	
 	
