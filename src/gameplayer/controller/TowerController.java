@@ -7,6 +7,7 @@ import engine.weapon.WeaponType;
 import gameplayer.model.tower.Tower;
 import gameplayer.model.tower.TowerManager;
 import gameplayer.model.weapon.Weapon;
+import gameplayer.view.GameGUI;
 import gameplayer.view.GridGUI;
 import gameplayer.view.helper.GraphicsLibrary;
 import javafx.event.ActionEvent;
@@ -16,6 +17,8 @@ import javafx.scene.control.Button;
 public class TowerController {
 	private TowerManager towerManager;
 	private GraphicsLibrary graphicsLib;
+	private GameGUI view;
+	private boolean sellable;
 
 	// create back end code for firing a weapon
 	/**
@@ -28,9 +31,10 @@ public class TowerController {
 	 * 
 	 */
 
-	public TowerController(TowerManager towerManager, GridGUI grid) {
+	public TowerController(TowerManager towerManager, GameGUI view) {
 		this.towerManager = towerManager;
 		this.graphicsLib = new GraphicsLibrary();
+		this.view = view;
 	}
 	
 
@@ -39,11 +43,16 @@ public class TowerController {
 	}
 
 	public void handleSellTowerClick(double x, double y) {
+		
 		Map<Integer, Tower> towersOnGrid = towerManager.getTowerOnGrid();
 		for (Map.Entry<Integer, Tower> entry : towersOnGrid.entrySet()) {
 			Tower t = entry.getValue();
-			if ((t.getX() <= x && t.getX() + GamePlayerController.ENTITY_SIZE >= x && t.getY() <= y - GamePlayerController.Y_OFFSET
-					&& t.getY() + GamePlayerController.ENTITY_SIZE >= y - GamePlayerController.Y_OFFSET)) {
+			double newX = this.view.gridToPixelCoordWidth(t.getX());
+			double newY=this.view.gridToPixelCoordHeight(t.getY());
+			System.out.println("Tower x y: "+newX+", "+newY);
+			System.out.println("Clicked: "+x+","+y);
+			if ((newX <= x && (newX + GamePlayerController.ENTITY_SIZE) >= x && newY <= y - GamePlayerController.Y_OFFSET
+					&& (newY + GamePlayerController.ENTITY_SIZE) >= (y - GamePlayerController.Y_OFFSET))) {
 				System.out.println("----++++++++sell tower--------++++++++");
 				sellTower(entry.getKey());
 			}
@@ -52,7 +61,7 @@ public class TowerController {
 
 	private void createButton() {
 		Button sellTower = graphicsLib.createButton("Sell tower", e -> {
-
+			this.sellable = true; 
 		});
 	}
 

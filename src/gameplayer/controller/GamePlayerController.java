@@ -144,7 +144,7 @@ public class GamePlayerController implements Observer {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		this.towerController = new TowerController(this.model.getTowerManager(), this.view.getGrid());
+		this.towerController = new TowerController(this.model.getTowerManager(), this.view);
 		
 	}
 
@@ -163,7 +163,7 @@ public class GamePlayerController implements Observer {
 		});
 		this.mainScene = view.init(this.model.getData().getGold(), this.model.getData().getLife(),
 				this.model.getData().getCurrentLevel(), getTowerImages());
-		this.mainScene.setOnMouseClicked(e -> handleMouseClicked(e.getX(), e.getY()));
+		this.view.getGrid().getGrid().setOnMouseClicked(e -> handleMouseClicked(e.getX(), e.getY()));
 		
 		this.view.getGrid().populatePath(model.getData().getGrid().getStartPoint());
 		this.dropController = new DragDropController(this.view, this.model, this.getTowerImageMap());
@@ -171,13 +171,19 @@ public class GamePlayerController implements Observer {
 		// testing stuff
 		// this.model.createDummyEnemies();
 	}
+	
 
 	private void handleMouseClicked(double x, double y) {
+		
 		Map<Integer, Tower> towersOnGrid = this.model.getTowerOnGrid();
 		for (int i : towersOnGrid.keySet()) {
 			Tower t = towersOnGrid.get(i);
-			if ((t.getX() <= x && t.getX() + ENTITY_SIZE >= x && t.getY() <= y - Y_OFFSET
-					&& t.getY() + ENTITY_SIZE >= y - Y_OFFSET)) {
+			double newX = this.view.gridToPixelCoordWidth(t.getX());
+			double newY=this.view.gridToPixelCoordHeight(t.getY());
+			System.out.println("Tower x y: "+newX+", "+newY);
+			System.out.println("Clicked: "+x+","+y);
+			if ((newX<= x && newX + ENTITY_SIZE >= x && newY <= y - Y_OFFSET
+					&& newY+ ENTITY_SIZE >= y - Y_OFFSET)) {
 				t.toggleInfoVisibility();
 			}
 		}
@@ -241,7 +247,7 @@ public class GamePlayerController implements Observer {
 			}
 
 			// check for game over condition
-			if (((GamePlayData) o).getLife() < 5) { // TODO: change 5 to 0
+			if (((GamePlayData) o).getLife() < 0) { // TODO: change 5 to 0
 				gameOver();
 			}
 

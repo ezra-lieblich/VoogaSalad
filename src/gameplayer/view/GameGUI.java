@@ -92,7 +92,13 @@ public class GameGUI {
 		return this.columns;
 	}
 	
+	public double gridToPixelCoordWidth(double num){
+		return num * GridGUI.GRID_WIDTH/this.columns;
+	}
 	
+	public double gridToPixelCoordHeight(double num){
+		return num * GridGUI.GRID_HEIGHT/this.rows;
+	}
 
 	public BorderPane getMainScreen() {
 		return mainScreen;
@@ -215,8 +221,8 @@ public class GameGUI {
 		int i = 0;
 
 		for (IDrawable entity : redraw) {
-			//System.out.println("Invalid image?"+entity.getImage().toString());
-			ImageView image = new ImageView(entity.getImage());
+			System.out.println("Invalid image?"+entity.getImage().toString());
+			ImageView image = new ImageView(graphics.createImage(entity.getImage().toString()));
 			if (i < towerCoords.size() && towerCoords.get(i).length > 1) {
 				// System.out.println("TOWER BEING RENDERED?!");
 				image.setX(towerCoords.get(i)[0]);

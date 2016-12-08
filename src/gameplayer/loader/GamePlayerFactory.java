@@ -76,8 +76,16 @@ public class GamePlayerFactory{
 		int height = currPath.getGridRows();
 		Grid gameGrid = new Grid(width, height);
 		List<Coordinate<Integer>> coordinates = currPath.getCoordinates();
+		Coordinate<Integer> start;
 		//String coordinates = authoringFileReader.getTextValue("level"+level, "path");
-		Coordinate<Integer> start = coordinates.get(0);
+		try {
+			start = coordinates.get(level);
+		} catch (IndexOutOfBoundsException e){
+			//TODO: handle null pointer if no path exists
+			System.out.println("path doesn't exist,please try make new game");
+			return null;
+		}
+		
 		Cell current = gameGrid.getCell(start.getX().intValue(), start.getY().intValue());
 		
 		gameGrid.setStart(current);
