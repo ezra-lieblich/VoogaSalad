@@ -3,9 +3,7 @@ package authoring.editorview.path;
 
 public interface PathEditorViewDelegate {
 	
-	public void onUserEnteredNumberColumns(int numColumns);
-	
-	public void onUserEnteredNumberRows(int numRows);
+	public void onUserEnteredGridDimensions(int dimensions);
 	
 	public void onUserEnteredPathImage(String pathImagePath);
 	

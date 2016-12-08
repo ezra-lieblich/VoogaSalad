@@ -124,7 +124,7 @@ public class TowerEditorView implements ITowerEditorView {
 
     @Override
     public void updateNameDisplay (String name) {
-        this.towerName.updateTowerName(name);
+        this.towerName.updateName(name);
     }
 
     @Override

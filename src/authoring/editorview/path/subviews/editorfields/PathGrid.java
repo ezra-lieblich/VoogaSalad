@@ -1,4 +1,4 @@
-package authoring.editorview.path.subviews;
+package authoring.editorview.path.subviews.editorfields;
 
 
 
@@ -18,13 +18,10 @@ import javafx.scene.shape.StrokeType;
 
 public class PathGrid {
 	
-	private int gridHeight;
-	private int gridWidth;
-	private int numColumns = -1;
-	private int numRows = -1;
-	private int cellHeight;
-	private int cellWidth;
-	private Image cellImage = new Image(getClass().getClassLoader().getResourceAsStream("blacksquare.png"));
+	private int gridSize;
+	private int gridDimensions;
+	private int cellSize;
+	private Image cellImage;
 	private ImageView[][] pathGrid;
 	private Rectangle[][] backgroundGrid;
 	
@@ -37,9 +34,8 @@ public class PathGrid {
 	private Group backgroundRoot;
 	
 	
-	public PathGrid(int height, int width){
-		this.gridHeight = height;
-		this.gridWidth = width;		
+	public PathGrid(int size){
+		this.gridSize = size;	
 		this.root = new Group();
 		this.gridRoot = new Group();
 		this.backgroundRoot = new Group();
@@ -68,21 +64,13 @@ public class PathGrid {
 		this.delegate = delegate;
 	}
 	
-	public void setNumColumns(int numColumns){
-		cellWidth = gridWidth/numColumns;
-		this.numColumns = numColumns;
-		if (numRows > 0 && pathCoordinates != null){
+	public void setGridDimensions(int dimensions){
+		cellSize = gridSize/dimensions;
+		this.gridDimensions = dimensions;
+		if (pathCoordinates != null){
 			redrawPath();
 		}
 		
-	}
-	
-	public void setNumRows(int numRows){
-		cellHeight = gridHeight/numRows;
-		this.numRows = numRows;	
-		if (numColumns > 0 && pathCoordinates != null){
-			redrawPath();
-		}
 	}
 	
 	public List<Coordinate<Integer>> getPathCoordinates(){
@@ -95,14 +83,12 @@ public class PathGrid {
 	
 	
 	public void setBackground(){
+			
+		cellSize = gridSize/gridDimensions;
+		backgroundGrid = new Rectangle[gridDimensions][gridDimensions];		
 		
-		
-		this.cellHeight = gridHeight/numRows;
-		this.cellWidth = gridWidth/numColumns;
-		backgroundGrid = new Rectangle[numColumns][numRows];		
-		
-		for (int i = 0; i < numColumns; i++){
-			for (int j = 0; j < numRows; j++){
+		for (int i = 0; i < gridDimensions; i++){
+			for (int j = 0; j < gridDimensions; j++){
 				
 				Rectangle rect = new Rectangle();			
 				rect = formatRectangle(i, j, rect);
@@ -148,10 +134,10 @@ public class PathGrid {
 
 	
 	
-	public void setPath(){
-		pathGrid = new ImageView[numColumns][numRows];		
-		for (int i = 0; i < numColumns; i++){
-			for (int j = 0; j < numRows; j++){
+	private void setPath(){
+		pathGrid = new ImageView[gridDimensions][gridDimensions];		
+		for (int i = 0; i < gridDimensions; i++){
+			for (int j = 0; j < gridDimensions; j++){
 				setCell(i, j);
 			}			
 		}
@@ -160,9 +146,7 @@ public class PathGrid {
 	
 	private void setCell(int x, int y){		
 		boolean inPath = setInPath(x, y);
-		setNode(x, y, inPath);
-		
-		
+		setNode(x, y, inPath);	
 	}
 
 	private boolean setInPath(int x, int y) {
@@ -188,22 +172,32 @@ public class PathGrid {
 
 	
 	private ImageView formatImageView(int x, int y, ImageView iv) {
-		iv.setFitHeight(cellHeight);
-		iv.setFitWidth(cellWidth);
-		iv.setX(x*cellWidth);
-		iv.setY(y*cellHeight);
+		iv.setFitHeight(cellSize);
+		iv.setFitWidth(cellSize);
+		iv.setX(x*cellSize);
+		iv.setY(y*cellSize);
 		return iv;
 	}
 	
 	private Rectangle formatRectangle(int x, int y, Rectangle rect) {
-		rect.setHeight(cellHeight);
-		rect.setWidth(cellWidth);
-		rect.setX(x*cellWidth);
-		rect.setY(y*cellHeight);
+		rect.setHeight(cellSize);
+		rect.setWidth(cellSize);
+		rect.setX(x*cellSize);
+		rect.setY(y*cellSize);
 		rect.setFill(Color.WHITE);
 		rect.setStroke(Color.GRAY);
 		rect.setStrokeType(StrokeType.INSIDE);
 		rect.setStrokeWidth(0.5);
+		
+//		if (pathCoordinates != null && !pathCoordinates.isEmpty()){
+//			int previousX = pathCoordinates.get(pathCoordinates.size()-1).getX();
+//			int previousY = pathCoordinates.get(pathCoordinates.size()-1).getY();
+//			if ((previousX == x && (previousY + 1 == y || previousY - 1 == y)) ||
+//					(previousY == y && (previousX + 1 == x || previousX - 1 == x))) {
+//				rect.
+//			}
+//		}	
+		
 		return rect;
 	}
 	
@@ -216,7 +210,7 @@ public class PathGrid {
 		else {
 			cellImage = new Image(imagePath);
 		}
-		if (numColumns > 0 && pathCoordinates != null && numRows > 0){
+		if (gridDimensions > 0 && pathCoordinates != null){
 			redrawPath();
 		}
 		
@@ -224,21 +218,19 @@ public class PathGrid {
 	}
 	
 	private void updatePath(double x, double y){
-		int i = (int) (x - 100)/cellWidth;
-		int j = (int) (y - 240)/cellHeight;
-		if (pathGrid[i][j].isVisible()){		
+		int i = (int) (x - 100)/cellSize;
+		int j = (int) (y - 240)/cellSize;
+		if (!addCellToPath(i, j)){
 			removeCellFromPath(i, j);
-		}
-		else {		
-			addCellToPath(i, j);
 		}
 	}
 	
-	private void addCellToPath(int x, int y){
+	private boolean addCellToPath(int x, int y){
 		boolean validCoordinate = delegate.onUserEnteredAddPathCoordinate(x, y);
 		if (validCoordinate){
 			pathGrid[x][y].setVisible(true);
 		}
+		return validCoordinate;
 
 	}
 	

@@ -12,6 +12,7 @@ import java.util.ResourceBundle;
 
 import authoring.editorview.path.NameIdPair;
 import authoring.editorview.path.PathEditorViewDelegate;
+import authoring.utilityfactories.ComboBoxFactory;
 
 /**
  * 
@@ -24,8 +25,9 @@ public class PathChooser{
 	private VBox root;
 	private PathEditorViewDelegate delegate;
 	private List<NameIdPair> nameIdList;
-	private ObservableList<String> pathList;
-	private ComboBox<String> pathComboBox;
+	private ObservableList<Object> pathList;
+	private ComboBox<Object> pathComboBox;
+	
 	private int activePathID;
 	
 	
@@ -55,19 +57,23 @@ public class PathChooser{
 	public Node getInstanceAsNode () {
 		return root;
 	}
-	
-	public void updatePathComboBox(String pathName){
 		
-		pathList.add(pathName);
+	public void updatePathComboBox(String pathName){		
 		NameIdPair newPair = new NameIdPair(pathName, activePathID);
-		nameIdList.add(newPair);
-		for (NameIdPair pair : nameIdList){
-			if (pair != newPair && pair.getId() == activePathID){
-				nameIdList.remove(pair);
-				pathList.remove(pair.getName());
+		boolean newPath = true;
+		for (NameIdPair pair : nameIdList){		
+			if (pair.getId() == activePathID){
+				newPath = false;
+				nameIdList.set(nameIdList.indexOf(pair), newPair);
+				pathList.set(pathList.indexOf(pair.getName()), pathName);				
 				break;
 			}
-		}		
+		}	
+		if (newPath){
+			pathList.add(pathName);
+			nameIdList.add(newPair);
+		}
+		pathComboBox.setValue(pathName);
 	}
 	
 	private void setEditView(String pathName){
@@ -78,21 +84,12 @@ public class PathChooser{
 				break;
 			}
 		}	
-		System.out.println(pathComboBox.getValue());
-		System.out.println(pathList);
 	}
 	
-	private void buildViewComponents(){
-		
+	private void buildViewComponents(){		
 		pathList = FXCollections.observableArrayList();
-		
-		pathComboBox = new ComboBox<String>(pathList);
-		pathComboBox.setOnAction(e -> setEditView(pathComboBox.getValue()));
-        pathComboBox.setPromptText(pathResource.getString("ComboBoxText"));
-		
-		
-//		pathComboBox = ComboBoxFactory.makeComboBox(pathResource.getString("ComboBoxText"), 
-//				e -> setEditView(pathComboBox.getValue().toString()), pathList);
+		pathComboBox = ComboBoxFactory.makeComboBox(pathResource.getString("ComboBoxText"), 
+				e -> setEditView(pathComboBox.getValue().toString()), pathList);
 		
 		pathComboBox.setTranslateX(5);
 		root.getChildren().add(pathComboBox);
