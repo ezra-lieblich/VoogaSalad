@@ -54,12 +54,15 @@ public class GamePlayerFactory{
 		return settings; 
 	}
 	
+	public Map<Integer, Tower> getTowerUpgrades() {
+		return authoringFileReader.getTowerUpgrades();
+	}
+	
 	/*
 	public int[] getGridDimension{
 		int width = Integer.parseInt(authoringFileReader.getTextValue("level"+level,"width"));
 		int height = Integer.parseInt(authoringFileReader.getTextValue("level"+level,"height"));
-		
-		
+			
 	}
 
 	*/
