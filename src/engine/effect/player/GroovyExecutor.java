@@ -11,7 +11,7 @@ public class GroovyExecutor {
     private static final String INVALID_COMMAND = "Invalid Groovy command %s";
     private ScriptEngine engine;
         
-    GroovyExecutor() {
+    public GroovyExecutor() {
         this.engine = new ScriptEngineManager().getEngineByName("groovy");
     }
     
