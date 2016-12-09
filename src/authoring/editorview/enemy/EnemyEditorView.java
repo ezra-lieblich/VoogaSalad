@@ -11,7 +11,6 @@ import authoring.editorview.enemy.subviews.editorfields.EnemyNameField;
 import authoring.editorview.enemy.subviews.editorfields.EnemyRewardMoneyField;
 import authoring.editorview.enemy.subviews.editorfields.EnemyRewardPointsField;
 import authoring.editorview.enemy.subviews.editorfields.EnemySizeField;
-import authoring.editorview.enemy.subviews.editorfields.EnemyCollisionEffectField;
 import authoring.editorview.enemy.subviews.editorfields.EnemyDamageField;
 import authoring.editorview.enemy.subviews.editorfields.EnemySpeedField;
 import javafx.scene.Node;
@@ -32,7 +31,6 @@ public class EnemyEditorView implements IEnemyEditorView {
     private EnemySpeedField enemySpeed;
     private EnemyImageView enemyImage;
     private EnemyEffectView enemyEffectView;
-    private EnemyCollisionEffectField enemyReactions;
     private EnemyDamageField enemyDamage;
     private EnemyHealthField enemyHealth;
     private EnemyRewardMoneyField enemyRewardMoney;
@@ -48,7 +46,6 @@ public class EnemyEditorView implements IEnemyEditorView {
         enemyBank = new EnemyImageBank();
         enemyName = new EnemyNameField(labelsResource);
         enemySpeed = new EnemySpeedField(labelsResource);
-        enemyReactions = new EnemyCollisionEffectField(labelsResource);
         enemyImage = new EnemyImageView(labelsResource);
         enemyDamage = new EnemyDamageField(labelsResource);
         enemyHealth = new EnemyHealthField(labelsResource);
@@ -56,7 +53,7 @@ public class EnemyEditorView implements IEnemyEditorView {
         enemyRewardPoints = new EnemyRewardPointsField(labelsResource);
         enemySize = new EnemySizeField(labelsResource);
         enemyEffectView =
-                new EnemyEffectView(enemyImage, enemyName, enemyReactions,
+                new EnemyEffectView(enemyImage, enemyName,
                                     enemySpeed, enemyDamage, enemyHealth, enemyRewardMoney,
                                     enemyRewardPoints, enemySize);
         setBorderPane();
@@ -80,18 +77,11 @@ public class EnemyEditorView implements IEnemyEditorView {
         enemyName.setDelegate(delegate);
         enemySpeed.setDelegate(delegate);
         enemyImage.setDelegate(delegate);
-        enemyReactions.setDelegate(delegate);
         enemyDamage.setDelegate(delegate);
         enemyHealth.setDelegate(delegate);
         enemyRewardMoney.setDelegate(delegate);
         enemyRewardPoints.setDelegate(delegate);
         enemySize.setDelegate(delegate);
-    }
-
-    @Override
-    public void updateEnemyReactions (String enemyReactions) {
-        this.enemyReactions.updateEnemyReaction(enemyReactions);
-
     }
 
     @Override
@@ -117,7 +107,7 @@ public class EnemyEditorView implements IEnemyEditorView {
 
     @Override
     public void updateEnemyDamage (double damage) {
-        this.enemyDamage.updateEnemyFrequency(Double.toString(damage));
+        this.enemyDamage.updateEnemyDamage(Double.toString(damage));
     }
 
     @Override
@@ -128,11 +118,6 @@ public class EnemyEditorView implements IEnemyEditorView {
     @Override
     public void updateEnemyRewardPoints (double rewardPoints) {
         this.enemyRewardPoints.updateEnemyRewardPoints(Double.toString(rewardPoints));
-    }
-
-    @Override
-    public void updateEnemyCollisionEffect (String collisionEffect) {
-        this.enemyReactions.updateEnemyReaction(collisionEffect);
     }
 
     @Override

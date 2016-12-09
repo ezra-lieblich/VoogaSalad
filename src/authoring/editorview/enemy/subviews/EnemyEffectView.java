@@ -12,7 +12,6 @@ import authoring.editorview.enemy.subviews.editorfields.EnemyNameField;
 import authoring.editorview.enemy.subviews.editorfields.EnemyRewardMoneyField;
 import authoring.editorview.enemy.subviews.editorfields.EnemyRewardPointsField;
 import authoring.editorview.enemy.subviews.editorfields.EnemySizeField;
-import authoring.editorview.enemy.subviews.editorfields.EnemyCollisionEffectField;
 import authoring.editorview.enemy.subviews.editorfields.EnemyDamageField;
 import authoring.editorview.enemy.subviews.editorfields.EnemySpeedField;
 import authoring.utilityfactories.BoxFactory;
@@ -41,7 +40,6 @@ public class EnemyEffectView extends PhotoFileChooser implements IEnemySetView {
 
     private EnemyImageView enemyImage;
     private EnemyNameField enemyName;
-    private EnemyCollisionEffectField enemyReactions;
     private EnemySpeedField enemySpeed;
     private EnemyDamageField enemyDamage;
     private EnemyHealthField enemyHealth;
@@ -54,7 +52,6 @@ public class EnemyEffectView extends PhotoFileChooser implements IEnemySetView {
 
     public EnemyEffectView (EnemyImageView enemyImage,
                             EnemyNameField enemyName,
-                            EnemyCollisionEffectField enemyReactions,
                             EnemySpeedField enemySpeed,
                             EnemyDamageField enemyDamage,
                             EnemyHealthField enemyHealth,
@@ -67,7 +64,6 @@ public class EnemyEffectView extends PhotoFileChooser implements IEnemySetView {
 
         this.enemyImage = enemyImage;
         this.enemyName = enemyName;
-        this.enemyReactions = enemyReactions;
         this.enemySpeed = enemySpeed;
         this.enemyDamage = enemyDamage;
         this.enemyHealth = enemyHealth;
@@ -99,17 +95,10 @@ public class EnemyEffectView extends PhotoFileChooser implements IEnemySetView {
                 .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Size"),
                                                            enemySize.getInstanceAsNode()));
         vbox.getChildren()
-                .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Reaction"),
-                                                           enemyReactions.getInstanceAsNode()));
-        vbox.getChildren()
                 .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Speed"),
                                                            enemySpeed.getInstanceAsNode()));
-        vbox.getChildren()
-                .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Damage"),
-                                                           enemyDamage.getInstanceAsNode()));
-        vbox.getChildren()
-                .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Health"),
-                                                           enemyHealth.getInstanceAsNode()));
+        vbox.getChildren().add(enemyDamage.getInstanceAsNode());
+        vbox.getChildren().add(enemyHealth.getInstanceAsNode());
         vbox.getChildren()
                 .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("RewardMoney"),
                                                            enemyRewardMoney.getInstanceAsNode()));

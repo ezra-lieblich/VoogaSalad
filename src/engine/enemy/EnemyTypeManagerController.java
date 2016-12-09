@@ -78,8 +78,7 @@ public class EnemyTypeManagerController
 
 	@Override
 	protected EnemyBuilder constructTypeProperties(IEnemyEditorView updateView, EnemyBuilder typeBuilder) {
-		return typeBuilder.addCollisionEffectListener((oldValue, newValue) -> updateView.updateEnemyCollisionEffect(newValue))
-				.addDamageListener((oldValue, newValue) -> updateView.updateEnemyDamage(newValue))
+		return typeBuilder.addDamageListener((oldValue, newValue) -> updateView.updateEnemyDamage(newValue))
 				.addHealthListener((oldValue, newValue) -> updateView.updateEnemyHealthDisplay(newValue))
 				.addMoneyListener((oldValue, newValue) -> updateView.updateEnemyRewardMoney(newValue))
 				.addScoreListener((oldValue, newValue) -> updateView.updateEnemyRewardPoints(newValue))

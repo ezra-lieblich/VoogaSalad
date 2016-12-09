@@ -3,9 +3,11 @@ package authoring.editorview.enemy.subviews.editorfields;
 import java.util.ResourceBundle;
 import authoring.editorview.enemy.EnemyEditorViewDelegate;
 import authoring.editorview.enemy.IEnemySetView;
+import authoring.utilityfactories.BoxFactory;
 import authoring.utilityfactories.TextFieldFactory;
 import javafx.scene.Node;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 
 
 /**
@@ -17,13 +19,10 @@ public class EnemyHealthField implements IEnemySetView {
 
     private EnemyEditorViewDelegate delegate;
     private TextField enemyHealthField;
+    private HBox hbox;
 
     public EnemyHealthField (ResourceBundle labelsResource) {
-        enemyHealthField =
-                TextFieldFactory.makeTextField(labelsResource.getString("EnterInt"),
-                                               e -> delegate
-                                                       .onUserEnteredEnemyHealth(enemyHealthField
-                                                               .getText()));
+        createField(labelsResource);
     }
 
     @Override
@@ -33,11 +32,21 @@ public class EnemyHealthField implements IEnemySetView {
 
     @Override
     public Node getInstanceAsNode () {
-        return enemyHealthField;
+        return hbox;
     }
 
     public void updateEnemyHealth (String enemyHealth) {
         enemyHealthField.setText(enemyHealth);
     }
 
+    private void createField (ResourceBundle labelsResource) {
+        enemyHealthField =
+                TextFieldFactory.makeTextField(labelsResource.getString("EnterInt"),
+                                               e -> delegate
+                                                       .onUserEnteredEnemyHealth(enemyHealthField
+                                                               .getText()));
+        hbox =
+                BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Health"),
+                                                      enemyHealthField);
+    }
 }
