@@ -86,7 +86,7 @@ public class EnemyEditorView implements IEnemyEditorView {
 
     @Override
     public void updateEnemySpeed (double speed) {
-        this.enemySpeed.updateEnemySpeed(Double.toString(speed));
+        this.enemySpeed.updateField(Double.toString(speed));
     }
 
     @Override
@@ -132,7 +132,7 @@ public class EnemyEditorView implements IEnemyEditorView {
 
     @Override
     public void updateSizeDisplay (double size) {
-        this.enemySize.updateEnemySize(Double.toString(size));
+        this.enemySize.updateField(Double.toString(size));
     }
 
     @Override

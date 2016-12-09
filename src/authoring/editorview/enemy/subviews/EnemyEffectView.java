@@ -91,12 +91,8 @@ public class EnemyEffectView extends PhotoFileChooser implements IEnemySetView {
                                                             }
                                                         }));
         vbox.getChildren().add(enemyName.getInstanceAsNode());
-        vbox.getChildren()
-                .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Size"),
-                                                           enemySize.getInstanceAsNode()));
-        vbox.getChildren()
-                .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Speed"),
-                                                           enemySpeed.getInstanceAsNode()));
+        vbox.getChildren().add(enemySize.getInstanceAsNode());
+        vbox.getChildren().add(enemySpeed.getInstanceAsNode());
         vbox.getChildren().add(enemyDamage.getInstanceAsNode());
         vbox.getChildren().add(enemyHealth.getInstanceAsNode());
         vbox.getChildren().add(enemyRewardMoney.getInstanceAsNode());
