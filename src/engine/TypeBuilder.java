@@ -4,6 +4,8 @@ import java.util.function.BiConsumer;
 
 public interface TypeBuilder<E extends Type, R extends TypeBuilder<E, R>> extends BindableType<R> {
 
+    boolean setNextId(int id);
+    
     R buildName (String name);
 
     R buildImagePath (String imagePath);
@@ -11,6 +13,8 @@ public interface TypeBuilder<E extends Type, R extends TypeBuilder<E, R>> extend
     R buildSize (double size);
     
     R buildId (int id);
+    
+    R copy(E type);
 
     E build ();
 

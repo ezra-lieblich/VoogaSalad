@@ -162,5 +162,16 @@ public class WeaponTypeBuilder extends AbstractTypeBuilder<Weapon, WeaponBuilder
         range.addListener(listener);
         return this;
     }
+
+    @Override
+    protected WeaponBuilder copyType (Weapon type) {
+        return this
+        .buildEffect(type.getEffect())
+        .buildFireRate(type.getFireRate())
+        .buildRange(type.getRange())
+        .buildSpeed(type.getSpeed())
+        .buildTrajectory(type.getTrajectory())
+        .buildTargets(type.getTargets());  
+    }
     
 }
