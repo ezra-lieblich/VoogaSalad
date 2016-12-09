@@ -1,11 +1,14 @@
 package engine.level;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
 import authoring.editorview.level.ILevelEditorView;
 import engine.AbstractTypeManagerController;
 import engine.ManagerMediator;
 import engine.level.wave.Wave;
 import engine.level.wave.WaveBuilder;
+import engine.level.wave.WaveManager;
 import engine.level.wave.WaveTypeBuilder;
 
 
@@ -218,4 +221,23 @@ public class LevelTypeManagerController
 	public double getWaveDelay(int levelID, int waveID) {
 		return getWave(levelID, waveID).getStartTime();
 	}
+	
+	 @Override
+	 public void loadManagerData(LevelManager typeManager, ILevelEditorView updateView) {
+		 for (Level level : typeManager.getEntities().values()) {
+			 loadWaveData(level.getWaveManager(), typeManager, updateView);
+		 }
+		 super.loadManagerData(typeManager, updateView);
+	 }
+	 
+	 private void loadWaveData(WaveManager waveManager, LevelManager typeManager, ILevelEditorView updateView) {
+		 waveManager.setEntities(typeManager.getEntities().keySet().stream().collect(Collectors.toMap(b -> b , b -> constructWaveCopy(b, waveManager, updateView))));
+		 waveBuilder.setNextId(waveManager.getMaxId());
+	 }
+	 
+	 private Wave constructWaveCopy(int id, WaveManager waveManager, ILevelEditorView updateView) {
+		 waveBuilder.copy(waveManager.getEntity(id));
+		 return buildWave(updateView);
+	 }
+
 }

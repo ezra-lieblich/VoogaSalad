@@ -77,22 +77,24 @@ public class AuthoringController {
     }
 
     private void saveAsXMLFile () throws IOException {
-        XStream serializer = new XStream(new DomDriver());
-    	String wholeFile = serializer.toXML(this);
-    	toolbar.saveFile(wholeFile);
-    	String authoringData = xmlToString(wholeFile);
-    	Wrapper.getInstance().createGame(authoringData);
-//        String fileContent = this.modelController.SaveData();
-//        toolbar.saveFile(fileContent);
-//        //TODO Lucy: add api call to record game in web app
-//        String gameData = xmlToString(fileContent);
-//        Wrapper.getInstance().createGame(gameData);
+//        XStream serializer = new XStream(new DomDriver());
+//    	String wholeFile = serializer.toXML(this);
+//    	toolbar.saveFile(wholeFile);
+//    	String authoringData = xmlToString(wholeFile);
+//    	Wrapper.getInstance().createGame(authoringData);
+        String fileContent = this.modelController.SaveData();
+        toolbar.saveFile(fileContent);
+        //TODO Lucy: add api call to record game in web app
+        String gameData = xmlToString(fileContent);
+        Wrapper.getInstance().createGame(gameData);
     }
     
 	public void loadData(String filePath) {
 		// TODO Reset mediators and managers. Loop through each Type and call it
 		GameAuthoringData data = modelController.loadData(filePath);
-		 modelController.getModelController(PathManagerController.class);
+		 modelController.getModelController(EnemyManagerController.class)
+		 	.loadManagerData(data.getManagerMediator().getManager(EnemyManager.class), 
+		 							viewController.getControllers().get("enemy"));
 
 	}
     

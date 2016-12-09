@@ -4,13 +4,14 @@ import java.util.List;
 import java.util.Map;
 import engine.TypeBuilder;
 import engine.level.wave.Wave;
+import engine.level.wave.WaveManager;
 
 
 public interface LevelBuilder extends TypeBuilder<Level, LevelBuilder>, BindableLevel {
 
     LevelBuilder buildPaths (List<Integer> paths);
 
-    LevelBuilder buildWaves (Map<Integer, Wave> enemies);
+    LevelBuilder buildWaves (WaveManager enemies);
 
     LevelBuilder buildRewardHealth (double rewardHealth);
 

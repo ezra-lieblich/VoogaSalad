@@ -7,14 +7,16 @@ import java.util.Map;
 
 import engine.AbstractType;
 import engine.level.wave.Wave;
+import engine.level.wave.WaveManager;
 import engine.level.wave.WaveTypeComparator;
 import engine.observer.ObservableList;
 import engine.observer.ObservableMap;
+import engine.observer.ObservableObjectProperty;
 import engine.observer.ObservableProperty;
 
 
 public class LevelType extends AbstractType implements Level {
-    private ObservableMap<Integer, Wave> waves;
+    private ObservableObjectProperty<WaveManager> waves;
     private ObservableProperty<Double> rewardHealth;
     private ObservableProperty<Double> rewardMoney;
     private ObservableProperty<Double> rewardScore;
@@ -35,14 +37,15 @@ public class LevelType extends AbstractType implements Level {
 
     @Override
     public List<Wave> getWaves () {
-        List<Wave> sortedWaves = new ArrayList<Wave>(waves.getProperty().values());
+        List<Wave> sortedWaves = new ArrayList<Wave>(waves.getProperty().getEntities().values());
         Collections.sort(sortedWaves, new WaveTypeComparator());
         return Collections.unmodifiableList(sortedWaves);
     }
 
     @Override
     public void removeWave (int enemy) {
-        waves.remove(enemy);
+        waves.getProperty().getEntities().remove(enemy);
+        waves.notifyObservers(waves.getProperty());
     }
 
     @Override
@@ -92,18 +95,19 @@ public class LevelType extends AbstractType implements Level {
 
     @Override
     public int createWave (Wave wave) {
-        waves.put(wave.getId(), wave);
+    	waves.getProperty().addEntry(wave);
+    	waves.notifyObservers(waves.getProperty());
         return wave.getId();
     }
 
     @Override
     public Wave getWave (int id) {
-        return waves.getProperty().get(id);
+        return waves.getProperty().getEntity(id);
     }
 
     @Override
     public void calculateLevelTime (int waveID) {
-        Wave wave = waves.getProperty().get(waveID);
+        Wave wave = waves.getProperty().getEntity(waveID);
         if (wave.getEnemyCount() * wave.getFrequency() + wave.getStartTime() > time.getProperty()) {
             time.setProperty(wave.getEnemyCount() * wave.getFrequency() + wave.getStartTime());
         }
@@ -126,6 +130,11 @@ public class LevelType extends AbstractType implements Level {
 
 	@Override
 	public Map<Integer, Wave> getWaveMap() {
+		return waves.getProperty().getEntities();
+	}
+
+	@Override
+	public WaveManager getWaveManager() {
 		return waves.getProperty();
 	}
 

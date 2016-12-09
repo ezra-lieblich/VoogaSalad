@@ -25,6 +25,7 @@ public abstract class AbstractTypeManagerController<E extends Manager<T>, U exte
         // typeManager.addEntry(typeBuilder.build()); //Testing XML
     }
 
+    @Override
     public void loadManagerData(E typeManager, V updateView) {
         typeManager.setEntities(typeManager.getEntities().keySet().stream().collect(Collectors.toMap(b -> b , b -> constructCopy(b, updateView))));
         typeBuilder.setNextId(typeManager.getMaxId());

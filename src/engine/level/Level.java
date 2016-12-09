@@ -2,6 +2,8 @@ package engine.level;
 
 import engine.Type;
 import engine.level.wave.Wave;
+import engine.level.wave.WaveManager;
+
 import java.util.List;
 import java.util.Map;
 
@@ -47,5 +49,7 @@ public interface Level extends Type {
     void removePath (int pathID);
 
     List<Integer> getPaths ();
+    
+    WaveManager getWaveManager ();
 
 }
