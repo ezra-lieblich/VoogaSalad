@@ -208,7 +208,7 @@ public class GamePlayerController implements Observer {
 
 	public void createBox(double x, double y, Tower t) {
 		VBox box = t.getInfoBox();
-		t.getSellButton().setOnAction(e -> this.towerController.handleSellTowerClick(x, y));
+		t.getSellButton().setOnAction(e -> this.towerController.handleSellTowerClick());
 	}
 	
 
