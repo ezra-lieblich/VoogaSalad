@@ -6,12 +6,15 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 
-public class GroovyExecuter {
+public class GroovyExecutor {
     private static final String INCORRECT_RETURN_TYPE = "Groovy command did not return an instance of %s";
     private static final String INVALID_COMMAND = "Invalid Groovy command %s";
-
-    private ScriptEngine engine = new ScriptEngineManager().getEngineByName("groovy");
+    private ScriptEngine engine;
         
+    GroovyExecutor() {
+        this.engine = new ScriptEngineManager().getEngineByName("groovy");
+    }
+    
     public Object execute(String groovyCommand) throws GroovyException {
         try {
             return engine.eval(groovyCommand);
@@ -24,6 +27,8 @@ public class GroovyExecuter {
     
     public <E> E execute(String groovyCommand, Class<E> returnType) throws GroovyException {
         try {
+            Object blah = execute(groovyCommand);
+            returnType.cast(blah);
             return returnType.cast(execute(groovyCommand));
         }
         catch (ClassCastException e) {

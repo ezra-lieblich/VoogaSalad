@@ -7,6 +7,7 @@ import java.util.stream.Stream;
 import authoring.editorview.enemy.IEnemyEditorView;
 import engine.AbstractTypeManagerController;
 import engine.ManagerMediator;
+import engine.effect.player.GameEffect;
 import engine.enemy.Enemy;
 import engine.enemy.EnemyBuilder;
 import engine.enemy.EnemyManager;
@@ -22,6 +23,9 @@ public class EffectTypeManagerController extends
 
     EffectTypeManagerController (ManagerMediator managerMediator) {
         super(new EffectTypeManager(), new EffectTypeBuilder(), managerMediator);
+        EffectBuilder efb = new EffectTypeBuilder();
+        GameEffect test = new GameEffect(efb.buildTriggerConditionGroovy("true").buildEffectGroovy("println 'HelloWorld'").build());
+        test.execute();
     }
 
     /*
