@@ -3,6 +3,7 @@ package engine.level;
 import engine.Type;
 import engine.level.wave.Wave;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -10,7 +11,9 @@ import java.util.List;
  */
 public interface Level extends Type {
 
-    List<Wave> getWaves ();
+    Map<Integer, Wave> getWaveMap ();
+	
+	List<Wave> getWaves ();
 
     double getRewardHealth ();
 

@@ -154,4 +154,15 @@ public class EnemyTypeBuilder extends AbstractTypeBuilder<Enemy, EnemyBuilder> i
 		return this;
 	}
 
+	@Override
+	protected EnemyBuilder copyType(Enemy type) {
+		return this
+		.buildCollisionEffect(type.getCollisionEffect())
+		.buildDamage(type.getDamage())
+		.buildHealth(type.getHealth())
+		.buildMoney(type.getMoney())
+		.buildScore(type.getScore())
+		.buildSpeed(type.getSpeed());
+	}
+
 }

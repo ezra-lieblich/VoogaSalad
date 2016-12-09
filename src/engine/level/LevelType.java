@@ -3,6 +3,8 @@ package engine.level;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+
 import engine.AbstractType;
 import engine.level.wave.Wave;
 import engine.level.wave.WaveTypeComparator;
@@ -121,5 +123,10 @@ public class LevelType extends AbstractType implements Level {
     public List<Integer> getPaths () {
         return Collections.unmodifiableList(paths.getProperty());
     }
+
+	@Override
+	public Map<Integer, Wave> getWaveMap() {
+		return waves.getProperty();
+	}
 
 }

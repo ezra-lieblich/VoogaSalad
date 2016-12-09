@@ -185,4 +185,16 @@ public class LevelTypeBuilder extends AbstractTypeBuilder<Level, LevelBuilder>
         return this;
     }
 
+	@Override
+	protected LevelBuilder copyType(Level type) {
+		return this
+		.buildDurationInSeconds(type.getDurationInSeconds())
+		.buildLevelTime(type.getLevelTime())
+		.buildPaths(type.getPaths())
+		.buildRewardHealth(type.getRewardHealth())
+		.buildRewardMoney(type.getRewardMoney())
+		.buildRewardScore(type.getRewardScore())
+		.buildWaves(type.getWaveMap());
+	}
+
 }
