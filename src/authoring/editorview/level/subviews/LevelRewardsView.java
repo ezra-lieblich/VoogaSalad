@@ -73,8 +73,8 @@ public class LevelRewardsView implements ILevelSetView {
 
     private void makeScoreRewardTextField () {
         rewardScoreTextField = TextFieldFactory.makeTextField("",
-                                                               e -> submitRewardScore(rewardScoreTextField
-                                                                       .getText()));
+                                                              e -> submitRewardScore(rewardScoreTextField
+                                                                      .getText()));
         rewardScoreTextField.setMaxWidth(75);
         HBox rewardScoreBox =
                 BoxFactory.createHBoxWithLabelandNode(

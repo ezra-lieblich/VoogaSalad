@@ -5,7 +5,6 @@ import java.util.ResourceBundle;
 import authoring.editorview.level.WaveObject;
 import authoring.editorview.level.ILevelSetView;
 import authoring.editorview.level.LevelEditorViewDelegate;
-import authoring.editorview.path.NameIdPair;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
