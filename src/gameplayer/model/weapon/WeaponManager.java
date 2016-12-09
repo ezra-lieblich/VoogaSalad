@@ -16,13 +16,14 @@ public class WeaponManager extends Observable{
 	private HashMap<Integer, Weapon> weaponOnGrid;
 	private int uniqueWeaponID;
 	private long timeInterval;
-	
+	private int tempCountFix;
 
 
 	public WeaponManager(GamePlayData gameData, TowerManager towerManager) {
 		this.gameData = gameData;
 		this.towerManager = towerManager;
 		this.timeInterval = this.towerManager.getTimeInterval();
+		this.tempCountFix = 1; 
 		initializeNewLevel();
 	}
 
@@ -43,16 +44,23 @@ public class WeaponManager extends Observable{
 	public void updateWeapon() {
 	
 		//newly fired weapon
-		ArrayList<Weapon> newlyGeneratedWeapons = this.towerManager.generateNewWeapons();
-		for (int i = 0; i < newlyGeneratedWeapons.size(); i++){
-			newlyGeneratedWeapons.get(i).setUniqueID(this.uniqueWeaponID);
-			this.weaponOnGrid.put(uniqueWeaponID, newlyGeneratedWeapons.get(i));
-			uniqueWeaponID++;
+		if(this.tempCountFix % 50 == 0){//VERY TEMP FIX
+			ArrayList<Weapon> newlyGeneratedWeapons = this.towerManager.generateNewWeapons();
+			for (int i = 0; i < newlyGeneratedWeapons.size(); i++){
+				newlyGeneratedWeapons.get(i).setUniqueID(this.uniqueWeaponID);
+				this.weaponOnGrid.put(uniqueWeaponID, newlyGeneratedWeapons.get(i));
+				uniqueWeaponID++;
+			}
+			tempCountFix = 1; 
+		}
+		else{
+			tempCountFix++; 
 		}
 		
 		for (int i : weaponOnGrid.keySet()) {
-			System.out.println("weaponsOnGrid Size: "+weaponOnGrid.size());
 			Weapon w = weaponOnGrid.get(i);
+			System.out.println("weaponsOnGrid Size: "+weaponOnGrid.size());
+				
 			if (w.getX() < GridGUI.GRID_WIDTH) {
 				w.setX(w.getSpeedX() + w.getX());
 			}

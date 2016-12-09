@@ -26,7 +26,7 @@
                     <listeners>
                       <null/>
                     </listeners>
-                    <property class="string">Images/blacksquarejpg</property>
+                    <property class="string">blacksquarejpg</property>
                   </imagePath>
                   <size class="engine.observer.ObservableObjectProperty">
                     <observers/>
@@ -51,7 +51,7 @@
                           <imagePath class="engine.observer.ObservableObjectProperty">
                             <observers/>
                             <listeners/>
-                            <property class="string">Images/penguin.jpg</property>
+                            <property class="string">penguin.jpg</property>
                           </imagePath>
                           <size class="engine.observer.ObservableObjectProperty">
                             <observers/>
@@ -97,7 +97,7 @@
                           <imagePath class="engine.observer.ObservableObjectProperty">
                             <observers/>
                             <listeners/>
-                            <property class="string">Images/penguin.jpg</property>
+                            <property class="string">penguin.jpg</property>
                           </imagePath>
                           <size class="engine.observer.ObservableObjectProperty">
                             <observers/>
@@ -143,7 +143,7 @@
                           <imagePath class="engine.observer.ObservableObjectProperty">
                             <observers/>
                             <listeners/>
-                            <property class="string">Images/penguin.jpg</property>
+                            <property class="string">penguin.jpg</property>
                           </imagePath>
                           <size class="engine.observer.ObservableObjectProperty">
                             <observers/>
@@ -235,7 +235,7 @@
                     <listeners>
                       <null/>
                     </listeners>
-                    <property class="string">Images/blacksquarejpg</property>
+                    <property class="string">blacksquarejpg</property>
                   </imagePath>
                   <size class="engine.observer.ObservableObjectProperty">
                     <observers/>
@@ -260,7 +260,7 @@
                           <imagePath class="engine.observer.ObservableObjectProperty">
                             <observers/>
                             <listeners/>
-                            <property class="string">Images/penguin.jpg</property>
+                            <property class="string">penguin.jpg</property>
                           </imagePath>
                           <size class="engine.observer.ObservableObjectProperty">
                             <observers/>
@@ -306,7 +306,7 @@
                           <imagePath class="engine.observer.ObservableObjectProperty">
                             <observers/>
                             <listeners/>
-                            <property class="string">Images/penguin.jpg</property>
+                            <property class="string">penguin.jpg</property>
                           </imagePath>
                           <size class="engine.observer.ObservableObjectProperty">
                             <observers/>
@@ -423,7 +423,7 @@
                     <listeners>
                       <null/>
                     </listeners>
-                    <property class="string">Images/butterfly.png</property>
+                    <property class="string">butterfly.png</property>
                   </imagePath>
                   <size class="engine.observer.ObservableObjectProperty">
                     <observers/>
@@ -652,7 +652,7 @@
                     <listeners>
                       <null/>
                     </listeners>
-                    <property class="string">Images/penguin.jpg</property>
+                    <property class="string">penguin.jpg</property>
                   </imagePath>
                   <size class="engine.observer.ObservableObjectProperty">
                     <observers/>
