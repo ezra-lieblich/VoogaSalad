@@ -1,10 +1,14 @@
 package gameplayer.model.tower;
 
 import java.util.ArrayList;
+
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
 import engine.tower.*;
 import engine.weapon.WeaponType;
 import gameplayer.model.IDrawable;
+import gameplayer.view.helper.GraphicsLibrary;
 
 public class Tower implements IDrawable {
 
@@ -15,6 +19,9 @@ public class Tower implements IDrawable {
 	private double xCoordinate;
 	private double yCoordinate;	
 	private Label towerInfo;
+	private VBox infoBox;
+	private Button sellButton;
+	private GraphicsLibrary graphics;
 	private boolean showInfo;
 	
 	
@@ -28,7 +35,8 @@ public class Tower implements IDrawable {
 		this.showInfo = false;
 		this.towerInfo = new Label("Type: " + this.type + "\n ID: " + this.uniqueID + "\n Cost: " + 
 				this.cost + "\n Image: " + this.image + "\n Name: " + this.name);
-		this.towerInfo.setVisible(showInfo);
+		this.graphics = new GraphicsLibrary();
+		initVBox();
 	}
 
 	/**
@@ -91,11 +99,30 @@ public class Tower implements IDrawable {
 	
 	public void toggleInfoVisibility(){
 		this.showInfo = !showInfo;
-		this.towerInfo.setVisible(showInfo);
+		this.infoBox.setVisible(showInfo);
+	}
+	
+	public void initVBox(){
+		this.infoBox = new VBox();
+		this.infoBox.getChildren().addAll(towerInfo, createSellButton());
+		this.infoBox.setVisible(showInfo);
+	}
+	
+	public Button createSellButton(){
+		this.sellButton = graphics.createButton("Sell Tower");
+		return sellButton;
+	}
+	
+	public Button getSellButton(){
+		return sellButton;
 	}
 
 	public Label getTowerInfo() {
 		return towerInfo;
+	}
+
+	public VBox getInfoBox() {
+		return infoBox;
 	}
 
 }

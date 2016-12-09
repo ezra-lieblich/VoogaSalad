@@ -24,10 +24,12 @@ import javafx.event.EventHandler;
 import javafx.scene.CacheHint;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
@@ -138,12 +140,14 @@ public class GamePlayerController implements Observer {
 		this.enemyManager.setCurrentCell(this.model.getData().getGrid().getStartPoint());
 		populateTowerToId();
 		initGUI();
+		
 		try {
 			Wrapper.getInstance().recordGameScores(""+this.model.getData().getGold(), ""+this.model.getData().getLife(), ""+this.model.getData().getCurrentLevel());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		this.towerController = new TowerController(this.model.getTowerManager(), this.view);
 		
 	}
@@ -180,25 +184,34 @@ public class GamePlayerController implements Observer {
 			Tower t = towersOnGrid.get(i);
 			double newX = this.view.gridToPixelCoordWidth(t.getX());
 			double newY=this.view.gridToPixelCoordHeight(t.getY());
-			System.out.println("Tower x y: "+newX+", "+newY);
-			System.out.println("Clicked: "+x+","+y);
-			if ((newX<= x && newX + ENTITY_SIZE >= x && newY <= y - Y_OFFSET
-					&& newY+ ENTITY_SIZE >= y - Y_OFFSET)) {
+			//System.out.println("Tower x y: "+newX+", "+newY);
+			//System.out.println("Clicked: "+x+","+y);
+			if ((newX<= x && newX + ENTITY_SIZE >= x && newY <= y
+					&& newY+ ENTITY_SIZE >= y)) {
+				//System.out.println("shown");
 				t.toggleInfoVisibility();
+				createBox(x, y, t);
 			}
 		}
 
 		HashMap<Integer, Enemy> enemiesOnGrid = this.enemyManager.getEnemyOnGrid();
 		for (int i : enemiesOnGrid.keySet()) {
 			Enemy e = enemiesOnGrid.get(i);
-			if (e.getX() <= x && e.getX() + ENTITY_SIZE >= x && e.getY() <= y - Y_OFFSET
-					&& e.getY() + ENTITY_SIZE >= y - Y_OFFSET) {
+			if (e.getX() <= x && e.getX() + ENTITY_SIZE >= x && e.getY() <= y
+					&& e.getY() + ENTITY_SIZE >= y) {
 				e.toggleInfoVisibility();
 			}
 		}
 		
-		this.towerController.handleSellTowerClick(x, y);
+
 	}
+
+	public void createBox(double x, double y, Tower t) {
+		VBox box = t.getInfoBox();
+		t.getSellButton().setOnAction(e -> this.towerController.handleSellTowerClick());
+	}
+	
+
 
 	private ArrayList<String> getTowerImages() {
 		ArrayList<String> towerImages = new ArrayList<String>();
@@ -237,7 +250,8 @@ public class GamePlayerController implements Observer {
 			this.view.updateStatsDisplay(((GamePlayData) o).getGold(), ((GamePlayData) o).getLife(),
 					((GamePlayData) o).getCurrentLevel());
 			this.view.updateCurrentLevelStats(((GamePlayData) o).getCurrentLevel());
-
+			
+			/*
 			try {
 				this.updateWebAppStats(newLevel, ((GamePlayData) o));
 			} catch (IOException e2) {
@@ -245,6 +259,7 @@ public class GamePlayerController implements Observer {
 				System.out.println("----------FAILED TO UPDATE WEB APP STATS---------");
 				e2.printStackTrace();
 			}
+			*/
 
 			// check for game over condition
 			if (((GamePlayData) o).getLife() < 0) { // TODO: change 5 to 0
@@ -254,13 +269,14 @@ public class GamePlayerController implements Observer {
 			// new level condition
 			if (this.oldLevel != newLevel) {
 				// record the data to log to web app
+				/*
 				try {
 					Wrapper.getInstance().recordGameScores("" + ((GamePlayData) o).getGold(),
 							"" + ((GamePlayData) o).getLife(), "" + ((GamePlayData) o).getCurrentLevel());
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
-				}
+				}*/
 				this.oldLevel = newLevel;
 				this.view.newLevelPopUp(e -> {
 					//// System.out.println("New level");

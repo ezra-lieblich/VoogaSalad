@@ -1,9 +1,11 @@
 package gameplayer.model;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Observable;
 
 import gameplayer.loader.*;
 import gameplayer.view.GridGUI;
+import statswrapper.Wrapper;
 
 public class GamePlayData  extends Observable{
 	private GamePlayerFactory factory;
@@ -76,10 +78,18 @@ public class GamePlayData  extends Observable{
 	public double getGold() {
 		return gold;
 	}
+	
 
 	public void setGold(double gold) {
 		System.out.println("Setting gold");
 		this.gold = gold;
+		try {
+			Wrapper.getInstance().updateGameScores("gold", Integer.toString((int)this.currentLevel), Double.toString(this.gold));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		setChanged();
 		notifyObservers();
 	}
@@ -91,6 +101,12 @@ public class GamePlayData  extends Observable{
 	// used by enemymodel
 	public void setLife(double life) {
 		this.lives = life;
+		try {
+			Wrapper.getInstance().updateGameScores("lives", Integer.toString((int)this.currentLevel), Double.toString(this.lives));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		setChanged();
 		notifyObservers();
 	}
