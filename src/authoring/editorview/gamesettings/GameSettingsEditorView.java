@@ -1,6 +1,8 @@
 package authoring.editorview.gamesettings;
 
 import java.util.List;
+import java.util.ResourceBundle;
+
 import authoring.editorview.ListDataSource;
 import authoring.editorview.gamesettings.subviews.GameNameView;
 import javafx.scene.Node;
@@ -20,11 +22,17 @@ public class GameSettingsEditorView implements IGameSettingsEditorView, IGameSet
     private GameNameView gameNameView;
     private BorderPane gameSettingsView;
     private GameSettingsEditorViewDelegate delegate;
+    
+    private static final String RESOURCE_FILE_NAME = "resources/GameAuthoringSettings";	
+	private ResourceBundle settingsResource = ResourceBundle.getBundle(RESOURCE_FILE_NAME);
+
+
+
 
     public GameSettingsEditorView (int aWidth, int aHeight) {
         gameSettingsView = new BorderPane();
         this.gameConditionsRoot = new VBox(10);
-        this.gameNameView = new GameNameView();
+        this.gameNameView = new GameNameView(settingsResource);
         addViewComponents();
     }
 
@@ -52,7 +60,7 @@ public class GameSettingsEditorView implements IGameSettingsEditorView, IGameSet
 
     @Override
     public void updateGameName (String name) {
-        this.gameNameView.updateGameName(name);
+        this.gameNameView.updateName(name);
     }
 
     @Override

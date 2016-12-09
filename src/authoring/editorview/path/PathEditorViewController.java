@@ -68,7 +68,7 @@ public class PathEditorViewController extends EditorViewController implements Pa
 	
 	@Override
 	public boolean onUserEnteredRemovePathCoordinate(int x, int y) {
-		return pathDataSource.setNewPathCoordinate(activeID, x, y);
+		return pathDataSource.removePathCoordinate(activeID, x, y);
 	}
 
 
@@ -78,8 +78,6 @@ public class PathEditorViewController extends EditorViewController implements Pa
 		
 	}
 
-	
 
-	
 
 }

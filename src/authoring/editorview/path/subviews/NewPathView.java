@@ -2,6 +2,7 @@ package authoring.editorview.path.subviews;
 
 import java.util.ResourceBundle;
 
+import authoring.editorview.path.IPathSetView;
 import authoring.editorview.path.PathEditorViewDelegate;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -9,7 +10,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 
-public class NewPathView {
+public class NewPathView implements IPathSetView {
 
 	private static final String RESOURCE_FILE_NAME = "resources/GameAuthoringPath";	
 	private ResourceBundle pathResource = ResourceBundle.getBundle(RESOURCE_FILE_NAME);
@@ -22,10 +23,12 @@ public class NewPathView {
 		buildViewComponents();
 	}
 	
+	@Override
 	public Node getInstanceAsNode(){
 		return root;
 	}
 	
+	@Override
 	public void setDelegate(PathEditorViewDelegate delegate){
 		this.delegate = delegate;
 	}
@@ -49,6 +52,7 @@ public class NewPathView {
 		
 	}
 	 
+
     private Button createButton (String label, EventHandler<ActionEvent> event) {
         Button button = new Button(label);
         button.setOnAction(event);

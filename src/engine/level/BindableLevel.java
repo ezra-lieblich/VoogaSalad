@@ -9,8 +9,8 @@ import engine.level.wave.Wave;
 
 public interface BindableLevel extends BindableType<LevelBuilder> {
     LevelBuilder addWaveListener (BiConsumer<Map<Integer, Wave>, Map<Integer, Wave>> listener);
-    
-    LevelBuilder addPathListener (BiConsumer <List<Integer>, List<Integer>> listener);
+
+    LevelBuilder addPathListener (BiConsumer<List<Integer>, List<Integer>> listener);
 
     LevelBuilder addRewardHealthListener (BiConsumer<Double, Double> listener);
 
@@ -19,7 +19,7 @@ public interface BindableLevel extends BindableType<LevelBuilder> {
     LevelBuilder addRewardScoreListener (BiConsumer<Double, Double> listener);
 
     LevelBuilder addDurationInSecondsListener (BiConsumer<Double, Double> listener);
-    
+
     LevelBuilder addLevelTimeListener (BiConsumer<Double, Double> listener);
 
 }

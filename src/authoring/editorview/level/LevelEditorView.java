@@ -1,7 +1,6 @@
 package authoring.editorview.level;
 
 import java.util.List;
-import java.util.Map;
 import java.util.ResourceBundle;
 import authoring.editorview.level.subviews.LevelChooserView;
 import authoring.editorview.level.subviews.LevelDesign;
@@ -9,11 +8,13 @@ import authoring.editorview.level.subviews.LevelNameView;
 import authoring.editorview.level.subviews.LevelRewardsView;
 import authoring.editorview.level.subviews.LevelTransitionTimeField;
 import authoring.editorview.path.NameIdPair;
+import authoring.utilityfactories.ButtonFactory;
 import authoring.editorview.ListDataSource;
 import authoring.editorview.level.subviews.CreateNewLevelView;
-import authoring.editorview.level.subviews.EnemyTableView;
+import authoring.editorview.level.subviews.WaveTableView;
 import javafx.scene.Node;
 import javafx.scene.layout.VBox;
+
 
 /**
  * 
@@ -23,6 +24,8 @@ import javafx.scene.layout.VBox;
  */
 public class LevelEditorView implements ILevelEditorView {
 
+    private LevelEditorViewDelegate delegate;
+
     private VBox vbox;
     private LevelChooserView levelChooser;
     private LevelDesign levelDesign;
@@ -30,7 +33,7 @@ public class LevelEditorView implements ILevelEditorView {
     private LevelNameView levelNameView;
     private CreateNewLevelView createNewLevelView;
     private LevelTransitionTimeField transitionTimeField;
-    private EnemyTableView enemyTableView;
+    private WaveTableView waveTableView;
     private ResourceBundle levelsResource =
             ResourceBundle.getBundle("resources/GameAuthoringLevels");
 
@@ -42,7 +45,7 @@ public class LevelEditorView implements ILevelEditorView {
         this.levelNameView = new LevelNameView(levelsResource);
         this.createNewLevelView = new CreateNewLevelView(levelsResource);
         this.transitionTimeField = new LevelTransitionTimeField(levelsResource);
-        this.enemyTableView = new EnemyTableView(levelsResource, width);
+        this.waveTableView = new WaveTableView(levelsResource, width);
         setLevelView();
     }
 
@@ -53,13 +56,14 @@ public class LevelEditorView implements ILevelEditorView {
 
     @Override
     public void setDelegate (LevelEditorViewDelegate delegate) {
+        this.delegate = delegate;
         levelNameView.setDelegate(delegate);
         levelRewardsView.setDelegate(delegate);
         levelChooser.setDelegate(delegate);
         levelDesign.setDelegate(delegate);
         createNewLevelView.setDelegate(delegate);
         transitionTimeField.setDelegate(delegate);
-        enemyTableView.setDelegate(delegate);
+        waveTableView.setDelegate(delegate);
     }
 
     private void setLevelView () {
@@ -69,49 +73,42 @@ public class LevelEditorView implements ILevelEditorView {
                                   levelRewardsView.getInstanceAsNode(),
                                   levelDesign.getInstanceAsNode(),
                                   transitionTimeField.getInstanceAsNode(),
-                                  enemyTableView.getInstanceAsNode());
+                                  ButtonFactory.makeButton("New Wave",
+                                                           e -> delegate.onUserEnteredAddWave()),
+                                  waveTableView.getInstanceAsNode());
     }
 
     @Override
     public void updateNameDisplay (String name) {
-        levelNameView.setLevelName(name);
+        levelNameView.updateName(name);
         // also level chooser
-
-    }
-
-    @Override
-    public void updateEnemy (Map<Integer, Integer> enemyCounts) {
-        // TODO Auto-generated method stub
 
     }
 
     @Override
     public void updateRewardScore (double winScore) {
         levelRewardsView.setRewardScore(Double.toString(winScore));
-
     }
 
     @Override
     public void updateRewardHealth (double winHealth) {
         levelRewardsView.setRewardHealth(Double.toString(winHealth));
-
     }
 
     @Override
     public void updateRewardMoney (double winMoney) {
         levelRewardsView.setRewardMoney(Double.toString(winMoney));
-
-    }
-
-    @Override
-    public void updatePath (int pathID) {
-        // TODO Auto-generated method stub
-
     }
 
     @Override
     public void updateTransitionTime (double time) {
         transitionTimeField.updateTransitionTimeField(Double.toString(time));
+    }
+
+    @Override
+    public void updateWavePath (int pathID) {
+        // TODO Auto-generated method stub
+
     }
 
     @Override
@@ -132,7 +129,6 @@ public class LevelEditorView implements ILevelEditorView {
 
     @Override
     public void updateBank (List<Integer> ids) {
-        // TODO Auto-generated method stub
         System.out.println("No level bank currently implemented");
     }
 
@@ -144,13 +140,30 @@ public class LevelEditorView implements ILevelEditorView {
 
     @Override
     public void setLevelListDataSource (ListDataSource source) {
-        // TODO Auto-generated method stub
         System.out.println("No level bank currently implemented");
     }
 
     @Override
     public void updateEnemyNames (List<NameIdPair> enemyNames) {
-        enemyTableView.updateEnemyTableView(enemyNames);
+        waveTableView.updateWaveTableView(enemyNames);
+    }
+
+    @Override
+    public void updateWaveNumber (int waveNumber) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void updateNumberOfEnemies (int numEnemies) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void updateWaveTimeDelay (double timeDelay) {
+        // TODO Auto-generated method stub
+
     }
 
 }
