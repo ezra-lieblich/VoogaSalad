@@ -214,4 +214,9 @@ public class LevelTypeManagerController
 	public void removePath(int levelID, int pathID) {
 		getTypeManager().getEntity(levelID).removePath(pathID);
 	}
+
+	@Override
+	public double getWaveDelay(int levelID, int waveID) {
+		return getWave(levelID, waveID).getStartTime();
+	}
 }

@@ -1,5 +1,8 @@
 package engine;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Map;
 import com.thoughtworks.xstream.XStream;
@@ -7,6 +10,8 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 import engine.ability.AbilityManagerController;
 import engine.ability.AbilityTypeManagerController;
+import engine.enemy.Enemy;
+import engine.enemy.EnemyManager;
 import engine.enemy.EnemyManagerController;
 import engine.enemy.EnemyTypeManagerController;
 import engine.level.LevelManagerController;
@@ -56,6 +61,12 @@ public class ModelAuthoringController implements ModelController {
         modelControllers.put(EnemyManagerController.class, new EnemyTypeManagerController(managerMediator));
         modelControllers.put(LevelManagerController.class, new LevelTypeManagerController(managerMediator));
     }
+
+	@Override
+	public GameAuthoringData loadData(String filePath) {
+		// TODO Reset mediators and managers. Loop through each Type and call it
+		return (GameAuthoringData) Serializer.fromXML(filePath);
+	}
     
 //    public void testXML() {
 //        String xml = Serializer.toXML(gameData);

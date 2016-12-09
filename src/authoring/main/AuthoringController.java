@@ -5,6 +5,11 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.HashMap;
+import java.util.Map;
+
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.DomDriver;
+
 import authoring.editorview.EditorViewController;
 import authoring.editorview.IEditorView;
 import authoring.editorview.IUpdateView;
@@ -23,8 +28,11 @@ import authoring.editorview.weapon.IWeaponEditorView;
 import authoring.editorview.weapon.WeaponEditorViewController;
 import authoring.toolbar.IToolbar;
 import authoring.view.AuthoringViewController;
+import engine.GameAuthoringData;
 import engine.ModelAuthoringController;
 import engine.ModelController;
+import engine.enemy.Enemy;
+import engine.enemy.EnemyManager;
 import engine.enemy.EnemyManagerController;
 import engine.level.LevelManagerController;
 import engine.path.PathManagerController;
@@ -69,12 +77,24 @@ public class AuthoringController {
     }
 
     private void saveAsXMLFile () throws IOException {
-        String fileContent = this.modelController.SaveData();
-        toolbar.saveFile(fileContent);
-        //TODO Lucy: add api call to record game in web app
-        String gameData = xmlToString(fileContent);
-        Wrapper.getInstance().createGame(gameData);
+        XStream serializer = new XStream(new DomDriver());
+    	String wholeFile = serializer.toXML(this);
+    	toolbar.saveFile(wholeFile);
+    	String authoringData = xmlToString(wholeFile);
+    	Wrapper.getInstance().createGame(authoringData);
+//        String fileContent = this.modelController.SaveData();
+//        toolbar.saveFile(fileContent);
+//        //TODO Lucy: add api call to record game in web app
+//        String gameData = xmlToString(fileContent);
+//        Wrapper.getInstance().createGame(gameData);
     }
+    
+	public void loadData(String filePath) {
+		// TODO Reset mediators and managers. Loop through each Type and call it
+		GameAuthoringData data = modelController.loadData(filePath);
+		 modelController.getModelController(PathManagerController.class);
+
+	}
     
     private String xmlToString(String textContent) throws IOException{
     	BufferedReader br = new BufferedReader(new StringReader(textContent));

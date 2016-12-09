@@ -65,5 +65,7 @@ public interface LevelManagerController
     
     public void setWaveDelay(int levelID, int waveID, double delay);
     
+    public double getWaveDelay(int levelID, int waveID);
+    
 
 }
