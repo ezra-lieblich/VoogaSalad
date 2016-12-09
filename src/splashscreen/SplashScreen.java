@@ -151,16 +151,10 @@ public class SplashScreen {
 	private void startGame(){
 		Stage s = new Stage();
 		
-		HomeSelection file = new HomeSelection(s);
-		file.initHomeScreen();
-		
-		/*
-		GamePlayerController playerController = new GamePlayerController();
-		playerController.init();
-		s.setTitle(TITLE);
-		s.setScene(playerController.getMainScene());
+		XMLGallery fileGallery = new XMLGallery();
+		s.setScene(fileGallery.getScene());
 		s.show();
-		*/
+		
 	}
 
 }

@@ -66,7 +66,7 @@ public class GameGUI {
 		this.mainScreen = new BorderPane();
 		this.graphics = new GraphicsLibrary();
 		this.grid = new GridGUI(rows, columns/* , path */);
-		this.dragDrop = new DragDropView(xError, yError);
+		this.dragDrop = new DragDropView(xError, yError, this);
 		this.buttonPanel = new GamePlayButtonPanel();
 		this.currentLevel = 0;
 		this.rows = rows;
@@ -99,6 +99,10 @@ public class GameGUI {
 	
 	public double gridToPixelCoordHeight(double num){
 		return num * GridGUI.GRID_HEIGHT/this.rows;
+	}
+	
+	public int pixelToGridCoord(double pixel){
+		return (int)pixel/(GridGUI.GRID_HEIGHT/this.rows);
 	}
 
 	public BorderPane getMainScreen() {
@@ -139,7 +143,7 @@ public class GameGUI {
 		this.buttonPanel.bindAnimationStop(handle);
 	}
 
-	public List<Double[]> getDroppedTowerCoords() {
+	public List<int[]> getDroppedTowerCoords() {
 		return getDragDrop().getCoordinates();
 	}
 
@@ -218,7 +222,7 @@ public class GameGUI {
 
 	public void reRenderTower(List<IDrawable> redraw) {// should be interface of
 														// drawables
-		ArrayList<Double[]> towerCoords = (ArrayList<Double[]>) this.getDroppedTowerCoords();
+		ArrayList<int[]> towerCoords = (ArrayList<int[]>) this.getDroppedTowerCoords();
 		int i = 0;
 
 		for (IDrawable entity : redraw) {

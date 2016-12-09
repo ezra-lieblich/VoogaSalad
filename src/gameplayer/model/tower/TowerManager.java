@@ -136,6 +136,12 @@ public class TowerManager extends Observable {
 			int fireRate =  (int) ((int) this.timeInterval/weaponForGun.getFireRate());
 			double x2 = this.gameData.cellToCoordinate(x1);
 			double y2 = this.gameData.cellToCoordinate(y1);
+			System.out.println("plaCE tower x1 "+x1);
+			System.out.println("plaCE tower y1 "+y1);
+
+			System.out.println("place tower x2: "+x2);
+			System.out.println("place tower y2: "+y2);
+			
 			Gun tempGun = new Gun(fireRate ,weaponForGun, x2, y2 );// change fire rate 
 			gunForTower.add(tempGun);
 		}
