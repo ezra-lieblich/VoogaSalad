@@ -24,10 +24,10 @@ public class TowerController {
 	/**
 	 * get all weaponTypes from all towers on the grid check on fire rate and do
 	 * math to fire weapon to map create all the newly fired weapon into an
-	 * arraylist<weapon> then call weaponManager's method
-	 * updateWeapon(ArrayList<Weapon> newlyGeneratedWeapons) the method above
-	 * will both updated current weapon on map and add the new weapons on the
-	 * position of the tower
+	 * arraylist<weapon> then call weaponManager's method updateWeapon(ArrayList
+	 * <Weapon> newlyGeneratedWeapons) the method above will both updated
+	 * current weapon on map and add the new weapons on the position of the
+	 * tower
 	 * 
 	 */
 
@@ -36,32 +36,24 @@ public class TowerController {
 		this.graphicsLib = new GraphicsLibrary();
 		this.view = view;
 	}
-	
 
 	private void sellTower(int id) {
 		this.towerManager.sellTower(id);
 	}
 
-	public void handleSellTowerClick(double x, double y) {
-		
+	public void handleSellTowerClick() {
+
 		Map<Integer, Tower> towersOnGrid = towerManager.getTowerOnGrid();
 		for (Map.Entry<Integer, Tower> entry : towersOnGrid.entrySet()) {
-			Tower t = entry.getValue();
-			double newX = this.view.gridToPixelCoordWidth(t.getX());
-			double newY=this.view.gridToPixelCoordHeight(t.getY());
-			System.out.println("Tower x y: "+newX+", "+newY);
-			System.out.println("Clicked: "+x+","+y);
-			if ((newX <= x && (newX + GamePlayerController.ENTITY_SIZE) >= x && newY <= y - GamePlayerController.Y_OFFSET
-					&& (newY + GamePlayerController.ENTITY_SIZE) >= (y - GamePlayerController.Y_OFFSET))) {
-				System.out.println("----++++++++sell tower--------++++++++");
-				sellTower(entry.getKey());
-			}
+
+			sellTower(entry.getKey());
+
 		}
 	}
 
 	private void createButton() {
 		Button sellTower = graphicsLib.createButton("Sell tower", e -> {
-			this.sellable = true; 
+			this.sellable = true;
 		});
 	}
 
