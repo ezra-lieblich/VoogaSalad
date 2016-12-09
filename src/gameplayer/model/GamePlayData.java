@@ -89,7 +89,6 @@ public class GamePlayData  extends Observable{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		setChanged();
 		notifyObservers();
 	}
