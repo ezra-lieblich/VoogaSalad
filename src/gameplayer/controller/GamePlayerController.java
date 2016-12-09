@@ -24,10 +24,12 @@ import javafx.event.EventHandler;
 import javafx.scene.CacheHint;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
@@ -182,23 +184,32 @@ public class GamePlayerController implements Observer {
 			double newY=this.view.gridToPixelCoordHeight(t.getY());
 			System.out.println("Tower x y: "+newX+", "+newY);
 			System.out.println("Clicked: "+x+","+y);
-			if ((newX<= x && newX + ENTITY_SIZE >= x && newY <= y - Y_OFFSET
-					&& newY+ ENTITY_SIZE >= y - Y_OFFSET)) {
+			if ((newX<= x && newX + ENTITY_SIZE >= x && newY <= y
+					&& newY+ ENTITY_SIZE >= y)) {
+				System.out.println("shown");
 				t.toggleInfoVisibility();
+				createBox(x, y, t);
 			}
 		}
 
 		HashMap<Integer, Enemy> enemiesOnGrid = this.enemyManager.getEnemyOnGrid();
 		for (int i : enemiesOnGrid.keySet()) {
 			Enemy e = enemiesOnGrid.get(i);
-			if (e.getX() <= x && e.getX() + ENTITY_SIZE >= x && e.getY() <= y - Y_OFFSET
-					&& e.getY() + ENTITY_SIZE >= y - Y_OFFSET) {
+			if (e.getX() <= x && e.getX() + ENTITY_SIZE >= x && e.getY() <= y
+					&& e.getY() + ENTITY_SIZE >= y) {
 				e.toggleInfoVisibility();
 			}
 		}
 		
-		this.towerController.handleSellTowerClick(x, y);
+
 	}
+
+	public void createBox(double x, double y, Tower t) {
+		VBox box = t.getInfoBox();
+		t.getSellButton().setOnAction(e -> this.towerController.handleSellTowerClick(x, y));
+	}
+	
+
 
 	private ArrayList<String> getTowerImages() {
 		ArrayList<String> towerImages = new ArrayList<String>();
@@ -330,22 +341,22 @@ public class GamePlayerController implements Observer {
 		HashMap<Integer, Enemy> enemyRedraw = this.enemyManager.getEnemyOnGrid();
 		Map<Integer, Tower> towerRedraw = this.model.getTowerOnGrid();
 		HashMap<Integer, Weapon> bulletRedraw = this.model.getWeaponManager().getWeaponOnGrid();
-		for (int i : bulletRedraw.keySet()) {
-			System.out.println("bulletRedraw");
-			if (!weaponsOnScreen.containsKey(bulletRedraw.get(i).getUniqueID())) {
-				ImageView image = new ImageView(bulletRedraw.get(i).getImage());
-				image.setCache(true);
-				image.setCacheHint(CacheHint.SPEED);
-				image.setX(bulletRedraw.get(i).getX());
-				image.setY(bulletRedraw.get(i).getY());
-				graphics.setImageViewParams(image, DragDropView.DEFENSIVEWIDTH * 0.5,
-						DragDropView.DEFENSIVEHEIGHT * 0.5);
-				weaponsOnScreen.put(bulletRedraw.get(i).getUniqueID(), image);
-			} else {
-				weaponsOnScreen.get(bulletRedraw.get(i).getUniqueID()).setX(bulletRedraw.get(i).getX());
-				weaponsOnScreen.get(bulletRedraw.get(i).getUniqueID()).setY(bulletRedraw.get(i).getY());
-			}
-		}
+//		for (int i : bulletRedraw.keySet()) {
+//			System.out.println("bulletRedraw");
+//			if (!weaponsOnScreen.containsKey(bulletRedraw.get(i).getUniqueID())) {
+//				ImageView image = new ImageView(bulletRedraw.get(i).getImage());
+//				image.setCache(true);
+//				image.setCacheHint(CacheHint.SPEED);
+//				image.setX(bulletRedraw.get(i).getX());
+//				image.setY(bulletRedraw.get(i).getY());
+//				graphics.setImageViewParams(image, DragDropView.DEFENSIVEWIDTH * 0.5,
+//						DragDropView.DEFENSIVEHEIGHT * 0.5);
+//				weaponsOnScreen.put(bulletRedraw.get(i).getUniqueID(), image);
+//			} else {
+//				weaponsOnScreen.get(bulletRedraw.get(i).getUniqueID()).setX(bulletRedraw.get(i).getX());
+//				weaponsOnScreen.get(bulletRedraw.get(i).getUniqueID()).setY(bulletRedraw.get(i).getY());
+//			}
+//		}
 
 		List<IDrawable> reEnemyDraw = convertEnemyDrawable(enemyRedraw);// probably
 																		// need
