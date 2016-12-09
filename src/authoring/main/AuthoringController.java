@@ -86,8 +86,8 @@ public class AuthoringController {
         WeaponEditorViewController weaponVC = (WeaponEditorViewController) editorVCs.get("weapon");
         EnemyEditorViewController enemyVC = (EnemyEditorViewController) editorVCs.get("enemy");
         TowerEditorViewController towerVC = (TowerEditorViewController) editorVCs.get("tower");
-        GameSettingsEditorViewController settingsVC =
-                (GameSettingsEditorViewController) editorVCs.get("settings");
+        GameSettingsEditorViewController setupVC =
+                (GameSettingsEditorViewController) editorVCs.get("setup");
 
         PathManagerController pathModel =
                 modelController.getModelController(PathManagerController.class);
@@ -108,7 +108,7 @@ public class AuthoringController {
         levelVC.setLevelDataSource(levelModel);
         weaponVC.setWeaponDataSource(weaponModel);
         towerVC.setTowerDataSource(towerModel);
-        settingsVC.setGameSettingsDataSource(settingsModel);
+        setupVC.setGameSettingsDataSource(settingsModel);
     }
 
     public Scene getScene () {
