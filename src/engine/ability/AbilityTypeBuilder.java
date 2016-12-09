@@ -78,5 +78,12 @@ public class AbilityTypeBuilder extends AbstractTypeBuilder<Ability, AbilityBuil
         effect.addListener(listener);
         return this;
     }
+
+    @Override
+    protected AbilityBuilder copyType (Ability type) {
+        return this
+                .buildEffect(type.getEffect())
+                .buildRate(type.getRate());
+    }
     
 }

@@ -28,15 +28,13 @@ public class TowerTypeBuilder extends AbstractTypeBuilder<Tower, TowerBuilder> i
 
      //public static final List<Integer> DEFAULT_WEAPONS = Arrays.stream(new Integer[]{}).collect(Collectors.toList());
      public static final Integer[] DEFAULT_WEAPONS = new Integer[]{0};
-     public static final Integer[] DEFAULT_TARGETS = new Integer[]{};
      public static final Integer[] DEFAULT_ABILITIES = new Integer[]{};
      public static final Integer[] DEFAULT_UPGRADES = new Integer[]{};
-     public static final double DEFAULT_COST = 100;
+     public static final double DEFAULT_COST = 10;
      public static final double DEFAULT_SELL_AMOUNT = DEFAULT_COST / 2;
      public static final int DEFAULT_UNLOCK_LEVEL = 0;
      
      private ObservableList<Integer> weapons;
-     private ObservableList<Integer> targets;
      private ObservableList<Integer> abilities;
      private ObservableList<Integer> upgrades;
      private ObservableProperty<Double> cost;
@@ -56,17 +54,6 @@ public class TowerTypeBuilder extends AbstractTypeBuilder<Tower, TowerBuilder> i
     @Override
     public TowerBuilder buildWeapons(List<Integer> weapons) {
         this.weapons.setProperty(weapons);
-        return this;
-    }
-    
-    @Override
-    public TowerBuilder buildTargets(Integer... targets) {
-        return buildWeapons(Arrays.stream(targets).collect(Collectors.toList()));
-    }
-    
-    @Override
-    public TowerBuilder buildTargets(List<Integer> targets) {
-        this.targets.setProperty(targets);
         return this;
     }
     
@@ -121,11 +108,6 @@ public class TowerTypeBuilder extends AbstractTypeBuilder<Tower, TowerBuilder> i
     }
 
     @Override
-    public ObservableList<Integer> getTargets () {
-        return targets;
-    }
-
-    @Override
     public ObservableList<Integer> getAbilities () {
         return abilities;
     }
@@ -154,7 +136,6 @@ public class TowerTypeBuilder extends AbstractTypeBuilder<Tower, TowerBuilder> i
     protected void restoreTypeDefaults () {
         //this.weapons = new ObservableListProperty<Integer>(DEFAULT_WEAPONS);
         this.weapons = new ObservableListProperty<Integer>(Arrays.stream(DEFAULT_WEAPONS).collect(Collectors.toList()));
-        this.targets = new ObservableListProperty<Integer>(Arrays.stream(DEFAULT_TARGETS).collect(Collectors.toList()));
         this.abilities = new ObservableListProperty<Integer>(Arrays.stream(DEFAULT_ABILITIES).collect(Collectors.toList()));
         this.upgrades = new ObservableListProperty<Integer>(Arrays.stream(DEFAULT_UPGRADES).collect(Collectors.toList()));
         this.cost = new ObservableObjectProperty<Double>(DEFAULT_COST);
@@ -201,6 +182,17 @@ public class TowerTypeBuilder extends AbstractTypeBuilder<Tower, TowerBuilder> i
     public TowerBuilder addUpgradesListener (BiConsumer<List<Integer>, List<Integer>> listener) {
         upgrades.addListener(listener);
         return this;
+    }
+
+    @Override
+    protected TowerBuilder copyType (Tower type) {
+        return this
+        .buildWeapons(type.getWeapons())
+        .buildAbilities(type.getAbilities())
+        .buildUpgrades(type.getUpgrades())
+        .buildCost(type.getCost())
+        .buildSellAmount(type.getSellAmount())
+        .buildUnlockLevel(type.getUnlockLevel());
     }
     
 

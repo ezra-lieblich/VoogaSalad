@@ -83,6 +83,15 @@ public abstract class AbstractTypeBuilder<E extends Type, R extends TypeBuilder<
     }
     
     @Override
+    public boolean setNextId(int id) {
+        boolean isValidIdAssignment = id > nextId;
+        if(isValidIdAssignment) {
+            nextId = id;
+        }
+        return isValidIdAssignment;
+    }
+    
+    @Override
     public R addNameListener(BiConsumer<String, String> listener) {
         name.addListener(listener);
         return getThis();
@@ -98,6 +107,15 @@ public abstract class AbstractTypeBuilder<E extends Type, R extends TypeBuilder<
     public R addSizeListener(BiConsumer<Double, Double> listener) {
         size.addListener(listener);
         return getThis();
+    }
+    
+    @Override
+    public R copy(E type) {
+        return copyType(type)
+        .buildName(type.getName())
+        .buildId(type.getId())
+        .buildImagePath(type.getImagePath())
+        .buildSize(type.getSize());   
     }
     
     protected void resetName(ObservableProperty<String> name) {
@@ -123,6 +141,8 @@ public abstract class AbstractTypeBuilder<E extends Type, R extends TypeBuilder<
     protected abstract E create ();
     
     protected abstract void restoreTypeDefaults();
+    
+    protected abstract R copyType(E type);
     
     protected abstract R getThis();
 
