@@ -1,6 +1,5 @@
 package authoring.editorview.tower;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.ResourceBundle;
 import authoring.editorview.ListDataSource;
@@ -42,7 +41,7 @@ public class TowerEditorView implements ITowerEditorView {
             ResourceBundle.getBundle("resources/GameAuthoringTower");
     private ResourceBundle dialogueBoxResource = ResourceBundle.getBundle("resources/DialogueBox");
 
-    public TowerEditorView () throws IOException {
+    public TowerEditorView () {
         towerEditorView = new BorderPane();
 
         towerName = new TowerNameField(labelsResource);

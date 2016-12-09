@@ -10,8 +10,8 @@ public abstract class EditorViewController {
     public Node getView () {
         return view.getInstanceAsNode();
     }
-    
-    public IUpdateView getUpdateView(){
-    	return (IUpdateView)this.view;
+
+    public IUpdateView getUpdateView () {
+        return (IUpdateView) this.view;
     }
 }

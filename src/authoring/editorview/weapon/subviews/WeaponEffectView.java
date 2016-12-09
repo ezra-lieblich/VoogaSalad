@@ -104,9 +104,7 @@ public class WeaponEffectView extends PhotoFileChooser {
                                                                                                             .getString("TryAgain"));
                                                                 }
                                                             }));
-        vboxView.getChildren()
-                .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Name"),
-                                                           weaponName.getInstanceAsNode()));
+        vboxView.getChildren().add(weaponName.getInstanceAsNode());
         vboxView.getChildren()
                 .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Size"),
                                                            weaponSize.getInstanceAsNode()));

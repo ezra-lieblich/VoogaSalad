@@ -1,9 +1,7 @@
 package authoring.editorview.gamesettings.subviews;
 
 import java.util.ResourceBundle;
-
 import authoring.editorview.NameView;
-
 import authoring.editorview.gamesettings.GameSettingsEditorViewDelegate;
 import authoring.editorview.gamesettings.IGameSettingsSetView;
 import authoring.utilityfactories.BoxFactory;
@@ -18,11 +16,11 @@ import authoring.utilityfactories.TextFieldFactory;
  */
 
 public class GameNameView extends NameView implements IGameSettingsSetView {
-	
+
     GameSettingsEditorViewDelegate delegate;
 
     public GameNameView (ResourceBundle settingsResource) {
-    	super(settingsResource);
+        super(settingsResource);
 
     }
 

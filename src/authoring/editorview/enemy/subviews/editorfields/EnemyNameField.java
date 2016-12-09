@@ -6,7 +6,6 @@ import authoring.editorview.enemy.EnemyEditorViewDelegate;
 import authoring.editorview.enemy.IEnemySetView;
 import authoring.utilityfactories.BoxFactory;
 import authoring.utilityfactories.TextFieldFactory;
-import javafx.scene.Node;
 
 
 /**

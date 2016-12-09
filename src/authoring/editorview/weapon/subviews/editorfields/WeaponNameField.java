@@ -1,11 +1,11 @@
 package authoring.editorview.weapon.subviews.editorfields;
 
 import java.util.ResourceBundle;
+import authoring.editorview.NameView;
 import authoring.editorview.weapon.IWeaponSetView;
 import authoring.editorview.weapon.WeaponEditorViewDelegate;
+import authoring.utilityfactories.BoxFactory;
 import authoring.utilityfactories.TextFieldFactory;
-import javafx.scene.Node;
-import javafx.scene.control.TextField;
 
 
 /**
@@ -13,21 +13,12 @@ import javafx.scene.control.TextField;
  * @author Kayla Schulz
  *
  */
-public class WeaponNameField implements IWeaponSetView {
+public class WeaponNameField extends NameView implements IWeaponSetView {
 
-    private TextField weaponNameField;
     private WeaponEditorViewDelegate delegate;
 
     public WeaponNameField (ResourceBundle labelsResource) {
-        createField(labelsResource);
-    }
-
-    private void createField (ResourceBundle labelsResource) {
-        weaponNameField =
-                TextFieldFactory.makeTextField(labelsResource.getString("EnterString"),
-                                               e -> delegate
-                                                       .onUserEnteredWeaponName(weaponNameField
-                                                               .getText()));
+        super(labelsResource);
     }
 
     @Override
@@ -36,12 +27,13 @@ public class WeaponNameField implements IWeaponSetView {
     }
 
     @Override
-    public Node getInstanceAsNode () {
-        return weaponNameField;
-    }
-
-    public void updateName (String weaponName) {
-        weaponNameField.setText(weaponName);
+    protected void makeNameTextField () {
+        nameTextField =
+                TextFieldFactory.makeTextField(resource.getString("EnterString"),
+                                               e -> delegate.onUserEnteredWeaponName(nameTextField
+                                                       .getText()));
+        root = BoxFactory.createHBoxWithLabelandNode(resource.getString("NameTextField"),
+                                                     nameTextField);
     }
 
 }

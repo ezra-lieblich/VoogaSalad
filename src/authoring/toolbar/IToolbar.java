@@ -4,6 +4,7 @@ import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 
+
 public interface IToolbar {
 
     public Node getInstanceAsNode();
@@ -14,4 +15,5 @@ public interface IToolbar {
 	
 	public void setOnPressedLoad(EventHandler<MouseEvent> e);
     
+
 }

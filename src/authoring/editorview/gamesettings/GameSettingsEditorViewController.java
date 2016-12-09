@@ -57,4 +57,10 @@ public class GameSettingsEditorViewController extends EditorViewController
         // TODO Auto-generated method stub
 
     }
+
+    @Override
+    public void onUserEnteredGameMoney (String money) {
+        // TODO Auto-generated method stub
+
+    }
 }

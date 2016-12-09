@@ -2,7 +2,6 @@ package authoring.editorview.gamesettings;
 
 import java.util.List;
 import java.util.ResourceBundle;
-
 import authoring.editorview.ListDataSource;
 import authoring.editorview.gamesettings.subviews.GameNameView;
 import javafx.scene.Node;
@@ -29,7 +28,7 @@ public class GameSettingsEditorView implements IGameSettingsEditorView, IGameSet
 
 
 
-    public GameSettingsEditorView (int aWidth, int aHeight) {
+    public GameSettingsEditorView (int width, int height) {
         gameSettingsView = new BorderPane();
         this.gameConditionsRoot = new VBox(10);
         this.gameNameView = new GameNameView(settingsResource);
@@ -95,7 +94,6 @@ public class GameSettingsEditorView implements IGameSettingsEditorView, IGameSet
 
     @Override
     public void setGameSettingsListDataSource (ListDataSource source) {
-        // TODO Auto-generated method stub
         System.out.println("Game settings doesn't have an image bank implemented!");
     }
 

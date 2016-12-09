@@ -1,6 +1,5 @@
 package authoring.editorview.enemy;
 
-import java.io.IOException;
 import java.util.ResourceBundle;
 import authoring.editorview.EditorViewController;
 import authoring.editorview.ListCellData;
@@ -22,7 +21,7 @@ public class EnemyEditorViewController extends EditorViewController
     private int currentEnemyID;
     private IEnemyEditorView enemyView;
 
-    public EnemyEditorViewController (int editorWidth, int editorHeight) throws IOException {
+    public EnemyEditorViewController (int editorWidth, int editorHeight) {
         enemyView = EnemyEditorViewFactory.build(editorWidth, editorHeight);
         enemyView.setDelegate(this);
         enemyView.setEnemyListDataSource(this);

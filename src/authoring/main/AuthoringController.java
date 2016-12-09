@@ -1,7 +1,6 @@
 package authoring.main;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.HashMap;
@@ -11,15 +10,12 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
 import authoring.editorview.EditorViewController;
-import authoring.editorview.IEditorView;
-import authoring.editorview.IUpdateView;
 import authoring.editorview.enemy.EnemyEditorViewController;
 import authoring.editorview.enemy.IEnemyEditorView;
 import authoring.editorview.gamesettings.GameSettingsEditorViewController;
 import authoring.editorview.gamesettings.IGameSettingsEditorView;
 import authoring.editorview.level.ILevelEditorView;
 import authoring.editorview.level.LevelEditorViewController;
-import authoring.editorview.path.IPathSetView;
 import authoring.editorview.path.IPathEditorView;
 import authoring.editorview.path.PathEditorViewController;
 import authoring.editorview.tower.ITowerEditorView;
@@ -93,7 +89,7 @@ public class AuthoringController {
 //    	Wrapper.getInstance().createGame(authoringData);
         String fileContent = this.modelController.SaveData();
         toolbar.saveFile(fileContent);
-        //TODO Lucy: add api call to record game in web app
+        // TODO Lucy: add api call to record game in web app
         String gameData = xmlToString(fileContent);
         Wrapper.getInstance().createGame(gameData);
     }
@@ -143,8 +139,8 @@ public class AuthoringController {
         WeaponEditorViewController weaponVC = (WeaponEditorViewController) editorVCs.get("weapon");
         EnemyEditorViewController enemyVC = (EnemyEditorViewController) editorVCs.get("enemy");
         TowerEditorViewController towerVC = (TowerEditorViewController) editorVCs.get("tower");
-        GameSettingsEditorViewController settingsVC =
-                (GameSettingsEditorViewController) editorVCs.get("settings");
+        GameSettingsEditorViewController setupVC =
+                (GameSettingsEditorViewController) editorVCs.get("setup");
 
         PathManagerController pathModel =
                 modelController.getModelController(PathManagerController.class);
@@ -165,7 +161,7 @@ public class AuthoringController {
         levelVC.setLevelDataSource(levelModel);
         weaponVC.setWeaponDataSource(weaponModel);
         towerVC.setTowerDataSource(towerModel);
-        settingsVC.setGameSettingsDataSource(settingsModel);
+        setupVC.setGameSettingsDataSource(settingsModel);
     }
 
     public Scene getScene () {
