@@ -25,7 +25,7 @@ public class EnemyImageView implements IEnemySetView {
     
     private final int CHARACTER_SIZE = 250;
 
-    public EnemyImageView (ResourceBundle labelsResource) throws IOException {
+    public EnemyImageView (ResourceBundle labelsResource) {
         this.labelsResource = labelsResource;
         enemyImage = new ImageView();
         enemyImage.setFitHeight(CHARACTER_SIZE);

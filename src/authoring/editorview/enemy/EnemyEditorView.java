@@ -1,6 +1,5 @@
 package authoring.editorview.enemy;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.ResourceBundle;
 import authoring.editorview.ListDataSource;
@@ -40,7 +39,7 @@ public class EnemyEditorView implements IEnemyEditorView {
     private EnemyRewardPointsField enemyRewardPoints;
     private EnemySizeField enemySize;
 
-    public EnemyEditorView () throws IOException {
+    public EnemyEditorView () {
         String ENEMY_EFFECT_RESOURCE_PATH = "resources/GameAuthoringEnemy";
         ResourceBundle labelsResource = ResourceBundle.getBundle(ENEMY_EFFECT_RESOURCE_PATH);
         ResourceBundle dialogueBoxResource = ResourceBundle.getBundle("resources/DialogueBox");
@@ -164,7 +163,6 @@ public class EnemyEditorView implements IEnemyEditorView {
 
     @Override
     public void updateBank (List<Integer> ids) {
-        // TODO Auto-generated method stub
         this.enemyBank.updateBank(ids);
     }
 

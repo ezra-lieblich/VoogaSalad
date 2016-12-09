@@ -1,7 +1,6 @@
 package authoring.editorview.level.subviews;
 
 import java.util.ResourceBundle;
-
 import authoring.editorview.NameView;
 import authoring.editorview.level.ILevelSetView;
 import authoring.editorview.level.LevelEditorViewDelegate;
@@ -14,7 +13,7 @@ public class LevelNameView extends NameView implements ILevelSetView {
     private LevelEditorViewDelegate delegate;
 
     public LevelNameView (ResourceBundle levelsResource) {
-    	super(levelsResource);
+        super(levelsResource);
     }
 
     @Override
@@ -23,7 +22,7 @@ public class LevelNameView extends NameView implements ILevelSetView {
     }
 
     @Override
-	protected void makeNameTextField() {
+    protected void makeNameTextField () {
         nameTextField = TextFieldFactory.makeTextField("",
                                                        e -> delegate
                                                                .onUserEnteredLevelName(
