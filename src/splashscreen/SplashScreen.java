@@ -83,10 +83,10 @@ public class SplashScreen {
 		mainScreen.add(actiontarget, 1, 6);
 
 		btn.setOnAction(e -> {
-			actiontarget.setText("Sign in button pressed");
+			
 			try {
-				Wrapper.getInstance().login(userfield.getText(), passField.getText());
-				
+				String response = Wrapper.getInstance().login(userfield.getText(), passField.getText());
+				actiontarget.setText(response);
 				//testing
 				//Wrapper.getInstance().updateGameScores("gold", "0", "777");
 				createPlayGameOrMakeGameOptions();
@@ -124,9 +124,9 @@ public class SplashScreen {
 		mainScreen.add(actiontarget, 2, 6);
 
 		btn.setOnAction(e -> {
-			actiontarget.setText("Now login");
 			try {
-				Wrapper.getInstance().createAccount(userfield.getText(), passField.getText());
+				String response = Wrapper.getInstance().createAccount(userfield.getText(), passField.getText());
+				actiontarget.setText(response+ "/n Now login");
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();

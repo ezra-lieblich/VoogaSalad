@@ -277,6 +277,7 @@ public class GamePlayerController implements Observer {
 					//// System.out.println("New level");
 					this.view.getGrid().getGrid().getChildren().clear();
 					// do something to trigger new level here!
+					this.model.initializeLevelInfo();
 				});
 
 			}
@@ -341,22 +342,26 @@ public class GamePlayerController implements Observer {
 		HashMap<Integer, Enemy> enemyRedraw = this.enemyManager.getEnemyOnGrid();
 		Map<Integer, Tower> towerRedraw = this.model.getTowerOnGrid();
 		HashMap<Integer, Weapon> bulletRedraw = this.model.getWeaponManager().getWeaponOnGrid();
-//		for (int i : bulletRedraw.keySet()) {
-//			System.out.println("bulletRedraw");
-//			if (!weaponsOnScreen.containsKey(bulletRedraw.get(i).getUniqueID())) {
-//				ImageView image = new ImageView(bulletRedraw.get(i).getImage());
-//				image.setCache(true);
-//				image.setCacheHint(CacheHint.SPEED);
-//				image.setX(bulletRedraw.get(i).getX());
-//				image.setY(bulletRedraw.get(i).getY());
-//				graphics.setImageViewParams(image, DragDropView.DEFENSIVEWIDTH * 0.5,
-//						DragDropView.DEFENSIVEHEIGHT * 0.5);
-//				weaponsOnScreen.put(bulletRedraw.get(i).getUniqueID(), image);
-//			} else {
-//				weaponsOnScreen.get(bulletRedraw.get(i).getUniqueID()).setX(bulletRedraw.get(i).getX());
-//				weaponsOnScreen.get(bulletRedraw.get(i).getUniqueID()).setY(bulletRedraw.get(i).getY());
-//			}
-//		}
+		/*
+		for (int i : bulletRedraw.keySet()) {
+			System.out.println("bulletRedraw");
+			
+			if (!weaponsOnScreen.containsKey(bulletRedraw.get(i).getUniqueID())) {
+				ImageView image = new ImageView(bulletRedraw.get(i).getImage());
+				image.setCache(true);
+				image.setCacheHint(CacheHint.SPEED);
+				image.setX(bulletRedraw.get(i).getX());
+				image.setY(bulletRedraw.get(i).getY());
+				graphics.setImageViewParams(image, DragDropView.DEFENSIVEWIDTH * 0.5,
+						DragDropView.DEFENSIVEHEIGHT * 0.5);
+				weaponsOnScreen.put(bulletRedraw.get(i).getUniqueID(), image);
+			} else {
+				weaponsOnScreen.get(bulletRedraw.get(i).getUniqueID()).setX(bulletRedraw.get(i).getX());
+				weaponsOnScreen.get(bulletRedraw.get(i).getUniqueID()).setY(bulletRedraw.get(i).getY());
+			}
+			
+		}
+		*/
 
 		List<IDrawable> reEnemyDraw = convertEnemyDrawable(enemyRedraw);// probably
 																		// need
