@@ -50,15 +50,19 @@ public class XMLGallery {
 			image.setFitWidth(100);
 			box.setOnMouseClicked(e -> {
 				System.out.println("open: " + filename);
-				GamePlayerController playerController = new GamePlayerController(filename);
-				playerController.init();
-				s.setTitle(TITLE);
-				s.setScene(playerController.getMainScene());
-				s.show();
+				createNewGame(s, filename);
 			});
 			box.getChildren().addAll(image, new Label(filename));
 			this.gallery.getChildren().add(box);
 		}
+	}
+
+	public void createNewGame(Stage s, String filename) {
+		GamePlayerController playerController = new GamePlayerController(filename);
+		playerController.init();
+		s.setTitle(TITLE);
+		s.setScene(playerController.getMainScene());
+		s.show();
 	}
 
 	public Scene getScene() {
