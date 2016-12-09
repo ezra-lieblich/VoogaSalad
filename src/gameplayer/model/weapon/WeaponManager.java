@@ -44,7 +44,7 @@ public class WeaponManager extends Observable{
 	public void updateWeapon() {
 	
 		//newly fired weapon
-		if(this.tempCountFix % 50 == 0){//VERY TEMP FIX
+		if(this.tempCountFix % 20 == 0){//VERY TEMP FIX MAKE BULLETS ONCE PER SECOND
 			ArrayList<Weapon> newlyGeneratedWeapons = this.towerManager.generateNewWeapons();
 			for (int i = 0; i < newlyGeneratedWeapons.size(); i++){
 				newlyGeneratedWeapons.get(i).setUniqueID(this.uniqueWeaponID);
