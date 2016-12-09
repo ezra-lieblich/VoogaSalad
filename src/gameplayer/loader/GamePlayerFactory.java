@@ -46,7 +46,7 @@ public class GamePlayerFactory{
 		HashMap<String,Double>settings = new HashMap<>(); 
 		GameMode gameSettings = authoringFileReader.getGameMode();
 		LevelManager levelManager = authoringFileReader.getLevelManager();
-		//refactor b/c current exml has no GameModeManager
+		//refactor b/c current xml has no GameModeManager
 		settings.put("levelnumber", 0.0); //take this out
 		settings.put("lives", 5.0);
 		settings.put("gold", 1000000.0);

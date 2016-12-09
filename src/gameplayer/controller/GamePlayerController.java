@@ -90,8 +90,7 @@ public class GamePlayerController implements Observer {
 
 	public GamePlayerController(String xmlFilePath) {
 		// use xml parser to create classes.
-		this.loader = new GamePlayerFactory(new XMLParser(xmlFilePath));// hardcoded
-		// "player.samplexml/game2.xml"
+		this.loader = new GamePlayerFactory(new XMLParser("player.samplexml/newWaveTester.xml"));// hardcoded
 		// does not work because of the image path
 
 		checkIfValid();

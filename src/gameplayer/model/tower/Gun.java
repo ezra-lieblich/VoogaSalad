@@ -41,7 +41,8 @@ public class Gun {
 		 String name = weaponType.getName(); 
 		 double demage = 50; // get from weapon type later
 		 String image = weaponType.getImagePath();
-		 return new Weapon (name,  demage, targetX, targetY, image, this.attackingRange,targetID, this.xcoor,this.ycoor);
+		 double speedMag = weaponType.getSpeed();
+		 return new Weapon (name,  demage, targetX, targetY, image, this.attackingRange,targetID, this.xcoor,this.ycoor,speedMag );
 	}
 
 }

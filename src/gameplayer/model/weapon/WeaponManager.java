@@ -42,8 +42,10 @@ public class WeaponManager extends Observable{
 
 
 	public void updateWeapon() {
-	
+		System.out.println("weaponsOnGrid Size: "+weaponOnGrid.size());
+
 		//newly fired weapon
+
 		if(this.tempCountFix % 50 == 0){//VERY TEMP FIX
 			ArrayList<Weapon> newlyGeneratedWeapons = this.towerManager.generateNewWeapons();
 			for (int i = 0; i < newlyGeneratedWeapons.size(); i++){
@@ -56,6 +58,8 @@ public class WeaponManager extends Observable{
 		else{
 			tempCountFix++; 
 		}
+		System.out.println("weaponsOnGrid Size: "+weaponOnGrid.size());
+
 		
 		for (int i : weaponOnGrid.keySet()) {
 			Weapon w = weaponOnGrid.get(i);
