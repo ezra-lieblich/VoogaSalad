@@ -77,7 +77,9 @@ public class Wrapper {
 		String endpoint = "updatescore";
 		URL url = new URL(baseURL + endpoint);
 		String json = "{\"updated_field\": \"" + field + "\",\"value\":\""+value+"\",\"level\":[\""+level+"\"]}";
+		System.out.println("UPDATE JSON: "+json);
 		String response = executeRequest(url, json, true);
+		System.out.println(response);
 	}
 	
 	private String executeRequest(URL url, String json, boolean post) throws IOException{

@@ -237,7 +237,8 @@ public class GamePlayerController implements Observer {
 			this.view.updateStatsDisplay(((GamePlayData) o).getGold(), ((GamePlayData) o).getLife(),
 					((GamePlayData) o).getCurrentLevel());
 			this.view.updateCurrentLevelStats(((GamePlayData) o).getCurrentLevel());
-
+			
+			/*
 			try {
 				this.updateWebAppStats(newLevel, ((GamePlayData) o));
 			} catch (IOException e2) {
@@ -245,6 +246,7 @@ public class GamePlayerController implements Observer {
 				System.out.println("----------FAILED TO UPDATE WEB APP STATS---------");
 				e2.printStackTrace();
 			}
+			*/
 
 			// check for game over condition
 			if (((GamePlayData) o).getLife() < 0) { // TODO: change 5 to 0
