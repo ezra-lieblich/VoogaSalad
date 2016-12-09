@@ -9,7 +9,7 @@ import engine.level.wave.Wave;
 public interface LevelManagerController
         extends ManagerController<LevelManager, LevelBuilder, Level, ILevelEditorView> {
 
-    //public Map<Integer, Wave> getEnemies (int levelID);
+    // public Map<Integer, Wave> getEnemies (int levelID);
 
     public void setRewardScore (int levelID, double winScore);
 
@@ -26,7 +26,7 @@ public interface LevelManagerController
     public void addPath (int levelID, int pathID);
 
     public List<Integer> getPaths (int levelID);
-    
+
     public void removePath (int levelID, int pathID);
 
     public void setTransitionTime (int levelID, double time);
@@ -36,9 +36,9 @@ public interface LevelManagerController
     public void setLevelNumber (int levelID, int levelNumber);
 
     public int getLevelNumber (int levelID);
-    
+
     public double getLevelTime (int levelID);
-    
+
     public int createWave (int levelID, ILevelEditorView updateView);
     
     public List<Wave> getWaves(int levelID);
@@ -67,5 +67,6 @@ public interface LevelManagerController
     
     public double getWaveDelay(int levelID, int waveID);
     
+
 
 }

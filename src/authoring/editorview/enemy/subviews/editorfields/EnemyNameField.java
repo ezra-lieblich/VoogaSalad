@@ -1,11 +1,12 @@
 package authoring.editorview.enemy.subviews.editorfields;
 
 import java.util.ResourceBundle;
+import authoring.editorview.NameView;
 import authoring.editorview.enemy.EnemyEditorViewDelegate;
 import authoring.editorview.enemy.IEnemySetView;
+import authoring.utilityfactories.BoxFactory;
 import authoring.utilityfactories.TextFieldFactory;
 import javafx.scene.Node;
-import javafx.scene.control.TextField;
 
 
 /**
@@ -13,16 +14,12 @@ import javafx.scene.control.TextField;
  * @author Kayla Schulz
  *
  */
-public class EnemyNameField implements IEnemySetView {
+public class EnemyNameField extends NameView implements IEnemySetView {
 
-    private TextField nameTextField;
     private EnemyEditorViewDelegate delegate;
 
     public EnemyNameField (ResourceBundle labelsResource) {
-        nameTextField =
-                TextFieldFactory.makeTextField(labelsResource.getString("EnterString"),
-                                               e -> delegate.onUserEnteredEnemyName(nameTextField
-                                                       .getText()));
+        super(labelsResource);
     }
 
     @Override
@@ -31,12 +28,13 @@ public class EnemyNameField implements IEnemySetView {
     }
 
     @Override
-    public Node getInstanceAsNode () {
-        return nameTextField;
-    }
-
-    public void updateName (String name) {
-        nameTextField.setText(name);
+    protected void makeNameTextField () {
+        nameTextField =
+                TextFieldFactory.makeTextField(resource.getString("EnterString"),
+                                               e -> delegate.onUserEnteredEnemyName(nameTextField
+                                                       .getText()));
+        root = BoxFactory.createHBoxWithLabelandNode(resource.getString("NameTextField"),
+                                                     nameTextField);
     }
 
 }

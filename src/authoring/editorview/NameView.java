@@ -1,10 +1,10 @@
 package authoring.editorview;
 
 import java.util.ResourceBundle;
-
 import javafx.scene.Node;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
+
 
 public abstract class NameView implements IEditorView {
 
@@ -29,7 +29,5 @@ public abstract class NameView implements IEditorView {
 	}
 	
 	protected abstract void makeNameTextField();
-	
-	
 	
 }

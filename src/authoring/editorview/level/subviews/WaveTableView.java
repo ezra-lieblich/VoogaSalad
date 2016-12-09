@@ -14,7 +14,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 
-public class EnemyTableView implements ILevelSetView {
+public class WaveTableView implements ILevelSetView {
 
     private TableView<WaveObject> enemyTable;
     private TableColumn waveNumberCol;
@@ -27,7 +27,7 @@ public class EnemyTableView implements ILevelSetView {
 
     private LevelEditorViewDelegate delegate;
 
-    public EnemyTableView (ResourceBundle labelsResource, int width) {
+    public WaveTableView (ResourceBundle labelsResource, int width) {
         enemyTable = new TableView<WaveObject>();
         data = FXCollections.observableArrayList();
         enemyTable.setPrefWidth(width);
@@ -77,13 +77,17 @@ public class EnemyTableView implements ILevelSetView {
         }
     }
 
-    public void updateEnemyTableView (List<NameIdPair> enemies) {
+    public void updateWaveTableView (List<NameIdPair> enemies) {
         setData(enemies);
         enemyTable.getColumns().clear();
         enemyTable.setItems(data);
         enemyTable.getColumns().addAll(waveNumberCol, enemyNameCol, numEnemiesCol,
                                        enemyFrequencyCol, pathCol, timeDelayCol);
         enemyTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+    }
+    
+    public void createNewWave () {
+        
     }
 
 }

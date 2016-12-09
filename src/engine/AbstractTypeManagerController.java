@@ -1,10 +1,12 @@
 package engine;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 import authoring.editorview.IUpdateView;
 
 
@@ -23,14 +25,26 @@ public abstract class AbstractTypeManagerController<E extends Manager<T>, U exte
         // typeManager.addEntry(typeBuilder.build()); //Testing XML
     }
 
+    public void loadManagerData(E typeManager, V updateView) {
+        typeManager.setEntities(typeManager.getEntities().keySet().stream().collect(Collectors.toMap(b -> b , b -> constructCopy(b, updateView))));
+        typeBuilder.setNextId(typeManager.getMaxId());
+        this.typeManager = typeManager;
+    }
+    
     @Override
     public int createType (V updateView) {
         return typeManager.addEntry(constructType(updateView));
     }
-
-    @Override
-    public void addTypeBankListener(V updateView) {
-        typeManager.addEntitiesListener((oldValue, newValue) -> updateView.updateBank(new ArrayList<Integer>(newValue.keySet())));
+    
+    @Override //TODO - remove duplicated code
+    public int createCopy(int id, V updateView) {
+        typeBuilder.copy(typeManager.getEntity(id));
+        return createType(updateView);
+    }
+    
+    protected T constructCopy(int id, V updateView) {
+        typeBuilder.copy(typeManager.getEntity(id));
+        return constructType(updateView);
     }
 
     protected T constructType (V updateView) {
@@ -42,6 +56,11 @@ public abstract class AbstractTypeManagerController<E extends Manager<T>, U exte
                 .addSizeListener( (oldValue, newValue) -> updateView
                         .updateSizeDisplay(newValue))
                 .build();
+    }
+    
+    @Override
+    public void addTypeBankListener(V updateView) {
+        typeManager.addEntitiesListener((oldValue, newValue) -> updateView.updateBank(new ArrayList<Integer>(newValue.keySet())));
     }
 
     @Override
@@ -91,7 +110,7 @@ public abstract class AbstractTypeManagerController<E extends Manager<T>, U exte
     public void setSize (int id, double size) {
         typeManager.getEntity(id).setSize(size);
     }
-
+    
     protected E getTypeManager () {
         return typeManager;
     }

@@ -14,8 +14,6 @@ public interface TowerInitializer extends TypeInitializer {
 
     ObservableList<Integer> getWeapons ();
 
-    ObservableList<Integer> getTargets ();
-
     ObservableList<Integer> getAbilities ();
     
     ObservableList<Integer> getUpgrades ();

@@ -5,14 +5,16 @@ import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.VBox;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import authoring.editorview.path.IPathSetView;
+
 import authoring.editorview.path.NameIdPair;
 import authoring.editorview.path.PathEditorViewDelegate;
 import authoring.utilityfactories.ComboBoxFactory;
+
 
 /**
  * 
@@ -20,7 +22,8 @@ import authoring.utilityfactories.ComboBoxFactory;
  *
  */
 
-public class PathChooser{
+
+public class PathChooser implements IPathSetView{
 	
 	private VBox root;
 	private PathEditorViewDelegate delegate;

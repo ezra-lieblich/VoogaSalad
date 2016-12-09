@@ -33,8 +33,8 @@ public class LevelType extends AbstractType implements Level {
 
     @Override
     public List<Wave> getWaves () {
-    	List<Wave> sortedWaves = new ArrayList<Wave>(waves.getProperty().values());
-    	Collections.sort(sortedWaves, new WaveTypeComparator());
+        List<Wave> sortedWaves = new ArrayList<Wave>(waves.getProperty().values());
+        Collections.sort(sortedWaves, new WaveTypeComparator());
         return Collections.unmodifiableList(sortedWaves);
     }
 
@@ -83,43 +83,43 @@ public class LevelType extends AbstractType implements Level {
         this.durationInSeconds.setProperty(durationInSeconds);
     }
 
-	@Override
-	public double getLevelTime() {
-		return time.getProperty();
-	}
+    @Override
+    public double getLevelTime () {
+        return time.getProperty();
+    }
 
-	@Override
-	public int createWave(Wave wave) {
-		waves.put(wave.getId(), wave);
-		return wave.getId();
-	}
+    @Override
+    public int createWave (Wave wave) {
+        waves.put(wave.getId(), wave);
+        return wave.getId();
+    }
 
-	@Override
-	public Wave getWave(int id) {
-		return waves.getProperty().get(id);
-	}
+    @Override
+    public Wave getWave (int id) {
+        return waves.getProperty().get(id);
+    }
 
-	@Override
-	public void calculateLevelTime(int waveID) {
-		Wave wave = waves.getProperty().get(waveID);
-		if (wave.getEnemyCount() * wave.getFrequency() + wave.getStartTime() > time.getProperty()) {
-			time.setProperty(wave.getEnemyCount() * wave.getFrequency() + wave.getStartTime());
-		}
-	}
+    @Override
+    public void calculateLevelTime (int waveID) {
+        Wave wave = waves.getProperty().get(waveID);
+        if (wave.getEnemyCount() * wave.getFrequency() + wave.getStartTime() > time.getProperty()) {
+            time.setProperty(wave.getEnemyCount() * wave.getFrequency() + wave.getStartTime());
+        }
+    }
 
-	@Override
-	public void addPath(int pathID) {
-		paths.add(pathID);
-	}
+    @Override
+    public void addPath (int pathID) {
+        paths.add(pathID);
+    }
 
-	@Override
-	public void removePath(int pathID) {
-		paths.remove(pathID);
-	}
+    @Override
+    public void removePath (int pathID) {
+        paths.remove(pathID);
+    }
 
-	@Override
-	public List<Integer> getPaths() {
-		return Collections.unmodifiableList(paths.getProperty());
-	}
+    @Override
+    public List<Integer> getPaths () {
+        return Collections.unmodifiableList(paths.getProperty());
+    }
 
 }

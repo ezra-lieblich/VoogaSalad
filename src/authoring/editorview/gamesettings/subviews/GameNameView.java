@@ -1,11 +1,13 @@
 package authoring.editorview.gamesettings.subviews;
 
+import java.util.ResourceBundle;
+
+import authoring.editorview.NameView;
+
 import authoring.editorview.gamesettings.GameSettingsEditorViewDelegate;
+import authoring.editorview.gamesettings.IGameSettingsSetView;
 import authoring.utilityfactories.BoxFactory;
 import authoring.utilityfactories.TextFieldFactory;
-import javafx.scene.Node;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
 
 
 /**
@@ -14,35 +16,28 @@ import javafx.scene.layout.HBox;
  * @author Kayla Schulz
  *
  */
-public class GameNameView {
 
-    private HBox hbox;
-    private TextField nameTextField;
+public class GameNameView extends NameView implements IGameSettingsSetView {
+	
     GameSettingsEditorViewDelegate delegate;
 
-    public GameNameView () {
-        makeNameTextField();
+    public GameNameView (ResourceBundle settingsResource) {
+    	super(settingsResource);
+
     }
 
-    public Node getInstanceAsNode () {
-        return hbox;
-    }
-
+    @Override
     public void setDelegate (GameSettingsEditorViewDelegate delegate) {
         this.delegate = delegate;
     }
 
-    private void makeNameTextField () {
+    protected void makeNameTextField () {
         nameTextField = TextFieldFactory.makeTextField("",
                                                        e -> delegate
                                                                .onUserEnteredGameNames(nameTextField
                                                                        .getText()));
-        hbox = BoxFactory.createHBoxWithLabelandNode("Choose game name: ", nameTextField);
+        root = BoxFactory.createHBoxWithLabelandNode(resource.getString("GameName"), nameTextField);
 
-    }
-
-    public void updateGameName (String name) {
-        nameTextField.setText(name);
     }
 
 }

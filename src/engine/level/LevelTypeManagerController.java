@@ -13,8 +13,8 @@ public class LevelTypeManagerController
         extends AbstractTypeManagerController<LevelManager, LevelBuilder, Level, ILevelEditorView>
         implements LevelManagerController {
 
-	private WaveBuilder waveBuilder;
-	
+    private WaveBuilder waveBuilder;
+
     public LevelTypeManagerController (ManagerMediator managerMediator) {
         super(new LevelTypeManager(), new LevelTypeBuilder(), managerMediator);
         waveBuilder = new WaveTypeBuilder();
@@ -49,7 +49,7 @@ public class LevelTypeManagerController
 
     @Override
     public void addPath (int levelID, int pathID) {
-    	getTypeManager().getEntity(levelID).addPath(pathID);
+        getTypeManager().getEntity(levelID).addPath(pathID);
     }
 
     @Override
@@ -57,12 +57,12 @@ public class LevelTypeManagerController
         getTypeManager().getEntity(levelID).setDurationInSeconds(time);
     }
 
-//    @Override
-//    //Probably remove
-//    public Map<Integer, Wave> getEnemies (int levelID) {
-//        //return getTypeManager().getEntity(levelID).getEnemyCounts()
-//    	return null;
-//    }
+    // @Override
+    // //Probably remove
+    // public Map<Integer, Wave> getEnemies (int levelID) {
+    // //return getTypeManager().getEntity(levelID).getEnemyCounts()
+    // return null;
+    // }
 
     @Override
     public double getRewardScore (int levelID) {
@@ -94,23 +94,22 @@ public class LevelTypeManagerController
                                                     LevelBuilder typeBuilder) {
         return typeBuilder.addDurationInSecondsListener( (oldValue, newValue) -> updateView
                 .updateTransitionTime(newValue))
-                //.addWaveListener( (oldValue, newValue) -> updateView.updateEnemy(newValue))
-                //.addPathListener(listener)
-        		.addRewardHealthListener( (oldValue, newValue) -> updateView
+                // .addWaveListener( (oldValue, newValue) -> updateView.updateEnemy(newValue))
+                // .addPathListener(listener)
+                .addRewardHealthListener( (oldValue, newValue) -> updateView
                         .updateRewardHealth(newValue))
                 .addRewardScoreListener( (oldValue, newValue) -> updateView
                         .updateRewardScore(newValue))
                 .addRewardMoneyListener( (oldValue, newValue) -> updateView
                         .updateRewardMoney(newValue));
-                //TODO add listener .addLevelTimeListener()
-        		
-        
+        // TODO add listener .addLevelTimeListener()
+
     }
 
     @Override
     public void setLevelNumber (int levelID, int levelNumber) {
         // TODO Auto-generated method stub
-        
+
     }
 
     @Override
@@ -119,19 +118,19 @@ public class LevelTypeManagerController
         return 0;
     }
 
-	@Override
-	public double getLevelTime(int levelID) {
-		return getTypeManager().getEntity(levelID).getLevelTime();
-	}
+    @Override
+    public double getLevelTime (int levelID) {
+        return getTypeManager().getEntity(levelID).getLevelTime();
+    }
 
-	@Override
-	public int createWave(int levelID, ILevelEditorView updateView) {
-		return  getTypeManager().getEntity(levelID).createWave(buildWave(updateView));
-		//TODO view methods need to actually go to right thing also need to add to level
-	}
-	
-	private Wave buildWave(ILevelEditorView updateView) {
-		return waveBuilder.addNameListener( (oldValue, newValue) -> updateView
+    @Override
+    public int createWave (int levelID, ILevelEditorView updateView) {
+        return getTypeManager().getEntity(levelID).createWave(buildWave(updateView));
+        // TODO view methods need to actually go to right thing also need to add to level
+    }
+
+    private Wave buildWave (ILevelEditorView updateView) {
+        return waveBuilder.addNameListener( (oldValue, newValue) -> updateView
                 .updateNameDisplay(newValue))
         .addImagePathListener( (oldValue, newValue) -> updateView
                 .updateImagePathDisplay(newValue))

@@ -22,6 +22,7 @@ public class Enemy extends SuperEnemy implements IDrawable{
 	private Cell enemyCell;
 	private List<EffectType> effects;
 	
+	@EffectMethod
 	public Enemy() {
 		this.effects = new ArrayList<EffectType>();			
 	}
