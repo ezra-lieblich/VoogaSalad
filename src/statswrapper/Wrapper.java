@@ -1,8 +1,10 @@
 package statswrapper;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -31,19 +33,21 @@ public class Wrapper {
 				.request(MediaType.TEXT_PLAIN_TYPE).get();
 	}
 	
-	public void login(String username, String password) throws IOException{
+	public String login(String username, String password) throws IOException{
 		this.username = username;
 		String endpoint = "login";
 		URL url = new URL(baseURL + endpoint);
 		String json = "{\"username\": \"" + username + "\",\"password\":\""+password+"\"}";
-		executeRequest(url, json, true);
+		String response = executeRequest(url, json, true);
+		return response;
 	}
 	
-	public void createAccount(String username, String password) throws IOException{
+	public String createAccount(String username, String password) throws IOException{
 		String endpoint = "createaccount";
 		URL url = new URL(baseURL + endpoint);
 		String json = "{\"username\": \"" + username + "\",\"password\":\""+password+"\"}";
-		executeRequest(url, json, true);
+		String response = executeRequest(url, json, true);
+		return response;
 	}
 	
 	public void createGame(String xmlData) throws IOException{
@@ -52,8 +56,7 @@ public class Wrapper {
 		URL url = new URL(baseURL + endpoint);
 		String newXML = xmlData.replaceAll("\"", "");
 		String json = "{\"type\":\"game\",\"game\": \"" + newXML + "\"}";
-		System.out.println(json);
-		executeRequest(url, json, true);
+		String response = executeRequest(url, json, true);
 	}
 	
 	/*
@@ -63,7 +66,7 @@ public class Wrapper {
 		String endpoint = "recordscore";
 		URL url = new URL(baseURL + endpoint);
 		String json = "{\"gold\": [\"" + gold + "\"],\"lives\":[\""+lives+"\"],\"level\":[\""+level+"\"]}";
-		executeRequest(url, json, true);
+		String response = executeRequest(url, json, true);
 	}
 	
 	/*
@@ -74,10 +77,12 @@ public class Wrapper {
 		String endpoint = "updatescore";
 		URL url = new URL(baseURL + endpoint);
 		String json = "{\"updated_field\": \"" + field + "\",\"value\":\""+value+"\",\"level\":[\""+level+"\"]}";
-		executeRequest(url, json, true);
+		System.out.println("UPDATE JSON: "+json);
+		String response = executeRequest(url, json, true);
+		System.out.println(response);
 	}
 	
-	private void executeRequest(URL url, String json, boolean post) throws IOException{
+	private String executeRequest(URL url, String json, boolean post) throws IOException{
 		URLConnection urlConnection = url.openConnection();
 		urlConnection.setDoOutput(post); //false if post
 		urlConnection.setRequestProperty("Content-Type", "application/json; charset=utf-8");
@@ -85,6 +90,19 @@ public class Wrapper {
 		OutputStream outputStream = urlConnection.getOutputStream();
 		outputStream.write((json).getBytes("UTF-8"));
 		outputStream.flush();
-		InputStream inputStream = urlConnection.getInputStream();	
+		//InputStream inputStream = urlConnection.getInputStream();
+		
+		//Get Response
+        InputStream in = urlConnection.getInputStream();
+        BufferedReader rd = new BufferedReader(new InputStreamReader(in));
+        String line;
+        StringBuffer response = new StringBuffer();
+        while((line = rd.readLine()) != null) {
+            response.append(line);
+            response.append('\r');
+        }
+        rd.close();
+        System.out.println("Read attempt: " + response.toString());
+        return response.toString();
 	}
 }
