@@ -49,6 +49,7 @@ public class GameGUI {
 	private BorderPane mainScreen;
 	private Scene scene;
 	private VBox leftPane;
+	private Button sellButton;
 	private GraphicsLibrary graphics;
 	private GridGUI grid;
 	private DragDropView dragDrop;
@@ -231,14 +232,16 @@ public class GameGUI {
 				this.grid.getGrid().getChildren().add(image);
 				if (entity instanceof Tower) {
 					//System.out.println("Tower added");
-					((Tower) entity).getTowerInfo().setLayoutX(image.getX());
-					((Tower) entity).getTowerInfo().setLayoutY(image.getY() + image.getFitHeight());
-					this.grid.getGrid().getChildren().add(((Tower) entity).getTowerInfo());
+					((Tower) entity).getInfoBox().setLayoutX(image.getX());
+					((Tower) entity).getInfoBox().setLayoutY(image.getY() + image.getFitHeight());
+					this.grid.getGrid().getChildren().add(((Tower) entity).getInfoBox());
 				}
 				i++;
 			}
 		}
 	}
+	
+
 
 	public void reRender(List<IDrawable> redraw) {// should be interface of
 													// drawables
