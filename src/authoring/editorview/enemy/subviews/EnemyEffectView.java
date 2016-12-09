@@ -100,9 +100,7 @@ public class EnemyEffectView extends PhotoFileChooser implements IEnemySetView {
         vbox.getChildren().add(enemyDamage.getInstanceAsNode());
         vbox.getChildren().add(enemyHealth.getInstanceAsNode());
         vbox.getChildren().add(enemyRewardMoney.getInstanceAsNode());
-        vbox.getChildren()
-                .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("RewardPoints"),
-                                                           enemyRewardPoints.getInstanceAsNode()));
+        vbox.getChildren().add(enemyRewardPoints.getInstanceAsNode());
     }
 
     @Override

@@ -1,23 +1,22 @@
 package authoring.editorview.enemy.subviews.editorfields;
 
 import java.util.ResourceBundle;
+import authoring.editorview.TextFieldView;
 import authoring.editorview.enemy.EnemyEditorViewDelegate;
 import authoring.editorview.enemy.IEnemySetView;
 import authoring.utilityfactories.BoxFactory;
 import authoring.utilityfactories.TextFieldFactory;
 import javafx.scene.Node;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
 
 
-public class EnemyRewardMoneyField implements IEnemySetView {
+public class EnemyRewardMoneyField extends TextFieldView implements IEnemySetView {
 
     private EnemyEditorViewDelegate delegate;
     private TextField enemyRewardMoneyField;
-    private HBox hbox;
 
     public EnemyRewardMoneyField (ResourceBundle labelsResource) {
-        createField(labelsResource);
+        super(labelsResource);
     }
 
     @Override
@@ -30,11 +29,13 @@ public class EnemyRewardMoneyField implements IEnemySetView {
         return hbox;
     }
 
-    public void updateEnemyRewardMoney (String enemyRewardMoney) {
-        enemyRewardMoneyField.setText(enemyRewardMoney);
+    @Override
+    public void updateField (String newData) {
+        enemyRewardMoneyField.setText(newData);
     }
 
-    private void createField (ResourceBundle labelsResource) {
+    @Override
+    protected void makeTextField (ResourceBundle labelsResource) {
         enemyRewardMoneyField =
                 TextFieldFactory.makeTextField(labelsResource.getString("EnterInt"),
                                                e -> delegate

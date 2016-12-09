@@ -102,22 +102,22 @@ public class EnemyEditorView implements IEnemyEditorView {
 
     @Override
     public void updateEnemyHealthDisplay (double enemyHealth) {
-        this.enemyHealth.updateEnemyHealth(Double.toString(enemyHealth));
+        this.enemyHealth.updateField(Double.toString(enemyHealth));
     }
 
     @Override
     public void updateEnemyDamage (double damage) {
-        this.enemyDamage.updateEnemyDamage(Double.toString(damage));
+        this.enemyDamage.updateField(Double.toString(damage));
     }
 
     @Override
     public void updateEnemyRewardMoney (double rewardMoney) {
-        this.enemyRewardMoney.updateEnemyRewardMoney(Double.toString(rewardMoney));
+        this.enemyRewardMoney.updateField(Double.toString(rewardMoney));
     }
 
     @Override
     public void updateEnemyRewardPoints (double rewardPoints) {
-        this.enemyRewardPoints.updateEnemyRewardPoints(Double.toString(rewardPoints));
+        this.enemyRewardPoints.updateField(Double.toString(rewardPoints));
     }
 
     @Override
