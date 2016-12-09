@@ -49,7 +49,7 @@ public class GamePlayerFactory{
 		//refactor b/c current exml has no GameModeManager
 		settings.put("levelnumber", 0.0); //take this out
 		settings.put("lives", 5.0);
-		settings.put("gold", 100.0);
+		settings.put("gold", 1000000.0);
 		settings.put("totalNumberOfLevels", 3.0);
 		return settings; 
 	}
