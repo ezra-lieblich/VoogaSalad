@@ -65,7 +65,7 @@ public class Wrapper {
 	public void recordGameScores(String gold, String lives, String level) throws IOException{
 		String endpoint = "recordscore";
 		URL url = new URL(baseURL + endpoint);
-		String json = "{\"gold\": [\"" + gold + "\"],\"lives\":[\""+lives+"\"],\"level\":[\""+level+"\"]}";
+		String json = "{\"gold\": \"" + gold + "\",\"lives\":\""+lives+"\",\"level\":\""+level+"\"}";
 		String response = executeRequest(url, json, true);
 	}
 	

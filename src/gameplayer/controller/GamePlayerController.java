@@ -140,12 +140,14 @@ public class GamePlayerController implements Observer {
 		this.enemyManager.setCurrentCell(this.model.getData().getGrid().getStartPoint());
 		populateTowerToId();
 		initGUI();
+		
 		try {
 			Wrapper.getInstance().recordGameScores(""+this.model.getData().getGold(), ""+this.model.getData().getLife(), ""+this.model.getData().getCurrentLevel());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		this.towerController = new TowerController(this.model.getTowerManager(), this.view);
 		
 	}
@@ -182,11 +184,11 @@ public class GamePlayerController implements Observer {
 			Tower t = towersOnGrid.get(i);
 			double newX = this.view.gridToPixelCoordWidth(t.getX());
 			double newY=this.view.gridToPixelCoordHeight(t.getY());
-			System.out.println("Tower x y: "+newX+", "+newY);
-			System.out.println("Clicked: "+x+","+y);
+			//System.out.println("Tower x y: "+newX+", "+newY);
+			//System.out.println("Clicked: "+x+","+y);
 			if ((newX<= x && newX + ENTITY_SIZE >= x && newY <= y
 					&& newY+ ENTITY_SIZE >= y)) {
-				System.out.println("shown");
+				//System.out.println("shown");
 				t.toggleInfoVisibility();
 				createBox(x, y, t);
 			}
@@ -267,13 +269,14 @@ public class GamePlayerController implements Observer {
 			// new level condition
 			if (this.oldLevel != newLevel) {
 				// record the data to log to web app
+				/*
 				try {
 					Wrapper.getInstance().recordGameScores("" + ((GamePlayData) o).getGold(),
 							"" + ((GamePlayData) o).getLife(), "" + ((GamePlayData) o).getCurrentLevel());
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
-				}
+				}*/
 				this.oldLevel = newLevel;
 				this.view.newLevelPopUp(e -> {
 					//// System.out.println("New level");
