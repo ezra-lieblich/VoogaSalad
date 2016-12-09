@@ -1,5 +1,6 @@
 package engine.tower;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -52,6 +53,11 @@ public class TowerTypeManager extends AbstractTypeManager<Tower> implements Towe
     @Override
     public Map<Integer, Tower> getUpgrades() {
         return upgrades;
+    }
+    
+    @Override
+    public int getMaxId() {
+        return Math.max(Collections.max(upgrades.keySet()), super.getMaxId());
     }
 
 }
