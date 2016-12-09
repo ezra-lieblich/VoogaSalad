@@ -54,6 +54,16 @@ public abstract class AbstractTypeManager<E extends Type> extends AbstractObserv
     public List<Integer> getEntityIds () {
         return Collections.unmodifiableList(new ArrayList<Integer>(data.getProperty().keySet()));
     }
+    
+    @Override
+    public void setEntities(Map<Integer, E> entities) {
+        this.data = new ObservableMapProperty<Integer, E>(new HashMap<Integer, E>());
+    }
+    
+    @Override
+    public int getMaxId() {
+        return Collections.max(getEntityIds());
+    }
 
     // protected <U> U getFromEntity(Supplier<U> getter) {
     // return getter.get();

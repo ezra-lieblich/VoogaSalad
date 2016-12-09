@@ -124,5 +124,14 @@ public class PathTypeBuilder extends AbstractTypeBuilder<Path, PathBuilder> impl
         gridColumns.addListener(listener);
         return this;
     }
+
+    @Override
+    protected PathBuilder copyType (Path type) {
+        return this
+                .buildCoordinates(type.getCoordinates())
+                .buildGridSizeColumns(type.getGridColumns())
+                .buildGridSizeRows(type.getGridRows())
+                .buildType(type.getType());
+    }
     
 }
