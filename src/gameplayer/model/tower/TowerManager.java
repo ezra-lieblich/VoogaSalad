@@ -213,6 +213,8 @@ public class TowerManager extends Observable {
 	 */
 	public void upgradeTower(int UniqueID){
 		Tower toBeUpgraded = this.towersOnGrid.get(UniqueID);
+		
+		
 		/**
 		 * create a new tower
 		 * substract the upgrade cost from gold amount

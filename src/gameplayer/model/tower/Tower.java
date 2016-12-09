@@ -1,6 +1,8 @@
 package gameplayer.model.tower;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -22,8 +24,8 @@ public class Tower implements IDrawable {
 	private VBox infoBox;
 	private Button sellButton;
 	private GraphicsLibrary graphics;
-	private boolean showInfo;
-	
+	private boolean showInfo, upgradable;
+	private Queue<Integer> upgradeList;
 	
 	
 	public Tower (engine.tower.Tower tt, ArrayList<Gun> weaponTypes, int uniqueID){
@@ -32,6 +34,10 @@ public class Tower implements IDrawable {
 		this.image = tt.getImagePath();
 		this.uniqueID = uniqueID;
 		this.sellAmount = tt.getSellAmount();
+		this.upgradeList = new LinkedList<Integer>();
+		this.upgradeList.addAll(tt.getUpgrades());
+		//System.out.println("upgradable: " + upgradeList.size());
+		this.upgradable = this.upgradeList.isEmpty();
 		this.showInfo = false;
 		this.towerInfo = new Label("Type: " + this.type + "\n ID: " + this.uniqueID + "\n Cost: " + 
 				this.cost + "\n Image: " + this.image + "\n Name: " + this.name);
