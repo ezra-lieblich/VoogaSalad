@@ -73,6 +73,7 @@ public class GamePlayData  extends Observable{
 		return (int) this.numLevels;
 	}
 
+	//@EffectMethod
 	public double getGold() {
 		return gold;
 	}

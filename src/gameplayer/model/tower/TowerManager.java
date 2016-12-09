@@ -40,7 +40,7 @@ public class TowerManager extends Observable {
 	private HashMap<Integer, engine.tower.Tower> availableTowerTypes;
 	private HashMap<Integer, engine.weapon.Weapon> allWeapons;	
 	private HashMap<Integer, gameplayer.model.tower.Tower> towersOnGrid; 
-	private HashMap<Integer, engine.tower.Tower> upgradeTowerTypes;
+	private Map<Integer, engine.tower.Tower> upgradeTowerTypes;
 	private int uniqueTowerID;
 	private long timeInterval;
 	
@@ -50,7 +50,7 @@ public class TowerManager extends Observable {
 		this.enemyManager = enemyManager;
 		this.allTowerTypes = this.gameData.getFactory().getTowers();
 		this.allWeapons = this.gameData.getFactory().getWeaponBank();
-		//this.upgradeTowerTypes = this.gameData.getFactory().getUpgradeTowers(); need this map from factory class
+		this.upgradeTowerTypes = this.gameData.getFactory().getTowerUpgrades();
 		this.towersOnGrid =  new HashMap<Integer, gameplayer.model.tower.Tower>();
 		this.uniqueTowerID = 0;
 		this.availableTowerTypes = new HashMap<Integer, engine.tower.Tower>();
