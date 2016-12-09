@@ -63,9 +63,18 @@ public class ModelAuthoringController implements ModelController {
     }
 
 	@Override
+	//TODO Catch it for real
 	public GameAuthoringData loadData(String filePath) {
 		// TODO Reset mediators and managers. Loop through each Type and call it
-		return (GameAuthoringData) Serializer.fromXML(filePath);
+		try {
+			File xmlFile = new File(filePath);
+			GameAuthoringData data = (GameAuthoringData) Serializer.fromXML(new FileInputStream(xmlFile));
+			return data;
+		} catch (FileNotFoundException e) {
+			//TODO: implement real error handling
+			System.out.println("File not found, please try again");
+			return null;
+		}
 	}
     
 //    public void testXML() {

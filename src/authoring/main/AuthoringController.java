@@ -34,10 +34,15 @@ import engine.ModelController;
 import engine.enemy.Enemy;
 import engine.enemy.EnemyManager;
 import engine.enemy.EnemyManagerController;
+import engine.level.LevelManager;
 import engine.level.LevelManagerController;
+import engine.path.PathManager;
 import engine.path.PathManagerController;
+import engine.settings.GameModeManager;
 import engine.settings.GameModeManagerController;
+import engine.tower.TowerManager;
 import engine.tower.TowerManagerController;
+import engine.weapon.WeaponManager;
 import engine.weapon.WeaponManagerController;
 import javafx.scene.Scene;
 import statswrapper.Wrapper;
@@ -73,6 +78,10 @@ public class AuthoringController {
 				e1.printStackTrace();
 			}
 		});
+        
+        toolbar.setOnPressedLoad(e -> {
+        	loadData("player.samplexml/load.xml");
+        });
 
     }
 
@@ -94,7 +103,24 @@ public class AuthoringController {
 		GameAuthoringData data = modelController.loadData(filePath);
 		 modelController.getModelController(EnemyManagerController.class)
 		 	.loadManagerData(data.getManagerMediator().getManager(EnemyManager.class), 
-		 							viewController.getControllers().get("enemy"));
+		 							(IEnemyEditorView) viewController.getControllers().get("enemy").getUpdateView());
+		 
+		 modelController.getModelController(TowerManagerController.class)
+		 	.loadManagerData(data.getManagerMediator().getManager(TowerManager.class),
+		 						(ITowerEditorView) viewController.getControllers().get("tower").getUpdateView());
+		 modelController.getModelController(WeaponManagerController.class)
+		 	.loadManagerData(data.getManagerMediator().getManager(WeaponManager.class), 
+		 						(IWeaponEditorView) viewController.getControllers().get("weapon").getUpdateView());
+		 modelController.getModelController(PathManagerController.class)
+		 	.loadManagerData(data.getManagerMediator().getManager(PathManager.class), 
+		 						(IPathEditorView) viewController.getControllers().get("path").getUpdateView());
+		 modelController.getModelController(LevelManagerController.class)
+		 	.loadManagerData(data.getManagerMediator().getManager(LevelManager.class), 
+		 						(ILevelEditorView) viewController.getControllers().get("level").getUpdateView());
+		 modelController.getModelController(GameModeManagerController.class)
+		 	.loadManagerData(data.getManagerMediator().getManager(GameModeManager.class),
+		 						(IGameSettingsEditorView) viewController.getControllers().get("settings").getUpdateView());
+		 
 
 	}
     
