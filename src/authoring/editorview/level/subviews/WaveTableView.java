@@ -57,6 +57,9 @@ public class WaveTableView implements ILevelSetView {
                 .setCellValueFactory(new PropertyValueFactory<WaveObject, String>("path"));
         timeDelayCol
                 .setCellValueFactory(new PropertyValueFactory<WaveObject, String>("timeDelay"));
+        waveTable.getColumns().addAll(waveNumberCol, enemyNameCol, numEnemiesCol,
+                                      enemyFrequencyCol, pathCol, timeDelayCol);
+        waveTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     }
 
     @Override
