@@ -52,17 +52,18 @@ public class EffectTypeManagerController extends
      */
     @Override
     public boolean setTrigger (int EffectID, String trigger) {
-        try {
-            getTypeManager().getEntity(EffectID).getTrigger()
-                    .setParticipantClass(Class.forName(trigger));
-            return true;
-        }
-        catch (ClassNotFoundException e) {
-            // TODO Auto-generated catch block
-            // Create null class object, Extend Duvall's Class
-
-            e.printStackTrace();
-            return false;
+//        try {
+//            getTypeManager().getEntity(EffectID).getTrigger()
+//                    .setParticipantClass(Class.forName(trigger));
+//            return true;
+//        }
+//        catch (ClassNotFoundException e) {
+//            // TODO Auto-generated catch block
+//            // Create null class object, Extend Duvall's Class
+//
+//            e.printStackTrace();
+//            return false;
+        return true;
         }
 
         // EffectType newEffect = new EffectType();
@@ -79,16 +80,16 @@ public class EffectTypeManagerController extends
         //
         // return enemy.getEffectsSize() - 1;
         // effectManager.getAnnotatedClassMethods(trigger)
-    }
+    
 
     @Override
     protected EffectBuilder constructTypeProperties (EffectView updateView,
                                                      EffectBuilder typeBuilder) {
-        return typeBuilder
-                .addTriggerClassListener( (oldValue, newValue) -> updateView
-                        .updateTriggerConditions(getTypeManager()
-                                .getAnnotatedClassMethods(newValue.getName()).stream()
-                                .map(a -> a.toString()).collect(Collectors.toList())));
+        return typeBuilder;
+//                .addTriggerClassListener( (oldValue, newValue) -> updateView
+//                        .updateTriggerConditions(getTypeManager()
+//                                .getAnnotatedClassMethods(newValue.getName()).stream()
+//                                .map(a -> a.toString()).collect(Collectors.toList())));
     }
 
 

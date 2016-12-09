@@ -134,4 +134,13 @@ public class EffectTypeBuilder extends AbstractTypeBuilder<Effect, EffectBuilder
         return this;
     }
 
+
+    @Override
+    protected EffectBuilder copyType (Effect type) {
+        return this
+                .buildEffectGroovy(type.getEffectGroovy())
+                .buildTriggerClass(type.getTriggerClass())
+                .buildTriggerConditionGroovy(type.getTriggerConditionGroovy());
+    }
+
 }
