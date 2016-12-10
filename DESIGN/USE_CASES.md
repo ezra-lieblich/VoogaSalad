@@ -42,4 +42,11 @@
 40. User gives enemy different speed for each level
 
 
-
+41. Set properties of a wave of enemies for a level
+42. Set sound properties on a Type
+43. Add a movement behavior for Tower  
+44. Add a winning condition to the list of winning conditions
+45. Add a losing condition to the list of losing conditions
+46. Creates a collision effect between weapon and enemy that affects the tower that shot the weapon
+47. Creates a collision effect that has a trigger it checks before implementing
+48. Create different modes within a game

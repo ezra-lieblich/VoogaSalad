@@ -14,7 +14,7 @@ public class gameEngine {
      * @param amount
      */
     public void setEnemiesPerLevel(int levelID, int enemyID, int amount) {
-        dataSource.setEnemy(levelID, enemyID, amount);
+        //dataSource.setEnemy(levelID, enemyID, amount);
     }
     
     

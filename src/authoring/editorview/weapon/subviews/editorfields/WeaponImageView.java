@@ -1,7 +1,6 @@
 package authoring.editorview.weapon.subviews.editorfields;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ResourceBundle;
 import authoring.editorview.weapon.IWeaponSetView;
 import authoring.editorview.weapon.WeaponEditorViewDelegate;

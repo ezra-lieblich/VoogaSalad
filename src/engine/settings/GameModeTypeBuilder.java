@@ -137,4 +137,14 @@ public class GameModeTypeBuilder extends AbstractTypeBuilder<GameMode, GameModeB
 		return this;
 	}
 
+	@Override
+	protected GameModeBuilder copyType(GameMode type) {
+		return this
+		.buildGameType(type.getGameType())
+		.buildInitialLives(type.getInitalLives())
+		.buildInitialMoney(type.getInitialMoney())
+		.buildLosingConditions(type.getLosingConditions())
+		.buildWinningConditions(type.getWinningConditions());
+	}
+
 }

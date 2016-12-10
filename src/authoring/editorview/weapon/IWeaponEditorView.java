@@ -19,8 +19,6 @@ public interface IWeaponEditorView extends IWeaponSetView, IUpdateView {
 
     public void updateSpeedDisplay (double speed);
 
-    public void updateCollisionEffectDisplay (String collisionEffect);
-
     public void updateRangeDisplay (double range);
 
     public void updateWeaponBank (List<Integer> activeWeapons);

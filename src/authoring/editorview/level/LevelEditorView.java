@@ -3,7 +3,6 @@ package authoring.editorview.level;
 import java.util.List;
 import java.util.ResourceBundle;
 import authoring.editorview.level.subviews.LevelChooserView;
-import authoring.editorview.level.subviews.LevelDesign;
 import authoring.editorview.level.subviews.LevelNameView;
 import authoring.editorview.level.subviews.LevelRewardsView;
 import authoring.editorview.level.subviews.LevelTransitionTimeField;
@@ -28,7 +27,6 @@ public class LevelEditorView implements ILevelEditorView {
 
     private VBox vbox;
     private LevelChooserView levelChooser;
-    private LevelDesign levelDesign;
     private LevelRewardsView levelRewardsView;
     private LevelNameView levelNameView;
     private CreateNewLevelView createNewLevelView;
@@ -40,7 +38,6 @@ public class LevelEditorView implements ILevelEditorView {
     LevelEditorView (int width, int height) {
         this.vbox = new VBox(10);
         this.levelChooser = new LevelChooserView(levelsResource);
-        this.levelDesign = new LevelDesign(levelsResource);
         this.levelRewardsView = new LevelRewardsView(levelsResource);
         this.levelNameView = new LevelNameView(levelsResource);
         this.createNewLevelView = new CreateNewLevelView(levelsResource);
@@ -60,7 +57,6 @@ public class LevelEditorView implements ILevelEditorView {
         levelNameView.setDelegate(delegate);
         levelRewardsView.setDelegate(delegate);
         levelChooser.setDelegate(delegate);
-        levelDesign.setDelegate(delegate);
         createNewLevelView.setDelegate(delegate);
         transitionTimeField.setDelegate(delegate);
         waveTableView.setDelegate(delegate);
@@ -71,7 +67,6 @@ public class LevelEditorView implements ILevelEditorView {
                                   levelChooser.getInstanceAsNode(),
                                   levelNameView.getInstanceAsNode(),
                                   levelRewardsView.getInstanceAsNode(),
-                                  levelDesign.getInstanceAsNode(),
                                   transitionTimeField.getInstanceAsNode(),
                                   ButtonFactory.makeButton("New Wave",
                                                            e -> delegate.onUserEnteredAddWave()),
@@ -145,7 +140,7 @@ public class LevelEditorView implements ILevelEditorView {
 
     @Override
     public void updateEnemyNames (List<NameIdPair> enemyNames) {
-        waveTableView.updateWaveTableView(enemyNames);
+        // waveTableView.updateWaveTableView(enemyNames);
     }
 
     @Override
@@ -164,6 +159,11 @@ public class LevelEditorView implements ILevelEditorView {
     public void updateWaveTimeDelay (double timeDelay) {
         // TODO Auto-generated method stub
 
+    }
+
+    @Override
+    public void updateWaves (List<WaveObject> waves) {
+        waveTableView.updateWaveTableView(waves);
     }
 
 }

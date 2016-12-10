@@ -1,7 +1,6 @@
 package authoring.editorview.enemy.subviews.editorfields;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ResourceBundle;
 import authoring.editorview.enemy.EnemyEditorViewDelegate;
 import authoring.editorview.enemy.IEnemySetView;
@@ -22,10 +21,10 @@ public class EnemyImageView implements IEnemySetView {
     private String imagePath;
     private ImageView enemyImage;
     private ResourceBundle labelsResource;
-    
+
     private final int CHARACTER_SIZE = 250;
 
-    public EnemyImageView (ResourceBundle labelsResource) throws IOException {
+    public EnemyImageView (ResourceBundle labelsResource) {
         this.labelsResource = labelsResource;
         enemyImage = new ImageView();
         enemyImage.setFitHeight(CHARACTER_SIZE);

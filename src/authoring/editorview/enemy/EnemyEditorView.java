@@ -1,6 +1,5 @@
 package authoring.editorview.enemy;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.ResourceBundle;
 import authoring.editorview.ListDataSource;
@@ -12,7 +11,6 @@ import authoring.editorview.enemy.subviews.editorfields.EnemyNameField;
 import authoring.editorview.enemy.subviews.editorfields.EnemyRewardMoneyField;
 import authoring.editorview.enemy.subviews.editorfields.EnemyRewardPointsField;
 import authoring.editorview.enemy.subviews.editorfields.EnemySizeField;
-import authoring.editorview.enemy.subviews.editorfields.EnemyCollisionEffectField;
 import authoring.editorview.enemy.subviews.editorfields.EnemyDamageField;
 import authoring.editorview.enemy.subviews.editorfields.EnemySpeedField;
 import javafx.scene.Node;
@@ -33,14 +31,13 @@ public class EnemyEditorView implements IEnemyEditorView {
     private EnemySpeedField enemySpeed;
     private EnemyImageView enemyImage;
     private EnemyEffectView enemyEffectView;
-    private EnemyCollisionEffectField enemyReactions;
     private EnemyDamageField enemyDamage;
     private EnemyHealthField enemyHealth;
     private EnemyRewardMoneyField enemyRewardMoney;
     private EnemyRewardPointsField enemyRewardPoints;
     private EnemySizeField enemySize;
 
-    public EnemyEditorView () throws IOException {
+    public EnemyEditorView () {
         String ENEMY_EFFECT_RESOURCE_PATH = "resources/GameAuthoringEnemy";
         ResourceBundle labelsResource = ResourceBundle.getBundle(ENEMY_EFFECT_RESOURCE_PATH);
         ResourceBundle dialogueBoxResource = ResourceBundle.getBundle("resources/DialogueBox");
@@ -49,7 +46,6 @@ public class EnemyEditorView implements IEnemyEditorView {
         enemyBank = new EnemyImageBank();
         enemyName = new EnemyNameField(labelsResource);
         enemySpeed = new EnemySpeedField(labelsResource);
-        enemyReactions = new EnemyCollisionEffectField(labelsResource);
         enemyImage = new EnemyImageView(labelsResource);
         enemyDamage = new EnemyDamageField(labelsResource);
         enemyHealth = new EnemyHealthField(labelsResource);
@@ -57,7 +53,7 @@ public class EnemyEditorView implements IEnemyEditorView {
         enemyRewardPoints = new EnemyRewardPointsField(labelsResource);
         enemySize = new EnemySizeField(labelsResource);
         enemyEffectView =
-                new EnemyEffectView(enemyImage, enemyName, enemyReactions,
+                new EnemyEffectView(enemyImage, enemyName,
                                     enemySpeed, enemyDamage, enemyHealth, enemyRewardMoney,
                                     enemyRewardPoints, enemySize);
         setBorderPane();
@@ -81,7 +77,6 @@ public class EnemyEditorView implements IEnemyEditorView {
         enemyName.setDelegate(delegate);
         enemySpeed.setDelegate(delegate);
         enemyImage.setDelegate(delegate);
-        enemyReactions.setDelegate(delegate);
         enemyDamage.setDelegate(delegate);
         enemyHealth.setDelegate(delegate);
         enemyRewardMoney.setDelegate(delegate);
@@ -90,14 +85,8 @@ public class EnemyEditorView implements IEnemyEditorView {
     }
 
     @Override
-    public void updateEnemyReactions (String enemyReactions) {
-        this.enemyReactions.updateEnemyReaction(enemyReactions);
-
-    }
-
-    @Override
     public void updateEnemySpeed (double speed) {
-        this.enemySpeed.updateEnemySpeed(Double.toString(speed));
+        this.enemySpeed.updateField(Double.toString(speed));
     }
 
     @Override
@@ -113,27 +102,22 @@ public class EnemyEditorView implements IEnemyEditorView {
 
     @Override
     public void updateEnemyHealthDisplay (double enemyHealth) {
-        this.enemyHealth.updateEnemyHealth(Double.toString(enemyHealth));
+        this.enemyHealth.updateField(Double.toString(enemyHealth));
     }
 
     @Override
     public void updateEnemyDamage (double damage) {
-        this.enemyDamage.updateEnemyFrequency(Double.toString(damage));
+        this.enemyDamage.updateField(Double.toString(damage));
     }
 
     @Override
     public void updateEnemyRewardMoney (double rewardMoney) {
-        this.enemyRewardMoney.updateEnemyRewardMoney(Double.toString(rewardMoney));
+        this.enemyRewardMoney.updateField(Double.toString(rewardMoney));
     }
 
     @Override
     public void updateEnemyRewardPoints (double rewardPoints) {
-        this.enemyRewardPoints.updateEnemyRewardPoints(Double.toString(rewardPoints));
-    }
-
-    @Override
-    public void updateEnemyCollisionEffect (String collisionEffect) {
-        this.enemyReactions.updateEnemyReaction(collisionEffect);
+        this.enemyRewardPoints.updateField(Double.toString(rewardPoints));
     }
 
     @Override
@@ -148,7 +132,7 @@ public class EnemyEditorView implements IEnemyEditorView {
 
     @Override
     public void updateSizeDisplay (double size) {
-        this.enemySize.updateEnemySize(Double.toString(size));
+        this.enemySize.updateField(Double.toString(size));
     }
 
     @Override
@@ -164,7 +148,6 @@ public class EnemyEditorView implements IEnemyEditorView {
 
     @Override
     public void updateBank (List<Integer> ids) {
-        // TODO Auto-generated method stub
         this.enemyBank.updateBank(ids);
     }
 

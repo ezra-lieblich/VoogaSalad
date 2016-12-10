@@ -25,6 +25,7 @@ public class WeaponEditorViewController extends EditorViewController
     public WeaponEditorViewController (int editorWidth, int editorHeight) throws IOException {
         weaponView = WeaponEditorViewFactory.build(editorWidth, editorHeight);
         weaponView.setDelegate(this);
+        weaponView.setWeaponListDataSource(this);
         this.view = weaponView;
     }
 
@@ -54,11 +55,6 @@ public class WeaponEditorViewController extends EditorViewController
         catch (NumberFormatException e) {
             createDialogueBox();
         }
-    }
-
-    @Override
-    public void onUserEnteredWeaponEffect (String weaponCollisionEffect) {
-        weaponDataSource.setWeaponCollisionEffect(currentWeaponID, weaponCollisionEffect);
     }
 
     @Override
