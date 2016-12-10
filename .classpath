@@ -4,7 +4,7 @@
 	<classpathentry kind="src" path="player.samplexml"/>
 	<classpathentry kind="src" path="Images"/>
 	<classpathentry kind="src" path="Images.DefaultTabs"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="lib/xstream-1.4.9.jar"/>
 	<classpathentry kind="lib" path="lib/javax.ws.rs-api-2.0.jar"/>
 	<classpathentry kind="lib" path="lib/commons-codec-1.9.jar"/>

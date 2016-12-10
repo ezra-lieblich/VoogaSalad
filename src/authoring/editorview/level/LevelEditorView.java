@@ -130,41 +130,8 @@ public class LevelEditorView implements ILevelEditorView {
     // WAVE
 
     @Override
-    public void updateEnemyNames (List<NameIdPair> enemyNames) {
-        // waveTableView.updateWaveTableView(enemyNames);
-    }
-
-    @Override
-    public void updateWaveNumber (int waveNumber) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void updateNumberOfEnemies (int numEnemies) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void updateWaveTimeDelay (double timeDelay) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
     public void updateWaves (List<WaveObject> waves) {
         waveTableView.updateWaveTableView(waves);
-    }
-
-    @Override
-    public void updateWavePath (int pathID) {
-        // TODO Auto-generated method stub
-    }
-
-    @Override
-    public void updateEnemyFrequency (double enemyFrequency) {
-        // enemyFrequencyField.updateEnemyFrequencyField(Double.toString(enemyFrequency));
     }
 
 }
