@@ -101,17 +101,6 @@ public class LevelEditorView implements ILevelEditorView {
     }
 
     @Override
-    public void updateWavePath (int pathID) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void updateEnemyFrequency (double enemyFrequency) {
-        // enemyFrequencyField.updateEnemyFrequencyField(Double.toString(enemyFrequency));
-    }
-
-    @Override
     public void updateImagePathDisplay (String imagePath) {
         // Don't worry about this right now
 
@@ -137,6 +126,8 @@ public class LevelEditorView implements ILevelEditorView {
     public void setLevelListDataSource (ListDataSource source) {
         System.out.println("No level bank currently implemented");
     }
+
+    // WAVE
 
     @Override
     public void updateEnemyNames (List<NameIdPair> enemyNames) {
@@ -164,6 +155,16 @@ public class LevelEditorView implements ILevelEditorView {
     @Override
     public void updateWaves (List<WaveObject> waves) {
         waveTableView.updateWaveTableView(waves);
+    }
+
+    @Override
+    public void updateWavePath (int pathID) {
+        // TODO Auto-generated method stub
+    }
+
+    @Override
+    public void updateEnemyFrequency (double enemyFrequency) {
+        // enemyFrequencyField.updateEnemyFrequencyField(Double.toString(enemyFrequency));
     }
 
 }
