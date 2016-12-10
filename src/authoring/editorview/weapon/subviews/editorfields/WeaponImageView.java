@@ -15,7 +15,7 @@ import javafx.scene.image.ImageView;
  * @author Kayla Schulz
  *
  */
-public class WeaponImageView implements IWeaponSetView {
+public class WeaponImageView  implements IWeaponSetView {
 
     private WeaponEditorViewDelegate delegate;
     private ResourceBundle labelsResource;

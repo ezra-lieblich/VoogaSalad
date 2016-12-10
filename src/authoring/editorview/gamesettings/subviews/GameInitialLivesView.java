@@ -4,9 +4,11 @@ import java.util.ResourceBundle;
 import authoring.editorview.gamesettings.GameSettingsEditorViewDelegate;
 import authoring.editorview.gamesettings.IGameSettingsSetView;
 import authoring.utilityfactories.BoxFactory;
+import authoring.utilityfactories.GridFactory;
 import authoring.utilityfactories.TextFieldFactory;
 import javafx.scene.Node;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 
 
@@ -14,7 +16,7 @@ public class GameInitialLivesView implements IGameSettingsSetView {
 
     private TextField initialLivesField;
     private GameSettingsEditorViewDelegate delegate;
-    private HBox hbox;
+    private GridPane root;
 
     public GameInitialLivesView (ResourceBundle labelsResource) {
         createField(labelsResource);
@@ -22,7 +24,7 @@ public class GameInitialLivesView implements IGameSettingsSetView {
 
     @Override
     public Node getInstanceAsNode () {
-        return hbox;
+        return root;
     }
 
     @Override
@@ -30,14 +32,12 @@ public class GameInitialLivesView implements IGameSettingsSetView {
         this.delegate = delegate;
     }
 
-    private void createField (ResourceBundle levelResource) {
-        initialLivesField =
-                TextFieldFactory.makeTextField("",
-                                               e -> delegate
-                                                       .onUserEnteredGameLives(initialLivesField
-                                                               .getText()));
-        hbox =
-                BoxFactory.createHBoxWithLabelandNode(levelResource.getString("TransitionTime"),
+    private void createField (ResourceBundle resource) {
+        initialLivesField = TextFieldFactory.makeTextField("", 
+        				e -> delegate.onUserEnteredGameLives(initialLivesField.getText()));
+        
+        initialLivesField.setPrefWidth(105);
+        root = GridFactory.createRowWithLabelandNode(resource.getString("InitialLives"),
                                                       initialLivesField);
     }
 

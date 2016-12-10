@@ -1,7 +1,7 @@
 package authoring.editorview.weapon.subviews.editorfields;
 
 import java.util.ResourceBundle;
-import authoring.editorview.NameView;
+import authoring.editorview.EditorNameView;
 import authoring.editorview.weapon.IWeaponSetView;
 import authoring.editorview.weapon.WeaponEditorViewDelegate;
 import authoring.utilityfactories.BoxFactory;
@@ -13,7 +13,7 @@ import authoring.utilityfactories.TextFieldFactory;
  * @author Kayla Schulz
  *
  */
-public class WeaponNameField extends NameView implements IWeaponSetView {
+public class WeaponNameField extends EditorNameView implements IWeaponSetView {
 
     private WeaponEditorViewDelegate delegate;
 

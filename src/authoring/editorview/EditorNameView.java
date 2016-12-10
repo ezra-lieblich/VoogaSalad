@@ -6,14 +6,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 
 
-public abstract class NameView implements IEditorView {
+public abstract class EditorNameView implements IEditorView {
 
     protected HBox root;
     protected TextField nameTextField;
 
     protected ResourceBundle resource;
 
-    public NameView (ResourceBundle resource) {
+    public EditorNameView (ResourceBundle resource) {
         this.resource = resource;
         makeNameTextField();
 

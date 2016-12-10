@@ -1,7 +1,55 @@
 package authoring.editorview.gamesettings.subviews;
 
-public class GameWinningConditionsView {
+import java.util.ResourceBundle;
+
+import authoring.editorview.gamesettings.GameSettingsEditorViewDelegate;
+import authoring.editorview.gamesettings.IGameSettingsSetView;
+import authoring.utilityfactories.ComboBoxFactory;
+import authoring.utilityfactories.GridFactory;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.Node;
+import javafx.scene.control.ComboBox;
+import javafx.scene.layout.GridPane;
+
+public class GameWinningConditionsView implements IGameSettingsSetView {
 
     // GROOVY
+	
+	private ObservableList<Object> winningConditionList;
+	private ComboBox<Object> winningConditionComboBox;
+    private GameSettingsEditorViewDelegate delegate;
+	private GridPane root;
 
+    public GameWinningConditionsView (ResourceBundle settingsResource) {
+    	makeComboBox();
+    }
+
+    @Override
+    public Node getInstanceAsNode () {
+        return root;
+    }
+
+    @Override
+    public void setDelegate (GameSettingsEditorViewDelegate delegate) {
+        this.delegate = delegate;
+    }
+    
+    private void makeComboBox(){
+		
+    	winningConditionList = FXCollections.observableArrayList();
+    	
+    	winningConditionComboBox = ComboBoxFactory.makeComboBox("" , 
+				e -> setWinningCondition(winningConditionComboBox.getValue().toString()), winningConditionList);
+    	winningConditionComboBox.setPrefWidth(105);
+		root = GridFactory.createRowWithLabelandNode("Winning condition: ", winningConditionComboBox);
+		
+	}
+
+	private Object setWinningCondition(String string) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	    
 }

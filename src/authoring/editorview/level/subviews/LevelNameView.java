@@ -1,14 +1,14 @@
 package authoring.editorview.level.subviews;
 
 import java.util.ResourceBundle;
-import authoring.editorview.NameView;
+import authoring.editorview.EditorNameView;
 import authoring.editorview.level.ILevelSetView;
 import authoring.editorview.level.LevelEditorViewDelegate;
 import authoring.utilityfactories.BoxFactory;
 import authoring.utilityfactories.TextFieldFactory;
 
 
-public class LevelNameView extends NameView implements ILevelSetView {
+public class LevelNameView extends EditorNameView implements ILevelSetView {
 
     private LevelEditorViewDelegate delegate;
 

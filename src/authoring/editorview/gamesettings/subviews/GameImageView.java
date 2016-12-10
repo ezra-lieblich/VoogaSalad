@@ -14,31 +14,22 @@ import authoring.utilityfactories.DialogueBoxFactory;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 
-public class BackgroundImageView extends PhotoFileChooser{
+public class GameImageView extends PhotoFileChooser{
 	
 	private HBox root;
 	private String backgroundImagePath;
-	private ImageView backgroundImageView;
-	private Image backgroundImage;
 	private PathEditorViewDelegate delegate;
 	
 	private static final String RESOURCE_FILE_NAME = "resources/GameAuthoringPath";	
 	private ResourceBundle pathResource = ResourceBundle.getBundle(RESOURCE_FILE_NAME);
 	
-	private static final String DEFAULT_IMAGE_FILE_NAME = "greensquare.png";
-	
-	
-	
-	public BackgroundImageView(){
+	public GameImageView(){
 		root = new HBox(10);
-		createBackgroundImage();
 		makeChooseImageButton();
 	}
 
@@ -52,11 +43,6 @@ public class BackgroundImageView extends PhotoFileChooser{
 		return backgroundImagePath;
 	}
 	
-	public Image getBackgroundImage(){
-		return backgroundImage;
-	}
-	
-
 	public void setDelegate(PathEditorViewDelegate delegate){
 		this.delegate = delegate;
 	}
@@ -71,10 +57,9 @@ public class BackgroundImageView extends PhotoFileChooser{
 							errorDialogueBox.show();
 						}
 					});
+			setBackgroundImageButton.setPrefWidth(230);
 			root.getChildren().add(setBackgroundImageButton);
 	}
-	
-
 
 	@Override
 	public void openFileChooser(FileChooser chooseFile) throws IOException {
@@ -82,22 +67,8 @@ public class BackgroundImageView extends PhotoFileChooser{
 		if (chosenFile != null){
 			BufferedImage image = ImageIO.read(chosenFile) ;
 			backgroundImagePath = chosenFile.getPath();	
-			createBackgroundImage();
 		}	
 	}
 	
-	
-	private void createBackgroundImage() {	
-		try {
-			backgroundImage = new Image(backgroundImagePath);
-					
-		}
-		catch (Exception e){
-			backgroundImage = new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_IMAGE_FILE_NAME));
-		}		
-		
-		
-	}
-
 	
 }

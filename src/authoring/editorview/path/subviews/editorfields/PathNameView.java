@@ -1,14 +1,14 @@
 package authoring.editorview.path.subviews.editorfields;
 
 import java.util.ResourceBundle;
-import authoring.editorview.NameView;
+import authoring.editorview.EditorNameView;
 import authoring.editorview.path.IPathSetView;
 import authoring.editorview.path.PathEditorViewDelegate;
 import authoring.utilityfactories.BoxFactory;
 import authoring.utilityfactories.TextFieldFactory;
 
 
-public class PathNameView extends NameView implements IPathSetView {
+public class PathNameView extends EditorNameView implements IPathSetView {
 
     private PathEditorViewDelegate delegate;
 
@@ -28,8 +28,7 @@ public class PathNameView extends NameView implements IPathSetView {
                                                                .onUserEnteredPathName(nameTextField
                                                                        .getText()));
         nameTextField.setMaxWidth(100);
-        root =
-                BoxFactory.createHBoxWithLabelandNode(resource.getString("NameTextField"),
+        root = BoxFactory.createHBoxWithLabelandNode(resource.getString("NameTextField"),
                                                       nameTextField);
     }
 

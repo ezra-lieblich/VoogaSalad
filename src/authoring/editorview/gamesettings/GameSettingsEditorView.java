@@ -4,9 +4,26 @@ import java.util.List;
 import java.util.ResourceBundle;
 import authoring.editorview.ListDataSource;
 import authoring.editorview.gamesettings.subviews.GameNameView;
+import authoring.editorview.gamesettings.subviews.GameSettingsEditingView;
+import javafx.geometry.Insets;
+import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.scene.text.Text;
 
 
 /**
@@ -17,27 +34,39 @@ import javafx.scene.layout.VBox;
  */
 public class GameSettingsEditorView implements IGameSettingsEditorView, IGameSettingsSetView {
 
-    private VBox gameConditionsRoot;
-    private GameNameView gameNameView;
-    private BorderPane gameSettingsView;
+    private Group gameSettingsPreview;
+    
+    private GridPane gameSettingsView;
     private GameSettingsEditorViewDelegate delegate;
     
-    private static final String RESOURCE_FILE_NAME = "resources/GameAuthoringSettings";	
-	private ResourceBundle settingsResource = ResourceBundle.getBundle(RESOURCE_FILE_NAME);
-
-
-
+   
+    
+    private GameSettingsEditingView gameSettingsEditor;
+    
 
     public GameSettingsEditorView (int width, int height) {
-        gameSettingsView = new BorderPane();
-        this.gameConditionsRoot = new VBox(10);
-        this.gameNameView = new GameNameView(settingsResource);
+        gameSettingsView = new GridPane();
+        
+        this.gameSettingsEditor = new GameSettingsEditingView();
+        this.gameSettingsPreview = new Group();
+        
         addViewComponents();
     }
 
     private void addViewComponents () {
-        gameConditionsRoot.getChildren().add(gameNameView.getInstanceAsNode());
-        gameSettingsView.setTop(gameConditionsRoot);
+    	
+    	
+    	
+    	ColumnConstraints editorColumn = new ColumnConstraints();	
+    	editorColumn.setMinWidth(250);  	  	
+    	ColumnConstraints previewColumn = new ColumnConstraints();
+    	RowConstraints fullRow = new RowConstraints();
+    	fullRow.setMinHeight(700);   	
+    	gameSettingsView.getColumnConstraints().addAll(editorColumn, previewColumn);
+    	gameSettingsView.getRowConstraints().add(fullRow);
+    	
+        gameSettingsView.add(gameSettingsEditor.getInstanceAsNode(), 0, 0);
+        gameSettingsView.add(gameSettingsPreview, 1, 0);
     }
 
     @Override
@@ -48,7 +77,7 @@ public class GameSettingsEditorView implements IGameSettingsEditorView, IGameSet
     @Override
     public void setDelegate (GameSettingsEditorViewDelegate delegate) {
         this.delegate = delegate;
-        gameNameView.setDelegate(delegate);
+        gameSettingsEditor.setDelegate(delegate);
     }
 
     @Override
@@ -59,7 +88,7 @@ public class GameSettingsEditorView implements IGameSettingsEditorView, IGameSet
 
     @Override
     public void updateGameName (String name) {
-        this.gameNameView.updateName(name);
+        // TODO
     }
 
     @Override
@@ -94,7 +123,6 @@ public class GameSettingsEditorView implements IGameSettingsEditorView, IGameSet
 
     @Override
     public void setGameSettingsListDataSource (ListDataSource source) {
-        System.out.println("Game settings doesn't have an image bank implemented!");
     }
 
     @Override
