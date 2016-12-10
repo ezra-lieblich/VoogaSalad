@@ -25,8 +25,8 @@ public class Weapon extends Observable implements IDrawable{
 		this.name = name;
 		this.damage = demage;
 		this.damage = 50;
-		this.speedX = 5;
-		this.speedY  = 5;
+		this.speedX = speedMag*(targetX-x)/(Math.sqrt(targetX*targetX+x*x));
+		this.speedY  = speedMag*(targetY-y)/(Math.sqrt(targetY*targetY+y*y));
 		this.image = image;
 		this.distanceTravelled = 0;
 		this.range = range;
