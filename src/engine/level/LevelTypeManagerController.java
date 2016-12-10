@@ -1,6 +1,8 @@
 package engine.level;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import authoring.editorview.level.ILevelEditorView;
@@ -231,7 +233,12 @@ public class LevelTypeManagerController
 	 }
 	 
 	 private void loadWaveData(WaveManager waveManager, LevelManager typeManager, ILevelEditorView updateView) {
-		 waveManager.setEntities(typeManager.getEntities().keySet().stream().collect(Collectors.toMap(b -> b , b -> constructWaveCopy(b, waveManager, updateView))));
+		 Map<Integer, Wave> waveMap = new HashMap<Integer, Wave>();
+		 for (Integer waveID : waveManager.getEntities().keySet()) {
+			 waveMap.put(waveID, constructWaveCopy(waveID, waveManager, updateView));
+		 }
+		 //waveManager.setEntities(typeManager.getEntities().keySet().stream().collect(Collectors.toMap(b -> b , b -> constructWaveCopy(b, waveManager, updateView))));
+		 waveManager.setEntities(waveMap);
 		 waveBuilder.setNextId(waveManager.getMaxId());
 	 }
 	 

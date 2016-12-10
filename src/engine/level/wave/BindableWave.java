@@ -14,5 +14,5 @@ public interface BindableWave extends BindableType<WaveBuilder> {
     WaveBuilder addStartTimeListener (BiConsumer<Double, Double> listener);
 
     WaveBuilder addFrequencyListener (BiConsumer<Double, Double> listener);
-
+    
 }

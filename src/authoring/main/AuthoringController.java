@@ -115,7 +115,7 @@ public class AuthoringController {
 		 						(ILevelEditorView) viewController.getControllers().get("level").getUpdateView());
 		 modelController.getModelController(GameModeManagerController.class)
 		 	.loadManagerData(data.getManagerMediator().getManager(GameModeManager.class),
-		 						(IGameSettingsEditorView) viewController.getControllers().get("settings").getUpdateView());
+		 						(IGameSettingsEditorView) viewController.getControllers().get("setup").getUpdateView());
 		 
 
 	}
