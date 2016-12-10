@@ -40,6 +40,7 @@ import java.awt.BorderLayout;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -47,6 +48,7 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.Queue;
 import java.util.Random;
+import java.util.Timer;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
@@ -84,7 +86,13 @@ public class GamePlayerController implements Observer {
 	private Queue<Enemy> currentWave;
 
 	private HashMap<String, Integer> towerToId;
-
+	
+	private double enemyFrequency;
+	
+	
+	private double startTime = System.currentTimeMillis();
+	private double elapsedTime = 0;
+	
 	// Might need to be refactored into a different class
 	private HashMap<Integer, ImageView> weaponsOnScreen;
 
@@ -249,33 +257,16 @@ public class GamePlayerController implements Observer {
 			this.view.updateStatsDisplay(((GamePlayData) o).getGold(), ((GamePlayData) o).getLife(),
 					((GamePlayData) o).getCurrentLevel());
 			this.view.updateCurrentLevelStats(((GamePlayData) o).getCurrentLevel());
-			
-			/*
-			try {
-				this.updateWebAppStats(newLevel, ((GamePlayData) o));
-			} catch (IOException e2) {
-				// TODO Auto-generated catch block
-				System.out.println("----------FAILED TO UPDATE WEB APP STATS---------");
-				e2.printStackTrace();
-			}
-			*/
+
 
 			// check for game over condition
-			if (((GamePlayData) o).getLife() < 0) { // TODO: change 5 to 0
+			if (((GamePlayData) o).getLife() < 0) {
 				gameOver();
 			}
 
 			// new level condition
 			if (this.oldLevel != newLevel) {
-				// record the data to log to web app
-				/*
-				try {
-					Wrapper.getInstance().recordGameScores("" + ((GamePlayData) o).getGold(),
-							"" + ((GamePlayData) o).getLife(), "" + ((GamePlayData) o).getCurrentLevel());
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}*/
+	
 				this.oldLevel = newLevel;
 				this.view.newLevelPopUp(e -> {
 					//// System.out.println("New level");
@@ -286,13 +277,11 @@ public class GamePlayerController implements Observer {
 
 			}
 		}
-		/*
-		 * GamePlayModel model = (GamePlayModel) o; if (model.getLife() == 0) {
-		 * updateLevel(); }
-		 */
+	
 
 	}
 
+	@Deprecated
 	private void updateWebAppStats(double newLevel, GamePlayData gdata) throws IOException {
 		/*
 		System.out.println("~~~~~trying to update web app stats~~~~~");
@@ -313,10 +302,14 @@ public class GamePlayerController implements Observer {
 
 	private void startAnimation() {
 		this.model.getData().getGrid().printGrid();
-		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> {
+		
+		//call this once per wave, gets the new wave, new enemy frequency, etc. 
+		getNewWaveOnInterval();
+		
+		KeyFrame frame = new KeyFrame(Duration.millis(this.enemyFrequency/*MILLISECOND_DELAY*/), e -> {
 			((Pane) this.view.getGrid().getGrid()).getChildren().clear(); // clear
 																			// everything
-			this.currentWave = this.enemyController.getEnemyModel().getPackOfEnemyComing();
+		
 			// trying to get this to work but null pointer
 			if (currentWave.size() != 0) {
 				if (timer % 15 == 0) {
@@ -336,6 +329,25 @@ public class GamePlayerController implements Observer {
 		animation.setCycleCount(Timeline.INDEFINITE);
 		animation.getKeyFrames().add(frame);
 		animation.play();
+	}
+	
+	private void getNewWaveOnInterval(){
+		double nextWaveStartTime = this.enemyController.getEnemyModel().getEnemyWaveStartTime();
+
+		while (elapsedTime < nextWaveStartTime) {
+		    elapsedTime = (new Date()).getTime() - startTime;
+		}
+		
+		if (elapsedTime>=nextWaveStartTime){
+			//get new wave, enemy frequency, and 
+			//this.enemyFrequency = this.enemyController.getEnemyModel().getFrequency();
+			this.currentWave = this.enemyController.getEnemyModel().getPackOfEnemyComing();
+			
+			//get the new start time for a new wave of enemies
+			//getNewWaveOnInterval(this.enemyController.getEnemyModel().getEnemyWaveStartTime());
+			
+		}
+
 	}
 
 	private void redrawEverything() {
