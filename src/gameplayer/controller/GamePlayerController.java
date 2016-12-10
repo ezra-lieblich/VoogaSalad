@@ -189,7 +189,7 @@ public class GamePlayerController implements Observer {
 					&& newY+ ENTITY_SIZE >= y)) {
 				//System.out.println("shown");
 				t.toggleInfoVisibility();
-				createBox(x, y, t);
+				addButtons(t);
 			}
 		}
 
@@ -205,9 +205,9 @@ public class GamePlayerController implements Observer {
 
 	}
 
-	public void createBox(double x, double y, Tower t) {
-		VBox box = t.getInfoBox();
+	public void addButtons(Tower t) {
 		t.getSellButton().setOnAction(e -> this.towerController.handleSellTowerClick());
+		t.getUpgradeButton().setOnAction(e -> this.towerController.upgrade(t.getUniqueID()));
 	}
 	
 

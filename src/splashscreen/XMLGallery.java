@@ -22,9 +22,9 @@ public class XMLGallery {
 	
 	public XMLGallery() {
 		this.fileList = new ArrayList<String>();
-		gallery = new TilePane();
-		gallery.setPrefColumns(3);
-		scene = new Scene(gallery);
+		this.gallery = new TilePane();
+		this.gallery.setPrefColumns(3);
+		this.scene = new Scene(gallery);
 		initFileList();
 		initGallery();
 	}
@@ -43,18 +43,21 @@ public class XMLGallery {
 	
 	private void initGallery(){
 		Stage s = new Stage();
+		this.scene.getStylesheets()
+		.add(this.getClass().getResource("/gameplayer/view/voogaStyle.css").toExternalForm());
 		for(String filename: fileList){
 			VBox box = new VBox();
 			ImageView image = new ImageView("penguin.jpg");
 			image.setFitHeight(100);
 			image.setFitWidth(100);
 			box.setOnMouseClicked(e -> {
-				System.out.println("open: " + filename);
 				createNewGame(s, filename);
 			});
 			box.getChildren().addAll(image, new Label(filename));
 			this.gallery.getChildren().add(box);
 		}
+		this.gallery.getStyleClass().clear();
+		this.gallery.getStyleClass().add("galleryPane");
 	}
 
 	public void createNewGame(Stage s, String filename) {
