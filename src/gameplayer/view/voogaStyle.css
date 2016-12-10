@@ -74,9 +74,13 @@
 }
 
 
-.scoreLabel{
+.scoreLabel {
 	-fx-font-size: 20;
 	-fx-text-fill: white;
+}
+
+.galleryPane {
+	-fx-background-color: #000000;
 }
 
 .gridGUI {
@@ -88,3 +92,4 @@
 .statsHBox {
 	-fx-background-color: #8da899;
 }
+

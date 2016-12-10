@@ -186,7 +186,7 @@ public class GamePlayerController implements Observer {
 			double newY = this.view.gridToPixelCoordHeight(t.getY());
 			if ((newX <= x && newX + ENTITY_SIZE >= x && newY <= y && newY + ENTITY_SIZE >= y)) {
 				t.toggleInfoVisibility();
-				createBox(x, y, t);
+				addButtons(t);
 			}
 		}
 
@@ -200,9 +200,9 @@ public class GamePlayerController implements Observer {
 
 	}
 
-	public void createBox(double x, double y, Tower t) {
-		VBox box = t.getInfoBox();
+	public void addButtons(Tower t) {
 		t.getSellButton().setOnAction(e -> this.towerController.handleSellTowerClick());
+		t.getUpgradeButton().setOnAction(e -> this.towerController.upgrade(t.getUniqueID()));
 	}
 
 	private ArrayList<String> getTowerImages() {

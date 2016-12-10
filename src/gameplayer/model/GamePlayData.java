@@ -19,6 +19,7 @@ public class GamePlayData  extends Observable{
 	private double gold;
 	private double lives;
 	private double numLevels; // reach level number winning the game
+	private double score;
 	
 
 	//CELL SIZE MUST BE INITIATED
@@ -38,6 +39,7 @@ public class GamePlayData  extends Observable{
 		this.gold = settingInfo.get("gold");
 		this.lives = settingInfo.get("lives");
 		this.currentLevel = 0;
+		this.score = 0;
 	}
 	
 	public void initializeLevelInfo() {
@@ -46,6 +48,8 @@ public class GamePlayData  extends Observable{
 		gridArray = this.grid.getGrid();
 		this.gridX = this.gridArray.length;
 		this.gridY = this.gridArray[0].length;
+		
+		// get level rewards and change current score, life, gold according
 	}
 
 	public GamePlayerFactory getFactory(){
@@ -80,6 +84,15 @@ public class GamePlayData  extends Observable{
 		return gold;
 	}
 	
+	public double getScore(){
+		return this.score;
+	}
+	
+	public void setScore(double additionalScore){
+		this.score += additionalScore;
+		setChanged();
+		notifyObservers();
+	}
 
 	public void setGold(double gold) {
 		System.out.println("Setting gold");
