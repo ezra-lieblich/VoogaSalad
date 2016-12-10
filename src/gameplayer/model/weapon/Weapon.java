@@ -18,9 +18,10 @@ public class Weapon extends Observable implements IDrawable{
 	//private double initialX, initialY;
 	private double range;
 	private int targetEnemyID;
+	private double speedMag;
 	
 	
-	public Weapon(String name,  double demage, double targetX, double targetY, String image,  double range, int targetID, double x, double y) {
+	public Weapon(String name,  double demage, double targetX, double targetY, String image,  double range, int targetID, double x, double y, double speedMag) {
 		this.name = name;
 		this.damage = demage;
 		this.damage = 50;
@@ -32,6 +33,7 @@ public class Weapon extends Observable implements IDrawable{
 		this.xCoordinate = x;
 		this.yCoordinate = y;
 		this.targetEnemyID = targetID;
+		this.speedMag = speedMag;
 	}
 	
 	
