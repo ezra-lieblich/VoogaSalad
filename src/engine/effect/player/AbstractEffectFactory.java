@@ -1,5 +1,7 @@
 package engine.effect.player;
 
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Collection;
 import java.util.HashMap;
@@ -7,44 +9,63 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.function.BiConsumer;
+import java.util.stream.Stream;
 import engine.effect.Effect;
+import engine.effect.EffectData;
 
 public abstract class AbstractEffectFactory {
+    public static final Class<? extends Annotation> EFFECT_DATA = EffectData.class;
     
-    private final String TRIGGER_NAME;
-    private final String ENCOMPASSING_CLASS_NAME;
-    
+    private String triggerVariableName;
+    private String encompasingClassVariableName;
     private Map<String, Object> effectAccessibleData;
     
-    AbstractEffectFactory(String triggerVariableName, String encompasssingClassName) {
-        this.TRIGGER_NAME = triggerVariableName;
-        this.ENCOMPASSING_CLASS_NAME = encompasssingClassName;
+    AbstractEffectFactory(String triggerVariableName, String encompasingClassVariableName) {
+//        loadDataIntoMap();
         this.effectAccessibleData = new HashMap<String, Object>();
-        loadDataIntoMap();
-
+        this.triggerVariableName = triggerVariableName;
+        this.encompasingClassVariableName = encompasingClassVariableName;
+        effectAccessibleData.put(triggerVariableName, new Object());
+        effectAccessibleData.put(encompasingClassVariableName, new Object());
+        loadInValues();
     }
     
     public GameEffect create(Effect effect) {
         GroovyExecutor groovyExecutor = new GroovyExecutor();
         addEffectAccessibleData(groovyExecutor);
-        return new GameEffect(effect, groovyExecutor);
+        return new GameEffect(effect, groovyExecutor, triggerVariableName, encompasingClassVariableName);
     }
     
     public Collection<String> getVariableNames() {
         return effectAccessibleData.keySet();
     }
     
-    private void loadDataIntoMap() {
-        effectAccessibleData.put(TRIGGER_NAME, null);
-        effectAccessibleData.put(ENCOMPASSING_CLASS_NAME, null);
-    }
+//    private void loadDataIntoMap() {
+//        effectAccessibleData.put(TRIGGER_NAME, null);
+//        effectAccessibleData.put(ENCOMPASSING_CLASS_NAME, null);
+//    }
     
     private void addEffectAccessibleData(GroovyExecutor groovyExecutor) {
         effectAccessibleData.entrySet().forEach(a -> groovyExecutor.addVariable(a.getKey(), a.getValue()));
     }
     
-    protected void loadSpecificDataIntoMap(String key, Object value) {
-        effectAccessibleData.put(key, value);
+    private void loadInValues() {
+        Stream.of(this.getClass().getFields()).filter(a -> a.isAnnotationPresent(EFFECT_DATA)).forEach(this::loadSpecificDataIntoMap);
+    }
+    
+    protected void loadSpecificDataIntoMap(Field variableField) {
+        try {
+            effectAccessibleData.put(variableField.getName(), variableField.get(this));
+        }
+        catch (IllegalArgumentException e) {
+            e.printStackTrace();
+            return;
+        }
+        catch (IllegalAccessException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return;
+        }
     }
         
 }

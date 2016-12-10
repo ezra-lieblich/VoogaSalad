@@ -7,6 +7,7 @@ import java.util.stream.Stream;
 import authoring.editorview.enemy.IEnemyEditorView;
 import engine.AbstractTypeManagerController;
 import engine.ManagerMediator;
+import engine.effect.player.CollisionEffectFactory;
 import engine.effect.player.GameEffect;
 import engine.effect.player.GroovyExecutor;
 import engine.observer.ObservableObjectProperty;
@@ -22,12 +23,23 @@ public class EffectTypeManagerController extends
     EffectTypeManagerController (ManagerMediator managerMediator) {
         super(new EffectTypeManager(new AnnotatedMethodMapFactory().create("engine.effect"), new AnnotatedDataMapFactory().create("engine.effect")), new EffectTypeBuilder(), managerMediator);
         EffectBuilder efb = new EffectTypeBuilder();
-        Effect effectType = efb.buildTriggerConditionGroovy("trigger.getHealth() == 50 && trigger.getName() == 'Sean'").buildEffectGroovy("trigger.setHealth(100)").build();
-        GameEffect test = new GameEffect(effectType, new GroovyExecutor());
+        Effect effectType = efb.buildTriggerConditionGroovy("collider.getHealth() == 50 && myself.getName() == 'Sean'").buildEffectGroovy("collider.setHealth(100)").build();
+        CollisionEffectFactory testFactory = new CollisionEffectFactory();
+        GameEffect gameEffect = testFactory.create(effectType);
+        
+        Enemy collider = new Enemy();
+        Enemy myself = new Enemy();
+        System.out.println(collider.getHealth());
+        gameEffect.addEncompassingClass(myself);
+        gameEffect.addTrigger(collider);
+        gameEffect.execute();
+        System.out.println(collider.getHealth());
+        
+        
         Enemy enemy = new Enemy();
         
-        AnnotatedMethodMapFactory testFactory = new AnnotatedMethodMapFactory();
-        Object blah = testFactory.create("engine.effect");
+        AnnotatedMethodMapFactory testMapFactory = new AnnotatedMethodMapFactory();
+        Object blah = testMapFactory.create("engine.effect");
         
 //        test.addTrigger((ITestEnemy)enemy);
 //        test.addEncompassingClass(this);

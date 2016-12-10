@@ -2,14 +2,17 @@ package engine.effect.player;
 
 import java.util.function.BiConsumer;
 import engine.effect.EffectData;
+import engine.effect.Enemy;
 
 public class CollisionEffectFactory extends AbstractEffectFactory {
     @EffectData
     public static final String TRIGGER_NAME = "collider";
     @EffectData
-    public static final String ENCOMPASSING_CLASS_NAME = "this";
+    public static final String ENCOMPASSING_CLASS_NAME = "myself";
+    @EffectData
+    private Enemy foe = new Enemy();
     
-    CollisionEffectFactory () {
+    public CollisionEffectFactory () {
         super(TRIGGER_NAME, ENCOMPASSING_CLASS_NAME);
     }
 
