@@ -1,7 +1,9 @@
 package engine.effect;
 
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,17 +12,18 @@ import org.reflections.Reflections;
 import org.reflections.scanners.MethodAnnotationsScanner;
 import com.sun.accessibility.internal.resources.accessibility;
 
-public class AnnotatedMethodMapFactory {
+public class AnnotatedMethodMapFactory extends AbstractAnnotatedFactory<Method>{
+    public static final Class<? extends Annotation> ANNOTATION_TYPE = EffectMethod.class;
     
-    public Map<Class<?>, List<Method>> create (Class<? extends Annotation> annotation) {
-        return create(annotation, "engine.effect");
+
+    @Override
+    protected Collection<Method> applySearch (Reflections reflections) {
+        return reflections.getMethodsAnnotatedWith(ANNOTATION_TYPE);
     }
     
-    public Map<Class<?>, List<Method>> create(Class<? extends Annotation> methodAnnotation, String packageName) {
-        Reflections reflections = new Reflections(packageName, new MethodAnnotationsScanner());
-        //reflections.getMethodsAnnotatedWith(annotation).stream().collect(Collectors.toMap( a -> a.toString(), a -> a));
-        //Map<Class<?>, List<Method>>
-        return reflections.getMethodsAnnotatedWith(methodAnnotation).stream().collect(Collectors.groupingBy( a -> a.getDeclaringClass()));
+    @Override
+    public Map<Class<?>, List<Method>> create (String packageName) {
+        return create(ANNOTATION_TYPE, packageName, new MethodAnnotationsScanner());
     }
     
 //    private Class<?> getLeafClass(List<Class<?>> classHierarchy) {
