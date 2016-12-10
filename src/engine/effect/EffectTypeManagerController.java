@@ -20,7 +20,7 @@ public class EffectTypeManagerController extends
         implements EffectManagerController {
 
     EffectTypeManagerController (ManagerMediator managerMediator) {
-        super(new EffectTypeManager(), new EffectTypeBuilder(), managerMediator);
+        super(new EffectTypeManager(null, null), new EffectTypeBuilder(), managerMediator);
         EffectBuilder efb = new EffectTypeBuilder();
         Effect effectType = efb.buildTriggerConditionGroovy("trigger.getHealth() == 50 && trigger.getName() == 'Sean'").buildEffectGroovy("trigger.setHealth(100)").build();
         GameEffect test = new GameEffect(effectType, new GroovyExecutor());
