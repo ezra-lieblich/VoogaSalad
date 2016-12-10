@@ -7,6 +7,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,9 +26,9 @@ public class EffectTypeManager extends AbstractTypeManager<Effect> implements Ef
     }
     
     @Override
-    public List<String> getAnnotatedClasses() {
+    public Collection<Class<?>> getAnnotatedClasses() {
         //return new ArrayList<String>(annotatedClassMethods.keySet());
-        return new ArrayList<String>(new ArrayList<String>());
+        return annotatedClassMethods.keySet();
     }
     
     @Override
