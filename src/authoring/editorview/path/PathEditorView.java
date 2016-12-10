@@ -23,6 +23,7 @@ public class PathEditorView implements IPathEditorView {
     private ResourceBundle pathResource = ResourceBundle.getBundle(RESOURCE_FILE_NAME);
 
     private static final int BOX_SPACING = 10;
+    private static final int GRID_SIZE = 400;
 
     private Group root;
     private HBox pathSettings;
@@ -37,17 +38,14 @@ public class PathEditorView implements IPathEditorView {
 
     public PathEditorView (int aWidth, int aHeight) {
         this.root = new Group();
-
         this.newPathView = new NewPathView();
         this.pathChooser = new PathChooser();
         this.pathDimensionsView = new PathDimensionsView();
         this.pathNameView = new PathNameView(pathResource);
         this.pathImageView = new PathImageView();
         this.pathInstructionsView = new PathInstructionsView();
-        this.pathGrid = new PathGrid(400);
-
+        this.pathGrid = new PathGrid(GRID_SIZE);
         setViewForDefaultPath();
-
     }
 
     @Override
