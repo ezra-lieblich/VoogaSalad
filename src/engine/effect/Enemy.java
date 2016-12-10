@@ -146,6 +146,7 @@ public class Enemy extends SuperEnemy implements IDrawable, ITestEnemy{
 
 	public void setHealth(double d) {
 		this.health = d;
+		System.out.println(this.health);
 	}
 
 }

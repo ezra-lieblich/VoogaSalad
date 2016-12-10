@@ -23,7 +23,7 @@ public class EffectTypeManagerController extends
     EffectTypeManagerController (ManagerMediator managerMediator) {
         super(new EffectTypeManager(new AnnotatedMethodMapFactory().create("engine.effect"), new AnnotatedDataMapFactory().create("engine.effect")), new EffectTypeBuilder(), managerMediator);
         EffectBuilder efb = new EffectTypeBuilder();
-        Effect effectType = efb.buildTriggerConditionGroovy("collider.getHealth() == 50 && myself.getName() == 'Sean'").buildEffectGroovy("collider.setHealth(100)").build();
+        Effect effectType = efb.buildTriggerConditionGroovy("collider.getHealth() == 50 && myself.getName() == 'Sean'").buildEffectGroovy("foe.setHealth(100)").build();
         CollisionEffectFactory testFactory = new CollisionEffectFactory();
         GameEffect gameEffect = testFactory.create(effectType);
         
@@ -58,7 +58,7 @@ public class EffectTypeManagerController extends
      */
     @Override
     public List<String> getTriggers () {
-        return getTypeManager().getAnnotatedClasses();
+        return getTypeManager().getAnnotatedClasses().stream().map(Class::getName).collect(Collectors.toList());
     }
 
     /*
