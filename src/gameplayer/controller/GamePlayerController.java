@@ -173,8 +173,6 @@ public class GamePlayerController implements Observer {
 		this.view.getGrid().populatePath(model.getData().getGrid().getStartPoint());
 		this.dropController = new DragDropController(this.view, this.model, this.getTowerImageMap());
 
-		// testing stuff
-		// this.model.createDummyEnemies();
 	}
 
 	private void handleMouseClicked(double x, double y) {
@@ -282,7 +280,7 @@ public class GamePlayerController implements Observer {
 		// call this once per wave, gets the new wave, new enemy frequency, etc.
 		getNewWaveOnInterval();
 
-		KeyFrame frame = new KeyFrame(Duration.millis(this.enemyFrequency/* MILLISECOND_DELAY */), e -> {
+		KeyFrame frame = new KeyFrame(Duration.millis(/*this.enemyFrequency*/ MILLISECOND_DELAY), e -> {
 			((Pane) this.view.getGrid().getGrid()).getChildren().clear(); 
 
 			// trying to get this to work but null pointer
