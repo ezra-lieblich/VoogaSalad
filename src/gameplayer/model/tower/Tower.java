@@ -6,6 +6,7 @@ import java.util.Queue;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import engine.tower.*;
 import engine.weapon.WeaponType;
@@ -23,6 +24,7 @@ public class Tower implements IDrawable {
 	private Label towerInfo;
 	private VBox infoBox;
 	private Button sellButton;
+	private Button upgradeButton;
 	private GraphicsLibrary graphics;
 	private boolean showInfo, upgradable;
 	private Queue<Integer> upgradeList;
@@ -130,17 +132,28 @@ public class Tower implements IDrawable {
 	
 	public void initVBox(){
 		this.infoBox = new VBox();
-		this.infoBox.getChildren().addAll(towerInfo, createSellButton());
+		HBox buttons = new HBox();
+		buttons.getChildren().addAll(createSellButton(), createUpgradeButton());
+		this.infoBox.getChildren().addAll(towerInfo, buttons);
 		this.infoBox.setVisible(showInfo);
 	}
 	
 	public Button createSellButton(){
-		this.sellButton = graphics.createButton("Sell Tower");
+		this.sellButton = graphics.createButton("Sell");
 		return sellButton;
+	}
+	
+	public Button createUpgradeButton(){
+		this.upgradeButton = graphics.createButton("Upgrade");
+		return upgradeButton;
 	}
 	
 	public Button getSellButton(){
 		return sellButton;
+	}
+	
+	public Button getUpgradeButton(){
+		return upgradeButton;
 	}
 
 	public Label getTowerInfo() {
@@ -149,6 +162,10 @@ public class Tower implements IDrawable {
 
 	public VBox getInfoBox() {
 		return infoBox;
+	}
+
+	public int getUniqueID() {
+		return uniqueID;
 	}
 
 }
