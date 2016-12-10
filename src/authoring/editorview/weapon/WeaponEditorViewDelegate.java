@@ -6,8 +6,6 @@ public interface WeaponEditorViewDelegate {
 
     public void onUserEnteredWeaponSpeed (String weaponSpeed);
 
-    public void onUserEnteredWeaponEffect (String weaponCollisionEffect);
-
     public void onUserEnteredWeaponRange (String weaponRange);
 
     public void onUserEnteredWeaponImagePath (String weaponImagePath);

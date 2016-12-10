@@ -57,11 +57,6 @@ public class WeaponEditorViewController extends EditorViewController
     }
 
     @Override
-    public void onUserEnteredWeaponEffect (String weaponCollisionEffect) {
-        weaponDataSource.setWeaponCollisionEffect(currentWeaponID, weaponCollisionEffect);
-    }
-
-    @Override
     public void onUserEnteredWeaponRange (String weaponRange) {
         try {
             Double.parseDouble(weaponRange);

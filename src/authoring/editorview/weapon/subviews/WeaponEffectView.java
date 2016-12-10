@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.util.ResourceBundle;
 import authoring.editorview.PhotoFileChooser;
 import authoring.editorview.weapon.WeaponEditorViewDelegate;
-import authoring.editorview.weapon.subviews.editorfields.WeaponCollisionEffectField;
 import authoring.editorview.weapon.subviews.editorfields.WeaponFireRateField;
 import authoring.editorview.weapon.subviews.editorfields.WeaponImageView;
 import authoring.editorview.weapon.subviews.editorfields.WeaponNameField;
@@ -39,7 +38,6 @@ public class WeaponEffectView extends PhotoFileChooser {
     private WeaponSpeedField weaponSpeed;
     private WeaponFireRateField weaponFireRate;
     private WeaponRangeField weaponRange;
-    private WeaponCollisionEffectField weaponCollision;
     private WeaponPathField weaponPath;
     private WeaponImageView weaponImage;
     private WeaponSizeField weaponSize;
@@ -50,7 +48,6 @@ public class WeaponEffectView extends PhotoFileChooser {
                              WeaponSpeedField weaponSpeed,
                              WeaponFireRateField weaponFireRate,
                              WeaponRangeField weaponRange,
-                             WeaponCollisionEffectField weaponCollision,
                              WeaponPathField weaponPath,
                              WeaponImageView weaponImage,
                              WeaponSizeField weaponSize,
@@ -64,7 +61,6 @@ public class WeaponEffectView extends PhotoFileChooser {
         this.weaponSpeed = weaponSpeed;
         this.weaponFireRate = weaponFireRate;
         this.weaponRange = weaponRange;
-        this.weaponCollision = weaponCollision;
         this.weaponPath = weaponPath;
 
         this.weaponSize = weaponSize;
@@ -117,8 +113,6 @@ public class WeaponEffectView extends PhotoFileChooser {
         vboxView.getChildren()
                 .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Range"),
                                                            weaponRange.getInstanceAsNode()));
-
-        vboxView.getChildren().add(weaponCollision.getInstanceAsNode());
         vboxView.getChildren().add(weaponPath.getInstanceAsNode());
     }
 
