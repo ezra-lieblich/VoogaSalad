@@ -25,9 +25,12 @@ public abstract class AbstractEffectFactory {
         this.effectAccessibleData = new HashMap<String, Object>();
         this.triggerVariableName = triggerVariableName;
         this.encompasingClassVariableName = encompasingClassVariableName;
-        effectAccessibleData.put(triggerVariableName, new Object());
-        effectAccessibleData.put(encompasingClassVariableName, new Object());
-        loadInValues();
+        loadEffectParameters(triggerVariableName, encompasingClassVariableName);
+        loadInSpecificValues();
+    }
+    
+    private void loadEffectParameters(String... parameterNames) {
+        Stream.of(parameterNames).forEach(a -> effectAccessibleData.put(a, new Object()));
     }
     
     public GameEffect create(Effect effect) {
@@ -49,7 +52,7 @@ public abstract class AbstractEffectFactory {
         effectAccessibleData.entrySet().forEach(a -> groovyExecutor.addVariable(a.getKey(), a.getValue()));
     }
     
-    private void loadInValues() {
+    private void loadInSpecificValues() {
         Stream.of(this.getClass().getFields()).filter(a -> a.isAnnotationPresent(EFFECT_DATA)).forEach(this::loadSpecificDataIntoMap);
     }
     

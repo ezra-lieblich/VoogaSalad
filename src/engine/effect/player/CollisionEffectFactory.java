@@ -5,10 +5,13 @@ import engine.effect.EffectData;
 import engine.effect.Enemy;
 
 public class CollisionEffectFactory extends AbstractEffectFactory {
-    @EffectData
     public static final String TRIGGER_NAME = "collider";
-    @EffectData
     public static final String ENCOMPASSING_CLASS_NAME = "myself";
+
+    @EffectData
+    private Object collider;
+    @EffectData
+    private Object myself;
     @EffectData
     private Enemy foe = new Enemy();
     

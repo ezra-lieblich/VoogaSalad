@@ -20,6 +20,7 @@ public abstract class AbstractAnnotatedFactory<E extends Member> {
     
     protected Map<Class<?>, List<E>> create(Class<?> methodAnnotation, String packageName, Scanner scanner) {
         Reflections reflections = new Reflections(packageName, scanner);
+        applySearch(reflections).stream().forEach(a->System.out.println(a.getDeclaringClass()));
         return applySearch(reflections).stream().collect(Collectors.groupingBy( a -> a.getDeclaringClass()));
     }
     
