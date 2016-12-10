@@ -11,6 +11,7 @@ import authoring.editorview.enemy.subviews.editorfields.EnemyNameField;
 import authoring.editorview.enemy.subviews.editorfields.EnemyRewardMoneyField;
 import authoring.editorview.enemy.subviews.editorfields.EnemyRewardPointsField;
 import authoring.editorview.enemy.subviews.editorfields.EnemySizeField;
+import authoring.editorview.enemy.subviews.editorfields.DeleteEnemy;
 import authoring.editorview.enemy.subviews.editorfields.EnemyDamageField;
 import authoring.editorview.enemy.subviews.editorfields.EnemySpeedField;
 import javafx.scene.Node;
@@ -36,6 +37,7 @@ public class EnemyEditorView implements IEnemyEditorView {
     private EnemyRewardMoneyField enemyRewardMoney;
     private EnemyRewardPointsField enemyRewardPoints;
     private EnemySizeField enemySize;
+    private DeleteEnemy deleteEnemy;
 
     public EnemyEditorView () {
         String ENEMY_EFFECT_RESOURCE_PATH = "resources/GameAuthoringEnemy";
@@ -52,10 +54,11 @@ public class EnemyEditorView implements IEnemyEditorView {
         enemyRewardMoney = new EnemyRewardMoneyField(labelsResource);
         enemyRewardPoints = new EnemyRewardPointsField(labelsResource);
         enemySize = new EnemySizeField(labelsResource);
+        deleteEnemy = new DeleteEnemy(labelsResource);
         enemyEffectView =
                 new EnemyEffectView(enemyImage, enemyName,
                                     enemySpeed, enemyDamage, enemyHealth, enemyRewardMoney,
-                                    enemyRewardPoints, enemySize);
+                                    enemyRewardPoints, enemySize, deleteEnemy);
         setBorderPane();
     }
 
@@ -82,6 +85,7 @@ public class EnemyEditorView implements IEnemyEditorView {
         enemyRewardMoney.setDelegate(delegate);
         enemyRewardPoints.setDelegate(delegate);
         enemySize.setDelegate(delegate);
+        deleteEnemy.setDelegate(delegate);
     }
 
     @Override

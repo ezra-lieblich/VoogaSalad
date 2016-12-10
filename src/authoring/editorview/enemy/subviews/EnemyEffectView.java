@@ -12,9 +12,9 @@ import authoring.editorview.enemy.subviews.editorfields.EnemyNameField;
 import authoring.editorview.enemy.subviews.editorfields.EnemyRewardMoneyField;
 import authoring.editorview.enemy.subviews.editorfields.EnemyRewardPointsField;
 import authoring.editorview.enemy.subviews.editorfields.EnemySizeField;
+import authoring.editorview.enemy.subviews.editorfields.DeleteEnemy;
 import authoring.editorview.enemy.subviews.editorfields.EnemyDamageField;
 import authoring.editorview.enemy.subviews.editorfields.EnemySpeedField;
-import authoring.utilityfactories.BoxFactory;
 import authoring.utilityfactories.ButtonFactory;
 import authoring.utilityfactories.DialogueBoxFactory;
 import javafx.scene.Node;
@@ -38,6 +38,7 @@ public class EnemyEffectView extends PhotoFileChooser implements IEnemySetView {
     private EnemyEditorViewDelegate delegate;
     private File chosenFile;
 
+    private DeleteEnemy deleteEnemy;
     private EnemyImageView enemyImage;
     private EnemyNameField enemyName;
     private EnemySpeedField enemySpeed;
@@ -57,7 +58,8 @@ public class EnemyEffectView extends PhotoFileChooser implements IEnemySetView {
                             EnemyHealthField enemyHealth,
                             EnemyRewardMoneyField enemyRewardMoney,
                             EnemyRewardPointsField enemyRewardPoints,
-                            EnemySizeField enemySize) {
+                            EnemySizeField enemySize,
+                            DeleteEnemy deleteEnemy) {
         enemyEffectView = new ScrollPane();
         vbox = new VBox(10);
         enemyEffectView.setContent(vbox);
@@ -70,6 +72,7 @@ public class EnemyEffectView extends PhotoFileChooser implements IEnemySetView {
         this.enemyRewardMoney = enemyRewardMoney;
         this.enemyRewardPoints = enemyRewardPoints;
         this.enemySize = enemySize;
+        this.deleteEnemy = deleteEnemy;
 
         labelsResource = ResourceBundle.getBundle(ENEMY_EFFECT_RESOURCE_PATH);
 
@@ -77,6 +80,7 @@ public class EnemyEffectView extends PhotoFileChooser implements IEnemySetView {
     }
 
     private void buildViewComponents () {
+        vbox.getChildren().add(deleteEnemy.getInstanceAsNode());
         vbox.getChildren().add(enemyImage.getInstanceAsNode());
         vbox.getChildren().add(ButtonFactory.makeButton(labelsResource.getString("Image"),
                                                         e -> {

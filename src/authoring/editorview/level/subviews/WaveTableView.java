@@ -16,14 +16,15 @@ import javafx.scene.control.cell.PropertyValueFactory;
 public class WaveTableView implements ILevelSetView {
 
     private TableView<WaveObject> waveTable;
-    private TableColumn waveNumberCol;
-    private TableColumn enemyNameCol;
-    private TableColumn numEnemiesCol;
-    private TableColumn enemyFrequencyCol;
-    private TableColumn pathCol;
-    private TableColumn timeDelayCol;
+    private TableColumn<WaveObject, String> waveNumberCol;
+    private TableColumn<WaveObject, String> enemyNameCol;
+    private TableColumn<WaveObject, String> numEnemiesCol;
+    private TableColumn<WaveObject, String> enemyFrequencyCol;
+    private TableColumn<WaveObject, String> pathCol;
+    private TableColumn<WaveObject, String> timeDelayCol;
     private ObservableList<WaveObject> data;
 
+    @SuppressWarnings("unused")
     private LevelEditorViewDelegate delegate;
 
     public WaveTableView (ResourceBundle labelsResource, int width) {
@@ -33,13 +34,14 @@ public class WaveTableView implements ILevelSetView {
         createTableColumns();
     }
 
+    @SuppressWarnings("unchecked")
     private void createTableColumns () {
-        waveNumberCol = new TableColumn("Wave Number");
-        enemyNameCol = new TableColumn("Enemy Name");
-        numEnemiesCol = new TableColumn("Number of Enemies");
-        enemyFrequencyCol = new TableColumn("Enemy Frequency");
-        pathCol = new TableColumn("Path");
-        timeDelayCol = new TableColumn("Time Delay");
+        waveNumberCol = new TableColumn<WaveObject, String>("Wave Number");
+        enemyNameCol = new TableColumn<WaveObject, String>("Enemy Name");
+        numEnemiesCol = new TableColumn<WaveObject, String>("Number of Enemies");
+        enemyFrequencyCol = new TableColumn<WaveObject, String>("Enemy Frequency");
+        pathCol = new TableColumn<WaveObject, String>("Path");
+        timeDelayCol = new TableColumn<WaveObject, String>("Time Delay");
         waveNumberCol.setEditable(false);
         enemyNameCol.setEditable(true);
         numEnemiesCol.setEditable(true);
@@ -81,13 +83,18 @@ public class WaveTableView implements ILevelSetView {
         }
     }
 
-    public void updateWaveTableView (List<WaveObject> enemies) {
-        setData(enemies);
+    @SuppressWarnings("unchecked")
+    public void updateWaveTableView (List<WaveObject> waves) {
+        setData(waves);
         waveTable.getColumns().clear();
         waveTable.setItems(data);
         waveTable.getColumns().addAll(waveNumberCol, enemyNameCol, numEnemiesCol,
                                       enemyFrequencyCol, pathCol, timeDelayCol);
         waveTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+    }
+
+    public void updateWaveObject () {
+
     }
 
     public void createNewWave () {
