@@ -4,6 +4,8 @@ public interface GameSettingsEditorViewDelegate {
 
     public void onUserEnteredGameLives (String lives);
 
+    public void onUserEnteredGameMoney (String money);
+
     public void onUserEnteredGameNames (String name);
 
     public void onUserEnteredGameImage (String imagePath);

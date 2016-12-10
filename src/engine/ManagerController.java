@@ -26,4 +26,7 @@ public interface ManagerController<E extends Manager<T>, U extends TypeBuilder<T
 
     void setSize (int id, double size);
 
+    int createCopy (int id, V updateView);
+    
+    void loadManagerData(E typeManager, V updateView);
 }

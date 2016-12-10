@@ -171,8 +171,7 @@ public class LevelEditorViewController extends EditorViewController
 
     @Override
     public void onUserEnteredEnemy (int enemyID) {
-        // TODO Auto-generated method stub
-
+        levelDataSource.setWaveEnemy(currentLevelID, currentWaveID, enemyID);
     }
 
     @Override

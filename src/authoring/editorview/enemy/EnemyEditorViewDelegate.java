@@ -22,8 +22,6 @@ public interface EnemyEditorViewDelegate {
 
     public void onUserEnteredEnemyMoney (String enemyRewardMoney);
 
-    public void onUserEnteredEnemyCollisionEffect (String enemyCollisionEffect);
-
     public void onUserEnteredEnemyImagePath (String enemyImagePath);
 
     public void onUserEnteredEnemyName (String enemyName);

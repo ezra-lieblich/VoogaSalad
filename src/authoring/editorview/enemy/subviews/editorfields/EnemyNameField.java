@@ -6,7 +6,6 @@ import authoring.editorview.enemy.EnemyEditorViewDelegate;
 import authoring.editorview.enemy.IEnemySetView;
 import authoring.utilityfactories.BoxFactory;
 import authoring.utilityfactories.TextFieldFactory;
-import javafx.scene.Node;
 
 
 /**
@@ -33,7 +32,7 @@ public class EnemyNameField extends NameView implements IEnemySetView {
                 TextFieldFactory.makeTextField(resource.getString("EnterString"),
                                                e -> delegate.onUserEnteredEnemyName(nameTextField
                                                        .getText()));
-        hbox = BoxFactory.createHBoxWithLabelandNode(resource.getString("NameTextField"),
+        root = BoxFactory.createHBoxWithLabelandNode(resource.getString("NameTextField"),
                                                      nameTextField);
     }
 

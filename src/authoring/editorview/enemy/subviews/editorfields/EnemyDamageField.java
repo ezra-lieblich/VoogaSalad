@@ -1,8 +1,10 @@
 package authoring.editorview.enemy.subviews.editorfields;
 
 import java.util.ResourceBundle;
+import authoring.editorview.TextFieldView;
 import authoring.editorview.enemy.EnemyEditorViewDelegate;
 import authoring.editorview.enemy.IEnemySetView;
+import authoring.utilityfactories.BoxFactory;
 import authoring.utilityfactories.TextFieldFactory;
 import javafx.scene.Node;
 import javafx.scene.control.TextField;
@@ -13,17 +15,13 @@ import javafx.scene.control.TextField;
  * @author Kayla Schulz
  *
  */
-public class EnemyDamageField implements IEnemySetView {
+public class EnemyDamageField extends TextFieldView implements IEnemySetView {
 
     private EnemyEditorViewDelegate delegate;
     private TextField enemyDamageField;
 
     public EnemyDamageField (ResourceBundle labelsResource) {
-        enemyDamageField =
-                TextFieldFactory.makeTextField(labelsResource.getString("EnterInt"),
-                                               e -> delegate
-                                                       .onUserEnteredEnemyDamage(enemyDamageField
-                                                               .getText()));
+        super(labelsResource);
     }
 
     @Override
@@ -33,11 +31,24 @@ public class EnemyDamageField implements IEnemySetView {
 
     @Override
     public Node getInstanceAsNode () {
-        return enemyDamageField;
+        return hbox;
     }
 
-    public void updateEnemyFrequency (String enemyDamage) {
-        enemyDamageField.setText(enemyDamage);
+    @Override
+    protected void makeTextField (ResourceBundle labelsResource) {
+        enemyDamageField =
+                TextFieldFactory.makeTextField(labelsResource.getString("EnterInt"),
+                                               e -> delegate
+                                                       .onUserEnteredEnemyDamage(enemyDamageField
+                                                               .getText()));
+        hbox =
+                BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Damage"),
+                                                      enemyDamageField);
+    }
+
+    @Override
+    public void updateField (String newData) {
+        enemyDamageField.setText(newData);
     }
 
 }

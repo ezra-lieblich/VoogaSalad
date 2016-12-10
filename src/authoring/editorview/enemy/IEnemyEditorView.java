@@ -13,8 +13,6 @@ import authoring.editorview.ListDataSource;
  */
 public interface IEnemyEditorView extends IEnemySetView, IUpdateView {
 
-    public void updateEnemyReactions (String enemyReactions);
-
     public void updateEnemySpeed (double speed);
 
     public void updateEnemyBank (List<Integer> activeEnemies);
@@ -30,8 +28,6 @@ public interface IEnemyEditorView extends IEnemySetView, IUpdateView {
     public void updateEnemyRewardMoney (double rewardMoney);
 
     public void updateEnemyRewardPoints (double rewardPoints);
-
-    public void updateEnemyCollisionEffect (String collisionEffect);
 
     public void setEnemyListDataSource (ListDataSource source);
 

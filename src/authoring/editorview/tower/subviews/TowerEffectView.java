@@ -100,9 +100,7 @@ public class TowerEffectView extends PhotoFileChooser implements ITowerSetView {
                                                                                                         .getString("TryAgain"));
                                                             }
                                                         }));
-        vbox.getChildren()
-                .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Name"),
-                                                           towerName.getInstanceAsNode()));
+        vbox.getChildren().add(towerName.getInstanceAsNode());
         vbox.getChildren()
                 .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Size"),
                                                            towerSize.getInstanceAsNode()));

@@ -21,13 +21,17 @@ public class GameSettingsEditorView implements IGameSettingsEditorView, IGameSet
     private GameNameView gameNameView;
     private BorderPane gameSettingsView;
     private GameSettingsEditorViewDelegate delegate;
-    private ResourceBundle gameSettingsBundle;
+    
+    private static final String RESOURCE_FILE_NAME = "resources/GameAuthoringSettings";	
+	private ResourceBundle settingsResource = ResourceBundle.getBundle(RESOURCE_FILE_NAME);
 
-    public GameSettingsEditorView (int aWidth, int aHeight) {
+
+
+
+    public GameSettingsEditorView (int width, int height) {
         gameSettingsView = new BorderPane();
         this.gameConditionsRoot = new VBox(10);
-        gameSettingsBundle = ResourceBundle.getBundle("resources/GameAuthoringSettings");
-        this.gameNameView = new GameNameView(gameSettingsBundle);
+        this.gameNameView = new GameNameView(settingsResource);
         addViewComponents();
     }
 
@@ -90,7 +94,6 @@ public class GameSettingsEditorView implements IGameSettingsEditorView, IGameSet
 
     @Override
     public void setGameSettingsListDataSource (ListDataSource source) {
-        // TODO Auto-generated method stub
         System.out.println("Game settings doesn't have an image bank implemented!");
     }
 

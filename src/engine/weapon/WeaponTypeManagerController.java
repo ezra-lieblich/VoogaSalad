@@ -18,8 +18,6 @@ public class WeaponTypeManagerController extends
     protected WeaponBuilder constructTypeProperties (IWeaponEditorView weaponUpdater,
                                                      WeaponBuilder typeBuilder) {
         return typeBuilder
-                .addEffectListener( (oldValue, newValue) -> weaponUpdater
-                        .updateCollisionEffectDisplay(newValue))
                 .addFireRateListener( (oldValue, newValue) -> weaponUpdater
                         .updateFireRateDisplay(newValue))
                 .addRangeListener( (oldValue, newValue) -> weaponUpdater
