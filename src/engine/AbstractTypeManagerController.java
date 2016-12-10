@@ -31,13 +31,13 @@ public abstract class AbstractTypeManagerController<E extends Manager<T>, U exte
     @Override
     public void loadManagerData(E typeManager, V updateView) {
         //this.typeManager = typeManager;
-        //this.typeManager.setEntities(typeManager.getEntities().keySet().stream().collect(Collectors.toMap(b -> b , b -> constructCopy(b, typeManager, updateView))));
-    	Map<Integer, T> newMap = new HashMap<Integer, T>();
-        for (Integer id : typeManager.getEntities().keySet()) {
-        	T value = constructCopy(id, typeManager, updateView);
-        	newMap.put(id, value);
-        }
-        this.typeManager.setEntities(newMap);
+        this.typeManager.setEntities(typeManager.getEntities().keySet().stream().collect(Collectors.toMap(b -> b , b -> constructCopy(b, typeManager, updateView))));
+//    	Map<Integer, T> newMap = new HashMap<Integer, T>();
+//        for (Integer id : typeManager.getEntities().keySet()) {
+//        	T value = constructCopy(id, typeManager, updateView);
+//        	newMap.put(id, value);
+//        }
+//        this.typeManager.setEntities(newMap);
         typeBuilder.setNextId(this.typeManager.getMaxId());
     }
     
@@ -71,7 +71,6 @@ public abstract class AbstractTypeManagerController<E extends Manager<T>, U exte
     @Override
     public void addTypeBankListener(V updateView) {
         typeManager.addEntitiesListener((oldValue, newValue) -> {
-        	Set<Integer> a = newValue.keySet();
         	updateView.updateBank(new ArrayList<Integer>(newValue.keySet().isEmpty() ? new ArrayList<Integer>() : newValue.keySet()));
         });
     }

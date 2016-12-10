@@ -109,9 +109,9 @@ public class AuthoringController {
 		 modelController.getModelController(LevelManagerController.class)
 		 	.loadManagerData(data.getManagerMediator().getManager(LevelManager.class), 
 		 						(ILevelEditorView) viewController.getControllers().get("level").getUpdateView());
-		 modelController.getModelController(GameModeManagerController.class)
-		 	.loadManagerData(data.getManagerMediator().getManager(GameModeManager.class),
-		 						(IGameSettingsEditorView) viewController.getControllers().get("setup").getUpdateView());
+//		 modelController.getModelController(GameModeManagerController.class)
+//		 	.loadManagerData(data.getManagerMediator().getManager(GameModeManager.class),
+//		 						(IGameSettingsEditorView) viewController.getControllers().get("setup").getUpdateView());
 	}
     
     private String xmlToString(String textContent) throws IOException{
