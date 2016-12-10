@@ -170,7 +170,7 @@ public class GamePlayerController implements Observer {
 			this.animation.pause();
 		});
 		this.mainScene = view.init(this.model.getData().getGold(), this.model.getData().getLife(),
-				this.model.getData().getCurrentLevel(), getTowerImages());
+				this.model.getData().getCurrentLevel(), this.model.getData().getScore(), getTowerImages());
 		this.view.getGrid().getGrid().setOnMouseClicked(e -> handleMouseClicked(e.getX(), e.getY()));
 
 		this.view.getGrid().populatePath(model.getData().getGrid().getStartPoint());
@@ -252,7 +252,7 @@ public class GamePlayerController implements Observer {
 		if (o instanceof GamePlayData) {
 			// update level in display
 			this.view.updateStatsDisplay(((GamePlayData) o).getGold(), ((GamePlayData) o).getLife(),
-					((GamePlayData) o).getCurrentLevel());
+					((GamePlayData) o).getCurrentLevel(),((GamePlayData)o).getScore());
 			this.view.updateCurrentLevelStats(((GamePlayData) o).getCurrentLevel());
 
 
@@ -321,7 +321,7 @@ public class GamePlayerController implements Observer {
 			// this.enemyFrequency =
 			// this.enemyController.getEnemyModel().getFrequency();
 			this.currentWave = this.enemyController.getEnemyModel().getPackOfEnemyComing();
-
+			
 			// get the new start time for a new wave of enemies
 			// getNewWaveOnInterval(this.enemyController.getEnemyModel().getEnemyWaveStartTime());
 
@@ -366,7 +366,7 @@ public class GamePlayerController implements Observer {
 	}
 
 	private void redrawWeapon() {
-
+		
 	}
 
 	public Timeline getTimeline() {
