@@ -3,6 +3,7 @@ package engine.effect;
 import java.lang.annotation.Annotation;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,10 +16,10 @@ import engine.AbstractTypeManager;
 
 public class EffectTypeManager extends AbstractTypeManager<Effect> implements EffectManager {
     //private Map<String, Class<?>> annotatedClasses;
-    private Map<String, List<Method>> annotatedClassMethods; //Return type : methods of that type
-    private Map<String, List<Class<?>>> effectAccessibleData;
+    private Map<Class<?>, List<Method>> annotatedClassMethods; //Return type : methods of that type
+    private Map<Class<?>, List<Field>> effectAccessibleData;
     
-    EffectTypeManager(Map<String, List<Method>> annotatedClassMethods, Map<String, List<Class<?>>> effectAccessibleData) {
+    EffectTypeManager(Map<Class<?>, List<Method>> annotatedClassMethods, Map<Class<?>, List<Field>> effectAccessibleData) {
         this.annotatedClassMethods = annotatedClassMethods;
         this.effectAccessibleData = effectAccessibleData;
     }

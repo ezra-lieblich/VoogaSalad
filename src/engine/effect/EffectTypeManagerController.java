@@ -20,14 +20,14 @@ public class EffectTypeManagerController extends
         implements EffectManagerController {
 
     EffectTypeManagerController (ManagerMediator managerMediator) {
-        super(new EffectTypeManager(null, null), new EffectTypeBuilder(), managerMediator);
+        super(new EffectTypeManager(new AnnotatedMethodMapFactory().create("engine.effect"), new AnnotatedDataMapFactory().create("engine.effect")), new EffectTypeBuilder(), managerMediator);
         EffectBuilder efb = new EffectTypeBuilder();
         Effect effectType = efb.buildTriggerConditionGroovy("trigger.getHealth() == 50 && trigger.getName() == 'Sean'").buildEffectGroovy("trigger.setHealth(100)").build();
         GameEffect test = new GameEffect(effectType, new GroovyExecutor());
         Enemy enemy = new Enemy();
         
         AnnotatedMethodMapFactory testFactory = new AnnotatedMethodMapFactory();
-        Object blah = testFactory.create(EffectMethod.class);
+        Object blah = testFactory.create("engine.effect");
         
 //        test.addTrigger((ITestEnemy)enemy);
 //        test.addEncompassingClass(this);
