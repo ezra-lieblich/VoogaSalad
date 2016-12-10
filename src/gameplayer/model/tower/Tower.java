@@ -59,7 +59,7 @@ public class Tower implements IDrawable {
 		this.xCoordinate = x;
 		this.yCoordinate = y;
 	}
-
+	
 	public double getX() {
 		return this.xCoordinate;
 	}
@@ -67,6 +67,20 @@ public class Tower implements IDrawable {
 	public double getY() {
 		return yCoordinate;
 	}
+	
+	public Boolean upgradable(){
+		return this.upgradable();
+	}
+	
+	public int getUpgradeType(){
+		int type = this.upgradeList.poll();
+		if (this.upgradeList.isEmpty()){
+			this.upgradable = false;
+		}
+		return type;
+	}
+	
+
 	
 	double sellTower(){
 		return this.sellAmount;
@@ -77,7 +91,9 @@ public class Tower implements IDrawable {
 	}
 	
 
-	
+	void setGuns(ArrayList<Gun> guns){
+		this.weaponTypes = guns;
+	}
 	
 	int getUnqueID(){
 		return this.uniqueID;
@@ -99,6 +115,10 @@ public class Tower implements IDrawable {
 
 	void setCost(double cost) {
 		this.cost = cost;
+	}
+	
+	void setImage(String image) {
+		this.image = image;
 	}
 
 
