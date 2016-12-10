@@ -35,7 +35,7 @@ public class PathType extends AbstractType implements Path {
     
     @Override
     public List<Coordinate<Integer>> getCoordinates () {
-        return Collections.unmodifiableList(coordinates.getProperty());
+        return coordinates.getProperty();
     }
 
     @Override
