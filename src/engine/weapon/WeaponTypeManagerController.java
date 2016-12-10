@@ -18,7 +18,7 @@ public class WeaponTypeManagerController extends
     protected WeaponBuilder constructTypeProperties (IWeaponEditorView weaponUpdater,
                                                      WeaponBuilder typeBuilder) {
         return typeBuilder
-                .addFireRateListener( (oldValue, newValue) -> weaponUpdater
+                .addReloadTimeListener( (oldValue, newValue) -> weaponUpdater
                         .updateFireRateDisplay(newValue))
                 .addRangeListener( (oldValue, newValue) -> weaponUpdater
                         .updateRangeDisplay(newValue))
@@ -37,7 +37,7 @@ public class WeaponTypeManagerController extends
 
     @Override
     public void setWeaponFireRate (int weaponID, double weaponFireRate) {
-        getTypeManager().getEntity(weaponID).setFireRate(weaponFireRate);
+        getTypeManager().getEntity(weaponID).setReloadTime(weaponFireRate);
     }
 
     @Override
@@ -72,7 +72,7 @@ public class WeaponTypeManagerController extends
 
     @Override
     public double getWeaponFireRate (int weaponID) {
-        return getTypeManager().getEntity(weaponID).getFireRate();
+        return getTypeManager().getEntity(weaponID).getReloadTime();
     }
 
     @Override
