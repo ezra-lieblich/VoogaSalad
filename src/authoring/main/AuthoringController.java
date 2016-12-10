@@ -82,11 +82,6 @@ public class AuthoringController {
     }
 
     private void saveAsXMLFile () throws IOException {
-//        XStream serializer = new XStream(new DomDriver());
-//    	String wholeFile = serializer.toXML(this);
-//    	toolbar.saveFile(wholeFile);
-//    	String authoringData = xmlToString(wholeFile);
-//    	Wrapper.getInstance().createGame(authoringData);
         String fileContent = this.modelController.SaveData();
         toolbar.saveFile(fileContent);
         // TODO Lucy: add api call to record game in web app
@@ -95,7 +90,8 @@ public class AuthoringController {
     }
     
 	public void loadData(String filePath) {
-		// TODO Reset mediators and managers. Loop through each Type and call it
+		//TODO GameModeManagerController ConstructTypeProperties is empty because it needs methods to call in front end.
+		//TODO Creates a null pointer exception currently. Also need controllers instead of Views!!!!
 		GameAuthoringData data = modelController.loadData(filePath);
 		 modelController.getModelController(EnemyManagerController.class)
 		 	.loadManagerData(data.getManagerMediator().getManager(EnemyManager.class), 
@@ -116,8 +112,6 @@ public class AuthoringController {
 		 modelController.getModelController(GameModeManagerController.class)
 		 	.loadManagerData(data.getManagerMediator().getManager(GameModeManager.class),
 		 						(IGameSettingsEditorView) viewController.getControllers().get("setup").getUpdateView());
-		 
-
 	}
     
     private String xmlToString(String textContent) throws IOException{
