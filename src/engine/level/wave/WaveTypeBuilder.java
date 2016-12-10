@@ -134,4 +134,14 @@ public class WaveTypeBuilder extends AbstractTypeBuilder<Wave, WaveBuilder>
         return this;
     }
 
+	@Override
+	protected WaveBuilder copyType(Wave type) {
+		return this
+		.buildEnemyCount(type.getEnemyCount())
+		.buildEnemyID(type.getEnemyID())
+		.buildFrequency(type.getFrequency())
+		.buildPathID(type.getPathID())
+		.buildStartTime(type.getStartTime());
+	}
+
 }

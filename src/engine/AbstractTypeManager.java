@@ -57,7 +57,8 @@ public abstract class AbstractTypeManager<E extends Type> extends AbstractObserv
     
     @Override
     public void setEntities(Map<Integer, E> entities) {
-        this.data = new ObservableMapProperty<Integer, E>(new HashMap<Integer, E>());
+    	this.data.setProperty(entities);
+        //this.data = new ObservableMapProperty<Integer, E>(entities);
     }
     
     @Override
