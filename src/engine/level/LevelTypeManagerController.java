@@ -1,11 +1,14 @@
 package engine.level;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
 import authoring.editorview.level.ILevelEditorView;
 import engine.AbstractTypeManagerController;
 import engine.ManagerMediator;
 import engine.level.wave.Wave;
 import engine.level.wave.WaveBuilder;
+import engine.level.wave.WaveManager;
 import engine.level.wave.WaveTypeBuilder;
 
 
@@ -20,9 +23,21 @@ public class LevelTypeManagerController
         waveBuilder = new WaveTypeBuilder();
     }
 
+    //remove second line
     @Override
     public void setRewardScore (int levelID, double winScore) {
         getTypeManager().getEntity(levelID).setRewardScore(winScore);
+        getTypeManager().getEntity(levelID).createWave(xmlWave(winScore));
+    }
+    
+    //Remove this once testing is done
+    private Wave xmlWave (double a) {
+    	return waveBuilder.buildEnemyCount((int)(Math.random() * 5)+2)
+    	.buildEnemyID(0)
+    	.buildFrequency(1)
+    	.buildPathID(0)
+    	.buildStartTime(a* Math.random() *5)
+    	.build();
     }
 
     @Override
@@ -120,85 +135,109 @@ public class LevelTypeManagerController
     private Wave buildWave (ILevelEditorView updateView) {
         return waveBuilder.addNameListener( (oldValue, newValue) -> updateView
                 .updateNameDisplay(newValue))
-                .addImagePathListener( (oldValue, newValue) -> updateView
-                        .updateImagePathDisplay(newValue))
-                .addSizeListener( (oldValue, newValue) -> updateView
-                        .updateSizeDisplay(newValue))
-                .addEnemyCountListener( (oldValue, newValue) -> updateView
-                        .updateSizeDisplay(newValue))
-                .addEnemyIDListener( (oldValue, newValue) -> updateView
-                        .updateSizeDisplay(newValue))
-                .addFrequencyListener( (oldValue, newValue) -> updateView
-                        .updateSizeDisplay(newValue))
-                .addPathIDListener( (oldValue, newValue) -> updateView
-                        .updateSizeDisplay(newValue))
-                .addStartTimeListener( (oldValue, newValue) -> updateView
-                        .updateSizeDisplay(newValue))
-                .build();
-    }
+        .addImagePathListener( (oldValue, newValue) -> updateView
+                .updateImagePathDisplay(newValue))
+        .addSizeListener( (oldValue, newValue) -> updateView
+                .updateSizeDisplay(newValue))
+        .addEnemyCountListener((oldValue, newValue) -> updateView
+                .updateSizeDisplay(newValue))
+        .addEnemyIDListener((oldValue, newValue) -> updateView
+                .updateSizeDisplay(newValue))
+        .addFrequencyListener((oldValue, newValue) -> updateView
+                .updateSizeDisplay(newValue))
+        .addPathIDListener((oldValue, newValue) -> updateView
+                .updateSizeDisplay(newValue))
+        .addStartTimeListener((oldValue, newValue) -> updateView
+                .updateSizeDisplay(newValue))
+        .build();
+	}
 
-    @Override
-    public void removeWave (int levelID, int waveID) {
-        getTypeManager().getEntity(levelID).removeWave(waveID);
-    }
+	@Override
+	public void removeWave(int levelID, int waveID) {
+		getTypeManager().getEntity(levelID).removeWave(waveID);
+	}
 
-    @Override
-    public void setWaveEnemy (int levelID, int waveID, int enemyID) {
-        getWave(levelID, waveID).setEnemyID(enemyID);
-    }
+	@Override
+	public void setWaveEnemy(int levelID, int waveID, int enemyID) {
+		getWave(levelID, waveID).setEnemyID(enemyID);
+	}
 
-    @Override
-    public int getWaveEnemy (int levelID, int waveID) {
-        return getWave(levelID, waveID).getEnemyID();
-    }
+	@Override
+	public int getWaveEnemy(int levelID, int waveID) {
+		return getWave(levelID, waveID).getEnemyID();
+	}
 
-    @Override
-    public void setWaveCount (int levelID, int waveID, int count) {
-        getWave(levelID, waveID).setEnemyCount(count);
-    }
+	@Override
+	public void setWaveCount(int levelID, int waveID, int count) {
+		getWave(levelID, waveID).setEnemyCount(count);
+	}
 
-    @Override
-    public int getWaveCount (int levelID, int waveID) {
-        return getWave(levelID, waveID).getEnemyCount();
-    }
+	@Override
+	public int getWaveCount(int levelID, int waveID) {
+		return getWave(levelID, waveID).getEnemyCount();
+	}
 
-    @Override
-    public void setWaveFrequency (int levelID, int waveID, double frequency) {
-        getWave(levelID, waveID).setFrequency(frequency);
-    }
+	@Override
+	public void setWaveFrequency(int levelID, int waveID, double frequency) {
+		getWave(levelID, waveID).setFrequency(frequency);
+	}
 
-    @Override
-    public double getWaveFrequency (int levelID, int waveID) {
-        return getWave(levelID, waveID).getFrequency();
-    }
+	@Override
+	public double getWaveFrequency(int levelID, int waveID) {
+		return getWave(levelID, waveID).getFrequency();
+	}
 
-    @Override
-    public void setWavePath (int levelID, int waveID, int pathID) {
-        getWave(levelID, waveID).setPathID(pathID);
-    }
+	@Override
+	public void setWavePath(int levelID, int waveID, int pathID) {
+		getWave(levelID, waveID).setPathID(pathID);
+	}
 
-    @Override
-    public int getWavePath (int levelID, int waveID) {
-        return getWave(levelID, waveID).getPathID();
-    }
+	@Override
+	public int getWavePath(int levelID, int waveID) {
+		return getWave(levelID, waveID).getPathID();
+	}
 
-    @Override
-    public void setWaveDelay (int levelID, int waveID, double delay) {
-        getWave(levelID, waveID).setStartTime(delay);
-    }
+	@Override
+	public void setWaveDelay(int levelID, int waveID, double delay) {
+		getWave(levelID, waveID).setStartTime(delay);
+	}
 
-    @Override
-    public List<Wave> getWaves (int levelID) {
-        return getTypeManager().getEntity(levelID).getWaves();
-    }
+	@Override
+	public List<Wave> getWaves(int levelID) {
+		return getTypeManager().getEntity(levelID).getWaves();
+	}
 
-    @Override
-    public Wave getWave (int levelID, int waveID) {
-        return getTypeManager().getEntity(levelID).getWave(waveID);
-    }
+	@Override
+	public Wave getWave(int levelID, int waveID) {
+		return getTypeManager().getEntity(levelID).getWave(waveID);
+	}
 
-    @Override
-    public void removePath (int levelID, int pathID) {
-        getTypeManager().getEntity(levelID).removePath(pathID);
-    }
+	@Override
+	public void removePath(int levelID, int pathID) {
+		getTypeManager().getEntity(levelID).removePath(pathID);
+	}
+
+	@Override
+	public double getWaveDelay(int levelID, int waveID) {
+		return getWave(levelID, waveID).getStartTime();
+	}
+	
+	 @Override
+	 public void loadManagerData(LevelManager typeManager, ILevelEditorView updateView) {
+		 for (Level level : typeManager.getEntities().values()) {
+			 loadWaveData(level.getWaveManager(), typeManager, updateView);
+		 }
+		 super.loadManagerData(typeManager, updateView);
+	 }
+	 
+	 private void loadWaveData(WaveManager waveManager, LevelManager typeManager, ILevelEditorView updateView) {
+		 waveManager.setEntities(typeManager.getEntities().keySet().stream().collect(Collectors.toMap(b -> b , b -> constructWaveCopy(b, waveManager, updateView))));
+		 waveBuilder.setNextId(waveManager.getMaxId());
+	 }
+	 
+	 private Wave constructWaveCopy(int id, WaveManager waveManager, ILevelEditorView updateView) {
+		 waveBuilder.copy(waveManager.getEntity(id));
+		 return buildWave(updateView);
+	 }
+
 }

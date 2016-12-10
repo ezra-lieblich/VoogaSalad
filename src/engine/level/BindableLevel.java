@@ -5,10 +5,11 @@ import java.util.Map;
 import java.util.function.BiConsumer;
 import engine.BindableType;
 import engine.level.wave.Wave;
+import engine.level.wave.WaveManager;
 
 
 public interface BindableLevel extends BindableType<LevelBuilder> {
-    LevelBuilder addWaveListener (BiConsumer<Map<Integer, Wave>, Map<Integer, Wave>> listener);
+    LevelBuilder addWaveListener (BiConsumer<WaveManager, WaveManager> listener);
 
     LevelBuilder addPathListener (BiConsumer<List<Integer>, List<Integer>> listener);
 
