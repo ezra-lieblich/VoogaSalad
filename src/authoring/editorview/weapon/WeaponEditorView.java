@@ -56,7 +56,7 @@ public class WeaponEditorView implements IWeaponEditorView {
         weaponRangeView = new WeaponRangeField(labelsResource);
         weaponFireRateView = new WeaponFireRateField(labelsResource);
         weaponPathView = new WeaponPathField(labelsResource);
-        weaponImageView = new WeaponImageView();
+        weaponImageView = new WeaponImageView(labelsResource);
         weaponSizeView = new WeaponSizeField(labelsResource);
         weaponEffectsView =
                 new WeaponEffectView(weaponNameView, weaponSpeedView, weaponFireRateView,
