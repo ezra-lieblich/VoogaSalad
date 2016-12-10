@@ -14,7 +14,7 @@ public class tempmain extends Application {
     @Override
     public void start (Stage s) throws IOException {
 
-        AuthoringController generalController = new AuthoringController(SIZE);
+        AuthoringController generalController = new AuthoringController(SIZE, s);
 
         Scene scene = generalController.getScene();
         s.setTitle(TITLE);
@@ -23,6 +23,9 @@ public class tempmain extends Application {
         s.setHeight(SIZE);
         s.setWidth(SIZE + 145);
         s.show();
+        
+//        ExitDialogueBox box = new ExitDialogueBox();
+//        box.displayDialogueBoxOnExit(s, e -> generalController.saveAsXMLFile());
 
     }
 

@@ -22,6 +22,7 @@ import engine.settings.GameModeManagerController;
 import engine.tower.TowerManagerController;
 import engine.weapon.WeaponManagerController;
 import javafx.scene.Scene;
+import javafx.stage.Stage;
 import statswrapper.Wrapper;
 
 
@@ -30,7 +31,7 @@ public class AuthoringController {
     private AuthoringViewController viewController;
     private IToolbar toolbar;
 
-    public AuthoringController (int size) {
+    public AuthoringController (int size, Stage s) {
         modelController = new ModelAuthoringController();
         try {
             viewController = new AuthoringViewController(size, size);
@@ -47,24 +48,22 @@ public class AuthoringController {
 
     private void configureToolbar () {
         toolbar = this.viewController.getView().getMyToolbar();
-        toolbar.setOnPressedSave(e -> {
-            try {
-                saveAsXMLFile();
-            }
-            catch (IOException e1) {
-                // TODO Auto-generated catch block
-                e1.printStackTrace();
-            }
-        });
+        toolbar.setOnPressedSave(e -> saveAsXMLFile());
 
     }
 
-    private void saveAsXMLFile () throws IOException {
+    public void saveAsXMLFile ()  {
         String fileContent = this.modelController.SaveData();
         toolbar.saveFile(fileContent);
         // TODO Lucy: add api call to record game in web app
-        String gameData = xmlToString(fileContent);
-        Wrapper.getInstance().createGame(gameData);
+        
+        try {
+        	String gameData = xmlToString(fileContent);
+			Wrapper.getInstance().createGame(gameData);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 
     private String xmlToString (String textContent) throws IOException {
