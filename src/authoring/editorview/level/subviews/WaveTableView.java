@@ -81,8 +81,8 @@ public class WaveTableView implements ILevelSetView {
         }
     }
 
-    public void updateWaveTableView (List<WaveObject> enemies) {
-        setData(enemies);
+    public void updateWaveTableView (List<WaveObject> waves) {
+        setData(waves);
         waveTable.getColumns().clear();
         waveTable.setItems(data);
         waveTable.getColumns().addAll(waveNumberCol, enemyNameCol, numEnemiesCol,
