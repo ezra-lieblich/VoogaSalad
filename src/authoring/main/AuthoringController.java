@@ -31,7 +31,7 @@ public class AuthoringController {
     private AuthoringViewController viewController;
     private IToolbar toolbar;
 
-    public AuthoringController (int size, Stage s) {
+    public AuthoringController (int size) {
         modelController = new ModelAuthoringController();
         try {
             viewController = new AuthoringViewController(size, size);

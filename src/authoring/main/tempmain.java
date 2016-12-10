@@ -14,7 +14,7 @@ public class tempmain extends Application {
     @Override
     public void start (Stage s) throws IOException {
 
-        AuthoringController generalController = new AuthoringController(SIZE, s);
+        AuthoringController generalController = new AuthoringController(SIZE);
 
         Scene scene = generalController.getScene();
         s.setTitle(TITLE);
