@@ -1,6 +1,7 @@
 package engine.effect.player;
 
 import java.lang.reflect.Method;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,6 +28,10 @@ public abstract class AbstractEffectFactory {
         GroovyExecutor groovyExecutor = new GroovyExecutor();
         addEffectAccessibleData(groovyExecutor);
         return new GameEffect(effect, groovyExecutor);
+    }
+    
+    public Collection<String> getVariableNames() {
+        return effectAccessibleData.keySet();
     }
     
     private void loadDataIntoMap() {
