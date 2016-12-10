@@ -36,6 +36,9 @@ public class Grid {
 		}
 	}
 
+	public void setNoPath(boolean isPathEmpty) {
+		this.noPath = isPathEmpty;
+	}
 	public int getRows(){
 		return this.row;
 	}

@@ -79,7 +79,7 @@ public class GamePlayerFactory{
 		Map<Integer, Path> paths = pathManager.getEntities();
 		if (paths.isEmpty()) {//no path
 			Grid emptyGrid = new Grid(DEFAULT_GRID_WIDTH, DEFAULT_GRID_HEIGHT);
-			//emptyGrid.setnPath(true); uncomment once the method has been added
+			emptyGrid.setNoPath(true); 
 			return emptyGrid;
 		}
 		Path currPath = paths.get(levelNumber); //TODO: MUST REFACTOR IF THERE ARE MULTIPLE PATHS
