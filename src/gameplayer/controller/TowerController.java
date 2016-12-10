@@ -50,6 +50,10 @@ public class TowerController {
 
 		}
 	}
+	
+	public void upgrade(int uniqueID){
+		this.towerManager.upgradeTower(uniqueID);
+	}
 
 	private void createButton() {
 		Button sellTower = graphicsLib.createButton("Sell tower", e -> {
