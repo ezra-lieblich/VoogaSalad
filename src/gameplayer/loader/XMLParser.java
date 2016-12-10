@@ -110,7 +110,6 @@ public class XMLParser {
 		return enemyTypes;
 	}
 	
-	//currently, the xml files do not have GameModeManagers, must ask sean/ezra to fix
 	protected GameMode getGameMode() {
 		GameModeManager gameModeManager = gameManager.getManager(GameModeManager.class);
 		return gameModeManager.getEntity(0);
@@ -123,6 +122,7 @@ public class XMLParser {
 	protected PathManager getPathManager() {
 		return gameManager.getManager(PathManager.class);
 	}
+	
 	
 	
 	

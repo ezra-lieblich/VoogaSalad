@@ -213,13 +213,22 @@ public class TowerManager extends Observable {
 	 */
 	public void upgradeTower(int UniqueID){
 		Tower toBeUpgraded = this.towersOnGrid.get(UniqueID);
-		/**
-		 * create a new tower
-		 * substract the upgrade cost from gold amount
-		 * place the new tower on the same location, make sure set on the cell as well
-		 * remove old tower
-		 * 
-		 */
+		int upgradeType = toBeUpgraded.getUpgradeType();
+		engine.tower.Tower upgraded = this.upgradeTowerTypes.get(upgradeType);
+		this.gameData.setGold(this.gameData.getGold() - upgraded.getCost());
+		toBeUpgraded.setImage(upgraded.getImagePath());
+		
+		List<Integer> weaponTypes = upgraded.getWeapons();
+		ArrayList<Gun> gunForTower = new ArrayList<Gun>();
+		// System.out.println("all the int weapons: " + gunsForTower.size());
+		for (int i : weaponTypes) {
+			engine.weapon.Weapon weaponForGun = this.allWeapons.get(i);
+			int fireRate =  (int) weaponForGun.getFireRate();
+			Gun tempGun = new Gun(fireRate, weaponForGun,this.gameData.cellToCoordinate(toBeUpgraded.getX()) , this.gameData.cellToCoordinate(toBeUpgraded.getY())); 
+			gunForTower.add(tempGun);
+		}
+		toBeUpgraded.setGuns(gunForTower);
+
 		
 	}
 	
