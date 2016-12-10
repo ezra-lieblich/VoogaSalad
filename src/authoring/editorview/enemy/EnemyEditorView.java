@@ -146,13 +146,15 @@ public class EnemyEditorView implements IEnemyEditorView {
 
     @Override
     public void deleteEnemy () {
-        // TODO Auto-generated method stub
-
+        enemyEffectView.clearView();
+        System.out.println("Getting here");
     }
 
     @Override
     public void updateBank (List<Integer> ids) {
         this.enemyBank.updateBank(ids);
+        System.out.println(ids.size());
+        //enemyEffectView.clearView();
     }
 
 }
