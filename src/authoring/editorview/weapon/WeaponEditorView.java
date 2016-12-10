@@ -56,7 +56,7 @@ public class WeaponEditorView implements IWeaponEditorView {
         weaponRangeView = new WeaponRangeField(labelsResource);
         weaponFireRateView = new WeaponFireRateField(labelsResource);
         weaponPathView = new WeaponPathField(labelsResource);
-        weaponImageView = new WeaponImageView(labelsResource);
+        weaponImageView = new WeaponImageView();
         weaponSizeView = new WeaponSizeField(labelsResource);
         weaponEffectsView =
                 new WeaponEffectView(weaponNameView, weaponSpeedView, weaponFireRateView,
@@ -138,6 +138,7 @@ public class WeaponEditorView implements IWeaponEditorView {
     @Override
     public void updateImagePathDisplay (String imagePath) {
         this.weaponImageView.updateWeaponImagePath(imagePath);
+        this.weaponBank.updateSelectedCell();
     }
 
     @Override

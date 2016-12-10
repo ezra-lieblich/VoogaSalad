@@ -51,7 +51,37 @@ public abstract class ImageBank implements ChangeListener<Number> {
     public Node getInstanceAsNode () {
         return listView;
     }
+    
+    public void updateSelectedCell(){
+    	int index = this.listView.getSelectionModel().getSelectedIndex();
+    	this.updateBankCellWithID(index);
+    }
+    
+    public void updateBankCellWithID(int id){
+    	Integer cellIndex = null;
+    	for (int i = 0; i < this.itemIDs.size(); i++){
+    		Integer itemID = this.itemIDs.get(i);
+    		if (itemID.equals(id)){
+    			cellIndex = i;
+    		}
+    	}
+    	if (cellIndex != null){
+    		this.updateBankCell(cellIndex);
+    	}
+    }
 
+    public void updateBankCell(int index){
+    	if (dataSource == null) {
+    		System.out.println("Table data source not set");
+    		return;
+    	}
+    	ListCellData cellData = dataSource.getCellDataForSubject(index);
+    	Node cell = createCellFromData(cellData);
+    	this.items.remove(index);
+    	items.set(index, cell);
+    	itemIDs.set(index, cellData.getId());
+    }
+    
     public void updateBank (List<Integer> ids) {
         if (dataSource == null) {
             System.out.println("Table data source not set");
