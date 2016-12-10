@@ -6,7 +6,6 @@ import java.util.ResourceBundle;
 import authoring.editorview.ListDataSource;
 import authoring.editorview.weapon.subviews.WeaponEffectView;
 import authoring.editorview.weapon.subviews.WeaponImageBank;
-import authoring.editorview.weapon.subviews.editorfields.WeaponCollisionEffectField;
 import authoring.editorview.weapon.subviews.editorfields.WeaponFireRateField;
 import authoring.editorview.weapon.subviews.editorfields.WeaponImageView;
 import authoring.editorview.weapon.subviews.editorfields.WeaponNameField;
@@ -32,7 +31,6 @@ public class WeaponEditorView implements IWeaponEditorView {
     private WeaponSpeedField weaponSpeedView;
     private WeaponFireRateField weaponFireRateView;
     private WeaponRangeField weaponRangeView;
-    private WeaponCollisionEffectField weaponCollisionView;
     private WeaponPathField weaponPathView;
     private WeaponImageView weaponImageView;
     private WeaponSizeField weaponSizeView;
@@ -57,13 +55,12 @@ public class WeaponEditorView implements IWeaponEditorView {
         weaponSpeedView = new WeaponSpeedField(labelsResource);
         weaponRangeView = new WeaponRangeField(labelsResource);
         weaponFireRateView = new WeaponFireRateField(labelsResource);
-        weaponCollisionView = new WeaponCollisionEffectField(labelsResource);
         weaponPathView = new WeaponPathField(labelsResource);
         weaponImageView = new WeaponImageView(labelsResource);
         weaponSizeView = new WeaponSizeField(labelsResource);
         weaponEffectsView =
                 new WeaponEffectView(weaponNameView, weaponSpeedView, weaponFireRateView,
-                                     weaponRangeView, weaponCollisionView,
+                                     weaponRangeView,
                                      weaponPathView, weaponImageView, weaponSizeView,
                                      labelsResource,
                                      dialogueBoxResource);
@@ -89,7 +86,6 @@ public class WeaponEditorView implements IWeaponEditorView {
         weaponSpeedView.setDelegate(delegate);
         weaponFireRateView.setDelegate(delegate);
         weaponRangeView.setDelegate(delegate);
-        weaponCollisionView.setDelegate(delegate);
         weaponEffectsView.setDelegate(delegate);
         weaponPathView.setDelegate(delegate);
         weaponSizeView.setDelegate(delegate);
@@ -103,11 +99,6 @@ public class WeaponEditorView implements IWeaponEditorView {
     @Override
     public void updateSpeedDisplay (double speed) {
         this.weaponSpeedView.updateWeaponSpeed(Double.toString(speed));
-    }
-
-    @Override
-    public void updateCollisionEffectDisplay (String collisionEffect) {
-        this.weaponCollisionView.updateWeaponCollisionEffect(collisionEffect);
     }
 
     @Override

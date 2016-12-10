@@ -6,7 +6,7 @@ import java.util.Observable;
 import gameplayer.model.Cell;
 import gameplayer.model.IDrawable;
 
-public class Enemy extends SuperEnemy implements IDrawable{
+public class Enemy extends SuperEnemy implements IDrawable, ITestEnemy{
 	
 	private String name; 
 	private double movingSpeed;  
@@ -24,7 +24,9 @@ public class Enemy extends SuperEnemy implements IDrawable{
 	
 	@EffectMethod
 	public Enemy() {
-		this.effects = new ArrayList<EffectType>();			
+		this.effects = new ArrayList<EffectType>();
+		this.health = 50;
+		this.name = "Sean";
 	}
 	
 	
@@ -135,7 +137,11 @@ public class Enemy extends SuperEnemy implements IDrawable{
 		this.movingSpeed = movingSpeed;
 	}
 
-	public double getHealth() {
+	/* (non-Javadoc)
+     * @see engine.effect.ITestEnemy#getHealth()
+     */
+	@Override
+    public double getHealth() {
 		return health;
 	}
 

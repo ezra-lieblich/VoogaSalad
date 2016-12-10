@@ -2,7 +2,10 @@ package engine;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -25,10 +28,17 @@ public abstract class AbstractTypeManagerController<E extends Manager<T>, U exte
         // typeManager.addEntry(typeBuilder.build()); //Testing XML
     }
 
+    @Override
     public void loadManagerData(E typeManager, V updateView) {
-        typeManager.setEntities(typeManager.getEntities().keySet().stream().collect(Collectors.toMap(b -> b , b -> constructCopy(b, updateView))));
-        typeBuilder.setNextId(typeManager.getMaxId());
-        this.typeManager = typeManager;
+        //this.typeManager = typeManager;
+        this.typeManager.setEntities(typeManager.getEntities().keySet().stream().collect(Collectors.toMap(b -> b , b -> constructCopy(b, typeManager, updateView))));
+//    	Map<Integer, T> newMap = new HashMap<Integer, T>();
+//        for (Integer id : typeManager.getEntities().keySet()) {
+//        	T value = constructCopy(id, typeManager, updateView);
+//        	newMap.put(id, value);
+//        }
+//        this.typeManager.setEntities(newMap);
+        typeBuilder.setNextId(this.typeManager.getMaxId());
     }
     
     @Override
@@ -42,7 +52,7 @@ public abstract class AbstractTypeManagerController<E extends Manager<T>, U exte
         return createType(updateView);
     }
     
-    protected T constructCopy(int id, V updateView) {
+    protected T constructCopy(int id, E typeManager, V updateView) {
         typeBuilder.copy(typeManager.getEntity(id));
         return constructType(updateView);
     }
@@ -60,7 +70,9 @@ public abstract class AbstractTypeManagerController<E extends Manager<T>, U exte
     
     @Override
     public void addTypeBankListener(V updateView) {
-        typeManager.addEntitiesListener((oldValue, newValue) -> updateView.updateBank(new ArrayList<Integer>(newValue.keySet())));
+        typeManager.addEntitiesListener((oldValue, newValue) -> {
+        	updateView.updateBank(new ArrayList<Integer>(newValue.keySet().isEmpty() ? new ArrayList<Integer>() : newValue.keySet()));
+        });
     }
 
     @Override

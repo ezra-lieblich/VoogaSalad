@@ -1,5 +1,6 @@
 package engine.path;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.function.Predicate;
 import authoring.editorview.IUpdateView;
@@ -109,7 +110,7 @@ public class PathTypeManagerController
                                                    PathBuilder typeBuilder) {
         return typeBuilder
                 .addCoordinatesListener( (oldValue, newValue) -> updateView
-                        .updatePathCoordinates(newValue))
+                        .updatePathCoordinates(Collections.unmodifiableList(newValue)))
                 .addGridRowsListener( (oldValue, newValue) -> updateView
                         .updateGridDimensions(newValue));
     }

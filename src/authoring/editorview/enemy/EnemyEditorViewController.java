@@ -39,8 +39,6 @@ public class EnemyEditorViewController extends EditorViewController
         enemyView.updateNameDisplay(enemyDataSource.getName(currentEnemyID));
         enemyView.updateSizeDisplay(enemyDataSource.getSize(currentEnemyID));
         enemyView.updateEnemyDamage(enemyDataSource.getEnemyDamage(currentEnemyID));
-        enemyView.updateEnemyCollisionEffect(enemyDataSource
-                .getEnemyCollisionEffect(currentEnemyID));
         enemyView.updateEnemySpeed(enemyDataSource.getEnemySpeed(currentEnemyID));
         enemyView.updateEnemyRewardMoney(enemyDataSource.getEnemyRewardMoney(currentEnemyID));
         enemyView.updateEnemyRewardPoints(enemyDataSource.getEnemyRewardScore(currentEnemyID));
@@ -110,11 +108,6 @@ public class EnemyEditorViewController extends EditorViewController
         catch (NumberFormatException e) {
             createDialogueBox();
         }
-    }
-
-    @Override
-    public void onUserEnteredEnemyCollisionEffect (String enemyCollisionEffect) {
-        enemyDataSource.setEnemyCollisionEffect(currentEnemyID, enemyCollisionEffect);
     }
 
     @Override

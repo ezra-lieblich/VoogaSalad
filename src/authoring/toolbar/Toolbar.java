@@ -19,13 +19,25 @@ public class Toolbar implements IToolbar {
     private ToolBar toolbar;
 
     private Button saveButton;
-
+    
+    private Button loadButton;
+    
     public Toolbar (int aWidth, int aHeight) {
-
-        saveButton = new Button("Save");
-
+    	
+    	saveButton = new Button("Save");
+    	
+    	loadButton = new Button("Load");
+    	
         this.toolbar = new ToolBar(
-                                   saveButton);
+        						saveButton,
+        						loadButton
+                                );
+        
+    }
+    
+    @Override
+    public void setOnPressedLoad(EventHandler<MouseEvent> e) {
+    	loadButton.setOnMouseClicked(e);
     }
 
     @Override
