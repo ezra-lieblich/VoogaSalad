@@ -13,11 +13,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import engine.AbstractTypeManager;
 
-@interface EffectClass {}
-
-@Retention(RetentionPolicy.RUNTIME)
-@interface EffectMethod {}
-
 public class EffectTypeManager extends AbstractTypeManager<Effect> implements EffectManager {
     //private Map<String, Class<?>> annotatedClasses;
     private Map<String, List<Method>> annotatedClassMethods; //Return type : methods of that type
@@ -26,13 +21,12 @@ public class EffectTypeManager extends AbstractTypeManager<Effect> implements Ef
     EffectTypeManager(Map<String, List<Method>> annotatedClassMethods, Map<String, List<Class<?>>> effectAccessibleData) {
         this.annotatedClassMethods = annotatedClassMethods;
         this.effectAccessibleData = effectAccessibleData;
-        add(Enemy.class);
-        add(SuperEnemy.class);
     }
     
     @Override
     public List<String> getAnnotatedClasses() {
-        return new ArrayList<String>(annotatedClassMethods.keySet());
+        //return new ArrayList<String>(annotatedClassMethods.keySet());
+        return new ArrayList<String>(new ArrayList<String>());
     }
     
     @Override
@@ -80,10 +74,6 @@ public class EffectTypeManager extends AbstractTypeManager<Effect> implements Ef
     /* (non-Javadoc)
      * @see engine.effect.EffectManager#getAnnotatedClasses()
      */
-    
-    public void printTest() {
-        annotatedClassMethods.values().forEach(a -> a.forEach(b -> System.out.println(b.getName())));
-    }
     
 //    public static void main (String[] args) {
 //        EffectManager test = new EffectManager();

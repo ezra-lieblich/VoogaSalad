@@ -25,9 +25,17 @@ public class EffectTypeManagerController extends
         Effect effectType = efb.buildTriggerConditionGroovy("trigger.getHealth() == 50 && trigger.getName() == 'Sean'").buildEffectGroovy("trigger.setHealth(100)").build();
         GameEffect test = new GameEffect(effectType, new GroovyExecutor());
         Enemy enemy = new Enemy();
-        test.addTrigger((ITestEnemy)enemy);
-        test.addEncompassingClass(this);
-        test.execute();
+        
+        AnnotatedMethodMapFactory testFactory = new AnnotatedMethodMapFactory();
+        Object blah = testFactory.create(EffectMethod.class);
+        
+//        test.addTrigger((ITestEnemy)enemy);
+//        test.addEncompassingClass(this);
+//        test.execute();
+        
+
+        
+        
         System.out.println(enemy.getHealth());
     }
 
