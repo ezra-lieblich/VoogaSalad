@@ -53,9 +53,10 @@ public class LevelEditorViewController extends EditorViewController
         }
     }
 
-    private List<NameIdPair> getWaveList () {
+    private List<WaveObject> getWaveList () {
         getCreatedEnemies();
-        return nameIDList;
+        // return nameIDList;
+        return null;
     }
 
     @Override
@@ -84,7 +85,7 @@ public class LevelEditorViewController extends EditorViewController
         levelView.updateRewardMoney(levelDataSource.getRewardMoney(currentLevelID));
         levelView.updateRewardScore(levelDataSource.getRewardScore(currentLevelID));
         levelView.updateNameDisplay(levelDataSource.getName(currentLevelID));
-        levelView.updateEnemyNames(getWaveList());
+        levelView.updateWaves(getWaveList());
     }
 
     @Override
@@ -120,8 +121,6 @@ public class LevelEditorViewController extends EditorViewController
     public void onUserEnteredAddWave () {
         currentWaveID = levelDataSource.createWave(currentLevelID, levelView);
         // levelView.updateNumberOfEnemies(levelDataSource.getenem);
-        levelView.updateEnemyFrequency(levelDataSource.getWaveFrequency(currentLevelID,
-                                                                        currentWaveID));
     }
 
     @Override
