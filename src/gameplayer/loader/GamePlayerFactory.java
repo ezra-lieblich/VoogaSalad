@@ -45,6 +45,21 @@ public class GamePlayerFactory{
 		return (HashMap<Integer, Weapon>) authoringFileReader.getWeaponTypes();
 		
 	}
+	
+	public double getLevelRewardScore(int levelNumber) {
+		LevelManager levelManager = authoringFileReader.getLevelManager();
+		return levelManager.getEntity(levelNumber).getRewardScore();
+	}
+	
+	public double getLevelRewardMoney(int levelNumber) {
+		LevelManager levelManager = authoringFileReader.getLevelManager();
+		return levelManager.getEntity(levelNumber).getRewardMoney();
+	}
+	
+	public double getLevelRewardLives(int levelNumber) {
+		LevelManager levelManager = authoringFileReader.getLevelManager();
+		return levelManager.getEntity(levelNumber).getRewardHealth();
+	}
 
 	
 	public HashMap<String, Double> getGameSetting(){
@@ -143,11 +158,14 @@ public class GamePlayerFactory{
 		return stuff;
 	}
 	*/
-	public List<Queue<Enemy>> getEnemy(int levelNumber) {
+	public Queue<Wave> getWaves(int levelNumber) {
 		Level level = this.authoringFileReader.getLevelManager().getEntity(levelNumber);
-		Map<Integer, engine.enemy.Enemy> enemyTypes = this.authoringFileReader.getEnemyTypes(); //refactor name
 		List<Wave> waves = level.getWaves();
-		List<Queue<Enemy>> ret = new ArrayList<Queue<Enemy>>();
+		Queue<Wave> ret = new LinkedList<Wave>();
+		waves.forEach(w -> ret.add(w));
+		return ret;
+		/*
+		Queue<Queue<Enemy>> ret = new LinkedList<Queue<Enemy>>();
 		for (Wave wave : waves) {
 			engine.enemy.Enemy enemyType = enemyTypes.get(wave.getEnemyID()); //refactor name
 			Queue<Enemy> enemies = new LinkedList<Enemy>();
@@ -160,6 +178,20 @@ public class GamePlayerFactory{
 			ret.add(enemies);
 		}
 		return ret;
+		*/
+	}
+	
+	public Queue<Enemy> getWaveQueue(Wave wave, int levelNumber) {
+		Map<Integer, engine.enemy.Enemy> enemyTypes = this.authoringFileReader.getEnemyTypes(); //refactor name
+		engine.enemy.Enemy enemyType = enemyTypes.get(wave.getEnemyID());
+		Queue<Enemy> enemies = new LinkedList<Enemy>();
+		for (int i = 0; i < wave.getEnemyCount(); i++) {
+			Cell start = this.getGrid(levelNumber).getStartPoint();
+			EnemyFactory enemyFactory = new EnemyFactory(enemyType, start);
+			
+			enemies.add(enemyFactory.createModelEnemy());
+		}
+		return enemies;
 	}
 	
 	
