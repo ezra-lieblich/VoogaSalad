@@ -52,9 +52,6 @@ public class GamePlayerFactory{
 		GameMode gameSettings = authoringFileReader.getGameMode();
 		LevelManager levelManager = authoringFileReader.getLevelManager();
 		settings.put("levelnumber", 0.0); 
-		//settings.put("lives", gameSettings.getInitalLives());
-		//settings.put("gold", gameSettings.getInitialMoney());
-		//settings.put("totalNumberOfLevels", (double) levelManager.getEntities().size());
 		settings.put("lives", 5.0);
 		settings.put("gold", 1000000.0);
 		settings.put("totalNumberOfLevels", 3.0);
