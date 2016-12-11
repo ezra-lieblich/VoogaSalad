@@ -36,7 +36,7 @@ public class Gun {
 	}
 	
 	public boolean isFiring(){
-		System.out.println("firingRate: "+firingRate);
+		System.out.println("firingRate: "+ firingRate);
 		fireCounter++;
 		if(fireCounter % firingRate == 0)
 			return true;
@@ -52,7 +52,7 @@ public class Gun {
 		 HashMap<String, ArrayList<GameEffect>> weaponEffect = new HashMap<String,ArrayList<GameEffect>>();
 		 for(int i: effects){
 			 GameEffect ge = allEffects.get(i);
-			 String trigger = ge.getTtriggerClass(); // no method for get trigger class
+			 String trigger = ge.getTriggerClass(); 
 			 if(!weaponEffect.keySet().contains(trigger)){
 				 ArrayList<GameEffect> effectByTrigger = new ArrayList<GameEffect>();
 				 weaponEffect.put(trigger, effectByTrigger);

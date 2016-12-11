@@ -59,7 +59,7 @@ public class WeaponManager extends Observable{
 		initializeNewLevel();
 		this.collisionFactory = new CollisionEffectFactory(); // only used to turn into gameEffect
 		this.effectManager = gameData.getFactory().getWeaponEffectManager(); // is effectManager the same as effectType Manager????? 		
-		this.allEffects= effectManager.getEntities().entrySet().stream().collect(Collectors.toMap(e-> e.getKey(), e->collisionFactory.create(e.getValue())));
+		this.allEffects = effectManager.getEntities().entrySet().stream().collect(Collectors.toMap(e-> e.getKey(), e->collisionFactory.create(e.getValue())));
 
 	}
 
