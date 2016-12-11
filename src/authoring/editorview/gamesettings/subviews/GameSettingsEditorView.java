@@ -9,6 +9,7 @@ import authoring.editorview.gamesettings.subviews.editorfields.GameInitialLivesV
 import authoring.editorview.gamesettings.subviews.editorfields.GameInitialMoneyView;
 import authoring.editorview.gamesettings.subviews.editorfields.GameLosingConditionsView;
 import authoring.editorview.gamesettings.subviews.editorfields.GameNameView;
+import authoring.editorview.gamesettings.subviews.editorfields.GamePathDimensionsView;
 import authoring.editorview.gamesettings.subviews.editorfields.GamePathTypeView;
 import authoring.editorview.gamesettings.subviews.editorfields.GameWinningConditionsView;
 import javafx.geometry.Insets;
@@ -36,6 +37,7 @@ public class GameSettingsEditorView implements IGameSettingsSetView {
 	private GameInitialMoneyView gameInitialMoneyView;
 	private GameWinningConditionsView gameWinningConditionsView;
 	private GameLosingConditionsView gameLosingConditionsView;
+	private GamePathDimensionsView gamePathDimensionsView;
 	
 	private static final String RESOURCE_FILE_NAME = "resources/GameAuthoringSettings";	
 	private ResourceBundle settingsResource = ResourceBundle.getBundle(RESOURCE_FILE_NAME);
@@ -53,7 +55,8 @@ public class GameSettingsEditorView implements IGameSettingsSetView {
 		this.gameInitialLivesView = new GameInitialLivesView(settingsResource);
 		this.gameInitialMoneyView = new GameInitialMoneyView(settingsResource);
 		this.gameWinningConditionsView = new GameWinningConditionsView(settingsResource);
-		this.gameLosingConditionsView = new GameLosingConditionsView(settingsResource);			
+		this.gameLosingConditionsView = new GameLosingConditionsView(settingsResource);	
+		this.gamePathDimensionsView = new GamePathDimensionsView();
 		buildView();		
 	}
 
@@ -73,7 +76,8 @@ public class GameSettingsEditorView implements IGameSettingsSetView {
 				gameInitialMoneyView.getInstanceAsNode(),
 				gameWinningConditionsView.getInstanceAsNode(),
 				gameLosingConditionsView.getInstanceAsNode(),
-				gamePathTypeView.getInstanceAsNode()
+				gamePathTypeView.getInstanceAsNode(),
+				gamePathDimensionsView.getInstanceAsNode()
 				);
 	}
 

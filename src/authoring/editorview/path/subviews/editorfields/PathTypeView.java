@@ -50,7 +50,9 @@ public class PathTypeView implements IPathSetView {
 	}
 	
 	public void updatePathType(String pathType){
+		pathTypeComboBox.setValue(pathType);
 		setEditView(pathType);
+		
 	}
 
 }

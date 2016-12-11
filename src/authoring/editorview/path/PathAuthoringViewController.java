@@ -62,6 +62,7 @@ public class PathAuthoringViewController extends EditorViewController implements
 		pathView.updatePathCoordinates(pathDataSource.getPathCoordinates(activeID));
 		pathView.updateImagePathDisplay(pathDataSource.getImagePath(activeID));
 		pathView.updateNameDisplay(pathDataSource.getName(activeID));
+		pathView.updateType(pathDataSource.getType(activeID));
 		pathView.updatePath();
 	}
 
@@ -80,7 +81,7 @@ public class PathAuthoringViewController extends EditorViewController implements
 
 	@Override
 	public void onUserEnteredDeletePath() {
-		
+		pathDataSource.deleteType(activeID);
 		
 	}
 

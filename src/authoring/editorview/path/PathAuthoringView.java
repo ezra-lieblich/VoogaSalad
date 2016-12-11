@@ -112,7 +112,11 @@ public class PathAuthoringView implements IPathUpdateView {
     @Override
     public void updatePath () {
         pathDesign.redrawPath();
-
+    }
+    
+    @Override
+    public void updateDeleteEntity (String entityID) {
+        // TODO Auto-generated method stub        
     }
 
     @Override
@@ -126,11 +130,7 @@ public class PathAuthoringView implements IPathUpdateView {
         System.out.println("There is no path bank implemented");
     }
 
-    @Override
-    public void updateDeleteEntity (String entityID) {
-        // TODO Auto-generated method stub
-        
-    }
+   
     
     @Override
     public void updateSizeDisplay (double size) {
