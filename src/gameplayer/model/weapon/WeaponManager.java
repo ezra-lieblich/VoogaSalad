@@ -96,6 +96,7 @@ public class WeaponManager extends Observable{
 
 			if (!this.gameData.coordinateInBound(w.getX(), w.getY())) {
 				weaponOnGridIterate.remove();
+				System.out.println(this.weaponOnGrid.keySet().size());
 			}
 		}
 

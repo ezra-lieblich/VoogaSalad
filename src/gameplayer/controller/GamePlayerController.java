@@ -112,7 +112,7 @@ public class GamePlayerController implements Observer {
 		this.graphics = new GraphicsLibrary();
 		this.enemyManager = this.enemyController.getEnemyModel();
 		this.gameSavingController = new GameSavingController(this.model);
-		this.gameSavingController.saveGame();
+		//this.gameSavingController.saveGame();
 	}
 
 	private void populateTowerToId() {
@@ -324,6 +324,7 @@ public class GamePlayerController implements Observer {
 			}
 			this.model.updateInLevel();
 			this.enemyManager.update();
+			this.model.getCollisionManager().handleCollisions();
 
 			redrawEverything();
 		});

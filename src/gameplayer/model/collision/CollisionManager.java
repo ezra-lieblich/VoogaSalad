@@ -16,20 +16,36 @@ public class CollisionManager {
 	}
 	
 	public void handleCollisions() {
-		for (int w = 0; w < weaponManager.getWeaponOnGrid().size(); w++) {
-			Weapon weapon = weaponManager.getWeaponOnGrid().get(w);
+		for (Weapon weapon : weaponManager.getWeaponOnGrid().values()) {
 			int targetUniqueID = weapon.getTargetEnemyID();
-			Enemy targetEnemy = enemyManager.getEnemyOnGrid().get(targetUniqueID);
-			boolean xInRange = Math.abs(weapon.getX() - targetEnemy.getX()) <= targetEnemy.getWidth(); //make more robust
-			boolean yInRange = Math.abs(weapon.getY() - targetEnemy.getY()) <= targetEnemy.getHealth(); //make more robust
-			if (xInRange && yInRange) {
-				Collision collision = new Collision(weapon, targetEnemy);
-				collision.processCollision();
-				weaponManager.getWeaponOnGrid().remove(weapon.getUniqueID()); //is this the right ID?
-				if (targetEnemy.getHealth() <= 0) {
-					enemyManager.getEnemyOnGrid().remove(targetUniqueID);
+			boolean enemyOnGrid = enemyManager.getEnemyOnGrid().keySet().contains(targetUniqueID);
+			boolean xInRange;
+			boolean yInRange;
+			if (!enemyOnGrid) {
+				xInRange = false;
+				yInRange = false;
+			}
+			else {
+				Enemy targetEnemy = enemyManager.getEnemyOnGrid().get(targetUniqueID);
+				
+				xInRange = Math.abs(weapon.getX() - targetEnemy.getX()) <= 100; //make more robust
+				System.out.println("weapon x " + weapon.getX());
+				System.out.println("enemy x "+ targetEnemy.getX());
+				System.out.println("weapon y " + weapon.getY());
+				System.out.println("enemy y "+ targetEnemy.getY());
+				yInRange = Math.abs(weapon.getY() - targetEnemy.getY()) <= 100; //make more robust
+				
+				if (xInRange && yInRange) {
+					Collision collision = new Collision(weapon, targetEnemy);
+					collision.processCollision();
+					weaponManager.getWeaponOnGrid().remove(weapon.getUniqueID()); //is this the right ID?
+					if (targetEnemy.getHealth() <= 0) {
+						enemyManager.getEnemyOnGrid().remove(targetUniqueID);
+					}
 				}
 			}
+			
+			
 		}
 	}
 	
