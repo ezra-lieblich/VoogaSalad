@@ -32,7 +32,7 @@ public class EffectTypeManager extends AbstractTypeManager<Effect> implements Ef
     
     @Override
     public List<String> getAnnotatedClasses() {
-        return new ArrayList<String>(annotatedClassMethods.keySet());
+        return new ArrayList<String>(null);
     }
     
     @Override
@@ -83,6 +83,19 @@ public class EffectTypeManager extends AbstractTypeManager<Effect> implements Ef
     
     public void printTest() {
         annotatedClassMethods.values().forEach(a -> a.forEach(b -> System.out.println(b.getName())));
+    }
+
+    @Override
+    public void add (Class<?> annotatedClass) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public <T extends Annotation> List<Method> generateAnnotatedMethods (Class<?> annotatedClass,
+                                                                         Class<T> annotationType) {
+        // TODO Auto-generated method stub
+        return null;
     }
     
 //    public static void main (String[] args) {

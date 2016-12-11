@@ -11,6 +11,6 @@ import authoring.editorview.IEditorView;
  */
 public interface ITowerSetView extends IEditorView {
 
-    public void setDelegate (TowerEditorViewDelegate delegate);
+    public void setDelegate (TowerAuthoringViewDelegate delegate);
 
 }

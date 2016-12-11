@@ -12,5 +12,5 @@ import authoring.editorview.IEditorView;
  */
 public interface IWeaponSetView extends IEditorView {
 
-    public void setDelegate (WeaponEditorViewDelegate delegate);
+    public void setDelegate (WeaponAuthoringViewDelegate delegate);
 }

@@ -2,7 +2,7 @@ package authoring.editorview.tower.subviews;
 
 import java.util.List;
 import authoring.editorview.ImageBank;
-import authoring.editorview.tower.TowerEditorViewDelegate;
+import authoring.editorview.tower.TowerAuthoringViewDelegate;
 import authoring.utilityfactories.ButtonFactory;
 import javafx.scene.control.Button;
 
@@ -14,7 +14,7 @@ import javafx.scene.control.Button;
  */
 public class TowerImageBank extends ImageBank {
 
-    private TowerEditorViewDelegate delegate;
+    private TowerAuthoringViewDelegate delegate;
 
     public TowerImageBank () {
         super();
@@ -26,7 +26,7 @@ public class TowerImageBank extends ImageBank {
         items.add(createTowerButton);
     }
 
-    public void setDelegate (TowerEditorViewDelegate delegate) {
+    public void setDelegate (TowerAuthoringViewDelegate delegate) {
         this.delegate = delegate;
     }
 

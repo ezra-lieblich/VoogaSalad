@@ -12,6 +12,6 @@ import authoring.editorview.IEditorView;
  */
 public interface IEnemySetView extends IEditorView {
 
-    public void setDelegate (EnemyEditorViewDelegate delegate);
+    public void setDelegate (EnemyAuthoringViewDelegate delegate);
 
 }

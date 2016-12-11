@@ -5,7 +5,7 @@ import java.util.ResourceBundle;
 
 import authoring.editorview.path.IPathSetView;
 
-import authoring.editorview.path.PathEditorViewDelegate;
+import authoring.editorview.path.PathAuthoringViewDelegate;
 import authoring.utilityfactories.BoxFactory;
 import authoring.utilityfactories.DialogueBoxFactory;
 import authoring.utilityfactories.TextFieldFactory;
@@ -24,7 +24,7 @@ public class PathDimensionsView implements IPathSetView{
 	
 	private TextField dimensionsTextField;
 	private HBox dimensionsBox;
-	private PathEditorViewDelegate delegate;
+	private PathAuthoringViewDelegate delegate;
 	
 	
 	
@@ -45,7 +45,7 @@ public class PathDimensionsView implements IPathSetView{
 	}
 	
 	@Override
-	public void setDelegate(PathEditorViewDelegate delegate){
+	public void setDelegate(PathAuthoringViewDelegate delegate){
 		this.delegate = delegate;
 	}
 	

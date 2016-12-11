@@ -15,18 +15,15 @@ import javafx.scene.layout.VBox;
  * @author Diane Hadley
  *
  */
-public class GameSettingsEditorView implements IGameSettingsEditorView, IGameSettingsSetView {
+public class GameSettingsEditorView implements IGameSettingsUpdateView, IGameSettingsSetView {
 
     private VBox gameConditionsRoot;
     private GameNameView gameNameView;
     private BorderPane gameSettingsView;
-    private GameSettingsEditorViewDelegate delegate;
-    
-    private static final String RESOURCE_FILE_NAME = "resources/GameAuthoringSettings";	
-	private ResourceBundle settingsResource = ResourceBundle.getBundle(RESOURCE_FILE_NAME);
+    private GameSettingsAuthoringViewDelegate delegate;
 
-
-
+    private static final String RESOURCE_FILE_NAME = "resources/GameAuthoringSettings";
+    private ResourceBundle settingsResource = ResourceBundle.getBundle(RESOURCE_FILE_NAME);
 
     public GameSettingsEditorView (int width, int height) {
         gameSettingsView = new BorderPane();
@@ -46,7 +43,7 @@ public class GameSettingsEditorView implements IGameSettingsEditorView, IGameSet
     }
 
     @Override
-    public void setDelegate (GameSettingsEditorViewDelegate delegate) {
+    public void setDelegate (GameSettingsAuthoringViewDelegate delegate) {
         this.delegate = delegate;
         gameNameView.setDelegate(delegate);
     }
@@ -110,6 +107,12 @@ public class GameSettingsEditorView implements IGameSettingsEditorView, IGameSet
     @Override
     public void updateSizeDisplay (double size) {
         // Don't worry about this
+    }
+
+    @Override
+    public void updateDeleteEntity (String entityID) {
+        // TODO Auto-generated method stub
+
     }
 
 }

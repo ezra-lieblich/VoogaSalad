@@ -1,9 +1,6 @@
 package engine.effect;
 
-import authoring.main.AuthoringController;
 import javafx.application.Application;
-import javafx.scene.Group;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class EffectTempMain extends Application {
