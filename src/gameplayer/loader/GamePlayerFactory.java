@@ -30,11 +30,14 @@ public class GamePlayerFactory{
 	
 	public static final int DEFAULT_GRID_WIDTH = 10;
 	public static final int DEFAULT_GRID_HEIGHT = 10;
+	
+	private EnemyFactory enemyFactory;
 
 	XMLParser authoringFileReader;	
 
 	public GamePlayerFactory(XMLParser parser){
 		this.authoringFileReader = parser;
+		this.enemyFactory = new EnemyFactory();
 	}
 	
 	public boolean xmlIsValid() {
@@ -45,7 +48,7 @@ public class GamePlayerFactory{
 		return (HashMap<Integer, Weapon>) authoringFileReader.getWeaponTypes();
 		
 	}
-	
+	 
 	public double getLevelRewardScore(int levelNumber) {
 		LevelManager levelManager = authoringFileReader.getLevelManager();
 		return levelManager.getEntity(levelNumber).getRewardScore();
@@ -78,43 +81,37 @@ public class GamePlayerFactory{
 		return authoringFileReader.getTowerUpgrades();
 	}
 	
-	/*
-	public int[] getGridDimension{
-		int width = Integer.parseInt(authoringFileReader.getTextValue("level"+level,"width"));
-		int height = Integer.parseInt(authoringFileReader.getTextValue("level"+level,"height"));
-			
-	}
-
-	*/
 	
 	
 	public Grid getGrid(int levelNumber){
 		Level level = authoringFileReader.getLevelManager().getEntity(levelNumber);
-		PathManager pathManager = authoringFileReader.getPathManager();
-		Map<Integer, Path> paths = pathManager.getEntities();
-		if (paths.isEmpty()) {//no path
+		//List<Integer> levelPaths = level.getPaths();
+		
+		List<Integer>levelPaths = new ArrayList<Integer>();
+		levelPaths.add(0); //HARDCODED FOR NOW
+		if (levelPaths.isEmpty()) {//no path
 			Grid emptyGrid = new Grid(DEFAULT_GRID_WIDTH, DEFAULT_GRID_HEIGHT);
 			emptyGrid.setNoPath(true); 
 			return emptyGrid;
 		}
-		Path currPath = paths.get(levelNumber); //TODO: MUST REFACTOR IF THERE ARE MULTIPLE PATHS
-		int width = currPath.getGridColumns();
-		int height = currPath.getGridRows();
-		Grid gameGrid = new Grid(width, height);
-		List<Coordinate<Integer>> coordinates = currPath.getCoordinates();
-		Coordinate<Integer> start = coordinates.get(levelNumber); 
-		Cell current = gameGrid.getCell(start.getX().intValue(), start.getY().intValue());
-		
-		gameGrid.setStart(current);
-		
-		for(int i=1; i< coordinates.size(); i++){
-			Coordinate<Integer> nextCoordinate = coordinates.get(i);
-			Cell next = gameGrid.getCell(nextCoordinate.getX().intValue(), nextCoordinate.getY().intValue());
-			current.setNext(next);
-			current = next; 
+		HashMap<Integer, gameplayer.model.Path> allPaths = new HashMap<Integer, gameplayer.model.Path>(); //TODO: REFACTOR NAME
+		Grid levelGrid = new Grid(DEFAULT_GRID_WIDTH, DEFAULT_GRID_HEIGHT); //width and height will be from game authoring
+		PathManager pathManager = authoringFileReader.getPathManager();
+		Map<Integer, Path> paths = pathManager.getEntities();
+		for (int i = 0; i < levelPaths.size(); i++) {
+			Path currPath = paths.get(i);
+			List<Coordinate<Integer>> coordinates = currPath.getCoordinates();
+			ArrayList<Cell> cells = new ArrayList<Cell>();
+			coordinates.forEach(c -> {
+				Cell currCell = new Cell(c.getX(), c.getY());
+				cells.add(currCell);
+			});
+			gameplayer.model.Path newPath = new gameplayer.model.Path(cells, levelGrid.getGrid());
+			allPaths.put(i, newPath);
 		}
 		
-		return gameGrid;
+		levelGrid.setAllPath(allPaths);
+		return levelGrid;
 	}
 	
 	
@@ -128,74 +125,27 @@ public class GamePlayerFactory{
 		return (HashMap<Integer, Tower>) authoringFileReader.getTowerTypes(); 
 	}
 	
-	/*
-	public List<Queue<Enemy>> getEnemy(int levelNumber) {
-		//System.out.println("Grid, is this empty? : ");
-		//System.out.println(this.getGrid(0).getCell(0, 0));
-		Queue<Enemy> myQueue = new LinkedList<Enemy>();
-		Queue<Enemy> myQueue1 = new LinkedList<Enemy>();
-		Enemy enem1 = new Enemy(1, "Izaya", 4, 7, "questionmark.png", 50.0, 50.0);
-		System.out.println("enem1: ");
-		System.out.println(enem1);
-		enem1.setCurrentCell(this.getGrid(0).getStartPoint());
-		Enemy enem2 = new Enemy(2, "Shizuo", 4, 7, "questionmark.png", 50.0, 50.0);
-		enem2.setCurrentCell(this.getGrid(0).getStartPoint());
-		Enemy enem3 = new Enemy(3, "Mikado", 4, 7, "kaneki.jpg", 50.0, 50.0);
-		enem3.setCurrentCell(this.getGrid(0).getStartPoint());
-		Enemy enem4 = new Enemy(4, "Kanra", 4, 7, "penguin.jpg", 50.0, 50.0);
-		enem4.setCurrentCell(this.getGrid(0).getStartPoint());
-		myQueue.add(enem1);
-		// myQueue.add(enem2);
-		// myQueue.add(enem3);
-		myQueue.add(enem4);
-		myQueue1.add(enem1);
-		myQueue1.add(enem2);
-		myQueue1.add(enem3);
-		myQueue1.add(enem4);
-		List<Queue<Enemy>> stuff = new ArrayList<Queue<Enemy>>();
-		stuff.add(myQueue);
-		stuff.add(myQueue1);
-		return stuff;
-	}
-	*/
+
 	public Queue<Wave> getWaves(int levelNumber) {
 		Level level = this.authoringFileReader.getLevelManager().getEntity(levelNumber);
 		List<Wave> waves = level.getWaves();
 		Queue<Wave> ret = new LinkedList<Wave>();
 		waves.forEach(w -> ret.add(w));
 		return ret;
-		/*
-		Queue<Queue<Enemy>> ret = new LinkedList<Queue<Enemy>>();
-		for (Wave wave : waves) {
-			engine.enemy.Enemy enemyType = enemyTypes.get(wave.getEnemyID()); //refactor name
-			Queue<Enemy> enemies = new LinkedList<Enemy>();
-			for (int i = 0; i < wave.getEnemyCount(); i++) {
-				Cell start = this.getGrid(levelNumber).getStartPoint();
-				EnemyFactory enemyFactory = new EnemyFactory(enemyType, start);
-				
-				enemies.add(enemyFactory.createModelEnemy());
-			}
-			ret.add(enemies);
-		}
-		return ret;
-		*/
 	}
 	
-	public Queue<Enemy> getWaveQueue(Wave wave, int levelNumber) {
+	public Queue<Enemy> getIndividualWaveQueue(Wave wave, int levelNumber) {
+		System.out.println("dsakfhsdaf jksdahflsjksdhafjk sdahjk sdah");
 		Map<Integer, engine.enemy.Enemy> enemyTypes = this.authoringFileReader.getEnemyTypes(); //refactor name
 		engine.enemy.Enemy enemyType = enemyTypes.get(wave.getEnemyID());
 		Queue<Enemy> enemies = new LinkedList<Enemy>();
+		int pathID = wave.getPathID();
 		for (int i = 0; i < wave.getEnemyCount(); i++) {
-			Cell start = this.getGrid(levelNumber).getStartPoint();
-			EnemyFactory enemyFactory = new EnemyFactory(enemyType, start);
-			
-			enemies.add(enemyFactory.createModelEnemy());
+			Cell start = this.getGrid(levelNumber).getPath(pathID).getPathStart();
+			enemies.add(this.enemyFactory.createModelEnemy(enemyType, start));
 		}
 		return enemies;
 	}
-	
-	
-	
 	
 	public String getGameTitle() {
 		return this.authoringFileReader.getName();

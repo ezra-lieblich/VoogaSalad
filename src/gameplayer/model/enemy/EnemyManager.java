@@ -40,8 +40,10 @@ public class EnemyManager extends Observable {
 	public EnemyManager(GamePlayData gameData) {
 		this.gameData = gameData;
 		this.gameFactory = gameData.getFactory();
-		initializeNewLevel();
 		this.graphicLib = new GraphicsLibrary();
+		this.allWaveFrequencies = new LinkedList<Double>();
+		this.allWaveStartTimes = new LinkedList<Double>();
+		initializeNewLevel();
 	}
 
 	public void initializeNewLevel(){
@@ -54,22 +56,20 @@ public class EnemyManager extends Observable {
 	}
 	
 	private void initializeWaves() {
+
+		System.out.println("Does all WaveStartTimes exist?");
+		System.out.println(allWaveStartTimes);
 		allWaves.forEach(w -> allWaveStartTimes.add(w.getStartTime()));
 		allWaves.forEach(w -> allWaveFrequencies.add(w.getFrequency()));
 	}
 
 	public void setCurrentCell(Cell cell) {
-		//System.out.println("CURRENT CELL SET: ");
-		//System.out.println(cell.getX() + ", " + cell.getY());
 		this.current = cell;
 		this.currentCopy = cell;
 	}
 
 
 	public HashMap<Integer, Enemy> getEnemyOnGrid() {
-		//System.out.println("are there enemies in enemymnager?");
-		//System.out.println(enemyOnGrid);
-
 		return this.enemyOnGrid;
 	}
 	
@@ -85,7 +85,6 @@ public class EnemyManager extends Observable {
 		enemy.setX(gameData.cellToCoordinate(enemy.getCurrentCell().getX()));
 		enemy.setY(gameData.cellToCoordinate(enemy.getCurrentCell().getY()));
 		enemyOnGrid.put(enemy.getUniqueID(), enemy);
-
 	}
 
 	// this method not being called??????
@@ -127,13 +126,7 @@ public class EnemyManager extends Observable {
 					handleEnemyEnteringBase(e);
 					return;
 				}
-				e.setxDirection(e.getCurrentCell().getNext().getX() - e.getCurrentCell().getX()); // -1,
-	
-				
-				// 0,
-				// or
-				// 1
-				
+				e.setxDirection(e.getCurrentCell().getNext().getX() - e.getCurrentCell().getX());
 				e.setyDirection(e.getCurrentCell().getNext().getY() - e.getCurrentCell().getY());
 				moveDist -= distToMove;
 			} else {
@@ -181,6 +174,8 @@ public class EnemyManager extends Observable {
 	
 	private void moveEnemies() {
 		for (Enemy enemy : enemyOnGrid.values()) {
+			System.out.println("ENEMY " + enemy.getUniqueID() + " XX " + enemy.getX());
+			System.out.println("ENEMY " + enemy.getUniqueID() + " YY " + enemy.getY());
 			moveSingleEnemy(enemy);
 		}
 	}
@@ -190,21 +185,25 @@ public class EnemyManager extends Observable {
 	}
 
 	public double getTimeOfNextWave() {
+		if (allWaveStartTimes.isEmpty()) return 0;
 		double timeInSeconds = this.allWaveStartTimes.poll();
 		double timeInMillis = timeInSeconds * 1000;
 		return timeInMillis;
 	}
 	
 	public double getFrequencyOfNextWave() {
+		if (allWaveStartTimes.isEmpty()) return 0;
 		double timeInSeconds = this.allWaveFrequencies.poll();
 		double timeInMillis = timeInSeconds * 1000;
 		return timeInMillis;
 	}
 	
 	public Queue<Enemy> getPackOfEnemyComing() {
+		if (allWaves.isEmpty()) {
+			return new LinkedList<Enemy>();
+		}
 		Wave wave = this.allWaves.poll();
-		return this.gameFactory.getWaveQueue(wave, this.gameData.getCurrentLevel());
-		
+		return this.gameFactory.getIndividualWaveQueue(wave, this.gameData.getCurrentLevel());
 	}
 
 }
