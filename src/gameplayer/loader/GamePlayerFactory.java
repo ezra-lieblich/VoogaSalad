@@ -9,8 +9,10 @@ import java.util.Map;
 import java.util.Observable;
 import java.util.Queue;
 import engine.enemy.EnemyType;
+import engine.level.Level;
 import engine.level.LevelManager;
 import engine.level.LevelTypeManager;
+import engine.level.wave.Wave;
 import engine.path.Coordinate;
 import engine.path.Path;
 import engine.path.PathManager;
@@ -25,6 +27,9 @@ import gameplayer.model.Grid;
 import gameplayer.model.enemy.Enemy;
 
 public class GamePlayerFactory{
+	
+	public static final int DEFAULT_GRID_WIDTH = 10;
+	public static final int DEFAULT_GRID_HEIGHT = 10;
 
 	XMLParser authoringFileReader;	
 
@@ -37,10 +42,7 @@ public class GamePlayerFactory{
 	}
 	
 	public HashMap<Integer, engine.weapon.Weapon> getWeaponBank() {
-		WeaponTypeBuilder weaponBuilder = new WeaponTypeBuilder();
-		HashMap<Integer, Weapon> bank = new HashMap<Integer, Weapon>();
-		bank.put(0, weaponBuilder.build());
-		return bank;
+		return (HashMap<Integer, Weapon>) authoringFileReader.getWeaponTypes();
 		
 	}
 
@@ -49,35 +51,43 @@ public class GamePlayerFactory{
 		HashMap<String,Double>settings = new HashMap<>(); 
 		GameMode gameSettings = authoringFileReader.getGameMode();
 		LevelManager levelManager = authoringFileReader.getLevelManager();
-		//refactor b/c current exml has no GameModeManager
-		settings.put("levelnumber", 0.0); //take this out
+		settings.put("levelnumber", 0.0); 
 		settings.put("lives", 5.0);
-		settings.put("gold", 100.0);
+		settings.put("gold", 1000000.0);
 		settings.put("totalNumberOfLevels", 3.0);
+
 		return settings; 
+	}
+	
+	public Map<Integer, Tower> getTowerUpgrades() {
+		return authoringFileReader.getTowerUpgrades();
 	}
 	
 	/*
 	public int[] getGridDimension{
 		int width = Integer.parseInt(authoringFileReader.getTextValue("level"+level,"width"));
 		int height = Integer.parseInt(authoringFileReader.getTextValue("level"+level,"height"));
-		
-		
+			
 	}
 
 	*/
 	
 	
-	public Grid getGrid(int level){
+	public Grid getGrid(int levelNumber){
+		Level level = authoringFileReader.getLevelManager().getEntity(levelNumber);
 		PathManager pathManager = authoringFileReader.getPathManager();
 		Map<Integer, Path> paths = pathManager.getEntities();
-		Path currPath = paths.get(0); //refactor to be the path for current level
+		if (paths.isEmpty()) {//no path
+			Grid emptyGrid = new Grid(DEFAULT_GRID_WIDTH, DEFAULT_GRID_HEIGHT);
+			//emptyGrid.setnPath(true); uncomment once the method has been added
+			return emptyGrid;
+		}
+		Path currPath = paths.get(levelNumber); //TODO: MUST REFACTOR IF THERE ARE MULTIPLE PATHS
 		int width = currPath.getGridColumns();
 		int height = currPath.getGridRows();
 		Grid gameGrid = new Grid(width, height);
 		List<Coordinate<Integer>> coordinates = currPath.getCoordinates();
-		//String coordinates = authoringFileReader.getTextValue("level"+level, "path");
-		Coordinate<Integer> start = coordinates.get(0);
+		Coordinate<Integer> start = coordinates.get(levelNumber); 
 		Cell current = gameGrid.getCell(start.getX().intValue(), start.getY().intValue());
 		
 		gameGrid.setStart(current);
@@ -86,18 +96,8 @@ public class GamePlayerFactory{
 			Coordinate<Integer> nextCoordinate = coordinates.get(i);
 			Cell next = gameGrid.getCell(nextCoordinate.getX().intValue(), nextCoordinate.getY().intValue());
 			current.setNext(next);
-			//System.out.println("in gameplayerfactory: is there a next?");
-			//System.out.println(current.getNext());
 			current = next; 
 		}
-		/*
-		Cell blah = gameGrid.getStartPoint();
-		System.out.println("Alright let's check if path is there");
-		while (blah!=null){
-			System.out.println(blah.getNext());
-			blah = blah.getNext();
-		}
-		*/
 		
 		return gameGrid;
 	}
@@ -105,11 +105,16 @@ public class GamePlayerFactory{
 	
 	
 	public HashMap<Integer, Tower> getTowers() {
+		for (Tower t : authoringFileReader.getTowerTypes().values()) {
+			System.out.println("TOWER IMAGE PATH");
+			System.out.println(t.getImagePath());
+		}
+		
 		return (HashMap<Integer, Tower>) authoringFileReader.getTowerTypes(); 
 	}
 	
-	
-	public List<Queue<Enemy>> getEnemy(int level) {
+	/*
+	public List<Queue<Enemy>> getEnemy(int levelNumber) {
 		//System.out.println("Grid, is this empty? : ");
 		//System.out.println(this.getGrid(0).getCell(0, 0));
 		Queue<Enemy> myQueue = new LinkedList<Enemy>();
@@ -137,6 +142,26 @@ public class GamePlayerFactory{
 		stuff.add(myQueue1);
 		return stuff;
 	}
+	*/
+	public List<Queue<Enemy>> getEnemy(int levelNumber) {
+		Level level = this.authoringFileReader.getLevelManager().getEntity(levelNumber);
+		Map<Integer, engine.enemy.Enemy> enemyTypes = this.authoringFileReader.getEnemyTypes(); //refactor name
+		List<Wave> waves = level.getWaves();
+		List<Queue<Enemy>> ret = new ArrayList<Queue<Enemy>>();
+		for (Wave wave : waves) {
+			engine.enemy.Enemy enemyType = enemyTypes.get(wave.getEnemyID()); //refactor name
+			Queue<Enemy> enemies = new LinkedList<Enemy>();
+			for (int i = 0; i < wave.getEnemyCount(); i++) {
+				Cell start = this.getGrid(levelNumber).getStartPoint();
+				EnemyFactory enemyFactory = new EnemyFactory(enemyType, start);
+				
+				enemies.add(enemyFactory.createModelEnemy());
+			}
+			ret.add(enemies);
+		}
+		return ret;
+	}
+	
 	
 	
 	

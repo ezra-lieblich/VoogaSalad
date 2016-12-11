@@ -18,6 +18,7 @@
 	<classpathentry kind="lib" path="lib/jna-4.1.0.jar"/>
 	<classpathentry kind="lib" path="lib/jna-platform-4.1.0.jar"/>
 	<classpathentry kind="lib" path="lib/gson-2.2.2.jar"/>
+<<<<<<< HEAD
 	<classpathentry kind="lib" path="/voogasalad_experiments/lib/groovy-all-2.4.7-indy.jar" sourcepath="/voogasalad_experiments/lib/groovy-src.jar">
 		<attributes>
 			<attribute name="javadoc_location" value="jar:platform:/resource/voogasalad_experiments/lib/groovy-doc.jar!/"/>
@@ -25,5 +26,8 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="/voogasalad_experiments/lib/groovy-doc.jar"/>
 	<classpathentry kind="lib" path="/voogasalad_experiments/lib/groovy-src.jar"/>
+=======
+	<classpathentry kind="lib" path="lib/DJNativeSwing-SWTAPI.jar"/>
+>>>>>>> 7018b0383bfac47f6b7c97b44446956fe18d069d
 	<classpathentry kind="output" path="bin"/>
 </classpath>

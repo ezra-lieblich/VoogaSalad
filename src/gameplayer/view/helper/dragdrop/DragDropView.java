@@ -35,11 +35,11 @@ public class DragDropView {
 	private List<ImageView> objects;
 	
 
-	public DragDropView(double xError, double yError) {
+	public DragDropView(double xError, double yError, GameGUI view) {
 		this.dragDropPane = new TabPane();
 		this.tabs = new ArrayList<Tab>();
 		this.graphicLib = new GraphicsLibrary();
-		this.dragDrop = new DragDrop(xError,yError);
+		this.dragDrop = new DragDrop(xError,yError, view);
 		this.objects = new ArrayList<ImageView>();
 		
 		setTabPaneStyle();

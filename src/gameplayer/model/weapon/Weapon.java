@@ -18,20 +18,22 @@ public class Weapon extends Observable implements IDrawable{
 	//private double initialX, initialY;
 	private double range;
 	private int targetEnemyID;
+	private double speedMag;
 	
 	
-	public Weapon(String name,  double demage, double targetX, double targetY, String image,  double range, int targetID, double x, double y) {
+	public Weapon(String name,  double demage, double targetX, double targetY, String image,  double range, int targetID, double x, double y, double speedMag) {
 		this.name = name;
 		this.damage = demage;
 		this.damage = 50;
-		this.speedX = targetX - x;
-		this.speedY  = targetY - y;
+		this.speedX = speedMag*(targetX-x)/(Math.sqrt(targetX*targetX+x*x));
+		this.speedY  = speedMag*(targetY-y)/(Math.sqrt(targetY*targetY+y*y));
 		this.image = image;
 		this.distanceTravelled = 0;
 		this.range = range;
 		this.xCoordinate = x;
 		this.yCoordinate = y;
 		this.targetEnemyID = targetID;
+		this.speedMag = speedMag;
 	}
 	
 	

@@ -4,7 +4,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.Predicate;
 import authoring.editorview.IUpdateView;
-import authoring.editorview.path.IPathSetView;
 import authoring.editorview.path.IPathEditorView;
 import authoring.editorview.tower.ITowerEditorView;
 import engine.AbstractTypeManagerController;
