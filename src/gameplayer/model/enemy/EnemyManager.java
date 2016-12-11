@@ -150,8 +150,6 @@ public class EnemyManager extends Observable {
 				moveDist -= moveDist;
 			}
 		}
-		setChanged();
-		notifyObservers();
 		return;
 	}
 	
@@ -159,14 +157,12 @@ public class EnemyManager extends Observable {
 
 
 	/*
-	private void checkCollision() {
-		for (Enemy e : getEnemyList()) {
-			for (Weapon w : this.gamePlayModel.getWeaponOnGrid()) {
-				gamePlayModel.singleCollision(e, w);
-			}
-			if (e.getHealth() < 0)
-				getEnemyList().remove(e);
+	private void checkCollision(Enemy e) {
+		for (Weapon w : this.gamePlayModel.getWeaponOnGrid()) {
+			gamePlayModel.singleCollision(e, w);
 		}
+		if (e.getHealth() < 0)
+			getEnemyList().remove(e);
 		setChanged();
 		notifyObservers();
 	}
@@ -176,8 +172,6 @@ public class EnemyManager extends Observable {
 
 
 	public void update() {
-		// updateEnemy();
-		// checkCollision();
 		moveEnemies();
 	}
 
@@ -190,9 +184,7 @@ public class EnemyManager extends Observable {
 			if (enemy.mustRemove()) {
 				iter.remove();
 			}
-		}
-			
-
+		}	
 	}
 
 	public double getTimeOfNextWave() {

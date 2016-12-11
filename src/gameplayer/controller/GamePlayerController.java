@@ -1,6 +1,7 @@
 package gameplayer.controller;
 
 import gameplayer.loader.GamePlayerFactory;
+import gameplayer.loader.GameSavingController;
 import gameplayer.loader.XMLParser;
 import gameplayer.main.main;
 import gameplayer.model.Cell;
@@ -69,6 +70,7 @@ public class GamePlayerController implements Observer {
 	private TowerController towerController;
 	private WeaponController weaponController;
 	private CollisionController collisionController;
+	private GameSavingController gameSavingController;
 
 	private DragDropController dropController;
 
@@ -109,6 +111,8 @@ public class GamePlayerController implements Observer {
 		this.animation = new Timeline();
 		this.graphics = new GraphicsLibrary();
 		this.enemyManager = this.enemyController.getEnemyModel();
+		this.gameSavingController = new GameSavingController(this.model);
+		this.gameSavingController.saveGame();
 	}
 
 	private void populateTowerToId() {
