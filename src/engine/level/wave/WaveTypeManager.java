@@ -1,5 +1,9 @@
 package engine.level.wave;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import engine.AbstractTypeManager;
 import engine.enemy.EnemyManager;
 
@@ -10,5 +14,12 @@ public class WaveTypeManager extends AbstractTypeManager<Wave> implements WaveMa
 	       // applyToAllEntities(a -> a.removeWave(index));
 		 //Need to do something
 	    }
+
+	@Override
+	public List<Wave> waveList() {
+		List<Wave> waves = new ArrayList<Wave>(getEntities().values());
+		return Collections.unmodifiableList(waves);
+	}
+	 
 
 }
