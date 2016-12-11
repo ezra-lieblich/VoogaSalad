@@ -82,7 +82,7 @@ public class WeaponAuthoringViewController extends EditorViewController
     private void refreshWeaponView () {
         weaponView.updateImagePathDisplay(weaponDataSource.getImagePath(currentWeaponID));
         weaponView.updateNameDisplay(weaponDataSource.getName(currentWeaponID));
-        weaponView.updateFireRateDisplay(weaponDataSource.getWeaponFireRate(currentWeaponID));
+        weaponView.updateFireRateDisplay(weaponDataSource.getWeaponReloadTime(currentWeaponID));
         weaponView.updateRangeDisplay(weaponDataSource.getWeaponRange(currentWeaponID));
         weaponView.updateSizeDisplay(weaponDataSource.getSize(currentWeaponID));
         weaponView.updateSpeedDisplay(weaponDataSource.getWeaponSpeed(currentWeaponID));

@@ -9,6 +9,9 @@ import engine.ManagerMediator;
 import engine.ability.Ability;
 import engine.ability.AbilityManager;
 import engine.ability.AbilityType;
+import engine.effect.EffectManager;
+import engine.effect.EffectManagerFactory;
+import engine.effect.EffectTypeManager;
 import engine.enemy.EnemyManager;
 import engine.enemy.EnemyType;
 import engine.weapon.Weapon;
@@ -18,9 +21,14 @@ import engine.weapon.WeaponType;
 public class TowerTypeManager extends AbstractTypeManager<Tower> implements TowerManager {
 
     private Map<Integer, Tower> upgrades;
+    private EffectManager abilityManager;
     
     public TowerTypeManager() {
         this.upgrades = new HashMap<Integer, Tower>();
+        this.abilityManager = new EffectManagerFactory().create();
+        TowerBuilder testFactory = new TowerTypeBuilder(); //TODO - get rid of this
+        upgrades.put(10, testFactory.build()); //TODO - get rid of this
+        upgrades.put(15, testFactory.build()); //TODO - get rid of this
     }
     
     @Override
@@ -58,6 +66,11 @@ public class TowerTypeManager extends AbstractTypeManager<Tower> implements Towe
     @Override
     public int getMaxId() {
         return upgrades.keySet().isEmpty() ? -1 : Math.max(Collections.max(upgrades.keySet()), super.getMaxId());
+    }
+
+    @Override
+    public EffectManager getEffectManager () {
+        return abilityManager;
     }
 
 }

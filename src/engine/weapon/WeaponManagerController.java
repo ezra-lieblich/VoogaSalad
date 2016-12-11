@@ -3,6 +3,7 @@ package engine.weapon;
 import java.util.List;
 import authoring.editorview.weapon.IWeaponUpdateView;
 import engine.ManagerController;
+import engine.effect.EffectManagerController;
 
 
 /**
@@ -28,7 +29,7 @@ public interface WeaponManagerController extends ManagerController<WeaponManager
 
     public double getWeaponRange (int weaponID);
 
-    public double getWeaponFireRate (int weaponID);
+    public double getWeaponReloadTime (int weaponID);
 
     public double getWeaponSpeed (int weaponID);
 
@@ -37,5 +38,7 @@ public interface WeaponManagerController extends ManagerController<WeaponManager
     public String getWeaponTrajectory (int weaponID);
 
     public List<Integer> getTargetEnemies (int weaponID);
+    
+    EffectManagerController getEffectManagerController();
 
 }

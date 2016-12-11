@@ -16,6 +16,8 @@ public class GameEffect {
 //    private ObservableProperty<String> triggerConditionGroovy;
 //    private ObservableProperty<String> effectGroovy;
     
+    private final String triggerName;
+    private final String encompassingClassName;
     private String name;
     private String imagePath;
     private Double size;
@@ -24,7 +26,7 @@ public class GameEffect {
     private String effectGroovy; 
     private GroovyExecutor groovyExecutor;
     
-    public GameEffect(Effect effect, GroovyExecutor groovyExecutor) {
+    public GameEffect(Effect effect, GroovyExecutor groovyExecutor, String triggerName, String encompassingClassName) {
         this.groovyExecutor = groovyExecutor;
         this.name = effect.getName();
         this.imagePath = effect.getImagePath();
@@ -32,6 +34,8 @@ public class GameEffect {
         this.triggerClass = effect.getTriggerClass();
         this.triggerConditionGroovy = effect.getTriggerConditionGroovy();
         this.effectGroovy = effect.getEffectGroovy();
+        this.triggerName = triggerName;
+        this.encompassingClassName = encompassingClassName;
     }
     
     public void execute() {
@@ -54,11 +58,11 @@ public class GameEffect {
     }
     
     public void addTrigger(Object value) {
-        groovyExecutor.addVariable(CollisionEffectFactory.TRIGGER_NAME, value);
+        groovyExecutor.addVariable(triggerName, value);
     }
     
     public void addEncompassingClass(Object value) {
-        groovyExecutor.addVariable(CollisionEffectFactory.ENCOMPASSING_CLASS_NAME, value);
+        groovyExecutor.addVariable(encompassingClassName, value);
     }
     
 }
