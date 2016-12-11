@@ -197,7 +197,11 @@ public class PathAuthoringView implements IPathUpdateView {
     public void updateSizeDisplay (double size) {
     }
 
-
+	@Override
+	public Integer getNearestAvailableItemID(int id) {
+		System.out.println("No path bank implemented");
+		return null;
+	}
 
 
 }

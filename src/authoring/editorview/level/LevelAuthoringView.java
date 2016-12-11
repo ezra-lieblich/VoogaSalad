@@ -141,4 +141,10 @@ public class LevelAuthoringView implements ILevelUpdateView {
         waveTableView.updateWaveTableView(waves);
     }
 
+	@Override
+	public Integer getNearestAvailableItemID(int id) {
+		System.out.println("No level bank implemented");
+		return null;
+	}
+
 }
