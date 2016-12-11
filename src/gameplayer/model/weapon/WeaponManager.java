@@ -22,7 +22,7 @@ public class WeaponManager extends Observable{
 	// all effects are gameEffect
 	
 	
-	// from engine.WeaponManager.getEffectManager effectTYpeManager
+	// from engine.WeaponManager.getEffectManager effectTypeManager
 	// getEntities() return a hashmap<int, Effect(raw)>
 	//convert raw effect into gameEffect
 	// collisionFactory.create(Effect(raw)) return the gameEffect
