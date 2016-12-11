@@ -61,6 +61,7 @@ public class XMLGallery {
 	}
 
 	public void createNewGame(Stage s, String filename) {
+		System.out.println("File: "+filename);
 		GamePlayerController playerController = new GamePlayerController("player.samplexml/"+filename);
 		playerController.init();
 		s.setTitle(TITLE);

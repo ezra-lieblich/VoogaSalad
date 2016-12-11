@@ -73,13 +73,13 @@ public class Wrapper {
 	 * Updated game score within the level
 	 */
 	public void updateGameScores(String field, String level, String value) throws IOException{
-		System.out.println("Update game scores: "+field+": "+value);
+		//System.out.println("Update game scores: "+field+": "+value);
 		String endpoint = "updatescore";
 		URL url = new URL(baseURL + endpoint);
 		String json = "{\"updated_field\": \"" + field + "\",\"value\":\""+value+"\",\"level\":[\""+level+"\"]}";
-		System.out.println("UPDATE JSON: "+json);
+		//System.out.println("UPDATE JSON: "+json);
 		String response = executeRequest(url, json, true);
-		System.out.println(response);
+		//System.out.println(response);
 	}
 	
 	private String executeRequest(URL url, String json, boolean post) throws IOException{
@@ -102,7 +102,7 @@ public class Wrapper {
             response.append('\r');
         }
         rd.close();
-        System.out.println("Read attempt: " + response.toString());
+        ////System.out.println("Read attempt: " + response.toString());
         return response.toString();
 	}
 }
