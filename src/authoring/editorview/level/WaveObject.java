@@ -1,6 +1,7 @@
 package authoring.editorview.level;
 
 import engine.level.wave.Wave;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
 
@@ -8,10 +9,10 @@ public class WaveObject implements Wave {
 
     private SimpleIntegerProperty waveNumber;
     private SimpleIntegerProperty enemyID;
-    private int enemyCount;
-    private double enemyFrequency;
-    private int pathID;
-    private double startTime;
+    private SimpleIntegerProperty enemyCount;
+    private SimpleDoubleProperty enemyFrequency;
+    private SimpleIntegerProperty pathID;
+    private SimpleDoubleProperty startTime;
 
     public WaveObject (int waveNumber,
                        int enemyID,
@@ -21,6 +22,10 @@ public class WaveObject implements Wave {
                        double startTime) {
         this.waveNumber = new SimpleIntegerProperty(waveNumber);
         this.enemyID = new SimpleIntegerProperty(enemyID);
+        this.enemyCount = new SimpleIntegerProperty(enemyCount);
+        this.enemyFrequency = new SimpleDoubleProperty(enemyFrequency);
+        this.pathID = new SimpleIntegerProperty(pathID);
+        this.startTime = new SimpleDoubleProperty(startTime);
     }
 
     @Override
@@ -40,44 +45,44 @@ public class WaveObject implements Wave {
 
     @Override
     public int getPathID () {
-        return pathID;
+        return pathID.get();
     }
 
     @Override
     public void setPathID (int pathID) {
-        this.pathID = pathID;
+        this.pathID.set(pathID);
     }
 
     @Override
     public int getEnemyCount () {
-        return enemyCount;
+        return enemyCount.get();
     }
 
     @Override
     public void setEnemyCount (int enemyCount) {
-        this.enemyCount = enemyCount;
+        this.enemyCount.set(enemyCount);
 
     }
 
     @Override
     public double getStartTime () {
-        return startTime;
+        return startTime.get();
     }
 
     @Override
     public void setStartTime (double startTime) {
-        this.startTime = startTime;
+        this.startTime.set(startTime);
 
     }
 
     @Override
     public double getFrequency () {
-        return enemyFrequency;
+        return enemyFrequency.get();
     }
 
     @Override
     public void setFrequency (double frequency) {
-        this.enemyFrequency = frequency;
+        this.enemyFrequency.set(frequency);
     }
 
     @Override

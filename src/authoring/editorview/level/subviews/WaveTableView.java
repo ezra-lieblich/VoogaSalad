@@ -17,12 +17,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 public class WaveTableView implements ILevelSetView {
 
     private TableView<WaveObject> waveTable;
-    private TableColumn<WaveObject, String> waveNumberCol;
+    private TableColumn<WaveObject, Integer> waveNumberCol;
     private TableColumn<WaveObject, String> enemyNameCol;
-    private TableColumn<WaveObject, String> numEnemiesCol;
-    private TableColumn<WaveObject, String> enemyFrequencyCol;
+    private TableColumn<WaveObject, Integer> numEnemiesCol;
+    private TableColumn<WaveObject, Double> enemyFrequencyCol;
     private TableColumn<WaveObject, String> pathCol;
-    private TableColumn<WaveObject, String> timeDelayCol;
+    private TableColumn<WaveObject, Double> timeDelayCol;
     private ObservableList<WaveObject> data;
 
     @SuppressWarnings("unused")
@@ -37,12 +37,12 @@ public class WaveTableView implements ILevelSetView {
 
     @SuppressWarnings("unchecked")
     private void createTableColumns () {
-        waveNumberCol = new TableColumn<WaveObject, String>("Wave Number");
+        waveNumberCol = new TableColumn<WaveObject, Integer>("Wave Number");
         enemyNameCol = new TableColumn<WaveObject, String>("Enemy Name");
-        numEnemiesCol = new TableColumn<WaveObject, String>("Number of Enemies");
-        enemyFrequencyCol = new TableColumn<WaveObject, String>("Enemy Frequency");
+        numEnemiesCol = new TableColumn<WaveObject, Integer>("Number of Enemies");
+        enemyFrequencyCol = new TableColumn<WaveObject, Double>("Enemy Frequency");
         pathCol = new TableColumn<WaveObject, String>("Path");
-        timeDelayCol = new TableColumn<WaveObject, String>("Time Delay");
+        timeDelayCol = new TableColumn<WaveObject, Double>("Time Delay");
         waveNumberCol.setEditable(false);
         enemyNameCol.setEditable(true);
         numEnemiesCol.setEditable(true);
@@ -50,17 +50,17 @@ public class WaveTableView implements ILevelSetView {
         pathCol.setEditable(true);
         timeDelayCol.setEditable(true);
         waveNumberCol.setCellValueFactory(
-                                          new PropertyValueFactory<WaveObject, String>("waveNumber"));
+                                          new PropertyValueFactory<WaveObject, Integer>("id"));
         enemyNameCol.setCellValueFactory(
-                                         new PropertyValueFactory<WaveObject, String>("enemyName"));
+                                         new PropertyValueFactory<WaveObject, String>("enemyID"));
         numEnemiesCol
-                .setCellValueFactory(new PropertyValueFactory<WaveObject, String>("numOfEnemies"));
+                .setCellValueFactory(new PropertyValueFactory<WaveObject, Integer>("enemyCount"));
         enemyFrequencyCol
-                .setCellValueFactory(new PropertyValueFactory<WaveObject, String>("enemyFrequency"));
+                .setCellValueFactory(new PropertyValueFactory<WaveObject, Double>("frequency"));
         pathCol
-                .setCellValueFactory(new PropertyValueFactory<WaveObject, String>("path"));
+                .setCellValueFactory(new PropertyValueFactory<WaveObject, String>("pathID"));
         timeDelayCol
-                .setCellValueFactory(new PropertyValueFactory<WaveObject, String>("timeDelay"));
+                .setCellValueFactory(new PropertyValueFactory<WaveObject, Double>("startTime"));
         waveTable.getColumns().addAll(waveNumberCol, enemyNameCol, numEnemiesCol,
                                       enemyFrequencyCol, pathCol, timeDelayCol);
         waveTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
