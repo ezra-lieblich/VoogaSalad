@@ -13,7 +13,7 @@ public interface BindableWeapon extends BindableType<WeaponBuilder> {
 
     WeaponBuilder addTrajectoryListener (BiConsumer<String, String> listener);
 
-    WeaponBuilder addEffectListener (BiConsumer<String, String> listener);
+    WeaponBuilder addEffectsListener (BiConsumer<List<Integer>, List<Integer>> listener);
 
     WeaponBuilder addSpeedListener(BiConsumer<Double, Double> listener);
 
