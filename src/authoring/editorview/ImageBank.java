@@ -86,6 +86,19 @@ public abstract class ImageBank implements ChangeListener<Number> {
             itemIDs.set(items.size() - 1, cellData.getId());
         }
     }
+    
+    /**
+     * 
+     * @param index of item
+     * @return ID of the data object represented at that index. Will be null if there is no item there.
+     */
+    public Integer getIDForItemAtIndex(int index){
+    	Integer result =  this.itemIDs.get(index);
+    	if (result<0){
+    		return null;
+    	}
+    	return result;
+    }
 
     protected Node createCellFromData (ListCellData data) {
         ImageView cell = new ImageView();
