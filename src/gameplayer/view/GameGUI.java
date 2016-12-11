@@ -3,6 +3,7 @@ package gameplayer.view;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import gameplayer.model.enemy.Enemy;
 import gameplayer.model.IDrawable;
@@ -18,6 +19,7 @@ import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.CacheHint;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -81,20 +83,20 @@ public class GameGUI {
 		initChat();
 		initStatsTab();
 		addButtonPanel();
-		initStatsDisplay(gold, lives, currentLevel,score);
+		initStatsDisplay(gold, lives, currentLevel, score);
 		return this.scene;
 	}
-	
+
 	public Scene init(double gold, double lives, double level, double score, List<String> imagePaths, Scene scene) {
 		this.numLevels = level;
-		//createScene();
+		// createScene();
 		this.scene = scene;
 		createGrid();
 		initDragDropPane(imagePaths);
 		initChat();
 		initStatsTab();
 		addButtonPanel();
-		initStatsDisplay(gold, lives, currentLevel,score);
+		initStatsDisplay(gold, lives, currentLevel, score);
 		return this.scene;
 	}
 
@@ -105,17 +107,17 @@ public class GameGUI {
 	public int getColumns() {
 		return this.columns;
 	}
-	
-	public double gridToPixelCoordWidth(double num){
-		return num * GridGUI.GRID_WIDTH/this.columns;
+
+	public double gridToPixelCoordWidth(double num) {
+		return num * GridGUI.GRID_WIDTH / this.columns;
 	}
-	
-	public double gridToPixelCoordHeight(double num){
-		return num * GridGUI.GRID_HEIGHT/this.rows;
+
+	public double gridToPixelCoordHeight(double num) {
+		return num * GridGUI.GRID_HEIGHT / this.rows;
 	}
-	
-	public int pixelToGridCoord(double pixel){
-		return (int)pixel/(GridGUI.GRID_HEIGHT/this.rows);
+
+	public int pixelToGridCoord(double pixel) {
+		return (int) pixel / (GridGUI.GRID_HEIGHT / this.rows);
 	}
 
 	public BorderPane getMainScreen() {
@@ -212,8 +214,8 @@ public class GameGUI {
 		Tab tab = dragDrop.createTab("Chat");
 		tab.setContent(browser);
 	}
-	
-	private void initStatsTab(){
+
+	private void initStatsTab() {
 		WebView browser = new WebView();
 		WebEngine webEngine = browser.getEngine();
 		webEngine.load("http://voogasquad.herokuapp.com/home");
@@ -223,8 +225,8 @@ public class GameGUI {
 		tab.setContent(scroll);
 	}
 
-	private void initStatsDisplay(double gold, double lives, double level,double score) {
-		this.statsDisplay = new StatsDisplay(gold, lives, level,score);
+	private void initStatsDisplay(double gold, double lives, double level, double score) {
+		this.statsDisplay = new StatsDisplay(gold, lives, level, score);
 		statsDisplay.init();
 		this.mainScreen.setBottom(statsDisplay.getScorePane());
 	}
@@ -233,22 +235,25 @@ public class GameGUI {
 		this.statsDisplay.updateLevelUI(gold, lives, level, score);
 	}
 
-	public void reRenderTower(List<IDrawable> redraw) {// should be interface of
-														// drawables
+	public void reRenderTower(Map<Integer, Tower> redraw) {// should be interface of
+		// drawables
 		ArrayList<int[]> towerCoords = (ArrayList<int[]>) this.getDroppedTowerCoords();
 		int i = 0;
 
-		for (IDrawable entity : redraw) {
-			//System.out.println("Invalid image?"+entity.getImage().toString());
+		for (Tower entity : redraw.values()) {
+			// System.out.println("Invalid
+			// image?"+entity.getImage().toString());
 			ImageView image = new ImageView(graphics.createImage(entity.getImage().toString()));
 			if (i < towerCoords.size() && towerCoords.get(i).length > 1) {
 				// System.out.println("TOWER BEING RENDERED?!");
 				image.setX(towerCoords.get(i)[0]);
 				image.setY(towerCoords.get(i)[1]);
+				image.setCache(true);
+				image.setCacheHint(CacheHint.SPEED);
 				graphics.setImageViewParams(image, DragDropView.DEFENSIVEWIDTH, DragDropView.DEFENSIVEHEIGHT);
 				this.grid.getGrid().getChildren().add(image);
 				if (entity instanceof Tower) {
-					//System.out.println("Tower added");
+					// System.out.println("Tower added");
 					((Tower) entity).getInfoBox().setLayoutX(image.getX());
 					((Tower) entity).getInfoBox().setLayoutY(image.getY() + image.getFitHeight());
 					this.grid.getGrid().getChildren().add(((Tower) entity).getInfoBox());
@@ -257,19 +262,39 @@ public class GameGUI {
 			}
 		}
 	}
-	
 
+	/*
+	 * public void reRenderTower(List<IDrawable> redraw) {// should be interface
+	 * of // drawables ArrayList<int[]> towerCoords = (ArrayList<int[]>)
+	 * this.getDroppedTowerCoords(); int i = 0;
+	 * 
+	 * for (IDrawable entity : redraw) {
+	 * //System.out.println("Invalid image?"+entity.getImage().toString());
+	 * ImageView image = new
+	 * ImageView(graphics.createImage(entity.getImage().toString())); if (i <
+	 * towerCoords.size() && towerCoords.get(i).length > 1) { //
+	 * System.out.println("TOWER BEING RENDERED?!");
+	 * image.setX(towerCoords.get(i)[0]); image.setY(towerCoords.get(i)[1]);
+	 * graphics.setImageViewParams(image, DragDropView.DEFENSIVEWIDTH,
+	 * DragDropView.DEFENSIVEHEIGHT);
+	 * this.grid.getGrid().getChildren().add(image); if (entity instanceof
+	 * Tower) { //System.out.println("Tower added"); ((Tower)
+	 * entity).getInfoBox().setLayoutX(image.getX()); ((Tower)
+	 * entity).getInfoBox().setLayoutY(image.getY() + image.getFitHeight());
+	 * this.grid.getGrid().getChildren().add(((Tower) entity).getInfoBox()); }
+	 * i++; } } }
+	 */
 
-	public void reRender(List<IDrawable> redraw) {// should be interface of
-													// drawables
-
-		for (IDrawable entity : redraw) {
+	public void reRenderEnemy(HashMap<Integer, Enemy> redraw) {
+		for (Enemy entity : redraw.values()) {
 			ImageView image = new ImageView(entity.getImage());
 			image.setX(entity.getX());
 			image.setY(entity.getY());
+			image.setCache(true);
+			image.setCacheHint(CacheHint.SPEED);
 			graphics.setImageViewParams(image, DragDropView.DEFENSIVEWIDTH * 0.9, DragDropView.DEFENSIVEHEIGHT * 0.9);
 			this.grid.getGrid().getChildren().add(image);
-			if(entity instanceof Enemy){
+			if (entity instanceof Enemy) {
 				((Enemy) entity).getEnemyInfo().setLayoutX(image.getX());
 				((Enemy) entity).getEnemyInfo().setLayoutY(image.getY() + image.getFitHeight());
 				this.grid.getGrid().getChildren().add(((Enemy) entity).getEnemyInfo());
@@ -277,23 +302,31 @@ public class GameGUI {
 		}
 	}
 
+	public void reRender(List<IDrawable> redraw) {
+		for (IDrawable entity : redraw) {
+			ImageView image = new ImageView(entity.getImage());
+			image.setX(entity.getX());
+			image.setY(entity.getY());
+			image.setCache(true);
+			image.setCacheHint(CacheHint.SPEED);
+			graphics.setImageViewParams(image, DragDropView.DEFENSIVEWIDTH * 0.9, DragDropView.DEFENSIVEHEIGHT * 0.9);
+			this.grid.getGrid().getChildren().add(image);
+			if (entity instanceof Enemy) {
+				((Enemy) entity).getEnemyInfo().setLayoutX(image.getX());
+				((Enemy) entity).getEnemyInfo().setLayoutY(image.getY() + image.getFitHeight());
+				this.grid.getGrid().getChildren().add(((Enemy) entity).getEnemyInfo());
+			}
+		}
+	}
 
-	public void reRenderWeapon(HashMap<Integer,ImageView>weaponsOnScreen) {
-	
-		for(Integer weapon:weaponsOnScreen.keySet()){
+	public void reRenderWeapon(HashMap<Integer, ImageView> weaponsOnScreen) {
+
+		for (Integer weapon : weaponsOnScreen.keySet()) {
 			this.grid.getGrid().getChildren().add(weaponsOnScreen.get(weapon));
 
 		}
 	}
 
-	public void reRender(List<IDrawable> redraw, double width, double height) {
-		for (IDrawable entity : redraw) {
-			ImageView image = new ImageView(entity.getImage());
-			image.setX(entity.getX());
-			image.setY(entity.getY());
-			graphics.setImageViewParams(image, width, height);
-			this.grid.getGrid().getChildren().add(image);
-		}
-	}
+
 
 }

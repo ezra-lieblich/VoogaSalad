@@ -1,10 +1,13 @@
 package gameplayer.model.collision;
 
+import java.util.Iterator;
+
 import gameplayer.model.GamePlayData;
 import gameplayer.model.enemy.Enemy;
 import gameplayer.model.enemy.EnemyManager;
 import gameplayer.model.weapon.Weapon;
 import gameplayer.model.weapon.WeaponManager;
+import statswrapper.Wrapper;
 
 public class CollisionManager {
 	EnemyManager enemyManager;
@@ -16,7 +19,9 @@ public class CollisionManager {
 	}
 	
 	public void handleCollisions() {
-		for (Weapon weapon : weaponManager.getWeaponOnGrid().values()) {
+		Iterator<Weapon> iter = weaponManager.getWeaponOnGrid().values().iterator();
+		while(iter.hasNext()) {
+			Weapon weapon = iter.next();
 			int targetUniqueID = weapon.getTargetEnemyID();
 			boolean enemyOnGrid = enemyManager.getEnemyOnGrid().keySet().contains(targetUniqueID);
 			boolean xInRange;
@@ -38,10 +43,11 @@ public class CollisionManager {
 				if (xInRange && yInRange) {
 					Collision collision = new Collision(weapon, targetEnemy);
 					collision.processCollision();
-					weaponManager.getWeaponOnGrid().remove(weapon.getUniqueID()); //is this the right ID?
+					iter.remove(); 
 					if (targetEnemy.getHealth() <= 0) {
 						enemyManager.getEnemyOnGrid().remove(targetUniqueID);
 					}
+
 				}
 			}
 			
