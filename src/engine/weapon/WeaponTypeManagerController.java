@@ -4,14 +4,19 @@ import java.util.List;
 import authoring.editorview.weapon.IWeaponEditorView;
 import engine.AbstractTypeManagerController;
 import engine.ManagerMediator;
+import engine.effect.EffectManagerController;
+import engine.effect.EffectTypeManagerController;
 
 
 public class WeaponTypeManagerController extends
         AbstractTypeManagerController<WeaponManager, WeaponBuilder, Weapon, IWeaponEditorView>
         implements WeaponManagerController {
 
+    private EffectManagerController weaponEffectManagerController;
+    
     public WeaponTypeManagerController (ManagerMediator managerMediator) {
         super(new WeaponTypeManager(), new WeaponTypeBuilder(), managerMediator);
+        weaponEffectManagerController = new EffectTypeManagerController(managerMediator, getTypeManager().getWeaponEffectManager());
     }
 
     @Override
@@ -93,6 +98,11 @@ public class WeaponTypeManagerController extends
     @Override
     public List<Integer> getTargetEnemies (int weaponID) {
         return getTypeManager().getEntity(weaponID).getTargets();
+    }
+    
+    @Override
+    public EffectManagerController getEffectManagerController () {
+        return weaponEffectManagerController;
     }
 
 }
