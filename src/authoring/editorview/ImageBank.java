@@ -52,6 +52,20 @@ public abstract class ImageBank implements ChangeListener<Number> {
         return listView;
     }
 
+    public void updateBank() {
+    	ArrayList<Integer> idCopy = (ArrayList<Integer>) this.itemIDs.clone();
+    	int i = 0;
+    	while (i < idCopy.size()){
+    		if (idCopy.get(i).equals(-1)){
+    			idCopy.remove(i);
+    		}
+    		else{
+    			i++;
+    		}
+    	}
+    	this.updateBank(idCopy);
+    }
+    
     public void updateBank (List<Integer> ids) {
         if (dataSource == null) {
             System.out.println("Table data source not set");
