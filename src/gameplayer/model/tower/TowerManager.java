@@ -244,10 +244,10 @@ public class TowerManager extends Observable {
 
 		for(int i: this.towersOnGrid.keySet()){
 			for(Gun g : towersOnGrid.get(i).getAllWeaponTypes()){
-				if(g.isFiring()){
+				if(g.isFiring() && enemyOnGrid.keySet().size() > 0 ){
 					for(int j : enemyOnGrid.keySet()){
 						Enemy e = enemyOnGrid.get(j);
-						double distance = this.gameData.getDistance(g.getX(), g.getY(), e.getX(), e.getY());//this doesnt work?
+						//double distance = this.gameData.getDistance(g.getX(), g.getY(), e.getX(), e.getY());//this doesnt work?
 						Enemy target = enemyOnGrid.get(j);
 						newlyFired.add(g.getWeapon(j,target.getX(), target.getY()));							
 						break;
