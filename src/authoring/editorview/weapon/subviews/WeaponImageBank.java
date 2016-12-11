@@ -3,7 +3,7 @@ package authoring.editorview.weapon.subviews;
 import java.util.List;
 import java.util.ResourceBundle;
 import authoring.editorview.ImageBank;
-import authoring.editorview.weapon.WeaponEditorViewDelegate;
+import authoring.editorview.weapon.WeaponAuthoringViewDelegate;
 import authoring.utilityfactories.ButtonFactory;
 import javafx.scene.control.Button;
 
@@ -16,7 +16,7 @@ import javafx.scene.control.Button;
 
 public class WeaponImageBank extends ImageBank {
 
-    private WeaponEditorViewDelegate delegate;
+    private WeaponAuthoringViewDelegate delegate;
 
     public WeaponImageBank (ResourceBundle labelsResource) {
         super();
@@ -30,7 +30,7 @@ public class WeaponImageBank extends ImageBank {
         items.add(createWeaponButton);
     }
 
-    public void setDelegate (WeaponEditorViewDelegate delegate) {
+    public void setDelegate (WeaponAuthoringViewDelegate delegate) {
         this.delegate = delegate;
     }
 

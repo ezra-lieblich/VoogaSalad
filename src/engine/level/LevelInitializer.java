@@ -1,10 +1,8 @@
 package engine.level;
 
 import engine.TypeInitializer;
-import engine.level.wave.Wave;
 import engine.level.wave.WaveManager;
 import engine.observer.ObservableList;
-import engine.observer.ObservableMap;
 import engine.observer.ObservableObjectProperty;
 import engine.observer.ObservableProperty;
 

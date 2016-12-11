@@ -4,7 +4,7 @@ import java.lang.reflect.Method;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import authoring.editorview.enemy.IEnemyEditorView;
+import authoring.editorview.enemy.IEnemyUpdateView;
 import engine.AbstractTypeManagerController;
 import engine.ManagerMediator;
 import engine.effect.player.GameEffect;

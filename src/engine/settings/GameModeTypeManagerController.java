@@ -2,13 +2,13 @@ package engine.settings;
 
 import java.util.List;
 
-import authoring.editorview.gamesettings.IGameSettingsEditorView;
+import authoring.editorview.gamesettings.IGameSettingsUpdateView;
 import engine.AbstractTypeManagerController;
 import engine.ManagerMediator;
 
 
 public class GameModeTypeManagerController 
-	extends AbstractTypeManagerController<GameModeManager, GameModeBuilder, GameMode, IGameSettingsEditorView> implements GameModeManagerController {
+	extends AbstractTypeManagerController<GameModeManager, GameModeBuilder, GameMode, IGameSettingsUpdateView> implements GameModeManagerController {
 
 	public GameModeTypeManagerController(ManagerMediator managerMediator) {
 		super(new GameModeTypeManager(), new GameModeTypeBuilder(), managerMediator);
@@ -65,9 +65,11 @@ public class GameModeTypeManagerController
 	}
 
 	@Override
-	protected GameModeBuilder constructTypeProperties(IGameSettingsEditorView updateView, GameModeBuilder typeBuilder) {
-		// TODO NEED methods in IGAMEUPDATEVIEW
-		return null;
+	protected GameModeBuilder constructTypeProperties(IGameSettingsUpdateView updateView, GameModeBuilder typeBuilder) {
+		return typeBuilder.addGameTypeListener( (oldValue, newValue) -> updateView.updateGameName(newValue));
+			
+				
+		//.addInitialMoneyListener((oldValue, newValue) ->) NEED INITIAL SCORE
 	}
 
 

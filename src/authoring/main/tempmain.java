@@ -21,8 +21,11 @@ public class tempmain extends Application {
         s.setScene(scene);
         s.setResizable(true);
         s.setHeight(SIZE);
-        s.setWidth(SIZE + 145);
+        s.setWidth(SIZE + 395);
         s.show();
+        
+        // ExitDialogueBox box = new ExitDialogueBox();
+        // box.displayDialogueBoxOnExit(s, e -> generalController.saveAsXMLFile());
 
     }
 

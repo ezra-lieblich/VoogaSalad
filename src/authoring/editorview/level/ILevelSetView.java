@@ -1,6 +1,6 @@
 package authoring.editorview.level;
 
-import authoring.editorview.IEditorView;
+import authoring.editorview.INodeView;
 
 
 /**
@@ -10,7 +10,7 @@ import authoring.editorview.IEditorView;
  * @author Kayla Schulz
  *
  */
-public interface ILevelSetView extends IEditorView {
+public interface ILevelSetView extends INodeView {
 
-    public void setDelegate (LevelEditorViewDelegate delegate);
+    public void setDelegate (LevelAuthoringViewDelegate delegate);
 }
