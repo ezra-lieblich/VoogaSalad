@@ -214,7 +214,6 @@ public class EnemyManager extends Observable {
 			System.out.println("ALL WAVES IS EMPTY");
 			return new LinkedList<Enemy>();
 		}
-		System.out.println("EnemyManager line 201: All waves: "+allWaves);
 		Wave wave = this.allWaves.poll();
 		return this.gameFactory.getIndividualWaveQueue(wave, this.gameData.getCurrentLevel());
 	}
