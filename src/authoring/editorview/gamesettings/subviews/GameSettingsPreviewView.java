@@ -1,12 +1,12 @@
 package authoring.editorview.gamesettings.subviews;
 
-import authoring.editorview.IEditorView;
+import authoring.editorview.INodeView;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public class GameSettingsPreviewView implements IEditorView {
+public class GameSettingsPreviewView implements INodeView {
 
 	
 	private Group root;
