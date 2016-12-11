@@ -125,28 +125,7 @@ public class GridGUI {
 			current = current.getNext();
 		}
 	}
-	
-	@Deprecated
-	private void populatePath( List<int[]> path) { //TODO: change how path is being sent
-		//System.out.println("Populate path!");
-		for (int i = 0; i < path.size(); i++) {
-			double x = path.get(i)[0];
-			double y = path.get(i)[1];
-			//System.out.println("X: "+x+", Y: "+y);
-			ImageView pathImage = graphicsLib.createImageView(graphicsLib.createImage("kaneki.jpg"));
-			//System.out.println("Path image: "+pathImage);
-			graphicsLib.setImageViewParams(pathImage, x*cellWidth, y*cellHeight,cellWidth, cellHeight);
-			//System.out.println("Image width and height: "+pathImage.getFitWidth()+","+pathImage.getFitHeight());
-			this.grid.getChildren().add(pathImage);
-			//pathImage.setX(x*cellWidth);
-			//pathImage.setY(x*cellWidth);
-			//pathImage.relocate(x*cellWidth, y*cellHeight);
-			//System.out.println("path image coords: "+pathImage.getX()+", "+pathImage.getY());
-		}
-	}
-	
 
-	// TOWER AND PATH ONLY
 	public void populateGrid(Grid grid) {
 		//populatePath(grid, gri)
 		/*
