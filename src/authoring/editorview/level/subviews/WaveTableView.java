@@ -48,14 +48,14 @@ public class WaveTableView implements ILevelSetView {
         enemyNameCol.setCellValueFactory(
                                          new PropertyValueFactory<WaveObject, String>("enemyName"));
         numEnemiesCol
-                .setCellValueFactory(new PropertyValueFactory<WaveObject, String>("enemyCount"));
+                .setCellValueFactory(new PropertyValueFactory<WaveObject, String>("numOfEnemies"));
         enemyFrequencyCol
                 .setCellValueFactory(new PropertyValueFactory<WaveObject, String>("enemyFrequency"));
 
         pathCol
                 .setCellValueFactory(new PropertyValueFactory<WaveObject, String>("path"));
         timeDelayCol
-                .setCellValueFactory(new PropertyValueFactory<WaveObject, String>("startTime"));
+                .setCellValueFactory(new PropertyValueFactory<WaveObject, String>("timeDelay"));
 
         waveTable.getColumns().addAll(waveNumberCol, enemyNameCol, numEnemiesCol,
                                       enemyFrequencyCol, pathCol, timeDelayCol);
