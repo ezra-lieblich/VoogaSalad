@@ -10,7 +10,7 @@ import javafx.scene.layout.HBox;
  * @author Kayla Schulz
  *
  */
-public abstract class TextFieldView implements IEditorView {
+public abstract class TextFieldView implements INodeView {
 
     protected HBox hbox;
 
