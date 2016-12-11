@@ -47,7 +47,7 @@ public class SplashScreen {
 		this.mainScreen.setMinWidth(SIZE);
 		this.mainScreen.setMinHeight(SIZE);
 		this.scene = new Scene(this.mainScreen);
-		this.scene.getStylesheets().add(this.getClass().getResource("splash.css").toExternalForm());
+		//this.scene.getStylesheets().add(this.getClass().getResource("splash.css").toExternalForm());
 		this.stage.setScene(this.scene);
 		addSignInOption();
 	}

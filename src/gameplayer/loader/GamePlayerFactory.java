@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Queue;
+
+import engine.effect.EffectManager;
 import engine.enemy.EnemyType;
 import engine.level.Level;
 import engine.level.LevelManager;
@@ -112,6 +114,9 @@ public class GamePlayerFactory{
 		return levelGrid;
 	}
 	
+	public EffectManager getWeaponEffectManager() {
+		return this.authoringFileReader.getWeaponEffectManager();
+	}
 	
 	
 	public Map<Integer, Tower> getTowers() {
