@@ -2,6 +2,7 @@ package gameplayer.model.enemy;
 
 import java.util.Observable;
 
+import engine.effect.EffectMethod;
 import gameplayer.model.Cell;
 import gameplayer.model.IDrawable;
 import javafx.scene.control.Label;
@@ -136,6 +137,7 @@ public class Enemy extends Observable implements IDrawable {
 		return this.image;
 	}
 
+	@EffectMethod
 	public double getMovingSpeed() {
 		return movingSpeed;
 	}

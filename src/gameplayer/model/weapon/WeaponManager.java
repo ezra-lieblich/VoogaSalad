@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Observable;
 
+import engine.effect.player.CollisionEffectFactory;
 import gameplayer.model.GamePlayData;
 import gameplayer.model.tower.Gun;
 import gameplayer.model.tower.TowerManager;
@@ -17,6 +18,28 @@ public class WeaponManager extends Observable{
 	private int uniqueWeaponID;
 	private long timeInterval;
 	private int tempCountFix;
+	CollisionEffectFactory collisionFactory;
+	// all effects are gameEffect
+	
+	
+	// from engine.WeaponManager.getEffectManager effectTYpeManager
+	// getEntities() return a hashmap<int, Effect(raw)>
+	//convert raw effect into gameEffect
+	// collisionFactory.create(Effect(raw)) return the gameEffect
+	// hashmap<int, gameEffect> = effectTypeManager.getEntities().entries().stream().collect(Colletctors.tomap(e-> e.getkey(), e->collisionFactory.create(e.getValue))
+	
+	// add encompassing class (weapon w) at creation
+	
+	//at collision time
+	// weapon.getEffect() -> arrayList of int
+	// effect =  hashmap.get()
+	// effect.addTrigger()
+	// effect.execute()
+	
+	// gameEffect.getTriggerClass()
+	
+	
+
 
 
 	public WeaponManager(GamePlayData gameData, TowerManager towerManager) {
@@ -25,6 +48,7 @@ public class WeaponManager extends Observable{
 		this.timeInterval = this.towerManager.getTimeInterval();
 		this.tempCountFix = 1; 
 		initializeNewLevel();
+		collisionFactory = new CollisionEffectFactory();
 	}
 
 	public void initializeNewLevel(){
