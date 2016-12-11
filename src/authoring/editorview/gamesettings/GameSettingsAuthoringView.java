@@ -133,6 +133,12 @@ public class GameSettingsAuthoringView implements IGameSettingsUpdateView, IGame
 		
 	}
 
+	@Override
+	public void updatePathType(String pathType) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 
 }
