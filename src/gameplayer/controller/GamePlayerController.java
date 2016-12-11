@@ -401,13 +401,7 @@ public class GamePlayerController implements Observer {
 		this.view.reRenderTower(towerRedraw);
 	}
 
-	private void redrawEnemy() {
-		HashMap<Integer, Enemy> enemyRedraw = this.enemyManager.getEnemyOnGrid();
-		System.out.println("enemyRedraw.size(): " + enemyRedraw.size());
-		List<IDrawable> reEnemyDraw = convertEnemyDrawable(enemyRedraw);
-		this.view.reRender(reEnemyDraw);
 
-	}
 
 	public Timeline getTimeline() {
 		return this.animation;

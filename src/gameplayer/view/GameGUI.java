@@ -327,14 +327,6 @@ public class GameGUI {
 		}
 	}
 
-	public void reRender(List<IDrawable> redraw, double width, double height) {
-		for (IDrawable entity : redraw) {
-			ImageView image = new ImageView(entity.getImage());
-			image.setX(entity.getX());
-			image.setY(entity.getY());
-			graphics.setImageViewParams(image, width, height);
-			this.grid.getGrid().getChildren().add(image);
-		}
-	}
+
 
 }
