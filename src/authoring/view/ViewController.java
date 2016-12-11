@@ -21,7 +21,7 @@ import authoring.editorview.weapon.WeaponAuthoringViewController;
 
 //TODO: Specific implementation of map
 
-public class AuthoringViewController implements EditorTabPaneDelegate {
+public class ViewController implements EditorTabPaneDelegate {
     private IAuthoringView view;
     private HashMap<String, EditorViewController> editors;
     private final String SETTINGS_RESOURCE_PATH = "resources/ViewSettings";
@@ -29,7 +29,7 @@ public class AuthoringViewController implements EditorTabPaneDelegate {
     private final String DEFAULT_TAB = "setup";
     private List<String> tabNames;
 
-    public AuthoringViewController (int width, int height) throws IOException {
+    public ViewController (int width, int height) throws IOException {
         createEditors();
         createScene(width, height);
         view.setEditorView(editors.get(DEFAULT_TAB).getView());
