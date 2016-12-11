@@ -1,6 +1,6 @@
 package authoring.editorview.path;
 
-import authoring.editorview.IEditorView;
+import authoring.editorview.INodeView;
 
 
 /**
@@ -9,7 +9,7 @@ import authoring.editorview.IEditorView;
  * and the public methods defining what components the path view should contain.
  *
  */
-public interface IPathSetView extends IEditorView {
+public interface IPathSetView extends INodeView {
 
     public void setDelegate (PathAuthoringViewDelegate delegate);
 

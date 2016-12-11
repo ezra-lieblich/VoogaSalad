@@ -137,6 +137,7 @@ public class WeaponAuthoringView implements IWeaponUpdateView {
 
     @Override
     public void updateImagePathDisplay (String imagePath) {
+    	this.weaponBank.updateBank();
         this.weaponImageView.updateWeaponImagePath(imagePath);
     }
 
@@ -153,7 +154,6 @@ public class WeaponAuthoringView implements IWeaponUpdateView {
 
     @Override
     public void updateBank (List<Integer> ids) {
-        // TODO Auto-generated method stub
         this.weaponBank.updateBank(ids);
     }
 

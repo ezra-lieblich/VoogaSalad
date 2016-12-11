@@ -48,8 +48,12 @@ public abstract class AbstractTypeManagerController<E extends Manager<T>, U exte
     
     @Override //TODO - remove duplicated code
     public int createCopy(int id, V updateView) {
-        typeBuilder.copy(typeManager.getEntity(id));
+        copyWithoutId(id).buildId(typeManager.getEntity(id).getId());
         return createType(updateView);
+    }
+    
+    protected U copyWithoutId(int id) {
+        return typeBuilder.copy(typeManager.getEntity(id));
     }
     
     protected T constructCopy(int id, E typeManager, V updateView) {

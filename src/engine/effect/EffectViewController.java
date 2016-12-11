@@ -14,7 +14,7 @@ public class EffectViewController {
     EffectViewController(int size, EffectManagerController effectDataSouce) {
         this.view = new EffectEditorView(size);
         this.effectDataSource = effectDataSouce;
-        view.updateTriggers(effectDataSource.getTriggers());
+        view.updateTriggers(effectDataSource.getAvailableClasses());
         linkTrigger();
         effectDataSource.createType(view);
     }
@@ -23,7 +23,7 @@ public class EffectViewController {
         view.getTriggers().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                boolean didSet = effectDataSource.setTrigger(view.getTriggers().getSelectionModel().getSelectedIndex(), view.getTriggers().getSelectionModel().getSelectedItem());
+                effectDataSource.setTrigger  (view.getTriggers().getSelectionModel().getSelectedIndex(), view.getTriggers().getSelectionModel().getSelectedItem());
                 //view.getTriggerConditions().getItems().setAll(effectDataSource.)
             }
         });

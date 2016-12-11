@@ -11,9 +11,9 @@ public interface Weapon extends Type{
 
     List<Integer> getTargets ();
 
-    double getFireRate ();
+    double getReloadTime ();
 
-    void setFireRate (double fireRate);
+    void setReloadTime (double fireRate);
 
     String getTrajectory ();
 
