@@ -5,6 +5,7 @@ import gameplayer.model.enemy.Enemy;
 import gameplayer.model.enemy.EnemyManager;
 import gameplayer.model.weapon.Weapon;
 import gameplayer.model.weapon.WeaponManager;
+import statswrapper.Wrapper;
 
 public class CollisionManager {
 	EnemyManager enemyManager;
@@ -23,6 +24,7 @@ public class CollisionManager {
 			boolean xInRange = Math.abs(weapon.getX() - targetEnemy.getX()) <= targetEnemy.getWidth(); //make more robust
 			boolean yInRange = Math.abs(weapon.getY() - targetEnemy.getY()) <= targetEnemy.getHealth(); //make more robust
 			if (xInRange && yInRange) {
+				//Wrapper.getInstance().
 				Collision collision = new Collision(weapon, targetEnemy);
 				collision.processCollision();
 				weaponManager.getWeaponOnGrid().remove(weapon.getUniqueID()); //is this the right ID?

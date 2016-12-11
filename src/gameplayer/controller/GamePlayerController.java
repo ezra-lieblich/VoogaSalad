@@ -232,7 +232,15 @@ public class GamePlayerController implements Observer {
 
 	private void gameOver() {
 
-		System.out.println("Game Over called");
+		//System.out.println("Game Over called");
+		//log end score
+		try {
+			Wrapper.getInstance().logEndScore("" +this.model.getData().getGold(), "" + this.model.getData().getLife(),"" + this.model.getData().getCurrentLevel());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			System.out.println("Log end score went wrong");
+			e.printStackTrace();
+		}
 		this.view.getMainScreen().getChildren().clear();
 		WebView browser = new WebView();
 		WebEngine webEngine = browser.getEngine();
