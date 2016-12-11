@@ -21,7 +21,7 @@ public class main extends Application {
 		this.stage = s;
 		//This is just for testing, should be switched to creating the authoring environment first
 		GamePlayerController playerController = new GamePlayerController("player.samplexml/newWaveTester.xml");
-		playerController.init();
+		playerController.init(false);
 		s.setTitle(TITLE);
 		s.setScene(playerController.getMainScene());
 		s.show();
