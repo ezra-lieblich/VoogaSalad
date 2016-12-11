@@ -289,6 +289,7 @@ public class GamePlayerController implements Observer {
 			if (currentWave.size() != 0) {
 				if (timer % 15 == 0) {
 					Enemy enemy = currentWave.poll();
+					System.out.println("Spawing enemy");
 					this.enemyManager.spawnEnemy(enemy);
 					timer = 1;
 				} else {
@@ -330,7 +331,6 @@ public class GamePlayerController implements Observer {
 			createEnemyKeyFrame(); //with the enemy frequency
 			// get the new start time for a new wave of enemies
 			//getNewWaveOnInterval();
-
 		}
 
 	}

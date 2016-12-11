@@ -87,7 +87,6 @@ public class GamePlayerFactory{
 		List<Integer>levelPaths = new ArrayList<Integer>();
 		levelPaths.add(0); //HARDCODED FOR NOW
 		if (levelPaths.isEmpty()) {//no path
-			System.out.println("NOOOOO PATTHSSSSS");
 			Grid emptyGrid = new Grid(DEFAULT_GRID_WIDTH, DEFAULT_GRID_HEIGHT);
 			emptyGrid.setNoPath(true); 
 			return emptyGrid;

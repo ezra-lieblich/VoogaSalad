@@ -85,7 +85,7 @@ public class EnemyManager extends Observable {
 		enemy.setX(gameData.cellToCoordinate(enemy.getCurrentCell().getX()));
 		enemy.setY(gameData.cellToCoordinate(enemy.getCurrentCell().getY()));
 		enemyOnGrid.put(enemy.getUniqueID(), enemy);
-
+		System.out.println("SIZEEEEEEE" + enemyOnGrid.size());
 	}
 
 	// this method not being called??????
