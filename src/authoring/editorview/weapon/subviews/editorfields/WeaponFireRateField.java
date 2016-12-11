@@ -2,7 +2,7 @@ package authoring.editorview.weapon.subviews.editorfields;
 
 import java.util.ResourceBundle;
 import authoring.editorview.weapon.IWeaponSetView;
-import authoring.editorview.weapon.WeaponEditorViewDelegate;
+import authoring.editorview.weapon.WeaponAuthoringViewDelegate;
 import authoring.utilityfactories.TextFieldFactory;
 import javafx.scene.Node;
 import javafx.scene.control.TextField;
@@ -16,7 +16,7 @@ import javafx.scene.control.TextField;
 public class WeaponFireRateField implements IWeaponSetView {
 
     private TextField weaponFireRateField;
-    private WeaponEditorViewDelegate delegate;
+    private WeaponAuthoringViewDelegate delegate;
 
     public WeaponFireRateField (ResourceBundle labelsResource) {
         createField(labelsResource);
@@ -29,7 +29,7 @@ public class WeaponFireRateField implements IWeaponSetView {
     }
 
     @Override
-    public void setDelegate (WeaponEditorViewDelegate delegate) {
+    public void setDelegate (WeaponAuthoringViewDelegate delegate) {
         this.delegate = delegate;
     }
 

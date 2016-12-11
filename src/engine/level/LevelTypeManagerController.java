@@ -3,9 +3,8 @@ package engine.level;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
-import authoring.editorview.level.ILevelEditorView;
+import authoring.editorview.level.ILevelUpdateView;
 import engine.AbstractTypeManagerController;
 import engine.ManagerMediator;
 import engine.level.wave.Wave;
@@ -15,7 +14,7 @@ import engine.level.wave.WaveTypeBuilder;
 
 
 public class LevelTypeManagerController
-        extends AbstractTypeManagerController<LevelManager, LevelBuilder, Level, ILevelEditorView>
+        extends AbstractTypeManagerController<LevelManager, LevelBuilder, Level, ILevelUpdateView>
         implements LevelManagerController {
 
     private WaveBuilder waveBuilder;
@@ -95,11 +94,11 @@ public class LevelTypeManagerController
     }
 
     @Override
-    protected LevelBuilder constructTypeProperties (ILevelEditorView updateView,
+    protected LevelBuilder constructTypeProperties (ILevelUpdateView updateView,
                                                     LevelBuilder typeBuilder) {
         return typeBuilder.addDurationInSecondsListener( (oldValue, newValue) -> updateView
                 .updateTransitionTime(newValue))
-                // .addWaveListener( (oldValue, newValue) -> updateView.updateEnemy(newValue))
+                .addWaveListener( (oldValue, newValue) -> updateView.updateWaves(newValue.waveList()))
                 // .addPathListener(listener)
                 .addRewardHealthListener( (oldValue, newValue) -> updateView
                         .updateRewardHealth(newValue))
@@ -129,12 +128,12 @@ public class LevelTypeManagerController
     }
 
     @Override
-    public int createWave (int levelID, ILevelEditorView updateView) {
+    public int createWave (int levelID, ILevelUpdateView updateView) {
         return getTypeManager().getEntity(levelID).createWave(buildWave(updateView));
         // TODO view methods need to actually go to right thing also need to add to level
     }
 
-    private Wave buildWave (ILevelEditorView updateView) {
+    private Wave buildWave (ILevelUpdateView updateView) {
         return waveBuilder.addNameListener( (oldValue, newValue) -> updateView
                 .updateNameDisplay(newValue))
         .addImagePathListener( (oldValue, newValue) -> updateView
@@ -162,6 +161,7 @@ public class LevelTypeManagerController
 	@Override
 	public void setWaveEnemy(int levelID, int waveID, int enemyID) {
 		getWave(levelID, waveID).setEnemyID(enemyID);
+		getTypeManager().getEntity(levelID).getWaveManager().addEntry(getWave(levelID, waveID));
 	}
 
 	@Override
@@ -172,6 +172,7 @@ public class LevelTypeManagerController
 	@Override
 	public void setWaveCount(int levelID, int waveID, int count) {
 		getWave(levelID, waveID).setEnemyCount(count);
+		getTypeManager().getEntity(levelID).getWaveManager().addEntry(getWave(levelID, waveID));
 	}
 
 	@Override
@@ -182,6 +183,7 @@ public class LevelTypeManagerController
 	@Override
 	public void setWaveFrequency(int levelID, int waveID, double frequency) {
 		getWave(levelID, waveID).setFrequency(frequency);
+		getTypeManager().getEntity(levelID).getWaveManager().addEntry(getWave(levelID, waveID));
 	}
 
 	@Override
@@ -192,6 +194,7 @@ public class LevelTypeManagerController
 	@Override
 	public void setWavePath(int levelID, int waveID, int pathID) {
 		getWave(levelID, waveID).setPathID(pathID);
+		getTypeManager().getEntity(levelID).getWaveManager().addEntry(getWave(levelID, waveID));
 	}
 
 	@Override
@@ -202,6 +205,7 @@ public class LevelTypeManagerController
 	@Override
 	public void setWaveDelay(int levelID, int waveID, double delay) {
 		getWave(levelID, waveID).setStartTime(delay);
+		getTypeManager().getEntity(levelID).getWaveManager().addEntry(getWave(levelID, waveID));
 	}
 
 	@Override
@@ -225,14 +229,14 @@ public class LevelTypeManagerController
 	}
 	
 	 @Override
-	 public void loadManagerData(LevelManager typeManager, ILevelEditorView updateView) {
+	 public void loadManagerData(LevelManager typeManager, ILevelUpdateView updateView) {
 		 for (Level level : typeManager.getEntities().values()) {
 			 loadWaveData(level.getWaveManager(), typeManager, updateView);
 		 }
 		 super.loadManagerData(typeManager, updateView);
 	 }
 	 
-	 private void loadWaveData(WaveManager waveManager, LevelManager typeManager, ILevelEditorView updateView) {
+	 private void loadWaveData(WaveManager waveManager, LevelManager typeManager, ILevelUpdateView updateView) {
 		 Map<Integer, Wave> waveMap = new HashMap<Integer, Wave>();
 		 for (Integer waveID : waveManager.getEntities().keySet()) {
 			 waveMap.put(waveID, constructWaveCopy(waveID, waveManager, updateView));
@@ -242,7 +246,7 @@ public class LevelTypeManagerController
 		 waveBuilder.setNextId(waveManager.getMaxId());
 	 }
 	 
-	 private Wave constructWaveCopy(int id, WaveManager waveManager, ILevelEditorView updateView) {
+	 private Wave constructWaveCopy(int id, WaveManager waveManager, ILevelUpdateView updateView) {
 		 waveBuilder.copy(waveManager.getEntity(id));
 		 return buildWave(updateView);
 	 }

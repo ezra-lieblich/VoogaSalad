@@ -3,7 +3,7 @@ package authoring.editorview.path.subviews;
 import java.util.ResourceBundle;
 
 import authoring.editorview.path.IPathSetView;
-import authoring.editorview.path.PathEditorViewDelegate;
+import authoring.editorview.path.PathAuthoringViewDelegate;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
@@ -15,7 +15,7 @@ public class NewPathView implements IPathSetView {
 	private static final String RESOURCE_FILE_NAME = "resources/GameAuthoringPath";	
 	private ResourceBundle pathResource = ResourceBundle.getBundle(RESOURCE_FILE_NAME);
 	
-	private PathEditorViewDelegate delegate;
+	private PathAuthoringViewDelegate delegate;
 	private VBox root;
 	
 	public NewPathView(){
@@ -29,7 +29,7 @@ public class NewPathView implements IPathSetView {
 	}
 	
 	@Override
-	public void setDelegate(PathEditorViewDelegate delegate){
+	public void setDelegate(PathAuthoringViewDelegate delegate){
 		this.delegate = delegate;
 	}
 

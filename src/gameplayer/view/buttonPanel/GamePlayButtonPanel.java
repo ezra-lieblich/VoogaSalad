@@ -11,7 +11,8 @@ import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import statswrapper.Wrapper;
-
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 public class GamePlayButtonPanel{
 	
 	private EventHandler<ActionEvent> startOnPress; 
@@ -68,6 +69,8 @@ public class GamePlayButtonPanel{
 		});
 		return viewStats;
 	}
+	
+
 	
 
 }

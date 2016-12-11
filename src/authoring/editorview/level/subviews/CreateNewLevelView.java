@@ -2,7 +2,7 @@ package authoring.editorview.level.subviews;
 
 import java.util.ResourceBundle;
 import authoring.editorview.level.ILevelSetView;
-import authoring.editorview.level.LevelEditorViewDelegate;
+import authoring.editorview.level.LevelAuthoringViewDelegate;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
@@ -15,7 +15,7 @@ public class CreateNewLevelView implements ILevelSetView {
     private static final String RESOURCE_FILE_NAME = "resources/GameAuthoringLevels";
     private ResourceBundle levelResource = ResourceBundle.getBundle(RESOURCE_FILE_NAME);
 
-    private LevelEditorViewDelegate delegate;
+    private LevelAuthoringViewDelegate delegate;
     private VBox vbox;
 
     public CreateNewLevelView (ResourceBundle levelsResource) {
@@ -29,7 +29,7 @@ public class CreateNewLevelView implements ILevelSetView {
     }
 
     @Override
-    public void setDelegate (LevelEditorViewDelegate delegate) {
+    public void setDelegate (LevelAuthoringViewDelegate delegate) {
         this.delegate = delegate;
     }
 

@@ -1,10 +1,17 @@
 package gameplayer.model.tower;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
+
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import engine.tower.*;
 import engine.weapon.WeaponType;
 import gameplayer.model.IDrawable;
+import gameplayer.view.helper.GraphicsLibrary;
 
 public class Tower implements IDrawable {
 
@@ -15,8 +22,12 @@ public class Tower implements IDrawable {
 	private double xCoordinate;
 	private double yCoordinate;	
 	private Label towerInfo;
-	private boolean showInfo;
-	
+	private VBox infoBox;
+	private Button sellButton;
+	private Button upgradeButton;
+	private GraphicsLibrary graphics;
+	private boolean showInfo, upgradable;
+	private Queue<Integer> upgradeList;
 	
 	
 	public Tower (engine.tower.Tower tt, ArrayList<Gun> weaponTypes, int uniqueID){
@@ -25,10 +36,15 @@ public class Tower implements IDrawable {
 		this.image = tt.getImagePath();
 		this.uniqueID = uniqueID;
 		this.sellAmount = tt.getSellAmount();
+		this.upgradeList = new LinkedList<Integer>();
+		this.upgradeList.addAll(tt.getUpgrades());
+		//System.out.println("upgradable: " + upgradeList.size());
+		this.upgradable = this.upgradeList.isEmpty();
 		this.showInfo = false;
 		this.towerInfo = new Label("Type: " + this.type + "\n ID: " + this.uniqueID + "\n Cost: " + 
 				this.cost + "\n Image: " + this.image + "\n Name: " + this.name);
-		this.towerInfo.setVisible(showInfo);
+		this.graphics = new GraphicsLibrary();
+		initVBox();
 	}
 
 	/**
@@ -45,7 +61,7 @@ public class Tower implements IDrawable {
 		this.xCoordinate = x;
 		this.yCoordinate = y;
 	}
-
+	
 	public double getX() {
 		return this.xCoordinate;
 	}
@@ -53,6 +69,20 @@ public class Tower implements IDrawable {
 	public double getY() {
 		return yCoordinate;
 	}
+	
+	public Boolean upgradable(){
+		return this.upgradable();
+	}
+	
+	public int getUpgradeType(){
+		int type = this.upgradeList.poll();
+		if (this.upgradeList.isEmpty()){
+			this.upgradable = false;
+		}
+		return type;
+	}
+	
+
 	
 	double sellTower(){
 		return this.sellAmount;
@@ -63,7 +93,9 @@ public class Tower implements IDrawable {
 	}
 	
 
-	
+	void setGuns(ArrayList<Gun> guns){
+		this.weaponTypes = guns;
+	}
 	
 	int getUnqueID(){
 		return this.uniqueID;
@@ -86,16 +118,54 @@ public class Tower implements IDrawable {
 	void setCost(double cost) {
 		this.cost = cost;
 	}
+	
+	void setImage(String image) {
+		this.image = image;
+	}
 
 
 	
 	public void toggleInfoVisibility(){
 		this.showInfo = !showInfo;
-		this.towerInfo.setVisible(showInfo);
+		this.infoBox.setVisible(showInfo);
+	}
+	
+	public void initVBox(){
+		this.infoBox = new VBox();
+		HBox buttons = new HBox();
+		buttons.getChildren().addAll(createSellButton(), createUpgradeButton());
+		this.infoBox.getChildren().addAll(towerInfo, buttons);
+		this.infoBox.setVisible(showInfo);
+	}
+	
+	public Button createSellButton(){
+		this.sellButton = graphics.createButton("Sell");
+		return sellButton;
+	}
+	
+	public Button createUpgradeButton(){
+		this.upgradeButton = graphics.createButton("Upgrade");
+		return upgradeButton;
+	}
+	
+	public Button getSellButton(){
+		return sellButton;
+	}
+	
+	public Button getUpgradeButton(){
+		return upgradeButton;
 	}
 
 	public Label getTowerInfo() {
 		return towerInfo;
+	}
+
+	public VBox getInfoBox() {
+		return infoBox;
+	}
+
+	public int getUniqueID() {
+		return uniqueID;
 	}
 
 }

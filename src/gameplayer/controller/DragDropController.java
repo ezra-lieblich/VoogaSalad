@@ -28,7 +28,8 @@ public class DragDropController implements Observer{
 		this.towerTypes = towerTypes; 
 		this.dragDrop.setTowerMap(towerTypes);
 	}
-
+	
+	
 	@Override
 	public void update(Observable o, Object arg) {
 		if (o instanceof DragDrop){
