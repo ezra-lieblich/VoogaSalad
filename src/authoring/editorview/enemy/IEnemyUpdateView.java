@@ -30,5 +30,12 @@ public interface IEnemyUpdateView extends IEnemySetView, IUpdateView {
     public void updateEnemyRewardPoints (double rewardPoints);
 
     public void setEnemyListDataSource (ListDataSource source);
+    
+    /**
+     * Returns the highest item index less than the current. 
+     * If there are none, the lowest index greater than the current will be returned.
+     * If there are no other items, a null value is returned
+     */
+    public Integer getNearestAvailableItemID(int id);
 
 }
