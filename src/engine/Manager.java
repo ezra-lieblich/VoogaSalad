@@ -18,5 +18,9 @@ public interface Manager<E extends Type> extends VisitorManager<MethodData<?>>, 
     List<Integer> getEntityIds();
     
     Map<Integer, E> getEntities ();
+    
+    void setEntities(Map<Integer, E> entities);
+    
+    int getMaxId();
 
 }

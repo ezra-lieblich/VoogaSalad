@@ -2,7 +2,11 @@ package authoring.editortabpane;
 
 import java.util.List;
 
-
+/**
+ * 
+ * @author Kayla Schulz
+ *
+ */
 public class EditorTabPaneFactory {
 
     private EditorTabPaneFactory () {

@@ -12,9 +12,9 @@ import javafx.scene.control.ComboBox;
  * @author Kayla Schulz
  *
  */
-public class ComboBoxFactory {
+public final class ComboBoxFactory {
 
-    public ComboBoxFactory () {
+    private ComboBoxFactory () {
 
     }
 

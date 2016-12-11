@@ -1,9 +1,9 @@
 package authoring.editorview.gamesettings;
 
-import authoring.editorview.IEditorView;
+import authoring.editorview.INodeView;
 
 
-public interface IGameSettingsSetView extends IEditorView {
+public interface IGameSettingsSetView extends INodeView {
 
-    public void setDelegate (GameSettingsEditorViewDelegate delegate);
+    public void setDelegate (GameSettingsAuthoringViewDelegate delegate);
 }

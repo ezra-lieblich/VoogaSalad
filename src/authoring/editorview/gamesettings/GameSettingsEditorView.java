@@ -1,6 +1,7 @@
 package authoring.editorview.gamesettings;
 
 import java.util.List;
+import java.util.ResourceBundle;
 import authoring.editorview.ListDataSource;
 import authoring.editorview.gamesettings.subviews.GameNameView;
 import javafx.scene.Node;
@@ -14,17 +15,20 @@ import javafx.scene.layout.VBox;
  * @author Diane Hadley
  *
  */
-public class GameSettingsEditorView implements IGameSettingsEditorView, IGameSettingsSetView {
+public class GameSettingsEditorView implements IGameSettingsUpdateView, IGameSettingsSetView {
 
     private VBox gameConditionsRoot;
     private GameNameView gameNameView;
     private BorderPane gameSettingsView;
-    private GameSettingsEditorViewDelegate delegate;
+    private GameSettingsAuthoringViewDelegate delegate;
 
-    public GameSettingsEditorView (int aWidth, int aHeight) {
+    private static final String RESOURCE_FILE_NAME = "resources/GameAuthoringSettings";
+    private ResourceBundle settingsResource = ResourceBundle.getBundle(RESOURCE_FILE_NAME);
+
+    public GameSettingsEditorView (int width, int height) {
         gameSettingsView = new BorderPane();
         this.gameConditionsRoot = new VBox(10);
-        this.gameNameView = new GameNameView();
+        this.gameNameView = new GameNameView(settingsResource);
         addViewComponents();
     }
 
@@ -39,7 +43,7 @@ public class GameSettingsEditorView implements IGameSettingsEditorView, IGameSet
     }
 
     @Override
-    public void setDelegate (GameSettingsEditorViewDelegate delegate) {
+    public void setDelegate (GameSettingsAuthoringViewDelegate delegate) {
         this.delegate = delegate;
         gameNameView.setDelegate(delegate);
     }
@@ -52,7 +56,7 @@ public class GameSettingsEditorView implements IGameSettingsEditorView, IGameSet
 
     @Override
     public void updateGameName (String name) {
-        this.gameNameView.updateGameName(name);
+        this.gameNameView.updateName(name);
     }
 
     @Override
@@ -87,7 +91,6 @@ public class GameSettingsEditorView implements IGameSettingsEditorView, IGameSet
 
     @Override
     public void setGameSettingsListDataSource (ListDataSource source) {
-        // TODO Auto-generated method stub
         System.out.println("Game settings doesn't have an image bank implemented!");
     }
 
@@ -104,6 +107,12 @@ public class GameSettingsEditorView implements IGameSettingsEditorView, IGameSet
     @Override
     public void updateSizeDisplay (double size) {
         // Don't worry about this
+    }
+
+    @Override
+    public void updateDeleteEntity (String entityID) {
+        // TODO Auto-generated method stub
+
     }
 
 }
