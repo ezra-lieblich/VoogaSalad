@@ -1,5 +1,11 @@
 package gameplayer.model.tower;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import engine.effect.player.GameEffect;
 import gameplayer.model.weapon.Weapon;
 
 public class Gun {
@@ -37,12 +43,24 @@ public class Gun {
 		return false;
 	}
 	
-	Weapon getWeapon(int targetID, double targetX, double targetY){
+	Weapon getWeapon(int targetID, double targetX, double targetY, Map<Integer, GameEffect> allEffects){
 		 String name = weaponType.getName(); 
 		 double demage = 50; // get from weapon type later
 		 String image = weaponType.getImagePath();
 		 double speedMag = weaponType.getSpeed();
-		 return new Weapon (name,  demage, targetX, targetY, image, this.attackingRange,targetID, this.xcoor,this.ycoor,speedMag );
+		 List<Integer> effects = weaponType.getEffects();
+		 HashMap<String, ArrayList<GameEffect>> weaponEffect = new HashMap<String,ArrayList<GameEffect>>();
+		 for(int i: effects){
+			 GameEffect ge = allEffects.get(i);
+			 String trigger = ge.getTtriggerClass(); // no method for get trigger class
+			 if(!weaponEffect.keySet().contains(trigger)){
+				 ArrayList<GameEffect> effectByTrigger = new ArrayList<GameEffect>();
+				 weaponEffect.put(trigger, effectByTrigger);
+			 }
+			 weaponEffect.get(trigger).add(ge);			 
+		 }
+		 
+		 return new Weapon (name,  demage, targetX, targetY, image, this.attackingRange,targetID, this.xcoor,this.ycoor,speedMag, weaponEffect );
 	}
 
 }
