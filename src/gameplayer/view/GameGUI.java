@@ -287,6 +287,7 @@ public class GameGUI {
 
 	public void reRenderEnemy(HashMap<Integer, Enemy> redraw) {
 		for (Enemy entity : redraw.values()) {
+			
 			ImageView image = new ImageView(entity.getImage());
 			image.setX(entity.getX());
 			image.setY(entity.getY());
@@ -305,6 +306,7 @@ public class GameGUI {
 	public void reRenderWeapon(HashMap<Integer, ImageView> weaponsOnScreen) {
 
 		for (Integer weapon : weaponsOnScreen.keySet()) {
+			System.out.println("size of weapons: " + weaponsOnScreen.size());
 			this.grid.getGrid().getChildren().add(weaponsOnScreen.get(weapon));
 
 		}

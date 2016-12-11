@@ -19,9 +19,10 @@ public class Weapon extends Observable implements IDrawable{
 	private double range;
 	private int targetEnemyID;
 	private double speedMag;
+	private int weaponTypeID;
 	
 	
-	public Weapon(String name,  double demage, double targetX, double targetY, String image,  double range, int targetID, double x, double y, double speedMag) {
+	public Weapon(String name,  double demage, double targetX, double targetY, String image,  double range, int targetID, double x, double y, double speedMag, int weaponTypeID) {
 		this.name = name;
 		this.damage = demage;
 		this.damage = 50;
@@ -36,11 +37,15 @@ public class Weapon extends Observable implements IDrawable{
 		this.targetEnemyID = targetID;
 		System.out.println("TARGET ENEMY IDDDDDD "+ this.targetEnemyID);
 		this.speedMag = speedMag;
+		this.weaponTypeID = weaponTypeID;
 	}
 	
 	
 	
 	// add boolean method out of range
+	public int getWeaponTypeID(){
+		return this.weaponTypeID;
+	}
 	
 	public int getTargetEnemyID() {
 		return this.targetEnemyID;

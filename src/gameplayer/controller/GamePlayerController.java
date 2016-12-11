@@ -27,6 +27,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -98,7 +99,7 @@ public class GamePlayerController implements Observer {
 	private HashMap<Integer, ImageView> weaponsOnScreen;
 	private HashMap<Integer, ImageView> enemiesOnScreen; 
 	private HashMap<Integer, ImageView> towersOnScreen; 
-	
+	private HashMap<String, Image> imageBank;
 
 	public GamePlayerController(String xmlFilePath) {
 		// use xml parser to create classes.
@@ -118,6 +119,8 @@ public class GamePlayerController implements Observer {
 		this.animation = new Timeline();
 		this.graphics = new GraphicsLibrary();
 		this.enemyManager = this.enemyController.getEnemyModel();
+		this.imageBank = new HashMap<String, Image>();
+		createImageBank();
 		this.gameSavingController = new GameSavingController(this.model);
 		//this.gameSavingController.saveGame();
 	}
@@ -385,29 +388,31 @@ public class GamePlayerController implements Observer {
 
 	private void redrawEverything() {
 		// redraw path
-		// this.view.getGrid().populatePath(this.model.getGrid().getStartPoint());
+//		 this.view.getGrid().populatePath(this.model.getGrid().getStartPoint());
 		this.view.getGrid().getGrid().getChildren().addAll(this.view.getGrid().getPathImages());
 
 		HashMap<Integer, Enemy> enemyRedraw = this.enemyManager.getEnemyOnGrid();
 		Map<Integer, Tower> towerRedraw = this.model.getTowerOnGrid();
 		HashMap<Integer, Weapon> bulletRedraw = this.model.getWeaponManager().getWeaponOnGrid();
-
 		for (int i : bulletRedraw.keySet()) {
 			if (!weaponsOnScreen.containsKey(bulletRedraw.get(i).getUniqueID())) {
-				ImageView image = new ImageView(graphics.createImage(bulletRedraw.get(i).getImage()));
+				Image ii = imageBank.get("Weapon " + bulletRedraw.get(i).getWeaponTypeID());
+				ImageView image = new ImageView(ii);
+				graphics.setImageViewParams(image, DragDropView.DEFENSIVEWIDTH * 0.5,
+						DragDropView.DEFENSIVEHEIGHT * 0.5);
 				image.setCache(true);
 				image.setCacheHint(CacheHint.SPEED);
 				image.setX(bulletRedraw.get(i).getX());
 				image.setY(bulletRedraw.get(i).getY());
-				graphics.setImageViewParams(image, DragDropView.DEFENSIVEWIDTH * 0.5,
-						DragDropView.DEFENSIVEHEIGHT * 0.5);
 				weaponsOnScreen.put(bulletRedraw.get(i).getUniqueID(), image);
+				
+//				this.view.getGrid().getGrid().getChildren().add(weaponsOnScreen.get(i));
 			} else {
 				weaponsOnScreen.get(bulletRedraw.get(i).getUniqueID()).setX(bulletRedraw.get(i).getX());
 				weaponsOnScreen.get(bulletRedraw.get(i).getUniqueID()).setY(bulletRedraw.get(i).getY());
 			}
-
 		}
+
 
 		//List<IDrawable> reEnemyDraw = convertEnemyDrawable(enemyRedraw);
 		//List<IDrawable> reTowerDraw = convertTowerDrawable(towerRedraw);
@@ -420,6 +425,19 @@ public class GamePlayerController implements Observer {
 	public Timeline getTimeline() {
 		return this.animation;
 	}
-
 	
+	public HashMap<String, Image> createImageBank(){
+		Map<Integer, engine.tower.Tower> towers = this.loader.getTowers();
+		
+		for(int i : towers.keySet()){
+			Image image = graphics.createImage(towers.get(i).getImagePath());
+			imageBank.put("Tower " + i, image);
+		}
+		Map<Integer, engine.weapon.Weapon> weapons = this.loader.getWeaponBank();
+		for(int i : weapons.keySet()){
+			Image image = graphics.createImage(weapons.get(i).getImagePath());
+			imageBank.put("Weapon " + i, image);
+		}
+		return imageBank;
+	}
 }
