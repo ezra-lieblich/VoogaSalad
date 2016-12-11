@@ -284,6 +284,7 @@ public class GamePlayerController implements Observer {
 
 		KeyFrame frame = new KeyFrame(Duration.millis(/*this.enemyFrequency*/ MILLISECOND_DELAY), e -> {
 			((Pane) this.view.getGrid().getGrid()).getChildren().clear(); 
+			this.weaponsOnScreen = new HashMap<>(); 
 
 			// trying to get this to work but null pointer
 			if (currentWave.size() != 0) {

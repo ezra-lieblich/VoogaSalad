@@ -2,6 +2,7 @@ package gameplayer.model.weapon;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Observable;
 
@@ -59,8 +60,9 @@ public class WeaponManager extends Observable{
 		}
 		System.out.println("weaponsOnGrid Size: "+weaponOnGrid.size());
 
-		
-		for (int i : weaponOnGrid.keySet()) {
+		Iterator<Integer>weaponOnGridIterate = weaponOnGrid.keySet().iterator(); 
+		while(weaponOnGridIterate.hasNext()){
+			Integer i = weaponOnGridIterate.next();
 			Weapon w = weaponOnGrid.get(i);
 			System.out.println("weaponsOnGrid Size: "+weaponOnGrid.size());
 				
@@ -71,9 +73,9 @@ public class WeaponManager extends Observable{
 				w.setY(w.getSpeedY() + w.getY());
 			}
 
-//			if (!this.gameData.coordinateInBound(w.getX(), w.getY()) || !w.inRange()) {
-//				this.weaponOnGrid.remove(i);
-//			}
+			if (!this.gameData.coordinateInBound(w.getX(), w.getY())) {
+				weaponOnGridIterate.remove();
+			}
 		}
 
 		setChanged();
