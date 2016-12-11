@@ -18,6 +18,8 @@ public interface IGameSettingsUpdateView extends IGameSettingsSetView, IUpdateVi
     public void updateGridSize (int size);
     
     public void updatePathList (List<Integer> pathList);
+    
+    public void updatePathType (String pathType);
 
     public void updateWinningConditions (List<String> winningConditions);
 

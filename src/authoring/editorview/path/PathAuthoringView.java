@@ -53,6 +53,8 @@ public class PathAuthoringView implements IPathUpdateView {
 
     public PathAuthoringView (int aWidth, int aHeight) {
         
+    	pathView = new GridPane();
+    	
     	pathEditor = new PathEditorView(EDITOR_SIZE);
     	pathDesign = new PathDesignView();
     	buildView();
@@ -104,7 +106,7 @@ public class PathAuthoringView implements IPathUpdateView {
         pathView.getRowConstraints().add(fullRow);
         
         pathView.add(pathEditor.getInstanceAsNode(), 0, 0);
-        pathView.add(pathDesign.getInstanceAsNode(), 1, 0);
+        //pathView.add(pathDesign.getInstanceAsNode(), 1, 0);
     }
     
     

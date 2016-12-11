@@ -15,14 +15,15 @@ public class PathEditorView implements IPathSetView {
     public PathEditorView (int size) {
     	root = new VBox(10);
     	
+    	
+    	
     	this.pathImageView = new PathImageView();
 
     }
 
 	@Override
 	public Node getInstanceAsNode() {
-		// TODO Auto-generated method stub
-		return null;
+		return root;
 	}
 
 	@Override
