@@ -25,6 +25,7 @@ import javafx.scene.layout.BorderPane;
  */
 
 public class EnemyAuthoringView implements IEnemyUpdateView {
+    @SuppressWarnings("unused")
     private EnemyAuthoringViewDelegate delegate;
     private BorderPane enemyEditorView;
     private EnemyImageBank enemyBank;
@@ -42,7 +43,6 @@ public class EnemyAuthoringView implements IEnemyUpdateView {
     public EnemyAuthoringView () {
         String ENEMY_EFFECT_RESOURCE_PATH = "resources/GameAuthoringEnemy";
         ResourceBundle labelsResource = ResourceBundle.getBundle(ENEMY_EFFECT_RESOURCE_PATH);
-        ResourceBundle dialogueBoxResource = ResourceBundle.getBundle("resources/DialogueBox");
 
         enemyEditorView = new BorderPane();
         enemyBank = new EnemyImageBank();
@@ -146,13 +146,21 @@ public class EnemyAuthoringView implements IEnemyUpdateView {
 
     @Override
     public void deleteEnemy () {
-        // TODO Auto-generated method stub
-
+        enemyEffectView.clearView();
+        System.out.println("Getting here");
     }
 
     @Override
     public void updateBank (List<Integer> ids) {
         this.enemyBank.updateBank(ids);
+        System.out.println(ids.size());
+        //enemyEffectView.clearView();
+    }
+
+    @Override
+    public void updateDeleteEntity (String entityID) {
+        // TODO Auto-generated method stub
+        
     }
 
 }

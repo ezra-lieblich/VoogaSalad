@@ -163,4 +163,10 @@ public class WeaponAuthoringView implements IWeaponUpdateView {
         this.weaponBank.setListDataSource(source);
     }
 
+    @Override
+    public void updateDeleteEntity (String entityID) {
+        // TODO Auto-generated method stub
+
+    }
+
 }

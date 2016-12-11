@@ -10,7 +10,6 @@ import engine.level.wave.Wave;
 import engine.level.wave.WaveManager;
 import engine.level.wave.WaveTypeComparator;
 import engine.observer.ObservableList;
-import engine.observer.ObservableMap;
 import engine.observer.ObservableObjectProperty;
 import engine.observer.ObservableProperty;
 
