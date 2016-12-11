@@ -20,14 +20,20 @@ public class GameModeTypeBuilder extends AbstractTypeBuilder<GameMode, GameModeB
     public static final String[] DEFAULT_WINNING_CONDITIONS = new String[]{};
     public static final String[] DEFAULT_LOSING_CONDITIONS = new String[]{};
     public static final String DEFAULT_GAME_TYPE = "Normal";
-    public static final double DEFAULT_INITIAL_LIVES = 1;
-    public static final double DEFAULT_INITIAL_MONEY = 5000;
+    public static final int DEFAULT_INITIAL_LIVES = 1;
+    public static final int DEFAULT_INITIAL_MONEY = 5000;
+    public static final String DEFAULT_PATH_TYPE = "Set";
+    public static final int DEFAULT_GRID_SIZE = 10;
+    public static final Integer[] DEFAULT_PATHS = new Integer[]{};
     
     private ObservableProperty<String> gameType;
     private ObservableList<String> winningConditions;
     private ObservableList<String> losingConditions;
-    private ObservableProperty<Double> initialLives;
-    private ObservableProperty<Double> initialMoney;
+    private ObservableProperty<Integer> initialLives;
+    private ObservableProperty<Integer> initialMoney;
+    private ObservableProperty<String> pathType;
+    private ObservableProperty<Integer> gridSize;
+    private ObservableList<Integer> paths;
 	
 	public GameModeTypeBuilder() {
 		super(DEFAULT_NAME, DEFAULT_IMAGE_PATH, DEFAULT_SIZE);
@@ -52,17 +58,36 @@ public class GameModeTypeBuilder extends AbstractTypeBuilder<GameMode, GameModeB
 	}
 
 	@Override
-	public GameModeBuilder addInitialLivesListener(BiConsumer<Double, Double> listener) {
+	public GameModeBuilder addInitialLivesListener(BiConsumer<Integer, Integer> listener) {
 		initialLives.addListener(listener);
 		return this;
 	}
 
 	@Override
-	public GameModeBuilder addInitialMoneyListener(BiConsumer<Double, Double> listener) {
+	public GameModeBuilder addInitialMoneyListener(BiConsumer<Integer, Integer> listener) {
 		initialMoney.addListener(listener);
 		return this;
 	}
 
+	@Override
+	public GameModeBuilder addGridSizeListener(BiConsumer<Integer, Integer> listener) {
+		gridSize.addListener(listener);
+		return this;
+	}
+
+	@Override
+	public GameModeBuilder addPathTypeListener(BiConsumer<String, String> listener) {
+		pathType.addListener(listener);
+		return this;
+	}
+
+	@Override
+	public GameModeBuilder addPathListener(BiConsumer<List<Integer>, List<Integer>> listener) {
+		paths.addListener(listener);
+		return this;
+	}
+
+	
 	@Override
 	public ObservableList<String> getWinningConditions() {
 		return winningConditions;
@@ -74,18 +99,33 @@ public class GameModeTypeBuilder extends AbstractTypeBuilder<GameMode, GameModeB
 	}
 
 	@Override
-	public ObservableProperty<Double> getInitalLives() {
+	public ObservableProperty<Integer> getInitalLives() {
 		return initialLives;
 	}
 
 	@Override
-	public ObservableProperty<Double> getInitialMoney() {
+	public ObservableProperty<Integer> getInitialMoney() {
 		return initialMoney;
 	}
 
 	@Override
 	public ObservableProperty<String> getGameType() {
 		return gameType;
+	}
+
+	@Override
+	public ObservableProperty<String> getPathType() {
+		return pathType;
+	}
+
+	@Override
+	public ObservableProperty<Integer> getGridSize() {
+		return gridSize;
+	}
+
+	@Override
+	public ObservableList<Integer> getPaths() {
+		return paths;
 	}
 
 	@Override
@@ -107,17 +147,35 @@ public class GameModeTypeBuilder extends AbstractTypeBuilder<GameMode, GameModeB
 	}
 
 	@Override
-	public GameModeBuilder buildInitialLives(double lives) {
+	public GameModeBuilder buildInitialLives(int lives) {
 		this.initialLives.setProperty(lives);
 		return this;
 	}
 
 	@Override
-	public GameModeBuilder buildInitialMoney(double money) {
+	public GameModeBuilder buildInitialMoney(int money) {
 		this.initialMoney.setProperty(money);
 		return this;
 	}
 
+	@Override
+	public GameModeBuilder buildGridSize(int size) {
+		this.gridSize.setProperty(size);
+		return this;
+	}
+
+	@Override
+	public GameModeBuilder buildPaths(List<Integer> paths) {
+		this.paths.setProperty(paths);
+		return this;
+	}
+
+	@Override
+	public GameModeBuilder buildPathType(String pathType) {
+		this.pathType.setProperty(pathType);
+		return this;
+	}
+	
 	@Override
 	protected GameMode create() {
 		return new GameModeType(this);
@@ -128,8 +186,11 @@ public class GameModeTypeBuilder extends AbstractTypeBuilder<GameMode, GameModeB
 		this.winningConditions = new ObservableListProperty<String>(Arrays.stream(DEFAULT_WINNING_CONDITIONS).collect(Collectors.toList()));
 		this.losingConditions = new ObservableListProperty<String>(Arrays.stream(DEFAULT_LOSING_CONDITIONS).collect(Collectors.toList()));
 		this.gameType = new ObservableObjectProperty<String>(DEFAULT_GAME_TYPE);
-		this.initialLives = new ObservableObjectProperty<Double>(DEFAULT_INITIAL_LIVES);
-		this.initialMoney = new ObservableObjectProperty<Double>(DEFAULT_INITIAL_MONEY);
+		this.initialLives = new ObservableObjectProperty<Integer>(DEFAULT_INITIAL_LIVES);
+		this.initialMoney = new ObservableObjectProperty<Integer>(DEFAULT_INITIAL_MONEY);
+		this.gridSize = new ObservableObjectProperty<Integer>(DEFAULT_GRID_SIZE);
+		this.paths = new ObservableListProperty<Integer>(Arrays.stream(DEFAULT_PATHS).collect(Collectors.toList()));
+		this.pathType = new ObservableObjectProperty<String>(DEFAULT_PATH_TYPE);
 	}
 
 	@Override
@@ -144,7 +205,9 @@ public class GameModeTypeBuilder extends AbstractTypeBuilder<GameMode, GameModeB
 		.buildInitialLives(type.getInitalLives())
 		.buildInitialMoney(type.getInitialMoney())
 		.buildLosingConditions(type.getLosingConditions())
-		.buildWinningConditions(type.getWinningConditions());
+		.buildWinningConditions(type.getWinningConditions())
+		.buildGridSize(type.getGridSize())
+		.buildPaths(type.getPaths())
+		.buildPathType(type.getPathType());
 	}
-
 }

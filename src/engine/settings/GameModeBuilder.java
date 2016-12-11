@@ -9,7 +9,10 @@ public interface GameModeBuilder extends TypeBuilder<GameMode, GameModeBuilder>,
 	GameModeBuilder buildWinningConditions(List<String> winningConditions);
 	GameModeBuilder buildLosingConditions(List<String> losingConditions);
 	GameModeBuilder buildGameType(String gameType);
-	GameModeBuilder buildInitialLives(double lives);
-	GameModeBuilder buildInitialMoney(double money);
+	GameModeBuilder buildInitialLives(int lives);
+	GameModeBuilder buildInitialMoney(int money);
+	GameModeBuilder buildPathType(String pathType);
+	GameModeBuilder buildGridSize(int size);
+	GameModeBuilder buildPaths(List<Integer> paths);
 
 }
