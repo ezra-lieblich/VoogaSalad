@@ -139,6 +139,12 @@ public class GameSettingsAuthoringView implements IGameSettingsUpdateView, IGame
 		
 	}
 
+	@Override
+	public Integer getNearestAvailableItemID(int id) {
+		System.out.println("No game settings bank implemented");
+		return null;
+	}
+
 	
 
 }
