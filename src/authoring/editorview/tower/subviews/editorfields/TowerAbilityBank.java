@@ -2,7 +2,7 @@ package authoring.editorview.tower.subviews.editorfields;
 
 import java.util.ResourceBundle;
 import authoring.editorview.tower.ITowerSetView;
-import authoring.editorview.tower.TowerEditorViewDelegate;
+import authoring.editorview.tower.TowerAuthoringViewDelegate;
 import javafx.scene.Node;
 import javafx.scene.layout.HBox;
 
@@ -15,16 +15,17 @@ import javafx.scene.layout.HBox;
 public class TowerAbilityBank implements ITowerSetView {
 
     private HBox towerAbilityBox;
-    private TowerEditorViewDelegate delegate;
-    private ResourceBundle labelsResource;
+    @SuppressWarnings("unused")
+    private TowerAuthoringViewDelegate delegate;
+    // private ResourceBundle labelsResource;
 
     public TowerAbilityBank (ResourceBundle labelsResource) {
-        this.labelsResource = labelsResource;
+        // this.labelsResource = labelsResource;
         towerAbilityBox = new HBox(5);
     }
 
     @Override
-    public void setDelegate (TowerEditorViewDelegate delegate) {
+    public void setDelegate (TowerAuthoringViewDelegate delegate) {
         this.delegate = delegate;
     }
 

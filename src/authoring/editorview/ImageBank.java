@@ -52,6 +52,20 @@ public abstract class ImageBank implements ChangeListener<Number> {
         return listView;
     }
 
+    public void updateBank() {
+    	ArrayList<Integer> idCopy = (ArrayList<Integer>) this.itemIDs.clone();
+    	int i = 0;
+    	while (i < idCopy.size()){
+    		if (idCopy.get(i).equals(-1)){
+    			idCopy.remove(i);
+    		}
+    		else{
+    			i++;
+    		}
+    	}
+    	this.updateBank(idCopy);
+    }
+    
     public void updateBank (List<Integer> ids) {
         if (dataSource == null) {
             System.out.println("Table data source not set");
@@ -59,14 +73,16 @@ public abstract class ImageBank implements ChangeListener<Number> {
         }
         this.items.remove(1, items.size());
         itemIDs = new ArrayList<Integer>();
-        for (int i = 0; i <= Collections.max(ids) + 1; i++)
-            itemIDs.add(-1);
+        if (ids.size() != 0) {
+            for (int i = 0; i <= Collections.max(ids) + 1; i++)
+                itemIDs.add(-1);
+        }
         for (int i = 0; i < ids.size(); i++) {
             ListCellData cellData = dataSource.getCellDataForSubject(ids.get(i));
             Node cell = createCellFromData(cellData);
             items.add(cell);
-            //itemIDs.set(cellData.getId(), items.size()-1);
-            itemIDs.set(items.size()-1, cellData.getId());
+            // itemIDs.set(cellData.getId(), items.size()-1);
+            itemIDs.set(items.size() - 1, cellData.getId());
         }
     }
 

@@ -30,7 +30,7 @@ public class EditorTabPane implements IEditorTabPane {
     private List<String> tabNames;
 
     public EditorTabPane (int width, int height, List<String> tabs) {
-        viewToOpen = "Enemy"; // default, change this later
+        viewToOpen = "Setup"; // default, change this later
         tabPane = new TabPane();
         tabNames = tabs;
         tabPane.setSide(Side.RIGHT);
@@ -55,7 +55,7 @@ public class EditorTabPane implements IEditorTabPane {
                     if (new_toggle.isSelected()) {
                     }
                 });
-
+        
         for(String name: tabNames) {
             ToggleButton button = buildButton(name, name.toLowerCase() + ".png",
                                               event -> delegate.userSelectedTab(name));

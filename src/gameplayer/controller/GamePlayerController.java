@@ -53,7 +53,6 @@ import java.util.Timer;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
-import chrriis.dj.nativeswing.swtimpl.components.JWebBrowser;
 
 public class GamePlayerController implements Observer {
 

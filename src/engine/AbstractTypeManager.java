@@ -54,6 +54,17 @@ public abstract class AbstractTypeManager<E extends Type> extends AbstractObserv
     public List<Integer> getEntityIds () {
         return Collections.unmodifiableList(new ArrayList<Integer>(data.getProperty().keySet()));
     }
+    
+    @Override
+    public void setEntities(Map<Integer, E> entities) {
+    	this.data.setProperty(entities);
+        //this.data = new ObservableMapProperty<Integer, E>(entities);
+    }
+    
+    @Override
+    public int getMaxId() {
+        return getEntityIds().isEmpty() ? -1 : Collections.max(getEntityIds());
+    }
 
     // protected <U> U getFromEntity(Supplier<U> getter) {
     // return getter.get();
@@ -131,7 +142,7 @@ public abstract class AbstractTypeManager<E extends Type> extends AbstractObserv
     
     @Override
     public Map<Integer, E> getEntities() {
-        return data.getProperty();
+        return Collections.unmodifiableMap(data.getProperty());
     }
 
 }
