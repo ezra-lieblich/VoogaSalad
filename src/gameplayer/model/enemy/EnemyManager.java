@@ -40,8 +40,10 @@ public class EnemyManager extends Observable {
 	public EnemyManager(GamePlayData gameData) {
 		this.gameData = gameData;
 		this.gameFactory = gameData.getFactory();
-		initializeNewLevel();
 		this.graphicLib = new GraphicsLibrary();
+		this.allWaveFrequencies = new LinkedList<Double>();
+		this.allWaveStartTimes = new LinkedList<Double>();
+		initializeNewLevel();
 	}
 
 	public void initializeNewLevel(){
@@ -54,6 +56,8 @@ public class EnemyManager extends Observable {
 	}
 	
 	private void initializeWaves() {
+		System.out.println("Does all WaveStartTimes exist?");
+		System.out.println(allWaveStartTimes);
 		allWaves.forEach(w -> allWaveStartTimes.add(w.getStartTime()));
 		allWaves.forEach(w -> allWaveFrequencies.add(w.getFrequency()));
 	}

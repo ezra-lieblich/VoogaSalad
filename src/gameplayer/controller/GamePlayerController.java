@@ -312,7 +312,7 @@ public class GamePlayerController implements Observer {
 
 	private void getNewWaveOnInterval() {
 		double nextWaveStartTime = this.enemyController.getEnemyModel().getTimeOfNextWave(); //uncomment later
-		
+		System.out.println("Time of next wave: "+nextWaveStartTime);
 		//double nextWaveStartTime = 0; //comment out later
 		while (elapsedTime < nextWaveStartTime) {
 			elapsedTime = (new Date()).getTime() - startTime;
