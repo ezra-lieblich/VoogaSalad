@@ -1,9 +1,7 @@
 package engine.level;
 
 import java.util.List;
-import java.util.Map;
 import engine.TypeBuilder;
-import engine.level.wave.Wave;
 import engine.level.wave.WaveManager;
 
 

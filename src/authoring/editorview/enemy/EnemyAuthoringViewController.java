@@ -128,8 +128,7 @@ public class EnemyAuthoringViewController extends EditorViewController
 
     @Override
     public void onUserPressedDeleteEnemy () {
-        // TODO Auto-generated method stub
-
+        enemyDataSource.deleteType(currentEnemyID);
     }
 
     @Override

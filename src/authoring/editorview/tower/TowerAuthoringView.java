@@ -24,6 +24,7 @@ import javafx.scene.layout.BorderPane;
  *
  */
 public class TowerAuthoringView implements ITowerUpdateView {
+    @SuppressWarnings("unused")
     private TowerAuthoringViewDelegate delegate;
     private BorderPane towerEditorView;
     private TowerImageBank towerBank;
@@ -157,5 +158,11 @@ public class TowerAuthoringView implements ITowerUpdateView {
     @Override
     public void setTowerListDataSource (ListDataSource source) {
         this.towerBank.setListDataSource(source);
+    }
+
+    @Override
+    public void updateDeleteEntity (String entityID) {
+        // TODO Auto-generated method stub
+        
     }
 }

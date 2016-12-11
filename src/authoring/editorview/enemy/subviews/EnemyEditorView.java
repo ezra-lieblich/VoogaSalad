@@ -103,6 +103,10 @@ public class EnemyEditorView extends PhotoFileChooser implements IEnemySetView {
         vbox.getChildren().add(enemyRewardPoints.getInstanceAsNode());
     }
 
+    public void clearView () {
+        vbox.getChildren().clear();
+    }
+
     @Override
     public void setDelegate (EnemyAuthoringViewDelegate delegate) {
         this.delegate = delegate;

@@ -1,10 +1,7 @@
 package authoring.editorview.level;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 import authoring.editorview.EditorViewController;
-import authoring.editorview.path.NameIdPair;
 import authoring.utilityfactories.DialogueBoxFactory;
 import engine.enemy.EnemyManagerController;
 import engine.level.LevelManagerController;
@@ -24,10 +21,8 @@ public class LevelAuthoringViewController extends EditorViewController
     private EnemyManagerController enemyDataSource;
     private int currentLevelID;
     private int currentWaveID;
-    private List<NameIdPair> nameIDList;
 
     public LevelAuthoringViewController (int editorWidth, int editorHeight) {
-        nameIDList = new ArrayList<NameIdPair>();
         levelView = LevelAuthoringViewFactory.build(editorWidth, editorHeight);
         levelView.setDelegate(this);
         this.view = levelView;
@@ -41,21 +36,6 @@ public class LevelAuthoringViewController extends EditorViewController
 
     public void setEnemyDataSource (EnemyManagerController source) {
         this.enemyDataSource = source;
-    }
-
-    private void getCreatedEnemies () {
-        List<Integer> enemyCreatedIDs = enemyDataSource.getCreatedTypeIds();
-        nameIDList.clear();
-        for (int id : enemyCreatedIDs) {
-            String curName = enemyDataSource.getName(id);
-            NameIdPair newPair = new NameIdPair(curName, id);
-            nameIDList.add(newPair);
-        }
-    }
-
-    private List<NameIdPair> getWaveList () {
-        getCreatedEnemies();
-        return nameIDList;
     }
 
     @Override
@@ -84,7 +64,7 @@ public class LevelAuthoringViewController extends EditorViewController
         levelView.updateRewardMoney(levelDataSource.getRewardMoney(currentLevelID));
         levelView.updateRewardScore(levelDataSource.getRewardScore(currentLevelID));
         levelView.updateNameDisplay(levelDataSource.getName(currentLevelID));
-        levelView.updateEnemyNames(getWaveList());
+        levelView.updateWaves(levelDataSource.getWaves(currentLevelID));
     }
 
     @Override
@@ -120,8 +100,6 @@ public class LevelAuthoringViewController extends EditorViewController
     public void onUserEnteredAddWave () {
         currentWaveID = levelDataSource.createWave(currentLevelID, levelView);
         // levelView.updateNumberOfEnemies(levelDataSource.getenem);
-        levelView.updateEnemyFrequency(levelDataSource.getWaveFrequency(currentLevelID,
-                                                                        currentWaveID));
     }
 
     @Override

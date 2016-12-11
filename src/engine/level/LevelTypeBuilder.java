@@ -1,19 +1,14 @@
 package engine.level;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
 import engine.AbstractTypeBuilder;
-import engine.level.wave.Wave;
 import engine.level.wave.WaveManager;
 import engine.level.wave.WaveTypeManager;
 import engine.observer.ObservableList;
 import engine.observer.ObservableListProperty;
-import engine.observer.ObservableMap;
-import engine.observer.ObservableMapProperty;
 import engine.observer.ObservableObjectProperty;
 import engine.observer.ObservableProperty;
 

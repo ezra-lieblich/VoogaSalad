@@ -3,6 +3,7 @@ package authoring.editorview.level.subviews;
 import java.util.List;
 import java.util.ResourceBundle;
 import authoring.editorview.level.WaveObject;
+import engine.level.wave.Wave;
 import authoring.editorview.level.ILevelSetView;
 import authoring.editorview.level.LevelAuthoringViewDelegate;
 import javafx.collections.FXCollections;
@@ -73,18 +74,18 @@ public class WaveTableView implements ILevelSetView {
         this.delegate = delegate;
     }
 
-    private void setData (List<WaveObject> waves) {
+    private void setData (List<Wave> waves) {
         data.clear();
-        for (WaveObject n : waves) {
-            WaveObject temp =
-                    new WaveObject(n.getWaveNumber(), n.getEnemyName(), n.getNumOfEnemies(),
-                                   n.getEnemyFrequency(), n.getPath(), n.getTimeDelay());
-            data.add(temp);
-        }
+//        for (WaveObject n : waves) {
+//            WaveObject temp =
+//                    new WaveObject(n.getWaveNumber(), n.getEnemyName(), n.getNumOfEnemies(),
+//                                   n.getEnemyFrequency(), n.getPath(), n.getTimeDelay());
+//            data.add(temp);
+//        }
     }
 
     @SuppressWarnings("unchecked")
-    public void updateWaveTableView (List<WaveObject> waves) {
+    public void updateWaveTableView (List<Wave> waves) {
         setData(waves);
         waveTable.getColumns().clear();
         waveTable.setItems(data);

@@ -19,15 +19,16 @@ import javafx.scene.image.ImageView;
 
 public class TowerImageView implements ITowerSetView {
 
+    @SuppressWarnings("unused")
     private TowerAuthoringViewDelegate delegate;
     private String imagePath;
     private ImageView towerImage;
-    private ResourceBundle labelsResource;
+    // private ResourceBundle labelsResource;
 
     private final int CHARACTER_SIZE = 250;
 
     public TowerImageView (ResourceBundle labelsResource) {
-        this.labelsResource = labelsResource;
+        // this.labelsResource = labelsResource;
         towerImage = new ImageView();
         towerImage.setFitHeight(CHARACTER_SIZE);
         towerImage.setFitWidth(CHARACTER_SIZE);
