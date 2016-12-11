@@ -12,7 +12,7 @@ import java.util.ResourceBundle;
 import authoring.editorview.path.IPathSetView;
 
 import authoring.editorview.path.NameIdPair;
-import authoring.editorview.path.PathEditorViewDelegate;
+import authoring.editorview.path.PathAuthoringViewDelegate;
 import authoring.utilityfactories.ComboBoxFactory;
 
 
@@ -26,7 +26,7 @@ import authoring.utilityfactories.ComboBoxFactory;
 public class PathChooser implements IPathSetView{
 	
 	private VBox root;
-	private PathEditorViewDelegate delegate;
+	private PathAuthoringViewDelegate delegate;
 	private List<NameIdPair> nameIdList;
 	private ObservableList<Object> pathList;
 	private ComboBox<Object> pathComboBox;
@@ -49,7 +49,7 @@ public class PathChooser implements IPathSetView{
 			   
 	}
 	
-	public void setDelegate(PathEditorViewDelegate delegate){
+	public void setDelegate(PathAuthoringViewDelegate delegate){
 		this.delegate = delegate;
 	}
 	

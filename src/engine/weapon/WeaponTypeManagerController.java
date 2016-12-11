@@ -1,13 +1,13 @@
 package engine.weapon;
 
 import java.util.List;
-import authoring.editorview.weapon.IWeaponEditorView;
+import authoring.editorview.weapon.IWeaponUpdateView;
 import engine.AbstractTypeManagerController;
 import engine.ManagerMediator;
 
 
 public class WeaponTypeManagerController extends
-        AbstractTypeManagerController<WeaponManager, WeaponBuilder, Weapon, IWeaponEditorView>
+        AbstractTypeManagerController<WeaponManager, WeaponBuilder, Weapon, IWeaponUpdateView>
         implements WeaponManagerController {
 
     public WeaponTypeManagerController (ManagerMediator managerMediator) {
@@ -15,7 +15,7 @@ public class WeaponTypeManagerController extends
     }
 
     @Override
-    protected WeaponBuilder constructTypeProperties (IWeaponEditorView weaponUpdater,
+    protected WeaponBuilder constructTypeProperties (IWeaponUpdateView weaponUpdater,
                                                      WeaponBuilder typeBuilder) {
         return typeBuilder
                 .addFireRateListener( (oldValue, newValue) -> weaponUpdater

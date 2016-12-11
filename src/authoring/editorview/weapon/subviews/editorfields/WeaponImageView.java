@@ -3,7 +3,7 @@ package authoring.editorview.weapon.subviews.editorfields;
 import java.io.File;
 import java.util.ResourceBundle;
 import authoring.editorview.weapon.IWeaponSetView;
-import authoring.editorview.weapon.WeaponEditorViewDelegate;
+import authoring.editorview.weapon.WeaponAuthoringViewDelegate;
 import authoring.utilityfactories.DialogueBoxFactory;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
@@ -15,9 +15,9 @@ import javafx.scene.image.ImageView;
  * @author Kayla Schulz
  *
  */
-public class WeaponImageView implements IWeaponSetView {
+public class WeaponImageView  implements IWeaponSetView {
 
-    private WeaponEditorViewDelegate delegate;
+    private WeaponAuthoringViewDelegate delegate;
     private ResourceBundle labelsResource;
     private String imagePath;
     private ImageView weaponImage;
@@ -57,7 +57,7 @@ public class WeaponImageView implements IWeaponSetView {
     }
 
     @Override
-    public void setDelegate (WeaponEditorViewDelegate delegate) {
+    public void setDelegate (WeaponAuthoringViewDelegate delegate) {
         this.delegate = delegate;
     }
 

@@ -56,12 +56,12 @@ public class LevelTypeBuilder extends AbstractTypeBuilder<Level, LevelBuilder>
         paths.addListener(listener);
         return this;
     }
-
+    
     @Override
-    public LevelBuilder addWaveListener (BiConsumer<WaveManager, WaveManager> listener) {
-        enemyCounts.addListener(listener);
-        return this;
-    }
+	public LevelBuilder addWaveListener(BiConsumer<WaveManager, WaveManager> listener) {
+    	enemyCounts.addListener(listener);
+      return this;
+	}
 
     @Override
     public LevelBuilder addRewardHealthListener (BiConsumer<Double, Double> listener) {
@@ -199,5 +199,7 @@ public class LevelTypeBuilder extends AbstractTypeBuilder<Level, LevelBuilder>
 		.buildRewardScore(type.getRewardScore())
 		.buildWaves(type.getWaveManager());
 	}
+
+	
 
 }

@@ -12,5 +12,5 @@ import authoring.editorview.IEditorView;
  */
 public interface ILevelSetView extends IEditorView {
 
-    public void setDelegate (LevelEditorViewDelegate delegate);
+    public void setDelegate (LevelAuthoringViewDelegate delegate);
 }

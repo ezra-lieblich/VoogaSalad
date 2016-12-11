@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import authoring.editorview.level.WaveObject;
 import authoring.editorview.level.ILevelSetView;
-import authoring.editorview.level.LevelEditorViewDelegate;
+import authoring.editorview.level.LevelAuthoringViewDelegate;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
@@ -25,7 +25,7 @@ public class WaveTableView implements ILevelSetView {
     private ObservableList<WaveObject> data;
 
     @SuppressWarnings("unused")
-    private LevelEditorViewDelegate delegate;
+    private LevelAuthoringViewDelegate delegate;
 
     public WaveTableView (ResourceBundle labelsResource, int width) {
         waveTable = new TableView<WaveObject>();
@@ -69,7 +69,7 @@ public class WaveTableView implements ILevelSetView {
     }
 
     @Override
-    public void setDelegate (LevelEditorViewDelegate delegate) {
+    public void setDelegate (LevelAuthoringViewDelegate delegate) {
         this.delegate = delegate;
     }
 

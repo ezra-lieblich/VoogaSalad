@@ -2,13 +2,13 @@ package engine.tower;
 
 import java.util.List;
 import com.oracle.webservices.internal.api.databinding.Databinding.Builder;
-import authoring.editorview.tower.ITowerEditorView;
+import authoring.editorview.tower.ITowerUpdateView;
 import engine.AbstractTypeManagerController;
 import engine.ManagerMediator;
 
 
 public class TowerTypeManagerController
-        extends AbstractTypeManagerController<TowerManager, TowerBuilder, Tower, ITowerEditorView>
+        extends AbstractTypeManagerController<TowerManager, TowerBuilder, Tower, ITowerUpdateView>
         implements TowerManagerController {
 
     public TowerTypeManagerController (ManagerMediator managerMediator) {
@@ -82,7 +82,7 @@ public class TowerTypeManagerController
 
     // TODO - edit createNewTower to work with both versions
     @Override
-    public int createTowerUpgrade (ITowerEditorView towerUpdater, int parentTowerID) {
+    public int createTowerUpgrade (ITowerUpdateView towerUpdater, int parentTowerID) {
         return getTypeManager().addUpgrade(constructType(towerUpdater), parentTowerID);
     }
 
@@ -92,7 +92,7 @@ public class TowerTypeManagerController
     }
 
     @Override
-    protected TowerBuilder constructTypeProperties (ITowerEditorView towerUpdater,
+    protected TowerBuilder constructTypeProperties (ITowerUpdateView towerUpdater,
                                                     TowerBuilder typeBuilder) {
         return typeBuilder
                 .addWeaponsListener( (oldValue, newValue) -> towerUpdater
