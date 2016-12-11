@@ -168,7 +168,9 @@ public class GamePlayerController implements Observer {
 		this.mainScene = view.init(this.model.getData().getGold(), this.model.getData().getLife(),
 				this.model.getData().getCurrentLevel(), this.model.getData().getScore(), getTowerImages());
 		this.view.getGrid().getGrid().setOnMouseClicked(e -> handleMouseClicked(e.getX(), e.getY()));
-
+		
+		System.out.println("line 172, gameplay controller: Is the grid null?");
+		System.out.println(model.getData().getGrid());
 		this.view.getGrid().populatePath(model.getData().getGrid().getStartPoint());
 		this.dropController = new DragDropController(this.view, this.model, this.getTowerImageMap());
 
@@ -321,6 +323,7 @@ public class GamePlayerController implements Observer {
 		}
 
 		if (elapsedTime >= nextWaveStartTime) {
+			System.out.println("Elapsed time is greater than next wave start time");
 			// get new wave, enemy frequency, and
 			this.enemyFrequency =this.enemyController.getEnemyModel().getFrequencyOfNextWave();
 			this.currentWave = this.enemyController.getEnemyModel().getPackOfEnemyComing();
