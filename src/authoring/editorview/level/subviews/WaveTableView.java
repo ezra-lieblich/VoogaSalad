@@ -44,13 +44,14 @@ public class WaveTableView implements ILevelSetView {
         pathCol = new TableColumn<WaveObject, String>("Path");
         timeDelayCol = new TableColumn<WaveObject, String>("Time Delay");
         waveNumberCol.setCellValueFactory(
-                                          new PropertyValueFactory<WaveObject, String>("id"));
+                                          new PropertyValueFactory<WaveObject, String>("waveNumber"));
         enemyNameCol.setCellValueFactory(
-                                         new PropertyValueFactory<WaveObject, String>("enemy"));
+                                         new PropertyValueFactory<WaveObject, String>("enemyName"));
         numEnemiesCol
-                .setCellValueFactory(new PropertyValueFactory<WaveObject, String>("count"));
+                .setCellValueFactory(new PropertyValueFactory<WaveObject, String>("enemyCount"));
         enemyFrequencyCol
-                .setCellValueFactory(new PropertyValueFactory<WaveObject, String>("frequency"));
+                .setCellValueFactory(new PropertyValueFactory<WaveObject, String>("enemyFrequency"));
+
         pathCol
                 .setCellValueFactory(new PropertyValueFactory<WaveObject, String>("path"));
         timeDelayCol
@@ -79,7 +80,6 @@ public class WaveTableView implements ILevelSetView {
                                    n.getFrequency(), n.getPath(), n.getStartTime());
             data.add(temp);
         }
-        waveTable.refresh();
     }
 
     @SuppressWarnings("unchecked")
