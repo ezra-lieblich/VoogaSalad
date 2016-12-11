@@ -12,6 +12,7 @@ public class CollisionEffectFactory extends AbstractEffectFactory {
     private Object collider;
     @EffectData
     private Object myself;
+    
     @EffectData
     private Enemy foe = new Enemy();
     
