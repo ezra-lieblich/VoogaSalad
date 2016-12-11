@@ -291,6 +291,7 @@ public class GamePlayerController implements Observer {
 			if (currentWave.size() != 0) {
 				if (timer % 15 == 0) {
 					Enemy enemy = currentWave.poll();
+
 					System.out.println("*************enemystart");
 					Cell current = enemy.getCurrentCell();
 					while(current!=null){
@@ -299,6 +300,7 @@ public class GamePlayerController implements Observer {
 					}
 					System.out.println("****************");
 					System.out.println("SDFSADLFHSDALFHSAD");
+					
 					this.enemyManager.spawnEnemy(enemy);
 					timer = 1;
 				} else {
@@ -322,7 +324,6 @@ public class GamePlayerController implements Observer {
 			redrawEnemy();
 		});
 	}
-	
 
 // TODO: Commented out to test enemies 
 //	private void getNewWaveOnInterval() {
@@ -345,6 +346,7 @@ public class GamePlayerController implements Observer {
 //		}
 //
 //	}
+
 
 
 	private void redrawEverything() {
