@@ -2,11 +2,14 @@ package gameplayer.model.enemy;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Queue;
 
+import engine.level.wave.Wave;
+import gameplayer.loader.EnemyFactory;
 import gameplayer.loader.GamePlayerFactory;
 import gameplayer.model.Cell;
 import gameplayer.model.GamePlayData;
@@ -20,6 +23,7 @@ public class EnemyManager extends Observable {
 
 	private HashMap<Integer, Enemy> enemyOnGrid; 
 	private GamePlayData gameData;
+	private GamePlayerFactory gameFactory;
 	private Grid grid;
 	private Cell current;
 	private Cell currentCopy;
@@ -27,14 +31,15 @@ public class EnemyManager extends Observable {
 	private GraphicsLibrary graphicLib;
 	private int uniqueEnemyID;
 
-	private List<Queue<Enemy>> allEnemyAtCurrentLevel;
-	private Queue<Enemy> currentWave;
-	private int waveNumber;
-	private Enemy upComingEnemy;
+	private Queue<Wave> allWaves;
+	private Queue<Double> allWaveStartTimes;
+	private Queue<Double> allWaveFrequencies;
+	
 
 
 	public EnemyManager(GamePlayData gameData) {
 		this.gameData = gameData;
+		this.gameFactory = gameData.getFactory();
 		initializeNewLevel();
 		this.graphicLib = new GraphicsLibrary();
 	}
@@ -44,11 +49,13 @@ public class EnemyManager extends Observable {
 		this.startCell = this.grid.getStartPoint();
 		this.uniqueEnemyID = 0;
 		this.enemyOnGrid = new HashMap<Integer, Enemy>();
-		waveNumber = 0;
-		this.allEnemyAtCurrentLevel = this.gameData.getFactory().getEnemy(this.gameData.getCurrentLevel());
-		currentWave = this.allEnemyAtCurrentLevel.get(waveNumber);
-		this.waveNumber++;
-		upComingEnemy = this.currentWave.poll();
+		this.allWaves = this.gameFactory.getWaves(this.gameData.getCurrentLevel());
+		initializeWaves();
+	}
+	
+	private void initializeWaves() {
+		allWaves.forEach(w -> allWaveStartTimes.add(w.getStartTime()));
+		allWaves.forEach(w -> allWaveFrequencies.add(w.getFrequency()));
 	}
 
 	public void setCurrentCell(Cell cell) {
@@ -182,9 +189,22 @@ public class EnemyManager extends Observable {
 		graphicLib.setImageViewParams(enemyImage, this.gameData.getCellWidth(),  this.gameData.getCellHeight());
 	}
 
-
+	public double getTimeOfNextWave() {
+		double timeInSeconds = this.allWaveStartTimes.poll();
+		double timeInMillis = timeInSeconds * 1000;
+		return timeInMillis;
+	}
+	
+	public double getFrequencyOfNextWave() {
+		double timeInSeconds = this.allWaveFrequencies.poll();
+		double timeInMillis = timeInSeconds * 1000;
+		return timeInMillis;
+	}
+	
 	public Queue<Enemy> getPackOfEnemyComing() {
-		return this.currentWave;
+		Wave wave = this.allWaves.poll();
+		return this.gameFactory.getWaveQueue(wave, this.gameData.getCurrentLevel());
+		
 	}
 
 }
