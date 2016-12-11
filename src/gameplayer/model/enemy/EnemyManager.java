@@ -56,6 +56,7 @@ public class EnemyManager extends Observable {
 	}
 	
 	private void initializeWaves() {
+
 		System.out.println("Does all WaveStartTimes exist?");
 		System.out.println(allWaveStartTimes);
 		allWaves.forEach(w -> allWaveStartTimes.add(w.getStartTime()));
@@ -207,8 +208,7 @@ public class EnemyManager extends Observable {
 	
 	public Queue<Enemy> getPackOfEnemyComing() {
 		Wave wave = this.allWaves.poll();
-		return this.gameFactory.getWaveQueue(wave, this.gameData.getCurrentLevel());
-		
+		return this.gameFactory.getIndividualWaveQueue(wave, this.gameData.getCurrentLevel());
 	}
 
 }
