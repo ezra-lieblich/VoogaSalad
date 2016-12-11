@@ -17,19 +17,20 @@ public class Gun {
 		this.ycoor = y; 
 	}
 	
-	double getx(){
+	public double getX(){
 		return this.xcoor;
 	}
 	
-	double gety(){
+	public double getY(){
 		return this.ycoor;
 	}
 	
-	double getRange(){
+	public double getRange(){
 		return this.attackingRange;
 	}
 	
-	boolean isFiring(){
+	public boolean isFiring(){
+		System.out.println("firingRate: "+firingRate);
 		fireCounter++;
 		if(fireCounter % firingRate == 0)
 			return true;
@@ -40,7 +41,8 @@ public class Gun {
 		 String name = weaponType.getName(); 
 		 double demage = 50; // get from weapon type later
 		 String image = weaponType.getImagePath();
-		 return new Weapon (name,  demage, targetX, targetY, image, this.attackingRange,targetID, this.xcoor,this.ycoor);
+		 double speedMag = weaponType.getSpeed();
+		 return new Weapon (name,  demage, targetX, targetY, image, this.attackingRange,targetID, this.xcoor,this.ycoor,speedMag );
 	}
 
 }

@@ -1,9 +1,11 @@
 package gameplayer.model;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Observable;
 
 import gameplayer.loader.*;
 import gameplayer.view.GridGUI;
+import statswrapper.Wrapper;
 
 public class GamePlayData  extends Observable{
 	private GamePlayerFactory factory;
@@ -17,6 +19,7 @@ public class GamePlayData  extends Observable{
 	private double gold;
 	private double lives;
 	private double numLevels; // reach level number winning the game
+	private double score;
 	
 
 	//CELL SIZE MUST BE INITIATED
@@ -36,6 +39,7 @@ public class GamePlayData  extends Observable{
 		this.gold = settingInfo.get("gold");
 		this.lives = settingInfo.get("lives");
 		this.currentLevel = 0;
+		this.score = 0;
 	}
 	
 	public void initializeLevelInfo() {
@@ -44,6 +48,8 @@ public class GamePlayData  extends Observable{
 		gridArray = this.grid.getGrid();
 		this.gridX = this.gridArray.length;
 		this.gridY = this.gridArray[0].length;
+		
+		// get level rewards and change current score, life, gold according
 	}
 
 	public GamePlayerFactory getFactory(){
@@ -60,7 +66,7 @@ public class GamePlayData  extends Observable{
 
 
 	public Grid getGrid() {
-		System.out.println("Successfully got grid");
+		//System.out.println("Successfully got grid");
 		this.grid = this.factory.getGrid(this.currentLevel);
 		return this.grid;
 	}
@@ -73,13 +79,30 @@ public class GamePlayData  extends Observable{
 		return (int) this.numLevels;
 	}
 
+	//@EffectMethod
 	public double getGold() {
 		return gold;
+	}
+	
+	public double getScore(){
+		return this.score;
+	}
+	
+	public void setScore(double additionalScore){
+		this.score += additionalScore;
+		setChanged();
+		notifyObservers();
 	}
 
 	public void setGold(double gold) {
 		System.out.println("Setting gold");
 		this.gold = gold;
+		try {
+			Wrapper.getInstance().updateGameScores("gold", Integer.toString((int)this.currentLevel), Double.toString(this.gold));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		setChanged();
 		notifyObservers();
 	}
@@ -91,6 +114,12 @@ public class GamePlayData  extends Observable{
 	// used by enemymodel
 	public void setLife(double life) {
 		this.lives = life;
+		try {
+			Wrapper.getInstance().updateGameScores("lives", Integer.toString((int)this.currentLevel), Double.toString(this.lives));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		setChanged();
 		notifyObservers();
 	}
