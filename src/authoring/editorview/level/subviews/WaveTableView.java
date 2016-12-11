@@ -8,10 +8,13 @@ import authoring.editorview.level.ILevelSetView;
 import authoring.editorview.level.LevelAuthoringViewDelegate;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 
 
 public class WaveTableView implements ILevelSetView {
@@ -19,7 +22,7 @@ public class WaveTableView implements ILevelSetView {
     private TableView<WaveObject> waveTable;
     private TableColumn<WaveObject, String> waveNumberCol;
     private TableColumn<WaveObject, String> enemyNameCol;
-    private TableColumn<WaveObject, String> numEnemiesCol;
+    private TableColumn<WaveObject, String> enemyCountCol;
     private TableColumn<WaveObject, String> enemyFrequencyCol;
     private TableColumn<WaveObject, String> pathCol;
     private TableColumn<WaveObject, String> timeDelayCol;
@@ -32,14 +35,16 @@ public class WaveTableView implements ILevelSetView {
         waveTable = new TableView<WaveObject>();
         data = FXCollections.observableArrayList();
         waveTable.setPrefWidth(width);
+        waveTable.setEditable(true);
         createTableColumns();
+        setEditableColumns();
     }
 
     @SuppressWarnings("unchecked")
     private void createTableColumns () {
         waveNumberCol = new TableColumn<WaveObject, String>("Wave Number");
         enemyNameCol = new TableColumn<WaveObject, String>("Enemy Name");
-        numEnemiesCol = new TableColumn<WaveObject, String>("Number of Enemies");
+        enemyCountCol = new TableColumn<WaveObject, String>("Number of Enemies");
         enemyFrequencyCol = new TableColumn<WaveObject, String>("Enemy Frequency");
         pathCol = new TableColumn<WaveObject, String>("Path");
         timeDelayCol = new TableColumn<WaveObject, String>("Time Delay");
@@ -47,7 +52,8 @@ public class WaveTableView implements ILevelSetView {
                                           new PropertyValueFactory<WaveObject, String>("waveNumber"));
         enemyNameCol.setCellValueFactory(
                                          new PropertyValueFactory<WaveObject, String>("enemyName"));
-        numEnemiesCol
+
+        enemyCountCol
                 .setCellValueFactory(new PropertyValueFactory<WaveObject, String>("numOfEnemies"));
         enemyFrequencyCol
                 .setCellValueFactory(new PropertyValueFactory<WaveObject, String>("enemyFrequency"));
@@ -57,9 +63,77 @@ public class WaveTableView implements ILevelSetView {
         timeDelayCol
                 .setCellValueFactory(new PropertyValueFactory<WaveObject, String>("timeDelay"));
 
-        waveTable.getColumns().addAll(waveNumberCol, enemyNameCol, numEnemiesCol,
+        waveTable.getColumns().addAll(waveNumberCol, enemyNameCol, enemyCountCol,
                                       enemyFrequencyCol, pathCol, timeDelayCol);
         waveTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+    }
+
+    private void setEditableColumns () {
+        enemyNameCol.setEditable(true);
+        enemyNameCol.setCellFactory(TextFieldTableCell.forTableColumn());
+        enemyNameCol.setOnEditCommit(
+                                     new EventHandler<CellEditEvent<WaveObject, String>>() {
+                                         @Override
+                                         public void handle (CellEditEvent<WaveObject, String> t) {
+                                             ((WaveObject) t.getTableView().getItems().get(
+                                                                                           t.getTablePosition()
+                                                                                                   .getRow()))
+                                                                                                           .setEnemyName(t
+                                                                                                                   .getNewValue());
+                                         }
+                                     });
+        enemyCountCol.setEditable(true);
+        enemyCountCol.setCellFactory(TextFieldTableCell.forTableColumn());
+        enemyCountCol.setOnEditCommit(
+                                      new EventHandler<CellEditEvent<WaveObject, String>>() {
+                                          @Override
+                                          public void handle (CellEditEvent<WaveObject, String> t) {
+                                              ((WaveObject) t.getTableView().getItems().get(
+                                                                                            t.getTablePosition()
+                                                                                                    .getRow()))
+                                                                                                            .setNumOfEnemies(t
+                                                                                                                    .getNewValue());
+                                          }
+                                      });
+        enemyFrequencyCol.setEditable(true);
+        enemyFrequencyCol.setCellFactory(TextFieldTableCell.forTableColumn());
+        enemyFrequencyCol.setOnEditCommit(
+                                          new EventHandler<CellEditEvent<WaveObject, String>>() {
+                                              @Override
+                                              public void handle (CellEditEvent<WaveObject, String> t) {
+                                                  ((WaveObject) t.getTableView().getItems().get(
+                                                                                                t.getTablePosition()
+                                                                                                        .getRow()))
+                                                                                                                .setEnemyFrequency(t
+                                                                                                                        .getNewValue());
+                                              }
+                                          });
+        pathCol.setEditable(true);
+        pathCol.setCellFactory(TextFieldTableCell.forTableColumn());
+        pathCol.setOnEditCommit(
+                                new EventHandler<CellEditEvent<WaveObject, String>>() {
+                                    @Override
+                                    public void handle (CellEditEvent<WaveObject, String> t) {
+                                        ((WaveObject) t.getTableView().getItems().get(
+                                                                                      t.getTablePosition()
+                                                                                              .getRow()))
+                                                                                                      .setPath(t
+                                                                                                              .getNewValue());
+                                    }
+                                });
+        timeDelayCol.setEditable(true);
+        timeDelayCol.setCellFactory(TextFieldTableCell.forTableColumn());
+        timeDelayCol.setOnEditCommit(
+                                     new EventHandler<CellEditEvent<WaveObject, String>>() {
+                                         @Override
+                                         public void handle (CellEditEvent<WaveObject, String> t) {
+                                             ((WaveObject) t.getTableView().getItems().get(
+                                                                                           t.getTablePosition()
+                                                                                                   .getRow()))
+                                                                                                           .setTimeDelay(t
+                                                                                                                   .getNewValue());
+                                         }
+                                     });
     }
 
     @Override
@@ -82,13 +156,8 @@ public class WaveTableView implements ILevelSetView {
         }
     }
 
-    @SuppressWarnings("unchecked")
     public void updateWaveTableView (List<WaveString> waves) {
         setData(waves);
-        waveTable.getColumns().clear();
-
-        waveTable.getColumns().addAll(waveNumberCol, enemyNameCol, numEnemiesCol,
-                                      enemyFrequencyCol, pathCol, timeDelayCol);
         waveTable.setItems(data);
         waveTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     }
