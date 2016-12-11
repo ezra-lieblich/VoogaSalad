@@ -36,9 +36,9 @@ import gameplayer.view.GridGUI;
 public class TowerManager extends Observable {
 	private GamePlayData gameData;
 	private EnemyManager enemyManager;
-	private HashMap<Integer, engine.tower.Tower> allTowerTypes;
+	private Map<Integer, engine.tower.Tower> allTowerTypes;
 	private HashMap<Integer, engine.tower.Tower> availableTowerTypes;
-	private HashMap<Integer, engine.weapon.Weapon> allWeapons;	
+	private Map<Integer, engine.weapon.Weapon> allWeapons;	
 	private HashMap<Integer, gameplayer.model.tower.Tower> towersOnGrid; 
 	private Map<Integer, engine.tower.Tower> upgradeTowerTypes;
 	private int uniqueTowerID;

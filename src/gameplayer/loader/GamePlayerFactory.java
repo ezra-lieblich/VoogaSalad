@@ -44,8 +44,8 @@ public class GamePlayerFactory{
 		return authoringFileReader.isValid();
 	}
 	
-	public HashMap<Integer, engine.weapon.Weapon> getWeaponBank() {
-		return (HashMap<Integer, Weapon>) authoringFileReader.getWeaponTypes();
+	public Map<Integer, engine.weapon.Weapon> getWeaponBank() {
+		return (Map<Integer, Weapon>) authoringFileReader.getWeaponTypes();
 		
 	}
 	 
@@ -116,13 +116,13 @@ public class GamePlayerFactory{
 	
 	
 	
-	public HashMap<Integer, Tower> getTowers() {
+	public Map<Integer, Tower> getTowers() {
 		for (Tower t : authoringFileReader.getTowerTypes().values()) {
 			System.out.println("TOWER IMAGE PATH");
 			System.out.println(t.getImagePath());
 		}
 		
-		return (HashMap<Integer, Tower>) authoringFileReader.getTowerTypes(); 
+		return (Map<Integer, Tower>) authoringFileReader.getTowerTypes(); 
 	}
 	
 

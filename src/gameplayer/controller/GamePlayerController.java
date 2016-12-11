@@ -99,7 +99,7 @@ public class GamePlayerController implements Observer {
 
 	public GamePlayerController(String xmlFilePath) {
 		// use xml parser to create classes.
-		this.loader = new GamePlayerFactory(new XMLParser("player.samplexml/newWaveTester.xml"));// hardcoded
+		this.loader = new GamePlayerFactory(new XMLParser("player.samplexml/newTextFile.xml"));// hardcoded
 		// does not work because of the image path
 		checkIfValid();
 		this.model = new GamePlayModel(this.loader);
@@ -211,7 +211,7 @@ public class GamePlayerController implements Observer {
 	//probably should move to frontend
 	private ArrayList<String> getTowerImages() {
 		ArrayList<String> towerImages = new ArrayList<String>();
-		HashMap<Integer, engine.tower.Tower> towers = this.loader.getTowers(); 
+		Map<Integer, engine.tower.Tower> towers = this.loader.getTowers(); 
 		for (engine.tower.Tower tower : towers.values()) { 
 			towerImages.add(tower.getImagePath());
 		}
