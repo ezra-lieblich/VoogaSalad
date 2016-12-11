@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 import authoring.editorview.level.WaveObject;
 import engine.level.wave.Wave;
+import engine.level.wave.WaveString;
+import engine.level.wave.WaveStringType;
 import authoring.editorview.level.ILevelSetView;
 import authoring.editorview.level.LevelAuthoringViewDelegate;
 import javafx.collections.FXCollections;
@@ -46,13 +48,13 @@ public class WaveTableView implements ILevelSetView {
         waveNumberCol.setCellValueFactory(
                                           new PropertyValueFactory<WaveObject, Integer>("id"));
         enemyNameCol.setCellValueFactory(
-                                         new PropertyValueFactory<WaveObject, String>("enemyID"));
+                                         new PropertyValueFactory<WaveObject, String>("enemy"));
         numEnemiesCol
-                .setCellValueFactory(new PropertyValueFactory<WaveObject, Integer>("enemyCount"));
+                .setCellValueFactory(new PropertyValueFactory<WaveObject, Integer>("count"));
         enemyFrequencyCol
                 .setCellValueFactory(new PropertyValueFactory<WaveObject, Double>("frequency"));
         pathCol
-                .setCellValueFactory(new PropertyValueFactory<WaveObject, String>("pathID"));
+                .setCellValueFactory(new PropertyValueFactory<WaveObject, String>("path"));
         timeDelayCol
                 .setCellValueFactory(new PropertyValueFactory<WaveObject, Double>("startTime"));
 
@@ -71,19 +73,19 @@ public class WaveTableView implements ILevelSetView {
         this.delegate = delegate;
     }
 
-    private void setData (List<Wave> waves) {
+    private void setData (List<WaveString> waves) {
         data.removeAll(data);
-        for (Wave n : waves) {
+        for (WaveString n : waves) {
             WaveObject temp =
-                    new WaveObject(n.getId(), n.getEnemyID(), n.getEnemyCount(),
-                                   n.getFrequency(), n.getPathID(), n.getStartTime());
+                    new WaveObject(n.getID(), n.getEnemy(), n.getCount(),
+                                   n.getFrequency(), n.getPath(), n.getStartTime());
             data.add(temp);
         }
         waveTable.refresh();
     }
 
     @SuppressWarnings("unchecked")
-    public void updateWaveTableView (List<Wave> waves) {
+    public void updateWaveTableView (List<WaveString> waves) {
         setData(waves);
         waveTable.getColumns().clear();
 

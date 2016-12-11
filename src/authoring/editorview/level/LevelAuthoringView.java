@@ -8,6 +8,7 @@ import authoring.editorview.level.subviews.LevelRewardsView;
 import authoring.editorview.level.subviews.LevelTransitionTimeField;
 import authoring.utilityfactories.ButtonFactory;
 import engine.level.wave.Wave;
+import engine.level.wave.WaveString;
 import authoring.editorview.ListDataSource;
 import authoring.editorview.level.subviews.CreateNewLevelView;
 import authoring.editorview.level.subviews.WaveTableView;
@@ -136,7 +137,7 @@ public class LevelAuthoringView implements ILevelUpdateView {
     }
 
     @Override
-    public void updateWaves (List<Wave> waves) {
+    public void updateWaves (List<WaveString> waves) {
         waveTableView.updateWaveTableView(waves);
     }
 
