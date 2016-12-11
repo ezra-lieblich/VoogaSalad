@@ -2,7 +2,7 @@ package authoring.editorview.enemy.subviews.editorfields;
 
 import java.util.ResourceBundle;
 import authoring.editorview.TextFieldView;
-import authoring.editorview.enemy.EnemyEditorViewDelegate;
+import authoring.editorview.enemy.EnemyAuthoringViewDelegate;
 import authoring.editorview.enemy.IEnemySetView;
 import authoring.utilityfactories.BoxFactory;
 import authoring.utilityfactories.TextFieldFactory;
@@ -18,14 +18,14 @@ import javafx.scene.control.TextField;
 public class EnemySpeedField extends TextFieldView implements IEnemySetView {
 
     private TextField enemySpeedField;
-    private EnemyEditorViewDelegate delegate;
+    private EnemyAuthoringViewDelegate delegate;
 
     public EnemySpeedField (ResourceBundle labelsResource) {
         super(labelsResource);
     }
 
     @Override
-    public void setDelegate (EnemyEditorViewDelegate delegate) {
+    public void setDelegate (EnemyAuthoringViewDelegate delegate) {
         this.delegate = delegate;
     }
 
