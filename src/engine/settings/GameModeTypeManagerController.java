@@ -1,5 +1,6 @@
 package engine.settings;
 
+import java.util.Collections;
 import java.util.List;
 
 import authoring.editorview.gamesettings.IGameSettingsUpdateView;
@@ -15,7 +16,7 @@ public class GameModeTypeManagerController
 	}
 
 	@Override
-	public void setNumberofLives(int gameModeID, double lives) {
+	public void setNumberofLives(int gameModeID, int lives) {
 		getTypeManager().getEntity(gameModeID).setInitialLives(lives);
 	}
 
@@ -25,7 +26,7 @@ public class GameModeTypeManagerController
 	}
 
 	@Override
-	public void setMoney(int gameModeID, double money) {
+	public void setMoney(int gameModeID, int money) {
 		getTypeManager().getEntity(gameModeID).setInitialMoney(money);
 	}
 
@@ -66,10 +67,48 @@ public class GameModeTypeManagerController
 
 	@Override
 	protected GameModeBuilder constructTypeProperties(IGameSettingsUpdateView updateView, GameModeBuilder typeBuilder) {
-		return typeBuilder.addGameTypeListener( (oldValue, newValue) -> updateView.updateGameName(newValue));
+		return typeBuilder.addGameTypeListener( (oldValue, newValue) -> updateView.updateGameName(newValue))
+				.addInitialLivesListener((oldValue, newValue) -> updateView.updateNumberofLives(newValue.intValue()))
+				.addLosingConditionsListener((oldValue, newValue) -> updateView.updateLosingConditions(newValue))
+				.addWinningConditionsListener((oldValue, newValue) -> updateView.updateLosingConditions(newValue));
 			
 				
 		//.addInitialMoneyListener((oldValue, newValue) ->) NEED INITIAL SCORE
+	}
+
+	@Override
+	public void setPathType(int gameModeID, String pathType) {
+		getTypeManager().getEntity(gameModeID).setPathType(pathType);
+	}
+
+	@Override
+	public String getPathType(int gameModeID) {
+		return getTypeManager().getEntity(gameModeID).getPathType();
+	}
+
+	@Override
+	public void setGridSize(int gameModeID, int gridSize) {
+		getTypeManager().getEntity(gameModeID).setGridSize(gridSize);
+	}
+
+	@Override
+	public int getGridSize(int gameModeID) {
+		return getTypeManager().getEntity(gameModeID).getGridSize();
+	}
+
+	@Override
+	public void addPath(int gameModeID, int pathID) {
+		getTypeManager().getEntity(gameModeID).addPath(pathID);
+	}
+
+	@Override
+	public void removePath(int gameModeID, int pathID) {
+		getTypeManager().getEntity(gameModeID).removePath(pathID);
+	}
+
+	@Override
+	public List<Integer> getPaths(int gameModeID) {
+		return Collections.unmodifiableList(getTypeManager().getEntity(gameModeID).getPaths());
 	}
 
 

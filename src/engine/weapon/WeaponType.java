@@ -40,7 +40,7 @@ public class WeaponType extends AbstractType implements Weapon {
 
     @Override
     public List<Integer> getTargets () {
-        return Collections.unmodifiableList(targets.getProperty());
+        return targets.getProperty();
     }
     
     @Override
