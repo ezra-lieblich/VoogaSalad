@@ -106,9 +106,9 @@ public class GamePlayModel extends Observable {
 		return this.towerManager.placeTower(type, x, y);
 	}
 
-	public void updateInLevel() {
+	public void updateInLevel(HashMap<Integer,ImageView>weaponsOnScreen) {
 		// checkCollision();
-		this.weaponManager.updateWeapon();
+		this.weaponManager.updateWeapon(weaponsOnScreen);
 		this.towerManager.updateAvailableTower();
 		this.enemyManager.update();
 		// this.enemyModel.update();

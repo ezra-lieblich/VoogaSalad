@@ -302,23 +302,6 @@ public class GameGUI {
 		}
 	}
 
-	public void reRender(List<IDrawable> redraw) {
-		for (IDrawable entity : redraw) {
-			ImageView image = new ImageView(entity.getImage());
-			image.setX(entity.getX());
-			image.setY(entity.getY());
-			image.setCache(true);
-			image.setCacheHint(CacheHint.SPEED);
-			graphics.setImageViewParams(image, DragDropView.DEFENSIVEWIDTH * 0.9, DragDropView.DEFENSIVEHEIGHT * 0.9);
-			this.grid.getGrid().getChildren().add(image);
-			if (entity instanceof Enemy) {
-				((Enemy) entity).getEnemyInfo().setLayoutX(image.getX());
-				((Enemy) entity).getEnemyInfo().setLayoutY(image.getY() + image.getFitHeight());
-				this.grid.getGrid().getChildren().add(((Enemy) entity).getEnemyInfo());
-			}
-		}
-	}
-
 	public void reRenderWeapon(HashMap<Integer, ImageView> weaponsOnScreen) {
 
 		for (Integer weapon : weaponsOnScreen.keySet()) {

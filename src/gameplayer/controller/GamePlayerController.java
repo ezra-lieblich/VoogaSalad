@@ -94,6 +94,9 @@ public class GamePlayerController implements Observer {
 
 	// Might need to be refactored into a different class
 	private HashMap<Integer, ImageView> weaponsOnScreen;
+	private HashMap<Integer, ImageView> enemiesOnScreen; 
+	private HashMap<Integer, ImageView> towersOnScreen; 
+	
 
 	public GamePlayerController(String xmlFilePath) {
 		// use xml parser to create classes.
@@ -108,6 +111,8 @@ public class GamePlayerController implements Observer {
 		this.oldLevel = 0;
 		this.towerToId = new HashMap<String, Integer>();
 		this.weaponsOnScreen = new HashMap<Integer, ImageView>();
+		this.enemiesOnScreen = new HashMap<Integer, ImageView>();
+		this.towersOnScreen = new HashMap<Integer, ImageView>(); 
 		this.animation = new Timeline();
 		this.graphics = new GraphicsLibrary();
 		this.enemyManager = this.enemyController.getEnemyModel();
@@ -308,8 +313,7 @@ public class GamePlayerController implements Observer {
 		
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> {
 			((Pane) this.view.getGrid().getGrid()).getChildren().clear();
-			this.weaponsOnScreen = new HashMap<>();
-
+			
 			// trying to get this to work but null pointer
 			if (currentWave.size() != 0) {
 				// if (timer % 15 == 0) {
@@ -338,7 +342,7 @@ public class GamePlayerController implements Observer {
 				this.currentWave = this.model.getEnemyManager().getPackOfEnemyComing();
 				System.out.println("Get a new wave: " + currentWave);
 			}
-			this.model.updateInLevel();
+			this.model.updateInLevel(weaponsOnScreen);
 			this.enemyManager.update();
 
 			redrawEverything();
@@ -384,7 +388,6 @@ public class GamePlayerController implements Observer {
 		HashMap<Integer, Weapon> bulletRedraw = this.model.getWeaponManager().getWeaponOnGrid();
 
 		for (int i : bulletRedraw.keySet()) {
-
 			if (!weaponsOnScreen.containsKey(bulletRedraw.get(i).getUniqueID())) {
 				ImageView image = new ImageView(graphics.createImage(bulletRedraw.get(i).getImage()));
 				image.setCache(true);
@@ -409,26 +412,9 @@ public class GamePlayerController implements Observer {
 		this.view.reRenderTower(towerRedraw);
 	}
 
-
-
 	public Timeline getTimeline() {
 		return this.animation;
 	}
 
-	private List<IDrawable> convertEnemyDrawable(HashMap<Integer, Enemy> enemies) {
-		ArrayList<IDrawable> ret = new ArrayList<>();
-		for (int e : enemies.keySet()) {
-			ret.add(enemies.get(e));
-		}
-		return ret;
-	}
-
-	private List<IDrawable> convertTowerDrawable(Map<Integer, Tower> towers) {
-		ArrayList<IDrawable> ret = new ArrayList<>();
-		for (int i : towers.keySet()) {
-			ret.add(towers.get(i));
-		}
-		return ret;
-	}
-
+	
 }
