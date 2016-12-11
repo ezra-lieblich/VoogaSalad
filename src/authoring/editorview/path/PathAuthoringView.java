@@ -2,6 +2,9 @@ package authoring.editorview.path;
 
 import authoring.editorview.path.subviews.NewPathView;
 import authoring.editorview.path.subviews.PathChooser;
+import authoring.editorview.path.subviews.PathDesignView;
+import authoring.editorview.path.subviews.PathEditorView;
+
 import java.util.List;
 import java.util.ResourceBundle;
 import authoring.editorview.ListDataSource;
@@ -13,7 +16,10 @@ import authoring.editorview.path.subviews.editorfields.PathDimensionsView;
 import engine.path.Coordinate;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 
 
@@ -24,12 +30,21 @@ public class PathAuthoringView implements IPathUpdateView {
 
     private static final int BOX_SPACING = 10;
     private static final int GRID_SIZE = 400;
+    private static final int EDITOR_SIZE = 250;
+    private static final int AUTHORING_HEIGHT = 700;
 
     private Group root;
     private HBox pathSettings;
 
+    private PathEditorView pathEditor;
+    private PathDesignView pathDesign;
+    private GridPane pathView;
+    
+    
+    
+    
     private PathChooser pathChooser;
-    private PathImageView pathImageView;
+    
     private PathDimensionsView pathDimensionsView;
     private PathInstructionsView pathInstructionsView;
     private PathNameView pathNameView;
@@ -37,15 +52,21 @@ public class PathAuthoringView implements IPathUpdateView {
     private PathGrid pathGrid;
 
     public PathAuthoringView (int aWidth, int aHeight) {
-        this.root = new Group();
+        
+    	pathEditor = new PathEditorView(EDITOR_SIZE);
+    	pathDesign = new PathDesignView();
+    	buildView();
+    	
+    	
+    	this.root = new Group();
         this.newPathView = new NewPathView();
         this.pathChooser = new PathChooser();
         this.pathDimensionsView = new PathDimensionsView();
         this.pathNameView = new PathNameView(pathResource);
-        this.pathImageView = new PathImageView();
+        
         this.pathInstructionsView = new PathInstructionsView();
         this.pathGrid = new PathGrid(GRID_SIZE);
-        setViewForDefaultPath();
+  //      setViewForDefaultPath();
     }
 
     @Override
@@ -60,7 +81,7 @@ public class PathAuthoringView implements IPathUpdateView {
         newPathView.setDelegate(delegate);
         pathDimensionsView.setDelegate(delegate);
         pathNameView.setDelegate(delegate);
-        pathImageView.setDelegate(delegate);
+        
     }
 
     @Override
@@ -68,31 +89,50 @@ public class PathAuthoringView implements IPathUpdateView {
         pathChooser.setActivePathId(pathID);
     }
 
-    private void setViewForDefaultPath () {
+    
+    private void buildView () {
 
-        pathSettings = new HBox(20);
-
-        VBox pathGetter = new VBox(BOX_SPACING);
-        pathGetter.getChildren().addAll(newPathView.getInstanceAsNode(),
-                                        pathChooser.getInstanceAsNode());
-        pathSettings.getChildren().add(pathGetter);
-
-        VBox textFieldSettings = new VBox(BOX_SPACING);
-        textFieldSettings.getChildren().addAll(pathDimensionsView.getInstanceAsNode(),
-                                               pathNameView.getInstanceAsNode());
-        pathSettings.getChildren().addAll(textFieldSettings, pathImageView.getInstanceAsNode());
-
-        Node instructions = pathInstructionsView.getInstanceAsNode();
-        instructions.setLayoutX(20);
-        instructions.setLayoutY(150);
-
-        Node grid = pathGrid.getInstanceAsNode();
-        grid.setLayoutX(100);
-        grid.setLayoutY(200);
-
-        root.getChildren().addAll(pathSettings, instructions,
-                                  grid);
+        ColumnConstraints editorColumn = new ColumnConstraints();
+        editorColumn.setMinWidth(EDITOR_SIZE);
+       
+        ColumnConstraints previewColumn = new ColumnConstraints();
+        RowConstraints fullRow = new RowConstraints();
+        
+        fullRow.setMinHeight(AUTHORING_HEIGHT);
+        
+        pathView.getColumnConstraints().addAll(editorColumn, previewColumn);
+        pathView.getRowConstraints().add(fullRow);
+        
+        pathView.add(pathEditor.getInstanceAsNode(), 0, 0);
+        pathView.add(pathDesign.getInstanceAsNode(), 1, 0);
     }
+    
+    
+//    private void setViewForDefaultPath () {
+//
+//        pathSettings = new HBox(20);
+//
+//        VBox pathGetter = new VBox(BOX_SPACING);
+//        pathGetter.getChildren().addAll(newPathView.getInstanceAsNode(),
+//                                        pathChooser.getInstanceAsNode());
+//        pathSettings.getChildren().add(pathGetter);
+//
+//        VBox textFieldSettings = new VBox(BOX_SPACING);
+//        textFieldSettings.getChildren().addAll(pathDimensionsView.getInstanceAsNode(),
+//                                               pathNameView.getInstanceAsNode());
+//        pathSettings.getChildren().addAll(textFieldSettings, pathImageView.getInstanceAsNode());
+//
+//        Node instructions = pathInstructionsView.getInstanceAsNode();
+//        instructions.setLayoutX(20);
+//        instructions.setLayoutY(150);
+//
+//        Node grid = pathGrid.getInstanceAsNode();
+//        grid.setLayoutX(100);
+//        grid.setLayoutY(200);
+//
+//        root.getChildren().addAll(pathSettings, instructions,
+//                                  grid);
+//    }
 
     @Override
     public void updateGridDimensions (int dimensions) {
@@ -116,15 +156,11 @@ public class PathAuthoringView implements IPathUpdateView {
 
     @Override
     public void updateImagePathDisplay (String imagePath) {
-        pathImageView.setPathImagePath(imagePath);
+ //       pathImageView.setPathImagePath(imagePath);
         pathGrid.setCellImage(imagePath);
     }
 
-    @Override
-    public void updateSizeDisplay (double size) {
-        // TODO Auto-generated method stub
-
-    }
+   
 
     @Override
     public void updateType (String pathType) {
@@ -153,6 +189,10 @@ public class PathAuthoringView implements IPathUpdateView {
     public void updateDeleteEntity (String entityID) {
         // TODO Auto-generated method stub
         
+    }
+    
+    @Override
+    public void updateSizeDisplay (double size) {
     }
 
 
