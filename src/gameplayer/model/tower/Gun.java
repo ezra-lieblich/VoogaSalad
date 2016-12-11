@@ -38,11 +38,12 @@ public class Gun {
 	}
 	
 	Weapon getWeapon(int targetID, double targetX, double targetY){
+			
 		 String name = weaponType.getName(); 
 		 double demage = 50; // get from weapon type later
 		 String image = weaponType.getImagePath();
 		 double speedMag = weaponType.getSpeed();
-		 return new Weapon (name,  demage, targetX, targetY, image, this.attackingRange,targetID, this.xcoor,this.ycoor,speedMag );
+		 return new Weapon (name,  demage, targetX, targetY, image, this.attackingRange,targetID, this.xcoor,this.ycoor,speedMag, this.weaponType.getId() );
 	}
 
 }
