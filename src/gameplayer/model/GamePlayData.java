@@ -126,6 +126,12 @@ public class GamePlayData  extends Observable{
 
 	public void setLevel(int d) {
 		this.currentLevel = d;
+		try {
+			Wrapper.getInstance().updateGameScores("level", Integer.toString((int)this.currentLevel), Double.toString(this.currentLevel));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		setChanged();
 		notifyObservers();
 	}

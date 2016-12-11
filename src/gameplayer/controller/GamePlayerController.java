@@ -143,15 +143,16 @@ public class GamePlayerController implements Observer {
 		this.enemyManager.setCurrentCell(this.model.getData().getGrid().getStartPoint());
 		populateTowerToId();
 		initGUI();
-
+		/*
 		try {
+			System.out.println("RECORD GAME SCORES CALLED");
 			Wrapper.getInstance().recordGameScores("" + this.model.getData().getGold(),
 					"" + this.model.getData().getLife(), "" + this.model.getData().getCurrentLevel());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		*/
 		this.towerController = new TowerController(this.model.getTowerManager(), this.view);
 
 	}
@@ -235,7 +236,7 @@ public class GamePlayerController implements Observer {
 		// new level condition
 		double newLevel = this.model.getData().getCurrentLevel();
 		if (this.oldLevel != newLevel) {
-
+			
 			this.oldLevel = newLevel;
 			this.view.newLevelPopUp(e -> {
 				//// System.out.println("New level");
