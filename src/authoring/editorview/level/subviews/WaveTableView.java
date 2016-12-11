@@ -47,6 +47,8 @@ public class WaveTableView implements ILevelSetView {
         enemyNameCol.setEditable(true);
         numEnemiesCol.setEditable(true);
         enemyFrequencyCol.setEditable(true);
+        pathCol.setEditable(true);
+        timeDelayCol.setEditable(true);
         waveNumberCol.setCellValueFactory(
                                           new PropertyValueFactory<WaveObject, String>("waveNumber"));
         enemyNameCol.setCellValueFactory(
@@ -75,31 +77,25 @@ public class WaveTableView implements ILevelSetView {
     }
 
     private void setData (List<Wave> waves) {
-        data.clear();
+        data.removeAll(data);
         for (Wave n : waves) {
             WaveObject temp =
                     new WaveObject(n.getId(), n.getEnemyID(), n.getEnemyCount(),
                                    n.getFrequency(), n.getPathID(), n.getStartTime());
             data.add(temp);
         }
+        waveTable.refresh();
     }
 
     @SuppressWarnings("unchecked")
     public void updateWaveTableView (List<Wave> waves) {
         setData(waves);
         waveTable.getColumns().clear();
-        waveTable.setItems(data);
+
         waveTable.getColumns().addAll(waveNumberCol, enemyNameCol, numEnemiesCol,
                                       enemyFrequencyCol, pathCol, timeDelayCol);
+        waveTable.setItems(data);
         waveTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-    }
-
-    public void updateWaveObject () {
-
-    }
-
-    public void createNewWave () {
-
     }
 
 }

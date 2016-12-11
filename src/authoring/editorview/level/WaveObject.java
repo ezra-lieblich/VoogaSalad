@@ -1,12 +1,13 @@
 package authoring.editorview.level;
 
 import engine.level.wave.Wave;
+import javafx.beans.property.SimpleIntegerProperty;
 
 
 public class WaveObject implements Wave {
 
-    private int waveNumber;
-    private int enemyID;
+    private SimpleIntegerProperty waveNumber;
+    private SimpleIntegerProperty enemyID;
     private int enemyCount;
     private double enemyFrequency;
     private int pathID;
@@ -18,21 +19,23 @@ public class WaveObject implements Wave {
                        double enemyFrequency,
                        int pathID,
                        double startTime) {
+        this.waveNumber = new SimpleIntegerProperty(waveNumber);
+        this.enemyID = new SimpleIntegerProperty(enemyID);
     }
 
     @Override
     public int getId () {
-        return waveNumber;
+        return waveNumber.get();
     }
 
     @Override
     public int getEnemyID () {
-        return enemyID;
+        return enemyID.get();
     }
 
     @Override
     public void setEnemyID (int enemyID) {
-        this.enemyID = enemyID;
+        this.enemyID.set(enemyID);
     }
 
     @Override
