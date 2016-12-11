@@ -47,6 +47,10 @@ public class Grid {
 	public void setNoPath(boolean isPathEmpty) {
 		this.noPath = isPathEmpty;
 	}
+	
+	public HashMap<Integer,Path> getAllPaths(){
+		return this.allPath;
+	}
 
 	public int getRows(){
 		return this.row;

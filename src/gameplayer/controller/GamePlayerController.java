@@ -171,7 +171,7 @@ public class GamePlayerController implements Observer {
 		
 		System.out.println("line 172, gameplay controller: Is the grid null?");
 		System.out.println(model.getData().getGrid());
-		this.view.getGrid().populatePath(model.getData().getGrid().getStartPoint());
+		this.view.getGrid().populatePath(model.getData().getGrid().getAllPaths());
 		this.dropController = new DragDropController(this.view, this.model, this.getTowerImageMap());
 
 	}

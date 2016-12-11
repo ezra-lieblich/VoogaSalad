@@ -1,10 +1,12 @@
 package gameplayer.view;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import gameplayer.model.Cell;
 import gameplayer.model.Grid;
+import gameplayer.model.Path;
 import gameplayer.model.tower.Tower;
 import gameplayer.view.helper.GraphicsLibrary;
 import javafx.scene.image.Image;
@@ -110,19 +112,20 @@ public class GridGUI {
 		this.grid.getChildren().addAll(towerImage, tower.getTowerInfo());
 	}
 
-	public void populatePath(Cell startingCell){
+	public void populatePath(HashMap<Integer,Path>allPaths){
 		//System.out.println("populate path!");
-		Cell current = startingCell;
-		//System.out.println("starting cell x: "+current.getX()+"; y: "+current.getY());
-		while (current != null){
-			ImageView pathImage = graphicsLib.createImageView(graphicsLib.createImage("kaneki.jpg"));
-			double x =current.getX();
-			double y = current.getY();
-			//System.out.println("path cell x: "+x+"; y: "+y);
-			graphicsLib.setImageViewParams(pathImage, x*cellWidth, y*cellHeight,cellWidth, cellHeight);
-			this.grid.getChildren().add(pathImage);
-			this.imagePath.add(pathImage);
-			current = current.getNext();
+		for(Integer uniquePath: allPaths.keySet()){
+			Cell current = allPaths.get(uniquePath).getPathStart();
+			while (current != null){
+				ImageView pathImage = graphicsLib.createImageView(graphicsLib.createImage("kaneki.jpg"));
+				double x =current.getX();
+				double y = current.getY();
+				//System.out.println("path cell x: "+x+"; y: "+y);
+				graphicsLib.setImageViewParams(pathImage, x*cellWidth, y*cellHeight,cellWidth, cellHeight);
+				this.grid.getChildren().add(pathImage);
+				this.imagePath.add(pathImage);
+				current = current.getNext();
+			}
 		}
 	}
 
