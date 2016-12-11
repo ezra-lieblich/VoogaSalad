@@ -68,12 +68,13 @@ public class GameModeTypeManagerController
 	@Override
 	protected GameModeBuilder constructTypeProperties(IGameSettingsUpdateView updateView, GameModeBuilder typeBuilder) {
 		return typeBuilder.addGameTypeListener( (oldValue, newValue) -> updateView.updateGameName(newValue))
+				.addInitialMoneyListener((oldValue, newValue) -> updateView.updateInitialMoney(newValue))
 				.addInitialLivesListener((oldValue, newValue) -> updateView.updateNumberofLives(newValue.intValue()))
 				.addLosingConditionsListener((oldValue, newValue) -> updateView.updateLosingConditions(newValue))
-				.addWinningConditionsListener((oldValue, newValue) -> updateView.updateLosingConditions(newValue));
-			
-				
-		//.addInitialMoneyListener((oldValue, newValue) ->) NEED INITIAL SCORE
+				.addWinningConditionsListener((oldValue, newValue) -> updateView.updateLosingConditions(newValue))
+				.addPathListener((oldValue, newValue) -> updateView.updatePathList(newValue))
+				.addGridSizeListener((oldValue, newValue) -> updateView.updateGridSize(newValue))
+				.addPathTypeListener((oldValue, newValue) -> updateView.updatePathType(newValue));	
 	}
 
 	@Override
