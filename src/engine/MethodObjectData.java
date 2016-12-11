@@ -5,7 +5,7 @@ public class MethodObjectData<E> implements MethodData<E>{
     private String method;
     private E value;
     
-    MethodObjectData(String method, E value) {
+    public MethodObjectData(String method, E value) {
         this.method = method;
         this.value = value;
     }
