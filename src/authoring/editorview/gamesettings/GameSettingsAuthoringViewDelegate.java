@@ -2,15 +2,13 @@ package authoring.editorview.gamesettings;
 
 public interface GameSettingsAuthoringViewDelegate {
 
-    public void onUserEnteredGameLives (String lives);
+    public void onUserEnteredGameLives (int lives);
 
-    public void onUserEnteredGameMoney (String money);
+    public void onUserEnteredGameMoney (int money);
 
     public void onUserEnteredGameNames (String name);
 
     public void onUserEnteredGameImage (String imagePath);
-
-    public void onUserEnteredImageSize (String imageSize);
 
     public void onUserEnteredWinningConditions (String winConditions);
 

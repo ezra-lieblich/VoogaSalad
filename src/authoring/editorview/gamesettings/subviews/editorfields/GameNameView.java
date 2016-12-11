@@ -1,4 +1,4 @@
-package authoring.editorview.gamesettings.subviews;
+package authoring.editorview.gamesettings.subviews.editorfields;
 
 import java.util.ResourceBundle;
 import authoring.editorview.EditorNameView;
@@ -46,8 +46,6 @@ public class GameNameView implements IGameSettingsSetView {
         nameTextField.setMaxWidth(105);
         
         root = GridFactory.createRowWithLabelandNode(resource.getString("GameName"), nameTextField);
-        
-//        root = BoxFactory.createHBoxWithLabelandNode(, nameTextField);
 
     }
 
