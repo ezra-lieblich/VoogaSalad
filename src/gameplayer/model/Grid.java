@@ -7,11 +7,14 @@ import gameplayer.model.tower.Tower;
 public class Grid {
 
 	private Cell[][] grid;
-	private Cell start;
+	private Cell start, end;
 	private int row;
 	private int col;
-	
-	
+	private boolean noPath;
+
+	//boolean value noPath,or path encoded 
+
+
 	public Grid(int x, int y) {
 		this.row = x;
 		this.col = y;
@@ -22,7 +25,7 @@ public class Grid {
 			}
 		}	
 	}
-	
+
 	//testing
 	public void printGrid(){
 		System.out.println("Grid");
@@ -32,49 +35,61 @@ public class Grid {
 			current = current.getNext();
 		}
 	}
-	
+
 	public int getRows(){
 		return this.row;
 	}
-	
+
 	public int getCol(){
 		return this.col;
 	}
-	
+
 	public Cell getCell(int x, int y){
 		return grid[x][y];
 	}
-	
+
 	public void setStart(Cell cell){
 		this.start = cell;
 	}
 	
+	public void setEnd(Cell cell){
+		this.end = cell;
+	}
+
 	public Cell getStartPoint(){
 		System.out.println("start point:");
 		System.out.println(this.start);
 		return this.start;
 	}
-	
+
 	public Cell getPathEndPoint(){
-		Cell current = this.start;
-		while(current.getNext() != null){
-			current = current.getNext();
+		if(this.noPath){
+			Cell current = this.start;
+			while(current.getNext() != null){
+				current = current.getNext();
+			}
+
+			this.end = current;
+			return current;
+
 		}
-		return current;
+		else{
+			return this.end;
+		}
 	}
-	
+
 	public Cell[][] getGrid(){
 		return this.grid;
 	}
-	
+
 	public void placeTower(Tower t,  int coordx, int coordy){
 		grid[coordx][coordy].addTower(t);
 	}
-	
+
 	public void removeTower(int xcoord, int ycoord){
 		grid[xcoord][ycoord].removeTower();
 	}
-	
+
 	/*
 	public void updateGrid(){
 		for(int i = 0; i < grid.length;i++){
@@ -82,9 +97,9 @@ public class Grid {
 				//grid[i][j].manageCollision();
 			}
 		}
-		
-				
+
+
 	}
 
-	*/
+	 */
 }

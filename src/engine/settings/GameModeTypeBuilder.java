@@ -20,8 +20,8 @@ public class GameModeTypeBuilder extends AbstractTypeBuilder<GameMode, GameModeB
     public static final String[] DEFAULT_WINNING_CONDITIONS = new String[]{};
     public static final String[] DEFAULT_LOSING_CONDITIONS = new String[]{};
     public static final String DEFAULT_GAME_TYPE = "Normal";
-    public static final double DEFAULT_INITIAL_LIVES = 100;
-    public static final double DEFAULT_INITIAL_MONEY = 500;
+    public static final double DEFAULT_INITIAL_LIVES = 1;
+    public static final double DEFAULT_INITIAL_MONEY = 5000;
     
     private ObservableProperty<String> gameType;
     private ObservableList<String> winningConditions;
