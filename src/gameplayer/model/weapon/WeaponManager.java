@@ -43,8 +43,6 @@ public class WeaponManager extends Observable{
 
 
 	public void updateWeapon() {
-		System.out.println("weaponsOnGrid Size: "+weaponOnGrid.size());
-
 		//newly fired weapon
 		if(this.tempCountFix % 20 == 0){//VERY TEMP FIX MAKE BULLETS ONCE PER SECOND
 			ArrayList<Weapon> newlyGeneratedWeapons = this.towerManager.generateNewWeapons();
@@ -58,13 +56,12 @@ public class WeaponManager extends Observable{
 		else{
 			tempCountFix++; 
 		}
-		System.out.println("weaponsOnGrid Size: "+weaponOnGrid.size());
 
 		Iterator<Integer>weaponOnGridIterate = weaponOnGrid.keySet().iterator(); 
 		while(weaponOnGridIterate.hasNext()){
 			Integer i = weaponOnGridIterate.next();
 			Weapon w = weaponOnGrid.get(i);
-			System.out.println("weaponsOnGrid Size: "+weaponOnGrid.size());
+//			System.out.println("weaponsOnGrid Size: "+weaponOnGrid.size());
 				
 			if (w.getX() < GridGUI.GRID_WIDTH) {
 				w.setX(w.getSpeedX() + w.getX());

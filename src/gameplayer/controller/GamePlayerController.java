@@ -129,7 +129,7 @@ public class GamePlayerController implements Observer {
 	 */
 	public void checkIfValid() {
 		if (!loader.xmlIsValid()) {
-			//// System.out.println("XML is invalid, game cannot be created");
+			//// //System.out.println("XML is invalid, game cannot be created");
 			// TODO: actually throw an error
 		}
 	}
@@ -169,8 +169,8 @@ public class GamePlayerController implements Observer {
 				this.model.getData().getCurrentLevel(), this.model.getData().getScore(), getTowerImages());
 		this.view.getGrid().getGrid().setOnMouseClicked(e -> handleMouseClicked(e.getX(), e.getY()));
 		
-		System.out.println("line 172, gameplay controller: Is the grid null?");
-		System.out.println(model.getData().getGrid());
+		//System.out.println("line 172, gameplay controller: Is the grid null?");
+		//System.out.println(model.getData().getGrid());
 		this.view.getGrid().populatePath(model.getData().getGrid().getAllPaths());
 		this.dropController = new DragDropController(this.view, this.model, this.getTowerImageMap());
 
@@ -237,7 +237,7 @@ public class GamePlayerController implements Observer {
 
 			this.oldLevel = newLevel;
 			this.view.newLevelPopUp(e -> {
-				//// System.out.println("New level");
+				//// //System.out.println("New level");
 				this.view.getGrid().getGrid().getChildren().clear();
 				// do something to trigger new level here!
 				this.model.initializeLevelInfo();
@@ -277,11 +277,13 @@ public class GamePlayerController implements Observer {
 
 	private void startAnimation() {
 		this.model.getData().getGrid().printGrid();
+		this.currentWave = this.model.getEnemyManager().getPackOfEnemyComing();
+		System.out.println("SIZE OF CURRENT WAVE: "+this.currentWave.size());
 
 		// call this once per wave, gets the new wave, new enemy frequency, etc.
-		getNewWaveOnInterval();
+//		getNewWaveOnInterval();
 
-		KeyFrame frame = new KeyFrame(Duration.millis(/*this.enemyFrequency*/ MILLISECOND_DELAY), e -> {
+		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> {
 			((Pane) this.view.getGrid().getGrid()).getChildren().clear(); 
 			this.weaponsOnScreen = new HashMap<>(); 
 
@@ -289,7 +291,16 @@ public class GamePlayerController implements Observer {
 			if (currentWave.size() != 0) {
 				if (timer % 15 == 0) {
 					Enemy enemy = currentWave.poll();
-					System.out.println("Spawing enemy");
+
+					System.out.println("*************enemystart");
+					Cell current = enemy.getCurrentCell();
+					while(current!=null){
+						System.out.println(current.getX()+","+current.getY());
+						current=current.getNext();
+					}
+					System.out.println("****************");
+					System.out.println("SDFSADLFHSDALFHSAD");
+					
 					this.enemyManager.spawnEnemy(enemy);
 					timer = 1;
 				} else {
@@ -303,7 +314,8 @@ public class GamePlayerController implements Observer {
 		});
 
 		animation.setCycleCount(Timeline.INDEFINITE);
-		animation.getKeyFrames().addAll(frame, this.enemyKeyFrame);
+		animation.getKeyFrames().add(frame);
+//		animation.getKeyFrames().addAll(frame, this.enemyKeyFrame);//TODO
 		animation.play();
 	}
 	
@@ -312,28 +324,29 @@ public class GamePlayerController implements Observer {
 			redrawEnemy();
 		});
 	}
-	
 
+// TODO: Commented out to test enemies 
+//	private void getNewWaveOnInterval() {
+//		double nextWaveStartTime = this.enemyController.getEnemyModel().getTimeOfNextWave(); //uncomment later
+//		//System.out.println("Time of next wave: "+nextWaveStartTime);
+//		//double nextWaveStartTime = 0; //comment out later
+//		while (elapsedTime < nextWaveStartTime) {
+//			elapsedTime = (new Date()).getTime() - startTime;
+//		}
+//
+//		if (elapsedTime >= nextWaveStartTime) {
+//			//System.out.println("Elapsed time is greater than next wave start time");
+//			// get new wave, enemy frequency, and
+//			this.enemyFrequency =this.enemyController.getEnemyModel().getFrequencyOfNextWave();
+//			this.currentWave = this.enemyController.getEnemyModel().getPackOfEnemyComing();
+////			createEnemyKeyFrame(); //with the enemy frequency
+//			// get the new start time for a new wave of enemies
+//			//getNewWaveOnInterval();
+//
+//		}
+//
+//	}
 
-	private void getNewWaveOnInterval() {
-		double nextWaveStartTime = this.enemyController.getEnemyModel().getTimeOfNextWave(); //uncomment later
-		System.out.println("Time of next wave: "+nextWaveStartTime);
-		//double nextWaveStartTime = 0; //comment out later
-		while (elapsedTime < nextWaveStartTime) {
-			elapsedTime = (new Date()).getTime() - startTime;
-		}
-
-		if (elapsedTime >= nextWaveStartTime) {
-			System.out.println("Elapsed time is greater than next wave start time");
-			// get new wave, enemy frequency, and
-			this.enemyFrequency =this.enemyController.getEnemyModel().getFrequencyOfNextWave();
-			this.currentWave = this.enemyController.getEnemyModel().getPackOfEnemyComing();
-			createEnemyKeyFrame(); //with the enemy frequency
-			// get the new start time for a new wave of enemies
-			//getNewWaveOnInterval();
-		}
-
-	}
 
 
 	private void redrawEverything() {

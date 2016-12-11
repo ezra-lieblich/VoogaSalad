@@ -30,11 +30,14 @@ public class GamePlayerFactory{
 	
 	public static final int DEFAULT_GRID_WIDTH = 10;
 	public static final int DEFAULT_GRID_HEIGHT = 10;
+	
+	private EnemyFactory enemyFactory;
 
 	XMLParser authoringFileReader;	
 
 	public GamePlayerFactory(XMLParser parser){
 		this.authoringFileReader = parser;
+		this.enemyFactory = new EnemyFactory();
 	}
 	
 	public boolean xmlIsValid() {
@@ -132,14 +135,14 @@ public class GamePlayerFactory{
 	}
 	
 	public Queue<Enemy> getIndividualWaveQueue(Wave wave, int levelNumber) {
+		System.out.println("dsakfhsdaf jksdahflsjksdhafjk sdahjk sdah");
 		Map<Integer, engine.enemy.Enemy> enemyTypes = this.authoringFileReader.getEnemyTypes(); //refactor name
 		engine.enemy.Enemy enemyType = enemyTypes.get(wave.getEnemyID());
 		Queue<Enemy> enemies = new LinkedList<Enemy>();
 		int pathID = wave.getPathID();
 		for (int i = 0; i < wave.getEnemyCount(); i++) {
 			Cell start = this.getGrid(levelNumber).getPath(pathID).getPathStart();
-			EnemyFactory enemyFactory = new EnemyFactory(enemyType, start);
-			enemies.add(enemyFactory.createModelEnemy());
+			enemies.add(this.enemyFactory.createModelEnemy(enemyType, start));
 		}
 		return enemies;
 	}

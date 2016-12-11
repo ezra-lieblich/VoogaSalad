@@ -85,7 +85,6 @@ public class EnemyManager extends Observable {
 		enemy.setX(gameData.cellToCoordinate(enemy.getCurrentCell().getX()));
 		enemy.setY(gameData.cellToCoordinate(enemy.getCurrentCell().getY()));
 		enemyOnGrid.put(enemy.getUniqueID(), enemy);
-		System.out.println("SIZEEEEEEE" + enemyOnGrid.size());
 	}
 
 	// this method not being called??????
@@ -127,13 +126,7 @@ public class EnemyManager extends Observable {
 					handleEnemyEnteringBase(e);
 					return;
 				}
-				e.setxDirection(e.getCurrentCell().getNext().getX() - e.getCurrentCell().getX()); // -1,
-	
-				
-				// 0,
-				// or
-				// 1
-				
+				e.setxDirection(e.getCurrentCell().getNext().getX() - e.getCurrentCell().getX());
 				e.setyDirection(e.getCurrentCell().getNext().getY() - e.getCurrentCell().getY());
 				moveDist -= distToMove;
 			} else {
@@ -181,6 +174,8 @@ public class EnemyManager extends Observable {
 	
 	private void moveEnemies() {
 		for (Enemy enemy : enemyOnGrid.values()) {
+			System.out.println("ENEMY " + enemy.getUniqueID() + " XX " + enemy.getX());
+			System.out.println("ENEMY " + enemy.getUniqueID() + " YY " + enemy.getY());
 			moveSingleEnemy(enemy);
 		}
 	}
