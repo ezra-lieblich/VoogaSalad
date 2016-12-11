@@ -45,7 +45,7 @@ public class GamePlayerFactory{
 		return (HashMap<Integer, Weapon>) authoringFileReader.getWeaponTypes();
 		
 	}
-	
+	 
 	public double getLevelRewardScore(int levelNumber) {
 		LevelManager levelManager = authoringFileReader.getLevelManager();
 		return levelManager.getEntity(levelNumber).getRewardScore();

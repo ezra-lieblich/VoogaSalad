@@ -47,13 +47,7 @@ import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Queue;
-import java.util.Random;
-import java.util.Timer;
 
-import javax.swing.BorderFactory;
-import javax.swing.JPanel;
-
-import chrriis.dj.nativeswing.swtimpl.components.JWebBrowser;
 
 public class GamePlayerController implements Observer {
 
@@ -93,6 +87,8 @@ public class GamePlayerController implements Observer {
 	
 	private double startTime = System.currentTimeMillis();
 	private double elapsedTime = 0;
+	
+	private KeyFrame enemyKeyFrame;
 	
 
 	// Might need to be refactored into a different class
@@ -302,28 +298,33 @@ public class GamePlayerController implements Observer {
 		});
 
 		animation.setCycleCount(Timeline.INDEFINITE);
-		animation.getKeyFrames().add(frame);
+		animation.getKeyFrames().addAll(frame, this.enemyKeyFrame);
 		animation.play();
+	}
+	
+	private void createEnemyKeyFrame(){
+		this.enemyKeyFrame = new KeyFrame(Duration.millis(this.enemyFrequency), e -> {
+			redrawEnemy();
+		});
 	}
 	
 
 
 	private void getNewWaveOnInterval() {
-		//double nextWaveStartTime = this.enemyController.getEnemyModel().getEnemyWaveStartTime(); //uncomment later
+		double nextWaveStartTime = this.enemyController.getEnemyModel().getTimeOfNextWave(); //uncomment later
 		
-		double nextWaveStartTime = 0; //comment out later
+		//double nextWaveStartTime = 0; //comment out later
 		while (elapsedTime < nextWaveStartTime) {
 			elapsedTime = (new Date()).getTime() - startTime;
 		}
 
 		if (elapsedTime >= nextWaveStartTime) {
 			// get new wave, enemy frequency, and
-			// this.enemyFrequency =
-			// this.enemyController.getEnemyModel().getFrequency();
+			this.enemyFrequency =this.enemyController.getEnemyModel().getFrequencyOfNextWave();
 			this.currentWave = this.enemyController.getEnemyModel().getPackOfEnemyComing();
-			
+			createEnemyKeyFrame(); //with the enemy frequency
 			// get the new start time for a new wave of enemies
-			// getNewWaveOnInterval(this.enemyController.getEnemyModel().getEnemyWaveStartTime());
+			getNewWaveOnInterval();
 
 		}
 
@@ -335,7 +336,7 @@ public class GamePlayerController implements Observer {
 		// this.view.getGrid().populatePath(this.model.getGrid().getStartPoint());
 		this.view.getGrid().getGrid().getChildren().addAll(this.view.getGrid().getPathImages());
 
-		HashMap<Integer, Enemy> enemyRedraw = this.enemyManager.getEnemyOnGrid();
+		//HashMap<Integer, Enemy> enemyRedraw = this.enemyManager.getEnemyOnGrid();
 		Map<Integer, Tower> towerRedraw = this.model.getTowerOnGrid();
 		HashMap<Integer, Weapon> bulletRedraw = this.model.getWeaponManager().getWeaponOnGrid();
 
@@ -357,15 +358,18 @@ public class GamePlayerController implements Observer {
 
 		}
 
-		List<IDrawable> reEnemyDraw = convertEnemyDrawable(enemyRedraw);
+		//List<IDrawable> reEnemyDraw = convertEnemyDrawable(enemyRedraw);
 		List<IDrawable> reTowerDraw = convertTowerDrawable(towerRedraw);
 
-		this.view.reRender(reEnemyDraw);
+		//this.view.reRender(reEnemyDraw);
 		this.view.reRenderWeapon(weaponsOnScreen);
 		this.view.reRenderTower(reTowerDraw);
 	}
 
-	private void redrawWeapon() {
+	private void redrawEnemy() {
+		HashMap<Integer, Enemy> enemyRedraw = this.enemyManager.getEnemyOnGrid();
+		List<IDrawable> reEnemyDraw = convertEnemyDrawable(enemyRedraw);
+		this.view.reRender(reEnemyDraw);
 		
 	}
 
