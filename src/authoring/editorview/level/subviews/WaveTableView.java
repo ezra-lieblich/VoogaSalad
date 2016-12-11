@@ -23,6 +23,8 @@ public class WaveTableView implements ILevelSetView {
     private TableColumn<WaveObject, Double> enemyFrequencyCol;
     private TableColumn<WaveObject, String> pathCol;
     private TableColumn<WaveObject, Double> timeDelayCol;
+    @SuppressWarnings("rawtypes")
+    private TableColumn editDeleteCol;
     private ObservableList<WaveObject> data;
 
     @SuppressWarnings("unused")
@@ -35,7 +37,7 @@ public class WaveTableView implements ILevelSetView {
         createTableColumns();
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     private void createTableColumns () {
         waveNumberCol = new TableColumn<WaveObject, Integer>("Wave Number");
         enemyNameCol = new TableColumn<WaveObject, String>("Enemy Name");
@@ -43,12 +45,7 @@ public class WaveTableView implements ILevelSetView {
         enemyFrequencyCol = new TableColumn<WaveObject, Double>("Enemy Frequency");
         pathCol = new TableColumn<WaveObject, String>("Path");
         timeDelayCol = new TableColumn<WaveObject, Double>("Time Delay");
-        waveNumberCol.setEditable(false);
-        enemyNameCol.setEditable(true);
-        numEnemiesCol.setEditable(true);
-        enemyFrequencyCol.setEditable(true);
-        pathCol.setEditable(true);
-        timeDelayCol.setEditable(true);
+        editDeleteCol = new TableColumn("Edit or Delete");
         waveNumberCol.setCellValueFactory(
                                           new PropertyValueFactory<WaveObject, Integer>("id"));
         enemyNameCol.setCellValueFactory(
@@ -61,8 +58,9 @@ public class WaveTableView implements ILevelSetView {
                 .setCellValueFactory(new PropertyValueFactory<WaveObject, String>("pathID"));
         timeDelayCol
                 .setCellValueFactory(new PropertyValueFactory<WaveObject, Double>("startTime"));
+
         waveTable.getColumns().addAll(waveNumberCol, enemyNameCol, numEnemiesCol,
-                                      enemyFrequencyCol, pathCol, timeDelayCol);
+                                      enemyFrequencyCol, pathCol, timeDelayCol, editDeleteCol);
         waveTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     }
 
@@ -93,7 +91,7 @@ public class WaveTableView implements ILevelSetView {
         waveTable.getColumns().clear();
 
         waveTable.getColumns().addAll(waveNumberCol, enemyNameCol, numEnemiesCol,
-                                      enemyFrequencyCol, pathCol, timeDelayCol);
+                                      enemyFrequencyCol, pathCol, timeDelayCol, editDeleteCol);
         waveTable.setItems(data);
         waveTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     }

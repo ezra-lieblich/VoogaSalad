@@ -129,7 +129,6 @@ public class LevelAuthoringView implements ILevelUpdateView {
 
     // WAVE
 
-
     @Override
     public void updateDeleteEntity (String entityID) {
         // TODO Auto-generated method stub
@@ -139,7 +138,6 @@ public class LevelAuthoringView implements ILevelUpdateView {
     @Override
     public void updateWaves (List<Wave> waves) {
         waveTableView.updateWaveTableView(waves);
-        System.out.println("Waves: " + waves);
     }
 
 }
