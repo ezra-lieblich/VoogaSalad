@@ -11,12 +11,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
-import java.util.function.Supplier;
 import engine.observer.AbstractObservable;
 import engine.observer.ObservableMap;
 import engine.observer.ObservableMapProperty;
-import engine.tower.TowerTypeManager;
-import engine.weapon.WeaponTypeManager;
+
 
 
 public abstract class AbstractTypeManager<E extends Type> extends AbstractObservable<MethodData<?>>
