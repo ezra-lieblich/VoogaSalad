@@ -5,14 +5,19 @@ import com.oracle.webservices.internal.api.databinding.Databinding.Builder;
 import authoring.editorview.tower.ITowerUpdateView;
 import engine.AbstractTypeManagerController;
 import engine.ManagerMediator;
+import engine.effect.EffectManagerController;
+import engine.effect.EffectTypeManagerController;
 
 
 public class TowerTypeManagerController
         extends AbstractTypeManagerController<TowerManager, TowerBuilder, Tower, ITowerUpdateView>
         implements TowerManagerController {
-
+    
+    private EffectManagerController abilityEffectManagerController;
+    
     public TowerTypeManagerController (ManagerMediator managerMediator) {
         super(new TowerTypeManager(), new TowerTypeBuilder(), managerMediator);
+        abilityEffectManagerController = new EffectTypeManagerController(managerMediator, getTypeManager().getEffectManager());
     }
 
     @Override
@@ -83,6 +88,7 @@ public class TowerTypeManagerController
     // TODO - edit createNewTower to work with both versions
     @Override
     public int createTowerUpgrade (ITowerUpdateView towerUpdater, int parentTowerID) {
+        copyWithoutId(parentTowerID);
         return getTypeManager().addUpgrade(constructType(towerUpdater), parentTowerID);
     }
 
@@ -107,5 +113,10 @@ public class TowerTypeManagerController
                         .updateTowerSellPriceDisplay(newValue))
                 .addUnlockLevelListener( (oldValue, newValue) -> towerUpdater
                         .updateUnlockLevelDisplay(newValue));
+    }
+
+    @Override
+    public EffectManagerController getEffectManagerController () {
+        return abilityEffectManagerController;
     }
 }

@@ -142,7 +142,7 @@ public abstract class AbstractTypeManager<E extends Type> extends AbstractObserv
     
     @Override
     public Map<Integer, E> getEntities() {
-        return data.getProperty();
+        return Collections.unmodifiableMap(data.getProperty());
     }
 
 }

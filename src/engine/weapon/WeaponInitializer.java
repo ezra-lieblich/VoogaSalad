@@ -9,7 +9,7 @@ public interface WeaponInitializer extends TypeInitializer {
 
     ObservableList<Integer> getTargets ();
     
-    ObservableProperty<Double> getFireRate ();
+    ObservableProperty<Double> getReloadTime ();
 
     ObservableProperty<String> getTrajectory ();
 

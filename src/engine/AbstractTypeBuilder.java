@@ -113,7 +113,6 @@ public abstract class AbstractTypeBuilder<E extends Type, R extends TypeBuilder<
     public R copy(E type) {
         return copyType(type)
         .buildName(type.getName())
-        .buildId(type.getId())
         .buildImagePath(type.getImagePath())
         .buildSize(type.getSize());   
     }
