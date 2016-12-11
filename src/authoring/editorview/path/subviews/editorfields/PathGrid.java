@@ -49,8 +49,8 @@ public class PathGrid implements IPathSetView{
 	}
 	
 	private void updatePath(double x, double y){
-		int i = (int) (x - 100)/cellSize;
-		int j = (int) (y - 240)/cellSize;
+		int i = (int) (x - 430)/cellSize;
+		int j = (int) (y - 190)/cellSize;
 		if (!addCellToPath(i, j)){
 			removeCellFromPath(i, j);
 		}
