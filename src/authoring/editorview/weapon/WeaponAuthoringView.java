@@ -139,7 +139,6 @@ public class WeaponAuthoringView implements IWeaponUpdateView {
     public void updateImagePathDisplay (String imagePath) {
     	this.weaponBank.updateBank();
         this.weaponImageView.updateWeaponImagePath(imagePath);
-        this.weaponBank.updateSelectedCell();
     }
 
     @Override
