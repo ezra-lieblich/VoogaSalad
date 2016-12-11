@@ -10,7 +10,7 @@ public final class GridFactory {
 	private GridFactory(){
 	}
 	
-	public static GridPane createRowWithLabelandNode (String labelString, Node control) {
+	public static GridPane createRowWithLabelandNode (String labelString, Node node) {
         GridPane row = new GridPane();
         
         ColumnConstraints column1 = new ColumnConstraints();
@@ -23,7 +23,7 @@ public final class GridFactory {
         Label label = new Label(labelString);
         
         row.add(label, 0, 0);
-        row.add(control, 1, 0);
+        row.add(node, 1, 0);
         
         
         return row;

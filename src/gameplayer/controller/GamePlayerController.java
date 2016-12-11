@@ -47,8 +47,6 @@ import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Queue;
-import java.util.Random;
-import java.util.Timer;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
@@ -93,13 +91,15 @@ public class GamePlayerController implements Observer {
 	private double startTime = System.currentTimeMillis();
 	private double elapsedTime = 0;
 	
+	private KeyFrame enemyKeyFrame;
+	
 
 	// Might need to be refactored into a different class
 	private HashMap<Integer, ImageView> weaponsOnScreen;
 
 	public GamePlayerController(String xmlFilePath) {
 		// use xml parser to create classes.
-		this.loader = new GamePlayerFactory(new XMLParser("player.samplexml/newWaveTester.xml"));// hardcoded
+		this.loader = new GamePlayerFactory(new XMLParser("player.samplexml/newTextFile.xml"));// hardcoded
 		// does not work because of the image path
 		checkIfValid();
 		this.model = new GamePlayModel(this.loader);
@@ -132,7 +132,7 @@ public class GamePlayerController implements Observer {
 	 */
 	public void checkIfValid() {
 		if (!loader.xmlIsValid()) {
-			//// System.out.println("XML is invalid, game cannot be created");
+			//// //System.out.println("XML is invalid, game cannot be created");
 			// TODO: actually throw an error
 		}
 	}
@@ -143,6 +143,7 @@ public class GamePlayerController implements Observer {
 		populateTowerToId();
 		initGUI();
 
+		/*
 		try {
 			Wrapper.getInstance().recordGameScores("" + this.model.getData().getGold(),
 					"" + this.model.getData().getLife(), "" + this.model.getData().getCurrentLevel());
@@ -150,6 +151,7 @@ public class GamePlayerController implements Observer {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		*/
 
 		this.towerController = new TowerController(this.model.getTowerManager(), this.view);
 
@@ -169,10 +171,12 @@ public class GamePlayerController implements Observer {
 			this.animation.pause();
 		});
 		this.mainScene = view.init(this.model.getData().getGold(), this.model.getData().getLife(),
-				this.model.getData().getCurrentLevel(), getTowerImages());
+				this.model.getData().getCurrentLevel(), this.model.getData().getScore(), getTowerImages());
 		this.view.getGrid().getGrid().setOnMouseClicked(e -> handleMouseClicked(e.getX(), e.getY()));
-
-		this.view.getGrid().populatePath(model.getData().getGrid().getStartPoint());
+		
+		//System.out.println("line 172, gameplay controller: Is the grid null?");
+		//System.out.println(model.getData().getGrid());
+		this.view.getGrid().populatePath(model.getData().getGrid().getAllPaths());
 		this.dropController = new DragDropController(this.view, this.model, this.getTowerImageMap());
 
 	}
@@ -204,9 +208,10 @@ public class GamePlayerController implements Observer {
 		t.getUpgradeButton().setOnAction(e -> this.towerController.upgrade(t.getUniqueID()));
 	}
 
+	//probably should move to frontend
 	private ArrayList<String> getTowerImages() {
 		ArrayList<String> towerImages = new ArrayList<String>();
-		HashMap<Integer, engine.tower.Tower> towers = this.loader.getTowers(); 
+		Map<Integer, engine.tower.Tower> towers = this.loader.getTowers(); 
 		for (engine.tower.Tower tower : towers.values()) { 
 			towerImages.add(tower.getImagePath());
 		}
@@ -237,7 +242,7 @@ public class GamePlayerController implements Observer {
 
 			this.oldLevel = newLevel;
 			this.view.newLevelPopUp(e -> {
-				//// System.out.println("New level");
+				//// //System.out.println("New level");
 				this.view.getGrid().getGrid().getChildren().clear();
 				// do something to trigger new level here!
 				this.model.initializeLevelInfo();
@@ -251,7 +256,7 @@ public class GamePlayerController implements Observer {
 		if (o instanceof GamePlayData) {
 			// update level in display
 			this.view.updateStatsDisplay(((GamePlayData) o).getGold(), ((GamePlayData) o).getLife(),
-					((GamePlayData) o).getCurrentLevel());
+					((GamePlayData) o).getCurrentLevel(),((GamePlayData)o).getScore());
 			this.view.updateCurrentLevelStats(((GamePlayData) o).getCurrentLevel());
 
 
@@ -277,17 +282,30 @@ public class GamePlayerController implements Observer {
 
 	private void startAnimation() {
 		this.model.getData().getGrid().printGrid();
+		this.currentWave = this.model.getEnemyManager().getPackOfEnemyComing();
+		System.out.println("SIZE OF CURRENT WAVE: "+this.currentWave.size());
 
 		// call this once per wave, gets the new wave, new enemy frequency, etc.
-		getNewWaveOnInterval();
+//		getNewWaveOnInterval();
 
-		KeyFrame frame = new KeyFrame(Duration.millis(/*this.enemyFrequency*/ MILLISECOND_DELAY), e -> {
+		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> {
 			((Pane) this.view.getGrid().getGrid()).getChildren().clear(); 
+			this.weaponsOnScreen = new HashMap<>(); 
 
 			// trying to get this to work but null pointer
 			if (currentWave.size() != 0) {
 				if (timer % 15 == 0) {
 					Enemy enemy = currentWave.poll();
+
+					System.out.println("*************enemystart");
+					Cell current = enemy.getCurrentCell();
+					while(current!=null){
+						System.out.println(current.getX()+","+current.getY());
+						current=current.getNext();
+					}
+					System.out.println("****************");
+					System.out.println("SDFSADLFHSDALFHSAD");
+					
 					this.enemyManager.spawnEnemy(enemy);
 					timer = 1;
 				} else {
@@ -302,31 +320,38 @@ public class GamePlayerController implements Observer {
 
 		animation.setCycleCount(Timeline.INDEFINITE);
 		animation.getKeyFrames().add(frame);
+//		animation.getKeyFrames().addAll(frame, this.enemyKeyFrame);//TODO
 		animation.play();
 	}
 	
-
-
-	private void getNewWaveOnInterval() {
-		//double nextWaveStartTime = this.enemyController.getEnemyModel().getEnemyWaveStartTime(); //uncomment later
-		
-		double nextWaveStartTime = 0; //comment out later
-		while (elapsedTime < nextWaveStartTime) {
-			elapsedTime = (new Date()).getTime() - startTime;
-		}
-
-		if (elapsedTime >= nextWaveStartTime) {
-			// get new wave, enemy frequency, and
-			// this.enemyFrequency =
-			// this.enemyController.getEnemyModel().getFrequency();
-			this.currentWave = this.enemyController.getEnemyModel().getPackOfEnemyComing();
-
-			// get the new start time for a new wave of enemies
-			// getNewWaveOnInterval(this.enemyController.getEnemyModel().getEnemyWaveStartTime());
-
-		}
-
+	private void createEnemyKeyFrame(){
+		this.enemyKeyFrame = new KeyFrame(Duration.millis(this.enemyFrequency), e -> {
+			redrawEnemy();
+		});
 	}
+
+// TODO: Commented out to test enemies 
+//	private void getNewWaveOnInterval() {
+//		double nextWaveStartTime = this.enemyController.getEnemyModel().getTimeOfNextWave(); //uncomment later
+//		//System.out.println("Time of next wave: "+nextWaveStartTime);
+//		//double nextWaveStartTime = 0; //comment out later
+//		while (elapsedTime < nextWaveStartTime) {
+//			elapsedTime = (new Date()).getTime() - startTime;
+//		}
+//
+//		if (elapsedTime >= nextWaveStartTime) {
+//			//System.out.println("Elapsed time is greater than next wave start time");
+//			// get new wave, enemy frequency, and
+//			this.enemyFrequency =this.enemyController.getEnemyModel().getFrequencyOfNextWave();
+//			this.currentWave = this.enemyController.getEnemyModel().getPackOfEnemyComing();
+////			createEnemyKeyFrame(); //with the enemy frequency
+//			// get the new start time for a new wave of enemies
+//			//getNewWaveOnInterval();
+//
+//		}
+//
+//	}
+
 
 
 	private void redrawEverything() {
@@ -341,7 +366,7 @@ public class GamePlayerController implements Observer {
 		for (int i : bulletRedraw.keySet()) {
 
 			if (!weaponsOnScreen.containsKey(bulletRedraw.get(i).getUniqueID())) {
-				ImageView image = new ImageView(bulletRedraw.get(i).getImage());
+				ImageView image = new ImageView(graphics.createImage(bulletRedraw.get(i).getImage()));
 				image.setCache(true);
 				image.setCacheHint(CacheHint.SPEED);
 				image.setX(bulletRedraw.get(i).getX());
@@ -364,8 +389,12 @@ public class GamePlayerController implements Observer {
 		this.view.reRenderTower(reTowerDraw);
 	}
 
-	private void redrawWeapon() {
-
+	private void redrawEnemy() {
+		HashMap<Integer, Enemy> enemyRedraw = this.enemyManager.getEnemyOnGrid();
+		System.out.println("enemyRedraw.size(): "+enemyRedraw.size());
+		List<IDrawable> reEnemyDraw = convertEnemyDrawable(enemyRedraw);
+		this.view.reRender(reEnemyDraw);
+		
 	}
 
 	public Timeline getTimeline() {

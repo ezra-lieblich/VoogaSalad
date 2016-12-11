@@ -468,13 +468,13 @@
                     </listeners>
                     <property class="double">20.0</property>
                   </money>
-                  <collisionEffect class="engine.observer.ObservableObjectProperty">
+                  <collisioneffects class="engine.observer.ObservableObjectProperty">
                     <observers/>
                     <listeners>
                       <null/>
                     </listeners>
                     <property class="string"></property>
-                  </collisionEffect>
+                  </collisioneffects>
                 </engine.enemy.EnemyType>
               </entry>
             </property>
@@ -669,13 +669,13 @@
                     </listeners>
                     <property class="list"/>
                   </targets>
-                  <fireRate class="engine.observer.ObservableObjectProperty">
+                  <reloadTime class="engine.observer.ObservableObjectProperty">
                     <observers/>
                     <listeners>
                       <null/>
                     </listeners>
                     <property class="double">15.0</property>
-                  </fireRate>
+                  </reloadTime>
                   <trajectory class="engine.observer.ObservableObjectProperty">
                     <observers/>
                     <listeners>
@@ -683,13 +683,13 @@
                     </listeners>
                     <property class="string">Straight</property>
                   </trajectory>
-                  <effect class="engine.observer.ObservableObjectProperty">
+                  <effects class="engine.observer.ObservableObjectProperty">
                     <observers/>
                     <listeners>
                       <null/>
                     </listeners>
                     <property class="string"></property>
-                  </effect>
+                  </effects>
                   <speed class="engine.observer.ObservableObjectProperty">
                     <observers/>
                     <listeners>

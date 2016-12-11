@@ -21,8 +21,8 @@ public class EffectTypeBuilder extends AbstractTypeBuilder<Effect, EffectBuilder
     public static final String DEFAULT_IMAGE_PATH = "Images/butterfly.png";
     public static final double DEFAULT_SIZE = 1;
     public static final String DEFAULT_TRIGGER_CLASS = "engine.effect.Enemy";
-    public static final String DEFAULT_TRIGGER_CONDITION_GROOVY = "";
-    public static final String DEFAULT_EFFECT_GROOVY = "";
+    public static final String DEFAULT_TRIGGER_CONDITION_GROOVY = "collider.getHealth() == 50";
+    public static final String DEFAULT_EFFECT_GROOVY = "collider.setHealth(110)";
 
     private ObservableProperty<String> triggerClass;
     private ObservableProperty<String> triggerConditionGroovy;

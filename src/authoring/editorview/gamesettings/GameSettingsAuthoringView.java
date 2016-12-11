@@ -61,21 +61,20 @@ public class GameSettingsAuthoringView implements IGameSettingsUpdateView, IGame
         gameSettingsEditor.setDelegate(delegate);
     }
 
-   
-
     @Override
-    public void updateGameName (String name) {
-        gameSettingsEditor.updateName(name);
+    public void updateNameDisplay (String name) {
+    	gameSettingsEditor.updateName(name);
     }
+
 
     @Override
     public void updateNumberofLives (int lives) {
         gameSettingsEditor.updateInitialLives(lives);
     }
-
+    
     @Override
-    public void updateGameImage (String imagePath) {
-        gameSettingsEditor.updateGameImagePath(imagePath);
+    public void updateImagePathDisplay (String imagePath) {
+    	gameSettingsEditor.updateGameImagePath(imagePath); //TODO why?
         gameSettingsPreview.updateGameImagePath(imagePath);
 
     }
@@ -101,14 +100,9 @@ public class GameSettingsAuthoringView implements IGameSettingsUpdateView, IGame
     	// TODO ?
     }
 
-    @Override
-    public void updateNameDisplay (String name) {
-    }
+   
 
-    @Override
-    public void updateImagePathDisplay (String imagePath) {
-    }
-
+    
     @Override
     public void updateSizeDisplay (double size) {
     }

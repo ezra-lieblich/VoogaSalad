@@ -7,13 +7,9 @@ import authoring.editorview.ListDataSource;
 
 public interface IGameSettingsUpdateView extends IGameSettingsSetView, IUpdateView {
 
-    public void updateGameName (String name);
-
     public void updateNumberofLives (int lives);
     
     public void updateInitialMoney (int money);
-
-    public void updateGameImage (String imagePath);
     
     public void updateGridSize (int size);
     
