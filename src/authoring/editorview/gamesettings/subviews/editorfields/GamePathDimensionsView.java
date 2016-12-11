@@ -1,11 +1,9 @@
-package authoring.editorview.path.subviews.editorfields;
+package authoring.editorview.gamesettings.subviews.editorfields;
 
 import java.util.ResourceBundle;
 
-
-import authoring.editorview.path.IPathSetView;
-
-import authoring.editorview.path.PathAuthoringViewDelegate;
+import authoring.editorview.gamesettings.GameSettingsAuthoringViewDelegate;
+import authoring.editorview.gamesettings.IGameSettingsSetView;
 import authoring.utilityfactories.DialogueBoxFactory;
 import authoring.utilityfactories.GridFactory;
 import authoring.utilityfactories.TextFieldFactory;
@@ -14,22 +12,19 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
+public class GamePathDimensionsView implements IGameSettingsSetView {
 
-public class PathDimensionsView implements IPathSetView{
-	
-	//Inheritance
-	
 	private GridPane root;
 	private int dimensions;
 	
 	private TextField dimensionsTextField;
-	private PathAuthoringViewDelegate delegate;
+	private GameSettingsAuthoringViewDelegate delegate;
 	
 	
 	private static final String RESOURCE_FILE_NAME = "resources/GameAuthoringPath";	
 	private ResourceBundle pathResource = ResourceBundle.getBundle(RESOURCE_FILE_NAME);
 	
-	public PathDimensionsView(){
+	public GamePathDimensionsView(){
 		makeGridDimensionsTextField();
 	}
 	
@@ -40,7 +35,7 @@ public class PathDimensionsView implements IPathSetView{
 	}
 	
 	@Override
-	public void setDelegate(PathAuthoringViewDelegate delegate){
+	public void setDelegate(GameSettingsAuthoringViewDelegate delegate){
 		this.delegate = delegate;
 	}
 	
@@ -59,7 +54,7 @@ public class PathDimensionsView implements IPathSetView{
 		dimensionsTextField = TextFieldFactory.makeTextField("", 
 				e -> submitGridDimensions(dimensionsTextField.getText()));
 		
-		dimensionsTextField.setMaxWidth(155); //TODO
+		dimensionsTextField.setPrefWidth(105); //TODO
 		
 		root = GridFactory.createRowWithLabelandNode(pathResource.getString("DimensionsTextField"), dimensionsTextField);
 		
@@ -68,7 +63,7 @@ public class PathDimensionsView implements IPathSetView{
 	private void submitGridDimensions(String gridDimensionsString){
 		try {
 			dimensions = Integer.parseInt(gridDimensionsString);
-			delegate.onUserEnteredGridDimensions(dimensions);
+			delegate.onUserEnteredGridSize(getGridDimensions());
 		}
 		catch (NumberFormatException e){
 			setGridDimensions(dimensions);
@@ -76,5 +71,7 @@ public class PathDimensionsView implements IPathSetView{
 		}
 	}
 
+	
+	
 
 }

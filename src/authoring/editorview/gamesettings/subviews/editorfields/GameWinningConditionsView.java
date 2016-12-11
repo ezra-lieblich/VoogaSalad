@@ -39,6 +39,8 @@ public class GameWinningConditionsView implements IGameSettingsSetView {
 		
     	winningConditionList = FXCollections.observableArrayList();
     	
+    	
+    	
     	winningConditionComboBox = ComboBoxFactory.makeComboBox("" , 
 				e -> setWinningCondition(winningConditionComboBox.getValue().toString()), winningConditionList);
     	winningConditionComboBox.setPrefWidth(105);

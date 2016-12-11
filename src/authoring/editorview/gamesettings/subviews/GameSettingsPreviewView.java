@@ -31,9 +31,22 @@ public class GameSettingsPreviewView implements INodeView {
 		return root;
 	}
 	
-	public void updateGameImagePath(String imagePath){
-		Image image = new Image(imagePath);
+	public void updateGameImagePath(String imagePath){	
+		Image image;
+		if (root.getChildren().contains(gameImageView)){
+			root.getChildren().remove(gameImageView);
+		}
+		
+		if (!imagePath.contains("file:") && !imagePath.contains("http:")) {
+			image = new Image (getClass().getClassLoader().getResourceAsStream(imagePath));		
+		}
+		
+		else {
+			image = new Image(imagePath);
+		}
+			
 		gameImageView.setImage(image);
+		root.getChildren().add(gameImageView);
 	}
 	
 	
