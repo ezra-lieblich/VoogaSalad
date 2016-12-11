@@ -2,7 +2,7 @@ package authoring.editorview.enemy.subviews.editorfields;
 
 import java.util.ResourceBundle;
 import authoring.editorview.TextFieldView;
-import authoring.editorview.enemy.EnemyEditorViewDelegate;
+import authoring.editorview.enemy.EnemyAuthoringViewDelegate;
 import authoring.editorview.enemy.IEnemySetView;
 import authoring.utilityfactories.BoxFactory;
 import authoring.utilityfactories.TextFieldFactory;
@@ -12,7 +12,7 @@ import javafx.scene.control.TextField;
 
 public class EnemyRewardMoneyField extends TextFieldView implements IEnemySetView {
 
-    private EnemyEditorViewDelegate delegate;
+    private EnemyAuthoringViewDelegate delegate;
     private TextField enemyRewardMoneyField;
 
     public EnemyRewardMoneyField (ResourceBundle labelsResource) {
@@ -20,7 +20,7 @@ public class EnemyRewardMoneyField extends TextFieldView implements IEnemySetVie
     }
 
     @Override
-    public void setDelegate (EnemyEditorViewDelegate delegate) {
+    public void setDelegate (EnemyAuthoringViewDelegate delegate) {
         this.delegate = delegate;
     }
 

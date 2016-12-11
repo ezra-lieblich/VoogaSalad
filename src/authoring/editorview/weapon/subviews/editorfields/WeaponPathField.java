@@ -2,7 +2,7 @@ package authoring.editorview.weapon.subviews.editorfields;
 
 import java.util.ResourceBundle;
 import authoring.editorview.weapon.IWeaponSetView;
-import authoring.editorview.weapon.WeaponEditorViewDelegate;
+import authoring.editorview.weapon.WeaponAuthoringViewDelegate;
 import authoring.utilityfactories.ComboBoxFactory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,7 +18,7 @@ import javafx.scene.control.ComboBox;
 public class WeaponPathField implements IWeaponSetView {
 
     private ComboBox<Object> weaponPathBox;
-    private WeaponEditorViewDelegate delegate;
+    private WeaponAuthoringViewDelegate delegate;
     private ResourceBundle labelsResource;
 
     public WeaponPathField (ResourceBundle labelsResource) {
@@ -40,7 +40,7 @@ public class WeaponPathField implements IWeaponSetView {
     }
 
     @Override
-    public void setDelegate (WeaponEditorViewDelegate delegate) {
+    public void setDelegate (WeaponAuthoringViewDelegate delegate) {
         this.delegate = delegate;
     }
 

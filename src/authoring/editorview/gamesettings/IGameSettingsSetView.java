@@ -5,5 +5,5 @@ import authoring.editorview.IEditorView;
 
 public interface IGameSettingsSetView extends IEditorView {
 
-    public void setDelegate (GameSettingsEditorViewDelegate delegate);
+    public void setDelegate (GameSettingsAuthoringViewDelegate delegate);
 }
