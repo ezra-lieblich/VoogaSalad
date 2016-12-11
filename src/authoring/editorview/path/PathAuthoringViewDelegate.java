@@ -11,7 +11,7 @@ public interface PathAuthoringViewDelegate {
 	
 	public void onUserEnteredPathType(String pathType);
 	
-	public int onUserEnteredCreatePath();
+	public void onUserEnteredCreatePath();
 	
 	public void onUserEnteredDeletePath();
 	

@@ -2,10 +2,13 @@ package authoring.editorview.path;
 
 
 import authoring.editorview.EditorViewController;
+import authoring.editorview.ListCellData;
+import authoring.editorview.ListDataSource;
 import engine.path.PathManagerController;
 
 
-public class PathAuthoringViewController extends EditorViewController implements PathAuthoringViewDelegate {
+public class PathAuthoringViewController extends EditorViewController 
+		implements PathAuthoringViewDelegate, ListDataSource {
 	private IPathUpdateView pathView;
 	private PathManagerController pathDataSource;
 	private int activeID;
@@ -48,10 +51,10 @@ public class PathAuthoringViewController extends EditorViewController implements
 
 	
 	@Override
-	public int onUserEnteredCreatePath() {
+	public void onUserEnteredCreatePath() {
 		activeID = pathDataSource.createType(pathView);	
 		pathView.updateActiveID(activeID);
-		return activeID;
+		onUserEnteredEditPath(activeID);
 	}
 
 	@Override
@@ -85,7 +88,14 @@ public class PathAuthoringViewController extends EditorViewController implements
 		
 	}
 
-	
+	@Override
+	public ListCellData getCellDataForSubject(int id) {
+		ListCellData cellData = new ListCellData();
+		cellData.setName(pathDataSource.getName(id));
+		cellData.setId(id);
+		cellData.setImagePath(pathDataSource.getImagePath(id));
+		return null;
+	}
 
 
 }

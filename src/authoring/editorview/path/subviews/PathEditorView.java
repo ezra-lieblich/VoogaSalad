@@ -29,7 +29,6 @@ public class PathEditorView implements IPathSetView {
 	private static final double BUFFER = 10.0;
 	
 	private PathImageView pathImageView;
-	private NewPathView newPathView;
 	private PathNameView pathNameView;
 	private PathChooser pathChooser;   
     private PathDimensionsView pathDimensionsView;
@@ -42,7 +41,7 @@ public class PathEditorView implements IPathSetView {
     	root = new VBox(10);
     	
     	this.pathImageView = new PathImageView();
-    	this.newPathView = new NewPathView();
+    	//this.newPathView = new NewPathView();
     	this.pathNameView = new PathNameView(pathResource);
     	this.pathChooser = new PathChooser();
         this.pathDimensionsView = new PathDimensionsView();
@@ -61,7 +60,6 @@ public class PathEditorView implements IPathSetView {
 	@Override
 	public void setDelegate(PathAuthoringViewDelegate delegate) {
 		pathImageView.setDelegate(delegate);
-		newPathView.setDelegate(delegate);
 		pathNameView.setDelegate(delegate);
 		pathChooser.setDelegate(delegate);
 		pathDimensionsView.setDelegate(delegate);
@@ -79,7 +77,6 @@ public class PathEditorView implements IPathSetView {
     	rootBuffer.setBackground(new Background(new BackgroundFill(Color.rgb(235, 235, 235), CornerRadii.EMPTY, Insets.EMPTY)));	
     	
     	root.getChildren().addAll(
-    			newPathView.getInstanceAsNode(),
     			pathChooser.getInstanceAsNode(),
     			pathNameView.getInstanceAsNode(),
     			pathDimensionsView.getInstanceAsNode(),
