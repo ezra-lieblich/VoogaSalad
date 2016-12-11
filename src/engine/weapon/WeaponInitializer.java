@@ -13,7 +13,7 @@ public interface WeaponInitializer extends TypeInitializer {
 
     ObservableProperty<String> getTrajectory ();
 
-    ObservableProperty<String> getEffect ();
+    ObservableList<Integer> getEffect ();
 
     ObservableProperty<Double> getSpeed ();
 

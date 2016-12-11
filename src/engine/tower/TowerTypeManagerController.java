@@ -1,5 +1,6 @@
 package engine.tower;
 
+import java.util.Collections;
 import java.util.List;
 import com.oracle.webservices.internal.api.databinding.Databinding.Builder;
 import authoring.editorview.tower.ITowerUpdateView;
@@ -37,17 +38,17 @@ public class TowerTypeManagerController
 
     @Override
     public List<Integer> getTowerUpgrades (int towerID) {
-        return getTypeManager().getEntity(towerID).getUpgrades();
+        return Collections.unmodifiableList(getTypeManager().getEntity(towerID).getUpgrades());
     }
 
     @Override
     public List<Integer> getTowerChosenWeapons (int towerID) {
-        return getTypeManager().getEntity(towerID).getWeapons();
+        return Collections.unmodifiableList(getTypeManager().getEntity(towerID).getWeapons());
     }
 
     @Override
     public List<Integer> getTowerAbilities (int towerID) {
-        return getTypeManager().getEntity(towerID).getAbilities();
+        return Collections.unmodifiableList(getTypeManager().getEntity(towerID).getAbilities());
     }
 
     @Override
@@ -102,11 +103,11 @@ public class TowerTypeManagerController
                                                     TowerBuilder typeBuilder) {
         return typeBuilder
                 .addWeaponsListener( (oldValue, newValue) -> towerUpdater
-                        .updateTowerWeaponBank(newValue))
+                        .updateTowerWeaponBank(Collections.unmodifiableList(newValue)))
                 .addAbilitiesListener( (oldValue, newValue) -> towerUpdater
-                        .updateTowerAbilityBank(newValue))
+                        .updateTowerAbilityBank(Collections.unmodifiableList(newValue)))
                 .addUpgradesListener( (oldValue, newValue) -> towerUpdater
-                        .updateTowerUpgradeBank(newValue))
+                        .updateTowerUpgradeBank(Collections.unmodifiableList(newValue)))
                 .addCostListener( (oldValue, newValue) -> towerUpdater
                         .updateTowerBuyPriceDisplay(newValue))
                 .addSellAmountListener( (oldValue, newValue) -> towerUpdater
