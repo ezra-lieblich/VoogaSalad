@@ -352,7 +352,7 @@ public class GamePlayerController implements Observer {
 		// this.view.getGrid().populatePath(this.model.getGrid().getStartPoint());
 		this.view.getGrid().getGrid().getChildren().addAll(this.view.getGrid().getPathImages());
 
-		//HashMap<Integer, Enemy> enemyRedraw = this.enemyManager.getEnemyOnGrid();
+		HashMap<Integer, Enemy> enemyRedraw = this.enemyManager.getEnemyOnGrid();
 		Map<Integer, Tower> towerRedraw = this.model.getTowerOnGrid();
 		HashMap<Integer, Weapon> bulletRedraw = this.model.getWeaponManager().getWeaponOnGrid();
 
@@ -374,16 +374,17 @@ public class GamePlayerController implements Observer {
 
 		}
 
-		//List<IDrawable> reEnemyDraw = convertEnemyDrawable(enemyRedraw);
+		List<IDrawable> reEnemyDraw = convertEnemyDrawable(enemyRedraw);
 		List<IDrawable> reTowerDraw = convertTowerDrawable(towerRedraw);
 
-		//this.view.reRender(reEnemyDraw);
+		this.view.reRender(reEnemyDraw);
 		this.view.reRenderWeapon(weaponsOnScreen);
 		this.view.reRenderTower(reTowerDraw);
 	}
 
 	private void redrawEnemy() {
 		HashMap<Integer, Enemy> enemyRedraw = this.enemyManager.getEnemyOnGrid();
+		System.out.println("enemyRedraw.size(): "+enemyRedraw.size());
 		List<IDrawable> reEnemyDraw = convertEnemyDrawable(enemyRedraw);
 		this.view.reRender(reEnemyDraw);
 		
