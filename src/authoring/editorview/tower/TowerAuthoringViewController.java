@@ -175,4 +175,10 @@ public class TowerAuthoringViewController extends EditorViewController
 		
 	}
 
+	@Override
+	public void onUserPressedCreateTowerUpgrade() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

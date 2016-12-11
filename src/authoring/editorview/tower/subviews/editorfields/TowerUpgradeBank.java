@@ -5,8 +5,10 @@ import java.util.ResourceBundle;
 import authoring.editorview.ImageBank;
 import authoring.editorview.tower.ITowerSetView;
 import authoring.editorview.tower.TowerAuthoringViewDelegate;
+import authoring.utilityfactories.ButtonFactory;
 import javafx.geometry.Orientation;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 
 
@@ -18,15 +20,23 @@ import javafx.scene.layout.HBox;
  */
 public class TowerUpgradeBank extends ImageBank implements ITowerSetView {
 
-    private HBox towerUpgradeBox;
+    protected final int DEFAULT_BANK_HEIGHT = 80;
+	
     private TowerAuthoringViewDelegate delegate;
     private ResourceBundle labelsResource;
 
     public TowerUpgradeBank (ResourceBundle labelsResource) {
     	super();
+    	Button createTowerButton =
+                ButtonFactory.makeButton("New",
+                                         e -> {
+                                             delegate.onUserPressedCreateTowerUpgrade();
+                                         });
     	this.listView.setOrientation(Orientation.HORIZONTAL);
+    	this.listView.setMaxHeight(DEFAULT_BANK_HEIGHT);
         this.labelsResource = labelsResource;
-        towerUpgradeBox = new HBox(5);
+        this.items.add(createTowerButton);
+        this.CONTENT_OFFSET = 1;
     }
 
     @Override
@@ -36,7 +46,7 @@ public class TowerUpgradeBank extends ImageBank implements ITowerSetView {
 
     @Override
     public Node getInstanceAsNode () {
-        return towerUpgradeBox;
+        return this.listView;
     }
 
 	@Override

@@ -24,6 +24,7 @@ public class EnemyImageBank extends ImageBank {
             delegate.onUserPressedCreateEnemy();
         });
         this.items.add(newEnemyButton);
+        this.CONTENT_OFFSET = 1;
     }
 
     public void setDelegate (EnemyAuthoringViewDelegate delegate) {
