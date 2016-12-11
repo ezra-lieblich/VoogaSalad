@@ -79,6 +79,8 @@ public class Grid {
 	}
 	
 	public Path getPath(int id){
+		System.out.println("Does the allPath exist?");
+		System.out.println(allPath);
 		return this.allPath.get(id);
 		
 	}

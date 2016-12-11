@@ -24,6 +24,7 @@ public class Enemy extends Observable implements IDrawable {
 	private Label enemyInfo;
 	private boolean showInfo;
 
+
 	public Enemy(int ID, String name, double movingSpeed, int health, String image, double width, double height) {
 		this.uniqueID = ID;
 		this.name = name;
@@ -126,7 +127,10 @@ public class Enemy extends Observable implements IDrawable {
 	}
 
 	public String getImage() {
-		return this.image;
+		//System.out.println("What is the image: "+image);
+		int index=this.image.lastIndexOf("/")+1;
+		String loc = this.image.substring(index, image.length());
+		return loc;
 	}
 
 	@EffectMethod

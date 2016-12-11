@@ -366,7 +366,7 @@ public class GamePlayerController implements Observer {
 		for (int i : bulletRedraw.keySet()) {
 
 			if (!weaponsOnScreen.containsKey(bulletRedraw.get(i).getUniqueID())) {
-				ImageView image = new ImageView(bulletRedraw.get(i).getImage());
+				ImageView image = new ImageView(graphics.createImage(bulletRedraw.get(i).getImage()));
 				image.setCache(true);
 				image.setCacheHint(CacheHint.SPEED);
 				image.setX(bulletRedraw.get(i).getX());
