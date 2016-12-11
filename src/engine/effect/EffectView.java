@@ -20,5 +20,6 @@ public interface EffectView extends IUpdateView {
     Group getNode ();
 
     Scene getScene ();
+    
 
 }

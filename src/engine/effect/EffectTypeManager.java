@@ -11,18 +11,33 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import engine.AbstractTypeManager;
+import engine.observer.ObservableObjectProperty;
+import engine.observer.ObservableProperty;
 
 public class EffectTypeManager extends AbstractTypeManager<Effect> implements EffectManager {
     //private Map<String, Class<?>> annotatedClasses;
     private Map<Class<?>, List<Method>> annotatedClassMethods; //Return type : methods of that type
     private Map<Class<?>, List<Field>> effectAccessibleData;
+    private ObservableProperty<String> activeClass;
     
     EffectTypeManager(Map<Class<?>, List<Method>> annotatedClassMethods, Map<Class<?>, List<Field>> effectAccessibleData) {
         this.annotatedClassMethods = annotatedClassMethods;
         this.effectAccessibleData = effectAccessibleData;
+        this.activeClass = new ObservableObjectProperty<String>(null);
+    }
+    
+    @Override
+    public void setActiveClass(String activeClass) {
+        this.activeClass.setProperty(activeClass);
+    }
+    
+    @Override
+    public void addActiveClassListener (BiConsumer<String, String> listener) {
+        activeClass.addListener(listener);
     }
     
     @Override
