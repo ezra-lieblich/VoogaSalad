@@ -6,8 +6,8 @@ import authoring.editorview.level.subviews.LevelChooserView;
 import authoring.editorview.level.subviews.LevelNameView;
 import authoring.editorview.level.subviews.LevelRewardsView;
 import authoring.editorview.level.subviews.LevelTransitionTimeField;
-import authoring.editorview.path.NameIdPair;
 import authoring.utilityfactories.ButtonFactory;
+import engine.level.wave.Wave;
 import authoring.editorview.ListDataSource;
 import authoring.editorview.level.subviews.CreateNewLevelView;
 import authoring.editorview.level.subviews.WaveTableView;
@@ -129,15 +129,17 @@ public class LevelAuthoringView implements ILevelUpdateView {
 
     // WAVE
 
-    @Override
-    public void updateWaves (List<WaveObject> waves) {
-        waveTableView.updateWaveTableView(waves);
-    }
 
     @Override
     public void updateDeleteEntity (String entityID) {
         // TODO Auto-generated method stub
-        
+
+    }
+
+    @Override
+    public void updateWaves (List<Wave> waves) {
+        waveTableView.updateWaveTableView(waves);
+        System.out.println("Waves: " + waves);
     }
 
 }

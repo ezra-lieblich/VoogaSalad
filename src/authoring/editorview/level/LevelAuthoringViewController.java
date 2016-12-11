@@ -24,10 +24,8 @@ public class LevelAuthoringViewController extends EditorViewController
     private EnemyManagerController enemyDataSource;
     private int currentLevelID;
     private int currentWaveID;
-    private List<NameIdPair> nameIDList;
 
     public LevelAuthoringViewController (int editorWidth, int editorHeight) {
-        nameIDList = new ArrayList<NameIdPair>();
         levelView = LevelAuthoringViewFactory.build(editorWidth, editorHeight);
         levelView.setDelegate(this);
         this.view = levelView;
@@ -41,22 +39,6 @@ public class LevelAuthoringViewController extends EditorViewController
 
     public void setEnemyDataSource (EnemyManagerController source) {
         this.enemyDataSource = source;
-    }
-
-    private void getCreatedEnemies () {
-        List<Integer> enemyCreatedIDs = enemyDataSource.getCreatedTypeIds();
-        nameIDList.clear();
-        for (int id : enemyCreatedIDs) {
-            String curName = enemyDataSource.getName(id);
-            NameIdPair newPair = new NameIdPair(curName, id);
-            nameIDList.add(newPair);
-        }
-    }
-
-    private List<WaveObject> getWaveList () {
-        getCreatedEnemies();
-        // return nameIDList;
-        return null;
     }
 
     @Override
@@ -85,7 +67,7 @@ public class LevelAuthoringViewController extends EditorViewController
         levelView.updateRewardMoney(levelDataSource.getRewardMoney(currentLevelID));
         levelView.updateRewardScore(levelDataSource.getRewardScore(currentLevelID));
         levelView.updateNameDisplay(levelDataSource.getName(currentLevelID));
-        levelView.updateWaves(getWaveList());
+        levelView.updateWaves(levelDataSource.getWaves(currentLevelID));
     }
 
     @Override

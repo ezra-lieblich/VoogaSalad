@@ -2,14 +2,10 @@ package engine.effect;
 
 import java.util.ArrayList;
 import java.util.List;
-import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
-import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.shape.Rectangle;
 
 
 public class EffectEditorView implements EffectView {
