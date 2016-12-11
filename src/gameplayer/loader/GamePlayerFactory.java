@@ -123,57 +123,13 @@ public class GamePlayerFactory{
 		return (HashMap<Integer, Tower>) authoringFileReader.getTowerTypes(); 
 	}
 	
-	/*
-	public List<Queue<Enemy>> getEnemy(int levelNumber) {
-		//System.out.println("Grid, is this empty? : ");
-		//System.out.println(this.getGrid(0).getCell(0, 0));
-		Queue<Enemy> myQueue = new LinkedList<Enemy>();
-		Queue<Enemy> myQueue1 = new LinkedList<Enemy>();
-		Enemy enem1 = new Enemy(1, "Izaya", 4, 7, "questionmark.png", 50.0, 50.0);
-		System.out.println("enem1: ");
-		System.out.println(enem1);
-		enem1.setCurrentCell(this.getGrid(0).getStartPoint());
-		Enemy enem2 = new Enemy(2, "Shizuo", 4, 7, "questionmark.png", 50.0, 50.0);
-		enem2.setCurrentCell(this.getGrid(0).getStartPoint());
-		Enemy enem3 = new Enemy(3, "Mikado", 4, 7, "kaneki.jpg", 50.0, 50.0);
-		enem3.setCurrentCell(this.getGrid(0).getStartPoint());
-		Enemy enem4 = new Enemy(4, "Kanra", 4, 7, "penguin.jpg", 50.0, 50.0);
-		enem4.setCurrentCell(this.getGrid(0).getStartPoint());
-		myQueue.add(enem1);
-		// myQueue.add(enem2);
-		// myQueue.add(enem3);
-		myQueue.add(enem4);
-		myQueue1.add(enem1);
-		myQueue1.add(enem2);
-		myQueue1.add(enem3);
-		myQueue1.add(enem4);
-		List<Queue<Enemy>> stuff = new ArrayList<Queue<Enemy>>();
-		stuff.add(myQueue);
-		stuff.add(myQueue1);
-		return stuff;
-	}
-	*/
+
 	public Queue<Wave> getWaves(int levelNumber) {
 		Level level = this.authoringFileReader.getLevelManager().getEntity(levelNumber);
 		List<Wave> waves = level.getWaves();
 		Queue<Wave> ret = new LinkedList<Wave>();
 		waves.forEach(w -> ret.add(w));
 		return ret;
-		/*
-		Queue<Queue<Enemy>> ret = new LinkedList<Queue<Enemy>>();
-		for (Wave wave : waves) {
-			engine.enemy.Enemy enemyType = enemyTypes.get(wave.getEnemyID()); //refactor name
-			Queue<Enemy> enemies = new LinkedList<Enemy>();
-			for (int i = 0; i < wave.getEnemyCount(); i++) {
-				Cell start = this.getGrid(levelNumber).getStartPoint();
-				EnemyFactory enemyFactory = new EnemyFactory(enemyType, start);
-				
-				enemies.add(enemyFactory.createModelEnemy());
-			}
-			ret.add(enemies);
-		}
-		return ret;
-		*/
 	}
 	
 	public Queue<Enemy> getIndividualWaveQueue(Wave wave, int levelNumber) {
@@ -188,9 +144,6 @@ public class GamePlayerFactory{
 		}
 		return enemies;
 	}
-	
-	
-	
 	
 	public String getGameTitle() {
 		return this.authoringFileReader.getName();
