@@ -4,25 +4,25 @@ import engine.enemy.Enemy;
 import gameplayer.model.Cell;
 
 public class EnemyFactory {
-	Enemy enemyType;
-	Cell startingPoint;
+
+	int currID;
 	
-	public EnemyFactory(Enemy engineEnemy, Cell start) {
-		enemyType = engineEnemy;
-		startingPoint = start;
+	public EnemyFactory() {
+		currID = 0;
 	}
 	
-	public gameplayer.model.enemy.Enemy createModelEnemy() { //refactor name
-		int ID = this.enemyType.getId();
-		String name = this.enemyType.getName();
-		double movingSpeed = this.enemyType.getSpeed();
-		int health = (int) this.enemyType.getHealth();
-		String image = this.enemyType.getImagePath();
-		double height = this.enemyType.getSize();
-		double width = this.enemyType.getSize();
+	public gameplayer.model.enemy.Enemy createModelEnemy(Enemy enemyType, Cell start) { //refactor name
+		int ID = currID;
+		String name = enemyType.getName();
+		double movingSpeed = enemyType.getSpeed();
+		int health = (int) enemyType.getHealth();
+		String image = enemyType.getImagePath();
+		double height =enemyType.getSize();
+		double width = enemyType.getSize();
 		gameplayer.model.enemy.Enemy modelEnemy = new gameplayer.model.enemy.Enemy(ID, name, 
 				movingSpeed, health, image, height, width);
-		modelEnemy.setCurrentCell(startingPoint);
+		modelEnemy.setCurrentCell(start);
+		currID++;
 		return modelEnemy;
 	}
 }

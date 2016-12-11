@@ -117,4 +117,10 @@ public class EffectEditorView implements EffectView {
         // TODO Auto-generated method stub
 
     }
+
+	@Override
+	public Integer getNearestAvailableItemID(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

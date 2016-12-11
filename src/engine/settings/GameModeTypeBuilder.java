@@ -15,7 +15,7 @@ import engine.observer.ObservableProperty;
 public class GameModeTypeBuilder extends AbstractTypeBuilder<GameMode, GameModeBuilder> implements GameModeBuilder, GameModeInitializer {
 
 	public static final String DEFAULT_NAME = "New Game";
-    public static final String DEFAULT_IMAGE_PATH = "Images/blacksquare.jpg";
+    public static final String DEFAULT_IMAGE_PATH = "blacksquare.png";
     public static final double DEFAULT_SIZE = 1;
     public static final String[] DEFAULT_WINNING_CONDITIONS = new String[]{};
     public static final String[] DEFAULT_LOSING_CONDITIONS = new String[]{};

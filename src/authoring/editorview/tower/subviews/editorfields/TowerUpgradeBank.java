@@ -21,7 +21,6 @@ public class TowerUpgradeBank extends ImageBank implements ITowerSetView {
 
     private TowerAuthoringViewDelegate delegate;
     private ResourceBundle labelsResource;
-    private Button addTowerUpgrade;
 
     public TowerUpgradeBank (ResourceBundle labelsResource) {
         super();
@@ -45,10 +44,6 @@ public class TowerUpgradeBank extends ImageBank implements ITowerSetView {
     @Override
     public Node getInstanceAsNode () {
         return this.listView;
-    }
-
-    private void dummyMethod () {
-        System.out.println("Help");
     }
 
     @Override

@@ -9,11 +9,11 @@ public interface GameModeManagerController extends ManagerController<GameModeMan
 		
 	public void setNumberofLives (int gameModeID, int lives);
 	
-	public double getNumberofLives (int gameModeID);
+	public int getNumberofLives (int gameModeID);
 	
 	public void setMoney (int gameModeID, int money);
 	
-	public double getMoney(int gameModeID);
+	public int getMoney(int gameModeID);
 	
 	public void addWinningCondition (int gameModeID, String winningCondition);
     

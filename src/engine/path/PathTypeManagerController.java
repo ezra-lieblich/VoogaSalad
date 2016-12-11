@@ -95,8 +95,8 @@ public class PathTypeManagerController
     }
 
     @Override
-    public void getType (int pathID) {
-        getTypeManager().getEntity(pathID).getType();        
+    public String getType (int pathID) {
+        return getTypeManager().getEntity(pathID).getType();        
     }
     
     @Override

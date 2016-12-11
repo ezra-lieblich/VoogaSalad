@@ -1,8 +1,12 @@
 package authoring.toolbar;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
 import authoring.utilityfactories.DialogueBoxFactory;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
@@ -24,10 +28,8 @@ public class Toolbar implements IToolbar {
     
     public Toolbar (int aWidth, int aHeight) {
     	
-    	saveButton = new Button("Save");
-    	
-    	loadButton = new Button("Load");
-    	
+    	saveButton = new Button("Save");    	
+    	loadButton = new Button("Load");   	
         this.toolbar = new ToolBar(
         						saveButton,
         						loadButton
@@ -49,6 +51,17 @@ public class Toolbar implements IToolbar {
     public void setOnPressedSave (EventHandler<MouseEvent> e) {
         saveButton.setOnMouseClicked(e);
     }
+    
+    public String loadFile (){
+    	FileChooser choose = new FileChooser();
+        choose.setTitle("Load game");
+        FileChooser.ExtensionFilter extFilter =
+                new FileChooser.ExtensionFilter("XML Files (*.xml)", "*.xml");
+        choose.getExtensionFilters().add(extFilter);
+        return choose.showOpenDialog(new Stage()).getPath();
+        
+    }
+    
 
     public void saveFile (String content) {
         FileChooser choose = new FileChooser();
