@@ -1,4 +1,4 @@
-package authoring.editorview.gamesettings.subviews;
+package authoring.editorview.gamesettings.subviews.editorfields;
 
 import authoring.utilityfactories.ComboBoxFactory;
 import authoring.utilityfactories.GridFactory;

@@ -10,10 +10,16 @@ public interface IGameSettingsUpdateView extends IGameSettingsSetView, IUpdateVi
     public void updateGameName (String name);
 
     public void updateNumberofLives (int lives);
+    
+    public void updateInitialMoney (int money);
 
     public void updateGameImage (String imagePath);
-
-    public void updateImageSize (double imageSize);
+    
+    public void updateGridSize (int size);
+    
+    public void updatePathList (List<Integer> pathList);
+    
+    public void updatePathType (String pathType);
 
     public void updateWinningConditions (List<String> winningConditions);
 

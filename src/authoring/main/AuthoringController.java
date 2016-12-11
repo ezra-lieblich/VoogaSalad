@@ -23,7 +23,7 @@ import authoring.editorview.tower.TowerAuthoringViewController;
 import authoring.editorview.weapon.IWeaponUpdateView;
 import authoring.editorview.weapon.WeaponAuthoringViewController;
 import authoring.toolbar.IToolbar;
-import authoring.view.AuthoringViewController;
+import authoring.view.ViewController;
 import engine.GameAuthoringData;
 import engine.ModelAuthoringController;
 import engine.ModelController;
@@ -46,13 +46,13 @@ import statswrapper.Wrapper;
 
 public class AuthoringController {
     private ModelController modelController;
-    private AuthoringViewController viewController;
+    private ViewController viewController;
     private IToolbar toolbar;
 
     public AuthoringController (int size) {
         modelController = new ModelAuthoringController();
         try {
-            viewController = new AuthoringViewController(size, size);
+            viewController = new ViewController(size, size);
             connectDataInterfaces(viewController);
         }
         catch (IOException e) {
@@ -127,7 +127,7 @@ public class AuthoringController {
     	return sb.toString();
     }
 
-    private void connectDataInterfaces (AuthoringViewController authoringVC) {
+    private void connectDataInterfaces (ViewController authoringVC) {
 
         HashMap<String, EditorViewController> editorVCs = authoringVC.getControllers();
         PathAuthoringViewController pathVC = (PathAuthoringViewController) editorVCs.get("path");

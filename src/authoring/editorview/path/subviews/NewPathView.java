@@ -4,8 +4,7 @@ import java.util.ResourceBundle;
 
 import authoring.editorview.path.IPathSetView;
 import authoring.editorview.path.PathAuthoringViewDelegate;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import authoring.utilityfactories.ButtonFactory;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
@@ -33,16 +32,14 @@ public class NewPathView implements IPathSetView {
 		this.delegate = delegate;
 	}
 
-	private void buildViewComponents() {
-		
+	private void buildViewComponents() {		
 		Button createPathButton =
-				createButton(pathResource.getString("NewPathButton"),
+				ButtonFactory.makeButton(pathResource.getString("NewPathButton"),
                  e -> {
 					createNewPath();		
 				});
+		createPathButton.setPrefWidth(230);
 	    root.getChildren().add(createPathButton);
-	    createPathButton.setTranslateY(5);
-	    createPathButton.setTranslateX(5);
 	    createPathButton.setFocusTraversable(false);
 	}
 	
@@ -51,11 +48,4 @@ public class NewPathView implements IPathSetView {
 		delegate.onUserEnteredEditPath(activeID);
 		
 	}
-	 
-
-    private Button createButton (String label, EventHandler<ActionEvent> event) {
-        Button button = new Button(label);
-        button.setOnAction(event);
-        return button;
-    }
 }

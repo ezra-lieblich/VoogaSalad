@@ -132,6 +132,7 @@ public class EnemyAuthoringView implements IEnemyUpdateView {
     @Override
     public void updateImagePathDisplay (String imagePath) {
         this.enemyImage.updateEnemyImagePath(imagePath);
+        this.enemyBank.updateBank();
     }
 
     @Override

@@ -1,5 +1,6 @@
 package engine.level;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +11,8 @@ import engine.ManagerMediator;
 import engine.level.wave.Wave;
 import engine.level.wave.WaveBuilder;
 import engine.level.wave.WaveManager;
+import engine.level.wave.WaveString;
+import engine.level.wave.WaveStringType;
 import engine.level.wave.WaveTypeBuilder;
 
 
@@ -98,7 +101,7 @@ public class LevelTypeManagerController
                                                     LevelBuilder typeBuilder) {
         return typeBuilder.addDurationInSecondsListener( (oldValue, newValue) -> updateView
                 .updateTransitionTime(newValue))
-                .addWaveListener( (oldValue, newValue) -> updateView.updateWaves(newValue.waveList()))
+                .addWaveListener( (oldValue, newValue) -> updateView.updateWaves(getWaveStrings(newValue.waveList())))
                 // .addPathListener(listener)
                 .addRewardHealthListener( (oldValue, newValue) -> updateView
                         .updateRewardHealth(newValue))
@@ -110,7 +113,15 @@ public class LevelTypeManagerController
 
     }
 
-    @Override
+    private List<WaveString> getWaveStrings(List<Wave> waveList) {
+		List<WaveString> waveStrings = new ArrayList<WaveString>();
+		for (Wave wave : waveList) {
+			waveStrings.add(new WaveStringType(wave));
+		}
+		return waveStrings;
+	}
+
+	@Override
     public void setLevelNumber (int levelID, int levelNumber) {
         // TODO Auto-generated method stub
 

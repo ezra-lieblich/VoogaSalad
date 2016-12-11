@@ -34,6 +34,7 @@ public abstract class ImageBank implements ChangeListener<Number> {
     protected final int DEFAULT_CELL_WIDTH = 60;
     protected final int DEFAULT_BANK_WIDTH = 120;
     protected final String DEFAULT_SUBJECT_IMAGE_PATH = "./Images/questionmark.png";
+    protected int CONTENT_OFFSET = 0;
 
     public ImageBank () {
         items = FXCollections.observableArrayList();
@@ -52,12 +53,26 @@ public abstract class ImageBank implements ChangeListener<Number> {
         return listView;
     }
 
+    public void updateBank() {
+    	ArrayList<Integer> idCopy = (ArrayList<Integer>) this.itemIDs.clone();
+    	int i = 0;
+    	while (i < idCopy.size()){
+    		if (idCopy.get(i).equals(-1)){
+    			idCopy.remove(i);
+    		}
+    		else{
+    			i++;
+    		}
+    	}
+    	this.updateBank(idCopy);
+    }
+    
     public void updateBank (List<Integer> ids) {
         if (dataSource == null) {
             System.out.println("Table data source not set");
             return;
         }
-        this.items.remove(1, items.size());
+        this.items.remove(CONTENT_OFFSET, items.size());
         itemIDs = new ArrayList<Integer>();
         if (ids.size() != 0) {
             for (int i = 0; i <= Collections.max(ids) + 1; i++)

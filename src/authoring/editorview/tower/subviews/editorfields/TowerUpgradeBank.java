@@ -1,9 +1,11 @@
 package authoring.editorview.tower.subviews.editorfields;
 
 import java.util.ResourceBundle;
+import authoring.editorview.ImageBank;
 import authoring.editorview.tower.ITowerSetView;
 import authoring.editorview.tower.TowerAuthoringViewDelegate;
 import authoring.utilityfactories.ButtonFactory;
+import javafx.geometry.Orientation;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
@@ -12,19 +14,29 @@ import javafx.scene.layout.HBox;
 /**
  * 
  * @author Kayla Schulz
+ * @author andrewbihl
  *
  */
-public class TowerUpgradeBank implements ITowerSetView {
+public class TowerUpgradeBank extends ImageBank implements ITowerSetView {
 
-    private HBox towerUpgradeBox;
+    protected final int DEFAULT_BANK_HEIGHT = 80;
+
     private TowerAuthoringViewDelegate delegate;
     private ResourceBundle labelsResource;
     private Button addTowerUpgrade;
 
     public TowerUpgradeBank (ResourceBundle labelsResource) {
+        super();
+        Button createTowerButton =
+                ButtonFactory.makeButton("New",
+                                         e -> {
+                                             delegate.onUserPressedCreateTowerUpgrade();
+                                         });
+        this.listView.setOrientation(Orientation.HORIZONTAL);
+        this.listView.setMaxHeight(DEFAULT_BANK_HEIGHT);
         this.labelsResource = labelsResource;
-        towerUpgradeBox = new HBox(5);
-        setHBox();
+        this.items.add(createTowerButton);
+        this.CONTENT_OFFSET = 1;
     }
 
     @Override
@@ -34,30 +46,15 @@ public class TowerUpgradeBank implements ITowerSetView {
 
     @Override
     public Node getInstanceAsNode () {
-        return towerUpgradeBox;
-    }
-
-    public void addTowerUpgrade (String towerUpgrade) {
-        // towerUpgradeBox.setValue(towerUpgrade);
-    }
-
-    public void deleteTowerUpgrade (String towerUpgrade) {
-
-    }
-
-    private void setHBox () {
-        addTowerUpgrade = ButtonFactory.makeButton("Add Upgrade", e -> dummyMethod());
-        towerUpgradeBox.getChildren().add(addTowerUpgrade);
-        towerUpgradeBox.setStyle("-fx-padding: 5;" +
-                                 "-fx-border-style: solid inside;" +
-                                 "-fx-border-width: 1;" +
-                                 "-fx-border-insets: 3;" +
-                                 "-fx-border-radius: 2;" +
-                                 "-fx-border-color: black;");
+        return this.listView;
     }
 
     private void dummyMethod () {
         System.out.println("Help");
     }
 
+    @Override
+    protected void userSelectedRow (int index) {
+        this.delegate.onUserSelectedTower(this.itemIDs.get(index));
+    }
 }

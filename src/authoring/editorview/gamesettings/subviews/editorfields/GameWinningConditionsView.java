@@ -1,4 +1,4 @@
-package authoring.editorview.gamesettings.subviews;
+package authoring.editorview.gamesettings.subviews.editorfields;
 
 import java.util.ResourceBundle;
 

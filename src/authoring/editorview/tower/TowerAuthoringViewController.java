@@ -169,4 +169,16 @@ public class TowerAuthoringViewController extends EditorViewController
         return cellData;
     }
 
+	@Override
+	public void onUserSelectedTowerUpgrade(int towerID) {
+		// TODO Show the tower so it can be edited.
+		
+	}
+
+	@Override
+	public void onUserPressedCreateTowerUpgrade() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

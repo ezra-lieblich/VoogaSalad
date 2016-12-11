@@ -3,36 +3,47 @@ package engine.effect;
 import java.lang.annotation.Annotation;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import engine.AbstractTypeManager;
-
-@interface EffectClass {}
-
-@Retention(RetentionPolicy.RUNTIME)
-@interface EffectMethod {}
+import engine.observer.ObservableObjectProperty;
+import engine.observer.ObservableProperty;
 
 public class EffectTypeManager extends AbstractTypeManager<Effect> implements EffectManager {
     //private Map<String, Class<?>> annotatedClasses;
-    private Map<String, List<Method>> annotatedClassMethods; //Return type : methods of that type
-    private Map<String, List<Class<?>>> effectAccessibleData;
+    private Map<Class<?>, List<Method>> annotatedClassMethods; //Return type : methods of that type
+    private Map<Class<?>, List<Field>> effectAccessibleData;
+    private ObservableProperty<String> activeClass;
     
-    EffectTypeManager(Map<String, List<Method>> annotatedClassMethods, Map<String, List<Class<?>>> effectAccessibleData) {
+    EffectTypeManager(Map<Class<?>, List<Method>> annotatedClassMethods, Map<Class<?>, List<Field>> effectAccessibleData) {
         this.annotatedClassMethods = annotatedClassMethods;
         this.effectAccessibleData = effectAccessibleData;
-        add(Enemy.class);
-        add(SuperEnemy.class);
+        this.activeClass = new ObservableObjectProperty<String>(null);
     }
     
     @Override
-    public List<String> getAnnotatedClasses() {
-        return new ArrayList<String>(null);
+    public void setActiveClass(String activeClass) {
+        this.activeClass.setProperty(activeClass);
+    }
+    
+    @Override
+    public void addActiveClassListener (BiConsumer<String, String> listener) {
+        activeClass.addListener(listener);
+    }
+    
+    @Override
+    public Collection<Class<?>> getAnnotatedClasses() {
+        //return new ArrayList<String>(annotatedClassMethods.keySet());
+        return annotatedClassMethods.keySet();
     }
     
     @Override
@@ -80,23 +91,6 @@ public class EffectTypeManager extends AbstractTypeManager<Effect> implements Ef
     /* (non-Javadoc)
      * @see engine.effect.EffectManager#getAnnotatedClasses()
      */
-    
-    public void printTest() {
-        annotatedClassMethods.values().forEach(a -> a.forEach(b -> System.out.println(b.getName())));
-    }
-
-    @Override
-    public void add (Class<?> annotatedClass) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public <T extends Annotation> List<Method> generateAnnotatedMethods (Class<?> annotatedClass,
-                                                                         Class<T> annotationType) {
-        // TODO Auto-generated method stub
-        return null;
-    }
     
 //    public static void main (String[] args) {
 //        EffectManager test = new EffectManager();

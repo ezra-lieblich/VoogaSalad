@@ -4,21 +4,26 @@ import java.util.List;
 import authoring.editorview.weapon.IWeaponUpdateView;
 import engine.AbstractTypeManagerController;
 import engine.ManagerMediator;
+import engine.effect.EffectManagerController;
+import engine.effect.EffectTypeManagerController;
 
 
 public class WeaponTypeManagerController extends
         AbstractTypeManagerController<WeaponManager, WeaponBuilder, Weapon, IWeaponUpdateView>
         implements WeaponManagerController {
 
+    private EffectManagerController weaponEffectManagerController;
+    
     public WeaponTypeManagerController (ManagerMediator managerMediator) {
         super(new WeaponTypeManager(), new WeaponTypeBuilder(), managerMediator);
+        weaponEffectManagerController = new EffectTypeManagerController(managerMediator, getTypeManager().getWeaponEffectManager());
     }
 
     @Override
     protected WeaponBuilder constructTypeProperties (IWeaponUpdateView weaponUpdater,
                                                      WeaponBuilder typeBuilder) {
         return typeBuilder
-                .addFireRateListener( (oldValue, newValue) -> weaponUpdater
+                .addReloadTimeListener( (oldValue, newValue) -> weaponUpdater
                         .updateFireRateDisplay(newValue))
                 .addRangeListener( (oldValue, newValue) -> weaponUpdater
                         .updateRangeDisplay(newValue))
@@ -37,7 +42,7 @@ public class WeaponTypeManagerController extends
 
     @Override
     public void setWeaponFireRate (int weaponID, double weaponFireRate) {
-        getTypeManager().getEntity(weaponID).setFireRate(weaponFireRate);
+        getTypeManager().getEntity(weaponID).setReloadTime(weaponFireRate);
     }
 
     @Override
@@ -71,8 +76,8 @@ public class WeaponTypeManagerController extends
     }
 
     @Override
-    public double getWeaponFireRate (int weaponID) {
-        return getTypeManager().getEntity(weaponID).getFireRate();
+    public double getWeaponReloadTime (int weaponID) {
+        return getTypeManager().getEntity(weaponID).getReloadTime();
     }
 
     @Override
@@ -93,6 +98,11 @@ public class WeaponTypeManagerController extends
     @Override
     public List<Integer> getTargetEnemies (int weaponID) {
         return getTypeManager().getEntity(weaponID).getTargets();
+    }
+    
+    @Override
+    public EffectManagerController getEffectManagerController () {
+        return weaponEffectManagerController;
     }
 
 }
