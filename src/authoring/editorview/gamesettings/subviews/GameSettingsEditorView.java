@@ -4,6 +4,13 @@ import java.util.ResourceBundle;
 
 import authoring.editorview.gamesettings.GameSettingsAuthoringViewDelegate;
 import authoring.editorview.gamesettings.IGameSettingsSetView;
+import authoring.editorview.gamesettings.subviews.editorfields.GameImageView;
+import authoring.editorview.gamesettings.subviews.editorfields.GameInitialLivesView;
+import authoring.editorview.gamesettings.subviews.editorfields.GameInitialMoneyView;
+import authoring.editorview.gamesettings.subviews.editorfields.GameLosingConditionsView;
+import authoring.editorview.gamesettings.subviews.editorfields.GameNameView;
+import authoring.editorview.gamesettings.subviews.editorfields.GamePathTypeView;
+import authoring.editorview.gamesettings.subviews.editorfields.GameWinningConditionsView;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
@@ -17,7 +24,7 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
-public class GameSettingsEditingView implements IGameSettingsSetView {
+public class GameSettingsEditorView implements IGameSettingsSetView {
 	
 	
 	private VBox root;
@@ -33,23 +40,28 @@ public class GameSettingsEditingView implements IGameSettingsSetView {
 	private static final String RESOURCE_FILE_NAME = "resources/GameAuthoringSettings";	
 	private ResourceBundle settingsResource = ResourceBundle.getBundle(RESOURCE_FILE_NAME);
 	
+	private static final double BUFFER = 10.0;
 	
-	public GameSettingsEditingView(){
+	public GameSettingsEditorView(int size){
 		
 		this.root = new VBox(10);
 		
 		this.rootBuffer = new AnchorPane();
 		this.gameNameView = new GameNameView(settingsResource);
-		this.gameImageView = new GameImageView();
+		this.gameImageView = new GameImageView(settingsResource);
 		this.gamePathTypeView = new GamePathTypeView();
 		this.gameInitialLivesView = new GameInitialLivesView(settingsResource);
 		this.gameInitialMoneyView = new GameInitialMoneyView(settingsResource);
 		this.gameWinningConditionsView = new GameWinningConditionsView(settingsResource);
-		this.gameLosingConditionsView = new GameLosingConditionsView(settingsResource);
-			
+		this.gameLosingConditionsView = new GameLosingConditionsView(settingsResource);			
+		buildView();		
+	}
+
+
+	private void buildView() {
 		rootBuffer.getChildren().add(root);
-    	AnchorPane.setLeftAnchor(root, 10.0);
-    	AnchorPane.setTopAnchor(root, 10.0);
+    	AnchorPane.setLeftAnchor(root, BUFFER);
+    	AnchorPane.setTopAnchor(root, BUFFER);
     	
     	rootBuffer.setBorder(new Border(new BorderStroke(Color.GRAY, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(0.5))));
     	rootBuffer.setBackground(new Background(new BackgroundFill(Color.rgb(235, 235, 235), CornerRadii.EMPTY, Insets.EMPTY)));	
@@ -63,7 +75,6 @@ public class GameSettingsEditingView implements IGameSettingsSetView {
 				gameLosingConditionsView.getInstanceAsNode(),
 				gamePathTypeView.getInstanceAsNode()
 				);
-		
 	}
 
 
@@ -76,6 +87,9 @@ public class GameSettingsEditingView implements IGameSettingsSetView {
 	@Override
 	public void setDelegate(GameSettingsAuthoringViewDelegate delegate) {
 		gameNameView.setDelegate(delegate);
+		gameImageView.setDelegate(delegate);
+		gameInitialMoneyView.setDelegate(delegate);
+		gameInitialLivesView.setDelegate(delegate);
 		
 	}
 	
@@ -83,6 +97,17 @@ public class GameSettingsEditingView implements IGameSettingsSetView {
 		gameNameView.updateName(name);
 	}
 	
+	public void updateInitialLives(int lives){
+		gameInitialLivesView.updateInitialLives(lives);
+	}
+	
+	public void updateGameImagePath(String imagePath){
+		gameImageView.updateGameImagePath(imagePath);
+	}
+	
+	public void updateInitialMoney(int money){
+		gameInitialMoneyView.updateInitialMoney(money);
+	}
 	
 
 }
