@@ -11,9 +11,9 @@ import engine.observer.ObservableProperty;
 public class WeaponType extends AbstractType implements Weapon {
     
     private ObservableList<Integer> targets;
-    private ObservableProperty<Double> fireRate;
+    private ObservableProperty<Double> reloadTime;
     private ObservableProperty<String> trajectory;
-    private ObservableProperty<String> effect;
+    private ObservableProperty<String> effects;
     private ObservableProperty<Double> speed;
     private ObservableProperty<Double> range;
     
@@ -21,9 +21,9 @@ public class WeaponType extends AbstractType implements Weapon {
     protected WeaponType (WeaponInitializer weaponInitializer) {
         super(weaponInitializer);
         this.targets = weaponInitializer.getTargets();
-        this.fireRate = weaponInitializer.getFireRate();
+        this.reloadTime = weaponInitializer.getReloadTime();
         this.trajectory = weaponInitializer.getTrajectory();
-        this.effect = weaponInitializer.getEffect();
+        this.effects = weaponInitializer.getEffect();
         this.speed = weaponInitializer.getSpeed();
         this.range = weaponInitializer.getRange();
     }
@@ -44,13 +44,13 @@ public class WeaponType extends AbstractType implements Weapon {
     }
     
     @Override
-    public double getFireRate () {
-        return fireRate.getProperty();
+    public double getReloadTime () {
+        return reloadTime.getProperty();
     }
 
     @Override
-    public void setFireRate (double fireRate) {
-        this.fireRate.setProperty(fireRate);
+    public void setReloadTime (double fireRate) {
+        this.reloadTime.setProperty(fireRate);
     }
 
     
@@ -66,12 +66,12 @@ public class WeaponType extends AbstractType implements Weapon {
 
     @Override
     public String getEffect () {
-        return effect.getProperty();
+        return effects.getProperty();
     }
 
     @Override
     public void setEffect (String effect) {
-        this.effect.setProperty(effect);
+        this.effects.setProperty(effect);
     }
 
     @Override

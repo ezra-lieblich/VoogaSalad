@@ -2,11 +2,13 @@ package authoring.editorview.path.subviews;
 
 import java.util.ResourceBundle;
 
+import authoring.editorview.INodeView;
 import javafx.scene.Node;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
-public class PathInstructionsView {
+
+public class PathInstructionsView implements INodeView{
 	
 	private VBox root;
 	
@@ -34,4 +36,5 @@ public class PathInstructionsView {
 	}
 
 	
+
 }

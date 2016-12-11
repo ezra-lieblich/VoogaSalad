@@ -2,10 +2,10 @@ package engine.settings;
 
 import java.util.List;
 
-import authoring.editorview.gamesettings.IGameSettingsEditorView;
+import authoring.editorview.gamesettings.IGameSettingsUpdateView;
 import engine.ManagerController;
 
-public interface GameModeManagerController extends ManagerController<GameModeManager, GameModeBuilder, GameMode, IGameSettingsEditorView>{
+public interface GameModeManagerController extends ManagerController<GameModeManager, GameModeBuilder, GameMode, IGameSettingsUpdateView>{
 		
 	public void setNumberofLives (int gameModeID, double lives);
 	

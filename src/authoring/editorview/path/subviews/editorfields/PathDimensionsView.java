@@ -2,7 +2,10 @@ package authoring.editorview.path.subviews.editorfields;
 
 import java.util.ResourceBundle;
 
-import authoring.editorview.path.PathEditorViewDelegate;
+
+import authoring.editorview.path.IPathSetView;
+
+import authoring.editorview.path.PathAuthoringViewDelegate;
 import authoring.utilityfactories.BoxFactory;
 import authoring.utilityfactories.DialogueBoxFactory;
 import authoring.utilityfactories.TextFieldFactory;
@@ -13,14 +16,15 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 
-public class PathDimensionsView {
+
+public class PathDimensionsView implements IPathSetView{
 	
 	private VBox root;
 	private int dimensions;
 	
 	private TextField dimensionsTextField;
 	private HBox dimensionsBox;
-	private PathEditorViewDelegate delegate;
+	private PathAuthoringViewDelegate delegate;
 	
 	
 	
@@ -34,9 +38,15 @@ public class PathDimensionsView {
 		makeGridDimensionsTextField();
 	}
 	
+	@Override
 	public Node getInstanceAsNode(){		
 		return root;
 		
+	}
+	
+	@Override
+	public void setDelegate(PathAuthoringViewDelegate delegate){
+		this.delegate = delegate;
 	}
 	
 	public int getGridDimensions(){
@@ -48,9 +58,7 @@ public class PathDimensionsView {
 		dimensionsTextField.setText(Integer.toString(dimensions));
 	}
 	
-	public void setDelegate(PathEditorViewDelegate delegate){
-		this.delegate = delegate;
-	}
+	
 
 	private void makeGridDimensionsTextField(){
 		dimensionsTextField = TextFieldFactory.makeTextField("", 
@@ -72,5 +80,6 @@ public class PathDimensionsView {
 			Alert inputError = DialogueBoxFactory.createErrorDialogueBox("The dimensions of the grid must be an integer.", "Input error");
 		}
 	}
+
 
 }

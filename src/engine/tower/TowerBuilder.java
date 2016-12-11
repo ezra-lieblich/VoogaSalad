@@ -14,10 +14,6 @@ public interface TowerBuilder extends TypeBuilder<Tower, TowerBuilder>, Bindable
     
     TowerBuilder buildWeapons (List<Integer> weapons);
 
-    TowerBuilder buildTargets (Integer ... targets);
-    
-    TowerBuilder buildTargets (List<Integer> targets);
-
     TowerBuilder buildAbilities (Integer ... targets);
     
     TowerBuilder buildAbilities (List<Integer> targets);

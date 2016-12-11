@@ -84,6 +84,19 @@ public class GameGUI {
 		initStatsDisplay(gold, lives, currentLevel,score);
 		return this.scene;
 	}
+	
+	public Scene init(double gold, double lives, double level, double score, List<String> imagePaths, Scene scene) {
+		this.numLevels = level;
+		//createScene();
+		this.scene = scene;
+		createGrid();
+		initDragDropPane(imagePaths);
+		initChat();
+		initStatsTab();
+		addButtonPanel();
+		initStatsDisplay(gold, lives, currentLevel,score);
+		return this.scene;
+	}
 
 	public int getRows() {
 		return this.rows;
@@ -226,7 +239,7 @@ public class GameGUI {
 		int i = 0;
 
 		for (IDrawable entity : redraw) {
-			System.out.println("Invalid image?"+entity.getImage().toString());
+			//System.out.println("Invalid image?"+entity.getImage().toString());
 			ImageView image = new ImageView(graphics.createImage(entity.getImage().toString()));
 			if (i < towerCoords.size() && towerCoords.get(i).length > 1) {
 				// System.out.println("TOWER BEING RENDERED?!");

@@ -2,7 +2,7 @@ package authoring.editorview.level.subviews;
 
 import java.util.ResourceBundle;
 import authoring.editorview.level.ILevelSetView;
-import authoring.editorview.level.LevelEditorViewDelegate;
+import authoring.editorview.level.LevelAuthoringViewDelegate;
 import authoring.utilityfactories.BoxFactory;
 import authoring.utilityfactories.TextFieldFactory;
 import javafx.scene.Node;
@@ -14,7 +14,7 @@ import javafx.scene.layout.VBox;
 public class LevelRewardsView implements ILevelSetView {
 
     private VBox vbox;
-    private LevelEditorViewDelegate delegate;
+    private LevelAuthoringViewDelegate delegate;
 
     private TextField rewardHealthTextField;
     private TextField rewardMoneyTextField;
@@ -38,7 +38,7 @@ public class LevelRewardsView implements ILevelSetView {
     }
 
     @Override
-    public void setDelegate (LevelEditorViewDelegate delegate) {
+    public void setDelegate (LevelAuthoringViewDelegate delegate) {
         this.delegate = delegate;
     }
 
@@ -73,8 +73,8 @@ public class LevelRewardsView implements ILevelSetView {
 
     private void makeScoreRewardTextField () {
         rewardScoreTextField = TextFieldFactory.makeTextField("",
-                                                               e -> submitRewardScore(rewardScoreTextField
-                                                                       .getText()));
+                                                              e -> submitRewardScore(rewardScoreTextField
+                                                                      .getText()));
         rewardScoreTextField.setMaxWidth(75);
         HBox rewardScoreBox =
                 BoxFactory.createHBoxWithLabelandNode(

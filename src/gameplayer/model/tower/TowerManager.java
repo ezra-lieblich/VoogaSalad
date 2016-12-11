@@ -36,9 +36,9 @@ import gameplayer.view.GridGUI;
 public class TowerManager extends Observable {
 	private GamePlayData gameData;
 	private EnemyManager enemyManager;
-	private HashMap<Integer, engine.tower.Tower> allTowerTypes;
+	private Map<Integer, engine.tower.Tower> allTowerTypes;
 	private HashMap<Integer, engine.tower.Tower> availableTowerTypes;
-	private HashMap<Integer, engine.weapon.Weapon> allWeapons;	
+	private Map<Integer, engine.weapon.Weapon> allWeapons;	
 	private HashMap<Integer, gameplayer.model.tower.Tower> towersOnGrid; 
 	private Map<Integer, engine.tower.Tower> upgradeTowerTypes;
 	private int uniqueTowerID;
@@ -133,7 +133,7 @@ public class TowerManager extends Observable {
 		// System.out.println("all the int weapons: " + gunsForTower.size());
 		for (int i : weaponTypes) {
 			engine.weapon.Weapon weaponForGun = this.allWeapons.get(i);
-			int fireRate =  (int) ((int) this.timeInterval/weaponForGun.getFireRate());
+			int fireRate =  (int) ((int) this.timeInterval/weaponForGun.getReloadTime());
 			double x2 = this.gameData.cellToCoordinate(x1);
 			double y2 = this.gameData.cellToCoordinate(y1);
 			System.out.println("plaCE tower x1 "+x1);
@@ -174,7 +174,7 @@ public class TowerManager extends Observable {
 		ArrayList<Long> allFireRate = new ArrayList<Long>();
 		for (int i : this.allTowerTypes.keySet()){
 			for(int j: allTowerTypes.get(i).getWeapons()){
-				allFireRate.add((long)this.allWeapons.get(j).getFireRate());
+				allFireRate.add((long)this.allWeapons.get(j).getReloadTime());
 			}
 		}
 
@@ -223,7 +223,7 @@ public class TowerManager extends Observable {
 		// System.out.println("all the int weapons: " + gunsForTower.size());
 		for (int i : weaponTypes) {
 			engine.weapon.Weapon weaponForGun = this.allWeapons.get(i);
-			int fireRate =  (int) weaponForGun.getFireRate();
+			int fireRate =  (int) weaponForGun.getReloadTime();
 			Gun tempGun = new Gun(fireRate, weaponForGun,this.gameData.cellToCoordinate(toBeUpgraded.getX()) , this.gameData.cellToCoordinate(toBeUpgraded.getY())); 
 			gunForTower.add(tempGun);
 		}

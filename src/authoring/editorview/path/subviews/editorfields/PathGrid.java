@@ -1,10 +1,8 @@
 package authoring.editorview.path.subviews.editorfields;
 
-
-
 import java.util.List;
-
-import authoring.editorview.path.PathEditorViewDelegate;
+import authoring.editorview.path.IPathSetView;
+import authoring.editorview.path.PathAuthoringViewDelegate;
 import engine.path.Coordinate;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
@@ -16,7 +14,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeType;
 
-public class PathGrid {
+public class PathGrid implements IPathSetView{
 	
 	private int gridSize;
 	private int gridDimensions;
@@ -24,24 +22,18 @@ public class PathGrid {
 	private Image cellImage;
 	private ImageView[][] pathGrid;
 	private Rectangle[][] backgroundGrid;
-	
-	private List<Coordinate<Integer>> pathCoordinates;
-	
-	private PathEditorViewDelegate delegate;
-	
+	private List<Coordinate<Integer>> pathCoordinates;	
+	private PathAuthoringViewDelegate delegate;	
 	private Group root;
 	private Group gridRoot;
-	private Group backgroundRoot;
-	
+	private Group backgroundRoot;	
 	
 	public PathGrid(int size){
 		this.gridSize = size;	
 		this.root = new Group();
 		this.gridRoot = new Group();
-		this.backgroundRoot = new Group();
-				
-		root.getChildren().addAll(backgroundRoot, gridRoot);
-		
+		this.backgroundRoot = new Group();				
+		root.getChildren().addAll(backgroundRoot, gridRoot);		
 		setPathUpdater();			
 	}
 
@@ -56,11 +48,36 @@ public class PathGrid {
 		});
 	}
 	
+	private void updatePath(double x, double y){
+		int i = (int) (x - 100)/cellSize;
+		int j = (int) (y - 240)/cellSize;
+		if (!addCellToPath(i, j)){
+			removeCellFromPath(i, j);
+		}
+	}
+	
+	private boolean addCellToPath(int x, int y){
+		boolean validCoordinate = delegate.onUserEnteredAddPathCoordinate(x, y);
+		if (validCoordinate){
+			pathGrid[x][y].setVisible(true);
+		}
+		return validCoordinate;
+	}
+	
+	private void removeCellFromPath(int x, int y){
+		boolean validCoordinate = delegate.onUserEnteredRemovePathCoordinate(x, y);
+		if (validCoordinate){
+			pathGrid[x][y].setVisible(false);
+		}		
+	}	
+	
+	@Override
 	public Node getInstanceAsNode(){
 		return root;
 	}
 	
-	public void setDelegate(PathEditorViewDelegate delegate){
+	@Override
+	public void setDelegate(PathAuthoringViewDelegate delegate){
 		this.delegate = delegate;
 	}
 	
@@ -69,8 +86,7 @@ public class PathGrid {
 		this.gridDimensions = dimensions;
 		if (pathCoordinates != null){
 			redrawPath();
-		}
-		
+		}		
 	}
 	
 	public List<Coordinate<Integer>> getPathCoordinates(){
@@ -79,51 +95,19 @@ public class PathGrid {
 	
 	public void setPathCoordinates(List<Coordinate<Integer>> pathCoordinates){
 		this.pathCoordinates = pathCoordinates;
-	}
+	}	
 	
-	
-	public void setBackground(){
-			
-		cellSize = gridSize/gridDimensions;
-		backgroundGrid = new Rectangle[gridDimensions][gridDimensions];		
-		
-		for (int i = 0; i < gridDimensions; i++){
-			for (int j = 0; j < gridDimensions; j++){
-				
-				Rectangle rect = new Rectangle();			
-				rect = formatRectangle(i, j, rect);
-				
-				
-				rect.setOnMouseEntered(new EventHandler<MouseEvent>() {  
-				    @Override
-				    public void handle(MouseEvent event) {
-				    	Rectangle node = (Rectangle) event.getTarget();
-				    	node.setFill(Color.LIGHTGRAY);		        
-				    }
-					});
-				
-				rect.setOnMouseExited(new EventHandler<MouseEvent>() {  
-				    @Override
-				    public void handle(MouseEvent event) {
-				    	Rectangle node = (Rectangle) event.getTarget();
-				    	node.setFill(Color.WHITE);			       
-				    }
-				});
-				backgroundGrid[i][j] = rect;
-				backgroundRoot.getChildren().add(rect);
-				
-			}
+	public void setCellImage(String imagePath){		
+		if (!imagePath.contains("file:") && !imagePath.contains("http:")) {
+			cellImage = new Image (getClass().getClassLoader().getResourceAsStream(imagePath));		
+		}		
+		else {
+			cellImage = new Image(imagePath);
 		}
+		if (gridDimensions > 0 && pathCoordinates != null){
+			redrawPath();
+		}	
 	}
-	
-	public void clearBackground(){
-		backgroundRoot.getChildren().clear();
-	}
-	
-	public void clearPath(){
-		gridRoot.getChildren().clear();
-	}
-	
 	
 	public void redrawPath() {
 		clearBackground();
@@ -131,8 +115,58 @@ public class PathGrid {
 		setBackground();
 		setPath();
 	}
-
 	
+	private void clearBackground(){
+		backgroundRoot.getChildren().clear();
+	}
+	
+	private void clearPath(){
+		gridRoot.getChildren().clear();
+	}
+	
+	private void setBackground(){			
+		cellSize = gridSize/gridDimensions;
+		backgroundGrid = new Rectangle[gridDimensions][gridDimensions];				
+		for (int i = 0; i < gridDimensions; i++){
+			for (int j = 0; j < gridDimensions; j++){
+				
+				Rectangle rect = new Rectangle();			
+				rect = formatRectangle(i, j, rect);						
+				setMouseHoverEffect(rect);
+				backgroundGrid[i][j] = rect;
+				backgroundRoot.getChildren().add(rect);				
+			}
+		}
+	}
+	
+	private Rectangle formatRectangle(int x, int y, Rectangle rect) {
+		rect.setHeight(cellSize);
+		rect.setWidth(cellSize);
+		rect.setX(x*cellSize);
+		rect.setY(y*cellSize);
+		rect.setFill(Color.WHITE);
+		rect.setStroke(Color.GRAY);
+		rect.setStrokeType(StrokeType.INSIDE);
+		rect.setStrokeWidth(0.5);
+		return rect;
+	}
+
+	private void setMouseHoverEffect(Rectangle rect) {
+		rect.setOnMouseEntered(new EventHandler<MouseEvent>() {  
+		    @Override
+		    public void handle(MouseEvent event) {
+		    	Rectangle node = (Rectangle) event.getTarget();
+		    	node.setFill(Color.LIGHTGRAY);		        
+		    }
+			});		
+		rect.setOnMouseExited(new EventHandler<MouseEvent>() {  
+		    @Override
+		    public void handle(MouseEvent event) {
+		    	Rectangle node = (Rectangle) event.getTarget();
+		    	node.setFill(Color.WHITE);			       
+		    }
+		});
+	}
 	
 	private void setPath(){
 		pathGrid = new ImageView[gridDimensions][gridDimensions];		
@@ -142,8 +176,7 @@ public class PathGrid {
 			}			
 		}
 	}
-	
-	
+		
 	private void setCell(int x, int y){		
 		boolean inPath = setInPath(x, y);
 		setNode(x, y, inPath);	
@@ -169,7 +202,6 @@ public class PathGrid {
 		pathGrid[x][y] = iv;
 		gridRoot.getChildren().add(pathGrid[x][y]);
 	}
-
 	
 	private ImageView formatImageView(int x, int y, ImageView iv) {
 		iv.setFitHeight(cellSize);
@@ -179,67 +211,4 @@ public class PathGrid {
 		return iv;
 	}
 	
-	private Rectangle formatRectangle(int x, int y, Rectangle rect) {
-		rect.setHeight(cellSize);
-		rect.setWidth(cellSize);
-		rect.setX(x*cellSize);
-		rect.setY(y*cellSize);
-		rect.setFill(Color.WHITE);
-		rect.setStroke(Color.GRAY);
-		rect.setStrokeType(StrokeType.INSIDE);
-		rect.setStrokeWidth(0.5);
-		
-//		if (pathCoordinates != null && !pathCoordinates.isEmpty()){
-//			int previousX = pathCoordinates.get(pathCoordinates.size()-1).getX();
-//			int previousY = pathCoordinates.get(pathCoordinates.size()-1).getY();
-//			if ((previousX == x && (previousY + 1 == y || previousY - 1 == y)) ||
-//					(previousY == y && (previousX + 1 == x || previousX - 1 == x))) {
-//				rect.
-//			}
-//		}	
-		
-		return rect;
-	}
-	
-	public void setCellImage(String imagePath){
-		
-		if (!imagePath.contains("file:") && !imagePath.contains("http:")) {
-			cellImage = new Image (getClass().getClassLoader().getResourceAsStream(imagePath));		
-		}
-		
-		else {
-			cellImage = new Image(imagePath);
-		}
-		if (gridDimensions > 0 && pathCoordinates != null){
-			redrawPath();
-		}
-		
-		
-	}
-	
-	private void updatePath(double x, double y){
-		int i = (int) (x - 100)/cellSize;
-		int j = (int) (y - 240)/cellSize;
-		if (!addCellToPath(i, j)){
-			removeCellFromPath(i, j);
-		}
-	}
-	
-	private boolean addCellToPath(int x, int y){
-		boolean validCoordinate = delegate.onUserEnteredAddPathCoordinate(x, y);
-		if (validCoordinate){
-			pathGrid[x][y].setVisible(true);
-		}
-		return validCoordinate;
-
-	}
-	
-	private void removeCellFromPath(int x, int y){
-		boolean validCoordinate = delegate.onUserEnteredRemovePathCoordinate(x, y);
-		if (validCoordinate){
-			pathGrid[x][y].setVisible(false);
-		}		
-	}
-	
-
 }

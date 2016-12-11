@@ -40,6 +40,7 @@ public class Path {
 			Cell next = allCoordinates.get(i+1);
 			current.setNext(next);
 		}		
+		System.out.println("Is there a getPathStart (Path.java line: 13): "+this.start);
 		return this.start;
 	}
 	

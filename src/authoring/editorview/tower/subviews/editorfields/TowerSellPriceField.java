@@ -2,7 +2,7 @@ package authoring.editorview.tower.subviews.editorfields;
 
 import java.util.ResourceBundle;
 import authoring.editorview.tower.ITowerSetView;
-import authoring.editorview.tower.TowerEditorViewDelegate;
+import authoring.editorview.tower.TowerAuthoringViewDelegate;
 import authoring.utilityfactories.TextFieldFactory;
 import javafx.scene.Node;
 import javafx.scene.control.TextField;
@@ -16,7 +16,7 @@ import javafx.scene.control.TextField;
 public class TowerSellPriceField implements ITowerSetView {
 
     private TextField towerSellField;
-    private TowerEditorViewDelegate delegate;
+    private TowerAuthoringViewDelegate delegate;
 
     public TowerSellPriceField (ResourceBundle labelsResource) {
         towerSellField =
@@ -27,7 +27,7 @@ public class TowerSellPriceField implements ITowerSetView {
     }
 
     @Override
-    public void setDelegate (TowerEditorViewDelegate delegate) {
+    public void setDelegate (TowerAuthoringViewDelegate delegate) {
         this.delegate = delegate;
     }
 

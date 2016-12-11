@@ -58,8 +58,8 @@ public class EnemyManager extends Observable {
 	
 	private void initializeWaves() {
 
-		System.out.println("Does all WaveStartTimes exist?");
-		System.out.println(allWaveStartTimes);
+		//System.out.println("Does all WaveStartTimes exist?");
+		//System.out.println(allWaveStartTimes);
 		allWaves.forEach(w -> allWaveStartTimes.add(w.getStartTime()));
 		allWaves.forEach(w -> allWaveFrequencies.add(w.getFrequency()));
 	}
@@ -184,10 +184,6 @@ public class EnemyManager extends Observable {
 		}
 	}
 
-	private void setEnemyImageSize(ImageView enemyImage){
-		graphicLib.setImageViewParams(enemyImage, this.gameData.getCellWidth(),  this.gameData.getCellHeight());
-	}
-
 	public double getTimeOfNextWave() {
 		if (allWaveStartTimes.isEmpty()) return 0;
 		double timeInSeconds = this.allWaveStartTimes.poll();
@@ -204,8 +200,10 @@ public class EnemyManager extends Observable {
 	
 	public Queue<Enemy> getPackOfEnemyComing() {
 		if (allWaves.isEmpty()) {
+			System.out.println("ALL WAVES IS EMPTY");
 			return new LinkedList<Enemy>();
 		}
+		System.out.println("EnemyManager line 201: All waves: "+allWaves);
 		Wave wave = this.allWaves.poll();
 		return this.gameFactory.getIndividualWaveQueue(wave, this.gameData.getCurrentLevel());
 	}

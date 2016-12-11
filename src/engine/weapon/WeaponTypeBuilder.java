@@ -15,7 +15,7 @@ import engine.weapon.Weapon;
 public class WeaponTypeBuilder extends AbstractTypeBuilder<Weapon, WeaponBuilder> implements WeaponBuilder, WeaponInitializer {
     
      public static final String DEFAULT_NAME = "New Weapon";
-     public static final String DEFAULT_IMAGE_PATH = "penguin.jpg";
+     public static final String DEFAULT_IMAGE_PATH = "Images/penguin.jpg";
      public static final double DEFAULT_SIZE = 1;
      public static final List<Integer> DEFAULT_WEAPONS = Arrays.stream(new Integer[]{}).collect(Collectors.toList());
      public static final double DEFAULT_FIRE_RATE = 15;
@@ -25,7 +25,7 @@ public class WeaponTypeBuilder extends AbstractTypeBuilder<Weapon, WeaponBuilder
      public static final double DEFAULT_RANGE = 50;
      
      private ObservableList<Integer> targets;
-     private ObservableProperty<Double> fireRate;
+     private ObservableProperty<Double> reloadTime;
      private ObservableProperty<String> trajectory;
      private ObservableProperty<String> effect;
      private ObservableProperty<Double> speed;
@@ -47,8 +47,8 @@ public class WeaponTypeBuilder extends AbstractTypeBuilder<Weapon, WeaponBuilder
      }
      
     @Override
-    public WeaponBuilder buildFireRate(double fireRate) {
-        this.fireRate.setProperty(fireRate);
+    public WeaponBuilder buildReloadTime(double fireRate) {
+        this.reloadTime.setProperty(fireRate);
         return this;
     }
     
@@ -87,8 +87,8 @@ public class WeaponTypeBuilder extends AbstractTypeBuilder<Weapon, WeaponBuilder
     }
     
     @Override
-    public ObservableProperty<Double> getFireRate () {
-        return fireRate;
+    public ObservableProperty<Double> getReloadTime () {
+        return reloadTime;
     }
 
     @Override
@@ -114,7 +114,7 @@ public class WeaponTypeBuilder extends AbstractTypeBuilder<Weapon, WeaponBuilder
     @Override
     protected void restoreTypeDefaults () {
         this.targets = new ObservableListProperty<Integer>(DEFAULT_WEAPONS);
-        this.fireRate = new ObservableObjectProperty<Double>(DEFAULT_FIRE_RATE);
+        this.reloadTime = new ObservableObjectProperty<Double>(DEFAULT_FIRE_RATE);
         this.trajectory = new ObservableObjectProperty<String>(DEFAULT_TRAJECTORY);
         this.effect = new ObservableObjectProperty<String>(DEFAULT_EFFECT);
         this.speed = new ObservableObjectProperty<Double>(DEFAULT_SPEED);
@@ -134,8 +134,8 @@ public class WeaponTypeBuilder extends AbstractTypeBuilder<Weapon, WeaponBuilder
     }
     
     @Override
-    public WeaponBuilder addFireRateListener(BiConsumer<Double, Double> listener) {
-        fireRate.addListener(listener);
+    public WeaponBuilder addReloadTimeListener(BiConsumer<Double, Double> listener) {
+        reloadTime.addListener(listener);
         return this;
     }
     
@@ -161,6 +161,17 @@ public class WeaponTypeBuilder extends AbstractTypeBuilder<Weapon, WeaponBuilder
     public WeaponBuilder addRangeListener(BiConsumer<Double, Double> listener) {
         range.addListener(listener);
         return this;
+    }
+
+    @Override
+    protected WeaponBuilder copyType (Weapon type) {
+        return this
+        .buildEffect(type.getEffect())
+        .buildReloadTime(type.getReloadTime())
+        .buildRange(type.getRange())
+        .buildSpeed(type.getSpeed())
+        .buildTrajectory(type.getTrajectory())
+        .buildTargets(type.getTargets());  
     }
     
 }

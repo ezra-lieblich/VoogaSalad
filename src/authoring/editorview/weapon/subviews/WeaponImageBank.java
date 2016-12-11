@@ -1,18 +1,11 @@
 package authoring.editorview.weapon.subviews;
 
-import java.io.File;
 import java.util.List;
 import java.util.ResourceBundle;
 import authoring.editorview.ImageBank;
-import authoring.editorview.weapon.WeaponEditorViewDelegate;
+import authoring.editorview.weapon.WeaponAuthoringViewDelegate;
 import authoring.utilityfactories.ButtonFactory;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 
 /**
@@ -23,7 +16,7 @@ import javafx.scene.image.ImageView;
 
 public class WeaponImageBank extends ImageBank {
 
-    private WeaponEditorViewDelegate delegate;
+    private WeaponAuthoringViewDelegate delegate;
 
     public WeaponImageBank (ResourceBundle labelsResource) {
         super();
@@ -37,7 +30,7 @@ public class WeaponImageBank extends ImageBank {
         items.add(createWeaponButton);
     }
 
-    public void setDelegate (WeaponEditorViewDelegate delegate) {
+    public void setDelegate (WeaponAuthoringViewDelegate delegate) {
         this.delegate = delegate;
     }
 
@@ -48,7 +41,7 @@ public class WeaponImageBank extends ImageBank {
     @Override
     protected void userSelectedRow (int index) {
         int selectedWeaponID = this.itemIDs.get(index);
-        if (selectedWeaponID != -1) 
+        if (selectedWeaponID != -1)
             this.delegate.onUserSelectedWeapon(selectedWeaponID);
     }
 

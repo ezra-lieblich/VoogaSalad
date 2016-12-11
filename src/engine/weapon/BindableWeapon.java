@@ -9,7 +9,7 @@ public interface BindableWeapon extends BindableType<WeaponBuilder> {
 
     WeaponBuilder addTargetsListener (BiConsumer<List<Integer>, List<Integer>> listener);
     
-    WeaponBuilder addFireRateListener (BiConsumer<Double, Double> listener);
+    WeaponBuilder addReloadTimeListener (BiConsumer<Double, Double> listener);
 
     WeaponBuilder addTrajectoryListener (BiConsumer<String, String> listener);
 
