@@ -325,7 +325,7 @@ public class GamePlayerController implements Observer {
 		});
 	}
 
-// TODO: Commented out to test enemies 
+
 //	private void getNewWaveOnInterval() {
 //		double nextWaveStartTime = this.enemyController.getEnemyModel().getTimeOfNextWave(); //uncomment later
 //		//System.out.println("Time of next wave: "+nextWaveStartTime);

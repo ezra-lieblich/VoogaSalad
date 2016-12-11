@@ -142,7 +142,7 @@ public class GamePlayerFactory{
 		int pathID = wave.getPathID();
 		for (int i = 0; i < wave.getEnemyCount(); i++) {
 			Cell start = this.getGrid(levelNumber).getPath(pathID).getPathStart();
-			enemies.add(this.enemyFactory.createModelEnemy(enemyType, start));
+			enemies.add(this.enemyFactory.createModelEnemy(enemyType, start, pathID));
 		}
 		return enemies;
 	}
