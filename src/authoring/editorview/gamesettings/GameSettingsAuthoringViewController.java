@@ -12,22 +12,23 @@ public class GameSettingsAuthoringViewController extends EditorViewController
     private int activeID = 0;
 
     public GameSettingsAuthoringViewController (int editorWidth, int editorHeight) {
-        IGameSettingsSetView myView =
-                GameSettingsAuthoringViewFactory.build(editorWidth, editorHeight);
-        myView.setDelegate(this);
-        this.view = myView;
+        gameView = GameSettingsAuthoringViewFactory.build(editorWidth, editorHeight);
+        gameView.setDelegate(this);
+        this.view = gameView;
     }
 
     public void setGameSettingsDataSource (GameModeManagerController source) {
         this.gameSettingsDataSource = source;
         this.gameSettingsDataSource.addTypeBankListener(this.gameView);
+        gameSettingsDataSource.createType(this.gameView);
     }
 
     @Override
     public void onUserEnteredGameLives (int lives) {
         this.gameSettingsDataSource.setNumberofLives(activeID, lives);
-
     }
+    
+    
 
     @Override
     public void onUserEnteredGameNames (String name) {
@@ -47,6 +48,11 @@ public class GameSettingsAuthoringViewController extends EditorViewController
 
     }
 
+    @Override
+	public void onUserEnteredGridSize(int size) {
+		// TODO Auto-generated method stub
+		
+	}
 
     @Override
     public void onUserEnteredWinningConditions (String winConditions) {
@@ -60,11 +66,7 @@ public class GameSettingsAuthoringViewController extends EditorViewController
 
     }
 
-	@Override
-	public void onUserEnteredGridSize(int size) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
     
 }
