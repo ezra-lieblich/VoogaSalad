@@ -1,6 +1,7 @@
 package gameplayer.controller;
 
 import gameplayer.loader.GamePlayerFactory;
+import gameplayer.loader.GameSavingController;
 import gameplayer.loader.XMLParser;
 import gameplayer.main.main;
 import gameplayer.model.Cell;
@@ -70,6 +71,7 @@ public class GamePlayerController implements Observer {
 	private TowerController towerController;
 	private WeaponController weaponController;
 	private CollisionController collisionController;
+	private GameSavingController gameSavingController;
 
 	private DragDropController dropController;
 
@@ -114,6 +116,8 @@ public class GamePlayerController implements Observer {
 		this.enemyManager = this.enemyController.getEnemyModel();
 		this.imageBank = new HashMap<String, Image>();
 		createImageBank();
+		this.gameSavingController = new GameSavingController(this.model);
+		//this.gameSavingController.saveGame();
 	}
 
 	private void populateTowerToId() {
@@ -235,7 +239,15 @@ public class GamePlayerController implements Observer {
 
 	private void gameOver() {
 
-		System.out.println("Game Over called");
+		//System.out.println("Game Over called");
+		//log end score
+		try {
+			Wrapper.getInstance().logEndScore("" +this.model.getData().getGold(), "" + this.model.getData().getLife(),"" + this.model.getData().getCurrentLevel());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			System.out.println("Log end score went wrong");
+			e.printStackTrace();
+		}
 		this.view.getMainScreen().getChildren().clear();
 		WebView browser = new WebView();
 		WebEngine webEngine = browser.getEngine();
@@ -335,6 +347,7 @@ public class GamePlayerController implements Observer {
 			}
 			this.model.updateInLevel();
 			this.enemyManager.update();
+			this.model.getCollisionManager().handleCollisions();
 
 			redrawEverything();
 		});

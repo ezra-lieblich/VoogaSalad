@@ -33,7 +33,9 @@ public class Weapon extends Observable implements IDrawable{
 		this.range = range;
 		this.xCoordinate = x;
 		this.yCoordinate = y;
+		
 		this.targetEnemyID = targetID;
+		System.out.println("TARGET ENEMY IDDDDDD "+ this.targetEnemyID);
 		this.speedMag = speedMag;
 		this.weaponTypeID = weaponTypeID;
 	}
@@ -46,7 +48,7 @@ public class Weapon extends Observable implements IDrawable{
 	}
 	
 	public int getTargetEnemyID() {
-		return targetEnemyID;
+		return this.targetEnemyID;
 	}
 
 
