@@ -81,7 +81,6 @@ public class WaveTableView implements ILevelSetView {
                                    n.getFrequency(), n.getPath(), n.getStartTime());
             data.add(temp);
         }
-        waveTable.refresh();
     }
 
     @SuppressWarnings("unchecked")

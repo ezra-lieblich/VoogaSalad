@@ -90,7 +90,7 @@ public abstract class ImageBank implements ChangeListener<Number> {
     public Integer getIndexForItemWithID(int id){
     	for (int i = 0; i <this.itemIDs.size(); i++){
     		if (this.itemIDs.get(i)==id) {
-    			return i+CONTENT_OFFSET;
+    			return i;
     		}
     	}
     	return null;
@@ -102,7 +102,7 @@ public abstract class ImageBank implements ChangeListener<Number> {
      * @return ID of the data object represented at that index. Will be null if there is no item there.
      */
     public Integer getIDForItemAtIndex(int index){
-    	Integer result =  this.itemIDs.get(index + CONTENT_OFFSET);
+    	Integer result =  this.itemIDs.get(index);
     	if (result<0){
     		return null;
     	}
