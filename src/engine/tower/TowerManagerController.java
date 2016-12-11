@@ -3,6 +3,7 @@ package engine.tower;
 import java.util.List;
 import authoring.editorview.tower.ITowerEditorView;
 import engine.ManagerController;
+import engine.effect.EffectManagerController;
 
 
 /**
@@ -44,4 +45,5 @@ public interface TowerManagerController
 
     public void removeTowerUpgrade (int parentTowerID, int childTowerID);
 
+    public EffectManagerController getEffectManagerController();
 }
