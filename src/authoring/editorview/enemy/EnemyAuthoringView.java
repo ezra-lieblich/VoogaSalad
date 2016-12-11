@@ -15,7 +15,7 @@ import authoring.editorview.enemy.subviews.editorfields.DeleteEnemy;
 import authoring.editorview.enemy.subviews.editorfields.EnemyDamageField;
 import authoring.editorview.enemy.subviews.editorfields.EnemySpeedField;
 import javafx.scene.Node;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 
 
 /**
@@ -27,7 +27,7 @@ import javafx.scene.layout.BorderPane;
 public class EnemyAuthoringView implements IEnemyUpdateView {
     @SuppressWarnings("unused")
     private EnemyAuthoringViewDelegate delegate;
-    private BorderPane enemyEditorView;
+    private GridPane enemyEditorView;
     private EnemyImageBank enemyBank;
     private EnemyNameField enemyName;
     private EnemySpeedField enemySpeed;
@@ -44,7 +44,7 @@ public class EnemyAuthoringView implements IEnemyUpdateView {
         String ENEMY_EFFECT_RESOURCE_PATH = "resources/GameAuthoringEnemy";
         ResourceBundle labelsResource = ResourceBundle.getBundle(ENEMY_EFFECT_RESOURCE_PATH);
 
-        enemyEditorView = new BorderPane();
+        enemyEditorView = new GridPane();
         enemyBank = new EnemyImageBank();
         enemyName = new EnemyNameField(labelsResource);
         enemySpeed = new EnemySpeedField(labelsResource);
@@ -63,8 +63,8 @@ public class EnemyAuthoringView implements IEnemyUpdateView {
     }
 
     private void setBorderPane () {
-        enemyEditorView.setLeft(enemyBank.getInstanceAsNode());
-        enemyEditorView.setCenter(enemyEffectView.getInstanceAsNode());
+        enemyEditorView.add(enemyBank.getInstanceAsNode(), 0, 0);
+        enemyEditorView.add(enemyEffectView.getInstanceAsNode(), 1, 0);
     }
 
     @Override
@@ -148,20 +148,20 @@ public class EnemyAuthoringView implements IEnemyUpdateView {
     @Override
     public void deleteEnemy () {
         enemyEffectView.clearView();
-        System.out.println("Getting here");
+        System.out.println("Getting here in enemy authoring view");
     }
 
     @Override
     public void updateBank (List<Integer> ids) {
         this.enemyBank.updateBank(ids);
         System.out.println(ids.size());
-        //enemyEffectView.clearView();
+        // enemyEffectView.clearView();
     }
 
     @Override
     public void updateDeleteEntity (String entityID) {
         // TODO Auto-generated method stub
-        
+
     }
 
 }

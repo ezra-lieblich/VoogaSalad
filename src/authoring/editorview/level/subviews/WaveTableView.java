@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 import authoring.editorview.level.WaveObject;
 import engine.level.wave.Wave;
+import engine.level.wave.WaveString;
+import engine.level.wave.WaveStringType;
 import authoring.editorview.level.ILevelSetView;
 import authoring.editorview.level.LevelAuthoringViewDelegate;
 import javafx.collections.FXCollections;
@@ -17,12 +19,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 public class WaveTableView implements ILevelSetView {
 
     private TableView<WaveObject> waveTable;
-    private TableColumn<WaveObject, String> waveNumberCol;
+    private TableColumn<WaveObject, Integer> waveNumberCol;
     private TableColumn<WaveObject, String> enemyNameCol;
-    private TableColumn<WaveObject, String> numEnemiesCol;
-    private TableColumn<WaveObject, String> enemyFrequencyCol;
+    private TableColumn<WaveObject, Integer> numEnemiesCol;
+    private TableColumn<WaveObject, Double> enemyFrequencyCol;
     private TableColumn<WaveObject, String> pathCol;
-    private TableColumn<WaveObject, String> timeDelayCol;
+    private TableColumn<WaveObject, Double> timeDelayCol;
     private ObservableList<WaveObject> data;
 
     @SuppressWarnings("unused")
@@ -37,28 +39,25 @@ public class WaveTableView implements ILevelSetView {
 
     @SuppressWarnings("unchecked")
     private void createTableColumns () {
-        waveNumberCol = new TableColumn<WaveObject, String>("Wave Number");
+        waveNumberCol = new TableColumn<WaveObject, Integer>("Wave Number");
         enemyNameCol = new TableColumn<WaveObject, String>("Enemy Name");
-        numEnemiesCol = new TableColumn<WaveObject, String>("Number of Enemies");
-        enemyFrequencyCol = new TableColumn<WaveObject, String>("Enemy Frequency");
+        numEnemiesCol = new TableColumn<WaveObject, Integer>("Number of Enemies");
+        enemyFrequencyCol = new TableColumn<WaveObject, Double>("Enemy Frequency");
         pathCol = new TableColumn<WaveObject, String>("Path");
-        timeDelayCol = new TableColumn<WaveObject, String>("Time Delay");
-        waveNumberCol.setEditable(false);
-        enemyNameCol.setEditable(true);
-        numEnemiesCol.setEditable(true);
-        enemyFrequencyCol.setEditable(true);
+        timeDelayCol = new TableColumn<WaveObject, Double>("Time Delay");
         waveNumberCol.setCellValueFactory(
-                                          new PropertyValueFactory<WaveObject, String>("waveNumber"));
+                                          new PropertyValueFactory<WaveObject, Integer>("id"));
         enemyNameCol.setCellValueFactory(
-                                         new PropertyValueFactory<WaveObject, String>("enemyName"));
+                                         new PropertyValueFactory<WaveObject, String>("enemy"));
         numEnemiesCol
-                .setCellValueFactory(new PropertyValueFactory<WaveObject, String>("numOfEnemies"));
+                .setCellValueFactory(new PropertyValueFactory<WaveObject, Integer>("count"));
         enemyFrequencyCol
-                .setCellValueFactory(new PropertyValueFactory<WaveObject, String>("enemyFrequency"));
+                .setCellValueFactory(new PropertyValueFactory<WaveObject, Double>("frequency"));
         pathCol
                 .setCellValueFactory(new PropertyValueFactory<WaveObject, String>("path"));
         timeDelayCol
-                .setCellValueFactory(new PropertyValueFactory<WaveObject, String>("timeDelay"));
+                .setCellValueFactory(new PropertyValueFactory<WaveObject, Double>("startTime"));
+
         waveTable.getColumns().addAll(waveNumberCol, enemyNameCol, numEnemiesCol,
                                       enemyFrequencyCol, pathCol, timeDelayCol);
         waveTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
@@ -74,32 +73,26 @@ public class WaveTableView implements ILevelSetView {
         this.delegate = delegate;
     }
 
-    private void setData (List<Wave> waves) {
-        data.clear();
-//        for (WaveObject n : waves) {
-//            WaveObject temp =
-//                    new WaveObject(n.getWaveNumber(), n.getEnemyName(), n.getNumOfEnemies(),
-//                                   n.getEnemyFrequency(), n.getPath(), n.getTimeDelay());
-//            data.add(temp);
-//        }
+    private void setData (List<WaveString> waves) {
+        data.removeAll(data);
+        for (WaveString n : waves) {
+            WaveObject temp =
+                    new WaveObject(n.getID(), n.getEnemy(), n.getCount(),
+                                   n.getFrequency(), n.getPath(), n.getStartTime());
+            data.add(temp);
+        }
+        waveTable.refresh();
     }
 
     @SuppressWarnings("unchecked")
-    public void updateWaveTableView (List<Wave> waves) {
+    public void updateWaveTableView (List<WaveString> waves) {
         setData(waves);
         waveTable.getColumns().clear();
-        waveTable.setItems(data);
+
         waveTable.getColumns().addAll(waveNumberCol, enemyNameCol, numEnemiesCol,
                                       enemyFrequencyCol, pathCol, timeDelayCol);
+        waveTable.setItems(data);
         waveTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-    }
-
-    public void updateWaveObject () {
-
-    }
-
-    public void createNewWave () {
-
     }
 
 }

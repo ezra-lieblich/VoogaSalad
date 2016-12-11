@@ -262,4 +262,9 @@ public class LevelTypeManagerController
 		 return buildWave(updateView);
 	 }
 
+    @Override
+    public List<WaveString> getWaveStrings (int levelID) {
+        return getWaveStrings(getTypeManager().getEntity(levelID).getWaveManager().waveList());
+    }
+
 }
