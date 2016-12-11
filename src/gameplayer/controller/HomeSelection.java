@@ -57,7 +57,7 @@ public class HomeSelection {
 		File temp = chooser.showOpenDialog(new Stage());
 		if (temp != null) {
 			fileName = temp.toString();
-			System.out.println("File name: "+fileName);
+//			System.out.println("File name: "+fileName);
 			GamePlayerController playerController = new GamePlayerController(fileName);
 			playerController.init();
 			s.setTitle(SplashScreen.TITLE);

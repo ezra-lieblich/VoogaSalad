@@ -133,6 +133,7 @@ public class GamePlayerFactory{
 	}
 	
 	public Queue<Enemy> getIndividualWaveQueue(Wave wave, int levelNumber) {
+		System.out.println("dsakfhsdaf jksdahflsjksdhafjk sdahjk sdah");
 		Map<Integer, engine.enemy.Enemy> enemyTypes = this.authoringFileReader.getEnemyTypes(); //refactor name
 		engine.enemy.Enemy enemyType = enemyTypes.get(wave.getEnemyID());
 		Queue<Enemy> enemies = new LinkedList<Enemy>();
