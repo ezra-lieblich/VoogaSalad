@@ -134,4 +134,10 @@ public class LevelEditorView implements ILevelEditorView {
         waveTableView.updateWaveTableView(waves);
     }
 
+    @Override
+    public void updateDeleteEntity (String entityID) {
+        // TODO Auto-generated method stub
+        
+    }
+
 }

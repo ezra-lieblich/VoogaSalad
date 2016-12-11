@@ -157,4 +157,10 @@ public class EnemyEditorView implements IEnemyEditorView {
         //enemyEffectView.clearView();
     }
 
+    @Override
+    public void updateDeleteEntity (String entityID) {
+        // TODO Auto-generated method stub
+        
+    }
+
 }

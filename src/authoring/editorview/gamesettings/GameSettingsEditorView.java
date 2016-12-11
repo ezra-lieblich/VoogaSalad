@@ -112,4 +112,10 @@ public class GameSettingsEditorView implements IGameSettingsEditorView, IGameSet
         // Don't worry about this
     }
 
+    @Override
+    public void updateDeleteEntity (String entityID) {
+        // TODO Auto-generated method stub
+        
+    }
+
 }

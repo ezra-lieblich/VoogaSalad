@@ -158,4 +158,10 @@ public class TowerEditorView implements ITowerEditorView {
     public void setTowerListDataSource (ListDataSource source) {
         this.towerBank.setListDataSource(source);
     }
+
+    @Override
+    public void updateDeleteEntity (String entityID) {
+        // TODO Auto-generated method stub
+        
+    }
 }

@@ -151,6 +151,12 @@ public class PathEditorView implements IPathEditorView {
         System.out.println("There is no path bank implemented");
     }
 
+    @Override
+    public void updateDeleteEntity (String entityID) {
+        // TODO Auto-generated method stub
+        
+    }
+
 
 
 
