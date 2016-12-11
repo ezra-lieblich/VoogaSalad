@@ -2,7 +2,6 @@ package engine.enemy;
 
 import authoring.editorview.enemy.IEnemyUpdateView;
 import engine.ManagerController;
-import engine.effect.EffectManager;
 import engine.effect.EffectManagerController;
 
 

@@ -146,4 +146,9 @@ public class LevelType extends AbstractType implements Level {
 		}
 	}
 
+	@Override
+	public void resetGridWaves() {
+		waves.getProperty().getEntities().values().clear();
+	}
+
 }

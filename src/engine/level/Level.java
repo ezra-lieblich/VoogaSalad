@@ -54,4 +54,6 @@ public interface Level extends Type {
     
     void removeEnemyReferences (int enemyID);
     
+    void resetGridWaves();
+    
 }

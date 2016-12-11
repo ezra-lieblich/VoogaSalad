@@ -16,4 +16,5 @@ public interface LevelManager extends Manager<Level> {
     void visitRemoveEntry(PathManager manager, Integer index);
     void visitAddPath(GameModeManager manager, Integer pathID);
     void visitRemovePath(GameModeManager manager, Integer pathID);
+    void visitGridSize(GameModeManager manager, Integer gridSize);
 }

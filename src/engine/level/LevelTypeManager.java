@@ -11,12 +11,10 @@ import engine.settings.GameModeManager;
  * Created by ezra on 11/17/16.
  */
 public class LevelTypeManager extends AbstractTypeManager<Level> implements LevelManager {
-	//TODO path references
 	
     @Override
     public void visitRemoveEntry (EnemyManager manager, Integer index) {
         applyToAllEntities(a -> a.removeEnemyReferences(index));
-
     }
 
 	@Override
@@ -36,6 +34,12 @@ public class LevelTypeManager extends AbstractTypeManager<Level> implements Leve
 	
 	private void removePathReferences(int pathID) {
         applyToAllEntities(a -> a.removePath(pathID));
+	}
+
+	@Override
+	public void visitGridSize(GameModeManager manager, Integer gridSize) {
+		// TODO Auto-generated method stub
+		applyToAllEntities(a -> a.resetGridWaves());
 	}
 
 }

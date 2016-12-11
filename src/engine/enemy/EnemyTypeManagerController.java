@@ -20,7 +20,7 @@ public class EnemyTypeManagerController
 			
 	public EnemyTypeManagerController(ManagerMediator managerMediator) {
 		super(new EnemyTypeManager(), new EnemyTypeBuilder(), managerMediator);
-		enemyEffectManagerController = new EffectTypeManagerController(managerMediator, getTypeManager().getEnemyEffectManager());
+		this.enemyEffectManagerController = new EffectTypeManagerController(managerMediator, getTypeManager().getEnemyEffectManager());
 	}
 
 	@Override
