@@ -50,8 +50,6 @@ public interface Level extends Type {
 
     List<Integer> getPaths ();
     
-    WaveManager getWaveManager ();
-    
-    void removeEnemies (int enemyID);
+    WaveManager getWaveManager ();void removeEnemies (int enemyID);
 
 }
