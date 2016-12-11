@@ -30,13 +30,11 @@ public class EffectTypeManagerController extends
         
         Enemy collider = new Enemy();
         Enemy myself = new Enemy();
-        System.out.println(collider.getHealth());
         gameEffect.addEncompassingClass(myself); //Enemy constructor gameEffect.addEncompassingClass(this)
         
         gameEffect.addTrigger(collider);
         
         gameEffect.execute();
-        System.out.println(collider.getHealth());
         
     }
     

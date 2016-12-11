@@ -101,7 +101,7 @@ public class PathTypeManagerController
     
     @Override
     public List<Coordinate<Integer>> getPathCoordinates (int pathID) {
-        return getTypeManager().getEntity(pathID).getCoordinates();
+        return Collections.unmodifiableList(getTypeManager().getEntity(pathID).getCoordinates());
     }
     
     

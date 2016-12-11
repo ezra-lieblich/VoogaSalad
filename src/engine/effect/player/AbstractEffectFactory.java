@@ -26,7 +26,6 @@ public abstract class AbstractEffectFactory {
         this.triggerVariableName = triggerVariableName;
         this.encompasingClassVariableName = encompasingClassVariableName;
         loadEffectParameters(triggerVariableName, encompasingClassVariableName);
-        loadInSpecificValues();
     }
     
     private void loadEffectParameters(String... parameterNames) {
@@ -52,9 +51,9 @@ public abstract class AbstractEffectFactory {
         effectAccessibleData.entrySet().forEach(a -> groovyExecutor.addVariable(a.getKey(), a.getValue()));
     }
     
-    private void loadInSpecificValues() {
-        Stream.of(this.getClass().getFields()).filter(a -> a.isAnnotationPresent(EFFECT_DATA)).forEach(this::loadSpecificDataIntoMap);
-    }
+    protected void loadInSpecificValues() {
+        Stream.of(getClass().getDeclaredFields()).filter(a -> a.isAnnotationPresent(EFFECT_DATA)).forEach(this::loadSpecificDataIntoMap);
+    }    
     
     protected void loadSpecificDataIntoMap(Field variableField) {
         try {
