@@ -9,14 +9,12 @@ import authoring.utilityfactories.ButtonFactory;
 import javafx.geometry.Orientation;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.layout.HBox;
 
 
 /**
  * 
+ * @author Andrew Bihl
  * @author Kayla Schulz
- * @author andrewbihl
- *
  */
 public class TowerUpgradeBank extends ImageBank implements ITowerSetView {
 
