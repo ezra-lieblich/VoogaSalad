@@ -24,6 +24,7 @@ public class Enemy extends Observable implements IDrawable {
 	private Label enemyInfo;
 	private boolean showInfo;
 	private int pathID;
+	private boolean shouldRemove;
 
 	public Enemy(int ID, String name, double movingSpeed, int health, String image, double width, double height, int pathNum) {
 		this.pathID = pathNum;
@@ -36,6 +37,7 @@ public class Enemy extends Observable implements IDrawable {
 		this.height = height;
 		this.showInfo = false;
 		this.enemyInfo = new Label("Name: " + name + "\nHealth: " + health);
+		this.shouldRemove = false;
 		initLabel();
 	}
 
@@ -160,6 +162,14 @@ public class Enemy extends Observable implements IDrawable {
 
 	public Label getEnemyInfo() {
 		return enemyInfo;
+	}
+	
+	public boolean mustRemove() {
+		return this.shouldRemove;
+	}
+	
+	public void setRemove(boolean removeOrNah) {
+		this.shouldRemove = removeOrNah;
 	}
 
 	public void toggleInfoVisibility() {
