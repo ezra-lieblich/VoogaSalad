@@ -74,6 +74,7 @@ public class XMLParser {
 	private ManagerMediator getGameManager(String xmlFilename) {
 		try {
 			File xmlFile = new File(xmlFilename);
+			//System.out.println("The file exists: "+xmlFile);
 			GameAuthoringData data = (GameAuthoringData) serializer.fromXML(new FileInputStream(xmlFile));
 			return data.getManagerMediator();
 			

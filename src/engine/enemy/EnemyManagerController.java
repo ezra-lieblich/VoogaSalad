@@ -2,6 +2,8 @@ package engine.enemy;
 
 import authoring.editorview.enemy.IEnemyUpdateView;
 import engine.ManagerController;
+import engine.effect.EffectManager;
+import engine.effect.EffectManagerController;
 
 
 // IEnemyUpdateView needs to extend IUpdateView
@@ -38,5 +40,8 @@ public interface EnemyManagerController
     public double getEnemyRewardScore (int enemyID); //
 
     public String getEnemyCollisionEffect (int enemyID);
+    
+    public EffectManagerController getEffectManagerController ();
+
 
 }

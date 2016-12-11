@@ -117,9 +117,9 @@ public class AuthoringController {
 			 modelController.getModelController(LevelManagerController.class)
 			 	.loadManagerData(data.getManagerMediator().getManager(LevelManager.class), 
 			 						(ILevelUpdateView) viewController.getControllers().get("level").getUpdateView());
-	//		 modelController.getModelController(GameModeManagerController.class)
-	//		 	.loadManagerData(data.getManagerMediator().getManager(GameModeManager.class),
-	//		 						(IGameSettingsEditorView) viewController.getControllers().get("setup").getUpdateView());
+			 modelController.getModelController(GameModeManagerController.class)
+			 	.loadManagerData(data.getManagerMediator().getManager(GameModeManager.class),
+			 						(IGameSettingsUpdateView) viewController.getControllers().get("setup").getUpdateView());
 		
 		}
 		catch (Exception e){

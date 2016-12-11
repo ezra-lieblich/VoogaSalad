@@ -3,6 +3,10 @@ package engine.enemy;
 import authoring.editorview.enemy.IEnemyUpdateView;
 import engine.AbstractTypeManagerController;
 import engine.ManagerMediator;
+import engine.effect.EffectManager;
+import engine.effect.EffectManagerController;
+import engine.effect.EffectTypeManager;
+import engine.effect.EffectTypeManagerController;
 
 
 
@@ -12,8 +16,11 @@ import engine.ManagerMediator;
 public class EnemyTypeManagerController  
 	extends AbstractTypeManagerController<EnemyManager, EnemyBuilder, Enemy, IEnemyUpdateView> implements EnemyManagerController {
 
+	private EffectManagerController enemyEffectManagerController;
+			
 	public EnemyTypeManagerController(ManagerMediator managerMediator) {
 		super(new EnemyTypeManager(), new EnemyTypeBuilder(), managerMediator);
+		enemyEffectManagerController = new EffectTypeManagerController(managerMediator, getTypeManager().getEnemyEffectManager());
 	}
 
 	@Override
@@ -84,6 +91,11 @@ public class EnemyTypeManagerController
 				.addScoreListener((oldValue, newValue) -> updateView.updateEnemyRewardPoints(newValue))
 				.addSpeedListener((oldValue, newValue) -> updateView.updateEnemySpeed(newValue));
 		
+	}
+
+	@Override
+	public EffectManagerController getEffectManagerController() {
+		return enemyEffectManagerController;
 	}
    
 }

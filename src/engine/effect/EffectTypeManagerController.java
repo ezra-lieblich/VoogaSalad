@@ -24,7 +24,7 @@ public class EffectTypeManagerController extends
         super(effectTypeManager, new EffectTypeBuilder(), managerMediator);
         
         EffectBuilder efb = new EffectTypeBuilder();
-        Effect effectType = efb.buildTriggerConditionGroovy("collider.getHealth() == 50 && myself.getName() == 'Sean'").buildEffectGroovy("foe.setHealth(100)").build();
+        Effect effectType = efb.buildTriggerConditionGroovy("collider.getHealth() == 50 && myself.getName() == 'Sean'").buildEffectGroovy("collider.setHealth(100)").build();
         CollisionEffectFactory testFactory = new CollisionEffectFactory();
         GameEffect gameEffect = testFactory.create(effectType);
         
