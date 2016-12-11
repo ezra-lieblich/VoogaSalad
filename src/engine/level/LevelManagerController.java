@@ -3,6 +3,7 @@ package engine.level;
 import java.util.List;
 import authoring.editorview.level.ILevelUpdateView;
 import engine.ManagerController;
+import engine.effect.EffectManagerController;
 import engine.level.wave.Wave;
 import engine.level.wave.WaveString;
 
@@ -69,4 +70,7 @@ public interface LevelManagerController
     public double getWaveDelay (int levelID, int waveID);
 
     public List<WaveString> getWaveStrings (int levelID);
+    
+    public EffectManagerController getEffectManagerController ();
+
 }

@@ -8,6 +8,8 @@ import java.util.Map;
 import authoring.editorview.level.ILevelUpdateView;
 import engine.AbstractTypeManagerController;
 import engine.ManagerMediator;
+import engine.effect.EffectManagerController;
+import engine.effect.EffectTypeManagerController;
 import engine.level.wave.Wave;
 import engine.level.wave.WaveBuilder;
 import engine.level.wave.WaveManager;
@@ -21,10 +23,12 @@ public class LevelTypeManagerController
         implements LevelManagerController {
 
     private WaveBuilder waveBuilder;
-
+    private EffectManagerController levelEffectManagerController;
+    
     public LevelTypeManagerController (ManagerMediator managerMediator) {
         super(new LevelTypeManager(), new LevelTypeBuilder(), managerMediator);
         waveBuilder = new WaveTypeBuilder();
+        this.levelEffectManagerController = new EffectTypeManagerController(managerMediator, getTypeManager().getLevelEffectManager());
     }
 
     //remove second line
@@ -266,5 +270,10 @@ public class LevelTypeManagerController
     public List<WaveString> getWaveStrings (int levelID) {
         return getWaveStrings(getTypeManager().getEntity(levelID).getWaveManager().waveList());
     }
+
+	@Override
+	public EffectManagerController getEffectManagerController() {
+		return levelEffectManagerController;
+	}
 
 }

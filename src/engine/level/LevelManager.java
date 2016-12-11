@@ -1,10 +1,10 @@
 package engine.level;
 
 import engine.Manager;
+import engine.effect.EffectManager;
 import engine.enemy.EnemyManager;
 import engine.path.PathManager;
 import engine.settings.GameModeManager;
-import engine.weapon.WeaponManager;
 
 
 /**
@@ -12,6 +12,7 @@ import engine.weapon.WeaponManager;
  */
 public interface LevelManager extends Manager<Level> {
 
+    EffectManager getLevelEffectManager () ;
     void visitRemoveEntry (EnemyManager manager, Integer index);
     void visitRemoveEntry(PathManager manager, Integer index);
     void visitAddPath(GameModeManager manager, Integer pathID);
