@@ -205,7 +205,8 @@ public class EnemyManager extends Observable {
 	public double getFrequencyOfNextWave() {
 		if (allWaveStartTimes.isEmpty()) return 0;
 		double timeInSeconds = this.allWaveFrequencies.poll();
-		double timeInMillis = timeInSeconds * 1000;
+		double timeInMillis = 10000;//10 seconds
+		//double timeInMillis = timeInSeconds * 1000;
 		return timeInMillis;
 	}
 	
