@@ -1,5 +1,6 @@
 package engine.weapon;
 
+import java.util.Collections;
 import java.util.List;
 import authoring.editorview.weapon.IWeaponUpdateView;
 import engine.AbstractTypeManagerController;
@@ -30,7 +31,7 @@ public class WeaponTypeManagerController extends
                 .addSpeedListener( (oldValue, newValue) -> weaponUpdater
                         .updateSpeedDisplay(newValue))
                 .addTargetsListener( (oldValue, newValue) -> weaponUpdater
-                        .updateTargetEnemies(newValue))
+                        .updateTargetEnemies(Collections.unmodifiableList(newValue)))
                 .addTrajectoryListener( (oldValue, newValue) -> weaponUpdater
                         .updateWeaponTrajectory(newValue));
     }
@@ -97,7 +98,7 @@ public class WeaponTypeManagerController extends
 
     @Override
     public List<Integer> getTargetEnemies (int weaponID) {
-        return getTypeManager().getEntity(weaponID).getTargets();
+        return Collections.unmodifiableList(getTypeManager().getEntity(weaponID).getTargets());
     }
     
     @Override
