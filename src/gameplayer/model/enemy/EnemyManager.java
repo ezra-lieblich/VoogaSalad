@@ -54,7 +54,7 @@ public class EnemyManager extends Observable {
 	}
 	
 	private void initializeWaves() {
-		allWaves.forEach(w -> allWaveStartTimes.add(w.getStartTime()));
+		allWaves.forEach(w -> allWaveStartTimes.add(w.getStartTime())); //FIX THIS
 		allWaves.forEach(w -> allWaveFrequencies.add(w.getFrequency()));
 	}
 
@@ -203,8 +203,7 @@ public class EnemyManager extends Observable {
 	
 	public Queue<Enemy> getPackOfEnemyComing() {
 		Wave wave = this.allWaves.poll();
-		return this.gameFactory.getWaveQueue(wave, this.gameData.getCurrentLevel());
-		
+		return this.gameFactory.getIndividualWaveQueue(wave, this.gameData.getCurrentLevel());
 	}
 
 }
