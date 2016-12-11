@@ -227,8 +227,10 @@ public class GamePlayerController implements Observer {
 	public GameGUI getView() {
 		return view;
 	}
-
+	
 	private void gameOver() {
+		
+		System.out.println("Game Over called");
 		this.view.getMainScreen().getChildren().clear();
 		WebView browser = new WebView();
 		WebEngine webEngine = browser.getEngine();
@@ -264,7 +266,7 @@ public class GamePlayerController implements Observer {
 			this.view.updateCurrentLevelStats(((GamePlayData) o).getCurrentLevel());
 
 			// check for game over condition
-			if (((GamePlayData) o).getLife() < 0) {
+			if (((GamePlayData) o).getLife() <= 0) {
 				gameOver();
 			}
 
