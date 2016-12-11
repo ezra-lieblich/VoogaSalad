@@ -1,76 +1,122 @@
 package authoring.editorview.level;
 
-import javafx.beans.property.SimpleStringProperty;
+import engine.level.wave.Wave;
 
 
-public class WaveObject {
+public class WaveObject implements Wave {
 
-    private final SimpleStringProperty enemyName;
-    private final SimpleStringProperty enemyFrequency;
-    private final SimpleStringProperty numOfEnemies;
-    private final SimpleStringProperty waveNumber;
-    private final SimpleStringProperty path;
-    private final SimpleStringProperty timeDelay;
+    private int waveNumber;
+    private int enemyID;
+    private int enemyCount;
+    private double enemyFrequency;
+    private int pathID;
+    private double startTime;
 
-    public WaveObject (String waveNumber,
-                       String enemyName,
-                       String enemyFrequency,
-                       String numOfEnemies,
-                       String path,
-                       String timeDelay) {
-        this.enemyName = new SimpleStringProperty(enemyName);
-        this.enemyFrequency = new SimpleStringProperty(enemyFrequency);
-        this.numOfEnemies = new SimpleStringProperty(numOfEnemies);
-        this.waveNumber = new SimpleStringProperty(waveNumber);
-        this.path = new SimpleStringProperty(path);
-        this.timeDelay = new SimpleStringProperty(timeDelay);
+    public WaveObject (int waveNumber,
+                       int enemyID,
+                       int enemyCount,
+                       double enemyFrequency,
+                       int pathID,
+                       double startTime) {
     }
 
-    public String getEnemyName () {
-        return enemyName.get();
+    @Override
+    public int getId () {
+        return waveNumber;
     }
 
-    public void setEnemyName (String enemyName) {
-        this.enemyName.set(enemyName);
+    @Override
+    public int getEnemyID () {
+        return enemyID;
     }
 
-    public String getEnemyFrequency () {
-        return enemyFrequency.get();
+    @Override
+    public void setEnemyID (int enemyID) {
+        this.enemyID = enemyID;
     }
 
-    public void setEnemyFrequency (String enemyFrequency) {
-        this.enemyFrequency.set(enemyFrequency);
+    @Override
+    public int getPathID () {
+        return pathID;
     }
 
-    public String getNumOfEnemies () {
-        return numOfEnemies.get();
+    @Override
+    public void setPathID (int pathID) {
+        this.pathID = pathID;
     }
 
-    public void setNumOfEnemies (String numOfEnemies) {
-        this.numOfEnemies.set(numOfEnemies);
+    @Override
+    public int getEnemyCount () {
+        return enemyCount;
     }
 
-    public String getWaveNumber () {
-        return waveNumber.get();
+    @Override
+    public void setEnemyCount (int enemyCount) {
+        this.enemyCount = enemyCount;
+
     }
 
-    public void setWaveNumber (String waveNumber) {
-        this.waveNumber.set(waveNumber);
+    @Override
+    public double getStartTime () {
+        return startTime;
     }
 
-    public String getPath () {
-        return path.get();
+    @Override
+    public void setStartTime (double startTime) {
+        this.startTime = startTime;
+
     }
 
-    public void setPath (String path) {
-        this.path.set(path);
+    @Override
+    public double getFrequency () {
+        return enemyFrequency;
     }
 
-    public String getTimeDelay () {
-        return timeDelay.get();
+    @Override
+    public void setFrequency (double frequency) {
+        this.enemyFrequency = frequency;
     }
 
-    public void setTimeDelay (String timeDelay) {
-        this.timeDelay.set(timeDelay);
+    @Override
+    public double calculateTime () {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    // Don't need
+    @Override
+    public String getName () {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public void setName (String name) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public String getImagePath () {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public void setImagePath (String imagePath) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public double getSize () {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    public void setSize (double size) {
+        // TODO Auto-generated method stub
+
     }
 }

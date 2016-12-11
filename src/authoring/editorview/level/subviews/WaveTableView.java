@@ -76,12 +76,12 @@ public class WaveTableView implements ILevelSetView {
 
     private void setData (List<Wave> waves) {
         data.clear();
-//        for (WaveObject n : waves) {
-//            WaveObject temp =
-//                    new WaveObject(n.getWaveNumber(), n.getEnemyName(), n.getNumOfEnemies(),
-//                                   n.getEnemyFrequency(), n.getPath(), n.getTimeDelay());
-//            data.add(temp);
-//        }
+        for (Wave n : waves) {
+            WaveObject temp =
+                    new WaveObject(n.getId(), n.getEnemyID(), n.getEnemyCount(),
+                                   n.getFrequency(), n.getPathID(), n.getStartTime());
+            data.add(temp);
+        }
     }
 
     @SuppressWarnings("unchecked")
