@@ -46,7 +46,7 @@ public class PathImageView extends PhotoFileChooser implements IPathSetView{
 						selectFile("Photos: ", "Select new path image"); //TODO resource file
 					} catch (IOException e1) {
 						Alert errorDialogueBox = DialogueBoxFactory.createErrorDialogueBox("Invalid File", "Error With File");
-						errorDialogueBox.show();
+						
 					}
 				});
 		setPathImageButton.setPrefWidth(280); //TODO magic number

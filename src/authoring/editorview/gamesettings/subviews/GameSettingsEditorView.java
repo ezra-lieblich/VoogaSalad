@@ -109,5 +109,7 @@ public class GameSettingsEditorView implements IGameSettingsSetView {
 		gameInitialMoneyView.updateInitialMoney(money);
 	}
 	
+	
+	
 
 }
