@@ -2,6 +2,7 @@ package gameplayer.model.weapon;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Observable;
 
@@ -42,8 +43,6 @@ public class WeaponManager extends Observable{
 
 
 	public void updateWeapon() {
-		System.out.println("weaponsOnGrid Size: "+weaponOnGrid.size());
-
 		//newly fired weapon
 		if(this.tempCountFix % 20 == 0){//VERY TEMP FIX MAKE BULLETS ONCE PER SECOND
 			ArrayList<Weapon> newlyGeneratedWeapons = this.towerManager.generateNewWeapons();
@@ -57,12 +56,12 @@ public class WeaponManager extends Observable{
 		else{
 			tempCountFix++; 
 		}
-		System.out.println("weaponsOnGrid Size: "+weaponOnGrid.size());
 
-		
-		for (int i : weaponOnGrid.keySet()) {
+		Iterator<Integer>weaponOnGridIterate = weaponOnGrid.keySet().iterator(); 
+		while(weaponOnGridIterate.hasNext()){
+			Integer i = weaponOnGridIterate.next();
 			Weapon w = weaponOnGrid.get(i);
-			System.out.println("weaponsOnGrid Size: "+weaponOnGrid.size());
+//			System.out.println("weaponsOnGrid Size: "+weaponOnGrid.size());
 				
 			if (w.getX() < GridGUI.GRID_WIDTH) {
 				w.setX(w.getSpeedX() + w.getX());
@@ -71,9 +70,9 @@ public class WeaponManager extends Observable{
 				w.setY(w.getSpeedY() + w.getY());
 			}
 
-//			if (!this.gameData.coordinateInBound(w.getX(), w.getY()) || !w.inRange()) {
-//				this.weaponOnGrid.remove(i);
-//			}
+			if (!this.gameData.coordinateInBound(w.getX(), w.getY())) {
+				weaponOnGridIterate.remove();
+			}
 		}
 
 		setChanged();

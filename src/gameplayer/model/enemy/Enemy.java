@@ -20,7 +20,6 @@ public class Enemy extends Observable implements IDrawable {
 	private int yDirection; // -1 if moving down, 1 if moving up
 	private double width, height;
 	private int uniqueID;
-	private Cell enemyCell;
 	private Label enemyInfo;
 	private boolean showInfo;
 
@@ -46,13 +45,6 @@ public class Enemy extends Observable implements IDrawable {
 	 * public double[] getWidthAndHeight(){ double[] weidthAndHeight =
 	 * {this.width, this.height}; return weidthAndHeight; }
 	 */
-	public void setCell(Cell c) {
-		this.enemyCell = c;
-	}
-
-	public Cell getCell() {
-		return this.enemyCell;
-	}
 
 	public void setUniqueID(int id) {
 		this.uniqueID = id;
