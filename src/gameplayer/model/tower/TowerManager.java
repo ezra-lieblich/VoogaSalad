@@ -44,6 +44,9 @@ public class TowerManager extends Observable {
 	private int uniqueTowerID;
 	private long timeInterval;
 	
+	public static final int WEAPONYERROR = 20;
+	public static final int WEAPONXERROR = 40;
+	
 
 	public TowerManager(GamePlayData gameData, EnemyManager enemyManager) {
 		this.gameData = gameData;
@@ -142,7 +145,7 @@ public class TowerManager extends Observable {
 			System.out.println("place tower x2: "+x2);
 			System.out.println("place tower y2: "+y2);
 			
-			Gun tempGun = new Gun(fireRate ,weaponForGun, x2, y2 );// change fire rate 
+			Gun tempGun = new Gun(fireRate ,weaponForGun, x2+WEAPONXERROR, y2+WEAPONYERROR);// change fire rate 
 			gunForTower.add(tempGun);
 		}
 

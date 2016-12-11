@@ -240,9 +240,7 @@ public class GamePlayerController implements Observer {
 	private void checkCreateNewLevel() {
 		// new level condition
 		double newLevel = this.model.getData().getCurrentLevel();
-		if (this.oldLevel <= newLevel) { // TODO: change back to greater than
-											// after testing
-
+		if (this.oldLevel > newLevel) { 
 			this.oldLevel = newLevel;
 			this.view.newLevelPopUp(e -> {
 				//// //System.out.println("New level");
