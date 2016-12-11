@@ -72,7 +72,7 @@ public class GamePlayerFactory{
 		settings.put("levelnumber", 0.0); 
 		settings.put("lives", 5.0);
 		settings.put("gold", 1000000.0);
-		settings.put("totalNumberOfLevels", 3.0);
+		settings.put("totalNumberOfLevels", 2.0);
 
 		return settings; 
 	}
@@ -85,10 +85,8 @@ public class GamePlayerFactory{
 	
 	public Grid getGrid(int levelNumber){
 		Level level = authoringFileReader.getLevelManager().getEntity(levelNumber);
-		//List<Integer> levelPaths = level.getPaths();
+		List<Integer> levelPaths = level.getPaths();
 		
-		List<Integer>levelPaths = new ArrayList<Integer>();
-		levelPaths.add(0); //HARDCODED FOR NOW
 		if (levelPaths.isEmpty()) {//no path
 			Grid emptyGrid = new Grid(DEFAULT_GRID_WIDTH, DEFAULT_GRID_HEIGHT);
 			emptyGrid.setNoPath(true); 
@@ -139,7 +137,7 @@ public class GamePlayerFactory{
 		Map<Integer, engine.enemy.Enemy> enemyTypes = this.authoringFileReader.getEnemyTypes(); //refactor name
 		engine.enemy.Enemy enemyType = enemyTypes.get(wave.getEnemyID());
 		Queue<Enemy> enemies = new LinkedList<Enemy>();
-		int pathID = wave.getPathID()-1; //needs to start at 0, hacky fix
+		int pathID = wave.getPathID(); //needs to start at 0, hacky fix
 		System.out.println("Path id: "+pathID);
 		for (int i = 0; i < wave.getEnemyCount(); i++) {
 			//System.out.println("Level: "+levelNumber);

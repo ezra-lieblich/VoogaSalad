@@ -81,6 +81,7 @@ public class EnemyManager extends Observable {
 	}
 
 	public void spawnEnemy(Enemy enemy) {
+		/*
 		System.out.println("rararara " + enemy.getCurrentCell().getX());
 		Path testPath = this.grid.getPath(0);
 		//System.out.println("testting :))) "+this.grid.getPath(enemy.getPathID()).getNext(enemy.getCurrentCell()).getY());
@@ -88,6 +89,9 @@ public class EnemyManager extends Observable {
 				- enemy.getCurrentCell().getX());
 		enemy.setyDirection(this.grid.getPath(enemy.getPathID()).getNext(enemy.getCurrentCell()).getY()
 				- enemy.getCurrentCell().getY());
+		*/
+		enemy.setxDirection(enemy.getCurrentCell().getNext().getX() - enemy.getCurrentCell().getX());
+		enemy.setyDirection(enemy.getCurrentCell().getNext().getY() - enemy.getCurrentCell().getY());
 		enemy.setX(gameData.cellToCoordinate(enemy.getCurrentCell().getX()));
 		enemy.setY(gameData.cellToCoordinate(enemy.getCurrentCell().getY()));
 		enemyOnGrid.put(enemy.getUniqueID(), enemy);
