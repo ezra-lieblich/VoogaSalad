@@ -13,7 +13,7 @@ public class WeaponType extends AbstractType implements Weapon {
     private ObservableList<Integer> targets;
     private ObservableProperty<Double> reloadTime;
     private ObservableProperty<String> trajectory;
-    private ObservableProperty<String> effect;
+    private ObservableList<Integer> effects;
     private ObservableProperty<Double> speed;
     private ObservableProperty<Double> range;
     
@@ -23,7 +23,7 @@ public class WeaponType extends AbstractType implements Weapon {
         this.targets = weaponInitializer.getTargets();
         this.reloadTime = weaponInitializer.getReloadTime();
         this.trajectory = weaponInitializer.getTrajectory();
-        this.effect = weaponInitializer.getEffect();
+        this.effects = weaponInitializer.getEffect();
         this.speed = weaponInitializer.getSpeed();
         this.range = weaponInitializer.getRange();
     }
@@ -65,13 +65,8 @@ public class WeaponType extends AbstractType implements Weapon {
     }
 
     @Override
-    public String getEffect () {
-        return effect.getProperty();
-    }
-
-    @Override
-    public void setEffect (String effect) {
-        this.effect.setProperty(effect);
+    public List<Integer> getEffects () {
+        return effects.getProperty();
     }
 
     @Override
@@ -92,6 +87,16 @@ public class WeaponType extends AbstractType implements Weapon {
     @Override
     public void setRange (double range) {
         this.range.setProperty(range);
+    }
+
+    @Override
+    public void addEffect (int effect) {
+        effects.add(effect);
+    }
+
+    @Override
+    public void removeEffect (int effect) {
+        effects.remove(effect);
     }
 
 }
