@@ -3,7 +3,7 @@ package authoring.editorview.tower.subviews.editorfields;
 import java.io.File;
 import java.util.ResourceBundle;
 import authoring.editorview.tower.ITowerSetView;
-import authoring.editorview.tower.TowerEditorViewDelegate;
+import authoring.editorview.tower.TowerAuthoringViewDelegate;
 import authoring.utilityfactories.DialogueBoxFactory;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
@@ -19,15 +19,16 @@ import javafx.scene.image.ImageView;
 
 public class TowerImageView implements ITowerSetView {
 
-    private TowerEditorViewDelegate delegate;
+    @SuppressWarnings("unused")
+    private TowerAuthoringViewDelegate delegate;
     private String imagePath;
     private ImageView towerImage;
-    private ResourceBundle labelsResource;
+    // private ResourceBundle labelsResource;
 
     private final int CHARACTER_SIZE = 250;
 
     public TowerImageView (ResourceBundle labelsResource) {
-        this.labelsResource = labelsResource;
+        // this.labelsResource = labelsResource;
         towerImage = new ImageView();
         towerImage.setFitHeight(CHARACTER_SIZE);
         towerImage.setFitWidth(CHARACTER_SIZE);
@@ -39,7 +40,7 @@ public class TowerImageView implements ITowerSetView {
     }
 
     @Override
-    public void setDelegate (TowerEditorViewDelegate delegate) {
+    public void setDelegate (TowerAuthoringViewDelegate delegate) {
         this.delegate = delegate;
     }
 

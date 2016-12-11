@@ -1,6 +1,6 @@
 package authoring.editorview.tower;
 
-import authoring.editorview.IEditorView;
+import authoring.editorview.INodeView;
 
 
 /**
@@ -9,8 +9,8 @@ import authoring.editorview.IEditorView;
  *
  * @author Kayla Schulz
  */
-public interface ITowerSetView extends IEditorView {
+public interface ITowerSetView extends INodeView {
 
-    public void setDelegate (TowerEditorViewDelegate delegate);
+    public void setDelegate (TowerAuthoringViewDelegate delegate);
 
 }

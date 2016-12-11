@@ -1,35 +1,44 @@
 package authoring.main;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.HashMap;
+import java.util.Map;
+
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.DomDriver;
+
 import authoring.editorview.EditorViewController;
-import authoring.editorview.IEditorView;
-import authoring.editorview.IUpdateView;
-import authoring.editorview.enemy.EnemyEditorViewController;
-import authoring.editorview.enemy.IEnemyEditorView;
-import authoring.editorview.gamesettings.GameSettingsEditorViewController;
-import authoring.editorview.gamesettings.IGameSettingsEditorView;
-import authoring.editorview.level.ILevelEditorView;
-import authoring.editorview.level.LevelEditorViewController;
-import authoring.editorview.path.IPathSetView;
-import authoring.editorview.path.IPathEditorView;
-import authoring.editorview.path.PathEditorViewController;
-import authoring.editorview.tower.ITowerEditorView;
-import authoring.editorview.tower.TowerEditorViewController;
-import authoring.editorview.weapon.IWeaponEditorView;
-import authoring.editorview.weapon.WeaponEditorViewController;
+import authoring.editorview.enemy.EnemyAuthoringViewController;
+import authoring.editorview.enemy.IEnemyUpdateView;
+import authoring.editorview.gamesettings.GameSettingsAuthoringViewController;
+import authoring.editorview.gamesettings.IGameSettingsUpdateView;
+import authoring.editorview.level.ILevelUpdateView;
+import authoring.editorview.level.LevelAuthoringViewController;
+import authoring.editorview.path.IPathUpdateView;
+import authoring.editorview.path.PathAuthoringViewController;
+import authoring.editorview.tower.ITowerUpdateView;
+import authoring.editorview.tower.TowerAuthoringViewController;
+import authoring.editorview.weapon.IWeaponUpdateView;
+import authoring.editorview.weapon.WeaponAuthoringViewController;
 import authoring.toolbar.IToolbar;
-import authoring.view.AuthoringViewController;
+import authoring.view.ViewController;
+import engine.GameAuthoringData;
 import engine.ModelAuthoringController;
 import engine.ModelController;
+import engine.enemy.Enemy;
+import engine.enemy.EnemyManager;
 import engine.enemy.EnemyManagerController;
+import engine.level.LevelManager;
 import engine.level.LevelManagerController;
+import engine.path.PathManager;
 import engine.path.PathManagerController;
+import engine.settings.GameModeManager;
 import engine.settings.GameModeManagerController;
+import engine.tower.TowerManager;
 import engine.tower.TowerManagerController;
+import engine.weapon.WeaponManager;
 import engine.weapon.WeaponManagerController;
 import javafx.scene.Scene;
 import statswrapper.Wrapper;
@@ -37,13 +46,13 @@ import statswrapper.Wrapper;
 
 public class AuthoringController {
     private ModelController modelController;
-    private AuthoringViewController viewController;
+    private ViewController viewController;
     private IToolbar toolbar;
 
     public AuthoringController (int size) {
         modelController = new ModelAuthoringController();
         try {
-            viewController = new AuthoringViewController(size, size);
+            viewController = new ViewController(size, size);
             connectDataInterfaces(viewController);
         }
         catch (IOException e) {
@@ -57,24 +66,55 @@ public class AuthoringController {
 
     private void configureToolbar () {
         toolbar = this.viewController.getView().getMyToolbar();
-        toolbar.setOnPressedSave(e -> {
-			try {
-				saveAsXMLFile();
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-		});
+
+        toolbar.setOnPressedSave(e -> saveAsXMLFile());
+
+        
+        toolbar.setOnPressedLoad(e -> {
+        	loadData("player.samplexml/load.xml");
+        });
+
 
     }
 
-    private void saveAsXMLFile () throws IOException {
+    public void saveAsXMLFile ()  {
         String fileContent = this.modelController.SaveData();
         toolbar.saveFile(fileContent);
-        //TODO Lucy: add api call to record game in web app
-        String gameData = xmlToString(fileContent);
-        Wrapper.getInstance().createGame(gameData);
+        // TODO Lucy: add api call to record game in web app
+        
+        try {
+        	String gameData = xmlToString(fileContent);
+			Wrapper.getInstance().createGame(gameData);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
+    
+	public void loadData(String filePath) {
+		//TODO GameModeManagerController ConstructTypeProperties is empty because it needs methods to call in front end.
+		//TODO Creates a null pointer exception currently. Also need controllers instead of Views!!!!
+		GameAuthoringData data = modelController.loadData(filePath);
+		 modelController.getModelController(EnemyManagerController.class)
+		 	.loadManagerData(data.getManagerMediator().getManager(EnemyManager.class), 
+		 							(IEnemyUpdateView) viewController.getControllers().get("enemy").getUpdateView());
+		 
+		 modelController.getModelController(TowerManagerController.class)
+		 	.loadManagerData(data.getManagerMediator().getManager(TowerManager.class),
+		 						(ITowerUpdateView) viewController.getControllers().get("tower").getUpdateView());
+		 modelController.getModelController(WeaponManagerController.class)
+		 	.loadManagerData(data.getManagerMediator().getManager(WeaponManager.class), 
+		 						(IWeaponUpdateView) viewController.getControllers().get("weapon").getUpdateView());
+		 modelController.getModelController(PathManagerController.class)
+		 	.loadManagerData(data.getManagerMediator().getManager(PathManager.class), 
+		 						(IPathUpdateView) viewController.getControllers().get("path").getUpdateView());
+		 modelController.getModelController(LevelManagerController.class)
+		 	.loadManagerData(data.getManagerMediator().getManager(LevelManager.class), 
+		 						(ILevelUpdateView) viewController.getControllers().get("level").getUpdateView());
+//		 modelController.getModelController(GameModeManagerController.class)
+//		 	.loadManagerData(data.getManagerMediator().getManager(GameModeManager.class),
+//		 						(IGameSettingsEditorView) viewController.getControllers().get("setup").getUpdateView());
+	}
     
     private String xmlToString(String textContent) throws IOException{
     	BufferedReader br = new BufferedReader(new StringReader(textContent));
@@ -87,16 +127,16 @@ public class AuthoringController {
     	return sb.toString();
     }
 
-    private void connectDataInterfaces (AuthoringViewController authoringVC) {
+    private void connectDataInterfaces (ViewController authoringVC) {
 
         HashMap<String, EditorViewController> editorVCs = authoringVC.getControllers();
-        PathEditorViewController pathVC = (PathEditorViewController) editorVCs.get("path");
-        LevelEditorViewController levelVC = (LevelEditorViewController) editorVCs.get("level");
-        WeaponEditorViewController weaponVC = (WeaponEditorViewController) editorVCs.get("weapon");
-        EnemyEditorViewController enemyVC = (EnemyEditorViewController) editorVCs.get("enemy");
-        TowerEditorViewController towerVC = (TowerEditorViewController) editorVCs.get("tower");
-        GameSettingsEditorViewController settingsVC =
-                (GameSettingsEditorViewController) editorVCs.get("settings");
+        PathAuthoringViewController pathVC = (PathAuthoringViewController) editorVCs.get("path");
+        LevelAuthoringViewController levelVC = (LevelAuthoringViewController) editorVCs.get("level");
+        WeaponAuthoringViewController weaponVC = (WeaponAuthoringViewController) editorVCs.get("weapon");
+        EnemyAuthoringViewController enemyVC = (EnemyAuthoringViewController) editorVCs.get("enemy");
+        TowerAuthoringViewController towerVC = (TowerAuthoringViewController) editorVCs.get("tower");
+        GameSettingsAuthoringViewController setupVC =
+                (GameSettingsAuthoringViewController) editorVCs.get("setup");
 
         PathManagerController pathModel =
                 modelController.getModelController(PathManagerController.class);
@@ -117,7 +157,7 @@ public class AuthoringController {
         levelVC.setLevelDataSource(levelModel);
         weaponVC.setWeaponDataSource(weaponModel);
         towerVC.setTowerDataSource(towerModel);
-        settingsVC.setGameSettingsDataSource(settingsModel);
+        setupVC.setGameSettingsDataSource(settingsModel);
     }
 
     public Scene getScene () {

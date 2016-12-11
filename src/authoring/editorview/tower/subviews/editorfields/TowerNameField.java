@@ -1,11 +1,11 @@
 package authoring.editorview.tower.subviews.editorfields;
 
 import java.util.ResourceBundle;
+import authoring.editorview.EditorNameView;
 import authoring.editorview.tower.ITowerSetView;
-import authoring.editorview.tower.TowerEditorViewDelegate;
+import authoring.editorview.tower.TowerAuthoringViewDelegate;
+import authoring.utilityfactories.BoxFactory;
 import authoring.utilityfactories.TextFieldFactory;
-import javafx.scene.Node;
-import javafx.scene.control.TextField;
 
 
 /**
@@ -13,30 +13,27 @@ import javafx.scene.control.TextField;
  * @author Kayla Schulz
  *
  */
-public class TowerNameField implements ITowerSetView {
+public class TowerNameField extends EditorNameView implements ITowerSetView {
 
-    private TextField towerNameField;
-    private TowerEditorViewDelegate delegate;
+    private TowerAuthoringViewDelegate delegate;
 
     public TowerNameField (ResourceBundle labelsResource) {
-        towerNameField =
-                TextFieldFactory.makeTextField(labelsResource.getString("EnterString"),
-                                               e -> delegate.onUserEnteredTowerName(towerNameField
-                                                       .getText()));
+        super(labelsResource);
     }
 
     @Override
-    public void setDelegate (TowerEditorViewDelegate delegate) {
+    public void setDelegate (TowerAuthoringViewDelegate delegate) {
         this.delegate = delegate;
     }
 
     @Override
-    public Node getInstanceAsNode () {
-        return towerNameField;
-    }
-
-    public void updateName (String towerName) {
-        towerNameField.setText(towerName);
+    protected void makeNameTextField () {
+        nameTextField =
+                TextFieldFactory.makeTextField(resource.getString("EnterString"),
+                                               e -> delegate.onUserEnteredTowerName(nameTextField
+                                                       .getText()));
+        root = BoxFactory.createHBoxWithLabelandNode(resource.getString("NameTextField"),
+                                                     nameTextField);
     }
 
 }

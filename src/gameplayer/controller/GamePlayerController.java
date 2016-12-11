@@ -48,6 +48,9 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.Queue;
 
+import javax.swing.BorderFactory;
+import javax.swing.JPanel;
+
 
 public class GamePlayerController implements Observer {
 

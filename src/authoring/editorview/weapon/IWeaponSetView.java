@@ -1,6 +1,6 @@
 package authoring.editorview.weapon;
 
-import authoring.editorview.IEditorView;
+import authoring.editorview.INodeView;
 
 
 /**
@@ -10,7 +10,7 @@ import authoring.editorview.IEditorView;
  * @author Kayla Schulz
  *
  */
-public interface IWeaponSetView extends IEditorView {
+public interface IWeaponSetView extends INodeView {
 
-    public void setDelegate (WeaponEditorViewDelegate delegate);
+    public void setDelegate (WeaponAuthoringViewDelegate delegate);
 }

@@ -12,9 +12,9 @@ import javafx.scene.layout.VBox;
  * @author Kayla Schulz
  *
  */
-public class BoxFactory {
+public final class BoxFactory {
 
-    public BoxFactory () {
+    private BoxFactory () {
 
     }
 

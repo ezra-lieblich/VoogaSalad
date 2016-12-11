@@ -4,12 +4,12 @@ import java.lang.reflect.Method;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import authoring.editorview.enemy.IEnemyEditorView;
+import authoring.editorview.enemy.IEnemyUpdateView;
 import engine.AbstractTypeManagerController;
 import engine.ManagerMediator;
-import engine.enemy.Enemy;
-import engine.enemy.EnemyBuilder;
-import engine.enemy.EnemyManager;
+import engine.effect.player.CollisionEffectFactory;
+import engine.effect.player.GameEffect;
+import engine.effect.player.GroovyExecutor;
 import engine.observer.ObservableObjectProperty;
 import engine.observer.ObservableProperty;
 import engine.tower.TowerTypeBuilder;
@@ -17,11 +17,31 @@ import engine.tower.TowerTypeManager;
 
 
 public class EffectTypeManagerController extends
-        AbstractTypeManagerController<EffectTypeManager, EffectBuilder, Effect, EffectView>
+        AbstractTypeManagerController<EffectManager, EffectBuilder, Effect, EffectView>
         implements EffectManagerController {
 
+    public EffectTypeManagerController (ManagerMediator managerMediator, EffectManager effectTypeManager) {
+        super(effectTypeManager, new EffectTypeBuilder(), managerMediator);
+        
+        EffectBuilder efb = new EffectTypeBuilder();
+        Effect effectType = efb.buildTriggerConditionGroovy("collider.getHealth() == 50 && myself.getName() == 'Sean'").buildEffectGroovy("collider.setHealth(100)").build();
+        CollisionEffectFactory testFactory = new CollisionEffectFactory();
+        GameEffect gameEffect = testFactory.create(effectType);
+        
+        Enemy collider = new Enemy();
+        Enemy myself = new Enemy();
+        System.out.println(collider.getHealth());
+        gameEffect.addEncompassingClass(myself); //Enemy constructor gameEffect.addEncompassingClass(this)
+        
+        gameEffect.addTrigger(collider);
+        
+        gameEffect.execute();
+        System.out.println(collider.getHealth());
+        
+    }
+    
     EffectTypeManagerController (ManagerMediator managerMediator) {
-        super(new EffectTypeManager(), new EffectTypeBuilder(), managerMediator);
+        this(managerMediator, new EffectManagerFactory().create());
     }
 
     /*
@@ -30,8 +50,15 @@ public class EffectTypeManagerController extends
      * @see engine.effect.EffectManagerController#getTriggers()
      */
     @Override
-    public List<String> getTriggers () {
-        return getTypeManager().getAnnotatedClasses();
+    public void addActiveClassListener(EffectView updateView) {
+        getTypeManager().addActiveClassListener((oldValue, newValue) -> {
+                updateView.updateTriggers(getAvailableClassMethods(newValue));
+        });
+    }
+    
+    @Override
+    public List<String> getAvailableClasses () {
+        return getTypeManager().getAnnotatedClasses().stream().map(Class::getName).collect(Collectors.toList());
     }
 
     /*
@@ -40,8 +67,8 @@ public class EffectTypeManagerController extends
      * @see engine.effect.EffectManagerController#getTriggerMethods(java.lang.String)
      */
     @Override
-    public List<String> getTriggerMethods (String trigger) {
-        return getTypeManager().getAnnotatedClassMethods(trigger).stream().map(Method::getName)
+    public List<String> getAvailableClassMethods (String trigger) {
+        return getTypeManager().getAnnotatedClassMethods(trigger).stream().map(a -> a.toGenericString())
                 .collect(Collectors.toList());
     }
 
@@ -50,20 +77,7 @@ public class EffectTypeManagerController extends
      * 
      * @see engine.effect.EffectManagerController#setTrigger(int, java.lang.String)
      */
-    @Override
-    public boolean setTrigger (int EffectID, String trigger) {
-        try {
-            getTypeManager().getEntity(EffectID).getTrigger()
-                    .setParticipantClass(Class.forName(trigger));
-            return true;
-        }
-        catch (ClassNotFoundException e) {
-            // TODO Auto-generated catch block
-            // Create null class object, Extend Duvall's Class
-
-            e.printStackTrace();
-            return false;
-        }
+  
 
         // EffectType newEffect = new EffectType();
         // ObservableProperty<String> observableTrigger = new
@@ -79,16 +93,51 @@ public class EffectTypeManagerController extends
         //
         // return enemy.getEffectsSize() - 1;
         // effectManager.getAnnotatedClassMethods(trigger)
-    }
+    
 
     @Override
     protected EffectBuilder constructTypeProperties (EffectView updateView,
                                                      EffectBuilder typeBuilder) {
-        return typeBuilder
-                .addTriggerClassListener( (oldValue, newValue) -> updateView
-                        .updateTriggerConditions(getTypeManager()
-                                .getAnnotatedClassMethods(newValue.getName()).stream()
-                                .map(Method::getName).collect(Collectors.toList())));
+        return typeBuilder;
+//                .addTriggerClassListener( (oldValue, newValue) -> updateView
+//                        .updateTriggerConditions(getTypeManager()
+//                                .getAnnotatedClassMethods(newValue.getName()).stream()
+//                                .map(a -> a.toString()).collect(Collectors.toList())));
+    }
+
+    @Override
+    public void setAvailableClass (String selectedClass) {
+        getTypeManager().setActiveClass(selectedClass);
+    }
+
+    @Override
+    public String getTrigger (int effectID) {
+        return getTypeManager().getEntity(effectID).getTriggerClass();
+    }
+
+    @Override
+    public String getCondition (int effectID) {
+        return getTypeManager().getEntity(effectID).getTriggerConditionGroovy();
+    }
+
+    @Override
+    public String getEffect (int effectID) {
+        return getTypeManager().getEntity(effectID).getEffectGroovy();
+    }
+
+    @Override
+    public void setTrigger (int effectID, String trigger) {
+         getTypeManager().getEntity(effectID).setTriggerClass(trigger);
+    }
+
+    @Override
+    public void setCondition (int effectID, String trigger) {
+        getTypeManager().getEntity(effectID).setTriggerConditionGroovy(trigger);
+    }
+
+    @Override
+    public void setEffect (int effectID, String trigger) {
+        getTypeManager().getEntity(effectID).setEffectGroovy(trigger);
     }
 
 }
