@@ -138,7 +138,7 @@ public class LevelType extends AbstractType implements Level {
 	}
 
 	@Override
-	public void removeEnemies(int enemyID) {
+	public void removeEnemyReferences(int enemyID) {
 		for (Wave wave : waves.getProperty().getEntities().values()) {
 			if (wave.getEnemyID() == enemyID) {
 				removeWave(wave.getId());

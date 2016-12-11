@@ -39,7 +39,7 @@ public class LevelTypeManagerController
     	return waveBuilder.buildEnemyCount((int)(Math.random() * 5)+2)
     	.buildEnemyID(0)
     	.buildFrequency(1)
-    	.buildPathID(0)
+    	.buildPathID((int)(Math.random()+.5))
     	.buildStartTime(a* Math.random() *5)
     	.build();
     }
