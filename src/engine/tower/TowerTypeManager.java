@@ -57,7 +57,7 @@ public class TowerTypeManager extends AbstractTypeManager<Tower> implements Towe
     
     @Override
     public int getMaxId() {
-        return Math.max(Collections.max(upgrades.keySet()), super.getMaxId());
+        return upgrades.keySet().isEmpty() ? -1 : Math.max(Collections.max(upgrades.keySet()), super.getMaxId());
     }
 
 }

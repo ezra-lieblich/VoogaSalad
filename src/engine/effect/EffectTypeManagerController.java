@@ -4,12 +4,11 @@ import java.lang.reflect.Method;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import authoring.editorview.enemy.IEnemyEditorView;
+import authoring.editorview.enemy.IEnemyUpdateView;
 import engine.AbstractTypeManagerController;
 import engine.ManagerMediator;
-import engine.enemy.Enemy;
-import engine.enemy.EnemyBuilder;
-import engine.enemy.EnemyManager;
+import engine.effect.player.GameEffect;
+import engine.effect.player.GroovyExecutor;
 import engine.observer.ObservableObjectProperty;
 import engine.observer.ObservableProperty;
 import engine.tower.TowerTypeBuilder;
@@ -21,7 +20,15 @@ public class EffectTypeManagerController extends
         implements EffectManagerController {
 
     EffectTypeManagerController (ManagerMediator managerMediator) {
-        super(new EffectTypeManager(), new EffectTypeBuilder(), managerMediator);
+        super(new EffectTypeManager(null, null), new EffectTypeBuilder(), managerMediator);
+        EffectBuilder efb = new EffectTypeBuilder();
+        Effect effectType = efb.buildTriggerConditionGroovy("trigger.getHealth() == 50 && trigger.getName() == 'Sean'").buildEffectGroovy("trigger.setHealth(100)").build();
+        GameEffect test = new GameEffect(effectType, new GroovyExecutor());
+        Enemy enemy = new Enemy();
+        test.addTrigger((ITestEnemy)enemy);
+        test.addEncompassingClass(this);
+        test.execute();
+        System.out.println(enemy.getHealth());
     }
 
     /*

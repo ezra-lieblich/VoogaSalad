@@ -1,20 +1,20 @@
 package authoring.editorview.gamesettings.subviews;
 
 import java.util.ResourceBundle;
-import authoring.editorview.gamesettings.GameSettingsEditorViewDelegate;
+import authoring.editorview.gamesettings.GameSettingsAuthoringViewDelegate;
 import authoring.editorview.gamesettings.IGameSettingsSetView;
-import authoring.utilityfactories.BoxFactory;
+import authoring.utilityfactories.GridFactory;
 import authoring.utilityfactories.TextFieldFactory;
 import javafx.scene.Node;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.GridPane;
 
 
 public class GameInitialMoneyView implements IGameSettingsSetView {
 
     private TextField initialMoneyField;
-    private GameSettingsEditorViewDelegate delegate;
-    private HBox hbox;
+    private GameSettingsAuthoringViewDelegate delegate;
+    private GridPane root;
 
     public GameInitialMoneyView (ResourceBundle labelsResource) {
         createField(labelsResource);
@@ -22,23 +22,21 @@ public class GameInitialMoneyView implements IGameSettingsSetView {
 
     @Override
     public Node getInstanceAsNode () {
-        return hbox;
+        return root;
     }
 
     @Override
-    public void setDelegate (GameSettingsEditorViewDelegate delegate) {
+    public void setDelegate (GameSettingsAuthoringViewDelegate delegate) {
         this.delegate = delegate;
     }
 
-    private void createField (ResourceBundle levelResource) {
-        initialMoneyField =
-                TextFieldFactory.makeTextField("",
-                                               e -> delegate
-                                                       .onUserEnteredGameMoney(initialMoneyField
-                                                               .getText()));
-        hbox =
-                BoxFactory.createHBoxWithLabelandNode(levelResource.getString("InitialMoney"),
-                                                      initialMoneyField);
+    private void createField (ResourceBundle resource) {
+        initialMoneyField = TextFieldFactory.makeTextField("",
+        		e -> delegate.onUserEnteredGameMoney(initialMoneyField.getText()));
+        
+        initialMoneyField.setPrefWidth(105);
+        root = GridFactory.createRowWithLabelandNode(resource.getString("InitialMoney"), initialMoneyField);
+        
     }
 
     public void updateInitialMoneyField (String initialLives) {

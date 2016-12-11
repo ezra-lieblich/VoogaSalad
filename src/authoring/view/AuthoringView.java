@@ -59,7 +59,7 @@ public class AuthoringView implements IAuthoringView {
         mainEditorView.setVbarPolicy(ScrollBarPolicy.ALWAYS);
         mainEditorView.setPrefHeight(SIZE * 19 / 20);
         editorView.setPrefHeight(SIZE * 19 / 20);
-        editorView.setPrefWidth(SIZE);
+        editorView.setPrefWidth(SIZE + 250);
 
     }
 

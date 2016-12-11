@@ -7,7 +7,7 @@ import java.util.ResourceBundle;
 import javax.imageio.ImageIO;
 import authoring.editorview.PhotoFileChooser;
 import authoring.editorview.path.IPathSetView;
-import authoring.editorview.path.PathEditorViewDelegate;
+import authoring.editorview.path.PathAuthoringViewDelegate;
 import authoring.utilityfactories.ButtonFactory;
 import authoring.utilityfactories.DialogueBoxFactory;
 import javafx.scene.Node;
@@ -25,7 +25,7 @@ public class PathImageView extends PhotoFileChooser implements IPathSetView{
 	private HBox root;
 	private String pathImagePath;
 	private ImageView pathImageView;
-	private PathEditorViewDelegate delegate;
+	private PathAuthoringViewDelegate delegate;
 	
 	private static final String RESOURCE_FILE_NAME = "resources/GameAuthoringPath";	
 	private ResourceBundle pathResource = ResourceBundle.getBundle(RESOURCE_FILE_NAME);
@@ -107,7 +107,7 @@ public class PathImageView extends PhotoFileChooser implements IPathSetView{
 	}
 	
 	
-	public void setDelegate(PathEditorViewDelegate delegate){
+	public void setDelegate(PathAuthoringViewDelegate delegate){
 		this.delegate = delegate;
 	}
 

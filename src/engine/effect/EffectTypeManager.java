@@ -21,20 +21,28 @@ import engine.AbstractTypeManager;
 public class EffectTypeManager extends AbstractTypeManager<Effect> implements EffectManager {
     //private Map<String, Class<?>> annotatedClasses;
     private Map<String, List<Method>> annotatedClassMethods; //Return type : methods of that type
+    private Map<String, List<Class<?>>> effectAccessibleData;
     
-    EffectTypeManager() {
-        annotatedClassMethods = new HashMap<String, List<Method>>();
+    EffectTypeManager(Map<String, List<Method>> annotatedClassMethods, Map<String, List<Class<?>>> effectAccessibleData) {
+        this.annotatedClassMethods = annotatedClassMethods;
+        this.effectAccessibleData = effectAccessibleData;
         add(Enemy.class);
         add(SuperEnemy.class);
+    }
+    
+    @Override
+    public List<String> getAnnotatedClasses() {
+        return new ArrayList<String>(null);
+    }
+    
+    @Override
+    public List<Method> getAnnotatedClassMethods(String className) {
+        return annotatedClassMethods.get(className);
     }
     
     /* (non-Javadoc)
      * @see engine.effect.EffectManager#add(java.lang.Class)
      */
-    @Override
-    public void add(Class<?> annotatedClass) {
-        annotatedClassMethods.put(annotatedClass.getName(), generateAnnotatedMethods(annotatedClass, EffectMethod.class));
-    }
     
     //TODO - Stream this
 //    public List<Method> getAnnotatedMethods(Class<?> annotatedClass) {
@@ -53,18 +61,11 @@ public class EffectTypeManager extends AbstractTypeManager<Effect> implements Ef
     /* (non-Javadoc)
      * @see engine.effect.EffectManager#generateAnnotatedMethods(java.lang.Class, java.lang.Class)
      */
-    @Override
-    public <T extends Annotation> List<Method> generateAnnotatedMethods(Class<?> annotatedClass, Class<T> annotationType) {
-        return Stream.of(annotatedClass.getMethods()).filter(a -> a.isAnnotationPresent(annotationType)).collect(Collectors.toList());
-    }
+
     
     /* (non-Javadoc)
      * @see engine.effect.EffectManager#getAnnotatedClassMethods(java.lang.String)
      */
-    @Override
-    public List<Method> getAnnotatedClassMethods(String className) {
-        return annotatedClassMethods.get(className);
-    }
     
 //    private <T extends Annotation> List<Method> getAnnotatedMethods(Class<?> annotatedClass, Class<T> annotationType, List<Method> annotatedMethods) {
 //        annotatedMethods.addAll(Stream.of(annotatedClass.getMethods()).filter(a -> a.isAnnotationPresent(annotationType)).collect(Collectors.toList()));
@@ -79,13 +80,22 @@ public class EffectTypeManager extends AbstractTypeManager<Effect> implements Ef
     /* (non-Javadoc)
      * @see engine.effect.EffectManager#getAnnotatedClasses()
      */
-    @Override
-    public List<String> getAnnotatedClasses() {
-        return new ArrayList<String>(annotatedClassMethods.keySet());
-    }
     
     public void printTest() {
         annotatedClassMethods.values().forEach(a -> a.forEach(b -> System.out.println(b.getName())));
+    }
+
+    @Override
+    public void add (Class<?> annotatedClass) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public <T extends Annotation> List<Method> generateAnnotatedMethods (Class<?> annotatedClass,
+                                                                         Class<T> annotationType) {
+        // TODO Auto-generated method stub
+        return null;
     }
     
 //    public static void main (String[] args) {

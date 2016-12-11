@@ -1,18 +1,19 @@
 package engine.path;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.function.Predicate;
 import authoring.editorview.IUpdateView;
 import authoring.editorview.path.IPathSetView;
-import authoring.editorview.path.IPathEditorView;
-import authoring.editorview.tower.ITowerEditorView;
+import authoring.editorview.path.IPathUpdateView;
+import authoring.editorview.tower.ITowerUpdateView;
 import engine.AbstractTypeManagerController;
 import engine.ManagerMediator;
 import engine.tower.Tower;
 
 
 public class PathTypeManagerController
-        extends AbstractTypeManagerController<PathManager, PathBuilder, Path, IPathEditorView> implements PathManagerController {
+        extends AbstractTypeManagerController<PathManager, PathBuilder, Path, IPathUpdateView> implements PathManagerController {
 
     public PathTypeManagerController (ManagerMediator managerMediator) {
         super(new PathTypeManager(), new PathTypeBuilder(), managerMediator);
@@ -105,11 +106,11 @@ public class PathTypeManagerController
     
     
     @Override
-    protected PathBuilder constructTypeProperties (IPathEditorView updateView,
+    protected PathBuilder constructTypeProperties (IPathUpdateView updateView,
                                                    PathBuilder typeBuilder) {
         return typeBuilder
                 .addCoordinatesListener( (oldValue, newValue) -> updateView
-                        .updatePathCoordinates(newValue))
+                        .updatePathCoordinates(Collections.unmodifiableList(newValue)))
                 .addGridRowsListener( (oldValue, newValue) -> updateView
                         .updateGridDimensions(newValue));
     }

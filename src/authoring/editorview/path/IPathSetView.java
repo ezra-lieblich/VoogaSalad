@@ -11,6 +11,6 @@ import authoring.editorview.IEditorView;
  */
 public interface IPathSetView extends IEditorView {
 
-    public void setDelegate (PathEditorViewDelegate delegate);
+    public void setDelegate (PathAuthoringViewDelegate delegate);
 
 }

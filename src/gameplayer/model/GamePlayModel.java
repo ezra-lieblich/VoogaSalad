@@ -49,7 +49,6 @@ public class GamePlayModel extends Observable {
 		this.weaponManager = new gameplayer.model.weapon.WeaponManager(this.gameData, this.towerManager);
 		this.collisionManager = new CollisionManager(gameData, this.weaponManager, this.enemyManager);
 		initializeGameSetting(factory);
-
 	}
 
 	/**
@@ -228,7 +227,6 @@ public class GamePlayModel extends Observable {
 
 	public void updateInLevel() {
 		// checkCollision();
-		//updateWeapon();
 		this.weaponManager.updateWeapon();
 		this.towerManager.updateAvailableTower();
 		this.enemyManager.update();

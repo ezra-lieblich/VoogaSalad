@@ -39,18 +39,22 @@ public class TowerManager extends Observable {
 	private HashMap<Integer, engine.tower.Tower> allTowerTypes;
 	private HashMap<Integer, engine.tower.Tower> availableTowerTypes;
 	private HashMap<Integer, engine.weapon.Weapon> allWeapons;	
-	private HashMap<Integer, gameplayer.model.tower.Tower> towersOnGrid; // change to hashMAP
+	private HashMap<Integer, gameplayer.model.tower.Tower> towersOnGrid; 
+	private Map<Integer, engine.tower.Tower> upgradeTowerTypes;
 	private int uniqueTowerID;
 	private long timeInterval;
+	
 
 	public TowerManager(GamePlayData gameData, EnemyManager enemyManager) {
 		this.gameData = gameData;
 		this.enemyManager = enemyManager;
 		this.allTowerTypes = this.gameData.getFactory().getTowers();
 		this.allWeapons = this.gameData.getFactory().getWeaponBank();
+		this.upgradeTowerTypes = this.gameData.getFactory().getTowerUpgrades();
 		this.towersOnGrid =  new HashMap<Integer, gameplayer.model.tower.Tower>();
 		this.uniqueTowerID = 0;
 		this.availableTowerTypes = new HashMap<Integer, engine.tower.Tower>();
+		
 	}
 
 	public HashMap<Integer, engine.tower.Tower> getAvailableTower() {
@@ -132,7 +136,14 @@ public class TowerManager extends Observable {
 			int fireRate =  (int) ((int) this.timeInterval/weaponForGun.getFireRate());
 			double x2 = this.gameData.cellToCoordinate(x1);
 			double y2 = this.gameData.cellToCoordinate(y1);
+			System.out.println("plaCE tower x1 "+x1);
+			System.out.println("plaCE tower y1 "+y1);
+
+			System.out.println("place tower x2: "+x2);
+			System.out.println("place tower y2: "+y2);
+			
 			Gun tempGun = new Gun(fireRate ,weaponForGun, x2, y2 );// change fire rate 
+			gunForTower.add(tempGun);
 		}
 
 		gameplayer.model.tower.Tower newlyPlaced = new gameplayer.model.tower.Tower(towerType, gunForTower,
@@ -186,14 +197,43 @@ public class TowerManager extends Observable {
 		this.gameData.setGold(this.gameData.getGold() + t.sellTower());
 		this.gameData.getGrid().removeTower((int)t.getX(),(int)t.getX());
 		this.towersOnGrid.remove(uniqueTowerID);
-		setChanged();
-		notifyObservers();
-
+		
+		//don't need this
+		//setChanged();
+		//notifyObservers();
 	}
 
-
 	/**
-	 * check all the weaponTypes of each Tower
+	 * add a ungrade queue into the tower class with reverse order from ArrayList
+	 * talk to front end when queue is empty disable the upgrade buttom 
+	 * display upgrade cost on front end
+	 *
+	 * 
+	 * @param UniqueID
+	 */
+	public void upgradeTower(int UniqueID){
+		Tower toBeUpgraded = this.towersOnGrid.get(UniqueID);
+		int upgradeType = toBeUpgraded.getUpgradeType();
+		engine.tower.Tower upgraded = this.upgradeTowerTypes.get(upgradeType);
+		this.gameData.setGold(this.gameData.getGold() - upgraded.getCost());
+		toBeUpgraded.setImage(upgraded.getImagePath());
+		
+		List<Integer> weaponTypes = upgraded.getWeapons();
+		ArrayList<Gun> gunForTower = new ArrayList<Gun>();
+		// System.out.println("all the int weapons: " + gunsForTower.size());
+		for (int i : weaponTypes) {
+			engine.weapon.Weapon weaponForGun = this.allWeapons.get(i);
+			int fireRate =  (int) weaponForGun.getFireRate();
+			Gun tempGun = new Gun(fireRate, weaponForGun,this.gameData.cellToCoordinate(toBeUpgraded.getX()) , this.gameData.cellToCoordinate(toBeUpgraded.getY())); 
+			gunForTower.add(tempGun);
+		}
+		toBeUpgraded.setGuns(gunForTower);
+
+		
+	}
+	
+	/**
+	 * get all the weapons fired by the towers currently on Grid
 	 */
 	public ArrayList<gameplayer.model.weapon.Weapon> generateNewWeapons(){
 		ArrayList<gameplayer.model.weapon.Weapon> newlyFired = new ArrayList<gameplayer.model.weapon.Weapon>();
@@ -204,16 +244,20 @@ public class TowerManager extends Observable {
 				if(g.isFiring()){
 					for(int j : enemyOnGrid.keySet()){
 						Enemy e = enemyOnGrid.get(j);
-						double distance = this.gameData.getDistance(g.getx(), g.gety(), e.getX(), e.getY());
-						if(distance < g.getRange()){
-							Enemy target = enemyOnGrid.get(j);
-							newlyFired.add(g.getWeapon(j,target.getX(), target.getY()));							
-						}
+						double distance = this.gameData.getDistance(g.getX(), g.getY(), e.getX(), e.getY());//this doesnt work?
+						Enemy target = enemyOnGrid.get(j);
+						newlyFired.add(g.getWeapon(j,target.getX(), target.getY()));							
 						break;
 					}
 				}
 			}
 		}
+		
+		System.out.println("+++++++++++++++++++++");
+		System.out.println("=====================");
+
+		System.out.println("number of weapon fired: " + newlyFired.size());
+		System.out.println("newlyFired"+newlyFired.size());
 		return newlyFired;
 	}
 

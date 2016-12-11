@@ -83,15 +83,19 @@ public class SplashScreen {
 		mainScreen.add(actiontarget, 1, 6);
 
 		btn.setOnAction(e -> {
-			actiontarget.setText("Sign in button pressed");
+			
 			try {
-				Wrapper.getInstance().login(userfield.getText(), passField.getText());
+				String response = Wrapper.getInstance().login(userfield.getText(), passField.getText());
+				actiontarget.setText(response);
+				//testing
+				//Wrapper.getInstance().updateGameScores("gold", "0", "777");
 				createPlayGameOrMakeGameOptions();
 				
 				//TESTING
 				//Wrapper.getInstance().recordGameScores("50", "3", "0");
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
+				createPlayGameOrMakeGameOptions();
 				e1.printStackTrace();
 			}
 		});
@@ -120,9 +124,9 @@ public class SplashScreen {
 		mainScreen.add(actiontarget, 2, 6);
 
 		btn.setOnAction(e -> {
-			actiontarget.setText("Now login");
 			try {
-				Wrapper.getInstance().createAccount(userfield.getText(), passField.getText());
+				String response = Wrapper.getInstance().createAccount(userfield.getText(), passField.getText());
+				actiontarget.setText(response+ "/n Now login");
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -147,16 +151,10 @@ public class SplashScreen {
 	private void startGame(){
 		Stage s = new Stage();
 		
-		HomeSelection file = new HomeSelection(s);
-		file.initHomeScreen();
-		
-		/*
-		GamePlayerController playerController = new GamePlayerController();
-		playerController.init();
-		s.setTitle(TITLE);
-		s.setScene(playerController.getMainScene());
+		XMLGallery fileGallery = new XMLGallery();
+		s.setScene(fileGallery.getScene());
 		s.show();
-		*/
+		
 	}
 
 }

@@ -63,7 +63,7 @@ public abstract class AbstractTypeManager<E extends Type> extends AbstractObserv
     
     @Override
     public int getMaxId() {
-        return Collections.max(getEntityIds());
+        return getEntityIds().isEmpty() ? -1 : Collections.max(getEntityIds());
     }
 
     // protected <U> U getFromEntity(Supplier<U> getter) {

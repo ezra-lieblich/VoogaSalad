@@ -2,7 +2,7 @@ package authoring.editorview.enemy.subviews;
 
 import java.util.List;
 import authoring.editorview.ImageBank;
-import authoring.editorview.enemy.EnemyEditorViewDelegate;
+import authoring.editorview.enemy.EnemyAuthoringViewDelegate;
 import authoring.utilityfactories.ButtonFactory;
 import javafx.scene.control.Button;
 
@@ -13,7 +13,7 @@ import javafx.scene.control.Button;
  *
  */
 public class EnemyImageBank extends ImageBank {
-    private EnemyEditorViewDelegate delegate;
+    private EnemyAuthoringViewDelegate delegate;
 
     // TODO: Keep mapping in array of enemy IDs to list indices in order to be able to delete and
     // maintain order
@@ -26,7 +26,7 @@ public class EnemyImageBank extends ImageBank {
         this.items.add(newEnemyButton);
     }
 
-    public void setDelegate (EnemyEditorViewDelegate delegate) {
+    public void setDelegate (EnemyAuthoringViewDelegate delegate) {
         this.delegate = delegate;
     }
 

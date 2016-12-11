@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Observable;
 
+import gameplayer.view.GameGUI;
+import gameplayer.view.GridGUI;
 import gameplayer.view.helper.GraphicsLibrary;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
@@ -33,24 +35,26 @@ public class DragDrop extends Observable{
 	private double xError;
 	private Node target;
 	private ImageView droppedImage;
-	private List<Double[]> coordinates;
+	private List<int[]> coordinates;
 	private HashMap<String, Integer> towerMap;
+	private GameGUI view;
 
 	public DragDrop() {
 		this.graphicLib = new GraphicsLibrary();
 		this.xError = 0;
 		this.yError = 0;
-		this.coordinates = new ArrayList<Double[]>();
+		this.coordinates = new ArrayList<int[]>();
 	}
 	
-	public DragDrop(double xError, double yError) {
+	public DragDrop(double xError, double yError, GameGUI view) {
 		this.graphicLib = new GraphicsLibrary();
 		this.xError = xError;
 		this.yError = yError;
-		this.coordinates = new ArrayList<Double[]>();
+		this.coordinates = new ArrayList<int[]>();
+		this.view = view;
 	}
 	
-	public List<Double[]> getCoordinates(){
+	public List<int[]> getCoordinates(){
 		return this.coordinates;
 	}
 	
@@ -99,16 +103,29 @@ public class DragDrop extends Observable{
 	private void addImagetoDroppedLoc(double xpos, double ypos, Node target) {
 		ImageView copy = new ImageView(this.source.getImage());
 		Integer newId = this.towerMap.get(this.source.getId());
-		System.out.println("ADDED TOWER IN DRAGDROP CLASS");
-		System.out.println("Tower coords: "+xpos+","+ypos);
+		//System.out.println("ADDED TOWER IN DRAGDROP CLASS");
+		//System.out.println("Tower coords: "+xpos+","+ypos);
 		copy.setId(Integer.toString(newId)); 
 		this.droppedImage = copy;
 		graphicLib.setImageViewParams(copy, this.width, this.height);
-		copy.setX(xpos+this.xError);
-		copy.setY(ypos+this.yError);
-		System.out.println("Thing: " + ypos+this.yError);
-			((Pane) target).getChildren().add(copy);
-		Double[] coords = {xpos+this.xError,ypos+this.yError};
+		int gridX = (int)(this.view.pixelToGridCoord(xpos+this.xError) * this.width);
+		int gridY = (int)(this.view.pixelToGridCoord(ypos+this.yError) * this.height);
+		System.out.println("New x,y: "+gridX+", "+gridY);
+		copy.setX(gridX);
+		copy.setY(gridY);
+		/*
+		copy.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+
+		     @Override
+		     public void handle(MouseEvent event) {
+		         System.out.println("Tile pressed ");
+		         event.consume();
+		     }
+		});
+		*/
+		//System.out.println("Thing: " + ypos+this.yError);
+		((Pane) target).getChildren().add(copy);
+		int[] coords = {gridX,gridY};
 		this.coordinates.add(coords);
 		setChanged();
 		notifyObservers();

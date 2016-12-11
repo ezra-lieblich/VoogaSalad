@@ -89,14 +89,16 @@ public abstract class ImageBank implements ChangeListener<Number> {
         }
         this.items.remove(1, items.size());
         itemIDs = new ArrayList<Integer>();
-        for (int i = 0; i <= Collections.max(ids) + 1; i++)
-            itemIDs.add(-1);
+        if (ids.size() != 0) {
+            for (int i = 0; i <= Collections.max(ids) + 1; i++)
+                itemIDs.add(-1);
+        }
         for (int i = 0; i < ids.size(); i++) {
             ListCellData cellData = dataSource.getCellDataForSubject(ids.get(i));
             Node cell = createCellFromData(cellData);
             items.add(cell);
-            //itemIDs.set(cellData.getId(), items.size()-1);
-            itemIDs.set(items.size()-1, cellData.getId());
+            // itemIDs.set(cellData.getId(), items.size()-1);
+            itemIDs.set(items.size() - 1, cellData.getId());
         }
     }
 
