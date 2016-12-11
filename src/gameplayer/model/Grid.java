@@ -38,6 +38,10 @@ public class Grid {
 		}
 	}
 
+	public void setAllPath(HashMap<Integer, Path> allPath){
+		this.allPath = allPath;
+	}
+	
 	public int getRows(){
 		return this.row;
 	}
