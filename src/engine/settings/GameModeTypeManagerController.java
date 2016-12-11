@@ -66,8 +66,10 @@ public class GameModeTypeManagerController
 
 	@Override
 	protected GameModeBuilder constructTypeProperties(IGameSettingsUpdateView updateView, GameModeBuilder typeBuilder) {
-		// TODO NEED methods in IGAMEUPDATEVIEW
-		return null;
+		return typeBuilder.addGameTypeListener( (oldValue, newValue) -> updateView.updateGameName(newValue));
+			
+				
+		//.addInitialMoneyListener((oldValue, newValue) ->) NEED INITIAL SCORE
 	}
 
 

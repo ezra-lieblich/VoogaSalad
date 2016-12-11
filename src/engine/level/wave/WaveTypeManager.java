@@ -1,5 +1,6 @@
 package engine.level.wave;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -16,7 +17,8 @@ public class WaveTypeManager extends AbstractTypeManager<Wave> implements WaveMa
 
 	@Override
 	public List<Wave> waveList() {
-		return Collections.unmodifiableList((List<Wave>) getEntities().values());
+		List<Wave> waves = new ArrayList<Wave>(getEntities().values());
+		return Collections.unmodifiableList(waves);
 	}
 	 
 
