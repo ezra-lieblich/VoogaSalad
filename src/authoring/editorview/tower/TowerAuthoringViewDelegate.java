@@ -37,5 +37,7 @@ public interface TowerAuthoringViewDelegate {
     public void onUserEnteredTowerSize (String towerSize);
     
     public void onUserSelectedTower (int towerID);
+    
+    public void onUserSelectedTowerUpgrade(int towerID);
 
 }
