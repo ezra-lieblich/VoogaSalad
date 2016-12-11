@@ -365,24 +365,6 @@ public class GamePlayerController implements Observer {
 
 	}
 
-	private void createEnemyKeyFrame() {
-		this.enemyKeyFrame = new KeyFrame(Duration.millis(this.enemyFrequency), e -> {
-			redrawEnemy();
-		});
-	}
-
-	private void countTime() {
-		this.timeCounterThread = new Thread() {
-			public void run() {
-				while (true) {
-					elapsedTime = (new Date()).getTime() - startTime;
-				}
-			}
-		};
-
-		this.timeCounterThread.start();
-
-	}
 
 	private void redrawEverything() {
 		// redraw path
@@ -411,12 +393,12 @@ public class GamePlayerController implements Observer {
 
 		}
 
-		List<IDrawable> reEnemyDraw = convertEnemyDrawable(enemyRedraw);
-		List<IDrawable> reTowerDraw = convertTowerDrawable(towerRedraw);
+		//List<IDrawable> reEnemyDraw = convertEnemyDrawable(enemyRedraw);
+		//List<IDrawable> reTowerDraw = convertTowerDrawable(towerRedraw);
 
-		this.view.reRender(reEnemyDraw);
+		this.view.reRenderEnemy(enemyRedraw);
 		this.view.reRenderWeapon(weaponsOnScreen);
-		this.view.reRenderTower(reTowerDraw);
+		this.view.reRenderTower(towerRedraw);
 	}
 
 	private void redrawEnemy() {
