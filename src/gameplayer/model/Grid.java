@@ -1,5 +1,6 @@
 package gameplayer.model;
 
+import java.util.HashMap;
 import java.util.List;
 
 import gameplayer.model.tower.Tower;
@@ -11,6 +12,7 @@ public class Grid {
 	private int row;
 	private int col;
 	private boolean noPath;
+	private HashMap<Integer, Path> allPath;
 
 	//boolean value noPath,or path encoded 
 
@@ -34,6 +36,16 @@ public class Grid {
 			System.out.println(current.getX() + ", " + current.getY());
 			current = current.getNext();
 		}
+	}
+
+
+	public void setAllPath(HashMap<Integer, Path> allPath){
+		this.allPath = allPath;
+	}
+	
+
+	public void setNoPath(boolean isPathEmpty) {
+		this.noPath = isPathEmpty;
 	}
 
 	public int getRows(){
@@ -60,6 +72,11 @@ public class Grid {
 		System.out.println("start point:");
 		System.out.println(this.start);
 		return this.start;
+	}
+	
+	public Path getPath(int id){
+		return this.allPath.get(id);
+		
 	}
 
 	public Cell getPathEndPoint(){
