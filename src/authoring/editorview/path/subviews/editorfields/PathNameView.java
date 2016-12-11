@@ -3,21 +3,21 @@ package authoring.editorview.path.subviews.editorfields;
 import java.util.ResourceBundle;
 import authoring.editorview.EditorNameView;
 import authoring.editorview.path.IPathSetView;
-import authoring.editorview.path.PathEditorViewDelegate;
+import authoring.editorview.path.PathAuthoringViewDelegate;
 import authoring.utilityfactories.BoxFactory;
 import authoring.utilityfactories.TextFieldFactory;
 
 
 public class PathNameView extends EditorNameView implements IPathSetView {
 
-    private PathEditorViewDelegate delegate;
+    private PathAuthoringViewDelegate delegate;
 
     public PathNameView (ResourceBundle pathResource) {
         super(pathResource);
     }
 
     @Override
-    public void setDelegate (PathEditorViewDelegate delegate) {
+    public void setDelegate (PathAuthoringViewDelegate delegate) {
         this.delegate = delegate;
     }
 

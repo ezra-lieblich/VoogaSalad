@@ -3,21 +3,21 @@ package authoring.editorview.level.subviews;
 import java.util.ResourceBundle;
 import authoring.editorview.EditorNameView;
 import authoring.editorview.level.ILevelSetView;
-import authoring.editorview.level.LevelEditorViewDelegate;
+import authoring.editorview.level.LevelAuthoringViewDelegate;
 import authoring.utilityfactories.BoxFactory;
 import authoring.utilityfactories.TextFieldFactory;
 
 
 public class LevelNameView extends EditorNameView implements ILevelSetView {
 
-    private LevelEditorViewDelegate delegate;
+    private LevelAuthoringViewDelegate delegate;
 
     public LevelNameView (ResourceBundle levelsResource) {
         super(levelsResource);
     }
 
     @Override
-    public void setDelegate (LevelEditorViewDelegate delegate) {
+    public void setDelegate (LevelAuthoringViewDelegate delegate) {
         this.delegate = delegate;
     }
 

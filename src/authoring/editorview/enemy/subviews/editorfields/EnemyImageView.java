@@ -2,7 +2,7 @@ package authoring.editorview.enemy.subviews.editorfields;
 
 import java.io.File;
 import java.util.ResourceBundle;
-import authoring.editorview.enemy.EnemyEditorViewDelegate;
+import authoring.editorview.enemy.EnemyAuthoringViewDelegate;
 import authoring.editorview.enemy.IEnemySetView;
 import authoring.utilityfactories.DialogueBoxFactory;
 import javafx.scene.Node;
@@ -17,7 +17,7 @@ import javafx.scene.image.ImageView;
  */
 public class EnemyImageView implements IEnemySetView {
 
-    private EnemyEditorViewDelegate delegate;
+    private EnemyAuthoringViewDelegate delegate;
     private String imagePath;
     private ImageView enemyImage;
     private ResourceBundle labelsResource;
@@ -57,7 +57,7 @@ public class EnemyImageView implements IEnemySetView {
     }
 
     @Override
-    public void setDelegate (EnemyEditorViewDelegate delegate) {
+    public void setDelegate (EnemyAuthoringViewDelegate delegate) {
         this.delegate = delegate;
     }
 

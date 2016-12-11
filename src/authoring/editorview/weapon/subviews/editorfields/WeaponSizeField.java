@@ -2,7 +2,7 @@ package authoring.editorview.weapon.subviews.editorfields;
 
 import java.util.ResourceBundle;
 import authoring.editorview.weapon.IWeaponSetView;
-import authoring.editorview.weapon.WeaponEditorViewDelegate;
+import authoring.editorview.weapon.WeaponAuthoringViewDelegate;
 import authoring.utilityfactories.TextFieldFactory;
 import javafx.scene.Node;
 import javafx.scene.control.TextField;
@@ -11,7 +11,7 @@ import javafx.scene.control.TextField;
 public class WeaponSizeField implements IWeaponSetView {
 
     private TextField weaponSizeField;
-    private WeaponEditorViewDelegate delegate;
+    private WeaponAuthoringViewDelegate delegate;
 
     public WeaponSizeField (ResourceBundle labelsResource) {
         createField(labelsResource);
@@ -24,7 +24,7 @@ public class WeaponSizeField implements IWeaponSetView {
     }
 
     @Override
-    public void setDelegate (WeaponEditorViewDelegate delegate) {
+    public void setDelegate (WeaponAuthoringViewDelegate delegate) {
         this.delegate = delegate;
     }
 

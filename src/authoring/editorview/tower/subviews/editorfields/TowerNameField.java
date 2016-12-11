@@ -3,7 +3,7 @@ package authoring.editorview.tower.subviews.editorfields;
 import java.util.ResourceBundle;
 import authoring.editorview.EditorNameView;
 import authoring.editorview.tower.ITowerSetView;
-import authoring.editorview.tower.TowerEditorViewDelegate;
+import authoring.editorview.tower.TowerAuthoringViewDelegate;
 import authoring.utilityfactories.BoxFactory;
 import authoring.utilityfactories.TextFieldFactory;
 
@@ -15,14 +15,14 @@ import authoring.utilityfactories.TextFieldFactory;
  */
 public class TowerNameField extends EditorNameView implements ITowerSetView {
 
-    private TowerEditorViewDelegate delegate;
+    private TowerAuthoringViewDelegate delegate;
 
     public TowerNameField (ResourceBundle labelsResource) {
         super(labelsResource);
     }
 
     @Override
-    public void setDelegate (TowerEditorViewDelegate delegate) {
+    public void setDelegate (TowerAuthoringViewDelegate delegate) {
         this.delegate = delegate;
     }
 

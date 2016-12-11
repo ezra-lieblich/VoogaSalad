@@ -11,12 +11,12 @@ import java.util.TreeMap;
 
 import authoring.editortabpane.EditorTabPaneDelegate;
 import authoring.editorview.EditorViewController;
-import authoring.editorview.enemy.EnemyEditorViewController;
-import authoring.editorview.gamesettings.GameSettingsEditorViewController;
-import authoring.editorview.level.LevelEditorViewController;
-import authoring.editorview.path.PathEditorViewController;
-import authoring.editorview.tower.TowerEditorViewController;
-import authoring.editorview.weapon.WeaponEditorViewController;
+import authoring.editorview.enemy.EnemyAuthoringViewController;
+import authoring.editorview.gamesettings.GameSettingsAuthoringViewController;
+import authoring.editorview.level.LevelAuthoringViewController;
+import authoring.editorview.path.PathAuthoringViewController;
+import authoring.editorview.tower.TowerAuthoringViewController;
+import authoring.editorview.weapon.WeaponAuthoringViewController;
 
 
 //TODO: Specific implementation of map
@@ -52,12 +52,12 @@ public class AuthoringViewController implements EditorTabPaneDelegate {
     	editors = new HashMap<String, EditorViewController>();
         int width = Integer.parseInt(settingsResource.getString("editorPrefWidth"));
         int height = Integer.parseInt(settingsResource.getString("editorPrefHeight"));
-        editors.put("setup", new GameSettingsEditorViewController(width, height));
-        editors.put("level", new LevelEditorViewController(width, height));
-        editors.put("path", new PathEditorViewController(width, height));
-        editors.put("weapon", new WeaponEditorViewController(width, height));
-        editors.put("enemy", new EnemyEditorViewController(width, height));
-        editors.put("tower", new TowerEditorViewController(width, height));        
+        editors.put("setup", new GameSettingsAuthoringViewController(width, height));
+        editors.put("level", new LevelAuthoringViewController(width, height));
+        editors.put("path", new PathAuthoringViewController(width, height));
+        editors.put("weapon", new WeaponAuthoringViewController(width, height));
+        editors.put("enemy", new EnemyAuthoringViewController(width, height));
+        editors.put("tower", new TowerAuthoringViewController(width, height));        
         
     }
 

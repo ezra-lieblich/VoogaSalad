@@ -3,7 +3,7 @@ package authoring.editorview.level.subviews;
 import java.util.ArrayList;
 import java.util.List;
 import authoring.editorview.level.ILevelSetView;
-import authoring.editorview.level.LevelEditorViewDelegate;
+import authoring.editorview.level.LevelAuthoringViewDelegate;
 import authoring.editorview.path.NameIdPair;
 import authoring.utilityfactories.ComboBoxFactory;
 import javafx.collections.FXCollections;
@@ -14,7 +14,7 @@ import javafx.scene.control.ComboBox;
 
 public class LevelSelectEnemyView implements ILevelSetView {
 
-    private LevelEditorViewDelegate delegate;
+    private LevelAuthoringViewDelegate delegate;
     private ComboBox<Object> enemyChooser;
 
     public LevelSelectEnemyView () {
@@ -46,7 +46,7 @@ public class LevelSelectEnemyView implements ILevelSetView {
     }
 
     @Override
-    public void setDelegate (LevelEditorViewDelegate delegate) {
+    public void setDelegate (LevelAuthoringViewDelegate delegate) {
         this.delegate = delegate;
     }
 

@@ -2,7 +2,7 @@ package authoring.editorview.gamesettings.subviews;
 
 import java.util.ResourceBundle;
 import authoring.editorview.EditorNameView;
-import authoring.editorview.gamesettings.GameSettingsEditorViewDelegate;
+import authoring.editorview.gamesettings.GameSettingsAuthoringViewDelegate;
 import authoring.editorview.gamesettings.IGameSettingsSetView;
 import authoring.utilityfactories.BoxFactory;
 import authoring.utilityfactories.GridFactory;
@@ -27,7 +27,7 @@ public class GameNameView implements IGameSettingsSetView {
 
     private ResourceBundle resource;
 	
-    private GameSettingsEditorViewDelegate delegate;
+    private GameSettingsAuthoringViewDelegate delegate;
 
     public GameNameView (ResourceBundle settingsResource) {
         this.resource = settingsResource;
@@ -37,7 +37,7 @@ public class GameNameView implements IGameSettingsSetView {
     }
 
     @Override
-    public void setDelegate (GameSettingsEditorViewDelegate delegate) {
+    public void setDelegate (GameSettingsAuthoringViewDelegate delegate) {
         this.delegate = delegate;
     }
 

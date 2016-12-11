@@ -2,7 +2,7 @@ package authoring.editorview.level.subviews;
 
 import java.util.ResourceBundle;
 import authoring.editorview.level.ILevelSetView;
-import authoring.editorview.level.LevelEditorViewDelegate;
+import authoring.editorview.level.LevelAuthoringViewDelegate;
 import authoring.utilityfactories.ComboBoxFactory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,7 +13,7 @@ import javafx.scene.control.ComboBox;
 public class LevelChooserView implements ILevelSetView {
 
     private ComboBox<Object> levelChooser;
-    private LevelEditorViewDelegate delegate;
+    private LevelAuthoringViewDelegate delegate;
 
     public LevelChooserView (ResourceBundle levelsResource) {
         ObservableList<Object> effectOptions = setList();
@@ -38,7 +38,7 @@ public class LevelChooserView implements ILevelSetView {
     }
 
     @Override
-    public void setDelegate (LevelEditorViewDelegate delegate) {
+    public void setDelegate (LevelAuthoringViewDelegate delegate) {
         this.delegate = delegate;
     }
 

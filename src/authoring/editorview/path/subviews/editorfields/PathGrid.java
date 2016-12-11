@@ -2,7 +2,7 @@ package authoring.editorview.path.subviews.editorfields;
 
 import java.util.List;
 import authoring.editorview.path.IPathSetView;
-import authoring.editorview.path.PathEditorViewDelegate;
+import authoring.editorview.path.PathAuthoringViewDelegate;
 import engine.path.Coordinate;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
@@ -23,7 +23,7 @@ public class PathGrid implements IPathSetView{
 	private ImageView[][] pathGrid;
 	private Rectangle[][] backgroundGrid;
 	private List<Coordinate<Integer>> pathCoordinates;	
-	private PathEditorViewDelegate delegate;	
+	private PathAuthoringViewDelegate delegate;	
 	private Group root;
 	private Group gridRoot;
 	private Group backgroundRoot;	
@@ -77,7 +77,7 @@ public class PathGrid implements IPathSetView{
 	}
 	
 	@Override
-	public void setDelegate(PathEditorViewDelegate delegate){
+	public void setDelegate(PathAuthoringViewDelegate delegate){
 		this.delegate = delegate;
 	}
 	

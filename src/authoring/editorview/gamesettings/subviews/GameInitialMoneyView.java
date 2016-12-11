@@ -1,7 +1,7 @@
 package authoring.editorview.gamesettings.subviews;
 
 import java.util.ResourceBundle;
-import authoring.editorview.gamesettings.GameSettingsEditorViewDelegate;
+import authoring.editorview.gamesettings.GameSettingsAuthoringViewDelegate;
 import authoring.editorview.gamesettings.IGameSettingsSetView;
 import authoring.utilityfactories.GridFactory;
 import authoring.utilityfactories.TextFieldFactory;
@@ -13,7 +13,7 @@ import javafx.scene.layout.GridPane;
 public class GameInitialMoneyView implements IGameSettingsSetView {
 
     private TextField initialMoneyField;
-    private GameSettingsEditorViewDelegate delegate;
+    private GameSettingsAuthoringViewDelegate delegate;
     private GridPane root;
 
     public GameInitialMoneyView (ResourceBundle labelsResource) {
@@ -26,7 +26,7 @@ public class GameInitialMoneyView implements IGameSettingsSetView {
     }
 
     @Override
-    public void setDelegate (GameSettingsEditorViewDelegate delegate) {
+    public void setDelegate (GameSettingsAuthoringViewDelegate delegate) {
         this.delegate = delegate;
     }
 

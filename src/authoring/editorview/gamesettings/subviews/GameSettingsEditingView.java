@@ -2,7 +2,7 @@ package authoring.editorview.gamesettings.subviews;
 
 import java.util.ResourceBundle;
 
-import authoring.editorview.gamesettings.GameSettingsEditorViewDelegate;
+import authoring.editorview.gamesettings.GameSettingsAuthoringViewDelegate;
 import authoring.editorview.gamesettings.IGameSettingsSetView;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -46,20 +46,13 @@ public class GameSettingsEditingView implements IGameSettingsSetView {
 		this.gameInitialMoneyView = new GameInitialMoneyView(settingsResource);
 		this.gameWinningConditionsView = new GameWinningConditionsView(settingsResource);
 		this.gameLosingConditionsView = new GameLosingConditionsView(settingsResource);
-		
-		
-		
+			
 		rootBuffer.getChildren().add(root);
     	AnchorPane.setLeftAnchor(root, 10.0);
     	AnchorPane.setTopAnchor(root, 10.0);
     	
-    	
-    	
     	rootBuffer.setBorder(new Border(new BorderStroke(Color.GRAY, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(0.5))));
-    	rootBuffer.setBackground(new Background(new BackgroundFill(Color.rgb(235, 235, 235), CornerRadii.EMPTY, Insets.EMPTY)));
-		
-		
-		
+    	rootBuffer.setBackground(new Background(new BackgroundFill(Color.rgb(235, 235, 235), CornerRadii.EMPTY, Insets.EMPTY)));	
 		
 		root.getChildren().addAll(
 				gameNameView.getInstanceAsNode(), 
@@ -81,9 +74,13 @@ public class GameSettingsEditingView implements IGameSettingsSetView {
 
 
 	@Override
-	public void setDelegate(GameSettingsEditorViewDelegate delegate) {
+	public void setDelegate(GameSettingsAuthoringViewDelegate delegate) {
 		gameNameView.setDelegate(delegate);
 		
+	}
+	
+	public void updateName(String name){
+		gameNameView.updateName(name);
 	}
 	
 	

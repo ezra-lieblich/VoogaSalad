@@ -1,7 +1,7 @@
 package authoring.editorview.gamesettings.subviews;
 
 import java.util.ResourceBundle;
-import authoring.editorview.gamesettings.GameSettingsEditorViewDelegate;
+import authoring.editorview.gamesettings.GameSettingsAuthoringViewDelegate;
 import authoring.editorview.gamesettings.IGameSettingsSetView;
 import authoring.utilityfactories.BoxFactory;
 import authoring.utilityfactories.GridFactory;
@@ -15,7 +15,7 @@ import javafx.scene.layout.HBox;
 public class GameInitialLivesView implements IGameSettingsSetView {
 
     private TextField initialLivesField;
-    private GameSettingsEditorViewDelegate delegate;
+    private GameSettingsAuthoringViewDelegate delegate;
     private GridPane root;
 
     public GameInitialLivesView (ResourceBundle labelsResource) {
@@ -28,7 +28,7 @@ public class GameInitialLivesView implements IGameSettingsSetView {
     }
 
     @Override
-    public void setDelegate (GameSettingsEditorViewDelegate delegate) {
+    public void setDelegate (GameSettingsAuthoringViewDelegate delegate) {
         this.delegate = delegate;
     }
 
