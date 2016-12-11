@@ -4,8 +4,6 @@ import java.util.ResourceBundle;
 
 import authoring.editorview.gamesettings.GameSettingsAuthoringViewDelegate;
 import authoring.editorview.gamesettings.IGameSettingsSetView;
-import authoring.editorview.path.IPathSetView;
-import authoring.editorview.path.PathAuthoringViewDelegate;
 import authoring.utilityfactories.DialogueBoxFactory;
 import authoring.utilityfactories.GridFactory;
 import authoring.utilityfactories.TextFieldFactory;

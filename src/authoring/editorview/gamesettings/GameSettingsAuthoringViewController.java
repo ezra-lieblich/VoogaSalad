@@ -25,8 +25,8 @@ public class GameSettingsAuthoringViewController extends EditorViewController
 
 	private void createNewGame() {
 		gameSettingsDataSource.createType(this.gameView);
-		gameView.updateGameName(gameSettingsDataSource.getName(activeID));
-		gameView.updateGameImage(gameSettingsDataSource.getImagePath(activeID));
+		gameView.updateNameDisplay(gameSettingsDataSource.getName(activeID));
+		gameView.updateImagePathDisplay(gameSettingsDataSource.getImagePath(activeID));
 		gameView.updateNumberofLives(gameSettingsDataSource.getNumberofLives(activeID));
 		gameView.updateInitialMoney(gameSettingsDataSource.getMoney(activeID));
 		gameView.updateGridSize(gameSettingsDataSource.getGridSize(activeID));
