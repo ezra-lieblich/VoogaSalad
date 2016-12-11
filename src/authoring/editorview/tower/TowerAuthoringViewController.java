@@ -178,7 +178,7 @@ public class TowerAuthoringViewController extends EditorViewController
 	@Override
 	public void onUserPressedCreateTowerUpgrade() {
 		//TODO: Fix this shit
-		towerDataSource.createTowerUpgrade(this.towerView, 1);
+		towerDataSource.createTowerUpgrade(this.towerView, 0);
 	}
 
 }

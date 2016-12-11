@@ -21,16 +21,19 @@ public class StatsDisplay {
 	private static final String LEVEL = "LevelType: ";
 	private static final String LIVES_LEFT = "Lives left: ";
 	private static final String AMOUNT_OF_GOLD = "Amount of gold: ";
+	private static final String SCORE = "Score: ";
 	private HBox scorePane;
 	private GraphicsLibrary graphics;
 	private Label goldLabel;
 	private Label liveLabel;
 	private Label levelLabel;
+	private Label scoreLabel; 
 	private double initGold;
 	private double initLives;
 	private double initLevel;
+	private double initScore; 
 
-	public StatsDisplay(double gold, double lives, double level) {
+	public StatsDisplay(double gold, double lives, double level,double score) {
 		this.scorePane = new HBox(10);
 		this.scorePane.getStyleClass().add("statsHBox");
 		this.graphics = new GraphicsLibrary();
@@ -41,6 +44,7 @@ public class StatsDisplay {
 		this.initGold = gold;
 		this.initLives = lives;
 		this.initLevel = level;
+		this.initScore = score; 
 	}
 
 	public HBox getScorePane() {
@@ -51,6 +55,7 @@ public class StatsDisplay {
 		this.goldLabel = createTextScore(AMOUNT_OF_GOLD, Double.toString(this.initGold), this.goldLabel);
 		this.liveLabel = createTextScore(LIVES_LEFT, Double.toString(this.initLives), this.liveLabel);
 		this.levelLabel= createTextScore(LEVEL, Double.toString(this.initLevel), this.levelLabel);
+		this.scoreLabel = createTextScore(SCORE, Double.toString(this.initScore),this.scoreLabel);
 	}
 
 	private Label createTextScore(String title, String score, Label scoreType) {
@@ -77,10 +82,15 @@ public class StatsDisplay {
 		this.levelLabel.setText(LEVEL + Double.toString(level));
 	}
 	
-	public void updateLevelUI(double gold, double lives, double level){
+	public void updateScore(double score){
+		this.scoreLabel.setText(SCORE + Double.toString(score));
+	}
+	
+	public void updateLevelUI(double gold, double lives, double level, double score){
 		updateGold(gold);
 		updateLives(lives);
 		updateLevel(level);
+		updateScore(score);
 	}
 
 }

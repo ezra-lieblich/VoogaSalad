@@ -22,7 +22,7 @@ public class GameModeTypeManagerController
 	}
 
 	@Override
-	public double getNumberofLives(int gameModeID) {
+	public int getNumberofLives(int gameModeID) {
 		return getTypeManager().getEntity(gameModeID).getInitalLives();
 	}
 
@@ -32,7 +32,7 @@ public class GameModeTypeManagerController
 	}
 
 	@Override
-	public double getMoney(int gameModeID) {
+	public int getMoney(int gameModeID) {
 		return getTypeManager().getEntity(gameModeID).getInitialMoney();
 	}
 
@@ -68,7 +68,7 @@ public class GameModeTypeManagerController
 
 	@Override
 	protected GameModeBuilder constructTypeProperties(IGameSettingsUpdateView updateView, GameModeBuilder typeBuilder) {
-		return typeBuilder.addGameTypeListener( (oldValue, newValue) -> updateView.updateGameName(newValue))
+		return typeBuilder //.addGameTypeListener( (oldValue, newValue) -> updateView.updateGameName(newValue))
 				.addInitialMoneyListener((oldValue, newValue) -> updateView.updateInitialMoney(newValue))
 				.addInitialLivesListener((oldValue, newValue) -> updateView.updateNumberofLives(newValue.intValue()))
 				.addLosingConditionsListener((oldValue, newValue) -> updateView.updateLosingConditions(newValue))

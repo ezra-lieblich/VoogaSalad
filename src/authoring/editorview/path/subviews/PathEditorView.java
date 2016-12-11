@@ -5,8 +5,10 @@ import java.util.ResourceBundle;
 import authoring.editorview.path.IPathSetView;
 import authoring.editorview.path.PathAuthoringViewDelegate;
 import authoring.editorview.path.subviews.editorfields.PathDimensionsView;
+import authoring.editorview.path.subviews.editorfields.PathImageDisplayView;
 import authoring.editorview.path.subviews.editorfields.PathImageView;
 import authoring.editorview.path.subviews.editorfields.PathNameView;
+import authoring.editorview.path.subviews.editorfields.PathTypeView;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
@@ -31,6 +33,9 @@ public class PathEditorView implements IPathSetView {
 	private PathNameView pathNameView;
 	private PathChooser pathChooser;   
     private PathDimensionsView pathDimensionsView;
+    private PathImageDisplayView pathImageDisplayView;
+    private PathTypeView pathTypeView;
+    private DeletePathView deletePathView;
 	
     public PathEditorView (int size, ResourceBundle pathResource) {
     	rootBuffer = new AnchorPane();
@@ -41,7 +46,9 @@ public class PathEditorView implements IPathSetView {
     	this.pathNameView = new PathNameView(pathResource);
     	this.pathChooser = new PathChooser();
         this.pathDimensionsView = new PathDimensionsView();
-    	
+    	this.pathImageDisplayView = new PathImageDisplayView(pathResource);
+    	this.pathTypeView = new PathTypeView();
+    	this.deletePathView= new DeletePathView();
     	buildView();
 
     }
@@ -58,6 +65,8 @@ public class PathEditorView implements IPathSetView {
 		pathNameView.setDelegate(delegate);
 		pathChooser.setDelegate(delegate);
 		pathDimensionsView.setDelegate(delegate);
+		pathTypeView.setDelegate(delegate);
+		deletePathView.setDelegate(delegate);
 		
 	}
 	
@@ -73,7 +82,12 @@ public class PathEditorView implements IPathSetView {
     			newPathView.getInstanceAsNode(),
     			pathChooser.getInstanceAsNode(),
     			pathNameView.getInstanceAsNode(),
-    			pathDimensionsView.getInstanceAsNode()
+    			pathDimensionsView.getInstanceAsNode(),
+    			pathImageDisplayView.getInstanceAsNode(),
+    			pathImageView.getInstanceAsNode(),
+    			pathTypeView.getInstanceAsNode(),
+    			deletePathView.getInstanceAsNode()
+    			
     	);
 		
 	}
@@ -94,6 +108,11 @@ public class PathEditorView implements IPathSetView {
 	
 	public void updatePathImagePath (String imagePath) {
 	    pathImageView.setPathImagePath(imagePath);
+	    pathImageDisplayView.updateImage(imagePath);
+	}
+	
+	public void updataPathType (String pathType){
+		pathTypeView.updatePathType(pathType);
 	}
 	
 	

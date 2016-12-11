@@ -70,7 +70,7 @@ public class GameImageView extends PhotoFileChooser implements IGameSettingsSetV
 		File chosenFile = chooseFile.showOpenDialog(new Stage());
 		if (chosenFile != null){
 			BufferedImage image = ImageIO.read(chosenFile) ;
-			gameImagePath = chosenFile.getPath();	
+			gameImagePath = chosenFile.toURI().toString();
 			delegate.onUserEnteredGameImage(gameImagePath);
 		}	
 	}
