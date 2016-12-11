@@ -201,6 +201,7 @@ public class GamePlayerController implements Observer {
 		t.getUpgradeButton().setOnAction(e -> this.towerController.upgrade(t.getUniqueID()));
 	}
 
+	//probably should move to frontend
 	private ArrayList<String> getTowerImages() {
 		ArrayList<String> towerImages = new ArrayList<String>();
 		HashMap<Integer, engine.tower.Tower> towers = this.loader.getTowers(); 
