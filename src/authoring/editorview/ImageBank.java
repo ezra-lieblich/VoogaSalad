@@ -16,12 +16,15 @@ import javafx.scene.image.ImageView;
 
 /**
  * 
- * @author andrewbihl
+ * @author Andrew Bihl
  *
  * This class allows the user to implement a simple list view where cells are based off a list of data object IDs.
  * The ListCellData object represents the information that should be presented in the list view, and is retrieved from a class implementing the 
  * dataSource interface. 
  * To change the way the list looks, override createCellFromData().
+ * If any initial cells hold non-data cells at all times, the CONTENT_OFFSET value must be set. For example, there may button in 
+ * the first cell that is clicked to create a new object. The CONTENT_OFFSET should be set to 1 after this button cell is added so
+ * that the mapping of indices to data id's can be maintained.
  *
  */
 
