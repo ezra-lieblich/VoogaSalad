@@ -168,5 +168,15 @@ public class WeaponAuthoringView implements IWeaponUpdateView {
         // TODO Auto-generated method stub
 
     }
+    
+	@Override
+	public Integer getNearestAvailableItemID(int id) {
+		int currentIndex = this.weaponBank.getIndexForItemWithID(id);
+		Integer nearestID = this.weaponBank.getIDForItemAtIndex(currentIndex-1);
+		if (nearestID == null){
+			nearestID = this.weaponBank.getIDForItemAtIndex(currentIndex+1);
+		}
+		return nearestID;
+	}
 
 }

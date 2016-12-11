@@ -34,6 +34,7 @@ public abstract class ImageBank implements ChangeListener<Number> {
     protected final int DEFAULT_CELL_WIDTH = 60;
     protected final int DEFAULT_BANK_WIDTH = 120;
     protected final String DEFAULT_SUBJECT_IMAGE_PATH = "./Images/questionmark.png";
+    protected int CONTENT_OFFSET = 0;
 
     public ImageBank () {
         items = FXCollections.observableArrayList();
@@ -71,7 +72,7 @@ public abstract class ImageBank implements ChangeListener<Number> {
             System.out.println("Table data source not set");
             return;
         }
-        this.items.remove(1, items.size());
+        this.items.remove(CONTENT_OFFSET, items.size());
         itemIDs = new ArrayList<Integer>();
         if (ids.size() != 0) {
             for (int i = 0; i <= Collections.max(ids) + 1; i++)
@@ -84,6 +85,28 @@ public abstract class ImageBank implements ChangeListener<Number> {
             // itemIDs.set(cellData.getId(), items.size()-1);
             itemIDs.set(items.size() - 1, cellData.getId());
         }
+    }
+    
+    public Integer getIndexForItemWithID(int id){
+    	for (int i = 0; i <this.itemIDs.size(); i++){
+    		if (this.itemIDs.get(i)==id) {
+    			return i;
+    		}
+    	}
+    	return null;
+    }
+    
+    /**
+     * 
+     * @param index of item
+     * @return ID of the data object represented at that index. Will be null if there is no item there.
+     */
+    public Integer getIDForItemAtIndex(int index){
+    	Integer result =  this.itemIDs.get(index);
+    	if (result<0){
+    		return null;
+    	}
+    	return result;
     }
 
     protected Node createCellFromData (ListCellData data) {

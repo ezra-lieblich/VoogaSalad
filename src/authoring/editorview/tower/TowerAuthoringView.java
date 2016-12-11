@@ -166,4 +166,14 @@ public class TowerAuthoringView implements ITowerUpdateView {
         // TODO Auto-generated method stub
         
     }
+    
+	@Override
+	public Integer getNearestAvailableItemID(int id) {
+		int currentIndex = this.towerBank.getIndexForItemWithID(id);
+		Integer nearestID = this.towerBank.getIDForItemAtIndex(currentIndex-1);
+		if (nearestID == null){
+			nearestID = this.towerBank.getIDForItemAtIndex(currentIndex+1);
+		}
+		return nearestID;
+	}
 }

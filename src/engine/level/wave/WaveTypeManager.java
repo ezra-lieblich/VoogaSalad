@@ -18,7 +18,7 @@ public class WaveTypeManager extends AbstractTypeManager<Wave> implements WaveMa
 	@Override
 	public List<Wave> waveList() {
 		List<Wave> waves = new ArrayList<Wave>(getEntities().values());
-		return Collections.unmodifiableList(waves);
+		return waves;
 	}
 	 
 

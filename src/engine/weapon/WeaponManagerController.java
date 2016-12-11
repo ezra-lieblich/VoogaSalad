@@ -19,7 +19,7 @@ public interface WeaponManagerController extends ManagerController<WeaponManager
 
     public void setWeaponSpeed (int weaponID, double weaponSpeed);
 
-    public void setWeaponCollisionEffect (int weaponID, String weaponCollisionEffect);
+    public void setWeaponCollisionEffect (int weaponID, int weaponCollisionEffectID);
 
     public void setWeaponTrajectory (int weaponID, String weaponTrajectory);
 
@@ -33,7 +33,7 @@ public interface WeaponManagerController extends ManagerController<WeaponManager
 
     public double getWeaponSpeed (int weaponID);
 
-    public String getWeaponCollisionEffect (int weaponID);
+    public List<Integer> getWeaponCollisionEffect (int weaponID);
 
     public String getWeaponTrajectory (int weaponID);
 

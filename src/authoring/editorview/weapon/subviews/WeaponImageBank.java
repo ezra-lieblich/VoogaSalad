@@ -28,6 +28,7 @@ public class WeaponImageBank extends ImageBank {
 
         // First cell is a button
         items.add(createWeaponButton);
+        this.CONTENT_OFFSET = 1;
     }
 
     public void setDelegate (WeaponAuthoringViewDelegate delegate) {

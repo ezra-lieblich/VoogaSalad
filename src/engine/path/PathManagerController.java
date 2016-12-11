@@ -19,7 +19,7 @@ public interface PathManagerController extends ManagerController<PathManager, Pa
                     
     List<Coordinate<Integer>> getPathCoordinates (int pathID);
     
-    void getType(int pathID);
+    String getType(int pathID);
     
     int getNumberofColumns (int pathID);
     

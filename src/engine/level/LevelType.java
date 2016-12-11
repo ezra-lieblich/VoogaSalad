@@ -38,7 +38,7 @@ public class LevelType extends AbstractType implements Level {
     public List<Wave> getWaves () {
         List<Wave> sortedWaves = new ArrayList<Wave>(waves.getProperty().getEntities().values());
         Collections.sort(sortedWaves, new WaveTypeComparator());
-        return Collections.unmodifiableList(sortedWaves);
+        return sortedWaves;
     }
 
     @Override
@@ -124,7 +124,7 @@ public class LevelType extends AbstractType implements Level {
 
     @Override
     public List<Integer> getPaths () {
-        return Collections.unmodifiableList(paths.getProperty());
+        return paths.getProperty();
     }
 
 	@Override
@@ -135,6 +135,15 @@ public class LevelType extends AbstractType implements Level {
 	@Override
 	public WaveManager getWaveManager() {
 		return waves.getProperty();
+	}
+
+	@Override
+	public void removeEnemyReferences(int enemyID) {
+		for (Wave wave : waves.getProperty().getEntities().values()) {
+			if (wave.getEnemyID() == enemyID) {
+				removeWave(wave.getId());
+			}
+		}
 	}
 
 }

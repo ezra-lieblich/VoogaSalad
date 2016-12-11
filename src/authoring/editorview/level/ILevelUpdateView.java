@@ -4,6 +4,7 @@ import java.util.List;
 import authoring.editorview.IUpdateView;
 import authoring.editorview.ListDataSource;
 import engine.level.wave.Wave;
+import engine.level.wave.WaveString;
 
 
 public interface ILevelUpdateView extends ILevelSetView, IUpdateView {
@@ -22,6 +23,6 @@ public interface ILevelUpdateView extends ILevelSetView, IUpdateView {
 
     // Wave Object Updates
 
-    public void updateWaves (List<Wave> waves);
+    public void updateWaves (List<WaveString> waves);
 
 }
