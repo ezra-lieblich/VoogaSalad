@@ -15,11 +15,12 @@ import javafx.scene.layout.HBox;
 public class TowerAbilityBank implements ITowerSetView {
 
     private HBox towerAbilityBox;
+    @SuppressWarnings("unused")
     private TowerAuthoringViewDelegate delegate;
-    private ResourceBundle labelsResource;
+    // private ResourceBundle labelsResource;
 
     public TowerAbilityBank (ResourceBundle labelsResource) {
-        this.labelsResource = labelsResource;
+        // this.labelsResource = labelsResource;
         towerAbilityBox = new HBox(5);
     }
 

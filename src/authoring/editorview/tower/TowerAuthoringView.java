@@ -24,6 +24,7 @@ import javafx.scene.layout.BorderPane;
  *
  */
 public class TowerAuthoringView implements ITowerUpdateView {
+    @SuppressWarnings("unused")
     private TowerAuthoringViewDelegate delegate;
     private BorderPane towerEditorView;
     private TowerImageBank towerBank;

@@ -1,10 +1,7 @@
 package authoring.editorview.level;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 import authoring.editorview.EditorViewController;
-import authoring.editorview.path.NameIdPair;
 import authoring.utilityfactories.DialogueBoxFactory;
 import engine.enemy.EnemyManagerController;
 import engine.level.LevelManagerController;

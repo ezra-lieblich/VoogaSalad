@@ -17,15 +17,14 @@ import javafx.scene.image.ImageView;
  */
 public class EnemyImageView implements IEnemySetView {
 
+    @SuppressWarnings("unused")
     private EnemyAuthoringViewDelegate delegate;
     private String imagePath;
     private ImageView enemyImage;
-    private ResourceBundle labelsResource;
 
     private final int CHARACTER_SIZE = 250;
 
     public EnemyImageView (ResourceBundle labelsResource) {
-        this.labelsResource = labelsResource;
         enemyImage = new ImageView();
         enemyImage.setFitHeight(CHARACTER_SIZE);
         enemyImage.setFitWidth(CHARACTER_SIZE);

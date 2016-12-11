@@ -14,6 +14,7 @@ import javafx.scene.control.ComboBox;
 
 public class LevelSelectEnemyView implements ILevelSetView {
 
+    @SuppressWarnings("unused")
     private LevelAuthoringViewDelegate delegate;
     private ComboBox<Object> enemyChooser;
 
