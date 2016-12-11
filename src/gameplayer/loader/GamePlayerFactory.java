@@ -142,9 +142,9 @@ public class GamePlayerFactory{
 		int pathID = wave.getPathID()-1; //needs to start at 0, hacky fix
 		System.out.println("Path id: "+pathID);
 		for (int i = 0; i < wave.getEnemyCount(); i++) {
-			System.out.println("Level: "+levelNumber);
-			System.out.println("Does the grid with the path exist?");
-			System.out.println(this.getGrid(levelNumber).getPath(pathID));
+			//System.out.println("Level: "+levelNumber);
+			//System.out.println("Does the grid with the path exist?");
+			//System.out.println(this.getGrid(levelNumber).getPath(pathID));
 			Cell start = this.getGrid(levelNumber).getPath(pathID).getPathStart();
 			enemies.add(this.enemyFactory.createModelEnemy(enemyType, start));
 		}
