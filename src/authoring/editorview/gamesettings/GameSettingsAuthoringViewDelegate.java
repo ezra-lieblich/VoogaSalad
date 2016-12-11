@@ -9,6 +9,8 @@ public interface GameSettingsAuthoringViewDelegate {
     public void onUserEnteredGameNames (String name);
 
     public void onUserEnteredGameImage (String imagePath);
+    
+    public void onUserEnteredGridSize (int size);
 
     public void onUserEnteredWinningConditions (String winConditions);
 

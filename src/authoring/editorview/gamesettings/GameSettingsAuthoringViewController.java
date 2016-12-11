@@ -60,5 +60,11 @@ public class GameSettingsAuthoringViewController extends EditorViewController
 
     }
 
+	@Override
+	public void onUserEnteredGridSize(int size) {
+		// TODO Auto-generated method stub
+		
+	}
+
     
 }

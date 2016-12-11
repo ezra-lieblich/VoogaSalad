@@ -121,6 +121,18 @@ public class GameSettingsAuthoringView implements IGameSettingsUpdateView, IGame
     public void updateBank (List<Integer> ids) {
     }
 
+	@Override
+	public void updateGridSize(int size) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updatePathList(List<Integer> pathList) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 
 }
