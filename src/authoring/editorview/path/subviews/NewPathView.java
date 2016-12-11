@@ -38,7 +38,7 @@ public class NewPathView implements IPathSetView {
                  e -> {
 					createNewPath();		
 				});
-		createPathButton.setPrefWidth(230);
+		createPathButton.setPrefWidth(280);
 	    root.getChildren().add(createPathButton);
 	    createPathButton.setFocusTraversable(false);
 	}
