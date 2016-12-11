@@ -101,7 +101,7 @@ public class LevelTypeManagerController
                                                     LevelBuilder typeBuilder) {
         return typeBuilder.addDurationInSecondsListener( (oldValue, newValue) -> updateView
                 .updateTransitionTime(newValue))
-                .addWaveListener( (oldValue, newValue) -> updateView.updateWaves(getWaveStrings(newValue.waveList())))
+                //.addWaveListener( (oldValue, newValue) -> updateView.updateWaves(getWaveStrings(newValue.waveList())))
                 // .addPathListener(listener)
                 .addRewardHealthListener( (oldValue, newValue) -> updateView
                         .updateRewardHealth(newValue))

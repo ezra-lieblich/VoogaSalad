@@ -2,6 +2,7 @@ package engine.level;
 
 import engine.AbstractTypeManager;
 import engine.enemy.EnemyManager;
+import engine.path.PathManager;
 
 
 /**
@@ -15,5 +16,10 @@ public class LevelTypeManager extends AbstractTypeManager<Level> implements Leve
         applyToAllEntities(a -> a.removeWave(index));
 
     }
+
+	@Override
+	public void visitRemoveEntry(PathManager manager, Integer index) {
+        applyToAllEntities(a -> a.removePath(index));
+	}
 
 }
