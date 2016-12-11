@@ -143,6 +143,7 @@ public class GamePlayerController implements Observer {
 		populateTowerToId();
 		initGUI();
 
+		/*
 		try {
 			Wrapper.getInstance().recordGameScores("" + this.model.getData().getGold(),
 					"" + this.model.getData().getLife(), "" + this.model.getData().getCurrentLevel());
@@ -150,6 +151,7 @@ public class GamePlayerController implements Observer {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		*/
 
 		this.towerController = new TowerController(this.model.getTowerManager(), this.view);
 
