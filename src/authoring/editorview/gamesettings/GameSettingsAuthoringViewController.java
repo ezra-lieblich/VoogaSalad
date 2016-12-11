@@ -9,6 +9,7 @@ public class GameSettingsAuthoringViewController extends EditorViewController
 
     private IGameSettingsUpdateView gameView;
     private GameModeManagerController gameSettingsDataSource;
+    private int activeID = 0;
 
     public GameSettingsAuthoringViewController (int editorWidth, int editorHeight) {
         IGameSettingsSetView myView =
@@ -23,32 +24,33 @@ public class GameSettingsAuthoringViewController extends EditorViewController
     }
 
     @Override
-    public void onUserEnteredGameLives (String lives) {
-        // TODO Auto-generated method stub
+    public void onUserEnteredGameLives (int lives) {
+        this.gameSettingsDataSource.setNumberofLives(activeID, lives);
 
     }
 
     @Override
     public void onUserEnteredGameNames (String name) {
-        // TODO Auto-generated method stub
+        this.gameSettingsDataSource.setName(activeID, name);
 
     }
 
     @Override
     public void onUserEnteredGameImage (String imagePath) {
-        // TODO Auto-generated method stub
+        this.gameSettingsDataSource.setImagePath(activeID, imagePath);
 
     }
-
+    
     @Override
-    public void onUserEnteredImageSize (String imageSize) {
-        // TODO Auto-generated method stub
+    public void onUserEnteredGameMoney (int money) {
+        this.gameSettingsDataSource.setMoney(activeID, money);
 
     }
+
 
     @Override
     public void onUserEnteredWinningConditions (String winConditions) {
-        // TODO Auto-generated method stub
+        //TODO
 
     }
 
@@ -58,9 +60,11 @@ public class GameSettingsAuthoringViewController extends EditorViewController
 
     }
 
-    @Override
-    public void onUserEnteredGameMoney (String money) {
-        // TODO Auto-generated method stub
+	@Override
+	public void onUserEnteredGridSize(int size) {
+		// TODO Auto-generated method stub
+		
+	}
 
-    }
+    
 }
