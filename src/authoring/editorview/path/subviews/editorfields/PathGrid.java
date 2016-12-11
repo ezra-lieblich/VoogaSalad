@@ -1,5 +1,6 @@
 package authoring.editorview.path.subviews.editorfields;
 
+import java.io.File;
 import java.util.List;
 import authoring.editorview.path.IPathSetView;
 import authoring.editorview.path.PathAuthoringViewDelegate;
@@ -98,12 +99,10 @@ public class PathGrid implements IPathSetView{
 	}	
 	
 	public void setCellImage(String imagePath){		
-		if (!imagePath.contains("file:") && !imagePath.contains("http:")) {
-			cellImage = new Image (getClass().getClassLoader().getResourceAsStream(imagePath));		
-		}		
-		else {
-			cellImage = new Image(imagePath);
-		}
+		
+		File file = new File(imagePath);
+		cellImage = new Image(file.toURI().toString());
+		
 		if (gridDimensions > 0 && pathCoordinates != null){
 			redrawPath();
 		}	

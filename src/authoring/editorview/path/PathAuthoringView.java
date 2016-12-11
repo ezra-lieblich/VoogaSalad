@@ -135,8 +135,7 @@ public class PathAuthoringView implements IPathUpdateView {
 
     @Override
     public void setPathListDataSource (ListDataSource source) {
-        // TODO Auto-generated method stub
-        System.out.println("There is no path bank implemented");
+    	pathBank.setListDataSource(source);
     }
 
    
