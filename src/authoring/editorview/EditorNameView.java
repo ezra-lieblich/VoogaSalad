@@ -6,7 +6,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 
 
-public abstract class EditorNameView implements IEditorView {
+public abstract class EditorNameView implements INodeView {
 
     protected HBox root;
     protected TextField nameTextField;
