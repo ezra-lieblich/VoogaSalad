@@ -99,7 +99,7 @@ public class LevelTypeManagerController
                                                     LevelBuilder typeBuilder) {
         return typeBuilder.addDurationInSecondsListener( (oldValue, newValue) -> updateView
                 .updateTransitionTime(newValue))
-                // .addWaveListener( (oldValue, newValue) -> updateView.updateEnemy(newValue))
+                .addWaveListener( (oldValue, newValue) -> updateView.updateWaves(newValue.waveList()))
                 // .addPathListener(listener)
                 .addRewardHealthListener( (oldValue, newValue) -> updateView
                         .updateRewardHealth(newValue))
@@ -162,6 +162,7 @@ public class LevelTypeManagerController
 	@Override
 	public void setWaveEnemy(int levelID, int waveID, int enemyID) {
 		getWave(levelID, waveID).setEnemyID(enemyID);
+		getTypeManager().getEntity(levelID).getWaveManager().addEntry(getWave(levelID, waveID));
 	}
 
 	@Override
@@ -172,6 +173,7 @@ public class LevelTypeManagerController
 	@Override
 	public void setWaveCount(int levelID, int waveID, int count) {
 		getWave(levelID, waveID).setEnemyCount(count);
+		getTypeManager().getEntity(levelID).getWaveManager().addEntry(getWave(levelID, waveID));
 	}
 
 	@Override
@@ -182,6 +184,7 @@ public class LevelTypeManagerController
 	@Override
 	public void setWaveFrequency(int levelID, int waveID, double frequency) {
 		getWave(levelID, waveID).setFrequency(frequency);
+		getTypeManager().getEntity(levelID).getWaveManager().addEntry(getWave(levelID, waveID));
 	}
 
 	@Override
@@ -192,6 +195,7 @@ public class LevelTypeManagerController
 	@Override
 	public void setWavePath(int levelID, int waveID, int pathID) {
 		getWave(levelID, waveID).setPathID(pathID);
+		getTypeManager().getEntity(levelID).getWaveManager().addEntry(getWave(levelID, waveID));
 	}
 
 	@Override
@@ -202,6 +206,7 @@ public class LevelTypeManagerController
 	@Override
 	public void setWaveDelay(int levelID, int waveID, double delay) {
 		getWave(levelID, waveID).setStartTime(delay);
+		getTypeManager().getEntity(levelID).getWaveManager().addEntry(getWave(levelID, waveID));
 	}
 
 	@Override
