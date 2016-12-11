@@ -105,7 +105,7 @@ public class PathAuthoringView implements IPathUpdateView {
 
     @Override
     public void updateType (String pathType) {
-        // TODO Auto-generated method stub
+        pathEditor.updataPathType(pathType);
 
     }
 
@@ -138,9 +138,11 @@ public class PathAuthoringView implements IPathUpdateView {
 
 	@Override
 	public Integer getNearestAvailableItemID(int id) {
-		System.out.println("No path bank implemented");
+		// TODO Auto-generated method stub
 		return null;
 	}
+
+
 
 
 }

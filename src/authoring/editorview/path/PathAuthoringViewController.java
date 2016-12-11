@@ -40,7 +40,13 @@ public class PathAuthoringViewController extends EditorViewController implements
 		pathDataSource.setName(activeID, pathName);	
 	}
 	
+	@Override
+	public void onUserEnteredPathType(String pathType) {
+		pathDataSource.setType(activeID, pathType);
+		
+	}
 
+	
 	@Override
 	public int onUserEnteredCreatePath() {
 		activeID = pathDataSource.createType(pathView);	
@@ -78,6 +84,7 @@ public class PathAuthoringViewController extends EditorViewController implements
 		
 	}
 
+	
 
 
 }

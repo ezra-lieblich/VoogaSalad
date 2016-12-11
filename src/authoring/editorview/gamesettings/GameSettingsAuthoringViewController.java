@@ -20,8 +20,20 @@ public class GameSettingsAuthoringViewController extends EditorViewController
     public void setGameSettingsDataSource (GameModeManagerController source) {
         this.gameSettingsDataSource = source;
         this.gameSettingsDataSource.addTypeBankListener(this.gameView);
-        gameSettingsDataSource.createType(this.gameView);
+        createNewGame();
     }
+
+	private void createNewGame() {
+		gameSettingsDataSource.createType(this.gameView);
+		gameView.updateGameName(gameSettingsDataSource.getName(activeID));
+		gameView.updateGameImage(gameSettingsDataSource.getImagePath(activeID));
+		gameView.updateNumberofLives(gameSettingsDataSource.getNumberofLives(activeID));
+		gameView.updateInitialMoney(gameSettingsDataSource.getMoney(activeID));
+		gameView.updateGridSize(gameSettingsDataSource.getGridSize(activeID));
+		gameView.updateLosingConditions(gameSettingsDataSource.getLosingConditons(activeID));
+		gameView.updateWinningConditions(gameSettingsDataSource.getWinningConditions(activeID));
+		gameView.updatePathType(gameSettingsDataSource.getPathType(activeID));		
+	}
 
     @Override
     public void onUserEnteredGameLives (int lives) {

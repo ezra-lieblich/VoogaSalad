@@ -13,46 +13,43 @@ import authoring.utilityfactories.DialogueBoxFactory;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 
 public class PathImageView extends PhotoFileChooser implements IPathSetView{
 
-	private HBox root;
+	private GridPane root;
 	private String pathImagePath;
-	private ImageView pathImageView;
+	
 	private PathAuthoringViewDelegate delegate;
 	
 	private static final String RESOURCE_FILE_NAME = "resources/GameAuthoringPath";	
 	private ResourceBundle pathResource = ResourceBundle.getBundle(RESOURCE_FILE_NAME);
 	
 	public PathImageView(){
-		root = new HBox(10);
+		root = new GridPane();
 		makeChooseImageButton();
-		formatPathImageView();
 	}
 	
+	@Override
 	public Node getInstanceAsNode(){		
 		return root;
 		
 	}
 	
-	
 	private void makeChooseImageButton(){
 		Button setPathImageButton = ButtonFactory.makeButton(pathResource.getString("PathImageButton"), 
 				e -> {
 					try {
-						selectFile("Photos: ", "Select new path image");
+						selectFile("Photos: ", "Select new path image"); //TODO resource file
 					} catch (IOException e1) {
 						Alert errorDialogueBox = DialogueBoxFactory.createErrorDialogueBox("Invalid File", "Error With File");
 						errorDialogueBox.show();
 					}
 				});
-		setPathImageButton.setTranslateY(5);
+		setPathImageButton.setPrefWidth(280); //TODO magic number
 		root.getChildren().add(setPathImageButton);
 	}
 
@@ -62,9 +59,7 @@ public class PathImageView extends PhotoFileChooser implements IPathSetView{
 		if (chosenFile != null){
 			BufferedImage image = ImageIO.read(chosenFile) ;
 			pathImagePath = chosenFile.toURI().toString();
-			delegate.onUserEnteredPathImage(pathImagePath);
-				
-			
+			delegate.onUserEnteredPathImage(pathImagePath);		
 		}
 	}
 	
@@ -75,55 +70,11 @@ public class PathImageView extends PhotoFileChooser implements IPathSetView{
 	
 	public void setPathImagePath(String imagePath){
 		this.pathImagePath = imagePath;
-		addImageView();
-		
 	}
-	
-	private void formatPathImageView() {
-		pathImageView = new ImageView();
-		pathImageView.setFitHeight(100);
-		pathImageView.setFitWidth(100);
-	}	
-	
-	private void addImageView() {
-		
-		Image image;
-		if (root.getChildren().contains(pathImageView)){
-			root.getChildren().remove(pathImageView);
-		}
-		
-		if (!pathImagePath.contains("file:") && !pathImagePath.contains("http:")) {
-			image = new Image (getClass().getClassLoader().getResourceAsStream(pathImagePath));		
-		}
-		
-		else {
-			image = new Image(pathImagePath);
-		}
-			
-		pathImageView.setImage(image);
-		root.getChildren().add(pathImageView);
-	
-		
-	}
-	
+
 	
 	public void setDelegate(PathAuthoringViewDelegate delegate){
 		this.delegate = delegate;
 	}
-
-
-//	private void loadPathImage() {	
-//		try {
-//			Image image = new Image(pathImagePath);
-//			pathImageView.setImage(image);
-//			delegate.onUserEnteredPathImage(activePathID, pathImagePath);			
-//		}
-//		catch (Exception e){
-//			Alert errorDialogueBox = DialogueBoxFactory.createErrorDialogueBox("Invalid image.", "Error With Image");
-//			errorDialogueBox.show();
-//		}		
-//		
-//	}
-	
 	
 }
