@@ -18,6 +18,11 @@ import javafx.scene.image.ImageView;
  * 
  * @author andrewbihl
  *
+ * This class allows the user to implement a simple list view where cells are based off a list of data object IDs.
+ * The ListCellData object represents the information that should be presented in the list view, and is retrieved from a class implementing the 
+ * dataSource interface. 
+ * To change the way the list looks, override createCellFromData().
+ *
  */
 
 public abstract class ImageBank implements ChangeListener<Number> {
