@@ -190,18 +190,23 @@ public class EnemyManager extends Observable {
 	}
 
 	public double getTimeOfNextWave() {
+		if (allWaveStartTimes.isEmpty()) return 0;
 		double timeInSeconds = this.allWaveStartTimes.poll();
 		double timeInMillis = timeInSeconds * 1000;
 		return timeInMillis;
 	}
 	
 	public double getFrequencyOfNextWave() {
+		if (allWaveStartTimes.isEmpty()) return 0;
 		double timeInSeconds = this.allWaveFrequencies.poll();
 		double timeInMillis = timeInSeconds * 1000;
 		return timeInMillis;
 	}
 	
 	public Queue<Enemy> getPackOfEnemyComing() {
+		if (allWaves.isEmpty()) {
+			return new LinkedList<Enemy>();
+		}
 		Wave wave = this.allWaves.poll();
 		return this.gameFactory.getIndividualWaveQueue(wave, this.gameData.getCurrentLevel());
 	}

@@ -324,7 +324,7 @@ public class GamePlayerController implements Observer {
 			this.currentWave = this.enemyController.getEnemyModel().getPackOfEnemyComing();
 			createEnemyKeyFrame(); //with the enemy frequency
 			// get the new start time for a new wave of enemies
-			getNewWaveOnInterval();
+			//getNewWaveOnInterval();
 
 		}
 
