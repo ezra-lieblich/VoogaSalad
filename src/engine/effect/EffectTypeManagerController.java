@@ -7,6 +7,7 @@ import java.util.stream.Stream;
 import authoring.editorview.enemy.IEnemyUpdateView;
 import engine.AbstractTypeManagerController;
 import engine.ManagerMediator;
+import engine.effect.player.AbstractEffectFactory;
 import engine.effect.player.CollisionEffectFactory;
 import engine.effect.player.GameEffect;
 import engine.effect.player.GroovyExecutor;
@@ -19,7 +20,8 @@ import engine.tower.TowerTypeManager;
 public class EffectTypeManagerController extends
         AbstractTypeManagerController<EffectManager, EffectBuilder, Effect, EffectView>
         implements EffectManagerController {
-
+    public static final Class<? extends AbstractEffectFactory> DEFAULT_EFFECT_FACTORY = AbstractEffectFactory.class;
+    
     public EffectTypeManagerController (ManagerMediator managerMediator, EffectManager effectTypeManager) {
         super(effectTypeManager, new EffectTypeBuilder(), managerMediator);
         
@@ -39,7 +41,7 @@ public class EffectTypeManagerController extends
     }
     
     EffectTypeManagerController (ManagerMediator managerMediator) {
-        this(managerMediator, new EffectManagerFactory().create());
+        this(managerMediator, new EffectManagerFactory().create(DEFAULT_EFFECT_FACTORY));
     }
 
     /*
@@ -136,6 +138,11 @@ public class EffectTypeManagerController extends
     @Override
     public void setEffect (int effectID, String trigger) {
         getTypeManager().getEntity(effectID).setEffectGroovy(trigger);
+    }
+
+    @Override
+    public List<String> getAvailableDataObjects () {
+        return getTypeManager().getAnnotatedDataObjects().stream().map( a -> a.getName()).collect(Collectors.toList());
     }
 
 }
