@@ -164,14 +164,14 @@ public class EnemyAuthoringView implements IEnemyUpdateView {
 
     }
 
-	@Override
-	public Integer getNearestAvailableItemID(int id) {
-		int currentIndex = this.enemyBank.getIndexForItemWithID(id);
-		Integer nearestID = this.enemyBank.getIDForItemAtIndex(currentIndex-1);
-		if (nearestID == null){
-			nearestID = this.enemyBank.getIDForItemAtIndex(currentIndex+1);
-		}
-		return nearestID;
-	}
+    @Override
+    public Integer getNearestAvailableItemID (int id) {
+        int currentIndex = this.enemyBank.getIndexForItemWithID(id);
+        Integer nearestID = this.enemyBank.getIDForItemAtIndex(currentIndex - 1);
+        if (nearestID == null) {
+            nearestID = this.enemyBank.getIDForItemAtIndex(currentIndex + 1);
+        }
+        return nearestID;
+    }
 
 }

@@ -19,15 +19,24 @@ public class EffectsController extends EditorViewController
     }
 
     @Override
-    public void onUserSelectedAvailableClass () {
-        // TODO Auto-generated method stub
-
+    public void onUserSelectedAvailableClass (String selectedClass) {
+        effectsDataSource.setAvailableClass(selectedClass);
+        // TODO: This also needs to update the available methods
     }
 
     @Override
-    public void onUserSelectedEffectName () {
-        // TODO Auto-generated method stub
+    public void onUserSelectedEffectName (String name) {
+        effectsDataSource.setName(currentEffectID, name);
+    }
 
+    @Override
+    public void onUserEnteredCondition (String condition) {
+        effectsDataSource.setCondition(currentEffectID, condition);
+    }
+
+    @Override
+    public void onUserEnteredEffect (String effect) {
+        effectsDataSource.setEffect(currentEffectID, effect);
     }
 
 }
