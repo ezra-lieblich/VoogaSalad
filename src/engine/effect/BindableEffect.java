@@ -1,9 +1,7 @@
 package engine.effect;
 
-import java.lang.reflect.Method;
-import java.util.List;
+
 import java.util.function.BiConsumer;
-import engine.effect.depreciated.EffectFunction;
 
 
 public interface BindableEffect {

@@ -110,6 +110,7 @@ public abstract class AbstractTypeBuilder<E extends Type, R extends TypeBuilder<
     @Override
     public R copy(E type) {
         return copyType(type)
+        .buildId(type.getId())
         .buildName(type.getName())
         .buildImagePath(type.getImagePath())
         .buildSize(type.getSize());   
@@ -127,8 +128,11 @@ public abstract class AbstractTypeBuilder<E extends Type, R extends TypeBuilder<
         this.size = size;
     }
     
-    public void createInputVariable(String name, Class<?> type) {
+    public void createInputVariable(String name, Class<E> type) {
         Map<String, Class<?>> varmap = new HashMap<String, Class<?>>();
+        varmap.put(name, type);
+        ObservableProperty<E> test = new ObservableObjectProperty<E>(null);
+        
     }
     
     private void restoreDefaults() {

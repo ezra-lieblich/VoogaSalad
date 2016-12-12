@@ -39,6 +39,7 @@ public abstract class AbstractTypeManagerController<E extends Manager<T>, U exte
 //        }
 //        this.typeManager.setEntities(newMap);
         typeBuilder.setNextId(this.typeManager.getMaxId());
+        //call some method that resets views
     }
     
     @Override

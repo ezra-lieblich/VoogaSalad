@@ -7,6 +7,8 @@ import java.util.Map;
 import authoring.editorview.level.LevelUpdateView;
 import engine.AbstractTypeManagerController;
 import engine.ManagerMediator;
+import engine.effect.EffectManagerController;
+import engine.effect.EffectTypeManagerController;
 import engine.level.wave.Wave;
 import engine.level.wave.WaveBuilder;
 import engine.level.wave.WaveManager;
@@ -20,10 +22,12 @@ public class LevelTypeManagerController
         implements LevelManagerController {
 
     private WaveBuilder waveBuilder;
-
+    private EffectManagerController levelEffectManagerController;
+    
     public LevelTypeManagerController (ManagerMediator managerMediator) {
         super(new LevelTypeManager(), new LevelTypeBuilder(), managerMediator);
         waveBuilder = new WaveTypeBuilder();
+        this.levelEffectManagerController = new EffectTypeManagerController(managerMediator, getTypeManager().getLevelEffectManager());
     }
 
     // remove second line
@@ -239,35 +243,41 @@ public class LevelTypeManagerController
         return getWave(levelID, waveID).getStartTime();
     }
 
-    @Override
-    public void loadManagerData (LevelManager typeManager, LevelUpdateView updateView) {
-        for (Level level : typeManager.getEntities().values()) {
-            loadWaveData(level.getWaveManager(), typeManager, updateView);
-        }
-        super.loadManagerData(typeManager, updateView);
-    }
-
-    private void loadWaveData (WaveManager waveManager,
-                               LevelManager typeManager,
-                               LevelUpdateView updateView) {
-        Map<Integer, Wave> waveMap = new HashMap<Integer, Wave>();
-        for (Integer waveID : waveManager.getEntities().keySet()) {
-            waveMap.put(waveID, constructWaveCopy(waveID, waveManager, updateView));
-        }
-        // waveManager.setEntities(typeManager.getEntities().keySet().stream().collect(Collectors.toMap(b
-        // -> b , b -> constructWaveCopy(b, waveManager, updateView))));
-        waveManager.setEntities(waveMap);
-        waveBuilder.setNextId(waveManager.getMaxId());
-    }
-
-    private Wave constructWaveCopy (int id, WaveManager waveManager, LevelUpdateView updateView) {
-        waveBuilder.copy(waveManager.getEntity(id));
-        return buildWave(updateView);
-    }
+//    @Override
+//    public void loadManagerData (LevelManager typeManager, ILevelUpdateView updateView) {
+//        for (Level level : typeManager.getEntities().values()) {
+//            loadWaveData(level.getWaveManager(), typeManager, updateView);
+//        }
+//        
+//        super.loadManagerData(typeManager, updateView);
+//    }
+//
+//    private void loadWaveData (WaveManager waveManager,
+//                               LevelManager typeManager,
+//                               ILevelUpdateView updateView) {
+//        Map<Integer, Wave> waveMap = new HashMap<Integer, Wave>();
+//        for (Integer waveID : waveManager.getEntities().keySet()) {
+//            waveMap.put(waveID, constructWaveCopy(waveID, waveManager, updateView));
+//        }
+//        // waveManager.setEntities(typeManager.getEntities().keySet().stream().collect(Collectors.toMap(b
+//        // -> b , b -> constructWaveCopy(b, waveManager, updateView))));
+//        waveManager.setEntities(waveMap);
+//        waveBuilder.setNextId(waveManager.getMaxId());
+//    }
+//
+//    private Wave constructWaveCopy (int id, WaveManager waveManager, ILevelUpdateView updateView) {
+//        waveBuilder.copy(waveManager.getEntity(id));
+//        return buildWave(updateView);
+//    }
 
     @Override
     public List<WaveString> getWaveStrings (int levelID) {
         return getWaveStrings(getTypeManager().getEntity(levelID).getWaveManager().waveList());
     }
+
+	@Override
+	public EffectManagerController getEffectManagerController() {
+		return levelEffectManagerController;
+	}
 
 }
