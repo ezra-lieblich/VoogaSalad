@@ -1,5 +1,6 @@
 package engine.observer;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -7,6 +8,10 @@ public class ObservableListProperty<E> extends ObservableObjectProperty<List<E>>
 
     public ObservableListProperty(List<E> value) {
         super(value);
+    }
+    
+    public ObservableListProperty() {
+        super(new ArrayList<E>());
     }
     
     @Override
