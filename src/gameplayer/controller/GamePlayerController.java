@@ -175,12 +175,7 @@ public class GamePlayerController implements Observer {
 	 * FILL THIS METHOD WITH XML SAVING CRAP
 	 */
 	private void initSaveGameButton() {
-		System.out.println("OGHERE");
-
 		this.view.saveButton(e -> {
-			System.out.println("OGHERE2");
-
-			System.out.println("saving game maybe?");
 			this.gameSavingController.saveGame();
 			//TODO: end game?
 		});
