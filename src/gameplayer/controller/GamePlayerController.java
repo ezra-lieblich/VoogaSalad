@@ -99,6 +99,8 @@ public class GamePlayerController implements Observer {
 	private HashMap<Integer, ImageView> weaponsOnScreen;
 	private HashMap<Integer, ImageView> enemiesOnScreen; 
 	private HashMap<Integer, ImageView> towersOnScreen; 
+	
+
 	private HashMap<String, Image> imageBank;
 
 	public GamePlayerController(String xmlFilePath) {
@@ -106,7 +108,8 @@ public class GamePlayerController implements Observer {
 		this.loader = new GamePlayerFactory(new XMLParser("player.samplexml/newTextFile.xml"));// hardcoded
 		// does not work because of the image path
 		checkIfValid();
-		this.model = new GamePlayModel(this.loader);
+		this.enemiesOnScreen = new HashMap<Integer, ImageView>();
+		this.model = new GamePlayModel(this.loader,enemiesOnScreen);
 		this.enemyController = new EnemyController(this.model.getEnemyManager(), null);
 		this.weaponController = new WeaponController(this.model.getWeaponManager());
 		this.collisionController = new CollisionController(this.model.getCollisionManager());
@@ -114,7 +117,6 @@ public class GamePlayerController implements Observer {
 		this.oldLevel = 0;
 		this.towerToId = new HashMap<String, Integer>();
 		this.weaponsOnScreen = new HashMap<Integer, ImageView>();
-		this.enemiesOnScreen = new HashMap<Integer, ImageView>();
 		this.towersOnScreen = new HashMap<Integer, ImageView>(); 
 		this.animation = new Timeline();
 		this.graphics = new GraphicsLibrary();
@@ -394,6 +396,20 @@ public class GamePlayerController implements Observer {
 		HashMap<Integer, Enemy> enemyRedraw = this.enemyManager.getEnemyOnGrid();
 		Map<Integer, Tower> towerRedraw = this.model.getTowerOnGrid();
 		HashMap<Integer, Weapon> bulletRedraw = this.model.getWeaponManager().getWeaponOnGrid();
+		
+		updateBulletOnScreen(bulletRedraw);
+		updateEnemiesOnScreen(enemyRedraw);
+
+		this.view.reRenderEnemy(enemiesOnScreen);
+		this.view.reRenderWeapon(weaponsOnScreen);
+		this.view.reRenderTower(towerRedraw);
+	}
+
+	public Timeline getTimeline() {
+		return this.animation;
+	}
+	
+	private void updateBulletOnScreen(HashMap<Integer, Weapon>bulletRedraw){
 		for (int i : bulletRedraw.keySet()) {
 			if (!weaponsOnScreen.containsKey(bulletRedraw.get(i).getUniqueID())) {
 				Image ii = imageBank.get("Weapon " + bulletRedraw.get(i).getWeaponTypeID());
@@ -412,21 +428,28 @@ public class GamePlayerController implements Observer {
 				weaponsOnScreen.get(bulletRedraw.get(i).getUniqueID()).setY(bulletRedraw.get(i).getY());
 			}
 		}
-
-
-		//List<IDrawable> reEnemyDraw = convertEnemyDrawable(enemyRedraw);
-		//List<IDrawable> reTowerDraw = convertTowerDrawable(towerRedraw);
-
-		this.view.reRenderEnemy(enemyRedraw);
-		this.view.reRenderWeapon(weaponsOnScreen);
-		this.view.reRenderTower(towerRedraw);
-	}
-
-	public Timeline getTimeline() {
-		return this.animation;
 	}
 	
-	public HashMap<String, Image> createImageBank(){
+	private void updateEnemiesOnScreen(HashMap<Integer,Enemy>enemyRedraw){
+		for(int i: enemyRedraw.keySet()){
+			if(!enemiesOnScreen.containsKey(enemyRedraw.get(i).getUniqueID())){
+				ImageView image = new ImageView(graphics.createImage(enemyRedraw.get(i).getImage()));
+				graphics.setImageViewParams(image, DragDropView.DEFENSIVEWIDTH * 0.9,
+						DragDropView.DEFENSIVEHEIGHT * 0.9);
+				image.setCache(true);
+				image.setCacheHint(CacheHint.SPEED);
+				image.setX(enemyRedraw.get(i).getX());
+				image.setY(enemyRedraw.get(i).getY());
+				enemiesOnScreen.put(enemyRedraw.get(i).getUniqueID(), image);
+			}
+			else {
+				enemiesOnScreen.get(enemyRedraw.get(i).getUniqueID()).setX(enemyRedraw.get(i).getX());
+				enemiesOnScreen.get(enemyRedraw.get(i).getUniqueID()).setY(enemyRedraw.get(i).getY());
+			}
+		}
+	}
+	
+	private HashMap<String, Image> createImageBank(){
 		Map<Integer, engine.tower.Tower> towers = this.loader.getTowers();
 		
 		for(int i : towers.keySet()){
@@ -440,4 +463,5 @@ public class GamePlayerController implements Observer {
 		}
 		return imageBank;
 	}
+
 }
