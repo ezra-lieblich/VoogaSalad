@@ -12,6 +12,8 @@ import engine.weapon.Weapon;
 import engine.weapon.WeaponType;
 import gameplayer.model.Cell;
 import gameplayer.model.GamePlayData;
+import gameplayer.model.Grid;
+import gameplayer.model.Path;
 import gameplayer.model.enemy.Enemy;
 import gameplayer.model.enemy.EnemyManager;
 import gameplayer.model.weapon.WeaponManager;
@@ -164,7 +166,11 @@ public class TowerManager extends Observable {
 
 	private boolean canPlaceTower(int xcood, int ycoord, double cost) {
 		Cell placingLocation = this.gameData.getGridArray()[xcood][ycoord];
-		if (placingLocation.getNext() != null || placingLocation.equals(this.gameData.getGrid().getPathEndPoint())) {
+		if (placingLocation.getTower() != null)
+			return false;
+		
+		
+		if (placingLocation.getNext() != null || onEndCell(placingLocation)) {
 			return false;
 		}
 
@@ -172,6 +178,24 @@ public class TowerManager extends Observable {
 			return false;
 
 		return true;
+	}
+	
+	private Boolean onEndCell(Cell c){
+		Grid g = this.gameData.getGrid();
+		if(g.isNoPathType()){
+			return false;
+		}
+		
+		else{
+			HashMap<Integer,Path> allPath = g.getAllPaths();
+			for(int i : allPath.keySet()){
+				if(c.equals(allPath.get(i))){
+					return true;
+				}
+			}
+		}
+		
+		return false;		
 	}
 
 	private void calculateTimeInterval(){

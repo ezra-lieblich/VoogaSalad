@@ -38,16 +38,75 @@ public class Grid {
 		}
 	}
 
+	public Cell getNext(int pathID, Cell c){
+		if(this.noPath){
+			return getNoPathNext(c);		
+		}
+		else{
+			return this.getPath(pathID).getNext(c);
+		}
+
+	}
+
+
+	private Cell getNoPathNext(Cell c){
+		int xdirection = (int)Math.signum(c.getX() - this.end.getX());
+
+		if (xdirection != 0){
+			if(availableToMoveTo(c.getX()+xdirection,c.getY())){
+				return this.grid[c.getX()+xdirection][c.getY()];
+			}
+		}
+
+		int ydirection = (int)Math.signum(c.getY() - this.end.getY());
+		if (ydirection != 0){
+			if(availableToMoveTo(c.getX(), c.getY() + ydirection)){
+				return this.grid[c.getX()][c.getY() + ydirection];
+			}
+			else{
+				if(availableToMoveTo(c.getX(),c.getY()-ydirection)){
+					return this.grid[c.getX()][c.getY()-ydirection];
+				}
+			}
+		}
+
+		if (xdirection != 0){
+			if(availableToMoveTo(c.getX()-xdirection,c.getY())){
+				return this.grid[c.getX()-xdirection][c.getY()];
+			}
+		}
+		
+		return c;
+	}
+	
+	private Boolean availableToMoveTo(int x, int y){
+		if(x >= this.row || x < 0 || y >= this.col || y < 0)
+			return false;
+		
+		
+		if (this.grid[x][y].getTower() != null)
+			return false;
+		
+		return true;
+		
+	}
+	
+	
+	
 
 	public void setAllPath(HashMap<Integer, Path> allPath){
 		this.allPath = allPath;
 	}
-	
+
 
 	public void setNoPath(boolean isPathEmpty) {
 		this.noPath = isPathEmpty;
 	}
 	
+	public Boolean isNoPathType(){
+		return this.noPath;
+	}
+
 	public HashMap<Integer,Path> getAllPaths(){
 		return this.allPath;
 	}
@@ -60,6 +119,13 @@ public class Grid {
 		return this.col;
 	}
 
+
+	/**
+	 * factory set start and end for no path case
+	 * @param x
+	 * @param y
+	 * @return
+	 */
 	public Cell getCell(int x, int y){
 		return grid[x][y];
 	}
@@ -67,24 +133,27 @@ public class Grid {
 	public void setStart(Cell cell){
 		this.start = cell;
 	}
-	
+
 	public void setEnd(Cell cell){
 		this.end = cell;
 	}
 
+	/*
 	public Cell getStartPoint(){
 		System.out.println("start point:");
 		System.out.println(this.start);
 		return this.start;
 	}
-	
+	 */
+
 	public Path getPath(int id){
 		System.out.println("Does the allPath exist?");
 		System.out.println(allPath);
 		return this.allPath.get(id);
-		
+
 	}
 
+	/*
 	public Cell getPathEndPoint(){
 		if(this.noPath){
 			Cell current = this.start;
@@ -100,6 +169,7 @@ public class Grid {
 			return this.end;
 		}
 	}
+	 */
 
 	public Cell[][] getGrid(){
 		return this.grid;

@@ -27,9 +27,9 @@ public class EnemyManager extends Observable {
 	private GamePlayData gameData;
 	private GamePlayerFactory gameFactory;
 	private Grid grid;
-	private Cell current;
+	//private Cell current;
 	//private Cell currentCopy;
-	private Cell startCell;
+	//private Cell startCell;
 	//private GraphicsLibrary graphicLib;
 
 	private Queue<Wave> allWaves;
@@ -51,7 +51,7 @@ public class EnemyManager extends Observable {
 
 	public void initializeNewLevel(){
 		this.grid = this.gameData.getGrid();
-		this.startCell = this.grid.getStartPoint();
+		//this.startCell = this.grid.getStartPoint();
 		this.enemyOnGrid = new HashMap<Integer, Enemy>();
 		this.allWaves = this.gameFactory.getWaves(this.gameData.getCurrentLevel());
 		initializeWaves();
@@ -65,10 +65,12 @@ public class EnemyManager extends Observable {
 		allWaves.forEach(w -> allWaveFrequencies.add(w.getFrequency()));
 	}
 
+	/*
 	public void setCurrentCell(Cell cell) {
 		this.current = cell;
 		//this.currentCopy = cell;
 	}
+	*/
 
 
 	public HashMap<Integer, Enemy> getEnemyOnGrid() {
