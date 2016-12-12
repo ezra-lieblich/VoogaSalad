@@ -28,7 +28,6 @@ public class WaveTableView implements ILevelSetView {
     private TableColumn<WaveObject, String> timeDelayCol;
     private ObservableList<WaveObject> data;
 
-    @SuppressWarnings("unused")
     private LevelAuthoringViewDelegate delegate;
 
     public WaveTableView (ResourceBundle labelsResource, int width) {
@@ -80,6 +79,8 @@ public class WaveTableView implements ILevelSetView {
                                                                                                    .getRow()))
                                                                                                            .setEnemyName(t
                                                                                                                    .getNewValue());
+                                             delegate.onUserEnteredEnemy(t.getRowValue()
+                                                     .getWaveNumber(), t.getNewValue());
                                          }
                                      });
         enemyCountCol.setEditable(true);
@@ -93,6 +94,8 @@ public class WaveTableView implements ILevelSetView {
                                                                                                     .getRow()))
                                                                                                             .setNumOfEnemies(t
                                                                                                                     .getNewValue());
+                                              delegate.onUserEnteredNumofEnemies(t.getRowValue()
+                                                      .getWaveNumber(), t.getNewValue());
                                           }
                                       });
         enemyFrequencyCol.setEditable(true);
@@ -106,6 +109,9 @@ public class WaveTableView implements ILevelSetView {
                                                                                                         .getRow()))
                                                                                                                 .setEnemyFrequency(t
                                                                                                                         .getNewValue());
+                                                  delegate.onUserEnteredEnemyFrequency(t
+                                                          .getRowValue()
+                                                          .getWaveNumber(), t.getNewValue());
                                               }
                                           });
         pathCol.setEditable(true);
@@ -119,6 +125,8 @@ public class WaveTableView implements ILevelSetView {
                                                                                               .getRow()))
                                                                                                       .setPath(t
                                                                                                               .getNewValue());
+                                        delegate.onUserEnteredSpawnPoint(t.getRowValue()
+                                                .getWaveNumber(), t.getNewValue());
                                     }
                                 });
         timeDelayCol.setEditable(true);
@@ -127,7 +135,11 @@ public class WaveTableView implements ILevelSetView {
                                      new EventHandler<CellEditEvent<WaveObject, String>>() {
                                          @Override
                                          public void handle (CellEditEvent<WaveObject, String> t) {
-                                             ((WaveObject) t.getTableView().getItems().get(t.getTablePosition().getRow())).setTimeDelay(t.getNewValue());
+                                             ((WaveObject) t.getTableView().getItems()
+                                                     .get(t.getTablePosition().getRow()))
+                                                             .setTimeDelay(t.getNewValue());
+                                             delegate.onUserEnteredWaveTimeDelay(t.getRowValue()
+                                                     .getWaveNumber(), t.getNewValue());
                                          }
                                      });
     }
