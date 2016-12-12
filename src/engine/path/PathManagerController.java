@@ -1,7 +1,9 @@
 package engine.path;
 
 import java.util.List;
-import authoring.editorview.path.PathSetView;
+import java.util.function.Consumer;
+
+
 import authoring.editorview.path.PathUpdateView;
 import engine.ManagerController;
 
@@ -28,5 +30,7 @@ public interface PathManagerController extends ManagerController<PathManager, Pa
     void setSquareGridDimensions (int pathID, int size);
     
     List<Integer> getAvailablePaths ();
+    
+    void addAvailablePathListener(Consumer<List<Integer>> listener);
     
 }

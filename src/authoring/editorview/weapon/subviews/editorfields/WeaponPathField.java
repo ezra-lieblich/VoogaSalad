@@ -37,6 +37,7 @@ public class WeaponPathField implements WeaponSetView {
         weaponPathBox =
                 ComboBoxFactory.makeComboBox(labelsResource.getString("Path"), e -> delegate
                         .onUserEnteredWeaponTrajectory((String) weaponPathBox.getValue()), pathOptions);
+        weaponPathBox.setPrefWidth(280);
     }
 
     @Override
