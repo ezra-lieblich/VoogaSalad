@@ -27,4 +27,6 @@ public interface PathManagerController extends ManagerController<PathManager, Pa
     
     void setSquareGridDimensions (int pathID, int size);
     
+    List<Integer> getAvailablePaths ();
+    
 }

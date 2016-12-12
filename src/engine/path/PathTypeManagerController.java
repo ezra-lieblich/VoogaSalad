@@ -78,6 +78,11 @@ public class PathTypeManagerController
     }
     
     @Override
+    public List<Integer> getAvailablePaths () {
+        return Collections.unmodifiableList(getTypeManager().getAvailablePaths());
+    }
+    
+    @Override
     public void setSquareGridDimensions (int pathID, int size) {
         setNumberofColumns(pathID, size);
         setNumberofRows(pathID, size);
