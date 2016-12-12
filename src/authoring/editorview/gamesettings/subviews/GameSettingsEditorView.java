@@ -1,5 +1,6 @@
 package authoring.editorview.gamesettings.subviews;
 
+import java.util.List;
 import java.util.ResourceBundle;
 
 import authoring.editorview.gamesettings.GameSettingsAuthoringViewDelegate;
@@ -98,6 +99,11 @@ public class GameSettingsEditorView implements IGameSettingsSetView {
 		gameImageView.setDelegate(delegate);
 		gameInitialMoneyView.setDelegate(delegate);
 		gameInitialLivesView.setDelegate(delegate);
+		gamePathTypeView.setDelegate(delegate);
+		gamePathView.setDelegate(delegate);
+		gamePathDimensionsView.setDelegate(delegate);
+		
+		//winning and losing conditions
 		
 	}
 	
@@ -118,12 +124,16 @@ public class GameSettingsEditorView implements IGameSettingsSetView {
 	}
 	
 	public void updatePathType(String pathType) {
-		//gamePathType.
+		gamePathTypeView.updatePathType(pathType);
 		
 	}
 	
 	public void updateGridDimensions(int size){
 		gamePathDimensionsView.setGridDimensions(size);
+	}
+	
+	public void updateAvailablePathList (List<Integer> availablePathList){
+		gamePathView.setAvailablePathList(availablePathList);
 	}
 	
 	

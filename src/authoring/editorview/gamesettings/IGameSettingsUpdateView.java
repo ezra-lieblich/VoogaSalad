@@ -15,6 +15,8 @@ public interface IGameSettingsUpdateView extends IGameSettingsSetView, IUpdateVi
     
     public void updatePathList (List<Integer> pathList);
     
+    public void updateAvailablePaths (List<Integer> availablePathList);
+    
     public void updatePathType (String pathType);
 
     public void updateWinningConditions (List<String> winningConditions);

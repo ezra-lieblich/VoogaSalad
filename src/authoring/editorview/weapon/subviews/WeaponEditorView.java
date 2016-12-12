@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ResourceBundle;
 import authoring.editorview.PhotoFileChooser;
+import authoring.editorview.weapon.IWeaponSetView;
 import authoring.editorview.weapon.WeaponAuthoringViewDelegate;
 import authoring.editorview.weapon.subviews.editorfields.WeaponFireRateField;
 import authoring.editorview.weapon.subviews.editorfields.WeaponImageView;
@@ -15,8 +16,18 @@ import authoring.editorview.weapon.subviews.editorfields.WeaponSpeedField;
 import authoring.utilityfactories.BoxFactory;
 import authoring.utilityfactories.ButtonFactory;
 import authoring.utilityfactories.DialogueBoxFactory;
-import javafx.scene.control.ScrollPane;
+import javafx.geometry.Insets;
+import javafx.scene.Node;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -26,11 +37,13 @@ import javafx.stage.Stage;
  * @author Kayla Schulz
  *
  */
-public class WeaponEditorView extends PhotoFileChooser {
+public class WeaponEditorView extends PhotoFileChooser implements IWeaponSetView {
 
     private VBox vboxView;
-    private ScrollPane completeView;
+    private AnchorPane rootBuffer;
     private WeaponAuthoringViewDelegate delegate;
+    
+    private static final double BUFFER = 10.0;
 
     private ResourceBundle labelsResource;
     private File chosenFile;
@@ -39,7 +52,6 @@ public class WeaponEditorView extends PhotoFileChooser {
     private WeaponFireRateField weaponFireRate;
     private WeaponRangeField weaponRange;
     private WeaponPathField weaponPath;
-    private WeaponImageView weaponImage;
     private WeaponSizeField weaponSize;
 
     private ResourceBundle dialogueBoxResource;
@@ -56,7 +68,6 @@ public class WeaponEditorView extends PhotoFileChooser {
         throws IOException {
         this.labelsResource = labelsResource;
         this.dialogueBoxResource = dialogueBoxResource;
-        this.weaponImage = weaponImage;
         this.weaponName = weaponName;
         this.weaponSpeed = weaponSpeed;
         this.weaponFireRate = weaponFireRate;
@@ -66,24 +77,29 @@ public class WeaponEditorView extends PhotoFileChooser {
         this.weaponSize = weaponSize;
 
         vboxView = new VBox(10);
-        completeView = new ScrollPane();
-        completeView.setContent(vboxView);
+
+        
+        rootBuffer = new AnchorPane();
+        rootBuffer.getChildren().add(vboxView);
 
         buildViewComponents();
     }
 
-    public void setPaneSize (int width, int height) {
-        completeView.setMaxSize(width, height);
-        completeView.setMinSize(width, height);
-        completeView.setPrefSize(width, height);
-    }
-
+    
+    @Override
     public void setDelegate (WeaponAuthoringViewDelegate delegate) {
         this.delegate = delegate;
     }
 
     private void buildViewComponents () throws IOException {
-        vboxView.getChildren().add(weaponImage.getInstanceAsNode());
+        
+    	AnchorPane.setLeftAnchor(vboxView, BUFFER);
+    	AnchorPane.setTopAnchor(vboxView, BUFFER);
+    	
+    	rootBuffer.setBorder(new Border(new BorderStroke(Color.GRAY, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(0.5))));
+    	rootBuffer.setBackground(new Background(new BackgroundFill(Color.rgb(235, 235, 235), CornerRadii.EMPTY, Insets.EMPTY)));	
+    	
+    	
         vboxView.getChildren().add(ButtonFactory.makeButton(labelsResource.getString("Image"),
                                                             e -> {
                                                                 try {
@@ -116,8 +132,9 @@ public class WeaponEditorView extends PhotoFileChooser {
         vboxView.getChildren().add(weaponPath.getInstanceAsNode());
     }
 
-    public ScrollPane getInstanceAsNode () {
-        return completeView;
+    @Override
+    public Node getInstanceAsNode () {
+        return rootBuffer;
     }
 
     public void createNewWeapon () {
