@@ -31,7 +31,7 @@ public class GameSavingController {
 		Enemy e = eman.getPackOfEnemyComing().element();
 		GamePlayData gameData = gameModel.getData();
 		//GamePlayerFactory factory = gameData.getFactory();
-		return new XStream(new DomDriver()).toXML(gameData);
+		return "" +gameData.getCurrentLevel();
 	}
 	
 	public void saveGame() {
