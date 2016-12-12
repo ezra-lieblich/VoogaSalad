@@ -35,7 +35,7 @@ public class EffectConditionField extends TextFieldView implements EffectSetView
                                                e -> delegate
                                                        .onUserEnteredCondition(conditionField
                                                                .getText()));
-        hbox =
+        root =
                 BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Condition"),
                                                       conditionField);
     }
