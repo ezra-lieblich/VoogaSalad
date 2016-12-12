@@ -48,6 +48,7 @@ public class EffectAuthoringViewController extends EditorViewController
     }
 
     public void openEffectView () {
+        refreshView();
         effectAuthoringView.openEffectView();
     }
 

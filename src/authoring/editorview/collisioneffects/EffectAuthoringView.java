@@ -97,14 +97,12 @@ public class EffectAuthoringView implements EffectUpdateView {
 
     @Override
     public void updateConditionField (String condition) {
-        // TODO Auto-generated method stub
-
+        conditionField.updateField(condition);
     }
 
     @Override
     public void updateEffectField (String effect) {
-        // TODO Auto-generated method stub
-
+        effectField.updateField(effect);
     }
 
     @Override
@@ -135,6 +133,7 @@ public class EffectAuthoringView implements EffectUpdateView {
 
     @Override
     public void setDelegate (EffectAuthoringViewDelegate delegate) {
+        effectBank.setDelegate(delegate);
         effectDataView.setDelegate(delegate);
         effectAvailMethods.setDelegate(delegate);
         effectAvailClasses.setDelegate(delegate);
@@ -143,13 +142,12 @@ public class EffectAuthoringView implements EffectUpdateView {
 
     @Override
     public Node getInstanceAsNode () {
-        // TODO Auto-generated method stub
-        return null;
+        return effectsPane;
     }
 
     @Override
     public void updateNameDisplay (String name) {
-        // effectDataView
+        nameField.updateName(name);
     }
 
     @Override
