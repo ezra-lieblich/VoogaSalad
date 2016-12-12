@@ -5,10 +5,8 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.util.HashMap;
 import java.util.Map;
-
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
-
 import authoring.editorview.EditorViewController;
 import authoring.editorview.enemy.EnemyAuthoringViewController;
 import authoring.editorview.enemy.EnemyUpdateView;
@@ -71,82 +69,93 @@ public class AuthoringController {
 
         toolbar.setOnPressedSave(e -> saveAsXMLFile());
 
-        
         toolbar.setOnPressedLoad(e -> {
-        	loadData();//"player.samplexml/load.xml"
+            loadData();// "player.samplexml/load.xml"
         });
-
 
     }
 
-    public void saveAsXMLFile ()  {
+    public void saveAsXMLFile () {
         String fileContent = this.modelController.SaveData();
         toolbar.saveFile(fileContent);
         // TODO Lucy: add api call to record game in web app
-        
-        try {
-        	String gameData = xmlToString(fileContent);
-			Wrapper.getInstance().createGame(gameData);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    }
-    
-	public void loadData() {
-		//TODO GameModeManagerController ConstructTypeProperties is empty because it needs methods to call in front end.
-		//TODO Creates a null pointer exception currently. Also need controllers instead of Views!!!!	
-		String filePath = toolbar.loadFile();
-		
-		try {
-			GameAuthoringData data = modelController.loadData(filePath);
-			
-			modelController.getModelController(EnemyManagerController.class)
-			 	.loadManagerData(data.getManagerMediator().getManager(EnemyManager.class), 
-			 							(EnemyUpdateView) viewController.getControllers().get("enemy").getUpdateView());
-			 
-			 modelController.getModelController(TowerManagerController.class)
-			 	.loadManagerData(data.getManagerMediator().getManager(TowerManager.class),
-			 						(TowerUpdateView) viewController.getControllers().get("tower").getUpdateView());
-			 modelController.getModelController(WeaponManagerController.class)
-			 	.loadManagerData(data.getManagerMediator().getManager(WeaponManager.class), 
-			 						(WeaponUpdateView) viewController.getControllers().get("weapon").getUpdateView());
-			 modelController.getModelController(PathManagerController.class)
-			 	.loadManagerData(data.getManagerMediator().getManager(PathManager.class), 
-			 						(PathUpdateView) viewController.getControllers().get("path").getUpdateView());
-			 modelController.getModelController(LevelManagerController.class)
-			 	.loadManagerData(data.getManagerMediator().getManager(LevelManager.class), 
-			 						(LevelUpdateView) viewController.getControllers().get("level").getUpdateView());
-			 modelController.getModelController(GameModeManagerController.class)
-			 	.loadManagerData(data.getManagerMediator().getManager(GameModeManager.class),
-			 						(GameSettingsUpdateView) viewController.getControllers().get("setup").getUpdateView());
-		
-		}
-		catch (Exception e){
-			Alert errorDialogueBox = DialogueBoxFactory.createErrorDialogueBox("Error With File", 
-					"This file could not be loaded.");
-		}
-	}
-    
-    private String xmlToString(String textContent) throws IOException{
-    	BufferedReader br = new BufferedReader(new StringReader(textContent));
-    	String line;
-    	StringBuilder sb = new StringBuilder();
 
-    	while((line=br.readLine())!= null){
-    	    sb.append(line.trim());
-    	}
-    	return sb.toString();
+        try {
+            String gameData = xmlToString(fileContent);
+            Wrapper.getInstance().createGame(gameData);
+        }
+        catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+    public void loadData () {
+        // TODO GameModeManagerController ConstructTypeProperties is empty because it needs methods
+        // to call in front end.
+        // TODO Creates a null pointer exception currently. Also need controllers instead of
+        // Views!!!!
+        String filePath = toolbar.loadFile();
+
+        try {
+            GameAuthoringData data = modelController.loadData(filePath);
+
+            modelController.getModelController(EnemyManagerController.class)
+                    .loadManagerData(data.getManagerMediator().getManager(EnemyManager.class),
+                                     (EnemyUpdateView) viewController.getControllers().get("enemy")
+                                             .getUpdateView());
+
+            modelController.getModelController(TowerManagerController.class)
+                    .loadManagerData(data.getManagerMediator().getManager(TowerManager.class),
+                                     (TowerUpdateView) viewController.getControllers().get("tower")
+                                             .getUpdateView());
+            modelController.getModelController(WeaponManagerController.class)
+                    .loadManagerData(data.getManagerMediator().getManager(WeaponManager.class),
+                                     (WeaponUpdateView) viewController.getControllers()
+                                             .get("weapon").getUpdateView());
+            modelController.getModelController(PathManagerController.class)
+                    .loadManagerData(data.getManagerMediator().getManager(PathManager.class),
+                                     (PathUpdateView) viewController.getControllers().get("path")
+                                             .getUpdateView());
+            modelController.getModelController(LevelManagerController.class)
+                    .loadManagerData(data.getManagerMediator().getManager(LevelManager.class),
+                                     (LevelUpdateView) viewController.getControllers().get("level")
+                                             .getUpdateView());
+            modelController.getModelController(GameModeManagerController.class)
+                    .loadManagerData(data.getManagerMediator().getManager(GameModeManager.class),
+                                     (GameSettingsUpdateView) viewController.getControllers()
+                                             .get("setup").getUpdateView());
+
+        }
+        catch (Exception e) {
+            Alert errorDialogueBox = DialogueBoxFactory.createErrorDialogueBox("Error With File",
+                                                                               "This file could not be loaded.");
+        }
+    }
+
+    private String xmlToString (String textContent) throws IOException {
+        BufferedReader br = new BufferedReader(new StringReader(textContent));
+        String line;
+        StringBuilder sb = new StringBuilder();
+
+        while ((line = br.readLine()) != null) {
+            sb.append(line.trim());
+        }
+        return sb.toString();
     }
 
     private void connectDataInterfaces (ViewController authoringVC) {
 
         HashMap<String, EditorViewController> editorVCs = authoringVC.getControllers();
         PathAuthoringViewController pathVC = (PathAuthoringViewController) editorVCs.get("path");
-        LevelAuthoringViewController levelVC = (LevelAuthoringViewController) editorVCs.get("level");
-        WeaponAuthoringViewController weaponVC = (WeaponAuthoringViewController) editorVCs.get("weapon");
-        EnemyAuthoringViewController enemyVC = (EnemyAuthoringViewController) editorVCs.get("enemy");
-        TowerAuthoringViewController towerVC = (TowerAuthoringViewController) editorVCs.get("tower");
+        LevelAuthoringViewController levelVC =
+                (LevelAuthoringViewController) editorVCs.get("level");
+        WeaponAuthoringViewController weaponVC =
+                (WeaponAuthoringViewController) editorVCs.get("weapon");
+        EnemyAuthoringViewController enemyVC =
+                (EnemyAuthoringViewController) editorVCs.get("enemy");
+        TowerAuthoringViewController towerVC =
+                (TowerAuthoringViewController) editorVCs.get("tower");
         GameSettingsAuthoringViewController setupVC =
                 (GameSettingsAuthoringViewController) editorVCs.get("setup");
 

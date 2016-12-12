@@ -3,6 +3,7 @@ package authoring.editorview.collisioneffects.subviews;
 import authoring.editorview.ImageBank;
 import authoring.editorview.collisioneffects.EffectAuthoringViewDelegate;
 import authoring.editorview.collisioneffects.EffectSetView;
+import javafx.scene.control.Label;
 
 
 /**
@@ -16,6 +17,8 @@ public class EffectBank extends ImageBank implements EffectSetView {
 
     public EffectBank () {
         super();
+        Label effectLabel = new Label("Effects");
+        this.items.add(effectLabel);
     }
 
     @Override

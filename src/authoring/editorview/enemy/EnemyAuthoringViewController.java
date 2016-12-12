@@ -4,7 +4,10 @@ import java.util.ResourceBundle;
 import authoring.editorview.EditorViewController;
 import authoring.editorview.ListCellData;
 import authoring.editorview.ListDataSource;
+import authoring.editorview.collisioneffects.EffectAuthoringView;
+import authoring.editorview.collisioneffects.EffectAuthoringViewController;
 import authoring.utilityfactories.DialogueBoxFactory;
+import engine.effect.EffectManagerController;
 import engine.enemy.*;
 
 
@@ -18,6 +21,7 @@ public class EnemyAuthoringViewController extends EditorViewController
         implements EnemyAuthoringViewDelegate, ListDataSource {
 
     private EnemyManagerController enemyDataSource;
+    private EffectManagerController effectDataSource;
     private int currentEnemyID;
     private EnemyUpdateView enemyView;
 
@@ -26,15 +30,17 @@ public class EnemyAuthoringViewController extends EditorViewController
         enemyView.setDelegate(this);
         enemyView.setEnemyListDataSource(this);
         this.view = enemyView;
+
     }
 
     public void setEnemyDataSource (EnemyManagerController source) {
         this.enemyDataSource = source;
         this.enemyDataSource.addTypeBankListener(this.enemyView);
+        effectDataSource = enemyDataSource.getEffectManagerController();
         onUserPressedCreateEnemy();
     }
 
-    private void refreshEnemyView () {
+    public void refreshView () {
         enemyView.updateImagePathDisplay(enemyDataSource.getImagePath(currentEnemyID));
         enemyView.updateNameDisplay(enemyDataSource.getName(currentEnemyID));
         enemyView.updateSizeDisplay(enemyDataSource.getSize(currentEnemyID));
@@ -48,7 +54,7 @@ public class EnemyAuthoringViewController extends EditorViewController
     @Override
     public void onUserPressedCreateEnemy () {
         currentEnemyID = enemyDataSource.createType(enemyView);
-        refreshEnemyView();
+        refreshView();
     }
 
     @Override
@@ -131,7 +137,7 @@ public class EnemyAuthoringViewController extends EditorViewController
         int nextID = this.enemyView.getNearestAvailableItemID(currentEnemyID);
         enemyDataSource.deleteType(currentEnemyID);
         currentEnemyID = nextID;
-        this.refreshEnemyView();
+        this.refreshView();
     }
 
     @Override
@@ -158,13 +164,13 @@ public class EnemyAuthoringViewController extends EditorViewController
     @Override
     public void onUserSelectedEnemy (int enemyID) {
         currentEnemyID = enemyID;
-        refreshEnemyView();
+        refreshView();
     }
 
     @Override
     public void onUserPressedAddEffect () {
-        // TODO Auto-generated method stub
-
+        EffectAuthoringViewController effectAuthoringView = new EffectAuthoringViewController();
+        effectAuthoringView.openEffectView();
     }
 
 }

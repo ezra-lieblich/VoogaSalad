@@ -24,7 +24,12 @@ public class FileAggregator {
 
 	private FileAggregator(){
 		this.imageDirectory = new File(IMAGES_DIRECTORY_NAME);
-		this.imageDirectory.mkdirs();
+		try {
+			Files.createDirectories(imageDirectory.toPath());
+		} catch (IOException e) {
+			System.out.println("Failed to create image directory");
+			e.printStackTrace();
+		}
 		this.originalImagePaths = new HashMap<String, Integer>();
 		this.images = new HashMap<String, File>();
 	}

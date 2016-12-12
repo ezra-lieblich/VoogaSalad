@@ -5,7 +5,9 @@ import java.util.ResourceBundle;
 import authoring.editorview.EditorViewController;
 import authoring.editorview.ListCellData;
 import authoring.editorview.ListDataSource;
+import authoring.editorview.collisioneffects.EffectAuthoringViewController;
 import authoring.utilityfactories.DialogueBoxFactory;
+import engine.effect.EffectManagerController;
 import engine.weapon.WeaponManagerController;
 
 
@@ -19,6 +21,7 @@ public class WeaponAuthoringViewController extends EditorViewController
         implements WeaponAuthoringViewDelegate, ListDataSource {
 
     private WeaponManagerController weaponDataSource;
+    private EffectManagerController effectDataSource;
     private int currentWeaponID;
     private WeaponUpdateView weaponView;
 
@@ -32,6 +35,7 @@ public class WeaponAuthoringViewController extends EditorViewController
     public void setWeaponDataSource (WeaponManagerController source) {
         this.weaponDataSource = source;
         this.weaponDataSource.addTypeBankListener(this.weaponView);
+        effectDataSource = weaponDataSource.getEffectManagerController();
         onUserPressedCreateWeapon();
     }
 
@@ -76,10 +80,10 @@ public class WeaponAuthoringViewController extends EditorViewController
     @Override
     public void onUserPressedCreateWeapon () {
         currentWeaponID = weaponDataSource.createType(weaponView);
-        refreshWeaponView();
+        refreshView();
     }
 
-    private void refreshWeaponView () {
+    public void refreshView () {
         weaponView.updateImagePathDisplay(weaponDataSource.getImagePath(currentWeaponID));
         weaponView.updateNameDisplay(weaponDataSource.getName(currentWeaponID));
         weaponView.updateFireRateDisplay(weaponDataSource.getWeaponReloadTime(currentWeaponID));
@@ -130,7 +134,7 @@ public class WeaponAuthoringViewController extends EditorViewController
     @Override
     public void onUserSelectedWeapon (int weaponID) {
         currentWeaponID = weaponID;
-        refreshWeaponView();
+        refreshView();
     }
 
     @Override
@@ -144,8 +148,8 @@ public class WeaponAuthoringViewController extends EditorViewController
 
     @Override
     public void onUserPressedAddEffect () {
-        // TODO Auto-generated method stub
-
+        EffectAuthoringViewController effectAuthoringView = new EffectAuthoringViewController();
+        effectAuthoringView.openEffectView();
     }
 
 }

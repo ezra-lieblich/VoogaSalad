@@ -16,13 +16,22 @@ public class EffectAuthoringViewController extends EditorViewController
 
     private EffectManagerController effectsDataSource;
     private int currentEffectID;
+    private EffectAuthoringView effectAuthoringView;
 
     public EffectAuthoringViewController () {
-
+        effectAuthoringView = new EffectAuthoringView();
+        effectAuthoringView.setDelegate(this);
+        // TODO - fix this
+        currentEffectID = 0;
     }
 
     public void setEffectDataSource (EffectManagerController source) {
         this.effectsDataSource = source;
+        // this.effectsDataSource.addTypeBankListener(this.effectAuthoringView);
+    }
+
+    public void openEffectView () {
+        effectAuthoringView.openEffectView();
     }
 
     @Override
@@ -32,7 +41,7 @@ public class EffectAuthoringViewController extends EditorViewController
     }
 
     @Override
-    public void onUserSelectedEffectName (String name) {
+    public void onUserEnteredEffectName (String name) {
         effectsDataSource.setName(currentEffectID, name);
     }
 
@@ -50,6 +59,12 @@ public class EffectAuthoringViewController extends EditorViewController
     public ListCellData getCellDataForSubject (int id) {
         // TODO Auto-generated method stub
         return null;
+    }
+
+    @Override
+    public void refreshView () {
+        // TODO Auto-generated method stub
+
     }
 
 }

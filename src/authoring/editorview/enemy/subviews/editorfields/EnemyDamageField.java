@@ -30,11 +30,6 @@ public class EnemyDamageField extends TextFieldView implements EnemySetView {
     }
 
     @Override
-    public Node getInstanceAsNode () {
-        return hbox;
-    }
-
-    @Override
     protected void makeTextField (ResourceBundle labelsResource) {
         enemyDamageField =
                 TextFieldFactory.makeTextField(labelsResource.getString("EnterInt"),
