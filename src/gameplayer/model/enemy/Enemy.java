@@ -76,7 +76,6 @@ public class Enemy extends Observable implements IDrawable {
 	}
 
 	@EffectMethod
-
 	public int getxDirection() { // heading
 		return xDirection;
 	}

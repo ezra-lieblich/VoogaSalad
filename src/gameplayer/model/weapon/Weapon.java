@@ -39,11 +39,19 @@ public class Weapon extends Observable implements IDrawable{
 		this.yCoordinate = y;
 		
 		this.targetEnemyID = targetID;
-		System.out.println("TARGET ENEMY IDDDDDD "+ this.targetEnemyID);
+		//System.out.println("TARGET ENEMY IDDDDDD "+ this.targetEnemyID);
 		this.speedMag = speedMag;
 		this.weaponEffect = weaponEffect;
+		
+		System.out.println();
+
+		System.out.println("++++++++++++++++++++++++");
+		System.out.println();
 		for(String s: weaponEffect.keySet()){
 			for(GameEffect e : weaponEffect.get(s)){
+				System.out.println("trigger name: " + s);
+				System.out.println("effec name: " + e.toString());
+
 				e.addEncompassingClass(this);
 			}			
 		}
@@ -54,7 +62,8 @@ public class Weapon extends Observable implements IDrawable{
 	
 	
 	public void triggerEffect(Object e){
-		String className = e.getClass().getSimpleName();
+		String className = e.getClass().getName();
+		System.out.println("Class Name:  " + className);
 		ArrayList<GameEffect> triggered = this.weaponEffect.get(className);
 		for(GameEffect g : triggered){
 			g.addTrigger(e);

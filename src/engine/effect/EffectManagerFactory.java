@@ -1,7 +1,7 @@
 package engine.effect;
 
 public class EffectManagerFactory {
-    public static final String DEFAULT_PACKAGE_PATH = "engine.effect";
+    public static final String DEFAULT_PACKAGE_PATH = "gameplayer.model";
     AnnotatedDataMapFactory annotatedDataMapFactory;
     AnnotatedMethodMapFactory methodMapFactory;
     
