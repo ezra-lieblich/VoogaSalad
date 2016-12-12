@@ -125,6 +125,10 @@ public class GamePlayerController implements Observer {
 		createImageBank();
 		this.gameSavingController = new GameSavingController(this.model);
 	}
+	
+	//TODO: create another constructor that takes in a ManagerMediator and LevelNumber
+	//it should use the XMLParser(ManagerMediator) constructor to create an XMLParser (aka this.loader)
+	
 
 	private void populateTowerToId() {
 		HashMap<Integer, engine.tower.Tower> mapping = this.model.getTowerManager().getAvailableTower();
