@@ -23,35 +23,35 @@ import javafx.scene.image.ImageView;
 
 public class EnemyManager extends Observable {
 
-	private HashMap<Integer, Enemy> enemyOnGrid; 
+	private Map<Integer, Enemy> enemyOnGrid; 
 	private GamePlayData gameData;
 	private GamePlayerFactory gameFactory;
 	private Grid grid;
 	private Cell current;
-	private Cell currentCopy;
+	//private Cell currentCopy;
 	private Cell startCell;
-	private GraphicsLibrary graphicLib;
-	private int uniqueEnemyID;
+	//private GraphicsLibrary graphicLib;
 
 	private Queue<Wave> allWaves;
 	private Queue<Double> allWaveStartTimes;
 	private Queue<Double> allWaveFrequencies;
 	
+	HashMap<Integer,ImageView>enemiesOnScreen;
 
 
-	public EnemyManager(GamePlayData gameData) {
+	public EnemyManager(GamePlayData gameData,HashMap<Integer,ImageView>enemiesOnScreen) {
 		this.gameData = gameData;
 		this.gameFactory = gameData.getFactory();
-		this.graphicLib = new GraphicsLibrary();
+		//this.graphicLib = new GraphicsLibrary();
 		this.allWaveFrequencies = new LinkedList<Double>();
 		this.allWaveStartTimes = new LinkedList<Double>();
+		this.enemiesOnScreen =enemiesOnScreen;
 		initializeNewLevel();
 	}
 
 	public void initializeNewLevel(){
 		this.grid = this.gameData.getGrid();
 		this.startCell = this.grid.getStartPoint();
-		this.uniqueEnemyID = 0;
 		this.enemyOnGrid = new HashMap<Integer, Enemy>();
 		this.allWaves = this.gameFactory.getWaves(this.gameData.getCurrentLevel());
 		initializeWaves();
@@ -67,12 +67,12 @@ public class EnemyManager extends Observable {
 
 	public void setCurrentCell(Cell cell) {
 		this.current = cell;
-		this.currentCopy = cell;
+		//this.currentCopy = cell;
 	}
 
 
 	public HashMap<Integer, Enemy> getEnemyOnGrid() {
-		return this.enemyOnGrid;
+		return (HashMap<Integer, Enemy>) this.enemyOnGrid; //refactor
 	}
 	
 	public List<Enemy> getEnemyListOnGrid() {
@@ -150,8 +150,6 @@ public class EnemyManager extends Observable {
 				moveDist -= moveDist;
 			}
 		}
-		setChanged();
-		notifyObservers();
 		return;
 	}
 	
@@ -159,25 +157,23 @@ public class EnemyManager extends Observable {
 
 
 	/*
-	private void checkCollision() {
-		for (Enemy e : getEnemyList()) {
-			for (Weapon w : this.gamePlayModel.getWeaponOnGrid()) {
-				gamePlayModel.singleCollision(e, w);
-			}
-			if (e.getHealth() < 0)
-				getEnemyList().remove(e);
+	private void checkCollision(Enemy e) {
+		GamePlayerModel gameModel = game
+		for (Weapon w : this.gamePlayModel.getWeaponOnGrid()) {
+			gamePlayModel.singleCollision(e, w);
 		}
+		if (e.getHealth() < 0)
+			getEnemyList().remove(e);
 		setChanged();
 		notifyObservers();
 	}
-	 */
+	*/
+	 
 
 
 
 
 	public void update() {
-		// updateEnemy();
-		// checkCollision();
 		moveEnemies();
 	}
 
@@ -189,11 +185,11 @@ public class EnemyManager extends Observable {
 			moveSingleEnemy(enemy);
 			if (enemy.mustRemove()) {
 				iter.remove();
+				
 			}
 		}
-			
-
 	}
+
 
 	public double getTimeOfNextWave() {
 		if (allWaveStartTimes.isEmpty()) return 0;
@@ -205,6 +201,7 @@ public class EnemyManager extends Observable {
 	public double getFrequencyOfNextWave() {
 		if (allWaveStartTimes.isEmpty()) return 0;
 		double timeInSeconds = this.allWaveFrequencies.poll();
+		//double timeInMillis = 10000;//10 seconds
 		double timeInMillis = timeInSeconds * 1000;
 		return timeInMillis;
 	}

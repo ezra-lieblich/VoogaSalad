@@ -80,6 +80,7 @@ public class GamePlayerFactory{
 	}
 	
 	public Map<Integer, Tower> getTowerUpgrades() {
+		System.out.println("size of UPGRADESSSSSSS"+authoringFileReader.getTowerUpgrades().size());
 		return authoringFileReader.getTowerUpgrades();
 	}
 	

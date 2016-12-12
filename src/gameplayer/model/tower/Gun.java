@@ -43,7 +43,8 @@ public class Gun {
 		return false;
 	}
 	
-	Weapon getWeapon(int targetID, double targetX, double targetY, Map<Integer, GameEffect> allEffects){
+	public Weapon getWeapon(int targetID, double targetX, double targetY, Map<Integer, GameEffect> allEffects){
+
 		 String name = weaponType.getName(); 
 		 double demage = 50; // get from weapon type later
 		 String image = weaponType.getImagePath();
@@ -60,7 +61,7 @@ public class Gun {
 			 weaponEffect.get(trigger).add(ge);			 
 		 }
 		 
-		 return new Weapon (name,  demage, targetX, targetY, image, this.attackingRange,targetID, this.xcoor,this.ycoor,speedMag, weaponEffect );
+		 return new Weapon (name,  demage, targetX, targetY, image, this.attackingRange,targetID, this.xcoor,this.ycoor,speedMag, weaponEffect ,this.weaponType.getId() );
 	}
 
 }
