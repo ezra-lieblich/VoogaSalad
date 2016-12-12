@@ -31,6 +31,7 @@ public class AddWeaponEffectView implements WeaponSetView {
         addWeaponEffectButton =
                 ButtonFactory.makeButton(labelsResource.getString("AddEffect"),
                                          e -> delegate.onUserPressedAddEffect());
+        addWeaponEffectButton.setPrefWidth(280);
     }
 
 }

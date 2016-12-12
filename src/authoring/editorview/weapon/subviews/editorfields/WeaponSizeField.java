@@ -3,13 +3,16 @@ package authoring.editorview.weapon.subviews.editorfields;
 import java.util.ResourceBundle;
 import authoring.editorview.weapon.WeaponSetView;
 import authoring.editorview.weapon.WeaponAuthoringViewDelegate;
+import authoring.utilityfactories.GridFactory;
 import authoring.utilityfactories.TextFieldFactory;
 import javafx.scene.Node;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
 
 
 public class WeaponSizeField implements WeaponSetView {
 
+	private GridPane root;
     private TextField weaponSizeField;
     private WeaponAuthoringViewDelegate delegate;
 
@@ -21,6 +24,8 @@ public class WeaponSizeField implements WeaponSetView {
         weaponSizeField =
                 TextFieldFactory.makeTextField(labelsResource.getString("EnterInt"), e -> delegate
                         .onUserEnteredWeaponSize(weaponSizeField.getText()));
+        weaponSizeField.setPrefWidth(130);
+        root = GridFactory.createRowWithLabelandNode(labelsResource.getString("Size"), weaponSizeField, 150);
     }
 
     @Override
@@ -30,7 +35,7 @@ public class WeaponSizeField implements WeaponSetView {
 
     @Override
     public Node getInstanceAsNode () {
-        return weaponSizeField;
+        return root;
     }
 
     public void updateWeaponSize (String weaponSize) {

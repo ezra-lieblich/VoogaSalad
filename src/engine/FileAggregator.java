@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.HashMap;
 
 import authoring.utilityfactories.DialogueBoxFactory;
@@ -51,7 +52,7 @@ public class FileAggregator {
 		rootDirectory.mkdirs();
 		File newImageDirectory = new File(rootDirectory, IMAGES_DIRECTORY_NAME);
 		try {
-			Files.move(imageDirectory.toPath(), newImageDirectory.toPath());
+			Files.move(imageDirectory.toPath(), newImageDirectory.toPath(), StandardCopyOption.REPLACE_EXISTING);
 		} catch (IOException e1) {
 			System.out.println("Failed to move image folder to game folder");
 			e1.printStackTrace();
@@ -133,23 +134,7 @@ public class FileAggregator {
 		image.delete();
 		this.images.remove(imagePath);
 	}
-	
-//	private File generateImagesFolder(){
-//		File images = new File(gameDirectory, IMAGES_DIRECTORY_NAME);
-//		images.mkdirs();
-//		for (String s : this.originalImagePaths.keySet()){
-//			File sourceFile = new File(s);
-//			File copiedFile = new File(images, getFileNameFromPath(s));
-//			try {
-//				Files.copy(sourceFile, copiedFile);
-//			} catch (IOException e) {
-//				System.out.println("FAILED TO COPY IMAGE FILE: "+s);
-//				e.printStackTrace();
-//			}
-//		}
-//		return images;
-//	}
-	
+
 	public String getFileNameFromPath(String filePath){
 		String[] pathComponents = filePath.split("/");
 		String name = pathComponents[pathComponents.length-1];
