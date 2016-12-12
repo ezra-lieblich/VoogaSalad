@@ -98,18 +98,18 @@ public class GamePlayerController implements Observer {
 
 	// Might need to be refactored into a different class
 	private HashMap<Integer, ImageView> weaponsOnScreen;
-	private HashMap<Integer, ImageView> enemiesOnScreen; 	
+	private HashMap<Integer, ImageView> enemiesOnScreen;
 
 	private HashMap<String, Image> imageBank;
 
 	public GamePlayerController(String xmlFilePath) {
 		// use xml parser to create classes.
-		this.loader = new GamePlayerFactory(new XMLParser("newTextFile.xml"));// hardcoded
+		this.loader = new GamePlayerFactory(new XMLParser("player.samplexml/WinEffect_FreePath_PitcforksTest.xml"));// hardcoded
 		// does not work because of the image path
 		checkIfValid();
 		this.enemiesOnScreen = new HashMap<Integer, ImageView>();
-		this.weaponsOnScreen = new HashMap<Integer, ImageView>(); 
-		this.model = new GamePlayModel(this.loader,enemiesOnScreen);
+		this.weaponsOnScreen = new HashMap<Integer, ImageView>();
+		this.model = new GamePlayModel(this.loader, enemiesOnScreen);
 		this.enemyController = new EnemyController(this.model.getEnemyManager(), null);
 		this.weaponController = new WeaponController(this.model.getWeaponManager());
 		this.collisionController = new CollisionController(this.model.getCollisionManager());
@@ -125,6 +125,12 @@ public class GamePlayerController implements Observer {
 		this.gameSavingController = new GameSavingController(this.model);
 		// this.gameSavingController.saveGame();
 	}
+
+	// TODO: create another constructor that takes in a ManagerMediator and
+	// LevelNumber
+	// it should use the XMLParser(ManagerMediator) constructor to create an
+	// XMLParser (aka this.loader)
+
 
 	private void populateTowerToId() {
 		HashMap<Integer, engine.tower.Tower> mapping = this.model.getTowerManager().getAvailableTower();
@@ -150,7 +156,7 @@ public class GamePlayerController implements Observer {
 
 	public void init(boolean newLevel) {
 		// HashMap<String, Double> settings = this.loader.getGameSetting();
-		//this.enemyManager.setCurrentCell(this.model.getData().getGrid().getStartPoint());
+		// this.enemyManager.setCurrentCell(this.model.getData().getGrid().getStartPoint());
 		populateTowerToId();
 		initGUI(newLevel);
 
@@ -163,13 +169,13 @@ public class GamePlayerController implements Observer {
 		initSaveGameButton();
 
 	}
-	
+
 	/**
 	 * FILL THIS METHOD WITH XML SAVING CRAP
 	 */
-	private void initSaveGameButton(){
+	private void initSaveGameButton() {
 		this.view.saveButton(e -> {
-			
+
 		});
 	}
 
@@ -214,7 +220,9 @@ public class GamePlayerController implements Observer {
 		// System.out.println("line 172, gameplay controller: Is the grid
 		// null?");
 		// System.out.println(model.getData().getGrid());
-		this.view.getGrid().populatePath(model.getData().getGrid().getAllPaths());
+		if (!this.model.getData().getGrid().isNoPathType()) {
+			this.view.getGrid().populatePath(model.getData().getGrid().getAllPaths());
+		}
 		this.dropController = new DragDropController(this.view, this.model, this.getTowerImageMap());
 
 	}
@@ -343,7 +351,7 @@ public class GamePlayerController implements Observer {
 
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> {
 			((Pane) this.view.getGrid().getGrid()).getChildren().clear();
-			
+
 			// trying to get this to work but null pointer
 			if (currentWave.size() != 0) {
 				// if (timer % 15 == 0) {
@@ -361,9 +369,9 @@ public class GamePlayerController implements Observer {
 				 * System.out.println("Elapsed time: " + elapsedTime); if
 				 * (elapsedTime %
 				 * this.enemyController.getEnemyModel().getFrequencyOfNextWave()
-				 * == 0) {
-				 * System.out.println("-----------------SPAWN ENEMY-----------"
-				 * ); this.enemyManager.spawnEnemy(enemy); }
+				 * == 0) { System.out.println(
+				 * "-----------------SPAWN ENEMY-----------" );
+				 * this.enemyManager.spawnEnemy(enemy); }
 				 */
 
 			} else {
@@ -417,12 +425,12 @@ public class GamePlayerController implements Observer {
 		HashMap<Integer, Enemy> enemyRedraw = this.enemyManager.getEnemyOnGrid();
 		Map<Integer, Tower> towerRedraw = this.model.getTowerOnGrid();
 		HashMap<Integer, Weapon> bulletRedraw = this.model.getWeaponManager().getWeaponOnGrid();
-		
-		System.out.println("bulletRedraw: "+bulletRedraw.size());
-		
+
+		System.out.println("bulletRedraw: " + bulletRedraw.size());
+
 		updateBulletOnScreen(bulletRedraw);
 		updateEnemiesOnScreen(enemyRedraw);
-		
+
 		this.view.reRenderEnemy(enemiesOnScreen);
 		this.view.reRenderWeapon(weaponsOnScreen);
 		this.view.reRenderTower(towerRedraw);
@@ -431,16 +439,16 @@ public class GamePlayerController implements Observer {
 	public Timeline getTimeline() {
 		return this.animation;
 	}
-	
-	private void updateBulletOnScreen(HashMap<Integer, Weapon>bulletRedraw){
-		Iterator<Integer>it = weaponsOnScreen.keySet().iterator();
-		while(it.hasNext()){
-			int value = it.next(); 
-			if(!bulletRedraw.containsKey(value)){
-				it.remove(); 
+
+	private void updateBulletOnScreen(HashMap<Integer, Weapon> bulletRedraw) {
+		Iterator<Integer> it = weaponsOnScreen.keySet().iterator();
+		while (it.hasNext()) {
+			int value = it.next();
+			if (!bulletRedraw.containsKey(value)) {
+				it.remove();
 			}
 		}
-		
+
 		for (int i : bulletRedraw.keySet()) {
 			if (!weaponsOnScreen.containsKey(bulletRedraw.get(i).getUniqueID())) {
 				Image ii = imageBank.get("Weapon " + bulletRedraw.get(i).getWeaponTypeID());
@@ -460,10 +468,10 @@ public class GamePlayerController implements Observer {
 			}
 		}
 	}
-	
-	private void updateEnemiesOnScreen(HashMap<Integer,Enemy>enemyRedraw){
-		for(int i: enemyRedraw.keySet()){
-			if(!enemiesOnScreen.containsKey(enemyRedraw.get(i).getUniqueID())){
+
+	private void updateEnemiesOnScreen(HashMap<Integer, Enemy> enemyRedraw) {
+		for (int i : enemyRedraw.keySet()) {
+			if (!enemiesOnScreen.containsKey(enemyRedraw.get(i).getUniqueID())) {
 				ImageView image = new ImageView(graphics.createImage(enemyRedraw.get(i).getImage()));
 				graphics.setImageViewParams(image, DragDropView.DEFENSIVEWIDTH * 0.9,
 						DragDropView.DEFENSIVEHEIGHT * 0.9);
@@ -472,14 +480,12 @@ public class GamePlayerController implements Observer {
 				image.setX(enemyRedraw.get(i).getX());
 				image.setY(enemyRedraw.get(i).getY());
 				enemiesOnScreen.put(enemyRedraw.get(i).getUniqueID(), image);
-			}
-			else {
+			} else {
 				enemiesOnScreen.get(enemyRedraw.get(i).getUniqueID()).setX(enemyRedraw.get(i).getX());
 				enemiesOnScreen.get(enemyRedraw.get(i).getUniqueID()).setY(enemyRedraw.get(i).getY());
 			}
 		}
 	}
-
 
 	public HashMap<String, Image> createImageBank() {
 		Map<Integer, engine.tower.Tower> towers = this.loader.getTowers();
