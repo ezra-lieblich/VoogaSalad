@@ -7,6 +7,7 @@ import authoring.editorview.ListDataSource;
 import authoring.editorview.collisioneffects.EffectAuthoringView;
 import authoring.editorview.collisioneffects.EffectAuthoringViewController;
 import authoring.utilityfactories.DialogueBoxFactory;
+import engine.effect.EffectManagerController;
 import engine.tower.TowerManagerController;
 import authoring.editorview.tower.TowerUpdateView;
 
@@ -21,6 +22,7 @@ public class TowerAuthoringViewController extends EditorViewController
         implements TowerAuthoringViewDelegate, ListDataSource {
 
     private TowerManagerController towerDataSource;
+    private EffectManagerController effectDataSource;
     private int currentTowerID;
     private TowerUpdateView towerView;
 
@@ -34,6 +36,7 @@ public class TowerAuthoringViewController extends EditorViewController
     public void setTowerDataSource (TowerManagerController source) {
         this.towerDataSource = source;
         this.towerDataSource.addTypeBankListener(this.towerView);
+        effectDataSource = towerDataSource.getEffectManagerController();
         onUserPressedCreateNewTower();
     }
 

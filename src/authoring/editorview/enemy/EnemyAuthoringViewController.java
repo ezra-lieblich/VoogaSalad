@@ -7,6 +7,7 @@ import authoring.editorview.ListDataSource;
 import authoring.editorview.collisioneffects.EffectAuthoringView;
 import authoring.editorview.collisioneffects.EffectAuthoringViewController;
 import authoring.utilityfactories.DialogueBoxFactory;
+import engine.effect.EffectManagerController;
 import engine.enemy.*;
 
 
@@ -20,6 +21,7 @@ public class EnemyAuthoringViewController extends EditorViewController
         implements EnemyAuthoringViewDelegate, ListDataSource {
 
     private EnemyManagerController enemyDataSource;
+    private EffectManagerController effectDataSource;
     private int currentEnemyID;
     private EnemyUpdateView enemyView;
 
@@ -34,6 +36,7 @@ public class EnemyAuthoringViewController extends EditorViewController
     public void setEnemyDataSource (EnemyManagerController source) {
         this.enemyDataSource = source;
         this.enemyDataSource.addTypeBankListener(this.enemyView);
+        effectDataSource = enemyDataSource.getEffectManagerController();
         onUserPressedCreateEnemy();
     }
 
