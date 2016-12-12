@@ -6,6 +6,7 @@ import authoring.editorview.level.subviews.LevelChooserView;
 import authoring.editorview.level.subviews.LevelNameView;
 import authoring.editorview.level.subviews.LevelRewardsView;
 import authoring.editorview.level.subviews.LevelTransitionTimeField;
+import authoring.editorview.level.subviews.PreviewLevelView;
 import authoring.utilityfactories.ButtonFactory;
 import engine.level.wave.Wave;
 import engine.level.wave.WaveString;
@@ -32,6 +33,7 @@ public class LevelAuthoringView implements LevelUpdateView {
     private LevelRewardsView levelRewardsView;
     private LevelNameView levelNameView;
     private CreateNewLevelView createNewLevelView;
+    private PreviewLevelView previewLevelView;
     private LevelTransitionTimeField transitionTimeField;
     private WaveTableView waveTableView;
     private AddLevelEffectView addLevelEffect;
@@ -47,6 +49,7 @@ public class LevelAuthoringView implements LevelUpdateView {
         this.createNewLevelView = new CreateNewLevelView(levelsResource);
         this.transitionTimeField = new LevelTransitionTimeField(levelsResource);
         this.waveTableView = new WaveTableView(levelsResource, width);
+        this.previewLevelView = new PreviewLevelView();
         this.addLevelEffect = new AddLevelEffectView(levelsResource);
         setLevelView();
     }
@@ -70,6 +73,7 @@ public class LevelAuthoringView implements LevelUpdateView {
 
     private void setLevelView () {
         vbox.getChildren().addAll(createNewLevelView.getInstanceAsNode(),
+        						  
                                   levelChooser.getInstanceAsNode(),
                                   levelNameView.getInstanceAsNode(),
                                   levelRewardsView.getInstanceAsNode(),
@@ -77,7 +81,10 @@ public class LevelAuthoringView implements LevelUpdateView {
                                   addLevelEffect.getInstanceAsNode(),
                                   ButtonFactory.makeButton("New Wave",
                                                            e -> delegate.onUserEnteredAddWave()),
-                                  waveTableView.getInstanceAsNode());
+                                  previewLevelView.getInstanceAsNode(),
+                                  waveTableView.getInstanceAsNode()
+                          
+        							);
     }
 
     @Override

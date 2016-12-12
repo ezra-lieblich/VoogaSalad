@@ -136,6 +136,12 @@ public class GameSettingsAuthoringView implements GameSettingsUpdateView, GameSe
 		return null;
 	}
 
+	@Override
+	public void updateAvailablePaths(List<Integer> availablePathList) {
+		gameSettingsEditor.updateAvailablePathList(availablePathList);
+		
+	}
+
 	
 
 }
