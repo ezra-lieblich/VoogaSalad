@@ -8,5 +8,5 @@ public interface EffectAuthoringViewDelegate {
 
     public void onUserEnteredCondition (String condition);
 
-    public void onUserEnteredEffect (String effect);
+    public void onUserSelectedEffect (String effect);
 }

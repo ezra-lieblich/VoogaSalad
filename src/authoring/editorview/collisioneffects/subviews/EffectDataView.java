@@ -1,5 +1,23 @@
 package authoring.editorview.collisioneffects.subviews;
 
-public class EffectDataView {
+import authoring.editorview.collisioneffects.EffectAuthoringViewDelegate;
+import authoring.editorview.collisioneffects.EffectSetView;
+import javafx.scene.Node;
+
+
+public class EffectDataView implements EffectSetView {
+
+    private EffectAuthoringViewDelegate delegate;
+
+    @Override
+    public Node getInstanceAsNode () {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public void setDelegate (EffectAuthoringViewDelegate delegate) {
+        this.delegate = delegate;
+    }
 
 }

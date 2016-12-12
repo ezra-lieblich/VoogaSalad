@@ -37,7 +37,7 @@ public class EffectController extends EditorViewController
     }
 
     @Override
-    public void onUserEnteredEffect (String effect) {
+    public void onUserSelectedEffect (String effect) {
         effectsDataSource.setEffect(currentEffectID, effect);
     }
 
