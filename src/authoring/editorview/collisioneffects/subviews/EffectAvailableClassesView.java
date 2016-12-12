@@ -18,6 +18,7 @@ import javafx.scene.control.Label;
 public class EffectAvailableClassesView extends ImageBank implements EffectSetView {
 
     private EffectAuthoringViewDelegate delegate;
+    private List<String> listItems;
 
     public EffectAvailableClassesView () {
         super();
@@ -32,8 +33,8 @@ public class EffectAvailableClassesView extends ImageBank implements EffectSetVi
 
     @Override
     protected void userSelectedRow (int index) {
-        // TODO Auto-generated method stub
-
+        String selectedClass = this.listItems.get(index);
+        this.delegate.onUserSelectedAvailableClass(selectedClass);
     }
 
     @Override
@@ -53,10 +54,11 @@ public class EffectAvailableClassesView extends ImageBank implements EffectSetVi
             return;
         }
         this.items.remove(CONTENT_OFFSET, items.size());
-        itemIDs = new ArrayList<Integer>();
+        listItems = new ArrayList<String>();
 
         for (int i = 0; i < list.size(); i++) {
             Label temp = new Label(list.get(i));
+            listItems.add(list.get(i));
             Node cell = temp;
             items.add(cell);
         }

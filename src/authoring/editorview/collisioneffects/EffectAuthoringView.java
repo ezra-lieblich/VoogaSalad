@@ -96,6 +96,11 @@ public class EffectAuthoringView implements EffectUpdateView {
     }
 
     @Override
+    public EffectAvailableMethodsView getEffectAvailMethods () {
+        return effectAvailMethods;
+    }
+
+    @Override
     public void updateConditionField (String condition) {
         conditionField.updateField(condition);
     }

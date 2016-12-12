@@ -55,6 +55,10 @@ public class EffectAuthoringViewController extends EditorViewController
     @Override
     public void onUserSelectedAvailableClass (String selectedClass) {
         effectDataSource.setAvailableClass(selectedClass);
+        System.out.println(selectedClass);
+        effectAuthoringView.getEffectAvailMethods()
+                .updateAvailMethods(effectDataSource.getAvailableClassMethods(selectedClass));
+        // effectAuthoringView.effectDataSource.getAvailableClassMethods(selectedClass)
         // TODO: This also needs to update the available methods
     }
 
