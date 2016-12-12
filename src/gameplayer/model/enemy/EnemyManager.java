@@ -46,7 +46,7 @@ public class EnemyManager extends Observable {
 		this.allWaveFrequencies = new LinkedList<Double>();
 		this.allWaveStartTimes = new LinkedList<Double>();
 		this.enemiesOnScreen =enemiesOnScreen;
-		initializeNewLevel();
+		//initializeNewLevel();
 	}
 
 	public void initializeNewLevel(){
@@ -93,8 +93,9 @@ public class EnemyManager extends Observable {
 		enemy.setyDirection(this.grid.getPath(enemy.getPathID()).getNext(enemy.getCurrentCell()).getY()
 				- enemy.getCurrentCell().getY());
 		*/
-		enemy.setxDirection(enemy.getCurrentCell().getNext().getX() - enemy.getCurrentCell().getX());
-		enemy.setyDirection(enemy.getCurrentCell().getNext().getY() - enemy.getCurrentCell().getY());
+		Cell nextCell = this.grid.getNext(enemy.getPathID(), enemy.getCurrentCell());
+		enemy.setxDirection(nextCell.getX() - enemy.getCurrentCell().getX());
+		enemy.setyDirection(nextCell.getY() - enemy.getCurrentCell().getY());
 		enemy.setX(gameData.cellToCoordinate(enemy.getCurrentCell().getX()));
 		enemy.setY(gameData.cellToCoordinate(enemy.getCurrentCell().getY()));
 		enemyOnGrid.put(enemy.getUniqueID(), enemy);
@@ -114,8 +115,9 @@ public class EnemyManager extends Observable {
 
 		while (moveDist > 0) {
 			try {
-				double deltaX = Math.abs(gameData.cellToCoordinate(enemy.getCurrentCell().getNext().getX()) - enemy.getX());
-				double deltaY = Math.abs(gameData.cellToCoordinate(enemy.getCurrentCell().getNext().getY()) - enemy.getY());
+				Cell nextCell = this.grid.getNext(enemy.getPathID(), enemy.getCurrentCell());
+				double deltaX = Math.abs(gameData.cellToCoordinate(nextCell.getX()) - enemy.getX());
+				double deltaY = Math.abs(gameData.cellToCoordinate(nextCell.getY()) - enemy.getY());
 				distToMove = deltaX + deltaY;
 			} catch (NullPointerException exception) { // enemy is currently at
 				// last cell on path
@@ -135,16 +137,18 @@ public class EnemyManager extends Observable {
 			if (moveDist >= distToMove) { // can move to center of next cell
 				enemy.setX(enemy.getX() + enemy.getxDirection() * distToMove);
 				enemy.setY(enemy.getY() + enemy.getyDirection() * distToMove);
-				enemy.setCurrentCell(enemy.getCurrentCell().getNext());
-				if (enemy.getCurrentCell().getNext() == null) {
+				Cell nextCell = this.grid.getNext(enemy.getPathID(), enemy.getCurrentCell());
+				enemy.setCurrentCell(nextCell);
+				if (enemy.getCurrentCell().equals(this.grid.getEnd())) {
 					if (gameData.getLife() >= 0) {
 						gameData.setLife(gameData.getLife() - 1);
 					}
 					enemy.setRemove(true);
 					return;
 				}
-				enemy.setxDirection(enemy.getCurrentCell().getNext().getX() - enemy.getCurrentCell().getX());
-				enemy.setyDirection(enemy.getCurrentCell().getNext().getY() - enemy.getCurrentCell().getY());
+				Cell nCell = this.grid.getNext(enemy.getPathID(), enemy.getCurrentCell());
+				enemy.setxDirection(nCell.getX() - enemy.getCurrentCell().getX());
+				enemy.setyDirection(nCell.getY() - enemy.getCurrentCell().getY());
 				moveDist -= distToMove;
 			} else {
 				enemy.setX(enemy.getX() + enemy.getxDirection() * moveDist);

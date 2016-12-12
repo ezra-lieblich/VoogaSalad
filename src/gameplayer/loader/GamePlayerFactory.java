@@ -178,7 +178,7 @@ public class GamePlayerFactory{
 
 
 	public Queue<Wave> getWaves(int levelNumber) {
-		Level level = this.authoringFileReader.getLevelManager().getEntity(levelNumber);
+		Level level = this.authoringFileReader.getLevelManager().getEntity(levelNumber);//NEED TO CHANGE
 		List<Wave> waves = level.getWaves();
 		Queue<Wave> ret = new LinkedList<Wave>();
 		waves.forEach(w -> ret.add(w));
