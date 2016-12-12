@@ -1,6 +1,5 @@
 package authoring.editorview.collisioneffects.subviews;
 
-import java.io.File;
 import java.util.List;
 import authoring.editorview.ImageBank;
 import authoring.editorview.ListCellData;
@@ -8,8 +7,6 @@ import authoring.editorview.collisioneffects.EffectAuthoringViewDelegate;
 import authoring.editorview.collisioneffects.EffectSetView;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 
 /**
@@ -32,7 +29,7 @@ public class EffectBank extends ImageBank implements EffectSetView {
         // TODO Auto-generated method stub
 
     }
-    
+
     public void updateEffectBank (List<Integer> activeEffects) {
         super.updateBank(activeEffects);
     }

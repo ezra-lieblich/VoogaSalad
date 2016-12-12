@@ -79,6 +79,9 @@ public class EffectAuthoringView implements EffectUpdateView {
     @Override
     public void setEffectListDataSource (ListDataSource source) {
         this.effectBank.setListDataSource(source);
+        this.effectAvailClasses.setListDataSource(source);
+        this.effectAvailMethods.setListDataSource(source);
+        this.effectDataObjects.setListDataSource(source);
     }
 
     @Override
@@ -100,7 +103,7 @@ public class EffectAuthoringView implements EffectUpdateView {
 
     @Override
     public void updateListedAvailableClasses (List<String> availClasses) {
-        // effectAvailClasses.updateBank(availClasses);
+        effectAvailClasses.updateAvailClasses(availClasses);
     }
 
     @Override

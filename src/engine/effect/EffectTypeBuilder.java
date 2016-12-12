@@ -17,7 +17,7 @@ import engine.observer.ObservableProperty;
 
 public class EffectTypeBuilder extends AbstractTypeBuilder<Effect, EffectBuilder> implements EffectBuilder, EffectInitializer {
     
-    public static final String DEFAULT_NAME = "New Enemy";
+    public static final String DEFAULT_NAME = "New Effect";
     public static final String DEFAULT_IMAGE_PATH = "Images/butterfly.png";
     public static final double DEFAULT_SIZE = 1;
     public static final String DEFAULT_TRIGGER_CLASS = "engine.effect.Enemy";

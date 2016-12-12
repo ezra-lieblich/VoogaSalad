@@ -1,6 +1,7 @@
 package authoring.editorview.collisioneffects.subviews;
 
 import java.util.ResourceBundle;
+import authoring.editorview.ImageBank;
 import authoring.editorview.collisioneffects.EffectAuthoringViewDelegate;
 import authoring.editorview.collisioneffects.EffectSetView;
 import authoring.editorview.collisioneffects.subviews.editorfields.EffectNameField;

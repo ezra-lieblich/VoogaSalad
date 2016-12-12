@@ -167,9 +167,12 @@ public class EnemyAuthoringViewController extends EditorViewController
 
     @Override
     public void onUserPressedAddEffect () {
-        EffectAuthoringViewController effectAuthoringView = new EffectAuthoringViewController(effectDataSource);
+        EffectAuthoringViewController effectAuthoringView =
+                new EffectAuthoringViewController(effectDataSource);
         effectDataSource.createType(effectAuthoringView.getEffectAuthoringView());
         effectAuthoringView.setEffectOptions(effectDataSource.getCreatedTypeIds());
+        effectAuthoringView.setAvailClasses(effectDataSource.getAvailableClasses());
+        System.out.println(effectDataSource.getAvailableClasses());
         effectAuthoringView.openEffectView();
     }
 

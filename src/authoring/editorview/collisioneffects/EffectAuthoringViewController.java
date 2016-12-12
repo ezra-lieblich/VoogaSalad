@@ -29,8 +29,12 @@ public class EffectAuthoringViewController extends EditorViewController
         this.effectsDataSource.addTypeBankListener(this.effectAuthoringView);
     }
 
-    public void setEffectOptions (List<Integer> list) {
-        effectAuthoringView.updateEffectBank(list);
+    public void setEffectOptions (List<Integer> effects) {
+        effectAuthoringView.updateEffectBank(effects);
+    }
+
+    public void setAvailClasses (List<String> classes) {
+        effectAuthoringView.updateListedAvailableClasses(classes);
     }
 
     public EffectUpdateView getEffectAuthoringView () {
