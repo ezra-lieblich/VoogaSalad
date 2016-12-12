@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ResourceBundle;
 import authoring.editorview.PhotoFileChooser;
-import authoring.editorview.weapon.IWeaponSetView;
+import authoring.editorview.weapon.WeaponSetView;
 import authoring.editorview.weapon.WeaponAuthoringViewDelegate;
 import authoring.editorview.weapon.subviews.editorfields.WeaponFireRateField;
 import authoring.editorview.weapon.subviews.editorfields.WeaponImageView;
@@ -37,7 +37,7 @@ import javafx.stage.Stage;
  * @author Kayla Schulz
  *
  */
-public class WeaponEditorView extends PhotoFileChooser implements IWeaponSetView {
+public class WeaponEditorView extends PhotoFileChooser implements WeaponSetView {
 
     private VBox vboxView;
     private AnchorPane rootBuffer;
