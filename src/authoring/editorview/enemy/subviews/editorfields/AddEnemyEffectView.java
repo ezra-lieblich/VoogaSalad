@@ -31,6 +31,7 @@ public class AddEnemyEffectView implements EnemySetView {
         addEnemyEffectButton =
                 ButtonFactory.makeButton(labelsResource.getString("AddEffect"),
                                          e -> delegate.onUserPressedAddEffect());
+        addEnemyEffectButton.setPrefWidth(280);
     }
 
 }

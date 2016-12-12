@@ -55,6 +55,7 @@ public class TowerAuthoringViewController extends EditorViewController
         towerView.updateTowerBuyPriceDisplay(towerDataSource.getTowerBuyPrice(currentTowerID));
         towerView.updateTowerSellPriceDisplay(towerDataSource.getTowerSellPrice(currentTowerID));
         towerView.updateUnlockLevelDisplay(towerDataSource.getTowerUnlockLevel(currentTowerID));
+        towerView.updateTowerUpgradeBank(towerDataSource.getTowerUpgrades(currentTowerID));
     }
 
     @Override
@@ -180,8 +181,7 @@ public class TowerAuthoringViewController extends EditorViewController
 
     @Override
     public void onUserPressedCreateTowerUpgrade () {
-        // TODO: Fix this shit
-        towerDataSource.createTowerUpgrade(this.towerView, 0);
+        towerDataSource.createTowerUpgrade(this.towerView, this.currentTowerID);
     }
 
     @Override

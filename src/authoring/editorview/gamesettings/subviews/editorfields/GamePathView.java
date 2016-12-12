@@ -20,9 +20,10 @@ public class GamePathView implements GameSettingsSetView {
 
 	private GridPane root;
 	private GameSettingsAuthoringViewDelegate delegate;
-	private CheckComboBox<Object> pathCheckComboBox;
-	private ObservableList<Object> availablePathList;
+	private CheckComboBox<String> pathCheckComboBox;
+	private ObservableList<String> availablePathList;
 	private List<NameIdPair> pathNameIdList;
+	private List<Integer> pathList;
 	
 	public GamePathView(ResourceBundle settingsResource){
 		root = new GridPane();
@@ -34,7 +35,7 @@ public class GamePathView implements GameSettingsSetView {
 		availablePathList = FXCollections.observableArrayList();		
 		
 		
-		pathCheckComboBox = ComboBoxFactory.makeCheckComboBox(availablePathList, a -> setPathIDFromName((String) a));
+		pathCheckComboBox = ComboBoxFactory.makeCheckComboBox(availablePathList, a -> setPathIDFromName(a));
 		pathCheckComboBox.setPrefWidth(105);
 		root = GridFactory.createRowWithLabelandNode(settingsResource.getString("Path"), pathCheckComboBox, 125);
 		
@@ -50,9 +51,9 @@ public class GamePathView implements GameSettingsSetView {
 		this.delegate = delegate;	
 	}
 	
-	private void setPathIDFromName(String pathName){
+	private void setPathIDFromName(List<String> pathNames){
 		for (NameIdPair pair : pathNameIdList){
-			if (pair.getName() == pathName){
+			if (pathNames.contains(pair.getName()) && !pathList.contains(pair.getId())){
 				delegate.onUserEnteredPath(pair.getId());
 			}
 		}		
@@ -60,6 +61,8 @@ public class GamePathView implements GameSettingsSetView {
 	
 	
 	public void setPathList(List<Integer> pathList){
+		
+		this.pathList = pathList;
 		for (Integer id : pathList){
 			for (NameIdPair pair : pathNameIdList){
 				if (pair.getId() == id){
