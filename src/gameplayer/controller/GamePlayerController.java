@@ -492,6 +492,25 @@ public class GamePlayerController implements Observer {
 			}
 		}
 	}
+	/*
+	private void redraw(HashMap<Integer, ?> enemyRedraw){
+		for (int i : enemyRedraw.keySet()) {
+			if (!enemiesOnScreen.containsKey(enemyRedraw.get(i).getUniqueID())) {
+				ImageView image = new ImageView(graphics.createImage(enemyRedraw.get(i).getImage()));
+				graphics.setImageViewParams(image, DragDropView.DEFENSIVEWIDTH * 0.9,
+						DragDropView.DEFENSIVEHEIGHT * 0.9);
+				image.setCache(true);
+				image.setCacheHint(CacheHint.SPEED);
+				image.setX(enemyRedraw.get(i).getX());
+				image.setY(enemyRedraw.get(i).getY());
+				enemiesOnScreen.put(enemyRedraw.get(i).getUniqueID(), image);
+			} else {
+				enemiesOnScreen.get(enemyRedraw.get(i).getUniqueID()).setX(enemyRedraw.get(i).getX());
+				enemiesOnScreen.get(enemyRedraw.get(i).getUniqueID()).setY(enemyRedraw.get(i).getY());
+			}
+		}
+	}
+	*/
 
 	public HashMap<String, Image> createImageBank() {
 		Map<Integer, engine.tower.Tower> towers = this.loader.getTowers();

@@ -269,28 +269,6 @@ public class GameGUI {
 		}
 	}
 
-	/*
-	 * public void reRenderTower(List<IDrawable> redraw) {// should be interface
-	 * of // drawables ArrayList<int[]> towerCoords = (ArrayList<int[]>)
-	 * this.getDroppedTowerCoords(); int i = 0;
-	 * 
-	 * for (IDrawable entity : redraw) {
-	 * //System.out.println("Invalid image?"+entity.getImage().toString());
-	 * ImageView image = new
-	 * ImageView(graphics.createImage(entity.getImage().toString())); if (i <
-	 * towerCoords.size() && towerCoords.get(i).length > 1) { //
-	 * System.out.println("TOWER BEING RENDERED?!");
-	 * image.setX(towerCoords.get(i)[0]); image.setY(towerCoords.get(i)[1]);
-	 * graphics.setImageViewParams(image, DragDropView.DEFENSIVEWIDTH,
-	 * DragDropView.DEFENSIVEHEIGHT);
-	 * this.grid.getGrid().getChildren().add(image); if (entity instanceof
-	 * Tower) { //System.out.println("Tower added"); ((Tower)
-	 * entity).getInfoBox().setLayoutX(image.getX()); ((Tower)
-	 * entity).getInfoBox().setLayoutY(image.getY() + image.getFitHeight());
-	 * this.grid.getGrid().getChildren().add(((Tower) entity).getInfoBox()); }
-	 * i++; } } }
-	 */
-
 	public void reRenderEnemy(HashMap<Integer, ImageView> redraw) {
 		for (ImageView image : redraw.values()) {
 			this.grid.getGrid().getChildren().add(image);
