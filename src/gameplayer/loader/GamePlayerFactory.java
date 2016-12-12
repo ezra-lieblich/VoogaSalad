@@ -127,7 +127,7 @@ public class GamePlayerFactory{
 					Cell currCell = new Cell(c.getX(), c.getY());
 					cells.add(currCell);
 				});
-				
+				levelGrid.setNoPath(true);
 				levelGrid.setStart(cells.get(0));
 				levelGrid.setEnd(cells.get(1));
 				//gameplayer.model.Path newPath = new gameplayer.model.Path(cells, levelGrid.getGrid());
