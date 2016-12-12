@@ -4,6 +4,7 @@ import java.lang.reflect.Method;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import authoring.editorview.collisioneffects.EffectUpdateView;
 import authoring.editorview.enemy.EnemyUpdateView;
 import engine.AbstractTypeManagerController;
 import engine.ManagerMediator;
@@ -18,7 +19,7 @@ import engine.tower.TowerTypeManager;
 
 
 public class EffectTypeManagerController extends
-        AbstractTypeManagerController<EffectManager, EffectBuilder, Effect, EffectView>
+        AbstractTypeManagerController<EffectManager, EffectBuilder, Effect, EffectUpdateView>
         implements EffectManagerController {
     public static final Class<? extends AbstractEffectFactory> DEFAULT_EFFECT_FACTORY = AbstractEffectFactory.class;
     
@@ -50,7 +51,7 @@ public class EffectTypeManagerController extends
      * @see engine.effect.EffectManagerController#getTriggers()
      */
     @Override
-    public void addActiveClassListener(EffectView updateView) {
+    public void addActiveClassListener(EffectUpdateView updateView) {
         getTypeManager().addActiveClassListener((oldValue, newValue) -> {
                 updateView.updateTriggers(getAvailableClassMethods(newValue));
         });
@@ -96,7 +97,7 @@ public class EffectTypeManagerController extends
     
 
     @Override
-    protected EffectBuilder constructTypeProperties (EffectView updateView,
+    protected EffectBuilder constructTypeProperties (EffectUpdateView updateView,
                                                      EffectBuilder typeBuilder) {
         return typeBuilder;
 //                .addTriggerClassListener( (oldValue, newValue) -> updateView

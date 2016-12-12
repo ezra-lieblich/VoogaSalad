@@ -2,7 +2,9 @@ package authoring.editorview.level;
 
 import java.util.ResourceBundle;
 import authoring.editorview.EditorViewController;
+import authoring.editorview.collisioneffects.EffectAuthoringViewController;
 import authoring.utilityfactories.DialogueBoxFactory;
+import engine.effect.EffectManagerController;
 import engine.enemy.EnemyManagerController;
 import engine.level.LevelManagerController;
 
@@ -19,6 +21,7 @@ public class LevelAuthoringViewController extends EditorViewController
     private LevelUpdateView levelView;
     private LevelManagerController levelDataSource;
     private EnemyManagerController enemyDataSource;
+    private EffectManagerController effectDataSource;
     private int currentLevelID;
     private int currentWaveID;
 
@@ -31,6 +34,7 @@ public class LevelAuthoringViewController extends EditorViewController
     public void setLevelDataSource (LevelManagerController source) {
         this.levelDataSource = source;
         this.levelDataSource.addTypeBankListener(this.levelView);
+        effectDataSource = levelDataSource.getEffectManagerController();
         onUserEnteredCreateLevel();
     }
 
@@ -59,12 +63,7 @@ public class LevelAuthoringViewController extends EditorViewController
     @Override
     public void onUserEnteredCreateLevel () {
         currentLevelID = levelDataSource.createType(levelView);
-        levelView.updateTransitionTime(levelDataSource.getTransitionTime(currentLevelID));
-        levelView.updateRewardHealth(levelDataSource.getRewardHealth(currentLevelID));
-        levelView.updateRewardMoney(levelDataSource.getRewardMoney(currentLevelID));
-        levelView.updateRewardScore(levelDataSource.getRewardScore(currentLevelID));
-        levelView.updateNameDisplay(levelDataSource.getName(currentLevelID));
-        levelView.updateWaves(levelDataSource.getWaveStrings(currentLevelID));
+        refreshView();
     }
 
     @Override
@@ -99,7 +98,6 @@ public class LevelAuthoringViewController extends EditorViewController
     @Override
     public void onUserEnteredAddWave () {
         currentWaveID = levelDataSource.createWave(currentLevelID, levelView);
-        // levelView.updateNumberOfEnemies(levelDataSource.getenem);
     }
 
     @Override
@@ -197,7 +195,33 @@ public class LevelAuthoringViewController extends EditorViewController
 
     @Override
     public void onUserPressedAddEffect () {
-        // TODO Auto-generated method stub
-
+        EffectAuthoringViewController effectAuthoringView =
+                new EffectAuthoringViewController(effectDataSource);
+        effectDataSource.createType(effectAuthoringView.getEffectAuthoringView());
+        effectAuthoringView.setEffectOptions(effectDataSource.getCreatedTypeIds());
+        effectAuthoringView.setAvailClasses(effectDataSource.getAvailableClasses());
+        effectAuthoringView.setAvailDataObjects(effectDataSource.getAvailableDataObjects());
+        effectAuthoringView.openEffectView();
     }
+
+    @Override
+    public void refreshView () {
+        levelView.updateTransitionTime(levelDataSource.getTransitionTime(currentLevelID));
+        levelView.updateRewardHealth(levelDataSource.getRewardHealth(currentLevelID));
+        levelView.updateRewardMoney(levelDataSource.getRewardMoney(currentLevelID));
+        levelView.updateRewardScore(levelDataSource.getRewardScore(currentLevelID));
+        levelView.updateNameDisplay(levelDataSource.getName(currentLevelID));
+        levelView.updateWaves(levelDataSource.getWaveStrings(currentLevelID));
+    }
+
+	@Override
+	public void onUserSelectedLevel(int levelID) {
+		currentLevelID = levelID;
+        refreshView();
+	}
+
+	@Override
+	public void onUserEnteredLevelImagePath(String path) {
+        levelDataSource.setImagePath(currentLevelID, path);
+	}
 }

@@ -177,6 +177,7 @@ public class GamePlayerController implements Observer {
 	 */
 	private void initSaveGameButton() {
 		this.view.saveButton(e -> {
+			System.out.println("saving game maybe?");
 			this.gameSavingController.saveGame();
 			//TODO: end game?
 		});
@@ -437,6 +438,7 @@ public class GamePlayerController implements Observer {
 	public Timeline getTimeline() {
 		return this.animation;
 	}
+
 	
 	
 	private void removeValFromMap(Map<Integer, ?> map, Iterator<Integer> it){

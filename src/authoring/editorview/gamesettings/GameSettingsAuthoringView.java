@@ -122,7 +122,7 @@ public class GameSettingsAuthoringView implements GameSettingsUpdateView, GameSe
 
 	@Override
 	public void updatePathList(List<Integer> pathList) {
-		// TODO Auto-generated method stub
+		gameSettingsEditor.updatePathList(pathList);
 		
 	}
 
@@ -139,6 +139,7 @@ public class GameSettingsAuthoringView implements GameSettingsUpdateView, GameSe
 	@Override
 	public void updateAvailablePaths(List<Integer> availablePathList) {
 		gameSettingsEditor.updateAvailablePathList(availablePathList);
+		System.out.println("hello");
 		
 	}
 

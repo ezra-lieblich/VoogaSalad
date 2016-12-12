@@ -15,5 +15,9 @@ public interface Type {
     void setSize (double size);
     
     int getId ();
+    
+    String getSound();
+    
+    void setSound(String soundPath);
 
 }

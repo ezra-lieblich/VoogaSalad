@@ -14,4 +14,6 @@ public abstract class EditorViewController {
     public IUpdateView getUpdateView () {
         return (IUpdateView) this.view;
     }
+
+    public abstract void refreshView ();
 }

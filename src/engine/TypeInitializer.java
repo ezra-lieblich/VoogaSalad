@@ -10,6 +10,8 @@ public interface TypeInitializer {
 
     ObservableProperty<Double> getSize ();
     
+    ObservableProperty<String> getSound ();
+    
     int getId ();
     
 }
