@@ -5,6 +5,7 @@ import authoring.editorview.TextFieldView;
 import authoring.editorview.enemy.EnemyAuthoringViewDelegate;
 import authoring.editorview.enemy.EnemySetView;
 import authoring.utilityfactories.BoxFactory;
+import authoring.utilityfactories.GridFactory;
 import authoring.utilityfactories.TextFieldFactory;
 import javafx.scene.Node;
 import javafx.scene.control.TextField;
@@ -26,7 +27,7 @@ public class EnemyRewardPointsField extends TextFieldView implements EnemySetVie
 
     @Override
     public Node getInstanceAsNode () {
-        return hbox;
+        return root;
     }
 
     @Override
@@ -41,8 +42,11 @@ public class EnemyRewardPointsField extends TextFieldView implements EnemySetVie
                                                e -> delegate
                                                        .onUserEnteredEnemyPoints(enemyRewardPointsField
                                                                .getText()));
-        hbox = BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("RewardPoints"),
-                                                     enemyRewardPointsField);
+        enemyRewardPointsField.setPrefWidth(110);
+        root = GridFactory.createRowWithLabelandNode(
+        		labelsResource.getString("RewardPoints"), 
+        		enemyRewardPointsField, 
+        		170);
     }
 
 }

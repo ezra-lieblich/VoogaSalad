@@ -5,6 +5,7 @@ import authoring.editorview.TextFieldView;
 import authoring.editorview.enemy.EnemyAuthoringViewDelegate;
 import authoring.editorview.enemy.EnemySetView;
 import authoring.utilityfactories.BoxFactory;
+import authoring.utilityfactories.GridFactory;
 import authoring.utilityfactories.TextFieldFactory;
 import javafx.scene.control.TextField;
 
@@ -35,9 +36,12 @@ public class EnemyDamageField extends TextFieldView implements EnemySetView {
                                                e -> delegate
                                                        .onUserEnteredEnemyDamage(enemyDamageField
                                                                .getText()));
-        hbox =
-                BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Damage"),
-                                                      enemyDamageField);
+        enemyDamageField.setPrefWidth(110);
+        root = GridFactory.createRowWithLabelandNode(
+        		labelsResource.getString("Damage"), 
+        		enemyDamageField, 
+        		170);
+                
     }
 
     @Override
