@@ -18,5 +18,8 @@ public class WinEffectFactory extends AbstractEffectFactory {
     
     public WinEffectFactory (GamePlayData data) {
         super(TRIGGER_NAME, ENCOMPASSING_CLASS_NAME);
+        gamePlayData = data;
+        loadInSpecificValues();
+
     }
 }
