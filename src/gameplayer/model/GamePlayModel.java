@@ -91,7 +91,6 @@ public class GamePlayModel extends Observable {
 		this.weaponManager.initializeNewLevel();
 		this.towerManager.updateAvailableTower();
 		this.enemyManager.initializeNewLevel();
-
 	}
 
 	/*
