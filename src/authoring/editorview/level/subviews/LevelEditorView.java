@@ -8,6 +8,7 @@ import authoring.editorview.PhotoFileChooser;
 import authoring.editorview.level.LevelAuthoringViewDelegate;
 import authoring.editorview.level.LevelSetView;
 import authoring.editorview.level.subviews.editorfields.AddLevelEffectView;
+import authoring.editorview.level.subviews.editorfields.CreateNewLevelView;
 import authoring.editorview.level.subviews.editorfields.LevelNameView;
 import authoring.editorview.level.subviews.editorfields.LevelRewardsView;
 import authoring.editorview.level.subviews.editorfields.LevelTransitionTimeField;
@@ -42,6 +43,7 @@ public class LevelEditorView extends PhotoFileChooser implements LevelSetView {
 	WaveTableView waveTableView;
 	PreviewLevelView previewLevelView;
 	AddLevelEffectView addLevelEffect;
+	CreateNewLevelView createNewLevelView;
 	
     private VBox vbox;
     private AnchorPane rootBuffer;
@@ -52,13 +54,15 @@ public class LevelEditorView extends PhotoFileChooser implements LevelSetView {
     
 	public LevelEditorView(LevelRewardsView levelRewardsView, LevelNameView levelNameView,
 			LevelTransitionTimeField transitionTimeField, WaveTableView waveTableView,
-			PreviewLevelView previewLevelView, AddLevelEffectView addLevelEffect) {
+			PreviewLevelView previewLevelView, AddLevelEffectView addLevelEffect, 
+			CreateNewLevelView createNewLevelView) {
 		this.levelRewardsView = levelRewardsView;
 		this.levelNameView = levelNameView;
 		this.transitionTimeField = transitionTimeField;
 		this.waveTableView = waveTableView;
 		this.previewLevelView = previewLevelView;
 		this.addLevelEffect = addLevelEffect;
+		this.createNewLevelView = createNewLevelView;
 		
         vbox = new VBox(10);
         rootBuffer = new AnchorPane();
@@ -73,28 +77,13 @@ public class LevelEditorView extends PhotoFileChooser implements LevelSetView {
 	     rootBuffer
          .setBorder(new Border(new BorderStroke(Color.GRAY, BorderStrokeStyle.SOLID,
                                                 CornerRadii.EMPTY, new BorderWidths(0.5))));
- rootBuffer
+	     rootBuffer
          .setBackground(new Background(new BackgroundFill(Color.rgb(235, 235, 235),
                                                           CornerRadii.EMPTY, Insets.EMPTY)));
 
- //vbox.getChildren().add(towerImage.getInstanceAsNode());
- Button imageButton = ButtonFactory.makeButton(labelsResource.getString("Image"),
-                                               e -> {
-                                                   try {
-                                                       selectFile(labelsResource
-                                                               .getString("Image"),
-                                                                  labelsResource
-                                                                          .getString("Photos"));
-                                                   }
-                                                   catch (IOException e1) {
-                                                       DialogueBoxFactory
-                                                               .createErrorDialogueBox(dialogueBoxResource
-                                                                       .getString("UnableToOpen"),
-                                                                                       dialogueBoxResource
-                                                                                               .getString("TryAgain"));
-                                                   }
-                                               });
- imageButton.setPrefWidth(380);
+ 		vbox.getChildren().addAll(levelRewardsView.getInstanceAsNode(), levelNameView.getInstanceAsNode(),
+ 									transitionTimeField.getInstanceAsNode(), createNewLevelView.getInstanceAsNode(),
+ 									waveTableView.getInstanceAsNode(), previewLevelView.getInstanceAsNode());
 	}
 
 	@Override
