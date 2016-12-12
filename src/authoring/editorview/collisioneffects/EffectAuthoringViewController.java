@@ -61,4 +61,10 @@ public class EffectAuthoringViewController extends EditorViewController
         return null;
     }
 
+    @Override
+    public void refreshView () {
+        // TODO Auto-generated method stub
+
+    }
+
 }

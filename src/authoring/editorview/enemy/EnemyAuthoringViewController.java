@@ -40,7 +40,7 @@ public class EnemyAuthoringViewController extends EditorViewController
         onUserPressedCreateEnemy();
     }
 
-    private void refreshEnemyView () {
+    public void refreshView () {
         enemyView.updateImagePathDisplay(enemyDataSource.getImagePath(currentEnemyID));
         enemyView.updateNameDisplay(enemyDataSource.getName(currentEnemyID));
         enemyView.updateSizeDisplay(enemyDataSource.getSize(currentEnemyID));
@@ -54,7 +54,7 @@ public class EnemyAuthoringViewController extends EditorViewController
     @Override
     public void onUserPressedCreateEnemy () {
         currentEnemyID = enemyDataSource.createType(enemyView);
-        refreshEnemyView();
+        refreshView();
     }
 
     @Override
@@ -137,7 +137,7 @@ public class EnemyAuthoringViewController extends EditorViewController
         int nextID = this.enemyView.getNearestAvailableItemID(currentEnemyID);
         enemyDataSource.deleteType(currentEnemyID);
         currentEnemyID = nextID;
-        this.refreshEnemyView();
+        this.refreshView();
     }
 
     @Override
@@ -164,7 +164,7 @@ public class EnemyAuthoringViewController extends EditorViewController
     @Override
     public void onUserSelectedEnemy (int enemyID) {
         currentEnemyID = enemyID;
-        refreshEnemyView();
+        refreshView();
     }
 
     @Override

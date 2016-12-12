@@ -46,10 +46,10 @@ public class TowerAuthoringViewController extends EditorViewController
     @Override
     public void onUserPressedCreateNewTower () {
         currentTowerID = towerDataSource.createType(towerView);
-        refreshTowerView();
+        refreshView();
     }
 
-    private void refreshTowerView () {
+    public void refreshView () {
         towerView.updateImagePathDisplay(towerDataSource.getImagePath(currentTowerID));
         towerView.updateNameDisplay(towerDataSource.getName(currentTowerID));
         towerView.updateSizeDisplay(towerDataSource.getSize(currentTowerID));
@@ -161,7 +161,7 @@ public class TowerAuthoringViewController extends EditorViewController
     @Override
     public void onUserSelectedTower (int towerID) {
         currentTowerID = towerID;
-        refreshTowerView();
+        refreshView();
     }
 
     @Override

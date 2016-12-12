@@ -176,7 +176,6 @@ public class AuthoringController {
         enemyVC.setEnemyDataSource(enemyModel);
         levelVC.setEnemyDataSource(enemyModel);
         levelVC.setLevelDataSource(levelModel);
-        // levelVC.
         weaponVC.setWeaponDataSource(weaponModel);
         towerVC.setTowerDataSource(towerModel);
         setupVC.setGameSettingsDataSource(settingsModel, pathModel);
