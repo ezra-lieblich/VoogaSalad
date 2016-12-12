@@ -200,13 +200,16 @@ public class LevelAuthoringViewController extends EditorViewController
 
     @Override
     public void onUserPressedAddEffect () {
-        EffectAuthoringViewController effectAuthoringView = new EffectAuthoringViewController(effectDataSource);
+        EffectAuthoringViewController effectAuthoringView =
+                new EffectAuthoringViewController(effectDataSource);
+        effectDataSource.createType(effectAuthoringView.getEffectAuthoringView());
+        effectAuthoringView.setEffectOptions(effectDataSource.getCreatedTypeIds());
         effectAuthoringView.openEffectView();
     }
 
     @Override
     public void refreshView () {
         // TODO Auto-generated method stub
-        
+
     }
 }

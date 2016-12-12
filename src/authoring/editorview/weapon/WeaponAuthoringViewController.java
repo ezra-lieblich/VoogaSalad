@@ -149,6 +149,8 @@ public class WeaponAuthoringViewController extends EditorViewController
     @Override
     public void onUserPressedAddEffect () {
         EffectAuthoringViewController effectAuthoringView = new EffectAuthoringViewController(effectDataSource);
+        effectDataSource.createType(effectAuthoringView.getEffectAuthoringView());
+        effectAuthoringView.setEffectOptions(effectDataSource.getCreatedTypeIds());
         effectAuthoringView.openEffectView();
     }
 

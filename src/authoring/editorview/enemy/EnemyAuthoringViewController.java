@@ -170,7 +170,6 @@ public class EnemyAuthoringViewController extends EditorViewController
         EffectAuthoringViewController effectAuthoringView = new EffectAuthoringViewController(effectDataSource);
         effectDataSource.createType(effectAuthoringView.getEffectAuthoringView());
         effectAuthoringView.setEffectOptions(effectDataSource.getCreatedTypeIds());
-        System.out.println(effectDataSource.getCreatedTypeIds());
         effectAuthoringView.openEffectView();
     }
 

@@ -4,7 +4,6 @@ import java.util.ResourceBundle;
 import authoring.editorview.EditorViewController;
 import authoring.editorview.ListCellData;
 import authoring.editorview.ListDataSource;
-import authoring.editorview.collisioneffects.EffectAuthoringView;
 import authoring.editorview.collisioneffects.EffectAuthoringViewController;
 import authoring.utilityfactories.DialogueBoxFactory;
 import engine.effect.EffectManagerController;
@@ -187,7 +186,10 @@ public class TowerAuthoringViewController extends EditorViewController
 
     @Override
     public void onUserPressedAddEffect () {
-        EffectAuthoringViewController effectAuthoringView = new EffectAuthoringViewController(effectDataSource);
+        EffectAuthoringViewController effectAuthoringView =
+                new EffectAuthoringViewController(effectDataSource);
+        effectDataSource.createType(effectAuthoringView.getEffectAuthoringView());
+        effectAuthoringView.setEffectOptions(effectDataSource.getCreatedTypeIds());
         effectAuthoringView.openEffectView();
     }
 
