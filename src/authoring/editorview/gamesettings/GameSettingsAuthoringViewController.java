@@ -102,5 +102,11 @@ public class GameSettingsAuthoringViewController extends EditorViewController
 		
 	}
 
+    @Override
+    public void refreshView () {
+        // TODO Auto-generated method stub
+        
+    }
+
     
 }
