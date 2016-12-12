@@ -109,7 +109,8 @@ public class PathAuthoringView implements PathUpdateView {
 
     @Override
     public void updateType (String pathType) {
-        pathEditor.updataPathType(pathType);
+        System.out.println(pathType);
+    	pathEditor.updataPathType(pathType);
 
     }
 

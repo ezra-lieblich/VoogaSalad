@@ -23,20 +23,21 @@ public class GamePathView implements GameSettingsSetView {
 	private CheckComboBox<String> pathCheckComboBox;
 	private ObservableList<String> availablePathList;
 	private List<NameIdPair> pathNameIdList;
-	private List<Integer> pathList;
+	private List<Integer> pathIdList;
+	private List<String> pathNameList;
 	
 	public GamePathView(ResourceBundle settingsResource){
 		root = new GridPane();
 		pathNameIdList = new ArrayList<NameIdPair>();
+		pathIdList = new ArrayList<Integer>();
+		pathNameList = new ArrayList<String>();
 		buildView(settingsResource);
 	}
 	
 	private void buildView(ResourceBundle settingsResource){		
 		availablePathList = FXCollections.observableArrayList();
-		//setAvailablePathList(delegate.getAvailablePathList());
 		
-		
-		pathCheckComboBox = ComboBoxFactory.makeCheckComboBox(availablePathList, a -> setPathIDFromName(a));
+		pathCheckComboBox = ComboBoxFactory.makeCheckComboBox(availablePathList, a -> updatePaths(a));
 		pathCheckComboBox.setPrefWidth(105);
 		root = GridFactory.createRowWithLabelandNode(settingsResource.getString("Path"), pathCheckComboBox, 125);
 		
@@ -52,22 +53,35 @@ public class GamePathView implements GameSettingsSetView {
 		this.delegate = delegate;	
 	}
 	
-	private void setPathIDFromName(List<String> pathNames){
+	private void updatePaths(List<String> pathNames){
 		for (NameIdPair pair : pathNameIdList){
-			if (pathNames.contains(pair.getName()) && !pathList.contains(pair.getId())){
+			if (pathNames.contains(pair.getName()) && !pathIdList.contains(pair.getId())){
+				pathNameList.add(pair.getName());
+				pathIdList.add(pair.getId());
 				delegate.onUserEnteredPath(pair.getId());
 			}
+			else if (!pathNames.contains(pair.getName()) && pathNameList.contains(pair.getName())){
+				pathNameList.remove(pair.getName());
+				pathIdList.remove((Object) pair.getId());
+				delegate.onUserEnteredRemovePath(pair.getId());
+				
+			}
+			
 		}		
 	}
 	
 	
 	public void setPathList(List<Integer> pathList){
-		
-		this.pathList = pathList;
+		pathIdList.clear();
+		pathNameList.clear();
+		this.pathIdList = new ArrayList<Integer>(pathList);
+		pathCheckComboBox.getCheckModel().clearChecks();
 		for (Integer id : pathList){
 			for (NameIdPair pair : pathNameIdList){
 				if (pair.getId() == id){
+					
 					pathCheckComboBox.getCheckModel().check(pair.getName());
+					pathNameList.add(pair.getName());
 				}				
 			}
 		}

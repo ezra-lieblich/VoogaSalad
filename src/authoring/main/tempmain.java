@@ -24,8 +24,8 @@ public class tempmain extends Application {
         s.setWidth(SIZE + 395);
         s.show();
         
-        // ExitDialogueBox box = new ExitDialogueBox();
-        // box.displayDialogueBoxOnExit(s, e -> generalController.saveAsXMLFile());
+         ExitDialogueBox box = new ExitDialogueBox();
+         box.displayDialogueBoxOnExit(s, e -> generalController.saveAsXMLFile());
 
     }
 

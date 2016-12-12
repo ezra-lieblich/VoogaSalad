@@ -3,6 +3,7 @@ package authoring.editorview.gamesettings;
 import java.util.List;
 
 import authoring.editorview.EditorViewController;
+import engine.path.Coordinate;
 import engine.path.PathManagerController;
 import engine.settings.GameModeManagerController;
 
@@ -27,6 +28,7 @@ public class GameSettingsAuthoringViewController extends EditorViewController
         this.pathDataSource = pathSource;
         this.gameSettingsDataSource.addTypeBankListener(this.gameView);
         this.pathDataSource.addAvailablePathListener(a -> gameView.updateAvailablePaths(a));
+        
         createNewGame();
     }
 
@@ -96,6 +98,8 @@ public class GameSettingsAuthoringViewController extends EditorViewController
 		this.gameSettingsDataSource.addPath(activeID, pathID);
 		
 	}
+	
+	
 
     @Override
     public void refreshView () {
@@ -117,6 +121,22 @@ public class GameSettingsAuthoringViewController extends EditorViewController
 	@Override
 	public List<Integer> getAvailablePathList() {
 		return this.pathDataSource.getAvailablePaths();
+	}
+
+	@Override
+	public int getPathDimensions(int pathID) {
+		return this.pathDataSource.getNumberofRows(pathID);
+	}
+
+	@Override
+	public List<Coordinate<Integer>> getPathCoordinates(int pathID) {
+		return this.pathDataSource.getPathCoordinates(pathID);
+	}
+
+	@Override
+	public void onUserEnteredRemovePath(int pathID) {
+		this.gameSettingsDataSource.removePath(activeID, pathID);
+		
 	}
 
     
