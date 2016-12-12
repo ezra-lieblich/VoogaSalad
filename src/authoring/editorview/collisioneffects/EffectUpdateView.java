@@ -27,8 +27,6 @@ public interface EffectUpdateView extends EffectSetView, IUpdateView {
 
     public void updateListedAvailableClasses (List<String> availClasses);
 
-    public void updateSelectedAvailableClass (String selectedClass);
-
     public void updateAvailableMethods (List<String> availMethods);
 
     public void updateAvailableDataObjects (List<String> availDataObjects);

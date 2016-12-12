@@ -54,8 +54,8 @@ public class EffectAuthoringView implements EffectUpdateView {
     private void setPane () {
         effectsPane.add(effectBank.getInstanceAsNode(), 0, 0, 1, 1);
         effectsPane.add(effectAvailClasses.getInstanceAsNode(), 1, 0, 1, 1);
-        effectsPane.add(effectDataObjects.getInstanceAsNode(), 2, 0, 1, 1);
-        effectsPane.add(effectAvailMethods.getInstanceAsNode(), 3, 0, 1, 1);
+        effectsPane.add(effectAvailMethods.getInstanceAsNode(), 2, 0, 1, 1);
+        effectsPane.add(effectDataObjects.getInstanceAsNode(), 3, 0, 1, 1);
         effectsPane.add(effectDataView.getInstanceAsNode(), 0, 1, GridPane.REMAINING, 1);
     }
 
@@ -118,12 +118,6 @@ public class EffectAuthoringView implements EffectUpdateView {
     @Override
     public void updateListedAvailableClasses (List<String> availClasses) {
         effectAvailClasses.updateAvailClasses(availClasses);
-    }
-
-    @Override
-    public void updateSelectedAvailableClass (String selectedClass) {
-        // TODO Auto-generated method stub
-
     }
 
     @Override

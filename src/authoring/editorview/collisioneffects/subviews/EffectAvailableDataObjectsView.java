@@ -3,6 +3,7 @@ package authoring.editorview.collisioneffects.subviews;
 import java.util.ArrayList;
 import java.util.List;
 import authoring.editorview.ImageBank;
+import authoring.editorview.ListCellData;
 import authoring.editorview.collisioneffects.EffectAuthoringViewDelegate;
 import authoring.editorview.collisioneffects.EffectSetView;
 import javafx.scene.Node;
@@ -18,15 +19,9 @@ import javafx.scene.control.ListView;
 public class EffectAvailableDataObjectsView extends ImageBank implements EffectSetView {
 
     private EffectAuthoringViewDelegate delegate;
-    private ListView<Node> listView;
 
     public EffectAvailableDataObjectsView () {
-        listView = new ListView<Node>();
-    }
-
-    @Override
-    public Node getInstanceAsNode () {
-        return listView;
+        super();
     }
 
     @Override
@@ -39,7 +34,18 @@ public class EffectAvailableDataObjectsView extends ImageBank implements EffectS
         // TODO Auto-generated method stub
 
     }
-    
+
+    @Override
+    protected Node createCellFromData (ListCellData data) {
+        Label cell = new Label();
+        String name = data.getName();
+        if (name.equals(null) || name.length() < 1) {
+            name = DEFAULT_SUBJECT_IMAGE_PATH;
+        }
+        cell.setText(name);
+        return cell;
+    }
+
     public void updateAvailDataObjects (List<String> list) {
         if (dataSource == null) {
             System.out.println("Table data source not set");

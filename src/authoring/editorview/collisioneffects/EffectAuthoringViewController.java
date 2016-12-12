@@ -93,6 +93,8 @@ public class EffectAuthoringViewController extends EditorViewController
         effectAuthoringView.updateNameDisplay(effectDataSource.getImagePath(currentEffectID));
         effectAuthoringView.updateConditionField(effectDataSource.getCondition(currentEffectID));
         effectAuthoringView.updateEffectField(effectDataSource.getEffect(currentEffectID));
+        effectAuthoringView.updateAvailableDataObjects(effectDataSource.getAvailableDataObjects());
+        // effectAuthoringView.updateEffectBank(effectDataSource.getCreatedTypeIds());
     }
 
     @Override
