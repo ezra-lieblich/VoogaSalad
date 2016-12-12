@@ -2,7 +2,7 @@ package authoring.editorview.path.subviews;
 
 import java.util.List;
 
-import authoring.editorview.path.IPathSetView;
+import authoring.editorview.path.PathSetView;
 import authoring.editorview.path.PathAuthoringViewDelegate;
 import authoring.editorview.path.subviews.editorfields.PathGrid;
 import engine.path.Coordinate;
@@ -10,7 +10,7 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 
-public class PathDesignView implements IPathSetView{
+public class PathDesignView implements PathSetView{
 
 	private static final int GRID_SIZE = 400;
 	
@@ -26,7 +26,7 @@ public class PathDesignView implements IPathSetView{
 		rootBuffer = new AnchorPane();
 		rootBuffer.getChildren().add(root);
 		
-		AnchorPane.setLeftAnchor(root, 100.0);
+		AnchorPane.setLeftAnchor(root, 25.0);
     	AnchorPane.setTopAnchor(root, 50.0);
 		this.pathInstructionsView = new PathInstructionsView();
         this.pathGrid = new PathGrid(GRID_SIZE);
@@ -35,7 +35,7 @@ public class PathDesignView implements IPathSetView{
 //        instructions.setTranslateX(500);
 //        instructions.setLayoutY(0);
         Node grid = pathGrid.getInstanceAsNode();
-        grid.setLayoutX(30);
+        grid.setLayoutX(25);
         grid.setLayoutY(100);
         
         root.getChildren().addAll(instructions, grid);

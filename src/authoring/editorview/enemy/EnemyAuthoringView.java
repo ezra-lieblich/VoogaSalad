@@ -11,6 +11,7 @@ import authoring.editorview.enemy.subviews.editorfields.EnemyNameField;
 import authoring.editorview.enemy.subviews.editorfields.EnemyRewardMoneyField;
 import authoring.editorview.enemy.subviews.editorfields.EnemyRewardPointsField;
 import authoring.editorview.enemy.subviews.editorfields.EnemySizeField;
+import authoring.editorview.enemy.subviews.editorfields.AddEnemyEffectView;
 import authoring.editorview.enemy.subviews.editorfields.DeleteEnemy;
 import authoring.editorview.enemy.subviews.editorfields.EnemyDamageField;
 import authoring.editorview.enemy.subviews.editorfields.EnemySpeedField;
@@ -24,7 +25,7 @@ import javafx.scene.layout.GridPane;
  * 
  */
 
-public class EnemyAuthoringView implements IEnemyUpdateView {
+public class EnemyAuthoringView implements EnemyUpdateView {
     @SuppressWarnings("unused")
     private EnemyAuthoringViewDelegate delegate;
     private GridPane enemyEditorView;
@@ -39,6 +40,7 @@ public class EnemyAuthoringView implements IEnemyUpdateView {
     private EnemyRewardPointsField enemyRewardPoints;
     private EnemySizeField enemySize;
     private DeleteEnemy deleteEnemy;
+    private AddEnemyEffectView addEnemyEffect;
 
     public EnemyAuthoringView () {
         String ENEMY_EFFECT_RESOURCE_PATH = "resources/GameAuthoringEnemy";
@@ -55,10 +57,11 @@ public class EnemyAuthoringView implements IEnemyUpdateView {
         enemyRewardPoints = new EnemyRewardPointsField(labelsResource);
         enemySize = new EnemySizeField(labelsResource);
         deleteEnemy = new DeleteEnemy(labelsResource);
+        addEnemyEffect = new AddEnemyEffectView(labelsResource);
         enemyEffectView =
                 new EnemyEditorView(enemyImage, enemyName,
                                     enemySpeed, enemyDamage, enemyHealth, enemyRewardMoney,
-                                    enemyRewardPoints, enemySize, deleteEnemy);
+                                    enemyRewardPoints, enemySize, deleteEnemy, addEnemyEffect);
         setBorderPane();
     }
 
@@ -86,6 +89,7 @@ public class EnemyAuthoringView implements IEnemyUpdateView {
         enemyRewardPoints.setDelegate(delegate);
         enemySize.setDelegate(delegate);
         deleteEnemy.setDelegate(delegate);
+        addEnemyEffect.setDelegate(delegate);
     }
 
     @Override
@@ -164,14 +168,14 @@ public class EnemyAuthoringView implements IEnemyUpdateView {
 
     }
 
-	@Override
-	public Integer getNearestAvailableItemID(int id) {
-		int currentIndex = this.enemyBank.getIndexForItemWithID(id);
-		Integer nearestID = this.enemyBank.getIDForItemAtIndex(currentIndex-1);
-		if (nearestID == null){
-			nearestID = this.enemyBank.getIDForItemAtIndex(currentIndex+1);
-		}
-		return nearestID;
-	}
+    @Override
+    public Integer getNearestAvailableItemID (int id) {
+        int currentIndex = this.enemyBank.getIndexForItemWithID(id);
+        Integer nearestID = this.enemyBank.getIDForItemAtIndex(currentIndex - 1);
+        if (nearestID == null) {
+            nearestID = this.enemyBank.getIDForItemAtIndex(currentIndex + 1);
+        }
+        return nearestID;
+    }
 
 }

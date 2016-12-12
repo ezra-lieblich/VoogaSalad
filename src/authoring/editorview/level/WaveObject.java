@@ -13,8 +13,8 @@ public class WaveObject {
 
     public WaveObject (SimpleStringProperty waveNumber,
                        SimpleStringProperty enemyName,
-                       SimpleStringProperty enemyFrequency,
                        SimpleStringProperty enemyCount,
+                       SimpleStringProperty enemyFrequency,
                        SimpleStringProperty path,
                        SimpleStringProperty startTime) {
         this.enemyName = enemyName;

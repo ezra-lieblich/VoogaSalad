@@ -8,7 +8,7 @@ package authoring.editorview.enemy;
 
 public class EnemyAuthoringViewFactory {
 
-    public static IEnemyUpdateView build (int width, int height) {
+    public static EnemyUpdateView build (int width, int height) {
         return new EnemyAuthoringView();
     }
 

@@ -6,7 +6,7 @@ import authoring.editorview.ListCellData;
 import authoring.editorview.ListDataSource;
 import authoring.utilityfactories.DialogueBoxFactory;
 import engine.tower.TowerManagerController;
-import authoring.editorview.tower.ITowerUpdateView;
+import authoring.editorview.tower.TowerUpdateView;
 
 
 /**
@@ -20,7 +20,7 @@ public class TowerAuthoringViewController extends EditorViewController
 
     private TowerManagerController towerDataSource;
     private int currentTowerID;
-    private ITowerUpdateView towerView;
+    private TowerUpdateView towerView;
 
     public TowerAuthoringViewController (int editorWidth, int editorHeight) {
         towerView = TowerAuthoringViewFactory.build(editorWidth, editorHeight);
@@ -169,16 +169,22 @@ public class TowerAuthoringViewController extends EditorViewController
         return cellData;
     }
 
-	@Override
-	public void onUserSelectedTowerUpgrade(int towerID) {
-		// TODO Show the tower so it can be edited.
-		
-	}
+    @Override
+    public void onUserSelectedTowerUpgrade (int towerID) {
+        // TODO Show the tower so it can be edited.
 
-	@Override
-	public void onUserPressedCreateTowerUpgrade() {
-		//TODO: Fix this shit
-		towerDataSource.createTowerUpgrade(this.towerView, 1);
-	}
+    }
+
+    @Override
+    public void onUserPressedCreateTowerUpgrade () {
+        // TODO: Fix this shit
+        towerDataSource.createTowerUpgrade(this.towerView, 0);
+    }
+
+    @Override
+    public void onUserPressedAddEffect () {
+        // TODO Auto-generated method stub
+
+    }
 
 }

@@ -1,5 +1,7 @@
 package engine.effect;
 
+import engine.effect.player.AbstractEffectFactory;
+
 public class EffectManagerFactory {
     public static final String DEFAULT_PACKAGE_PATH = "gameplayer.model";
     AnnotatedDataMapFactory annotatedDataMapFactory;
@@ -10,12 +12,12 @@ public class EffectManagerFactory {
         methodMapFactory = new AnnotatedMethodMapFactory();
     }
     
-    public EffectManager create() {
-        return create(DEFAULT_PACKAGE_PATH);
+    public EffectManager create(Class<? extends AbstractEffectFactory> effectFactory) {
+        return create(effectFactory, DEFAULT_PACKAGE_PATH);
     }
     
-    public EffectManager create(String packagePath) {
-        return new EffectTypeManager(methodMapFactory.create(packagePath), annotatedDataMapFactory.create(packagePath));
+    public EffectManager create(Class<? extends AbstractEffectFactory> effectFactory, String packagePath) {
+        return new EffectTypeManager(methodMapFactory.create(packagePath), annotatedDataMapFactory.create(packagePath).get(effectFactory));
     }
     
 }

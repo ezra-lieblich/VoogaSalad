@@ -1,14 +1,14 @@
 package authoring.editorview.weapon.subviews.editorfields;
 
 import java.util.ResourceBundle;
-import authoring.editorview.weapon.IWeaponSetView;
+import authoring.editorview.weapon.WeaponSetView;
 import authoring.editorview.weapon.WeaponAuthoringViewDelegate;
 import authoring.utilityfactories.TextFieldFactory;
 import javafx.scene.Node;
 import javafx.scene.control.TextField;
 
 
-public class WeaponSizeField implements IWeaponSetView {
+public class WeaponSizeField implements WeaponSetView {
 
     private TextField weaponSizeField;
     private WeaponAuthoringViewDelegate delegate;

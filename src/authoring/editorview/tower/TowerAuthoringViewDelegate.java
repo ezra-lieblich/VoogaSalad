@@ -9,10 +9,12 @@ package authoring.editorview.tower;
 public interface TowerAuthoringViewDelegate {
 
     public void onUserPressedCreateNewTower ();
-    
-    public void onUserPressedCreateTowerUpgrade();
+
+    public void onUserPressedCreateTowerUpgrade ();
 
     public void onUserPressedDeleteTower ();
+
+    public void onUserPressedAddEffect ();
 
     public void onUserEnteredTowerAbility (String towerAbility);
 
@@ -37,9 +39,9 @@ public interface TowerAuthoringViewDelegate {
     public void onUserEnteredTowerUnlockLevel (String towerLevel);
 
     public void onUserEnteredTowerSize (String towerSize);
-    
+
     public void onUserSelectedTower (int towerID);
-    
-    public void onUserSelectedTowerUpgrade(int towerID);
+
+    public void onUserSelectedTowerUpgrade (int towerID);
 
 }

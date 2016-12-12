@@ -1,7 +1,7 @@
 package engine.weapon;
 
 import java.util.List;
-import authoring.editorview.weapon.IWeaponUpdateView;
+import authoring.editorview.weapon.WeaponUpdateView;
 import engine.ManagerController;
 import engine.effect.EffectManagerController;
 
@@ -11,7 +11,7 @@ import engine.effect.EffectManagerController;
  * 
  * @author Andrew Bihl
  */
-public interface WeaponManagerController extends ManagerController<WeaponManager, WeaponBuilder, Weapon, IWeaponUpdateView> {
+public interface WeaponManagerController extends ManagerController<WeaponManager, WeaponBuilder, Weapon, WeaponUpdateView> {
 
     public void setWeaponRange (int weaponID, double weaponRange);
 

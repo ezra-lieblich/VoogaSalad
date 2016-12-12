@@ -16,7 +16,7 @@ import engine.level.LevelManagerController;
 public class LevelAuthoringViewController extends EditorViewController
         implements LevelAuthoringViewDelegate {
 
-    private ILevelUpdateView levelView;
+    private LevelUpdateView levelView;
     private LevelManagerController levelDataSource;
     private EnemyManagerController enemyDataSource;
     private int currentLevelID;
@@ -85,7 +85,7 @@ public class LevelAuthoringViewController extends EditorViewController
     }
 
     @Override
-    public void onUserEnteredEnemyFrequency (String frequency) {
+    public void onUserEnteredEnemyFrequency (String waveID, String frequency) {
         try {
             Double.parseDouble(frequency);
             levelDataSource.setWaveFrequency(currentLevelID, currentWaveID,
@@ -103,7 +103,7 @@ public class LevelAuthoringViewController extends EditorViewController
     }
 
     @Override
-    public void onUserEnteredRemoveWave (int waveID) {
+    public void onUserEnteredRemoveWave (String waveID) {
         // TODO Auto-generated method stub
 
     }
@@ -148,12 +148,19 @@ public class LevelAuthoringViewController extends EditorViewController
     }
 
     @Override
-    public void onUserEnteredEnemy (int enemyID) {
-        levelDataSource.setWaveEnemy(currentLevelID, currentWaveID, enemyID);
+    public void onUserEnteredEnemy (String waveID, String enemyID) {
+        try {
+            levelDataSource.setWaveEnemy(currentLevelID, Integer.parseInt(waveID),
+                                         Integer.parseInt(enemyID));
+        }
+        catch (NumberFormatException e) {
+            createIntCheckDialogueBox();
+        }
+
     }
 
     @Override
-    public void onUserEnteredNumofEnemies (String numEnemies) {
+    public void onUserEnteredNumofEnemies (String waveID, String numEnemies) {
         try {
             Integer.parseInt(numEnemies);
             levelDataSource.setWaveCount(currentLevelID, currentWaveID,
@@ -165,7 +172,7 @@ public class LevelAuthoringViewController extends EditorViewController
     }
 
     @Override
-    public void onUserEnteredSpawnPoint (String spawnPoint) {
+    public void onUserEnteredSpawnPoint (String waveID, String spawnPoint) {
         try {
             Integer.parseInt(spawnPoint);
             levelDataSource.setWavePath(currentLevelID, currentWaveID,
@@ -177,7 +184,7 @@ public class LevelAuthoringViewController extends EditorViewController
     }
 
     @Override
-    public void onUserEnteredWaveTimeDelay (String timeDelay) {
+    public void onUserEnteredWaveTimeDelay (String waveID, String timeDelay) {
         try {
             Double.parseDouble(timeDelay);
             levelDataSource.setWaveDelay(currentLevelID, currentWaveID,
@@ -186,5 +193,11 @@ public class LevelAuthoringViewController extends EditorViewController
         catch (NumberFormatException e) {
             createIntCheckDialogueBox();
         }
+    }
+
+    @Override
+    public void onUserPressedAddEffect () {
+        // TODO Auto-generated method stub
+
     }
 }

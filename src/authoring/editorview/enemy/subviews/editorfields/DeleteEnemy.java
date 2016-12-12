@@ -2,7 +2,7 @@ package authoring.editorview.enemy.subviews.editorfields;
 
 import java.util.ResourceBundle;
 import authoring.editorview.enemy.EnemyAuthoringViewDelegate;
-import authoring.editorview.enemy.IEnemySetView;
+import authoring.editorview.enemy.EnemySetView;
 import authoring.utilityfactories.ButtonFactory;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -13,7 +13,7 @@ import javafx.scene.control.Button;
  * @author Kayla Schulz
  *
  */
-public class DeleteEnemy implements IEnemySetView {
+public class DeleteEnemy implements EnemySetView {
 
     private EnemyAuthoringViewDelegate delegate;
     private Button deleteEnemyButton;
