@@ -94,6 +94,10 @@ public class GamePlayData extends Observable{
 		notifyObservers();
 	}
 
+	public boolean won(){
+		return this.win;
+	}
+	
 	public GamePlayerFactory getFactory(){
 		return this.factory;
 	}

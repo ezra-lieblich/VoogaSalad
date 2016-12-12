@@ -108,7 +108,7 @@ public class GamePlayerController implements Observer {
 		this.loader = new GamePlayerFactory(new XMLParser("player.samplexml/WinEffect_FreePath_PitcforksTest.xml"));// hardcoded
 		// does not work because of the image path
 		checkIfValid();
-		this.currentWave = new LinkedList<>(); 
+		this.currentWave = new LinkedList<>();
 		this.enemiesOnScreen = new HashMap<Integer, ImageView>();
 		this.weaponsOnScreen = new HashMap<Integer, ImageView>();
 		this.model = new GamePlayModel(this.loader, enemiesOnScreen);
@@ -132,7 +132,6 @@ public class GamePlayerController implements Observer {
 	// LevelNumber
 	// it should use the XMLParser(ManagerMediator) constructor to create an
 	// XMLParser (aka this.loader)
-
 
 	private void populateTowerToId() {
 		HashMap<Integer, engine.tower.Tower> mapping = this.model.getTowerManager().getAvailableTower();
@@ -168,7 +167,7 @@ public class GamePlayerController implements Observer {
 		} catch (IOException e) {
 		}
 		this.towerController = new TowerController(this.model.getTowerManager(), this.view);
-		initSaveGameButton();
+		//initSaveGameButton();
 
 	}
 
@@ -177,7 +176,9 @@ public class GamePlayerController implements Observer {
 	 */
 	private void initSaveGameButton() {
 		this.view.saveButton(e -> {
-
+			System.out.println("saving game maybe?");
+			this.gameSavingController.saveGame();
+			//TODO: end game?
 		});
 	}
 
@@ -201,6 +202,7 @@ public class GamePlayerController implements Observer {
 		this.view = new GameGUI(rows, cols); // just for testing, should be
 		// replaced by block above, 5
 		// rows, 5 columns
+		initSaveGameButton();
 		this.view.bindAnimationStart(e -> {
 			this.startAnimation();
 		});
@@ -275,23 +277,12 @@ public class GamePlayerController implements Observer {
 	}
 
 	private void gameOver() {
+		endCondition("http://people.duke.edu/~lz107/voogaTemplates/gameover.html");
 
-		// System.out.println("Game Over called");
-		// log end score
-		try {
-			Wrapper.getInstance().logEndScore("" + this.model.getData().getGold(), "" + this.model.getData().getLife(),
-					"" + this.model.getData().getCurrentLevel());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			System.out.println("Log end score went wrong");
-			e.printStackTrace();
-		}
-		this.view.getMainScreen().getChildren().clear();
-		WebView browser = new WebView();
-		WebEngine webEngine = browser.getEngine();
-		webEngine.load("http://people.duke.edu/~lz107/voogaTemplates/gameover.html");
-		this.view.getMainScreen().setCenter(browser);
-
+	}
+	
+	private void winGame(){
+		endCondition("http://people.duke.edu/~lz107/voogaTemplates/win.html");
 	}
 
 	private void checkCreateNewLevel() {
@@ -311,8 +302,23 @@ public class GamePlayerController implements Observer {
 				this.model.initializeLevelInfo();
 
 			});
-
 		}
+	}
+
+	private void endCondition(String url) {
+		try {
+			Wrapper.getInstance().logEndScore("" + this.model.getData().getGold(), "" + this.model.getData().getLife(),
+					"" + this.model.getData().getCurrentLevel());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			System.out.println("Log end score went wrong");
+			e.printStackTrace();
+		}
+		this.view.getMainScreen().getChildren().clear();
+		WebView browser = new WebView();
+		WebEngine webEngine = browser.getEngine();
+		webEngine.load(url);
+		this.view.getMainScreen().setCenter(browser);
 	}
 
 	@Override
@@ -326,6 +332,10 @@ public class GamePlayerController implements Observer {
 			// check for game over condition
 			if (((GamePlayData) o).getLife() <= 0) {
 				gameOver();
+			}
+			
+			if (((GamePlayData) o).won()){
+				winGame();
 			}
 
 			checkCreateNewLevel();
@@ -353,17 +363,17 @@ public class GamePlayerController implements Observer {
 
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> {
 			((Pane) this.view.getGrid().getGrid()).getChildren().clear();
-			System.out.println("intervalbetween: "+intervalBetweenWaves);
-			System.out.println("elapse: "+(System.currentTimeMillis()-this.startTime));
+			System.out.println("intervalbetween: " + intervalBetweenWaves);
+			System.out.println("elapse: " + (System.currentTimeMillis() - this.startTime));
 			// trying to get this to work but null pointer
-			if(System.currentTimeMillis()-this.startTime>intervalBetweenWaves&&intervalBetweenWaves>=0){
+			if (System.currentTimeMillis() - this.startTime > intervalBetweenWaves && intervalBetweenWaves >= 0) {
 				System.out.println("**********************");
-				
+
 				this.currentWave = this.model.getEnemyManager().getPackOfEnemyComing();
-				
-				this.intervalBetweenWaves=this.model.getEnemyManager().getTimeOfNextWave();
+
+				this.intervalBetweenWaves = this.model.getEnemyManager().getTimeOfNextWave();
 			}
-			
+
 			this.model.updateInLevel(weaponsOnScreen);
 			this.enemyManager.update();
 			this.model.getCollisionManager().handleCollisions();
@@ -384,20 +394,19 @@ public class GamePlayerController implements Observer {
 		Thread enemyThread = new Thread() {
 			public void run() {
 				long intervalBetween = (long) control.getEnemyModel().getFrequencyOfNextWave();
-				while (intervalBetween!=0) {
-					if(currentWave.size()!=0){
-						System.out.println("currentWave: "+currentWave.size());
+				while (intervalBetween != 0) {
+					if (currentWave.size() != 0) {
+						System.out.println("currentWave: " + currentWave.size());
 						Enemy enemy = currentWave.poll();
 						enemyManager.spawnEnemy(enemy);
+					} else {
+
 					}
-					else{	
-						
-					}
-											
+
 					try {
 						Thread.sleep(intervalBetween);
 					} catch (InterruptedException e) {
-						
+
 						e.printStackTrace();
 					}
 				}
@@ -459,7 +468,7 @@ public class GamePlayerController implements Observer {
 	}
 
 	private void updateEnemiesOnScreen(HashMap<Integer, Enemy> enemyRedraw) {
-		//might fix later
+		// might fix later
 		Iterator<Integer> it = enemiesOnScreen.keySet().iterator();
 		while (it.hasNext()) {
 			int value = it.next();
@@ -467,7 +476,7 @@ public class GamePlayerController implements Observer {
 				it.remove();
 			}
 		}
-		
+
 		for (int i : enemyRedraw.keySet()) {
 			if (!enemiesOnScreen.containsKey(enemyRedraw.get(i).getUniqueID())) {
 				ImageView image = new ImageView(graphics.createImage(enemyRedraw.get(i).getImage()));

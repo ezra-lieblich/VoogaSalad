@@ -18,10 +18,12 @@ import javafx.scene.control.Alert;
 public class GameSavingController {
 	//private XStream serializer;
 	private GamePlayModel gameModel;
+	int counter;
 	
 	public GameSavingController(GamePlayModel model) {
 		//serializer = new XStream(new DomDriver());
 		this.gameModel = model;
+		this.counter = 0;
 	}
 	
 	public String toPrettyXML() {
@@ -33,7 +35,8 @@ public class GameSavingController {
 	}
 	
 	public void saveGame() {
-		String dirName = "src/gameSavingTest.xml";
+		String dirName = "src/newGame" + counter+ ".xml";
+		counter += 1;
 		File newFile = new File(dirName);
 		String content = toPrettyXML();
 		System.out.println("XML LENTHHHHH " +content.length());
