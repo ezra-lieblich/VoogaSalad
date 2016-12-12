@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ResourceBundle;
 import authoring.editorview.PhotoFileChooser;
 import authoring.editorview.weapon.WeaponAuthoringViewDelegate;
+import authoring.editorview.weapon.subviews.editorfields.AddWeaponEffectView;
 import authoring.editorview.weapon.subviews.editorfields.WeaponFireRateField;
 import authoring.editorview.weapon.subviews.editorfields.WeaponImageView;
 import authoring.editorview.weapon.subviews.editorfields.WeaponNameField;
@@ -41,6 +42,7 @@ public class WeaponEditorView extends PhotoFileChooser {
     private WeaponPathField weaponPath;
     private WeaponImageView weaponImage;
     private WeaponSizeField weaponSize;
+    private AddWeaponEffectView addWeaponEffect;
 
     private ResourceBundle dialogueBoxResource;
 
@@ -51,6 +53,7 @@ public class WeaponEditorView extends PhotoFileChooser {
                              WeaponPathField weaponPath,
                              WeaponImageView weaponImage,
                              WeaponSizeField weaponSize,
+                             AddWeaponEffectView addWeaponEffect,
                              ResourceBundle labelsResource,
                              ResourceBundle dialogueBoxResource)
         throws IOException {
@@ -62,7 +65,7 @@ public class WeaponEditorView extends PhotoFileChooser {
         this.weaponFireRate = weaponFireRate;
         this.weaponRange = weaponRange;
         this.weaponPath = weaponPath;
-
+        this.addWeaponEffect = addWeaponEffect;
         this.weaponSize = weaponSize;
 
         vboxView = new VBox(10);
@@ -114,6 +117,7 @@ public class WeaponEditorView extends PhotoFileChooser {
                 .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Range"),
                                                            weaponRange.getInstanceAsNode()));
         vboxView.getChildren().add(weaponPath.getInstanceAsNode());
+        vboxView.getChildren().add(addWeaponEffect.getInstanceAsNode());
     }
 
     public ScrollPane getInstanceAsNode () {
