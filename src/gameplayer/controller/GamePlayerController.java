@@ -210,7 +210,7 @@ public class GamePlayerController implements Observer {
 					this.model.getData().getCurrentLevel(), this.model.getData().getScore(), getTowerImages());
 		}
 		this.view.getGrid().getGrid().setOnMouseClicked(e -> handleMouseClicked(e.getX(), e.getY()));
-
+		
 		// System.out.println("line 172, gameplay controller: Is the grid
 		// null?");
 		// System.out.println(model.getData().getGrid());
