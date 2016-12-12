@@ -32,7 +32,7 @@ public class EffectAuthoringViewController extends EditorViewController
     }
 
     @Override
-    public void onUserSelectedEffectName (String name) {
+    public void onUserEnteredEffectName (String name) {
         effectsDataSource.setName(currentEffectID, name);
     }
 

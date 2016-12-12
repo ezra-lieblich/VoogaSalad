@@ -1,6 +1,7 @@
 package authoring.editorview.collisioneffects;
 
 import java.util.List;
+import authoring.editorview.IUpdateView;
 import authoring.editorview.ListDataSource;
 
 
@@ -9,7 +10,7 @@ import authoring.editorview.ListDataSource;
  * @author Kayla Schulz
  *
  */
-public interface EffectUpdateView {
+public interface EffectUpdateView extends EffectSetView, IUpdateView {
 
     public void createNewEffect ();
 
