@@ -55,6 +55,7 @@ public class TowerAuthoringViewController extends EditorViewController
         towerView.updateTowerBuyPriceDisplay(towerDataSource.getTowerBuyPrice(currentTowerID));
         towerView.updateTowerSellPriceDisplay(towerDataSource.getTowerSellPrice(currentTowerID));
         towerView.updateUnlockLevelDisplay(towerDataSource.getTowerUnlockLevel(currentTowerID));
+        towerView.updateTowerUpgradeBank(towerDataSource.getTowerUpgrades(currentTowerID));
     }
 
     @Override
@@ -161,7 +162,6 @@ public class TowerAuthoringViewController extends EditorViewController
     public void onUserSelectedTower (int towerID) {
         currentTowerID = towerID;
         refreshView();
-        this.towerView.updateTowerUpgradeBank(towerDataSource.getTowerUpgrades(towerID));
     }
 
     @Override
