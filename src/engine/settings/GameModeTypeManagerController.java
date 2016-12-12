@@ -102,7 +102,7 @@ public class GameModeTypeManagerController
 	@Override
 	public int getGridSize(int gameModeID) {
 		int gridSize = getTypeManager().getEntity(gameModeID).getGridSize();
-		getTypeManager().notifyObservers(new MethodObjectData<Object>("GridSize", gridSize) );
+		getTypeManager().notifyObservers(new MethodObjectData<Object>("GridSize", gameModeID) );
 		return gridSize;
 	}
 
