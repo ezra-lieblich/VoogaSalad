@@ -2,8 +2,6 @@ package authoring.editorview.level;
 
 import java.util.ResourceBundle;
 import authoring.editorview.EditorViewController;
-import authoring.editorview.ListCellData;
-import authoring.editorview.ListDataSource;
 import authoring.editorview.collisioneffects.EffectAuthoringViewController;
 import authoring.utilityfactories.DialogueBoxFactory;
 import engine.effect.EffectManagerController;
@@ -18,7 +16,7 @@ import engine.level.LevelManagerController;
  *
  */
 public class LevelAuthoringViewController extends EditorViewController
-        implements LevelAuthoringViewDelegate, ListDataSource {
+        implements LevelAuthoringViewDelegate {
 
     private LevelUpdateView levelView;
     private LevelManagerController levelDataSource;
@@ -30,7 +28,6 @@ public class LevelAuthoringViewController extends EditorViewController
     public LevelAuthoringViewController (int editorWidth, int editorHeight) {
         levelView = LevelAuthoringViewFactory.build(editorWidth, editorHeight);
         levelView.setDelegate(this);
-        this.levelView.setLevelListDataSource(this);
         this.view = levelView;
     }
 
@@ -226,14 +223,5 @@ public class LevelAuthoringViewController extends EditorViewController
 	@Override
 	public void onUserEnteredLevelImagePath(String path) {
         levelDataSource.setImagePath(currentLevelID, path);
-	}
-
-	@Override
-	public ListCellData getCellDataForSubject(int id) {
-        ListCellData cellData = new ListCellData();
-        cellData.setName(levelDataSource.getName(id));
-        cellData.setImagePath(levelDataSource.getImagePath(id));
-        cellData.setId(id);
-        return cellData;
 	}
 }
