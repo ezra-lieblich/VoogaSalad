@@ -9,7 +9,7 @@ public interface EffectAuthoringViewDelegate {
 
     public void onUserSelectedAvailableClass (String selectedClass);
 
-    public void onUserSelectedEffectName (String name);
+    public void onUserEnteredEffectName (String name);
 
     public void onUserEnteredCondition (String condition);
 

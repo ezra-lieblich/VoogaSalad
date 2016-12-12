@@ -91,4 +91,10 @@ public class PathAuthoringViewController extends EditorViewController
         return cellData;
     }
 
+    @Override
+    public void refreshView () {
+        // TODO Auto-generated method stub
+        
+    }
+
 }
