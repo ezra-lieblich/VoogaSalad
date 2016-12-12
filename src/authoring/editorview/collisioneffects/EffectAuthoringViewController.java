@@ -1,5 +1,6 @@
 package authoring.editorview.collisioneffects;
 
+import java.util.List;
 import authoring.editorview.EditorViewController;
 import authoring.editorview.ListCellData;
 import authoring.editorview.ListDataSource;
@@ -16,10 +17,10 @@ public class EffectAuthoringViewController extends EditorViewController
 
     private EffectManagerController effectsDataSource;
     private int currentEffectID;
-    private EffectAuthoringView effectAuthoringView;
+    private EffectUpdateView effectAuthoringView;
 
     public EffectAuthoringViewController () {
-        effectAuthoringView = new EffectAuthoringView();
+        effectAuthoringView = EffectAuthoringViewFactory.build();
         effectAuthoringView.setDelegate(this);
         // TODO - fix this
         currentEffectID = 0;
@@ -28,6 +29,14 @@ public class EffectAuthoringViewController extends EditorViewController
     public void setEffectDataSource (EffectManagerController source) {
         this.effectsDataSource = source;
         // this.effectsDataSource.addTypeBankListener(this.effectAuthoringView);
+    }
+
+    public void setEffectOptions (List<Integer> list) {
+        effectAuthoringView.updateListedEffects(list);
+    }
+
+    public EffectUpdateView getEffectAuthoringView () {
+        return effectAuthoringView;
     }
 
     public void openEffectView () {

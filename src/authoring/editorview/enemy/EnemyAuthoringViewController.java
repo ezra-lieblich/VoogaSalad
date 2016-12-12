@@ -29,7 +29,6 @@ public class EnemyAuthoringViewController extends EditorViewController
         enemyView.setDelegate(this);
         enemyView.setEnemyListDataSource(this);
         this.view = enemyView;
-
     }
 
     public void setEnemyDataSource (EnemyManagerController source) {
@@ -169,6 +168,9 @@ public class EnemyAuthoringViewController extends EditorViewController
     @Override
     public void onUserPressedAddEffect () {
         EffectAuthoringViewController effectAuthoringView = new EffectAuthoringViewController();
+        effectDataSource.createType(effectAuthoringView.getEffectAuthoringView());
+        effectAuthoringView.setEffectOptions(effectDataSource.getCreatedTypeIds());
+        System.out.println(effectDataSource.getCreatedTypeIds());
         effectAuthoringView.openEffectView();
     }
 

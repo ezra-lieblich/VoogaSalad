@@ -1,10 +1,11 @@
 package engine.effect;
 
 import java.util.List;
+import authoring.editorview.collisioneffects.EffectUpdateView;
 import engine.ManagerController;
 
 
-public interface EffectManagerController extends ManagerController<EffectManager, EffectBuilder, Effect, EffectView> {
+public interface EffectManagerController extends ManagerController<EffectManager, EffectBuilder, Effect, EffectUpdateView> {
 
     List<String> getAvailableClasses ();
 
@@ -26,6 +27,6 @@ public interface EffectManagerController extends ManagerController<EffectManager
     
     void setEffect(int effectID, String trigger);
     
-    void addActiveClassListener(EffectView updateView);
+    void addActiveClassListener(EffectUpdateView updateView);
 
 }

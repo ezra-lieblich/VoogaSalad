@@ -96,9 +96,8 @@ public class EffectAuthoringView implements EffectUpdateView {
     }
 
     @Override
-    public void updateListedEffects (List<String> effects) {
-        // TODO Auto-generated method stub
-
+    public void updateListedEffects (List<Integer> effects) {
+        // effectBank.
     }
 
     @Override
@@ -173,6 +172,12 @@ public class EffectAuthoringView implements EffectUpdateView {
     public Integer getNearestAvailableItemID (int id) {
         // TODO Auto-generated method stub
         return null;
+    }
+
+    @Override
+    public void updateTriggers (List<String> triggers) {
+        // TODO Auto-generated method stub
+
     }
 
 }
