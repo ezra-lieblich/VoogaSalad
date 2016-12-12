@@ -104,8 +104,9 @@ public class GamePlayerController implements Observer {
 	private HashMap<String, Image> imageBank;
 
 	public GamePlayerController(String xmlFilePath) {
+		System.out.println(xmlFilePath);
 		// use xml parser to create classes.
-		this.loader = new GamePlayerFactory(new XMLParser("player.samplexml/WinEffect_FreePath_PitcforksTest.xml"));// hardcoded
+		this.loader = new GamePlayerFactory(new XMLParser(/*"player.samplexml/"+*/xmlFilePath));// hardcoded
 		// does not work because of the image path
 		checkIfValid();
 		this.currentWave = new LinkedList<>();
@@ -443,19 +444,19 @@ public class GamePlayerController implements Observer {
 	}
 	
 	
-	private void removeValFromIterator(HashMap<Integer, Object> map){
-		
-	}
-
-	private void updateBulletOnScreen(HashMap<Integer, Weapon> bulletRedraw) {
-		Iterator<Integer> it = weaponsOnScreen.keySet().iterator();
+	private void removeValFromMap(Map<Integer, ?> map, Iterator<Integer> it){
 		while (it.hasNext()) {
 			int value = it.next();
-			if (!bulletRedraw.containsKey(value)) {
+			if (!map.containsKey(value)) {
 				it.remove();
 			}
 		}
+	}
 
+	private void updateBulletOnScreen(HashMap<Integer, Weapon> bulletRedraw) {
+		
+		Iterator<Integer> it = weaponsOnScreen.keySet().iterator();
+		removeValFromMap(bulletRedraw, it);
 		for (int i : bulletRedraw.keySet()) {
 			if (!weaponsOnScreen.containsKey(bulletRedraw.get(i).getUniqueID())) {
 				Image ii = imageBank.get("Weapon " + bulletRedraw.get(i).getWeaponTypeID());
@@ -479,13 +480,7 @@ public class GamePlayerController implements Observer {
 	private void updateEnemiesOnScreen(HashMap<Integer, Enemy> enemyRedraw) {
 		// might fix later
 		Iterator<Integer> it = enemiesOnScreen.keySet().iterator();
-		while (it.hasNext()) {
-			int value = it.next();
-			if (!enemyRedraw.containsKey(value)) {
-				it.remove();
-			}
-		}
-
+		removeValFromMap(enemyRedraw, it);
 		for (int i : enemyRedraw.keySet()) {
 			if (!enemiesOnScreen.containsKey(enemyRedraw.get(i).getUniqueID())) {
 				ImageView image = new ImageView(graphics.createImage(enemyRedraw.get(i).getImage()));
