@@ -95,7 +95,7 @@ public class GameModeTypeManagerController
 
 	@Override
 	public void setGridSize(int gameModeID, int gridSize) {
-		getTypeManager().notifyObservers(new MethodObjectData<Integer>("GridSize", gridSize) );
+		getTypeManager().notifyObservers(new MethodObjectData<Object>("GridSize", gameModeID) );
 		getTypeManager().getEntity(gameModeID).setGridSize(gridSize);
 	}
 
@@ -106,13 +106,13 @@ public class GameModeTypeManagerController
 
 	@Override
 	public void addPath(int gameModeID, int pathID) {
-		getTypeManager().notifyObservers(new MethodObjectData<Integer>("AddPath", pathID));
+		getTypeManager().notifyObservers(new MethodObjectData<Object>("AddPath", pathID));
 		getTypeManager().getEntity(gameModeID).addPath(pathID);
 	}
 
 	@Override
 	public void removePath(int gameModeID, int pathID) {
-		getTypeManager().notifyObservers(new MethodObjectData<Integer>("RemovePath", pathID));
+		getTypeManager().notifyObservers(new MethodObjectData<Object>("RemovePath", pathID));
 		getTypeManager().getEntity(gameModeID).removePath(pathID);
 	}
 
