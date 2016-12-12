@@ -397,7 +397,7 @@ public class GamePlayerController implements Observer {
 					try {
 						Thread.sleep(intervalBetween);
 					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
+						
 						e.printStackTrace();
 					}
 				}

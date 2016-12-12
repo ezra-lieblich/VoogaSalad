@@ -123,6 +123,11 @@ public class XMLParser {
     	return weaponManager.getWeaponEffectManager();
 	}
 	
+	protected EffectManager getGameModeEffectManager() {
+		GameModeManager gameModeManager = gameManager.getManager(GameModeManager.class);
+		return gameModeManager.getGameModeEffectManager();
+	}
+	
 	
 	
 	

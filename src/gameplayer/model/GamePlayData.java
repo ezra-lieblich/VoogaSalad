@@ -70,7 +70,7 @@ public class GamePlayData extends Observable{
 		this.numLevels.set(settingInfo.get("totalNumberOfLevels"));  // put into property file
 		this.gold.set(settingInfo.get("gold"));
 		this.lives.set(settingInfo.get("lives").intValue());
-		this.currentLevel.set(-1); //REMEMBER TO CHANGE
+		this.currentLevel.set(settingInfo.get("levelnumber").intValue()-1); //REMEMBER TO CHANGE
 		this.score.set(0);
 	}
 	

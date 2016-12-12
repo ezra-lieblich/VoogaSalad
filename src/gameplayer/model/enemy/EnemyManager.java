@@ -109,6 +109,7 @@ public class EnemyManager extends Observable {
 		enemy.setyDirection(nextCell.getY() - enemy.getCurrentCell().getY());
 		enemy.setX(gameData.cellToCoordinate(enemy.getCurrentCell().getX()));
 		enemy.setY(gameData.cellToCoordinate(enemy.getCurrentCell().getY()));
+		System.out.println("enemy spawning: "+ enemy.getUniqueID());
 		enemyOnGrid.put(enemy.getUniqueID(), enemy);
 	}
 
