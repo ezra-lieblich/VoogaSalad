@@ -3,7 +3,7 @@ package authoring.editorview.gamesettings.subviews.editorfields;
 import java.util.ResourceBundle;
 
 import authoring.editorview.gamesettings.GameSettingsAuthoringViewDelegate;
-import authoring.editorview.gamesettings.IGameSettingsSetView;
+import authoring.editorview.gamesettings.GameSettingsSetView;
 import authoring.utilityfactories.DialogueBoxFactory;
 import authoring.utilityfactories.GridFactory;
 import authoring.utilityfactories.TextFieldFactory;
@@ -12,7 +12,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
-public class GamePathDimensionsView implements IGameSettingsSetView {
+public class GamePathDimensionsView implements GameSettingsSetView {
 
 	private GridPane root;
 	private int dimensions;
@@ -56,14 +56,14 @@ public class GamePathDimensionsView implements IGameSettingsSetView {
 		
 		dimensionsTextField.setPrefWidth(105); //TODO
 		
-		root = GridFactory.createRowWithLabelandNode(pathResource.getString("DimensionsTextField"), dimensionsTextField);
+		root = GridFactory.createRowWithLabelandNode(pathResource.getString("DimensionsTextField"), dimensionsTextField, 125);
 		
 	}
 	
 	private void submitGridDimensions(String gridDimensionsString){
 		try {
 			dimensions = Integer.parseInt(gridDimensionsString);
-			delegate.onUserEnteredGridSize(getGridDimensions());
+			delegate.onUserEnteredGameGridSize(getGridDimensions());
 		}
 		catch (NumberFormatException e){
 			setGridDimensions(dimensions);

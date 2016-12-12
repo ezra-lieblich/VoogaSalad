@@ -1,7 +1,7 @@
 package authoring.editorview.level.subviews;
 
 import java.util.ResourceBundle;
-import authoring.editorview.level.ILevelSetView;
+import authoring.editorview.level.LevelSetView;
 import authoring.editorview.level.LevelAuthoringViewDelegate;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -10,7 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 
 
-public class CreateNewLevelView implements ILevelSetView {
+public class CreateNewLevelView implements LevelSetView {
 
     private static final String RESOURCE_FILE_NAME = "resources/GameAuthoringLevels";
     private ResourceBundle levelResource = ResourceBundle.getBundle(RESOURCE_FILE_NAME);

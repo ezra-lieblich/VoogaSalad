@@ -4,16 +4,16 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.Predicate;
 import authoring.editorview.IUpdateView;
-import authoring.editorview.path.IPathSetView;
-import authoring.editorview.path.IPathUpdateView;
-import authoring.editorview.tower.ITowerUpdateView;
+import authoring.editorview.path.PathSetView;
+import authoring.editorview.path.PathUpdateView;
+import authoring.editorview.tower.TowerUpdateView;
 import engine.AbstractTypeManagerController;
 import engine.ManagerMediator;
 import engine.tower.Tower;
 
 
 public class PathTypeManagerController
-        extends AbstractTypeManagerController<PathManager, PathBuilder, Path, IPathUpdateView> implements PathManagerController {
+        extends AbstractTypeManagerController<PathManager, PathBuilder, Path, PathUpdateView> implements PathManagerController {
 
     public PathTypeManagerController (ManagerMediator managerMediator) {
         super(new PathTypeManager(), new PathTypeBuilder(), managerMediator);
@@ -111,7 +111,7 @@ public class PathTypeManagerController
     
     
     @Override
-    protected PathBuilder constructTypeProperties (IPathUpdateView updateView,
+    protected PathBuilder constructTypeProperties (PathUpdateView updateView,
                                                    PathBuilder typeBuilder) {
         return typeBuilder
                 .addCoordinatesListener( (oldValue, newValue) -> updateView

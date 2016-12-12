@@ -2,7 +2,7 @@ package authoring.editorview.tower.subviews.editorfields;
 
 import java.util.ResourceBundle;
 import authoring.editorview.ImageBank;
-import authoring.editorview.tower.ITowerSetView;
+import authoring.editorview.tower.TowerSetView;
 import authoring.editorview.tower.TowerAuthoringViewDelegate;
 import authoring.utilityfactories.ButtonFactory;
 import javafx.geometry.Orientation;
@@ -15,7 +15,7 @@ import javafx.scene.control.Button;
  * @author Andrew Bihl
  * @author Kayla Schulz
  */
-public class TowerUpgradeBank extends ImageBank implements ITowerSetView {
+public class TowerUpgradeBank extends ImageBank implements TowerSetView {
 
     protected final int DEFAULT_BANK_HEIGHT = 80;
 

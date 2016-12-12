@@ -2,7 +2,7 @@ package authoring.editorview.gamesettings.subviews.editorfields;
 
 import java.util.ResourceBundle;
 import authoring.editorview.gamesettings.GameSettingsAuthoringViewDelegate;
-import authoring.editorview.gamesettings.IGameSettingsSetView;
+import authoring.editorview.gamesettings.GameSettingsSetView;
 import authoring.utilityfactories.DialogueBoxFactory;
 import authoring.utilityfactories.GridFactory;
 import authoring.utilityfactories.TextFieldFactory;
@@ -12,7 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
 
-public class GameInitialMoneyView implements IGameSettingsSetView {
+public class GameInitialMoneyView implements GameSettingsSetView {
 
     private TextField initialMoneyField;
     private int initialMoney;
@@ -38,7 +38,7 @@ public class GameInitialMoneyView implements IGameSettingsSetView {
         		e -> submitInitialMoney(initialMoneyField.getText()));
         
         initialMoneyField.setPrefWidth(105); //TODO magic number
-        root = GridFactory.createRowWithLabelandNode(resource.getString("InitialMoney"), initialMoneyField);
+        root = GridFactory.createRowWithLabelandNode(resource.getString("InitialMoney"), initialMoneyField, 125);
         
     }
 

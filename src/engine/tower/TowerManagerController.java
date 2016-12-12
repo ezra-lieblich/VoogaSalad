@@ -1,7 +1,7 @@
 package engine.tower;
 
 import java.util.List;
-import authoring.editorview.tower.ITowerUpdateView;
+import authoring.editorview.tower.TowerUpdateView;
 import engine.ManagerController;
 import engine.effect.EffectManagerController;
 
@@ -13,7 +13,7 @@ import engine.effect.EffectManagerController;
  *
  */
 public interface TowerManagerController
-        extends ManagerController<TowerManager, TowerBuilder, Tower, ITowerUpdateView> {
+        extends ManagerController<TowerManager, TowerBuilder, Tower, TowerUpdateView> {
 
     public double getTowerBuyPrice (int towerID);
 
@@ -41,7 +41,7 @@ public interface TowerManagerController
 
     public void removeTowerWeapon (int towerID, int towerChosenWeaponID);
 
-    public int createTowerUpgrade (ITowerUpdateView towerUpdater, int parentTowerID);
+    public int createTowerUpgrade (TowerUpdateView towerUpdater, int parentTowerID);
 
     public void removeTowerUpgrade (int parentTowerID, int childTowerID);
 

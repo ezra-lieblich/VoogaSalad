@@ -51,6 +51,7 @@ import engine.weapon.WeaponTypeManager;
 import engine.GameAuthoringData;
 import engine.ManagerMediator;
 import engine.ManagerTypeMediator;
+import engine.effect.EffectManager;
 
 
 
@@ -122,6 +123,12 @@ public class XMLParser {
 	
 	protected PathManager getPathManager() {
 		return gameManager.getManager(PathManager.class);
+	}
+	
+	protected EffectManager getWeaponEffectManager() {
+    	WeaponManager weaponManager = gameManager.getManager(WeaponManager.class);
+    	return weaponManager.getWeaponEffectManager();
+
 	}
 	
 	

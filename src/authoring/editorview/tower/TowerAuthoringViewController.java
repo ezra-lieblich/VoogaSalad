@@ -6,7 +6,7 @@ import authoring.editorview.ListCellData;
 import authoring.editorview.ListDataSource;
 import authoring.utilityfactories.DialogueBoxFactory;
 import engine.tower.TowerManagerController;
-import authoring.editorview.tower.ITowerUpdateView;
+import authoring.editorview.tower.TowerUpdateView;
 
 
 /**
@@ -20,7 +20,7 @@ public class TowerAuthoringViewController extends EditorViewController
 
     private TowerManagerController towerDataSource;
     private int currentTowerID;
-    private ITowerUpdateView towerView;
+    private TowerUpdateView towerView;
 
     public TowerAuthoringViewController (int editorWidth, int editorHeight) {
         towerView = TowerAuthoringViewFactory.build(editorWidth, editorHeight);

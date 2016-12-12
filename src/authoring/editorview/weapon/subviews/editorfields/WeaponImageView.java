@@ -2,7 +2,7 @@ package authoring.editorview.weapon.subviews.editorfields;
 
 import java.io.File;
 import java.util.ResourceBundle;
-import authoring.editorview.weapon.IWeaponSetView;
+import authoring.editorview.weapon.WeaponSetView;
 import authoring.editorview.weapon.WeaponAuthoringViewDelegate;
 import authoring.utilityfactories.DialogueBoxFactory;
 import javafx.scene.Node;
@@ -15,7 +15,7 @@ import javafx.scene.image.ImageView;
  * @author Kayla Schulz
  *
  */
-public class WeaponImageView  implements IWeaponSetView {
+public class WeaponImageView  implements WeaponSetView {
 
     private WeaponAuthoringViewDelegate delegate;
     private ResourceBundle labelsResource;

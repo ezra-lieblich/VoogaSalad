@@ -1,7 +1,7 @@
 package authoring.editorview.weapon.subviews.editorfields;
 
 import java.util.ResourceBundle;
-import authoring.editorview.weapon.IWeaponSetView;
+import authoring.editorview.weapon.WeaponSetView;
 import authoring.editorview.weapon.WeaponAuthoringViewDelegate;
 import authoring.utilityfactories.TextFieldFactory;
 import javafx.scene.Node;
@@ -13,7 +13,7 @@ import javafx.scene.control.TextField;
  * @author Kayla Schulz
  *
  */
-public class WeaponRangeField implements IWeaponSetView {
+public class WeaponRangeField implements WeaponSetView {
 
     private TextField weaponRangeField;
     private WeaponAuthoringViewDelegate delegate;

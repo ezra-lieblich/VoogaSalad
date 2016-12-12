@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.ResourceBundle;
 import javax.imageio.ImageIO;
 import authoring.editorview.PhotoFileChooser;
-import authoring.editorview.path.IPathSetView;
+import authoring.editorview.path.PathSetView;
 import authoring.editorview.path.PathAuthoringViewDelegate;
 import authoring.utilityfactories.ButtonFactory;
 import authoring.utilityfactories.DialogueBoxFactory;
@@ -18,7 +18,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 
-public class PathImageView extends PhotoFileChooser implements IPathSetView{
+public class PathImageView extends PhotoFileChooser implements PathSetView{
 
 	private GridPane root;
 	private String pathImagePath;
@@ -58,7 +58,7 @@ public class PathImageView extends PhotoFileChooser implements IPathSetView{
 		File chosenFile = chooseFile.showOpenDialog(new Stage());
 		if (chosenFile != null){
 			BufferedImage image = ImageIO.read(chosenFile) ;
-			pathImagePath = chosenFile.toURI().toString();
+			pathImagePath = chosenFile.toURI().getPath();
 			delegate.onUserEnteredPathImage(pathImagePath);		
 		}
 	}

@@ -22,7 +22,7 @@ import javafx.scene.layout.VBox;
  * @author Diane Hadley
  *
  */
-public class LevelAuthoringView implements ILevelUpdateView {
+public class LevelAuthoringView implements LevelUpdateView {
 
     private LevelAuthoringViewDelegate delegate;
 
@@ -141,10 +141,10 @@ public class LevelAuthoringView implements ILevelUpdateView {
         waveTableView.updateWaveTableView(waves);
     }
 
-	@Override
-	public Integer getNearestAvailableItemID(int id) {
-		System.out.println("No level bank implemented");
-		return null;
-	}
+    @Override
+    public Integer getNearestAvailableItemID (int id) {
+        System.out.println("No level bank implemented");
+        return null;
+    }
 
 }

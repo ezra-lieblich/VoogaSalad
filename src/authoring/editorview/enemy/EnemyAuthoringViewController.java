@@ -19,7 +19,7 @@ public class EnemyAuthoringViewController extends EditorViewController
 
     private EnemyManagerController enemyDataSource;
     private int currentEnemyID;
-    private IEnemyUpdateView enemyView;
+    private EnemyUpdateView enemyView;
 
     public EnemyAuthoringViewController (int editorWidth, int editorHeight) {
         enemyView = EnemyAuthoringViewFactory.build(editorWidth, editorHeight);

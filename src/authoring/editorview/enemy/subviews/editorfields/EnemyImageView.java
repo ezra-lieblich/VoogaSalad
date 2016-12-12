@@ -3,7 +3,7 @@ package authoring.editorview.enemy.subviews.editorfields;
 import java.io.File;
 import java.util.ResourceBundle;
 import authoring.editorview.enemy.EnemyAuthoringViewDelegate;
-import authoring.editorview.enemy.IEnemySetView;
+import authoring.editorview.enemy.EnemySetView;
 import authoring.utilityfactories.DialogueBoxFactory;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
@@ -15,7 +15,7 @@ import javafx.scene.image.ImageView;
  * @author Kayla Schulz
  *
  */
-public class EnemyImageView implements IEnemySetView {
+public class EnemyImageView implements EnemySetView {
 
     @SuppressWarnings("unused")
     private EnemyAuthoringViewDelegate delegate;
