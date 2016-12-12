@@ -21,8 +21,7 @@ public class Tower implements IDrawable {
 	private int uniqueID, type; // towerType
 	private double xCoordinate;
 	private double yCoordinate;	
-	private Label towerInfo;
-	private VBox infoBox;
+	private HBox infoBox;
 	private Button sellButton;
 	private Button upgradeButton;
 	private GraphicsLibrary graphics;
@@ -41,8 +40,6 @@ public class Tower implements IDrawable {
 		//System.out.println("upgradable: " + upgradeList.size());
 		this.upgradable = this.upgradeList.isEmpty();
 		this.showInfo = false;
-		this.towerInfo = new Label("Type: " + this.type + "\n ID: " + this.uniqueID + "\n Cost: " + 
-				this.cost + "\n Image: " + this.image + "\n Name: " + this.name);
 		this.graphics = new GraphicsLibrary();
 		initVBox();
 	}
@@ -131,10 +128,8 @@ public class Tower implements IDrawable {
 	}
 	
 	public void initVBox(){
-		this.infoBox = new VBox();
-		HBox buttons = new HBox();
-		buttons.getChildren().addAll(createSellButton(), createUpgradeButton());
-		this.infoBox.getChildren().addAll(towerInfo, buttons);
+		this.infoBox = new HBox();
+		this.infoBox.getChildren().addAll(createSellButton(), createUpgradeButton());
 		this.infoBox.setVisible(showInfo);
 	}
 	
@@ -156,11 +151,8 @@ public class Tower implements IDrawable {
 		return upgradeButton;
 	}
 
-	public Label getTowerInfo() {
-		return towerInfo;
-	}
 
-	public VBox getInfoBox() {
+	public HBox getInfoBox() {
 		return infoBox;
 	}
 
