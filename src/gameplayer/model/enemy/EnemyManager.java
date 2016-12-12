@@ -35,6 +35,7 @@ public class EnemyManager extends Observable {
 	private Queue<Wave> allWaves;
 	private Queue<Double> allWaveStartTimes;
 	private Queue<Double> allWaveFrequencies;
+	private Boolean noMoreWave;
 	
 	HashMap<Integer,ImageView>enemiesOnScreen;
 
@@ -55,7 +56,7 @@ public class EnemyManager extends Observable {
 		this.enemyOnGrid = new HashMap<Integer, Enemy>();
 		this.allWaves = this.gameFactory.getWaves(this.gameData.getCurrentLevel());
 		initializeWaves();
-		
+		this.noMoreWave = false;
 		System.out.println("Start: " + grid.getStart().getX() + " " + grid.getStart().getY());
 		System.out.println("end: " + grid.getEnd().getX() + " " + grid.getEnd().getY());
 
@@ -67,6 +68,10 @@ public class EnemyManager extends Observable {
 		//System.out.println(allWaveStartTimes);
 		allWaves.forEach(w -> allWaveStartTimes.add(w.getStartTime()));
 		allWaves.forEach(w -> allWaveFrequencies.add(w.getFrequency()));
+	}
+	
+	public Boolean getNoMoreWave(){
+		return this.noMoreWave;
 	}
 
 	/*
@@ -219,6 +224,7 @@ public class EnemyManager extends Observable {
 	
 	public Queue<Enemy> getPackOfEnemyComing() {
 		if (allWaves.isEmpty()) {
+			this.noMoreWave = true;
 			System.out.println("ALL WAVES IS EMPTY");
 			return new LinkedList<Enemy>();
 		}
