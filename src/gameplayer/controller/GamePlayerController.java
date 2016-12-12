@@ -123,11 +123,8 @@ public class GamePlayerController implements Observer {
 		this.imageBank = new HashMap<String, Image>();
 		createImageBank();
 		this.gameSavingController = new GameSavingController(this.model);
+		// this.gameSavingController.saveGame();
 	}
-	
-	//TODO: create another constructor that takes in a ManagerMediator and LevelNumber
-	//it should use the XMLParser(ManagerMediator) constructor to create an XMLParser (aka this.loader)
-	
 
 	private void populateTowerToId() {
 		HashMap<Integer, engine.tower.Tower> mapping = this.model.getTowerManager().getAvailableTower();
@@ -213,7 +210,7 @@ public class GamePlayerController implements Observer {
 					this.model.getData().getCurrentLevel(), this.model.getData().getScore(), getTowerImages());
 		}
 		this.view.getGrid().getGrid().setOnMouseClicked(e -> handleMouseClicked(e.getX(), e.getY()));
-		
+
 		// System.out.println("line 172, gameplay controller: Is the grid
 		// null?");
 		// System.out.println(model.getData().getGrid());
