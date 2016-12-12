@@ -5,8 +5,9 @@ import java.util.ResourceBundle;
 import authoring.editorview.EditorViewController;
 import authoring.editorview.ListCellData;
 import authoring.editorview.ListDataSource;
-import authoring.editorview.collisioneffects.EffectAuthoringView;
+import authoring.editorview.collisioneffects.EffectAuthoringViewController;
 import authoring.utilityfactories.DialogueBoxFactory;
+import engine.effect.EffectManagerController;
 import engine.weapon.WeaponManagerController;
 
 
@@ -20,6 +21,7 @@ public class WeaponAuthoringViewController extends EditorViewController
         implements WeaponAuthoringViewDelegate, ListDataSource {
 
     private WeaponManagerController weaponDataSource;
+    private EffectManagerController effectDataSource;
     private int currentWeaponID;
     private WeaponUpdateView weaponView;
 
@@ -33,6 +35,7 @@ public class WeaponAuthoringViewController extends EditorViewController
     public void setWeaponDataSource (WeaponManagerController source) {
         this.weaponDataSource = source;
         this.weaponDataSource.addTypeBankListener(this.weaponView);
+        effectDataSource = weaponDataSource.getEffectManagerController();
         onUserPressedCreateWeapon();
     }
 
@@ -145,7 +148,7 @@ public class WeaponAuthoringViewController extends EditorViewController
 
     @Override
     public void onUserPressedAddEffect () {
-        EffectAuthoringView effectAuthoringView = new EffectAuthoringView();
+        EffectAuthoringViewController effectAuthoringView = new EffectAuthoringViewController();
         effectAuthoringView.openEffectView();
     }
 

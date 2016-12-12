@@ -5,6 +5,7 @@ import authoring.editorview.EditorViewController;
 import authoring.editorview.ListCellData;
 import authoring.editorview.ListDataSource;
 import authoring.editorview.collisioneffects.EffectAuthoringView;
+import authoring.editorview.collisioneffects.EffectAuthoringViewController;
 import authoring.utilityfactories.DialogueBoxFactory;
 import engine.tower.TowerManagerController;
 import authoring.editorview.tower.TowerUpdateView;
@@ -183,7 +184,7 @@ public class TowerAuthoringViewController extends EditorViewController
 
     @Override
     public void onUserPressedAddEffect () {
-        EffectAuthoringView effectAuthoringView = new EffectAuthoringView();
+        EffectAuthoringViewController effectAuthoringView = new EffectAuthoringViewController();
         effectAuthoringView.openEffectView();
     }
 

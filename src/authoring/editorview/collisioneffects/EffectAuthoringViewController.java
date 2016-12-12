@@ -16,13 +16,22 @@ public class EffectAuthoringViewController extends EditorViewController
 
     private EffectManagerController effectsDataSource;
     private int currentEffectID;
+    private EffectAuthoringView effectAuthoringView;
 
     public EffectAuthoringViewController () {
-
+        effectAuthoringView = new EffectAuthoringView();
+        effectAuthoringView.setDelegate(this);
+        // TODO - fix this
+        currentEffectID = 0;
     }
 
     public void setEffectDataSource (EffectManagerController source) {
         this.effectsDataSource = source;
+        // this.effectsDataSource.addTypeBankListener(this.effectAuthoringView);
+    }
+
+    public void openEffectView () {
+        effectAuthoringView.openEffectView();
     }
 
     @Override

@@ -5,6 +5,7 @@ import authoring.editorview.EditorViewController;
 import authoring.editorview.ListCellData;
 import authoring.editorview.ListDataSource;
 import authoring.editorview.collisioneffects.EffectAuthoringView;
+import authoring.editorview.collisioneffects.EffectAuthoringViewController;
 import authoring.utilityfactories.DialogueBoxFactory;
 import engine.enemy.*;
 
@@ -27,7 +28,7 @@ public class EnemyAuthoringViewController extends EditorViewController
         enemyView.setDelegate(this);
         enemyView.setEnemyListDataSource(this);
         this.view = enemyView;
-        
+
     }
 
     public void setEnemyDataSource (EnemyManagerController source) {
@@ -165,7 +166,7 @@ public class EnemyAuthoringViewController extends EditorViewController
 
     @Override
     public void onUserPressedAddEffect () {
-        EffectAuthoringView effectAuthoringView = new EffectAuthoringView();
+        EffectAuthoringViewController effectAuthoringView = new EffectAuthoringViewController();
         effectAuthoringView.openEffectView();
     }
 

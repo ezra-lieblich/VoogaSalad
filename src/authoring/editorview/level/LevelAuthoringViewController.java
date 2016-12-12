@@ -3,7 +3,9 @@ package authoring.editorview.level;
 import java.util.ResourceBundle;
 import authoring.editorview.EditorViewController;
 import authoring.editorview.collisioneffects.EffectAuthoringView;
+import authoring.editorview.collisioneffects.EffectAuthoringViewController;
 import authoring.utilityfactories.DialogueBoxFactory;
+import engine.effect.EffectManagerController;
 import engine.enemy.EnemyManagerController;
 import engine.level.LevelManagerController;
 
@@ -20,6 +22,7 @@ public class LevelAuthoringViewController extends EditorViewController
     private LevelUpdateView levelView;
     private LevelManagerController levelDataSource;
     private EnemyManagerController enemyDataSource;
+    private EffectManagerController effectDataSource;
     private int currentLevelID;
     private int currentWaveID;
 
@@ -32,6 +35,7 @@ public class LevelAuthoringViewController extends EditorViewController
     public void setLevelDataSource (LevelManagerController source) {
         this.levelDataSource = source;
         this.levelDataSource.addTypeBankListener(this.levelView);
+        // effectDataSource = levelDataSource.get
         onUserEnteredCreateLevel();
     }
 
@@ -198,7 +202,7 @@ public class LevelAuthoringViewController extends EditorViewController
 
     @Override
     public void onUserPressedAddEffect () {
-        EffectAuthoringView effectAuthoringView = new EffectAuthoringView();
+        EffectAuthoringViewController effectAuthoringView = new EffectAuthoringViewController();
         effectAuthoringView.openEffectView();
     }
 }
