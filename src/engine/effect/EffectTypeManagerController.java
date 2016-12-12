@@ -8,14 +8,14 @@ import authoring.editorview.collisioneffects.EffectUpdateView;
 import authoring.editorview.enemy.EnemyUpdateView;
 import engine.AbstractTypeManagerController;
 import engine.ManagerMediator;
-import engine.effect.player.AbstractEffectFactory;
-import engine.effect.player.CollisionEffectFactory;
-import engine.effect.player.GameEffect;
-import engine.effect.player.GroovyExecutor;
 import engine.observer.ObservableObjectProperty;
 import engine.observer.ObservableProperty;
 import engine.tower.TowerTypeBuilder;
 import engine.tower.TowerTypeManager;
+import gameplayer.model.effect.AbstractEffectFactory;
+import gameplayer.model.effect.CollisionEffectFactory;
+import gameplayer.model.effect.GameEffect;
+import gameplayer.model.effect.GroovyExecutor;
 
 
 public class EffectTypeManagerController extends

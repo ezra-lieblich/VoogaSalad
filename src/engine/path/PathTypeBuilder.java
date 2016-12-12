@@ -24,14 +24,14 @@ public class PathTypeBuilder extends AbstractTypeBuilder<Path, PathBuilder> impl
      public static final String DEFAULT_SOUND_PATH = "Music/DopeBeats.mp3";
      
      public static final double DEFAULT_SIZE = 1;
-     public static final String DEFAULT_TYPE = "Set";
+     public static final PathOption DEFAULT_TYPE = PathOption.SET;
      //public static final List<Coordinate<Integer>> DEFAULT_COORDINATES = Arrays.stream(new GridCoordinate[]{}).collect(Collectors.toList());
      public static final GridCoordinate[] DEFAULT_COORDINATES = new GridCoordinate[]{};
      public static final Integer DEFAULT_GRID_ROWS = 10;
      public static final Integer DEFAULT_GRID_COLUMNS = 10;
      
      
-     private ObservableProperty<String> type;
+     private ObservableProperty<PathOption> type;
      private ObservableList<Coordinate<Integer>> coordinates;
      private ObservableProperty<Integer> gridRows;
      private ObservableProperty<Integer> gridColumns;
@@ -41,7 +41,7 @@ public class PathTypeBuilder extends AbstractTypeBuilder<Path, PathBuilder> impl
      }
     
     @Override
-    public PathBuilder buildType(String type) {
+    public PathBuilder buildType(PathOption type) {
         this.type.setProperty(type);
         return this;
     }
@@ -50,6 +50,11 @@ public class PathTypeBuilder extends AbstractTypeBuilder<Path, PathBuilder> impl
     public PathBuilder buildCoordinates(List<Coordinate<Integer>> coordinates) {
         this.coordinates.setProperty(coordinates);
         return this;
+    }
+    
+    @Override
+    public PathBuilder buildCoordinates (Coordinate<Integer> ... coordinates) {
+        return buildCoordinates(Arrays.stream(coordinates).collect(Collectors.toList()));
     }
     
     @Override
@@ -70,7 +75,7 @@ public class PathTypeBuilder extends AbstractTypeBuilder<Path, PathBuilder> impl
     }
 
     @Override
-    public ObservableProperty<String> getType () {
+    public ObservableProperty<PathOption> getType () {
         return type;
     }
 
@@ -91,7 +96,7 @@ public class PathTypeBuilder extends AbstractTypeBuilder<Path, PathBuilder> impl
 
     @Override
     protected void restoreTypeDefaults () {
-        this.type = new ObservableObjectProperty<String>(DEFAULT_TYPE);
+        this.type = new ObservableObjectProperty<PathOption>(DEFAULT_TYPE);
         this.coordinates = new ObservableListProperty<Coordinate<Integer>>(Arrays.stream(DEFAULT_COORDINATES).collect(Collectors.toList()));
         this.gridRows = new ObservableObjectProperty<Integer>(DEFAULT_GRID_ROWS);
         this.gridColumns = new ObservableObjectProperty<Integer>(DEFAULT_GRID_COLUMNS);
@@ -103,7 +108,7 @@ public class PathTypeBuilder extends AbstractTypeBuilder<Path, PathBuilder> impl
     }
     
     @Override
-    public PathBuilder addTypeListener(BiConsumer<String, String> listener) {
+    public PathBuilder addTypeListener(BiConsumer<PathOption, PathOption> listener) {
         type.addListener(listener);
         return this;
     }

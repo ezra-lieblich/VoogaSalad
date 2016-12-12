@@ -1,4 +1,4 @@
-package engine.effect.player;
+package gameplayer.model.effect;
 
 import java.lang.reflect.Field;
 import java.util.function.BiConsumer;

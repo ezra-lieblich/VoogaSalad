@@ -96,6 +96,7 @@ public class PathGrid implements PathSetView{
 	
 	public void setPathCoordinates(List<Coordinate<Integer>> pathCoordinates){
 		this.pathCoordinates = pathCoordinates;
+		redrawPath();
 	}	
 	
 	public void setCellImage(String imagePath){		
