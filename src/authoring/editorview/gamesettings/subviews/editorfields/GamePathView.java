@@ -32,7 +32,8 @@ public class GamePathView implements GameSettingsSetView {
 	}
 	
 	private void buildView(ResourceBundle settingsResource){		
-		availablePathList = FXCollections.observableArrayList();		
+		availablePathList = FXCollections.observableArrayList();
+		//setAvailablePathList(delegate.getAvailablePathList());
 		
 		
 		pathCheckComboBox = ComboBoxFactory.makeCheckComboBox(availablePathList, a -> setPathIDFromName(a));

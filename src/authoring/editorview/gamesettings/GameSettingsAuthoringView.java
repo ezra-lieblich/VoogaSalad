@@ -59,6 +59,7 @@ public class GameSettingsAuthoringView implements GameSettingsUpdateView, GameSe
     @Override
     public void setDelegate (GameSettingsAuthoringViewDelegate delegate) {
         gameSettingsEditor.setDelegate(delegate);
+        
     }
 
     @Override
