@@ -9,9 +9,13 @@ import engine.ManagerMediator;
 import engine.ability.Ability;
 import engine.ability.AbilityManager;
 import engine.ability.AbilityType;
+import engine.effect.EffectBuilder;
 import engine.effect.EffectManager;
 import engine.effect.EffectManagerFactory;
+import engine.effect.EffectTypeBuilder;
 import engine.effect.EffectTypeManager;
+import engine.effect.player.AbstractEffectFactory;
+import engine.effect.player.CollisionEffectFactory;
 import engine.enemy.EnemyManager;
 import engine.enemy.EnemyType;
 import engine.weapon.Weapon;
@@ -19,13 +23,15 @@ import engine.weapon.WeaponManager;
 import engine.weapon.WeaponType;
 
 public class TowerTypeManager extends AbstractTypeManager<Tower> implements TowerManager {
-
+    
+    public static final Class<? extends AbstractEffectFactory> DEFAULT_EFFECT_FACTORY = CollisionEffectFactory.class;
+    
     private Map<Integer, Tower> upgrades;
     private EffectManager abilityManager;
     
     public TowerTypeManager() {
         this.upgrades = new HashMap<Integer, Tower>();
-        this.abilityManager = new EffectManagerFactory().create();
+        this.abilityManager = new EffectManagerFactory().create(DEFAULT_EFFECT_FACTORY);
         TowerBuilder testFactory = new TowerTypeBuilder(); //TODO - get rid of this
         upgrades.put(10, testFactory.build()); //TODO - get rid of this
         upgrades.put(15, testFactory.build()); //TODO - get rid of this

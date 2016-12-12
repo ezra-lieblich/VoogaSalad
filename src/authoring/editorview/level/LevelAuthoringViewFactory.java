@@ -7,7 +7,7 @@ package authoring.editorview.level;
  */
 public class LevelAuthoringViewFactory {
 
-    public static ILevelUpdateView build (int width, int height) {
+    public static LevelUpdateView build (int width, int height) {
 
         return new LevelAuthoringView(width, height);
 

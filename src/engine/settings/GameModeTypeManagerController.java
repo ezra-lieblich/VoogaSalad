@@ -1,36 +1,43 @@
 package engine.settings;
 
+import java.util.Collections;
 import java.util.List;
 
-import authoring.editorview.gamesettings.IGameSettingsUpdateView;
+import authoring.editorview.gamesettings.GameSettingsUpdateView;
 import engine.AbstractTypeManagerController;
 import engine.ManagerMediator;
+import engine.MethodObjectData;
+import engine.effect.EffectManagerController;
+import engine.effect.EffectTypeManagerController;
 
 
 public class GameModeTypeManagerController 
-	extends AbstractTypeManagerController<GameModeManager, GameModeBuilder, GameMode, IGameSettingsUpdateView> implements GameModeManagerController {
+	extends AbstractTypeManagerController<GameModeManager, GameModeBuilder, GameMode, GameSettingsUpdateView> implements GameModeManagerController {
 
+	private EffectManagerController gameModeEffectManagerController;
+	
 	public GameModeTypeManagerController(ManagerMediator managerMediator) {
 		super(new GameModeTypeManager(), new GameModeTypeBuilder(), managerMediator);
+		this.gameModeEffectManagerController = new EffectTypeManagerController(managerMediator, getTypeManager().getGameModeEffectManager());
 	}
 
 	@Override
-	public void setNumberofLives(int gameModeID, double lives) {
+	public void setNumberofLives(int gameModeID, int lives) {
 		getTypeManager().getEntity(gameModeID).setInitialLives(lives);
 	}
 
 	@Override
-	public double getNumberofLives(int gameModeID) {
+	public int getNumberofLives(int gameModeID) {
 		return getTypeManager().getEntity(gameModeID).getInitalLives();
 	}
 
 	@Override
-	public void setMoney(int gameModeID, double money) {
+	public void setMoney(int gameModeID, int money) {
 		getTypeManager().getEntity(gameModeID).setInitialMoney(money);
 	}
 
 	@Override
-	public double getMoney(int gameModeID) {
+	public int getMoney(int gameModeID) {
 		return getTypeManager().getEntity(gameModeID).getInitialMoney();
 	}
 
@@ -65,11 +72,58 @@ public class GameModeTypeManagerController
 	}
 
 	@Override
-	protected GameModeBuilder constructTypeProperties(IGameSettingsUpdateView updateView, GameModeBuilder typeBuilder) {
-		return typeBuilder.addGameTypeListener( (oldValue, newValue) -> updateView.updateGameName(newValue));
-			
-				
-		//.addInitialMoneyListener((oldValue, newValue) ->) NEED INITIAL SCORE
+	protected GameModeBuilder constructTypeProperties(GameSettingsUpdateView updateView, GameModeBuilder typeBuilder) {
+		return typeBuilder //.addGameTypeListener( (oldValue, newValue) -> updateView.updateGameName(newValue))
+				.addInitialMoneyListener((oldValue, newValue) -> updateView.updateInitialMoney(newValue))
+				.addInitialLivesListener((oldValue, newValue) -> updateView.updateNumberofLives(newValue.intValue()))
+				.addLosingConditionsListener((oldValue, newValue) -> updateView.updateLosingConditions(newValue))
+				.addWinningConditionsListener((oldValue, newValue) -> updateView.updateLosingConditions(newValue))
+				.addPathListener((oldValue, newValue) -> updateView.updatePathList(newValue))
+				.addGridSizeListener((oldValue, newValue) -> updateView.updateGridSize(newValue))
+				.addPathTypeListener((oldValue, newValue) -> updateView.updatePathType(newValue));	
+	}
+
+	@Override
+	public void setPathType(int gameModeID, String pathType) {
+		getTypeManager().getEntity(gameModeID).setPathType(pathType);
+	}
+
+	@Override
+	public String getPathType(int gameModeID) {
+		return getTypeManager().getEntity(gameModeID).getPathType();
+	}
+
+	@Override
+	public void setGridSize(int gameModeID, int gridSize) {
+		getTypeManager().notifyObservers(new MethodObjectData<Integer>("GridSize", gridSize) );
+		getTypeManager().getEntity(gameModeID).setGridSize(gridSize);
+	}
+
+	@Override
+	public int getGridSize(int gameModeID) {
+		return getTypeManager().getEntity(gameModeID).getGridSize();
+	}
+
+	@Override
+	public void addPath(int gameModeID, int pathID) {
+		getTypeManager().notifyObservers(new MethodObjectData<Integer>("AddPath", pathID));
+		getTypeManager().getEntity(gameModeID).addPath(pathID);
+	}
+
+	@Override
+	public void removePath(int gameModeID, int pathID) {
+		getTypeManager().notifyObservers(new MethodObjectData<Integer>("RemovePath", pathID));
+		getTypeManager().getEntity(gameModeID).removePath(pathID);
+	}
+
+	@Override
+	public List<Integer> getPaths(int gameModeID) {
+		return Collections.unmodifiableList(getTypeManager().getEntity(gameModeID).getPaths());
+	}
+
+	@Override
+	public EffectManagerController getEffectManagerController() {
+		return gameModeEffectManagerController;
 	}
 
 

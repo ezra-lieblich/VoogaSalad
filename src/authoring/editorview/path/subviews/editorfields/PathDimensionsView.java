@@ -3,38 +3,33 @@ package authoring.editorview.path.subviews.editorfields;
 import java.util.ResourceBundle;
 
 
-import authoring.editorview.path.IPathSetView;
+import authoring.editorview.path.PathSetView;
 
 import authoring.editorview.path.PathAuthoringViewDelegate;
-import authoring.utilityfactories.BoxFactory;
 import authoring.utilityfactories.DialogueBoxFactory;
+import authoring.utilityfactories.GridFactory;
 import authoring.utilityfactories.TextFieldFactory;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.GridPane;
 
 
-
-public class PathDimensionsView implements IPathSetView{
+public class PathDimensionsView implements PathSetView{
 	
-	private VBox root;
+	//Inheritance
+	
+	private GridPane root;
 	private int dimensions;
 	
 	private TextField dimensionsTextField;
-	private HBox dimensionsBox;
 	private PathAuthoringViewDelegate delegate;
 	
-	
-	
-	private static final int BOX_SPACING = 10;
 	
 	private static final String RESOURCE_FILE_NAME = "resources/GameAuthoringPath";	
 	private ResourceBundle pathResource = ResourceBundle.getBundle(RESOURCE_FILE_NAME);
 	
 	public PathDimensionsView(){
-		this.root = new VBox(BOX_SPACING);
 		makeGridDimensionsTextField();
 	}
 	
@@ -63,10 +58,10 @@ public class PathDimensionsView implements IPathSetView{
 	private void makeGridDimensionsTextField(){
 		dimensionsTextField = TextFieldFactory.makeTextField("", 
 				e -> submitGridDimensions(dimensionsTextField.getText()));
-		dimensionsTextField.setMaxWidth(75);
-		dimensionsBox = BoxFactory.createHBoxWithLabelandNode(pathResource.getString("DimensionsTextField"), dimensionsTextField);
 		
-		root.getChildren().add(dimensionsBox);
+		dimensionsTextField.setMaxWidth(155); //TODO
+		
+		root = GridFactory.createRowWithLabelandNode(pathResource.getString("DimensionsTextField"), dimensionsTextField, 125);
 		
 	}
 	

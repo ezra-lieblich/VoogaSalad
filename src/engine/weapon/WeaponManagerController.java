@@ -1,7 +1,7 @@
 package engine.weapon;
 
 import java.util.List;
-import authoring.editorview.weapon.IWeaponUpdateView;
+import authoring.editorview.weapon.WeaponUpdateView;
 import engine.ManagerController;
 import engine.effect.EffectManagerController;
 
@@ -11,7 +11,7 @@ import engine.effect.EffectManagerController;
  * 
  * @author Andrew Bihl
  */
-public interface WeaponManagerController extends ManagerController<WeaponManager, WeaponBuilder, Weapon, IWeaponUpdateView> {
+public interface WeaponManagerController extends ManagerController<WeaponManager, WeaponBuilder, Weapon, WeaponUpdateView> {
 
     public void setWeaponRange (int weaponID, double weaponRange);
 
@@ -19,7 +19,7 @@ public interface WeaponManagerController extends ManagerController<WeaponManager
 
     public void setWeaponSpeed (int weaponID, double weaponSpeed);
 
-    public void setWeaponCollisionEffect (int weaponID, String weaponCollisionEffect);
+    public void setWeaponCollisionEffect (int weaponID, int weaponCollisionEffectID);
 
     public void setWeaponTrajectory (int weaponID, String weaponTrajectory);
 
@@ -33,7 +33,7 @@ public interface WeaponManagerController extends ManagerController<WeaponManager
 
     public double getWeaponSpeed (int weaponID);
 
-    public String getWeaponCollisionEffect (int weaponID);
+    public List<Integer> getWeaponCollisionEffect (int weaponID);
 
     public String getWeaponTrajectory (int weaponID);
 

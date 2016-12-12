@@ -1,7 +1,8 @@
 package engine.weapon;
 
+import java.util.Collections;
 import java.util.List;
-import authoring.editorview.weapon.IWeaponUpdateView;
+import authoring.editorview.weapon.WeaponUpdateView;
 import engine.AbstractTypeManagerController;
 import engine.ManagerMediator;
 import engine.effect.EffectManagerController;
@@ -9,7 +10,7 @@ import engine.effect.EffectTypeManagerController;
 
 
 public class WeaponTypeManagerController extends
-        AbstractTypeManagerController<WeaponManager, WeaponBuilder, Weapon, IWeaponUpdateView>
+        AbstractTypeManagerController<WeaponManager, WeaponBuilder, Weapon, WeaponUpdateView>
         implements WeaponManagerController {
 
     private EffectManagerController weaponEffectManagerController;
@@ -20,7 +21,7 @@ public class WeaponTypeManagerController extends
     }
 
     @Override
-    protected WeaponBuilder constructTypeProperties (IWeaponUpdateView weaponUpdater,
+    protected WeaponBuilder constructTypeProperties (WeaponUpdateView weaponUpdater,
                                                      WeaponBuilder typeBuilder) {
         return typeBuilder
                 .addReloadTimeListener( (oldValue, newValue) -> weaponUpdater
@@ -30,7 +31,7 @@ public class WeaponTypeManagerController extends
                 .addSpeedListener( (oldValue, newValue) -> weaponUpdater
                         .updateSpeedDisplay(newValue))
                 .addTargetsListener( (oldValue, newValue) -> weaponUpdater
-                        .updateTargetEnemies(newValue))
+                        .updateTargetEnemies(Collections.unmodifiableList(newValue)))
                 .addTrajectoryListener( (oldValue, newValue) -> weaponUpdater
                         .updateWeaponTrajectory(newValue));
     }
@@ -51,8 +52,8 @@ public class WeaponTypeManagerController extends
     }
 
     @Override
-    public void setWeaponCollisionEffect (int weaponID, String weaponCollisionEffect) {
-        getTypeManager().getEntity(weaponID).setEffect(weaponCollisionEffect);
+    public void setWeaponCollisionEffect (int weaponID, int weaponCollisionEffectID) {
+        getTypeManager().getEntity(weaponID).addEffect(weaponCollisionEffectID);
     }
 
     @Override
@@ -86,8 +87,8 @@ public class WeaponTypeManagerController extends
     }
 
     @Override
-    public String getWeaponCollisionEffect (int weaponID) {
-        return getTypeManager().getEntity(weaponID).getEffect();
+    public List<Integer> getWeaponCollisionEffect (int weaponID) {
+        return getTypeManager().getEntity(weaponID).getEffects();
     }
 
     @Override
@@ -97,7 +98,7 @@ public class WeaponTypeManagerController extends
 
     @Override
     public List<Integer> getTargetEnemies (int weaponID) {
-        return getTypeManager().getEntity(weaponID).getTargets();
+        return Collections.unmodifiableList(getTypeManager().getEntity(weaponID).getTargets());
     }
     
     @Override

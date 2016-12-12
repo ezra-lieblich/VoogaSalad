@@ -23,7 +23,9 @@ public class TowerImageBank extends ImageBank {
                                          e -> {
                                              delegate.onUserPressedCreateNewTower();
                                          });
+        createTowerButton.setPrefWidth(130);
         items.add(createTowerButton);
+        this.CONTENT_OFFSET = 1;
     }
 
     public void setDelegate (TowerAuthoringViewDelegate delegate) {

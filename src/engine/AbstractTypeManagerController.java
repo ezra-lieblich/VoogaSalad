@@ -39,6 +39,7 @@ public abstract class AbstractTypeManagerController<E extends Manager<T>, U exte
 //        }
 //        this.typeManager.setEntities(newMap);
         typeBuilder.setNextId(this.typeManager.getMaxId());
+        //call some method that resets views
     }
     
     @Override
@@ -119,6 +120,8 @@ public abstract class AbstractTypeManagerController<E extends Manager<T>, U exte
     
     @Override
     public void setImagePath (int id, String imagePath) {
+    	String oldPath = this.getImagePath(id);
+    	FileAggregator.defaultInstance().addImageToAssets(oldPath, imagePath);
         typeManager.getEntity(id).setImagePath(imagePath);
     }
 

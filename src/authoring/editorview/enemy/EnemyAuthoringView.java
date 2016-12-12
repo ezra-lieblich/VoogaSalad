@@ -11,11 +11,12 @@ import authoring.editorview.enemy.subviews.editorfields.EnemyNameField;
 import authoring.editorview.enemy.subviews.editorfields.EnemyRewardMoneyField;
 import authoring.editorview.enemy.subviews.editorfields.EnemyRewardPointsField;
 import authoring.editorview.enemy.subviews.editorfields.EnemySizeField;
+import authoring.editorview.enemy.subviews.editorfields.AddEnemyEffectView;
 import authoring.editorview.enemy.subviews.editorfields.DeleteEnemy;
 import authoring.editorview.enemy.subviews.editorfields.EnemyDamageField;
 import authoring.editorview.enemy.subviews.editorfields.EnemySpeedField;
 import javafx.scene.Node;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 
 
 /**
@@ -24,10 +25,10 @@ import javafx.scene.layout.BorderPane;
  * 
  */
 
-public class EnemyAuthoringView implements IEnemyUpdateView {
+public class EnemyAuthoringView implements EnemyUpdateView {
     @SuppressWarnings("unused")
     private EnemyAuthoringViewDelegate delegate;
-    private BorderPane enemyEditorView;
+    private GridPane enemyEditorView;
     private EnemyImageBank enemyBank;
     private EnemyNameField enemyName;
     private EnemySpeedField enemySpeed;
@@ -39,12 +40,13 @@ public class EnemyAuthoringView implements IEnemyUpdateView {
     private EnemyRewardPointsField enemyRewardPoints;
     private EnemySizeField enemySize;
     private DeleteEnemy deleteEnemy;
+    private AddEnemyEffectView addEnemyEffect;
 
     public EnemyAuthoringView () {
         String ENEMY_EFFECT_RESOURCE_PATH = "resources/GameAuthoringEnemy";
         ResourceBundle labelsResource = ResourceBundle.getBundle(ENEMY_EFFECT_RESOURCE_PATH);
 
-        enemyEditorView = new BorderPane();
+        enemyEditorView = new GridPane();
         enemyBank = new EnemyImageBank();
         enemyName = new EnemyNameField(labelsResource);
         enemySpeed = new EnemySpeedField(labelsResource);
@@ -55,16 +57,17 @@ public class EnemyAuthoringView implements IEnemyUpdateView {
         enemyRewardPoints = new EnemyRewardPointsField(labelsResource);
         enemySize = new EnemySizeField(labelsResource);
         deleteEnemy = new DeleteEnemy(labelsResource);
+        addEnemyEffect = new AddEnemyEffectView(labelsResource);
         enemyEffectView =
                 new EnemyEditorView(enemyImage, enemyName,
                                     enemySpeed, enemyDamage, enemyHealth, enemyRewardMoney,
-                                    enemyRewardPoints, enemySize, deleteEnemy);
+                                    enemyRewardPoints, enemySize, deleteEnemy, addEnemyEffect);
         setBorderPane();
     }
 
     private void setBorderPane () {
-        enemyEditorView.setLeft(enemyBank.getInstanceAsNode());
-        enemyEditorView.setCenter(enemyEffectView.getInstanceAsNode());
+        enemyEditorView.add(enemyBank.getInstanceAsNode(), 0, 0);
+        enemyEditorView.add(enemyEffectView.getInstanceAsNode(), 1, 0);
     }
 
     @Override
@@ -86,6 +89,7 @@ public class EnemyAuthoringView implements IEnemyUpdateView {
         enemyRewardPoints.setDelegate(delegate);
         enemySize.setDelegate(delegate);
         deleteEnemy.setDelegate(delegate);
+        addEnemyEffect.setDelegate(delegate);
     }
 
     @Override
@@ -148,20 +152,30 @@ public class EnemyAuthoringView implements IEnemyUpdateView {
     @Override
     public void deleteEnemy () {
         enemyEffectView.clearView();
-        System.out.println("Getting here");
+        System.out.println("Getting here in enemy authoring view");
     }
 
     @Override
     public void updateBank (List<Integer> ids) {
         this.enemyBank.updateBank(ids);
         System.out.println(ids.size());
-        //enemyEffectView.clearView();
+        // enemyEffectView.clearView();
     }
 
     @Override
     public void updateDeleteEntity (String entityID) {
         // TODO Auto-generated method stub
-        
+
+    }
+
+    @Override
+    public Integer getNearestAvailableItemID (int id) {
+        int currentIndex = this.enemyBank.getIndexForItemWithID(id);
+        Integer nearestID = this.enemyBank.getIDForItemAtIndex(currentIndex - 1);
+        if (nearestID == null) {
+            nearestID = this.enemyBank.getIDForItemAtIndex(currentIndex + 1);
+        }
+        return nearestID;
     }
 
 }

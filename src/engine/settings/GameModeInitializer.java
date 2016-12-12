@@ -7,8 +7,11 @@ import engine.observer.ObservableProperty;
 public interface GameModeInitializer extends TypeInitializer {
 	ObservableList<String> getWinningConditions();
 	ObservableList<String> getLosingConditions();
-	ObservableProperty<Double> getInitalLives();
-	ObservableProperty<Double> getInitialMoney();
+	ObservableProperty<Integer> getInitalLives();
+	ObservableProperty<Integer> getInitialMoney();
     ObservableProperty<String> getGameType();
+    ObservableProperty<String> getPathType();
+    ObservableProperty<Integer> getGridSize();
+    ObservableList<Integer> getPaths();
 
 }

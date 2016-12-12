@@ -2,18 +2,19 @@ package engine.path;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 import authoring.editorview.IUpdateView;
-import authoring.editorview.path.IPathSetView;
-import authoring.editorview.path.IPathUpdateView;
-import authoring.editorview.tower.ITowerUpdateView;
+import authoring.editorview.path.PathSetView;
+import authoring.editorview.path.PathUpdateView;
+import authoring.editorview.tower.TowerUpdateView;
 import engine.AbstractTypeManagerController;
 import engine.ManagerMediator;
 import engine.tower.Tower;
 
 
 public class PathTypeManagerController
-        extends AbstractTypeManagerController<PathManager, PathBuilder, Path, IPathUpdateView> implements PathManagerController {
+        extends AbstractTypeManagerController<PathManager, PathBuilder, Path, PathUpdateView> implements PathManagerController {
 
     public PathTypeManagerController (ManagerMediator managerMediator) {
         super(new PathTypeManager(), new PathTypeBuilder(), managerMediator);
@@ -78,7 +79,16 @@ public class PathTypeManagerController
     }
     
     @Override
+    public List<Integer> getAvailablePaths () {
+        return Collections.unmodifiableList(getTypeManager().getAvailablePaths());
+    }
+    
+    @Override
     public void setSquareGridDimensions (int pathID, int size) {
+        if(size < getTypeManager().getEntity(pathID).getGridRows()) {
+            getTypeManager().getEntity(pathID).getCoordinates().clear();
+        }
+
         setNumberofColumns(pathID, size);
         setNumberofRows(pathID, size);
     }
@@ -95,18 +105,18 @@ public class PathTypeManagerController
     }
 
     @Override
-    public void getType (int pathID) {
-        getTypeManager().getEntity(pathID).getType();        
+    public String getType (int pathID) {
+        return getTypeManager().getEntity(pathID).getType();        
     }
     
     @Override
     public List<Coordinate<Integer>> getPathCoordinates (int pathID) {
-        return getTypeManager().getEntity(pathID).getCoordinates();
+        return Collections.unmodifiableList(getTypeManager().getEntity(pathID).getCoordinates());
     }
     
     
     @Override
-    protected PathBuilder constructTypeProperties (IPathUpdateView updateView,
+    protected PathBuilder constructTypeProperties (PathUpdateView updateView,
                                                    PathBuilder typeBuilder) {
         return typeBuilder
                 .addCoordinatesListener( (oldValue, newValue) -> updateView
@@ -115,4 +125,7 @@ public class PathTypeManagerController
                         .updateGridDimensions(newValue));
     }
 
+    public void addAvailablePathListener(Consumer<List<Integer>> listener) {
+        getTypeManager().addAvailablePathListener((oldValue, newValue) -> listener.accept(newValue));
+    }
 }

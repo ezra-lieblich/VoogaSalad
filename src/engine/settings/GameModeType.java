@@ -1,6 +1,5 @@
 package engine.settings;
 
-import java.util.Collections;
 import java.util.List;
 
 import engine.AbstractType;
@@ -13,8 +12,11 @@ public class GameModeType extends AbstractType implements GameMode {
     private ObservableProperty<String> gameType;
     private ObservableList<String> winningConditions;
     private ObservableList<String> losingConditions;
-    private ObservableProperty<Double> initialLives;
-    private ObservableProperty<Double> initialMoney;
+    private ObservableProperty<Integer> initialLives;
+    private ObservableProperty<Integer> initialMoney;
+    private ObservableProperty<String> pathType;
+    private ObservableProperty<Integer> gridSize;
+    private ObservableList<Integer> paths;
 
 	protected GameModeType(GameModeInitializer gameInitializer) {
 		super(gameInitializer);
@@ -23,12 +25,15 @@ public class GameModeType extends AbstractType implements GameMode {
 		this.losingConditions = gameInitializer.getLosingConditions();
 		this.initialLives = gameInitializer.getInitalLives();
 		this.initialMoney = gameInitializer.getInitialMoney();
+		this.pathType = gameInitializer.getPathType();
+		this.gridSize = gameInitializer.getGridSize();
+		this.paths = gameInitializer.getPaths();
 	}
 	
 
 
     public List<String> getWinningConditions() {
-        return Collections.unmodifiableList(winningConditions.getProperty());
+        return winningConditions.getProperty();
     }
 
     public void setWinningCondition(String winningCondition) {
@@ -36,7 +41,7 @@ public class GameModeType extends AbstractType implements GameMode {
     }
 
     public List<String> getLosingConditions() {
-        return Collections.unmodifiableList(losingConditions.getProperty());
+        return losingConditions.getProperty();
     }
 
     public void setLosingCondition(String losingCondition) {
@@ -52,26 +57,26 @@ public class GameModeType extends AbstractType implements GameMode {
     }
 
 	@Override
-	public double getInitalLives() {
+	public int getInitalLives() {
 		return initialLives.getProperty();
 	}
 
 	@Override
-	public void setInitialLives(double lives) {
+	public void setInitialLives(int lives) {
 		initialLives.setProperty(lives);
 	}
 
 
 
 	@Override
-	public double getInitialMoney() {
+	public int getInitialMoney() {
 		return initialMoney.getProperty();
 	}
 
 
 
 	@Override
-	public void setInitialMoney(double money) {
+	public void setInitialMoney(int money) {
 		initialMoney.setProperty(money);
 	}
 
@@ -87,5 +92,54 @@ public class GameModeType extends AbstractType implements GameMode {
 	@Override
 	public void removeLosingCondition(String losingCondition) {
 		losingConditions.remove(losingCondition);
+	}
+
+
+
+	@Override
+	public void setPathType(String pathType) {
+		this.pathType.setProperty(pathType);
+	}
+
+
+
+	@Override
+	public String getPathType() {
+		return pathType.getProperty();
+	}
+
+
+
+	@Override
+	public void setGridSize(int gridSize) {
+		this.gridSize.setProperty(gridSize);
+	}
+
+
+
+	@Override
+	public int getGridSize() {
+		return gridSize.getProperty();
+	}
+
+
+
+	@Override
+	public void addPath(int pathID) {
+		this.paths.add(pathID);
+	}
+
+
+
+	@Override
+	public void removePath(int pathID) {
+		this.paths.remove(pathID);
+	}
+
+
+
+	@Override
+	public List<Integer> getPaths() {
+		return paths.getProperty();
 	}
 }

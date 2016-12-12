@@ -11,7 +11,7 @@ public class GameSettingsAuthoringViewFactory {
         // Does Nothing
     }
 
-    public static IGameSettingsUpdateView build (int width, int height) {
+    public static GameSettingsUpdateView build (int width, int height) {
         return new GameSettingsAuthoringView(width, height);
     }
 

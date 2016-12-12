@@ -4,26 +4,25 @@ import javafx.beans.property.SimpleStringProperty;
 
 
 public class WaveObject {
-
     private final SimpleStringProperty enemyName;
     private final SimpleStringProperty enemyFrequency;
-    private final SimpleStringProperty numOfEnemies;
+    private final SimpleStringProperty enemyCount;
     private final SimpleStringProperty waveNumber;
     private final SimpleStringProperty path;
-    private final SimpleStringProperty timeDelay;
+    private final SimpleStringProperty startTime;
 
-    public WaveObject (String waveNumber,
-                       String enemyName,
-                       String enemyFrequency,
-                       String numOfEnemies,
-                       String path,
-                       String timeDelay) {
-        this.enemyName = new SimpleStringProperty(enemyName);
-        this.enemyFrequency = new SimpleStringProperty(enemyFrequency);
-        this.numOfEnemies = new SimpleStringProperty(numOfEnemies);
-        this.waveNumber = new SimpleStringProperty(waveNumber);
-        this.path = new SimpleStringProperty(path);
-        this.timeDelay = new SimpleStringProperty(timeDelay);
+    public WaveObject (SimpleStringProperty waveNumber,
+                       SimpleStringProperty enemyName,
+                       SimpleStringProperty enemyCount,
+                       SimpleStringProperty enemyFrequency,
+                       SimpleStringProperty path,
+                       SimpleStringProperty startTime) {
+        this.enemyName = enemyName;
+        this.enemyFrequency = enemyFrequency;
+        this.enemyCount = enemyCount;
+        this.waveNumber = waveNumber;
+        this.path = path;
+        this.startTime = startTime;
     }
 
     public String getEnemyName () {
@@ -43,11 +42,11 @@ public class WaveObject {
     }
 
     public String getNumOfEnemies () {
-        return numOfEnemies.get();
+        return enemyCount.get();
     }
 
     public void setNumOfEnemies (String numOfEnemies) {
-        this.numOfEnemies.set(numOfEnemies);
+        this.enemyCount.set(numOfEnemies);
     }
 
     public String getWaveNumber () {
@@ -67,10 +66,10 @@ public class WaveObject {
     }
 
     public String getTimeDelay () {
-        return timeDelay.get();
+        return startTime.get();
     }
 
     public void setTimeDelay (String timeDelay) {
-        this.timeDelay.set(timeDelay);
+        this.startTime.set(timeDelay);
     }
 }

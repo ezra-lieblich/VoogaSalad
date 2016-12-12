@@ -1,8 +1,9 @@
 package engine.tower;
 
+import java.util.Collections;
 import java.util.List;
 import com.oracle.webservices.internal.api.databinding.Databinding.Builder;
-import authoring.editorview.tower.ITowerUpdateView;
+import authoring.editorview.tower.TowerUpdateView;
 import engine.AbstractTypeManagerController;
 import engine.ManagerMediator;
 import engine.effect.EffectManagerController;
@@ -10,7 +11,7 @@ import engine.effect.EffectTypeManagerController;
 
 
 public class TowerTypeManagerController
-        extends AbstractTypeManagerController<TowerManager, TowerBuilder, Tower, ITowerUpdateView>
+        extends AbstractTypeManagerController<TowerManager, TowerBuilder, Tower, TowerUpdateView>
         implements TowerManagerController {
     
     private EffectManagerController abilityEffectManagerController;
@@ -37,17 +38,17 @@ public class TowerTypeManagerController
 
     @Override
     public List<Integer> getTowerUpgrades (int towerID) {
-        return getTypeManager().getEntity(towerID).getUpgrades();
+        return Collections.unmodifiableList(getTypeManager().getEntity(towerID).getUpgrades());
     }
 
     @Override
     public List<Integer> getTowerChosenWeapons (int towerID) {
-        return getTypeManager().getEntity(towerID).getWeapons();
+        return Collections.unmodifiableList(getTypeManager().getEntity(towerID).getWeapons());
     }
 
     @Override
     public List<Integer> getTowerAbilities (int towerID) {
-        return getTypeManager().getEntity(towerID).getAbilities();
+        return Collections.unmodifiableList(getTypeManager().getEntity(towerID).getAbilities());
     }
 
     @Override
@@ -87,7 +88,7 @@ public class TowerTypeManagerController
 
     // TODO - edit createNewTower to work with both versions
     @Override
-    public int createTowerUpgrade (ITowerUpdateView towerUpdater, int parentTowerID) {
+    public int createTowerUpgrade (TowerUpdateView towerUpdater, int parentTowerID) {
         copyWithoutId(parentTowerID);
         return getTypeManager().addUpgrade(constructType(towerUpdater), parentTowerID);
     }
@@ -98,15 +99,15 @@ public class TowerTypeManagerController
     }
 
     @Override
-    protected TowerBuilder constructTypeProperties (ITowerUpdateView towerUpdater,
+    protected TowerBuilder constructTypeProperties (TowerUpdateView towerUpdater,
                                                     TowerBuilder typeBuilder) {
         return typeBuilder
                 .addWeaponsListener( (oldValue, newValue) -> towerUpdater
-                        .updateTowerWeaponBank(newValue))
+                        .updateTowerWeaponBank(Collections.unmodifiableList(newValue)))
                 .addAbilitiesListener( (oldValue, newValue) -> towerUpdater
-                        .updateTowerAbilityBank(newValue))
+                        .updateTowerAbilityBank(Collections.unmodifiableList(newValue)))
                 .addUpgradesListener( (oldValue, newValue) -> towerUpdater
-                        .updateTowerUpgradeBank(newValue))
+                        .updateTowerUpgradeBank(Collections.unmodifiableList(newValue)))
                 .addCostListener( (oldValue, newValue) -> towerUpdater
                         .updateTowerBuyPriceDisplay(newValue))
                 .addSellAmountListener( (oldValue, newValue) -> towerUpdater

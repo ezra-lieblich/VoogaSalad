@@ -1,7 +1,10 @@
 package engine.level;
 
 import engine.Manager;
+import engine.effect.EffectManager;
 import engine.enemy.EnemyManager;
+import engine.path.PathManager;
+import engine.settings.GameModeManager;
 
 
 /**
@@ -9,7 +12,10 @@ import engine.enemy.EnemyManager;
  */
 public interface LevelManager extends Manager<Level> {
 
-    // TODO Need to go into waves and remove this
+    EffectManager getLevelEffectManager () ;
     void visitRemoveEntry (EnemyManager manager, Integer index);
-
+    void visitRemoveEntry(PathManager manager, Integer index);
+    void visitAddPath(GameModeManager manager, Integer pathID);
+    void visitRemovePath(GameModeManager manager, Integer pathID);
+    void visitGridSize(GameModeManager manager, Integer gridSize);
 }

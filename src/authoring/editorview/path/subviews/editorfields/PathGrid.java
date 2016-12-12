@@ -1,7 +1,8 @@
 package authoring.editorview.path.subviews.editorfields;
 
+import java.io.File;
 import java.util.List;
-import authoring.editorview.path.IPathSetView;
+import authoring.editorview.path.PathSetView;
 import authoring.editorview.path.PathAuthoringViewDelegate;
 import engine.path.Coordinate;
 import javafx.event.EventHandler;
@@ -14,7 +15,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeType;
 
-public class PathGrid implements IPathSetView{
+public class PathGrid implements PathSetView{
 	
 	private int gridSize;
 	private int gridDimensions;
@@ -49,8 +50,8 @@ public class PathGrid implements IPathSetView{
 	}
 	
 	private void updatePath(double x, double y){
-		int i = (int) (x - 100)/cellSize;
-		int j = (int) (y - 240)/cellSize;
+		int i = (int) (x - 500)/cellSize;
+		int j = (int) (y - 190)/cellSize;
 		if (!addCellToPath(i, j)){
 			removeCellFromPath(i, j);
 		}
@@ -98,12 +99,10 @@ public class PathGrid implements IPathSetView{
 	}	
 	
 	public void setCellImage(String imagePath){		
-		if (!imagePath.contains("file:") && !imagePath.contains("http:")) {
-			cellImage = new Image (getClass().getClassLoader().getResourceAsStream(imagePath));		
-		}		
-		else {
-			cellImage = new Image(imagePath);
-		}
+		
+		File file = new File(imagePath);
+		cellImage = new Image(file.toURI().toString());
+		
 		if (gridDimensions > 0 && pathCoordinates != null){
 			redrawPath();
 		}	
