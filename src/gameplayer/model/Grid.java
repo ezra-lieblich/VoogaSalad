@@ -50,6 +50,7 @@ public class Grid {
 
 
 	private Cell getNoPathNext(Cell c){
+
 		int xdirection = (int)Math.signum( this.end.getX() - c.getX());
 
 		if (xdirection != 0){

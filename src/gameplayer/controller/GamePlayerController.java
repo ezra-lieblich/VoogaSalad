@@ -123,12 +123,14 @@ public class GamePlayerController implements Observer {
 		this.imageBank = new HashMap<String, Image>();
 		createImageBank();
 		this.gameSavingController = new GameSavingController(this.model);
+		// this.gameSavingController.saveGame();
 	}
 
 	// TODO: create another constructor that takes in a ManagerMediator and
 	// LevelNumber
 	// it should use the XMLParser(ManagerMediator) constructor to create an
 	// XMLParser (aka this.loader)
+
 
 	private void populateTowerToId() {
 		HashMap<Integer, engine.tower.Tower> mapping = this.model.getTowerManager().getAvailableTower();
@@ -404,7 +406,7 @@ public class GamePlayerController implements Observer {
 					try {
 						Thread.sleep((long) control.getEnemyModel().getFrequencyOfNextWave());
 					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
+						
 						e.printStackTrace();
 					}
 				}
@@ -423,8 +425,6 @@ public class GamePlayerController implements Observer {
 		HashMap<Integer, Enemy> enemyRedraw = this.enemyManager.getEnemyOnGrid();
 		Map<Integer, Tower> towerRedraw = this.model.getTowerOnGrid();
 		HashMap<Integer, Weapon> bulletRedraw = this.model.getWeaponManager().getWeaponOnGrid();
-
-		System.out.println("bulletRedraw: " + bulletRedraw.size());
 
 		updateBulletOnScreen(bulletRedraw);
 		updateEnemiesOnScreen(enemyRedraw);

@@ -34,6 +34,7 @@ public class EnemyManager extends Observable {
 	private Queue<Wave> allWaves;
 	private Queue<Double> allWaveStartTimes;
 	private Queue<Double> allWaveFrequencies;
+	private Boolean noMoreWave;
 	
 	
 	HashMap<Integer,ImageView>enemiesOnScreen;
@@ -55,7 +56,7 @@ public class EnemyManager extends Observable {
 		this.enemyOnGrid = new HashMap<Integer, Enemy>();
 		this.allWaves = this.gameFactory.getWaves(this.gameData.getCurrentLevel());
 		initializeWaves();
-		
+		this.noMoreWave = false;
 		System.out.println("Start: " + grid.getStart().getX() + " " + grid.getStart().getY());
 		System.out.println("end: " + grid.getEnd().getX() + " " + grid.getEnd().getY());
 
@@ -67,6 +68,10 @@ public class EnemyManager extends Observable {
 		//System.out.println(allWaveStartTimes);
 		allWaves.forEach(w -> allWaveStartTimes.add(w.getStartTime()));
 		allWaves.forEach(w -> allWaveFrequencies.add(w.getFrequency()));
+	}
+	
+	public Boolean getNoMoreWave(){
+		return this.noMoreWave;
 	}
 
 	/*
@@ -102,6 +107,7 @@ public class EnemyManager extends Observable {
 		enemy.setyDirection(nextCell.getY() - enemy.getCurrentCell().getY());
 		enemy.setX(gameData.cellToCoordinate(enemy.getCurrentCell().getX()));
 		enemy.setY(gameData.cellToCoordinate(enemy.getCurrentCell().getY()));
+		System.out.println("enemy spawning: "+ enemy.getUniqueID());
 		enemyOnGrid.put(enemy.getUniqueID(), enemy);
 	}
 
@@ -221,6 +227,7 @@ public class EnemyManager extends Observable {
 			if(this.enemyOnGrid.size() == 0){
 				this.gameData.setLevel(this.gameData.getCurrentLevel() + 1);
 			}
+			this.noMoreWave = true;
 			System.out.println("ALL WAVES IS EMPTY");
 			return new LinkedList<Enemy>();
 		}
