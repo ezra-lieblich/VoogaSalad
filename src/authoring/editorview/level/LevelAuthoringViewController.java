@@ -64,7 +64,7 @@ public class LevelAuthoringViewController extends EditorViewController
         levelView.updateRewardMoney(levelDataSource.getRewardMoney(currentLevelID));
         levelView.updateRewardScore(levelDataSource.getRewardScore(currentLevelID));
         levelView.updateNameDisplay(levelDataSource.getName(currentLevelID));
-        levelView.updateWaves(levelDataSource.getWaves(currentLevelID));
+        levelView.updateWaves(levelDataSource.getWaveStrings(currentLevelID));
     }
 
     @Override

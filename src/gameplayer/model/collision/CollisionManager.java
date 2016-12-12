@@ -38,10 +38,10 @@ public class CollisionManager {
 				Enemy targetEnemy = enemyManager.getEnemyOnGrid().get(targetUniqueID);
 				
 				xInRange = Math.abs(weapon.getX() - targetEnemy.getX()) <= 100; //make more robust
-				System.out.println("weapon x " + weapon.getX());
-				System.out.println("enemy x "+ targetEnemy.getX());
-				System.out.println("weapon y " + weapon.getY());
-				System.out.println("enemy y "+ targetEnemy.getY());
+				//System.out.println("weapon x " + weapon.getX());
+				//System.out.println("enemy x "+ targetEnemy.getX());
+				//System.out.println("weapon y " + weapon.getY());
+				//System.out.println("enemy y "+ targetEnemy.getY());
 				yInRange = Math.abs(weapon.getY() - targetEnemy.getY()) <= 100; //make more robust
 				
 				if (xInRange && yInRange) {

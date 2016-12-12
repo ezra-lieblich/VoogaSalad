@@ -38,15 +38,10 @@ public class GameEffect {
         this.encompassingClassName = encompassingClassName;
     }
     
-    public void execute() {
-        try {
-            if(executeCondition()) {
-                executeEffect();
-            }
-        } catch (GroovyException e) {
-            System.out.println("ERRORS lolz");
+    public void execute() throws GroovyException {
+        if(executeCondition()) {
+            executeEffect();
         }
-
     }
     
     private boolean executeCondition() {
@@ -63,6 +58,10 @@ public class GameEffect {
     
     public void addEncompassingClass(Object value) {
         groovyExecutor.addVariable(encompassingClassName, value);
+    }
+    
+    public String getTriggerClass(){
+    	return this.triggerClass;
     }
     
 }

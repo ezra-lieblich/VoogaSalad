@@ -157,13 +157,33 @@ public class GamePlayerController implements Observer {
 		try {
 			Wrapper.getInstance().recordGameScores("" + this.model.getData().getGold(),
 					"" + this.model.getData().getLife(), "" + this.model.getData().getCurrentLevel());
-		} catch (IOException e) { // TODO Auto-generated catch block
-									// e.printStackTrace();
-
+		} catch (IOException e) {
 		}
-
 		this.towerController = new TowerController(this.model.getTowerManager(), this.view);
+		initSaveGameButton();
 
+	}
+	
+	/**
+	 * FILL THIS METHOD WITH XML SAVING CRAP
+	 */
+	private void initSaveGameButton(){
+		this.view.saveButton(e -> {
+			
+		});
+	}
+
+	public void setDataStoreOnClose(Stage s) {
+		s.setOnCloseRequest(e -> {
+			try {
+				Wrapper.getInstance().logEndScore("" + this.model.getData().getGold(),
+						"" + this.model.getData().getLife(), "" + this.model.getData().getCurrentLevel());
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				System.out.println("Log end score went wrong");
+				e1.printStackTrace();
+			}
+		});
 	}
 
 	private void initGUI(boolean newlevel) {

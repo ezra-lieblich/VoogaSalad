@@ -4,7 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.GridPane;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -14,6 +14,7 @@ import authoring.editorview.path.IPathSetView;
 import authoring.editorview.path.NameIdPair;
 import authoring.editorview.path.PathAuthoringViewDelegate;
 import authoring.utilityfactories.ComboBoxFactory;
+import authoring.utilityfactories.GridFactory;
 
 
 /**
@@ -25,7 +26,7 @@ import authoring.utilityfactories.ComboBoxFactory;
 
 public class PathChooser implements IPathSetView{
 	
-	private VBox root;
+	private GridPane root;
 	private PathAuthoringViewDelegate delegate;
 	private List<NameIdPair> nameIdList;
 	private ObservableList<Object> pathList;
@@ -41,7 +42,6 @@ public class PathChooser implements IPathSetView{
 	//TODO: delete path
 	
 	public PathChooser(){
-		this.root = new VBox();
 		buildViewComponents();
 		//TODO: add binding
 		nameIdList = new ArrayList<NameIdPair>();
@@ -91,11 +91,11 @@ public class PathChooser implements IPathSetView{
 	
 	private void buildViewComponents(){		
 		pathList = FXCollections.observableArrayList();
-		pathComboBox = ComboBoxFactory.makeComboBox(pathResource.getString("ComboBoxText"), 
+		pathComboBox = ComboBoxFactory.makeComboBox("", 
 				e -> setEditView(pathComboBox.getValue().toString()), pathList);
 		
-		pathComboBox.setTranslateX(5);
-		root.getChildren().add(pathComboBox);
+		pathComboBox.setPrefWidth(155); //TODO magic number
+		root = GridFactory.createRowWithLabelandNode(pathResource.getString("ComboBoxText"), pathComboBox);
 	}
 
 	

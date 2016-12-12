@@ -109,7 +109,7 @@ public class GridGUI {
 	private void addTowerToGrid(Tower tower, int row, int col) {
 		ImageView towerImage = graphicsLib.createImageView(graphicsLib.createImage(tower.getImage()));
 		graphicsLib.setImageViewParams(towerImage, cellWidth * col, cellHeight * row, cellWidth, cellHeight);
-		this.grid.getChildren().addAll(towerImage, tower.getTowerInfo());
+		this.grid.getChildren().addAll(towerImage, tower.getInfoBox());
 	}
 
 	public void populatePath(HashMap<Integer,Path>allPaths){

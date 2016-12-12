@@ -14,7 +14,9 @@ public class Collision {
 	}
 	
 	public void processCollision() {
-		enemy.setHealth(enemy.getHealth()-weapon.getDamage());
+		this.weapon.triggerEffect(this.enemy);
+		//enemy.setHealth(enemy.getHealth()-weapon.getDamage());
+		//enemy.setHealth(enemy.getHealth()-weapon.getDamage());
 		System.out.println("PROCESSED COLLISION:::::: ");
 	}
 	

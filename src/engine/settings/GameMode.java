@@ -10,7 +10,6 @@ import engine.Type;
  */
 public interface GameMode extends Type{
 	
-
     List<String> getWinningConditions();
 
     void setWinningCondition(String winningCondition);
@@ -27,11 +26,26 @@ public interface GameMode extends Type{
 
     void setGameType(String gameType);
     
-    double getInitalLives();
+    int getInitalLives();
     
-    void setInitialLives(double lives);
+    void setInitialLives(int lives);
     
-    double getInitialMoney();
+    int getInitialMoney();
     
-    void  setInitialMoney(double money);
+    void  setInitialMoney(int money);
+    
+    void setPathType(String pathType);
+    
+    String getPathType();
+    
+    void setGridSize(int gridSize);
+    
+    int getGridSize();
+    
+    void addPath(int pathID);
+    
+    void removePath(int pathID);
+    
+    List<Integer> getPaths();
+    
 }
