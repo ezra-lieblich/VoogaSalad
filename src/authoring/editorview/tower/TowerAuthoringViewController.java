@@ -108,7 +108,10 @@ public class TowerAuthoringViewController extends EditorViewController
 
     @Override
     public void onUserPressedDeleteTower () {
+        int nextID = this.towerView.getNearestAvailableItemID(currentTowerID);
         towerDataSource.deleteType(currentTowerID);
+        currentTowerID = nextID;
+        this.refreshView();
     }
 
     @Override
