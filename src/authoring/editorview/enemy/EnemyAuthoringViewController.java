@@ -128,7 +128,10 @@ public class EnemyAuthoringViewController extends EditorViewController
 
     @Override
     public void onUserPressedDeleteEnemy () {
+    	int nextID = this.enemyView.getNearestAvailableItemID(currentEnemyID);
         enemyDataSource.deleteType(currentEnemyID);
+        currentEnemyID = nextID;
+        this.refreshEnemyView();
     }
 
     @Override

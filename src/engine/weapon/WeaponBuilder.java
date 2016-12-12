@@ -10,11 +10,13 @@ public interface WeaponBuilder extends TypeBuilder<Weapon, WeaponBuilder>, Binda
     
     WeaponBuilder buildTargets (List<Integer> targets);
     
+    WeaponBuilder buildEffects (Integer ... effects);
+    
+    WeaponBuilder buildEffects (List<Integer> effects);
+    
     WeaponBuilder buildReloadTime (double reloadTime);
 
     WeaponBuilder buildTrajectory (String trajectory);
-
-    WeaponBuilder buildEffect (String effect);
 
     WeaponBuilder buildSpeed (double speed);
 

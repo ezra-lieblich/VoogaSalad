@@ -95,13 +95,13 @@ public class PathTypeManagerController
     }
 
     @Override
-    public void getType (int pathID) {
-        getTypeManager().getEntity(pathID).getType();        
+    public String getType (int pathID) {
+        return getTypeManager().getEntity(pathID).getType();        
     }
     
     @Override
     public List<Coordinate<Integer>> getPathCoordinates (int pathID) {
-        return getTypeManager().getEntity(pathID).getCoordinates();
+        return Collections.unmodifiableList(getTypeManager().getEntity(pathID).getCoordinates());
     }
     
     

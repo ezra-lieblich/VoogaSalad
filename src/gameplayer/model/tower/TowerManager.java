@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 
+import engine.effect.player.GameEffect;
 import engine.tower.TowerType;
 import engine.weapon.Weapon;
 import engine.weapon.WeaponType;
@@ -43,10 +44,10 @@ public class TowerManager extends Observable {
 	private Map<Integer, engine.tower.Tower> upgradeTowerTypes;
 	private int uniqueTowerID;
 	private long timeInterval;
-	
+
 	public static final int WEAPONYERROR = 20;
 	public static final int WEAPONXERROR = 40;
-	
+
 
 	public TowerManager(GamePlayData gameData, EnemyManager enemyManager) {
 		this.gameData = gameData;
@@ -57,7 +58,7 @@ public class TowerManager extends Observable {
 		this.towersOnGrid =  new HashMap<Integer, gameplayer.model.tower.Tower>();
 		this.uniqueTowerID = 0;
 		this.availableTowerTypes = new HashMap<Integer, engine.tower.Tower>();
-		
+
 	}
 
 	public HashMap<Integer, engine.tower.Tower> getAvailableTower() {
@@ -122,8 +123,8 @@ public class TowerManager extends Observable {
 		//System.out.println("========================");
 		//System.out.println("contains weapon: " + towerType.getWeapons().get(0));
 		//System.out.println("number of tower on grid: " + this.towersOnGrid.size());
-		
-		
+
+
 		int x1 = (int) (x / this.gameData.getCellWidth());
 		int y1 = (int) (y / this.gameData.getCellHeight());
 		if (!canPlaceTower(x1, y1, towerType.getCost())) {
@@ -144,7 +145,7 @@ public class TowerManager extends Observable {
 
 			System.out.println("place tower x2: "+x2);
 			System.out.println("place tower y2: "+y2);
-			
+
 			Gun tempGun = new Gun(fireRate ,weaponForGun, x2+WEAPONXERROR, y2+WEAPONYERROR);// change fire rate 
 			gunForTower.add(tempGun);
 		}
@@ -200,7 +201,7 @@ public class TowerManager extends Observable {
 		this.gameData.setGold(this.gameData.getGold() + t.sellTower());
 		this.gameData.getGrid().removeTower((int)t.getX(),(int)t.getX());
 		this.towersOnGrid.remove(uniqueTowerID);
-		
+
 		//don't need this
 		//setChanged();
 		//notifyObservers();
@@ -217,10 +218,16 @@ public class TowerManager extends Observable {
 	public void upgradeTower(int UniqueID){
 		Tower toBeUpgraded = this.towersOnGrid.get(UniqueID);
 		int upgradeType = toBeUpgraded.getUpgradeType();
-		engine.tower.Tower upgraded = this.upgradeTowerTypes.get(upgradeType);
+		engine.tower.Tower upgraded = this.upgradeTowerTypes.get(10); // change back to upgradeType when xml is fixed
+		for(int i : this.upgradeTowerTypes.keySet()){
+			//System.out.println("key set: " + i);
+		}
+		//System.out.println("tower upgrade check: " +upgraded== null );
+		//System.out.println("tower upgrade check: " +upgraded.getCost() );
+
 		this.gameData.setGold(this.gameData.getGold() - upgraded.getCost());
 		toBeUpgraded.setImage(upgraded.getImagePath());
-		
+
 		List<Integer> weaponTypes = upgraded.getWeapons();
 		ArrayList<Gun> gunForTower = new ArrayList<Gun>();
 		// System.out.println("all the int weapons: " + gunsForTower.size());
@@ -232,35 +239,34 @@ public class TowerManager extends Observable {
 		}
 		toBeUpgraded.setGuns(gunForTower);
 
-		
+
 	}
-	
+
 	/**
 	 * get all the weapons fired by the towers currently on Grid
 	 */
-	public ArrayList<gameplayer.model.weapon.Weapon> generateNewWeapons(){
+	public ArrayList<gameplayer.model.weapon.Weapon> generateNewWeapons(Map<Integer, GameEffect> allEffects){
 		ArrayList<gameplayer.model.weapon.Weapon> newlyFired = new ArrayList<gameplayer.model.weapon.Weapon>();
 		HashMap<Integer, Enemy> enemyOnGrid = this.enemyManager.getEnemyOnGrid();
 
 		for(int i: this.towersOnGrid.keySet()){
 			for(Gun g : towersOnGrid.get(i).getAllWeaponTypes()){
-				if(g.isFiring() && enemyOnGrid.keySet().size() > 0 ){
+				if(g.isFiring()){
 					for(int j : enemyOnGrid.keySet()){
 						Enemy e = enemyOnGrid.get(j);
-						//double distance = this.gameData.getDistance(g.getX(), g.getY(), e.getX(), e.getY());//this doesnt work?
 						Enemy target = enemyOnGrid.get(j);
-						newlyFired.add(g.getWeapon(j,target.getX(), target.getY()));							
+						newlyFired.add(g.getWeapon(j,target.getX(), target.getY(), allEffects ));							
 						break;
 					}
 				}
 			}
 		}
-		
-//		System.out.println("+++++++++++++++++++++");
-//		System.out.println("=====================");
-//
-//		System.out.println("number of weapon fired: " + newlyFired.size());
-//		System.out.println("newlyFired"+newlyFired.size());
+
+		//		System.out.println("+++++++++++++++++++++");
+		//		System.out.println("=====================");
+		//
+		//		System.out.println("number of weapon fired: " + newlyFired.size());
+		//		System.out.println("newlyFired"+newlyFired.size());
 		return newlyFired;
 	}
 

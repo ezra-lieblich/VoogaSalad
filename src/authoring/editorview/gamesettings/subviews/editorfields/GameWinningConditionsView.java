@@ -1,4 +1,4 @@
-package authoring.editorview.gamesettings.subviews;
+package authoring.editorview.gamesettings.subviews.editorfields;
 
 import java.util.ResourceBundle;
 
@@ -38,6 +38,8 @@ public class GameWinningConditionsView implements IGameSettingsSetView {
     private void makeComboBox(){
 		
     	winningConditionList = FXCollections.observableArrayList();
+    	
+    	
     	
     	winningConditionComboBox = ComboBoxFactory.makeComboBox("" , 
 				e -> setWinningCondition(winningConditionComboBox.getValue().toString()), winningConditionList);

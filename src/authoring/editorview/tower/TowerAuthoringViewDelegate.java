@@ -9,6 +9,8 @@ package authoring.editorview.tower;
 public interface TowerAuthoringViewDelegate {
 
     public void onUserPressedCreateNewTower ();
+    
+    public void onUserPressedCreateTowerUpgrade();
 
     public void onUserPressedDeleteTower ();
 
@@ -37,5 +39,7 @@ public interface TowerAuthoringViewDelegate {
     public void onUserEnteredTowerSize (String towerSize);
     
     public void onUserSelectedTower (int towerID);
+    
+    public void onUserSelectedTowerUpgrade(int towerID);
 
 }

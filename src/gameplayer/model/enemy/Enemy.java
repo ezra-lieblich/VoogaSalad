@@ -70,30 +70,37 @@ public class Enemy extends Observable implements IDrawable {
 		return this.height;
 	}
 
+	@EffectMethod
 	public String getName() {
 		return name;
 	}
+
+	@EffectMethod
 
 	public int getxDirection() { // heading
 		return xDirection;
 	}
 
+	@EffectMethod
 	public void setxDirection(int xDirection) { // heading
 		this.xDirection = xDirection;
 		setChanged();
 		notifyObservers();
 	}
 
+	@EffectMethod
 	public int getyDirection() {
 		return yDirection;
 	}
 
+	@EffectMethod
 	public void setyDirection(int yDirection) {
 		this.yDirection = yDirection;
 		setChanged();
 		notifyObservers();
 	}
 
+	
 	public void setCurrentCell(Cell c) { // don't think we need to notify
 											// observers of this change
 		this.currentCell = c;
@@ -101,30 +108,36 @@ public class Enemy extends Observable implements IDrawable {
 		//this.yDirection = c.getNext().getY() - c.getY();
 	}
 
+	@EffectMethod
 	public Cell getCurrentCell() {
 		return this.currentCell;
 	}
 
+	@EffectMethod
 	public double getX() {
 		return xCoordinate;
 	}
 
+	@EffectMethod
 	public void setX(double xCoordinate) {
 		this.xCoordinate = xCoordinate;
 		setChanged();
 		notifyObservers();
 	}
 
+	@EffectMethod
 	public double getY() {
 		return yCoordinate;
 	}
 
+	@EffectMethod
 	public void setY(double yCoordinate) {
 		this.yCoordinate = yCoordinate;
 		setChanged();
 		notifyObservers();
 	}
 
+	@EffectMethod
 	public void setImage(String image) { // might not need to notify observers
 											// here
 		this.image = image;
@@ -132,6 +145,7 @@ public class Enemy extends Observable implements IDrawable {
 		notifyObservers();
 	}
 
+	@EffectMethod
 	public String getImage() {
 		//System.out.println("What is the image: "+image);
 		int index=this.image.lastIndexOf("/")+1;
@@ -144,16 +158,19 @@ public class Enemy extends Observable implements IDrawable {
 		return movingSpeed;
 	}
 
+	@EffectMethod
 	public void setMovingSpeed(double movingSpeed) {
 		this.movingSpeed = movingSpeed;
 		setChanged();
 		notifyObservers();
 	}
 
+	@EffectMethod
 	public double getHealth() {
 		return health;
 	}
 
+	@EffectMethod
 	public void setHealth(double d) {
 		this.health = d;
 		setChanged();

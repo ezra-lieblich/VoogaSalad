@@ -51,5 +51,7 @@ public interface Level extends Type {
     List<Integer> getPaths ();
     
     WaveManager getWaveManager ();
-
+    
+    void removeEnemyReferences (int enemyID);
+    
 }

@@ -9,46 +9,66 @@ public class GameSettingsAuthoringViewController extends EditorViewController
 
     private IGameSettingsUpdateView gameView;
     private GameModeManagerController gameSettingsDataSource;
+    private int activeID = 0;
 
     public GameSettingsAuthoringViewController (int editorWidth, int editorHeight) {
-        IGameSettingsSetView myView =
-                GameSettingsAuthoringViewFactory.build(editorWidth, editorHeight);
-        myView.setDelegate(this);
-        this.view = myView;
+        gameView = GameSettingsAuthoringViewFactory.build(editorWidth, editorHeight);
+        gameView.setDelegate(this);
+        this.view = gameView;
     }
 
     public void setGameSettingsDataSource (GameModeManagerController source) {
         this.gameSettingsDataSource = source;
         this.gameSettingsDataSource.addTypeBankListener(this.gameView);
+        createNewGame();
     }
+
+	private void createNewGame() {
+		gameSettingsDataSource.createType(this.gameView);
+		gameView.updateNameDisplay(gameSettingsDataSource.getName(activeID));
+		gameView.updateImagePathDisplay(gameSettingsDataSource.getImagePath(activeID));
+		gameView.updateNumberofLives(gameSettingsDataSource.getNumberofLives(activeID));
+		gameView.updateInitialMoney(gameSettingsDataSource.getMoney(activeID));
+		gameView.updateGridSize(gameSettingsDataSource.getGridSize(activeID));
+		gameView.updateLosingConditions(gameSettingsDataSource.getLosingConditons(activeID));
+		gameView.updateWinningConditions(gameSettingsDataSource.getWinningConditions(activeID));
+		gameView.updatePathType(gameSettingsDataSource.getPathType(activeID));		
+	}
 
     @Override
-    public void onUserEnteredGameLives (String lives) {
-        // TODO Auto-generated method stub
-
+    public void onUserEnteredGameLives (int lives) {
+        this.gameSettingsDataSource.setNumberofLives(activeID, lives);
     }
+    
+    
 
     @Override
     public void onUserEnteredGameNames (String name) {
-        // TODO Auto-generated method stub
+        this.gameSettingsDataSource.setName(activeID, name);
 
     }
 
     @Override
     public void onUserEnteredGameImage (String imagePath) {
-        // TODO Auto-generated method stub
+        this.gameSettingsDataSource.setImagePath(activeID, imagePath);
+
+    }
+    
+    @Override
+    public void onUserEnteredGameMoney (int money) {
+        this.gameSettingsDataSource.setMoney(activeID, money);
 
     }
 
     @Override
-    public void onUserEnteredImageSize (String imageSize) {
-        // TODO Auto-generated method stub
-
-    }
+	public void onUserEnteredGridSize(int size) {
+		// TODO Auto-generated method stub
+		
+	}
 
     @Override
     public void onUserEnteredWinningConditions (String winConditions) {
-        // TODO Auto-generated method stub
+        //TODO
 
     }
 
@@ -58,9 +78,7 @@ public class GameSettingsAuthoringViewController extends EditorViewController
 
     }
 
-    @Override
-    public void onUserEnteredGameMoney (String money) {
-        // TODO Auto-generated method stub
+	
 
-    }
+    
 }

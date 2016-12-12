@@ -19,10 +19,12 @@ public interface Weapon extends Type{
 
     void setTrajectory (String trajectory);
 
-    String getEffect ();
+    List<Integer> getEffects ();
 
-    void setEffect (String effect);
+    void addEffect (int effect);
 
+    void removeEffect (int effect);
+    
     double getSpeed ();
 
     void setSpeed (double speed);
