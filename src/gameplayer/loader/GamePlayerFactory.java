@@ -72,9 +72,9 @@ public class GamePlayerFactory{
 		GameMode gameSettings = authoringFileReader.getGameMode();
 		LevelManager levelManager = authoringFileReader.getLevelManager();
 		settings.put("levelnumber", 0.0); 
-		settings.put("lives", 5.0);
-		settings.put("gold", 1000000.0);
-		settings.put("totalNumberOfLevels", 1.0);
+		settings.put("lives",(double) gameSettings.getInitalLives());
+		settings.put("gold", (double)gameSettings.getInitialMoney());
+		settings.put("totalNumberOfLevels", (double)levelManager.getEntities().size());
 
 		return settings; 
 	}
@@ -132,9 +132,9 @@ public class GamePlayerFactory{
 				});
 				levelGrid.setNoPath(true);
 				levelGrid.setStart(cells.get(0));
-				Cell myHardcodedCell = levelGrid.getCell(7, 3); 
-				//levelGrid.setEnd(cells.get(1)); UNCOMMENT ME
-				levelGrid.setEnd(myHardcodedCell);
+
+				levelGrid.setEnd(levelGrid.getCell(7, 3));
+				//levelGrid.setEnd(cells.get(1));
 				//gameplayer.model.Path newPath = new gameplayer.model.Path(cells, levelGrid.getGrid());
 				//allPaths.put(index, newPath);
 			}

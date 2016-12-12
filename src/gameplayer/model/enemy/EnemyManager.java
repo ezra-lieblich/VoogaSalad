@@ -55,6 +55,10 @@ public class EnemyManager extends Observable {
 		this.enemyOnGrid = new HashMap<Integer, Enemy>();
 		this.allWaves = this.gameFactory.getWaves(this.gameData.getCurrentLevel());
 		initializeWaves();
+		
+		System.out.println("Start: " + grid.getStart().getX() + " " + grid.getStart().getY());
+		System.out.println("end: " + grid.getEnd().getX() + " " + grid.getEnd().getY());
+
 	}
 	
 	private void initializeWaves() {

@@ -50,8 +50,8 @@ public class Grid {
 
 
 	private Cell getNoPathNext(Cell c){
-		System.out.println("the cell enemy is at: " + c.getX() + " " + c.getY());
-		int xdirection = (int)Math.signum(c.getX() - this.end.getX());
+
+		int xdirection = (int)Math.signum( this.end.getX() - c.getX());
 
 		if (xdirection != 0){
 			if(availableToMoveTo(c.getX()+xdirection,c.getY())){
@@ -59,7 +59,7 @@ public class Grid {
 			}
 		}
 
-		int ydirection = (int)Math.signum(c.getY() - this.end.getY());
+		int ydirection = (int)Math.signum(this.end.getY() - c.getY() );
 		if (ydirection != 0){
 			if(availableToMoveTo(c.getX(), c.getY() + ydirection)){
 				return this.grid[c.getX()][c.getY() + ydirection];
