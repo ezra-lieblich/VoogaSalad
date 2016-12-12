@@ -1,6 +1,6 @@
 package engine.enemy;
 
-import authoring.editorview.enemy.IEnemyUpdateView;
+import authoring.editorview.enemy.EnemyUpdateView;
 import engine.AbstractTypeManagerController;
 import engine.ManagerMediator;
 import engine.effect.EffectManager;
@@ -14,7 +14,7 @@ import engine.effect.EffectTypeManagerController;
  * Created by ezra on 11/29/16.
  */
 public class EnemyTypeManagerController  
-	extends AbstractTypeManagerController<EnemyManager, EnemyBuilder, Enemy, IEnemyUpdateView> implements EnemyManagerController {
+	extends AbstractTypeManagerController<EnemyManager, EnemyBuilder, Enemy, EnemyUpdateView> implements EnemyManagerController {
 
 	private EffectManagerController enemyEffectManagerController;
 			
@@ -84,7 +84,7 @@ public class EnemyTypeManagerController
 	}
 
 	@Override
-	protected EnemyBuilder constructTypeProperties(IEnemyUpdateView updateView, EnemyBuilder typeBuilder) {
+	protected EnemyBuilder constructTypeProperties(EnemyUpdateView updateView, EnemyBuilder typeBuilder) {
 		return typeBuilder.addDamageListener((oldValue, newValue) -> updateView.updateEnemyDamage(newValue))
 				.addHealthListener((oldValue, newValue) -> updateView.updateEnemyHealthDisplay(newValue))
 				.addMoneyListener((oldValue, newValue) -> updateView.updateEnemyRewardMoney(newValue))

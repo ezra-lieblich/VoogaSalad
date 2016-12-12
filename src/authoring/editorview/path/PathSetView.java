@@ -9,7 +9,7 @@ import authoring.editorview.INodeView;
  * and the public methods defining what components the path view should contain.
  *
  */
-public interface IPathSetView extends INodeView {
+public interface PathSetView extends INodeView {
 
     public void setDelegate (PathAuthoringViewDelegate delegate);
 

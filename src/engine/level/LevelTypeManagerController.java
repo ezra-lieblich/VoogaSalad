@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import authoring.editorview.level.ILevelUpdateView;
+import authoring.editorview.level.LevelUpdateView;
 import engine.AbstractTypeManagerController;
 import engine.ManagerMediator;
 import engine.effect.EffectManagerController;
@@ -18,7 +18,7 @@ import engine.level.wave.WaveTypeBuilder;
 
 
 public class LevelTypeManagerController
-        extends AbstractTypeManagerController<LevelManager, LevelBuilder, Level, ILevelUpdateView>
+        extends AbstractTypeManagerController<LevelManager, LevelBuilder, Level, LevelUpdateView>
         implements LevelManagerController {
 
     private WaveBuilder waveBuilder;
@@ -100,7 +100,7 @@ public class LevelTypeManagerController
     }
 
     @Override
-    protected LevelBuilder constructTypeProperties (ILevelUpdateView updateView,
+    protected LevelBuilder constructTypeProperties (LevelUpdateView updateView,
                                                     LevelBuilder typeBuilder) {
         return typeBuilder.addDurationInSecondsListener( (oldValue, newValue) -> updateView
                 .updateTransitionTime(newValue))
@@ -143,12 +143,12 @@ public class LevelTypeManagerController
     }
 
     @Override
-    public int createWave (int levelID, ILevelUpdateView updateView) {
+    public int createWave (int levelID, LevelUpdateView updateView) {
         return getTypeManager().getEntity(levelID).createWave(buildWave(updateView));
         // TODO view methods need to actually go to right thing also need to add to level
     }
 
-    private Wave buildWave (ILevelUpdateView updateView) {
+    private Wave buildWave (LevelUpdateView updateView) {
         return waveBuilder.addNameListener( (oldValue, newValue) -> updateView
                 .updateNameDisplay(newValue))
                 .addImagePathListener( (oldValue, newValue) -> updateView

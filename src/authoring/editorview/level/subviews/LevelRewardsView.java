@@ -1,7 +1,7 @@
 package authoring.editorview.level.subviews;
 
 import java.util.ResourceBundle;
-import authoring.editorview.level.ILevelSetView;
+import authoring.editorview.level.LevelSetView;
 import authoring.editorview.level.LevelAuthoringViewDelegate;
 import authoring.utilityfactories.BoxFactory;
 import authoring.utilityfactories.TextFieldFactory;
@@ -11,7 +11,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 
-public class LevelRewardsView implements ILevelSetView {
+public class LevelRewardsView implements LevelSetView {
 
     private VBox vbox;
     private LevelAuthoringViewDelegate delegate;

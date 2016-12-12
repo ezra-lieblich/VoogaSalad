@@ -2,7 +2,7 @@ package engine.weapon;
 
 import java.util.Collections;
 import java.util.List;
-import authoring.editorview.weapon.IWeaponUpdateView;
+import authoring.editorview.weapon.WeaponUpdateView;
 import engine.AbstractTypeManagerController;
 import engine.ManagerMediator;
 import engine.effect.EffectManagerController;
@@ -10,7 +10,7 @@ import engine.effect.EffectTypeManagerController;
 
 
 public class WeaponTypeManagerController extends
-        AbstractTypeManagerController<WeaponManager, WeaponBuilder, Weapon, IWeaponUpdateView>
+        AbstractTypeManagerController<WeaponManager, WeaponBuilder, Weapon, WeaponUpdateView>
         implements WeaponManagerController {
 
     private EffectManagerController weaponEffectManagerController;
@@ -21,7 +21,7 @@ public class WeaponTypeManagerController extends
     }
 
     @Override
-    protected WeaponBuilder constructTypeProperties (IWeaponUpdateView weaponUpdater,
+    protected WeaponBuilder constructTypeProperties (WeaponUpdateView weaponUpdater,
                                                      WeaponBuilder typeBuilder) {
         return typeBuilder
                 .addReloadTimeListener( (oldValue, newValue) -> weaponUpdater

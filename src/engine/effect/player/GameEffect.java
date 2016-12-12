@@ -38,7 +38,7 @@ public class GameEffect {
         this.encompassingClassName = encompassingClassName;
     }
     
-    public void execute() throws GroovyException {
+    public void execute() {
         if(executeCondition()) {
             executeEffect();
         }

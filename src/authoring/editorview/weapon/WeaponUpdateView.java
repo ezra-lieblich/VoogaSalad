@@ -13,7 +13,7 @@ import authoring.editorview.ListDataSource;
  * @author Kayla Schulz
  *
  */
-public interface IWeaponUpdateView extends IWeaponSetView, IUpdateView {
+public interface WeaponUpdateView extends WeaponSetView, IUpdateView {
 
     public void updateFireRateDisplay (double fireRate);
 

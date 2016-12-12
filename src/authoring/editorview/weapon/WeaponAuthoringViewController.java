@@ -20,7 +20,7 @@ public class WeaponAuthoringViewController extends EditorViewController
 
     private WeaponManagerController weaponDataSource;
     private int currentWeaponID;
-    private IWeaponUpdateView weaponView;
+    private WeaponUpdateView weaponView;
 
     public WeaponAuthoringViewController (int editorWidth, int editorHeight) throws IOException {
         weaponView = WeaponAuthoringViewFactory.build(editorWidth, editorHeight);
@@ -140,6 +140,12 @@ public class WeaponAuthoringViewController extends EditorViewController
         cellData.setImagePath(weaponDataSource.getImagePath(id));
         cellData.setId(id);
         return cellData;
+    }
+
+    @Override
+    public void onUserPressedAddEffect () {
+        // TODO Auto-generated method stub
+
     }
 
 }

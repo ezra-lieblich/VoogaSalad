@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import authoring.editorview.level.WaveObject;
 import engine.level.wave.WaveString;
-import authoring.editorview.level.ILevelSetView;
+import authoring.editorview.level.LevelSetView;
 import authoring.editorview.level.LevelAuthoringViewDelegate;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,7 +17,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 
 
-public class WaveTableView implements ILevelSetView {
+public class WaveTableView implements LevelSetView {
 
     private TableView<WaveObject> waveTable;
     private TableColumn<WaveObject, String> waveNumberCol;

@@ -23,9 +23,11 @@ public class Enemy extends Observable implements IDrawable {
 	private int uniqueID;
 	private Label enemyInfo;
 	private boolean showInfo;
+	private int pathID;
+	private boolean shouldRemove;
 
-
-	public Enemy(int ID, String name, double movingSpeed, int health, String image, double width, double height) {
+	public Enemy(int ID, String name, double movingSpeed, int health, String image, double width, double height, int pathNum) {
+		this.pathID = pathNum;
 		this.uniqueID = ID;
 		this.name = name;
 		this.movingSpeed = movingSpeed;
@@ -35,6 +37,7 @@ public class Enemy extends Observable implements IDrawable {
 		this.height = height;
 		this.showInfo = false;
 		this.enemyInfo = new Label("Name: " + name + "\nHealth: " + health);
+		this.shouldRemove = false;
 		initLabel();
 	}
 
@@ -47,7 +50,10 @@ public class Enemy extends Observable implements IDrawable {
 	 * public double[] getWidthAndHeight(){ double[] weidthAndHeight =
 	 * {this.width, this.height}; return weidthAndHeight; }
 	 */
-
+	
+	public int getPathID() {
+		return this.pathID;
+	}
 	public void setUniqueID(int id) {
 		this.uniqueID = id;
 	}
@@ -156,6 +162,14 @@ public class Enemy extends Observable implements IDrawable {
 
 	public Label getEnemyInfo() {
 		return enemyInfo;
+	}
+	
+	public boolean mustRemove() {
+		return this.shouldRemove;
+	}
+	
+	public void setRemove(boolean removeOrNah) {
+		this.shouldRemove = removeOrNah;
 	}
 
 	public void toggleInfoVisibility() {

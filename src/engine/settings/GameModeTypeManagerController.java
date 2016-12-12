@@ -3,7 +3,7 @@ package engine.settings;
 import java.util.Collections;
 import java.util.List;
 
-import authoring.editorview.gamesettings.IGameSettingsUpdateView;
+import authoring.editorview.gamesettings.GameSettingsUpdateView;
 import engine.AbstractTypeManagerController;
 import engine.ManagerMediator;
 import engine.MethodObjectData;
@@ -12,7 +12,7 @@ import engine.effect.EffectTypeManagerController;
 
 
 public class GameModeTypeManagerController 
-	extends AbstractTypeManagerController<GameModeManager, GameModeBuilder, GameMode, IGameSettingsUpdateView> implements GameModeManagerController {
+	extends AbstractTypeManagerController<GameModeManager, GameModeBuilder, GameMode, GameSettingsUpdateView> implements GameModeManagerController {
 
 	private EffectManagerController gameModeEffectManagerController;
 	
@@ -72,7 +72,7 @@ public class GameModeTypeManagerController
 	}
 
 	@Override
-	protected GameModeBuilder constructTypeProperties(IGameSettingsUpdateView updateView, GameModeBuilder typeBuilder) {
+	protected GameModeBuilder constructTypeProperties(GameSettingsUpdateView updateView, GameModeBuilder typeBuilder) {
 		return typeBuilder //.addGameTypeListener( (oldValue, newValue) -> updateView.updateGameName(newValue))
 				.addInitialMoneyListener((oldValue, newValue) -> updateView.updateInitialMoney(newValue))
 				.addInitialLivesListener((oldValue, newValue) -> updateView.updateNumberofLives(newValue.intValue()))

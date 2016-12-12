@@ -1,12 +1,10 @@
 package engine;
 
-import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 import engine.observer.ObservableObjectProperty;
 import engine.observer.ObservableProperty;
-import engine.tower.TowerBuilder;
-import engine.weapon.Weapon;
 
 public abstract class AbstractTypeBuilder<E extends Type, R extends TypeBuilder<E, R>> implements TypeBuilder<E, R>, TypeInitializer {
     
@@ -128,6 +126,10 @@ public abstract class AbstractTypeBuilder<E extends Type, R extends TypeBuilder<
     
     protected void resetSize(ObservableProperty<Double> size) {
         this.size = size;
+    }
+    
+    public void createInputVariable(String name, Class<?> type) {
+        Map<String, Class<?>> varmap = new HashMap<String, Class<?>>();
     }
     
     private void restoreDefaults() {

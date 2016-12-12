@@ -5,7 +5,7 @@ import authoring.editorview.IUpdateView;
 import authoring.editorview.ListDataSource;
 
 
-public interface IGameSettingsUpdateView extends IGameSettingsSetView, IUpdateView {
+public interface GameSettingsUpdateView extends GameSettingsSetView, IUpdateView {
 
     public void updateNumberofLives (int lives);
     
@@ -14,6 +14,8 @@ public interface IGameSettingsUpdateView extends IGameSettingsSetView, IUpdateVi
     public void updateGridSize (int size);
     
     public void updatePathList (List<Integer> pathList);
+    
+    public void updateAvailablePaths (List<Integer> availablePathList);
     
     public void updatePathType (String pathType);
 

@@ -1,6 +1,6 @@
 package authoring.editorview.path.subviews.editorfields;
 
-import authoring.editorview.path.IPathSetView;
+import authoring.editorview.path.PathSetView;
 import authoring.editorview.path.PathAuthoringViewDelegate;
 import authoring.utilityfactories.ComboBoxFactory;
 import authoring.utilityfactories.GridFactory;
@@ -10,7 +10,7 @@ import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.GridPane;
 
-public class PathTypeView implements IPathSetView {
+public class PathTypeView implements PathSetView {
 	
 	//TODO inheritance
 	
@@ -31,7 +31,7 @@ public class PathTypeView implements IPathSetView {
 		pathTypeComboBox = ComboBoxFactory.makeComboBox("" , 
 				e -> delegate.onUserEnteredPathType(pathTypeComboBox.getValue().toString()), pathTypeList);
 		pathTypeComboBox.setPrefWidth(155); //TODO
-		root = GridFactory.createRowWithLabelandNode("Path type: ", pathTypeComboBox);
+		root = GridFactory.createRowWithLabelandNode("Path type: ", pathTypeComboBox, 125);
 		
 	}
 	

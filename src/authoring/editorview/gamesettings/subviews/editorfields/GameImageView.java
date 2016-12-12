@@ -9,7 +9,7 @@ import javax.imageio.ImageIO;
 
 import authoring.editorview.PhotoFileChooser;
 import authoring.editorview.gamesettings.GameSettingsAuthoringViewDelegate;
-import authoring.editorview.gamesettings.IGameSettingsSetView;
+import authoring.editorview.gamesettings.GameSettingsSetView;
 import authoring.utilityfactories.ButtonFactory;
 import authoring.utilityfactories.DialogueBoxFactory;
 import javafx.scene.Node;
@@ -20,7 +20,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 
-public class GameImageView extends PhotoFileChooser implements IGameSettingsSetView{
+public class GameImageView extends PhotoFileChooser implements GameSettingsSetView{
 	
 	private HBox root;
 	private String gameImagePath;

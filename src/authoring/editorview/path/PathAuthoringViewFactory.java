@@ -6,7 +6,7 @@ public class PathAuthoringViewFactory {
        
     }
 
-    public static IPathUpdateView build (int width, int height) {
+    public static PathUpdateView build (int width, int height) {
         return new PathAuthoringView(width, height);
     }
 

@@ -2,6 +2,7 @@ package gameplayer.model.enemy;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +15,7 @@ import gameplayer.loader.GamePlayerFactory;
 import gameplayer.model.Cell;
 import gameplayer.model.GamePlayData;
 import gameplayer.model.Grid;
+import gameplayer.model.Path;
 import gameplayer.model.weapon.Weapon;
 import gameplayer.view.GridGUI;
 import gameplayer.view.helper.GraphicsLibrary;
@@ -57,8 +59,8 @@ public class EnemyManager extends Observable {
 	
 	private void initializeWaves() {
 
-		System.out.println("Does all WaveStartTimes exist?");
-		System.out.println(allWaveStartTimes);
+		//System.out.println("Does all WaveStartTimes exist?");
+		//System.out.println(allWaveStartTimes);
 		allWaves.forEach(w -> allWaveStartTimes.add(w.getStartTime()));
 		allWaves.forEach(w -> allWaveFrequencies.add(w.getFrequency()));
 	}
@@ -80,6 +82,15 @@ public class EnemyManager extends Observable {
 	}
 
 	public void spawnEnemy(Enemy enemy) {
+		/*
+		System.out.println("rararara " + enemy.getCurrentCell().getX());
+		Path testPath = this.grid.getPath(0);
+		//System.out.println("testting :))) "+this.grid.getPath(enemy.getPathID()).getNext(enemy.getCurrentCell()).getY());
+		enemy.setxDirection(this.grid.getPath(enemy.getPathID()).getNext(enemy.getCurrentCell()).getX() 
+				- enemy.getCurrentCell().getX());
+		enemy.setyDirection(this.grid.getPath(enemy.getPathID()).getNext(enemy.getCurrentCell()).getY()
+				- enemy.getCurrentCell().getY());
+		*/
 		enemy.setxDirection(enemy.getCurrentCell().getNext().getX() - enemy.getCurrentCell().getX());
 		enemy.setyDirection(enemy.getCurrentCell().getNext().getY() - enemy.getCurrentCell().getY());
 		enemy.setX(gameData.cellToCoordinate(enemy.getCurrentCell().getX()));
@@ -87,65 +98,64 @@ public class EnemyManager extends Observable {
 		enemyOnGrid.put(enemy.getUniqueID(), enemy);
 	}
 
-	// this method not being called??????
-	private void moveSingleEnemy(Enemy e) {
+	/*
+	 * returns true if enemy should be removed from grid
+	 */
+	private void moveSingleEnemy(Enemy enemy) {
 		// to make it easier, only updating enemy's current cell once it reaches
 		// the center point of the next cell
 		double distToMove;
 		boolean onLastCell = false;
 
-		double moveDist = e.getMovingSpeed();
+		double moveDist = enemy.getMovingSpeed();
 		
 
 		while (moveDist > 0) {
 			try {
-				double deltaX = Math.abs(gameData.cellToCoordinate(e.getCurrentCell().getNext().getX()) - e.getX());
-				double deltaY = Math.abs(gameData.cellToCoordinate(e.getCurrentCell().getNext().getY()) - e.getY());
+				double deltaX = Math.abs(gameData.cellToCoordinate(enemy.getCurrentCell().getNext().getX()) - enemy.getX());
+				double deltaY = Math.abs(gameData.cellToCoordinate(enemy.getCurrentCell().getNext().getY()) - enemy.getY());
 				distToMove = deltaX + deltaY;
 			} catch (NullPointerException exception) { // enemy is currently at
 				// last cell on path
-				double destinationXpos = e.getCurrentCell().getX()
-						+ e.getxDirection() * gameData.getCellWidth() / 2; // midpoint
+				double destinationXpos = enemy.getCurrentCell().getX()
+						+ enemy.getxDirection() * gameData.getCellWidth() / 2; // midpoint
 				// +
 				// width/2
 				// =
 				// edge
-				double destinationYpos = e.getCurrentCell().getY()
-						+ e.getyDirection() * gameData.getCellWidth() / 2;
-				distToMove = Math.abs(destinationXpos - e.getX()) + Math.abs(destinationYpos - e.getY());
+				double destinationYpos = enemy.getCurrentCell().getY()
+						+ enemy.getyDirection() * gameData.getCellWidth() / 2;
+				distToMove = Math.abs(destinationXpos - enemy.getX()) + Math.abs(destinationYpos - enemy.getY());
 				onLastCell = true;
 			}
 			
 			
 			if (moveDist >= distToMove) { // can move to center of next cell
-				e.setX(e.getX() + e.getxDirection() * distToMove);
-				e.setY(e.getY() + e.getyDirection() * distToMove);
-				e.setCurrentCell(e.getCurrentCell().getNext());
-				if (e.getCurrentCell().getNext() == null) {
-					gameData.setLife(gameData.getLife() - 1);
-					handleEnemyEnteringBase(e);
+				enemy.setX(enemy.getX() + enemy.getxDirection() * distToMove);
+				enemy.setY(enemy.getY() + enemy.getyDirection() * distToMove);
+				enemy.setCurrentCell(enemy.getCurrentCell().getNext());
+				if (enemy.getCurrentCell().getNext() == null) {
+					if (gameData.getLife() >= 0) {
+						gameData.setLife(gameData.getLife() - 1);
+					}
+					enemy.setRemove(true);
 					return;
 				}
-				e.setxDirection(e.getCurrentCell().getNext().getX() - e.getCurrentCell().getX());
-				e.setyDirection(e.getCurrentCell().getNext().getY() - e.getCurrentCell().getY());
+				enemy.setxDirection(enemy.getCurrentCell().getNext().getX() - enemy.getCurrentCell().getX());
+				enemy.setyDirection(enemy.getCurrentCell().getNext().getY() - enemy.getCurrentCell().getY());
 				moveDist -= distToMove;
 			} else {
-				e.setX(e.getX() + e.getxDirection() * moveDist);
-				e.setY(e.getY() + e.getyDirection() * moveDist);
+				enemy.setX(enemy.getX() + enemy.getxDirection() * moveDist);
+				enemy.setY(enemy.getY() + enemy.getyDirection() * moveDist);
 				moveDist -= moveDist;
 			}
 		}
 		setChanged();
 		notifyObservers();
+		return;
 	}
 	
-	private void handleEnemyEnteringBase(Enemy e){
-		removeEnemyFromGrid(e);
-	}
-	
-	private void removeEnemyFromGrid(Enemy e) {
-		this.enemyOnGrid.remove(e.getUniqueID());
-	}
+
 
 
 	/*
@@ -173,15 +183,14 @@ public class EnemyManager extends Observable {
 
 	
 	private void moveEnemies() {
-		for (Enemy enemy : enemyOnGrid.values()) {
-			System.out.println("ENEMY " + enemy.getUniqueID() + " XX " + enemy.getX());
-			System.out.println("ENEMY " + enemy.getUniqueID() + " YY " + enemy.getY());
+		Iterator<Enemy> iter = enemyOnGrid.values().iterator();
+		while (iter.hasNext()) {
+			Enemy enemy = iter.next();
 			moveSingleEnemy(enemy);
+			if (enemy.mustRemove()) {
+				iter.remove();
+			}
 		}
-	}
-
-	private void setEnemyImageSize(ImageView enemyImage){
-		graphicLib.setImageViewParams(enemyImage, this.gameData.getCellWidth(),  this.gameData.getCellHeight());
 	}
 
 	public double getTimeOfNextWave() {
@@ -194,12 +203,14 @@ public class EnemyManager extends Observable {
 	public double getFrequencyOfNextWave() {
 		if (allWaveStartTimes.isEmpty()) return 0;
 		double timeInSeconds = this.allWaveFrequencies.poll();
+		//double timeInMillis = 10000;//10 seconds
 		double timeInMillis = timeInSeconds * 1000;
 		return timeInMillis;
 	}
 	
 	public Queue<Enemy> getPackOfEnemyComing() {
 		if (allWaves.isEmpty()) {
+			System.out.println("ALL WAVES IS EMPTY");
 			return new LinkedList<Enemy>();
 		}
 		Wave wave = this.allWaves.poll();
