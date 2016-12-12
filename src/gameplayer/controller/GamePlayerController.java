@@ -175,7 +175,6 @@ public class GamePlayerController implements Observer {
 	 */
 	private void initSaveGameButton() {
 		this.view.saveButton(e -> {
-			System.out.println("saving game maybe?");
 			this.gameSavingController.saveGame();
 			//TODO: end game?
 		});
@@ -188,7 +187,6 @@ public class GamePlayerController implements Observer {
 						"" + this.model.getData().getLife(), "" + this.model.getData().getCurrentLevel());
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
-				System.out.println("Log end score went wrong");
 				e1.printStackTrace();
 			}
 		});
@@ -362,16 +360,10 @@ public class GamePlayerController implements Observer {
 
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> {
 			((Pane) this.view.getGrid().getGrid()).getChildren().clear();
-			System.out.println("intervalbetween: " + intervalBetweenWaves);
-			System.out.println("elapse: " + (System.currentTimeMillis() - this.startTime));
 			// trying to get this to work but null pointer
 			if (System.currentTimeMillis() - this.startTime > intervalBetweenWaves && intervalBetweenWaves >= 0) {
-				System.out.println("**********************");
-
 				this.currentWave = this.model.getEnemyManager().getPackOfEnemyComing();
-				
 				this.intervalBetweenWaves = this.model.getEnemyManager().getTimeOfNextWave();
-			
 			}
 
 			this.model.updateInLevel(weaponsOnScreen);
