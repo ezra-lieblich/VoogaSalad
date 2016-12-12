@@ -1,5 +1,4 @@
 package gameplayer.loader;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -12,20 +11,16 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
-
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
-
 import engine.enemy.EnemyManager;
 import engine.enemy.EnemyType;
 import engine.enemy.EnemyTypeBuilder;
@@ -51,10 +46,7 @@ import engine.weapon.WeaponTypeManager;
 import engine.GameAuthoringData;
 import engine.ManagerMediator;
 import engine.ManagerTypeMediator;
-
-
-
-
+import engine.effect.EffectManager;
 /**
  * This class is an xml parser that is able to read xml files and grab the appropriate values from them. 
  * @author Aaron, Naijiao
@@ -65,15 +57,19 @@ public class XMLParser {
 	private Element rootElement;
 	private XStream serializer;
 	private ManagerMediator gameManager;
-
 	public XMLParser(String xmlFilename) {
 		serializer = new XStream(new DomDriver());
 		gameManager = getGameManager(xmlFilename);
 	}
 	
+	public XMLParser(ManagerMediator manager) {
+		gameManager = manager;
+	}
+	
 	private ManagerMediator getGameManager(String xmlFilename) {
 		try {
 			File xmlFile = new File(xmlFilename);
+			//System.out.println("The file exists: "+xmlFile);
 			GameAuthoringData data = (GameAuthoringData) serializer.fromXML(new FileInputStream(xmlFile));
 			return data.getManagerMediator();
 			
@@ -82,7 +78,6 @@ public class XMLParser {
 			System.out.println("File not found, please try again");
 		} 
 		return null;
-
 	}
     
     
@@ -123,6 +118,11 @@ public class XMLParser {
 		return gameManager.getManager(PathManager.class);
 	}
 	
+	protected EffectManager getWeaponEffectManager() {
+    	WeaponManager weaponManager = gameManager.getManager(WeaponManager.class);
+    	return weaponManager.getWeaponEffectManager();
+	}
+	
 	
 	
 	
@@ -140,5 +140,4 @@ public class XMLParser {
     }
     
 	
-
 }
