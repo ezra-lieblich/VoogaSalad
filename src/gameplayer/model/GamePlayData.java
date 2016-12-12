@@ -47,14 +47,17 @@ public class GamePlayData extends Observable{
 		this.score = new SimpleDoubleProperty();
 		this.currentLevel = new SimpleIntegerProperty();
 		this.factory = factory;	
-		/*
+		
 		this.winFactory = new WinEffectFactory(this);
-		//this.effectManager = gameData.getFactory().getWinEffectManager(); // get win effect Manager in xml in game setting.get effect manager 
+		this.effectManager = this.factory.getWinEffectManager(); // get win effect Manager in xml in game setting.get effect manager 
 		this.allEffects = effectManager.getEntities().entrySet().stream().collect(Collectors.toMap(e-> e.getKey(), e->winFactory.create(e.getValue())));
 		for (int i : this.allEffects.keySet()){
-			this.score.addListener((Observable, oldValue, newValue) -> allEffects.get(i).execute()) ;
+			this.score.addListener((Observable, oldValue, newValue) -> allEffects.get(i).execute());
+			this.gold.addListener((Observable, oldValue, newValue) -> allEffects.get(i).execute());
+			this.currentLevel.addListener((Observable, oldValue, newValue) -> allEffects.get(i).execute());
+
 		}
-		*/
+		
 		
 	}
 	
@@ -175,8 +178,8 @@ public class GamePlayData extends Observable{
 	}
 	
 	@EffectMethod
-	public double getTotalLevel() {
-		return this.numLevels.get();
+	public int getTotalLevel() {
+		return (int)this.numLevels.get();
 	}
 
 	public double getCellWidth() {

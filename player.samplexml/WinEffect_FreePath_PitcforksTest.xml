@@ -741,12 +741,12 @@
                     <triggerConditionGroovy class="engine.observer.ObservableObjectProperty">
                       <observers/>
                       <listeners/>
-                      <property class="string">getTotalLevel() + 1 == getCurrentLevel()</property>
+                      <property class="string">data.getTotalLevel() + 1 == data.getCurrentLevel()</property>
                     </triggerConditionGroovy>
                     <effectGroovy class="engine.observer.ObservableObjectProperty">
                       <observers/>
                       <listeners/>
-                      <property class="string">setWin(true)</property>
+                      <property class="string">data.setWin()</property>
                     </effectGroovy>
                   </engine.effect.EffectType>
                 </entry>
