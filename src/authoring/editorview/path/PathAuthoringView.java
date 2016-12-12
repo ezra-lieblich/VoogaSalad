@@ -14,7 +14,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 
 
-public class PathAuthoringView implements IPathUpdateView {
+public class PathAuthoringView implements PathUpdateView {
 
     private static final String RESOURCE_FILE_NAME = "resources/GameAuthoringPath";
     private ResourceBundle pathResource = ResourceBundle.getBundle(RESOURCE_FILE_NAME);

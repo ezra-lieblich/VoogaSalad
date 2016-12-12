@@ -4,13 +4,13 @@ import authoring.editorview.EditorViewController;
 import engine.effect.EffectManagerController;
 
 
-public class EffectsController extends EditorViewController
-        implements EffectsAuthoringViewDelegate {
+public class EffectController extends EditorViewController
+        implements EffectAuthoringViewDelegate {
 
     private EffectManagerController effectsDataSource;
     private int currentEffectID;
 
-    public EffectsController () {
+    public EffectController () {
 
     }
 

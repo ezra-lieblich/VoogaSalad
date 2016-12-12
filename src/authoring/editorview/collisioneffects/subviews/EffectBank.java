@@ -1,14 +1,14 @@
 package authoring.editorview.collisioneffects.subviews;
 
 import authoring.editorview.ImageBank;
-import authoring.editorview.collisioneffects.EffectsAuthoringViewDelegate;
+import authoring.editorview.collisioneffects.EffectAuthoringViewDelegate;
 
 
-public class EffectsBank extends ImageBank {
+public class EffectBank extends ImageBank {
 
-    private EffectsAuthoringViewDelegate delegate;
+    private EffectAuthoringViewDelegate delegate;
 
-    public EffectsBank () {
+    public EffectBank () {
         super();
     }
 
@@ -18,7 +18,7 @@ public class EffectsBank extends ImageBank {
 
     }
 
-    public void setDelegate (EffectsAuthoringViewDelegate delegate) {
+    public void setDelegate (EffectAuthoringViewDelegate delegate) {
         this.delegate = delegate;
     }
 

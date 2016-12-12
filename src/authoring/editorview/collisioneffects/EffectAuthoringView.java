@@ -1,17 +1,17 @@
 package authoring.editorview.collisioneffects;
 
 import authoring.editorview.ListDataSource;
-import authoring.editorview.collisioneffects.subviews.EffectsBank;
+import authoring.editorview.collisioneffects.subviews.EffectBank;
 import javafx.scene.layout.GridPane;
 
 
-public class EffectsAuthoringView implements IEffectsUpdateView {
+public class EffectAuthoringView implements EffectUpdateView {
 
     private GridPane effectsPane;
-    private EffectsBank effectsBank;
+    private EffectBank effectsBank;
 
-    public EffectsAuthoringView () {
-        effectsBank = new EffectsBank();
+    public EffectAuthoringView () {
+        effectsBank = new EffectBank();
         setPane();
     }
 

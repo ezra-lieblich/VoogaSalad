@@ -7,7 +7,7 @@ import engine.settings.GameModeManagerController;
 public class GameSettingsAuthoringViewController extends EditorViewController
         implements GameSettingsAuthoringViewDelegate {
 
-    private IGameSettingsUpdateView gameView;
+    private GameSettingsUpdateView gameView;
     private GameModeManagerController gameSettingsDataSource;
     private int activeID = 0;
 

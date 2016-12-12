@@ -13,14 +13,14 @@ import authoring.editorview.EditorViewController;
 import authoring.editorview.enemy.EnemyAuthoringViewController;
 import authoring.editorview.enemy.IEnemyUpdateView;
 import authoring.editorview.gamesettings.GameSettingsAuthoringViewController;
-import authoring.editorview.gamesettings.IGameSettingsUpdateView;
+import authoring.editorview.gamesettings.GameSettingsUpdateView;
 import authoring.editorview.level.ILevelUpdateView;
 import authoring.editorview.level.LevelAuthoringViewController;
-import authoring.editorview.path.IPathUpdateView;
+import authoring.editorview.path.PathUpdateView;
 import authoring.editorview.path.PathAuthoringViewController;
-import authoring.editorview.tower.ITowerUpdateView;
+import authoring.editorview.tower.TowerUpdateView;
 import authoring.editorview.tower.TowerAuthoringViewController;
-import authoring.editorview.weapon.IWeaponUpdateView;
+import authoring.editorview.weapon.WeaponUpdateView;
 import authoring.editorview.weapon.WeaponAuthoringViewController;
 import authoring.toolbar.IToolbar;
 import authoring.utilityfactories.DialogueBoxFactory;
@@ -107,19 +107,19 @@ public class AuthoringController {
 			 
 			 modelController.getModelController(TowerManagerController.class)
 			 	.loadManagerData(data.getManagerMediator().getManager(TowerManager.class),
-			 						(ITowerUpdateView) viewController.getControllers().get("tower").getUpdateView());
+			 						(TowerUpdateView) viewController.getControllers().get("tower").getUpdateView());
 			 modelController.getModelController(WeaponManagerController.class)
 			 	.loadManagerData(data.getManagerMediator().getManager(WeaponManager.class), 
-			 						(IWeaponUpdateView) viewController.getControllers().get("weapon").getUpdateView());
+			 						(WeaponUpdateView) viewController.getControllers().get("weapon").getUpdateView());
 			 modelController.getModelController(PathManagerController.class)
 			 	.loadManagerData(data.getManagerMediator().getManager(PathManager.class), 
-			 						(IPathUpdateView) viewController.getControllers().get("path").getUpdateView());
+			 						(PathUpdateView) viewController.getControllers().get("path").getUpdateView());
 			 modelController.getModelController(LevelManagerController.class)
 			 	.loadManagerData(data.getManagerMediator().getManager(LevelManager.class), 
 			 						(ILevelUpdateView) viewController.getControllers().get("level").getUpdateView());
 			 modelController.getModelController(GameModeManagerController.class)
 			 	.loadManagerData(data.getManagerMediator().getManager(GameModeManager.class),
-			 						(IGameSettingsUpdateView) viewController.getControllers().get("setup").getUpdateView());
+			 						(GameSettingsUpdateView) viewController.getControllers().get("setup").getUpdateView());
 		
 		}
 		catch (Exception e){

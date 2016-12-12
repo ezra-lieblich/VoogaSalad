@@ -3,7 +3,7 @@ package authoring.editorview.collisioneffects;
 import authoring.editorview.ListDataSource;
 
 
-public interface IEffectsUpdateView {
+public interface EffectUpdateView {
 
     public void updateEffectName (String name);
 

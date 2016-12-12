@@ -1,6 +1,6 @@
 package authoring.editorview.collisioneffects;
 
-public interface EffectsAuthoringViewDelegate {
+public interface EffectAuthoringViewDelegate {
 
     public void onUserSelectedAvailableClass (String selectedClass);
 

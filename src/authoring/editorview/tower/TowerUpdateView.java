@@ -11,7 +11,7 @@ import authoring.editorview.ListDataSource;
  * @author Kayla Schulz
  *
  */
-public interface ITowerUpdateView extends TowerSetView, IUpdateView {
+public interface TowerUpdateView extends TowerSetView, IUpdateView {
 
     public void updateUnlockLevelDisplay (int towerLevel);
 

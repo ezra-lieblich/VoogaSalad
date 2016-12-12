@@ -6,7 +6,7 @@ import engine.path.PathManagerController;
 
 
 public class PathAuthoringViewController extends EditorViewController implements PathAuthoringViewDelegate {
-	private IPathUpdateView pathView;
+	private PathUpdateView pathView;
 	private PathManagerController pathDataSource;
 	private int activeID;
 	
