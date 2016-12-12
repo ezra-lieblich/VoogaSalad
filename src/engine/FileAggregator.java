@@ -12,7 +12,7 @@ import authoring.utilityfactories.DialogueBoxFactory;
 import javafx.scene.control.Alert;
 
 public class FileAggregator {
-	private final String IMAGES_DIRECTORY_NAME = "images";
+	private final String IMAGES_DIRECTORY_NAME = "game_images";
 	private static FileAggregator defaultInstance;
 	private File imageDirectory;
 	//Map images used to the number of places used in the program. Remove on count=0
