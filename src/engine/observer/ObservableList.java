@@ -8,4 +8,5 @@ public interface ObservableList<E> extends ObservableProperty<List<E>> {
 
     void remove (E value);
 
+    void clear();
 }
