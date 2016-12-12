@@ -73,12 +73,12 @@ public class GamePlayData extends Observable{
 		this.numLevels.set(settingInfo.get("totalNumberOfLevels"));  // put into property file
 		this.gold.set(settingInfo.get("gold"));
 		this.lives.set(settingInfo.get("lives").intValue());
-		this.currentLevel.set(settingInfo.get("levelnumber").intValue()-1); //REMEMBER TO CHANGE
+		this.currentLevel.set(settingInfo.get("levelnumber").intValue()); //REMEMBER TO CHANGE
 		this.score.set(0);
 	}
 	
 	public void initializeLevelInfo() {
-		setLevel(this.currentLevel.get()+1);
+		setLevel(this.currentLevel.get());
 		this.grid = this.factory.getGrid(this.currentLevel.get());
 		gridArray = this.grid.getGrid();
 		this.gridX = this.gridArray.length;
@@ -90,8 +90,14 @@ public class GamePlayData extends Observable{
 	@EffectMethod
 	public void setWin(){
 		this.win = true;
+		setChanged();
+		notifyObservers();
 	}
 
+	public boolean won(){
+		return this.win;
+	}
+	
 	public GamePlayerFactory getFactory(){
 		return this.factory;
 	}
