@@ -36,7 +36,6 @@ public class Gun {
 	}
 	
 	public boolean isFiring(){
-		System.out.println("firingRate: "+ firingRate);
 		fireCounter++;
 		if(fireCounter % firingRate == 0)
 			return true;
