@@ -87,7 +87,7 @@ public class FileAggregator {
 	public String addImageToAssets(String oldImagePath, String newImagePath){
 		decrementImageCount(oldImagePath);
 		incrementImageCount(newImagePath);
-		return this.images.get(newImagePath).getAbsolutePath();
+		return this.images.get(newImagePath).getPath();
 	}
 	
 	private void decrementImageCount(String path){
