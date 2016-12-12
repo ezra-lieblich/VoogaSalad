@@ -100,7 +100,7 @@ public class FileAggregator {
 		return images;
 	}
 	
-	private String getFileNameFromPath(String filePath){
+	public String getFileNameFromPath(String filePath){
 		String[] pathComponents = filePath.split("/");
 		String name = pathComponents[pathComponents.length-1];
 		return name;
