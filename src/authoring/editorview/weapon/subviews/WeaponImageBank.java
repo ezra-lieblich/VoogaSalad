@@ -21,7 +21,7 @@ public class WeaponImageBank extends ImageBank {
     public WeaponImageBank (ResourceBundle labelsResource) {
         super();
         Button createWeaponButton =
-                ButtonFactory.makeButton("Create Weapon",
+                ButtonFactory.makeButton("New Weapon",
                                          e -> {
                                              delegate.onUserPressedCreateWeapon();
                                          });

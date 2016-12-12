@@ -32,9 +32,6 @@ public class TowerTypeManager extends AbstractTypeManager<Tower> implements Towe
     public TowerTypeManager() {
         this.upgrades = new HashMap<Integer, Tower>();
         this.abilityManager = new EffectManagerFactory().create(DEFAULT_EFFECT_FACTORY);
-        TowerBuilder testFactory = new TowerTypeBuilder(); //TODO - get rid of this
-        upgrades.put(10, testFactory.build()); //TODO - get rid of this
-        upgrades.put(15, testFactory.build()); //TODO - get rid of this
     }
     
     @Override

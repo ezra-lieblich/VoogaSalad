@@ -39,6 +39,8 @@ public class WeaponAuthoringView implements WeaponUpdateView {
     private WeaponSizeField weaponSizeView;
     private AddWeaponEffectView addWeaponEffect;
 
+    private static final int EDITOR_WIDTH = 300;
+    
     private int width;
     private int height;
 
@@ -68,7 +70,8 @@ public class WeaponAuthoringView implements WeaponUpdateView {
                                      weaponRangeView,
                                      weaponPathView, weaponImageView, weaponSizeView,
                                      addWeaponEffect, labelsResource,
-                                     dialogueBoxResource);
+                                     dialogueBoxResource,
+                                     EDITOR_WIDTH);
         buildView();
     }
 
@@ -79,7 +82,7 @@ public class WeaponAuthoringView implements WeaponUpdateView {
         bankColumn.setMinWidth(150);
     	
     	ColumnConstraints editorColumn = new ColumnConstraints();
-        editorColumn.setMinWidth(250);
+        editorColumn.setPrefWidth(EDITOR_WIDTH);
        
         ColumnConstraints previewColumn = new ColumnConstraints();
         

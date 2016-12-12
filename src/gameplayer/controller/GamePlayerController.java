@@ -92,10 +92,8 @@ public class GamePlayerController implements Observer {
 
 	private double startTime;
 	private double intervalBetweenWaves;
-
-	private KeyFrame enemyKeyFrame;
-
-	private Thread timeCounterThread;
+	
+	private Thread enemyThread;
 
 	// Might need to be refactored into a different class
 	private HashMap<Integer, ImageView> weaponsOnScreen;
@@ -104,8 +102,9 @@ public class GamePlayerController implements Observer {
 	private HashMap<String, Image> imageBank;
 
 	public GamePlayerController(String xmlFilePath) {
+		System.out.println(xmlFilePath);
 		// use xml parser to create classes.
-		this.loader = new GamePlayerFactory(new XMLParser("player.samplexml/WinEffect_FreePath_PitcforksTest.xml"));// hardcoded
+		this.loader = new GamePlayerFactory(new XMLParser(/*"player.samplexml/"+*/xmlFilePath));// hardcoded
 		// does not work because of the image path
 		checkIfValid();
 		this.currentWave = new LinkedList<>();
@@ -176,6 +175,7 @@ public class GamePlayerController implements Observer {
 	 */
 	private void initSaveGameButton() {
 		this.view.saveButton(e -> {
+			System.out.println("saving game maybe?");
 			this.gameSavingController.saveGame();
 			//TODO: end game?
 		});
@@ -369,8 +369,9 @@ public class GamePlayerController implements Observer {
 				System.out.println("**********************");
 
 				this.currentWave = this.model.getEnemyManager().getPackOfEnemyComing();
-
+				
 				this.intervalBetweenWaves = this.model.getEnemyManager().getTimeOfNextWave();
+			
 			}
 
 			this.model.updateInLevel(weaponsOnScreen);
@@ -386,11 +387,12 @@ public class GamePlayerController implements Observer {
 		animation.play();
 	}
 
+	
+	
 	private void spawnEnemyOnInterval(EnemyManager enemyManager,
 			EnemyController control/* ,Queue<Enemy> currentWave */) {
 
-		System.out.println("ENEMY THREAD");
-		Thread enemyThread = new Thread() {
+		this.enemyThread = new Thread() {
 			public void run() {
 				long intervalBetween = (long) control.getEnemyModel().getFrequencyOfNextWave();
 				while (intervalBetween != 0) {
@@ -398,12 +400,15 @@ public class GamePlayerController implements Observer {
 						System.out.println("currentWave: " + currentWave.size());
 						Enemy enemy = currentWave.poll();
 						enemyManager.spawnEnemy(enemy);
-					} else {
-
-					}
-
+					} 
 					try {
 						Thread.sleep(intervalBetween);
+						if (currentWave.size()==0){
+							this.wait();
+						}
+						if (enemyManager.getEnemyOnGrid().size()==0){ //wait until enemies are all off the grid
+							enemyManager.getData().setLevel(enemyManager.getData().getCurrentLevel()+1);
+						}
 					} catch (InterruptedException e) {
 
 						e.printStackTrace();
@@ -436,21 +441,22 @@ public class GamePlayerController implements Observer {
 	public Timeline getTimeline() {
 		return this.animation;
 	}
-	
-	
-	private void removeValFromIterator(HashMap<Integer, Object> map){
-		
-	}
 
-	private void updateBulletOnScreen(HashMap<Integer, Weapon> bulletRedraw) {
-		Iterator<Integer> it = weaponsOnScreen.keySet().iterator();
+	
+	
+	private void removeValFromMap(Map<Integer, ?> map, Iterator<Integer> it){
 		while (it.hasNext()) {
 			int value = it.next();
-			if (!bulletRedraw.containsKey(value)) {
+			if (!map.containsKey(value)) {
 				it.remove();
 			}
 		}
+	}
 
+	private void updateBulletOnScreen(HashMap<Integer, Weapon> bulletRedraw) {
+		
+		Iterator<Integer> it = weaponsOnScreen.keySet().iterator();
+		removeValFromMap(bulletRedraw, it);
 		for (int i : bulletRedraw.keySet()) {
 			if (!weaponsOnScreen.containsKey(bulletRedraw.get(i).getUniqueID())) {
 				Image ii = imageBank.get("Weapon " + bulletRedraw.get(i).getWeaponTypeID());
@@ -474,13 +480,7 @@ public class GamePlayerController implements Observer {
 	private void updateEnemiesOnScreen(HashMap<Integer, Enemy> enemyRedraw) {
 		// might fix later
 		Iterator<Integer> it = enemiesOnScreen.keySet().iterator();
-		while (it.hasNext()) {
-			int value = it.next();
-			if (!enemyRedraw.containsKey(value)) {
-				it.remove();
-			}
-		}
-
+		removeValFromMap(enemyRedraw, it);
 		for (int i : enemyRedraw.keySet()) {
 			if (!enemiesOnScreen.containsKey(enemyRedraw.get(i).getUniqueID())) {
 				ImageView image = new ImageView(graphics.createImage(enemyRedraw.get(i).getImage()));
@@ -497,6 +497,25 @@ public class GamePlayerController implements Observer {
 			}
 		}
 	}
+	/*
+	private void redraw(HashMap<Integer, ?> enemyRedraw){
+		for (int i : enemyRedraw.keySet()) {
+			if (!enemiesOnScreen.containsKey(enemyRedraw.get(i).getUniqueID())) {
+				ImageView image = new ImageView(graphics.createImage(enemyRedraw.get(i).getImage()));
+				graphics.setImageViewParams(image, DragDropView.DEFENSIVEWIDTH * 0.9,
+						DragDropView.DEFENSIVEHEIGHT * 0.9);
+				image.setCache(true);
+				image.setCacheHint(CacheHint.SPEED);
+				image.setX(enemyRedraw.get(i).getX());
+				image.setY(enemyRedraw.get(i).getY());
+				enemiesOnScreen.put(enemyRedraw.get(i).getUniqueID(), image);
+			} else {
+				enemiesOnScreen.get(enemyRedraw.get(i).getUniqueID()).setX(enemyRedraw.get(i).getX());
+				enemiesOnScreen.get(enemyRedraw.get(i).getUniqueID()).setY(enemyRedraw.get(i).getY());
+			}
+		}
+	}
+	*/
 
 	public HashMap<String, Image> createImageBank() {
 		Map<Integer, engine.tower.Tower> towers = this.loader.getTowers();

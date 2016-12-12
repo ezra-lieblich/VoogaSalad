@@ -86,7 +86,6 @@ public class GamePlayerFactory{
 
 
 	public Grid getGrid(int levelNumber){
-		
 		Level level = authoringFileReader.getLevelManager().getEntity(levelNumber);//REMEMBER TO CHANGE
 		String pathType = authoringFileReader.getGameMode().getPathType();
 		System.out.println("lev num: " +levelNumber);

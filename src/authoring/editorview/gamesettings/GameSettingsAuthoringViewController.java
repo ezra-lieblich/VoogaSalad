@@ -1,5 +1,7 @@
 package authoring.editorview.gamesettings;
 
+import java.util.List;
+
 import authoring.editorview.EditorViewController;
 import engine.path.PathManagerController;
 import engine.settings.GameModeManagerController;
@@ -24,20 +26,13 @@ public class GameSettingsAuthoringViewController extends EditorViewController
         this.gameSettingsDataSource = source;
         this.pathDataSource = pathSource;
         this.gameSettingsDataSource.addTypeBankListener(this.gameView);
-        //addAvailablePathListener
+        this.pathDataSource.addAvailablePathListener(a -> gameView.updateAvailablePaths(a));
         createNewGame();
     }
 
 	private void createNewGame() {
 		gameSettingsDataSource.createType(this.gameView);
-		gameView.updateNameDisplay(gameSettingsDataSource.getName(activeID));
-		gameView.updateImagePathDisplay(gameSettingsDataSource.getImagePath(activeID));
-		gameView.updateNumberofLives(gameSettingsDataSource.getNumberofLives(activeID));
-		gameView.updateInitialMoney(gameSettingsDataSource.getMoney(activeID));
-		gameView.updateGridSize(gameSettingsDataSource.getGridSize(activeID));
-		gameView.updateLosingConditions(gameSettingsDataSource.getLosingConditons(activeID));
-		gameView.updateWinningConditions(gameSettingsDataSource.getWinningConditions(activeID));
-		gameView.updatePathType(gameSettingsDataSource.getPathType(activeID));		
+		refreshView();		
 	}
 
     @Override
@@ -100,6 +95,28 @@ public class GameSettingsAuthoringViewController extends EditorViewController
 	public void onUserEnteredPath(int pathID) {
 		this.gameSettingsDataSource.addPath(activeID, pathID);
 		
+	}
+
+    @Override
+    public void refreshView () {
+    	gameView.updateNameDisplay(gameSettingsDataSource.getName(activeID));
+		gameView.updateImagePathDisplay(gameSettingsDataSource.getImagePath(activeID));
+		gameView.updateNumberofLives(gameSettingsDataSource.getNumberofLives(activeID));
+		gameView.updateInitialMoney(gameSettingsDataSource.getMoney(activeID));
+		gameView.updateGridSize(gameSettingsDataSource.getGridSize(activeID));
+		gameView.updateLosingConditions(gameSettingsDataSource.getLosingConditons(activeID));
+		gameView.updateWinningConditions(gameSettingsDataSource.getWinningConditions(activeID));
+		gameView.updatePathType(gameSettingsDataSource.getPathType(activeID));      
+    }
+
+	@Override
+	public String getPathImage(int pathID) {
+		return this.pathDataSource.getImagePath(pathID);
+	}
+
+	@Override
+	public List<Integer> getAvailablePathList() {
+		return this.pathDataSource.getAvailablePaths();
 	}
 
     

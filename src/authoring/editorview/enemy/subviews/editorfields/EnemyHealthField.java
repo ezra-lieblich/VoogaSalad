@@ -5,6 +5,7 @@ import authoring.editorview.TextFieldView;
 import authoring.editorview.enemy.EnemyAuthoringViewDelegate;
 import authoring.editorview.enemy.EnemySetView;
 import authoring.utilityfactories.BoxFactory;
+import authoring.utilityfactories.GridFactory;
 import authoring.utilityfactories.TextFieldFactory;
 import javafx.scene.Node;
 import javafx.scene.control.TextField;
@@ -31,7 +32,7 @@ public class EnemyHealthField extends TextFieldView implements EnemySetView {
 
     @Override
     public Node getInstanceAsNode () {
-        return hbox;
+        return root;
     }
 
     @Override
@@ -46,8 +47,12 @@ public class EnemyHealthField extends TextFieldView implements EnemySetView {
                                                e -> delegate
                                                        .onUserEnteredEnemyHealth(enemyHealthField
                                                                .getText()));
-        hbox =
-                BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Health"),
-                                                      enemyHealthField);
+        enemyHealthField.setPrefWidth(110);
+        
+        root = GridFactory.createRowWithLabelandNode(
+        		labelsResource.getString("Health"), 
+        		enemyHealthField, 
+        		170);
+                
     }
 }

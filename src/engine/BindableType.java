@@ -9,4 +9,6 @@ public interface BindableType<R extends BindableType<R>> {
     R addImagePathListener (BiConsumer<String, String> listener);
 
     R addSizeListener (BiConsumer<Double, Double> listener);
+    
+    R addSoundListener (BiConsumer<String, String> listener);
 }

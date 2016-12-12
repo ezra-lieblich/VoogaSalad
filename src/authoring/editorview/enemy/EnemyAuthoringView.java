@@ -16,7 +16,9 @@ import authoring.editorview.enemy.subviews.editorfields.DeleteEnemy;
 import authoring.editorview.enemy.subviews.editorfields.EnemyDamageField;
 import authoring.editorview.enemy.subviews.editorfields.EnemySpeedField;
 import javafx.scene.Node;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.RowConstraints;
 
 
 /**
@@ -28,12 +30,12 @@ import javafx.scene.layout.GridPane;
 public class EnemyAuthoringView implements EnemyUpdateView {
     @SuppressWarnings("unused")
     private EnemyAuthoringViewDelegate delegate;
-    private GridPane enemyEditorView;
+    private GridPane enemyView;
     private EnemyImageBank enemyBank;
     private EnemyNameField enemyName;
     private EnemySpeedField enemySpeed;
     private EnemyImageView enemyImage;
-    private EnemyEditorView enemyEffectView;
+    private EnemyEditorView enemyEditorView;
     private EnemyDamageField enemyDamage;
     private EnemyHealthField enemyHealth;
     private EnemyRewardMoneyField enemyRewardMoney;
@@ -46,7 +48,7 @@ public class EnemyAuthoringView implements EnemyUpdateView {
         String ENEMY_EFFECT_RESOURCE_PATH = "resources/GameAuthoringEnemy";
         ResourceBundle labelsResource = ResourceBundle.getBundle(ENEMY_EFFECT_RESOURCE_PATH);
 
-        enemyEditorView = new GridPane();
+        enemyView = new GridPane();
         enemyBank = new EnemyImageBank();
         enemyName = new EnemyNameField(labelsResource);
         enemySpeed = new EnemySpeedField(labelsResource);
@@ -58,28 +60,45 @@ public class EnemyAuthoringView implements EnemyUpdateView {
         enemySize = new EnemySizeField(labelsResource);
         deleteEnemy = new DeleteEnemy(labelsResource);
         addEnemyEffect = new AddEnemyEffectView(labelsResource);
-        enemyEffectView =
+        enemyEditorView =
                 new EnemyEditorView(enemyImage, enemyName,
                                     enemySpeed, enemyDamage, enemyHealth, enemyRewardMoney,
                                     enemyRewardPoints, enemySize, deleteEnemy, addEnemyEffect);
-        setBorderPane();
+        buildView();
     }
 
-    private void setBorderPane () {
-        enemyEditorView.add(enemyBank.getInstanceAsNode(), 0, 0);
-        enemyEditorView.add(enemyEffectView.getInstanceAsNode(), 1, 0);
+    private void buildView () {
+
+        ColumnConstraints bankColumn = new ColumnConstraints();
+        bankColumn.setMinWidth(150);
+
+        ColumnConstraints editorColumn = new ColumnConstraints();
+        editorColumn.setPrefWidth(300);
+
+        ColumnConstraints previewColumn = new ColumnConstraints();
+
+        RowConstraints fullRow = new RowConstraints();
+
+        fullRow.setMinHeight(700);
+
+        enemyView.getColumnConstraints().addAll(bankColumn, editorColumn, previewColumn);
+        enemyView.getRowConstraints().add(fullRow);
+
+        enemyView.add(enemyBank.getInstanceAsNode(), 0, 0);
+        enemyView.add(enemyEditorView.getInstanceAsNode(), 1, 0);
+        enemyView.add(enemyImage.getInstanceAsNode(), 2, 0);
     }
 
     @Override
     public Node getInstanceAsNode () {
-        return enemyEditorView;
+        return enemyView;
     }
 
     @Override
     public void setDelegate (EnemyAuthoringViewDelegate delegate) {
         this.delegate = delegate;
         enemyBank.setDelegate(delegate);
-        enemyEffectView.setDelegate(delegate);
+        enemyEditorView.setDelegate(delegate);
         enemyName.setDelegate(delegate);
         enemySpeed.setDelegate(delegate);
         enemyImage.setDelegate(delegate);
@@ -151,7 +170,7 @@ public class EnemyAuthoringView implements EnemyUpdateView {
 
     @Override
     public void deleteEnemy () {
-        enemyEffectView.clearView();
+        enemyEditorView.clearView();
         System.out.println("Getting here in enemy authoring view");
     }
 

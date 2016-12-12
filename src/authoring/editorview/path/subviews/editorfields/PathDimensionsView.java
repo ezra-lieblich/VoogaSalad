@@ -51,9 +51,7 @@ public class PathDimensionsView implements PathSetView{
 	public void setGridDimensions(int dimensions){
 		this.dimensions = dimensions;
 		dimensionsTextField.setText(Integer.toString(dimensions));
-	}
-	
-	
+	}	
 
 	private void makeGridDimensionsTextField(){
 		dimensionsTextField = TextFieldFactory.makeTextField("", 

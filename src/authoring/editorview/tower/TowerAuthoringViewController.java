@@ -4,7 +4,9 @@ import java.util.ResourceBundle;
 import authoring.editorview.EditorViewController;
 import authoring.editorview.ListCellData;
 import authoring.editorview.ListDataSource;
+import authoring.editorview.collisioneffects.EffectAuthoringViewController;
 import authoring.utilityfactories.DialogueBoxFactory;
+import engine.effect.EffectManagerController;
 import engine.tower.TowerManagerController;
 import authoring.editorview.tower.TowerUpdateView;
 
@@ -19,6 +21,7 @@ public class TowerAuthoringViewController extends EditorViewController
         implements TowerAuthoringViewDelegate, ListDataSource {
 
     private TowerManagerController towerDataSource;
+    private EffectManagerController effectDataSource;
     private int currentTowerID;
     private TowerUpdateView towerView;
 
@@ -27,12 +30,12 @@ public class TowerAuthoringViewController extends EditorViewController
         towerView.setDelegate(this);
         towerView.setTowerListDataSource(this);
         this.view = towerView;
-
     }
 
     public void setTowerDataSource (TowerManagerController source) {
         this.towerDataSource = source;
         this.towerDataSource.addTypeBankListener(this.towerView);
+        effectDataSource = towerDataSource.getEffectManagerController();
         onUserPressedCreateNewTower();
     }
 
@@ -42,16 +45,17 @@ public class TowerAuthoringViewController extends EditorViewController
     @Override
     public void onUserPressedCreateNewTower () {
         currentTowerID = towerDataSource.createType(towerView);
-        refreshTowerView();
+        refreshView();
     }
 
-    private void refreshTowerView () {
+    public void refreshView () {
         towerView.updateImagePathDisplay(towerDataSource.getImagePath(currentTowerID));
         towerView.updateNameDisplay(towerDataSource.getName(currentTowerID));
         towerView.updateSizeDisplay(towerDataSource.getSize(currentTowerID));
         towerView.updateTowerBuyPriceDisplay(towerDataSource.getTowerBuyPrice(currentTowerID));
         towerView.updateTowerSellPriceDisplay(towerDataSource.getTowerSellPrice(currentTowerID));
         towerView.updateUnlockLevelDisplay(towerDataSource.getTowerUnlockLevel(currentTowerID));
+        towerView.updateTowerUpgradeBank(towerDataSource.getTowerUpgrades(currentTowerID));
     }
 
     @Override
@@ -157,7 +161,7 @@ public class TowerAuthoringViewController extends EditorViewController
     @Override
     public void onUserSelectedTower (int towerID) {
         currentTowerID = towerID;
-        refreshTowerView();
+        refreshView();
     }
 
     @Override
@@ -177,14 +181,18 @@ public class TowerAuthoringViewController extends EditorViewController
 
     @Override
     public void onUserPressedCreateTowerUpgrade () {
-        // TODO: Fix this shit
-        towerDataSource.createTowerUpgrade(this.towerView, 0);
+        towerDataSource.createTowerUpgrade(this.towerView, this.currentTowerID);
     }
 
     @Override
     public void onUserPressedAddEffect () {
-        // TODO Auto-generated method stub
-
+        EffectAuthoringViewController effectAuthoringView =
+                new EffectAuthoringViewController(effectDataSource);
+        effectDataSource.createType(effectAuthoringView.getEffectAuthoringView());
+        effectAuthoringView.setEffectOptions(effectDataSource.getCreatedTypeIds());
+        effectAuthoringView.setAvailClasses(effectDataSource.getAvailableClasses());
+        effectAuthoringView.setAvailDataObjects(effectDataSource.getAvailableDataObjects());
+        effectAuthoringView.openEffectView();
     }
 
 }
