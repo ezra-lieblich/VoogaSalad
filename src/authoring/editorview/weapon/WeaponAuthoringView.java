@@ -14,7 +14,9 @@ import authoring.editorview.weapon.subviews.editorfields.WeaponRangeField;
 import authoring.editorview.weapon.subviews.editorfields.WeaponSizeField;
 import authoring.editorview.weapon.subviews.editorfields.WeaponSpeedField;
 import javafx.scene.Node;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.RowConstraints;
 
 
 /**
@@ -24,9 +26,9 @@ import javafx.scene.layout.BorderPane;
  */
 public class WeaponAuthoringView implements IWeaponUpdateView {
     private WeaponAuthoringViewDelegate delegate;
-    private BorderPane weaponEditorView;
+    private GridPane weaponView;
     private WeaponImageBank weaponBank;
-    private WeaponEditorView weaponEffectsView;
+    private WeaponEditorView weaponEditorView;
     private WeaponNameField weaponNameView;
     private WeaponSpeedField weaponSpeedView;
     private WeaponFireRateField weaponFireRateView;
@@ -45,10 +47,8 @@ public class WeaponAuthoringView implements IWeaponUpdateView {
         this.width = width;
         this.height = height;
 
-        weaponEditorView = new BorderPane();
-        weaponEditorView.setPrefSize(width, height);
-        weaponEditorView.setMaxSize(width, height);
-        weaponEditorView.setMinSize(width, height);
+        weaponView = new GridPane();
+        
 
         weaponBank = new WeaponImageBank(labelsResource);
         weaponNameView = new WeaponNameField(labelsResource);
@@ -58,24 +58,42 @@ public class WeaponAuthoringView implements IWeaponUpdateView {
         weaponPathView = new WeaponPathField(labelsResource);
         weaponImageView = new WeaponImageView(labelsResource);
         weaponSizeView = new WeaponSizeField(labelsResource);
-        weaponEffectsView =
+        weaponEditorView =
                 new WeaponEditorView(weaponNameView, weaponSpeedView, weaponFireRateView,
                                      weaponRangeView,
                                      weaponPathView, weaponImageView, weaponSizeView,
                                      labelsResource,
                                      dialogueBoxResource);
-        setBorderPane();
+        buildView();
     }
 
-    private void setBorderPane () {
-        weaponEffectsView.setPaneSize(width * 3 / 4, height);
-        weaponEditorView.setLeft(weaponBank.getInstanceAsNode());
-        weaponEditorView.setCenter(weaponEffectsView.getInstanceAsNode());
+    
+    private void buildView () {
+
+        ColumnConstraints bankColumn = new ColumnConstraints();
+        bankColumn.setMinWidth(150);
+    	
+    	ColumnConstraints editorColumn = new ColumnConstraints();
+        editorColumn.setMinWidth(250);
+       
+        ColumnConstraints previewColumn = new ColumnConstraints();
+        
+        
+        RowConstraints fullRow = new RowConstraints();
+        
+        fullRow.setMinHeight(700);
+        
+        weaponView.getColumnConstraints().addAll(bankColumn, editorColumn, previewColumn);
+        weaponView.getRowConstraints().add(fullRow);
+        
+        weaponView.add(weaponBank.getInstanceAsNode(), 0, 0);
+        weaponView.add(weaponEditorView.getInstanceAsNode(), 1, 0);
+        weaponView.add(weaponImageView.getInstanceAsNode(), 2, 0);
     }
 
     @Override
     public Node getInstanceAsNode () {
-        return weaponEditorView;
+        return weaponView;
     }
 
     @Override
@@ -86,7 +104,7 @@ public class WeaponAuthoringView implements IWeaponUpdateView {
         weaponSpeedView.setDelegate(delegate);
         weaponFireRateView.setDelegate(delegate);
         weaponRangeView.setDelegate(delegate);
-        weaponEffectsView.setDelegate(delegate);
+        weaponEditorView.setDelegate(delegate);
         weaponPathView.setDelegate(delegate);
         weaponSizeView.setDelegate(delegate);
     }
