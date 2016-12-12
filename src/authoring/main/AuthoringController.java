@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
@@ -72,11 +73,19 @@ public class AuthoringController {
 
         toolbar.setOnPressedLoad(e -> {
             loadData();// "player.samplexml/load.xml"
+            
+        toolbar.setOnPressedPreview(a -> choosePreviewLevel());
         });
 
     }
 
-    public void saveAsXMLFile () {
+    private void choosePreviewLevel() {
+    	List<Integer> possiblePaths= modelController.getModelController(GameModeManager.class).getEntity(0).getPaths();
+    	//TODO Select path options and on click call method below
+    	// createPreview(modelController.getGameData());
+	}
+
+	public void saveAsXMLFile () {
         String fileContent = this.modelController.SaveData();
         toolbar.saveFile(fileContent);
         // TODO Lucy: add api call to record game in web app

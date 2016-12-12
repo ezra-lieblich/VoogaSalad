@@ -7,4 +7,6 @@ public interface ModelController {
     String SaveData ();
     
     GameAuthoringData loadData (String filePath);
+    
+    GameData getGameData ();
 }
