@@ -1,30 +1,29 @@
 package authoring.editorview.level.subviews.editorfields;
 
 import java.util.ResourceBundle;
+import authoring.editorview.level.LevelAuthoringViewDelegate;
 import authoring.editorview.level.LevelSetView;
 import authoring.utilityfactories.ButtonFactory;
-import authoring.editorview.level.LevelAuthoringViewDelegate;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 
 
-public class CreateNewLevelView implements LevelSetView {
+public class CreateNewWaveView implements LevelSetView {
 
     private static final String RESOURCE_FILE_NAME = "resources/GameAuthoringLevels";
     private ResourceBundle levelResource = ResourceBundle.getBundle(RESOURCE_FILE_NAME);
 
     private LevelAuthoringViewDelegate delegate;
-    private VBox vbox;
+    private Button createWaveButton;
 
-    public CreateNewLevelView (ResourceBundle levelsResource) {
-        this.vbox = new VBox();
+    public CreateNewWaveView (ResourceBundle levelsResource) {
         buildViewComponents();
     }
 
     @Override
     public Node getInstanceAsNode () {
-        return vbox;
+        return createWaveButton;
     }
 
     @Override
@@ -34,19 +33,18 @@ public class CreateNewLevelView implements LevelSetView {
 
     private void buildViewComponents () {
 
-        Button createLevelButton =
-                ButtonFactory.makeButton(levelResource.getString("NewLevelButton"),
+        createWaveButton =
+                ButtonFactory.makeButton(levelResource.getString("NewWave"),
                                          e -> {
-                                             createNewLevel();
+                                             createNewWave();
                                          });
-        vbox.getChildren().add(createLevelButton);
-        createLevelButton.setTranslateY(5);
-        createLevelButton.setTranslateX(5);
-        createLevelButton.setFocusTraversable(false);
+        createWaveButton.setTranslateY(5);
+        createWaveButton.setTranslateX(5);
+        createWaveButton.setFocusTraversable(false);
     }
 
-    public void createNewLevel () {
-        delegate.onUserEnteredCreateLevel();
+    public void createNewWave () {
+        delegate.onUserEnteredAddWave();
     }
 
 }

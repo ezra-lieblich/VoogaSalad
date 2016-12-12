@@ -121,7 +121,7 @@ public class GameModeTypeManagerController
 
 	@Override
 	public List<Integer> getPaths(int gameModeID) {
-		return Collections.unmodifiableList(getTypeManager().getEntity(gameModeID).getPaths());
+		return getTypeManager().getEntity(gameModeID).getPaths();
 	}
 
 	@Override

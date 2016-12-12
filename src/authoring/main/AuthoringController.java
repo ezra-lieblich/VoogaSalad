@@ -191,7 +191,7 @@ public class AuthoringController {
         levelVC.setLevelDataSource(levelModel);
         weaponVC.setWeaponDataSource(weaponModel);
         towerVC.setTowerDataSource(towerModel);
-        setupVC.setGameSettingsDataSource(settingsModel, pathModel);
+        setupVC.setGameSettingsDataSource(settingsModel, pathModel, levelModel);
     }
 
     public Scene getScene () {
