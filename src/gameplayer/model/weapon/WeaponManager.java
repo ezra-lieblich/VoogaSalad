@@ -11,6 +11,7 @@ import gameplayer.model.GamePlayData;
 import gameplayer.model.tower.Gun;
 import gameplayer.model.tower.TowerManager;
 import gameplayer.view.GridGUI;
+import javafx.scene.image.ImageView;
 
 public class WeaponManager extends Observable{
 	private GamePlayData gameData;
@@ -66,7 +67,7 @@ public class WeaponManager extends Observable{
 	}
 
 
-	public void updateWeapon() {
+	public void updateWeapon(HashMap<Integer,ImageView>weaponsOnScreen) {
 		//newly fired weapon
 		if(this.tempCountFix % 20 == 0){//VERY TEMP FIX MAKE BULLETS ONCE PER SECOND
 			ArrayList<Weapon> newlyGeneratedWeapons = this.towerManager.generateNewWeapons();
@@ -96,7 +97,7 @@ public class WeaponManager extends Observable{
 
 			if (!this.gameData.coordinateInBound(w.getX(), w.getY())) {
 				weaponOnGridIterate.remove();
-				System.out.println(this.weaponOnGrid.keySet().size());
+				weaponsOnScreen.remove(w.getUniqueID());
 			}
 		}
 

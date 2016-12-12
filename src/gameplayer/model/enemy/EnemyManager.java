@@ -36,14 +36,16 @@ public class EnemyManager extends Observable {
 	private Queue<Double> allWaveStartTimes;
 	private Queue<Double> allWaveFrequencies;
 	
+	HashMap<Integer,ImageView>enemiesOnScreen;
 
 
-	public EnemyManager(GamePlayData gameData) {
+	public EnemyManager(GamePlayData gameData,HashMap<Integer,ImageView>enemiesOnScreen) {
 		this.gameData = gameData;
 		this.gameFactory = gameData.getFactory();
 		//this.graphicLib = new GraphicsLibrary();
 		this.allWaveFrequencies = new LinkedList<Double>();
 		this.allWaveStartTimes = new LinkedList<Double>();
+		this.enemiesOnScreen =enemiesOnScreen;
 		initializeNewLevel();
 	}
 
@@ -183,6 +185,7 @@ public class EnemyManager extends Observable {
 			moveSingleEnemy(enemy);
 			if (enemy.mustRemove()) {
 				iter.remove();
+				
 			}
 		}
 	}
