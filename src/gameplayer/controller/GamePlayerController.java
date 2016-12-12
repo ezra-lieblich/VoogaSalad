@@ -437,6 +437,11 @@ public class GamePlayerController implements Observer {
 	public Timeline getTimeline() {
 		return this.animation;
 	}
+	
+	
+	private void removeValFromIterator(HashMap<Integer, Object> map){
+		
+	}
 
 	private void updateBulletOnScreen(HashMap<Integer, Weapon> bulletRedraw) {
 		Iterator<Integer> it = weaponsOnScreen.keySet().iterator();
