@@ -21,7 +21,9 @@ public interface WeaponAuthoringViewDelegate {
     public void onUserPressedDeleteWeapon ();
 
     public void onUserEnteredWeaponSize (String weaponSize);
-    
+
     public void onUserSelectedWeapon (int weaponID);
+
+    public void onUserPressedAddEffect ();
 
 }

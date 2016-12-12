@@ -23,6 +23,8 @@ public interface LevelAuthoringViewDelegate {
 
     public void onUserEnteredTransitionTime (String time);
 
+    public void onUserPressedAddEffect ();
+
     // WAVE
 
     public void onUserEnteredAddWave ();

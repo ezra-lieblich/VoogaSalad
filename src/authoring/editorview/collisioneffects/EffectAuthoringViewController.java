@@ -6,13 +6,18 @@ import authoring.editorview.ListDataSource;
 import engine.effect.EffectManagerController;
 
 
-public class EffectController extends EditorViewController
+/**
+ * 
+ * @author Kayla Schulz
+ *
+ */
+public class EffectAuthoringViewController extends EditorViewController
         implements EffectAuthoringViewDelegate, ListDataSource {
 
     private EffectManagerController effectsDataSource;
     private int currentEffectID;
 
-    public EffectController () {
+    public EffectAuthoringViewController () {
 
     }
 
@@ -37,7 +42,7 @@ public class EffectController extends EditorViewController
     }
 
     @Override
-    public void onUserEnteredEffect (String effect) {
+    public void onUserSelectedEffect (String effect) {
         effectsDataSource.setEffect(currentEffectID, effect);
     }
 

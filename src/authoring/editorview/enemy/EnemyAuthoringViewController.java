@@ -128,7 +128,7 @@ public class EnemyAuthoringViewController extends EditorViewController
 
     @Override
     public void onUserPressedDeleteEnemy () {
-    	int nextID = this.enemyView.getNearestAvailableItemID(currentEnemyID);
+        int nextID = this.enemyView.getNearestAvailableItemID(currentEnemyID);
         enemyDataSource.deleteType(currentEnemyID);
         currentEnemyID = nextID;
         this.refreshEnemyView();
@@ -159,6 +159,12 @@ public class EnemyAuthoringViewController extends EditorViewController
     public void onUserSelectedEnemy (int enemyID) {
         currentEnemyID = enemyID;
         refreshEnemyView();
+    }
+
+    @Override
+    public void onUserPressedAddEffect () {
+        // TODO Auto-generated method stub
+
     }
 
 }
