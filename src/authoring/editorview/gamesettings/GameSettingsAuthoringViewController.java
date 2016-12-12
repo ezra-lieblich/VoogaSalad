@@ -1,5 +1,7 @@
 package authoring.editorview.gamesettings;
 
+import java.util.List;
+
 import authoring.editorview.EditorViewController;
 import engine.path.PathManagerController;
 import engine.settings.GameModeManagerController;
@@ -110,6 +112,11 @@ public class GameSettingsAuthoringViewController extends EditorViewController
 	@Override
 	public String getPathImage(int pathID) {
 		return this.pathDataSource.getImagePath(pathID);
+	}
+
+	@Override
+	public List<Integer> getAvailablePathList() {
+		return this.pathDataSource.getAvailablePaths();
 	}
 
     

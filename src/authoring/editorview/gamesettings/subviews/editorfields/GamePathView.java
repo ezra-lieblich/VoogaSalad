@@ -34,7 +34,6 @@ public class GamePathView implements GameSettingsSetView {
 	private void buildView(ResourceBundle settingsResource){		
 		availablePathList = FXCollections.observableArrayList();		
 		
-		availablePathList.addAll("Hello", "YO", "Hi");
 		
 		pathCheckComboBox = ComboBoxFactory.makeCheckComboBox(availablePathList, a -> setPathIDFromName(a));
 		pathCheckComboBox.setPrefWidth(105);
