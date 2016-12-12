@@ -10,12 +10,14 @@ public abstract class AbstractType implements Type {
     private ObservableProperty<String> name;
     private ObservableProperty<String> imagePath;
     private ObservableProperty<Double> size;
+    private ObservableProperty<String> sound;
     private final int id;
     
     protected AbstractType(TypeInitializer typeBuilder) {
         this.name = typeBuilder.getName();
         this.imagePath = typeBuilder.getImagePath();
         this.size = typeBuilder.getSize();    
+        this.sound = typeBuilder.getSound();
         this.id = typeBuilder.getId();
     }
     
@@ -54,6 +56,16 @@ public abstract class AbstractType implements Type {
     @Override
     public int getId () {
         return id;
+    }
+    
+    @Override
+    public void setSound (String soundPath) {
+    	this.sound.setProperty(soundPath);
+    }
+    
+    @Override
+    public String getSound () {
+    	return sound.getProperty();
     }
 
 }

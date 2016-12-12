@@ -32,9 +32,10 @@ public class WeaponNameField extends EditorNameView implements WeaponSetView {
                 TextFieldFactory.makeTextField(resource.getString("EnterString"),
                                                e -> delegate.onUserEnteredWeaponName(nameTextField
                                                        .getText()));
+        nameTextField.setPrefWidth(130);
         root =
                 GridFactory.createRowWithLabelandNode(resource.getString("NameTextField"),
-                                                      nameTextField, 125);
+                                                      nameTextField, 150);
 
     }
 

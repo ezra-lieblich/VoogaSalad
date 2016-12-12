@@ -38,7 +38,7 @@ public class EnemyImageBank extends ImageBank {
     @Override
     protected void userSelectedRow (int index) {
         int selectedEnemy = this.itemIDs.get(index);
-        if (selectedEnemy != -1) 
+        if (selectedEnemy != -1)
             this.delegate.onUserSelectedEnemy(selectedEnemy);
     }
 }

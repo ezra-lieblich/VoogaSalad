@@ -6,7 +6,6 @@ import authoring.editorview.enemy.EnemyAuthoringViewDelegate;
 import authoring.editorview.enemy.EnemySetView;
 import authoring.utilityfactories.BoxFactory;
 import authoring.utilityfactories.TextFieldFactory;
-import javafx.scene.Node;
 import javafx.scene.control.TextField;
 
 
@@ -27,11 +26,6 @@ public class EnemyDamageField extends TextFieldView implements EnemySetView {
     @Override
     public void setDelegate (EnemyAuthoringViewDelegate delegate) {
         this.delegate = delegate;
-    }
-
-    @Override
-    public Node getInstanceAsNode () {
-        return hbox;
     }
 
     @Override

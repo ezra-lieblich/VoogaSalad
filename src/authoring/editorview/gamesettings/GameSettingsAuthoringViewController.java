@@ -24,7 +24,7 @@ public class GameSettingsAuthoringViewController extends EditorViewController
         this.gameSettingsDataSource = source;
         this.pathDataSource = pathSource;
         this.gameSettingsDataSource.addTypeBankListener(this.gameView);
-        //addAvailablePathListener
+        this.pathDataSource.addAvailablePathListener(a -> gameView.updateAvailablePaths(a));
         createNewGame();
     }
 
@@ -101,6 +101,12 @@ public class GameSettingsAuthoringViewController extends EditorViewController
 		this.gameSettingsDataSource.addPath(activeID, pathID);
 		
 	}
+
+    @Override
+    public void refreshView () {
+        // TODO Auto-generated method stub
+        
+    }
 
     
 }

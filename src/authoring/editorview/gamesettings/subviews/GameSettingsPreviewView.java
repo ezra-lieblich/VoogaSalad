@@ -1,5 +1,7 @@
 package authoring.editorview.gamesettings.subviews;
 
+import java.io.File;
+
 import authoring.editorview.INodeView;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -37,14 +39,8 @@ public class GameSettingsPreviewView implements INodeView {
 			root.getChildren().remove(gameImageView);
 		}
 		
-		if (!imagePath.contains("file:") && !imagePath.contains("http:")) {
-			image = new Image (getClass().getClassLoader().getResourceAsStream(imagePath));		
-		}
-		
-		else {
-			image = new Image(imagePath);
-		}
-			
+		File imageFile = new File(imagePath);
+		image = new Image(imageFile.toURI().toString());
 		gameImageView.setImage(image);
 		root.getChildren().add(gameImageView);
 	}

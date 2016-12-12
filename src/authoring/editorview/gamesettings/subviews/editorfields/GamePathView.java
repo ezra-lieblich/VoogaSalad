@@ -77,6 +77,7 @@ public class GamePathView implements GameSettingsSetView {
 			this.pathNameIdList.add(pair);
 			this.availablePathList.add(delegate.getPathName(id));
 		}
+		
 	}
 
 }

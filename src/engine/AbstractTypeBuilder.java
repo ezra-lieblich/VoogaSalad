@@ -11,19 +11,22 @@ public abstract class AbstractTypeBuilder<E extends Type, R extends TypeBuilder<
     private final String DEFAULT_NAME;
     private final String DEFAULT_IMAGE_PATH;
     private final Double DEFAULT_SIZE;
+    private final String DEFAULT_SOUND;
     
     
     private ObservableProperty<String> name;
     private ObservableProperty<String> imagePath;
     private ObservableProperty<Double> size;
+    private ObservableProperty<String> sound;
     private int id;
     private int nextId;
     
     
-    protected AbstractTypeBuilder(String name, String imagePath, double size) {
+    protected AbstractTypeBuilder(String name, String imagePath, double size, String sound) {
         this.DEFAULT_NAME = name;
         this.DEFAULT_IMAGE_PATH = imagePath;
         this.DEFAULT_SIZE = size;
+        this.DEFAULT_SOUND = sound;
         this.nextId = 0;
         restoreDefaults();
     }
@@ -44,6 +47,12 @@ public abstract class AbstractTypeBuilder<E extends Type, R extends TypeBuilder<
     public R buildSize(double size) {
         this.size.setProperty(size);
         return getThis();
+    }
+    
+    @Override
+    public R buildSound(String soundPath) {
+    	this.sound.setProperty(soundPath);
+    	return getThis();
     }
     
     @Override
@@ -73,6 +82,11 @@ public abstract class AbstractTypeBuilder<E extends Type, R extends TypeBuilder<
     @Override
     public ObservableProperty<Double> getSize () {
         return size;
+    }
+    
+    @Override
+    public ObservableProperty<String> getSound () {
+    	return sound;
     }
     
     @Override
@@ -108,12 +122,19 @@ public abstract class AbstractTypeBuilder<E extends Type, R extends TypeBuilder<
     }
     
     @Override
+    public R addSoundListener(BiConsumer<String, String> listener) {
+    	sound.addListener(listener);
+    	return getThis();
+    }
+    
+    @Override
     public R copy(E type) {
         return copyType(type)
         .buildId(type.getId())
         .buildName(type.getName())
         .buildImagePath(type.getImagePath())
-        .buildSize(type.getSize());   
+        .buildSize(type.getSize())
+        .buildSound(type.getSound());
     }
     
     protected void resetName(ObservableProperty<String> name) {
@@ -140,6 +161,7 @@ public abstract class AbstractTypeBuilder<E extends Type, R extends TypeBuilder<
         this.name = new ObservableObjectProperty<String>(DEFAULT_NAME + " (" + id + ")");
         this.imagePath = new ObservableObjectProperty<String>(DEFAULT_IMAGE_PATH);
         this.size = new ObservableObjectProperty<Double>(DEFAULT_SIZE);
+        this.sound = new ObservableObjectProperty<String>(DEFAULT_SOUND);
         restoreTypeDefaults();
     }
     

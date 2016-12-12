@@ -1,28 +1,23 @@
-package authoring.editorview.enemy.subviews.editorfields;
+package authoring.editorview.collisioneffects.subviews.editorfields;
 
 import java.util.ResourceBundle;
 import authoring.editorview.EditorNameView;
-import authoring.editorview.enemy.EnemyAuthoringViewDelegate;
-import authoring.editorview.enemy.EnemySetView;
+import authoring.editorview.collisioneffects.EffectAuthoringViewDelegate;
+import authoring.editorview.collisioneffects.EffectSetView;
 import authoring.utilityfactories.GridFactory;
 import authoring.utilityfactories.TextFieldFactory;
 
 
-/**
- * 
- * @author Kayla Schulz
- *
- */
-public class EnemyNameField extends EditorNameView implements EnemySetView {
+public class EffectNameField extends EditorNameView implements EffectSetView {
 
-    private EnemyAuthoringViewDelegate delegate;
+    private EffectAuthoringViewDelegate delegate;
 
-    public EnemyNameField (ResourceBundle labelsResource) {
+    public EffectNameField (ResourceBundle labelsResource) {
         super(labelsResource);
     }
 
     @Override
-    public void setDelegate (EnemyAuthoringViewDelegate delegate) {
+    public void setDelegate (EffectAuthoringViewDelegate delegate) {
         this.delegate = delegate;
     }
 
@@ -30,11 +25,11 @@ public class EnemyNameField extends EditorNameView implements EnemySetView {
     protected void makeNameTextField () {
         nameTextField =
                 TextFieldFactory.makeTextField(resource.getString("EnterString"),
-                                               e -> delegate.onUserEnteredEnemyName(nameTextField
+                                               e -> delegate.onUserEnteredEffectName(nameTextField
                                                        .getText()));
         nameTextField.setPrefWidth(105);
         root = GridFactory.createRowWithLabelandNode(resource.getString("NameTextField"),
-                                                     nameTextField, 150);
+                                                     nameTextField, 125);
     }
 
 }

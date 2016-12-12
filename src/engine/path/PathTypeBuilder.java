@@ -21,6 +21,7 @@ public class PathTypeBuilder extends AbstractTypeBuilder<Path, PathBuilder> impl
     
      public static final String DEFAULT_NAME = "New Path";
      public static final String DEFAULT_IMAGE_PATH = "Images/blacksquare.png";
+     public static final String DEFAULT_SOUND_PATH = "Music/DopeBeats.mp3";
      
      public static final double DEFAULT_SIZE = 1;
      public static final String DEFAULT_TYPE = "Set";
@@ -36,7 +37,7 @@ public class PathTypeBuilder extends AbstractTypeBuilder<Path, PathBuilder> impl
      private ObservableProperty<Integer> gridColumns;
      
      public PathTypeBuilder() {
-         super(DEFAULT_NAME, DEFAULT_IMAGE_PATH, DEFAULT_SIZE);
+         super(DEFAULT_NAME, DEFAULT_IMAGE_PATH, DEFAULT_SIZE, DEFAULT_SOUND_PATH);
      }
     
     @Override

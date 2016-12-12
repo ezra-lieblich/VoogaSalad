@@ -3,9 +3,11 @@ package authoring.editorview.weapon.subviews.editorfields;
 import java.util.ResourceBundle;
 import authoring.editorview.weapon.WeaponSetView;
 import authoring.editorview.weapon.WeaponAuthoringViewDelegate;
+import authoring.utilityfactories.GridFactory;
 import authoring.utilityfactories.TextFieldFactory;
 import javafx.scene.Node;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
 
 
 /**
@@ -15,6 +17,7 @@ import javafx.scene.control.TextField;
  */
 public class WeaponSpeedField implements WeaponSetView {
 
+	private GridPane root;
     private TextField weaponSpeedField;
     private WeaponAuthoringViewDelegate delegate;
 
@@ -26,6 +29,11 @@ public class WeaponSpeedField implements WeaponSetView {
         weaponSpeedField =
                 TextFieldFactory.makeTextField(labelsResource.getString("EnterInt"), e -> delegate
                         .onUserEnteredWeaponSpeed(weaponSpeedField.getText()));
+        weaponSpeedField.setPrefWidth(130);
+        root = GridFactory.createRowWithLabelandNode(
+        		labelsResource.getString("Speed"), 
+        		weaponSpeedField, 
+        		150);
     }
 
     @Override
@@ -35,7 +43,7 @@ public class WeaponSpeedField implements WeaponSetView {
 
     @Override
     public Node getInstanceAsNode () {
-        return weaponSpeedField;
+        return root;
     }
 
     public void updateWeaponSpeed (String weaponSpeed) {

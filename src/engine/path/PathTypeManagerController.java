@@ -125,6 +125,7 @@ public class PathTypeManagerController
                         .updateGridDimensions(newValue));
     }
 
+    @Override
     public void addAvailablePathListener(Consumer<List<Integer>> listener) {
         getTypeManager().addAvailablePathListener((oldValue, newValue) -> listener.accept(newValue));
     }

@@ -19,6 +19,8 @@ public class LevelTypeBuilder extends AbstractTypeBuilder<Level, LevelBuilder>
     public static final String DEFAULT_NAME = "Level";
     public static final String DEFAULT_IMAGE_PATH = "Images/blacksquarejpg";
     public static final double DEFAULT_SIZE = 1;
+    public static final String DEFAULT_SOUND_PATH = "Music/DopeBeats.mp3";
+
     //remove??
     public static final WaveManager DEFAULT_ENEMY_COUNTS = new WaveTypeManager();
     public static final double DEFAULT_REWARD_HEALTH = 0;
@@ -37,7 +39,7 @@ public class LevelTypeBuilder extends AbstractTypeBuilder<Level, LevelBuilder>
     private ObservableProperty<Double> time;
 
     protected LevelTypeBuilder () {
-        super(DEFAULT_NAME, DEFAULT_IMAGE_PATH, DEFAULT_SIZE);
+        super(DEFAULT_NAME, DEFAULT_IMAGE_PATH, DEFAULT_SIZE, DEFAULT_SOUND_PATH);
     }
 
     @Override

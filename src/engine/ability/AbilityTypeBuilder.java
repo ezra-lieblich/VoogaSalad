@@ -18,6 +18,7 @@ public class AbilityTypeBuilder extends AbstractTypeBuilder<Ability, AbilityBuil
      public static final String DEFAULT_NAME = "New Weapon";
      public static final String DEFAULT_IMAGE_PATH = "Images.penguin.jpg";
      public static final double DEFAULT_SIZE = 1;
+     public static final String DEFAULT_SOUND_PATH = "Music/DopeBeats.mp3";
      public static final double DEFAULT_RATE = 2;
      public static final String DEFAULT_EFFECT = "";
      
@@ -26,7 +27,7 @@ public class AbilityTypeBuilder extends AbstractTypeBuilder<Ability, AbilityBuil
      private ObservableProperty<String> effect;
      
      public AbilityTypeBuilder() {
-         super(DEFAULT_NAME, DEFAULT_IMAGE_PATH, DEFAULT_SIZE);
+         super(DEFAULT_NAME, DEFAULT_IMAGE_PATH, DEFAULT_SIZE, DEFAULT_SOUND_PATH);
      }
     
     @Override

@@ -29,4 +29,8 @@ public interface ManagerController<E extends Manager<T>, U extends TypeBuilder<T
     int createCopy (int id, V updateView);
     
     void loadManagerData(E typeManager, V updateView);
+    
+    String getSound (int id);
+    
+    void setSound (int id, String soundPath);
 }

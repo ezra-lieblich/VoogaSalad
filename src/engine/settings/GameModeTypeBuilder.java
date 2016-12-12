@@ -15,8 +15,9 @@ import engine.observer.ObservableProperty;
 public class GameModeTypeBuilder extends AbstractTypeBuilder<GameMode, GameModeBuilder> implements GameModeBuilder, GameModeInitializer {
 
 	public static final String DEFAULT_NAME = "New Game";
-    public static final String DEFAULT_IMAGE_PATH = "greensquare.png";
+    public static final String DEFAULT_IMAGE_PATH = "Images/greensquare.png";
     public static final double DEFAULT_SIZE = 1;
+    public static final String DEFAULT_SOUND_PATH = "Music/DopeBeats.mp3";
     public static final String[] DEFAULT_WINNING_CONDITIONS = new String[]{};
     public static final String[] DEFAULT_LOSING_CONDITIONS = new String[]{};
     public static final String DEFAULT_GAME_TYPE = "Normal";
@@ -36,7 +37,7 @@ public class GameModeTypeBuilder extends AbstractTypeBuilder<GameMode, GameModeB
     private ObservableList<Integer> paths;
 	
 	public GameModeTypeBuilder() {
-		super(DEFAULT_NAME, DEFAULT_IMAGE_PATH, DEFAULT_SIZE);
+		super(DEFAULT_NAME, DEFAULT_IMAGE_PATH, DEFAULT_SIZE, DEFAULT_SOUND_PATH);
 	}
 
 	@Override
