@@ -151,7 +151,7 @@ public class GamePlayerController implements Observer {
 
 	public void init(boolean newLevel) {
 		// HashMap<String, Double> settings = this.loader.getGameSetting();
-		this.enemyManager.setCurrentCell(this.model.getData().getGrid().getStartPoint());
+		//this.enemyManager.setCurrentCell(this.model.getData().getGrid().getStartPoint());
 		populateTowerToId();
 		initGUI(newLevel);
 
