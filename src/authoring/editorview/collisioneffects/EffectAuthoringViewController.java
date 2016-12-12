@@ -70,8 +70,9 @@ public class EffectAuthoringViewController extends EditorViewController
     }
 
     @Override
-    public void onUserEnteredEffect (String effect) {
-        effectsDataSource.setEffect(currentEffectID, effect);
+    public void onUserSelectedEffect (int effectID) {
+        currentEffectID = effectID;
+        refreshView();
     }
 
     @Override
@@ -86,8 +87,12 @@ public class EffectAuthoringViewController extends EditorViewController
 
     @Override
     public void refreshView () {
-        // TODO Auto-generated method stub
+        effectAuthoringView.updateNameDisplay(effectsDataSource.getImagePath(currentEffectID));
+    }
 
+    @Override
+    public void onUserEnteredEffectText (String effect) {
+        effectsDataSource.setEffect(currentEffectID, effect);
     }
 
 }

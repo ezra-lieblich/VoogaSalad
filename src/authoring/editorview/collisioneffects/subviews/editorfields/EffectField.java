@@ -28,7 +28,7 @@ public class EffectField extends TextFieldView implements EffectSetView {
         effectTextField =
                 TextFieldFactory.makeTextField(labelsResource.getString("EnterString"),
                                                e -> delegate
-                                                       .onUserEnteredEffect(effectTextField
+                                                       .onUserEnteredEffectText(effectTextField
                                                                .getText()));
         hbox =
                 BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Effect"),
