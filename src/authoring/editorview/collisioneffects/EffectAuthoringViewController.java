@@ -37,6 +37,14 @@ public class EffectAuthoringViewController extends EditorViewController
         effectAuthoringView.updateListedAvailableClasses(classes);
     }
 
+    public void setAvailMethods (List<String> methods) {
+        effectAuthoringView.updateAvailableMethods(methods);
+    }
+
+    public void setAvailDataObjects (List<String> dataObjects) {
+        effectAuthoringView.updateAvailableDataObjects(dataObjects);
+    }
+
     public EffectUpdateView getEffectAuthoringView () {
         return effectAuthoringView;
     }

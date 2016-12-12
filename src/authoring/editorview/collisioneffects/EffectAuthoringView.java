@@ -114,14 +114,12 @@ public class EffectAuthoringView implements EffectUpdateView {
 
     @Override
     public void updateAvailableMethods (List<String> availMethods) {
-        // TODO Auto-generated method stub
-
+        effectAvailMethods.updateAvailMethods(availMethods);
     }
 
     @Override
     public void updateAvailableDataObjects (List<String> availDataObjects) {
-        // TODO Auto-generated method stub
-
+        effectDataObjects.updateAvailDataObjects(availDataObjects);
     }
 
     @Override
