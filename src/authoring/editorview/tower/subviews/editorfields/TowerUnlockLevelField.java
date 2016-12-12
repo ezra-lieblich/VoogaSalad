@@ -1,7 +1,7 @@
 package authoring.editorview.tower.subviews.editorfields;
 
 import java.util.ResourceBundle;
-import authoring.editorview.tower.ITowerSetView;
+import authoring.editorview.tower.TowerSetView;
 import authoring.editorview.tower.TowerAuthoringViewDelegate;
 import authoring.utilityfactories.GridFactory;
 import authoring.utilityfactories.TextFieldFactory;
@@ -15,7 +15,7 @@ import javafx.scene.layout.GridPane;
  * @author Kayla Schulz
  *
  */
-public class TowerUnlockLevelField implements ITowerSetView {
+public class TowerUnlockLevelField implements TowerSetView {
 
 	
 	private GridPane root;

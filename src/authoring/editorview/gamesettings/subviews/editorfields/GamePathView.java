@@ -8,7 +8,7 @@ import org.controlsfx.control.CheckComboBox;
 
 import authoring.editorview.NameIdPair;
 import authoring.editorview.gamesettings.GameSettingsAuthoringViewDelegate;
-import authoring.editorview.gamesettings.IGameSettingsSetView;
+import authoring.editorview.gamesettings.GameSettingsSetView;
 import authoring.utilityfactories.ComboBoxFactory;
 import authoring.utilityfactories.GridFactory;
 import javafx.collections.FXCollections;
@@ -16,7 +16,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
 
-public class GamePathView implements IGameSettingsSetView {
+public class GamePathView implements GameSettingsSetView {
 
 	private GridPane root;
 	private GameSettingsAuthoringViewDelegate delegate;

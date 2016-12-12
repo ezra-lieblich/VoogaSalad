@@ -10,7 +10,7 @@ import authoring.editorview.INodeView;
  * @author Kayla Schulz
  *
  */
-public interface ILevelSetView extends INodeView {
+public interface LevelSetView extends INodeView {
 
     public void setDelegate (LevelAuthoringViewDelegate delegate);
 }

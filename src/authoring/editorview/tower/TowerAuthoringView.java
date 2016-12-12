@@ -26,7 +26,7 @@ import javafx.scene.layout.RowConstraints;
  * @author Diane Hadley
  *
  */
-public class TowerAuthoringView implements ITowerUpdateView {
+public class TowerAuthoringView implements TowerUpdateView {
     @SuppressWarnings("unused")
     private TowerAuthoringViewDelegate delegate;
     private GridPane towerView;

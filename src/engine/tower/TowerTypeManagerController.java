@@ -3,7 +3,7 @@ package engine.tower;
 import java.util.Collections;
 import java.util.List;
 import com.oracle.webservices.internal.api.databinding.Databinding.Builder;
-import authoring.editorview.tower.ITowerUpdateView;
+import authoring.editorview.tower.TowerUpdateView;
 import engine.AbstractTypeManagerController;
 import engine.ManagerMediator;
 import engine.effect.EffectManagerController;
@@ -11,7 +11,7 @@ import engine.effect.EffectTypeManagerController;
 
 
 public class TowerTypeManagerController
-        extends AbstractTypeManagerController<TowerManager, TowerBuilder, Tower, ITowerUpdateView>
+        extends AbstractTypeManagerController<TowerManager, TowerBuilder, Tower, TowerUpdateView>
         implements TowerManagerController {
     
     private EffectManagerController abilityEffectManagerController;
@@ -88,7 +88,7 @@ public class TowerTypeManagerController
 
     // TODO - edit createNewTower to work with both versions
     @Override
-    public int createTowerUpgrade (ITowerUpdateView towerUpdater, int parentTowerID) {
+    public int createTowerUpgrade (TowerUpdateView towerUpdater, int parentTowerID) {
         copyWithoutId(parentTowerID);
         return getTypeManager().addUpgrade(constructType(towerUpdater), parentTowerID);
     }
@@ -99,7 +99,7 @@ public class TowerTypeManagerController
     }
 
     @Override
-    protected TowerBuilder constructTypeProperties (ITowerUpdateView towerUpdater,
+    protected TowerBuilder constructTypeProperties (TowerUpdateView towerUpdater,
                                                     TowerBuilder typeBuilder) {
         return typeBuilder
                 .addWeaponsListener( (oldValue, newValue) -> towerUpdater

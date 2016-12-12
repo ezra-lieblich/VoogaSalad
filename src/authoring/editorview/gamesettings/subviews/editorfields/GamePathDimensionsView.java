@@ -3,7 +3,7 @@ package authoring.editorview.gamesettings.subviews.editorfields;
 import java.util.ResourceBundle;
 
 import authoring.editorview.gamesettings.GameSettingsAuthoringViewDelegate;
-import authoring.editorview.gamesettings.IGameSettingsSetView;
+import authoring.editorview.gamesettings.GameSettingsSetView;
 import authoring.utilityfactories.DialogueBoxFactory;
 import authoring.utilityfactories.GridFactory;
 import authoring.utilityfactories.TextFieldFactory;
@@ -12,7 +12,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
-public class GamePathDimensionsView implements IGameSettingsSetView {
+public class GamePathDimensionsView implements GameSettingsSetView {
 
 	private GridPane root;
 	private int dimensions;

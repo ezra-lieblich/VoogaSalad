@@ -3,7 +3,7 @@ package authoring.editorview.gamesettings.subviews;
 import java.util.ResourceBundle;
 
 import authoring.editorview.gamesettings.GameSettingsAuthoringViewDelegate;
-import authoring.editorview.gamesettings.IGameSettingsSetView;
+import authoring.editorview.gamesettings.GameSettingsSetView;
 import authoring.editorview.gamesettings.subviews.editorfields.GameImageView;
 import authoring.editorview.gamesettings.subviews.editorfields.GameInitialLivesView;
 import authoring.editorview.gamesettings.subviews.editorfields.GameInitialMoneyView;
@@ -26,7 +26,7 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
-public class GameSettingsEditorView implements IGameSettingsSetView {
+public class GameSettingsEditorView implements GameSettingsSetView {
 	
 	
 	private VBox root;

@@ -5,7 +5,7 @@ import authoring.editorview.IUpdateView;
 import authoring.editorview.ListDataSource;
 
 
-public interface IGameSettingsUpdateView extends IGameSettingsSetView, IUpdateView {
+public interface GameSettingsUpdateView extends GameSettingsSetView, IUpdateView {
 
     public void updateNumberofLives (int lives);
     

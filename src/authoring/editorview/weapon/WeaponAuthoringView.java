@@ -22,7 +22,7 @@ import javafx.scene.layout.BorderPane;
  * @author Kayla Schulz
  *
  */
-public class WeaponAuthoringView implements IWeaponUpdateView {
+public class WeaponAuthoringView implements WeaponUpdateView {
     private WeaponAuthoringViewDelegate delegate;
     private BorderPane weaponEditorView;
     private WeaponImageBank weaponBank;
