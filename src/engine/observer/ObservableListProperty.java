@@ -20,5 +20,11 @@ public class ObservableListProperty<E> extends ObservableObjectProperty<List<E>>
         getProperty().removeIf(a -> a.equals(value));
         notifyListenersAndObservers(Collections.unmodifiableList(getProperty()), Collections.unmodifiableList(getProperty()));
     }
+
+    @Override
+    public void clear () {
+        getProperty().clear();
+        notifyListenersAndObservers(Collections.unmodifiableList(getProperty()), Collections.unmodifiableList(getProperty()));
+    }
     
 }

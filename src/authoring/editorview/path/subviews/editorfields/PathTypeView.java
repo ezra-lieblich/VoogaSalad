@@ -1,9 +1,11 @@
 package authoring.editorview.path.subviews.editorfields;
 
 import authoring.editorview.path.PathSetView;
+import java.util.stream.Stream;
 import authoring.editorview.path.PathAuthoringViewDelegate;
 import authoring.utilityfactories.ComboBoxFactory;
 import authoring.utilityfactories.GridFactory;
+import engine.path.PathOption;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
@@ -27,7 +29,7 @@ public class PathTypeView implements PathSetView {
 	private void makeComboBox(){
 		
 		pathTypeList = FXCollections.observableArrayList();
-		pathTypeList.addAll("Free", "Set");
+		pathTypeList.addAll(Stream.of(PathOption.values()).map(PathOption::name).toArray());
 		pathTypeComboBox = ComboBoxFactory.makeComboBox("" , 
 				e -> delegate.onUserEnteredPathType(pathTypeComboBox.getValue().toString()), pathTypeList);
 		pathTypeComboBox.setPrefWidth(155); //TODO
