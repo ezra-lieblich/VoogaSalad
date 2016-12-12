@@ -100,8 +100,28 @@ public class PathEditorView implements PathSetView {
 	
 	public void updataPathType (String pathType){
 		pathTypeView.updatePathType(pathType);
+		updateView(pathType);
 	}
 	
+	public void updateView(String pathType){
+		if (pathType == "Free" && 
+				root.getChildren().contains(pathImageDisplayView.getInstanceAsNode()) &&
+				root.getChildren().contains(pathImageView.getInstanceAsNode())){
+			root.getChildren().removeAll(
+					pathImageDisplayView.getInstanceAsNode(),
+					pathImageView.getInstanceAsNode());
+			
+		}
+		else if (pathType == "Set" &&
+				!root.getChildren().contains(pathImageDisplayView.getInstanceAsNode()) &&
+				!root.getChildren().contains(pathImageView.getInstanceAsNode())){
+			root.getChildren().addAll(
+					pathImageDisplayView.getInstanceAsNode(),
+					pathImageView.getInstanceAsNode());
+			
+		}
+			
+	}
 	
 
 }

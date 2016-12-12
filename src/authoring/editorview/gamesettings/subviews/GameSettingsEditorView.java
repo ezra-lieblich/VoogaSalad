@@ -102,9 +102,9 @@ public class GameSettingsEditorView implements GameSettingsSetView {
 		gamePathTypeView.setDelegate(delegate);
 		gamePathView.setDelegate(delegate);
 		gamePathDimensionsView.setDelegate(delegate);
-		
-		//winning and losing conditions
-		
+		gameWinningConditionsView.setDelegate(delegate);
+		gameLosingConditionsView.setDelegate(delegate);
+			
 	}
 	
 	public void updateName(String name){
@@ -136,7 +136,9 @@ public class GameSettingsEditorView implements GameSettingsSetView {
 		gamePathView.setAvailablePathList(availablePathList);
 	}
 	
-	
-	
+	public void updatePathList(List<Integer> pathList) {
+		gamePathView.setPathList(pathList);
+		
+	}	
 
 }

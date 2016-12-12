@@ -7,7 +7,6 @@ import authoring.editorview.collisioneffects.EffectAuthoringViewDelegate;
 import authoring.editorview.collisioneffects.EffectSetView;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 
 
 /**
@@ -18,15 +17,9 @@ import javafx.scene.control.ListView;
 public class EffectAvailableMethodsView extends ImageBank implements EffectSetView {
 
     private EffectAuthoringViewDelegate delegate;
-    private ListView<Node> listView;
 
     public EffectAvailableMethodsView () {
-        listView = new ListView<Node>();
-    }
-
-    @Override
-    public Node getInstanceAsNode () {
-        return listView;
+        super();
     }
 
     @Override
@@ -39,7 +32,7 @@ public class EffectAvailableMethodsView extends ImageBank implements EffectSetVi
         // TODO Auto-generated method stub
 
     }
-    
+
     public void updateAvailMethods (List<String> list) {
         if (dataSource == null) {
             System.out.println("Table data source not set");

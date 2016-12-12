@@ -64,16 +64,10 @@ public class ModelAuthoringController implements ModelController {
 
 	@Override
 	//TODO Catch it for real
-	public GameAuthoringData loadData(String filePath) {
-		try {
+	public GameAuthoringData loadData(String filePath) throws FileNotFoundException {
 			File xmlFile = new File(filePath);
 			GameAuthoringData data = (GameAuthoringData) Serializer.fromXML(new FileInputStream(xmlFile));
 			return data;
-		} catch (FileNotFoundException e) {
-			//TODO: implement real error handling
-			System.out.println("File not found, please try again");
-			return null;
-		}
 	}
 
 	@Override

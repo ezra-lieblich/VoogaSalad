@@ -1,5 +1,7 @@
 package authoring.editorview.gamesettings;
 
+import java.util.List;
+
 public interface GameSettingsAuthoringViewDelegate {
 
     public void onUserEnteredGameLives (int lives);
@@ -21,5 +23,9 @@ public interface GameSettingsAuthoringViewDelegate {
     public void onUserEnteredPath (int pathID);
     
     public String getPathName (int pathID);
+    
+    public String getPathImage (int pathID);
+    
+    public List<Integer> getAvailablePathList ();
 
 }

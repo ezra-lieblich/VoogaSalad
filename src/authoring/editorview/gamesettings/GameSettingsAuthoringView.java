@@ -122,7 +122,7 @@ public class GameSettingsAuthoringView implements GameSettingsUpdateView, GameSe
 
 	@Override
 	public void updatePathList(List<Integer> pathList) {
-		// TODO Auto-generated method stub
+		gameSettingsEditor.updatePathList(pathList);
 		
 	}
 
