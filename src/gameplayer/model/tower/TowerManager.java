@@ -70,17 +70,17 @@ public class TowerManager extends Observable {
 	 */
 	public void populateAvailableTower() {
 		int level = gameData.getCurrentLevel();
-		System.out.println("in updateAvailableTower: level:" + level);
-		System.out.println("Alltowertypes: ");
-		System.out.println(allTowerTypes);
+		//System.out.println("in updateAvailableTower: level:" + level);
+		//System.out.println("Alltowertypes: ");
+		//System.out.println(allTowerTypes);
 		for (int i=0;i<allTowerTypes.keySet().size();i++) {
 			System.out.println("At tower #: "+i);
 			System.out.println("At "+i+":"+allTowerTypes.get(i));
 			availableTowerTypes.put(i, allTowerTypes.get(i));
 
 		}
-		System.out.println("All available tower types: ");
-		System.out.println(this.availableTowerTypes);
+		//System.out.println("All available tower types: ");
+		//System.out.println(this.availableTowerTypes);
 	}
 
 
