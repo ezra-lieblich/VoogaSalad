@@ -52,6 +52,8 @@ public interface Level extends Type {
     
     WaveManager getWaveManager ();
     
+    void setWaveManager (WaveManager waveManager);
+    
     void removeEnemyReferences (int enemyID);
     
     void resetGridWaves();
