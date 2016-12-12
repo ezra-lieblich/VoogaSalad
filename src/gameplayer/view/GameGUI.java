@@ -163,6 +163,10 @@ public class GameGUI {
 	public List<int[]> getDroppedTowerCoords() {
 		return getDragDrop().getCoordinates();
 	}
+	
+	public void saveButton(EventHandler<ActionEvent> handle){
+		this.buttonPanel.bindSaveGame(handle);
+	}
 
 	private void addButtonPanel() {
 		this.buttonPanel.init();

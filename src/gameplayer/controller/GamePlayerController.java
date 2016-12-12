@@ -161,7 +161,17 @@ public class GamePlayerController implements Observer {
 		} catch (IOException e) {
 		}
 		this.towerController = new TowerController(this.model.getTowerManager(), this.view);
+		initSaveGameButton();
 
+	}
+	
+	/**
+	 * FILL THIS METHOD WITH XML SAVING CRAP
+	 */
+	private void initSaveGameButton(){
+		this.view.saveButton(e -> {
+			
+		});
 	}
 
 	public void setDataStoreOnClose(Stage s) {
