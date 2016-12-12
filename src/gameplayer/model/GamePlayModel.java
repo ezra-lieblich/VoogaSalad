@@ -29,21 +29,40 @@ public class GamePlayModel extends Observable {
 	// private int hitBuffer = 10; // initialize from xml
 
 	private HashMap<Integer, engine.weapon.Weapon> weaponMap;
-	private GraphicsLibrary graphicLib;
+	//private GraphicsLibrary graphicLib;
 	private TowerManager towerManager;
 	private gameplayer.model.weapon.WeaponManager weaponManager;
 	private EnemyManager enemyManager;
 	private CollisionManager collisionManager;
 	// private EnemyModel enemyModel;
-
-	public GamePlayModel(GamePlayerFactory factory) {
-		graphicLib = new GraphicsLibrary();
+	
+	/**
+	 * this constructor is for reloading the game
+	 * with the progress user already made in the game
+	 * @param gameData
+	 */
+	public GamePlayModel(GamePlayData gameData, HashMap<Integer,ImageView>enemiesOnScreen){
+		this.gameData = gameData;
+		this.gameData.initializeGameSetting();
+		this.enemyManager = new EnemyManager(this.gameData,enemiesOnScreen);
+		this.towerManager = new TowerManager(gameData, this.enemyManager);
+		this.towerManager.initializeTowerForLoading();
+		this.weaponManager = new gameplayer.model.weapon.WeaponManager(this.gameData, this.towerManager);
+		this.collisionManager = new CollisionManager(gameData, this.weaponManager, this.enemyManager,enemiesOnScreen);
+		initializeGameSetting(gameData.getFactory());
+		
+	}
+	
+	
+	
+	public GamePlayModel(GamePlayerFactory factory,HashMap<Integer,ImageView>enemiesOnScreen) {
+		//graphicLib = new GraphicsLibrary();
 		this.gameData = new GamePlayData(factory);
 		this.gameData.initializeGameSetting();
-		this.enemyManager = new EnemyManager(this.gameData);
+		this.enemyManager = new EnemyManager(this.gameData,enemiesOnScreen);
 		this.towerManager = new TowerManager(gameData, this.enemyManager);
 		this.weaponManager = new gameplayer.model.weapon.WeaponManager(this.gameData, this.towerManager);
-		this.collisionManager = new CollisionManager(gameData, this.weaponManager, this.enemyManager);
+		this.collisionManager = new CollisionManager(gameData, this.weaponManager, this.enemyManager,enemiesOnScreen);
 		initializeGameSetting(factory);
 	}
 
@@ -91,7 +110,6 @@ public class GamePlayModel extends Observable {
 		this.weaponManager.initializeNewLevel();
 		this.towerManager.updateAvailableTower();
 		this.enemyManager.initializeNewLevel();
-
 	}
 
 	/*
@@ -106,9 +124,9 @@ public class GamePlayModel extends Observable {
 		return this.towerManager.placeTower(type, x, y);
 	}
 
-	public void updateInLevel() {
+	public void updateInLevel(HashMap<Integer,ImageView>weaponsOnScreen) {
 		// checkCollision();
-		this.weaponManager.updateWeapon();
+		this.weaponManager.updateWeapon(weaponsOnScreen);
 		this.towerManager.updateAvailableTower();
 		this.enemyManager.update();
 		// this.enemyModel.update();
