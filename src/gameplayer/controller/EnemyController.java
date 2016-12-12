@@ -54,7 +54,9 @@ public class EnemyController implements Observer{
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
 		if (o instanceof EnemyManager){
-			//updateEnemyViews();
+			if (((EnemyManager)o).getEnemyOnGrid().size()==0){
+				((EnemyManager)o).getData().setLevel(((EnemyManager)o).getData().getCurrentLevel()+1);
+			}
 		}
 		
 	}

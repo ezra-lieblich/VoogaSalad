@@ -98,10 +98,8 @@ public class GamePlayerController implements Observer {
 
 	private double startTime;
 	private double intervalBetweenWaves;
-
-	private KeyFrame enemyKeyFrame;
-
-	private Thread timeCounterThread;
+	
+	private Thread enemyThread;
 
 	// Might need to be refactored into a different class
 	private HashMap<Integer, ImageView> weaponsOnScreen;
@@ -357,6 +355,7 @@ public class GamePlayerController implements Observer {
 	public void update(Observable o, Object arg) {
 		if (o instanceof GamePlayData) {
 			// update level in display
+			System.out.println("LEVEL IN OBSERVABLE: "+((GamePlayData) o).getCurrentLevel());
 			this.view.updateStatsDisplay(((GamePlayData) o).getGold(), ((GamePlayData) o).getLife(),
 					((GamePlayData) o).getCurrentLevel(), ((GamePlayData) o).getScore());
 			this.view.updateCurrentLevelStats(((GamePlayData) o).getCurrentLevel());
@@ -393,59 +392,67 @@ public class GamePlayerController implements Observer {
 		spawnEnemyOnInterval(this.enemyManager,
 				this.enemyController/* , this.currentWave */);
 
-		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> {
-			((Pane) this.view.getGrid().getGrid()).getChildren().clear();
-			System.out.println("intervalbetween: " + intervalBetweenWaves);
-			System.out.println("elapse: " + (System.currentTimeMillis() - this.startTime));
-			// trying to get this to work but null pointer
-			if (System.currentTimeMillis() - this.startTime > intervalBetweenWaves && intervalBetweenWaves >= 0) {
-				System.out.println("**********************");
-
-				this.currentWave = this.model.getEnemyManager().getPackOfEnemyComing();
-
-				this.intervalBetweenWaves = this.model.getEnemyManager().getTimeOfNextWave();
-			}
-
-			this.model.updateInLevel(weaponsOnScreen);
-			this.enemyManager.update();
-			this.model.getCollisionManager().handleCollisions();
-
-			redrawEverything();
-		});
-
-		animation.setCycleCount(Timeline.INDEFINITE);
-		animation.getKeyFrames().add(frame);
-		// animation.getKeyFrames().addAll(frame, this.enemyKeyFrame);//TODO
-		animation.play();
+//		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> {
+//			((Pane) this.view.getGrid().getGrid()).getChildren().clear();
+//			//System.out.println("intervalbetween: " + intervalBetweenWaves);
+//			//System.out.println("elapse: " + (System.currentTimeMillis() - this.startTime));
+//			// trying to get this to work but null pointer
+//			if (System.currentTimeMillis() - this.startTime > intervalBetweenWaves && intervalBetweenWaves >= 0) {
+//				System.out.println("**********************");
+//
+//				this.currentWave = this.model.getEnemyManager().getPackOfEnemyComing();
+//				
+//				this.intervalBetweenWaves = this.model.getEnemyManager().getTimeOfNextWave();
+//			
+//			}
+//
+//			this.model.updateInLevel(weaponsOnScreen);
+//			this.enemyManager.update();
+//			this.model.getCollisionManager().handleCollisions();
+//
+//			redrawEverything();
+//			
+//			checkForWin();
+//		});
+//
+//		animation.setCycleCount(Timeline.INDEFINITE);
+//		animation.getKeyFrames().add(frame);
+//		// animation.getKeyFrames().addAll(frame, this.enemyKeyFrame);//TODO
+//		animation.play();
 	}
 
+	private void checkForWin(){
+		System.out.println("WIN CURRENT LEVEL: "+enemyManager.getData().getCurrentLevel());
+		if (enemyManager.getEnemyOnGrid().size()==0 && currentWave.size()==0){ //wait until enemies are all off the grid
+			enemyManager.getData().setLevel(enemyManager.getData().getCurrentLevel()+1);
+		}
+	}
+	
+	
 	private void spawnEnemyOnInterval(EnemyManager enemyManager,
 			EnemyController control/* ,Queue<Enemy> currentWave */) {
 
-		System.out.println("ENEMY THREAD");
-		Thread enemyThread = new Thread() {
-			public void run() {
-				long intervalBetween = (long) control.getEnemyModel().getFrequencyOfNextWave();
-				while (intervalBetween != 0) {
-					if (currentWave.size() != 0) {
-						System.out.println("currentWave: " + currentWave.size());
-						Enemy enemy = currentWave.poll();
-						enemyManager.spawnEnemy(enemy);
-					} else {
-
-					}
-
-					try {
-						Thread.sleep(intervalBetween);
-					} catch (InterruptedException e) {
-
-						e.printStackTrace();
-					}
-				}
-			}
-		};
-
-		enemyThread.start();
+//		Thread enemyThread = new Thread() {
+//			public void run() {
+//				long intervalBetween = (long) control.getEnemyModel().getFrequencyOfNextWave();
+//				while (intervalBetween != 0) {
+//					if (currentWave.size() != 0) {
+//						System.out.println("currentWave: " + currentWave.size());
+//						Enemy enemy = currentWave.poll();
+//						enemyManager.spawnEnemy(enemy);
+//					} 
+//					
+//					try {
+//						Thread.sleep(intervalBetween);
+//					} catch (InterruptedException e) {
+//
+//						e.printStackTrace();
+//					}
+//				}
+//			}
+//		};
+//
+//		enemyThread.start();
 
 	}
 
