@@ -120,7 +120,8 @@ public class SplashScreen {
 	        Stage mainStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
 
 			File out = filechooser.showOpenDialog(mainStage);
-			System.out.println("file name " + out.getPath());
+			String[] path = out.getPath().split("/");
+			String fileName = path[path.length-1];
 			
 		});
 		HBox hbBtn = new HBox(10);

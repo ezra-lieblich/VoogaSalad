@@ -39,6 +39,9 @@ import javafx.util.Duration;
 import statswrapper.Wrapper;
 
 import java.awt.BorderLayout;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -54,6 +57,9 @@ import java.util.Queue;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
+
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.DomDriver;
 
 public class GamePlayerController implements Observer {
 
@@ -108,12 +114,12 @@ public class GamePlayerController implements Observer {
 		this.loader = new GamePlayerFactory(new XMLParser("player.samplexml/WinEffect_FreePath_PitcforksTest.xml"));// hardcoded
 		// does not work because of the image path
 		checkIfValid();
-		this.currentWave = new LinkedList<>(); 
-		this.enemiesOnScreen = new HashMap<Integer, ImageView>();
-		this.weaponsOnScreen = new HashMap<Integer, ImageView>();
-		this.model = new GamePlayModel(this.loader, enemiesOnScreen);
-		this.enemyController = new EnemyController(this.model.getEnemyManager(), null);
-		this.weaponController = new WeaponController(this.model.getWeaponManager());
+		this.currentWave = new LinkedList<>();  //SHARED
+		this.enemiesOnScreen = new HashMap<Integer, ImageView>(); //SHARED
+		this.weaponsOnScreen = new HashMap<Integer, ImageView>(); //SHARED
+		this.model = new GamePlayModel(this.loader, enemiesOnScreen); 
+		this.enemyController = new EnemyController(this.model.getEnemyManager(), null); //SHARED
+		this.weaponController = new WeaponController(this.model.getWeaponManager()); //SHARED
 		this.collisionController = new CollisionController(this.model.getCollisionManager());
 		this.model.getData().addObserver(this);
 		this.oldLevel = 0;
@@ -125,13 +131,38 @@ public class GamePlayerController implements Observer {
 		this.imageBank = new HashMap<String, Image>();
 		createImageBank();
 		this.gameSavingController = new GameSavingController(this.model);
-		// this.gameSavingController.saveGame();
 	}
 
-	// TODO: create another constructor that takes in a ManagerMediator and
-	// LevelNumber
-	// it should use the XMLParser(ManagerMediator) constructor to create an
-	// XMLParser (aka this.loader)
+	public GamePlayerController(String savedXmlFilePath, boolean wasLoaded) {
+		File loadedFile = new File(savedXmlFilePath);
+		GamePlayData gameData;
+		try {
+			gameData = (GamePlayData) new XStream(new DomDriver()).fromXML(new FileInputStream(loadedFile));
+		} catch (FileNotFoundException e) {
+			System.out.println("File not found, please try again");
+			return;
+		}
+		this.loader = gameData.getFactory();
+		this.currentWave = new LinkedList<>();  //SHARED
+		this.enemiesOnScreen = new HashMap<Integer, ImageView>(); //SHARED
+		this.weaponsOnScreen = new HashMap<Integer, ImageView>(); //SHARED
+		this.model = new GamePlayModel(gameData, this.enemiesOnScreen);
+		this.enemyController = new EnemyController(this.model.getEnemyManager(), null); //SHARED
+		this.weaponController = new WeaponController(this.model.getWeaponManager()); //SHARED
+		this.collisionController = new CollisionController(this.model.getCollisionManager()); //SHARED
+		this.model.addObserver(this); //SHARED
+		this.oldLevel = 0;
+		if (gameData.getCurrentLevel() > 0) oldLevel = gameData.getCurrentLevel() -1;
+		this.towerToId = new HashMap<String, Integer>();
+		this.weaponsOnScreen = new HashMap<Integer, ImageView>();
+		this.animation = new Timeline();
+		this.graphics = new GraphicsLibrary();
+		this.enemyManager = this.enemyController.getEnemyModel();
+		this.imageBank = new HashMap<String, Image>();
+		createImageBank();
+		this.gameSavingController = new GameSavingController(this.model);
+		
+	}
 
 
 	private void populateTowerToId() {
@@ -169,7 +200,7 @@ public class GamePlayerController implements Observer {
 		}
 		this.towerController = new TowerController(this.model.getTowerManager(), this.view);
 		initSaveGameButton();
-
+		
 	}
 
 	/**
