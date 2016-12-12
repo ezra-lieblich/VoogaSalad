@@ -109,6 +109,19 @@ public class TowerManager extends Observable {
 	public Map<Integer,gameplayer.model.tower.Tower> getTowerOnGrid() { // fix naming
 		return this.towersOnGrid;
 	}
+	
+	
+	public void initializeTowerForLoading(){
+		Cell[][] grid = this.gameData.getGridArray();
+		for(int i = 0; i < grid.length; i++){
+			for (int j = 0; j < grid[0].length; j++){
+				Tower t = grid[i][j].getTower();
+				if(t != null){
+					this.towersOnGrid.put(t.getUniqueID(), t);
+				}
+			}
+		}
+	}
 
 	/**
 	 * 
