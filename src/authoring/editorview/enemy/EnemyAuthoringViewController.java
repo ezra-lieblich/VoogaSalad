@@ -174,7 +174,6 @@ public class EnemyAuthoringViewController extends EditorViewController
         effectAuthoringView.setAvailClasses(effectDataSource.getAvailableClasses());
         // effectAuthoringView.setAvailMethods(effectDataSource.getAvailableClassMethods(selectedClass));
         effectAuthoringView.setAvailDataObjects(effectDataSource.getAvailableDataObjects());
-        System.out.println(effectDataSource.getAvailableClasses());
         effectAuthoringView.openEffectView();
     }
 

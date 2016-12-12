@@ -63,12 +63,7 @@ public class LevelAuthoringViewController extends EditorViewController
     @Override
     public void onUserEnteredCreateLevel () {
         currentLevelID = levelDataSource.createType(levelView);
-        levelView.updateTransitionTime(levelDataSource.getTransitionTime(currentLevelID));
-        levelView.updateRewardHealth(levelDataSource.getRewardHealth(currentLevelID));
-        levelView.updateRewardMoney(levelDataSource.getRewardMoney(currentLevelID));
-        levelView.updateRewardScore(levelDataSource.getRewardScore(currentLevelID));
-        levelView.updateNameDisplay(levelDataSource.getName(currentLevelID));
-        levelView.updateWaves(levelDataSource.getWaveStrings(currentLevelID));
+        refreshView();
     }
 
     @Override
@@ -204,12 +199,19 @@ public class LevelAuthoringViewController extends EditorViewController
                 new EffectAuthoringViewController(effectDataSource);
         effectDataSource.createType(effectAuthoringView.getEffectAuthoringView());
         effectAuthoringView.setEffectOptions(effectDataSource.getCreatedTypeIds());
+        effectAuthoringView.setAvailClasses(effectDataSource.getAvailableClasses());
+        // effectAuthoringView.setAvailMethods(effectDataSource.getAvailableClassMethods(selectedClass));
+        effectAuthoringView.setAvailDataObjects(effectDataSource.getAvailableDataObjects());
         effectAuthoringView.openEffectView();
     }
 
     @Override
     public void refreshView () {
-        // TODO Auto-generated method stub
-
+        levelView.updateTransitionTime(levelDataSource.getTransitionTime(currentLevelID));
+        levelView.updateRewardHealth(levelDataSource.getRewardHealth(currentLevelID));
+        levelView.updateRewardMoney(levelDataSource.getRewardMoney(currentLevelID));
+        levelView.updateRewardScore(levelDataSource.getRewardScore(currentLevelID));
+        levelView.updateNameDisplay(levelDataSource.getName(currentLevelID));
+        levelView.updateWaves(levelDataSource.getWaveStrings(currentLevelID));
     }
 }
