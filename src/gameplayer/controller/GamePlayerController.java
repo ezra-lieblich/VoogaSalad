@@ -105,7 +105,7 @@ public class GamePlayerController implements Observer {
 
 	public GamePlayerController(String xmlFilePath) {
 		// use xml parser to create classes.
-		this.loader = new GamePlayerFactory(new XMLParser("player.samplexml/WinEffect_FreePath_PitcforksTest.xml"));// hardcoded
+		this.loader = new GamePlayerFactory(new XMLParser("player.samplexml/pray.xml"));// hardcoded
 		// does not work because of the image path
 		checkIfValid();
 		this.currentWave = new LinkedList<>(); 

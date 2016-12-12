@@ -11,15 +11,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
+import engine.effect.ReflectionException;
 import engine.observer.AbstractObservable;
 import engine.observer.ObservableMap;
 import engine.observer.ObservableMapProperty;
 
 
 
-public abstract class AbstractTypeManager<E extends Type> extends AbstractObservable<MethodData<?>>
+public abstract class AbstractTypeManager<E extends Type> extends AbstractObservable<MethodData<Object>>
         implements Manager<E> {
-    // ManagerMediator managerMediator;
+    private static final String INVALID_REFLECTION_CALL = "Invalid reflection call";
+    
     private ObservableMap<Integer, E> data;
 
     protected AbstractTypeManager () {
@@ -35,7 +37,7 @@ public abstract class AbstractTypeManager<E extends Type> extends AbstractObserv
     @Override
     public void removeEntry (int id) {
         data.remove(id);
-        notifyObservers(new MethodObjectData<Integer>("RemoveEntry", id));
+        notifyObservers(new MethodObjectData<Object>("RemoveEntry", id));
     }
 
     @Override
@@ -110,30 +112,27 @@ public abstract class AbstractTypeManager<E extends Type> extends AbstractObserv
     // TODO - error might occur due to taking in a VisitableManager
     // TODO - get specific interface
     @Override
-    public <U extends VisitableManager<MethodData<?>>> void visitManager (U visitableManager,
-                                                                          MethodData<?> dataMethod) {
+    public <U extends VisitableManager<MethodData<Object>>> void visitManager (U visitableManager,
+                                                                          MethodData<Object> dataMethod) throws ReflectionException {
         try {
             Method visitMethod =
                     this.getClass().getMethod("visit" + dataMethod.getMethod(),
                                               new Class[] { visitableManager.getClass().getInterfaces()[0], Integer.class });
             visitMethod.invoke(this, new Object[] { visitableManager, dataMethod.getValue() });
         }
-        catch (NoSuchMethodException e) {
-            // This means that the class does not depend on the visitor and so does not have the subsequent handling methods
-            System.out.print(e);
-            //return;
+        catch (NoSuchMethodException | IllegalArgumentException | InvocationTargetException e) {
+            // This means that the class does not depend on the visitor and so does not have the subsequent handling methods (Not an Error)
+            // This allows for the class to dynamically handle additional visitable objects, without having to make a method for each one in very visitor
+            return;
         }
-        catch (SecurityException | IllegalAccessException | IllegalArgumentException
-                | InvocationTargetException e) {
-            // This error should arise due to user input. TODO handle differently?
-            e.printStackTrace();
-            //return;
+        catch (SecurityException | IllegalAccessException e) {
+                throw new ReflectionException(e, INVALID_REFLECTION_CALL);
         }
     }
 
     @Override
-    public <U extends VisitorManager<MethodData<?>>> void accept (U visitor,
-                                                                  MethodData<?> methodData) {
+    public <U extends VisitorManager<MethodData<Object>>> void accept (U visitor,
+                                                                  MethodData<Object> methodData) {
         System.out.println("Here");
         visitor.visitManager(this, methodData);
     }

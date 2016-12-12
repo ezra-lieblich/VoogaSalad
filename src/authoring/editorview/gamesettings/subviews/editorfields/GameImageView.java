@@ -69,8 +69,7 @@ public class GameImageView extends PhotoFileChooser implements GameSettingsSetVi
 	public void openFileChooser(FileChooser chooseFile) throws IOException {
 		File chosenFile = chooseFile.showOpenDialog(new Stage());
 		if (chosenFile != null){
-			BufferedImage image = ImageIO.read(chosenFile) ;
-			gameImagePath = chosenFile.toURI().toString();
+			gameImagePath = chosenFile.toString();
 			delegate.onUserEnteredGameImage(gameImagePath);
 		}	
 	}

@@ -19,6 +19,7 @@ import authoring.utilityfactories.ButtonFactory;
 import authoring.utilityfactories.DialogueBoxFactory;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -45,6 +46,7 @@ public class WeaponEditorView extends PhotoFileChooser implements WeaponSetView 
     private WeaponAuthoringViewDelegate delegate;
     
     private static final double BUFFER = 10.0;
+    private int editorWidth;
 
     private ResourceBundle labelsResource;
     private File chosenFile;
@@ -67,7 +69,8 @@ public class WeaponEditorView extends PhotoFileChooser implements WeaponSetView 
                              WeaponSizeField weaponSize,
                              AddWeaponEffectView addWeaponEffect,
                              ResourceBundle labelsResource,
-                             ResourceBundle dialogueBoxResource)
+                             ResourceBundle dialogueBoxResource,
+                             int columnWidth)
         throws IOException {
         this.labelsResource = labelsResource;
         this.dialogueBoxResource = dialogueBoxResource;
@@ -78,6 +81,7 @@ public class WeaponEditorView extends PhotoFileChooser implements WeaponSetView 
         this.weaponPath = weaponPath;
         this.addWeaponEffect = addWeaponEffect;
         this.weaponSize = weaponSize;
+        this.editorWidth = columnWidth;
 
         vboxView = new VBox(10);
 
@@ -102,8 +106,7 @@ public class WeaponEditorView extends PhotoFileChooser implements WeaponSetView 
     	rootBuffer.setBorder(new Border(new BorderStroke(Color.GRAY, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(0.5))));
     	rootBuffer.setBackground(new Background(new BackgroundFill(Color.rgb(235, 235, 235), CornerRadii.EMPTY, Insets.EMPTY)));	
     	
-    	
-        vboxView.getChildren().add(ButtonFactory.makeButton(labelsResource.getString("Image"),
+    	Button changeImage = ButtonFactory.makeButton(labelsResource.getString("Image"),
                                                             e -> {
                                                                 try {
                                                                     selectFile(labelsResource
@@ -118,20 +121,14 @@ public class WeaponEditorView extends PhotoFileChooser implements WeaponSetView 
                                                                                                     dialogueBoxResource
                                                                                                             .getString("TryAgain"));
                                                                 }
-                                                            }));
+                                                            });
+    	changeImage.setPrefWidth(editorWidth - 2*((int) BUFFER));
+    	vboxView.getChildren().add(changeImage);
         vboxView.getChildren().add(weaponName.getInstanceAsNode());
-        vboxView.getChildren()
-                .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Size"),
-                                                           weaponSize.getInstanceAsNode()));
-        vboxView.getChildren()
-                .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("FireRate"),
-                                                           weaponFireRate.getInstanceAsNode()));
-        vboxView.getChildren()
-                .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Speed"),
-                                                           weaponSpeed.getInstanceAsNode()));
-        vboxView.getChildren()
-                .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Range"),
-                                                           weaponRange.getInstanceAsNode()));
+        vboxView.getChildren().add(weaponSize.getInstanceAsNode());
+        vboxView.getChildren().add(weaponFireRate.getInstanceAsNode());               
+        vboxView.getChildren().add(weaponSpeed.getInstanceAsNode());
+        vboxView.getChildren().add(weaponRange.getInstanceAsNode());
         vboxView.getChildren().add(weaponPath.getInstanceAsNode());
         vboxView.getChildren().add(addWeaponEffect.getInstanceAsNode());
     }
