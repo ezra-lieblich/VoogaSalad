@@ -3,7 +3,6 @@ package engine.settings;
 import engine.TypeInitializer;
 import engine.observer.ObservableList;
 import engine.observer.ObservableProperty;
-import engine.path.Path;
 
 public interface GameModeInitializer extends TypeInitializer {
 	ObservableList<String> getWinningConditions();

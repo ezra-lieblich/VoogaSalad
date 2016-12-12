@@ -25,6 +25,11 @@ public class PathTypeManager extends AbstractTypeManager<Path> implements PathMa
         availablePaths.addListener(listener);
     }
     
+    protected void updateActivePaths() {
+        
+    }
+    
+    
     @Override
     public List<Integer> getAvailablePaths() {
         return availablePaths.getProperty();
