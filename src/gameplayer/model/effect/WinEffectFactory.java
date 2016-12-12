@@ -1,4 +1,4 @@
-package engine.effect.player;
+package gameplayer.model.effect;
 
 import engine.effect.EffectData;
 import engine.effect.Enemy;
