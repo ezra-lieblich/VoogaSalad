@@ -6,8 +6,6 @@ import authoring.editorview.collisioneffects.EffectAuthoringView;
 import authoring.utilityfactories.DialogueBoxFactory;
 import engine.enemy.EnemyManagerController;
 import engine.level.LevelManagerController;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 
 
 /**
@@ -202,9 +200,6 @@ public class LevelAuthoringViewController extends EditorViewController
 
     @Override
     public void onUserPressedAddEffect () {
-        Stage stage = new Stage();
-        Scene myScene = effectAuthoringView.getScene();
-        stage.setScene(myScene);
-        stage.show();
+        effectAuthoringView.openEffectView();
     }
 }

@@ -8,6 +8,7 @@ import authoring.editorview.collisioneffects.subviews.EffectAvailableMethodsView
 import authoring.editorview.collisioneffects.subviews.EffectBank;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 
 
 /**
@@ -43,6 +44,13 @@ public class EffectAuthoringView implements EffectUpdateView {
 
     public Scene getScene () {
         return myScene;
+    }
+
+    public void openEffectView () {
+        Stage stage = new Stage();
+        Scene myScene = getScene();
+        stage.setScene(myScene);
+        stage.show();
     }
 
     @Override
