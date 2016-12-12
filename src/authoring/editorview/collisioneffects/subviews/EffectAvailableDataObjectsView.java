@@ -6,6 +6,11 @@ import javafx.scene.Node;
 import javafx.scene.control.ListView;
 
 
+/**
+ * 
+ * @author Kayla Schulz
+ *
+ */
 public class EffectAvailableDataObjectsView implements EffectSetView {
 
     private EffectAuthoringViewDelegate delegate;

@@ -5,6 +5,11 @@ import authoring.editorview.collisioneffects.EffectSetView;
 import javafx.scene.Node;
 
 
+/**
+ * 
+ * @author Kayla Schulz
+ *
+ */
 public class EffectDataView implements EffectSetView {
 
     private EffectAuthoringViewDelegate delegate;

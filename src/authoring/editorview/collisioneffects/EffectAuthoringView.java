@@ -6,6 +6,11 @@ import authoring.editorview.collisioneffects.subviews.EffectBank;
 import javafx.scene.layout.GridPane;
 
 
+/**
+ * 
+ * @author Kayla Schulz
+ *
+ */
 public class EffectAuthoringView implements EffectUpdateView {
 
     private GridPane effectsPane;

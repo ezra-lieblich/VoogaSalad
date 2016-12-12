@@ -1,5 +1,10 @@
 package authoring.editorview.collisioneffects;
 
+/**
+ * 
+ * @author Kayla Schulz
+ *
+ */
 public interface EffectAuthoringViewDelegate {
 
     public void onUserSelectedAvailableClass (String selectedClass);

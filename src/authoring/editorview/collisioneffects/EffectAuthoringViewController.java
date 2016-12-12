@@ -6,13 +6,18 @@ import authoring.editorview.ListDataSource;
 import engine.effect.EffectManagerController;
 
 
-public class EffectController extends EditorViewController
+/**
+ * 
+ * @author Kayla Schulz
+ *
+ */
+public class EffectAuthoringViewController extends EditorViewController
         implements EffectAuthoringViewDelegate, ListDataSource {
 
     private EffectManagerController effectsDataSource;
     private int currentEffectID;
 
-    public EffectController () {
+    public EffectAuthoringViewController () {
 
     }
 

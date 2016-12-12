@@ -4,6 +4,11 @@ import java.util.List;
 import authoring.editorview.ListDataSource;
 
 
+/**
+ * 
+ * @author Kayla Schulz
+ *
+ */
 public interface EffectUpdateView {
 
     public void createNewEffect ();

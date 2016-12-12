@@ -6,6 +6,11 @@ import javafx.scene.Node;
 import javafx.scene.control.ListView;
 
 
+/**
+ * 
+ * @author Kayla Schulz
+ *
+ */
 public class EffectAvailableMethodsView implements EffectSetView {
 
     private EffectAuthoringViewDelegate delegate;
