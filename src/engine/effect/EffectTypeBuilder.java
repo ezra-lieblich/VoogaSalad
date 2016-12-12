@@ -20,6 +20,7 @@ public class EffectTypeBuilder extends AbstractTypeBuilder<Effect, EffectBuilder
     public static final String DEFAULT_NAME = "New Enemy";
     public static final String DEFAULT_IMAGE_PATH = "Images/butterfly.png";
     public static final double DEFAULT_SIZE = 1;
+    public static final String DEFAULT_SOUND_PATH = "Music/DopeBeats.mp3";
     public static final String DEFAULT_TRIGGER_CLASS = "engine.effect.Enemy";
     public static final String DEFAULT_TRIGGER_CONDITION_GROOVY = "collider.getHealth() == 50";
     public static final String DEFAULT_EFFECT_GROOVY = "collider.setHealth(110)";
@@ -30,7 +31,7 @@ public class EffectTypeBuilder extends AbstractTypeBuilder<Effect, EffectBuilder
 
     
     public EffectTypeBuilder () {
-        super(DEFAULT_NAME, DEFAULT_IMAGE_PATH, DEFAULT_SIZE);
+        super(DEFAULT_NAME, DEFAULT_IMAGE_PATH, DEFAULT_SIZE, DEFAULT_SOUND_PATH);
     }
 
 

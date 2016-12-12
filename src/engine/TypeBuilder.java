@@ -14,6 +14,8 @@ public interface TypeBuilder<E extends Type, R extends TypeBuilder<E, R>> extend
     
     R buildId (int id);
     
+    R buildSound (String SoundPath);
+    
     R copy(E type);
 
     E build ();

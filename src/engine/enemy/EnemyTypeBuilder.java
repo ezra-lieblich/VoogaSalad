@@ -12,6 +12,8 @@ public class EnemyTypeBuilder extends AbstractTypeBuilder<Enemy, EnemyBuilder> i
     public static final String DEFAULT_NAME = "New Enemy";
     public static final String DEFAULT_IMAGE_PATH = "Images/butterfly.png";
     public static final double DEFAULT_SIZE = 1;
+    public static final String DEFAULT_SOUND_PATH = "Music/DopeBeats.mp3";
+
     public static final double DEFAULT_SPEED = 1;
     public static final double DEFAULT_HEALTH = 10;
     public static final double DEFAULT_DAMAGE = 2;
@@ -29,7 +31,7 @@ public class EnemyTypeBuilder extends AbstractTypeBuilder<Enemy, EnemyBuilder> i
 	private ObservableProperty<String> collisionEffect;
     
 	public EnemyTypeBuilder() {
-		super(DEFAULT_NAME, DEFAULT_IMAGE_PATH, DEFAULT_SIZE);
+		super(DEFAULT_NAME, DEFAULT_IMAGE_PATH, DEFAULT_SIZE, DEFAULT_SOUND_PATH);
 	}
 
 	@Override
