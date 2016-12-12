@@ -4,9 +4,11 @@ import java.io.IOException;
 import java.util.List;
 import java.util.ResourceBundle;
 import authoring.editorview.ListDataSource;
+import authoring.editorview.enemy.subviews.editorfields.DeleteEnemy;
 import authoring.editorview.weapon.subviews.WeaponEditorView;
 import authoring.editorview.weapon.subviews.WeaponImageBank;
 import authoring.editorview.weapon.subviews.editorfields.AddWeaponEffectView;
+import authoring.editorview.weapon.subviews.editorfields.DeleteWeapon;
 import authoring.editorview.weapon.subviews.editorfields.WeaponFireRateField;
 import authoring.editorview.weapon.subviews.editorfields.WeaponImageView;
 import authoring.editorview.weapon.subviews.editorfields.WeaponNameField;
@@ -38,9 +40,10 @@ public class WeaponAuthoringView implements WeaponUpdateView {
     private WeaponImageView weaponImageView;
     private WeaponSizeField weaponSizeView;
     private AddWeaponEffectView addWeaponEffect;
+    private DeleteWeapon deleteWeapon;
 
     private static final int EDITOR_WIDTH = 300;
-    
+
     private int width;
     private int height;
 
@@ -52,7 +55,6 @@ public class WeaponAuthoringView implements WeaponUpdateView {
         this.height = height;
 
         weaponView = new GridPane();
-        
 
         weaponBank = new WeaponImageBank(labelsResource);
         weaponNameView = new WeaponNameField(labelsResource);
@@ -62,38 +64,37 @@ public class WeaponAuthoringView implements WeaponUpdateView {
         weaponPathView = new WeaponPathField(labelsResource);
         weaponImageView = new WeaponImageView(labelsResource);
         weaponSizeView = new WeaponSizeField(labelsResource);
+        deleteWeapon = new DeleteWeapon(labelsResource);
 
         addWeaponEffect = new AddWeaponEffectView(labelsResource);
-		weaponEditorView =
+        weaponEditorView =
 
                 new WeaponEditorView(weaponNameView, weaponSpeedView, weaponFireRateView,
                                      weaponRangeView,
                                      weaponPathView, weaponImageView, weaponSizeView,
-                                     addWeaponEffect, labelsResource,
+                                     addWeaponEffect, deleteWeapon, labelsResource,
                                      dialogueBoxResource,
                                      EDITOR_WIDTH);
         buildView();
     }
 
-    
     private void buildView () {
 
         ColumnConstraints bankColumn = new ColumnConstraints();
         bankColumn.setMinWidth(150);
-    	
-    	ColumnConstraints editorColumn = new ColumnConstraints();
+
+        ColumnConstraints editorColumn = new ColumnConstraints();
         editorColumn.setPrefWidth(EDITOR_WIDTH);
-       
+
         ColumnConstraints previewColumn = new ColumnConstraints();
-        
-        
+
         RowConstraints fullRow = new RowConstraints();
-        
+
         fullRow.setMinHeight(700);
-        
+
         weaponView.getColumnConstraints().addAll(bankColumn, editorColumn, previewColumn);
         weaponView.getRowConstraints().add(fullRow);
-        
+
         weaponView.add(weaponBank.getInstanceAsNode(), 0, 0);
         weaponView.add(weaponEditorView.getInstanceAsNode(), 1, 0);
         weaponView.add(weaponImageView.getInstanceAsNode(), 2, 0);
@@ -116,6 +117,7 @@ public class WeaponAuthoringView implements WeaponUpdateView {
         weaponPathView.setDelegate(delegate);
         weaponSizeView.setDelegate(delegate);
         addWeaponEffect.setDelegate(delegate);
+        deleteWeapon.setDelegate(delegate);
     }
 
     @Override

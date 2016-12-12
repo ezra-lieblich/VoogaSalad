@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Observable;
-
-import engine.effect.player.GameEffect;
 import engine.tower.TowerType;
 import engine.weapon.Weapon;
 import engine.weapon.WeaponType;
@@ -14,6 +12,7 @@ import gameplayer.model.Cell;
 import gameplayer.model.GamePlayData;
 import gameplayer.model.Grid;
 import gameplayer.model.Path;
+import gameplayer.model.effect.GameEffect;
 import gameplayer.model.enemy.Enemy;
 import gameplayer.model.enemy.EnemyManager;
 import gameplayer.model.weapon.WeaponManager;

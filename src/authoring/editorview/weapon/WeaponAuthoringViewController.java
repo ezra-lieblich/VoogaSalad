@@ -116,8 +116,10 @@ public class WeaponAuthoringViewController extends EditorViewController
 
     @Override
     public void onUserPressedDeleteWeapon () {
-        // TODO Auto-generated method stub
-
+        int nextID = this.weaponView.getNearestAvailableItemID(currentWeaponID);
+        weaponDataSource.deleteType(currentWeaponID);
+        currentWeaponID = nextID;
+        this.refreshView();
     }
 
     @Override

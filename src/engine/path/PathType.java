@@ -10,7 +10,7 @@ import java.util.List;
 
 public class PathType extends AbstractType implements Path {
 
-    private ObservableProperty<String> type;
+    private ObservableProperty<PathOption> type;
     private ObservableList<Coordinate<Integer>> coordinates; 
     private ObservableProperty<Integer> gridRows;
     private ObservableProperty<Integer> gridColumns;
@@ -24,12 +24,12 @@ public class PathType extends AbstractType implements Path {
     }
     
     @Override
-    public String getType () {
+    public PathOption getType () {
         return type.getProperty();
     }
 
     @Override
-    public void setType (String type) {
+    public void setType (PathOption type) {
         this.type.setProperty(type);
     }
     
@@ -67,6 +67,11 @@ public class PathType extends AbstractType implements Path {
   public void removeCoordinate(Coordinate<Integer> coordinate) {
       coordinates.remove(coordinate);
   }
+
+@Override
+public void clearCoordinates () {
+    coordinates.clear();
+}
   
 //@Override
 //public void setCoordinates (List<Coordinate<Integer>> coordinates) {

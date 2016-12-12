@@ -1,4 +1,4 @@
-package engine.effect.player;
+package gameplayer.model.effect;
 
 /**
  * This utility provides convenience methods for dynamically calling methods and allocating classes. 

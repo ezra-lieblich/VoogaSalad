@@ -3,8 +3,8 @@ package engine.enemy;
 import engine.AbstractTypeManager;
 import engine.effect.EffectManager;
 import engine.effect.EffectManagerFactory;
-import engine.effect.player.AbstractEffectFactory;
-import engine.effect.player.CollisionEffectFactory;
+import gameplayer.model.effect.AbstractEffectFactory;
+import gameplayer.model.effect.CollisionEffectFactory;
 
 public class EnemyTypeManager extends AbstractTypeManager<Enemy> implements EnemyManager {
     

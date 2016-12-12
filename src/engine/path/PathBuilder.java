@@ -10,11 +10,11 @@ import engine.weapon.WeaponInitializer;
 
 public interface PathBuilder extends TypeBuilder<Path, PathBuilder>, BindablePath { //TODO - Add bindable interface
 
-    PathBuilder buildType (String type);
+    PathBuilder buildType (PathOption type);
 
     PathBuilder buildCoordinates (List<Coordinate<Integer>> coordinates);
     
-    //PathBuilder buildCoordinates (Coordinate<Integer>... coordinates);
+    PathBuilder buildCoordinates (Coordinate<Integer>... coordinates);
     
     PathBuilder buildGridSizeRows (Integer gridRows);
     

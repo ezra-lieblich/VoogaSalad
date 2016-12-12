@@ -3,11 +3,11 @@ package engine.level;
 import engine.AbstractTypeManager;
 import engine.effect.EffectManager;
 import engine.effect.EffectManagerFactory;
-import engine.effect.player.AbstractEffectFactory;
-import engine.effect.player.CollisionEffectFactory;
 import engine.enemy.EnemyManager;
 import engine.path.PathManager;
 import engine.settings.GameModeManager;
+import gameplayer.model.effect.AbstractEffectFactory;
+import gameplayer.model.effect.CollisionEffectFactory;
 
 
 /**

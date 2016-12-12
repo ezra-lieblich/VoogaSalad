@@ -3,9 +3,8 @@ package gameplayer.model.weapon;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Observable;
-
-import engine.effect.player.GameEffect;
 import gameplayer.model.IDrawable;
+import gameplayer.model.effect.GameEffect;
 
 public class Weapon extends Observable implements IDrawable{
 	

@@ -217,23 +217,23 @@ public class LevelAuthoringViewController extends EditorViewController
         levelView.updateWaves(levelDataSource.getWaveStrings(currentLevelID));
     }
 
-	@Override
-	public void onUserSelectedLevel(int levelID) {
-		currentLevelID = levelID;
+    @Override
+    public void onUserSelectedLevel (int levelID) {
+        currentLevelID = levelID;
         refreshView();
-	}
+    }
 
-	@Override
-	public void onUserEnteredLevelImagePath(String path) {
+    @Override
+    public void onUserEnteredLevelImagePath (String path) {
         levelDataSource.setImagePath(currentLevelID, path);
-	}
+    }
 
-	@Override
-	public ListCellData getCellDataForSubject(int id) {
+    @Override
+    public ListCellData getCellDataForSubject (int id) {
         ListCellData cellData = new ListCellData();
         cellData.setName(levelDataSource.getName(id));
         cellData.setImagePath(levelDataSource.getImagePath(id));
         cellData.setId(id);
         return cellData;
-	}
+    }
 }
