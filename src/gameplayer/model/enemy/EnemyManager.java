@@ -7,6 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Observable;
+import java.util.Observer;
 import java.util.Queue;
 
 import engine.level.wave.Wave;
@@ -21,7 +22,7 @@ import gameplayer.view.GridGUI;
 import gameplayer.view.helper.GraphicsLibrary;
 import javafx.scene.image.ImageView;
 
-public class EnemyManager extends Observable {
+public class EnemyManager extends Observable{
 
 	private Map<Integer, Enemy> enemyOnGrid; 
 	private GamePlayData gameData;
@@ -242,5 +243,6 @@ public class EnemyManager extends Observable {
 		Wave wave = this.allWaves.poll();
 		return this.gameFactory.getIndividualWaveQueue(wave, this.gameData.getCurrentLevel());
 	}
+
 
 }

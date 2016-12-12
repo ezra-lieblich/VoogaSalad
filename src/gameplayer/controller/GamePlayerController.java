@@ -92,10 +92,8 @@ public class GamePlayerController implements Observer {
 
 	private double startTime;
 	private double intervalBetweenWaves;
-
-	private KeyFrame enemyKeyFrame;
-
-	private Thread timeCounterThread;
+	
+	private Thread enemyThread;
 
 	// Might need to be refactored into a different class
 	private HashMap<Integer, ImageView> weaponsOnScreen;
@@ -371,8 +369,9 @@ public class GamePlayerController implements Observer {
 				System.out.println("**********************");
 
 				this.currentWave = this.model.getEnemyManager().getPackOfEnemyComing();
-
+				
 				this.intervalBetweenWaves = this.model.getEnemyManager().getTimeOfNextWave();
+			
 			}
 
 			this.model.updateInLevel(weaponsOnScreen);
@@ -388,11 +387,12 @@ public class GamePlayerController implements Observer {
 		animation.play();
 	}
 
+	
+	
 	private void spawnEnemyOnInterval(EnemyManager enemyManager,
 			EnemyController control/* ,Queue<Enemy> currentWave */) {
 
-		System.out.println("ENEMY THREAD");
-		Thread enemyThread = new Thread() {
+		this.enemyThread = new Thread() {
 			public void run() {
 				long intervalBetween = (long) control.getEnemyModel().getFrequencyOfNextWave();
 				while (intervalBetween != 0) {
@@ -400,12 +400,15 @@ public class GamePlayerController implements Observer {
 						System.out.println("currentWave: " + currentWave.size());
 						Enemy enemy = currentWave.poll();
 						enemyManager.spawnEnemy(enemy);
-					} else {
-
-					}
-
+					} 
 					try {
 						Thread.sleep(intervalBetween);
+						if (currentWave.size()==0){
+							this.wait();
+						}
+						if (enemyManager.getEnemyOnGrid().size()==0){ //wait until enemies are all off the grid
+							enemyManager.getData().setLevel(enemyManager.getData().getCurrentLevel()+1);
+						}
 					} catch (InterruptedException e) {
 
 						e.printStackTrace();
