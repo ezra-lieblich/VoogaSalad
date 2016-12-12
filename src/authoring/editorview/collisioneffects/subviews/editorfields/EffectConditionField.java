@@ -4,7 +4,7 @@ import java.util.ResourceBundle;
 import authoring.editorview.TextFieldView;
 import authoring.editorview.collisioneffects.EffectAuthoringViewDelegate;
 import authoring.editorview.collisioneffects.EffectSetView;
-import authoring.utilityfactories.BoxFactory;
+import authoring.utilityfactories.GridFactory;
 import authoring.utilityfactories.TextFieldFactory;
 import javafx.scene.control.TextField;
 
@@ -36,8 +36,8 @@ public class EffectConditionField extends TextFieldView implements EffectSetView
                                                        .onUserEnteredCondition(conditionField
                                                                .getText()));
         root =
-                BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Condition"),
-                                                      conditionField);
+                GridFactory.createRowWithLabelandNode(labelsResource.getString("Condition"),
+                                                      conditionField, 125);
     }
 
 }
