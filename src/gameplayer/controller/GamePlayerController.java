@@ -167,7 +167,7 @@ public class GamePlayerController implements Observer {
 		} catch (IOException e) {
 		}
 		this.towerController = new TowerController(this.model.getTowerManager(), this.view);
-		initSaveGameButton();
+		//initSaveGameButton();
 
 	}
 
@@ -202,6 +202,7 @@ public class GamePlayerController implements Observer {
 		this.view = new GameGUI(rows, cols); // just for testing, should be
 		// replaced by block above, 5
 		// rows, 5 columns
+		initSaveGameButton();
 		this.view.bindAnimationStart(e -> {
 			this.startAnimation();
 		});
