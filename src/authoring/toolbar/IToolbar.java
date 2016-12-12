@@ -15,6 +15,8 @@ public interface IToolbar {
 	
 	public void setOnPressedLoad(EventHandler<MouseEvent> e);
 	
+	public void setOnPressedPreview(EventHandler<MouseEvent> e);
+	
 	public String loadFile ();
     
 

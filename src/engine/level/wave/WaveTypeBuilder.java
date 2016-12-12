@@ -12,6 +12,8 @@ public class WaveTypeBuilder extends AbstractTypeBuilder<Wave, WaveBuilder>
     public static final String DEFAULT_NAME = "New Wave";
     public static final String DEFAULT_IMAGE_PATH = "Images/penguin.jpg";
     public static final double DEFAULT_SIZE = 1;
+    public static final String DEFAULT_SOUND_PATH = "Music/DopeBeats.mp3";
+
 
     public static final int DEFAULT_ENEMY_COUNT = 0;
     public static final int DEFAULT_ENEMY_ID = 0;
@@ -26,7 +28,7 @@ public class WaveTypeBuilder extends AbstractTypeBuilder<Wave, WaveBuilder>
     private ObservableProperty<Double> frequency;
 
     public WaveTypeBuilder () {
-        super(DEFAULT_NAME, DEFAULT_IMAGE_PATH, DEFAULT_SIZE);
+        super(DEFAULT_NAME, DEFAULT_IMAGE_PATH, DEFAULT_SIZE, DEFAULT_SOUND_PATH);
     }
 
     @Override

@@ -4,10 +4,12 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 import authoring.editorview.EditorViewController;
+import authoring.editorview.IUpdateView;
 import authoring.editorview.enemy.EnemyAuthoringViewController;
 import authoring.editorview.enemy.EnemyUpdateView;
 import authoring.editorview.gamesettings.GameSettingsAuthoringViewController;
@@ -71,11 +73,19 @@ public class AuthoringController {
 
         toolbar.setOnPressedLoad(e -> {
             loadData();// "player.samplexml/load.xml"
+            
+        toolbar.setOnPressedPreview(a -> choosePreviewLevel());
         });
 
     }
 
-    public void saveAsXMLFile () {
+    private void choosePreviewLevel() {
+    	List<Integer> possiblePaths= modelController.getModelController(GameModeManager.class).getEntity(0).getPaths();
+    	//TODO Select path options and on click call method below
+    	// createPreview(modelController.getGameData());
+	}
+
+	public void saveAsXMLFile () {
         String fileContent = this.modelController.SaveData();
         toolbar.saveFile(fileContent);
         // TODO Lucy: add api call to record game in web app
@@ -93,47 +103,50 @@ public class AuthoringController {
     public void loadData () {
         // TODO GameModeManagerController ConstructTypeProperties is empty because it needs methods
         // to call in front end.
-        // TODO Creates a null pointer exception currently. Also need controllers instead of
-        // Views!!!!
-        String filePath = toolbar.loadFile();
+                String filePath = toolbar.loadFile();
 
         try {
             GameAuthoringData data = modelController.loadData(filePath);
 
             modelController.getModelController(EnemyManagerController.class)
                     .loadManagerData(data.getManagerMediator().getManager(EnemyManager.class),
-                                     (EnemyUpdateView) viewController.getControllers().get("enemy")
-                                             .getUpdateView());
-
+                                     (EnemyUpdateView) getUpdateView("enemy"));
             modelController.getModelController(TowerManagerController.class)
                     .loadManagerData(data.getManagerMediator().getManager(TowerManager.class),
-                                     (TowerUpdateView) viewController.getControllers().get("tower")
-                                             .getUpdateView());
+                                     (TowerUpdateView) getUpdateView("tower"));
             modelController.getModelController(WeaponManagerController.class)
                     .loadManagerData(data.getManagerMediator().getManager(WeaponManager.class),
-                                     (WeaponUpdateView) viewController.getControllers()
-                                             .get("weapon").getUpdateView());
+                                     (WeaponUpdateView) getUpdateView("weapon"));
             modelController.getModelController(PathManagerController.class)
                     .loadManagerData(data.getManagerMediator().getManager(PathManager.class),
-                                     (PathUpdateView) viewController.getControllers().get("path")
-                                             .getUpdateView());
+                                     (PathUpdateView) getUpdateView("path"));
             modelController.getModelController(LevelManagerController.class)
                     .loadManagerData(data.getManagerMediator().getManager(LevelManager.class),
-                                     (LevelUpdateView) viewController.getControllers().get("level")
-                                             .getUpdateView());
+                                     (LevelUpdateView) getUpdateView("level"));
             modelController.getModelController(GameModeManagerController.class)
                     .loadManagerData(data.getManagerMediator().getManager(GameModeManager.class),
-                                     (GameSettingsUpdateView) viewController.getControllers()
-                                             .get("setup").getUpdateView());
+                                     (GameSettingsUpdateView) getUpdateView("setup"));
+            refreshViews();
 
         }
         catch (Exception e) {
+        	System.out.print(e);
             Alert errorDialogueBox = DialogueBoxFactory.createErrorDialogueBox("Error With File",
                                                                                "This file could not be loaded.");
         }
     }
 
-    private String xmlToString (String textContent) throws IOException {
+    private void refreshViews() {
+    	for (EditorViewController view : viewController.getControllers().values()) {
+    		view.refreshView();
+    	}
+	}
+    
+    private IUpdateView getUpdateView(String key) {
+    	return viewController.getController(key).getUpdateView();
+    }
+
+	private String xmlToString (String textContent) throws IOException {
         BufferedReader br = new BufferedReader(new StringReader(textContent));
         String line;
         StringBuilder sb = new StringBuilder();

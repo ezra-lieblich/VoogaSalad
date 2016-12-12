@@ -76,6 +76,11 @@ public class ModelAuthoringController implements ModelController {
 			return null;
 		}
 	}
+
+	@Override
+	public GameData getGameData() {
+		return gameData;
+	}
     
 //    public void testXML() {
 //        String xml = Serializer.toXML(gameData);
