@@ -115,6 +115,7 @@ public class GamePlayerFactory{
 		 */
 
 		if(pathType.equals("Free")){
+			System.out.println("Paths list in game mode" +authoringFileReader.getGameMode().getPaths().size());
 			List<Integer> hardCodedPathIDs = new ArrayList<Integer>();
 			hardCodedPathIDs.add(0);
 			for (Integer index : hardCodedPathIDs) {
