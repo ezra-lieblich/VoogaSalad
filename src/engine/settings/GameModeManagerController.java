@@ -4,6 +4,7 @@ import java.util.List;
 
 import authoring.editorview.gamesettings.GameSettingsUpdateView;
 import engine.ManagerController;
+import engine.effect.EffectManagerController;
 
 public interface GameModeManagerController extends ManagerController<GameModeManager, GameModeBuilder, GameMode, GameSettingsUpdateView>{
 		
@@ -40,4 +41,7 @@ public interface GameModeManagerController extends ManagerController<GameModeMan
     public void removePath(int gameModeID, int pathID);
     
     public List<Integer> getPaths(int gameModeID);
+    
+    public EffectManagerController getEffectManagerController ();
+
 }
