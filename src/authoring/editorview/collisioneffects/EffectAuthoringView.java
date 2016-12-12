@@ -53,7 +53,6 @@ public class EffectAuthoringView implements EffectUpdateView {
 
     public void openEffectView () {
         Stage stage = new Stage();
-        // setDelegate(); this needs to be controller
         Scene myScene = getScene();
         stage.setScene(myScene);
         stage.show();
@@ -101,8 +100,7 @@ public class EffectAuthoringView implements EffectUpdateView {
 
     @Override
     public void updateListedAvailableClasses (List<String> availClasses) {
-        // TODO Auto-generated method stub
-
+        // effectAvailClasses.updateBank(availClasses);
     }
 
     @Override
