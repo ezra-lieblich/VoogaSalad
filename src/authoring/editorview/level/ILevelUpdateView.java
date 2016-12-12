@@ -3,7 +3,6 @@ package authoring.editorview.level;
 import java.util.List;
 import authoring.editorview.IUpdateView;
 import authoring.editorview.ListDataSource;
-import engine.level.wave.Wave;
 import engine.level.wave.WaveString;
 
 

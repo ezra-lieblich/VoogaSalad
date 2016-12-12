@@ -23,18 +23,20 @@ public interface LevelAuthoringViewDelegate {
 
     public void onUserEnteredTransitionTime (String time);
 
-    public void onUserEnteredEnemyFrequency (String frequency);
+    // WAVE
 
     public void onUserEnteredAddWave ();
 
-    public void onUserEnteredRemoveWave (int waveID);
+    public void onUserEnteredRemoveWave (String waveID);
 
-    public void onUserEnteredEnemy (int enemyID);
+    public void onUserEnteredEnemyFrequency (String waveID, String frequency);
 
-    public void onUserEnteredNumofEnemies (String numEnemies);
+    public void onUserEnteredEnemy (String waveID, String enemyID);
 
-    public void onUserEnteredSpawnPoint (String spawnPoint);
+    public void onUserEnteredNumofEnemies (String waveID, String numEnemies);
 
-    public void onUserEnteredWaveTimeDelay (String timeDelay);
+    public void onUserEnteredSpawnPoint (String waveID, String spawnPoint);
+
+    public void onUserEnteredWaveTimeDelay (String waveID, String timeDelay);
 
 }
