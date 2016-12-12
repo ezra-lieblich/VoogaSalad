@@ -127,12 +127,13 @@ public class GamePlayerFactory{
 				System.out.println("coordinates size: " + coordinates.size());
 				ArrayList<Cell> cells = new ArrayList<Cell>();
 				coordinates.forEach(c -> {
-					Cell currCell = new Cell(c.getX(), c.getY());
+					Cell currCell = levelGrid.getCell(c.getX(), c.getY());
 					cells.add(currCell);
 				});
 				levelGrid.setNoPath(true);
 				levelGrid.setStart(cells.get(0));
-				levelGrid.setEnd(cells.get(1));
+				levelGrid.setEnd(levelGrid.getCell(7, 3));
+				//levelGrid.setEnd(cells.get(1));
 				//gameplayer.model.Path newPath = new gameplayer.model.Path(cells, levelGrid.getGrid());
 				//allPaths.put(index, newPath);
 			}
