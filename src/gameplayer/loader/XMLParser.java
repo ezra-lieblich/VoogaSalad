@@ -51,7 +51,6 @@ import engine.weapon.WeaponTypeManager;
 import engine.GameAuthoringData;
 import engine.ManagerMediator;
 import engine.ManagerTypeMediator;
-import engine.effect.EffectManager;
 
 
 
@@ -72,14 +71,9 @@ public class XMLParser {
 		gameManager = getGameManager(xmlFilename);
 	}
 	
-	public XMLParser(ManagerMediator manager) {
-		gameManager = manager;
-	}
-	
 	private ManagerMediator getGameManager(String xmlFilename) {
 		try {
 			File xmlFile = new File(xmlFilename);
-			//System.out.println("The file exists: "+xmlFile);
 			GameAuthoringData data = (GameAuthoringData) serializer.fromXML(new FileInputStream(xmlFile));
 			return data.getManagerMediator();
 			
@@ -127,12 +121,6 @@ public class XMLParser {
 	
 	protected PathManager getPathManager() {
 		return gameManager.getManager(PathManager.class);
-	}
-	
-	protected EffectManager getWeaponEffectManager() {
-    	WeaponManager weaponManager = gameManager.getManager(WeaponManager.class);
-    	return weaponManager.getWeaponEffectManager();
-
 	}
 	
 	
