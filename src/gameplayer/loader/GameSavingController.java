@@ -35,7 +35,7 @@ public class GameSavingController {
 	}
 	
 	public void saveGame() {
-		String dirName = "src/newGame" + counter+ ".xml";
+		String dirName = "SavedGames/newGame" + counter+ ".xml";
 		counter += 1;
 		File newFile = new File(dirName);
 		String content = toPrettyXML();

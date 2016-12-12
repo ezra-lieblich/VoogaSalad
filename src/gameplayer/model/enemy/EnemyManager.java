@@ -74,6 +74,11 @@ public class EnemyManager extends Observable {
 		return this.noMoreWave;
 	}
 
+	public void setNoMoreWave(){
+		this.noMoreWave = true;
+		setChanged();
+		notifyObservers();
+	}
 	/*
 	public void setCurrentCell(Cell cell) {
 		this.current = cell;
@@ -226,10 +231,7 @@ public class EnemyManager extends Observable {
 	
 	public Queue<Enemy> getPackOfEnemyComing() {
 		if (allWaves.isEmpty()) {
-			if(this.enemyOnGrid.size() == 0){
-				this.gameData.setLevel(this.gameData.getCurrentLevel() + 1);
-			}
-			this.noMoreWave = true;
+			this.setNoMoreWave();
 			//System.out.println("ALL WAVES IS EMPTY");
 			return new LinkedList<Enemy>();
 		}

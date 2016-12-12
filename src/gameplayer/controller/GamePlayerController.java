@@ -110,8 +110,9 @@ public class GamePlayerController implements Observer {
 	private HashMap<String, Image> imageBank;
 
 	public GamePlayerController(String xmlFilePath) {
+		System.out.println(xmlFilePath);
 		// use xml parser to create classes.
-		this.loader = new GamePlayerFactory(new XMLParser("player.samplexml/WinEffect_FreePath_PitcforksTest.xml"));// hardcoded
+		this.loader = new GamePlayerFactory(new XMLParser(/*"player.samplexml/"+*/xmlFilePath));// hardcoded
 		// does not work because of the image path
 		checkIfValid();
 		this.currentWave = new LinkedList<>();  //SHARED
@@ -131,6 +132,7 @@ public class GamePlayerController implements Observer {
 		this.imageBank = new HashMap<String, Image>();
 		createImageBank();
 		this.gameSavingController = new GameSavingController(this.model);
+		//this.gameSavingController.saveGame();
 	}
 
 	public GamePlayerController(String savedXmlFilePath, boolean wasLoaded) {
@@ -163,7 +165,6 @@ public class GamePlayerController implements Observer {
 		this.gameSavingController = new GameSavingController(this.model);
 		
 	}
-
 
 	private void populateTowerToId() {
 		HashMap<Integer, engine.tower.Tower> mapping = this.model.getTowerManager().getAvailableTower();
@@ -200,7 +201,6 @@ public class GamePlayerController implements Observer {
 		}
 		this.towerController = new TowerController(this.model.getTowerManager(), this.view);
 		initSaveGameButton();
-		
 	}
 
 	/**
@@ -234,6 +234,7 @@ public class GamePlayerController implements Observer {
 		this.view = new GameGUI(rows, cols); // just for testing, should be
 		// replaced by block above, 5
 		// rows, 5 columns
+		initSaveGameButton();
 		this.view.bindAnimationStart(e -> {
 			this.startAnimation();
 		});
@@ -308,23 +309,12 @@ public class GamePlayerController implements Observer {
 	}
 
 	private void gameOver() {
+		endCondition("http://people.duke.edu/~lz107/voogaTemplates/gameover.html");
 
-		// System.out.println("Game Over called");
-		// log end score
-		try {
-			Wrapper.getInstance().logEndScore("" + this.model.getData().getGold(), "" + this.model.getData().getLife(),
-					"" + this.model.getData().getCurrentLevel());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			System.out.println("Log end score went wrong");
-			e.printStackTrace();
-		}
-		this.view.getMainScreen().getChildren().clear();
-		WebView browser = new WebView();
-		WebEngine webEngine = browser.getEngine();
-		webEngine.load("http://people.duke.edu/~lz107/voogaTemplates/gameover.html");
-		this.view.getMainScreen().setCenter(browser);
-
+	}
+	
+	private void winGame(){
+		endCondition("http://people.duke.edu/~lz107/voogaTemplates/win.html");
 	}
 
 	private void checkCreateNewLevel() {
@@ -344,8 +334,23 @@ public class GamePlayerController implements Observer {
 				this.model.initializeLevelInfo();
 
 			});
-
 		}
+	}
+
+	private void endCondition(String url) {
+		try {
+			Wrapper.getInstance().logEndScore("" + this.model.getData().getGold(), "" + this.model.getData().getLife(),
+					"" + this.model.getData().getCurrentLevel());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			System.out.println("Log end score went wrong");
+			e.printStackTrace();
+		}
+		this.view.getMainScreen().getChildren().clear();
+		WebView browser = new WebView();
+		WebEngine webEngine = browser.getEngine();
+		webEngine.load(url);
+		this.view.getMainScreen().setCenter(browser);
 	}
 
 	@Override
@@ -359,6 +364,10 @@ public class GamePlayerController implements Observer {
 			// check for game over condition
 			if (((GamePlayData) o).getLife() <= 0) {
 				gameOver();
+			}
+			
+			if (((GamePlayData) o).won()){
+				winGame();
 			}
 
 			checkCreateNewLevel();
@@ -386,17 +395,17 @@ public class GamePlayerController implements Observer {
 
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> {
 			((Pane) this.view.getGrid().getGrid()).getChildren().clear();
-			System.out.println("intervalbetween: "+intervalBetweenWaves);
-			System.out.println("elapse: "+(System.currentTimeMillis()-this.startTime));
+			System.out.println("intervalbetween: " + intervalBetweenWaves);
+			System.out.println("elapse: " + (System.currentTimeMillis() - this.startTime));
 			// trying to get this to work but null pointer
-			if(System.currentTimeMillis()-this.startTime>intervalBetweenWaves&&intervalBetweenWaves>=0){
+			if (System.currentTimeMillis() - this.startTime > intervalBetweenWaves && intervalBetweenWaves >= 0) {
 				System.out.println("**********************");
-				
+
 				this.currentWave = this.model.getEnemyManager().getPackOfEnemyComing();
-				
-				this.intervalBetweenWaves=this.model.getEnemyManager().getTimeOfNextWave();
+
+				this.intervalBetweenWaves = this.model.getEnemyManager().getTimeOfNextWave();
 			}
-			
+
 			this.model.updateInLevel(weaponsOnScreen);
 			this.enemyManager.update();
 			this.model.getCollisionManager().handleCollisions();
@@ -417,20 +426,19 @@ public class GamePlayerController implements Observer {
 		Thread enemyThread = new Thread() {
 			public void run() {
 				long intervalBetween = (long) control.getEnemyModel().getFrequencyOfNextWave();
-				while (intervalBetween!=0) {
-					if(currentWave.size()!=0){
-						System.out.println("currentWave: "+currentWave.size());
+				while (intervalBetween != 0) {
+					if (currentWave.size() != 0) {
+						System.out.println("currentWave: " + currentWave.size());
 						Enemy enemy = currentWave.poll();
 						enemyManager.spawnEnemy(enemy);
+					} else {
+
 					}
-					else{	
-						
-					}
-											
+
 					try {
 						Thread.sleep(intervalBetween);
 					} catch (InterruptedException e) {
-						
+
 						e.printStackTrace();
 					}
 				}
@@ -462,15 +470,21 @@ public class GamePlayerController implements Observer {
 		return this.animation;
 	}
 
-	private void updateBulletOnScreen(HashMap<Integer, Weapon> bulletRedraw) {
-		Iterator<Integer> it = weaponsOnScreen.keySet().iterator();
+	
+	
+	private void removeValFromMap(Map<Integer, ?> map, Iterator<Integer> it){
 		while (it.hasNext()) {
 			int value = it.next();
-			if (!bulletRedraw.containsKey(value)) {
+			if (!map.containsKey(value)) {
 				it.remove();
 			}
 		}
+	}
 
+	private void updateBulletOnScreen(HashMap<Integer, Weapon> bulletRedraw) {
+		
+		Iterator<Integer> it = weaponsOnScreen.keySet().iterator();
+		removeValFromMap(bulletRedraw, it);
 		for (int i : bulletRedraw.keySet()) {
 			if (!weaponsOnScreen.containsKey(bulletRedraw.get(i).getUniqueID())) {
 				Image ii = imageBank.get("Weapon " + bulletRedraw.get(i).getWeaponTypeID());
@@ -492,15 +506,9 @@ public class GamePlayerController implements Observer {
 	}
 
 	private void updateEnemiesOnScreen(HashMap<Integer, Enemy> enemyRedraw) {
-		//might fix later
+		// might fix later
 		Iterator<Integer> it = enemiesOnScreen.keySet().iterator();
-		while (it.hasNext()) {
-			int value = it.next();
-			if (!enemyRedraw.containsKey(value)) {
-				it.remove();
-			}
-		}
-		
+		removeValFromMap(enemyRedraw, it);
 		for (int i : enemyRedraw.keySet()) {
 			if (!enemiesOnScreen.containsKey(enemyRedraw.get(i).getUniqueID())) {
 				ImageView image = new ImageView(graphics.createImage(enemyRedraw.get(i).getImage()));
@@ -517,6 +525,25 @@ public class GamePlayerController implements Observer {
 			}
 		}
 	}
+	/*
+	private void redraw(HashMap<Integer, ?> enemyRedraw){
+		for (int i : enemyRedraw.keySet()) {
+			if (!enemiesOnScreen.containsKey(enemyRedraw.get(i).getUniqueID())) {
+				ImageView image = new ImageView(graphics.createImage(enemyRedraw.get(i).getImage()));
+				graphics.setImageViewParams(image, DragDropView.DEFENSIVEWIDTH * 0.9,
+						DragDropView.DEFENSIVEHEIGHT * 0.9);
+				image.setCache(true);
+				image.setCacheHint(CacheHint.SPEED);
+				image.setX(enemyRedraw.get(i).getX());
+				image.setY(enemyRedraw.get(i).getY());
+				enemiesOnScreen.put(enemyRedraw.get(i).getUniqueID(), image);
+			} else {
+				enemiesOnScreen.get(enemyRedraw.get(i).getUniqueID()).setX(enemyRedraw.get(i).getX());
+				enemiesOnScreen.get(enemyRedraw.get(i).getUniqueID()).setY(enemyRedraw.get(i).getY());
+			}
+		}
+	}
+	*/
 
 	public HashMap<String, Image> createImageBank() {
 		Map<Integer, engine.tower.Tower> towers = this.loader.getTowers();

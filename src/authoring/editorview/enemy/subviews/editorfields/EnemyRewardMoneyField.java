@@ -4,7 +4,7 @@ import java.util.ResourceBundle;
 import authoring.editorview.TextFieldView;
 import authoring.editorview.enemy.EnemyAuthoringViewDelegate;
 import authoring.editorview.enemy.EnemySetView;
-import authoring.utilityfactories.BoxFactory;
+import authoring.utilityfactories.GridFactory;
 import authoring.utilityfactories.TextFieldFactory;
 import javafx.scene.Node;
 import javafx.scene.control.TextField;
@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 
 public class EnemyRewardMoneyField extends TextFieldView implements EnemySetView {
 
+	
     private EnemyAuthoringViewDelegate delegate;
     private TextField enemyRewardMoneyField;
 
@@ -26,7 +27,7 @@ public class EnemyRewardMoneyField extends TextFieldView implements EnemySetView
 
     @Override
     public Node getInstanceAsNode () {
-        return hbox;
+        return root;
     }
 
     @Override
@@ -41,9 +42,12 @@ public class EnemyRewardMoneyField extends TextFieldView implements EnemySetView
                                                e -> delegate
                                                        .onUserEnteredEnemyMoney(enemyRewardMoneyField
                                                                .getText()));
-        hbox =
-                BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("RewardMoney"),
-                                                      enemyRewardMoneyField);
+        enemyRewardMoneyField.setPrefWidth(110);
+        root = GridFactory.createRowWithLabelandNode(
+        		labelsResource.getString("RewardMoney"),
+        		enemyRewardMoneyField, 
+        		170);
+               
     }
 
 }

@@ -1,11 +1,13 @@
 package engine.path;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
 import engine.AbstractTypeManager;
 import engine.ManagerMediator;
 import engine.observer.ObservableList;
+import engine.observer.ObservableListProperty;
 import engine.settings.GameModeManager;
 import engine.weapon.WeaponManager;
 
@@ -13,11 +15,16 @@ public class PathTypeManager extends AbstractTypeManager<Path> implements PathMa
         
     private ObservableList<Integer> availablePaths;
     
-    public void visitEditPath(GameModeManager manager, Integer index) {
+    PathTypeManager() {
+        availablePaths = new ObservableListProperty<Integer>();
+    }
+    
+    public void visitGridSize(GameModeManager manager, Integer index) {
         availablePaths.setProperty(getEntities().values().stream()
-                                   .filter(a -> a.getType().equals(manager.getEntity(index).getGameType()) && a.getGridRows() == manager.getEntity(index).getGridSize() && a.getGridColumns()==(manager.getEntity(index).getGridSize()))
+                                   .filter(a -> a.getType().equals(manager.getEntity(index).getPathType()) && a.getGridRows() == manager.getEntity(index).getGridSize() && a.getGridColumns()==(manager.getEntity(index).getGridSize()))
                                    .map(Path::getId)
                                    .collect(Collectors.toList()));  
+        System.out.println("HERERER");
     }
     
     @Override 

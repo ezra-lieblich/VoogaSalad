@@ -1,4 +1,4 @@
-package authoring.editorview.level.subviews;
+package authoring.editorview.level.subviews.editorfields;
 
 import java.util.ResourceBundle;
 import authoring.editorview.EditorNameView;
