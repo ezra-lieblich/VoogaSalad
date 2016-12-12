@@ -63,7 +63,7 @@ public class GamePathDimensionsView implements IGameSettingsSetView {
 	private void submitGridDimensions(String gridDimensionsString){
 		try {
 			dimensions = Integer.parseInt(gridDimensionsString);
-			delegate.onUserEnteredGridSize(getGridDimensions());
+			delegate.onUserEnteredGameGridSize(getGridDimensions());
 		}
 		catch (NumberFormatException e){
 			setGridDimensions(dimensions);

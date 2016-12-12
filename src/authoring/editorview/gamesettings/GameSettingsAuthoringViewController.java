@@ -1,6 +1,7 @@
 package authoring.editorview.gamesettings;
 
 import authoring.editorview.EditorViewController;
+import engine.path.PathManagerController;
 import engine.settings.GameModeManagerController;
 
 
@@ -9,6 +10,7 @@ public class GameSettingsAuthoringViewController extends EditorViewController
 
     private IGameSettingsUpdateView gameView;
     private GameModeManagerController gameSettingsDataSource;
+    private PathManagerController pathDataSource;
     private int activeID = 0;
 
     public GameSettingsAuthoringViewController (int editorWidth, int editorHeight) {
@@ -17,8 +19,10 @@ public class GameSettingsAuthoringViewController extends EditorViewController
         this.view = gameView;
     }
 
-    public void setGameSettingsDataSource (GameModeManagerController source) {
+    public void setGameSettingsDataSource (GameModeManagerController source, 
+									       PathManagerController pathSource) {
         this.gameSettingsDataSource = source;
+        this.pathDataSource = pathSource;
         this.gameSettingsDataSource.addTypeBankListener(this.gameView);
         createNewGame();
     }
@@ -43,7 +47,7 @@ public class GameSettingsAuthoringViewController extends EditorViewController
     
 
     @Override
-    public void onUserEnteredGameNames (String name) {
+    public void onUserEnteredGameName (String name) {
         this.gameSettingsDataSource.setName(activeID, name);
 
     }
@@ -61,24 +65,40 @@ public class GameSettingsAuthoringViewController extends EditorViewController
     }
 
     @Override
-	public void onUserEnteredGridSize(int size) {
-		// TODO Auto-generated method stub
-		
-	}
-
-    @Override
     public void onUserEnteredWinningConditions (String winConditions) {
-        //TODO
+        this.gameSettingsDataSource.addWinningCondition(activeID, winConditions);
 
     }
 
     @Override
     public void onUserEnteredLosingConditions (String loseConditions) {
-        // TODO Auto-generated method stub
+        this.gameSettingsDataSource.addLosingCondition(activeID, loseConditions);
 
     }
 
-	
+	@Override
+	public String getPathName(int pathID) {
+		return this.pathDataSource.getName(pathID);
+		
+	}
+
+	@Override
+	public void onUserEnteredGameGridSize(int size) {
+		this.gameSettingsDataSource.setGridSize(activeID, size);
+		
+	}
+
+	@Override
+	public void onUserEnteredGamePathType(String type) {
+		this.gameSettingsDataSource.setPathType(activeID, type);
+		
+	}
+
+	@Override
+	public void onUserEnteredPath(int pathID) {
+		this.gameSettingsDataSource.addPath(activeID, pathID);
+		
+	}
 
     
 }

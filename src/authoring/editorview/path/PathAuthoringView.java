@@ -56,11 +56,6 @@ public class PathAuthoringView implements IPathUpdateView {
     	pathBank.setDelegate(delegate);
     }
 
-    @Override
-    public void updateActiveID (int pathID) {
-        pathEditor.updateActiveID(pathID);
-    }
-
     
     private void buildView () {
 

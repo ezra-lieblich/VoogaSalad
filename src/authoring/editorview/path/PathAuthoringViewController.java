@@ -52,14 +52,12 @@ public class PathAuthoringViewController extends EditorViewController
 	@Override
 	public void onUserEnteredCreatePath() {
 		activeID = pathDataSource.createType(pathView);	
-		pathView.updateActiveID(activeID);
 		onUserEnteredEditPath(activeID);
 	}
 
 	@Override
 	public void onUserEnteredEditPath(int pathID) {
 		activeID = pathID;
-		pathView.updateActiveID(activeID);
 		pathView.updateImagePathDisplay(pathDataSource.getImagePath(activeID));
 		pathView.updateGridDimensions(pathDataSource.getNumberofRows(activeID));	
 		pathView.updatePathCoordinates(pathDataSource.getPathCoordinates(activeID));		

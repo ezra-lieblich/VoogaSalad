@@ -46,9 +46,8 @@ public class GameLosingConditionsView implements IGameSettingsSetView{
 		
 	}
 
-	private Object setLosingCondition(String string) {
-		// TODO Auto-generated method stub
-		return null;
+	private void setLosingCondition(String string) {
+		delegate.onUserEnteredLosingConditions(string);;
 	}
 
 }

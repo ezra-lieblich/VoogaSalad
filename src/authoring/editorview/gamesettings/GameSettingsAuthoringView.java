@@ -84,9 +84,11 @@ public class GameSettingsAuthoringView implements IGameSettingsUpdateView, IGame
 		gameSettingsEditor.updateInitialMoney(money);
 	}
 
+    
+    
     @Override
     public void updateWinningConditions (List<String> winningConditions) {
-        // TODO Auto-generated method stub
+    	
 
     }
 
@@ -100,9 +102,6 @@ public class GameSettingsAuthoringView implements IGameSettingsUpdateView, IGame
     	// TODO ?
     }
 
-   
-
-    
     @Override
     public void updateSizeDisplay (double size) {
     }
@@ -129,13 +128,11 @@ public class GameSettingsAuthoringView implements IGameSettingsUpdateView, IGame
 
 	@Override
 	public void updatePathType(String pathType) {
-		// TODO Auto-generated method stub
-		
+		gameSettingsEditor.updatePathType(pathType);
 	}
 
 	@Override
 	public Integer getNearestAvailableItemID(int id) {
-		System.out.println("No game settings bank implemented");
 		return null;
 	}
 
