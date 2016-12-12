@@ -60,8 +60,8 @@ public class FileAggregator {
 	}
 	
 	public File createGameFolder(String gameName, File xml){
-		File gameDirectory
-		
+//		File gameDirectory
+		return null;
 	}
 	
 	private File generateImagesFolder(){

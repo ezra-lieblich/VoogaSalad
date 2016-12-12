@@ -11,6 +11,7 @@ import authoring.utilityfactories.ButtonFactory;
 import engine.level.wave.Wave;
 import engine.level.wave.WaveString;
 import authoring.editorview.ListDataSource;
+import authoring.editorview.level.subviews.AddLevelEffectView;
 import authoring.editorview.level.subviews.CreateNewLevelView;
 import authoring.editorview.level.subviews.WaveTableView;
 import javafx.scene.Node;
@@ -35,6 +36,8 @@ public class LevelAuthoringView implements LevelUpdateView {
     private PreviewLevelView previewLevelView;
     private LevelTransitionTimeField transitionTimeField;
     private WaveTableView waveTableView;
+    private AddLevelEffectView addLevelEffect;
+
     private ResourceBundle levelsResource =
             ResourceBundle.getBundle("resources/GameAuthoringLevels");
 
@@ -47,6 +50,7 @@ public class LevelAuthoringView implements LevelUpdateView {
         this.transitionTimeField = new LevelTransitionTimeField(levelsResource);
         this.waveTableView = new WaveTableView(levelsResource, width);
         this.previewLevelView = new PreviewLevelView();
+        this.addLevelEffect = new AddLevelEffectView(levelsResource);
         setLevelView();
     }
 
@@ -64,6 +68,7 @@ public class LevelAuthoringView implements LevelUpdateView {
         createNewLevelView.setDelegate(delegate);
         transitionTimeField.setDelegate(delegate);
         waveTableView.setDelegate(delegate);
+        addLevelEffect.setDelegate(delegate);
     }
 
     private void setLevelView () {
@@ -73,6 +78,7 @@ public class LevelAuthoringView implements LevelUpdateView {
                                   levelNameView.getInstanceAsNode(),
                                   levelRewardsView.getInstanceAsNode(),
                                   transitionTimeField.getInstanceAsNode(),
+                                  addLevelEffect.getInstanceAsNode(),
                                   ButtonFactory.makeButton("New Wave",
                                                            e -> delegate.onUserEnteredAddWave()),
                                   previewLevelView.getInstanceAsNode(),

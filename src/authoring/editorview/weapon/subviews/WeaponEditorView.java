@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 import authoring.editorview.PhotoFileChooser;
 import authoring.editorview.weapon.WeaponSetView;
 import authoring.editorview.weapon.WeaponAuthoringViewDelegate;
+import authoring.editorview.weapon.subviews.editorfields.AddWeaponEffectView;
 import authoring.editorview.weapon.subviews.editorfields.WeaponFireRateField;
 import authoring.editorview.weapon.subviews.editorfields.WeaponImageView;
 import authoring.editorview.weapon.subviews.editorfields.WeaponNameField;
@@ -53,6 +54,7 @@ public class WeaponEditorView extends PhotoFileChooser implements WeaponSetView 
     private WeaponRangeField weaponRange;
     private WeaponPathField weaponPath;
     private WeaponSizeField weaponSize;
+    private AddWeaponEffectView addWeaponEffect;
 
     private ResourceBundle dialogueBoxResource;
 
@@ -63,6 +65,7 @@ public class WeaponEditorView extends PhotoFileChooser implements WeaponSetView 
                              WeaponPathField weaponPath,
                              WeaponImageView weaponImage,
                              WeaponSizeField weaponSize,
+                             AddWeaponEffectView addWeaponEffect,
                              ResourceBundle labelsResource,
                              ResourceBundle dialogueBoxResource)
         throws IOException {
@@ -73,7 +76,7 @@ public class WeaponEditorView extends PhotoFileChooser implements WeaponSetView 
         this.weaponFireRate = weaponFireRate;
         this.weaponRange = weaponRange;
         this.weaponPath = weaponPath;
-
+        this.addWeaponEffect = addWeaponEffect;
         this.weaponSize = weaponSize;
 
         vboxView = new VBox(10);
@@ -130,6 +133,7 @@ public class WeaponEditorView extends PhotoFileChooser implements WeaponSetView 
                 .add(BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Range"),
                                                            weaponRange.getInstanceAsNode()));
         vboxView.getChildren().add(weaponPath.getInstanceAsNode());
+        vboxView.getChildren().add(addWeaponEffect.getInstanceAsNode());
     }
 
     @Override
