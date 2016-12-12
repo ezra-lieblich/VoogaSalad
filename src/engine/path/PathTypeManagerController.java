@@ -2,6 +2,7 @@ package engine.path;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 import authoring.editorview.IUpdateView;
 import authoring.editorview.path.PathSetView;
@@ -84,6 +85,10 @@ public class PathTypeManagerController
     
     @Override
     public void setSquareGridDimensions (int pathID, int size) {
+        if(size < getTypeManager().getEntity(pathID).getGridRows()) {
+            getTypeManager().getEntity(pathID).getCoordinates().clear();
+        }
+
         setNumberofColumns(pathID, size);
         setNumberofRows(pathID, size);
     }
@@ -120,4 +125,7 @@ public class PathTypeManagerController
                         .updateGridDimensions(newValue));
     }
 
+    public void addAvailablePathListener(Consumer<List<Integer>> listener) {
+        getTypeManager().addAvailablePathListener((oldValue, newValue) -> listener.accept(newValue));
+    }
 }
