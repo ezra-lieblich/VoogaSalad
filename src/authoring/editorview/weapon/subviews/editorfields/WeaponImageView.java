@@ -8,6 +8,7 @@ import authoring.utilityfactories.DialogueBoxFactory;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 
 
 /**
@@ -17,6 +18,7 @@ import javafx.scene.image.ImageView;
  */
 public class WeaponImageView  implements WeaponSetView {
 
+	private AnchorPane root;
     private WeaponAuthoringViewDelegate delegate;
     private ResourceBundle labelsResource;
     private String imagePath;
@@ -29,6 +31,10 @@ public class WeaponImageView  implements WeaponSetView {
         weaponImage = new ImageView();
         weaponImage.setFitWidth(CHARACTER_SIZE);
         weaponImage.setFitHeight(CHARACTER_SIZE);
+        root = new AnchorPane();
+    	root.getChildren().add(weaponImage);
+    	AnchorPane.setLeftAnchor(weaponImage, 125.0);
+    	AnchorPane.setTopAnchor(weaponImage, 175.0);
     }
 
     public void updateWeaponImagePath (String imagePath) {
@@ -53,7 +59,7 @@ public class WeaponImageView  implements WeaponSetView {
 
     @Override
     public Node getInstanceAsNode () {
-        return weaponImage;
+        return root;
     }
 
     @Override

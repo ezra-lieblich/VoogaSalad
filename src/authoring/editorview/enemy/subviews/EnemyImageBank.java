@@ -23,6 +23,7 @@ public class EnemyImageBank extends ImageBank {
         Button newEnemyButton = ButtonFactory.makeButton("New Enemy", e -> {
             delegate.onUserPressedCreateEnemy();
         });
+        newEnemyButton.setPrefWidth(130);
         this.items.add(newEnemyButton);
         this.CONTENT_OFFSET = 1;
     }
@@ -38,7 +39,7 @@ public class EnemyImageBank extends ImageBank {
     @Override
     protected void userSelectedRow (int index) {
         int selectedEnemy = this.itemIDs.get(index);
-        if (selectedEnemy != -1) 
+        if (selectedEnemy != -1)
             this.delegate.onUserSelectedEnemy(selectedEnemy);
     }
 }

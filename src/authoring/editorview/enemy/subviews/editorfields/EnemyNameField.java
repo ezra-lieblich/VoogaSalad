@@ -32,9 +32,9 @@ public class EnemyNameField extends EditorNameView implements EnemySetView {
                 TextFieldFactory.makeTextField(resource.getString("EnterString"),
                                                e -> delegate.onUserEnteredEnemyName(nameTextField
                                                        .getText()));
-        nameTextField.setPrefWidth(105);
+        nameTextField.setPrefWidth(110);
         root = GridFactory.createRowWithLabelandNode(resource.getString("NameTextField"),
-                                                     nameTextField, 125);
+                                                     nameTextField, 170);
     }
 
 }

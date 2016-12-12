@@ -25,6 +25,7 @@ public abstract class AbstractTypeManagerController<E extends Manager<T>, U exte
         this.typeManager = typeManager;
         this.typeBuilder = typeBuilder;
         managerMediator.addManager(typeManager);
+        typeManager.addObserver(managerMediator);
         // typeManager.addEntry(typeBuilder.build()); //Testing XML
     }
 
@@ -70,6 +71,7 @@ public abstract class AbstractTypeManagerController<E extends Manager<T>, U exte
                         .updateImagePathDisplay(newValue))
                 .addSizeListener( (oldValue, newValue) -> updateView
                         .updateSizeDisplay(newValue))
+                //.addSoundListener(listener) need method in front end to call
                 .build();
     }
     
@@ -101,6 +103,11 @@ public abstract class AbstractTypeManagerController<E extends Manager<T>, U exte
     }
 
     @Override
+    public String getSound (int id) {
+    	return typeManager.getEntity(id).getSound();
+    }
+    
+    @Override
     public List<Integer> getCreatedTypeIds () {
         return typeManager.getEntityIds();
     }
@@ -121,13 +128,18 @@ public abstract class AbstractTypeManagerController<E extends Manager<T>, U exte
     @Override
     public void setImagePath (int id, String imagePath) {
     	String oldPath = this.getImagePath(id);
-    	FileAggregator.defaultInstance().addImageToAssets(oldPath, imagePath);
+    	imagePath = FileAggregator.defaultInstance().addImageToAssets(oldPath, imagePath);
         typeManager.getEntity(id).setImagePath(imagePath);
     }
 
     @Override
     public void setSize (int id, double size) {
         typeManager.getEntity(id).setSize(size);
+    }
+    
+    @Override
+    public void setSound (int id, String soundPath) {
+    	typeManager.getEntity(id).setSound(soundPath);
     }
     
     protected E getTypeManager () {
