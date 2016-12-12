@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 import authoring.editorview.ListDataSource;
 import authoring.editorview.weapon.subviews.WeaponEditorView;
 import authoring.editorview.weapon.subviews.WeaponImageBank;
+import authoring.editorview.weapon.subviews.editorfields.AddWeaponEffectView;
 import authoring.editorview.weapon.subviews.editorfields.WeaponFireRateField;
 import authoring.editorview.weapon.subviews.editorfields.WeaponImageView;
 import authoring.editorview.weapon.subviews.editorfields.WeaponNameField;
@@ -34,6 +35,7 @@ public class WeaponAuthoringView implements WeaponUpdateView {
     private WeaponPathField weaponPathView;
     private WeaponImageView weaponImageView;
     private WeaponSizeField weaponSizeView;
+    private AddWeaponEffectView addWeaponEffect;
 
     private int width;
     private int height;
@@ -58,11 +60,12 @@ public class WeaponAuthoringView implements WeaponUpdateView {
         weaponPathView = new WeaponPathField(labelsResource);
         weaponImageView = new WeaponImageView(labelsResource);
         weaponSizeView = new WeaponSizeField(labelsResource);
+        addWeaponEffect = new AddWeaponEffectView(labelsResource);
         weaponEffectsView =
                 new WeaponEditorView(weaponNameView, weaponSpeedView, weaponFireRateView,
                                      weaponRangeView,
                                      weaponPathView, weaponImageView, weaponSizeView,
-                                     labelsResource,
+                                     addWeaponEffect, labelsResource,
                                      dialogueBoxResource);
         setBorderPane();
     }
@@ -89,6 +92,7 @@ public class WeaponAuthoringView implements WeaponUpdateView {
         weaponEffectsView.setDelegate(delegate);
         weaponPathView.setDelegate(delegate);
         weaponSizeView.setDelegate(delegate);
+        addWeaponEffect.setDelegate(delegate);
     }
 
     @Override
@@ -137,7 +141,7 @@ public class WeaponAuthoringView implements WeaponUpdateView {
 
     @Override
     public void updateImagePathDisplay (String imagePath) {
-    	this.weaponBank.updateBank();
+        this.weaponBank.updateBank();
         this.weaponImageView.updateWeaponImagePath(imagePath);
     }
 
@@ -168,15 +172,15 @@ public class WeaponAuthoringView implements WeaponUpdateView {
         // TODO Auto-generated method stub
 
     }
-    
-	@Override
-	public Integer getNearestAvailableItemID(int id) {
-		int currentIndex = this.weaponBank.getIndexForItemWithID(id);
-		Integer nearestID = this.weaponBank.getIDForItemAtIndex(currentIndex-1);
-		if (nearestID == null){
-			nearestID = this.weaponBank.getIDForItemAtIndex(currentIndex+1);
-		}
-		return nearestID;
-	}
+
+    @Override
+    public Integer getNearestAvailableItemID (int id) {
+        int currentIndex = this.weaponBank.getIndexForItemWithID(id);
+        Integer nearestID = this.weaponBank.getIDForItemAtIndex(currentIndex - 1);
+        if (nearestID == null) {
+            nearestID = this.weaponBank.getIDForItemAtIndex(currentIndex + 1);
+        }
+        return nearestID;
+    }
 
 }
