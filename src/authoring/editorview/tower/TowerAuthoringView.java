@@ -6,7 +6,6 @@ import authoring.editorview.ListDataSource;
 import authoring.editorview.tower.subviews.TowerEditorView;
 import authoring.editorview.tower.subviews.TowerImageBank;
 import authoring.editorview.tower.subviews.editorfields.AddTowerEffectView;
-import authoring.editorview.tower.subviews.editorfields.DeleteTower;
 import authoring.editorview.tower.subviews.editorfields.TowerAbilityBank;
 import authoring.editorview.tower.subviews.editorfields.TowerBuyPriceField;
 import authoring.editorview.tower.subviews.editorfields.TowerWeaponBank;
@@ -43,7 +42,6 @@ public class TowerAuthoringView implements TowerUpdateView {
     private TowerUpgradeBank towerUpgradeBank;
     private TowerSizeField towerSize;
     private AddTowerEffectView addTowerEffect;
-    private DeleteTower deleteTower;
 
     private ResourceBundle labelsResource =
             ResourceBundle.getBundle("resources/GameAuthoringTower");
@@ -62,14 +60,13 @@ public class TowerAuthoringView implements TowerUpdateView {
         towerUpgradeBank = new TowerUpgradeBank(labelsResource);
         towerSize = new TowerSizeField(labelsResource);
         addTowerEffect = new AddTowerEffectView(labelsResource);
-        deleteTower = new DeleteTower(labelsResource);
 
         towerBank = new TowerImageBank();
         towerEditorView =
                 new TowerEditorView(towerName, towerImage, towerBuyPrice, towerSellPrice,
                                     towerUnlockLevel, towerAbility, towerWeaponBank,
                                     towerUpgradeBank,
-                                    towerSize, deleteTower, addTowerEffect,
+                                    towerSize, addTowerEffect,
                                     labelsResource, dialogueBoxResource);
         buildView();
     }
@@ -116,7 +113,6 @@ public class TowerAuthoringView implements TowerUpdateView {
         towerUpgradeBank.setDelegate(delegate);
         towerSize.setDelegate(delegate);
         addTowerEffect.setDelegate(delegate);
-        deleteTower.setDelegate(delegate);
     }
 
     @Override
