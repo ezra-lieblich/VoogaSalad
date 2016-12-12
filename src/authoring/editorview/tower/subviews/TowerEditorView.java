@@ -7,6 +7,7 @@ import authoring.editorview.PhotoFileChooser;
 import authoring.editorview.tower.TowerSetView;
 import authoring.editorview.tower.TowerAuthoringViewDelegate;
 import authoring.editorview.tower.subviews.editorfields.AddTowerEffectView;
+import authoring.editorview.tower.subviews.editorfields.DeleteTower;
 import authoring.editorview.tower.subviews.editorfields.TowerAbilityBank;
 import authoring.editorview.tower.subviews.editorfields.TowerBuyPriceField;
 import authoring.editorview.tower.subviews.editorfields.TowerWeaponBank;
@@ -54,6 +55,7 @@ public class TowerEditorView extends PhotoFileChooser implements TowerSetView {
     private TowerUpgradeBank towerUpgrade;
     private TowerSizeField towerSize;
     private AddTowerEffectView addTowerEffect;
+    private DeleteTower deleteTower;
 
     private VBox vbox;
     private ScrollPane completeView;
@@ -74,6 +76,7 @@ public class TowerEditorView extends PhotoFileChooser implements TowerSetView {
                             TowerWeaponBank towerChooseWeapon,
                             TowerUpgradeBank towerUpgrade,
                             TowerSizeField towerSize,
+                            DeleteTower deleteTower,
                             AddTowerEffectView addTowerEffect,
                             ResourceBundle labelsResource,
                             ResourceBundle dialogueBoxResource) {
@@ -91,6 +94,7 @@ public class TowerEditorView extends PhotoFileChooser implements TowerSetView {
         this.towerUpgrade = towerUpgrade;
         this.towerSize = towerSize;
         this.addTowerEffect = addTowerEffect;
+        this.deleteTower = deleteTower;
 
         vbox = new VBox(10);
         rootBuffer = new AnchorPane();
@@ -138,7 +142,8 @@ public class TowerEditorView extends PhotoFileChooser implements TowerSetView {
                                   towerBuyPrice.getInstanceAsNode(),
                                   towerSellPrice.getInstanceAsNode(),
                                   towerUnlockLevel.getInstanceAsNode(),
-                                  addTowerEffect.getInstanceAsNode());
+                                  addTowerEffect.getInstanceAsNode(),
+                                  deleteTower.getInstanceAsNode());
 
         vbox.getChildren().add(towerAbility.getInstanceAsNode());
         vbox.getChildren().add(towerChooseWeapon.getInstanceAsNode());
