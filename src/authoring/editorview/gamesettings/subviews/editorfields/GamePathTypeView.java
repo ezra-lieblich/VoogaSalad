@@ -25,7 +25,7 @@ public class GamePathTypeView {
 		pathTypeComboBox = ComboBoxFactory.makeComboBox("" , 
 				e -> setEditView(pathTypeComboBox.getValue().toString()), pathTypeList);
 		pathTypeComboBox.setPrefWidth(105);
-		root = GridFactory.createRowWithLabelandNode("Path type: ", pathTypeComboBox);
+		root = GridFactory.createRowWithLabelandNode("Path type: ", pathTypeComboBox, 125);
 		
 	}
 	

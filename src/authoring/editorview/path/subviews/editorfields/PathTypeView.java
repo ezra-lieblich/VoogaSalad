@@ -31,7 +31,7 @@ public class PathTypeView implements IPathSetView {
 		pathTypeComboBox = ComboBoxFactory.makeComboBox("" , 
 				e -> delegate.onUserEnteredPathType(pathTypeComboBox.getValue().toString()), pathTypeList);
 		pathTypeComboBox.setPrefWidth(155); //TODO
-		root = GridFactory.createRowWithLabelandNode("Path type: ", pathTypeComboBox);
+		root = GridFactory.createRowWithLabelandNode("Path type: ", pathTypeComboBox, 125);
 		
 	}
 	

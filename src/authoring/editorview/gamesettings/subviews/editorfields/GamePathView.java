@@ -36,7 +36,7 @@ public class GamePathView implements IGameSettingsSetView {
 		
 		pathCheckComboBox = ComboBoxFactory.makeCheckComboBox(pathList, a -> setPathIDFromName((String) a));
 		pathCheckComboBox.setPrefWidth(105);
-		root = GridFactory.createRowWithLabelandNode(settingsResource.getString("Path"), pathCheckComboBox);
+		root = GridFactory.createRowWithLabelandNode(settingsResource.getString("Path"), pathCheckComboBox, 125);
 		
 	}
 

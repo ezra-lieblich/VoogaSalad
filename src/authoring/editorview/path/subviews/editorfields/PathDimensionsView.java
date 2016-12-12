@@ -61,7 +61,7 @@ public class PathDimensionsView implements IPathSetView{
 		
 		dimensionsTextField.setMaxWidth(155); //TODO
 		
-		root = GridFactory.createRowWithLabelandNode(pathResource.getString("DimensionsTextField"), dimensionsTextField);
+		root = GridFactory.createRowWithLabelandNode(pathResource.getString("DimensionsTextField"), dimensionsTextField, 125);
 		
 	}
 	

@@ -35,7 +35,8 @@ public class PathImageDisplayView implements INodeView {
 	private void buildRoot(ResourceBundle pathResource){
 		root = GridFactory.createRowWithLabelandNode(
 				pathResource.getString("PathImage"), 
-				pathImageView);
+				pathImageView,
+				125);
 	}
 	
 	private void formatPathImageView() {

@@ -56,7 +56,7 @@ public class GamePathDimensionsView implements IGameSettingsSetView {
 		
 		dimensionsTextField.setPrefWidth(105); //TODO
 		
-		root = GridFactory.createRowWithLabelandNode(pathResource.getString("DimensionsTextField"), dimensionsTextField);
+		root = GridFactory.createRowWithLabelandNode(pathResource.getString("DimensionsTextField"), dimensionsTextField, 125);
 		
 	}
 	

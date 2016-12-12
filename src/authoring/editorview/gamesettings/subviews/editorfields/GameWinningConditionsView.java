@@ -46,7 +46,7 @@ public class GameWinningConditionsView implements IGameSettingsSetView {
     	winningConditionComboBox = ComboBoxFactory.makeComboBox("" , 
 				e -> setWinningCondition(winningConditionComboBox.getValue().toString()), winningConditionList);
     	winningConditionComboBox.setPrefWidth(105);
-		root = GridFactory.createRowWithLabelandNode("Winning condition: ", winningConditionComboBox);
+		root = GridFactory.createRowWithLabelandNode("Winning condition: ", winningConditionComboBox, 125);
 		
 	}
 

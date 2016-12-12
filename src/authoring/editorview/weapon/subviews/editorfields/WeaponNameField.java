@@ -5,6 +5,7 @@ import authoring.editorview.EditorNameView;
 import authoring.editorview.weapon.IWeaponSetView;
 import authoring.editorview.weapon.WeaponAuthoringViewDelegate;
 import authoring.utilityfactories.BoxFactory;
+import authoring.utilityfactories.GridFactory;
 import authoring.utilityfactories.TextFieldFactory;
 
 
@@ -32,8 +33,8 @@ public class WeaponNameField extends EditorNameView implements IWeaponSetView {
                 TextFieldFactory.makeTextField(resource.getString("EnterString"),
                                                e -> delegate.onUserEnteredWeaponName(nameTextField
                                                        .getText()));
-        root = BoxFactory.createHBoxWithLabelandNode(resource.getString("NameTextField"),
-                                                     nameTextField);
+        root = GridFactory.createRowWithLabelandNode(resource.getString("NameTextField"), nameTextField, 125);
+        
     }
 
 }

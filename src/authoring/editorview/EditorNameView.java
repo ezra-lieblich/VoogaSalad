@@ -4,12 +4,11 @@ import java.util.ResourceBundle;
 import javafx.scene.Node;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 
 
 public abstract class EditorNameView implements INodeView {
 
-    protected HBox root;
+    protected GridPane root;
     protected TextField nameTextField;
 
     protected ResourceBundle resource;
