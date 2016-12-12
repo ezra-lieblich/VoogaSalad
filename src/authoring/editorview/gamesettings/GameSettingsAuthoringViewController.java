@@ -1,5 +1,7 @@
 package authoring.editorview.gamesettings;
 
+import java.util.List;
+
 import authoring.editorview.EditorViewController;
 import engine.path.PathManagerController;
 import engine.settings.GameModeManagerController;
@@ -30,14 +32,7 @@ public class GameSettingsAuthoringViewController extends EditorViewController
 
 	private void createNewGame() {
 		gameSettingsDataSource.createType(this.gameView);
-		gameView.updateNameDisplay(gameSettingsDataSource.getName(activeID));
-		gameView.updateImagePathDisplay(gameSettingsDataSource.getImagePath(activeID));
-		gameView.updateNumberofLives(gameSettingsDataSource.getNumberofLives(activeID));
-		gameView.updateInitialMoney(gameSettingsDataSource.getMoney(activeID));
-		gameView.updateGridSize(gameSettingsDataSource.getGridSize(activeID));
-		gameView.updateLosingConditions(gameSettingsDataSource.getLosingConditons(activeID));
-		gameView.updateWinningConditions(gameSettingsDataSource.getWinningConditions(activeID));
-		gameView.updatePathType(gameSettingsDataSource.getPathType(activeID));		
+		refreshView();		
 	}
 
     @Override
@@ -104,9 +99,25 @@ public class GameSettingsAuthoringViewController extends EditorViewController
 
     @Override
     public void refreshView () {
-        // TODO Auto-generated method stub
-        
+    	gameView.updateNameDisplay(gameSettingsDataSource.getName(activeID));
+		gameView.updateImagePathDisplay(gameSettingsDataSource.getImagePath(activeID));
+		gameView.updateNumberofLives(gameSettingsDataSource.getNumberofLives(activeID));
+		gameView.updateInitialMoney(gameSettingsDataSource.getMoney(activeID));
+		gameView.updateGridSize(gameSettingsDataSource.getGridSize(activeID));
+		gameView.updateLosingConditions(gameSettingsDataSource.getLosingConditons(activeID));
+		gameView.updateWinningConditions(gameSettingsDataSource.getWinningConditions(activeID));
+		gameView.updatePathType(gameSettingsDataSource.getPathType(activeID));      
     }
+
+	@Override
+	public String getPathImage(int pathID) {
+		return this.pathDataSource.getImagePath(pathID);
+	}
+
+	@Override
+	public List<Integer> getAvailablePathList() {
+		return this.pathDataSource.getAvailablePaths();
+	}
 
     
 }
