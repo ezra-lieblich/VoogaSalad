@@ -18,13 +18,17 @@ import javafx.scene.image.ImageView;
  * 
  * @author Andrew Bihl
  *
- * This class allows the user to implement a simple list view where cells are based off a list of data object IDs.
- * The ListCellData object represents the information that should be presented in the list view, and is retrieved from a class implementing the 
- * dataSource interface. 
- * To change the way the list looks, override createCellFromData().
- * If any initial cells hold non-data cells at all times, the CONTENT_OFFSET value must be set. For example, there may button in 
- * the first cell that is clicked to create a new object. The CONTENT_OFFSET should be set to 1 after this button cell is added so
- * that the mapping of indices to data id's can be maintained.
+ *         This class allows the user to implement a simple list view where cells are based off a
+ *         list of data object IDs.
+ *         The ListCellData object represents the information that should be presented in the list
+ *         view, and is retrieved from a class implementing the
+ *         dataSource interface.
+ *         To change the way the list looks, override createCellFromData().
+ *         If any initial cells hold non-data cells at all times, the CONTENT_OFFSET value must be
+ *         set. For example, there may button in
+ *         the first cell that is clicked to create a new object. The CONTENT_OFFSET should be set
+ *         to 1 after this button cell is added so
+ *         that the mapping of indices to data id's can be maintained.
  *
  */
 
@@ -61,20 +65,20 @@ public abstract class ImageBank implements ChangeListener<Number> {
         return listView;
     }
 
-    public void updateBank() {
-    	ArrayList<Integer> idCopy = (ArrayList<Integer>) this.itemIDs.clone();
-    	int i = 0;
-    	while (i < idCopy.size()){
-    		if (idCopy.get(i).equals(-1)){
-    			idCopy.remove(i);
-    		}
-    		else{
-    			i++;
-    		}
-    	}
-    	this.updateBank(idCopy);
+    public void updateBank () {
+        ArrayList<Integer> idCopy = (ArrayList<Integer>) this.itemIDs.clone();
+        int i = 0;
+        while (i < idCopy.size()) {
+            if (idCopy.get(i).equals(-1)) {
+                idCopy.remove(i);
+            }
+            else {
+                i++;
+            }
+        }
+        this.updateBank(idCopy);
     }
-    
+
     public void updateBank (List<Integer> ids) {
         if (dataSource == null) {
             System.out.println("Table data source not set");
@@ -94,27 +98,28 @@ public abstract class ImageBank implements ChangeListener<Number> {
             itemIDs.set(items.size() - 1, cellData.getId());
         }
     }
-    
-    public Integer getIndexForItemWithID(int id){
-    	for (int i = 0; i <this.itemIDs.size(); i++){
-    		if (this.itemIDs.get(i)==id) {
-    			return i;
-    		}
-    	}
-    	return null;
+
+    public Integer getIndexForItemWithID (int id) {
+        for (int i = 0; i < this.itemIDs.size(); i++) {
+            if (this.itemIDs.get(i) == id) {
+                return i;
+            }
+        }
+        return null;
     }
-    
+
     /**
      * 
      * @param index of item
-     * @return ID of the data object represented at that index. Will be null if there is no item there.
+     * @return ID of the data object represented at that index. Will be null if there is no item
+     *         there.
      */
-    public Integer getIDForItemAtIndex(int index){
-    	Integer result =  this.itemIDs.get(index);
-    	if (result<0){
-    		return null;
-    	}
-    	return result;
+    public Integer getIDForItemAtIndex (int index) {
+        Integer result = this.itemIDs.get(index);
+        if (result < 0) {
+            return null;
+        }
+        return result;
     }
 
     protected Node createCellFromData (ListCellData data) {
