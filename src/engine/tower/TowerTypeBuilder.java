@@ -25,6 +25,7 @@ public class TowerTypeBuilder extends AbstractTypeBuilder<Tower, TowerBuilder> i
      public static final String DEFAULT_NAME = "New Tower";
      public static final String DEFAULT_IMAGE_PATH = "Images/tower.png";
      public static final double DEFAULT_SIZE = 1;
+     public static final String DEFAULT_SOUND_PATH = "Music/DopeBeats.mp3";
 
      //public static final List<Integer> DEFAULT_WEAPONS = Arrays.stream(new Integer[]{}).collect(Collectors.toList());
      public static final Integer[] DEFAULT_WEAPONS = new Integer[]{0};
@@ -42,7 +43,7 @@ public class TowerTypeBuilder extends AbstractTypeBuilder<Tower, TowerBuilder> i
      private ObservableProperty<Integer> unlockLevel;
      
      public TowerTypeBuilder() {
-         super(DEFAULT_NAME, DEFAULT_IMAGE_PATH, DEFAULT_SIZE);
+         super(DEFAULT_NAME, DEFAULT_IMAGE_PATH, DEFAULT_SIZE, DEFAULT_SOUND_PATH);
          
      }
      

@@ -27,13 +27,17 @@ public class Toolbar implements IToolbar {
     
     private Button loadButton;
     
+    private Button previewButton;
+    
     public Toolbar (int aWidth, int aHeight) {
     	
     	saveButton = new Button("Save");    	
-    	loadButton = new Button("Load");   	
+    	loadButton = new Button("Load");
+    	previewButton = new Button("Preview");
         this.toolbar = new ToolBar(
         						saveButton,
-        						loadButton
+        						loadButton,
+        						previewButton
                                 );
         
     }
@@ -75,5 +79,11 @@ public class Toolbar implements IToolbar {
             FileAggregator.defaultInstance().createGameFolder(gameFile, content);
         }
     }
+
+	@Override
+	public void setOnPressedPreview(EventHandler<MouseEvent> e) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
