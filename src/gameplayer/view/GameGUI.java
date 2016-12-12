@@ -300,7 +300,6 @@ public class GameGUI {
 	public void reRenderWeapon(HashMap<Integer, ImageView> weaponsOnScreen) {
 
 		for (Integer weapon : weaponsOnScreen.keySet()) {
-			System.out.println("size of weapons: " + weaponsOnScreen.size());
 			this.grid.getGrid().getChildren().add(weaponsOnScreen.get(weapon));
 
 		}
