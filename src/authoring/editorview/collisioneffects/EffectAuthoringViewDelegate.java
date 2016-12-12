@@ -13,5 +13,5 @@ public interface EffectAuthoringViewDelegate {
 
     public void onUserEnteredCondition (String condition);
 
-    public void onUserSelectedEffect (String effect);
+    public void onUserEnteredEffect (String effect);
 }

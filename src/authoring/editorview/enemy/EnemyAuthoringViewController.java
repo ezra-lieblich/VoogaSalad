@@ -4,7 +4,6 @@ import java.util.ResourceBundle;
 import authoring.editorview.EditorViewController;
 import authoring.editorview.ListCellData;
 import authoring.editorview.ListDataSource;
-import authoring.editorview.collisioneffects.EffectAuthoringView;
 import authoring.editorview.collisioneffects.EffectAuthoringViewController;
 import authoring.utilityfactories.DialogueBoxFactory;
 import engine.effect.EffectManagerController;
