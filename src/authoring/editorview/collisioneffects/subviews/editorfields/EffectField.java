@@ -4,11 +4,15 @@ import java.util.ResourceBundle;
 import authoring.editorview.TextFieldView;
 import authoring.editorview.collisioneffects.EffectAuthoringViewDelegate;
 import authoring.editorview.collisioneffects.EffectSetView;
+import authoring.utilityfactories.BoxFactory;
+import authoring.utilityfactories.TextFieldFactory;
+import javafx.scene.control.TextField;
 
 
 public class EffectField extends TextFieldView implements EffectSetView {
 
     private EffectAuthoringViewDelegate delegate;
+    private TextField effectTextField;
 
     public EffectField (ResourceBundle resource) {
         super(resource);
@@ -16,14 +20,19 @@ public class EffectField extends TextFieldView implements EffectSetView {
 
     @Override
     public void updateField (String newData) {
-        // TODO Auto-generated method stub
-
+        effectTextField.setText(newData);
     }
 
     @Override
     protected void makeTextField (ResourceBundle labelsResource) {
-        // TODO Auto-generated method stub
-
+        effectTextField =
+                TextFieldFactory.makeTextField(labelsResource.getString("EnterString"),
+                                               e -> delegate
+                                                       .onUserEnteredEffectText(effectTextField
+                                                               .getText()));
+        hbox =
+                BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Effect"),
+                                                      effectTextField);
     }
 
     @Override

@@ -4,7 +4,6 @@ import java.util.ResourceBundle;
 import authoring.editorview.EditorViewController;
 import authoring.editorview.ListCellData;
 import authoring.editorview.ListDataSource;
-import authoring.editorview.collisioneffects.EffectAuthoringView;
 import authoring.editorview.collisioneffects.EffectAuthoringViewController;
 import authoring.utilityfactories.DialogueBoxFactory;
 import engine.effect.EffectManagerController;
@@ -30,7 +29,6 @@ public class EnemyAuthoringViewController extends EditorViewController
         enemyView.setDelegate(this);
         enemyView.setEnemyListDataSource(this);
         this.view = enemyView;
-
     }
 
     public void setEnemyDataSource (EnemyManagerController source) {
@@ -169,7 +167,13 @@ public class EnemyAuthoringViewController extends EditorViewController
 
     @Override
     public void onUserPressedAddEffect () {
-        EffectAuthoringViewController effectAuthoringView = new EffectAuthoringViewController();
+        EffectAuthoringViewController effectAuthoringView =
+                new EffectAuthoringViewController(effectDataSource);
+        effectDataSource.createType(effectAuthoringView.getEffectAuthoringView());
+        effectAuthoringView.setEffectOptions(effectDataSource.getCreatedTypeIds());
+        effectAuthoringView.setAvailClasses(effectDataSource.getAvailableClasses());
+        // effectAuthoringView.setAvailMethods(effectDataSource.getAvailableClassMethods(selectedClass));
+        effectAuthoringView.setAvailDataObjects(effectDataSource.getAvailableDataObjects());
         effectAuthoringView.openEffectView();
     }
 

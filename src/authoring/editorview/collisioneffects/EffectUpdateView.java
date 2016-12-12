@@ -22,7 +22,7 @@ public interface EffectUpdateView extends EffectSetView, IUpdateView {
 
     public void updateEffectField (String effect);
 
-    public void updateListedEffects (List<String> effects);
+    public void updateEffectBank (List<Integer> effects);
 
     public void updateListedAvailableClasses (List<String> availClasses);
 
@@ -33,5 +33,9 @@ public interface EffectUpdateView extends EffectSetView, IUpdateView {
     public void updateAvailableDataObjects (List<String> availDataObjects);
 
     public void setEffectListDataSource (ListDataSource source);
+
+    public void openEffectView ();
+    
+    public void updateTriggers(List<String> triggers);
 
 }

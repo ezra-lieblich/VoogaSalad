@@ -21,7 +21,7 @@ import javafx.stage.Stage;
 public class EffectAuthoringView implements EffectUpdateView {
 
     private GridPane effectsPane;
-    private EffectBank effectsBank;
+    private EffectBank effectBank;
     private EffectAvailableClassesView effectAvailClasses;
     private EffectAvailableDataObjectsView effectDataObjects;
     private EffectAvailableMethodsView effectAvailMethods;
@@ -29,7 +29,7 @@ public class EffectAuthoringView implements EffectUpdateView {
     private Scene myScene;
 
     public EffectAuthoringView () {
-        effectsBank = new EffectBank();
+        effectBank = new EffectBank();
         effectsPane = new GridPane();
         effectAvailClasses = new EffectAvailableClassesView();
         effectDataObjects = new EffectAvailableDataObjectsView();
@@ -40,7 +40,7 @@ public class EffectAuthoringView implements EffectUpdateView {
     }
 
     private void setPane () {
-        effectsPane.add(effectsBank.getInstanceAsNode(), 0, 0, 1, 1);
+        effectsPane.add(effectBank.getInstanceAsNode(), 0, 0, 1, 1);
         effectsPane.add(effectAvailClasses.getInstanceAsNode(), 1, 0, 1, 1);
         effectsPane.add(effectDataObjects.getInstanceAsNode(), 2, 0, 1, 1);
         effectsPane.add(effectAvailMethods.getInstanceAsNode(), 3, 0, 1, 1);
@@ -53,7 +53,6 @@ public class EffectAuthoringView implements EffectUpdateView {
 
     public void openEffectView () {
         Stage stage = new Stage();
-        // setDelegate(); this needs to be controller
         Scene myScene = getScene();
         stage.setScene(myScene);
         stage.show();
@@ -79,8 +78,10 @@ public class EffectAuthoringView implements EffectUpdateView {
 
     @Override
     public void setEffectListDataSource (ListDataSource source) {
-        // TODO Auto-generated method stub
-
+        this.effectBank.setListDataSource(source);
+        this.effectAvailClasses.setListDataSource(source);
+        this.effectAvailMethods.setListDataSource(source);
+        this.effectDataObjects.setListDataSource(source);
     }
 
     @Override
@@ -96,15 +97,13 @@ public class EffectAuthoringView implements EffectUpdateView {
     }
 
     @Override
-    public void updateListedEffects (List<String> effects) {
-        // TODO Auto-generated method stub
-
+    public void updateEffectBank (List<Integer> effects) {
+        effectBank.updateBank(effects);
     }
 
     @Override
     public void updateListedAvailableClasses (List<String> availClasses) {
-        // TODO Auto-generated method stub
-
+        effectAvailClasses.updateAvailClasses(availClasses);
     }
 
     @Override
@@ -115,14 +114,12 @@ public class EffectAuthoringView implements EffectUpdateView {
 
     @Override
     public void updateAvailableMethods (List<String> availMethods) {
-        // TODO Auto-generated method stub
-
+        effectAvailMethods.updateAvailMethods(availMethods);
     }
 
     @Override
     public void updateAvailableDataObjects (List<String> availDataObjects) {
-        // TODO Auto-generated method stub
-
+        effectDataObjects.updateAvailDataObjects(availDataObjects);
     }
 
     @Override
@@ -173,6 +170,12 @@ public class EffectAuthoringView implements EffectUpdateView {
     public Integer getNearestAvailableItemID (int id) {
         // TODO Auto-generated method stub
         return null;
+    }
+
+    @Override
+    public void updateTriggers (List<String> triggers) {
+        // TODO Auto-generated method stub
+
     }
 
 }
