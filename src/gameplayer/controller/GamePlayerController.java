@@ -105,7 +105,7 @@ public class GamePlayerController implements Observer {
 
 	public GamePlayerController(String xmlFilePath) {
 		// use xml parser to create classes.
-		this.loader = new GamePlayerFactory(new XMLParser("player.samplexml/pray.xml"));// hardcoded
+		this.loader = new GamePlayerFactory(new XMLParser("player.samplexml/WinEffect_FreePath_PitcforksTest.xml"));// hardcoded
 		// does not work because of the image path
 		checkIfValid();
 		this.currentWave = new LinkedList<>();
@@ -176,6 +176,7 @@ public class GamePlayerController implements Observer {
 	 */
 	private void initSaveGameButton() {
 		this.view.saveButton(e -> {
+			System.out.println("saving game maybe?");
 			this.gameSavingController.saveGame();
 			//TODO: end game?
 		});
@@ -435,11 +436,6 @@ public class GamePlayerController implements Observer {
 
 	public Timeline getTimeline() {
 		return this.animation;
-	}
-	
-	
-	private void removeValFromIterator(HashMap<Integer, Object> map){
-		
 	}
 
 	private void updateBulletOnScreen(HashMap<Integer, Weapon> bulletRedraw) {
