@@ -1,11 +1,13 @@
 package authoring.editorview.collisioneffects;
 
 import authoring.editorview.EditorViewController;
+import authoring.editorview.ListCellData;
+import authoring.editorview.ListDataSource;
 import engine.effect.EffectManagerController;
 
 
 public class EffectController extends EditorViewController
-        implements EffectAuthoringViewDelegate {
+        implements EffectAuthoringViewDelegate, ListDataSource {
 
     private EffectManagerController effectsDataSource;
     private int currentEffectID;
@@ -37,6 +39,12 @@ public class EffectController extends EditorViewController
     @Override
     public void onUserEnteredEffect (String effect) {
         effectsDataSource.setEffect(currentEffectID, effect);
+    }
+
+    @Override
+    public ListCellData getCellDataForSubject (int id) {
+        // TODO Auto-generated method stub
+        return null;
     }
 
 }
