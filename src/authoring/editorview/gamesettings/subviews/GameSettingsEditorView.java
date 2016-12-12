@@ -122,6 +122,10 @@ public class GameSettingsEditorView implements IGameSettingsSetView {
 		
 	}
 	
+	public void updateGridDimensions(int size){
+		gamePathDimensionsView.setGridDimensions(size);
+	}
+	
 	
 	
 

@@ -116,7 +116,7 @@ public class GameSettingsAuthoringView implements IGameSettingsUpdateView, IGame
 
 	@Override
 	public void updateGridSize(int size) {
-		// TODO Auto-generated method stub
+		gameSettingsEditor.updateGridDimensions(size);
 		
 	}
 

@@ -63,7 +63,8 @@ public class GamePathView implements IGameSettingsSetView {
 		for (Integer id : pathList){
 			NameIdPair pair = new NameIdPair(delegate.getPathName(id), id);
 			this.pathNameIdList.add(pair);
-			this.pathList.add(delegate.getPathName(id));
+			pathCheckComboBox.getCheckModel().check(pair.getName());
+			//this.pathList.add(delegate.getPathName(id));
 		}
 	}
 
