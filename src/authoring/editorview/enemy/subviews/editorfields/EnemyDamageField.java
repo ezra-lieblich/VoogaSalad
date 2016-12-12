@@ -7,7 +7,6 @@ import authoring.editorview.enemy.EnemySetView;
 import authoring.utilityfactories.BoxFactory;
 import authoring.utilityfactories.GridFactory;
 import authoring.utilityfactories.TextFieldFactory;
-import javafx.scene.Node;
 import javafx.scene.control.TextField;
 
 

@@ -1,5 +1,6 @@
 package authoring.editorview.collisioneffects;
 
+import java.util.List;
 import authoring.editorview.EditorViewController;
 import authoring.editorview.ListCellData;
 import authoring.editorview.ListDataSource;
@@ -14,57 +15,91 @@ import engine.effect.EffectManagerController;
 public class EffectAuthoringViewController extends EditorViewController
         implements EffectAuthoringViewDelegate, ListDataSource {
 
-    private EffectManagerController effectsDataSource;
+    private EffectManagerController effectDataSource;
     private int currentEffectID;
-    private EffectAuthoringView effectAuthoringView;
+    private EffectUpdateView effectAuthoringView;
 
-    public EffectAuthoringViewController () {
-        effectAuthoringView = new EffectAuthoringView();
+    public EffectAuthoringViewController (EffectManagerController effectsDataSource) {
+        this.effectDataSource = effectsDataSource;
+        effectAuthoringView = EffectAuthoringViewFactory.build();
         effectAuthoringView.setDelegate(this);
-        // TODO - fix this
-        currentEffectID = 0;
+        effectAuthoringView.setEffectListDataSource(this);
+        this.effectDataSource.addTypeBankListener(this.effectAuthoringView);
     }
 
-    public void setEffectDataSource (EffectManagerController source) {
-        this.effectsDataSource = source;
-        // this.effectsDataSource.addTypeBankListener(this.effectAuthoringView);
+    public void setEffectOptions (List<Integer> effects) {
+        effectAuthoringView.updateEffectBank(effects);
+    }
+
+    public void setAvailClasses (List<String> classes) {
+        effectAuthoringView.updateListedAvailableClasses(classes);
+    }
+
+    public void setAvailMethods (List<String> methods) {
+        effectAuthoringView.updateAvailableMethods(methods);
+    }
+
+    public void setAvailDataObjects (List<String> dataObjects) {
+        effectAuthoringView.updateAvailableDataObjects(dataObjects);
+    }
+
+    public EffectUpdateView getEffectAuthoringView () {
+        return effectAuthoringView;
     }
 
     public void openEffectView () {
+        refreshView();
         effectAuthoringView.openEffectView();
     }
 
     @Override
     public void onUserSelectedAvailableClass (String selectedClass) {
-        effectsDataSource.setAvailableClass(selectedClass);
+        effectDataSource.setAvailableClass(selectedClass);
+        System.out.println(selectedClass);
+        effectAuthoringView.getEffectAvailMethods()
+                .updateAvailMethods(effectDataSource.getAvailableClassMethods(selectedClass));
+        // effectAuthoringView.effectDataSource.getAvailableClassMethods(selectedClass)
         // TODO: This also needs to update the available methods
     }
 
     @Override
     public void onUserEnteredEffectName (String name) {
-        effectsDataSource.setName(currentEffectID, name);
+        effectDataSource.setName(currentEffectID, name);
     }
 
     @Override
     public void onUserEnteredCondition (String condition) {
-        effectsDataSource.setCondition(currentEffectID, condition);
+        effectDataSource.setCondition(currentEffectID, condition);
     }
 
     @Override
-    public void onUserSelectedEffect (String effect) {
-        effectsDataSource.setEffect(currentEffectID, effect);
+    public void onUserSelectedEffect (int effectID) {
+        currentEffectID = effectID;
+        refreshView();
     }
 
     @Override
     public ListCellData getCellDataForSubject (int id) {
-        // TODO Auto-generated method stub
-        return null;
+        ListCellData cellData = new ListCellData();
+        System.out.println("id: " + id + " effectsDS: " + effectDataSource);
+        cellData.setName(effectDataSource.getName(id));
+        cellData.setImagePath(effectDataSource.getImagePath(id));
+        cellData.setId(id);
+        return cellData;
     }
 
     @Override
     public void refreshView () {
-        // TODO Auto-generated method stub
+        effectAuthoringView.updateNameDisplay(effectDataSource.getImagePath(currentEffectID));
+        effectAuthoringView.updateConditionField(effectDataSource.getCondition(currentEffectID));
+        effectAuthoringView.updateEffectField(effectDataSource.getEffect(currentEffectID));
+        effectAuthoringView.updateAvailableDataObjects(effectDataSource.getAvailableDataObjects());
+        // effectAuthoringView.updateEffectBank(effectDataSource.getCreatedTypeIds());
+    }
 
+    @Override
+    public void onUserEnteredEffectText (String effect) {
+        effectDataSource.setEffect(currentEffectID, effect);
     }
 
 }
