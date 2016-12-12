@@ -27,6 +27,8 @@ public interface EnemyAuthoringViewDelegate {
     public void onUserEnteredEnemyName (String enemyName);
 
     public void onUserEnteredEnemySize (String enemySize);
-    
+
     public void onUserSelectedEnemy (int enemyID);
+
+    public void onUserPressedAddEffect ();
 }

@@ -10,7 +10,7 @@ import authoring.editorview.INodeView;
  * @author Kayla Schulz
  *
  */
-public interface IEnemySetView extends INodeView {
+public interface EnemySetView extends INodeView {
 
     public void setDelegate (EnemyAuthoringViewDelegate delegate);
 

@@ -2,8 +2,10 @@ package authoring.editorview.gamesettings.subviews.editorfields;
 
 import java.util.ResourceBundle;
 
+import org.controlsfx.control.CheckComboBox;
+
 import authoring.editorview.gamesettings.GameSettingsAuthoringViewDelegate;
-import authoring.editorview.gamesettings.IGameSettingsSetView;
+import authoring.editorview.gamesettings.GameSettingsSetView;
 import authoring.utilityfactories.ComboBoxFactory;
 import authoring.utilityfactories.GridFactory;
 import javafx.collections.FXCollections;
@@ -12,7 +14,7 @@ import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.GridPane;
 
-public class GameWinningConditionsView implements IGameSettingsSetView {
+public class GameWinningConditionsView implements GameSettingsSetView {
 
     // GROOVY
 	
@@ -44,13 +46,12 @@ public class GameWinningConditionsView implements IGameSettingsSetView {
     	winningConditionComboBox = ComboBoxFactory.makeComboBox("" , 
 				e -> setWinningCondition(winningConditionComboBox.getValue().toString()), winningConditionList);
     	winningConditionComboBox.setPrefWidth(105);
-		root = GridFactory.createRowWithLabelandNode("Winning condition: ", winningConditionComboBox);
+		root = GridFactory.createRowWithLabelandNode("Winning condition: ", winningConditionComboBox, 125);
 		
 	}
 
-	private Object setWinningCondition(String string) {
-		// TODO Auto-generated method stub
-		return null;
+	private void setWinningCondition(String string) {
+		delegate.onUserEnteredWinningConditions(string);
 	}
 
 	    

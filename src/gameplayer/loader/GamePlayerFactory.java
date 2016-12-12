@@ -90,7 +90,7 @@ public class GamePlayerFactory{
 		Level level = authoringFileReader.getLevelManager().getEntity(levelNumber);
 		List<Integer> levelPaths = level.getPaths();
 		
-		if (levelPaths.isEmpty()) {//no path
+		if (levelPaths.isEmpty()) { //no path
 			Grid emptyGrid = new Grid(DEFAULT_GRID_WIDTH, DEFAULT_GRID_HEIGHT);
 			emptyGrid.setNoPath(true); 
 			return emptyGrid;
@@ -99,8 +99,18 @@ public class GamePlayerFactory{
 		Grid levelGrid = new Grid(DEFAULT_GRID_WIDTH, DEFAULT_GRID_HEIGHT); //width and height will be from game authoring
 		PathManager pathManager = authoringFileReader.getPathManager();
 		Map<Integer, Path> paths = pathManager.getEntities();
-		for (int i = 0; i < levelPaths.size(); i++) {
-			Path currPath = paths.get(i);
+		/*
+		//hard coding
+		Cell start = new Cell(0,2);
+		Cell end = new Cell(10, 8);
+		levelGrid.setStart(start);
+		levelGrid.setEnd(end);
+		levelGrid.setNoPath(true);
+		return levelGrid;
+		*/
+		
+		for (Integer index : levelPaths) {
+			Path currPath = paths.get(index);
 			List<Coordinate<Integer>> coordinates = currPath.getCoordinates();
 			ArrayList<Cell> cells = new ArrayList<Cell>();
 			coordinates.forEach(c -> {
@@ -108,11 +118,12 @@ public class GamePlayerFactory{
 				cells.add(currCell);
 			});
 			gameplayer.model.Path newPath = new gameplayer.model.Path(cells, levelGrid.getGrid());
-			allPaths.put(i, newPath);
+			allPaths.put(index, newPath);
 		}
 		
 		levelGrid.setAllPath(allPaths);
 		return levelGrid;
+		
 	}
 	
 	public EffectManager getWeaponEffectManager() {

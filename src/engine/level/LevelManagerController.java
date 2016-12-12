@@ -1,14 +1,14 @@
 package engine.level;
 
 import java.util.List;
-import authoring.editorview.level.ILevelUpdateView;
+import authoring.editorview.level.LevelUpdateView;
 import engine.ManagerController;
 import engine.level.wave.Wave;
 import engine.level.wave.WaveString;
 
 
 public interface LevelManagerController
-        extends ManagerController<LevelManager, LevelBuilder, Level, ILevelUpdateView> {
+        extends ManagerController<LevelManager, LevelBuilder, Level, LevelUpdateView> {
 
     // public Map<Integer, Wave> getEnemies (int levelID);
 
@@ -40,7 +40,7 @@ public interface LevelManagerController
 
     public double getLevelTime (int levelID);
 
-    public int createWave (int levelID, ILevelUpdateView updateView);
+    public int createWave (int levelID, LevelUpdateView updateView);
 
     public List<Wave> getWaves (int levelID);
 

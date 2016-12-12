@@ -49,6 +49,10 @@ public class GameSettingsPreviewView implements INodeView {
 		root.getChildren().add(gameImageView);
 	}
 	
+	public void updateGridDimensions(int size){
+		
+	}
+	
 	
 
 	

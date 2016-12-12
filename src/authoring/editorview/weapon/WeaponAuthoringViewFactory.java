@@ -11,7 +11,7 @@ import java.io.IOException;
 
 public class WeaponAuthoringViewFactory {
 
-    public static IWeaponUpdateView build (int width, int height) throws IOException {
+    public static WeaponUpdateView build (int width, int height) throws IOException {
         return new WeaponAuthoringView(width, height);
     }
 

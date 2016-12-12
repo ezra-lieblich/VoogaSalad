@@ -44,6 +44,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Observable;
@@ -97,9 +98,7 @@ public class GamePlayerController implements Observer {
 
 	// Might need to be refactored into a different class
 	private HashMap<Integer, ImageView> weaponsOnScreen;
-	private HashMap<Integer, ImageView> enemiesOnScreen; 
-	private HashMap<Integer, ImageView> towersOnScreen; 
-	
+	private HashMap<Integer, ImageView> enemiesOnScreen; 	
 
 	private HashMap<String, Image> imageBank;
 
@@ -109,6 +108,7 @@ public class GamePlayerController implements Observer {
 		// does not work because of the image path
 		checkIfValid();
 		this.enemiesOnScreen = new HashMap<Integer, ImageView>();
+		this.weaponsOnScreen = new HashMap<Integer, ImageView>(); 
 		this.model = new GamePlayModel(this.loader,enemiesOnScreen);
 		this.enemyController = new EnemyController(this.model.getEnemyManager(), null);
 		this.weaponController = new WeaponController(this.model.getWeaponManager());
@@ -117,15 +117,17 @@ public class GamePlayerController implements Observer {
 		this.oldLevel = 0;
 		this.towerToId = new HashMap<String, Integer>();
 		this.weaponsOnScreen = new HashMap<Integer, ImageView>();
-		this.towersOnScreen = new HashMap<Integer, ImageView>(); 
 		this.animation = new Timeline();
 		this.graphics = new GraphicsLibrary();
 		this.enemyManager = this.enemyController.getEnemyModel();
 		this.imageBank = new HashMap<String, Image>();
 		createImageBank();
 		this.gameSavingController = new GameSavingController(this.model);
-		// this.gameSavingController.saveGame();
 	}
+	
+	//TODO: create another constructor that takes in a ManagerMediator and LevelNumber
+	//it should use the XMLParser(ManagerMediator) constructor to create an XMLParser (aka this.loader)
+	
 
 	private void populateTowerToId() {
 		HashMap<Integer, engine.tower.Tower> mapping = this.model.getTowerManager().getAvailableTower();
@@ -211,7 +213,7 @@ public class GamePlayerController implements Observer {
 					this.model.getData().getCurrentLevel(), this.model.getData().getScore(), getTowerImages());
 		}
 		this.view.getGrid().getGrid().setOnMouseClicked(e -> handleMouseClicked(e.getX(), e.getY()));
-
+		
 		// System.out.println("line 172, gameplay controller: Is the grid
 		// null?");
 		// System.out.println(model.getData().getGrid());
@@ -419,9 +421,11 @@ public class GamePlayerController implements Observer {
 		Map<Integer, Tower> towerRedraw = this.model.getTowerOnGrid();
 		HashMap<Integer, Weapon> bulletRedraw = this.model.getWeaponManager().getWeaponOnGrid();
 		
+		System.out.println("bulletRedraw: "+bulletRedraw.size());
+		
 		updateBulletOnScreen(bulletRedraw);
 		updateEnemiesOnScreen(enemyRedraw);
-
+		
 		this.view.reRenderEnemy(enemiesOnScreen);
 		this.view.reRenderWeapon(weaponsOnScreen);
 		this.view.reRenderTower(towerRedraw);
@@ -432,6 +436,14 @@ public class GamePlayerController implements Observer {
 	}
 	
 	private void updateBulletOnScreen(HashMap<Integer, Weapon>bulletRedraw){
+		Iterator<Integer>it = weaponsOnScreen.keySet().iterator();
+		while(it.hasNext()){
+			int value = it.next(); 
+			if(!bulletRedraw.containsKey(value)){
+				it.remove(); 
+			}
+		}
+		
 		for (int i : bulletRedraw.keySet()) {
 			if (!weaponsOnScreen.containsKey(bulletRedraw.get(i).getUniqueID())) {
 				Image ii = imageBank.get("Weapon " + bulletRedraw.get(i).getWeaponTypeID());

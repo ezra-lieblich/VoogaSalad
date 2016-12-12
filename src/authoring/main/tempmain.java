@@ -19,7 +19,7 @@ public class tempmain extends Application {
         Scene scene = generalController.getScene();
         s.setTitle(TITLE);
         s.setScene(scene);
-        s.setResizable(true);
+        s.setResizable(false);
         s.setHeight(SIZE);
         s.setWidth(SIZE + 395);
         s.show();

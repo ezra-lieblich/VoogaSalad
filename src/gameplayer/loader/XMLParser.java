@@ -72,6 +72,10 @@ public class XMLParser {
 		gameManager = getGameManager(xmlFilename);
 	}
 	
+	public XMLParser(ManagerMediator manager) {
+		gameManager = manager;
+	}
+	
 	private ManagerMediator getGameManager(String xmlFilename) {
 		try {
 			File xmlFile = new File(xmlFilename);

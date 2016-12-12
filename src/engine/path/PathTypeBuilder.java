@@ -20,10 +20,10 @@ import engine.weapon.Weapon;
 public class PathTypeBuilder extends AbstractTypeBuilder<Path, PathBuilder> implements PathBuilder, PathInitializer {
     
      public static final String DEFAULT_NAME = "New Path";
-     public static final String DEFAULT_IMAGE_PATH = "blacksquare.png";
+     public static final String DEFAULT_IMAGE_PATH = "Images/blacksquare.png";
      
      public static final double DEFAULT_SIZE = 1;
-     public static final String DEFAULT_TYPE = "direct";
+     public static final String DEFAULT_TYPE = "Set";
      //public static final List<Coordinate<Integer>> DEFAULT_COORDINATES = Arrays.stream(new GridCoordinate[]{}).collect(Collectors.toList());
      public static final GridCoordinate[] DEFAULT_COORDINATES = new GridCoordinate[]{};
      public static final Integer DEFAULT_GRID_ROWS = 10;

@@ -21,10 +21,10 @@ import engine.observer.ObservableProperty;
 public class EffectTypeManager extends AbstractTypeManager<Effect> implements EffectManager {
     //private Map<String, Class<?>> annotatedClasses;
     private Map<Class<?>, List<Method>> annotatedClassMethods; //Return type : methods of that type
-    private Map<Class<?>, List<Field>> effectAccessibleData;
+    private List<Field> effectAccessibleData;
     private ObservableProperty<String> activeClass;
     
-    EffectTypeManager(Map<Class<?>, List<Method>> annotatedClassMethods, Map<Class<?>, List<Field>> effectAccessibleData) {
+    EffectTypeManager(Map<Class<?>, List<Method>> annotatedClassMethods, List<Field> effectAccessibleData) {
         this.annotatedClassMethods = annotatedClassMethods;
         this.effectAccessibleData = effectAccessibleData;
         this.activeClass = new ObservableObjectProperty<String>(null);
@@ -49,6 +49,11 @@ public class EffectTypeManager extends AbstractTypeManager<Effect> implements Ef
     @Override
     public List<Method> getAnnotatedClassMethods(String className) {
         return annotatedClassMethods.get(className);
+    }
+
+    @Override
+    public List<Field> getAnnotatedDataObjects () {
+        return effectAccessibleData;
     }
     
     /* (non-Javadoc)

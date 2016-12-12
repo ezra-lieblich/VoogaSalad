@@ -9,7 +9,7 @@ import authoring.editorview.INodeView;
  *
  * @author Kayla Schulz
  */
-public interface ITowerSetView extends INodeView {
+public interface TowerSetView extends INodeView {
 
     public void setDelegate (TowerAuthoringViewDelegate delegate);
 

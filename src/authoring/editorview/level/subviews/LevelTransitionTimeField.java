@@ -1,7 +1,7 @@
 package authoring.editorview.level.subviews;
 
 import java.util.ResourceBundle;
-import authoring.editorview.level.ILevelSetView;
+import authoring.editorview.level.LevelSetView;
 import authoring.editorview.level.LevelAuthoringViewDelegate;
 import authoring.utilityfactories.BoxFactory;
 import authoring.utilityfactories.TextFieldFactory;
@@ -10,7 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 
 
-public class LevelTransitionTimeField implements ILevelSetView {
+public class LevelTransitionTimeField implements LevelSetView {
 
     private TextField transitionTimeField;
     private LevelAuthoringViewDelegate delegate;

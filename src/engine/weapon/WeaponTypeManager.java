@@ -6,14 +6,18 @@ import engine.effect.EffectManager;
 import engine.effect.EffectManagerFactory;
 import engine.effect.EffectTypeBuilder;
 import engine.effect.EffectTypeManager;
+import engine.effect.player.AbstractEffectFactory;
+import engine.effect.player.CollisionEffectFactory;
 import engine.enemy.EnemyManager;
 
 public class WeaponTypeManager extends AbstractTypeManager<Weapon> implements WeaponManager {
     
+    public static final Class<? extends AbstractEffectFactory> DEFAULT_EFFECT_FACTORY = CollisionEffectFactory.class;
+
     private EffectManager weaponEffectManager;
     
     WeaponTypeManager() {
-        weaponEffectManager = new EffectManagerFactory().create();
+        weaponEffectManager = new EffectManagerFactory().create(DEFAULT_EFFECT_FACTORY);
         EffectBuilder effectFactory = new EffectTypeBuilder();
         weaponEffectManager.addEntry(effectFactory.build());
         weaponEffectManager.addEntry(effectFactory.build());

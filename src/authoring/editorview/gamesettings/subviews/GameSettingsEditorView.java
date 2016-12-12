@@ -1,9 +1,10 @@
 package authoring.editorview.gamesettings.subviews;
 
+import java.util.List;
 import java.util.ResourceBundle;
 
 import authoring.editorview.gamesettings.GameSettingsAuthoringViewDelegate;
-import authoring.editorview.gamesettings.IGameSettingsSetView;
+import authoring.editorview.gamesettings.GameSettingsSetView;
 import authoring.editorview.gamesettings.subviews.editorfields.GameImageView;
 import authoring.editorview.gamesettings.subviews.editorfields.GameInitialLivesView;
 import authoring.editorview.gamesettings.subviews.editorfields.GameInitialMoneyView;
@@ -11,6 +12,7 @@ import authoring.editorview.gamesettings.subviews.editorfields.GameLosingConditi
 import authoring.editorview.gamesettings.subviews.editorfields.GameNameView;
 import authoring.editorview.gamesettings.subviews.editorfields.GamePathDimensionsView;
 import authoring.editorview.gamesettings.subviews.editorfields.GamePathTypeView;
+import authoring.editorview.gamesettings.subviews.editorfields.GamePathView;
 import authoring.editorview.gamesettings.subviews.editorfields.GameWinningConditionsView;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -25,7 +27,7 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
-public class GameSettingsEditorView implements IGameSettingsSetView {
+public class GameSettingsEditorView implements GameSettingsSetView {
 	
 	
 	private VBox root;
@@ -38,6 +40,7 @@ public class GameSettingsEditorView implements IGameSettingsSetView {
 	private GameWinningConditionsView gameWinningConditionsView;
 	private GameLosingConditionsView gameLosingConditionsView;
 	private GamePathDimensionsView gamePathDimensionsView;
+	private GamePathView gamePathView;
 	
 	private static final String RESOURCE_FILE_NAME = "resources/GameAuthoringSettings";	
 	private ResourceBundle settingsResource = ResourceBundle.getBundle(RESOURCE_FILE_NAME);
@@ -57,6 +60,7 @@ public class GameSettingsEditorView implements IGameSettingsSetView {
 		this.gameWinningConditionsView = new GameWinningConditionsView(settingsResource);
 		this.gameLosingConditionsView = new GameLosingConditionsView(settingsResource);	
 		this.gamePathDimensionsView = new GamePathDimensionsView();
+		this.gamePathView = new GamePathView(settingsResource);
 		buildView();		
 	}
 
@@ -77,7 +81,8 @@ public class GameSettingsEditorView implements IGameSettingsSetView {
 				gameWinningConditionsView.getInstanceAsNode(),
 				gameLosingConditionsView.getInstanceAsNode(),
 				gamePathTypeView.getInstanceAsNode(),
-				gamePathDimensionsView.getInstanceAsNode()
+				gamePathDimensionsView.getInstanceAsNode(),
+				gamePathView.getInstanceAsNode()
 				);
 	}
 
@@ -94,6 +99,11 @@ public class GameSettingsEditorView implements IGameSettingsSetView {
 		gameImageView.setDelegate(delegate);
 		gameInitialMoneyView.setDelegate(delegate);
 		gameInitialLivesView.setDelegate(delegate);
+		gamePathTypeView.setDelegate(delegate);
+		gamePathView.setDelegate(delegate);
+		gamePathDimensionsView.setDelegate(delegate);
+		
+		//winning and losing conditions
 		
 	}
 	
@@ -111,6 +121,19 @@ public class GameSettingsEditorView implements IGameSettingsSetView {
 	
 	public void updateInitialMoney(int money){
 		gameInitialMoneyView.updateInitialMoney(money);
+	}
+	
+	public void updatePathType(String pathType) {
+		gamePathTypeView.updatePathType(pathType);
+		
+	}
+	
+	public void updateGridDimensions(int size){
+		gamePathDimensionsView.setGridDimensions(size);
+	}
+	
+	public void updateAvailablePathList (List<Integer> availablePathList){
+		gamePathView.setAvailablePathList(availablePathList);
 	}
 	
 	

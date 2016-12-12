@@ -3,7 +3,7 @@ package authoring.editorview.gamesettings.subviews.editorfields;
 import java.util.ResourceBundle;
 import authoring.editorview.EditorNameView;
 import authoring.editorview.gamesettings.GameSettingsAuthoringViewDelegate;
-import authoring.editorview.gamesettings.IGameSettingsSetView;
+import authoring.editorview.gamesettings.GameSettingsSetView;
 import authoring.utilityfactories.BoxFactory;
 import authoring.utilityfactories.GridFactory;
 import authoring.utilityfactories.TextFieldFactory;
@@ -20,7 +20,7 @@ import javafx.scene.layout.HBox;
  *
  */
 
-public class GameNameView implements IGameSettingsSetView {
+public class GameNameView implements GameSettingsSetView {
 
 	private GridPane root;
     private TextField nameTextField;
@@ -42,10 +42,10 @@ public class GameNameView implements IGameSettingsSetView {
     }
 
     protected void makeNameTextField () {
-        nameTextField = TextFieldFactory.makeTextField("", e -> delegate.onUserEnteredGameNames(nameTextField.getText()));
+        nameTextField = TextFieldFactory.makeTextField("", e -> delegate.onUserEnteredGameName(nameTextField.getText()));
         nameTextField.setMaxWidth(105);
         
-        root = GridFactory.createRowWithLabelandNode(resource.getString("GameName"), nameTextField);
+        root = GridFactory.createRowWithLabelandNode(resource.getString("GameName"), nameTextField, 125);
 
     }
 
