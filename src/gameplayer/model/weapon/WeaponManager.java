@@ -4,13 +4,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Observable;
+import java.util.stream.Collectors;
 
-import engine.effect.player.CollisionEffectFactory;
+import engine.effect.EffectManager;
+import engine.effect.EffectTypeManager;
 import gameplayer.model.GamePlayData;
+import gameplayer.model.effect.CollisionEffectFactory;
+import gameplayer.model.effect.GameEffect;
 import gameplayer.model.tower.Gun;
 import gameplayer.model.tower.TowerManager;
 import gameplayer.view.GridGUI;
+import javafx.scene.image.ImageView;
 
 public class WeaponManager extends Observable{
 	private GamePlayData gameData;
@@ -19,7 +25,10 @@ public class WeaponManager extends Observable{
 	private int uniqueWeaponID;
 	private long timeInterval;
 	private int tempCountFix;
-	CollisionEffectFactory collisionFactory;
+	private CollisionEffectFactory collisionFactory;
+	private EffectManager effectManager;
+	private Map<Integer, GameEffect> allEffects;
+	
 	// all effects are gameEffect
 	
 	
@@ -49,7 +58,10 @@ public class WeaponManager extends Observable{
 		this.timeInterval = this.towerManager.getTimeInterval();
 		this.tempCountFix = 1; 
 		initializeNewLevel();
-		collisionFactory = new CollisionEffectFactory();
+		this.collisionFactory = new CollisionEffectFactory(); // only used to turn into gameEffect
+		this.effectManager = gameData.getFactory().getWeaponEffectManager(); // is effectManager the same as effectType Manager????? 		
+		this.allEffects = effectManager.getEntities().entrySet().stream().collect(Collectors.toMap(e-> e.getKey(), e->collisionFactory.create(e.getValue())));
+
 	}
 
 	public void initializeNewLevel(){
@@ -66,10 +78,10 @@ public class WeaponManager extends Observable{
 	}
 
 
-	public void updateWeapon() {
+	public void updateWeapon(HashMap<Integer,ImageView>weaponsOnScreen) {
 		//newly fired weapon
 		if(this.tempCountFix % 20 == 0){//VERY TEMP FIX MAKE BULLETS ONCE PER SECOND
-			ArrayList<Weapon> newlyGeneratedWeapons = this.towerManager.generateNewWeapons();
+			ArrayList<Weapon> newlyGeneratedWeapons = this.towerManager.generateNewWeapons(this.allEffects);
 			for (int i = 0; i < newlyGeneratedWeapons.size(); i++){
 				newlyGeneratedWeapons.get(i).setUniqueID(this.uniqueWeaponID);
 				this.weaponOnGrid.put(uniqueWeaponID, newlyGeneratedWeapons.get(i));
@@ -96,6 +108,7 @@ public class WeaponManager extends Observable{
 
 			if (!this.gameData.coordinateInBound(w.getX(), w.getY())) {
 				weaponOnGridIterate.remove();
+				weaponsOnScreen.remove(w.getUniqueID());
 			}
 		}
 

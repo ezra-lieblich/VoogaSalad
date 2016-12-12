@@ -14,13 +14,13 @@ import engine.effect.EffectManager;
 import engine.effect.EffectManagerFactory;
 import engine.effect.EffectTypeBuilder;
 import engine.effect.EffectTypeManager;
-import engine.effect.player.AbstractEffectFactory;
-import engine.effect.player.CollisionEffectFactory;
 import engine.enemy.EnemyManager;
 import engine.enemy.EnemyType;
 import engine.weapon.Weapon;
 import engine.weapon.WeaponManager;
 import engine.weapon.WeaponType;
+import gameplayer.model.effect.AbstractEffectFactory;
+import gameplayer.model.effect.CollisionEffectFactory;
 
 public class TowerTypeManager extends AbstractTypeManager<Tower> implements TowerManager {
     

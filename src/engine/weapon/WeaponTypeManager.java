@@ -6,9 +6,9 @@ import engine.effect.EffectManager;
 import engine.effect.EffectManagerFactory;
 import engine.effect.EffectTypeBuilder;
 import engine.effect.EffectTypeManager;
-import engine.effect.player.AbstractEffectFactory;
-import engine.effect.player.CollisionEffectFactory;
 import engine.enemy.EnemyManager;
+import gameplayer.model.effect.AbstractEffectFactory;
+import gameplayer.model.effect.CollisionEffectFactory;
 
 public class WeaponTypeManager extends AbstractTypeManager<Weapon> implements WeaponManager {
     

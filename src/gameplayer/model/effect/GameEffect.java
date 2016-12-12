@@ -1,4 +1,4 @@
-package engine.effect.player;
+package gameplayer.model.effect;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
@@ -58,6 +58,10 @@ public class GameEffect {
     
     public void addEncompassingClass(Object value) {
         groovyExecutor.addVariable(encompassingClassName, value);
+    }
+    
+    public String getTriggerClass(){
+    	return this.triggerClass;
     }
     
 }
