@@ -7,13 +7,18 @@ import authoring.editorview.gamesettings.GameSettingsUpdateView;
 import engine.AbstractTypeManagerController;
 import engine.ManagerMediator;
 import engine.MethodObjectData;
+import engine.effect.EffectManagerController;
+import engine.effect.EffectTypeManagerController;
 
 
 public class GameModeTypeManagerController 
 	extends AbstractTypeManagerController<GameModeManager, GameModeBuilder, GameMode, GameSettingsUpdateView> implements GameModeManagerController {
 
+	private EffectManagerController gameModeEffectManagerController;
+	
 	public GameModeTypeManagerController(ManagerMediator managerMediator) {
 		super(new GameModeTypeManager(), new GameModeTypeBuilder(), managerMediator);
+		this.gameModeEffectManagerController = new EffectTypeManagerController(managerMediator, getTypeManager().getGameModeEffectManager());
 	}
 
 	@Override
@@ -90,6 +95,7 @@ public class GameModeTypeManagerController
 
 	@Override
 	public void setGridSize(int gameModeID, int gridSize) {
+		getTypeManager().notifyObservers(new MethodObjectData<Integer>("GridSize", gridSize) );
 		getTypeManager().getEntity(gameModeID).setGridSize(gridSize);
 	}
 
@@ -113,6 +119,11 @@ public class GameModeTypeManagerController
 	@Override
 	public List<Integer> getPaths(int gameModeID) {
 		return Collections.unmodifiableList(getTypeManager().getEntity(gameModeID).getPaths());
+	}
+
+	@Override
+	public EffectManagerController getEffectManagerController() {
+		return gameModeEffectManagerController;
 	}
 
 
