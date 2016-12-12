@@ -38,7 +38,7 @@ public class GamePlayData extends Observable{
 	private EffectManager effectManager;
 	private Map<Integer, GameEffect> allEffects;	
 
-	
+
 	
 	public GamePlayData(GamePlayerFactory factory){
 		this.numLevels = new SimpleDoubleProperty();

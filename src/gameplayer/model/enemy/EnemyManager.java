@@ -57,8 +57,8 @@ public class EnemyManager extends Observable {
 		this.allWaves = this.gameFactory.getWaves(this.gameData.getCurrentLevel());
 		initializeWaves();
 		this.noMoreWave = false;
-		System.out.println("Start: " + grid.getStart().getX() + " " + grid.getStart().getY());
-		System.out.println("end: " + grid.getEnd().getX() + " " + grid.getEnd().getY());
+		//System.out.println("Start: " + grid.getStart().getX() + " " + grid.getStart().getY());
+		//System.out.println("end: " + grid.getEnd().getX() + " " + grid.getEnd().getY());
 
 	}
 	
@@ -107,7 +107,7 @@ public class EnemyManager extends Observable {
 		enemy.setyDirection(nextCell.getY() - enemy.getCurrentCell().getY());
 		enemy.setX(gameData.cellToCoordinate(enemy.getCurrentCell().getX()));
 		enemy.setY(gameData.cellToCoordinate(enemy.getCurrentCell().getY()));
-		System.out.println("enemy spawning: "+ enemy.getUniqueID());
+		//System.out.println("enemy spawning: "+ enemy.getUniqueID());
 		enemyOnGrid.put(enemy.getUniqueID(), enemy);
 	}
 
@@ -153,6 +153,8 @@ public class EnemyManager extends Observable {
 					if (gameData.getLife() >= 0) {
 						gameData.setLife(gameData.getLife() - 1);
 					}
+					
+					//System.out.println("ENEMY REMOVING");
 					enemy.setRemove(true);
 					return;
 				}
@@ -228,7 +230,7 @@ public class EnemyManager extends Observable {
 				this.gameData.setLevel(this.gameData.getCurrentLevel() + 1);
 			}
 			this.noMoreWave = true;
-			System.out.println("ALL WAVES IS EMPTY");
+			//System.out.println("ALL WAVES IS EMPTY");
 			return new LinkedList<Enemy>();
 		}
 		Wave wave = this.allWaves.poll();
