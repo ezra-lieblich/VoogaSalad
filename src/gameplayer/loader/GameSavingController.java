@@ -31,11 +31,11 @@ public class GameSavingController {
 		Enemy e = eman.getPackOfEnemyComing().element();
 		GamePlayData gameData = gameModel.getData();
 		//GamePlayerFactory factory = gameData.getFactory();
-		return new XStream(new DomDriver()).toXML(gameData);
+		return "" +gameData.getCurrentLevel();
 	}
 	
 	public void saveGame() {
-		String dirName = "src/newGame" + counter+ ".xml";
+		String dirName = "SavedGames/newGame" + counter+ ".xml";
 		counter += 1;
 		File newFile = new File(dirName);
 		String content = toPrettyXML();
