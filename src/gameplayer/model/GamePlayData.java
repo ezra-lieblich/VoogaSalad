@@ -90,8 +90,14 @@ public class GamePlayData extends Observable{
 	@EffectMethod
 	public void setWin(){
 		this.win = true;
+		setChanged();
+		notifyObservers();
 	}
 
+	public boolean won(){
+		return this.win;
+	}
+	
 	public GamePlayerFactory getFactory(){
 		return this.factory;
 	}
