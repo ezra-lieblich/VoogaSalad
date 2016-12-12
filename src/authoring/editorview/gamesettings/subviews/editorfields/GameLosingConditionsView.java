@@ -42,13 +42,12 @@ public class GameLosingConditionsView implements IGameSettingsSetView{
     	losingConditionComboBox = ComboBoxFactory.makeComboBox("" , 
 				e -> setLosingCondition(losingConditionComboBox.getValue().toString()), losingConditionList);
     	losingConditionComboBox.setPrefWidth(105);
-		root = GridFactory.createRowWithLabelandNode("Losing condition: ", losingConditionComboBox);
+		root = GridFactory.createRowWithLabelandNode("Losing condition: ", losingConditionComboBox, 125);
 		
 	}
 
-	private Object setLosingCondition(String string) {
-		// TODO Auto-generated method stub
-		return null;
+	private void setLosingCondition(String string) {
+		delegate.onUserEnteredLosingConditions(string);;
 	}
 
 }

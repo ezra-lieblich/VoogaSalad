@@ -2,9 +2,10 @@ package authoring.editorview.level.subviews;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import authoring.editorview.NameIdPair;
 import authoring.editorview.level.ILevelSetView;
 import authoring.editorview.level.LevelAuthoringViewDelegate;
-import authoring.editorview.path.NameIdPair;
 import authoring.utilityfactories.ComboBoxFactory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

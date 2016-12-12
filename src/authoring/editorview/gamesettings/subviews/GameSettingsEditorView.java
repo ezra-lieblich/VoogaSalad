@@ -11,6 +11,7 @@ import authoring.editorview.gamesettings.subviews.editorfields.GameLosingConditi
 import authoring.editorview.gamesettings.subviews.editorfields.GameNameView;
 import authoring.editorview.gamesettings.subviews.editorfields.GamePathDimensionsView;
 import authoring.editorview.gamesettings.subviews.editorfields.GamePathTypeView;
+import authoring.editorview.gamesettings.subviews.editorfields.GamePathView;
 import authoring.editorview.gamesettings.subviews.editorfields.GameWinningConditionsView;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -38,6 +39,7 @@ public class GameSettingsEditorView implements IGameSettingsSetView {
 	private GameWinningConditionsView gameWinningConditionsView;
 	private GameLosingConditionsView gameLosingConditionsView;
 	private GamePathDimensionsView gamePathDimensionsView;
+	private GamePathView gamePathView;
 	
 	private static final String RESOURCE_FILE_NAME = "resources/GameAuthoringSettings";	
 	private ResourceBundle settingsResource = ResourceBundle.getBundle(RESOURCE_FILE_NAME);
@@ -57,6 +59,7 @@ public class GameSettingsEditorView implements IGameSettingsSetView {
 		this.gameWinningConditionsView = new GameWinningConditionsView(settingsResource);
 		this.gameLosingConditionsView = new GameLosingConditionsView(settingsResource);	
 		this.gamePathDimensionsView = new GamePathDimensionsView();
+		this.gamePathView = new GamePathView(settingsResource);
 		buildView();		
 	}
 
@@ -77,7 +80,8 @@ public class GameSettingsEditorView implements IGameSettingsSetView {
 				gameWinningConditionsView.getInstanceAsNode(),
 				gameLosingConditionsView.getInstanceAsNode(),
 				gamePathTypeView.getInstanceAsNode(),
-				gamePathDimensionsView.getInstanceAsNode()
+				gamePathDimensionsView.getInstanceAsNode(),
+				gamePathView.getInstanceAsNode()
 				);
 	}
 
@@ -111,6 +115,15 @@ public class GameSettingsEditorView implements IGameSettingsSetView {
 	
 	public void updateInitialMoney(int money){
 		gameInitialMoneyView.updateInitialMoney(money);
+	}
+	
+	public void updatePathType(String pathType) {
+		//gamePathType.
+		
+	}
+	
+	public void updateGridDimensions(int size){
+		gamePathDimensionsView.setGridDimensions(size);
 	}
 	
 	

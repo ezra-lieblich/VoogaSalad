@@ -58,7 +58,7 @@ public class PathImageView extends PhotoFileChooser implements IPathSetView{
 		File chosenFile = chooseFile.showOpenDialog(new Stage());
 		if (chosenFile != null){
 			BufferedImage image = ImageIO.read(chosenFile) ;
-			pathImagePath = chosenFile.toURI().toString();
+			pathImagePath = chosenFile.toURI().getPath();
 			delegate.onUserEnteredPathImage(pathImagePath);		
 		}
 	}

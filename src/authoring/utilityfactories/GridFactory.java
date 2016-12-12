@@ -10,11 +10,11 @@ public final class GridFactory {
 	private GridFactory(){
 	}
 	
-	public static GridPane createRowWithLabelandNode (String labelString, Node node) {
+	public static GridPane createRowWithLabelandNode (String labelString, Node node, int columnSize) {
         GridPane row = new GridPane();
         
         ColumnConstraints column1 = new ColumnConstraints();
-        column1.setMinWidth(125);
+        column1.setMinWidth(columnSize);
         
         ColumnConstraints column2 = new ColumnConstraints();
 		

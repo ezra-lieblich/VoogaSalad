@@ -2,10 +2,13 @@ package authoring.editorview.path;
 
 
 import authoring.editorview.EditorViewController;
+import authoring.editorview.ListCellData;
+import authoring.editorview.ListDataSource;
 import engine.path.PathManagerController;
 
 
-public class PathAuthoringViewController extends EditorViewController implements PathAuthoringViewDelegate {
+public class PathAuthoringViewController extends EditorViewController 
+		implements PathAuthoringViewDelegate, ListDataSource {
 	private IPathUpdateView pathView;
 	private PathManagerController pathDataSource;
 	private int activeID;
@@ -13,6 +16,7 @@ public class PathAuthoringViewController extends EditorViewController implements
 	public PathAuthoringViewController(int editorWidth, int editorHeight){
 		this.pathView = PathAuthoringViewFactory.build(editorWidth, editorHeight);
 		pathView.setDelegate(this);
+		pathView.setPathListDataSource(this);
 		this.view = pathView;
 	}
 	
@@ -20,13 +24,11 @@ public class PathAuthoringViewController extends EditorViewController implements
 		this.pathDataSource = source;
 		this.pathDataSource.addTypeBankListener(this.pathView);
 		onUserEnteredCreatePath();
-		onUserEnteredEditPath(activeID);	
 	}
 
 	@Override
 	public void onUserEnteredGridDimensions(int dimensions) {
-		pathDataSource.setSquareGridDimensions(activeID, dimensions);
-		
+		pathDataSource.setSquareGridDimensions(activeID, dimensions);		
 	}
 	
 	@Override
@@ -48,19 +50,17 @@ public class PathAuthoringViewController extends EditorViewController implements
 
 	
 	@Override
-	public int onUserEnteredCreatePath() {
+	public void onUserEnteredCreatePath() {
 		activeID = pathDataSource.createType(pathView);	
-		pathView.updateActiveID(activeID);
-		return activeID;
+		onUserEnteredEditPath(activeID);
 	}
 
 	@Override
 	public void onUserEnteredEditPath(int pathID) {
 		activeID = pathID;
-		pathView.updateActiveID(activeID);
-		pathView.updateGridDimensions(pathDataSource.getNumberofRows(activeID));	
-		pathView.updatePathCoordinates(pathDataSource.getPathCoordinates(activeID));
 		pathView.updateImagePathDisplay(pathDataSource.getImagePath(activeID));
+		pathView.updateGridDimensions(pathDataSource.getNumberofRows(activeID));	
+		pathView.updatePathCoordinates(pathDataSource.getPathCoordinates(activeID));		
 		pathView.updateNameDisplay(pathDataSource.getName(activeID));
 		pathView.updateType(pathDataSource.getType(activeID));
 		pathView.updatePath();
@@ -85,7 +85,14 @@ public class PathAuthoringViewController extends EditorViewController implements
 		
 	}
 
-	
+	@Override
+	public ListCellData getCellDataForSubject(int id) {
+		ListCellData cellData = new ListCellData();
+		cellData.setName(pathDataSource.getName(id));
+		cellData.setImagePath(pathDataSource.getImagePath(id));
+		cellData.setId(id);		
+		return cellData;
+	}
 
 
 }

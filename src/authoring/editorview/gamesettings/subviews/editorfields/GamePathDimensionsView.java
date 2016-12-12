@@ -56,14 +56,14 @@ public class GamePathDimensionsView implements IGameSettingsSetView {
 		
 		dimensionsTextField.setPrefWidth(105); //TODO
 		
-		root = GridFactory.createRowWithLabelandNode(pathResource.getString("DimensionsTextField"), dimensionsTextField);
+		root = GridFactory.createRowWithLabelandNode(pathResource.getString("DimensionsTextField"), dimensionsTextField, 125);
 		
 	}
 	
 	private void submitGridDimensions(String gridDimensionsString){
 		try {
 			dimensions = Integer.parseInt(gridDimensionsString);
-			delegate.onUserEnteredGridSize(getGridDimensions());
+			delegate.onUserEnteredGameGridSize(getGridDimensions());
 		}
 		catch (NumberFormatException e){
 			setGridDimensions(dimensions);
