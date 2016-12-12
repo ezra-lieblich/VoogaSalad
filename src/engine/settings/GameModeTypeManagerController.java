@@ -9,6 +9,7 @@ import engine.ManagerMediator;
 import engine.MethodObjectData;
 import engine.effect.EffectManagerController;
 import engine.effect.EffectTypeManagerController;
+import engine.path.PathOption;
 
 
 public class GameModeTypeManagerController 
@@ -80,17 +81,17 @@ public class GameModeTypeManagerController
 				.addWinningConditionsListener((oldValue, newValue) -> updateView.updateLosingConditions(newValue))
 				.addPathListener((oldValue, newValue) -> updateView.updatePathList(newValue))
 				.addGridSizeListener((oldValue, newValue) -> updateView.updateGridSize(newValue))
-				.addPathTypeListener((oldValue, newValue) -> updateView.updatePathType(newValue));	
+				.addPathTypeListener((oldValue, newValue) -> updateView.updatePathType(newValue.name()));	
 	}
 
 	@Override
 	public void setPathType(int gameModeID, String pathType) {
-		getTypeManager().getEntity(gameModeID).setPathType(pathType);
+		getTypeManager().getEntity(gameModeID).setPathType(PathOption.valueOf(pathType));
 	}
 
 	@Override
 	public String getPathType(int gameModeID) {
-		return getTypeManager().getEntity(gameModeID).getPathType();
+		return getTypeManager().getEntity(gameModeID).getPathType().name();
 	}
 
 	@Override

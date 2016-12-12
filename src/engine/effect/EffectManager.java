@@ -11,14 +11,14 @@ import engine.Manager;
 
 public interface EffectManager extends Manager<Effect> {
 
-    List<Method> getAnnotatedClassMethods (String className);
+    List<Method> getAnnotatedClassMethods (Class<?> className);
 
     Collection<Class<?>> getAnnotatedClasses ();
     
     List<Field> getAnnotatedDataObjects ();
     
-    void addActiveClassListener (BiConsumer<String, String> listener);
+    void addActiveClassListener (BiConsumer<Class<?>, Class<?>> listener);
     
-    void setActiveClass(String activeClass);
+    void setActiveClass(Class<?> activeClass);
 
 }

@@ -87,7 +87,7 @@ public class GamePlayerFactory{
 
 	public Grid getGrid(int levelNumber){
 		Level level = authoringFileReader.getLevelManager().getEntity(levelNumber);//REMEMBER TO CHANGE
-		String pathType = authoringFileReader.getGameMode().getPathType();
+		String pathType = authoringFileReader.getGameMode().getPathType().name();
 		System.out.println("lev num: " +levelNumber);
 		List<Integer> levelPaths = level.getPaths();
 
@@ -113,7 +113,7 @@ public class GamePlayerFactory{
 		return levelGrid;
 		 */
 
-		if(pathType.equals("Free")){
+		if(pathType.equals("FREE")){
 			System.out.println("Paths list in game mode" +authoringFileReader.getGameMode().getPaths().size());
 			List<Integer> hardCodedPathIDs = new ArrayList<Integer>();
 			hardCodedPathIDs.add(0);
