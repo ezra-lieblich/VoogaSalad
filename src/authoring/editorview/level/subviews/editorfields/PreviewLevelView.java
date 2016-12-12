@@ -7,6 +7,7 @@ import authoring.editorview.level.LevelSetView;
 import authoring.utilityfactories.ButtonFactory;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.stage.Stage;
 
 public class PreviewLevelView implements LevelSetView{
 
@@ -24,7 +25,12 @@ public class PreviewLevelView implements LevelSetView{
 
 	
 	private void buildPreviewButton(){
-		previewButton = ButtonFactory.makeButton("Preview Level", null);
+		previewButton = ButtonFactory.makeButton("Preview Level", e -> {
+			Stage s = new Stage(); 
+			s.setHeight(600);
+			s.setWidth(600);
+			s.show(); 
+		});
 	}
 
 	@Override

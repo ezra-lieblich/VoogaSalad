@@ -9,6 +9,7 @@ public class Path {
 	private Cell start, end;
 	
 
+
 	
 	public Path(ArrayList<Cell> allCoordinates, Cell[][] grid) {
 		this.allCoordinates = allCoordinates;
@@ -24,6 +25,7 @@ public class Path {
 			}		
 		}
 	}
+	
 	
 	
 	public Cell getNext(Cell c){

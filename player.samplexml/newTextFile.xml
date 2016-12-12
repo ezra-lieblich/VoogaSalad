@@ -524,17 +524,17 @@
                   <triggerClass class="engine.observer.ObservableObjectProperty">
                     <observers/>
                     <listeners/>
-                    <property class="string">engine.effect.Enemy</property>
+                    <property class="string">gameplayer.model.enemy.Enemy</property>
                   </triggerClass>
                   <triggerConditionGroovy class="engine.observer.ObservableObjectProperty">
                     <observers/>
                     <listeners/>
-                    <property class="string">collider.getHealth() == 50</property>
+                    <property class="string">collider.getHealth() == 10</property>
                   </triggerConditionGroovy>
                   <effectGroovy class="engine.observer.ObservableObjectProperty">
                     <observers/>
                     <listeners/>
-                    <property class="string">collider.setHealth(110)</property>
+                    <property class="string">collider.setHealth(-10)</property>
                   </effectGroovy>
                 </engine.effect.EffectType>
               </entry>
