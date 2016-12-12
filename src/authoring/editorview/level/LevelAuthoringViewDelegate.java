@@ -24,6 +24,8 @@ public interface LevelAuthoringViewDelegate {
     public void onUserEnteredTransitionTime (String time);
 
     public void onUserPressedAddEffect ();
+    
+    public void onUserSelectedLevel (int levelID);
 
     // WAVE
 
@@ -40,5 +42,7 @@ public interface LevelAuthoringViewDelegate {
     public void onUserEnteredSpawnPoint (String waveID, String spawnPoint);
 
     public void onUserEnteredWaveTimeDelay (String waveID, String timeDelay);
+
+	public void onUserEnteredLevelImagePath(String path);
 
 }

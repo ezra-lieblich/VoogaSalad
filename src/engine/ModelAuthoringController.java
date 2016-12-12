@@ -65,7 +65,6 @@ public class ModelAuthoringController implements ModelController {
 	@Override
 	//TODO Catch it for real
 	public GameAuthoringData loadData(String filePath) {
-		// TODO Reset mediators and managers. Loop through each Type and call it
 		try {
 			File xmlFile = new File(filePath);
 			GameAuthoringData data = (GameAuthoringData) Serializer.fromXML(new FileInputStream(xmlFile));
