@@ -132,7 +132,9 @@ public class GamePlayerFactory{
 				});
 				levelGrid.setNoPath(true);
 				levelGrid.setStart(cells.get(0));
-				levelGrid.setEnd(cells.get(1));
+				Cell myHardcodedCell = new Cell(7, 3); 
+				//levelGrid.setEnd(cells.get(1)); UNCOMMENT ME
+				levelGrid.setEnd(myHardcodedCell);
 				//gameplayer.model.Path newPath = new gameplayer.model.Path(cells, levelGrid.getGrid());
 				//allPaths.put(index, newPath);
 			}

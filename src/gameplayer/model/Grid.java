@@ -50,6 +50,7 @@ public class Grid {
 
 
 	private Cell getNoPathNext(Cell c){
+		System.out.println("the cell enemy is at: " + c.getX() + " " + c.getY());
 		int xdirection = (int)Math.signum(c.getX() - this.end.getX());
 
 		if (xdirection != 0){
