@@ -459,6 +459,15 @@ public class GamePlayerController implements Observer {
 	}
 
 	private void updateEnemiesOnScreen(HashMap<Integer, Enemy> enemyRedraw) {
+		//might fix later
+		Iterator<Integer> it = enemiesOnScreen.keySet().iterator();
+		while (it.hasNext()) {
+			int value = it.next();
+			if (!enemyRedraw.containsKey(value)) {
+				it.remove();
+			}
+		}
+		
 		for (int i : enemyRedraw.keySet()) {
 			if (!enemiesOnScreen.containsKey(enemyRedraw.get(i).getUniqueID())) {
 				ImageView image = new ImageView(graphics.createImage(enemyRedraw.get(i).getImage()));
