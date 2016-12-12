@@ -5,9 +5,9 @@ import engine.effect.EffectBuilder;
 import engine.effect.EffectManager;
 import engine.effect.EffectManagerFactory;
 import engine.effect.EffectTypeBuilder;
-import engine.effect.player.AbstractEffectFactory;
-import engine.effect.player.WinEffectFactory;
 import engine.path.PathManager;
+import gameplayer.model.effect.AbstractEffectFactory;
+import gameplayer.model.effect.WinEffectFactory;
 
 public class GameModeTypeManager extends AbstractTypeManager<GameMode> implements GameModeManager{
     public static final Class<? extends AbstractEffectFactory> DEFAULT_EFFECT_FACTORY = WinEffectFactory.class;

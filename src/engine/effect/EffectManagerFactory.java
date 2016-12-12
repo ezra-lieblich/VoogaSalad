@@ -1,6 +1,6 @@
 package engine.effect;
 
-import engine.effect.player.AbstractEffectFactory;
+import gameplayer.model.effect.AbstractEffectFactory;
 
 public class EffectManagerFactory {
     public static final String DEFAULT_PACKAGE_PATH = "gameplayer.model";

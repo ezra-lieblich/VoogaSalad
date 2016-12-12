@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import engine.effect.player.GameEffect;
+import gameplayer.model.effect.GameEffect;
 import gameplayer.model.weapon.Weapon;
 
 public class Gun {
