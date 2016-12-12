@@ -39,6 +39,10 @@ public class ViewController implements EditorTabPaneDelegate {
     	return this.editors;
     }
     
+    public EditorViewController getController(String id) {
+    	return this.editors.get(id);
+    }
+    
     private void createScene (int width, int height) {
     	checkNullTabs();
         view = AuthoringViewFactory.build(width, height);
