@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
-import authoring.editorview.enemy.IEnemyUpdateView;
+import authoring.editorview.enemy.EnemyUpdateView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;

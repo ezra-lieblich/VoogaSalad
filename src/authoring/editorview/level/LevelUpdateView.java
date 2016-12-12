@@ -3,11 +3,10 @@ package authoring.editorview.level;
 import java.util.List;
 import authoring.editorview.IUpdateView;
 import authoring.editorview.ListDataSource;
-import engine.level.wave.Wave;
 import engine.level.wave.WaveString;
 
 
-public interface ILevelUpdateView extends ILevelSetView, IUpdateView {
+public interface LevelUpdateView extends LevelSetView, IUpdateView {
 
     public void updateRewardScore (double winPoints);
 

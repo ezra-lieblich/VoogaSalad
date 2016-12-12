@@ -1,7 +1,7 @@
 package authoring.editorview.tower.subviews.editorfields;
 
 import java.util.ResourceBundle;
-import authoring.editorview.tower.ITowerSetView;
+import authoring.editorview.tower.TowerSetView;
 import authoring.editorview.tower.TowerAuthoringViewDelegate;
 import javafx.scene.Node;
 import javafx.scene.layout.HBox;
@@ -12,7 +12,7 @@ import javafx.scene.layout.HBox;
  * @author Kayla Schulz
  *
  */
-public class TowerWeaponBank implements ITowerSetView {
+public class TowerWeaponBank implements TowerSetView {
 
     private HBox towerChooseWeaponBox;
     private TowerAuthoringViewDelegate delegate;

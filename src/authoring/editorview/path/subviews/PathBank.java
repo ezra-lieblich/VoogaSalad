@@ -1,5 +1,6 @@
 package authoring.editorview.path.subviews;
 
+import java.util.List;
 import java.util.ResourceBundle;
 
 import authoring.editorview.ImageBank;
@@ -16,14 +17,11 @@ public class PathBank extends ImageBank {
 		Button createPathButton =
 				ButtonFactory.makeButton(pathResource.getString("NewPathButton"),
                  e -> {
-					createNewPath();		
+                	 delegate.onUserEnteredCreatePath();			
 				});
-		
-	}
-
-	@Override
-	protected void userSelectedRow(int index) {
-		// TODO Auto-generated method stub
+		createPathButton.setPrefWidth(130);
+		items.add(createPathButton);
+        this.CONTENT_OFFSET = 1;
 		
 	}
 	
@@ -31,11 +29,18 @@ public class PathBank extends ImageBank {
 		this.delegate = delegate;
 	}
 	
-	private void createNewPath(){
-		int activeID = delegate.onUserEnteredCreatePath();				
-		delegate.onUserEnteredEditPath(activeID);
+	public void updatePathBank(List<Integer> createdPaths){
+		super.updateBank(createdPaths);
 		
 	}
-	
+
+	@Override
+	protected void userSelectedRow(int index) {
+		int selectedPathID = this.itemIDs.get(index);
+		if (selectedPathID != -1){
+			this.delegate.onUserEnteredEditPath(selectedPathID);
+		}
+		
+	}
 
 }

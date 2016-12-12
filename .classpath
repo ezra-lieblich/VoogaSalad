@@ -34,5 +34,8 @@
 	<classpathentry kind="lib" path="lib/reflections/dom4j-1.6.1.redhat-7.jar"/>
 	<classpathentry kind="lib" path="lib/reflections/jarWithManifest.jar"/>
 	<classpathentry kind="lib" path="lib/DJNativeSwing-SWTAPI.jar"/>
+	<classpathentry kind="lib" path="lib/check-combo-box/controlsfx-8.40.12.jar"/>
+	<classpathentry kind="lib" path="lib/check-combo-box/controlsfx-samples-8.40.12.jar"/>
+	<classpathentry kind="lib" path="lib/check-combo-box/fxsampler-1.0.9.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
