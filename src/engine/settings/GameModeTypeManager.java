@@ -17,8 +17,8 @@ public class GameModeTypeManager extends AbstractTypeManager<GameMode> implement
 	GameModeTypeManager() {
 		this.gameModeEffectManager = new EffectManagerFactory().create(DEFAULT_EFFECT_FACTORY);
 		 EffectBuilder effectFactory = new EffectTypeBuilder();
-		 gameModeEffectManager.addEntry(effectFactory.buildTriggerConditionGroovy("getTotalLevel() + 1 == getCurrentLevel()")
-				 									.buildEffectGroovy("setWin(true)")
+		 gameModeEffectManager.addEntry(effectFactory.buildTriggerConditionGroovy("data.getTotalLevel() + 1 == data.getCurrentLevel()")
+				 									.buildEffectGroovy("data.setWin()")
 				 									.build());
 	}
 	
