@@ -36,6 +36,7 @@ public class DeleteEnemy implements EnemySetView {
         deleteEnemyButton =
                 ButtonFactory.makeButton(labelsResource.getString("Delete"),
                                          e -> delegate.onUserPressedDeleteEnemy());
+        deleteEnemyButton.setPrefWidth(280);
     }
 
 }

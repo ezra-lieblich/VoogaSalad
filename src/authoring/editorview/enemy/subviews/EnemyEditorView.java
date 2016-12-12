@@ -18,9 +18,20 @@ import authoring.editorview.enemy.subviews.editorfields.EnemyDamageField;
 import authoring.editorview.enemy.subviews.editorfields.EnemySpeedField;
 import authoring.utilityfactories.ButtonFactory;
 import authoring.utilityfactories.DialogueBoxFactory;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -34,7 +45,7 @@ import javafx.stage.Stage;
 
 public class EnemyEditorView extends PhotoFileChooser implements EnemySetView {
 
-    private ScrollPane enemyEffectView;
+    private AnchorPane rootBuffer;
     private VBox vbox;
     private EnemyAuthoringViewDelegate delegate;
     private File chosenFile;
@@ -52,6 +63,7 @@ public class EnemyEditorView extends PhotoFileChooser implements EnemySetView {
 
     private ResourceBundle labelsResource;
     private final String ENEMY_EFFECT_RESOURCE_PATH = "resources/GameAuthoringEnemy";
+    private static final double BUFFER = 10.0;
 
     public EnemyEditorView (EnemyImageView enemyImage,
                             EnemyNameField enemyName,
@@ -63,9 +75,9 @@ public class EnemyEditorView extends PhotoFileChooser implements EnemySetView {
                             EnemySizeField enemySize,
                             DeleteEnemy deleteEnemy,
                             AddEnemyEffectView addEnemyEffect) {
-        enemyEffectView = new ScrollPane();
+        rootBuffer = new AnchorPane();
         vbox = new VBox(10);
-        enemyEffectView.setContent(vbox);
+        rootBuffer.getChildren().add(vbox);
 
         this.enemyImage = enemyImage;
         this.enemyName = enemyName;
@@ -84,9 +96,19 @@ public class EnemyEditorView extends PhotoFileChooser implements EnemySetView {
     }
 
     private void buildViewComponents () {
-        vbox.getChildren().add(deleteEnemy.getInstanceAsNode());
-        vbox.getChildren().add(enemyImage.getInstanceAsNode());
-        vbox.getChildren().add(ButtonFactory.makeButton(labelsResource.getString("Image"),
+    	
+    	AnchorPane.setLeftAnchor(vbox, BUFFER);
+        AnchorPane.setTopAnchor(vbox, BUFFER);
+
+        rootBuffer
+                .setBorder(new Border(new BorderStroke(Color.GRAY, BorderStrokeStyle.SOLID,
+                                                       CornerRadii.EMPTY, new BorderWidths(0.5))));
+        rootBuffer
+                .setBackground(new Background(new BackgroundFill(Color.rgb(235, 235, 235),
+                                                                 CornerRadii.EMPTY, Insets.EMPTY)));
+
+        
+        Button imageButton = ButtonFactory.makeButton(labelsResource.getString("Image"),
                                                         e -> {
                                                             try {
                                                                 selectFile("Select new enemy image",
@@ -97,15 +119,20 @@ public class EnemyEditorView extends PhotoFileChooser implements EnemySetView {
                                                                         .createErrorDialogueBox("Unable to open file chooser",
                                                                                                 "Try again");
                                                             }
-                                                        }));
-        vbox.getChildren().add(enemyName.getInstanceAsNode());
-        vbox.getChildren().add(enemySize.getInstanceAsNode());
-        vbox.getChildren().add(enemySpeed.getInstanceAsNode());
-        vbox.getChildren().add(enemyDamage.getInstanceAsNode());
-        vbox.getChildren().add(enemyHealth.getInstanceAsNode());
-        vbox.getChildren().add(enemyRewardMoney.getInstanceAsNode());
-        vbox.getChildren().add(enemyRewardPoints.getInstanceAsNode());
-        vbox.getChildren().add(addEnemyEffect.getInstanceAsNode());
+                                                        });
+        imageButton.setPrefWidth(280);
+        vbox.getChildren().addAll(
+        		imageButton,
+        		enemyName.getInstanceAsNode(),
+        		enemySize.getInstanceAsNode(),
+        		enemySpeed.getInstanceAsNode(),
+        		enemyDamage.getInstanceAsNode(),
+        		enemyHealth.getInstanceAsNode(),
+        		enemyRewardMoney.getInstanceAsNode(),
+        		enemyRewardPoints.getInstanceAsNode(),
+        		addEnemyEffect.getInstanceAsNode(),
+        		deleteEnemy.getInstanceAsNode()
+        		);
     }
 
     public void clearView () {
@@ -119,7 +146,7 @@ public class EnemyEditorView extends PhotoFileChooser implements EnemySetView {
 
     @Override
     public Node getInstanceAsNode () {
-        return enemyEffectView;
+        return rootBuffer;
     }
 
     @Override

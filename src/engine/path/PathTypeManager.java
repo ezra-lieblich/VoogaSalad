@@ -1,17 +1,23 @@
 package engine.path;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
 import engine.AbstractTypeManager;
 import engine.ManagerMediator;
 import engine.observer.ObservableList;
+import engine.observer.ObservableListProperty;
 import engine.settings.GameModeManager;
 import engine.weapon.WeaponManager;
 
 public class PathTypeManager extends AbstractTypeManager<Path> implements PathManager {
         
     private ObservableList<Integer> availablePaths;
+    
+    public PathTypeManager(){
+    	this.availablePaths = new ObservableListProperty<Integer>(new ArrayList());
+    }
     
     public void visitEditPath(GameModeManager manager, Integer index) {
         availablePaths.setProperty(getEntities().values().stream()
