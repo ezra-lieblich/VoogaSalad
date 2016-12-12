@@ -66,7 +66,9 @@ public class EnemyManager extends Observable {
 
 		//System.out.println("Does all WaveStartTimes exist?");
 		//System.out.println(allWaveStartTimes);
-		allWaves.forEach(w -> allWaveStartTimes.add(w.getStartTime()));
+//		allWaves.forEach(w -> allWaveStartTimes.add(w.getStartTime()));
+		allWaveStartTimes.add(0.0);
+		allWaveStartTimes.add(10.0);
 		allWaves.forEach(w -> allWaveFrequencies.add(w.getFrequency()));
 	}
 	
@@ -207,7 +209,7 @@ public class EnemyManager extends Observable {
 
 
 	public double getTimeOfNextWave() {
-		if (allWaveStartTimes.isEmpty()) return 0;
+		if (allWaveStartTimes.isEmpty()) return -1;
 		double timeInSeconds = this.allWaveStartTimes.poll();
 		double timeInMillis = timeInSeconds * 1000;
 		return timeInMillis;
