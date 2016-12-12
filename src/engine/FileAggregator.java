@@ -59,10 +59,10 @@ public class FileAggregator {
 		}
 	}
 	
-	public File createGameFolder(String gameName, File xml){
-		File gameDirectory
-		
-	}
+//	public File createGameFolder(String gameName, File xml){
+//		File gameDirectory
+//		
+//	}
 	
 	private File generateImagesFolder(){
 		File images = new File(this.gameDirectory.getAbsolutePath()+"images");
