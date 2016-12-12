@@ -22,14 +22,12 @@ public class WeaponAuthoringViewController extends EditorViewController
     private WeaponManagerController weaponDataSource;
     private int currentWeaponID;
     private WeaponUpdateView weaponView;
-    private EffectAuthoringView effectAuthoringView;
 
     public WeaponAuthoringViewController (int editorWidth, int editorHeight) throws IOException {
         weaponView = WeaponAuthoringViewFactory.build(editorWidth, editorHeight);
         weaponView.setDelegate(this);
         weaponView.setWeaponListDataSource(this);
         this.view = weaponView;
-        effectAuthoringView = new EffectAuthoringView();
     }
 
     public void setWeaponDataSource (WeaponManagerController source) {
@@ -147,6 +145,7 @@ public class WeaponAuthoringViewController extends EditorViewController
 
     @Override
     public void onUserPressedAddEffect () {
+        EffectAuthoringView effectAuthoringView = new EffectAuthoringView();
         effectAuthoringView.openEffectView();
     }
 

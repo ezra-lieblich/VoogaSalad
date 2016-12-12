@@ -21,14 +21,13 @@ public class EnemyAuthoringViewController extends EditorViewController
     private EnemyManagerController enemyDataSource;
     private int currentEnemyID;
     private EnemyUpdateView enemyView;
-    private EffectAuthoringView effectAuthoringView;
 
     public EnemyAuthoringViewController (int editorWidth, int editorHeight) {
         enemyView = EnemyAuthoringViewFactory.build(editorWidth, editorHeight);
         enemyView.setDelegate(this);
         enemyView.setEnemyListDataSource(this);
         this.view = enemyView;
-        effectAuthoringView = new EffectAuthoringView();
+        
     }
 
     public void setEnemyDataSource (EnemyManagerController source) {
@@ -166,6 +165,7 @@ public class EnemyAuthoringViewController extends EditorViewController
 
     @Override
     public void onUserPressedAddEffect () {
+        EffectAuthoringView effectAuthoringView = new EffectAuthoringView();
         effectAuthoringView.openEffectView();
     }
 

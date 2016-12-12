@@ -22,14 +22,12 @@ public class TowerAuthoringViewController extends EditorViewController
     private TowerManagerController towerDataSource;
     private int currentTowerID;
     private TowerUpdateView towerView;
-    private EffectAuthoringView effectAuthoringView;
 
     public TowerAuthoringViewController (int editorWidth, int editorHeight) {
         towerView = TowerAuthoringViewFactory.build(editorWidth, editorHeight);
         towerView.setDelegate(this);
         towerView.setTowerListDataSource(this);
         this.view = towerView;
-        effectAuthoringView = new EffectAuthoringView();
     }
 
     public void setTowerDataSource (TowerManagerController source) {
@@ -185,6 +183,7 @@ public class TowerAuthoringViewController extends EditorViewController
 
     @Override
     public void onUserPressedAddEffect () {
+        EffectAuthoringView effectAuthoringView = new EffectAuthoringView();
         effectAuthoringView.openEffectView();
     }
 

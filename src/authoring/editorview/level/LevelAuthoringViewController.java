@@ -22,13 +22,11 @@ public class LevelAuthoringViewController extends EditorViewController
     private EnemyManagerController enemyDataSource;
     private int currentLevelID;
     private int currentWaveID;
-    private EffectAuthoringView effectAuthoringView;
 
     public LevelAuthoringViewController (int editorWidth, int editorHeight) {
         levelView = LevelAuthoringViewFactory.build(editorWidth, editorHeight);
         levelView.setDelegate(this);
         this.view = levelView;
-        effectAuthoringView = new EffectAuthoringView();
     }
 
     public void setLevelDataSource (LevelManagerController source) {
@@ -200,6 +198,7 @@ public class LevelAuthoringViewController extends EditorViewController
 
     @Override
     public void onUserPressedAddEffect () {
+        EffectAuthoringView effectAuthoringView = new EffectAuthoringView();
         effectAuthoringView.openEffectView();
     }
 }
