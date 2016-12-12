@@ -7,7 +7,6 @@ import java.util.HashMap;
 import com.google.common.io.Files;
 
 public class FileAggregator {
-	private final String GAME_DIRECTORY_NAME = "game";
 	private static FileAggregator defaultInstance;
 	//Map images used to the number of places used in the program. Remove on count=0
 	private HashMap<String, Integer> originalImagePaths;
@@ -60,8 +59,13 @@ public class FileAggregator {
 		}
 	}
 	
-	public File generateImagesFolder(File xmlFile){
-		File images = new File(this.gameDirectory.getAbsolutePath()+GAME_DIRECTORY_NAME);
+	public File createGameFolder(String gameName, File xml){
+		File gameDirectory
+		
+	}
+	
+	private File generateImagesFolder(){
+		File images = new File(this.gameDirectory.getAbsolutePath()+"images");
 		images.mkdirs();
 		for (String s : this.originalImagePaths.keySet()){
 			File sourceFile = new File(s);
