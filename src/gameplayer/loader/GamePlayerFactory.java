@@ -71,7 +71,7 @@ public class GamePlayerFactory{
 		HashMap<String,Double>settings = new HashMap<>(); 
 		GameMode gameSettings = authoringFileReader.getGameMode();
 		LevelManager levelManager = authoringFileReader.getLevelManager();
-		settings.put("levelnumber", 0.0); 
+		settings.put("levelnumber", (double) levelManager.getEntityIds().get(0)); 
 		settings.put("lives",(double) gameSettings.getInitalLives());
 		settings.put("gold", (double)gameSettings.getInitialMoney());
 		settings.put("totalNumberOfLevels", (double)levelManager.getEntities().size());
@@ -80,7 +80,6 @@ public class GamePlayerFactory{
 	}
 
 	public Map<Integer, Tower> getTowerUpgrades() {
-		System.out.println("size of UPGRADESSSSSSS"+authoringFileReader.getTowerUpgrades().size());
 		return authoringFileReader.getTowerUpgrades();
 	}
 
@@ -95,7 +94,6 @@ public class GamePlayerFactory{
 
 
 		if (levelPaths.isEmpty()) {
-			System.out.println("Level path is empty!!!");
 
 			//no path
 			Grid emptyGrid = new Grid(DEFAULT_GRID_WIDTH, DEFAULT_GRID_HEIGHT);
@@ -166,6 +164,10 @@ public class GamePlayerFactory{
 
 	public EffectManager getWeaponEffectManager() {
 		return this.authoringFileReader.getWeaponEffectManager();
+	}
+	
+	public EffectManager getWinEffectManager() { //actually called GameModeEffectManager
+		return this.authoringFileReader.getGameModeEffectManager();
 	}
 
 

@@ -135,6 +135,11 @@ public class XMLParser {
 
 	}
 	
+	protected EffectManager getGameModeEffectManager() {
+		GameModeManager gameModeManager = gameManager.getManager(GameModeManager.class);
+		return gameModeManager.getGameModeEffectManager();
+	}
+	
 	
 	
 	

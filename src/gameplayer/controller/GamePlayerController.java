@@ -404,7 +404,7 @@ public class GamePlayerController implements Observer {
 					try {
 						Thread.sleep((long) control.getEnemyModel().getFrequencyOfNextWave());
 					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
+						
 						e.printStackTrace();
 					}
 				}
@@ -423,8 +423,6 @@ public class GamePlayerController implements Observer {
 		HashMap<Integer, Enemy> enemyRedraw = this.enemyManager.getEnemyOnGrid();
 		Map<Integer, Tower> towerRedraw = this.model.getTowerOnGrid();
 		HashMap<Integer, Weapon> bulletRedraw = this.model.getWeaponManager().getWeaponOnGrid();
-
-		System.out.println("bulletRedraw: " + bulletRedraw.size());
 
 		updateBulletOnScreen(bulletRedraw);
 		updateEnemiesOnScreen(enemyRedraw);
