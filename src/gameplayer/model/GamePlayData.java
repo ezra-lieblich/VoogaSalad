@@ -1,64 +1,30 @@
 package gameplayer.model;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Observable;
-import java.util.stream.Collectors;
 
-import engine.effect.EffectManager;
-import engine.effect.EffectMethod;
-import engine.effect.player.CollisionEffectFactory;
-import engine.effect.player.GameEffect;
-import engine.effect.player.WinEffectFactory;
 import gameplayer.loader.*;
 import gameplayer.view.GridGUI;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import statswrapper.Wrapper;
 
-public class GamePlayData extends Observable{
+public class GamePlayData  extends Observable{
 	private GamePlayerFactory factory;
-	private IntegerProperty currentLevel;
+	private int currentLevel;
 
 	private Grid grid;
 	private Cell[][] gridArray;
 	private int gridX;
 	private int gridY;
-	private DoubleProperty gold;
-	private DoubleProperty lives;
-	private DoubleProperty numLevels; // reach level number winning the game
-	private DoubleProperty score;
+	private double gold;
+	private double lives;
+	private double numLevels; // reach level number winning the game
+	private double score;
+	
+
 	//CELL SIZE MUST BE INITIATED
 
-	
-	private Boolean win = false;
-	private WinEffectFactory winFactory;
-	private EffectManager effectManager;
-	private Map<Integer, GameEffect> allEffects;	
-
-
-	
 	public GamePlayData(GamePlayerFactory factory){
-		this.numLevels = new SimpleDoubleProperty();
-		this.lives = new SimpleDoubleProperty();
-		this.gold = new SimpleDoubleProperty();
-		this.score = new SimpleDoubleProperty();
-		this.currentLevel = new SimpleIntegerProperty();
-		this.factory = factory;	
-		
-		this.winFactory = new WinEffectFactory(this);
-		this.effectManager = this.factory.getWinEffectManager(); // get win effect Manager in xml in game setting.get effect manager 
-		this.allEffects = effectManager.getEntities().entrySet().stream().collect(Collectors.toMap(e-> e.getKey(), e->winFactory.create(e.getValue())));
-		for (int i : this.allEffects.keySet()){
-			this.score.addListener((Observable, oldValue, newValue) -> allEffects.get(i).execute());
-			this.gold.addListener((Observable, oldValue, newValue) -> allEffects.get(i).execute());
-			this.currentLevel.addListener((Observable, oldValue, newValue) -> allEffects.get(i).execute());
-
-		}
-		
-		
+		this.factory = factory;
 	}
 	
 	/**
@@ -68,28 +34,21 @@ public class GamePlayData extends Observable{
 	 */
 	public void initializeGameSetting() {
 		HashMap<String, Double> settingInfo = this.factory.getGameSetting();
-		System.out.println("total levels: "+ settingInfo.get("totalNumberOfLevels"));
-		//this.numLevels.setValue(2.0);
-		this.numLevels.set(settingInfo.get("totalNumberOfLevels"));  // put into property file
-		this.gold.set(settingInfo.get("gold"));
-		this.lives.set(settingInfo.get("lives").intValue());
-		this.currentLevel.set(settingInfo.get("levelnumber").intValue()-1); //REMEMBER TO CHANGE
-		this.score.set(0);
+		this.numLevels = settingInfo.get("totalNumberOfLevels");  // put into property file
+		this.gold = settingInfo.get("gold");
+		this.lives = settingInfo.get("lives");
+		this.currentLevel = 0;
+		this.score = 0;
 	}
 	
 	public void initializeLevelInfo() {
-		setLevel(this.currentLevel.get()+1);
-		this.grid = this.factory.getGrid(this.currentLevel.get());
+		setLevel(this.currentLevel++);
+		this.grid = this.factory.getGrid(this.currentLevel);
 		gridArray = this.grid.getGrid();
 		this.gridX = this.gridArray.length;
 		this.gridY = this.gridArray[0].length;
 		
 		// get level rewards and change current score, life, gold according
-	}
-	
-	@EffectMethod
-	public void setWin(){
-		this.win = true;
 	}
 
 	public GamePlayerFactory getFactory(){
@@ -107,6 +66,7 @@ public class GamePlayData extends Observable{
 
 	public Grid getGrid() {
 		//System.out.println("Successfully got grid");
+		this.grid = this.factory.getGrid(this.currentLevel);
 		return this.grid;
 	}
 	
@@ -114,32 +74,30 @@ public class GamePlayData extends Observable{
 		return this.gridArray;
 	}
 
-	@EffectMethod
-	public double getLevelNumber() {
-		return this.numLevels.get();
+	public int getLevelNumber() {
+		return (int) this.numLevels;
 	}
 
-	@EffectMethod
+	//@EffectMethod
 	public double getGold() {
-		return gold.get();
+		return gold;
 	}
 	
-	@EffectMethod
 	public double getScore(){
-		return this.score.get();
+		return this.score;
 	}
 	
 	public void setScore(double additionalScore){
-		this.score.set(this.score.get() + additionalScore );
+		this.score += additionalScore;
 		setChanged();
 		notifyObservers();
 	}
 
 	public void setGold(double gold) {
 		System.out.println("Setting gold");
-		this.gold.set(gold);
+		this.gold = gold;
 		try {
-			Wrapper.getInstance().updateGameScores("gold", Integer.toString((int)this.currentLevel.get()), Double.toString(this.gold.get()));
+			Wrapper.getInstance().updateGameScores("gold", Integer.toString((int)this.currentLevel), Double.toString(this.gold));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -148,16 +106,15 @@ public class GamePlayData extends Observable{
 		notifyObservers();
 	}
 
-	@EffectMethod
 	public double getLife() {
-		return this.lives.get();
+		return this.lives;
 	}
 
 	// used by enemymodel
 	public void setLife(double life) {
-		this.lives.set((int)life);
+		this.lives = life;
 		try {
-			Wrapper.getInstance().updateGameScores("lives", Integer.toString(this.currentLevel.get()), Double.toString(this.lives.get()));
+			Wrapper.getInstance().updateGameScores("lives", Integer.toString((int)this.currentLevel), Double.toString(this.lives));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -167,19 +124,13 @@ public class GamePlayData extends Observable{
 	}
 
 	public void setLevel(int d) {
-		this.currentLevel.set(d);;
+		this.currentLevel = d;
 		setChanged();
 		notifyObservers();
 	}
 
-	@EffectMethod
 	public int getCurrentLevel() {
-		return this.currentLevel.get();
-	}
-	
-	@EffectMethod
-	public int getTotalLevel() {
-		return (int)this.numLevels.get();
+		return this.currentLevel;
 	}
 
 	public double getCellWidth() {

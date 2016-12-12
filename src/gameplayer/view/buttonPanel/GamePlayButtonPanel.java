@@ -17,10 +17,8 @@ public class GamePlayButtonPanel{
 	
 	private EventHandler<ActionEvent> startOnPress; 
 	private EventHandler<ActionEvent> pauseOnPress;
-	private EventHandler<ActionEvent> saveOnPress;
 	private ButtonPanel panel;
 	private GraphicsLibrary graphicsLib;
-	
 	
 	public GamePlayButtonPanel(){
 		this.panel = new ButtonPanel();
@@ -43,12 +41,8 @@ public class GamePlayButtonPanel{
 		this.pauseOnPress = handle;
 	}
 	
-	public void bindSaveGame(EventHandler<ActionEvent> handle){
-		this.saveOnPress = handle;
-	}
-	
 	private Button[] createButtons(){
-		Button[] buttonArr = {createPlayButton(), createPauseButton(), viewStats(), saveButton()};
+		Button[] buttonArr = {createPlayButton(), createPauseButton(), viewStats()};
 		return buttonArr;
 	}
 	
@@ -60,11 +54,6 @@ public class GamePlayButtonPanel{
 	private Button createPauseButton(){
 		Button pause = graphicsLib.createButton("Pause", pauseOnPress);
 		return pause;
-	}
-	
-	private Button saveButton(){
-		Button save = graphicsLib.createButton("Save", saveOnPress);
-		return save;
 	}
 	
 	private Button viewStats(){

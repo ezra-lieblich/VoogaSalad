@@ -8,7 +8,6 @@ import authoring.utilityfactories.DialogueBoxFactory;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 
 
 /**
@@ -19,7 +18,6 @@ import javafx.scene.layout.AnchorPane;
 public class EnemyImageView implements EnemySetView {
 
     @SuppressWarnings("unused")
-    private AnchorPane root;
     private EnemyAuthoringViewDelegate delegate;
     private String imagePath;
     private ImageView enemyImage;
@@ -27,13 +25,9 @@ public class EnemyImageView implements EnemySetView {
     private final int CHARACTER_SIZE = 250;
 
     public EnemyImageView (ResourceBundle labelsResource) {
-    	root = new AnchorPane();
         enemyImage = new ImageView();
         enemyImage.setFitHeight(CHARACTER_SIZE);
         enemyImage.setFitWidth(CHARACTER_SIZE);
-        root.getChildren().add(enemyImage);
-    	AnchorPane.setLeftAnchor(enemyImage, 125.0);
-    	AnchorPane.setTopAnchor(enemyImage, 175.0);
     }
 
     public void updateEnemyImagePath (String imagePath) {
@@ -58,7 +52,7 @@ public class EnemyImageView implements EnemySetView {
 
     @Override
     public Node getInstanceAsNode () {
-        return root;
+        return enemyImage;
     }
 
     @Override

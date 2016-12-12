@@ -23,7 +23,7 @@ import javafx.scene.image.ImageView;
  *         The ListCellData object represents the information that should be presented in the list
  *         view, and is retrieved from a class implementing the
  *         dataSource interface.
- *         To change the way the list cells looks, override createCellFromData().
+ *         To change the way the list looks, override createCellFromData().
  *         If any initial cells hold non-data cells at all times, the CONTENT_OFFSET value must be
  *         set. For example, there may button in
  *         the first cell that is clicked to create a new object. The CONTENT_OFFSET should be set

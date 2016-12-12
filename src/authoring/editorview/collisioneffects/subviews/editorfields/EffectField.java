@@ -5,7 +5,6 @@ import authoring.editorview.TextFieldView;
 import authoring.editorview.collisioneffects.EffectAuthoringViewDelegate;
 import authoring.editorview.collisioneffects.EffectSetView;
 import authoring.utilityfactories.BoxFactory;
-import authoring.utilityfactories.GridFactory;
 import authoring.utilityfactories.TextFieldFactory;
 import javafx.scene.control.TextField;
 
@@ -31,8 +30,9 @@ public class EffectField extends TextFieldView implements EffectSetView {
                                                e -> delegate
                                                        .onUserEnteredEffectText(effectTextField
                                                                .getText()));
-        root = GridFactory.createRowWithLabelandNode(labelsResource.getString("Effect"), effectTextField, 125);
-                
+        hbox =
+                BoxFactory.createHBoxWithLabelandNode(labelsResource.getString("Effect"),
+                                                      effectTextField);
     }
 
     @Override

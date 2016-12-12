@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.function.Consumer;
 import engine.observer.Observable;
 
-public interface Manager<E extends Type> extends VisitorManager<MethodData<Object>>, VisitableManager<MethodData<Object>>, Observable<MethodData<Object>>, BindableManager<E> {
+public interface Manager<E extends Type> extends VisitorManager<MethodData<?>>, VisitableManager<MethodData<?>>, Observable<MethodData<?>>, BindableManager<E> {
 
     int addEntry (E entry);
 

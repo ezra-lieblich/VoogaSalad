@@ -48,6 +48,6 @@ public class TowerUpgradeBank extends ImageBank implements TowerSetView {
 
     @Override
     protected void userSelectedRow (int index) {
-    	this.delegate.onUserSelectedTowerUpgrade(this.itemIDs.get(index));
+        this.delegate.onUserSelectedTower(this.itemIDs.get(index));
     }
 }

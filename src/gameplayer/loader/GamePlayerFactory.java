@@ -29,10 +29,10 @@ import gameplayer.model.Grid;
 import gameplayer.model.enemy.Enemy;
 
 public class GamePlayerFactory{
-
+	
 	public static final int DEFAULT_GRID_WIDTH = 10;
 	public static final int DEFAULT_GRID_HEIGHT = 10;
-
+	
 	private EnemyFactory enemyFactory;
 
 	XMLParser authoringFileReader;	
@@ -41,61 +41,55 @@ public class GamePlayerFactory{
 		this.authoringFileReader = parser;
 		this.enemyFactory = new EnemyFactory();
 	}
-
+	
 	public boolean xmlIsValid() {
 		return authoringFileReader.isValid();
 	}
-
+	
 	public Map<Integer, engine.weapon.Weapon> getWeaponBank() {
 		return (Map<Integer, Weapon>) authoringFileReader.getWeaponTypes();
-
+		
 	}
-
+	 
 	public double getLevelRewardScore(int levelNumber) {
 		LevelManager levelManager = authoringFileReader.getLevelManager();
 		return levelManager.getEntity(levelNumber).getRewardScore();
 	}
-
+	
 	public double getLevelRewardMoney(int levelNumber) {
 		LevelManager levelManager = authoringFileReader.getLevelManager();
 		return levelManager.getEntity(levelNumber).getRewardMoney();
 	}
-
+	
 	public double getLevelRewardLives(int levelNumber) {
 		LevelManager levelManager = authoringFileReader.getLevelManager();
 		return levelManager.getEntity(levelNumber).getRewardHealth();
 	}
 
-
+	
 	public HashMap<String, Double> getGameSetting(){
 		HashMap<String,Double>settings = new HashMap<>(); 
 		GameMode gameSettings = authoringFileReader.getGameMode();
 		LevelManager levelManager = authoringFileReader.getLevelManager();
-		settings.put("levelnumber", (double) levelManager.getEntityIds().get(0)); 
-		settings.put("lives",6.0);
-		settings.put("gold", (double)gameSettings.getInitialMoney());
-		settings.put("totalNumberOfLevels", (double)levelManager.getEntities().size());
+		settings.put("levelnumber", 0.0); 
+		settings.put("lives", 5.0);
+		settings.put("gold", 1000000.0);
+		settings.put("totalNumberOfLevels", 2.0);
 
 		return settings; 
 	}
-
+	
 	public Map<Integer, Tower> getTowerUpgrades() {
 		return authoringFileReader.getTowerUpgrades();
 	}
-
-
-
+	
+	
+	
 	public Grid getGrid(int levelNumber){
-		
-		Level level = authoringFileReader.getLevelManager().getEntity(levelNumber);//REMEMBER TO CHANGE
-		String pathType = authoringFileReader.getGameMode().getPathType();
-		System.out.println("lev num: " +levelNumber);
+		Level level = authoringFileReader.getLevelManager().getEntity(levelNumber);
 		List<Integer> levelPaths = level.getPaths();
-
-
-		if (levelPaths.isEmpty()) {
-
-			//no path
+		
+		if (levelPaths.isEmpty()) {//no path
 			Grid emptyGrid = new Grid(DEFAULT_GRID_WIDTH, DEFAULT_GRID_HEIGHT);
 			emptyGrid.setNoPath(true); 
 			return emptyGrid;
@@ -104,91 +98,45 @@ public class GamePlayerFactory{
 		Grid levelGrid = new Grid(DEFAULT_GRID_WIDTH, DEFAULT_GRID_HEIGHT); //width and height will be from game authoring
 		PathManager pathManager = authoringFileReader.getPathManager();
 		Map<Integer, Path> paths = pathManager.getEntities();
-		/*
-		//hard coding
-		Cell start = new Cell(0,2);
-		Cell end = new Cell(10, 8);
-		levelGrid.setStart(start);
-		levelGrid.setEnd(end);
-		levelGrid.setNoPath(true);
-		return levelGrid;
-		 */
-
-		if(pathType.equals("Free")){
-			System.out.println("Paths list in game mode" +authoringFileReader.getGameMode().getPaths().size());
-			List<Integer> hardCodedPathIDs = new ArrayList<Integer>();
-			hardCodedPathIDs.add(0);
-			for (Integer index : hardCodedPathIDs) {
-			//for (Integer index : levelPaths) {
-				Path currPath = paths.get(index);
-				List<Coordinate<Integer>> coordinates = currPath.getCoordinates();
-				System.out.println("coordinates size: " + coordinates.size());
-				ArrayList<Cell> cells = new ArrayList<Cell>();
-				coordinates.forEach(c -> {
-					Cell currCell = levelGrid.getCell(c.getX(), c.getY());
-					cells.add(currCell);
-				});
-				levelGrid.setNoPath(true);
-				levelGrid.setStart(cells.get(0));
-
-				levelGrid.setEnd(levelGrid.getCell(7, 3));
-				//levelGrid.setEnd(cells.get(1));
-				//gameplayer.model.Path newPath = new gameplayer.model.Path(cells, levelGrid.getGrid());
-				//allPaths.put(index, newPath);
-			}
-
-			//levelGrid.setAllPath(allPaths);
-			
-		}
-
-		else{
-			for (Integer index : levelPaths) {
-				Path currPath = paths.get(index);
-				List<Coordinate<Integer>> coordinates = currPath.getCoordinates();
-				System.out.println("coordinates size: " + coordinates.size());
-				ArrayList<Cell> cells = new ArrayList<Cell>();
-				coordinates.forEach(c -> {
-					Cell currCell = new Cell(c.getX(), c.getY());
-					cells.add(currCell);
-				});
-				gameplayer.model.Path newPath = new gameplayer.model.Path(cells, levelGrid.getGrid());
-				allPaths.put(index, newPath);
-			}
-
-			levelGrid.setAllPath(allPaths);
+		for (int i = 0; i < levelPaths.size(); i++) {
+			Path currPath = paths.get(i);
+			List<Coordinate<Integer>> coordinates = currPath.getCoordinates();
+			ArrayList<Cell> cells = new ArrayList<Cell>();
+			coordinates.forEach(c -> {
+				Cell currCell = new Cell(c.getX(), c.getY());
+				cells.add(currCell);
+			});
+			gameplayer.model.Path newPath = new gameplayer.model.Path(cells, levelGrid.getGrid());
+			allPaths.put(i, newPath);
 		}
 		
+		levelGrid.setAllPath(allPaths);
 		return levelGrid;
-
 	}
-
+	
 	public EffectManager getWeaponEffectManager() {
 		return this.authoringFileReader.getWeaponEffectManager();
 	}
 	
-	public EffectManager getWinEffectManager() { //actually called GameModeEffectManager
-		return this.authoringFileReader.getGameModeEffectManager();
-	}
-
-
+	
 	public Map<Integer, Tower> getTowers() {
 		for (Tower t : authoringFileReader.getTowerTypes().values()) {
 			System.out.println("TOWER IMAGE PATH");
 			System.out.println(t.getImagePath());
 		}
-
+		
 		return (Map<Integer, Tower>) authoringFileReader.getTowerTypes(); 
 	}
-
+	
 
 	public Queue<Wave> getWaves(int levelNumber) {
-		Level level = this.authoringFileReader.getLevelManager().getEntity(levelNumber);//NEED TO CHANGE
+		Level level = this.authoringFileReader.getLevelManager().getEntity(levelNumber);
 		List<Wave> waves = level.getWaves();
 		Queue<Wave> ret = new LinkedList<Wave>();
 		waves.forEach(w -> ret.add(w));
 		return ret;
 	}
-
+	
 	public Queue<Enemy> getIndividualWaveQueue(Wave wave, int levelNumber) {
 		System.out.println("dsakfhsdaf jksdahflsjksdhafjk sdahjk sdah");
 		Map<Integer, engine.enemy.Enemy> enemyTypes = this.authoringFileReader.getEnemyTypes(); //refactor name
@@ -200,18 +148,12 @@ public class GamePlayerFactory{
 			//System.out.println("Level: "+levelNumber);
 			//System.out.println("Does the grid with the path exist?");
 			//System.out.println(this.getGrid(levelNumber).getPath(pathID));
-			Cell start;
-			if (this.getGrid(levelNumber).isNoPathType()) {
-				start = this.getGrid(levelNumber).getStart();
-			}
-			else {
-				start = this.getGrid(levelNumber).getPath(pathID).getPathStart();
-			}
+			Cell start = this.getGrid(levelNumber).getPath(pathID).getPathStart();
 			enemies.add(this.enemyFactory.createModelEnemy(enemyType, start, pathID));
 		}
 		return enemies;
 	}
-
+	
 	public String getGameTitle() {
 		return this.authoringFileReader.getName();
 	}

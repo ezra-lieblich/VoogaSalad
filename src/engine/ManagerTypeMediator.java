@@ -32,16 +32,9 @@ public class ManagerTypeMediator implements ManagerMediator{
         allManagers = new HashMap<Class<?>, Manager<? extends Type>>();
     }
     
-//    @Override
-//    public <R extends Manager<? extends Type>> void update (R observable, MethodData<Object> value) {
-//        allManagers.values().forEach(a -> a.visitManager(observable, value));
-//    }
-    
-    @SuppressWarnings("unchecked")
     @Override
-    public <R extends Observable<MethodData<Object>>> void update (R observable,
-                                                                   MethodData<Object> value) {
-        allManagers.values().forEach(a -> a.visitManager((VisitableManager<MethodData<Object>>) observable, value));        
+    public <R extends Manager<? extends Type>> void update (R observable, MethodData<?> value) {
+        allManagers.values().forEach(a -> a.visitManager(observable, value));
     }
     
 //    @Override
@@ -64,7 +57,6 @@ public class ManagerTypeMediator implements ManagerMediator{
     public <R> R getManager(Class<R> key) {
         return key.cast(allManagers.get(key));
     }
-
     
 //    @Override
 //    public Enemy getEnemy(int id) {

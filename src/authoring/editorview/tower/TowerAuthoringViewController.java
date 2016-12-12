@@ -55,7 +55,6 @@ public class TowerAuthoringViewController extends EditorViewController
         towerView.updateTowerBuyPriceDisplay(towerDataSource.getTowerBuyPrice(currentTowerID));
         towerView.updateTowerSellPriceDisplay(towerDataSource.getTowerSellPrice(currentTowerID));
         towerView.updateUnlockLevelDisplay(towerDataSource.getTowerUnlockLevel(currentTowerID));
-        towerView.updateTowerUpgradeBank(towerDataSource.getTowerUpgrades(currentTowerID));
     }
 
     @Override
@@ -181,7 +180,8 @@ public class TowerAuthoringViewController extends EditorViewController
 
     @Override
     public void onUserPressedCreateTowerUpgrade () {
-        towerDataSource.createTowerUpgrade(this.towerView, this.currentTowerID);
+        // TODO: Fix this shit
+        towerDataSource.createTowerUpgrade(this.towerView, 0);
     }
 
     @Override
@@ -191,6 +191,7 @@ public class TowerAuthoringViewController extends EditorViewController
         effectDataSource.createType(effectAuthoringView.getEffectAuthoringView());
         effectAuthoringView.setEffectOptions(effectDataSource.getCreatedTypeIds());
         effectAuthoringView.setAvailClasses(effectDataSource.getAvailableClasses());
+        // effectAuthoringView.setAvailMethods(effectDataSource.getAvailableClassMethods(selectedClass));
         effectAuthoringView.setAvailDataObjects(effectDataSource.getAvailableDataObjects());
         effectAuthoringView.openEffectView();
     }

@@ -27,10 +27,8 @@ public class EffectBank extends ImageBank implements EffectSetView {
     @Override
     protected void userSelectedRow (int index) {
         int selectedEffect = this.itemIDs.get(index);
-        if (selectedEffect != -1) {
+        if (selectedEffect != -1)
             this.delegate.onUserSelectedEffect(selectedEffect);
-        }
-
     }
 
     public void updateEffectBank (List<Integer> activeEffects) {

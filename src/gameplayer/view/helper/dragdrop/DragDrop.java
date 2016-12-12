@@ -10,7 +10,6 @@ import gameplayer.view.GridGUI;
 import gameplayer.view.helper.GraphicsLibrary;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DragEvent;

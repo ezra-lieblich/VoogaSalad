@@ -3,7 +3,6 @@ package authoring.editorview.collisioneffects;
 import java.util.List;
 import authoring.editorview.IUpdateView;
 import authoring.editorview.ListDataSource;
-import authoring.editorview.collisioneffects.subviews.EffectAvailableMethodsView;
 
 
 /**
@@ -27,6 +26,8 @@ public interface EffectUpdateView extends EffectSetView, IUpdateView {
 
     public void updateListedAvailableClasses (List<String> availClasses);
 
+    public void updateSelectedAvailableClass (String selectedClass);
+
     public void updateAvailableMethods (List<String> availMethods);
 
     public void updateAvailableDataObjects (List<String> availDataObjects);
@@ -34,9 +35,7 @@ public interface EffectUpdateView extends EffectSetView, IUpdateView {
     public void setEffectListDataSource (ListDataSource source);
 
     public void openEffectView ();
-
-    public void updateTriggers (List<String> triggers);
-
-    public EffectAvailableMethodsView getEffectAvailMethods ();
+    
+    public void updateTriggers(List<String> triggers);
 
 }

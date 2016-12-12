@@ -2,7 +2,6 @@ package splashscreen;
 
 import java.io.File;
 import java.io.FilenameFilter;
-import java.io.IOException;
 import java.util.*;
 
 import gameplayer.controller.GamePlayerController;
@@ -13,7 +12,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import statswrapper.Wrapper;
 
 public class XMLGallery {
 	
@@ -62,15 +60,11 @@ public class XMLGallery {
 		this.gallery.getStyleClass().add("galleryPane");
 	}
 
-	
-	
 	public void createNewGame(Stage s, String filename) {
 		System.out.println("File: "+filename);
 		GamePlayerController playerController = new GamePlayerController("player.samplexml/"+filename);
 		playerController.init(false);
-		playerController.setDataStoreOnClose(s);
 		s.setTitle(TITLE);
-		
 		s.setScene(playerController.getMainScene());
 		s.show();
 	}

@@ -23,7 +23,6 @@ public class EnemyImageBank extends ImageBank {
         Button newEnemyButton = ButtonFactory.makeButton("New Enemy", e -> {
             delegate.onUserPressedCreateEnemy();
         });
-        newEnemyButton.setPrefWidth(130);
         this.items.add(newEnemyButton);
         this.CONTENT_OFFSET = 1;
     }

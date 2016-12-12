@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ResourceBundle;
 
 import authoring.editorview.INodeView;
+import authoring.utilityfactories.DialogueBoxFactory;
 import authoring.utilityfactories.GridFactory;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
@@ -53,5 +54,24 @@ public class PathImageDisplayView implements INodeView {
 	
 		
 	}
+	
+
+		
+//		if (root.getChildren().contains(pathImageView)){
+//			root.getChildren().remove(pathImageView);
+//		}
+//		
+//		if (!pathImagePath.contains("file:") && !pathImagePath.contains("http:")) {
+//			image = new Image (getClass().getClassLoader().getResourceAsStream(pathImagePath));		
+//		}
+//		
+//		else {
+//			image = new Image(pathImagePath);
+//		}
+//			
+//		pathImageView.setImage(image);
+//		root.getChildren().add(pathImageView);		
+//	}
+	
 	 
 }

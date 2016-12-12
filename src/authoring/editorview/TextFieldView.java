@@ -2,7 +2,7 @@ package authoring.editorview;
 
 import java.util.ResourceBundle;
 import javafx.scene.Node;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 
 
 /**
@@ -12,7 +12,7 @@ import javafx.scene.layout.GridPane;
  */
 public abstract class TextFieldView implements INodeView {
 
-    protected GridPane root;
+    protected HBox hbox;
 
     protected ResourceBundle resource;
 
@@ -23,7 +23,7 @@ public abstract class TextFieldView implements INodeView {
 
     @Override
     public Node getInstanceAsNode () {
-        return root;
+        return hbox;
     }
 
     public abstract void updateField (String newData);

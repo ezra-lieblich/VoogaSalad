@@ -200,6 +200,7 @@ public class LevelAuthoringViewController extends EditorViewController
         effectDataSource.createType(effectAuthoringView.getEffectAuthoringView());
         effectAuthoringView.setEffectOptions(effectDataSource.getCreatedTypeIds());
         effectAuthoringView.setAvailClasses(effectDataSource.getAvailableClasses());
+        // effectAuthoringView.setAvailMethods(effectDataSource.getAvailableClassMethods(selectedClass));
         effectAuthoringView.setAvailDataObjects(effectDataSource.getAvailableDataObjects());
         effectAuthoringView.openEffectView();
     }

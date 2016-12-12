@@ -15,16 +15,18 @@ import engine.effect.EffectManagerController;
 public class EffectAuthoringViewController extends EditorViewController
         implements EffectAuthoringViewDelegate, ListDataSource {
 
-    private EffectManagerController effectDataSource;
+    private EffectManagerController effectsDataSource;
     private int currentEffectID;
     private EffectUpdateView effectAuthoringView;
 
     public EffectAuthoringViewController (EffectManagerController effectsDataSource) {
-        this.effectDataSource = effectsDataSource;
+        this.effectsDataSource = effectsDataSource;
         effectAuthoringView = EffectAuthoringViewFactory.build();
         effectAuthoringView.setDelegate(this);
         effectAuthoringView.setEffectListDataSource(this);
-        this.effectDataSource.addTypeBankListener(this.effectAuthoringView);
+        // TODO - fix this
+        currentEffectID = 0;
+        this.effectsDataSource.addTypeBankListener(this.effectAuthoringView);
     }
 
     public void setEffectOptions (List<Integer> effects) {
@@ -48,28 +50,23 @@ public class EffectAuthoringViewController extends EditorViewController
     }
 
     public void openEffectView () {
-        refreshView();
         effectAuthoringView.openEffectView();
     }
 
     @Override
     public void onUserSelectedAvailableClass (String selectedClass) {
-        effectDataSource.setAvailableClass(selectedClass);
-        System.out.println(selectedClass);
-        effectAuthoringView.getEffectAvailMethods()
-                .updateAvailMethods(effectDataSource.getAvailableClassMethods(selectedClass));
-        // effectAuthoringView.effectDataSource.getAvailableClassMethods(selectedClass)
+        effectsDataSource.setAvailableClass(selectedClass);
         // TODO: This also needs to update the available methods
     }
 
     @Override
     public void onUserEnteredEffectName (String name) {
-        effectDataSource.setName(currentEffectID, name);
+        effectsDataSource.setName(currentEffectID, name);
     }
 
     @Override
     public void onUserEnteredCondition (String condition) {
-        effectDataSource.setCondition(currentEffectID, condition);
+        effectsDataSource.setCondition(currentEffectID, condition);
     }
 
     @Override
@@ -81,25 +78,21 @@ public class EffectAuthoringViewController extends EditorViewController
     @Override
     public ListCellData getCellDataForSubject (int id) {
         ListCellData cellData = new ListCellData();
-        System.out.println("id: " + id + " effectsDS: " + effectDataSource);
-        cellData.setName(effectDataSource.getName(id));
-        cellData.setImagePath(effectDataSource.getImagePath(id));
+        System.out.println("id: " + id + " effectsDS: " + effectsDataSource);
+        cellData.setName(effectsDataSource.getName(id));
+        cellData.setImagePath(effectsDataSource.getImagePath(id));
         cellData.setId(id);
         return cellData;
     }
 
     @Override
     public void refreshView () {
-        effectAuthoringView.updateNameDisplay(effectDataSource.getImagePath(currentEffectID));
-        effectAuthoringView.updateConditionField(effectDataSource.getCondition(currentEffectID));
-        effectAuthoringView.updateEffectField(effectDataSource.getEffect(currentEffectID));
-        effectAuthoringView.updateAvailableDataObjects(effectDataSource.getAvailableDataObjects());
-        // effectAuthoringView.updateEffectBank(effectDataSource.getCreatedTypeIds());
+        effectAuthoringView.updateNameDisplay(effectsDataSource.getImagePath(currentEffectID));
     }
 
     @Override
     public void onUserEnteredEffectText (String effect) {
-        effectDataSource.setEffect(currentEffectID, effect);
+        effectsDataSource.setEffect(currentEffectID, effect);
     }
 
 }

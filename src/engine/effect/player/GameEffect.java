@@ -60,8 +60,4 @@ public class GameEffect {
         groovyExecutor.addVariable(encompassingClassName, value);
     }
     
-    public String getTriggerClass(){
-    	return this.triggerClass;
-    }
-    
 }

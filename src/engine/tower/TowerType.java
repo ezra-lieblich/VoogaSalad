@@ -47,7 +47,7 @@ public class TowerType extends AbstractType implements Tower {
 
     @Override
     public List<Integer> getUpgrades () {
-        return upgrades.getProperty();
+        return weapons.getProperty();
     }
     
     @Override

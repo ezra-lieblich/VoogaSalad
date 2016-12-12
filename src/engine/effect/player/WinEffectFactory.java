@@ -4,19 +4,18 @@ import engine.effect.EffectData;
 import engine.effect.Enemy;
 import gameplayer.model.GamePlayData;
 
-
 public class WinEffectFactory extends AbstractEffectFactory {
     public static final String TRIGGER_NAME = "winTrigger";
     public static final String ENCOMPASSING_CLASS_NAME = "gamePlayData";
 
     @EffectData
-    protected Object winTrigger;
+    private Object winTrigger;
     @EffectData
-    protected Object gamePlayData;
-
+    private Object gamePlayData;
+    
     @EffectData
-    protected GamePlayData data;
-
+    private GamePlayData data;
+    
     public WinEffectFactory (GamePlayData data) {
         super(TRIGGER_NAME, ENCOMPASSING_CLASS_NAME);
         this.data = data;

@@ -64,8 +64,6 @@ public class Cell {
 	}
 
 	public Tower getTower(){
-		if(this.tower == null)
-			return null;
 		return this.tower;
 	}
 	

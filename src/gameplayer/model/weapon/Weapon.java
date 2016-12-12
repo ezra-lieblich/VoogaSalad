@@ -1,10 +1,7 @@
 package gameplayer.model.weapon;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Observable;
 
-import engine.effect.player.GameEffect;
 import gameplayer.model.IDrawable;
 
 public class Weapon extends Observable implements IDrawable{
@@ -22,11 +19,9 @@ public class Weapon extends Observable implements IDrawable{
 	private double range;
 	private int targetEnemyID;
 	private double speedMag;
-	private int weaponTypeID;
-	private HashMap<String, ArrayList<GameEffect>> weaponEffect;
 	
 	
-	public Weapon(String name,  double demage, double targetX, double targetY, String image,  double range, int targetID, double x, double y, double speedMag, HashMap<String, ArrayList<GameEffect>> weaponEffect, int weaponTypeID) {
+	public Weapon(String name,  double demage, double targetX, double targetY, String image,  double range, int targetID, double x, double y, double speedMag) {
 		this.name = name;
 		this.damage = demage;
 		this.damage = 50;
@@ -37,48 +32,16 @@ public class Weapon extends Observable implements IDrawable{
 		this.range = range;
 		this.xCoordinate = x;
 		this.yCoordinate = y;
-		
 		this.targetEnemyID = targetID;
-		//System.out.println("TARGET ENEMY IDDDDDD "+ this.targetEnemyID);
 		this.speedMag = speedMag;
-		this.weaponEffect = weaponEffect;
-		
-		System.out.println();
-
-		System.out.println("++++++++++++++++++++++++");
-		System.out.println();
-		for(String s: weaponEffect.keySet()){
-			for(GameEffect e : weaponEffect.get(s)){
-				System.out.println("trigger name: " + s);
-				System.out.println("effec name: " + e.toString());
-
-				e.addEncompassingClass(this);
-			}			
-		}
-
-		this.weaponTypeID = weaponTypeID;
 	}
 	
-	
-	
-	public void triggerEffect(Object e){
-		String className = e.getClass().getName();
-		System.out.println("Class Name:  " + className);
-		ArrayList<GameEffect> triggered = this.weaponEffect.get(className);
-		for(GameEffect g : triggered){
-			g.addTrigger(e);
-			g.execute();
-		}
-	}
 	
 	
 	// add boolean method out of range
-	public int getWeaponTypeID(){
-		return this.weaponTypeID;
-	}
 	
 	public int getTargetEnemyID() {
-		return this.targetEnemyID;
+		return targetEnemyID;
 	}
 
 
@@ -102,6 +65,7 @@ public class Weapon extends Observable implements IDrawable{
 
 	
 
+	
 	public double getSpeedX(){
 		return this.speedX;
 	}
@@ -152,6 +116,8 @@ public class Weapon extends Observable implements IDrawable{
 	public void setDamage(double damage) {
 		this.damage = damage;
 	}
+
+
 
 	
 	

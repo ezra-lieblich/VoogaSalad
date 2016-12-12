@@ -34,15 +34,15 @@ public class GameSettingsPreviewView implements INodeView {
 	}
 	
 	public void updateGameImagePath(String imagePath){	
-//		Image image;
-//		if (root.getChildren().contains(gameImageView)){
-//			root.getChildren().remove(gameImageView);
-//		}
+		Image image;
+		if (root.getChildren().contains(gameImageView)){
+			root.getChildren().remove(gameImageView);
+		}
 		
 		File imageFile = new File(imagePath);
-		Image image = new Image(imageFile.toURI().toString());
+		image = new Image(imageFile.toURI().toString());
 		gameImageView.setImage(image);
-//		root.getChildren().add(gameImageView);
+		root.getChildren().add(gameImageView);
 	}
 	
 	public void updateGridDimensions(int size){

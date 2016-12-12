@@ -3,7 +3,7 @@ package engine.effect;
 import engine.effect.player.AbstractEffectFactory;
 
 public class EffectManagerFactory {
-    public static final String DEFAULT_PACKAGE_PATH = "gameplayer.model";
+    public static final String DEFAULT_PACKAGE_PATH = "engine.effect";
     AnnotatedDataMapFactory annotatedDataMapFactory;
     AnnotatedMethodMapFactory methodMapFactory;
     

@@ -1,5 +1,6 @@
 package authoring.editorview.collisioneffects.subviews;
 
+import java.util.ResourceBundle;
 import authoring.editorview.collisioneffects.EffectAuthoringViewDelegate;
 import authoring.editorview.collisioneffects.EffectSetView;
 import authoring.editorview.collisioneffects.subviews.editorfields.EffectConditionField;
@@ -23,15 +24,14 @@ public class EffectDataView implements EffectSetView {
     private EffectNameField nameField;
     private EffectConditionField conditionField;
     private EffectField effectField;
+    private ResourceBundle labelsResource;
 
-    public EffectDataView (EffectNameField nameField,
-                           EffectConditionField conditionField,
-                           EffectField effectField) {
+    public EffectDataView () {
+        labelsResource = ResourceBundle.getBundle("resources/GameAuthoringEffect");
         effectDataPane = new BorderPane();
-
-        this.nameField = nameField;
-        this.conditionField = conditionField;
-        this.effectField = effectField;
+        nameField = new EffectNameField(labelsResource);
+        conditionField = new EffectConditionField(labelsResource);
+        effectField = new EffectField(labelsResource);
         setPane();
     }
 
