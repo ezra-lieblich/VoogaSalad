@@ -14,6 +14,8 @@ import gameplayer.loader.*;
 import gameplayer.view.GridGUI;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import statswrapper.Wrapper;
 
 public class GamePlayData extends Observable{
@@ -39,13 +41,20 @@ public class GamePlayData extends Observable{
 	
 	
 	public GamePlayData(GamePlayerFactory factory){
+		this.numLevels = new SimpleDoubleProperty();
+		this.lives = new SimpleDoubleProperty();
+		this.gold = new SimpleDoubleProperty();
+		this.score = new SimpleDoubleProperty();
+		this.currentLevel = new SimpleIntegerProperty();
 		this.factory = factory;	
+		/*
 		this.winFactory = new WinEffectFactory(this);
 		//this.effectManager = gameData.getFactory().getWinEffectManager(); // get win effect Manager in xml in game setting.get effect manager 
 		this.allEffects = effectManager.getEntities().entrySet().stream().collect(Collectors.toMap(e-> e.getKey(), e->winFactory.create(e.getValue())));
 		for (int i : this.allEffects.keySet()){
 			this.score.addListener((Observable, oldValue, newValue) -> allEffects.get(i).execute()) ;
 		}
+		*/
 		
 	}
 	
@@ -56,10 +65,12 @@ public class GamePlayData extends Observable{
 	 */
 	public void initializeGameSetting() {
 		HashMap<String, Double> settingInfo = this.factory.getGameSetting();
-		this.numLevels.set(settingInfo.get("totalNumberOfLevels").intValue());  // put into property file
+		System.out.println("total levels: "+ settingInfo.get("totalNumberOfLevels"));
+		//this.numLevels.setValue(2.0);
+		this.numLevels.set(settingInfo.get("totalNumberOfLevels"));  // put into property file
 		this.gold.set(settingInfo.get("gold"));
 		this.lives.set(settingInfo.get("lives").intValue());
-		this.currentLevel.set(0);
+		this.currentLevel.set(0); //REMEMBER TO CHANGE
 		this.score.set(0);
 	}
 	

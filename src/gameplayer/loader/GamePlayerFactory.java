@@ -74,7 +74,7 @@ public class GamePlayerFactory{
 		settings.put("levelnumber", 0.0); 
 		settings.put("lives", 5.0);
 		settings.put("gold", 1000000.0);
-		settings.put("totalNumberOfLevels", 2.0);
+		settings.put("totalNumberOfLevels", 1.0);
 
 		return settings; 
 	}
@@ -87,8 +87,10 @@ public class GamePlayerFactory{
 
 
 	public Grid getGrid(int levelNumber){
-		Level level = authoringFileReader.getLevelManager().getEntity(levelNumber);
+		
+		Level level = authoringFileReader.getLevelManager().getEntity(levelNumber);//REMEMBER TO CHANGE
 		String pathType = authoringFileReader.getGameMode().getPathType();
+		System.out.println("lev num: " +levelNumber);
 		List<Integer> levelPaths = level.getPaths();
 
 
@@ -194,7 +196,13 @@ public class GamePlayerFactory{
 			//System.out.println("Level: "+levelNumber);
 			//System.out.println("Does the grid with the path exist?");
 			//System.out.println(this.getGrid(levelNumber).getPath(pathID));
-			Cell start = this.getGrid(levelNumber).getPath(pathID).getPathStart();
+			Cell start;
+			if (this.getGrid(levelNumber).isNoPathType()) {
+				start = this.getGrid(levelNumber).getStart();
+			}
+			else {
+				start = this.getGrid(levelNumber).getPath(pathID).getPathStart();
+			}
 			enemies.add(this.enemyFactory.createModelEnemy(enemyType, start, pathID));
 		}
 		return enemies;
