@@ -31,10 +31,10 @@ public class EnemyManager extends Observable {
 	//private Cell currentCopy;
 	//private Cell startCell;
 	//private GraphicsLibrary graphicLib;
-
 	private Queue<Wave> allWaves;
 	private Queue<Double> allWaveStartTimes;
 	private Queue<Double> allWaveFrequencies;
+	
 	
 	HashMap<Integer,ImageView>enemiesOnScreen;
 
@@ -218,6 +218,9 @@ public class EnemyManager extends Observable {
 	
 	public Queue<Enemy> getPackOfEnemyComing() {
 		if (allWaves.isEmpty()) {
+			if(this.enemyOnGrid.size() == 0){
+				this.gameData.setLevel(this.gameData.getCurrentLevel() + 1);
+			}
 			System.out.println("ALL WAVES IS EMPTY");
 			return new LinkedList<Enemy>();
 		}
