@@ -21,7 +21,7 @@ public class PathTypeManager extends AbstractTypeManager<Path> implements PathMa
     
     public void visitGridSize(GameModeManager manager, Integer index) {
         availablePaths.setProperty(getEntities().values().stream()
-                                   .filter(a -> a.getType().equals(manager.getEntity(index).getPathType()) && a.getGridRows() == manager.getEntity(index).getGridSize() && a.getGridColumns()==(manager.getEntity(index).getGridSize()))
+                                   .filter(a -> a.getType().name().equals(manager.getEntity(index).getPathType()) && a.getGridRows() == manager.getEntity(index).getGridSize() && a.getGridColumns()==(manager.getEntity(index).getGridSize()))
                                    .map(Path::getId)
                                    .collect(Collectors.toList()));  
         System.out.println("HERERER");

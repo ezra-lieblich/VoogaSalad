@@ -22,21 +22,21 @@ public class EffectTypeManager extends AbstractTypeManager<Effect> implements Ef
     //private Map<String, Class<?>> annotatedClasses;
     private Map<Class<?>, List<Method>> annotatedClassMethods; //Return type : methods of that type
     private List<Field> effectAccessibleData;
-    private ObservableProperty<String> activeClass;
+    private ObservableProperty<Class<?>> activeClass;
     
     EffectTypeManager(Map<Class<?>, List<Method>> annotatedClassMethods, List<Field> effectAccessibleData) {
         this.annotatedClassMethods = annotatedClassMethods;
         this.effectAccessibleData = effectAccessibleData;
-        this.activeClass = new ObservableObjectProperty<String>(null);
+        this.activeClass = new ObservableObjectProperty<Class<?>>(null);
     }
     
     @Override
-    public void setActiveClass(String activeClass) {
+    public void setActiveClass(Class<?> activeClass) {
         this.activeClass.setProperty(activeClass);
     }
     
     @Override
-    public void addActiveClassListener (BiConsumer<String, String> listener) {
+    public void addActiveClassListener (BiConsumer<Class<?>, Class<?>> listener) {
         activeClass.addListener(listener);
     }
     
@@ -47,7 +47,7 @@ public class EffectTypeManager extends AbstractTypeManager<Effect> implements Ef
     }
     
     @Override
-    public List<Method> getAnnotatedClassMethods(String className) {
+    public List<Method> getAnnotatedClassMethods(Class<?> className) {
         return annotatedClassMethods.get(className);
     }
 
