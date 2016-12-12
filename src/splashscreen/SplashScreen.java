@@ -35,38 +35,41 @@ public class SplashScreen {
 	public SplashScreen(Stage s) {
 		this.stage = s;
 		this.mainScreen = new GridPane();
+		this.mainScreen.getStyleClass().add("splash");
+		this.mainScreen.setStyle("-fx-background: #34495e;");
 
 	}
 
 	public void init() {
-		/*
+
 		WebView browser = new WebView();
 		WebEngine webEngine = browser.getEngine();
-		webEngine.load("http://voogasquad.herokuapp.com/");
-		*/
+		webEngine.load("http://people.duke.edu/~lz107/voogaTemplates/splashscreen.html");
+		this.mainScreen.add(browser, 0, 0);
 		this.mainScreen.setMinWidth(SIZE);
 		this.mainScreen.setMinHeight(SIZE);
 		this.scene = new Scene(this.mainScreen);
+		this.scene.getStylesheets().add(this.getClass().getResource("splash.css").toExternalForm());
 		this.stage.setScene(this.scene);
 		addSignInOption();
 	}
 
 	private void addSignInOption() {
-		Text scenetitle = new Text("Welcome");
-		scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
-		mainScreen.add(scenetitle, 0, 0, 2, 1);
+		//Text scenetitle = new Text("Welcome");
+		//scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
+		//mainScreen.add(scenetitle, 0, 0, 2, 1);
 
 		Label userName = new Label("User Name:");
 		mainScreen.add(userName, 0, 1);
 
 		TextField userTextField = new TextField();
-		mainScreen.add(userTextField, 1, 1);
+		mainScreen.add(userTextField, 0, 2);
 
 		Label pw = new Label("Password:");
-		mainScreen.add(pw, 0, 2);
+		mainScreen.add(pw, 0, 3);
 
 		PasswordField pwBox = new PasswordField();
-		mainScreen.add(pwBox, 1, 2);
+		mainScreen.add(pwBox, 0, 4);
 
 		//System.out.println("textfield input: "+userTextField.getText()+","+ pwBox.getText());
 		addLoginButtons(userTextField, pwBox);
@@ -78,9 +81,10 @@ public class SplashScreen {
 		HBox hbBtn = new HBox(10);
 		hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
 		hbBtn.getChildren().add(btn);
-		mainScreen.add(hbBtn, 1, 4);
+		mainScreen.add(hbBtn, 1, 2); //column, row
+	
 		final Text actiontarget = new Text();
-		mainScreen.add(actiontarget, 1, 6);
+		mainScreen.add(actiontarget, 0, 5);
 
 		btn.setOnAction(e -> {
 			
@@ -111,7 +115,7 @@ public class SplashScreen {
 		HBox hbBtn = new HBox(10);
 		hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
 		hbBtn.getChildren().addAll(btn1, btn2);
-		mainScreen.add(hbBtn, 1, 5);
+		mainScreen.add(hbBtn, 0, 5);
 	}
 
 	private void addCreateAccountButtons(TextField userfield, TextField passField) {
@@ -119,9 +123,9 @@ public class SplashScreen {
 		HBox hbBtn = new HBox(10);
 		hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
 		hbBtn.getChildren().add(btn);
-		mainScreen.add(hbBtn, 2, 4);
+		mainScreen.add(hbBtn, 1, 4);
 		final Text actiontarget = new Text();
-		mainScreen.add(actiontarget, 2, 6);
+		mainScreen.add(actiontarget, 0, 5);
 
 		btn.setOnAction(e -> {
 			try {
