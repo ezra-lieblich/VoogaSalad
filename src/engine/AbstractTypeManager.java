@@ -17,7 +17,7 @@ import engine.observer.ObservableMapProperty;
 
 
 
-public abstract class AbstractTypeManager<E extends Type> extends AbstractObservable<MethodData<?>>
+public abstract class AbstractTypeManager<E extends Type> extends AbstractObservable<MethodData<Object>>
         implements Manager<E> {
     // ManagerMediator managerMediator;
     private ObservableMap<Integer, E> data;
@@ -35,7 +35,7 @@ public abstract class AbstractTypeManager<E extends Type> extends AbstractObserv
     @Override
     public void removeEntry (int id) {
         data.remove(id);
-        notifyObservers(new MethodObjectData<Integer>("RemoveEntry", id));
+        notifyObservers(new MethodObjectData<Object>("RemoveEntry", id));
     }
 
     @Override
@@ -110,8 +110,8 @@ public abstract class AbstractTypeManager<E extends Type> extends AbstractObserv
     // TODO - error might occur due to taking in a VisitableManager
     // TODO - get specific interface
     @Override
-    public <U extends VisitableManager<MethodData<?>>> void visitManager (U visitableManager,
-                                                                          MethodData<?> dataMethod) {
+    public <U extends VisitableManager<MethodData<Object>>> void visitManager (U visitableManager,
+                                                                          MethodData<Object> dataMethod) {
         try {
             Method visitMethod =
                     this.getClass().getMethod("visit" + dataMethod.getMethod(),
@@ -132,8 +132,8 @@ public abstract class AbstractTypeManager<E extends Type> extends AbstractObserv
     }
 
     @Override
-    public <U extends VisitorManager<MethodData<?>>> void accept (U visitor,
-                                                                  MethodData<?> methodData) {
+    public <U extends VisitorManager<MethodData<Object>>> void accept (U visitor,
+                                                                  MethodData<Object> methodData) {
         System.out.println("Here");
         visitor.visitManager(this, methodData);
     }
