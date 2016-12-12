@@ -2,6 +2,9 @@ package authoring.editorview.collisioneffects;
 
 import java.util.List;
 import authoring.editorview.ListDataSource;
+import authoring.editorview.collisioneffects.subviews.EffectAvailableClassesView;
+import authoring.editorview.collisioneffects.subviews.EffectAvailableDataObjectsView;
+import authoring.editorview.collisioneffects.subviews.EffectAvailableMethodsView;
 import authoring.editorview.collisioneffects.subviews.EffectBank;
 import javafx.scene.layout.GridPane;
 
@@ -15,14 +18,23 @@ public class EffectAuthoringView implements EffectUpdateView {
 
     private GridPane effectsPane;
     private EffectBank effectsBank;
+    private EffectAvailableClassesView effectAvailClasses;
+    private EffectAvailableDataObjectsView effectDataObjects;
+    private EffectAvailableMethodsView effectAvailMethods;
 
     public EffectAuthoringView () {
         effectsBank = new EffectBank();
+        effectAvailClasses = new EffectAvailableClassesView();
+        effectDataObjects = new EffectAvailableDataObjectsView();
+        effectAvailMethods = new EffectAvailableMethodsView();
         setPane();
     }
 
     private void setPane () {
         effectsPane.add(effectsBank.getInstanceAsNode(), 0, 0, 1, 1);
+        effectsPane.add(effectAvailClasses.getInstanceAsNode(), 1, 0, 1, 1);
+        effectsPane.add(effectDataObjects.getInstanceAsNode(), 2, 0, 1, 1);
+        effectsPane.add(effectAvailMethods.getInstanceAsNode(), 3, 0, 1, 1);
     }
 
     @Override
