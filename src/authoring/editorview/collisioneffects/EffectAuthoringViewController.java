@@ -15,18 +15,16 @@ import engine.effect.EffectManagerController;
 public class EffectAuthoringViewController extends EditorViewController
         implements EffectAuthoringViewDelegate, ListDataSource {
 
-    private EffectManagerController effectsDataSource;
+    private EffectManagerController effectDataSource;
     private int currentEffectID;
     private EffectUpdateView effectAuthoringView;
 
     public EffectAuthoringViewController (EffectManagerController effectsDataSource) {
-        this.effectsDataSource = effectsDataSource;
+        this.effectDataSource = effectsDataSource;
         effectAuthoringView = EffectAuthoringViewFactory.build();
         effectAuthoringView.setDelegate(this);
         effectAuthoringView.setEffectListDataSource(this);
-        // TODO - fix this
-        currentEffectID = 0;
-        this.effectsDataSource.addTypeBankListener(this.effectAuthoringView);
+        this.effectDataSource.addTypeBankListener(this.effectAuthoringView);
     }
 
     public void setEffectOptions (List<Integer> effects) {
@@ -55,18 +53,18 @@ public class EffectAuthoringViewController extends EditorViewController
 
     @Override
     public void onUserSelectedAvailableClass (String selectedClass) {
-        effectsDataSource.setAvailableClass(selectedClass);
+        effectDataSource.setAvailableClass(selectedClass);
         // TODO: This also needs to update the available methods
     }
 
     @Override
     public void onUserEnteredEffectName (String name) {
-        effectsDataSource.setName(currentEffectID, name);
+        effectDataSource.setName(currentEffectID, name);
     }
 
     @Override
     public void onUserEnteredCondition (String condition) {
-        effectsDataSource.setCondition(currentEffectID, condition);
+        effectDataSource.setCondition(currentEffectID, condition);
     }
 
     @Override
@@ -78,21 +76,23 @@ public class EffectAuthoringViewController extends EditorViewController
     @Override
     public ListCellData getCellDataForSubject (int id) {
         ListCellData cellData = new ListCellData();
-        System.out.println("id: " + id + " effectsDS: " + effectsDataSource);
-        cellData.setName(effectsDataSource.getName(id));
-        cellData.setImagePath(effectsDataSource.getImagePath(id));
+        System.out.println("id: " + id + " effectsDS: " + effectDataSource);
+        cellData.setName(effectDataSource.getName(id));
+        cellData.setImagePath(effectDataSource.getImagePath(id));
         cellData.setId(id);
         return cellData;
     }
 
     @Override
     public void refreshView () {
-        effectAuthoringView.updateNameDisplay(effectsDataSource.getImagePath(currentEffectID));
+        effectAuthoringView.updateNameDisplay(effectDataSource.getImagePath(currentEffectID));
+        effectAuthoringView.updateConditionField(effectDataSource.getCondition(currentEffectID));
+        effectAuthoringView.updateEffectField(effectDataSource.getEffect(currentEffectID));
     }
 
     @Override
     public void onUserEnteredEffectText (String effect) {
-        effectsDataSource.setEffect(currentEffectID, effect);
+        effectDataSource.setEffect(currentEffectID, effect);
     }
 
 }
