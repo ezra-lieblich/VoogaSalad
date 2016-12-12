@@ -19,20 +19,18 @@ public class EffectAuthoringViewController extends EditorViewController
     private int currentEffectID;
     private EffectUpdateView effectAuthoringView;
 
-    public EffectAuthoringViewController () {
+    public EffectAuthoringViewController (EffectManagerController effectsDataSource) {
+        this.effectsDataSource = effectsDataSource;
         effectAuthoringView = EffectAuthoringViewFactory.build();
         effectAuthoringView.setDelegate(this);
+        effectAuthoringView.setEffectListDataSource(this);
         // TODO - fix this
         currentEffectID = 0;
-    }
-
-    public void setEffectDataSource (EffectManagerController source) {
-        this.effectsDataSource = source;
-        // this.effectsDataSource.addTypeBankListener(this.effectAuthoringView);
+        this.effectsDataSource.addTypeBankListener(this.effectAuthoringView);
     }
 
     public void setEffectOptions (List<Integer> list) {
-        effectAuthoringView.updateListedEffects(list);
+        effectAuthoringView.updateEffectBank(list);
     }
 
     public EffectUpdateView getEffectAuthoringView () {
@@ -66,8 +64,12 @@ public class EffectAuthoringViewController extends EditorViewController
 
     @Override
     public ListCellData getCellDataForSubject (int id) {
-        // TODO Auto-generated method stub
-        return null;
+        ListCellData cellData = new ListCellData();
+        System.out.println("id: " + id + " effectsDS: " + effectsDataSource);
+        cellData.setName(effectsDataSource.getName(id));
+        cellData.setImagePath(effectsDataSource.getImagePath(id));
+        cellData.setId(id);
+        return cellData;
     }
 
     @Override

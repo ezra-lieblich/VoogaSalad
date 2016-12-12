@@ -187,7 +187,7 @@ public class TowerAuthoringViewController extends EditorViewController
 
     @Override
     public void onUserPressedAddEffect () {
-        EffectAuthoringViewController effectAuthoringView = new EffectAuthoringViewController();
+        EffectAuthoringViewController effectAuthoringView = new EffectAuthoringViewController(effectDataSource);
         effectAuthoringView.openEffectView();
     }
 

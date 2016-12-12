@@ -21,7 +21,7 @@ import javafx.stage.Stage;
 public class EffectAuthoringView implements EffectUpdateView {
 
     private GridPane effectsPane;
-    private EffectBank effectsBank;
+    private EffectBank effectBank;
     private EffectAvailableClassesView effectAvailClasses;
     private EffectAvailableDataObjectsView effectDataObjects;
     private EffectAvailableMethodsView effectAvailMethods;
@@ -29,7 +29,7 @@ public class EffectAuthoringView implements EffectUpdateView {
     private Scene myScene;
 
     public EffectAuthoringView () {
-        effectsBank = new EffectBank();
+        effectBank = new EffectBank();
         effectsPane = new GridPane();
         effectAvailClasses = new EffectAvailableClassesView();
         effectDataObjects = new EffectAvailableDataObjectsView();
@@ -40,7 +40,7 @@ public class EffectAuthoringView implements EffectUpdateView {
     }
 
     private void setPane () {
-        effectsPane.add(effectsBank.getInstanceAsNode(), 0, 0, 1, 1);
+        effectsPane.add(effectBank.getInstanceAsNode(), 0, 0, 1, 1);
         effectsPane.add(effectAvailClasses.getInstanceAsNode(), 1, 0, 1, 1);
         effectsPane.add(effectDataObjects.getInstanceAsNode(), 2, 0, 1, 1);
         effectsPane.add(effectAvailMethods.getInstanceAsNode(), 3, 0, 1, 1);
@@ -79,8 +79,7 @@ public class EffectAuthoringView implements EffectUpdateView {
 
     @Override
     public void setEffectListDataSource (ListDataSource source) {
-        // TODO Auto-generated method stub
-
+        this.effectBank.setListDataSource(source);
     }
 
     @Override
@@ -96,8 +95,8 @@ public class EffectAuthoringView implements EffectUpdateView {
     }
 
     @Override
-    public void updateListedEffects (List<Integer> effects) {
-        // effectBank.
+    public void updateEffectBank (List<Integer> effects) {
+        effectBank.updateBank(effects);
     }
 
     @Override

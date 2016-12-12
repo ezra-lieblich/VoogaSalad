@@ -22,7 +22,7 @@ public interface EffectUpdateView extends EffectSetView, IUpdateView {
 
     public void updateEffectField (String effect);
 
-    public void updateListedEffects (List<Integer> effects);
+    public void updateEffectBank (List<Integer> effects);
 
     public void updateListedAvailableClasses (List<String> availClasses);
 
