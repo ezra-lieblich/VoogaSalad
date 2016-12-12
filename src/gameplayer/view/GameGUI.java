@@ -73,7 +73,7 @@ public class GameGUI {
 		this.columns = columns;
 	}
 
-	public Scene init(double gold, double lives, double level, List<String> imagePaths) {
+	public Scene init(double gold, double lives, double level, double score, List<String> imagePaths) {
 		this.numLevels = level;
 		createScene();
 		createGrid();
@@ -81,7 +81,7 @@ public class GameGUI {
 		initChat();
 		initStatsTab();
 		addButtonPanel();
-		initStatsDisplay(gold, lives, currentLevel);
+		initStatsDisplay(gold, lives, currentLevel,score);
 		return this.scene;
 	}
 
@@ -210,14 +210,14 @@ public class GameGUI {
 		tab.setContent(scroll);
 	}
 
-	private void initStatsDisplay(double gold, double lives, double level) {
-		this.statsDisplay = new StatsDisplay(gold, lives, level);
+	private void initStatsDisplay(double gold, double lives, double level,double score) {
+		this.statsDisplay = new StatsDisplay(gold, lives, level,score);
 		statsDisplay.init();
 		this.mainScreen.setBottom(statsDisplay.getScorePane());
 	}
 
-	public void updateStatsDisplay(double gold, double lives, double level) {
-		this.statsDisplay.updateLevelUI(gold, lives, level);
+	public void updateStatsDisplay(double gold, double lives, double level, double score) {
+		this.statsDisplay.updateLevelUI(gold, lives, level, score);
 	}
 
 	public void reRenderTower(List<IDrawable> redraw) {// should be interface of
@@ -273,12 +273,7 @@ public class GameGUI {
 		}
 	}
 
-	public void reRender(List<IDrawable> redraw, double width, double height) {// should
-																				// be
-																				// interface
-																				// of
-		// drawables
-
+	public void reRender(List<IDrawable> redraw, double width, double height) {
 		for (IDrawable entity : redraw) {
 			ImageView image = new ImageView(entity.getImage());
 			image.setX(entity.getX());

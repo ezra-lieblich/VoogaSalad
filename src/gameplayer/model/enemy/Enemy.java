@@ -2,6 +2,7 @@ package gameplayer.model.enemy;
 
 import java.util.Observable;
 
+import engine.effect.EffectMethod;
 import gameplayer.model.Cell;
 import gameplayer.model.IDrawable;
 import javafx.scene.control.Label;
@@ -20,9 +21,9 @@ public class Enemy extends Observable implements IDrawable {
 	private int yDirection; // -1 if moving down, 1 if moving up
 	private double width, height;
 	private int uniqueID;
-	private Cell enemyCell;
 	private Label enemyInfo;
 	private boolean showInfo;
+
 
 	public Enemy(int ID, String name, double movingSpeed, int health, String image, double width, double height) {
 		this.uniqueID = ID;
@@ -46,13 +47,6 @@ public class Enemy extends Observable implements IDrawable {
 	 * public double[] getWidthAndHeight(){ double[] weidthAndHeight =
 	 * {this.width, this.height}; return weidthAndHeight; }
 	 */
-	public void setCell(Cell c) {
-		this.enemyCell = c;
-	}
-
-	public Cell getCell() {
-		return this.enemyCell;
-	}
 
 	public void setUniqueID(int id) {
 		this.uniqueID = id;
@@ -133,9 +127,13 @@ public class Enemy extends Observable implements IDrawable {
 	}
 
 	public String getImage() {
-		return this.image;
+		//System.out.println("What is the image: "+image);
+		int index=this.image.lastIndexOf("/")+1;
+		String loc = this.image.substring(index, image.length());
+		return loc;
 	}
 
+	@EffectMethod
 	public double getMovingSpeed() {
 		return movingSpeed;
 	}

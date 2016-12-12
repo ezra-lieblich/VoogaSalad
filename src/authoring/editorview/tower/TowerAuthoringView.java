@@ -114,8 +114,8 @@ public class TowerAuthoringView implements ITowerUpdateView {
 
     @Override
     public void updateTowerUpgradeBank (List<Integer> towerUpgrades) {
-        // TODO Actually do this
-    }
+    	this.towerUpgradeBank.updateBank(towerUpgrades);
+    	}
 
     @Override
     public void updateTowerBank (List<Integer> createdTowers) {
@@ -159,6 +159,7 @@ public class TowerAuthoringView implements ITowerUpdateView {
     @Override
     public void setTowerListDataSource (ListDataSource source) {
         this.towerBank.setListDataSource(source);
+        this.towerUpgradeBank.setListDataSource(source);
     }
 
     @Override

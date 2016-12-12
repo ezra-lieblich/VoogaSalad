@@ -11,7 +11,6 @@ public class GamePlayData  extends Observable{
 	private GamePlayerFactory factory;
 	private int currentLevel;
 
-	private int cellSize;
 	private Grid grid;
 	private Cell[][] gridArray;
 	private int gridX;
@@ -139,23 +138,18 @@ public class GamePlayData  extends Observable{
 	}
 
 	public double getCellHeight() {
-		return GridGUI.GRID_WIDTH / this.getRow();
+		return GridGUI.GRID_HEIGHT / this.getRow();
 	}
 
 	public double cellToCoordinate(double d) {
 		return (d) * getCellWidth();
 	}
 	
-	
-	public int getCellSize(){
-		return this.cellSize;
-	}
-	
 	/**
 	 * utility methods for each single classes
 	 */
-	public Boolean coordinateInBound(double d, double e) {
-		return (d < this.gridX * cellSize && e < this.gridY * cellSize);
+	public Boolean coordinateInBound(double x, double y) {
+		return (x < GridGUI.GRID_WIDTH && y < GridGUI.GRID_HEIGHT && x > 0 && y > 0);
 	}
 
 	public double getDistance(double x1, double y1, double x2, double y2) {
