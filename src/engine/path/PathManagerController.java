@@ -1,11 +1,11 @@
 package engine.path;
 
 import java.util.List;
-import authoring.editorview.path.IPathSetView;
-import authoring.editorview.path.IPathUpdateView;
+import authoring.editorview.path.PathSetView;
+import authoring.editorview.path.PathUpdateView;
 import engine.ManagerController;
 
-public interface PathManagerController extends ManagerController<PathManager, PathBuilder, Path, IPathUpdateView>{
+public interface PathManagerController extends ManagerController<PathManager, PathBuilder, Path, PathUpdateView>{
 
     boolean setNewPathCoordinate (int pathID, int x, int y);
     
@@ -26,5 +26,7 @@ public interface PathManagerController extends ManagerController<PathManager, Pa
     int getNumberofRows (int pathID);
     
     void setSquareGridDimensions (int pathID, int size);
+    
+    List<Integer> getAvailablePaths ();
     
 }

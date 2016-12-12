@@ -10,6 +10,8 @@ public interface EffectManagerController extends ManagerController<EffectManager
 
     List<String> getAvailableClassMethods (String selectedClass);
     
+    List<String> getAvailableDataObjects ();
+    
     void setAvailableClass(String selectedClass);
     
     String getTrigger(int effectID);

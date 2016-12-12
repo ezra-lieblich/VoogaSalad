@@ -6,7 +6,7 @@ import authoring.editorview.ListDataSource;
 import engine.level.wave.WaveString;
 
 
-public interface ILevelUpdateView extends ILevelSetView, IUpdateView {
+public interface LevelUpdateView extends LevelSetView, IUpdateView {
 
     public void updateRewardScore (double winPoints);
 

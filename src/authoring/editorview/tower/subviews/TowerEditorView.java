@@ -5,7 +5,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ResourceBundle;
 import authoring.editorview.PhotoFileChooser;
-import authoring.editorview.tower.ITowerSetView;
+import authoring.editorview.tower.TowerSetView;
 import authoring.editorview.tower.TowerAuthoringViewDelegate;
 import authoring.editorview.tower.subviews.editorfields.TowerAbilityBank;
 import authoring.editorview.tower.subviews.editorfields.TowerBuyPriceField;
@@ -42,7 +42,7 @@ import javafx.stage.Stage;
  * @author Kayla Schulz
  *
  */
-public class TowerEditorView extends PhotoFileChooser implements ITowerSetView {
+public class TowerEditorView extends PhotoFileChooser implements TowerSetView {
 
     private TowerAuthoringViewDelegate delegate;
     private TowerNameField towerName;

@@ -1,6 +1,6 @@
 package engine.enemy;
 
-import authoring.editorview.enemy.IEnemyUpdateView;
+import authoring.editorview.enemy.EnemyUpdateView;
 import engine.ManagerController;
 import engine.effect.EffectManager;
 import engine.effect.EffectManagerController;
@@ -8,7 +8,7 @@ import engine.effect.EffectManagerController;
 
 // IEnemyUpdateView needs to extend IUpdateView
 public interface EnemyManagerController
-        extends ManagerController<EnemyManager, EnemyBuilder, Enemy, IEnemyUpdateView> {
+        extends ManagerController<EnemyManager, EnemyBuilder, Enemy, EnemyUpdateView> {
 
     public void setEnemySpeed (int enemyID, double enemySpeed);
 

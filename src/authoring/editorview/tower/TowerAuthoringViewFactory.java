@@ -8,7 +8,7 @@ package authoring.editorview.tower;
 
 public class TowerAuthoringViewFactory {
 
-    public static ITowerUpdateView build (int width, int height) {
+    public static TowerUpdateView build (int width, int height) {
 
         return new TowerAuthoringView();
     }

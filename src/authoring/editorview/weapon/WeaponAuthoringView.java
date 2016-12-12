@@ -24,7 +24,7 @@ import javafx.scene.layout.RowConstraints;
  * @author Kayla Schulz
  *
  */
-public class WeaponAuthoringView implements IWeaponUpdateView {
+public class WeaponAuthoringView implements WeaponUpdateView {
     private WeaponAuthoringViewDelegate delegate;
     private GridPane weaponView;
     private WeaponImageBank weaponBank;

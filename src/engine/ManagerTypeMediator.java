@@ -64,7 +64,7 @@ public class ManagerTypeMediator implements ManagerMediator{
 //        //allManagers.forEach(a -> getter.get());
 //        ///Manager<Enemy> test = new EnemyTypeManager(null);
 //        //Function<? super Manager<? extends Type>> test;
-//        //Consumer<Integer> test = Manager<Enemy>::getEntity;
+//        Consumer<Integer> test = Manager<Enemy>::getEntity;
 //        //Function<? super Manager<? extends Type>, E>;
 //        //getEntry(Manager<Enemy>::getActiveEntity);
 //        //allManagers.stream().map(mapper)

@@ -2,7 +2,7 @@ package authoring.editorview.path.subviews.editorfields;
 
 import java.io.File;
 import java.util.List;
-import authoring.editorview.path.IPathSetView;
+import authoring.editorview.path.PathSetView;
 import authoring.editorview.path.PathAuthoringViewDelegate;
 import engine.path.Coordinate;
 import javafx.event.EventHandler;
@@ -15,7 +15,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeType;
 
-public class PathGrid implements IPathSetView{
+public class PathGrid implements PathSetView{
 	
 	private int gridSize;
 	private int gridDimensions;
