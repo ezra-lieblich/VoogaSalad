@@ -16,11 +16,11 @@ import gameplayer.model.enemy.EnemyManager;
 import javafx.scene.control.Alert;
 
 public class GameSavingController {
-	private XStream serializer;
+	//private XStream serializer;
 	private GamePlayModel gameModel;
 	
 	public GameSavingController(GamePlayModel model) {
-		serializer = new XStream(new DomDriver());
+		//serializer = new XStream(new DomDriver());
 		this.gameModel = model;
 	}
 	
@@ -28,12 +28,12 @@ public class GameSavingController {
 		EnemyManager eman = gameModel.getEnemyManager();
 		Enemy e = eman.getPackOfEnemyComing().element();
 		GamePlayData gameData = gameModel.getData();
-		//GamePlayerFactory
-		return serializer.toXML(gameData);
+		//GamePlayerFactory factory = gameData.getFactory();
+		return new XStream(new DomDriver()).toXML(gameData);
 	}
 	
 	public void saveGame() {
-		String dirName = "src/";
+		String dirName = "src/gameSavingTest.xml";
 		File newFile = new File(dirName);
 		String content = toPrettyXML();
 		System.out.println("XML LENTHHHHH " +content.length());

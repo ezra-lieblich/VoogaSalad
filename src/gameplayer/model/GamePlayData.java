@@ -7,7 +7,7 @@ import gameplayer.loader.*;
 import gameplayer.view.GridGUI;
 import statswrapper.Wrapper;
 
-public class GamePlayData  extends Observable{
+public class GamePlayData extends Observable{
 	private GamePlayerFactory factory;
 	private int currentLevel;
 
