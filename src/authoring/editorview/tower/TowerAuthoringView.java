@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 import authoring.editorview.ListDataSource;
 import authoring.editorview.tower.subviews.TowerEditorView;
 import authoring.editorview.tower.subviews.TowerImageBank;
+import authoring.editorview.tower.subviews.editorfields.AddTowerEffectView;
 import authoring.editorview.tower.subviews.editorfields.TowerAbilityBank;
 import authoring.editorview.tower.subviews.editorfields.TowerBuyPriceField;
 import authoring.editorview.tower.subviews.editorfields.TowerWeaponBank;
@@ -15,7 +16,6 @@ import authoring.editorview.tower.subviews.editorfields.TowerSizeField;
 import authoring.editorview.tower.subviews.editorfields.TowerUnlockLevelField;
 import authoring.editorview.tower.subviews.editorfields.TowerUpgradeBank;
 import javafx.scene.Node;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
@@ -41,6 +41,8 @@ public class TowerAuthoringView implements TowerUpdateView {
     private TowerWeaponBank towerWeaponBank;
     private TowerUpgradeBank towerUpgradeBank;
     private TowerSizeField towerSize;
+    private AddTowerEffectView addTowerEffect;
+
     private ResourceBundle labelsResource =
             ResourceBundle.getBundle("resources/GameAuthoringTower");
     private ResourceBundle dialogueBoxResource = ResourceBundle.getBundle("resources/DialogueBox");
@@ -57,36 +59,35 @@ public class TowerAuthoringView implements TowerUpdateView {
         towerWeaponBank = new TowerWeaponBank(labelsResource);
         towerUpgradeBank = new TowerUpgradeBank(labelsResource);
         towerSize = new TowerSizeField(labelsResource);
+        addTowerEffect = new AddTowerEffectView(labelsResource);
 
         towerBank = new TowerImageBank();
         towerEditorView =
                 new TowerEditorView(towerName, towerImage, towerBuyPrice, towerSellPrice,
                                     towerUnlockLevel, towerAbility, towerWeaponBank,
                                     towerUpgradeBank,
-                                    towerSize,
+                                    towerSize, addTowerEffect,
                                     labelsResource, dialogueBoxResource);
         buildView();
     }
-
 
     private void buildView () {
 
         ColumnConstraints bankColumn = new ColumnConstraints();
         bankColumn.setMinWidth(150);
-    	
-    	ColumnConstraints editorColumn = new ColumnConstraints();
+
+        ColumnConstraints editorColumn = new ColumnConstraints();
         editorColumn.setPrefWidth(400);
-       
+
         ColumnConstraints previewColumn = new ColumnConstraints();
-        
-        
+
         RowConstraints fullRow = new RowConstraints();
-        
+
         fullRow.setMinHeight(700);
-        
+
         towerView.getColumnConstraints().addAll(bankColumn, editorColumn, previewColumn);
         towerView.getRowConstraints().add(fullRow);
-        
+
         towerView.add(towerBank.getInstanceAsNode(), 0, 0);
         towerView.add(towerEditorView.getInstanceAsNode(), 1, 0);
         towerView.add(towerImage.getInstanceAsNode(), 2, 0);
@@ -111,6 +112,7 @@ public class TowerAuthoringView implements TowerUpdateView {
         towerWeaponBank.setDelegate(delegate);
         towerUpgradeBank.setDelegate(delegate);
         towerSize.setDelegate(delegate);
+        addTowerEffect.setDelegate(delegate);
     }
 
     @Override
@@ -136,8 +138,8 @@ public class TowerAuthoringView implements TowerUpdateView {
 
     @Override
     public void updateTowerUpgradeBank (List<Integer> towerUpgrades) {
-    	this.towerUpgradeBank.updateBank(towerUpgrades);
-    	}
+        this.towerUpgradeBank.updateBank(towerUpgrades);
+    }
 
     @Override
     public void updateTowerBank (List<Integer> createdTowers) {
@@ -187,16 +189,16 @@ public class TowerAuthoringView implements TowerUpdateView {
     @Override
     public void updateDeleteEntity (String entityID) {
         // TODO Auto-generated method stub
-        
+
     }
-    
-	@Override
-	public Integer getNearestAvailableItemID(int id) {
-		int currentIndex = this.towerBank.getIndexForItemWithID(id);
-		Integer nearestID = this.towerBank.getIDForItemAtIndex(currentIndex-1);
-		if (nearestID == null){
-			nearestID = this.towerBank.getIDForItemAtIndex(currentIndex+1);
-		}
-		return nearestID;
-	}
+
+    @Override
+    public Integer getNearestAvailableItemID (int id) {
+        int currentIndex = this.towerBank.getIndexForItemWithID(id);
+        Integer nearestID = this.towerBank.getIDForItemAtIndex(currentIndex - 1);
+        if (nearestID == null) {
+            nearestID = this.towerBank.getIDForItemAtIndex(currentIndex + 1);
+        }
+        return nearestID;
+    }
 }
