@@ -1,7 +1,7 @@
 package authoring.editorview.level.subviews;
 
 import java.util.ResourceBundle;
-import authoring.editorview.level.ILevelSetView;
+import authoring.editorview.level.LevelSetView;
 import authoring.editorview.level.LevelAuthoringViewDelegate;
 import authoring.utilityfactories.ComboBoxFactory;
 import javafx.collections.FXCollections;
@@ -10,7 +10,7 @@ import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 
 
-public class LevelChooserView implements ILevelSetView {
+public class LevelChooserView implements LevelSetView {
 
     private ComboBox<Object> levelChooser;
     private LevelAuthoringViewDelegate delegate;

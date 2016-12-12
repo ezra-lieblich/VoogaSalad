@@ -11,7 +11,7 @@ import authoring.editorview.ListDataSource;
  * @author Kayla Schulz
  *
  */
-public interface IEnemyUpdateView extends IEnemySetView, IUpdateView {
+public interface IEnemyUpdateView extends EnemySetView, IUpdateView {
 
     public void updateEnemySpeed (double speed);
 

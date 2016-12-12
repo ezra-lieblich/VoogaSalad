@@ -10,7 +10,7 @@ import authoring.editorview.INodeView;
  * @author Kayla Schulz
  *
  */
-public interface IWeaponSetView extends INodeView {
+public interface WeaponSetView extends INodeView {
 
     public void setDelegate (WeaponAuthoringViewDelegate delegate);
 }

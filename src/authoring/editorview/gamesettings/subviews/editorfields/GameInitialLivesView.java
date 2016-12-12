@@ -2,7 +2,7 @@ package authoring.editorview.gamesettings.subviews.editorfields;
 
 import java.util.ResourceBundle;
 import authoring.editorview.gamesettings.GameSettingsAuthoringViewDelegate;
-import authoring.editorview.gamesettings.IGameSettingsSetView;
+import authoring.editorview.gamesettings.GameSettingsSetView;
 import authoring.utilityfactories.DialogueBoxFactory;
 import authoring.utilityfactories.GridFactory;
 import authoring.utilityfactories.TextFieldFactory;
@@ -12,7 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
 
-public class GameInitialLivesView implements IGameSettingsSetView {
+public class GameInitialLivesView implements GameSettingsSetView {
 
     private TextField initialLivesField;
     private int initialLives;

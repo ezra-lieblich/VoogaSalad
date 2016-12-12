@@ -3,7 +3,7 @@ package authoring.editorview.enemy.subviews.editorfields;
 import java.util.ResourceBundle;
 import authoring.editorview.EditorNameView;
 import authoring.editorview.enemy.EnemyAuthoringViewDelegate;
-import authoring.editorview.enemy.IEnemySetView;
+import authoring.editorview.enemy.EnemySetView;
 import authoring.utilityfactories.BoxFactory;
 import authoring.utilityfactories.TextFieldFactory;
 
@@ -13,7 +13,7 @@ import authoring.utilityfactories.TextFieldFactory;
  * @author Kayla Schulz
  *
  */
-public class EnemyNameField extends EditorNameView implements IEnemySetView {
+public class EnemyNameField extends EditorNameView implements EnemySetView {
 
     private EnemyAuthoringViewDelegate delegate;
 

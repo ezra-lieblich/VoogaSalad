@@ -1,7 +1,7 @@
 package engine.path;
 
 import java.util.List;
-import authoring.editorview.path.IPathSetView;
+import authoring.editorview.path.PathSetView;
 import authoring.editorview.path.IPathUpdateView;
 import engine.ManagerController;
 

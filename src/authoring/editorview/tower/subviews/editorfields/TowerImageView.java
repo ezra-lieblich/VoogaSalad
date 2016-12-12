@@ -2,7 +2,7 @@ package authoring.editorview.tower.subviews.editorfields;
 
 import java.io.File;
 import java.util.ResourceBundle;
-import authoring.editorview.tower.ITowerSetView;
+import authoring.editorview.tower.TowerSetView;
 import authoring.editorview.tower.TowerAuthoringViewDelegate;
 import authoring.utilityfactories.DialogueBoxFactory;
 import javafx.scene.Node;
@@ -17,7 +17,7 @@ import javafx.scene.image.ImageView;
  *
  */
 
-public class TowerImageView implements ITowerSetView {
+public class TowerImageView implements TowerSetView {
 
     @SuppressWarnings("unused")
     private TowerAuthoringViewDelegate delegate;

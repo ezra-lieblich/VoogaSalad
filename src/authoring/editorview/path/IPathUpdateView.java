@@ -6,7 +6,7 @@ import authoring.editorview.IUpdateView;
 import authoring.editorview.ListDataSource;
 import engine.path.Coordinate;
 
-public interface IPathUpdateView extends IPathSetView, IUpdateView{
+public interface IPathUpdateView extends PathSetView, IUpdateView{
 	
 	public void updateGridDimensions(int dimensions);
 	

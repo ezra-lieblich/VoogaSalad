@@ -16,7 +16,7 @@ import javafx.scene.layout.RowConstraints;
  * @author Diane Hadley
  *
  */
-public class GameSettingsAuthoringView implements IGameSettingsUpdateView, IGameSettingsSetView {
+public class GameSettingsAuthoringView implements IGameSettingsUpdateView, GameSettingsSetView {
 
     private GridPane gameSettingsView;
 

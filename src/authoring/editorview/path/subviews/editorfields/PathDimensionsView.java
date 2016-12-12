@@ -3,7 +3,7 @@ package authoring.editorview.path.subviews.editorfields;
 import java.util.ResourceBundle;
 
 
-import authoring.editorview.path.IPathSetView;
+import authoring.editorview.path.PathSetView;
 
 import authoring.editorview.path.PathAuthoringViewDelegate;
 import authoring.utilityfactories.DialogueBoxFactory;
@@ -15,7 +15,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
 
-public class PathDimensionsView implements IPathSetView{
+public class PathDimensionsView implements PathSetView{
 	
 	//Inheritance
 	

@@ -2,7 +2,7 @@ package authoring.editorview.path.subviews;
 
 import java.util.ResourceBundle;
 
-import authoring.editorview.path.IPathSetView;
+import authoring.editorview.path.PathSetView;
 import authoring.editorview.path.PathAuthoringViewDelegate;
 import authoring.editorview.path.subviews.editorfields.PathDimensionsView;
 import authoring.editorview.path.subviews.editorfields.PathImageDisplayView;
@@ -22,7 +22,7 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
-public class PathEditorView implements IPathSetView {
+public class PathEditorView implements PathSetView {
 
 	private VBox root;
 	private AnchorPane rootBuffer;

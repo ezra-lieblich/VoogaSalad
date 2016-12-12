@@ -1,6 +1,7 @@
 package authoring.editorview.collisioneffects;
 
 import authoring.editorview.ListDataSource;
+import authoring.editorview.collisioneffects.subviews.EffectsBank;
 import javafx.scene.layout.GridPane;
 
 
@@ -11,10 +12,11 @@ public class EffectsAuthoringView implements IEffectsUpdateView {
 
     public EffectsAuthoringView () {
         effectsBank = new EffectsBank();
+        setPane();
     }
 
     private void setPane () {
-
+        effectsPane.add(effectsBank.getInstanceAsNode(), 0, 0);
     }
 
     @Override

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import authoring.editorview.path.IPathSetView;
+import authoring.editorview.path.PathSetView;
 
 import authoring.editorview.path.NameIdPair;
 import authoring.editorview.path.PathAuthoringViewDelegate;
@@ -24,7 +24,7 @@ import authoring.utilityfactories.GridFactory;
  */
 
 
-public class PathChooser implements IPathSetView{
+public class PathChooser implements PathSetView{
 	
 	private GridPane root;
 	private PathAuthoringViewDelegate delegate;

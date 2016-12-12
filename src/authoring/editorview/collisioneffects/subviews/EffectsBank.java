@@ -1,6 +1,7 @@
-package authoring.editorview.collisioneffects;
+package authoring.editorview.collisioneffects.subviews;
 
 import authoring.editorview.ImageBank;
+import authoring.editorview.collisioneffects.EffectsAuthoringViewDelegate;
 
 
 public class EffectsBank extends ImageBank {

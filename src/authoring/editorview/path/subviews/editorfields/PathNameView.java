@@ -1,7 +1,7 @@
 package authoring.editorview.path.subviews.editorfields;
 
 import java.util.ResourceBundle;
-import authoring.editorview.path.IPathSetView;
+import authoring.editorview.path.PathSetView;
 import authoring.editorview.path.PathAuthoringViewDelegate;
 import authoring.utilityfactories.GridFactory;
 import authoring.utilityfactories.TextFieldFactory;
@@ -10,7 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
 
-public class PathNameView  implements IPathSetView {
+public class PathNameView  implements PathSetView {
 
     private PathAuthoringViewDelegate delegate;
     private GridPane root;

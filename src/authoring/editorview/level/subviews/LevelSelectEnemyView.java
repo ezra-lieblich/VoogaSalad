@@ -2,7 +2,7 @@ package authoring.editorview.level.subviews;
 
 import java.util.ArrayList;
 import java.util.List;
-import authoring.editorview.level.ILevelSetView;
+import authoring.editorview.level.LevelSetView;
 import authoring.editorview.level.LevelAuthoringViewDelegate;
 import authoring.editorview.path.NameIdPair;
 import authoring.utilityfactories.ComboBoxFactory;
@@ -12,7 +12,7 @@ import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 
 
-public class LevelSelectEnemyView implements ILevelSetView {
+public class LevelSelectEnemyView implements LevelSetView {
 
     @SuppressWarnings("unused")
     private LevelAuthoringViewDelegate delegate;
