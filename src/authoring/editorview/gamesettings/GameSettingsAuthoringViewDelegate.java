@@ -35,5 +35,9 @@ public interface GameSettingsAuthoringViewDelegate {
     public int getPathDimensions (int pathID);
     
     public List<Coordinate<Integer>> getPathCoordinates (int pathID);
+    
+    public List<Integer> getLevelIDs();
+    
+    public String getLevelName (int levelID);
  
 }

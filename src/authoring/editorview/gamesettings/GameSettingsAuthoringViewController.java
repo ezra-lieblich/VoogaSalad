@@ -3,6 +3,7 @@ package authoring.editorview.gamesettings;
 import java.util.List;
 
 import authoring.editorview.EditorViewController;
+import engine.level.LevelManagerController;
 import engine.path.Coordinate;
 import engine.path.PathManagerController;
 import engine.settings.GameModeManagerController;
@@ -14,6 +15,7 @@ public class GameSettingsAuthoringViewController extends EditorViewController
     private GameSettingsUpdateView gameView;
     private GameModeManagerController gameSettingsDataSource;
     private PathManagerController pathDataSource;
+    private LevelManagerController levelDataSource;
     private int activeID = 0;
 
     public GameSettingsAuthoringViewController (int editorWidth, int editorHeight) {
@@ -23,9 +25,11 @@ public class GameSettingsAuthoringViewController extends EditorViewController
     }
 
     public void setGameSettingsDataSource (GameModeManagerController source, 
-									       PathManagerController pathSource) {
+									       PathManagerController pathSource,
+									       LevelManagerController levelSource) {
         this.gameSettingsDataSource = source;
         this.pathDataSource = pathSource;
+        this.levelDataSource = levelSource;
         this.gameSettingsDataSource.addTypeBankListener(this.gameView);
         this.pathDataSource.addAvailablePathListener(a -> gameView.updateAvailablePaths(a));
         
@@ -137,6 +141,14 @@ public class GameSettingsAuthoringViewController extends EditorViewController
 	public void onUserEnteredRemovePath(int pathID) {
 		this.gameSettingsDataSource.removePath(activeID, pathID);
 		
+	}
+	
+	public List<Integer> getLevelIDs(){
+		return this.levelDataSource.getCreatedTypeIds();
+	}
+	
+	public String getLevelName (int levelID){
+		return this.levelDataSource.getName(levelID);
 	}
 
     
