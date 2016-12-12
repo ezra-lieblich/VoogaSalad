@@ -21,5 +21,7 @@ public interface GameSettingsAuthoringViewDelegate {
     public void onUserEnteredPath (int pathID);
     
     public String getPathName (int pathID);
+    
+    public String getPathImage (int pathID);
 
 }

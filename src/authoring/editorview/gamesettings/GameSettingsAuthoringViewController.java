@@ -107,5 +107,10 @@ public class GameSettingsAuthoringViewController extends EditorViewController
 		gameView.updatePathType(gameSettingsDataSource.getPathType(activeID));      
     }
 
+	@Override
+	public String getPathImage(int pathID) {
+		return this.pathDataSource.getImagePath(pathID);
+	}
+
     
 }
