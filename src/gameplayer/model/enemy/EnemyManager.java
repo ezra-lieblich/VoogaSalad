@@ -62,6 +62,10 @@ public class EnemyManager extends Observable {
 
 	}
 	
+	public GamePlayData getData(){
+		return this.gameData;
+	}
+	
 	private void initializeWaves() {
 
 		//System.out.println("Does all WaveStartTimes exist?");
