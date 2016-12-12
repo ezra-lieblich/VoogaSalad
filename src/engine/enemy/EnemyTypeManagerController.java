@@ -3,7 +3,9 @@ package engine.enemy;
 import authoring.editorview.enemy.EnemyUpdateView;
 import engine.AbstractTypeManagerController;
 import engine.ManagerMediator;
+import engine.effect.EffectManager;
 import engine.effect.EffectManagerController;
+import engine.effect.EffectTypeManager;
 import engine.effect.EffectTypeManagerController;
 
 
@@ -13,12 +15,11 @@ import engine.effect.EffectTypeManagerController;
 public class EnemyTypeManagerController
         extends AbstractTypeManagerController<EnemyManager, EnemyBuilder, Enemy, EnemyUpdateView>
         implements EnemyManagerController {
-
     private EffectManagerController enemyEffectManagerController;
 
     public EnemyTypeManagerController (ManagerMediator managerMediator) {
         super(new EnemyTypeManager(), new EnemyTypeBuilder(), managerMediator);
-        enemyEffectManagerController =
+        this.enemyEffectManagerController =
                 new EffectTypeManagerController(managerMediator,
                                                 getTypeManager().getEnemyEffectManager());
     }
