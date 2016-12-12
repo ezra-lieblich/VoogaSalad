@@ -5,6 +5,7 @@ import java.util.List;
 import engine.AbstractType;
 import engine.observer.ObservableList;
 import engine.observer.ObservableProperty;
+import engine.path.PathOption;
 
 public class GameModeType extends AbstractType implements GameMode {
 
@@ -14,7 +15,7 @@ public class GameModeType extends AbstractType implements GameMode {
     private ObservableList<String> losingConditions;
     private ObservableProperty<Integer> initialLives;
     private ObservableProperty<Integer> initialMoney;
-    private ObservableProperty<String> pathType;
+    private ObservableProperty<PathOption> pathType;
     private ObservableProperty<Integer> gridSize;
     private ObservableList<Integer> paths;
 
@@ -97,14 +98,14 @@ public class GameModeType extends AbstractType implements GameMode {
 
 
 	@Override
-	public void setPathType(String pathType) {
+	public void setPathType(PathOption pathType) {
 		this.pathType.setProperty(pathType);
 	}
 
 
 
 	@Override
-	public String getPathType() {
+	public PathOption getPathType() {
 		return pathType.getProperty();
 	}
 
