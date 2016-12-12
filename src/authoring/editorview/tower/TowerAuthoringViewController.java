@@ -4,8 +4,11 @@ import java.util.ResourceBundle;
 import authoring.editorview.EditorViewController;
 import authoring.editorview.ListCellData;
 import authoring.editorview.ListDataSource;
+import authoring.editorview.collisioneffects.EffectAuthoringView;
 import authoring.utilityfactories.DialogueBoxFactory;
 import engine.tower.TowerManagerController;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import authoring.editorview.tower.TowerUpdateView;
 
 
@@ -21,13 +24,14 @@ public class TowerAuthoringViewController extends EditorViewController
     private TowerManagerController towerDataSource;
     private int currentTowerID;
     private TowerUpdateView towerView;
+    private EffectAuthoringView effectAuthoringView;
 
     public TowerAuthoringViewController (int editorWidth, int editorHeight) {
         towerView = TowerAuthoringViewFactory.build(editorWidth, editorHeight);
         towerView.setDelegate(this);
         towerView.setTowerListDataSource(this);
         this.view = towerView;
-
+        effectAuthoringView = new EffectAuthoringView();
     }
 
     public void setTowerDataSource (TowerManagerController source) {
@@ -183,8 +187,10 @@ public class TowerAuthoringViewController extends EditorViewController
 
     @Override
     public void onUserPressedAddEffect () {
-        // TODO Auto-generated method stub
-
+        Stage stage = new Stage();
+        Scene myScene = effectAuthoringView.getScene();
+        stage.setScene(myScene);
+        stage.show();
     }
 
 }

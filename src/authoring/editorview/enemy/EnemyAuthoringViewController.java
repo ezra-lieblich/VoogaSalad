@@ -4,8 +4,11 @@ import java.util.ResourceBundle;
 import authoring.editorview.EditorViewController;
 import authoring.editorview.ListCellData;
 import authoring.editorview.ListDataSource;
+import authoring.editorview.collisioneffects.EffectAuthoringView;
 import authoring.utilityfactories.DialogueBoxFactory;
 import engine.enemy.*;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 
 /**
@@ -20,12 +23,14 @@ public class EnemyAuthoringViewController extends EditorViewController
     private EnemyManagerController enemyDataSource;
     private int currentEnemyID;
     private EnemyUpdateView enemyView;
+    private EffectAuthoringView effectAuthoringView;
 
     public EnemyAuthoringViewController (int editorWidth, int editorHeight) {
         enemyView = EnemyAuthoringViewFactory.build(editorWidth, editorHeight);
         enemyView.setDelegate(this);
         enemyView.setEnemyListDataSource(this);
         this.view = enemyView;
+        effectAuthoringView = new EffectAuthoringView();
     }
 
     public void setEnemyDataSource (EnemyManagerController source) {
@@ -163,8 +168,10 @@ public class EnemyAuthoringViewController extends EditorViewController
 
     @Override
     public void onUserPressedAddEffect () {
-        // TODO Auto-generated method stub
-
+        Stage stage = new Stage();
+        Scene myScene = effectAuthoringView.getScene();
+        stage.setScene(myScene);
+        stage.show();
     }
 
 }

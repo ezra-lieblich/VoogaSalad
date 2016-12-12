@@ -2,9 +2,12 @@ package authoring.editorview.level;
 
 import java.util.ResourceBundle;
 import authoring.editorview.EditorViewController;
+import authoring.editorview.collisioneffects.EffectAuthoringView;
 import authoring.utilityfactories.DialogueBoxFactory;
 import engine.enemy.EnemyManagerController;
 import engine.level.LevelManagerController;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 
 /**
@@ -21,11 +24,13 @@ public class LevelAuthoringViewController extends EditorViewController
     private EnemyManagerController enemyDataSource;
     private int currentLevelID;
     private int currentWaveID;
+    private EffectAuthoringView effectAuthoringView;
 
     public LevelAuthoringViewController (int editorWidth, int editorHeight) {
         levelView = LevelAuthoringViewFactory.build(editorWidth, editorHeight);
         levelView.setDelegate(this);
         this.view = levelView;
+        effectAuthoringView = new EffectAuthoringView();
     }
 
     public void setLevelDataSource (LevelManagerController source) {
@@ -197,7 +202,9 @@ public class LevelAuthoringViewController extends EditorViewController
 
     @Override
     public void onUserPressedAddEffect () {
-        // TODO Auto-generated method stub
-
+        Stage stage = new Stage();
+        Scene myScene = effectAuthoringView.getScene();
+        stage.setScene(myScene);
+        stage.show();
     }
 }

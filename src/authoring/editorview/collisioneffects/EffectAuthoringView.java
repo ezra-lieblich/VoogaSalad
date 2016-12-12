@@ -6,6 +6,7 @@ import authoring.editorview.collisioneffects.subviews.EffectAvailableClassesView
 import authoring.editorview.collisioneffects.subviews.EffectAvailableDataObjectsView;
 import authoring.editorview.collisioneffects.subviews.EffectAvailableMethodsView;
 import authoring.editorview.collisioneffects.subviews.EffectBank;
+import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 
 
@@ -21,13 +22,16 @@ public class EffectAuthoringView implements EffectUpdateView {
     private EffectAvailableClassesView effectAvailClasses;
     private EffectAvailableDataObjectsView effectDataObjects;
     private EffectAvailableMethodsView effectAvailMethods;
+    private Scene myScene;
 
     public EffectAuthoringView () {
         effectsBank = new EffectBank();
+        effectsPane = new GridPane();
         effectAvailClasses = new EffectAvailableClassesView();
         effectDataObjects = new EffectAvailableDataObjectsView();
         effectAvailMethods = new EffectAvailableMethodsView();
         setPane();
+        myScene = new Scene(effectsPane);
     }
 
     private void setPane () {
@@ -35,6 +39,10 @@ public class EffectAuthoringView implements EffectUpdateView {
         effectsPane.add(effectAvailClasses.getInstanceAsNode(), 1, 0, 1, 1);
         effectsPane.add(effectDataObjects.getInstanceAsNode(), 2, 0, 1, 1);
         effectsPane.add(effectAvailMethods.getInstanceAsNode(), 3, 0, 1, 1);
+    }
+
+    public Scene getScene () {
+        return myScene;
     }
 
     @Override

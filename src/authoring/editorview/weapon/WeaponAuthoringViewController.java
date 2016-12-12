@@ -5,8 +5,11 @@ import java.util.ResourceBundle;
 import authoring.editorview.EditorViewController;
 import authoring.editorview.ListCellData;
 import authoring.editorview.ListDataSource;
+import authoring.editorview.collisioneffects.EffectAuthoringView;
 import authoring.utilityfactories.DialogueBoxFactory;
 import engine.weapon.WeaponManagerController;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 
 /**
@@ -21,12 +24,14 @@ public class WeaponAuthoringViewController extends EditorViewController
     private WeaponManagerController weaponDataSource;
     private int currentWeaponID;
     private WeaponUpdateView weaponView;
+    private EffectAuthoringView effectAuthoringView;
 
     public WeaponAuthoringViewController (int editorWidth, int editorHeight) throws IOException {
         weaponView = WeaponAuthoringViewFactory.build(editorWidth, editorHeight);
         weaponView.setDelegate(this);
         weaponView.setWeaponListDataSource(this);
         this.view = weaponView;
+        effectAuthoringView = new EffectAuthoringView();
     }
 
     public void setWeaponDataSource (WeaponManagerController source) {
@@ -144,8 +149,10 @@ public class WeaponAuthoringViewController extends EditorViewController
 
     @Override
     public void onUserPressedAddEffect () {
-        // TODO Auto-generated method stub
-
+        Stage stage = new Stage();
+        Scene myScene = effectAuthoringView.getScene();
+        stage.setScene(myScene);
+        stage.show();
     }
 
 }
