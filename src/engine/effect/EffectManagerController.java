@@ -27,6 +27,6 @@ public interface EffectManagerController extends ManagerController<EffectManager
     
     void setEffect(int effectID, String trigger);
     
-    void addActiveClassListener(EffectUpdateView updateView);
+    void addActiveClassListener(EffectUpdateView updateView) throws ClassNotFoundException;
 
 }

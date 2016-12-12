@@ -51,9 +51,9 @@ public class EffectTypeManagerController extends
      * @see engine.effect.EffectManagerController#getTriggers()
      */
     @Override
-    public void addActiveClassListener(EffectUpdateView updateView) {
+    public void addActiveClassListener(EffectUpdateView updateView) throws ClassNotFoundException{
         getTypeManager().addActiveClassListener((oldValue, newValue) -> {
-                updateView.updateTriggers(getAvailableClassMethods(newValue));
+                    updateView.updateTriggers(getAvailableClassMethods(newValue.getName()));
         });
     }
     
@@ -69,8 +69,13 @@ public class EffectTypeManagerController extends
      */
     @Override
     public List<String> getAvailableClassMethods (String trigger) {
-        return getTypeManager().getAnnotatedClassMethods(trigger).stream().map(a -> a.toGenericString())
-                .collect(Collectors.toList());
+        try {
+            return getTypeManager().getAnnotatedClassMethods(Class.forName(trigger)).stream().map(a -> a.toGenericString())
+                    .collect(Collectors.toList());
+        }
+        catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /*
@@ -108,7 +113,12 @@ public class EffectTypeManagerController extends
 
     @Override
     public void setAvailableClass (String selectedClass) {
-        getTypeManager().setActiveClass(selectedClass);
+        try {
+            getTypeManager().setActiveClass(Class.forName(selectedClass));
+        }
+        catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
