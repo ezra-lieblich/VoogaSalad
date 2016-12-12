@@ -127,11 +127,7 @@ public class WaveTableView implements ILevelSetView {
                                      new EventHandler<CellEditEvent<WaveObject, String>>() {
                                          @Override
                                          public void handle (CellEditEvent<WaveObject, String> t) {
-                                             ((WaveObject) t.getTableView().getItems().get(
-                                                                                           t.getTablePosition()
-                                                                                                   .getRow()))
-                                                                                                           .setTimeDelay(t
-                                                                                                                   .getNewValue());
+                                             ((WaveObject) t.getTableView().getItems().get(t.getTablePosition().getRow())).setTimeDelay(t.getNewValue());
                                          }
                                      });
     }
