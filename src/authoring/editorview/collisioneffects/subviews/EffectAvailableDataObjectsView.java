@@ -8,7 +8,6 @@ import authoring.editorview.collisioneffects.EffectAuthoringViewDelegate;
 import authoring.editorview.collisioneffects.EffectSetView;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 
 
 /**
