@@ -31,7 +31,7 @@ public class PathInstructionsView implements INodeView{
 	
 	private void addInstructionsText(){
 		Text instructions = new Text(pathResource.getString("PathBuilderInstructions"));
-		instructions.setWrappingWidth(500);
+		instructions.setWrappingWidth(450);
 		root.getChildren().add(instructions);
 	}
 

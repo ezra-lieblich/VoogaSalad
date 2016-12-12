@@ -1,5 +1,6 @@
 package authoring.editorview.path.subviews.editorfields;
 
+import java.io.File;
 import java.util.List;
 import authoring.editorview.path.PathSetView;
 import authoring.editorview.path.PathAuthoringViewDelegate;
@@ -49,7 +50,7 @@ public class PathGrid implements PathSetView{
 	}
 	
 	private void updatePath(double x, double y){
-		int i = (int) (x - 430)/cellSize;
+		int i = (int) (x - 500)/cellSize;
 		int j = (int) (y - 190)/cellSize;
 		if (!addCellToPath(i, j)){
 			removeCellFromPath(i, j);
@@ -98,12 +99,10 @@ public class PathGrid implements PathSetView{
 	}	
 	
 	public void setCellImage(String imagePath){		
-		if (!imagePath.contains("file:") && !imagePath.contains("http:")) {
-			cellImage = new Image (getClass().getClassLoader().getResourceAsStream(imagePath));		
-		}		
-		else {
-			cellImage = new Image(imagePath);
-		}
+		
+		File file = new File(imagePath);
+		cellImage = new Image(file.toURI().toString());
+		
 		if (gridDimensions > 0 && pathCoordinates != null){
 			redrawPath();
 		}	

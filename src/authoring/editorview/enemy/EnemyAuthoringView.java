@@ -24,7 +24,7 @@ import javafx.scene.layout.GridPane;
  * 
  */
 
-public class EnemyAuthoringView implements IEnemyUpdateView {
+public class EnemyAuthoringView implements EnemyUpdateView {
     @SuppressWarnings("unused")
     private EnemyAuthoringViewDelegate delegate;
     private GridPane enemyEditorView;

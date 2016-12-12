@@ -14,8 +14,6 @@ public interface PathUpdateView extends PathSetView, IUpdateView{
 	
 	public void updateType (String pathType);
 	
-	public void updateActiveID (int pathID);
-	
 	public void updatePath ();
 
 	public void setPathListDataSource (ListDataSource source);

@@ -38,7 +38,7 @@ public class GameInitialMoneyView implements GameSettingsSetView {
         		e -> submitInitialMoney(initialMoneyField.getText()));
         
         initialMoneyField.setPrefWidth(105); //TODO magic number
-        root = GridFactory.createRowWithLabelandNode(resource.getString("InitialMoney"), initialMoneyField);
+        root = GridFactory.createRowWithLabelandNode(resource.getString("InitialMoney"), initialMoneyField, 125);
         
     }
 

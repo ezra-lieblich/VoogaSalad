@@ -41,7 +41,7 @@ public class GameInitialLivesView implements GameSettingsSetView {
  
         initialLivesField.setPrefWidth(105); //TODO magic number
         root = GridFactory.createRowWithLabelandNode(settingsResource.getString("InitialLives"),
-                                                      initialLivesField);
+                                                      initialLivesField, 125);
     }
 
     public void updateInitialLives (int lives) {

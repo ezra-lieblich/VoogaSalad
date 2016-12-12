@@ -42,10 +42,10 @@ public class GameNameView implements GameSettingsSetView {
     }
 
     protected void makeNameTextField () {
-        nameTextField = TextFieldFactory.makeTextField("", e -> delegate.onUserEnteredGameNames(nameTextField.getText()));
+        nameTextField = TextFieldFactory.makeTextField("", e -> delegate.onUserEnteredGameName(nameTextField.getText()));
         nameTextField.setMaxWidth(105);
         
-        root = GridFactory.createRowWithLabelandNode(resource.getString("GameName"), nameTextField);
+        root = GridFactory.createRowWithLabelandNode(resource.getString("GameName"), nameTextField, 125);
 
     }
 

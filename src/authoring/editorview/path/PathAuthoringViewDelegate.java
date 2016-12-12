@@ -11,7 +11,7 @@ public interface PathAuthoringViewDelegate {
 	
 	public void onUserEnteredPathType(String pathType);
 	
-	public int onUserEnteredCreatePath();
+	public void onUserEnteredCreatePath();
 	
 	public void onUserEnteredDeletePath();
 	
@@ -20,6 +20,7 @@ public interface PathAuthoringViewDelegate {
 	public boolean onUserEnteredAddPathCoordinate(int x, int y);
 	
 	public boolean onUserEnteredRemovePathCoordinate(int x, int y);
+	
 	
 	
 	

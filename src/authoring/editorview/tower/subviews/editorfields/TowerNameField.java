@@ -4,7 +4,7 @@ import java.util.ResourceBundle;
 import authoring.editorview.EditorNameView;
 import authoring.editorview.tower.TowerSetView;
 import authoring.editorview.tower.TowerAuthoringViewDelegate;
-import authoring.utilityfactories.BoxFactory;
+import authoring.utilityfactories.GridFactory;
 import authoring.utilityfactories.TextFieldFactory;
 
 
@@ -32,8 +32,9 @@ public class TowerNameField extends EditorNameView implements TowerSetView {
                 TextFieldFactory.makeTextField(resource.getString("EnterString"),
                                                e -> delegate.onUserEnteredTowerName(nameTextField
                                                        .getText()));
-        root = BoxFactory.createHBoxWithLabelandNode(resource.getString("NameTextField"),
-                                                     nameTextField);
+        nameTextField.setPrefWidth(230);
+        root = GridFactory.createRowWithLabelandNode(resource.getString("NameTextField"), nameTextField, 150);
+        
     }
 
 }

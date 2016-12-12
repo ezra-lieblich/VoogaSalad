@@ -3,9 +3,11 @@ package authoring.editorview.tower.subviews.editorfields;
 import java.util.ResourceBundle;
 import authoring.editorview.tower.TowerSetView;
 import authoring.editorview.tower.TowerAuthoringViewDelegate;
+import authoring.utilityfactories.GridFactory;
 import authoring.utilityfactories.TextFieldFactory;
 import javafx.scene.Node;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
 
 
 /**
@@ -15,6 +17,7 @@ import javafx.scene.control.TextField;
  */
 public class TowerBuyPriceField implements TowerSetView {
 
+	private GridPane root;
     private TextField towerBuyField;
     private TowerAuthoringViewDelegate delegate;
 
@@ -24,6 +27,11 @@ public class TowerBuyPriceField implements TowerSetView {
                                                e -> delegate
                                                        .onUserEnteredTowerBuyPrice(towerBuyField
                                                                .getText()));
+        towerBuyField.setPrefWidth(230);
+        root = GridFactory.createRowWithLabelandNode(
+        		labelsResource.getString("BuyPrice"), 
+        		towerBuyField, 
+        		150);
     }
 
     @Override
@@ -33,7 +41,7 @@ public class TowerBuyPriceField implements TowerSetView {
 
     @Override
     public Node getInstanceAsNode () {
-        return towerBuyField;
+        return root;
     }
 
     public void updateTowerBuyPrice (String towerBuyPrice) {

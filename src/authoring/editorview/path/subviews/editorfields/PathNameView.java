@@ -43,7 +43,7 @@ public class PathNameView  implements PathSetView {
                                                                .onUserEnteredPathName(nameTextField
                                                                        .getText()));
         nameTextField.setMaxWidth(155);
-        root = GridFactory.createRowWithLabelandNode(resource.getString("NameTextField"), nameTextField);
+        root = GridFactory.createRowWithLabelandNode(resource.getString("NameTextField"), nameTextField, 125);
         
     }
 

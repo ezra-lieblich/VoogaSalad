@@ -22,7 +22,7 @@ import javafx.scene.layout.VBox;
  * @author Diane Hadley
  *
  */
-public class LevelAuthoringView implements ILevelUpdateView {
+public class LevelAuthoringView implements LevelUpdateView {
 
     private LevelAuthoringViewDelegate delegate;
 

@@ -16,7 +16,7 @@ import engine.level.LevelManagerController;
 public class LevelAuthoringViewController extends EditorViewController
         implements LevelAuthoringViewDelegate {
 
-    private ILevelUpdateView levelView;
+    private LevelUpdateView levelView;
     private LevelManagerController levelDataSource;
     private EnemyManagerController enemyDataSource;
     private int currentLevelID;

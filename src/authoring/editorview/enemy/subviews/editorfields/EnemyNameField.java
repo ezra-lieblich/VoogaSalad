@@ -4,7 +4,7 @@ import java.util.ResourceBundle;
 import authoring.editorview.EditorNameView;
 import authoring.editorview.enemy.EnemyAuthoringViewDelegate;
 import authoring.editorview.enemy.EnemySetView;
-import authoring.utilityfactories.BoxFactory;
+import authoring.utilityfactories.GridFactory;
 import authoring.utilityfactories.TextFieldFactory;
 
 
@@ -32,8 +32,9 @@ public class EnemyNameField extends EditorNameView implements EnemySetView {
                 TextFieldFactory.makeTextField(resource.getString("EnterString"),
                                                e -> delegate.onUserEnteredEnemyName(nameTextField
                                                        .getText()));
-        root = BoxFactory.createHBoxWithLabelandNode(resource.getString("NameTextField"),
-                                                     nameTextField);
+        nameTextField.setPrefWidth(105);
+        root = GridFactory.createRowWithLabelandNode(resource.getString("NameTextField"),
+                                                     nameTextField, 125);
     }
 
 }

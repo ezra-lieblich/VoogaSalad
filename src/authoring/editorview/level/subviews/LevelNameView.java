@@ -4,7 +4,7 @@ import java.util.ResourceBundle;
 import authoring.editorview.EditorNameView;
 import authoring.editorview.level.LevelSetView;
 import authoring.editorview.level.LevelAuthoringViewDelegate;
-import authoring.utilityfactories.BoxFactory;
+import authoring.utilityfactories.GridFactory;
 import authoring.utilityfactories.TextFieldFactory;
 
 
@@ -30,8 +30,8 @@ public class LevelNameView extends EditorNameView implements LevelSetView {
                                                                                                .getText()));
         nameTextField.setMaxWidth(75);
         root =
-                BoxFactory.createHBoxWithLabelandNode(resource.getString("NameTextField"),
-                                                      nameTextField);
+                GridFactory.createRowWithLabelandNode(resource.getString("NameTextField"),
+                                                      nameTextField, 125);
 
     }
 

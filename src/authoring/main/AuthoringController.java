@@ -11,10 +11,10 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 
 import authoring.editorview.EditorViewController;
 import authoring.editorview.enemy.EnemyAuthoringViewController;
-import authoring.editorview.enemy.IEnemyUpdateView;
+import authoring.editorview.enemy.EnemyUpdateView;
 import authoring.editorview.gamesettings.GameSettingsAuthoringViewController;
 import authoring.editorview.gamesettings.GameSettingsUpdateView;
-import authoring.editorview.level.ILevelUpdateView;
+import authoring.editorview.level.LevelUpdateView;
 import authoring.editorview.level.LevelAuthoringViewController;
 import authoring.editorview.path.PathUpdateView;
 import authoring.editorview.path.PathAuthoringViewController;
@@ -103,7 +103,7 @@ public class AuthoringController {
 			
 			modelController.getModelController(EnemyManagerController.class)
 			 	.loadManagerData(data.getManagerMediator().getManager(EnemyManager.class), 
-			 							(IEnemyUpdateView) viewController.getControllers().get("enemy").getUpdateView());
+			 							(EnemyUpdateView) viewController.getControllers().get("enemy").getUpdateView());
 			 
 			 modelController.getModelController(TowerManagerController.class)
 			 	.loadManagerData(data.getManagerMediator().getManager(TowerManager.class),
@@ -116,7 +116,7 @@ public class AuthoringController {
 			 						(PathUpdateView) viewController.getControllers().get("path").getUpdateView());
 			 modelController.getModelController(LevelManagerController.class)
 			 	.loadManagerData(data.getManagerMediator().getManager(LevelManager.class), 
-			 						(ILevelUpdateView) viewController.getControllers().get("level").getUpdateView());
+			 						(LevelUpdateView) viewController.getControllers().get("level").getUpdateView());
 			 modelController.getModelController(GameModeManagerController.class)
 			 	.loadManagerData(data.getManagerMediator().getManager(GameModeManager.class),
 			 						(GameSettingsUpdateView) viewController.getControllers().get("setup").getUpdateView());
@@ -169,7 +169,7 @@ public class AuthoringController {
         levelVC.setLevelDataSource(levelModel);
         weaponVC.setWeaponDataSource(weaponModel);
         towerVC.setTowerDataSource(towerModel);
-        setupVC.setGameSettingsDataSource(settingsModel);
+        setupVC.setGameSettingsDataSource(settingsModel, pathModel);
     }
 
     public Scene getScene () {

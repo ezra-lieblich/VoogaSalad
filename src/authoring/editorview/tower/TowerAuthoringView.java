@@ -16,6 +16,9 @@ import authoring.editorview.tower.subviews.editorfields.TowerUnlockLevelField;
 import authoring.editorview.tower.subviews.editorfields.TowerUpgradeBank;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.RowConstraints;
 
 
 /**
@@ -26,10 +29,10 @@ import javafx.scene.layout.BorderPane;
 public class TowerAuthoringView implements TowerUpdateView {
     @SuppressWarnings("unused")
     private TowerAuthoringViewDelegate delegate;
-    private BorderPane towerEditorView;
+    private GridPane towerView;
     private TowerImageBank towerBank;
     private TowerNameField towerName;
-    private TowerEditorView towerEffectView;
+    private TowerEditorView towerEditorView;
     private TowerImageView towerImage;
     private TowerBuyPriceField towerBuyPrice;
     private TowerSellPriceField towerSellPrice;
@@ -43,7 +46,7 @@ public class TowerAuthoringView implements TowerUpdateView {
     private ResourceBundle dialogueBoxResource = ResourceBundle.getBundle("resources/DialogueBox");
 
     public TowerAuthoringView () {
-        towerEditorView = new BorderPane();
+        towerView = new GridPane();
 
         towerName = new TowerNameField(labelsResource);
         towerImage = new TowerImageView(labelsResource);
@@ -56,29 +59,48 @@ public class TowerAuthoringView implements TowerUpdateView {
         towerSize = new TowerSizeField(labelsResource);
 
         towerBank = new TowerImageBank();
-        towerEffectView =
+        towerEditorView =
                 new TowerEditorView(towerName, towerImage, towerBuyPrice, towerSellPrice,
                                     towerUnlockLevel, towerAbility, towerWeaponBank,
                                     towerUpgradeBank,
                                     towerSize,
                                     labelsResource, dialogueBoxResource);
-        setBorderPane();
+        buildView();
     }
 
-    private void setBorderPane () {
-        towerEditorView.setLeft(towerBank.getInstanceAsNode());
-        towerEditorView.setCenter(towerEffectView.getInstanceAsNode());
+
+    private void buildView () {
+
+        ColumnConstraints bankColumn = new ColumnConstraints();
+        bankColumn.setMinWidth(150);
+    	
+    	ColumnConstraints editorColumn = new ColumnConstraints();
+        editorColumn.setPrefWidth(400);
+       
+        ColumnConstraints previewColumn = new ColumnConstraints();
+        
+        
+        RowConstraints fullRow = new RowConstraints();
+        
+        fullRow.setMinHeight(700);
+        
+        towerView.getColumnConstraints().addAll(bankColumn, editorColumn, previewColumn);
+        towerView.getRowConstraints().add(fullRow);
+        
+        towerView.add(towerBank.getInstanceAsNode(), 0, 0);
+        towerView.add(towerEditorView.getInstanceAsNode(), 1, 0);
+        towerView.add(towerImage.getInstanceAsNode(), 2, 0);
     }
 
     @Override
     public Node getInstanceAsNode () {
-        return towerEditorView;
+        return towerView;
     }
 
     @Override
     public void setDelegate (TowerAuthoringViewDelegate delegate) {
         this.delegate = delegate;
-        towerEffectView.setDelegate(delegate);
+        towerEditorView.setDelegate(delegate);
         towerBank.setDelegate(delegate);
         towerName.setDelegate(delegate);
         towerImage.setDelegate(delegate);
