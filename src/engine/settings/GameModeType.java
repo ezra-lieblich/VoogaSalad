@@ -1,12 +1,10 @@
 package engine.settings;
 
-import java.util.Collections;
 import java.util.List;
 
 import engine.AbstractType;
 import engine.observer.ObservableList;
 import engine.observer.ObservableProperty;
-import engine.path.Path;
 
 public class GameModeType extends AbstractType implements GameMode {
 
