@@ -115,6 +115,7 @@ public class GamePlayerController implements Observer {
 		this.weaponController = new WeaponController(this.model.getWeaponManager());
 		this.collisionController = new CollisionController(this.model.getCollisionManager());
 		this.model.getData().addObserver(this);
+		this.enemyController.getEnemyModel().addObserver(this);
 		this.oldLevel = 0;
 		this.towerToId = new HashMap<String, Integer>();
 		this.weaponsOnScreen = new HashMap<Integer, ImageView>();
@@ -281,6 +282,7 @@ public class GamePlayerController implements Observer {
 	}
 	
 	private void winGame(){
+		this.animation.pause();
 		endCondition("http://people.duke.edu/~lz107/voogaTemplates/win.html");
 	}
 
@@ -289,6 +291,7 @@ public class GamePlayerController implements Observer {
 		double newLevel = this.model.getData().getCurrentLevel();
 		if (this.oldLevel < newLevel) {
 			// this.timeCounterThread.
+			System.out.println("NEW LEVEL");
 			this.startTime = System.currentTimeMillis();
 			this.intervalBetweenWaves = this.model.getEnemyManager().getTimeOfNextWave();
 			this.oldLevel = newLevel;
@@ -313,6 +316,7 @@ public class GamePlayerController implements Observer {
 			System.out.println("Log end score went wrong");
 			e.printStackTrace();
 		}
+		System.out.println("Trying to set the winning screen");
 		this.view.getMainScreen().getChildren().clear();
 		WebView browser = new WebView();
 		WebEngine webEngine = browser.getEngine();
@@ -324,7 +328,6 @@ public class GamePlayerController implements Observer {
 	public void update(Observable o, Object arg) {
 		if (o instanceof GamePlayData) {
 			// update level in display
-			System.out.println("LEVEL IN OBSERVABLE: "+((GamePlayData) o).getCurrentLevel());
 			this.view.updateStatsDisplay(((GamePlayData) o).getGold(), ((GamePlayData) o).getLife(),
 					((GamePlayData) o).getCurrentLevel(), ((GamePlayData) o).getScore());
 			this.view.updateCurrentLevelStats(((GamePlayData) o).getCurrentLevel());
@@ -334,7 +337,9 @@ public class GamePlayerController implements Observer {
 				gameOver();
 			}
 			
+			System.out.println("(((GamePlayData) o).won())"+(((GamePlayData) o).won()));
 			if (((GamePlayData) o).won()){
+				System.out.println("WIn game!");
 				winGame();
 			}
 
@@ -391,9 +396,10 @@ public class GamePlayerController implements Observer {
 	}
 
 	private void checkForWin(){
-		System.out.println("WIN CURRENT LEVEL: "+enemyManager.getData().getCurrentLevel());
-		if (enemyManager.getEnemyOnGrid().size()==0 && currentWave.size()==0){ //wait until enemies are all off the grid
-			enemyManager.getData().setLevel(enemyManager.getData().getCurrentLevel()+1);
+		if (enemyManager.getEnemyOnGrid().size()==0 && currentWave.size()==0 && this.oldLevel == enemyManager.getData().getCurrentLevel() ){ //wait until enemies are all off the grid
+			System.out.println("SET WIN!");
+			enemyManager.getData().setWin();
+			//enemyManager.getData().setLevel(enemyManager.getData().getCurrentLevel()+1);
 		}
 	}
 	
