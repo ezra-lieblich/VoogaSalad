@@ -59,6 +59,8 @@ public class GameSettingsAuthoringView implements GameSettingsUpdateView, GameSe
     @Override
     public void setDelegate (GameSettingsAuthoringViewDelegate delegate) {
         gameSettingsEditor.setDelegate(delegate);
+        gameSettingsPreview.setDelegate(delegate);
+        
     }
 
     @Override
@@ -117,13 +119,15 @@ public class GameSettingsAuthoringView implements GameSettingsUpdateView, GameSe
 	@Override
 	public void updateGridSize(int size) {
 		gameSettingsEditor.updateGridDimensions(size);
+		gameSettingsPreview.updateGridDimensions(size);
 		
 	}
 
 	@Override
 	public void updatePathList(List<Integer> pathList) {
+		System.out.println("yo");
 		gameSettingsEditor.updatePathList(pathList);
-		
+		gameSettingsPreview.updatePathList(pathList);
 	}
 
 	@Override
@@ -139,7 +143,7 @@ public class GameSettingsAuthoringView implements GameSettingsUpdateView, GameSe
 	@Override
 	public void updateAvailablePaths(List<Integer> availablePathList) {
 		gameSettingsEditor.updateAvailablePathList(availablePathList);
-		System.out.println("hello");
+		
 		
 	}
 
