@@ -176,7 +176,9 @@ public class GamePlayerController implements Observer {
 	 */
 	private void initSaveGameButton() {
 		this.view.saveButton(e -> {
-
+			System.out.println("saving game maybe?");
+			this.gameSavingController.saveGame();
+			//TODO: end game?
 		});
 	}
 
