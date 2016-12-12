@@ -14,7 +14,6 @@ import authoring.editorview.weapon.subviews.editorfields.WeaponPathField;
 import authoring.editorview.weapon.subviews.editorfields.WeaponRangeField;
 import authoring.editorview.weapon.subviews.editorfields.WeaponSizeField;
 import authoring.editorview.weapon.subviews.editorfields.WeaponSpeedField;
-import authoring.utilityfactories.BoxFactory;
 import authoring.utilityfactories.ButtonFactory;
 import authoring.utilityfactories.DialogueBoxFactory;
 import javafx.geometry.Insets;
@@ -44,7 +43,7 @@ public class WeaponEditorView extends PhotoFileChooser implements WeaponSetView 
     private VBox vboxView;
     private AnchorPane rootBuffer;
     private WeaponAuthoringViewDelegate delegate;
-    
+
     private static final double BUFFER = 10.0;
     private int editorWidth;
 
@@ -85,48 +84,50 @@ public class WeaponEditorView extends PhotoFileChooser implements WeaponSetView 
 
         vboxView = new VBox(10);
 
-        
         rootBuffer = new AnchorPane();
         rootBuffer.getChildren().add(vboxView);
 
         buildViewComponents();
     }
 
-    
     @Override
     public void setDelegate (WeaponAuthoringViewDelegate delegate) {
         this.delegate = delegate;
     }
 
     private void buildViewComponents () throws IOException {
-        
-    	AnchorPane.setLeftAnchor(vboxView, BUFFER);
-    	AnchorPane.setTopAnchor(vboxView, BUFFER);
-    	
-    	rootBuffer.setBorder(new Border(new BorderStroke(Color.GRAY, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(0.5))));
-    	rootBuffer.setBackground(new Background(new BackgroundFill(Color.rgb(235, 235, 235), CornerRadii.EMPTY, Insets.EMPTY)));	
-    	
-    	Button changeImage = ButtonFactory.makeButton(labelsResource.getString("Image"),
-                                                            e -> {
-                                                                try {
-                                                                    selectFile(labelsResource
-                                                                            .getString("Photos"),
-                                                                               labelsResource
-                                                                                       .getString("NewWeapon"));
-                                                                }
-                                                                catch (IOException e1) {
-                                                                    DialogueBoxFactory
-                                                                            .createErrorDialogueBox(dialogueBoxResource
-                                                                                    .getString("UnableToOpen"),
-                                                                                                    dialogueBoxResource
-                                                                                                            .getString("TryAgain"));
-                                                                }
-                                                            });
-    	changeImage.setPrefWidth(editorWidth - 2*((int) BUFFER));
-    	vboxView.getChildren().add(changeImage);
+
+        AnchorPane.setLeftAnchor(vboxView, BUFFER);
+        AnchorPane.setTopAnchor(vboxView, BUFFER);
+
+        rootBuffer
+                .setBorder(new Border(new BorderStroke(Color.GRAY, BorderStrokeStyle.SOLID,
+                                                       CornerRadii.EMPTY, new BorderWidths(0.5))));
+        rootBuffer
+                .setBackground(new Background(new BackgroundFill(Color.rgb(235, 235, 235),
+                                                                 CornerRadii.EMPTY, Insets.EMPTY)));
+
+        Button changeImage = ButtonFactory.makeButton(labelsResource.getString("Image"),
+                                                      e -> {
+                                                          try {
+                                                              selectFile(labelsResource
+                                                                      .getString("Photos"),
+                                                                         labelsResource
+                                                                                 .getString("NewWeapon"));
+                                                          }
+                                                          catch (IOException e1) {
+                                                              DialogueBoxFactory
+                                                                      .createErrorDialogueBox(dialogueBoxResource
+                                                                              .getString("UnableToOpen"),
+                                                                                              dialogueBoxResource
+                                                                                                      .getString("TryAgain"));
+                                                          }
+                                                      });
+        changeImage.setPrefWidth(editorWidth - 2 * ((int) BUFFER));
+        vboxView.getChildren().add(changeImage);
         vboxView.getChildren().add(weaponName.getInstanceAsNode());
         vboxView.getChildren().add(weaponSize.getInstanceAsNode());
-        vboxView.getChildren().add(weaponFireRate.getInstanceAsNode());               
+        vboxView.getChildren().add(weaponFireRate.getInstanceAsNode());
         vboxView.getChildren().add(weaponSpeed.getInstanceAsNode());
         vboxView.getChildren().add(weaponRange.getInstanceAsNode());
         vboxView.getChildren().add(weaponPath.getInstanceAsNode());
@@ -148,8 +149,6 @@ public class WeaponEditorView extends PhotoFileChooser implements WeaponSetView 
         if (chosenFile != null) {
             delegate.onUserEnteredWeaponImagePath(chosenFile.toURI().getPath());
         }
-        // if not null -> get imageFilePath and update the instance variable
-        // then loadImage through the created method above
     }
 
 }

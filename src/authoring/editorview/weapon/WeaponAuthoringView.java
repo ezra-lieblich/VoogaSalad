@@ -40,7 +40,7 @@ public class WeaponAuthoringView implements WeaponUpdateView {
     private AddWeaponEffectView addWeaponEffect;
 
     private static final int EDITOR_WIDTH = 300;
-    
+
     private int width;
     private int height;
 
@@ -52,7 +52,6 @@ public class WeaponAuthoringView implements WeaponUpdateView {
         this.height = height;
 
         weaponView = new GridPane();
-        
 
         weaponBank = new WeaponImageBank(labelsResource);
         weaponNameView = new WeaponNameField(labelsResource);
@@ -62,9 +61,9 @@ public class WeaponAuthoringView implements WeaponUpdateView {
         weaponPathView = new WeaponPathField(labelsResource);
         weaponImageView = new WeaponImageView(labelsResource);
         weaponSizeView = new WeaponSizeField(labelsResource);
-
         addWeaponEffect = new AddWeaponEffectView(labelsResource);
-		weaponEditorView =
+
+        weaponEditorView =
 
                 new WeaponEditorView(weaponNameView, weaponSpeedView, weaponFireRateView,
                                      weaponRangeView,
@@ -75,25 +74,23 @@ public class WeaponAuthoringView implements WeaponUpdateView {
         buildView();
     }
 
-    
     private void buildView () {
 
         ColumnConstraints bankColumn = new ColumnConstraints();
         bankColumn.setMinWidth(150);
-    	
-    	ColumnConstraints editorColumn = new ColumnConstraints();
+
+        ColumnConstraints editorColumn = new ColumnConstraints();
         editorColumn.setPrefWidth(EDITOR_WIDTH);
-       
+
         ColumnConstraints previewColumn = new ColumnConstraints();
-        
-        
+
         RowConstraints fullRow = new RowConstraints();
-        
+
         fullRow.setMinHeight(700);
-        
+
         weaponView.getColumnConstraints().addAll(bankColumn, editorColumn, previewColumn);
         weaponView.getRowConstraints().add(fullRow);
-        
+
         weaponView.add(weaponBank.getInstanceAsNode(), 0, 0);
         weaponView.add(weaponEditorView.getInstanceAsNode(), 1, 0);
         weaponView.add(weaponImageView.getInstanceAsNode(), 2, 0);

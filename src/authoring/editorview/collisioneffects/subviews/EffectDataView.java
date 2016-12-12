@@ -17,6 +17,7 @@ import javafx.scene.layout.VBox;
  */
 public class EffectDataView implements EffectSetView {
 
+    @SuppressWarnings("unused")
     private EffectAuthoringViewDelegate delegate;
     private BorderPane effectDataPane;
     private EffectNameField nameField;

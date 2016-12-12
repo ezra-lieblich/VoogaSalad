@@ -16,6 +16,7 @@ import javafx.scene.control.Label;
  */
 public class EffectAvailableMethodsView extends ImageBank implements EffectSetView {
 
+    @SuppressWarnings("unused")
     private EffectAuthoringViewDelegate delegate;
 
     public EffectAvailableMethodsView () {

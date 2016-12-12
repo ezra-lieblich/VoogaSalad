@@ -21,7 +21,6 @@ import authoring.utilityfactories.DialogueBoxFactory;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -96,8 +95,8 @@ public class EnemyEditorView extends PhotoFileChooser implements EnemySetView {
     }
 
     private void buildViewComponents () {
-    	
-    	AnchorPane.setLeftAnchor(vbox, BUFFER);
+
+        AnchorPane.setLeftAnchor(vbox, BUFFER);
         AnchorPane.setTopAnchor(vbox, BUFFER);
 
         rootBuffer
@@ -107,32 +106,30 @@ public class EnemyEditorView extends PhotoFileChooser implements EnemySetView {
                 .setBackground(new Background(new BackgroundFill(Color.rgb(235, 235, 235),
                                                                  CornerRadii.EMPTY, Insets.EMPTY)));
 
-        
         Button imageButton = ButtonFactory.makeButton(labelsResource.getString("Image"),
-                                                        e -> {
-                                                            try {
-                                                                selectFile("Select new enemy image",
-                                                                           "Photos: ");
-                                                            }
-                                                            catch (IOException e1) {
-                                                                DialogueBoxFactory
-                                                                        .createErrorDialogueBox("Unable to open file chooser",
-                                                                                                "Try again");
-                                                            }
-                                                        });
+                                                      e -> {
+                                                          try {
+                                                              selectFile("Select new enemy image",
+                                                                         "Photos: ");
+                                                          }
+                                                          catch (IOException e1) {
+                                                              DialogueBoxFactory
+                                                                      .createErrorDialogueBox("Unable to open file chooser",
+                                                                                              "Try again");
+                                                          }
+                                                      });
         imageButton.setPrefWidth(280);
         vbox.getChildren().addAll(
-        		imageButton,
-        		enemyName.getInstanceAsNode(),
-        		enemySize.getInstanceAsNode(),
-        		enemySpeed.getInstanceAsNode(),
-        		enemyDamage.getInstanceAsNode(),
-        		enemyHealth.getInstanceAsNode(),
-        		enemyRewardMoney.getInstanceAsNode(),
-        		enemyRewardPoints.getInstanceAsNode(),
-        		addEnemyEffect.getInstanceAsNode(),
-        		deleteEnemy.getInstanceAsNode()
-        		);
+                                  imageButton,
+                                  enemyName.getInstanceAsNode(),
+                                  enemySize.getInstanceAsNode(),
+                                  enemySpeed.getInstanceAsNode(),
+                                  enemyDamage.getInstanceAsNode(),
+                                  enemyHealth.getInstanceAsNode(),
+                                  enemyRewardMoney.getInstanceAsNode(),
+                                  enemyRewardPoints.getInstanceAsNode(),
+                                  addEnemyEffect.getInstanceAsNode(),
+                                  deleteEnemy.getInstanceAsNode());
     }
 
     public void clearView () {

@@ -151,6 +151,8 @@ public class WeaponAuthoringViewController extends EditorViewController
         EffectAuthoringViewController effectAuthoringView =
                 new EffectAuthoringViewController(effectDataSource);
         effectDataSource.createType(effectAuthoringView.getEffectAuthoringView());
+        System.out.println("x");
+        System.out.println(effectAuthoringView.getEffectAuthoringView());
         effectAuthoringView.setEffectOptions(effectDataSource.getCreatedTypeIds());
         effectAuthoringView.setAvailClasses(effectDataSource.getAvailableClasses());
         effectAuthoringView.setAvailDataObjects(effectDataSource.getAvailableDataObjects());

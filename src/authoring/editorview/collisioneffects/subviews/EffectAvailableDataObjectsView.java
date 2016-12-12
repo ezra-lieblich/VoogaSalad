@@ -17,6 +17,7 @@ import javafx.scene.control.Label;
  */
 public class EffectAvailableDataObjectsView extends ImageBank implements EffectSetView {
 
+    @SuppressWarnings("unused")
     private EffectAuthoringViewDelegate delegate;
     private List<String> listItems;
 
