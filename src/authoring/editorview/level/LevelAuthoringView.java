@@ -8,7 +8,6 @@ import engine.level.wave.WaveString;
 import authoring.editorview.ListDataSource;
 import authoring.editorview.level.subviews.editorfields.AddLevelEffectView;
 import authoring.editorview.level.subviews.editorfields.CreateNewLevelView;
-import authoring.editorview.level.subviews.editorfields.LevelChooserView;
 import authoring.editorview.level.subviews.editorfields.LevelNameView;
 import authoring.editorview.level.subviews.editorfields.LevelRewardsView;
 import authoring.editorview.level.subviews.editorfields.LevelTransitionTimeField;
@@ -29,7 +28,6 @@ public class LevelAuthoringView implements LevelUpdateView {
     private LevelAuthoringViewDelegate delegate;
 
     private VBox vbox;
-    private LevelChooserView levelChooser;
     private LevelRewardsView levelRewardsView;
     private LevelNameView levelNameView;
     private CreateNewLevelView createNewLevelView;
@@ -43,7 +41,6 @@ public class LevelAuthoringView implements LevelUpdateView {
 
     LevelAuthoringView (int width, int height) {
         this.vbox = new VBox(10);
-        this.levelChooser = new LevelChooserView(levelsResource);
         this.levelRewardsView = new LevelRewardsView(levelsResource);
         this.levelNameView = new LevelNameView(levelsResource);
         this.createNewLevelView = new CreateNewLevelView(levelsResource);
@@ -64,7 +61,6 @@ public class LevelAuthoringView implements LevelUpdateView {
         this.delegate = delegate;
         levelNameView.setDelegate(delegate);
         levelRewardsView.setDelegate(delegate);
-        levelChooser.setDelegate(delegate);
         createNewLevelView.setDelegate(delegate);
         transitionTimeField.setDelegate(delegate);
         waveTableView.setDelegate(delegate);
@@ -74,7 +70,6 @@ public class LevelAuthoringView implements LevelUpdateView {
     private void setLevelView () {
         vbox.getChildren().addAll(createNewLevelView.getInstanceAsNode(),
         						  
-                                  levelChooser.getInstanceAsNode(),
                                   levelNameView.getInstanceAsNode(),
                                   levelRewardsView.getInstanceAsNode(),
                                   transitionTimeField.getInstanceAsNode(),
