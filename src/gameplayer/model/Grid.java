@@ -143,6 +143,9 @@ public class Grid {
 		return this.start;
 	}
 	
+	public Cell getEnd() {
+		return this.end;
+	}
 	/*
 	public Cell getStartPoint(){
 		System.out.println("start point:");

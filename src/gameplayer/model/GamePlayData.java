@@ -70,7 +70,7 @@ public class GamePlayData extends Observable{
 		this.numLevels.set(settingInfo.get("totalNumberOfLevels"));  // put into property file
 		this.gold.set(settingInfo.get("gold"));
 		this.lives.set(settingInfo.get("lives").intValue());
-		this.currentLevel.set(0); //REMEMBER TO CHANGE
+		this.currentLevel.set(-1); //REMEMBER TO CHANGE
 		this.score.set(0);
 	}
 	
@@ -104,7 +104,6 @@ public class GamePlayData extends Observable{
 
 	public Grid getGrid() {
 		//System.out.println("Successfully got grid");
-		this.grid = this.factory.getGrid(this.currentLevel.get());
 		return this.grid;
 	}
 	
