@@ -39,16 +39,15 @@ public class GameSettingsPathPreview implements INodeView{
 	
 	private void drawPath(){		
 		int cellSize = SIZE/dimensions;
-		for (Coordinate<Integer> coordinate : pathCoordinates){			
+		for (Coordinate<Integer> coordinate : pathCoordinates){		
 			ImageView iv = new ImageView(image);
 			iv.setFitHeight(cellSize);
 			iv.setFitWidth(cellSize);
-			iv.setX(coordinate.getX() * cellSize);
-			iv.setY(coordinate.getY() * cellSize);
+			iv.setLayoutX(coordinate.getX() * cellSize);
+			iv.setLayoutY(coordinate.getY() * cellSize);
 			root.getChildren().add(iv);			
 		}
 	}
-	
 	
 	
 }

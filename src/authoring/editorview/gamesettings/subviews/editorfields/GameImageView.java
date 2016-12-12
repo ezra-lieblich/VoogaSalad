@@ -1,11 +1,10 @@
 package authoring.editorview.gamesettings.subviews.editorfields;
 
 
-import java.awt.image.BufferedImage;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ResourceBundle;
-import javax.imageio.ImageIO;
 
 import authoring.editorview.PhotoFileChooser;
 import authoring.editorview.gamesettings.GameSettingsAuthoringViewDelegate;
