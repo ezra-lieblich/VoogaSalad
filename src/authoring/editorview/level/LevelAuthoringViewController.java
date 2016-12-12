@@ -200,7 +200,6 @@ public class LevelAuthoringViewController extends EditorViewController
         effectDataSource.createType(effectAuthoringView.getEffectAuthoringView());
         effectAuthoringView.setEffectOptions(effectDataSource.getCreatedTypeIds());
         effectAuthoringView.setAvailClasses(effectDataSource.getAvailableClasses());
-        // effectAuthoringView.setAvailMethods(effectDataSource.getAvailableClassMethods(selectedClass));
         effectAuthoringView.setAvailDataObjects(effectDataSource.getAvailableDataObjects());
         effectAuthoringView.openEffectView();
     }
@@ -214,4 +213,15 @@ public class LevelAuthoringViewController extends EditorViewController
         levelView.updateNameDisplay(levelDataSource.getName(currentLevelID));
         levelView.updateWaves(levelDataSource.getWaveStrings(currentLevelID));
     }
+
+	@Override
+	public void onUserSelectedLevel(int levelID) {
+		currentLevelID = levelID;
+        refreshView();
+	}
+
+	@Override
+	public void onUserEnteredLevelImagePath(String path) {
+        levelDataSource.setImagePath(currentLevelID, path);
+	}
 }

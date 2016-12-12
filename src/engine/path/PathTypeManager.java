@@ -15,15 +15,16 @@ public class PathTypeManager extends AbstractTypeManager<Path> implements PathMa
         
     private ObservableList<Integer> availablePaths;
     
-    public PathTypeManager(){
-    	this.availablePaths = new ObservableListProperty<Integer>(new ArrayList());
+    PathTypeManager() {
+        availablePaths = new ObservableListProperty<Integer>();
     }
     
-    public void visitEditPath(GameModeManager manager, Integer index) {
+    public void visitGridSize(GameModeManager manager, Integer index) {
         availablePaths.setProperty(getEntities().values().stream()
                                    .filter(a -> a.getType().equals(manager.getEntity(index).getGameType()) && a.getGridRows() == manager.getEntity(index).getGridSize() && a.getGridColumns()==(manager.getEntity(index).getGridSize()))
                                    .map(Path::getId)
                                    .collect(Collectors.toList()));  
+        System.out.println("HERERER");
     }
     
     @Override 
