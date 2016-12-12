@@ -1,5 +1,6 @@
 package splashscreen;
 
+import java.io.File;
 import java.io.IOException;
 
 import authoring.main.AuthoringController;
@@ -7,6 +8,7 @@ import gameplayer.controller.GamePlayerController;
 import gameplayer.controller.HomeSelection;
 import gameplayer.view.helper.GraphicsLibrary;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -21,6 +23,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import statswrapper.Wrapper;
 
@@ -112,9 +115,17 @@ public class SplashScreen {
 		Button btn2 = graphics.createButton("Play a game", e -> {
 			startGame();
 		});
+		Button btn3 = graphics.createButton("Load a game", e ->{
+			FileChooser filechooser = new FileChooser();
+	        Stage mainStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+
+			File out = filechooser.showOpenDialog(mainStage);
+			System.out.println("file name " + out.getPath());
+			
+		});
 		HBox hbBtn = new HBox(10);
 		hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
-		hbBtn.getChildren().addAll(btn1, btn2);
+		hbBtn.getChildren().addAll(btn1, btn2,btn3);
 		mainScreen.add(hbBtn, 0, 5);
 	}
 
@@ -151,7 +162,7 @@ public class SplashScreen {
 		s.show();
 
 	}
-	
+
 	private void startGame(){
 		Stage s = new Stage();
 		

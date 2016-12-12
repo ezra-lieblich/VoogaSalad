@@ -21,5 +21,6 @@ public class WinEffectFactory extends AbstractEffectFactory {
         super(TRIGGER_NAME, ENCOMPASSING_CLASS_NAME);
         this.data = data;
         loadInSpecificValues();
+
     }
 }

@@ -7,6 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Observable;
+import java.util.Observer;
 import java.util.Queue;
 
 import engine.level.wave.Wave;
@@ -21,7 +22,7 @@ import gameplayer.view.GridGUI;
 import gameplayer.view.helper.GraphicsLibrary;
 import javafx.scene.image.ImageView;
 
-public class EnemyManager extends Observable {
+public class EnemyManager extends Observable{
 
 	private Map<Integer, Enemy> enemyOnGrid; 
 	private GamePlayData gameData;
@@ -62,6 +63,10 @@ public class EnemyManager extends Observable {
 
 	}
 	
+	public GamePlayData getData(){
+		return this.gameData;
+	}
+	
 	private void initializeWaves() {
 
 		//System.out.println("Does all WaveStartTimes exist?");
@@ -74,6 +79,11 @@ public class EnemyManager extends Observable {
 		return this.noMoreWave;
 	}
 
+	public void setNoMoreWave(){
+		this.noMoreWave = true;
+		setChanged();
+		notifyObservers();
+	}
 	/*
 	public void setCurrentCell(Cell cell) {
 		this.current = cell;
@@ -226,15 +236,13 @@ public class EnemyManager extends Observable {
 	
 	public Queue<Enemy> getPackOfEnemyComing() {
 		if (allWaves.isEmpty()) {
-			if(this.enemyOnGrid.size() == 0){
-				this.gameData.setLevel(this.gameData.getCurrentLevel() + 1);
-			}
-			this.noMoreWave = true;
+			this.setNoMoreWave();
 			//System.out.println("ALL WAVES IS EMPTY");
 			return new LinkedList<Enemy>();
 		}
 		Wave wave = this.allWaves.poll();
 		return this.gameFactory.getIndividualWaveQueue(wave, this.gameData.getCurrentLevel());
 	}
+
 
 }
