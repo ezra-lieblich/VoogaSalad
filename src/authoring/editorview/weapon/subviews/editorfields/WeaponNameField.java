@@ -4,7 +4,6 @@ import java.util.ResourceBundle;
 import authoring.editorview.EditorNameView;
 import authoring.editorview.weapon.WeaponSetView;
 import authoring.editorview.weapon.WeaponAuthoringViewDelegate;
-import authoring.utilityfactories.BoxFactory;
 import authoring.utilityfactories.GridFactory;
 import authoring.utilityfactories.TextFieldFactory;
 
@@ -33,8 +32,10 @@ public class WeaponNameField extends EditorNameView implements WeaponSetView {
                 TextFieldFactory.makeTextField(resource.getString("EnterString"),
                                                e -> delegate.onUserEnteredWeaponName(nameTextField
                                                        .getText()));
-        root = GridFactory.createRowWithLabelandNode(resource.getString("NameTextField"), nameTextField, 125);
-        
+        root =
+                GridFactory.createRowWithLabelandNode(resource.getString("NameTextField"),
+                                                      nameTextField, 125);
+
     }
 
 }

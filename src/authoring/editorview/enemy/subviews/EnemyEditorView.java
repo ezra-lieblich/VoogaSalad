@@ -12,6 +12,7 @@ import authoring.editorview.enemy.subviews.editorfields.EnemyNameField;
 import authoring.editorview.enemy.subviews.editorfields.EnemyRewardMoneyField;
 import authoring.editorview.enemy.subviews.editorfields.EnemyRewardPointsField;
 import authoring.editorview.enemy.subviews.editorfields.EnemySizeField;
+import authoring.editorview.enemy.subviews.editorfields.AddEnemyEffectView;
 import authoring.editorview.enemy.subviews.editorfields.DeleteEnemy;
 import authoring.editorview.enemy.subviews.editorfields.EnemyDamageField;
 import authoring.editorview.enemy.subviews.editorfields.EnemySpeedField;
@@ -47,6 +48,7 @@ public class EnemyEditorView extends PhotoFileChooser implements EnemySetView {
     private EnemyRewardMoneyField enemyRewardMoney;
     private EnemyRewardPointsField enemyRewardPoints;
     private EnemySizeField enemySize;
+    private AddEnemyEffectView addEnemyEffect;
 
     private ResourceBundle labelsResource;
     private final String ENEMY_EFFECT_RESOURCE_PATH = "resources/GameAuthoringEnemy";
@@ -59,7 +61,8 @@ public class EnemyEditorView extends PhotoFileChooser implements EnemySetView {
                             EnemyRewardMoneyField enemyRewardMoney,
                             EnemyRewardPointsField enemyRewardPoints,
                             EnemySizeField enemySize,
-                            DeleteEnemy deleteEnemy) {
+                            DeleteEnemy deleteEnemy,
+                            AddEnemyEffectView addEnemyEffect) {
         enemyEffectView = new ScrollPane();
         vbox = new VBox(10);
         enemyEffectView.setContent(vbox);
@@ -73,6 +76,7 @@ public class EnemyEditorView extends PhotoFileChooser implements EnemySetView {
         this.enemyRewardPoints = enemyRewardPoints;
         this.enemySize = enemySize;
         this.deleteEnemy = deleteEnemy;
+        this.addEnemyEffect = addEnemyEffect;
 
         labelsResource = ResourceBundle.getBundle(ENEMY_EFFECT_RESOURCE_PATH);
 
@@ -101,6 +105,7 @@ public class EnemyEditorView extends PhotoFileChooser implements EnemySetView {
         vbox.getChildren().add(enemyHealth.getInstanceAsNode());
         vbox.getChildren().add(enemyRewardMoney.getInstanceAsNode());
         vbox.getChildren().add(enemyRewardPoints.getInstanceAsNode());
+        vbox.getChildren().add(addEnemyEffect.getInstanceAsNode());
     }
 
     public void clearView () {

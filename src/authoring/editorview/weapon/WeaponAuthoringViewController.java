@@ -142,4 +142,10 @@ public class WeaponAuthoringViewController extends EditorViewController
         return cellData;
     }
 
+    @Override
+    public void onUserPressedAddEffect () {
+        // TODO Auto-generated method stub
+
+    }
+
 }

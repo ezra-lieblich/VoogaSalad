@@ -1,16 +1,20 @@
 package engine;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
 
 import com.google.common.io.Files;
 
+import authoring.utilityfactories.DialogueBoxFactory;
+import javafx.scene.control.Alert;
+
 public class FileAggregator {
+	private final String IMAGES_DIRECTORY_NAME = "images";
 	private static FileAggregator defaultInstance;
 	//Map images used to the number of places used in the program. Remove on count=0
 	private HashMap<String, Integer> originalImagePaths;
-	private File gameDirectory;
 
 	private FileAggregator(){
 		this.originalImagePaths = new HashMap<String, Integer>();
@@ -59,17 +63,33 @@ public class FileAggregator {
 		}
 	}
 	
-//	public File createGameFolder(String gameName, File xml){
-//		File gameDirectory
-//		
-//	}
+	public File createGameFolder(File rootDirectory, String xmlContent){
+		rootDirectory.mkdirs();
+		//Game folder name and xml file name will match
+		String xmlFileName = this.getFileNameFromPath(rootDirectory.getAbsolutePath()+".xml");
+		File xmlFile = new File(rootDirectory, xmlFileName);
+		try {
+			FileWriter fileWriter = new FileWriter(xmlFile);
+			fileWriter.write(xmlContent);
+			fileWriter.close();
+			generateImagesFolder(rootDirectory);
+			return rootDirectory;
+		}
+		catch (IOException e) {
+			Alert fileError =
+					DialogueBoxFactory.createErrorDialogueBox("Error with file. Can't be saved",
+							"File Error");
+			fileError.show();
+			return null;
+		}
+	}
 	
-	private File generateImagesFolder(){
-		File images = new File(this.gameDirectory.getAbsolutePath()+"images");
+	private File generateImagesFolder(File gameDirectory){
+		File images = new File(gameDirectory, IMAGES_DIRECTORY_NAME);
 		images.mkdirs();
 		for (String s : this.originalImagePaths.keySet()){
 			File sourceFile = new File(s);
-			File copiedFile = new File(images.getAbsolutePath()+getFileNameFromPath(s));
+			File copiedFile = new File(images, getFileNameFromPath(s));
 			try {
 				Files.copy(sourceFile, copiedFile);
 			} catch (IOException e) {

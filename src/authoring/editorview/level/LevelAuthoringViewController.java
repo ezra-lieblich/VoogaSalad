@@ -194,4 +194,10 @@ public class LevelAuthoringViewController extends EditorViewController
             createIntCheckDialogueBox();
         }
     }
+
+    @Override
+    public void onUserPressedAddEffect () {
+        // TODO Auto-generated method stub
+
+    }
 }

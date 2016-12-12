@@ -24,6 +24,7 @@ public class GameSettingsAuthoringViewController extends EditorViewController
         this.gameSettingsDataSource = source;
         this.pathDataSource = pathSource;
         this.gameSettingsDataSource.addTypeBankListener(this.gameView);
+        //addAvailablePathListener
         createNewGame();
     }
 
@@ -85,6 +86,7 @@ public class GameSettingsAuthoringViewController extends EditorViewController
 	@Override
 	public void onUserEnteredGameGridSize(int size) {
 		this.gameSettingsDataSource.setGridSize(activeID, size);
+		
 		
 	}
 
