@@ -3,14 +3,16 @@ package engine;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Path;
+import java.nio.file.Files;
 import java.util.HashMap;
-
-import com.google.common.io.Files;
 
 import authoring.utilityfactories.DialogueBoxFactory;
 import javafx.scene.control.Alert;
-
+/**
+ * 
+ * @author Andrew Bihl
+ *
+ */
 public class FileAggregator {
 	private final String IMAGES_DIRECTORY_NAME = "game_images";
 	private static FileAggregator defaultInstance;
@@ -44,7 +46,7 @@ public class FileAggregator {
 		rootDirectory.mkdirs();
 		File newImageDirectory = new File(rootDirectory, IMAGES_DIRECTORY_NAME);
 		try {
-			Files.move(imageDirectory, newImageDirectory);
+			Files.move(imageDirectory.toPath(), newImageDirectory.toPath());
 		} catch (IOException e1) {
 			System.out.println("Failed to move image folder to game folder");
 			e1.printStackTrace();
@@ -108,13 +110,16 @@ public class FileAggregator {
 	
 	private void addImageFile(String imagePath){
 		File source = new File(imagePath);
-		File newImage = new File(this.imageDirectory, this.getFileNameFromPath(imagePath));
+		File newImage = new File(imageDirectory, this.getFileNameFromPath(imagePath));
 		try {
-			Files.copy(source, newImage);
-			this.images.put(imagePath, newImage);
+			Files.copy(source.toPath(), newImage.toPath());
 		} catch (IOException e) {
 			System.out.println("FAILED TO COPY IMAGE FILE: "+imagePath);
 			e.printStackTrace();
+		}
+		//The copy will fail if for some reason the file is already created in the directory.
+		if (newImage.exists()){
+			this.images.put(imagePath, newImage);
 		}
 	}
 	
