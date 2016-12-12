@@ -1,5 +1,9 @@
 package authoring.editorview.gamesettings.subviews;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
 import authoring.editorview.INodeView;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -11,9 +15,11 @@ public class GameSettingsPreviewView implements INodeView {
 	
 	private Group root;
 	private ImageView gameImageView;
+	private List<Integer> pathList;
 	
 	public GameSettingsPreviewView(int size){
 		root = new Group();
+		pathList = new ArrayList<Integer>();
 		formatImageView(size);
 	}
 
@@ -32,18 +38,14 @@ public class GameSettingsPreviewView implements INodeView {
 	}
 	
 	public void updateGameImagePath(String imagePath){	
-		Image image;
+		
 		if (root.getChildren().contains(gameImageView)){
 			root.getChildren().remove(gameImageView);
 		}
 		
-		if (!imagePath.contains("file:") && !imagePath.contains("http:")) {
-			image = new Image (getClass().getClassLoader().getResourceAsStream(imagePath));		
-		}
-		
-		else {
-			image = new Image(imagePath);
-		}
+		File file = new File(imagePath);
+		Image image = new Image(file.toURI().toString());
+		gameImageView.setImage(image);
 			
 		gameImageView.setImage(image);
 		root.getChildren().add(gameImageView);
@@ -51,6 +53,10 @@ public class GameSettingsPreviewView implements INodeView {
 	
 	public void updateGridDimensions(int size){
 		
+	}
+	
+	public void updatePathList(List<Integer> pathList){
+		this.pathList = pathList;
 	}
 	
 	

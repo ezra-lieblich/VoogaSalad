@@ -139,6 +139,7 @@ public class GameSettingsAuthoringView implements GameSettingsUpdateView, GameSe
 	@Override
 	public void updateAvailablePaths(List<Integer> availablePathList) {
 		gameSettingsEditor.updateAvailablePathList(availablePathList);
+		System.out.println("hello");
 		
 	}
 
