@@ -3,7 +3,6 @@ package authoring.editorview.level.subviews;
 import java.io.File;
 import java.io.IOException;
 import java.util.ResourceBundle;
-
 import authoring.editorview.PhotoFileChooser;
 import authoring.editorview.level.LevelAuthoringViewDelegate;
 import authoring.editorview.level.LevelSetView;
@@ -33,60 +32,65 @@ import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+
 public class LevelEditorView extends PhotoFileChooser implements LevelSetView {
     private static final double BUFFER = 10.0;
-	
-	private LevelAuthoringViewDelegate delegate;
-	private LevelRewardsView levelRewardsView;
-	private LevelNameView levelNameView;
-	LevelTransitionTimeField transitionTimeField;
-	WaveTableView waveTableView;
-	PreviewLevelView previewLevelView;
-	AddLevelEffectView addLevelEffect;
-	CreateNewLevelView createNewLevelView;
-	
+
+    private LevelAuthoringViewDelegate delegate;
+    private LevelRewardsView levelRewardsView;
+    private LevelNameView levelNameView;
+    LevelTransitionTimeField transitionTimeField;
+    WaveTableView waveTableView;
+    PreviewLevelView previewLevelView;
+    AddLevelEffectView addLevelEffect;
+    CreateNewLevelView createNewLevelView;
+
     private VBox vbox;
     private AnchorPane rootBuffer;
     private File chosenFile;
     private ResourceBundle labelsResource;
     private ResourceBundle dialogueBoxResource;
 
-    
-	public LevelEditorView(LevelRewardsView levelRewardsView, LevelNameView levelNameView,
-			LevelTransitionTimeField transitionTimeField, WaveTableView waveTableView,
-			PreviewLevelView previewLevelView, AddLevelEffectView addLevelEffect, 
-			CreateNewLevelView createNewLevelView) {
-		this.levelRewardsView = levelRewardsView;
-		this.levelNameView = levelNameView;
-		this.transitionTimeField = transitionTimeField;
-		this.waveTableView = waveTableView;
-		this.previewLevelView = previewLevelView;
-		this.addLevelEffect = addLevelEffect;
-		this.createNewLevelView = createNewLevelView;
-		
+    public LevelEditorView (LevelRewardsView levelRewardsView,
+                            LevelNameView levelNameView,
+                            LevelTransitionTimeField transitionTimeField,
+                            WaveTableView waveTableView,
+                            PreviewLevelView previewLevelView,
+                            AddLevelEffectView addLevelEffect,
+                            CreateNewLevelView createNewLevelView) {
+        this.levelRewardsView = levelRewardsView;
+        this.levelNameView = levelNameView;
+        this.transitionTimeField = transitionTimeField;
+        this.waveTableView = waveTableView;
+        this.previewLevelView = previewLevelView;
+        this.addLevelEffect = addLevelEffect;
+        this.createNewLevelView = createNewLevelView;
+
         vbox = new VBox(10);
         rootBuffer = new AnchorPane();
         rootBuffer.getChildren().add(vbox);
         buildViewComponents();
-	}
+    }
 
-	private void buildViewComponents() {
-		 AnchorPane.setLeftAnchor(vbox, BUFFER);
-	     AnchorPane.setTopAnchor(vbox, BUFFER);
-	     
-	     rootBuffer
-         .setBorder(new Border(new BorderStroke(Color.GRAY, BorderStrokeStyle.SOLID,
-                                                CornerRadii.EMPTY, new BorderWidths(0.5))));
-	     rootBuffer
-         .setBackground(new Background(new BackgroundFill(Color.rgb(235, 235, 235),
-                                                          CornerRadii.EMPTY, Insets.EMPTY)));
+    private void buildViewComponents () {
+        AnchorPane.setLeftAnchor(vbox, BUFFER);
+        AnchorPane.setTopAnchor(vbox, BUFFER);
 
- 		vbox.getChildren().addAll(levelRewardsView.getInstanceAsNode(), levelNameView.getInstanceAsNode(),
- 									transitionTimeField.getInstanceAsNode(), createNewLevelView.getInstanceAsNode(),
- 									waveTableView.getInstanceAsNode(), previewLevelView.getInstanceAsNode());
-	}
+        rootBuffer
+                .setBorder(new Border(new BorderStroke(Color.GRAY, BorderStrokeStyle.SOLID,
+                                                       CornerRadii.EMPTY, new BorderWidths(0.5))));
+        rootBuffer
+                .setBackground(new Background(new BackgroundFill(Color.rgb(235, 235, 235),
+                                                                 CornerRadii.EMPTY, Insets.EMPTY)));
+        vbox.getChildren().addAll(levelRewardsView.getInstanceAsNode(),
+                                  levelNameView.getInstanceAsNode(),
+                                  transitionTimeField.getInstanceAsNode(),
+                                  createNewLevelView.getInstanceAsNode(),
+                                  waveTableView.getInstanceAsNode(),
+                                  previewLevelView.getInstanceAsNode());
+    }
 
-	@Override
+    @Override
     public void setDelegate (LevelAuthoringViewDelegate delegate) {
         this.delegate = delegate;
     }

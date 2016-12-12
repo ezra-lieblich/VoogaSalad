@@ -16,6 +16,7 @@ import authoring.editorview.level.subviews.editorfields.LevelTransitionTimeField
 import authoring.editorview.level.subviews.editorfields.PreviewLevelView;
 import authoring.editorview.level.subviews.editorfields.WaveTableView;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
@@ -32,7 +33,6 @@ public class LevelAuthoringView implements LevelUpdateView {
 
     private static final int EDITOR_SIZE = 300;
 
-	
     private LevelAuthoringViewDelegate delegate;
 
     private GridPane levelView;
@@ -51,25 +51,26 @@ public class LevelAuthoringView implements LevelUpdateView {
             ResourceBundle.getBundle("resources/GameAuthoringLevels");
 
     LevelAuthoringView (int width, int height) {
-    	this.levelView = new GridPane();
-    	
+        this.levelView = new GridPane();
+
         this.vbox = new VBox(10);
         this.levelRewardsView = new LevelRewardsView(levelsResource);
         this.levelNameView = new LevelNameView(levelsResource);
-        //should be with bank
+        // should be with bank
         this.createNewLevelView = new CreateNewLevelView(levelsResource);
         this.transitionTimeField = new LevelTransitionTimeField(levelsResource);
         this.waveTableView = new WaveTableView(levelsResource, width);
         this.previewLevelView = new PreviewLevelView();
         this.addLevelEffect = new AddLevelEffectView(levelsResource);
-        
+
         this.levelBank = new LevelBank();
-        this.levelEditorView = new LevelEditorView(levelRewardsView, levelNameView, transitionTimeField,
-        								waveTableView, previewLevelView, addLevelEffect, createNewLevelView);
+        this.levelEditorView =
+                new LevelEditorView(levelRewardsView, levelNameView, transitionTimeField,
+                                    waveTableView, previewLevelView, addLevelEffect,
+                                    createNewLevelView);
         setLevelView();
     }
 
-    
     @Override
     public Node getInstanceAsNode () {
         return levelView;
@@ -88,7 +89,7 @@ public class LevelAuthoringView implements LevelUpdateView {
     }
 
     private void setLevelView () {
-    	ColumnConstraints bankColumn = new ColumnConstraints();
+        ColumnConstraints bankColumn = new ColumnConstraints();
         bankColumn.setMinWidth(150);
 
         ColumnConstraints editorColumn = new ColumnConstraints();
@@ -99,31 +100,32 @@ public class LevelAuthoringView implements LevelUpdateView {
         RowConstraints fullRow = new RowConstraints();
 
         fullRow.setMinHeight(700);
-        
+
         levelView.getColumnConstraints().addAll(bankColumn, editorColumn, previewColumn);
         levelView.getRowConstraints().add(fullRow);
-        
+
+        Button newWave = ButtonFactory.makeButton("New Wave",
+                                                  e -> delegate.onUserEnteredAddWave());
         levelView.add(levelBank.getInstanceAsNode(), 0, 0);
-        levelView.add(levelEditorView.getInstanceAsNode(), 1, 0);
-        levelView.add(ButtonFactory.makeButton("New Wave",
-                                          e -> delegate.onUserEnteredAddWave()), 2, 0);
-//        //levelView.add(levelEditorView.getInstanceAsNode(), 1, 0);
-//        //levelView.add(levelImageView.getInstanceAsNode(), 2, 0);
-//        levelView.add(levelNameView.getInstanceAsNode(), 1, 1);
-//        vbox.getChildren().addAll(createNewLevelView.getInstanceAsNode(),
-//        						  
-//        		
-//        						  //lev.add(enemyBank.getInstanceAsNode(), 0, 0);
-//                                  levelNameView.getInstanceAsNode(),
-//                                  levelRewardsView.getInstanceAsNode(),
-//                                  transitionTimeField.getInstanceAsNode(),
-//                                  addLevelEffect.getInstanceAsNode(),
-//                                  ButtonFactory.makeButton("New Wave",
-//                                                           e -> delegate.onUserEnteredAddWave()),
-//                                  previewLevelView.getInstanceAsNode(),
-//                                  waveTableView.getInstanceAsNode()
-//                          
-//        							);
+        // levelView.add(newWave, 1, 0);
+        levelView.add(levelEditorView.getInstanceAsNode(), 1, 1);
+        // //levelView.add(levelEditorView.getInstanceAsNode(), 1, 0);
+        // //levelView.add(levelImageView.getInstanceAsNode(), 2, 0);
+        // levelView.add(levelNameView.getInstanceAsNode(), 1, 1);
+        // vbox.getChildren().addAll(createNewLevelView.getInstanceAsNode(),
+        //
+        //
+        // //lev.add(enemyBank.getInstanceAsNode(), 0, 0);
+        // levelNameView.getInstanceAsNode(),
+        // levelRewardsView.getInstanceAsNode(),
+        // transitionTimeField.getInstanceAsNode(),
+        // addLevelEffect.getInstanceAsNode(),
+        // ButtonFactory.makeButton("New Wave",
+        // e -> delegate.onUserEnteredAddWave()),
+        // previewLevelView.getInstanceAsNode(),
+        // waveTableView.getInstanceAsNode()
+        //
+        // );
     }
 
     @Override
@@ -178,7 +180,7 @@ public class LevelAuthoringView implements LevelUpdateView {
 
     @Override
     public void setLevelListDataSource (ListDataSource source) {
-    	this.levelBank.setListDataSource(source);
+        this.levelBank.setListDataSource(source);
         System.out.println("No level bank currently implemented");
     }
 
