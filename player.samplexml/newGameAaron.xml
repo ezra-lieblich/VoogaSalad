@@ -1730,7 +1730,7 @@
                     <listeners>
                       <null/>
                     </listeners>
-                    <property class="string">game_images/greensquare.png</property>
+                    <property class="string">game_images/brownPath.png</property>
                   </imagePath>
                   <size class="engine.observer.ObservableObjectProperty">
                     <observers/>
@@ -1841,7 +1841,7 @@
                     <listeners>
                       <null/>
                     </listeners>
-                    <property class="string">game_images/greensquare.png</property>
+                    <property class="string">game_images/brownPath.png</property>
                   </imagePath>
                   <size class="engine.observer.ObservableObjectProperty">
                     <observers/>

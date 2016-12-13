@@ -51,6 +51,8 @@ import java.util.Observer;
 import java.util.Queue;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
+
+import engine.path.PathManager;
 public class GamePlayerController implements Observer {
 	public static final int Y_OFFSET = 54;
 	public static final int ENTITY_SIZE = 70;
@@ -192,7 +194,8 @@ public class GamePlayerController implements Observer {
 		// null?");
 		// System.out.println(model.getData().getGrid());
 		if (!this.model.getData().getGrid().isNoPathType()) {
-			this.view.getGrid().populatePath(model.getData().getGrid().getAllPaths());
+			PathManager pathManager = this.loader.getPathManager();
+			this.view.getGrid().populatePath(model.getData().getGrid().getAllPaths(), pathManager);
 		}
 		this.dropController = new DragDropController(this.view, this.model, this.getTowerImageMap());
 	}

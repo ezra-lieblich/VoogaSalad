@@ -83,6 +83,10 @@ public class GamePlayerFactory{
 	public Map<Integer, Tower> getTowerUpgrades() {
 		return authoringFileReader.getTowerUpgrades();
 	}
+	
+	public PathManager getPathManager() {
+		return this.authoringFileReader.getPathManager();
+	}
 
 
 

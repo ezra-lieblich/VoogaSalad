@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import engine.path.PathManager;
 import gameplayer.model.Cell;
 import gameplayer.model.Grid;
 import gameplayer.model.Path;
@@ -112,12 +113,14 @@ public class GridGUI {
 		this.grid.getChildren().addAll(towerImage, tower.getInfoBox());
 	}
 
-	public void populatePath(HashMap<Integer,Path>allPaths){
+	public void populatePath(HashMap<Integer,Path>allPaths, PathManager pathManager){
 		//System.out.println("populate path!");
 		for(Integer uniquePath: allPaths.keySet()){
+			engine.path.Path currentPath = pathManager.getEntity(uniquePath);
+			String pathPicture = currentPath.getImagePath();
 			Cell current = allPaths.get(uniquePath).getPathStart();
 			while (current != null){
-				ImageView pathImage = graphicsLib.createImageView(graphicsLib.createImage("kaneki.jpg"));
+				ImageView pathImage = graphicsLib.createImageView(graphicsLib.createImage(pathPicture));
 				double x =current.getX();
 				double y = current.getY();
 				//System.out.println("path cell x: "+x+"; y: "+y);
