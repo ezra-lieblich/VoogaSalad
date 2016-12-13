@@ -318,6 +318,24 @@ public class GamePlayerController implements Observer {
 		this.view.getMainScreen().setCenter(browser);
 	}
 
+	private boolean loseCondition() {
+		return (this.model.getData().getLife() <= 0);
+	}
+	
+	private boolean winCondition(){
+		return (this.model.getData().won() || (this.model.getData().getLife() > 0
+				&& this.model.getData().getCurrentLevel() >= this.model.getData().getLevelNumber()));
+	}
+
+	private void winLoseCondition() {
+		if (loseCondition()) {
+			gameOver();
+		} else if (winCondition()) {
+			// System.out.println("WIn game!");
+			winGame();
+		}
+	}
+
 	@Override
 	public void update(Observable o, Object arg) {
 		if (o instanceof GamePlayData) {
@@ -326,12 +344,7 @@ public class GamePlayerController implements Observer {
 					((GamePlayData) o).getCurrentLevel(), ((GamePlayData) o).getScore());
 			this.view.updateCurrentLevelStats(((GamePlayData) o).getCurrentLevel());
 			// check for game over condition
-			if (((GamePlayData) o).getLife() <= 0) {
-				gameOver();
-			} else if (((GamePlayData) o).won()) {
-				// System.out.println("WIn game!");
-				winGame();
-			}
+			winLoseCondition();
 			// updateNewLevel();
 			checkCreateNewLevel();
 
@@ -365,6 +378,7 @@ public class GamePlayerController implements Observer {
 			this.enemyManager.update();
 			this.model.getCollisionManager().handleCollisions();
 			redrawEverything();
+			winLoseCondition();
 			updateNewLevel();
 
 		});
