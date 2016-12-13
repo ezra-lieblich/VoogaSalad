@@ -482,7 +482,7 @@
                     <listeners>
                       <null/>
                     </listeners>
-                    <property class="int">1</property>
+                    <property class="int">6</property>
                   </initialLives>
                   <initialMoney class="engine.observer.ObservableObjectProperty">
                     <observers/>
@@ -1827,7 +1827,7 @@
                 </engine.path.PathType>
               </entry>
               <entry>
-                <int>2</int>
+                <int>1</int>
                 <engine.path.PathType>
                   <name class="engine.observer.ObservableObjectProperty">
                     <observers/>
@@ -1855,7 +1855,7 @@
                     <listeners/>
                     <property class="string">Music/DopeBeats.mp3</property>
                   </sound>
-                  <id>2</id>
+                  <id>1</id>
                   <type class="engine.observer.ObservableObjectProperty">
                     <observers/>
                     <listeners>

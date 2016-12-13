@@ -15,11 +15,13 @@ public class CollisionManager {
 	EnemyManager enemyManager;
 	WeaponManager weaponManager;
 	HashMap<Integer,ImageView>enemiesOnScreen;
+	GamePlayData gameData;
 	
-	public CollisionManager(GamePlayData gameData, WeaponManager wManager, EnemyManager eManager,HashMap<Integer,ImageView>enemiesOnScreen) {
+	public CollisionManager(GamePlayData gameData, WeaponManager wManager, EnemyManager eManager,HashMap<Integer,ImageView>enemiesOnScreen, GamePlayData data) {
 		enemyManager = eManager;
 		weaponManager = wManager;
 		this.enemiesOnScreen=enemiesOnScreen;
+		this.gameData = data;
 	}
 	
 	public void handleCollisions() {
@@ -45,7 +47,7 @@ public class CollisionManager {
 				yInRange = Math.abs(weapon.getY() - targetEnemy.getY()) <= 100; //make more robust
 				
 				if (xInRange && yInRange) {
-					Collision collision = new Collision(weapon, targetEnemy);
+					Collision collision = new Collision(weapon, targetEnemy, this.gameData);
 					collision.processCollision();
 					iter.remove(); 
 					if (targetEnemy.getHealth() <= 0) {

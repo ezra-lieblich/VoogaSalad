@@ -75,6 +75,7 @@ public class GamePlayData extends Observable{
 		this.gold.set(settingInfo.get("gold"));
 		this.lives.set(settingInfo.get("lives").intValue());
 		this.currentLevel.set(settingInfo.get("levelnumber").intValue()); //REMEMBER TO CHANGE
+		System.out.println("initial level number: "+this.currentLevel.get());
 		this.score.set(0);
 	}
 	
@@ -90,6 +91,10 @@ public class GamePlayData extends Observable{
 	
 	@EffectMethod
 	public void setWin(){
+		System.out.println("==================");
+		System.out.println("total number of levels: " + this.numLevels.get());
+		System.out.println("current level number: " + this.currentLevel.get());
+
 		this.win = true;
 		setChanged();
 		notifyObservers();
@@ -174,6 +179,11 @@ public class GamePlayData extends Observable{
 	}
 
 	public void setLevel(int d) {
+		System.out.println("========================");
+		System.out.println("set level before level: " + this.currentLevel.get());
+		System.out.println("set level to " + d);
+		System.out.println("========================");
+		System.out.println();
 		this.currentLevel.set(d);;
 		setChanged();
 		notifyObservers();

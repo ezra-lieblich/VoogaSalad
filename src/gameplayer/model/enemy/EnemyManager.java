@@ -159,12 +159,12 @@ public class EnemyManager extends Observable{
 				enemy.setY(enemy.getY() + enemy.getyDirection() * distToMove);
 				Cell nextCell = this.grid.getNext(enemy.getPathID(), enemy.getCurrentCell());
 				enemy.setCurrentCell(nextCell);
-				if (enemy.getCurrentCell().equals(this.grid.getEnd())) {
+				if (enemy.getCurrentCell().equals(this.grid.getEnd(enemy.getPathID()))) { //THIS IS THE ERRORR
 					if (gameData.getLife() >= 0) {
 						gameData.setLife(gameData.getLife() - 1);
 					}
 					
-					//System.out.println("ENEMY REMOVING");
+					System.out.println("ENEMY REMOVING");
 					enemy.setRemove(true);
 					return;
 				}
