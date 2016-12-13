@@ -296,6 +296,7 @@ public class GamePlayerController implements Observer {
 				winGame();
 			}
 			checkCreateNewLevel();
+			checkForWin();
 		}
 	}
 	/*
@@ -323,7 +324,6 @@ public class GamePlayerController implements Observer {
 			this.model.getCollisionManager().handleCollisions();
 			redrawEverything();
 			
-			checkForWin();
 		});
 		animation.setCycleCount(Timeline.INDEFINITE);
 		animation.getKeyFrames().add(frame);
@@ -334,14 +334,12 @@ public class GamePlayerController implements Observer {
 		if (enemyManager.getEnemyOnGrid().size()==0 && currentWave.size()==0 && this.oldLevel == enemyManager.getData().getCurrentLevel() ){ //wait until enemies are all off the grid
 			//System.out.println("SET WIN!");
 			System.out.println("---------New level in checkforwin--------------");
-			//enemyManager.getData().setWin();
-			enemyManager.getData().setLevel(enemyManager.getData().getCurrentLevel()+1);
-		}
-		/*
-		if (enemyManager.getData().won()){
 			
+			enemyManager.getData().setLevel(enemyManager.getData().getCurrentLevel()+1);
+			
+			System.out.println("SEt new level: "+enemyManager.getData().getCurrentLevel());
 		}
-		*/
+
 	
 	}
 	
