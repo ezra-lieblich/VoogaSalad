@@ -194,7 +194,6 @@ public class GamePlayerFactory{
 				start = currGrid.getStart();
 			}
 			else {
-				gameplayer.model.Path debugg = currGrid.getPath(pathID);
 				start = currGrid.getPath(pathID).getPathStart();
 			}
 			enemies.add(this.enemyFactory.createModelEnemy(enemyType, start, pathID));

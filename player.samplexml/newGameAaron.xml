@@ -482,7 +482,7 @@
                     <listeners>
                       <null/>
                     </listeners>
-                    <property class="int">1</property>
+                    <property class="int">6</property>
                   </initialLives>
                   <initialMoney class="engine.observer.ObservableObjectProperty">
                     <observers/>
