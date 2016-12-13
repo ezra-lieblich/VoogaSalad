@@ -213,7 +213,7 @@ public class EnemyManager extends Observable{
 			moveSingleEnemy(enemy);
 			if (enemy.mustRemove()) {
 				iter.remove();
-				
+				System.out.println("removing size" + enemyOnGrid.size());
 			}
 		}
 	}

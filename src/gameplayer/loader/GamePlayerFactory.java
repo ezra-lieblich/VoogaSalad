@@ -138,7 +138,6 @@ public class GamePlayerFactory{
 				ArrayList<Cell> cells = new ArrayList<Cell>();
 				coordinates.forEach(c -> {
 					Cell currCell = levelGrid.getCell(c.getX(), c.getY());
-					System.out.println("idalid" +currCell.getX());
 					cells.add(currCell);
 				});
 				gameplayer.model.Path newPath = new gameplayer.model.Path(cells, levelGrid.getGrid());

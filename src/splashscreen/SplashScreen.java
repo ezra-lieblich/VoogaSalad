@@ -6,6 +6,7 @@ import java.io.IOException;
 import authoring.main.AuthoringController;
 import gameplayer.controller.GamePlayerController;
 import gameplayer.controller.HomeSelection;
+import gameplayer.loader.XMLParser;
 import gameplayer.view.helper.GraphicsLibrary;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -122,9 +123,13 @@ public class SplashScreen {
 			File out = filechooser.showOpenDialog(mainStage);
 			String[] path = out.getPath().split("/");
 			String fileName = path[path.length-1];
-			File input = new File("SavedGames/"+fileName);
-			//String levelNumber;
-			//GamePlayerController controller = new GamePlayerController("SavedGames/"+fileName, levelNumber);
+
+			String fileLocation = "SavedGames/"+fileName;
+			
+//			gameplayer.loader.XMLParser parser = new XMLParser(fileLocation);
+//			
+//			String levelNumber;
+//			GamePlayerController controller = new GamePlayerController("SavedGames/"+fileName, levelNumber);
 			
 		});
 		HBox hbBtn = new HBox(10);
