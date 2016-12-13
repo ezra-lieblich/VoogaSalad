@@ -13,23 +13,25 @@ public class PathNameView extends EditorNameView implements PathSetView {
     private PathAuthoringViewDelegate delegate;
 
     public PathNameView (ResourceBundle pathResource) {
-    	super(pathResource);
+        super(pathResource);
     }
 
     @Override
     public void setDelegate (PathAuthoringViewDelegate delegate) {
         this.delegate = delegate;
     }
-    
+
     @Override
-	protected void makeNameTextField () {
+    protected void makeNameTextField () {
         nameTextField = TextFieldFactory.makeTextField("",
                                                        e -> delegate
                                                                .onUserEnteredPathName(nameTextField
                                                                        .getText()));
         nameTextField.setMaxWidth(155);
-        root = GridFactory.createRowWithLabelandNode(resource.getString("NameTextField"), nameTextField, 125);
-        
+        root =
+                GridFactory.createRowWithLabelandNode(resource.getString("NameTextField"),
+                                                      nameTextField, 125);
+
     }
 
 }

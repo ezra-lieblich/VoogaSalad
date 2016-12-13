@@ -7,6 +7,7 @@ import authoring.editorview.gamesettings.GameSettingsSetView;
 import authoring.utilityfactories.GridFactory;
 import authoring.utilityfactories.TextFieldFactory;
 
+
 /**
  * 
  * @author Diane Hadley
@@ -15,11 +16,11 @@ import authoring.utilityfactories.TextFieldFactory;
  */
 
 public class GameNameView extends EditorNameView implements GameSettingsSetView {
-	
+
     private GameSettingsAuthoringViewDelegate delegate;
 
     public GameNameView (ResourceBundle settingsResource) {
-    	super(settingsResource);
+        super(settingsResource);
 
     }
 
@@ -30,11 +31,15 @@ public class GameNameView extends EditorNameView implements GameSettingsSetView 
 
     @Override
     protected void makeNameTextField () {
-        nameTextField = TextFieldFactory.makeTextField("", e -> delegate.onUserEnteredGameName(nameTextField.getText()));
+        nameTextField =
+                TextFieldFactory.makeTextField("", e -> delegate
+                        .onUserEnteredGameName(nameTextField.getText()));
         nameTextField.setMaxWidth(105);
-        
-        root = GridFactory.createRowWithLabelandNode(resource.getString("GameName"), nameTextField, 125);
+
+        root =
+                GridFactory.createRowWithLabelandNode(resource.getString("GameName"), nameTextField,
+                                                      125);
 
     }
-    
+
 }

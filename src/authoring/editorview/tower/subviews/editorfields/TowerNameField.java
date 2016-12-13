@@ -33,8 +33,10 @@ public class TowerNameField extends EditorNameView implements TowerSetView {
                                                e -> delegate.onUserEnteredTowerName(nameTextField
                                                        .getText()));
         nameTextField.setPrefWidth(230);
-        root = GridFactory.createRowWithLabelandNode(resource.getString("NameTextField"), nameTextField, 150);
-        
+        root =
+                GridFactory.createRowWithLabelandNode(resource.getString("NameTextField"),
+                                                      nameTextField, 150);
+
     }
 
 }

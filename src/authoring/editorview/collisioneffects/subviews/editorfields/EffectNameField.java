@@ -7,7 +7,11 @@ import authoring.editorview.collisioneffects.EffectSetView;
 import authoring.utilityfactories.GridFactory;
 import authoring.utilityfactories.TextFieldFactory;
 
-
+/**
+ * 
+ * @author Kayla Schulz
+ *
+ */
 public class EffectNameField extends EditorNameView implements EffectSetView {
 
     private EffectAuthoringViewDelegate delegate;

@@ -25,19 +25,19 @@ public class EffectTypeManagerController extends
     
     public EffectTypeManagerController (ManagerMediator managerMediator, EffectManager effectTypeManager) {
         super(effectTypeManager, new EffectTypeBuilder(), managerMediator);
-        
-        EffectBuilder efb = new EffectTypeBuilder();
-        Effect effectType = efb.buildTriggerConditionGroovy("collider.getHealth() == 50 && myself.getName() == 'Sean'").buildEffectGroovy("collider.setHealth(100)").build();
-        CollisionEffectFactory testFactory = new CollisionEffectFactory();
-        GameEffect gameEffect = testFactory.create(effectType);
-        
-        Enemy collider = new Enemy();
-        Enemy myself = new Enemy();
-        gameEffect.addEncompassingClass(myself); //Enemy constructor gameEffect.addEncompassingClass(this)
-        
-        gameEffect.addTrigger(collider);
-        
-        gameEffect.execute();
+//        
+//        EffectBuilder efb = new EffectTypeBuilder();
+//        Effect effectType = efb.buildTriggerConditionGroovy("collider.getHealth() == 50 && myself.getName() == 'Sean'").buildEffectGroovy("collider.setHealth(100)").build();
+//        CollisionEffectFactory testFactory = new CollisionEffectFactory();
+//        GameEffect gameEffect = testFactory.create(effectType);
+//        
+//        Enemy collider = new Enemy();
+//        Enemy myself = new Enemy();
+//        gameEffect.addEncompassingClass(myself); //Enemy constructor gameEffect.addEncompassingClass(this)
+//        
+//        gameEffect.addTrigger(collider);
+//        
+//        gameEffect.execute();
         
     }
     

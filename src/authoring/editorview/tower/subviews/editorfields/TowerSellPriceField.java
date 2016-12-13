@@ -17,7 +17,7 @@ import javafx.scene.layout.GridPane;
  */
 public class TowerSellPriceField implements TowerSetView {
 
-	private GridPane root;
+    private GridPane root;
     private TextField towerSellField;
     private TowerAuthoringViewDelegate delegate;
 
@@ -28,7 +28,9 @@ public class TowerSellPriceField implements TowerSetView {
                                                        .onUserEnteredTowerSellPrice(towerSellField
                                                                .getText()));
         towerSellField.setPrefWidth(230);
-        root = GridFactory.createRowWithLabelandNode(labelsResource.getString("SellPrice"), towerSellField, 150);
+        root =
+                GridFactory.createRowWithLabelandNode(labelsResource.getString("SellPrice"),
+                                                      towerSellField, 150);
     }
 
     @Override

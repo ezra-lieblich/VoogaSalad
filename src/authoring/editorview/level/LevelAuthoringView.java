@@ -2,8 +2,6 @@ package authoring.editorview.level;
 
 import java.util.List;
 import java.util.ResourceBundle;
-import authoring.utilityfactories.ButtonFactory;
-import engine.level.wave.Wave;
 import engine.level.wave.WaveString;
 import authoring.editorview.ListDataSource;
 import authoring.editorview.level.subviews.LevelBank;

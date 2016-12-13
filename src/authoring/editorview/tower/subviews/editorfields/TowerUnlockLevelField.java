@@ -17,8 +17,7 @@ import javafx.scene.layout.GridPane;
  */
 public class TowerUnlockLevelField implements TowerSetView {
 
-	
-	private GridPane root;
+    private GridPane root;
     private TextField towerLevelField;
     private TowerAuthoringViewDelegate delegate;
 
@@ -30,9 +29,9 @@ public class TowerUnlockLevelField implements TowerSetView {
                                                                .getText()));
         towerLevelField.setPrefWidth(230);
         root = GridFactory.createRowWithLabelandNode(
-        		labelsResource.getString("UnlockLevel"),
-        		towerLevelField, 
-        		150);
+                                                     labelsResource.getString("UnlockLevel"),
+                                                     towerLevelField,
+                                                     150);
     }
 
     @Override
