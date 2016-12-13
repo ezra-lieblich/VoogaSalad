@@ -90,6 +90,10 @@ public class GamePlayData extends Observable{
 	
 	@EffectMethod
 	public void setWin(){
+		System.out.println("==================");
+		System.out.println("total number of levels: " + this.numLevels.get());
+		System.out.println("current level number: " + this.currentLevel.get());
+
 		this.win = true;
 		setChanged();
 		notifyObservers();
