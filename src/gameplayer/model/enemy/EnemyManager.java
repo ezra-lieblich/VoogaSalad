@@ -213,7 +213,6 @@ public class EnemyManager extends Observable{
 			moveSingleEnemy(enemy);
 			if (enemy.mustRemove()) {
 				iter.remove();
-				
 			}
 		}
 	}
