@@ -248,7 +248,7 @@ public class GameGUI {
 	}
 
 	public void updateStatsDisplay(double gold, double lives, double level, double score) {
-		System.out.println("update stats display: "+gold+","+lives+","+level+","+score);
+		//System.out.println("update stats display: "+gold+","+lives+","+level+);
 		this.statsDisplay.updateLevelUI(gold, lives, level, score);
 	}
 

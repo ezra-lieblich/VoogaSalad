@@ -396,10 +396,7 @@
               </entry>
             </annotatedClassMethods>
             <effectAccessibleData>
-              <field>
-                <name>foe</name>
-                <clazz>gameplayer.model.effect.CollisionEffectFactory</clazz>
-              </field>
+              
               <field>
                 <name>myself</name>
                 <clazz>gameplayer.model.effect.CollisionEffectFactory</clazz>
@@ -1047,10 +1044,7 @@
               </entry>
             </annotatedClassMethods>
             <effectAccessibleData>
-              <field>
-                <name>foe</name>
-                <clazz>gameplayer.model.effect.CollisionEffectFactory</clazz>
-              </field>
+           
               <field>
                 <name>myself</name>
                 <clazz>gameplayer.model.effect.CollisionEffectFactory</clazz>
@@ -1670,10 +1664,7 @@
               </entry>
             </annotatedClassMethods>
             <effectAccessibleData>
-              <field>
-                <name>foe</name>
-                <clazz>gameplayer.model.effect.CollisionEffectFactory</clazz>
-              </field>
+
               <field>
                 <name>myself</name>
                 <clazz>gameplayer.model.effect.CollisionEffectFactory</clazz>
@@ -2255,10 +2246,7 @@
               </entry>
             </annotatedClassMethods>
             <effectAccessibleData>
-              <field>
-                <name>foe</name>
-                <clazz>gameplayer.model.effect.CollisionEffectFactory</clazz>
-              </field>
+   
               <field>
                 <name>myself</name>
                 <clazz>gameplayer.model.effect.CollisionEffectFactory</clazz>
