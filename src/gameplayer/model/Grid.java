@@ -144,8 +144,12 @@ public class Grid {
 		return this.start;
 	}
 	
-	public Cell getEnd() {
-		return this.end;
+	public Cell getEnd(int pathID) {
+		if (this.noPath){
+			return this.end;
+		}
+		else
+			return this.getPath(pathID).getPathEndPoint();
 	}
 	/*
 	public Cell getStartPoint(){

@@ -1,4 +1,5 @@
 package gameplayer.controller;
+
 import gameplayer.loader.GamePlayerFactory;
 import gameplayer.loader.GameSavingController;
 import gameplayer.loader.XMLParser;
@@ -51,6 +52,7 @@ import java.util.Observer;
 import java.util.Queue;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
+
 public class GamePlayerController implements Observer {
 	public static final int Y_OFFSET = 54;
 	public static final int ENTITY_SIZE = 70;
@@ -77,16 +79,17 @@ public class GamePlayerController implements Observer {
 	private double enemyFrequency;
 	private double startTime;
 	private double intervalBetweenWaves;
-	
+
 	private Thread enemyThread;
 	// Might need to be refactored into a different class
 	private HashMap<Integer, ImageView> weaponsOnScreen;
 	private HashMap<Integer, ImageView> enemiesOnScreen;
 	private HashMap<String, Image> imageBank;
+
 	public GamePlayerController(String xmlFilePath) {
 		System.out.println(xmlFilePath);
 		// use xml parser to create classes.
-		this.loader = new GamePlayerFactory(new XMLParser(/*"player.samplexml/"+*/xmlFilePath));// hardcoded
+		this.loader = new GamePlayerFactory(new XMLParser(/* "player.samplexml/"+ */xmlFilePath));// hardcoded
 		// does not work because of the image path
 		checkIfValid();
 		this.currentWave = new LinkedList<>();
@@ -109,6 +112,7 @@ public class GamePlayerController implements Observer {
 		this.gameSavingController = new GameSavingController(this.model);
 		// this.gameSavingController.saveGame();
 	}
+
 	// TODO: create another constructor that takes in a ManagerMediator and
 	// LevelNumber
 	// it should use the XMLParser(ManagerMediator) constructor to create an
@@ -119,9 +123,11 @@ public class GamePlayerController implements Observer {
 			this.towerToId.put(mapping.get(key).getImagePath(), key);
 		}
 	}
+
 	public HashMap<String, Integer> getTowerImageMap() {
 		return this.towerToId;
 	}
+
 	/**
 	 * Checks to see if XML is valid If not, it will not create a game and it
 	 * will throw an error
@@ -132,6 +138,7 @@ public class GamePlayerController implements Observer {
 			// TODO: actually throw an error
 		}
 	}
+
 	public void init(boolean newLevel) {
 		// HashMap<String, Double> settings = this.loader.getGameSetting();
 		// this.enemyManager.setCurrentCell(this.model.getData().getGrid().getStartPoint());
@@ -143,17 +150,19 @@ public class GamePlayerController implements Observer {
 		} catch (IOException e) {
 		}
 		this.towerController = new TowerController(this.model.getTowerManager(), this.view);
-		//initSaveGameButton();
+		// initSaveGameButton();
 	}
+
 	/**
 	 * FILL THIS METHOD WITH XML SAVING CRAP
 	 */
 	private void initSaveGameButton() {
 		this.view.saveButton(e -> {
 			this.gameSavingController.saveGame();
-			//TODO: end game?
+			// TODO: end game?
 		});
 	}
+
 	public void setDataStoreOnClose(Stage s) {
 		s.setOnCloseRequest(e -> {
 			try {
@@ -165,6 +174,7 @@ public class GamePlayerController implements Observer {
 			}
 		});
 	}
+
 	private void initGUI(boolean newlevel) {
 		System.out.println("initing gui");
 		int rows = model.getData().getRow();
@@ -196,6 +206,7 @@ public class GamePlayerController implements Observer {
 		}
 		this.dropController = new DragDropController(this.view, this.model, this.getTowerImageMap());
 	}
+
 	private void handleMouseClicked(double x, double y) {
 		Map<Integer, Tower> towersOnGrid = this.model.getTowerOnGrid();
 		for (int i : towersOnGrid.keySet()) {
@@ -215,10 +226,12 @@ public class GamePlayerController implements Observer {
 			}
 		}
 	}
+
 	public void addButtons(Tower t) {
 		t.getSellButton().setOnAction(e -> this.towerController.handleSellTowerClick());
 		t.getUpgradeButton().setOnAction(e -> this.towerController.upgrade(t.getUniqueID()));
 	}
+
 	// probably should move to frontend
 	private ArrayList<String> getTowerImages() {
 		ArrayList<String> towerImages = new ArrayList<String>();
@@ -228,21 +241,25 @@ public class GamePlayerController implements Observer {
 		}
 		return towerImages;
 	}
+
 	public Scene getMainScene() {
 		return this.mainScene;
 	}
+
 	public GameGUI getView() {
 		return view;
 	}
+
 	private void gameOver() {
 		endCondition("http://people.duke.edu/~lz107/voogaTemplates/gameover.html");
 	}
-	
-	private void winGame(){
+
+	private void winGame() {
 		System.out.println("WIN GAME CONDITION");
 		this.animation.pause();
 		endCondition("http://people.duke.edu/~lz107/voogaTemplates/win.html");
 	}
+
 	private void checkCreateNewLevel() {
 		// new level condition
 		double newLevel = this.model.getData().getCurrentLevel();
@@ -262,6 +279,7 @@ public class GamePlayerController implements Observer {
 			});
 		}
 	}
+
 	private void endCondition(String url) {
 		try {
 			Wrapper.getInstance().logEndScore("" + this.model.getData().getGold(), "" + this.model.getData().getLife(),
@@ -278,6 +296,7 @@ public class GamePlayerController implements Observer {
 		webEngine.load(url);
 		this.view.getMainScreen().setCenter(browser);
 	}
+
 	@Override
 	public void update(Observable o, Object arg) {
 		if (o instanceof GamePlayData) {
@@ -289,9 +308,9 @@ public class GamePlayerController implements Observer {
 			if (((GamePlayData) o).getLife() <= 0) {
 				gameOver();
 			}
-			
-			System.out.println("(((GamePlayData) o).won())"+(((GamePlayData) o).won()));
-			if (((GamePlayData) o).won()){
+
+			System.out.println("(((GamePlayData) o).won())" + (((GamePlayData) o).won()));
+			if (((GamePlayData) o).won()) {
 				System.out.println("WIn game!");
 				winGame();
 			}
@@ -299,6 +318,7 @@ public class GamePlayerController implements Observer {
 			checkForWin();
 		}
 	}
+
 	/*
 	 * private void updateLevel() { //TODO: use Parser's method to get path and
 	 * update the view's grid with that path }
@@ -314,7 +334,7 @@ public class GamePlayerController implements Observer {
 				this.enemyController/* , this.currentWave */);
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> {
 			((Pane) this.view.getGrid().getGrid()).getChildren().clear();
-			
+
 			if (System.currentTimeMillis() - this.startTime > intervalBetweenWaves && intervalBetweenWaves >= 0) {
 				this.currentWave = this.model.getEnemyManager().getPackOfEnemyComing();
 				this.intervalBetweenWaves = this.model.getEnemyManager().getTimeOfNextWave();
@@ -323,27 +343,28 @@ public class GamePlayerController implements Observer {
 			this.enemyManager.update();
 			this.model.getCollisionManager().handleCollisions();
 			redrawEverything();
-			
+
 		});
 		animation.setCycleCount(Timeline.INDEFINITE);
 		animation.getKeyFrames().add(frame);
 		// animation.getKeyFrames().addAll(frame, this.enemyKeyFrame);//TODO
 		animation.play();
 	}
-	private void checkForWin(){
-		if (enemyManager.getEnemyOnGrid().size()==0 && currentWave.size()==0 && this.oldLevel == enemyManager.getData().getCurrentLevel() ){ //wait until enemies are all off the grid
-			//System.out.println("SET WIN!");
+
+	private void checkForWin() {
+		if (enemyManager.getEnemyOnGrid().size() == 0 && currentWave.size() == 0
+				&& this.oldLevel == enemyManager.getData().getCurrentLevel()) {
+			// System.out.println("SET WIN!");
 			System.out.println("---------New level in checkforwin--------------");
-			
-			enemyManager.getData().setLevel(enemyManager.getData().getCurrentLevel()+1);
-			
-			System.out.println("SEt new level: "+enemyManager.getData().getCurrentLevel());
+			if (enemyManager.getData().getCurrentLevel() + 1 <= enemyManager.getData().getLevelNumber()) {
+				enemyManager.getData().setLevel(enemyManager.getData().getCurrentLevel() + 1);
+
+				System.out.println("SEt new level: " + enemyManager.getData().getCurrentLevel());
+			}
 		}
 
-	
 	}
-	
-	
+
 	private void spawnEnemyOnInterval(EnemyManager enemyManager,
 			EnemyController control/* ,Queue<Enemy> currentWave */) {
 		Thread enemyThread = new Thread() {
@@ -354,8 +375,8 @@ public class GamePlayerController implements Observer {
 						System.out.println("currentWave: " + currentWave.size());
 						Enemy enemy = currentWave.poll();
 						enemyManager.spawnEnemy(enemy);
-					} 
-					
+					}
+
 					try {
 						Thread.sleep(intervalBetween);
 					} catch (InterruptedException e) {
@@ -366,6 +387,7 @@ public class GamePlayerController implements Observer {
 		};
 		enemyThread.start();
 	}
+
 	private void redrawEverything() {
 		// redraw path
 		// this.view.getGrid().populatePath(this.model.getGrid().getStartPoint());
@@ -379,12 +401,12 @@ public class GamePlayerController implements Observer {
 		this.view.reRenderWeapon(weaponsOnScreen);
 		this.view.reRenderTower(towerRedraw);
 	}
+
 	public Timeline getTimeline() {
 		return this.animation;
 	}
-	
-	
-	private void removeValFromMap(Map<Integer, ?> map, Iterator<Integer> it){
+
+	private void removeValFromMap(Map<Integer, ?> map, Iterator<Integer> it) {
 		while (it.hasNext()) {
 			int value = it.next();
 			if (!map.containsKey(value)) {
@@ -392,8 +414,9 @@ public class GamePlayerController implements Observer {
 			}
 		}
 	}
+
 	private void updateBulletOnScreen(HashMap<Integer, Weapon> bulletRedraw) {
-		
+
 		Iterator<Integer> it = weaponsOnScreen.keySet().iterator();
 		removeValFromMap(bulletRedraw, it);
 		for (int i : bulletRedraw.keySet()) {
@@ -414,6 +437,7 @@ public class GamePlayerController implements Observer {
 			}
 		}
 	}
+
 	private void updateEnemiesOnScreen(HashMap<Integer, Enemy> enemyRedraw) {
 		// might fix later
 		Iterator<Integer> it = enemiesOnScreen.keySet().iterator();
@@ -434,25 +458,24 @@ public class GamePlayerController implements Observer {
 			}
 		}
 	}
+
 	/*
-	private void redraw(HashMap<Integer, ?> enemyRedraw){
-		for (int i : enemyRedraw.keySet()) {
-			if (!enemiesOnScreen.containsKey(enemyRedraw.get(i).getUniqueID())) {
-				ImageView image = new ImageView(graphics.createImage(enemyRedraw.get(i).getImage()));
-				graphics.setImageViewParams(image, DragDropView.DEFENSIVEWIDTH * 0.9,
-						DragDropView.DEFENSIVEHEIGHT * 0.9);
-				image.setCache(true);
-				image.setCacheHint(CacheHint.SPEED);
-				image.setX(enemyRedraw.get(i).getX());
-				image.setY(enemyRedraw.get(i).getY());
-				enemiesOnScreen.put(enemyRedraw.get(i).getUniqueID(), image);
-			} else {
-				enemiesOnScreen.get(enemyRedraw.get(i).getUniqueID()).setX(enemyRedraw.get(i).getX());
-				enemiesOnScreen.get(enemyRedraw.get(i).getUniqueID()).setY(enemyRedraw.get(i).getY());
-			}
-		}
-	}
-	*/
+	 * private void redraw(HashMap<Integer, ?> enemyRedraw){ for (int i :
+	 * enemyRedraw.keySet()) { if
+	 * (!enemiesOnScreen.containsKey(enemyRedraw.get(i).getUniqueID())) {
+	 * ImageView image = new
+	 * ImageView(graphics.createImage(enemyRedraw.get(i).getImage()));
+	 * graphics.setImageViewParams(image, DragDropView.DEFENSIVEWIDTH * 0.9,
+	 * DragDropView.DEFENSIVEHEIGHT * 0.9); image.setCache(true);
+	 * image.setCacheHint(CacheHint.SPEED);
+	 * image.setX(enemyRedraw.get(i).getX());
+	 * image.setY(enemyRedraw.get(i).getY());
+	 * enemiesOnScreen.put(enemyRedraw.get(i).getUniqueID(), image); } else {
+	 * enemiesOnScreen.get(enemyRedraw.get(i).getUniqueID()).setX(enemyRedraw.
+	 * get(i).getX());
+	 * enemiesOnScreen.get(enemyRedraw.get(i).getUniqueID()).setY(enemyRedraw.
+	 * get(i).getY()); } } }
+	 */
 	public HashMap<String, Image> createImageBank() {
 		Map<Integer, engine.tower.Tower> towers = this.loader.getTowers();
 		for (int i : towers.keySet()) {
