@@ -48,9 +48,9 @@ public class EnemySpeedField extends TextFieldView implements EnemySetView {
                                                                .getText()));
         enemySpeedField.setPrefWidth(110);
         root = GridFactory.createRowWithLabelandNode(
-        		labelsResource.getString("Speed"), 
-        		enemySpeedField, 
-        		170);
+                                                     labelsResource.getString("Speed"),
+                                                     enemySpeedField,
+                                                     170);
     }
 
 }

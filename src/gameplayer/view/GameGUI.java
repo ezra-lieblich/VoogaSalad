@@ -90,9 +90,11 @@ public class GameGUI {
 	}
 
 	public Scene init(double gold, double lives, double level, double score, List<String> imagePaths, Scene scene) {
+		System.out.println("GameGUI stats: "+lives+","+level+","+score+","+imagePaths);
 		this.numLevels = level;
 		// createScene();
 		this.scene = scene;
+		clearScreen();
 		createGrid();
 		initDragDropPane(imagePaths);
 		initChat();
@@ -100,6 +102,14 @@ public class GameGUI {
 		addButtonPanel();
 		initStatsDisplay(gold, lives, currentLevel, score);
 		return this.scene;
+	}
+	
+	private void clearScreen(){
+		mainScreen.setRight(null);
+		mainScreen.setTop(null);
+		this.buttonPanel.getPane().getChildren().clear();
+		this.dragDrop.getDragDropPane().getTabs().clear();
+		this.grid.getGrid().getChildren().clear();
 	}
 
 	public int getRows() {
@@ -238,6 +248,7 @@ public class GameGUI {
 	}
 
 	public void updateStatsDisplay(double gold, double lives, double level, double score) {
+		System.out.println("update stats display: "+gold+","+lives+","+level+","+score);
 		this.statsDisplay.updateLevelUI(gold, lives, level, score);
 	}
 

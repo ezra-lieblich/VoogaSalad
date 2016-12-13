@@ -17,7 +17,7 @@ import javafx.scene.layout.GridPane;
  */
 public class WeaponSpeedField implements WeaponSetView {
 
-	private GridPane root;
+    private GridPane root;
     private TextField weaponSpeedField;
     private WeaponAuthoringViewDelegate delegate;
 
@@ -31,9 +31,9 @@ public class WeaponSpeedField implements WeaponSetView {
                         .onUserEnteredWeaponSpeed(weaponSpeedField.getText()));
         weaponSpeedField.setPrefWidth(130);
         root = GridFactory.createRowWithLabelandNode(
-        		labelsResource.getString("Speed"), 
-        		weaponSpeedField, 
-        		150);
+                                                     labelsResource.getString("Speed"),
+                                                     weaponSpeedField,
+                                                     150);
     }
 
     @Override

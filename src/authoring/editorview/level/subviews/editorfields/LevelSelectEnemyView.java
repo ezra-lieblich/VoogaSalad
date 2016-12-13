@@ -12,6 +12,11 @@ import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 
 
+/**
+ * 
+ * @author Kayla Schulz
+ *
+ */
 public class LevelSelectEnemyView implements LevelSetView {
 
     @SuppressWarnings("unused")

@@ -8,6 +8,11 @@ import authoring.utilityfactories.GridFactory;
 import authoring.utilityfactories.TextFieldFactory;
 
 
+/**
+ * 
+ * @author Kayla Schulz
+ *
+ */
 public class LevelNameView extends EditorNameView implements LevelSetView {
 
     private LevelAuthoringViewDelegate delegate;

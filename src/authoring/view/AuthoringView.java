@@ -15,6 +15,13 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 
 
+/**
+ * 
+ * @author Kayla Schulz
+ * @author Andrew Bihl
+ * @author Diane Hadley
+ *
+ */
 public class AuthoringView implements IAuthoringView {
 
     private Scene scene;
@@ -41,11 +48,11 @@ public class AuthoringView implements IAuthoringView {
     public IEditorTabPane getMySideTabbedToolbar () {
         return editorTabPane;
     }
-    
+
     @Override
-	public IToolbar getMyToolbar() {
-		return toolbar;
-	}
+    public IToolbar getMyToolbar () {
+        return toolbar;
+    }
 
     private void initScene () {
         authoringView.setTop(toolbar.getInstanceAsNode());
@@ -90,7 +97,5 @@ public class AuthoringView implements IAuthoringView {
     public void setEditorTabPaneDelegate (EditorTabPaneDelegate delegate) {
         editorTabPane.setDelegate(delegate);
     }
-
-	
 
 }

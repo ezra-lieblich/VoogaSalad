@@ -8,6 +8,11 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 
 
+/**
+ * 
+ * @author Kayla Schulz
+ *
+ */
 public class AddLevelEffectView implements LevelSetView {
 
     private LevelAuthoringViewDelegate delegate;

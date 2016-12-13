@@ -9,6 +9,11 @@ import authoring.utilityfactories.TextFieldFactory;
 import javafx.scene.control.TextField;
 
 
+/**
+ * 
+ * @author Kayla Schulz
+ *
+ */
 public class EffectConditionField extends TextFieldView implements EffectSetView {
 
     private TextField conditionField;

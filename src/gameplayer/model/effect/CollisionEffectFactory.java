@@ -15,12 +15,12 @@ public class CollisionEffectFactory extends AbstractEffectFactory {
     @EffectData
     protected Object myself;
     
-    @EffectData
-    protected Enemy foe;
+//    @EffectData
+//    protected Enemy foe;
     
     public CollisionEffectFactory () {
         super(TRIGGER_NAME, ENCOMPASSING_CLASS_NAME);
-        foe = new Enemy();
+//        foe = new Enemy();
         loadInSpecificValues();
         
     }
