@@ -30,21 +30,9 @@ public class LevelTypeManagerController
         this.levelEffectManagerController = new EffectTypeManagerController(managerMediator, getTypeManager().getLevelEffectManager());
     }
 
-    // remove second line
     @Override
     public void setRewardScore (int levelID, double winScore) {
         getTypeManager().getEntity(levelID).setRewardScore(winScore);
-        getTypeManager().getEntity(levelID).createWave(xmlWave(winScore));
-    }
-
-    // Remove this once testing is done
-    private Wave xmlWave (double a) {
-        return waveBuilder.buildEnemyCount((int) (Math.random() * 5) + 2)
-                .buildEnemyID(0)
-                .buildFrequency(1)
-                .buildPathID((int) (Math.random() + .5))
-                .buildStartTime(a * Math.random() * 5)
-                .build();
     }
 
     @Override
@@ -242,33 +230,6 @@ public class LevelTypeManagerController
     public double getWaveDelay (int levelID, int waveID) {
         return getWave(levelID, waveID).getStartTime();
     }
-
-//    @Override
-//    public void loadManagerData (LevelManager typeManager, ILevelUpdateView updateView) {
-//        for (Level level : typeManager.getEntities().values()) {
-//            loadWaveData(level.getWaveManager(), typeManager, updateView);
-//        }
-//        
-//        super.loadManagerData(typeManager, updateView);
-//    }
-//
-//    private void loadWaveData (WaveManager waveManager,
-//                               LevelManager typeManager,
-//                               ILevelUpdateView updateView) {
-//        Map<Integer, Wave> waveMap = new HashMap<Integer, Wave>();
-//        for (Integer waveID : waveManager.getEntities().keySet()) {
-//            waveMap.put(waveID, constructWaveCopy(waveID, waveManager, updateView));
-//        }
-//        // waveManager.setEntities(typeManager.getEntities().keySet().stream().collect(Collectors.toMap(b
-//        // -> b , b -> constructWaveCopy(b, waveManager, updateView))));
-//        waveManager.setEntities(waveMap);
-//        waveBuilder.setNextId(waveManager.getMaxId());
-//    }
-//
-//    private Wave constructWaveCopy (int id, WaveManager waveManager, ILevelUpdateView updateView) {
-//        waveBuilder.copy(waveManager.getEntity(id));
-//        return buildWave(updateView);
-//    }
 
     @Override
     public List<WaveString> getWaveStrings (int levelID) {
