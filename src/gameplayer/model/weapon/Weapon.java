@@ -62,9 +62,9 @@ public class Weapon extends Observable implements IDrawable{
 	
 	public void triggerEffect(Object e){
 		String className = e.getClass().getName();
-		System.out.println("Class Name:  " + className);
+		//System.out.println("Class Name:  " + className);
 		ArrayList<GameEffect> triggered = this.weaponEffect.get(className);
-		System.out.println("Triggered gameeffect: "+triggered);
+		//System.out.println("Triggered gameeffect: "+triggered);
 		for(GameEffect g : triggered){
 			g.addTrigger(e);
 			g.execute();
