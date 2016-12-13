@@ -34,7 +34,6 @@ public class PathAuthoringViewController extends EditorViewController
     @Override
     public void onUserEnteredPathImage (String pathImagePath) {
         pathDataSource.setImagePath(activeID, pathImagePath);
-       
 
     }
 
@@ -89,13 +88,13 @@ public class PathAuthoringViewController extends EditorViewController
 
     @Override
     public void refreshView () {
-    	pathView.updateImagePathDisplay(pathDataSource.getImagePath(activeID));
+        pathView.updateImagePathDisplay(pathDataSource.getImagePath(activeID));
         pathView.updateGridDimensions(pathDataSource.getNumberofRows(activeID));
         pathView.updatePathCoordinates(pathDataSource.getPathCoordinates(activeID));
         pathView.updateNameDisplay(pathDataSource.getName(activeID));
         pathView.updateType(pathDataSource.getType(activeID));
         pathView.updatePath();
-        
+
     }
 
 }

@@ -17,6 +17,11 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 
 
+/**
+ * 
+ * @author Kayla Schulz
+ *
+ */
 public class WaveTableView implements LevelSetView {
 
     private TableView<WaveObject> waveTable;

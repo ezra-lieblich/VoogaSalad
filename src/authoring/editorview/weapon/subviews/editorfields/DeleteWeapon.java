@@ -1,7 +1,6 @@
 package authoring.editorview.weapon.subviews.editorfields;
 
 import java.util.ResourceBundle;
-import authoring.editorview.tower.TowerAuthoringViewDelegate;
 import authoring.editorview.weapon.WeaponAuthoringViewDelegate;
 import authoring.editorview.weapon.WeaponSetView;
 import authoring.utilityfactories.ButtonFactory;
@@ -9,6 +8,11 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 
 
+/**
+ * 
+ * @author Kayla Schulz
+ *
+ */
 public class DeleteWeapon implements WeaponSetView {
 
     private WeaponAuthoringViewDelegate delegate;

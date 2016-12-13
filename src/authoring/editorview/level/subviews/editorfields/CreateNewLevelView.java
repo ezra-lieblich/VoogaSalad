@@ -9,6 +9,11 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 
 
+/**
+ * 
+ * @author Kayla Schulz
+ *
+ */
 public class CreateNewLevelView implements LevelSetView {
 
     private static final String RESOURCE_FILE_NAME = "resources/GameAuthoringLevels";

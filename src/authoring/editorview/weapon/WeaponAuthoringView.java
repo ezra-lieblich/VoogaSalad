@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.ResourceBundle;
 import authoring.editorview.ListDataSource;
-import authoring.editorview.enemy.subviews.editorfields.DeleteEnemy;
 import authoring.editorview.weapon.subviews.WeaponEditorView;
 import authoring.editorview.weapon.subviews.WeaponImageBank;
 import authoring.editorview.weapon.subviews.editorfields.AddWeaponEffectView;

@@ -15,7 +15,6 @@ import authoring.editorview.weapon.subviews.editorfields.WeaponPathField;
 import authoring.editorview.weapon.subviews.editorfields.WeaponRangeField;
 import authoring.editorview.weapon.subviews.editorfields.WeaponSizeField;
 import authoring.editorview.weapon.subviews.editorfields.WeaponSpeedField;
-import authoring.utilityfactories.BoxFactory;
 import authoring.utilityfactories.ButtonFactory;
 import authoring.utilityfactories.DialogueBoxFactory;
 import javafx.geometry.Insets;

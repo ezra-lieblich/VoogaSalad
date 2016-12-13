@@ -3,7 +3,6 @@ package authoring.editorview.level.subviews;
 import java.util.List;
 import authoring.editorview.ImageBank;
 import authoring.editorview.ListCellData;
-import authoring.editorview.enemy.EnemyAuthoringViewDelegate;
 import authoring.editorview.level.LevelAuthoringViewDelegate;
 import authoring.utilityfactories.ButtonFactory;
 import javafx.scene.Node;
@@ -11,6 +10,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 
+/**
+ * 
+ * @author Ezra Lieblich
+ * @author Kayla Schulz
+ *
+ */
 public class LevelBank extends ImageBank {
     private LevelAuthoringViewDelegate delegate;
 

@@ -6,9 +6,13 @@ import authoring.editorview.level.LevelSetView;
 import authoring.utilityfactories.ButtonFactory;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.layout.VBox;
 
 
+/**
+ * 
+ * @author Kayla Schulz
+ *
+ */
 public class CreateNewWaveView implements LevelSetView {
 
     private static final String RESOURCE_FILE_NAME = "resources/GameAuthoringLevels";

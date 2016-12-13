@@ -12,10 +12,10 @@ import javafx.scene.control.Alert.AlertType;
 
 public final class DialogueBoxFactory {
 
-	private DialogueBoxFactory(){
-		
-	}
-	
+    private DialogueBoxFactory () {
+
+    }
+
     /**
      * Creates a dialogue box that describes the error
      * 
