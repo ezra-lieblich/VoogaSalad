@@ -1,5 +1,11 @@
 package authoring.editorview.weapon;
 
+/**
+ * 
+ * @author Kayla Schulz
+ * @author Andrew Bihl
+ *
+ */
 public interface WeaponAuthoringViewDelegate {
 
     public void onUserEnteredWeaponFireRate (String weaponRate);

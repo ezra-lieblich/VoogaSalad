@@ -17,7 +17,7 @@ import javafx.scene.layout.GridPane;
  */
 public class WeaponRangeField implements WeaponSetView {
 
-	private GridPane root;
+    private GridPane root;
     private TextField weaponRangeField;
     private WeaponAuthoringViewDelegate delegate;
 
@@ -31,9 +31,9 @@ public class WeaponRangeField implements WeaponSetView {
                         .onUserEnteredWeaponRange(weaponRangeField.getText()));
         weaponRangeField.setPrefWidth(130);
         root = GridFactory.createRowWithLabelandNode(
-        		labelsResource.getString("Range"), 
-        		weaponRangeField, 
-        		150);
+                                                     labelsResource.getString("Range"),
+                                                     weaponRangeField,
+                                                     150);
     }
 
     @Override

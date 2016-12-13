@@ -4,13 +4,17 @@ import java.util.ResourceBundle;
 import authoring.editorview.TextFieldView;
 import authoring.editorview.enemy.EnemyAuthoringViewDelegate;
 import authoring.editorview.enemy.EnemySetView;
-import authoring.utilityfactories.BoxFactory;
 import authoring.utilityfactories.GridFactory;
 import authoring.utilityfactories.TextFieldFactory;
 import javafx.scene.Node;
 import javafx.scene.control.TextField;
 
 
+/**
+ * 
+ * @author Kayla Schulz
+ *
+ */
 public class EnemyRewardPointsField extends TextFieldView implements EnemySetView {
 
     private EnemyAuthoringViewDelegate delegate;
@@ -44,9 +48,9 @@ public class EnemyRewardPointsField extends TextFieldView implements EnemySetVie
                                                                .getText()));
         enemyRewardPointsField.setPrefWidth(110);
         root = GridFactory.createRowWithLabelandNode(
-        		labelsResource.getString("RewardPoints"), 
-        		enemyRewardPointsField, 
-        		170);
+                                                     labelsResource.getString("RewardPoints"),
+                                                     enemyRewardPointsField,
+                                                     170);
     }
 
 }

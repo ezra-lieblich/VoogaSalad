@@ -6,6 +6,7 @@ import authoring.editorview.INodeView;
 /**
  * 
  * Communicates with the model to indicate when a new level was chosen
+ * 
  * @author Diane Hadley
  * @author Kayla Schulz
  *

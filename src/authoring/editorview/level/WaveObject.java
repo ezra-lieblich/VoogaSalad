@@ -3,6 +3,11 @@ package authoring.editorview.level;
 import javafx.beans.property.SimpleStringProperty;
 
 
+/**
+ * 
+ * @author Kayla Schulz
+ *
+ */
 public class WaveObject {
     private final SimpleStringProperty enemyName;
     private final SimpleStringProperty enemyFrequency;

@@ -20,8 +20,6 @@ import javafx.scene.layout.AnchorPane;
 
 public class TowerImageView implements TowerSetView {
 
-    @SuppressWarnings("unused")
-    
     private AnchorPane root;
     private TowerAuthoringViewDelegate delegate;
     private String imagePath;
@@ -32,14 +30,14 @@ public class TowerImageView implements TowerSetView {
 
     public TowerImageView (ResourceBundle labelsResource) {
         // this.labelsResource = labelsResource;
-         	
-    	towerImage = new ImageView();
+
+        towerImage = new ImageView();
         towerImage.setFitHeight(CHARACTER_SIZE);
         towerImage.setFitWidth(CHARACTER_SIZE);
         root = new AnchorPane();
-    	root.getChildren().add(towerImage);
-    	AnchorPane.setLeftAnchor(towerImage, 75.0);
-    	AnchorPane.setTopAnchor(towerImage, 175.0);
+        root.getChildren().add(towerImage);
+        AnchorPane.setLeftAnchor(towerImage, 75.0);
+        AnchorPane.setTopAnchor(towerImage, 175.0);
     }
 
     public void updateTowerImagePath (String imagePath) {

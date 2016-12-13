@@ -16,9 +16,9 @@ import javafx.scene.layout.AnchorPane;
  * @author Kayla Schulz
  *
  */
-public class WeaponImageView  implements WeaponSetView {
+public class WeaponImageView implements WeaponSetView {
 
-	private AnchorPane root;
+    private AnchorPane root;
     private WeaponAuthoringViewDelegate delegate;
     private ResourceBundle labelsResource;
     private String imagePath;
@@ -32,9 +32,9 @@ public class WeaponImageView  implements WeaponSetView {
         weaponImage.setFitWidth(CHARACTER_SIZE);
         weaponImage.setFitHeight(CHARACTER_SIZE);
         root = new AnchorPane();
-    	root.getChildren().add(weaponImage);
-    	AnchorPane.setLeftAnchor(weaponImage, 125.0);
-    	AnchorPane.setTopAnchor(weaponImage, 175.0);
+        root.getChildren().add(weaponImage);
+        AnchorPane.setLeftAnchor(weaponImage, 125.0);
+        AnchorPane.setTopAnchor(weaponImage, 175.0);
     }
 
     public void updateWeaponImagePath (String imagePath) {
