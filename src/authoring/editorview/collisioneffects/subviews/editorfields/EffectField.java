@@ -4,12 +4,16 @@ import java.util.ResourceBundle;
 import authoring.editorview.TextFieldView;
 import authoring.editorview.collisioneffects.EffectAuthoringViewDelegate;
 import authoring.editorview.collisioneffects.EffectSetView;
-import authoring.utilityfactories.BoxFactory;
 import authoring.utilityfactories.GridFactory;
 import authoring.utilityfactories.TextFieldFactory;
 import javafx.scene.control.TextField;
 
 
+/**
+ * 
+ * @author Kayla Schulz
+ *
+ */
 public class EffectField extends TextFieldView implements EffectSetView {
 
     private EffectAuthoringViewDelegate delegate;
@@ -31,8 +35,10 @@ public class EffectField extends TextFieldView implements EffectSetView {
                                                e -> delegate
                                                        .onUserEnteredEffectText(effectTextField
                                                                .getText()));
-        root = GridFactory.createRowWithLabelandNode(labelsResource.getString("Effect"), effectTextField, 125);
-                
+        root =
+                GridFactory.createRowWithLabelandNode(labelsResource.getString("Effect"),
+                                                      effectTextField, 125);
+
     }
 
     @Override

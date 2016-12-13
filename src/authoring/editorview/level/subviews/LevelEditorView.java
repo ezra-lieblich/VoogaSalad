@@ -30,6 +30,12 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 
+/**
+ * 
+ * @author Kayla Schulz
+ * @author Diane Hadley
+ *
+ */
 public class LevelEditorView extends PhotoFileChooser implements LevelSetView {
     private static final double BUFFER = 10.0;
 

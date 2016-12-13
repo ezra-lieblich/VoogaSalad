@@ -10,6 +10,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 
 
+/**
+ * 
+ * @author Kayla Schulz
+ *
+ */
 public class LevelTransitionTimeField implements LevelSetView {
 
     private TextField transitionTimeField;

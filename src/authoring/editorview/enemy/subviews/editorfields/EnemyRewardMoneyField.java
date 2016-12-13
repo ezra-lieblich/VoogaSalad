@@ -10,9 +10,13 @@ import javafx.scene.Node;
 import javafx.scene.control.TextField;
 
 
+/**
+ * 
+ * @author Kayla Schulz
+ *
+ */
 public class EnemyRewardMoneyField extends TextFieldView implements EnemySetView {
 
-	
     private EnemyAuthoringViewDelegate delegate;
     private TextField enemyRewardMoneyField;
 
@@ -44,10 +48,10 @@ public class EnemyRewardMoneyField extends TextFieldView implements EnemySetView
                                                                .getText()));
         enemyRewardMoneyField.setPrefWidth(110);
         root = GridFactory.createRowWithLabelandNode(
-        		labelsResource.getString("RewardMoney"),
-        		enemyRewardMoneyField, 
-        		170);
-               
+                                                     labelsResource.getString("RewardMoney"),
+                                                     enemyRewardMoneyField,
+                                                     170);
+
     }
 
 }

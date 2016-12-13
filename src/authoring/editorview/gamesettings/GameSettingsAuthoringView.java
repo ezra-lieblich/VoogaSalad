@@ -22,10 +22,9 @@ public class GameSettingsAuthoringView implements GameSettingsUpdateView, GameSe
 
     private GameSettingsEditorView gameSettingsEditor;
     private GameSettingsPreviewView gameSettingsPreview;
-    
+
     private static final int EDITOR_SIZE = 250;
     private static final int PREVIEW_SIZE = 700;
-  
 
     public GameSettingsAuthoringView (int width, int height) {
         gameSettingsView = new GridPane();
@@ -38,15 +37,15 @@ public class GameSettingsAuthoringView implements GameSettingsUpdateView, GameSe
 
         ColumnConstraints editorColumn = new ColumnConstraints();
         editorColumn.setMinWidth(EDITOR_SIZE);
-       
+
         ColumnConstraints previewColumn = new ColumnConstraints();
         RowConstraints fullRow = new RowConstraints();
-        
+
         fullRow.setMinHeight(PREVIEW_SIZE);
-        
+
         gameSettingsView.getColumnConstraints().addAll(editorColumn, previewColumn);
         gameSettingsView.getRowConstraints().add(fullRow);
-        
+
         gameSettingsView.add(gameSettingsEditor.getInstanceAsNode(), 0, 0);
         gameSettingsView.add(gameSettingsPreview.getInstanceAsNode(), 1, 0);
     }
@@ -60,37 +59,33 @@ public class GameSettingsAuthoringView implements GameSettingsUpdateView, GameSe
     public void setDelegate (GameSettingsAuthoringViewDelegate delegate) {
         gameSettingsEditor.setDelegate(delegate);
         gameSettingsPreview.setDelegate(delegate);
-        
+
     }
 
     @Override
     public void updateNameDisplay (String name) {
-    	gameSettingsEditor.updateName(name);
+        gameSettingsEditor.updateName(name);
     }
-
 
     @Override
     public void updateNumberofLives (int lives) {
         gameSettingsEditor.updateInitialLives(lives);
     }
-    
+
     @Override
     public void updateImagePathDisplay (String imagePath) {
-    	gameSettingsEditor.updateGameImagePath(imagePath); //TODO why?
+        gameSettingsEditor.updateGameImagePath(imagePath); // TODO why?
         gameSettingsPreview.updateGameImagePath(imagePath);
 
     }
-    
-    @Override
-	public void updateInitialMoney(int money) {
-		gameSettingsEditor.updateInitialMoney(money);
-	}
 
-    
-    
+    @Override
+    public void updateInitialMoney (int money) {
+        gameSettingsEditor.updateInitialMoney(money);
+    }
+
     @Override
     public void updateWinningConditions (List<String> winningConditions) {
-    	
 
     }
 
@@ -101,7 +96,7 @@ public class GameSettingsAuthoringView implements GameSettingsUpdateView, GameSe
 
     @Override
     public void setGameSettingsListDataSource (ListDataSource source) {
-    	// TODO ?
+        // TODO ?
     }
 
     @Override
@@ -111,42 +106,39 @@ public class GameSettingsAuthoringView implements GameSettingsUpdateView, GameSe
     @Override
     public void updateDeleteEntity (String entityID) {
     }
-    
+
     @Override
     public void updateBank (List<Integer> ids) {
     }
 
-	@Override
-	public void updateGridSize(int size) {
-		gameSettingsEditor.updateGridDimensions(size);
-		gameSettingsPreview.updateGridDimensions(size);
-		
-	}
+    @Override
+    public void updateGridSize (int size) {
+        gameSettingsEditor.updateGridDimensions(size);
+        gameSettingsPreview.updateGridDimensions(size);
 
-	@Override
-	public void updatePathList(List<Integer> pathList) {
-		System.out.println("yo");
-		gameSettingsEditor.updatePathList(pathList);
-		gameSettingsPreview.updatePathList(pathList);
-	}
+    }
 
-	@Override
-	public void updatePathType(String pathType) {
-		gameSettingsEditor.updatePathType(pathType);
-	}
+    @Override
+    public void updatePathList (List<Integer> pathList) {
+        System.out.println("yo");
+        gameSettingsEditor.updatePathList(pathList);
+        gameSettingsPreview.updatePathList(pathList);
+    }
 
-	@Override
-	public Integer getNearestAvailableItemID(int id) {
-		return null;
-	}
+    @Override
+    public void updatePathType (String pathType) {
+        gameSettingsEditor.updatePathType(pathType);
+    }
 
-	@Override
-	public void updateAvailablePaths(List<Integer> availablePathList) {
-		gameSettingsEditor.updateAvailablePathList(availablePathList);
-		
-		
-	}
+    @Override
+    public Integer getNearestAvailableItemID (int id) {
+        return null;
+    }
 
-	
+    @Override
+    public void updateAvailablePaths (List<Integer> availablePathList) {
+        gameSettingsEditor.updateAvailablePathList(availablePathList);
+
+    }
 
 }
