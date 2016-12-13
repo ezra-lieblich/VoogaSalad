@@ -8,7 +8,7 @@ import engine.observer.ObservableProperty;
 
 public interface PathInitializer extends TypeInitializer{
 
-    ObservableProperty<String> getType ();
+    ObservableProperty<PathOption> getType ();
 
     ObservableList<Coordinate<Integer>> getCoordinates ();
     

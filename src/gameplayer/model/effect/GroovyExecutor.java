@@ -1,4 +1,4 @@
-package engine.effect.player;
+package gameplayer.model.effect;
 
 import java.util.Map;
 import java.util.Map.Entry;

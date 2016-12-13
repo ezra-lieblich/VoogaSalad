@@ -11,6 +11,7 @@ import engine.observer.ObservableList;
 import engine.observer.ObservableListProperty;
 import engine.observer.ObservableObjectProperty;
 import engine.observer.ObservableProperty;
+import engine.path.PathOption;
 
 public class GameModeTypeBuilder extends AbstractTypeBuilder<GameMode, GameModeBuilder> implements GameModeBuilder, GameModeInitializer {
 
@@ -23,7 +24,7 @@ public class GameModeTypeBuilder extends AbstractTypeBuilder<GameMode, GameModeB
     public static final String DEFAULT_GAME_TYPE = "Normal";
     public static final int DEFAULT_INITIAL_LIVES = 1;
     public static final int DEFAULT_INITIAL_MONEY = 5000;
-    public static final String DEFAULT_PATH_TYPE = "Set";
+    public static final PathOption DEFAULT_PATH_TYPE = PathOption.SET;
     public static final int DEFAULT_GRID_SIZE = 10;
     public static final Integer[] DEFAULT_PATHS = new Integer[]{};
     
@@ -32,7 +33,7 @@ public class GameModeTypeBuilder extends AbstractTypeBuilder<GameMode, GameModeB
     private ObservableList<String> losingConditions;
     private ObservableProperty<Integer> initialLives;
     private ObservableProperty<Integer> initialMoney;
-    private ObservableProperty<String> pathType;
+    private ObservableProperty<PathOption> pathType;
     private ObservableProperty<Integer> gridSize;
     private ObservableList<Integer> paths;
 	
@@ -77,7 +78,7 @@ public class GameModeTypeBuilder extends AbstractTypeBuilder<GameMode, GameModeB
 	}
 
 	@Override
-	public GameModeBuilder addPathTypeListener(BiConsumer<String, String> listener) {
+	public GameModeBuilder addPathTypeListener(BiConsumer<PathOption, PathOption> listener) {
 		pathType.addListener(listener);
 		return this;
 	}
@@ -115,7 +116,7 @@ public class GameModeTypeBuilder extends AbstractTypeBuilder<GameMode, GameModeB
 	}
 
 	@Override
-	public ObservableProperty<String> getPathType() {
+	public ObservableProperty<PathOption> getPathType() {
 		return pathType;
 	}
 
@@ -172,7 +173,7 @@ public class GameModeTypeBuilder extends AbstractTypeBuilder<GameMode, GameModeB
 	}
 
 	@Override
-	public GameModeBuilder buildPathType(String pathType) {
+	public GameModeBuilder buildPathType(PathOption pathType) {
 		this.pathType.setProperty(pathType);
 		return this;
 	}
@@ -191,7 +192,7 @@ public class GameModeTypeBuilder extends AbstractTypeBuilder<GameMode, GameModeB
 		this.initialMoney = new ObservableObjectProperty<Integer>(DEFAULT_INITIAL_MONEY);
 		this.gridSize = new ObservableObjectProperty<Integer>(DEFAULT_GRID_SIZE);
 		this.paths = new ObservableListProperty<Integer>(Arrays.stream(DEFAULT_PATHS).collect(Collectors.toList()));
-		this.pathType = new ObservableObjectProperty<String>(DEFAULT_PATH_TYPE);
+		this.pathType = new ObservableObjectProperty<PathOption>(DEFAULT_PATH_TYPE);
 	}
 
 	@Override

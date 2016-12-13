@@ -10,9 +10,9 @@ import java.util.stream.Collectors;
 
 import engine.effect.EffectManager;
 import engine.effect.EffectTypeManager;
-import engine.effect.player.CollisionEffectFactory;
-import engine.effect.player.GameEffect;
 import gameplayer.model.GamePlayData;
+import gameplayer.model.effect.CollisionEffectFactory;
+import gameplayer.model.effect.GameEffect;
 import gameplayer.model.tower.Gun;
 import gameplayer.model.tower.TowerManager;
 import gameplayer.view.GridGUI;

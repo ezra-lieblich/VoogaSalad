@@ -2,6 +2,7 @@ package engine.path;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 import authoring.editorview.IUpdateView;
@@ -32,15 +33,23 @@ public class PathTypeManagerController
     
     @Override
     public void setType (int pathID, String type) {
-        getTypeManager().getEntity(pathID).setType(type);        
+        getTypeManager().getEntity(pathID).clearCoordinates();
+        getTypeManager().getEntity(pathID).setType(PathOption.valueOf(type));        
     }
     
     @Override
     public boolean setNewPathCoordinate (int pathID, int x, int y) {
         GridCoordinate newCoordinate = new GridCoordinate(x, y);
-        return handleRequest(validatePath(pathID, a -> newCoordinate.isCardinalTo(a) , true), a -> a.getEntity(pathID).addCoordinate(newCoordinate));
+        return handleRequest(validatePath(pathID, getPathOption(pathID)::validateAddition, newCoordinate), a -> a.getEntity(pathID).addCoordinate(newCoordinate));
     }
     
+    private boolean validatePath(int pathID, BiFunction<List<Coordinate<Integer>>, GridCoordinate, Boolean> operation,  GridCoordinate newCoordinate) {
+        return operation.apply(getTypeManager().getEntity(pathID).getCoordinates(), newCoordinate);
+    }
+    
+    private PathOption getPathOption(int pathID) {
+        return getTypeManager().getEntity(pathID).getType();
+    }
 //    private boolean validatePathAddition(int pathID, GridCoordinate gridCoordinate) {
 //        List<Coordinate<Integer>> coordinates = getTypeManager().getEntity(pathID).getCoordinates();
 //        if(coordinates.size()==0){
@@ -49,15 +58,6 @@ public class PathTypeManagerController
 //        Coordinate<Integer> lastCoordinate = coordinates.get(coordinates.size()-1);
 //        return gridCoordinate.isCardinalTo(lastCoordinate);
 //    }
-
-    private boolean validatePath(int pathID, Predicate<Coordinate<Integer>> condition, boolean isEmptyFlag) {
-        List<Coordinate<Integer>> coordinates = getTypeManager().getEntity(pathID).getCoordinates();
-        if(coordinates.size()==0){
-            return isEmptyFlag;
-        }
-        Coordinate<Integer> lastCoordinate = coordinates.get(coordinates.size()-1);
-        return condition.test(lastCoordinate);
-    }
     
 //    private boolean validatePathRemoval(int pathID, int x, int y) {
 //        List<Coordinate<Integer>> coordinates = getTypeManager().getEntity(pathID).getCoordinates();
@@ -68,7 +68,7 @@ public class PathTypeManagerController
     @Override
     public boolean removePathCoordinate (int pathID, int x, int y) {
         GridCoordinate newCoordinate = new GridCoordinate(x, y);
-        return handleRequest(validatePath(pathID, a -> a.equals(newCoordinate), false), a -> a.getEntity(pathID).removeCoordinate(newCoordinate));
+        return handleRequest(validatePath(pathID, getPathOption(pathID)::validateRemoval, newCoordinate), a-> a.getEntity(pathID).removeCoordinate(newCoordinate));
 //        List<Coordinate<Integer>> coordinates = getTypeManager().getEntity(pathID).getCoordinates();
 //        boolean isValidRemove  = coordinates.get(coordinates.size()-1).getX() == x && coordinates.get(coordinates.size()-1).getY() == y;
 //        if(isValidRemove){
@@ -106,7 +106,7 @@ public class PathTypeManagerController
 
     @Override
     public String getType (int pathID) {
-        return getTypeManager().getEntity(pathID).getType();        
+        return getTypeManager().getEntity(pathID).getType().name();        
     }
     
     @Override
@@ -122,7 +122,9 @@ public class PathTypeManagerController
                 .addCoordinatesListener( (oldValue, newValue) -> updateView
                         .updatePathCoordinates(Collections.unmodifiableList(newValue)))
                 .addGridRowsListener( (oldValue, newValue) -> updateView
-                        .updateGridDimensions(newValue));
+                        .updateGridDimensions(newValue))
+                .addTypeListener((oldValue, newValue) -> updateView
+                        .updateType(newValue.name()));
     }
 
     @Override

@@ -3,6 +3,7 @@ package engine.settings;
 import java.util.List;
 
 import engine.Type;
+import engine.path.PathOption;
 
 
 /**
@@ -34,9 +35,9 @@ public interface GameMode extends Type{
     
     void  setInitialMoney(int money);
     
-    void setPathType(String pathType);
+    void setPathType(PathOption pathType);
     
-    String getPathType();
+    PathOption getPathType();
     
     void setGridSize(int gridSize);
     

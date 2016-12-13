@@ -8,10 +8,10 @@ import java.util.stream.Collectors;
 
 import engine.effect.EffectManager;
 import engine.effect.EffectMethod;
-import engine.effect.player.CollisionEffectFactory;
-import engine.effect.player.GameEffect;
-import engine.effect.player.WinEffectFactory;
 import gameplayer.loader.*;
+import gameplayer.model.effect.CollisionEffectFactory;
+import gameplayer.model.effect.GameEffect;
+import gameplayer.model.effect.WinEffectFactory;
 import gameplayer.view.GridGUI;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;

@@ -1,4 +1,4 @@
-package engine.effect.player;
+package gameplayer.model.effect;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;

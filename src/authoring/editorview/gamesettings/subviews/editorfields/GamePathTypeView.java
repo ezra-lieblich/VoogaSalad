@@ -1,9 +1,11 @@
 package authoring.editorview.gamesettings.subviews.editorfields;
 
+import java.util.stream.Stream;
 import authoring.editorview.gamesettings.GameSettingsAuthoringViewDelegate;
 import authoring.editorview.gamesettings.GameSettingsSetView;
 import authoring.utilityfactories.ComboBoxFactory;
 import authoring.utilityfactories.GridFactory;
+import engine.path.PathOption;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
@@ -25,7 +27,7 @@ public class GamePathTypeView implements GameSettingsSetView {
 	private void makeComboBox(){
 		
 		pathTypeList = FXCollections.observableArrayList();
-		pathTypeList.addAll("Free", "Set");
+		pathTypeList.addAll(Stream.of(PathOption.values()).map(PathOption::name).toArray());
 		pathTypeComboBox = ComboBoxFactory.makeComboBox("" , 
 				e -> delegate.onUserEnteredGamePathType(pathTypeComboBox.getValue().toString()), pathTypeList);
 		pathTypeComboBox.setPrefWidth(105);
