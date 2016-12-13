@@ -239,6 +239,7 @@ public class GamePlayerController implements Observer {
 	}
 	
 	private void winGame(){
+		System.out.println("WIN GAME CONDITION");
 		this.animation.pause();
 		endCondition("http://people.duke.edu/~lz107/voogaTemplates/win.html");
 	}
@@ -331,10 +332,17 @@ public class GamePlayerController implements Observer {
 	}
 	private void checkForWin(){
 		if (enemyManager.getEnemyOnGrid().size()==0 && currentWave.size()==0 && this.oldLevel == enemyManager.getData().getCurrentLevel() ){ //wait until enemies are all off the grid
-			System.out.println("SET WIN!");
-			enemyManager.getData().setWin();
-			//enemyManager.getData().setLevel(enemyManager.getData().getCurrentLevel()+1);
+			//System.out.println("SET WIN!");
+			System.out.println("---------New level in checkforwin--------------");
+			//enemyManager.getData().setWin();
+			enemyManager.getData().setLevel(enemyManager.getData().getCurrentLevel()+1);
 		}
+		/*
+		if (enemyManager.getData().won()){
+			
+		}
+		*/
+	
 	}
 	
 	
