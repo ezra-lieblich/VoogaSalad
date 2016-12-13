@@ -392,9 +392,10 @@ public class GamePlayerController implements Observer {
 
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> {
 			((Pane) this.view.getGrid().getGrid()).getChildren().clear();
-			
+			// trying to get this to work but null pointer
 			if (System.currentTimeMillis() - this.startTime > intervalBetweenWaves && intervalBetweenWaves >= 0) {
 				this.currentWave = this.model.getEnemyManager().getPackOfEnemyComing();
+				
 				this.intervalBetweenWaves = this.model.getEnemyManager().getTimeOfNextWave();
 			}
 
@@ -403,8 +404,6 @@ public class GamePlayerController implements Observer {
 			this.model.getCollisionManager().handleCollisions();
 
 			redrawEverything();
-			
-			checkForWin();
 		});
 
 		animation.setCycleCount(Timeline.INDEFINITE);
@@ -420,13 +419,12 @@ public class GamePlayerController implements Observer {
 			enemyManager.getData().setWin();
 			//enemyManager.getData().setLevel(enemyManager.getData().getCurrentLevel()+1);
 		}
-	}
-	
+	}	
 	
 	private void spawnEnemyOnInterval(EnemyManager enemyManager,
 			EnemyController control/* ,Queue<Enemy> currentWave */) {
 
-		Thread enemyThread = new Thread() {
+		this.enemyThread = new Thread() {
 			public void run() {
 				long intervalBetween = (long) control.getEnemyModel().getFrequencyOfNextWave();
 				while (intervalBetween != 0) {
@@ -435,9 +433,14 @@ public class GamePlayerController implements Observer {
 						Enemy enemy = currentWave.poll();
 						enemyManager.spawnEnemy(enemy);
 					} 
-					
 					try {
 						Thread.sleep(intervalBetween);
+						if (currentWave.size()==0){
+							this.wait();
+						}
+						if (enemyManager.getEnemyOnGrid().size()==0){ //wait until enemies are all off the grid
+							enemyManager.getData().setLevel(enemyManager.getData().getCurrentLevel()+1);
+						}
 					} catch (InterruptedException e) {
 
 						e.printStackTrace();
