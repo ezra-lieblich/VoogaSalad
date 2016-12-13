@@ -29,6 +29,7 @@ public class Path {
 	
 	
 	public Cell getNext(Cell c){
+
 		return path.get(c);
 	}
 	

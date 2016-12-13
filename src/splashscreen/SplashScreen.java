@@ -123,8 +123,8 @@ public class SplashScreen {
 			String[] path = out.getPath().split("/");
 			String fileName = path[path.length-1];
 			File input = new File("SavedGames/"+fileName);
-			String levelNumber;
-			GamePlayerController controller = new GamePlayerController("SavedGames/"+fileName, levelNumber);
+			//String levelNumber;
+			//GamePlayerController controller = new GamePlayerController("SavedGames/"+fileName, levelNumber);
 			
 		});
 		HBox hbBtn = new HBox(10);
