@@ -89,7 +89,7 @@ public class GamePlayerController implements Observer {
 	private HashMap<String, Image> imageBank;
 
 	public GamePlayerController(String xmlFilePath) {
-		//System.out.println(xmlFilePath);
+		// System.out.println(xmlFilePath);
 		// use xml parser to create classes.
 		this.loader = new GamePlayerFactory(new XMLParser(/* "player.samplexml/"+ */xmlFilePath));// hardcoded
 		// does not work because of the image path
@@ -114,8 +114,6 @@ public class GamePlayerController implements Observer {
 		this.gameSavingController = new GameSavingController(this.model);
 		// this.gameSavingController.saveGame();
 	}
-	
-
 
 	// TODO: create another constructor that takes in a ManagerMediator and
 	// LevelNumber
@@ -138,7 +136,8 @@ public class GamePlayerController implements Observer {
 	 */
 	public void checkIfValid() {
 		if (!loader.xmlIsValid()) {
-			//// ////System.out.println("XML is invalid, game cannot be created");
+			//// ////System.out.println("XML is invalid, game cannot be
+			//// created");
 			// TODO: actually throw an error
 		}
 	}
@@ -182,12 +181,13 @@ public class GamePlayerController implements Observer {
 	}
 
 	private void initGUI(boolean newlevel) {
+		// this.view = null;
 		System.out.println("initing gui");
 		int rows = model.getData().getRow();
 		int cols = model.getData().getColumns();
-		this.view = new GameGUI(rows, cols); // just for testing, should be
-		// replaced by block above, 5
-		// rows, 5 columns
+		if (!newlevel) {
+			this.view = new GameGUI(rows, cols); // just for testing, should be
+		}
 		initSaveGameButton();
 		this.view.bindAnimationStart(e -> {
 			this.startAnimation();
@@ -196,11 +196,13 @@ public class GamePlayerController implements Observer {
 			this.animation.pause();
 			this.animationOn = false;
 		});
+
 		if (newlevel) {
 			this.mainScene = view.init(this.model.getData().getGold(), this.model.getData().getLife(),
 					this.model.getData().getCurrentLevel(), this.model.getData().getScore(), getTowerImages(),
 					this.mainScene);
 		} else {
+
 			this.mainScene = view.init(this.model.getData().getGold(), this.model.getData().getLife(),
 					this.model.getData().getCurrentLevel(), this.model.getData().getScore(), getTowerImages());
 		}
@@ -262,16 +264,19 @@ public class GamePlayerController implements Observer {
 	}
 
 	private void winGame() {
-		//System.out.println("WIN GAME CONDITION");
+		// System.out.println("WIN GAME CONDITION");
 		this.animation.pause();
 		endCondition("http://people.duke.edu/~lz107/voogaTemplates/win.html");
 	}
 
 	private boolean okForNewLevel(double newLevel) {
-		//System.out.println("animationON: " + this.animationOn);
-		//System.out.println("this.oldLevel < newLevel: " + (this.oldLevel < newLevel));
-		//System.out.println("enemyManager.getEnemyOnGrid().size() == 0: " + (enemyManager.getEnemyOnGrid().size() == 0));
-		//System.out.println("currentWave.size() == 0: " + (currentWave.size() == 0));
+		// System.out.println("animationON: " + this.animationOn);
+		// System.out.println("this.oldLevel < newLevel: " + (this.oldLevel <
+		// newLevel));
+		// System.out.println("enemyManager.getEnemyOnGrid().size() == 0: " +
+		// (enemyManager.getEnemyOnGrid().size() == 0));
+		// System.out.println("currentWave.size() == 0: " + (currentWave.size()
+		// == 0));
 		return (this.animationOn && this.oldLevel < newLevel && enemyManager.getEnemyOnGrid().size() == 0
 				&& currentWave.size() == 0);
 	}
@@ -280,18 +285,18 @@ public class GamePlayerController implements Observer {
 		// new level condition
 		double newLevel = this.model.getData().getCurrentLevel();
 		if (okForNewLevel(newLevel)) {
-			//System.out.println("NEW LEVEL");
+			// System.out.println("NEW LEVEL");
 			this.animation.pause();
 			this.startTime = System.currentTimeMillis();
 			this.intervalBetweenWaves = this.model.getEnemyManager().getTimeOfNextWave();
 			this.oldLevel = newLevel;
 			this.view.newLevelPopUp(e -> {
 				this.model.initializeLevelInfo();
-				//this.view.getGrid().getGrid().getChildren().clear();
-				
+				// this.view.getGrid().getGrid().getChildren().clear();
+
 				this.view.getMainScreen().getChildren().clear();
 				init(true);
-				
+
 			});
 		}
 	}
@@ -302,10 +307,10 @@ public class GamePlayerController implements Observer {
 					"" + this.model.getData().getCurrentLevel());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			//System.out.println("Log end score went wrong");
+			// System.out.println("Log end score went wrong");
 			e.printStackTrace();
 		}
-		//System.out.println("Trying to set the winning screen");
+		// System.out.println("Trying to set the winning screen");
 		this.view.getMainScreen().getChildren().clear();
 		WebView browser = new WebView();
 		WebEngine webEngine = browser.getEngine();
@@ -323,14 +328,13 @@ public class GamePlayerController implements Observer {
 			// check for game over condition
 			if (((GamePlayData) o).getLife() <= 0) {
 				gameOver();
-			}
-			else if (((GamePlayData) o).won()) {
-				//System.out.println("WIn game!");
+			} else if (((GamePlayData) o).won()) {
+				// System.out.println("WIn game!");
 				winGame();
 			}
-			//updateNewLevel();
+			// updateNewLevel();
 			checkCreateNewLevel();
-			
+
 		}
 	}
 
@@ -372,17 +376,20 @@ public class GamePlayerController implements Observer {
 	}
 
 	private void updateNewLevel() {
-		////System.out.println("Calling check for win");
+		//// System.out.println("Calling check for win");
 		if (enemyManager.getEnemyOnGrid().size() == 0 && currentWave.size() == 0
 				&& this.oldLevel == enemyManager.getData().getCurrentLevel()) {
 			// //System.out.println("SET WIN!");
-			//System.out.println("---------New level in checkforwin--------------");
-			//System.out.println(enemyManager.getData().getCurrentLevel() + "<=" + enemyManager.getData().getLevelNumber());
-			if (enemyManager.getData().getCurrentLevel() <= enemyManager.getData().getLevelNumber()-1) {
-				//System.out.println("WHY ARE YOU NOT SETTING LEVEL");
+			// System.out.println("---------New level in
+			// checkforwin--------------");
+			// System.out.println(enemyManager.getData().getCurrentLevel() +
+			// "<=" + enemyManager.getData().getLevelNumber());
+			if (enemyManager.getData().getCurrentLevel() <= enemyManager.getData().getLevelNumber() - 1) {
+				// System.out.println("WHY ARE YOU NOT SETTING LEVEL");
 				enemyManager.getData().setLevel(enemyManager.getData().getCurrentLevel() + 1);
 
-				//System.out.println("SEt new level: " + enemyManager.getData().getCurrentLevel());
+				// System.out.println("SEt new level: " +
+				// enemyManager.getData().getCurrentLevel());
 			}
 		}
 
@@ -395,10 +402,12 @@ public class GamePlayerController implements Observer {
 				long intervalBetween = (long) control.getEnemyModel().getFrequencyOfNextWave();
 				while (intervalBetween != 0) {
 					if (currentWave.size() > 0) {
-						//System.out.println("currentWave: " + currentWave.size());
+						// System.out.println("currentWave: " +
+						// currentWave.size());
 						Enemy enemy = currentWave.poll();
 						if (enemy == null) {
-							//System.out.println("**********Enemy wave is null! new level time**********8");
+							// System.out.println("**********Enemy wave is null!
+							// new level time**********8");
 						}
 						enemyManager.spawnEnemy(enemy);
 					}
