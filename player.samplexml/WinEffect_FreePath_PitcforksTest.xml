@@ -253,15 +253,15 @@
             <effectAccessibleData>
               <field>
                 <name>collider</name>
-                <clazz>engine.effect.player.CollisionEffectFactory</clazz>
+                <clazz>gameplayer.model.effect.CollisionEffectFactory</clazz>
               </field>
               <field>
                 <name>myself</name>
-                <clazz>engine.effect.player.CollisionEffectFactory</clazz>
+                <clazz>gameplayer.model.effect.CollisionEffectFactory</clazz>
               </field>
               <field>
                 <name>foe</name>
-                <clazz>engine.effect.player.CollisionEffectFactory</clazz>
+                <clazz>gameplayer.model.effect.CollisionEffectFactory</clazz>
               </field>
             </effectAccessibleData>
             <activeClass class="engine.observer.ObservableObjectProperty">
@@ -312,15 +312,15 @@
           <effectAccessibleData>
             <field>
               <name>collider</name>
-              <clazz>engine.effect.player.CollisionEffectFactory</clazz>
+              <clazz>gameplayer.model.effect.CollisionEffectFactory</clazz>
             </field>
             <field>
               <name>myself</name>
-              <clazz>engine.effect.player.CollisionEffectFactory</clazz>
+              <clazz>gameplayer.model.effect.CollisionEffectFactory</clazz>
             </field>
             <field>
               <name>foe</name>
-              <clazz>engine.effect.player.CollisionEffectFactory</clazz>
+              <clazz>gameplayer.model.effect.CollisionEffectFactory</clazz>
             </field>
           </effectAccessibleData>
           <activeClass class="engine.observer.ObservableObjectProperty">
@@ -523,15 +523,15 @@
             <effectAccessibleData>
               <field>
                 <name>collider</name>
-                <clazz>engine.effect.player.CollisionEffectFactory</clazz>
+                <clazz>gameplayer.model.effect.CollisionEffectFactory</clazz>
               </field>
               <field>
                 <name>myself</name>
-                <clazz>engine.effect.player.CollisionEffectFactory</clazz>
+                <clazz>gameplayer.model.effect.CollisionEffectFactory</clazz>
               </field>
               <field>
                 <name>foe</name>
-                <clazz>engine.effect.player.CollisionEffectFactory</clazz>
+                <clazz>gameplayer.model.effect.CollisionEffectFactory</clazz>
               </field>
             </effectAccessibleData>
             <activeClass class="engine.observer.ObservableObjectProperty">
@@ -784,15 +784,15 @@
             <effectAccessibleData>
               <field>
                 <name>winTrigger</name>
-                <clazz>engine.effect.player.WinEffectFactory</clazz>
+                <clazz>gameplayer.model.effect.WinEffectFactory</clazz>
               </field>
               <field>
                 <name>data</name>
-                <clazz>engine.effect.player.WinEffectFactory</clazz>
+                <clazz>gameplayer.model.effect.WinEffectFactory</clazz>
               </field>
               <field>
                 <name>gamePlayData</name>
-                <clazz>engine.effect.player.WinEffectFactory</clazz>
+                <clazz>gameplayer.model.effect.WinEffectFactory</clazz>
               </field>
             </effectAccessibleData>
             <activeClass class="engine.observer.ObservableObjectProperty">
@@ -1126,15 +1126,15 @@
             <effectAccessibleData>
               <field>
                 <name>collider</name>
-                <clazz>engine.effect.player.CollisionEffectFactory</clazz>
+                <clazz>gameplayer.model.effect.CollisionEffectFactory</clazz>
               </field>
               <field>
                 <name>myself</name>
-                <clazz>engine.effect.player.CollisionEffectFactory</clazz>
+                <clazz>gameplayer.model.effect.CollisionEffectFactory</clazz>
               </field>
               <field>
                 <name>foe</name>
-                <clazz>engine.effect.player.CollisionEffectFactory</clazz>
+                <clazz>gameplayer.model.effect.CollisionEffectFactory</clazz>
               </field>
             </effectAccessibleData>
             <activeClass class="engine.observer.ObservableObjectProperty">
