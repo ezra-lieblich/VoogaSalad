@@ -19,8 +19,10 @@ public class EnemyFactory {
 		String image = enemyType.getImagePath();
 		double height = enemyType.getSize();
 		double width = enemyType.getSize();
+		double goldReward = enemyType.getMoney();
+		double scoreReward = enemyType.getScore();
 		gameplayer.model.enemy.Enemy modelEnemy = new gameplayer.model.enemy.Enemy(ID, name, 
-				movingSpeed, health, image, height, width, pathID);
+				movingSpeed, health, image, height, width, pathID, goldReward, scoreReward);
 		modelEnemy.setCurrentCell(start);
 		currID++;
 		return modelEnemy;

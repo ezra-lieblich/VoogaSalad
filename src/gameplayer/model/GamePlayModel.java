@@ -48,7 +48,7 @@ public class GamePlayModel extends Observable {
 		this.towerManager = new TowerManager(gameData, this.enemyManager);
 		this.towerManager.initializeTowerForLoading(); //getting towerList from gameData
 		this.weaponManager = new gameplayer.model.weapon.WeaponManager(this.gameData, this.towerManager);
-		this.collisionManager = new CollisionManager(gameData, this.weaponManager, this.enemyManager,enemiesOnScreen);
+		this.collisionManager = new CollisionManager(gameData, this.weaponManager, this.enemyManager,enemiesOnScreen, gameData);
 		initializeGameSetting(gameData.getFactory());
 	}
 	
@@ -61,7 +61,7 @@ public class GamePlayModel extends Observable {
 		this.enemyManager = new EnemyManager(this.gameData,enemiesOnScreen);
 		this.towerManager = new TowerManager(gameData, this.enemyManager);
 		this.weaponManager = new gameplayer.model.weapon.WeaponManager(this.gameData, this.towerManager);
-		this.collisionManager = new CollisionManager(gameData, this.weaponManager, this.enemyManager,enemiesOnScreen);
+		this.collisionManager = new CollisionManager(gameData, this.weaponManager, this.enemyManager,enemiesOnScreen, this.gameData);
 		initializeGameSetting(factory);
 	}
 
