@@ -10,6 +10,11 @@ import javafx.scene.Node;
 import javafx.scene.control.TextField;
 
 
+/**
+ * 
+ * @author Kayla Schulz
+ *
+ */
 public class EnemySizeField extends TextFieldView implements EnemySetView {
 
     private EnemyAuthoringViewDelegate delegate;
@@ -43,9 +48,9 @@ public class EnemySizeField extends TextFieldView implements EnemySetView {
                                                                .getText()));
         enemySizeField.setPrefWidth(110);
         root = GridFactory.createRowWithLabelandNode(
-        		labelsResource.getString("Size"),
-        		enemySizeField, 
-        		170);
+                                                     labelsResource.getString("Size"),
+                                                     enemySizeField,
+                                                     170);
     }
 
 }

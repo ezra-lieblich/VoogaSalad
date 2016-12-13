@@ -10,9 +10,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
 
+/**
+ * 
+ * @author Kayla Schulz
+ *
+ */
 public class TowerSizeField implements TowerSetView {
 
-	private GridPane root;
+    private GridPane root;
     private TextField towerSizeField;
     private TowerAuthoringViewDelegate delegate;
 
@@ -21,11 +26,11 @@ public class TowerSizeField implements TowerSetView {
                 TextFieldFactory.makeTextField(labelsResource.getString("EnterInt"),
                                                e -> delegate.onUserEnteredTowerSize(towerSizeField
                                                        .getText()));
-       towerSizeField.setPrefWidth(230);
+        towerSizeField.setPrefWidth(230);
         root = GridFactory.createRowWithLabelandNode(
-        		labelsResource.getString("Size"), 
-        		towerSizeField, 
-        		150);
+                                                     labelsResource.getString("Size"),
+                                                     towerSizeField,
+                                                     150);
     }
 
     @Override

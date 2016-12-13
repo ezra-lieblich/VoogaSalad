@@ -10,9 +10,15 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
 
+/**
+ * 
+ * @author Kayla Schulz
+ * @author Diane Hadley
+ *
+ */
 public class WeaponSizeField implements WeaponSetView {
 
-	private GridPane root;
+    private GridPane root;
     private TextField weaponSizeField;
     private WeaponAuthoringViewDelegate delegate;
 
@@ -25,7 +31,9 @@ public class WeaponSizeField implements WeaponSetView {
                 TextFieldFactory.makeTextField(labelsResource.getString("EnterInt"), e -> delegate
                         .onUserEnteredWeaponSize(weaponSizeField.getText()));
         weaponSizeField.setPrefWidth(130);
-        root = GridFactory.createRowWithLabelandNode(labelsResource.getString("Size"), weaponSizeField, 150);
+        root =
+                GridFactory.createRowWithLabelandNode(labelsResource.getString("Size"),
+                                                      weaponSizeField, 150);
     }
 
     @Override

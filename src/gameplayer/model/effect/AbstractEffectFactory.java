@@ -35,7 +35,7 @@ public abstract class AbstractEffectFactory {
     public GameEffect create(Effect effect) {
         GroovyExecutor groovyExecutor = new GroovyExecutor();
         addEffectAccessibleData(groovyExecutor);
-        return new GameEffect(effect, groovyExecutor, triggerVariableName, encompasingClassVariableName);
+        return new GameEffect(effect, groovyExecutor, effect.getTriggerClass(), encompasingClassVariableName);
     }
     
     public Collection<String> getVariableNames() {

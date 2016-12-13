@@ -2,9 +2,7 @@ package authoring.utilityfactories;
 
 import java.util.List;
 import java.util.function.Consumer;
-
 import org.controlsfx.control.CheckComboBox;
-
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -39,24 +37,24 @@ public final class ComboBoxFactory {
         combobox.setPromptText(promptText);
         return combobox;
     }
-    
-    
+
     public static CheckComboBox<String> makeCheckComboBox (
-    													   ObservableList<String> options, Consumer<List<String>> func){
-		CheckComboBox<String> checkComboBox = new CheckComboBox<String>(options);
-		checkComboBox.getCheckModel().getCheckedItems().addListener(new ListChangeListener<String>() {
+                                                           ObservableList<String> options,
+                                                           Consumer<List<String>> func) {
+        CheckComboBox<String> checkComboBox = new CheckComboBox<String>(options);
+        checkComboBox.getCheckModel().getCheckedItems()
+                .addListener(new ListChangeListener<String>() {
 
+                    @Override
+                    public void onChanged (javafx.collections.ListChangeListener.Change<? extends String> c) {
+                        func.accept(checkComboBox.getCheckModel().getCheckedItems());
 
-			@Override
-			public void onChanged(javafx.collections.ListChangeListener.Change<? extends String> c) {
-				func.accept(checkComboBox.getCheckModel().getCheckedItems());
-				
-			}
-			
-		});
-		
-    	return checkComboBox;
-    	
+                    }
+
+                });
+
+        return checkComboBox;
+
     }
 
 }
