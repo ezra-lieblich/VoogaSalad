@@ -1617,7 +1617,7 @@
                                 <listeners>
                                   <null/>
                                 </listeners>
-                                <property class="int">5</property>
+                                <property class="int">3</property>
                               </enemyCount>
                               <delay class="engine.observer.ObservableObjectProperty">
                                 <observers/>
@@ -1684,7 +1684,7 @@
                                 <listeners>
                                   <null/>
                                 </listeners>
-                                <property class="int">3</property>
+                                <property class="int">2</property>
                               </enemyCount>
                               <delay class="engine.observer.ObservableObjectProperty">
                                 <observers/>

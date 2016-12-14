@@ -1,8 +1,10 @@
 package gameplayer.loader;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.HashMap;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
@@ -18,28 +20,43 @@ import javafx.scene.control.Alert;
 public class GameSavingController {
 	//private XStream serializer;
 	private GamePlayModel gameModel;
-	int counter;
+	String xmlName;
 	
-	public GameSavingController(GamePlayModel model) {
+	public GameSavingController(GamePlayModel model, String xmlFilename) {
 		//serializer = new XStream(new DomDriver());
 		this.gameModel = model;
-		this.counter = 0;
+		this.xmlName = xmlFilename;
 	}
 	
 	public String toPrettyXML() {
 		EnemyManager eman = gameModel.getEnemyManager();
-		Enemy e = eman.getPackOfEnemyComing().element();
 		GamePlayData gameData = gameModel.getData();
-		//GamePlayerFactory factory = gameData.getFactory();
-		return "" +gameData.getCurrentLevel();
+		SavedSettings settings = new SavedSettings(this.xmlName);
+		settings.setGold(gameData.getGold());
+		settings.setLevel(gameData.getCurrentLevel());
+		settings.setLives(gameData.getLife());
+		settings.setScore(gameData.getScore());
+		return new XStream(new DomDriver()).toXML(settings);
 	}
 	
 	public void saveGame() {
-		String dirName = "SavedGames/newGame" + counter+ ".xml";
-		counter += 1;
-		File newFile = new File(dirName);
-		String content = toPrettyXML();
-		System.out.println("XML LENTHHHHH " +content.length());
+		//GamePlayData gameData = gameModel.getData();
+		//int level = gameData.getCurrentLevel();
+		//String content = this.xmlName+"\n"+level;
+		//File dirFile = new File("player.samplexml/savedGame-"+counter);
+		
+		String content = this.toPrettyXML();
+		FileWriter fw;
+		try {
+			fw = new FileWriter("SavedGames/savedGame.xml");
+			BufferedWriter bw = new BufferedWriter(fw);
+			bw.write(content);
+			bw.close();
+		} catch (IOException e) {
+			System.out.println("Game does not exist, please choose another");
+		}
+		
+		/*
 		try {
 			FileWriter writer = new FileWriter(newFile);
 			writer.write(content);
@@ -48,5 +65,6 @@ public class GameSavingController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		*/
 	}
 }

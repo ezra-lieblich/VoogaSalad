@@ -2,6 +2,7 @@ package gameplayer.controller;
 
 import gameplayer.loader.GamePlayerFactory;
 import gameplayer.loader.GameSavingController;
+import gameplayer.loader.SavedSettings;
 import gameplayer.loader.XMLParser;
 import gameplayer.model.GamePlayData;
 import gameplayer.model.GamePlayModel;
@@ -93,15 +94,21 @@ public class GamePlayerController implements Observer {
 		this.enemyManager = this.enemyController.getEnemyModel();
 		this.imageBank = new HashMap<String, Image>();
 		createImageBank();
-		this.gameSavingController = new GameSavingController(this.model);
-		//this.gameSavingController.saveGame();
+		this.gameSavingController = new GameSavingController(this.model, xmlFilePath);
+		init(false);
+		// this.gameSavingController.saveGame();
 
 	}
 
-	// TODO: create another constructor that takes in a ManagerMediator and
-	// LevelNumber
-	// it should use the XMLParser(ManagerMediator) constructor to create an
-	// XMLParser (aka this.loader)
+	public GamePlayerController(String xmlFilePath, SavedSettings settings) {
+		this(xmlFilePath);
+		this.model.getData().setLevel(settings.getLevel());
+		this.model.getData().setGold(settings.getGold());
+		this.model.getData().setLife(settings.getLives());
+		this.model.getData().setScore(settings.getScore());
+	}
+	
+	
 	private void populateTowerToId() {
 		HashMap<Integer, engine.tower.Tower> mapping = this.model.getTowerManager().getAvailableTower();
 		for (int key : mapping.keySet()) {

@@ -228,7 +228,7 @@ public class GameGUI {
 	private void initDragDropPane(List<String> imagePaths) {
 		dragDrop.setDragTarget(grid.getGrid());
 		mainScreen.setRight(dragDrop.getDragDropPane());
-		Tab tab = dragDrop.createTab("Weapons");
+		Tab tab = dragDrop.createTab("Towers");
 		dragDrop.populateImageViewsToTab(tab, imagePaths);
 	}
 

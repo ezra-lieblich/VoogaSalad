@@ -1,11 +1,20 @@
 package splashscreen;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.DomDriver;
 
 import authoring.main.AuthoringController;
+import engine.GameAuthoringData;
 import gameplayer.controller.GamePlayerController;
 import gameplayer.controller.HomeSelection;
+import gameplayer.loader.SavedSettings;
 import gameplayer.loader.XMLParser;
 import gameplayer.view.helper.GraphicsLibrary;
 import javafx.geometry.Pos;
@@ -120,16 +129,29 @@ public class SplashScreen {
 			FileChooser filechooser = new FileChooser();
 	        Stage mainStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
 
+	        
 			File out = filechooser.showOpenDialog(mainStage);
-			String[] path = out.getPath().split("/");
-			String fileName = path[path.length-1];
+			String xmlName;
+			SavedSettings settings;
+			try {
+				XStream deserializer = new XStream(new DomDriver());
+				settings = (SavedSettings) deserializer.fromXML(new FileInputStream(out));
+				xmlName = settings.getGameType();
 
-			String fileLocation = "SavedGames/"+fileName;
+				
+			} catch (Exception e1) {
+				System.out.println("Error reading file, please use a different file");
+				return;
+			}
+			GamePlayerController gameController = new GamePlayerController(xmlName, settings);
+			gameController.init(false);
 			
-//			gameplayer.loader.XMLParser parser = new XMLParser(fileLocation);
-//			
-//			String levelNumber;
-//			GamePlayerController controller = new GamePlayerController("SavedGames/"+fileName, levelNumber);
+			Stage stage = new Stage();
+			gameController.setDataStoreOnClose(stage);
+			stage.setTitle(TITLE);
+			stage.setScene(gameController.getMainScene());
+			stage.show();
+		
 			
 		});
 		HBox hbBtn = new HBox(10);
