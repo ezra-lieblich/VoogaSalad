@@ -95,6 +95,7 @@ public class GamePlayerController implements Observer {
 		createImageBank();
 		this.gameSavingController = new GameSavingController(this.model);
 		//this.gameSavingController.saveGame();
+
 	}
 
 	// TODO: create another constructor that takes in a ManagerMediator and
@@ -138,7 +139,7 @@ public class GamePlayerController implements Observer {
 		}
 		this.towerController = new TowerController(this.model.getTowerManager(), this.view);
 		// initSaveGameButton();
-		
+
 	}
 
 	/**
@@ -253,7 +254,7 @@ public class GamePlayerController implements Observer {
 	}
 
 	private boolean okForNewLevel(double newLevel) {
-		return (this.animationOn && this.oldLevel < newLevel && enemyManager.getEnemyOnGrid().size() == 0
+		return (this.oldLevel < newLevel && enemyManager.getEnemyOnGrid().size() == 0
 				&& currentWave.size() == 0);
 
 		// return true;
@@ -263,11 +264,10 @@ public class GamePlayerController implements Observer {
 		// new level condition
 		double newLevel = this.model.getData().getCurrentLevel();
 		if (okForNewLevel(newLevel)) {
-			// System.out.println("NEW LEVEL");
+			System.out.println("NEW LEVEL TIME");
 			this.animation.pause();
 			this.startTime = System.currentTimeMillis();
 			this.intervalBetweenWaves = this.model.getEnemyManager().getTimeOfNextWave();
-			this.oldLevel = newLevel;
 			this.view.newLevelPopUp(e -> {
 				this.model.initializeLevelInfo();
 				// this.view.getGrid().getGrid().getChildren().clear();
@@ -325,7 +325,7 @@ public class GamePlayerController implements Observer {
 			winLoseCondition();
 			// updateNewLevel();
 			checkCreateNewLevel();
-			updateNewLevel();
+			//updateNewLevel();
 
 		}
 	}
@@ -355,6 +355,8 @@ public class GamePlayerController implements Observer {
 			this.enemyManager.update();
 			this.model.getCollisionManager().handleCollisions();
 			redrawEverything();
+			//checkCreateNewLevel();
+			updateNewLevel();
 			winLoseCondition();
 		});
 		animation.setCycleCount(Timeline.INDEFINITE);
@@ -364,24 +366,22 @@ public class GamePlayerController implements Observer {
 
 	}
 
+	//sets the new level under the correct conditions
 	private void updateNewLevel() {
-		if (enemyManager.getEnemyOnGrid().size() == 0 && currentWave.size() == 0
-				&& this.oldLevel == enemyManager.getData().getCurrentLevel()) {
 
-			System.out
-					.println(enemyManager.getData().getCurrentLevel() + "<=" + enemyManager.getData().getLevelNumber());
-			if (enemyManager.getData().getCurrentLevel() <= enemyManager.getData().getLevelNumber() - 1) {
-				// System.out.println("WHY ARE YOU NOT SETTING LEVEL");
+		System.out.println("old level: " + this.oldLevel);
+		System.out.println("Current level: " + enemyManager.getData().getCurrentLevel());
+		System.out.println("Num levels: " + enemyManager.getData().getLevelNumber());
+		if (enemyManager.getEnemyOnGrid().size() == 0 && currentWave.size() == 0) {
+				System.out.println("WHY ARE YOU NOT SETTING LEVEL");
 				enemyManager.getData().setLevel(enemyManager.getData().getCurrentLevel() + 1);
 
-				System.out.println("SEt new level: " + enemyManager.getData().getCurrentLevel());
-			}
+				System.out.println("Set new level: " + enemyManager.getData().getCurrentLevel());
 		}
 
 	}
 
-	private void spawnEnemyOnInterval(EnemyManager enemyManager,
-			EnemyController control) {
+	private void spawnEnemyOnInterval(EnemyManager enemyManager, EnemyController control) {
 		Thread enemyThread = new Thread() {
 			public void run() {
 				long intervalBetween = (long) control.getEnemyModel().getFrequencyOfNextWave();
