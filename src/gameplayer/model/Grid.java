@@ -144,8 +144,12 @@ public class Grid {
 		return this.start;
 	}
 	
-	public Cell getEnd() {
-		return this.end;
+	public Cell getEnd(int pathID) {
+		if (this.noPath){
+			return this.end;
+		}
+		else
+			return this.getPath(pathID).getPathEndPoint();
 	}
 	/*
 	public Cell getStartPoint(){
@@ -156,8 +160,8 @@ public class Grid {
 	 */
 
 	public Path getPath(int id){
-		System.out.println("Does the allPath exist?");
-		System.out.println(allPath);
+		//System.out.println("Does the allPath exist?");
+		//System.out.println(allPath);
 		return this.allPath.get(id);
 
 	}

@@ -48,7 +48,7 @@ public abstract class AbstractEffectFactory {
 //    }
     
     private void addEffectAccessibleData(GroovyExecutor groovyExecutor) {
-        effectAccessibleData.entrySet().forEach(a -> groovyExecutor.addVariable(a.getKey(), a.getValue()));
+        effectAccessibleData.entrySet().forEach(a -> {groovyExecutor.addVariable(a.getKey(), a.getValue()); System.out.println(a.getKey());});
     }
     
     protected void loadInSpecificValues() {

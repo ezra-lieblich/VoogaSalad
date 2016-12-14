@@ -43,14 +43,13 @@ public class GamePlayModel extends Observable {
 	 */
 	public GamePlayModel(GamePlayData gameData, HashMap<Integer,ImageView>enemiesOnScreen){
 		this.gameData = gameData;
-		this.gameData.initializeGameSetting();
+		//this.gameData.initializeGameSetting(); don't need to do this b/c gameData is already initialized
 		this.enemyManager = new EnemyManager(this.gameData,enemiesOnScreen);
 		this.towerManager = new TowerManager(gameData, this.enemyManager);
-		this.towerManager.initializeTowerForLoading();
+		this.towerManager.initializeTowerForLoading(); //getting towerList from gameData
 		this.weaponManager = new gameplayer.model.weapon.WeaponManager(this.gameData, this.towerManager);
-		this.collisionManager = new CollisionManager(gameData, this.weaponManager, this.enemyManager,enemiesOnScreen);
+		this.collisionManager = new CollisionManager(gameData, this.weaponManager, this.enemyManager,enemiesOnScreen, gameData);
 		initializeGameSetting(gameData.getFactory());
-		
 	}
 	
 	
@@ -62,7 +61,7 @@ public class GamePlayModel extends Observable {
 		this.enemyManager = new EnemyManager(this.gameData,enemiesOnScreen);
 		this.towerManager = new TowerManager(gameData, this.enemyManager);
 		this.weaponManager = new gameplayer.model.weapon.WeaponManager(this.gameData, this.towerManager);
-		this.collisionManager = new CollisionManager(gameData, this.weaponManager, this.enemyManager,enemiesOnScreen);
+		this.collisionManager = new CollisionManager(gameData, this.weaponManager, this.enemyManager,enemiesOnScreen, this.gameData);
 		initializeGameSetting(factory);
 	}
 

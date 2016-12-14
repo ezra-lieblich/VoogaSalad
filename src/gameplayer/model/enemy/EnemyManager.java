@@ -41,7 +41,7 @@ public class EnemyManager extends Observable{
 	HashMap<Integer,ImageView>enemiesOnScreen;
 
 
-	public EnemyManager(GamePlayData gameData,HashMap<Integer,ImageView>enemiesOnScreen) {
+	public EnemyManager(GamePlayData gameData,HashMap<Integer,ImageView>enemiesOnScreen) {		
 		this.gameData = gameData;
 		this.gameFactory = gameData.getFactory();
 		//this.graphicLib = new GraphicsLibrary();
@@ -159,12 +159,12 @@ public class EnemyManager extends Observable{
 				enemy.setY(enemy.getY() + enemy.getyDirection() * distToMove);
 				Cell nextCell = this.grid.getNext(enemy.getPathID(), enemy.getCurrentCell());
 				enemy.setCurrentCell(nextCell);
-				if (enemy.getCurrentCell().equals(this.grid.getEnd())) {
+				if (enemy.getCurrentCell().equals(this.grid.getEnd(enemy.getPathID()))) { //THIS IS THE ERRORR
 					if (gameData.getLife() >= 0) {
 						gameData.setLife(gameData.getLife() - 1);
 					}
 					
-					//System.out.println("ENEMY REMOVING");
+					System.out.println("ENEMY REMOVING");
 					enemy.setRemove(true);
 					return;
 				}
@@ -213,7 +213,6 @@ public class EnemyManager extends Observable{
 			moveSingleEnemy(enemy);
 			if (enemy.mustRemove()) {
 				iter.remove();
-				
 			}
 		}
 	}

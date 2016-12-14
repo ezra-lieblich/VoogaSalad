@@ -28,7 +28,7 @@ public class LevelTypeBuilder extends AbstractTypeBuilder<Level, LevelBuilder>
     public static final double DEFAULT_REWARD_SCORE = 200;
     public static final double DEFAULT_DURATION_IN_SECONDS = 1;
     public static final double DEFAULT_LEVEL_TIME = 0;
-    public static final Integer[] DEFAULT_PATHS = new Integer[] {0, 1};
+    public static final Integer[] DEFAULT_PATHS = new Integer[] {};
 
     private ObservableList<Integer> paths;
     private ObservableObjectProperty<WaveManager> enemyCounts;

@@ -55,8 +55,8 @@ public class EditorTabPane implements IEditorTabPane {
                     if (new_toggle.isSelected()) {
                     }
                 });
-        
-        for(String name: tabNames) {
+
+        for (String name : tabNames) {
             ToggleButton button = buildButton(name, name.toLowerCase() + ".png",
                                               event -> delegate.userSelectedTab(name));
             button.setToggleGroup(group1);

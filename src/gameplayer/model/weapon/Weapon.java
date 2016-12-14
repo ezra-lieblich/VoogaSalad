@@ -42,6 +42,7 @@ public class Weapon extends Observable implements IDrawable{
 		this.speedMag = speedMag;
 		this.weaponEffect = weaponEffect;
 		
+		/*
 		System.out.println();
 
 		System.out.println("++++++++++++++++++++++++");
@@ -54,6 +55,7 @@ public class Weapon extends Observable implements IDrawable{
 				e.addEncompassingClass(this);
 			}			
 		}
+		*/
 
 		this.weaponTypeID = weaponTypeID;
 	}
@@ -64,6 +66,7 @@ public class Weapon extends Observable implements IDrawable{
 		String className = e.getClass().getName();
 		System.out.println("Class Name:  " + className);
 		ArrayList<GameEffect> triggered = this.weaponEffect.get(className);
+		System.out.println("Triggered gameeffect: "+triggered);
 		for(GameEffect g : triggered){
 			g.addTrigger(e);
 			g.execute();

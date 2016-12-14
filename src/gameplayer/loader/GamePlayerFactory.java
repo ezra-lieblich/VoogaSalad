@@ -34,6 +34,7 @@ public class GamePlayerFactory{
 	public static final int DEFAULT_GRID_HEIGHT = 10;
 
 	private EnemyFactory enemyFactory;
+	private Grid currGrid;
 
 	XMLParser authoringFileReader;	
 
@@ -82,25 +83,19 @@ public class GamePlayerFactory{
 	public Map<Integer, Tower> getTowerUpgrades() {
 		return authoringFileReader.getTowerUpgrades();
 	}
+	
+	public PathManager getPathManager() {
+		return this.authoringFileReader.getPathManager();
+	}
 
 
 
 	public Grid getGrid(int levelNumber){
-		Level level = authoringFileReader.getLevelManager().getEntity(levelNumber);//REMEMBER TO CHANGE
 		String pathType = authoringFileReader.getGameMode().getPathType().name();
-		System.out.println("lev num: " +levelNumber);
-		List<Integer> levelPaths = level.getPaths();
+		GameMode gameMode = this.authoringFileReader.getGameMode();
+		HashMap<Integer, gameplayer.model.Path> allPaths = new HashMap<Integer, gameplayer.model.Path>();
 
-
-		if (levelPaths.isEmpty()) {
-
-			//no path
-			Grid emptyGrid = new Grid(DEFAULT_GRID_WIDTH, DEFAULT_GRID_HEIGHT);
-			emptyGrid.setNoPath(true); 
-			return emptyGrid;
-		}
-		HashMap<Integer, gameplayer.model.Path> allPaths = new HashMap<Integer, gameplayer.model.Path>(); //TODO: REFACTOR NAME
-		Grid levelGrid = new Grid(DEFAULT_GRID_WIDTH, DEFAULT_GRID_HEIGHT); //width and height will be from game authoring
+		Grid levelGrid = new Grid(gameMode.getGridSize(), gameMode.getGridSize()); 
 		PathManager pathManager = authoringFileReader.getPathManager();
 		Map<Integer, Path> paths = pathManager.getEntities();
 		/*
@@ -114,14 +109,13 @@ public class GamePlayerFactory{
 		 */
 
 		if(pathType.equals("FREE")){
-			System.out.println("Paths list in game mode" +authoringFileReader.getGameMode().getPaths().size());
-			List<Integer> hardCodedPathIDs = new ArrayList<Integer>();
-			hardCodedPathIDs.add(0);
-			for (Integer index : hardCodedPathIDs) {
+			List<Integer> hardCodedPathIDs = new ArrayList<Integer>(); //for testing
+			hardCodedPathIDs.add(0); //for testing
+			for (Integer index : hardCodedPathIDs) { //for testing
 			//for (Integer index : levelPaths) {
 				Path currPath = paths.get(index);
 				List<Coordinate<Integer>> coordinates = currPath.getCoordinates();
-				System.out.println("coordinates size: " + coordinates.size());
+//				System.out.println("coordinates size: " + coordinates.size());
 				ArrayList<Cell> cells = new ArrayList<Cell>();
 				coordinates.forEach(c -> {
 					Cell currCell = levelGrid.getCell(c.getX(), c.getY());
@@ -141,22 +135,22 @@ public class GamePlayerFactory{
 		}
 
 		else{
-			for (Integer index : levelPaths) {
-				Path currPath = paths.get(index);
+			for (Integer pathIndex : paths.keySet()) {
+				Path currPath = paths.get(pathIndex);
 				List<Coordinate<Integer>> coordinates = currPath.getCoordinates();
-				System.out.println("coordinates size: " + coordinates.size());
+//				System.out.println("coordinates size: " + coordinates.size());
 				ArrayList<Cell> cells = new ArrayList<Cell>();
 				coordinates.forEach(c -> {
-					Cell currCell = new Cell(c.getX(), c.getY());
+					Cell currCell = levelGrid.getCell(c.getX(), c.getY());
 					cells.add(currCell);
 				});
 				gameplayer.model.Path newPath = new gameplayer.model.Path(cells, levelGrid.getGrid());
-				allPaths.put(index, newPath);
+				allPaths.put(pathIndex, newPath);
 			}
 
 			levelGrid.setAllPath(allPaths);
 		}
-		
+		this.currGrid = levelGrid;
 		return levelGrid;
 
 	}
@@ -172,8 +166,6 @@ public class GamePlayerFactory{
 
 	public Map<Integer, Tower> getTowers() {
 		for (Tower t : authoringFileReader.getTowerTypes().values()) {
-			System.out.println("TOWER IMAGE PATH");
-			System.out.println(t.getImagePath());
 		}
 
 		return (Map<Integer, Tower>) authoringFileReader.getTowerTypes(); 
@@ -189,22 +181,21 @@ public class GamePlayerFactory{
 	}
 
 	public Queue<Enemy> getIndividualWaveQueue(Wave wave, int levelNumber) {
-		System.out.println("dsakfhsdaf jksdahflsjksdhafjk sdahjk sdah");
 		Map<Integer, engine.enemy.Enemy> enemyTypes = this.authoringFileReader.getEnemyTypes(); //refactor name
 		engine.enemy.Enemy enemyType = enemyTypes.get(wave.getEnemyID());
 		Queue<Enemy> enemies = new LinkedList<Enemy>();
 		int pathID = wave.getPathID(); //needs to start at 0, hacky fix
-		System.out.println("Path id: "+pathID);
+//		System.out.println("Path id: "+pathID);
 		for (int i = 0; i < wave.getEnemyCount(); i++) {
 			//System.out.println("Level: "+levelNumber);
 			//System.out.println("Does the grid with the path exist?");
 			//System.out.println(this.getGrid(levelNumber).getPath(pathID));
 			Cell start;
-			if (this.getGrid(levelNumber).isNoPathType()) {
-				start = this.getGrid(levelNumber).getStart();
+			if (currGrid.isNoPathType()) {
+				start = currGrid.getStart();
 			}
 			else {
-				start = this.getGrid(levelNumber).getPath(pathID).getPathStart();
+				start = currGrid.getPath(pathID).getPathStart();
 			}
 			enemies.add(this.enemyFactory.createModelEnemy(enemyType, start, pathID));
 		}

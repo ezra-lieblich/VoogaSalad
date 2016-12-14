@@ -22,7 +22,7 @@ public class GameInitialLivesView implements GameSettingsSetView {
 
     public GameInitialLivesView (ResourceBundle resource) {
         this.settingsResource = resource;
-    	createField();
+        createField();
     }
 
     @Override
@@ -36,29 +36,33 @@ public class GameInitialLivesView implements GameSettingsSetView {
     }
 
     private void createField () {
-        initialLivesField = TextFieldFactory.makeTextField("", 
-        				e -> submitInitialLives(initialLivesField.getText()));
- 
-        initialLivesField.setPrefWidth(105); //TODO magic number
+        initialLivesField = TextFieldFactory.makeTextField("",
+                                                           e -> submitInitialLives(initialLivesField
+                                                                   .getText()));
+
+        initialLivesField.setPrefWidth(105); // TODO magic number
         root = GridFactory.createRowWithLabelandNode(settingsResource.getString("InitialLives"),
-                                                      initialLivesField, 125);
+                                                     initialLivesField, 125);
     }
 
     public void updateInitialLives (int lives) {
-    	initialLives = lives;
+        initialLives = lives;
         initialLivesField.setText(Integer.toString(lives));
     }
-    
-    private void submitInitialLives(String livesString){
-		try {
-			initialLives = Integer.parseInt(livesString);
-			delegate.onUserEnteredGameLives(initialLives);
-		}
-		catch (NumberFormatException e){
-			updateInitialLives(initialLives);
-			Alert inputError = DialogueBoxFactory.createErrorDialogueBox("The number of lives must be an integer.", "Input error"); 
-			//TODO move to resource file
-		}
-	}
+
+    private void submitInitialLives (String livesString) {
+        try {
+            initialLives = Integer.parseInt(livesString);
+            delegate.onUserEnteredGameLives(initialLives);
+        }
+        catch (NumberFormatException e) {
+            updateInitialLives(initialLives);
+            Alert inputError =
+                    DialogueBoxFactory.createErrorDialogueBox(
+                                                              "The number of lives must be an integer.",
+                                                              "Input error");
+            // TODO move to resource file
+        }
+    }
 
 }

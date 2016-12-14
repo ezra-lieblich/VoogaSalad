@@ -1,5 +1,6 @@
 package gameplayer.model;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Observable;
@@ -56,8 +57,7 @@ public class GamePlayData extends Observable{
 			this.gold.addListener((Observable, oldValue, newValue) -> allEffects.get(i).execute());
 			this.currentLevel.addListener((Observable, oldValue, newValue) -> allEffects.get(i).execute());
 
-		}
-		
+		}		
 		
 	}
 	
@@ -74,6 +74,7 @@ public class GamePlayData extends Observable{
 		this.gold.set(settingInfo.get("gold"));
 		this.lives.set(settingInfo.get("lives").intValue());
 		this.currentLevel.set(settingInfo.get("levelnumber").intValue()); //REMEMBER TO CHANGE
+		System.out.println("initial level number: "+this.currentLevel.get());
 		this.score.set(0);
 	}
 	
@@ -89,6 +90,10 @@ public class GamePlayData extends Observable{
 	
 	@EffectMethod
 	public void setWin(){
+		System.out.println("==================");
+		System.out.println("total number of levels: " + this.numLevels.get());
+		System.out.println("current level number: " + this.currentLevel.get());
+
 		this.win = true;
 		setChanged();
 		notifyObservers();
@@ -137,6 +142,12 @@ public class GamePlayData extends Observable{
 	
 	public void setScore(double additionalScore){
 		this.score.set(this.score.get() + additionalScore );
+		try {
+			Wrapper.getInstance().logScore(Double.toString(this.score.get()));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		setChanged();
 		notifyObservers();
 	}

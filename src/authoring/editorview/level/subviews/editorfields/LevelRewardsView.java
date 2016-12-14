@@ -11,6 +11,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 
+/**
+ * 
+ * @author Kayla Schulz
+ *
+ */
 public class LevelRewardsView implements LevelSetView {
 
     private VBox vbox;

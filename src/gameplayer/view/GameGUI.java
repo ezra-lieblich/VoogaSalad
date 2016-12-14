@@ -64,6 +64,8 @@ public class GameGUI {
 	private int rows;
 	private int columns;
 	
+	private WebView newLevelBrowser;
+	
 	private HashMap<Integer,ImageView>towersOnScreen;
 
 	public GameGUI(int rows, int columns) {
@@ -90,16 +92,27 @@ public class GameGUI {
 	}
 
 	public Scene init(double gold, double lives, double level, double score, List<String> imagePaths, Scene scene) {
+		System.out.println("GameGUI stats: "+lives+","+level+","+score+","+imagePaths);
 		this.numLevels = level;
 		// createScene();
 		this.scene = scene;
+		clearScreen();
 		createGrid();
 		initDragDropPane(imagePaths);
 		initChat();
 		initStatsTab();
 		addButtonPanel();
 		initStatsDisplay(gold, lives, currentLevel, score);
+		//createNewLevelBrowser();
 		return this.scene;
+	}
+	
+	private void clearScreen(){
+		mainScreen.setRight(null);
+		mainScreen.setTop(null);
+		this.buttonPanel.getPane().getChildren().clear();
+		this.dragDrop.getDragDropPane().getTabs().clear();
+		this.grid.getGrid().getChildren().clear();
 	}
 
 	public int getRows() {
@@ -124,6 +137,12 @@ public class GameGUI {
 
 	public BorderPane getMainScreen() {
 		return mainScreen;
+	}
+	
+	private void createNewLevelBrowser(){
+		this.newLevelBrowser = new WebView();
+		WebEngine webEngine = this.newLevelBrowser.getEngine();
+		webEngine.load("http://people.duke.edu/~lz107/voogaTemplates/newlevel.html");
 	}
 
 	public void setMainScreen(BorderPane mainScreen) {
@@ -186,11 +205,11 @@ public class GameGUI {
 	 */
 	public void newLevelPopUp(EventHandler<ActionEvent> e) {
 		this.grid.getGrid().getChildren().clear();
-		// this.grid.getPathGrid().getChildren().clear();
+		
 		Button btn = graphics.createButton("Next level", e);
 		ImageView stuff = graphics.createImageView(graphics.createImage("newlevel.png"));
 		graphics.setImageViewParams(stuff, GridGUI.GRID_WIDTH, GridGUI.GRID_HEIGHT);
-		this.grid.getGrid().getChildren().add(stuff);
+		//this.grid.getGrid().getChildren().add(this.newLevelBrowser);
 		this.grid.getGrid().getChildren().add(btn);
 	}
 
@@ -209,7 +228,7 @@ public class GameGUI {
 	private void initDragDropPane(List<String> imagePaths) {
 		dragDrop.setDragTarget(grid.getGrid());
 		mainScreen.setRight(dragDrop.getDragDropPane());
-		Tab tab = dragDrop.createTab("Blah test");
+		Tab tab = dragDrop.createTab("Towers");
 		dragDrop.populateImageViewsToTab(tab, imagePaths);
 	}
 
@@ -222,13 +241,13 @@ public class GameGUI {
 	}
 
 	private void initStatsTab() {
-		WebView browser = new WebView();
-		WebEngine webEngine = browser.getEngine();
-		webEngine.load("http://voogasquad.herokuapp.com/home");
-		ScrollPane scroll = new ScrollPane();
-		scroll.setContent(browser);
-		Tab tab = dragDrop.createTab("Your Stats");
-		tab.setContent(scroll);
+//		WebView browser = new WebView();
+//		WebEngine webEngine = browser.getEngine();
+//		webEngine.load("http://voogasquad.herokuapp.com/home");
+//		ScrollPane scroll = new ScrollPane();
+//		scroll.setContent(browser);
+//		Tab tab = dragDrop.createTab("Your Stats");
+//		tab.setContent(scroll);
 	}
 
 	private void initStatsDisplay(double gold, double lives, double level, double score) {
@@ -238,6 +257,7 @@ public class GameGUI {
 	}
 
 	public void updateStatsDisplay(double gold, double lives, double level, double score) {
+		//System.out.println("update stats display: "+gold+","+lives+","+level+);
 		this.statsDisplay.updateLevelUI(gold, lives, level, score);
 	}
 
