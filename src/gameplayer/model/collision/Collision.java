@@ -24,7 +24,7 @@ public class Collision {
 		
 		this.data.setGold(this.data.getGold() + this.enemy.getGoldReward());
 		this.data.setScore(this.enemy.getScoreReward());
-		this.data.setScore(2);
+		//this.data.setScore(2);
 
 		//enemy.setHealth(enemy.getHealth()-weapon.getDamage());
 		//enemy.setHealth(enemy.getHealth()-weapon.getDamage());
