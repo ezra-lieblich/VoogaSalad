@@ -338,8 +338,6 @@ public class GamePlayerController implements Observer {
 	}
 
 	/*
-	 * private void updateLevel() { //TODO: use Parser's method to get path and
-	 * update the view's grid with that path }
 	 */
 	private void startAnimation() {
 		this.animationOn = true;
@@ -374,9 +372,7 @@ public class GamePlayerController implements Observer {
 		//// System.out.println("Calling check for win");
 		if (enemyManager.getEnemyOnGrid().size() == 0 && currentWave.size() == 0
 				&& this.oldLevel == enemyManager.getData().getCurrentLevel()) {
-			// //System.out.println("SET WIN!");
-			// System.out.println("---------New level in
-			// checkforwin--------------");
+
 			System.out
 					.println(enemyManager.getData().getCurrentLevel() + "<=" + enemyManager.getData().getLevelNumber());
 			if (enemyManager.getData().getCurrentLevel() <= enemyManager.getData().getLevelNumber() - 1) {
@@ -390,19 +386,13 @@ public class GamePlayerController implements Observer {
 	}
 
 	private void spawnEnemyOnInterval(EnemyManager enemyManager,
-			EnemyController control/* ,Queue<Enemy> currentWave */) {
+			EnemyController control) {
 		Thread enemyThread = new Thread() {
 			public void run() {
 				long intervalBetween = (long) control.getEnemyModel().getFrequencyOfNextWave();
 				while (intervalBetween != 0) {
 					if (currentWave.size() > 0) {
-						// System.out.println("currentWave: " +
-						// currentWave.size());
 						Enemy enemy = currentWave.poll();
-						if (enemy == null) {
-							// System.out.println("**********Enemy wave is null!
-							// new level time**********8");
-						}
 						enemyManager.spawnEnemy(enemy);
 					}
 
