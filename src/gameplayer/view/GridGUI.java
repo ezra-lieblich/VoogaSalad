@@ -35,7 +35,7 @@ public class GridGUI {
 	private List<int[]> path;
 	private List<ImageView> imagePath;
 
-	public static final String TEST_URL = "../../../Images/gridBackground.png"; 
+	public static final String TEST_URL = "../../../Images/mushbackground.png"; 
 																																							// dummy
 																																							// url
 
