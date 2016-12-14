@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import engine.path.PathManager;
 import gameplayer.model.Cell;
 import gameplayer.model.Grid;
 import gameplayer.model.Path;
@@ -34,9 +35,7 @@ public class GridGUI {
 	private List<int[]> path;
 	private List<ImageView> imagePath;
 
-	public static final String TEST_URL = "../../../Images/gridBackground.png"; 
-																																							// dummy
-																																							// url
+	public static final String TEST_URL = "../../../Images/BalloonBackground.jpg"; 
 
 	public GridGUI(int rows, int columns/*, List<int[]> path*/) {
 		//System.out.println("Rows: "+rows+"; columns: "+columns);
@@ -65,21 +64,7 @@ public class GridGUI {
 		return this.imagePath;
 	}
 	//for testing
-	@Deprecated
-	private void initDummyPath(){
-		
-		int[] stuff  = {0,0};
-		int []stuff1 = {1,1};
-		int []stuff2 = {2,2};
-		int[] stuff3={3,3};
-		int[] stuff4={4,4};
-		this.path = new ArrayList<int[]>();
-		this.path.add(stuff);
-		this.path.add(stuff1);
-		this.path.add(stuff2);
-		this.path.add(stuff3);
-		this.path.add(stuff4);
-	}
+
 	
 	public void init(){
 		//initDummyPath(); //TODO: get rid of
@@ -112,12 +97,14 @@ public class GridGUI {
 		this.grid.getChildren().addAll(towerImage, tower.getInfoBox());
 	}
 
-	public void populatePath(HashMap<Integer,Path>allPaths){
+	public void populatePath(HashMap<Integer,Path>allPaths, PathManager pathManager){
 		//System.out.println("populate path!");
 		for(Integer uniquePath: allPaths.keySet()){
+			engine.path.Path currentPath = pathManager.getEntity(uniquePath);
+			String pathPicture = currentPath.getImagePath();
 			Cell current = allPaths.get(uniquePath).getPathStart();
 			while (current != null){
-				ImageView pathImage = graphicsLib.createImageView(graphicsLib.createImage("kaneki.jpg"));
+				ImageView pathImage = graphicsLib.createImageView(graphicsLib.createImage(pathPicture));
 				double x =current.getX();
 				double y = current.getY();
 				//System.out.println("path cell x: "+x+"; y: "+y);

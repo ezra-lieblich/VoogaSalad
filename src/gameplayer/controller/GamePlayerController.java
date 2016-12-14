@@ -2,56 +2,42 @@ package gameplayer.controller;
 
 import gameplayer.loader.GamePlayerFactory;
 import gameplayer.loader.GameSavingController;
+import gameplayer.loader.SavedSettings;
 import gameplayer.loader.XMLParser;
-import gameplayer.main.main;
-import gameplayer.model.Cell;
 import gameplayer.model.GamePlayData;
 import gameplayer.model.GamePlayModel;
-import gameplayer.model.IDrawable;
 import gameplayer.model.enemy.Enemy;
 import gameplayer.model.enemy.EnemyManager;
 import gameplayer.model.tower.Tower;
 import gameplayer.model.weapon.Weapon;
 import gameplayer.view.GameGUI;
-import gameplayer.view.GridGUI;
 import gameplayer.view.helper.GraphicsLibrary;
 import gameplayer.view.helper.dragdrop.DragDropView;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.application.Application;
-import javafx.embed.swing.JFXPanel;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.CacheHint;
-import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import statswrapper.Wrapper;
-import java.awt.BorderLayout;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Queue;
-import javax.swing.BorderFactory;
-import javax.swing.JPanel;
+
+import engine.path.PathManager;
 
 public class GamePlayerController implements Observer {
 	public static final int Y_OFFSET = 54;
@@ -72,17 +58,14 @@ public class GamePlayerController implements Observer {
 	private DragDropController dropController;
 	private EnemyManager enemyManager;
 	private double oldLevel;
-	private int timer = 1;
 	private GraphicsLibrary graphics;
 	private Queue<Enemy> currentWave;
 	private HashMap<String, Integer> towerToId;
-	private double enemyFrequency;
 	private double startTime;
 	private double intervalBetweenWaves;
 
 	private boolean animationOn = false;
 
-	private Thread enemyThread;
 	// Might need to be refactored into a different class
 	private HashMap<Integer, ImageView> weaponsOnScreen;
 	private HashMap<Integer, ImageView> enemiesOnScreen;
@@ -111,14 +94,21 @@ public class GamePlayerController implements Observer {
 		this.enemyManager = this.enemyController.getEnemyModel();
 		this.imageBank = new HashMap<String, Image>();
 		createImageBank();
-		this.gameSavingController = new GameSavingController(this.model);
+		this.gameSavingController = new GameSavingController(this.model, xmlFilePath);
+		init(false);
 		// this.gameSavingController.saveGame();
+
 	}
 
-	// TODO: create another constructor that takes in a ManagerMediator and
-	// LevelNumber
-	// it should use the XMLParser(ManagerMediator) constructor to create an
-	// XMLParser (aka this.loader)
+	public GamePlayerController(String xmlFilePath, SavedSettings settings) {
+		this(xmlFilePath);
+		this.model.getData().setLevel(settings.getLevel());
+		this.model.getData().setGold(settings.getGold());
+		this.model.getData().setLife(settings.getLives());
+		this.model.getData().setScore(settings.getScore());
+	}
+	
+	
 	private void populateTowerToId() {
 		HashMap<Integer, engine.tower.Tower> mapping = this.model.getTowerManager().getAvailableTower();
 		for (int key : mapping.keySet()) {
@@ -145,7 +135,6 @@ public class GamePlayerController implements Observer {
 	public void init(boolean newLevel) {
 		// HashMap<String, Double> settings = this.loader.getGameSetting();
 		// this.enemyManager.setCurrentCell(this.model.getData().getGrid().getStartPoint());
-		System.out.println("NEW LEVEL INIT");
 		createImageBank();
 		populateTowerToId();
 		initGUI(newLevel);
@@ -156,6 +145,7 @@ public class GamePlayerController implements Observer {
 		}
 		this.towerController = new TowerController(this.model.getTowerManager(), this.view);
 		// initSaveGameButton();
+
 	}
 
 	/**
@@ -182,7 +172,6 @@ public class GamePlayerController implements Observer {
 
 	private void initGUI(boolean newlevel) {
 		// this.view = null;
-		System.out.println("initing gui");
 		int rows = model.getData().getRow();
 		int cols = model.getData().getColumns();
 		if (!newlevel) {
@@ -202,7 +191,6 @@ public class GamePlayerController implements Observer {
 					this.model.getData().getCurrentLevel(), this.model.getData().getScore(), getTowerImages(),
 					this.mainScene);
 		} else {
-
 			this.mainScene = view.init(this.model.getData().getGold(), this.model.getData().getLife(),
 					this.model.getData().getCurrentLevel(), this.model.getData().getScore(), getTowerImages());
 		}
@@ -211,7 +199,8 @@ public class GamePlayerController implements Observer {
 		// null?");
 		// //System.out.println(model.getData().getGrid());
 		if (!this.model.getData().getGrid().isNoPathType()) {
-			this.view.getGrid().populatePath(model.getData().getGrid().getAllPaths());
+			PathManager pathManager = this.loader.getPathManager();
+			this.view.getGrid().populatePath(model.getData().getGrid().getAllPaths(), pathManager);
 		}
 		this.dropController = new DragDropController(this.view, this.model, this.getTowerImageMap());
 	}
@@ -269,34 +258,36 @@ public class GamePlayerController implements Observer {
 		endCondition("http://people.duke.edu/~lz107/voogaTemplates/win.html");
 	}
 
-	private boolean okForNewLevel(double newLevel) {
-		// System.out.println("animationON: " + this.animationOn);
-		// System.out.println("this.oldLevel < newLevel: " + (this.oldLevel <
-		// newLevel));
-		// System.out.println("enemyManager.getEnemyOnGrid().size() == 0: " +
-		// (enemyManager.getEnemyOnGrid().size() == 0));
-		// System.out.println("currentWave.size() == 0: " + (currentWave.size()
-		// == 0));
-		return (this.animationOn && this.oldLevel < newLevel && enemyManager.getEnemyOnGrid().size() == 0
-				&& currentWave.size() == 0);
+	private boolean okForNewLevel() {
+		System.out.println("enemyManager.getEnemyOnGrid().size(): "+enemyManager.getEnemyOnGrid().size());
+		System.out.println("currentWave.size(): "+currentWave.size() );
+		return (noMoreEnemies() && enemyManager.getData().getCurrentLevel()<enemyManager.getData().getLevelNumber());
+
+	}
+	
+	private boolean noMoreEnemies(){
+		return (enemyManager.getEnemyOnGrid().size() == 0 && currentWave.size() == 0);
 	}
 
 	private void checkCreateNewLevel() {
 		// new level condition
-		double newLevel = this.model.getData().getCurrentLevel();
-		if (okForNewLevel(newLevel)) {
-			// System.out.println("NEW LEVEL");
+		if (okForNewLevel()) {
+			System.out.println("OK FOR NEW LEVEL");
+			enemyManager.getData().setLevel(enemyManager.getData().getCurrentLevel() + 1);
 			this.animation.pause();
-			this.startTime = System.currentTimeMillis();
-			this.intervalBetweenWaves = this.model.getEnemyManager().getTimeOfNextWave();
-			this.oldLevel = newLevel;
+			System.out.println("GAMELEVEL: "+this.enemyManager.getData().getCurrentLevel());
+
 			this.view.newLevelPopUp(e -> {
+				
 				this.model.initializeLevelInfo();
+				this.intervalBetweenWaves = this.model.getEnemyManager().getTimeOfNextWave();
+
 				// this.view.getGrid().getGrid().getChildren().clear();
 
 				this.view.getMainScreen().getChildren().clear();
 				init(true);
-
+				this.animation.play();
+				this.startTime = System.currentTimeMillis();
 			});
 		}
 	}
@@ -318,6 +309,26 @@ public class GamePlayerController implements Observer {
 		this.view.getMainScreen().setCenter(browser);
 	}
 
+	private boolean loseCondition() {
+		return (this.model.getData().getLife() <= 0);
+	}
+
+	private boolean winCondition() {
+		System.out.println("this.model.getData().getCurrentLevel() >= this.model.getData().getLevelNumber()"+
+	this.model.getData().getCurrentLevel() +">="+ this.model.getData().getLevelNumber());
+		return (this.model.getData().won() || (this.model.getData().getLife() > 0
+				&& noMoreEnemies() && this.model.getData().getCurrentLevel() >= this.model.getData().getLevelNumber()));
+	}
+
+	private void winLoseCondition() {
+		if (loseCondition()) {
+			gameOver();
+		} else if (winCondition()) {
+			// System.out.println("WIn game!");
+			winGame();
+		}
+	}
+
 	@Override
 	public void update(Observable o, Object arg) {
 		if (o instanceof GamePlayData) {
@@ -325,48 +336,39 @@ public class GamePlayerController implements Observer {
 			this.view.updateStatsDisplay(((GamePlayData) o).getGold(), ((GamePlayData) o).getLife(),
 					((GamePlayData) o).getCurrentLevel(), ((GamePlayData) o).getScore());
 			this.view.updateCurrentLevelStats(((GamePlayData) o).getCurrentLevel());
-			// check for game over condition
-			if (((GamePlayData) o).getLife() <= 0) {
-				gameOver();
-			} else if (((GamePlayData) o).won()) {
-				// System.out.println("WIn game!");
-				winGame();
-			}
-			// updateNewLevel();
-			checkCreateNewLevel();
+		
 
 		}
 	}
 
+	private boolean waveTimeIntervalElapsed() {
+		return (System.currentTimeMillis() - this.startTime > intervalBetweenWaves && intervalBetweenWaves >= 0);
+	}
+
 	/*
-	 * private void updateLevel() { //TODO: use Parser's method to get path and
-	 * update the view's grid with that path }
 	 */
 	private void startAnimation() {
 		this.animationOn = true;
 		this.model.getData().getGrid().printGrid();
-		// call this once per wave, gets the new wave, new enemy frequency, etc.
-		// getNewWaveOnInterval();
-		// countTime();
 		this.startTime = System.currentTimeMillis();
 		this.intervalBetweenWaves = this.model.getEnemyManager().getTimeOfNextWave();
 		spawnEnemyOnInterval(this.enemyManager,
 				this.enemyController/* , this.currentWave */);
+		System.out.println("GAMELEVEL: "+this.enemyManager.getData().getCurrentLevel());
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> {
 			((Pane) this.view.getGrid().getGrid()).getChildren().clear();
-
-			if (System.currentTimeMillis() - this.startTime > intervalBetweenWaves && intervalBetweenWaves >= 0) {
-				// if (this.currentWave.size() > 0) {
+			
+			if (waveTimeIntervalElapsed()) {
 				this.currentWave = this.model.getEnemyManager().getPackOfEnemyComing();
-				// }
 				this.intervalBetweenWaves = this.model.getEnemyManager().getTimeOfNextWave();
 			}
+			
 			this.model.updateInLevel(weaponsOnScreen);
 			this.enemyManager.update();
 			this.model.getCollisionManager().handleCollisions();
 			redrawEverything();
-			updateNewLevel();
-
+			checkCreateNewLevel();
+			winLoseCondition();
 		});
 		animation.setCycleCount(Timeline.INDEFINITE);
 		animation.getKeyFrames().add(frame);
@@ -375,40 +377,13 @@ public class GamePlayerController implements Observer {
 
 	}
 
-	private void updateNewLevel() {
-		//// System.out.println("Calling check for win");
-		if (enemyManager.getEnemyOnGrid().size() == 0 && currentWave.size() == 0
-				&& this.oldLevel == enemyManager.getData().getCurrentLevel()) {
-			// //System.out.println("SET WIN!");
-			// System.out.println("---------New level in
-			// checkforwin--------------");
-			// System.out.println(enemyManager.getData().getCurrentLevel() +
-			// "<=" + enemyManager.getData().getLevelNumber());
-			if (enemyManager.getData().getCurrentLevel() <= enemyManager.getData().getLevelNumber() - 1) {
-				// System.out.println("WHY ARE YOU NOT SETTING LEVEL");
-				enemyManager.getData().setLevel(enemyManager.getData().getCurrentLevel() + 1);
-
-				// System.out.println("SEt new level: " +
-				// enemyManager.getData().getCurrentLevel());
-			}
-		}
-
-	}
-
-	private void spawnEnemyOnInterval(EnemyManager enemyManager,
-			EnemyController control/* ,Queue<Enemy> currentWave */) {
+	private void spawnEnemyOnInterval(EnemyManager enemyManager, EnemyController control) {
 		Thread enemyThread = new Thread() {
 			public void run() {
 				long intervalBetween = (long) control.getEnemyModel().getFrequencyOfNextWave();
 				while (intervalBetween != 0) {
 					if (currentWave.size() > 0) {
-						// System.out.println("currentWave: " +
-						// currentWave.size());
 						Enemy enemy = currentWave.poll();
-						if (enemy == null) {
-							// System.out.println("**********Enemy wave is null!
-							// new level time**********8");
-						}
 						enemyManager.spawnEnemy(enemy);
 					}
 
@@ -494,23 +469,6 @@ public class GamePlayerController implements Observer {
 		}
 	}
 
-	/*
-	 * private void redraw(HashMap<Integer, ?> enemyRedraw){ for (int i :
-	 * enemyRedraw.keySet()) { if
-	 * (!enemiesOnScreen.containsKey(enemyRedraw.get(i).getUniqueID())) {
-	 * ImageView image = new
-	 * ImageView(graphics.createImage(enemyRedraw.get(i).getImage()));
-	 * graphics.setImageViewParams(image, DragDropView.DEFENSIVEWIDTH * 0.9,
-	 * DragDropView.DEFENSIVEHEIGHT * 0.9); image.setCache(true);
-	 * image.setCacheHint(CacheHint.SPEED);
-	 * image.setX(enemyRedraw.get(i).getX());
-	 * image.setY(enemyRedraw.get(i).getY());
-	 * enemiesOnScreen.put(enemyRedraw.get(i).getUniqueID(), image); } else {
-	 * enemiesOnScreen.get(enemyRedraw.get(i).getUniqueID()).setX(enemyRedraw.
-	 * get(i).getX());
-	 * enemiesOnScreen.get(enemyRedraw.get(i).getUniqueID()).setY(enemyRedraw.
-	 * get(i).getY()); } } }
-	 */
 	public HashMap<String, Image> createImageBank() {
 		Map<Integer, engine.tower.Tower> towers = this.loader.getTowers();
 		for (int i : towers.keySet()) {

@@ -4,6 +4,7 @@ import java.lang.reflect.Field;
 import java.util.function.BiConsumer;
 import engine.effect.EffectData;
 import engine.effect.Enemy;
+import gameplayer.model.GamePlayData;
 
 public class CollisionEffectFactory extends AbstractEffectFactory {
     public static final String TRIGGER_NAME = "collider";
@@ -15,12 +16,12 @@ public class CollisionEffectFactory extends AbstractEffectFactory {
     @EffectData
     protected Object myself;
     
-//    @EffectData
-//    protected Enemy foe;
+   @EffectData
+    protected GamePlayData data;
     
-    public CollisionEffectFactory () {
+    public CollisionEffectFactory (GamePlayData data) {
         super(TRIGGER_NAME, ENCOMPASSING_CLASS_NAME);
-//        foe = new Enemy();
+        this.data = data;
         loadInSpecificValues();
         
     }

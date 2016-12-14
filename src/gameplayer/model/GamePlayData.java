@@ -57,8 +57,7 @@ public class GamePlayData extends Observable{
 			this.gold.addListener((Observable, oldValue, newValue) -> allEffects.get(i).execute());
 			this.currentLevel.addListener((Observable, oldValue, newValue) -> allEffects.get(i).execute());
 
-		}
-		
+		}		
 		
 	}
 	
@@ -143,6 +142,12 @@ public class GamePlayData extends Observable{
 	
 	public void setScore(double additionalScore){
 		this.score.set(this.score.get() + additionalScore );
+		try {
+			Wrapper.getInstance().logScore(Double.toString(this.score.get()));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		setChanged();
 		notifyObservers();
 	}
@@ -179,11 +184,6 @@ public class GamePlayData extends Observable{
 	}
 
 	public void setLevel(int d) {
-		System.out.println("========================");
-		System.out.println("set level before level: " + this.currentLevel.get());
-		System.out.println("set level to " + d);
-		System.out.println("========================");
-		System.out.println();
 		this.currentLevel.set(d);;
 		setChanged();
 		notifyObservers();

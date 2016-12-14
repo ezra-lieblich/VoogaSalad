@@ -196,8 +196,12 @@ public class LevelTypeManagerController
 
     @Override
     public void setWavePath (int levelID, int waveID, int pathID) {
-        getWave(levelID, waveID).setPathID(pathID);
-        getTypeManager().getEntity(levelID).getWaveManager().addEntry(getWave(levelID, waveID));
+    	if (getTypeManager().getEntity(levelID).getPaths().contains(pathID)){
+    		getWave(levelID, waveID).setPathID(pathID);
+    		//getTypeManager().getEntity(levelID).getWaveManager().addEntry(getWave(levelID, waveID));
+    	}
+		getTypeManager().getEntity(levelID).getWaveManager().addEntry(getWave(levelID, waveID));
+
     }
 
     @Override

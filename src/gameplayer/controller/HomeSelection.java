@@ -59,7 +59,7 @@ public class HomeSelection {
 			fileName = temp.toString();
 //			System.out.println("File name: "+fileName);
 			GamePlayerController playerController = new GamePlayerController(fileName);
-			playerController.init(false);
+			//playerController.init(false);
 			s.setTitle(SplashScreen.TITLE);
 			s.setScene(playerController.getMainScene());
 			s.show();

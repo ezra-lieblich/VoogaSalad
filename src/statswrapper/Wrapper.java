@@ -70,6 +70,16 @@ public class Wrapper {
 	}
 	
 	/*
+	 * Record for every new level
+	 */
+	public void logScore(String score) throws IOException{
+		String endpoint = "logScore";
+		URL url = new URL(baseURL + endpoint);
+		String json = "{\"score\": \"" + score + "\"}";
+		String response = executeRequest(url, json, true);
+	}
+	
+	/*
 	 * Updated game score within the level
 	 */
 	public void updateGameScores(String field, String level, String value) throws IOException{
