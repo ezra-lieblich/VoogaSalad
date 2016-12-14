@@ -38,21 +38,22 @@ public class CollisionManager {
 			}
 			else {
 				Enemy targetEnemy = enemyManager.getEnemyOnGrid().get(targetUniqueID);
-				
-				xInRange = Math.abs(weapon.getX() - targetEnemy.getX()) <= 100; //make more robust
+				int hitBox = 75;
+				xInRange = Math.abs(weapon.getX() - targetEnemy.getX()) <= hitBox; //make more robust
 				//System.out.println("weapon x " + weapon.getX());
 				//System.out.println("enemy x "+ targetEnemy.getX());
 				//System.out.println("weapon y " + weapon.getY());
 				//System.out.println("enemy y "+ targetEnemy.getY());
-				yInRange = Math.abs(weapon.getY() - targetEnemy.getY()) <= 100; //make more robust
+				yInRange = Math.abs(weapon.getY() - targetEnemy.getY()) <= hitBox; //make more robust
 				
 				if (xInRange && yInRange) {
 					Collision collision = new Collision(weapon, targetEnemy, this.gameData);
 					collision.processCollision();
 					iter.remove(); 
 					if (targetEnemy.getHealth() <= 0) {
-						enemyManager.getEnemyOnGrid().remove(targetUniqueID);
+						
 						enemiesOnScreen.remove(targetUniqueID);
+						enemyManager.getEnemyOnGrid().remove(targetUniqueID);
 					}
 
 				}

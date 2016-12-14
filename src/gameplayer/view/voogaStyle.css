@@ -84,10 +84,11 @@
 }
 
 .gridGUI {
-	-fx-background-image: url(../../../Images/gridBackground.png);
+	-fx-background-image: url(../../../Images/BalloonBackground.jpg);
 	-fx-background-position: center center;
 	-fx-background-repeat: stretch;
 }
+
 
 .statsHBox {
 	-fx-background-color: #8da899;

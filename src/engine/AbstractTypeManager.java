@@ -120,10 +120,10 @@ public abstract class AbstractTypeManager<E extends Type> extends AbstractObserv
                                               new Class[] { visitableManager.getClass().getInterfaces()[0], Integer.class });
             visitMethod.invoke(this, new Object[] { visitableManager, dataMethod.getValue() });
         }
-        catch (NoSuchMethodException | IllegalArgumentException | InvocationTargetException e) {
+        catch (NoSuchMethodException | IllegalArgumentException  | InvocationTargetException e) {
             // This means that the class does not depend on the visitor and so does not have the subsequent handling methods (Not an Error)
             // This allows for the class to dynamically handle additional visitable objects, without having to make a method for each one in very visitor
-            return;
+        	return;
         }
         catch (SecurityException | IllegalAccessException e) {
                 throw new ReflectionException(e, INVALID_REFLECTION_CALL);
@@ -138,7 +138,7 @@ public abstract class AbstractTypeManager<E extends Type> extends AbstractObserv
     
     @Override
     public Map<Integer, E> getEntities() {
-        return Collections.unmodifiableMap(data.getProperty());
+        return data.getProperty();
     }
 
 }

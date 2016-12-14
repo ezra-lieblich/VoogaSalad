@@ -41,7 +41,7 @@ public class EnemyManager extends Observable{
 	HashMap<Integer,ImageView>enemiesOnScreen;
 
 
-	public EnemyManager(GamePlayData gameData,HashMap<Integer,ImageView>enemiesOnScreen) {
+	public EnemyManager(GamePlayData gameData,HashMap<Integer,ImageView>enemiesOnScreen) {		
 		this.gameData = gameData;
 		this.gameFactory = gameData.getFactory();
 		//this.graphicLib = new GraphicsLibrary();

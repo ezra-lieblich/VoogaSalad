@@ -2,6 +2,7 @@ package engine.level;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -148,12 +149,25 @@ public class LevelType extends AbstractType implements Level {
 
 	@Override
 	public void resetGridWaves() {
-		waves.getProperty().getEntities().values().clear();
+		paths.setProperty(new ArrayList<Integer>());
+		waves.getProperty().setEntities(new HashMap<Integer, Wave>());
+        waves.notifyObservers(waves.getProperty());
 	}
 
 	@Override
 	public void setWaveManager(WaveManager waveManager) {
 		waves.setProperty(waveManager);
+	}
+
+	@Override
+	public void removePathReferences(int pathID) {
+		paths.remove(pathID);
+		for (Wave wave : waves.getProperty().getEntities().values()) {
+			if (wave.getPathID() == pathID) {
+				removeWave(wave.getId());
+			}
+		}
+		System.out.println(waves);
 	}
 
 }

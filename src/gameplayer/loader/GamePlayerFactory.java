@@ -83,6 +83,10 @@ public class GamePlayerFactory{
 	public Map<Integer, Tower> getTowerUpgrades() {
 		return authoringFileReader.getTowerUpgrades();
 	}
+	
+	public PathManager getPathManager() {
+		return this.authoringFileReader.getPathManager();
+	}
 
 
 
@@ -112,6 +116,7 @@ public class GamePlayerFactory{
 				Path currPath = paths.get(index);
 				List<Coordinate<Integer>> coordinates = currPath.getCoordinates();
 				//System.out.println("coordinates size: " + coordinates.size());
+//				System.out.println("coordinates size: " + coordinates.size());
 				ArrayList<Cell> cells = new ArrayList<Cell>();
 				coordinates.forEach(c -> {
 					Cell currCell = levelGrid.getCell(c.getX(), c.getY());
@@ -135,6 +140,8 @@ public class GamePlayerFactory{
 				Path currPath = paths.get(pathIndex);
 				List<Coordinate<Integer>> coordinates = currPath.getCoordinates();
 				//System.out.println("coordinates size: " + coordinates.size());
+//				System.out.println("coordinates size: " + coordinates.size());
+
 				ArrayList<Cell> cells = new ArrayList<Cell>();
 				coordinates.forEach(c -> {
 					Cell currCell = levelGrid.getCell(c.getX(), c.getY());
