@@ -25,7 +25,6 @@ public class LevelAuthoringViewController extends EditorViewController
     private EnemyManagerController enemyDataSource;
     private EffectManagerController effectDataSource;
     private int currentLevelID;
-    private int currentWaveID;
 
     public LevelAuthoringViewController (int editorWidth, int editorHeight) {
         levelView = LevelAuthoringViewFactory.build(editorWidth, editorHeight);
@@ -70,9 +69,11 @@ public class LevelAuthoringViewController extends EditorViewController
     }
 
     @Override
-    public void onUserEnteredDeleteLevel () {
-        // TODO Auto-generated method stub
-
+    public void onUserPressedDeleteLevel () {
+        int nextID = this.levelView.getNearestAvailableItemID(currentLevelID);
+        levelDataSource.deleteType(currentLevelID);
+        currentLevelID = nextID;
+        this.refreshView();
     }
 
     @Override
@@ -96,11 +97,6 @@ public class LevelAuthoringViewController extends EditorViewController
         catch (NumberFormatException e) {
             createIntCheckDialogueBox();
         }
-    }
-
-    @Override
-    public void onUserEnteredAddWave () {
-        currentWaveID = levelDataSource.createWave(currentLevelID, levelView);
     }
 
     @Override
@@ -235,5 +231,10 @@ public class LevelAuthoringViewController extends EditorViewController
         cellData.setImagePath(levelDataSource.getImagePath(id));
         cellData.setId(id);
         return cellData;
+    }
+
+    @Override
+    public void onUserEnteredAddWave () {
+        levelDataSource.createWave(currentLevelID, levelView);
     }
 }

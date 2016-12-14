@@ -2,13 +2,12 @@ package authoring.editorview.level.subviews;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ResourceBundle;
 import authoring.editorview.PhotoFileChooser;
 import authoring.editorview.level.LevelAuthoringViewDelegate;
 import authoring.editorview.level.LevelSetView;
 import authoring.editorview.level.subviews.editorfields.AddLevelEffectView;
-import authoring.editorview.level.subviews.editorfields.CreateNewLevelView;
 import authoring.editorview.level.subviews.editorfields.CreateNewWaveView;
+import authoring.editorview.level.subviews.editorfields.DeleteLevel;
 import authoring.editorview.level.subviews.editorfields.LevelNameView;
 import authoring.editorview.level.subviews.editorfields.LevelRewardsView;
 import authoring.editorview.level.subviews.editorfields.LevelTransitionTimeField;
@@ -46,14 +45,12 @@ public class LevelEditorView extends PhotoFileChooser implements LevelSetView {
     WaveTableView waveTableView;
     PreviewLevelView previewLevelView;
     AddLevelEffectView addLevelEffect;
-    CreateNewLevelView createNewLevelView;
     private CreateNewWaveView createWaveView;
+    private DeleteLevel deleteLevelView;
 
     private VBox vbox;
     private AnchorPane rootBuffer;
     private File chosenFile;
-    private ResourceBundle labelsResource;
-    private ResourceBundle dialogueBoxResource;
 
     public LevelEditorView (LevelRewardsView levelRewardsView,
                             LevelNameView levelNameView,
@@ -61,7 +58,7 @@ public class LevelEditorView extends PhotoFileChooser implements LevelSetView {
                             WaveTableView waveTableView,
                             PreviewLevelView previewLevelView,
                             AddLevelEffectView addLevelEffect,
-                            CreateNewLevelView createNewLevelView,
+                            DeleteLevel deleteLevelView,
                             CreateNewWaveView createWaveView) {
         this.levelRewardsView = levelRewardsView;
         this.levelNameView = levelNameView;
@@ -69,8 +66,8 @@ public class LevelEditorView extends PhotoFileChooser implements LevelSetView {
         this.waveTableView = waveTableView;
         this.previewLevelView = previewLevelView;
         this.addLevelEffect = addLevelEffect;
-        this.createNewLevelView = createNewLevelView;
         this.createWaveView = createWaveView;
+        this.deleteLevelView = deleteLevelView;
 
         vbox = new VBox(10);
         rootBuffer = new AnchorPane();
@@ -92,7 +89,7 @@ public class LevelEditorView extends PhotoFileChooser implements LevelSetView {
         vbox.getChildren().addAll(levelRewardsView.getInstanceAsNode(),
                                   levelNameView.getInstanceAsNode(),
                                   transitionTimeField.getInstanceAsNode(),
-                                  createNewLevelView.getInstanceAsNode(),
+                                  deleteLevelView.getInstanceAsNode(),
                                   createWaveView.getInstanceAsNode(),
                                   waveTableView.getInstanceAsNode(),
                                   previewLevelView.getInstanceAsNode());
