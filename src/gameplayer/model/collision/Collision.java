@@ -18,8 +18,13 @@ public class Collision {
 	
 	public void processCollision() {
 		this.weapon.triggerEffect(this.enemy);
+		//System.out.println("old moneny: " + this.data.getGold() +" " + this.data.getScore());
+		//System.out.println("add moneny: " + this.enemy.getGoldReward() + " " + this.enemy.getScoreReward());
+		
+		
 		this.data.setGold(this.data.getGold() + this.enemy.getGoldReward());
-		this.data.setGold(this.data.getScore() + this.enemy.getScoreReward());
+		this.data.setScore(this.enemy.getScoreReward());
+		this.data.setScore(2);
 
 		//enemy.setHealth(enemy.getHealth()-weapon.getDamage());
 		//enemy.setHealth(enemy.getHealth()-weapon.getDamage());

@@ -514,6 +514,7 @@ public class GamePlayerController implements Observer {
 	public HashMap<String, Image> createImageBank() {
 		Map<Integer, engine.tower.Tower> towers = this.loader.getTowers();
 		for (int i : towers.keySet()) {
+			System.out.print("towerImagePath: " + towers.get(i).getImagePath());
 			Image image = graphics.createImage(towers.get(i).getImagePath());
 			imageBank.put("Tower " + i, image);
 		}
