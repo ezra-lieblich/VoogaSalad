@@ -64,6 +64,8 @@ public class GameGUI {
 	private int rows;
 	private int columns;
 	
+	private WebView newLevelBrowser;
+	
 	private HashMap<Integer,ImageView>towersOnScreen;
 
 	public GameGUI(int rows, int columns) {
@@ -101,6 +103,7 @@ public class GameGUI {
 		initStatsTab();
 		addButtonPanel();
 		initStatsDisplay(gold, lives, currentLevel, score);
+		//createNewLevelBrowser();
 		return this.scene;
 	}
 	
@@ -134,6 +137,12 @@ public class GameGUI {
 
 	public BorderPane getMainScreen() {
 		return mainScreen;
+	}
+	
+	private void createNewLevelBrowser(){
+		this.newLevelBrowser = new WebView();
+		WebEngine webEngine = this.newLevelBrowser.getEngine();
+		webEngine.load("http://people.duke.edu/~lz107/voogaTemplates/newlevel.html");
 	}
 
 	public void setMainScreen(BorderPane mainScreen) {
@@ -196,11 +205,11 @@ public class GameGUI {
 	 */
 	public void newLevelPopUp(EventHandler<ActionEvent> e) {
 		this.grid.getGrid().getChildren().clear();
-		// this.grid.getPathGrid().getChildren().clear();
+		
 		Button btn = graphics.createButton("Next level", e);
 		ImageView stuff = graphics.createImageView(graphics.createImage("newlevel.png"));
 		graphics.setImageViewParams(stuff, GridGUI.GRID_WIDTH, GridGUI.GRID_HEIGHT);
-		this.grid.getGrid().getChildren().add(stuff);
+		//this.grid.getGrid().getChildren().add(this.newLevelBrowser);
 		this.grid.getGrid().getChildren().add(btn);
 	}
 

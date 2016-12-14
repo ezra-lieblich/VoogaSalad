@@ -84,7 +84,7 @@
 }
 
 .gridGUI {
-	-fx-background-image: url(../../../Images/gridBackground.png);
+	-fx-background-image: url(../../../Images/mushbackground.png);
 	-fx-background-position: center center;
 	-fx-background-repeat: stretch;
 }
