@@ -36,6 +36,7 @@ import gameplayer.view.GridGUI;
  *
  */
 public class TowerManager extends Observable {
+	private static final int UPGRADE_COST = 100;
 	private GamePlayData gameData;
 	private EnemyManager enemyManager;
 	private Map<Integer, engine.tower.Tower> allTowerTypes;
@@ -264,8 +265,8 @@ public class TowerManager extends Observable {
 		*/
 		//System.out.println("tower upgrade check: " +upgraded== null );
 		//System.out.println("tower upgrade check: " +upgraded.getCost() );
-
-//		this.gameData.setGold(this.gameData.getGold() - upgraded.getCost());
+		
+		this.gameData.setGold(this.gameData.getGold() - UPGRADE_COST);
 //		toBeUpgraded.setImage(upgraded.getImagePath());
 		toBeUpgraded.setImage("Images/supermonkey.png"); 
 		 toBeUpgraded.incrementUpgradeCount();
