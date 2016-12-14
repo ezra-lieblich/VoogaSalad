@@ -133,7 +133,6 @@ public abstract class AbstractTypeManager<E extends Type> extends AbstractObserv
     @Override
     public <U extends VisitorManager<MethodData<Object>>> void accept (U visitor,
                                                                   MethodData<Object> methodData) {
-        System.out.println("Here");
         visitor.visitManager(this, methodData);
     }
     

@@ -171,13 +171,13 @@ public class EnemyAuthoringView implements EnemyUpdateView {
     @Override
     public void deleteEnemy () {
         enemyEditorView.clearView();
-        System.out.println("Getting here in enemy authoring view");
+        //System.out.println("Getting here in enemy authoring view");
     }
 
     @Override
     public void updateBank (List<Integer> ids) {
         this.enemyBank.updateBank(ids);
-        System.out.println(ids.size());
+        //System.out.println(ids.size());
         // enemyEffectView.clearView();
     }
 

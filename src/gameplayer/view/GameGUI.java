@@ -92,7 +92,7 @@ public class GameGUI {
 	}
 
 	public Scene init(double gold, double lives, double level, double score, List<String> imagePaths, Scene scene) {
-		System.out.println("GameGUI stats: "+lives+","+level+","+score+","+imagePaths);
+		//System.out.println("GameGUI stats: "+lives+","+level+","+score+","+imagePaths);
 		this.numLevels = level;
 		// createScene();
 		this.scene = scene;

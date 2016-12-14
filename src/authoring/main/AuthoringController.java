@@ -138,7 +138,7 @@ public class AuthoringController {
 
         }
         catch (Exception e) {
-            System.out.print(e);
+            //System.out.print(e);
             Alert errorDialogueBox = DialogueBoxFactory.createErrorDialogueBox("Error With File",
                                                                                "This file could not be loaded.");
         }

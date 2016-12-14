@@ -138,7 +138,7 @@ public class FileAggregator {
 		try {
 			Files.copy(source.toPath(), newImage.toPath());
 		} catch (IOException e) {
-			System.out.println("FAILED TO COPY IMAGE FILE: "+imagePath);
+			//System.out.println("FAILED TO COPY IMAGE FILE: "+imagePath);
 			e.printStackTrace();
 		}
 		//The copy will fail if for some reason the file is already created in the directory.

@@ -54,7 +54,6 @@ public class GameSavingController {
 		} catch (IOException e) {
 			System.out.println("Game does not exist, please choose another");
 		}
-		
 	}
 	
 	private String getUserInput() {
