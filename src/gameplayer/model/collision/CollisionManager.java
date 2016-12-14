@@ -38,7 +38,7 @@ public class CollisionManager {
 			}
 			else {
 				Enemy targetEnemy = enemyManager.getEnemyOnGrid().get(targetUniqueID);
-				int hitBox = 50;
+				int hitBox = 75;
 				xInRange = Math.abs(weapon.getX() - targetEnemy.getX()) <= hitBox; //make more robust
 				//System.out.println("weapon x " + weapon.getX());
 				//System.out.println("enemy x "+ targetEnemy.getX());

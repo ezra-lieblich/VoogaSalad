@@ -133,26 +133,18 @@ public class SplashScreen {
 			File out = filechooser.showOpenDialog(mainStage);
 			String xmlName;
 			SavedSettings settings;
-			int level;
 			try {
 				XStream deserializer = new XStream(new DomDriver());
 				settings = (SavedSettings) deserializer.fromXML(new FileInputStream(out));
 				xmlName = settings.getGameType();
-				/*
-				FileReader fileReader = new FileReader(out);
-				
-				BufferedReader buffer = new BufferedReader(fileReader);
-				xmlName = buffer.readLine();
-				level = Integer.parseInt(buffer.readLine());
-				buffer.close();
-				*/
-						
+
 				
 			} catch (Exception e1) {
 				System.out.println("Error reading file, please use a different file");
 				return;
 			}
 			GamePlayerController gameController = new GamePlayerController(xmlName, settings);
+			gameController.init(false);
 			
 			Stage stage = new Stage();
 			gameController.setDataStoreOnClose(stage);

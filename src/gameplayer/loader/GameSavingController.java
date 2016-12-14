@@ -32,6 +32,10 @@ public class GameSavingController {
 		EnemyManager eman = gameModel.getEnemyManager();
 		GamePlayData gameData = gameModel.getData();
 		SavedSettings settings = new SavedSettings(this.xmlName);
+		settings.setGold(gameData.getGold());
+		settings.setLevel(gameData.getCurrentLevel());
+		settings.setLives(gameData.getLife());
+		settings.setScore(gameData.getScore());
 		return new XStream(new DomDriver()).toXML(settings);
 	}
 	

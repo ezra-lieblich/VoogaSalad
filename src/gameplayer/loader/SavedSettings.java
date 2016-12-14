@@ -7,13 +7,13 @@ public class SavedSettings {
 	private double score;
 	private double gold;
 	private int level;
-	private int lives;
+	private double lives;
 	
 	public SavedSettings(String xmlFileName) {
 		this.gameType = xmlFileName;
 	}
 	
-	public void setLives(int numLives) {
+	public void setLives(double numLives) {
 		this.lives = numLives;
 	}
 	
@@ -45,7 +45,7 @@ public class SavedSettings {
 		return level;
 	}
 
-	public int getLives() {
+	public double getLives() {
 		return lives;
 	}
 }
