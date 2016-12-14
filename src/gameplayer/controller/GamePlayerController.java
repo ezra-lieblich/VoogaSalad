@@ -108,7 +108,8 @@ public class GamePlayerController implements Observer {
 		this.model.getData().setLife(settings.getLives());
 		this.model.getData().setScore(settings.getScore());
 		this.model.getData().setGrid(settings.getGrid());
-		init(true);
+		this.model.initializeLevelInfo();
+
 	}
 	
 	
