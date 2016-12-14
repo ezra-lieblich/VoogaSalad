@@ -1,7 +1,11 @@
 package splashscreen;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 import authoring.main.AuthoringController;
 import gameplayer.controller.GamePlayerController;
@@ -120,16 +124,34 @@ public class SplashScreen {
 			FileChooser filechooser = new FileChooser();
 	        Stage mainStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
 
+	        
 			File out = filechooser.showOpenDialog(mainStage);
-			String[] path = out.getPath().split("/");
-			String fileName = path[path.length-1];
-
-			String fileLocation = "SavedGames/"+fileName;
+			String xmlName;
+			int level;
+			try {
+				
+				FileReader fileReader = new FileReader(out);
+				
+				BufferedReader buffer = new BufferedReader(fileReader);
+				xmlName = buffer.readLine();
+				level = Integer.parseInt(buffer.readLine());
+				buffer.close();
+						
+				
+			} catch (Exception e1) {
+				System.out.println("Error reading file, please use a different file");
+				return;
+			}
 			
-//			gameplayer.loader.XMLParser parser = new XMLParser(fileLocation);
-//			
-//			String levelNumber;
-//			GamePlayerController controller = new GamePlayerController("SavedGames/"+fileName, levelNumber);
+			GamePlayerController gameController = new GamePlayerController(xmlName, level);
+			gameController.init(false);
+			
+			Stage stage = new Stage();
+			gameController.setDataStoreOnClose(stage);
+			stage.setTitle(TITLE);
+			stage.setScene(gameController.getMainScene());
+			stage.show();
+		
 			
 		});
 		HBox hbBtn = new HBox(10);

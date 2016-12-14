@@ -1,5 +1,6 @@
 package gameplayer.loader;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -19,11 +20,13 @@ public class GameSavingController {
 	//private XStream serializer;
 	private GamePlayModel gameModel;
 	int counter;
+	String xmlName;
 	
-	public GameSavingController(GamePlayModel model) {
+	public GameSavingController(GamePlayModel model, String xmlFilename) {
 		//serializer = new XStream(new DomDriver());
 		this.gameModel = model;
 		this.counter = 0;
+		this.xmlName = xmlFilename;
 	}
 	
 	public String toPrettyXML() {
@@ -35,11 +38,23 @@ public class GameSavingController {
 	}
 	
 	public void saveGame() {
-		String dirName = "SavedGames/newGame" + counter+ ".xml";
+		GamePlayData gameData = gameModel.getData();
+		int level = gameData.getCurrentLevel();
+		String content = this.xmlName+"\n"+level;
+		//File dirFile = new File("player.samplexml/savedGame-"+counter);
+		
+		FileWriter fw;
+		try {
+			fw = new FileWriter("player.samplexml/savedGame-"+counter+".txt");
+			BufferedWriter bw = new BufferedWriter(fw);
+			bw.write(content);
+			bw.close();
+		} catch (IOException e) {
+			System.out.println("Game does not exist, please choose another");
+		}
+		
 		counter += 1;
-		File newFile = new File(dirName);
-		String content = toPrettyXML();
-		System.out.println("XML LENTHHHHH " +content.length());
+		/*
 		try {
 			FileWriter writer = new FileWriter(newFile);
 			writer.write(content);
@@ -48,5 +63,6 @@ public class GameSavingController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		*/
 	}
 }
