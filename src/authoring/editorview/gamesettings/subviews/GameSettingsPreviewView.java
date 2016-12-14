@@ -22,7 +22,6 @@ public class GameSettingsPreviewView implements GameSettingsSetView {
         pathRoot = new Group();
         formatImageView(size);
         root.getChildren().add(pathRoot);
-
     }
 
     private void formatImageView (int size) {
@@ -41,7 +40,6 @@ public class GameSettingsPreviewView implements GameSettingsSetView {
         File imageFile = new File(imagePath);
         Image image = new Image(imageFile.toURI().toString());
         gameImageView.setImage(image);
-
     }
 
     public void updateGridDimensions (int size) {
@@ -49,8 +47,7 @@ public class GameSettingsPreviewView implements GameSettingsSetView {
     }
 
     public void updatePathList (List<Integer> pathList) {
-        pathRoot.getChildren().clear();
-
+    	pathRoot.getChildren().clear();
         for (Integer pathID : pathList) {
             GameSettingsPathPreview pathPreview = new GameSettingsPathPreview(
                                                                               delegate.getPathCoordinates(pathID),
@@ -58,7 +55,6 @@ public class GameSettingsPreviewView implements GameSettingsSetView {
                                                                               delegate.getPathDimensions(pathID));
             pathRoot.getChildren().add(pathPreview.getInstanceAsNode());
         }
-
     }
 
     @Override

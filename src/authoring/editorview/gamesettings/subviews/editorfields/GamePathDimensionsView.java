@@ -63,7 +63,8 @@ public class GamePathDimensionsView implements GameSettingsSetView {
     private void submitGridDimensions (String gridDimensionsString) {
         try {
             dimensions = Integer.parseInt(gridDimensionsString);
-            delegate.onUserEnteredGameGridSize(getGridDimensions());
+            delegate.onUserEnteredGameGridSize(dimensions);
+            
         }
         catch (NumberFormatException e) {
             setGridDimensions(dimensions);

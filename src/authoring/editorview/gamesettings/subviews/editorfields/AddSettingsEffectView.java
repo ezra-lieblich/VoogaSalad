@@ -31,7 +31,7 @@ public class AddSettingsEffectView implements GameSettingsSetView {
         addSettingsEffectButton =
                 ButtonFactory.makeButton(labelsResource.getString("AddEffect"),
                                          e -> delegate.onUserPressedAddEffect());
-        addSettingsEffectButton.setPrefWidth(280);
+        addSettingsEffectButton.setPrefWidth(230);
     }
     
 }
