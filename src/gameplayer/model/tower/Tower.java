@@ -38,7 +38,7 @@ public class Tower implements IDrawable {
 		this.upgradeList = new LinkedList<Integer>();
 		this.upgradeList.addAll(tt.getUpgrades());
 		//System.out.println("upgradable: " + upgradeList.size());
-		this.upgradable = this.upgradeList.isEmpty();
+		this.upgradable = !this.upgradeList.isEmpty();
 		this.showInfo = false;
 		this.graphics = new GraphicsLibrary();
 		initVBox();
@@ -68,7 +68,7 @@ public class Tower implements IDrawable {
 	}
 	
 	public Boolean upgradable(){
-		return this.upgradable();
+		return this.upgradable;
 	}
 	
 	public int getUpgradeType(){

@@ -234,6 +234,7 @@ public class TowerManager extends Observable {
 	 */
 	public void sellTower(int uniqueTowerID){
 		Tower t = this.towersOnGrid.get(uniqueTowerID);
+		System.out.println(t.getImage());
 		this.gameData.setGold(this.gameData.getGold() + t.sellTower());
 		this.gameData.getGrid().removeTower((int)t.getX(),(int)t.getX());
 		this.towersOnGrid.remove(uniqueTowerID);

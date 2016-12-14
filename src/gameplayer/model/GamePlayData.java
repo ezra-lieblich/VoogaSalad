@@ -79,6 +79,7 @@ public class GamePlayData extends Observable{
 	}
 	
 	public void initializeLevelInfo() {
+		System.out.println("game data level: "+this.currentLevel.get());
 		setLevel(this.currentLevel.get());
 		this.grid = this.factory.getGrid(this.currentLevel.get());
 		gridArray = this.grid.getGrid();
@@ -100,6 +101,11 @@ public class GamePlayData extends Observable{
 
 	public boolean won(){
 		return this.win;
+	}
+	
+	public void setGrid(Grid grid) {
+		this.grid = grid;
+		this.gridArray = grid.getGrid();
 	}
 	
 	public GamePlayerFactory getFactory(){

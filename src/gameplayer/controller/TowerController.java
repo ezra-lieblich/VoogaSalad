@@ -41,12 +41,13 @@ public class TowerController {
 		this.towerManager.sellTower(id);
 	}
 
-	public void handleSellTowerClick() {
+	public void handleSellTowerClick(Tower t) {
 
 		Map<Integer, Tower> towersOnGrid = towerManager.getTowerOnGrid();
 		for (Map.Entry<Integer, Tower> entry : towersOnGrid.entrySet()) {
-
-			sellTower(entry.getKey());
+			if(entry.getValue().equals(t)){
+				sellTower(entry.getKey());
+			}
 
 		}
 	}

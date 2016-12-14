@@ -894,12 +894,12 @@
                     <triggerConditionGroovy class="engine.observer.ObservableObjectProperty">
                       <observers/>
                       <listeners/>
-                      <property class="string">collider.getHealth() == 50</property>
+                      <property class="string">collider.getHealth() >= 0</property>
                     </triggerConditionGroovy>
                     <effectGroovy class="engine.observer.ObservableObjectProperty">
                       <observers/>
                       <listeners/>
-                      <property class="string">collider.setHealth(110)</property>
+                      <property class="string">collider.setHealth(-10)</property>
                     </effectGroovy>
                   </engine.effect.EffectType>
                 </entry>
@@ -941,12 +941,12 @@
                     <triggerConditionGroovy class="engine.observer.ObservableObjectProperty">
                       <observers/>
                       <listeners/>
-                      <property class="string">collider.getHealth() == 50</property>
+                      <property class="string">collider.getHealth() >= 0</property>
                     </triggerConditionGroovy>
                     <effectGroovy class="engine.observer.ObservableObjectProperty">
                       <observers/>
                       <listeners/>
-                      <property class="string">collider.setHealth(110)</property>
+                      <property class="string">collider.setHealth(-10)</property>
                     </effectGroovy>
                   </engine.effect.EffectType>
                 </entry>
@@ -2161,7 +2161,7 @@
                     <triggerConditionGroovy class="engine.observer.ObservableObjectProperty">
                       <observers/>
                       <listeners/>
-                      <property class="string">collider.getHealth() == 50</property>
+                      <property class="string">collider.getHealth() >= 0</property>
                     </triggerConditionGroovy>
                     <effectGroovy class="engine.observer.ObservableObjectProperty">
                       <observers/>
@@ -2202,12 +2202,12 @@
                     <triggerConditionGroovy class="engine.observer.ObservableObjectProperty">
                       <observers/>
                       <listeners/>
-                      <property class="string">collider.getHealth() == 50</property>
+                      <property class="string">collider.getHealth() >= 0</property>
                     </triggerConditionGroovy>
                     <effectGroovy class="engine.observer.ObservableObjectProperty">
                       <observers/>
                       <listeners/>
-                      <property class="string">collider.setHealth(110)</property>
+                      <property class="string">collider.setHealth(-10)</property>
                     </effectGroovy>
                   </engine.effect.EffectType>
                 </entry>
