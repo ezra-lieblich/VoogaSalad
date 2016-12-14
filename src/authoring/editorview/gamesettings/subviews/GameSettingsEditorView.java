@@ -128,7 +128,9 @@ public class GameSettingsEditorView implements GameSettingsSetView {
     }
 
     public void updateGridDimensions (int size) {
+    	gamePathView.clearPathList();
         gamePathDimensionsView.setGridDimensions(size);
+        
     }
 
     public void updateAvailablePathList (List<Integer> availablePathList) {

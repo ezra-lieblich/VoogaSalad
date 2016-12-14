@@ -81,7 +81,8 @@ public class GameModeTypeManagerController
 				.addWinningConditionsListener((oldValue, newValue) -> updateView.updateLosingConditions(newValue))
 				.addPathListener((oldValue, newValue) -> updateView.updatePathList(newValue))
 				.addGridSizeListener((oldValue, newValue) -> updateView.updateGridSize(newValue))
-				.addPathTypeListener((oldValue, newValue) -> updateView.updatePathType(newValue.name()));	
+				.addPathTypeListener((oldValue, newValue) -> updateView.updatePathType(newValue.name()));
+				
 	}
 
 	@Override
@@ -99,6 +100,7 @@ public class GameModeTypeManagerController
 	public void setGridSize(int gameModeID, int gridSize) {
 		getTypeManager().notifyObservers(new MethodObjectData<Object>("GridSize", gameModeID) );
 		getTypeManager().getEntity(gameModeID).setGridSize(gridSize);
+		getTypeManager().getEntity(gameModeID).getPaths().clear();
 	}
 
 	@Override
