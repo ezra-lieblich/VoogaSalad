@@ -63,7 +63,7 @@ public class GamePathView implements GameSettingsSetView {
             }
             else if (!pathNames.contains(pair.getName()) && pathNameList.contains(pair.getName())) {
             	pathNameList.remove(pair.getName());
-                pathIdList.remove(pair.getId());
+                pathIdList.remove((Object) pair.getId());
                 delegate.onUserEnteredRemovePath(pair.getId());
 
             }

@@ -47,7 +47,7 @@ public class GameSettingsPreviewView implements GameSettingsSetView {
     }
 
     public void updatePathList (List<Integer> pathList) {
-        pathRoot.getChildren().clear();
+    	pathRoot.getChildren().clear();
         for (Integer pathID : pathList) {
             GameSettingsPathPreview pathPreview = new GameSettingsPathPreview(
                                                                               delegate.getPathCoordinates(pathID),
