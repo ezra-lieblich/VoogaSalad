@@ -94,13 +94,7 @@ public class GamePlayerController implements Observer {
 		this.imageBank = new HashMap<String, Image>();
 		createImageBank();
 		this.gameSavingController = new GameSavingController(this.model);
-<<<<<<< HEAD
 		//this.gameSavingController.saveGame();
-=======
-		// this.gameSavingController.saveGame();
-		
-		
->>>>>>> 94e15edd46adec965e8b2fcf617d47c4c20ff8fb
 	}
 
 	// TODO: create another constructor that takes in a ManagerMediator and
