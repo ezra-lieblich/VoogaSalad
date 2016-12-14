@@ -331,6 +331,7 @@ public class GamePlayerController implements Observer {
 			winLoseCondition();
 			// updateNewLevel();
 			checkCreateNewLevel();
+			updateNewLevel();
 
 		}
 	}
@@ -345,6 +346,7 @@ public class GamePlayerController implements Observer {
 		// call this once per wave, gets the new wave, new enemy frequency, etc.
 		// getNewWaveOnInterval();
 		// countTime();
+		
 		this.startTime = System.currentTimeMillis();
 		this.intervalBetweenWaves = this.model.getEnemyManager().getTimeOfNextWave();
 		spawnEnemyOnInterval(this.enemyManager,
@@ -363,7 +365,7 @@ public class GamePlayerController implements Observer {
 			this.model.getCollisionManager().handleCollisions();
 			redrawEverything();
 			winLoseCondition();
-			updateNewLevel();
+			//updateNewLevel();
 
 		});
 		animation.setCycleCount(Timeline.INDEFINITE);
@@ -380,14 +382,14 @@ public class GamePlayerController implements Observer {
 			// //System.out.println("SET WIN!");
 			// System.out.println("---------New level in
 			// checkforwin--------------");
-			// System.out.println(enemyManager.getData().getCurrentLevel() +
-			// "<=" + enemyManager.getData().getLevelNumber());
-			if (enemyManager.getData().getCurrentLevel() <= enemyManager.getData().getLevelNumber() - 1) {
+			System.out.println(enemyManager.getData().getCurrentLevel() +
+			 "<=" + enemyManager.getData().getLevelNumber());
+			if (enemyManager.getData().getCurrentLevel() <= enemyManager.getData().getLevelNumber()-1) {
 				// System.out.println("WHY ARE YOU NOT SETTING LEVEL");
 				enemyManager.getData().setLevel(enemyManager.getData().getCurrentLevel() + 1);
 
-				// System.out.println("SEt new level: " +
-				// enemyManager.getData().getCurrentLevel());
+				 System.out.println("SEt new level: " +
+				 enemyManager.getData().getCurrentLevel());
 			}
 		}
 
