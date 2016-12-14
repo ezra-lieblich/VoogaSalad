@@ -75,8 +75,8 @@ public class TowerManager extends Observable {
 		//System.out.println("Alltowertypes: ");
 		//System.out.println(allTowerTypes);
 		for (int i=0;i<allTowerTypes.keySet().size();i++) {
-			System.out.println("At tower #: "+i);
-			System.out.println("At "+i+":"+allTowerTypes.get(i));
+			//System.out.println("At tower #: "+i);
+			//System.out.println("At "+i+":"+allTowerTypes.get(i));
 			availableTowerTypes.put(i, allTowerTypes.get(i));
 
 		}
@@ -154,11 +154,11 @@ public class TowerManager extends Observable {
 			int fireRate =  (int) ((int) this.timeInterval/weaponForGun.getReloadTime());
 			double x2 = this.gameData.cellToCoordinate(x1);
 			double y2 = this.gameData.cellToCoordinate(y1);
-			System.out.println("plaCE tower x1 "+x1);
-			System.out.println("plaCE tower y1 "+y1);
+			//System.out.println("plaCE tower x1 "+x1);
+			//System.out.println("plaCE tower y1 "+y1);
 
-			System.out.println("place tower x2: "+x2);
-			System.out.println("place tower y2: "+y2);
+			//System.out.println("place tower x2: "+x2);
+			//System.out.println("place tower y2: "+y2);
 
 			Gun tempGun = new Gun(fireRate ,weaponForGun, x2+WEAPONXERROR, y2+WEAPONYERROR);// change fire rate 
 			gunForTower.add(tempGun);
@@ -234,6 +234,7 @@ public class TowerManager extends Observable {
 	 */
 	public void sellTower(int uniqueTowerID){
 		Tower t = this.towersOnGrid.get(uniqueTowerID);
+		System.out.println(t.getImage());
 		this.gameData.setGold(this.gameData.getGold() + t.sellTower());
 		this.gameData.getGrid().removeTower((int)t.getX(),(int)t.getX());
 		this.towersOnGrid.remove(uniqueTowerID);

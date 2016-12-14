@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import authoring.editorview.gamesettings.GameSettingsAuthoringViewDelegate;
 import authoring.editorview.gamesettings.GameSettingsSetView;
+import authoring.editorview.gamesettings.subviews.editorfields.AddSettingsEffectView;
 import authoring.editorview.gamesettings.subviews.editorfields.GameImageView;
 import authoring.editorview.gamesettings.subviews.editorfields.GameInitialLivesView;
 import authoring.editorview.gamesettings.subviews.editorfields.GameInitialMoneyView;
@@ -40,6 +41,7 @@ public class GameSettingsEditorView implements GameSettingsSetView {
     private GameLosingConditionsView gameLosingConditionsView;
     private GamePathDimensionsView gamePathDimensionsView;
     private GamePathView gamePathView;
+    private AddSettingsEffectView settingsEffectView;
 
     private static final String RESOURCE_FILE_NAME = "resources/GameAuthoringSettings";
     private ResourceBundle settingsResource = ResourceBundle.getBundle(RESOURCE_FILE_NAME);
@@ -60,6 +62,7 @@ public class GameSettingsEditorView implements GameSettingsSetView {
         this.gameLosingConditionsView = new GameLosingConditionsView(settingsResource);
         this.gamePathDimensionsView = new GamePathDimensionsView();
         this.gamePathView = new GamePathView(settingsResource);
+        this.settingsEffectView = new AddSettingsEffectView(settingsResource);
         buildView();
     }
 
@@ -82,6 +85,7 @@ public class GameSettingsEditorView implements GameSettingsSetView {
                                   gameInitialMoneyView.getInstanceAsNode(),
                                   gameWinningConditionsView.getInstanceAsNode(),
                                   gameLosingConditionsView.getInstanceAsNode(),
+                                  settingsEffectView.getInstanceAsNode(),
                                   gamePathTypeView.getInstanceAsNode(),
                                   gamePathDimensionsView.getInstanceAsNode(),
                                   gamePathView.getInstanceAsNode());
@@ -103,7 +107,7 @@ public class GameSettingsEditorView implements GameSettingsSetView {
         gamePathDimensionsView.setDelegate(delegate);
         gameWinningConditionsView.setDelegate(delegate);
         gameLosingConditionsView.setDelegate(delegate);
-
+        settingsEffectView.setDelegate(delegate);
     }
 
     public void updateName (String name) {

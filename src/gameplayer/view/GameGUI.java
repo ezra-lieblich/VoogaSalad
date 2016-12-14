@@ -92,7 +92,7 @@ public class GameGUI {
 	}
 
 	public Scene init(double gold, double lives, double level, double score, List<String> imagePaths, Scene scene) {
-		System.out.println("GameGUI stats: "+lives+","+level+","+score+","+imagePaths);
+		//System.out.println("GameGUI stats: "+lives+","+level+","+score+","+imagePaths);
 		this.numLevels = level;
 		// createScene();
 		this.scene = scene;
@@ -207,6 +207,7 @@ public class GameGUI {
 		this.grid.getGrid().getChildren().clear();
 		
 		Button btn = graphics.createButton("Next level", e);
+		btn.getStyleClass().add("ipad-dark-grey");
 		ImageView stuff = graphics.createImageView(graphics.createImage("newlevel.png"));
 		graphics.setImageViewParams(stuff, GridGUI.GRID_WIDTH, GridGUI.GRID_HEIGHT);
 		//this.grid.getGrid().getChildren().add(this.newLevelBrowser);
@@ -248,6 +249,10 @@ public class GameGUI {
 //		scroll.setContent(browser);
 //		Tab tab = dragDrop.createTab("Your Stats");
 //		tab.setContent(scroll);
+	}
+	
+	public StatsDisplay getStatsDisplay(){
+		return this.statsDisplay;
 	}
 
 	private void initStatsDisplay(double gold, double lives, double level, double score) {
@@ -291,6 +296,7 @@ public class GameGUI {
 
 	public void reRenderEnemy(HashMap<Integer, ImageView> redraw) {
 		for (ImageView image : redraw.values()) {
+			//System.out.println("Enemy image: "+image.toString());
 			this.grid.getGrid().getChildren().add(image);
 		}
 	}

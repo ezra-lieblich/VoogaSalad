@@ -68,31 +68,31 @@ public class GamePlayData extends Observable{
 	 */
 	public void initializeGameSetting() {
 		HashMap<String, Double> settingInfo = this.factory.getGameSetting();
-		System.out.println("total levels: "+ settingInfo.get("totalNumberOfLevels"));
+		//System.out.println("total levels: "+ settingInfo.get("totalNumberOfLevels"));
 		//this.numLevels.setValue(2.0);
 		this.numLevels.set(settingInfo.get("totalNumberOfLevels"));  // put into property file
 		this.gold.set(settingInfo.get("gold"));
 		this.lives.set(settingInfo.get("lives").intValue());
 		this.currentLevel.set(settingInfo.get("levelnumber").intValue()); //REMEMBER TO CHANGE
-		System.out.println("initial level number: "+this.currentLevel.get());
+		//System.out.println("initial level number: "+this.currentLevel.get());
 		this.score.set(0);
 	}
 	
 	public void initializeLevelInfo() {
+		System.out.println("game data level: "+this.currentLevel.get());
 		setLevel(this.currentLevel.get());
 		this.grid = this.factory.getGrid(this.currentLevel.get());
 		gridArray = this.grid.getGrid();
 		this.gridX = this.gridArray.length;
 		this.gridY = this.gridArray[0].length;
-		
 		// get level rewards and change current score, life, gold according
 	}
 	
 	@EffectMethod
 	public void setWin(){
-		System.out.println("==================");
-		System.out.println("total number of levels: " + this.numLevels.get());
-		System.out.println("current level number: " + this.currentLevel.get());
+		//System.out.println("==================");
+		//System.out.println("total number of levels: " + this.numLevels.get());
+		//System.out.println("current level number: " + this.currentLevel.get());
 
 		this.win = true;
 		setChanged();
@@ -101,6 +101,11 @@ public class GamePlayData extends Observable{
 
 	public boolean won(){
 		return this.win;
+	}
+	
+	public void setGrid(Grid grid) {
+		this.grid = grid;
+		this.gridArray = grid.getGrid();
 	}
 	
 	public GamePlayerFactory getFactory(){
@@ -153,7 +158,7 @@ public class GamePlayData extends Observable{
 	}
 
 	public void setGold(double gold) {
-		System.out.println("Setting gold");
+		//System.out.println("Setting gold");
 		this.gold.set(gold);
 		try {
 			Wrapper.getInstance().updateGameScores("gold", Integer.toString((int)this.currentLevel.get()), Double.toString(this.gold.get()));
@@ -184,6 +189,8 @@ public class GamePlayData extends Observable{
 	}
 
 	public void setLevel(int d) {
+		System.out.println("set level to be: " + d);
+		System.out.println("set level check win:  " + this.win);
 		this.currentLevel.set(d);;
 		setChanged();
 		notifyObservers();

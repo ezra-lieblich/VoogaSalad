@@ -20,6 +20,7 @@ public class EffectAvailableMethodsView extends ImageBank implements EffectSetVi
 
     public EffectAvailableMethodsView () {
         super();
+        listView.setPrefWidth(450);
     }
 
     @Override
@@ -29,13 +30,12 @@ public class EffectAvailableMethodsView extends ImageBank implements EffectSetVi
 
     @Override
     protected void userSelectedRow (int index) {
-        // TODO Auto-generated method stub
-
+        // Do nothing
     }
 
     public void updateAvailMethods (List<String> list) {
         if (dataSource == null) {
-            System.out.println("Table data source not set");
+            //System.out.println("Table data source not set");
             return;
         }
         this.items.remove(CONTENT_OFFSET, items.size());

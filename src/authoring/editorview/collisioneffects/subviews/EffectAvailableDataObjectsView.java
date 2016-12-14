@@ -22,6 +22,7 @@ public class EffectAvailableDataObjectsView extends ImageBank implements EffectS
 
     public EffectAvailableDataObjectsView () {
         super();
+        listView.setPrefWidth(170);
     }
 
     @Override
@@ -47,7 +48,7 @@ public class EffectAvailableDataObjectsView extends ImageBank implements EffectS
 
     public void updateAvailDataObjects (List<String> list) {
         if (dataSource == null) {
-            System.out.println("Table data source not set");
+            //System.out.println("Table data source not set");
             return;
         }
         this.items.remove(CONTENT_OFFSET, items.size());

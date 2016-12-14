@@ -42,6 +42,24 @@ public class FileAggregator {
 		return defaultInstance;
 	}
 	
+	
+	public void writeXMLFile(File xmlFile, String xmlContent){
+        if (xmlFile != null) {
+            FileWriter fileWriter;
+            try {
+                fileWriter = new FileWriter(xmlFile);
+                fileWriter.write(xmlContent);
+                fileWriter.close();
+            }
+            catch (IOException e) {
+                Alert fileError =
+                        DialogueBoxFactory.createErrorDialogueBox("Error with file. Can't be saved",
+                                                                  "File Error");
+                fileError.show();
+            }
+        }
+	}
+	
 	/**
 	 * 
 	 * @param rootDirectory – This is the folder with user-input title. The working game directory is renamed to match this folder.
@@ -120,7 +138,7 @@ public class FileAggregator {
 		try {
 			Files.copy(source.toPath(), newImage.toPath());
 		} catch (IOException e) {
-			System.out.println("FAILED TO COPY IMAGE FILE: "+imagePath);
+			//System.out.println("FAILED TO COPY IMAGE FILE: "+imagePath);
 			e.printStackTrace();
 		}
 		//The copy will fail if for some reason the file is already created in the directory.

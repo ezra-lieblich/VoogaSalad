@@ -75,7 +75,7 @@ public class XMLParser {
 			
 		} catch (FileNotFoundException e) {
 			//TODO: implement real error handling
-			System.out.println("File not found, please try again");
+			//System.out.println("File not found, please try again");
 		} 
 		return null;
 	}

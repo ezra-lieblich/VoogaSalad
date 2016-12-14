@@ -65,7 +65,7 @@ public class XMLGallery {
 	
 	
 	public void createNewGame(Stage s, String filename) {
-		System.out.println("File: "+filename);
+		//System.out.println("File: "+filename);
 		GamePlayerController playerController = new GamePlayerController("player.samplexml/"+filename);
 		//playerController.init(false); init moved to GamePlayerController constructor
 		playerController.setDataStoreOnClose(s);

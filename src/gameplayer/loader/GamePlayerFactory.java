@@ -115,6 +115,7 @@ public class GamePlayerFactory{
 			//for (Integer index : levelPaths) {
 				Path currPath = paths.get(index);
 				List<Coordinate<Integer>> coordinates = currPath.getCoordinates();
+				//System.out.println("coordinates size: " + coordinates.size());
 //				System.out.println("coordinates size: " + coordinates.size());
 				ArrayList<Cell> cells = new ArrayList<Cell>();
 				coordinates.forEach(c -> {
@@ -138,7 +139,9 @@ public class GamePlayerFactory{
 			for (Integer pathIndex : paths.keySet()) {
 				Path currPath = paths.get(pathIndex);
 				List<Coordinate<Integer>> coordinates = currPath.getCoordinates();
+				//System.out.println("coordinates size: " + coordinates.size());
 //				System.out.println("coordinates size: " + coordinates.size());
+
 				ArrayList<Cell> cells = new ArrayList<Cell>();
 				coordinates.forEach(c -> {
 					Cell currCell = levelGrid.getCell(c.getX(), c.getY());
@@ -166,6 +169,8 @@ public class GamePlayerFactory{
 
 	public Map<Integer, Tower> getTowers() {
 		for (Tower t : authoringFileReader.getTowerTypes().values()) {
+			//System.out.println("TOWER IMAGE PATH");
+			//System.out.println(t.getImagePath());
 		}
 
 		return (Map<Integer, Tower>) authoringFileReader.getTowerTypes(); 
@@ -181,11 +186,12 @@ public class GamePlayerFactory{
 	}
 
 	public Queue<Enemy> getIndividualWaveQueue(Wave wave, int levelNumber) {
+		//System.out.println("dsakfhsdaf jksdahflsjksdhafjk sdahjk sdah");
 		Map<Integer, engine.enemy.Enemy> enemyTypes = this.authoringFileReader.getEnemyTypes(); //refactor name
 		engine.enemy.Enemy enemyType = enemyTypes.get(wave.getEnemyID());
 		Queue<Enemy> enemies = new LinkedList<Enemy>();
 		int pathID = wave.getPathID(); //needs to start at 0, hacky fix
-//		System.out.println("Path id: "+pathID);
+		//System.out.println("Path id: "+pathID);
 		for (int i = 0; i < wave.getEnemyCount(); i++) {
 			//System.out.println("Level: "+levelNumber);
 			//System.out.println("Does the grid with the path exist?");

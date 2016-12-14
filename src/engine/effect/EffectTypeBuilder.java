@@ -22,8 +22,10 @@ public class EffectTypeBuilder extends AbstractTypeBuilder<Effect, EffectBuilder
     public static final double DEFAULT_SIZE = 1;
     public static final String DEFAULT_SOUND_PATH = "Music/DopeBeats.mp3";
     public static final String DEFAULT_TRIGGER_CLASS = "gameplayer.model.enemy.Enemy";
-    public static final String DEFAULT_TRIGGER_CONDITION_GROOVY = "collider.getHealth() == 50";
-    public static final String DEFAULT_EFFECT_GROOVY = "collider.setHealth(110)";
+
+    public static final String DEFAULT_TRIGGER_CONDITION_GROOVY = "5 == 5";
+    public static final String DEFAULT_EFFECT_GROOVY = "collider.setHealth(collider.getHealth() - 2)";
+
 
     private ObservableProperty<String> triggerClass;
     private ObservableProperty<String> triggerConditionGroovy;
