@@ -22,6 +22,7 @@ public class EffectAvailableDataObjectsView extends ImageBank implements EffectS
 
     public EffectAvailableDataObjectsView () {
         super();
+        listView.setPrefWidth(170);
     }
 
     @Override

@@ -19,7 +19,7 @@ public interface LevelAuthoringViewDelegate {
 
     public void onUserEnteredCreateLevel ();
 
-    public void onUserEnteredDeleteLevel ();
+    public void onUserPressedDeleteLevel ();
 
     public void onUserEnteredTransitionTime (String time);
 
