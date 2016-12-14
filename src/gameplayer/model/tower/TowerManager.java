@@ -255,8 +255,8 @@ public class TowerManager extends Observable {
 	public void upgradeTower(int UniqueID){
 		Tower toBeUpgraded = this.towersOnGrid.get(UniqueID);
 		
-		int upgradeType = toBeUpgraded.getUpgradeType();
-		engine.tower.Tower upgraded = this.upgradeTowerTypes.get(upgradeType); // change back to upgradeType when xml is fixed
+//		int upgradeType = toBeUpgraded.getUpgradeType();
+//		engine.tower.Tower upgraded = this.upgradeTowerTypes.get(upgradeType); // change back to upgradeType when xml is fixed
 		/*
 		for(int i : this.upgradeTowerTypes.keySet()){
 			System.out.println("key set: " + i);
@@ -265,19 +265,21 @@ public class TowerManager extends Observable {
 		//System.out.println("tower upgrade check: " +upgraded== null );
 		//System.out.println("tower upgrade check: " +upgraded.getCost() );
 
-		this.gameData.setGold(this.gameData.getGold() - upgraded.getCost());
-		toBeUpgraded.setImage(upgraded.getImagePath());
-
-		List<Integer> weaponTypes = upgraded.getWeapons();
-		ArrayList<Gun> gunForTower = new ArrayList<Gun>();
-		// System.out.println("all the int weapons: " + gunsForTower.size());
-		for (int i : weaponTypes) {
-			engine.weapon.Weapon weaponForGun = this.allWeapons.get(i);
-			int fireRate =  (int) weaponForGun.getReloadTime();
-			Gun tempGun = new Gun(fireRate, weaponForGun,this.gameData.cellToCoordinate(toBeUpgraded.getX()) , this.gameData.cellToCoordinate(toBeUpgraded.getY())); 
-			gunForTower.add(tempGun);
-		}
-		toBeUpgraded.setGuns(gunForTower);
+//		this.gameData.setGold(this.gameData.getGold() - upgraded.getCost());
+//		toBeUpgraded.setImage(upgraded.getImagePath());
+		toBeUpgraded.setImage("Images/supermonkey.png"); 
+		 toBeUpgraded.incrementUpgradeCount();
+		 System.out.println(toBeUpgraded.getUpgradeCount());
+//		List<Integer> weaponTypes = upgraded.getWeapons();
+//		ArrayList<Gun> gunForTower = new ArrayList<Gun>();
+//		// System.out.println("all the int weapons: " + gunsForTower.size());
+//		for (int i : weaponTypes) {
+//			engine.weapon.Weapon weaponForGun = this.allWeapons.get(i);
+//			int fireRate =  (int) weaponForGun.getReloadTime();
+//			Gun tempGun = new Gun(fireRate, weaponForGun,this.gameData.cellToCoordinate(toBeUpgraded.getX()) , this.gameData.cellToCoordinate(toBeUpgraded.getY())); 
+//			gunForTower.add(tempGun);
+//		}
+//		toBeUpgraded.setGuns(gunForTower);
 
 
 	}

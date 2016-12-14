@@ -27,6 +27,7 @@ public class Tower implements IDrawable {
 	private GraphicsLibrary graphics;
 	private boolean showInfo, upgradable;
 	private Queue<Integer> upgradeList;
+	private int upgradeCount;
 	
 	
 	public Tower (engine.tower.Tower tt, ArrayList<Gun> weaponTypes, int uniqueID){
@@ -40,6 +41,7 @@ public class Tower implements IDrawable {
 		//System.out.println("upgradable: " + upgradeList.size());
 		this.upgradable = !this.upgradeList.isEmpty();
 		this.showInfo = false;
+		this.upgradeCount = 0;
 		this.graphics = new GraphicsLibrary();
 		initVBox();
 	}
@@ -158,6 +160,14 @@ public class Tower implements IDrawable {
 
 	public int getUniqueID() {
 		return uniqueID;
+	}
+
+	public int getUpgradeCount() {
+		return upgradeCount;
+	}
+
+	public int incrementUpgradeCount() {
+		return this.upgradeCount++;
 	}
 
 }
