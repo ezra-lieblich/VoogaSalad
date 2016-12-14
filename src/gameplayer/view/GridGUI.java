@@ -35,14 +35,8 @@ public class GridGUI {
 	private List<int[]> path;
 	private List<ImageView> imagePath;
 
-<<<<<<< HEAD
 	public static final String TEST_URL = "../../../Images/BalloonBackground.jpg"; 
-=======
-	public static final String TEST_URL = "../../../Images/mushbackground.png"; 
->>>>>>> 94e15edd46adec965e8b2fcf617d47c4c20ff8fb
-																																							// dummy
-																																							// url
-
+	
 	public GridGUI(int rows, int columns/*, List<int[]> path*/) {
 		//System.out.println("Rows: "+rows+"; columns: "+columns);
 		this.grid = new Pane();
