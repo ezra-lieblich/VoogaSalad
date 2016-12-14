@@ -185,7 +185,6 @@ public class GamePlayerController implements Observer {
 					this.model.getData().getCurrentLevel(), this.model.getData().getScore(), getTowerImages(),
 					this.mainScene);
 		} else {
-
 			this.mainScene = view.init(this.model.getData().getGold(), this.model.getData().getLife(),
 					this.model.getData().getCurrentLevel(), this.model.getData().getScore(), getTowerImages());
 		}
@@ -346,13 +345,12 @@ public class GamePlayerController implements Observer {
 				this.enemyController/* , this.currentWave */);
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> {
 			((Pane) this.view.getGrid().getGrid()).getChildren().clear();
-
+			
 			if (waveTimeIntervalElapsed()) {
-				// if (this.currentWave.size() > 0) {
 				this.currentWave = this.model.getEnemyManager().getPackOfEnemyComing();
-				// }
 				this.intervalBetweenWaves = this.model.getEnemyManager().getTimeOfNextWave();
 			}
+			
 			this.model.updateInLevel(weaponsOnScreen);
 			this.enemyManager.update();
 			this.model.getCollisionManager().handleCollisions();
@@ -367,7 +365,6 @@ public class GamePlayerController implements Observer {
 	}
 
 	private void updateNewLevel() {
-		//// System.out.println("Calling check for win");
 		if (enemyManager.getEnemyOnGrid().size() == 0 && currentWave.size() == 0
 				&& this.oldLevel == enemyManager.getData().getCurrentLevel()) {
 
