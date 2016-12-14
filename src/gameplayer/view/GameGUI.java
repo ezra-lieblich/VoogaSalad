@@ -292,7 +292,7 @@ public class GameGUI {
 
 	public void reRenderEnemy(HashMap<Integer, ImageView> redraw) {
 		for (ImageView image : redraw.values()) {
-			System.out.println("Enemy image: "+image.toString());
+			//System.out.println("Enemy image: "+image.toString());
 			this.grid.getGrid().getChildren().add(image);
 		}
 	}
