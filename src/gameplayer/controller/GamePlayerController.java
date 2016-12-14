@@ -3,55 +3,37 @@ package gameplayer.controller;
 import gameplayer.loader.GamePlayerFactory;
 import gameplayer.loader.GameSavingController;
 import gameplayer.loader.XMLParser;
-import gameplayer.main.main;
-import gameplayer.model.Cell;
 import gameplayer.model.GamePlayData;
 import gameplayer.model.GamePlayModel;
-import gameplayer.model.IDrawable;
 import gameplayer.model.enemy.Enemy;
 import gameplayer.model.enemy.EnemyManager;
 import gameplayer.model.tower.Tower;
 import gameplayer.model.weapon.Weapon;
 import gameplayer.view.GameGUI;
-import gameplayer.view.GridGUI;
 import gameplayer.view.helper.GraphicsLibrary;
 import gameplayer.view.helper.dragdrop.DragDropView;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.application.Application;
-import javafx.embed.swing.JFXPanel;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.CacheHint;
-import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import statswrapper.Wrapper;
-import java.awt.BorderLayout;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Queue;
-import javax.swing.BorderFactory;
-import javax.swing.JPanel;
+
 
 import engine.path.PathManager;
 
@@ -74,17 +56,14 @@ public class GamePlayerController implements Observer {
 	private DragDropController dropController;
 	private EnemyManager enemyManager;
 	private double oldLevel;
-	private int timer = 1;
 	private GraphicsLibrary graphics;
 	private Queue<Enemy> currentWave;
 	private HashMap<String, Integer> towerToId;
-	private double enemyFrequency;
 	private double startTime;
 	private double intervalBetweenWaves;
 
 	private boolean animationOn = false;
 
-	private Thread enemyThread;
 	// Might need to be refactored into a different class
 	private HashMap<Integer, ImageView> weaponsOnScreen;
 	private HashMap<Integer, ImageView> enemiesOnScreen;
@@ -322,6 +301,25 @@ public class GamePlayerController implements Observer {
 		this.view.getMainScreen().setCenter(browser);
 	}
 
+	private boolean loseCondition() {
+		return (this.model.getData().getLife() <= 0);
+	}
+	
+	private boolean winCondition(){
+		return (this.model.getData().won() || (this.model.getData().getLife() > 0
+				&& this.model.getData().getCurrentLevel() >= this.model.getData().getLevelNumber()));
+	}
+
+	private void winLoseCondition() {
+		if (loseCondition()) {
+			gameOver();
+		} else if (winCondition()) {
+			// System.out.println("WIn game!");
+			winGame();
+		}
+	}
+
+	
 	@Override
 	public void update(Observable o, Object arg) {
 		if (o instanceof GamePlayData) {
@@ -330,14 +328,10 @@ public class GamePlayerController implements Observer {
 					((GamePlayData) o).getCurrentLevel(), ((GamePlayData) o).getScore());
 			this.view.updateCurrentLevelStats(((GamePlayData) o).getCurrentLevel());
 			// check for game over condition
-			if (((GamePlayData) o).getLife() <= 0) {
-				gameOver();
-			} else if (((GamePlayData) o).won()) {
-				// System.out.println("WIn game!");
-				winGame();
-			}
+			winLoseCondition();
 			// updateNewLevel();
 			checkCreateNewLevel();
+			updateNewLevel();
 
 		}
 	}
@@ -352,6 +346,7 @@ public class GamePlayerController implements Observer {
 		// call this once per wave, gets the new wave, new enemy frequency, etc.
 		// getNewWaveOnInterval();
 		// countTime();
+		this.currentWave = this.model.getEnemyManager().getPackOfEnemyComing();
 		this.startTime = System.currentTimeMillis();
 		this.intervalBetweenWaves = this.model.getEnemyManager().getTimeOfNextWave();
 		spawnEnemyOnInterval(this.enemyManager,
@@ -369,7 +364,8 @@ public class GamePlayerController implements Observer {
 			this.enemyManager.update();
 			this.model.getCollisionManager().handleCollisions();
 			redrawEverything();
-			updateNewLevel();
+			winLoseCondition();
+			//updateNewLevel();
 
 		});
 		animation.setCycleCount(Timeline.INDEFINITE);
@@ -386,14 +382,14 @@ public class GamePlayerController implements Observer {
 			// //System.out.println("SET WIN!");
 			// System.out.println("---------New level in
 			// checkforwin--------------");
-			// System.out.println(enemyManager.getData().getCurrentLevel() +
-			// "<=" + enemyManager.getData().getLevelNumber());
-			if (enemyManager.getData().getCurrentLevel() <= enemyManager.getData().getLevelNumber() - 1) {
+			System.out.println(enemyManager.getData().getCurrentLevel() +
+			 "<=" + enemyManager.getData().getLevelNumber());
+			if (enemyManager.getData().getCurrentLevel() <= enemyManager.getData().getLevelNumber()-1) {
 				// System.out.println("WHY ARE YOU NOT SETTING LEVEL");
 				enemyManager.getData().setLevel(enemyManager.getData().getCurrentLevel() + 1);
 
-				// System.out.println("SEt new level: " +
-				// enemyManager.getData().getCurrentLevel());
+				 System.out.println("SEt new level: " +
+				 enemyManager.getData().getCurrentLevel());
 			}
 		}
 
