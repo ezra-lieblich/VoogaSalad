@@ -35,7 +35,7 @@ public class EffectAvailableMethodsView extends ImageBank implements EffectSetVi
 
     public void updateAvailMethods (List<String> list) {
         if (dataSource == null) {
-            System.out.println("Table data source not set");
+            //System.out.println("Table data source not set");
             return;
         }
         this.items.remove(CONTENT_OFFSET, items.size());

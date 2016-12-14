@@ -69,13 +69,13 @@ public class GamePlayData extends Observable{
 	 */
 	public void initializeGameSetting() {
 		HashMap<String, Double> settingInfo = this.factory.getGameSetting();
-		System.out.println("total levels: "+ settingInfo.get("totalNumberOfLevels"));
+		//System.out.println("total levels: "+ settingInfo.get("totalNumberOfLevels"));
 		//this.numLevels.setValue(2.0);
 		this.numLevels.set(settingInfo.get("totalNumberOfLevels"));  // put into property file
 		this.gold.set(settingInfo.get("gold"));
 		this.lives.set(settingInfo.get("lives").intValue());
 		this.currentLevel.set(settingInfo.get("levelnumber").intValue()); //REMEMBER TO CHANGE
-		System.out.println("initial level number: "+this.currentLevel.get());
+		//System.out.println("initial level number: "+this.currentLevel.get());
 		this.score.set(0);
 	}
 	
@@ -91,9 +91,9 @@ public class GamePlayData extends Observable{
 	
 	@EffectMethod
 	public void setWin(){
-		System.out.println("==================");
-		System.out.println("total number of levels: " + this.numLevels.get());
-		System.out.println("current level number: " + this.currentLevel.get());
+		//System.out.println("==================");
+		//System.out.println("total number of levels: " + this.numLevels.get());
+		//System.out.println("current level number: " + this.currentLevel.get());
 
 		this.win = true;
 		setChanged();
@@ -148,7 +148,7 @@ public class GamePlayData extends Observable{
 	}
 
 	public void setGold(double gold) {
-		System.out.println("Setting gold");
+		//System.out.println("Setting gold");
 		this.gold.set(gold);
 		try {
 			Wrapper.getInstance().updateGameScores("gold", Integer.toString((int)this.currentLevel.get()), Double.toString(this.gold.get()));
@@ -179,11 +179,11 @@ public class GamePlayData extends Observable{
 	}
 
 	public void setLevel(int d) {
-		System.out.println("========================");
-		System.out.println("set level before level: " + this.currentLevel.get());
-		System.out.println("set level to " + d);
-		System.out.println("========================");
-		System.out.println();
+//		System.out.println("========================");
+//		System.out.println("set level before level: " + this.currentLevel.get());
+//		System.out.println("set level to " + d);
+//		System.out.println("========================");
+//		System.out.println();
 		this.currentLevel.set(d);;
 		setChanged();
 		notifyObservers();

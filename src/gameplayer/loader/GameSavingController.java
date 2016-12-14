@@ -39,7 +39,7 @@ public class GameSavingController {
 		counter += 1;
 		File newFile = new File(dirName);
 		String content = toPrettyXML();
-		System.out.println("XML LENTHHHHH " +content.length());
+		//System.out.println("XML LENTHHHHH " +content.length());
 		try {
 			FileWriter writer = new FileWriter(newFile);
 			writer.write(content);

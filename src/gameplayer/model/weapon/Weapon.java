@@ -42,14 +42,14 @@ public class Weapon extends Observable implements IDrawable{
 		this.speedMag = speedMag;
 		this.weaponEffect = weaponEffect;
 		
-		System.out.println();
+		//System.out.println();
 
-		System.out.println("++++++++++++++++++++++++");
-		System.out.println();
+		//System.out.println("++++++++++++++++++++++++");
+		//System.out.println();
 		for(String s: weaponEffect.keySet()){
 			for(GameEffect e : weaponEffect.get(s)){
-				System.out.println("trigger name: " + s);
-				System.out.println("effec name: " + e.toString());
+				//System.out.println("trigger name: " + s);
+				//System.out.println("effec name: " + e.toString());
 
 				e.addEncompassingClass(this);
 			}			

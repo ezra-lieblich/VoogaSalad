@@ -150,7 +150,7 @@ public class LevelAuthoringView implements LevelUpdateView {
     @Override
     public void updateBank (List<Integer> ids) {
         this.levelBank.updateBank(ids);
-        System.out.println("No level bank currently implemented");
+        //System.out.println("No level bank currently implemented");
     }
 
     @Override
@@ -162,7 +162,7 @@ public class LevelAuthoringView implements LevelUpdateView {
     @Override
     public void setLevelListDataSource (ListDataSource source) {
         this.levelBank.setListDataSource(source);
-        System.out.println("No level bank currently implemented");
+        //System.out.println("No level bank currently implemented");
     }
 
     // WAVE
@@ -180,7 +180,7 @@ public class LevelAuthoringView implements LevelUpdateView {
 
     @Override
     public Integer getNearestAvailableItemID (int id) {
-        System.out.println("No level bank implemented");
+        //System.out.println("No level bank implemented");
         return null;
     }
 
