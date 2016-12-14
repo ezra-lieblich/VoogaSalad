@@ -8,12 +8,10 @@ import authoring.editorview.gamesettings.subviews.editorfields.AddSettingsEffect
 import authoring.editorview.gamesettings.subviews.editorfields.GameImageView;
 import authoring.editorview.gamesettings.subviews.editorfields.GameInitialLivesView;
 import authoring.editorview.gamesettings.subviews.editorfields.GameInitialMoneyView;
-import authoring.editorview.gamesettings.subviews.editorfields.GameLosingConditionsView;
 import authoring.editorview.gamesettings.subviews.editorfields.GameNameView;
 import authoring.editorview.gamesettings.subviews.editorfields.GamePathDimensionsView;
 import authoring.editorview.gamesettings.subviews.editorfields.GamePathTypeView;
 import authoring.editorview.gamesettings.subviews.editorfields.GamePathView;
-import authoring.editorview.gamesettings.subviews.editorfields.GameWinningConditionsView;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
@@ -37,8 +35,6 @@ public class GameSettingsEditorView implements GameSettingsSetView {
     private GameImageView gameImageView;
     private GameInitialLivesView gameInitialLivesView;
     private GameInitialMoneyView gameInitialMoneyView;
-    private GameWinningConditionsView gameWinningConditionsView;
-    private GameLosingConditionsView gameLosingConditionsView;
     private GamePathDimensionsView gamePathDimensionsView;
     private GamePathView gamePathView;
     private AddSettingsEffectView settingsEffectView;
@@ -58,8 +54,6 @@ public class GameSettingsEditorView implements GameSettingsSetView {
         this.gamePathTypeView = new GamePathTypeView();
         this.gameInitialLivesView = new GameInitialLivesView(settingsResource);
         this.gameInitialMoneyView = new GameInitialMoneyView(settingsResource);
-        this.gameWinningConditionsView = new GameWinningConditionsView(settingsResource);
-        this.gameLosingConditionsView = new GameLosingConditionsView(settingsResource);
         this.gamePathDimensionsView = new GamePathDimensionsView();
         this.gamePathView = new GamePathView(settingsResource);
         this.settingsEffectView = new AddSettingsEffectView(settingsResource);
@@ -83,8 +77,6 @@ public class GameSettingsEditorView implements GameSettingsSetView {
                                   gameImageView.getInstanceAsNode(),
                                   gameInitialLivesView.getInstanceAsNode(),
                                   gameInitialMoneyView.getInstanceAsNode(),
-                                  gameWinningConditionsView.getInstanceAsNode(),
-                                  gameLosingConditionsView.getInstanceAsNode(),
                                   settingsEffectView.getInstanceAsNode(),
                                   gamePathTypeView.getInstanceAsNode(),
                                   gamePathDimensionsView.getInstanceAsNode(),
@@ -105,8 +97,6 @@ public class GameSettingsEditorView implements GameSettingsSetView {
         gamePathTypeView.setDelegate(delegate);
         gamePathView.setDelegate(delegate);
         gamePathDimensionsView.setDelegate(delegate);
-        gameWinningConditionsView.setDelegate(delegate);
-        gameLosingConditionsView.setDelegate(delegate);
         settingsEffectView.setDelegate(delegate);
     }
 
@@ -132,7 +122,9 @@ public class GameSettingsEditorView implements GameSettingsSetView {
     }
 
     public void updateGridDimensions (int size) {
+    	gamePathView.clearPathList();
         gamePathDimensionsView.setGridDimensions(size);
+        
     }
 
     public void updateAvailablePathList (List<Integer> availablePathList) {

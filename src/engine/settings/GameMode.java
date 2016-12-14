@@ -47,6 +47,8 @@ public interface GameMode extends Type{
     
     void removePath(int pathID);
     
+    void clearPaths();
+    
     List<Integer> getPaths();
     
 }
