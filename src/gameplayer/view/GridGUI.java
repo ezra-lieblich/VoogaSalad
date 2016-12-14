@@ -87,8 +87,7 @@ public class GridGUI {
 
 	//right now, background is set in the css file
 	private void setTerrain(String imageURL) {
-		//grid.setStyle("-fx-background-image: url(" + imageURL + "); " + "-fx-background-position: center center;"
-				//+ "-fx-background-repeat: stretch;");
+//		grid.setStyle("-fx-background-image: url(" + TEST_URL + ");");
 	}
 
 	private void addTowerToGrid(Tower tower, int row, int col) {

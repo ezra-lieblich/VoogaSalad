@@ -1,6 +1,8 @@
 package authoring.main;
 
 import java.io.IOException;
+
+import authoring.utilityfactories.DialogueBoxFactory;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -25,7 +27,14 @@ public class tempmain extends Application {
         s.show();
 
         ExitDialogueBox box = new ExitDialogueBox();
-        box.displayDialogueBoxOnExit(s, e -> generalController.saveAsXMLFile());
+        box.displayDialogueBoxOnExit(s, e -> {
+			try {
+				generalController.saveAsXMLFile();
+			} catch (IOException e1) {
+				DialogueBoxFactory.createErrorDialogueBox("Couldn't load authoring environment", "IOExcpetion");
+				
+			}
+		});
 
     }
 

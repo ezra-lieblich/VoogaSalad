@@ -250,6 +250,10 @@ public class GameGUI {
 //		Tab tab = dragDrop.createTab("Your Stats");
 //		tab.setContent(scroll);
 	}
+	
+	public StatsDisplay getStatsDisplay(){
+		return this.statsDisplay;
+	}
 
 	private void initStatsDisplay(double gold, double lives, double level, double score) {
 		this.statsDisplay = new StatsDisplay(gold, lives, level, score);

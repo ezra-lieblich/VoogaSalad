@@ -11,6 +11,7 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
 import authoring.main.AuthoringController;
+import authoring.utilityfactories.DialogueBoxFactory;
 import engine.GameAuthoringData;
 import gameplayer.controller.GamePlayerController;
 import gameplayer.controller.HomeSelection;
@@ -113,14 +114,18 @@ public class SplashScreen {
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				createPlayGameOrMakeGameOptions();
-				e1.printStackTrace();
+				DialogueBoxFactory.createErrorDialogueBox("Couldn't load authoring environment", "IOExcpetion");
 			}
 		});
 	}
 	
 	private void createPlayGameOrMakeGameOptions(){
 		Button btn1 = graphics.createButton("Make a game", e ->{
-			startAuthoringEnv();
+			try {
+				startAuthoringEnv();
+			} catch (IOException e1) {
+				DialogueBoxFactory.createErrorDialogueBox("Couldn't load authoring environment", "IOExcpetion");
+			}
 		});
 		Button btn2 = graphics.createButton("Play a game", e -> {
 			startGame();
@@ -140,7 +145,7 @@ public class SplashScreen {
 
 				
 			} catch (Exception e1) {
-				System.out.println("Error reading file, please use a different file");
+				DialogueBoxFactory.createErrorDialogueBox("Couldn't load a game", "Exception");
 				return;
 			}
 			GamePlayerController gameController = new GamePlayerController(xmlName, settings);
@@ -180,7 +185,7 @@ public class SplashScreen {
 		});
 	}
 
-	private void startAuthoringEnv() {
+	private void startAuthoringEnv() throws IOException {
 		Stage s = new Stage();
 		AuthoringController generalController = new AuthoringController(SIZE);
 

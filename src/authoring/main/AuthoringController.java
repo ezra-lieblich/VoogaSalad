@@ -53,7 +53,7 @@ public class AuthoringController {
     private ViewController viewController;
     private IToolbar toolbar;
 
-    public AuthoringController (int size) {
+    public AuthoringController (int size) throws IOException {
         modelController = new ModelAuthoringController();
         try {
             viewController = new ViewController(size, size);
@@ -61,8 +61,7 @@ public class AuthoringController {
         }
         catch (IOException e) {
             // TODO Auto-generated catch block
-
-            e.printStackTrace();
+        	throw new IOException();
         }
         configureToolbar();
 
@@ -71,7 +70,14 @@ public class AuthoringController {
     private void configureToolbar () {
         toolbar = this.viewController.getView().getMyToolbar();
 
-        toolbar.setOnPressedSave(e -> saveAsXMLFile());
+        toolbar.setOnPressedSave(e -> {
+			try {
+				saveAsXMLFile();
+			} catch (IOException e1) {
+				DialogueBoxFactory.createErrorDialogueBox("Couldn't Save Game", "IOExcpetion");
+
+			}
+		});
 
         toolbar.setOnPressedLoad(e -> {
             loadData();// "player.samplexml/load.xml"
@@ -88,7 +94,7 @@ public class AuthoringController {
         // createPreview(modelController.getGameData());
     }
 
-    public void saveAsXMLFile () {
+    public void saveAsXMLFile () throws IOException {
         String fileContent = this.modelController.SaveData();
         toolbar.saveFile(fileContent);
         // TODO Lucy: add api call to record game in web app
@@ -98,8 +104,7 @@ public class AuthoringController {
             Wrapper.getInstance().createGame(gameData);
         }
         catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+        	throw new IOException();
         }
     }
 
