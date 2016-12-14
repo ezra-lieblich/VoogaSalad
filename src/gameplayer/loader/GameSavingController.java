@@ -57,6 +57,7 @@ public class GameSavingController {
 		}
 		
 		/*
+>>>>>>> 6804c3a6943d043933632ab14cb7138487ba9d41
 		try {
 			FileWriter writer = new FileWriter(newFile);
 			writer.write(content);

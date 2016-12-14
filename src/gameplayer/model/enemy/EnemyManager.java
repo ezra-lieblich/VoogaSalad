@@ -164,7 +164,7 @@ public class EnemyManager extends Observable{
 						gameData.setLife(gameData.getLife() - 1);
 					}
 					
-					System.out.println("ENEMY REMOVING");
+					//System.out.println("ENEMY REMOVING");
 					enemy.setRemove(true);
 					return;
 				}

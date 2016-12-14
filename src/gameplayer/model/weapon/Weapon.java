@@ -44,13 +44,14 @@ public class Weapon extends Observable implements IDrawable{
 		
 		/*
 		System.out.println();
+>>>>>>> 6804c3a6943d043933632ab14cb7138487ba9d41
 
-		System.out.println("++++++++++++++++++++++++");
-		System.out.println();
+		//System.out.println("++++++++++++++++++++++++");
+		//System.out.println();
 		for(String s: weaponEffect.keySet()){
 			for(GameEffect e : weaponEffect.get(s)){
-				System.out.println("trigger name: " + s);
-				System.out.println("effec name: " + e.toString());
+				//System.out.println("trigger name: " + s);
+				//System.out.println("effec name: " + e.toString());
 
 				e.addEncompassingClass(this);
 			}			
