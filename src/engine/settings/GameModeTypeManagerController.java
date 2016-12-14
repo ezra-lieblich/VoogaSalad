@@ -86,6 +86,7 @@ public class GameModeTypeManagerController
 
 	@Override
 	public void setPathType(int gameModeID, String pathType) {
+		getTypeManager().notifyObservers(new MethodObjectData<Object>("GridSize", gameModeID) );
 		getTypeManager().getEntity(gameModeID).setPathType(PathOption.valueOf(pathType));
 	}
 

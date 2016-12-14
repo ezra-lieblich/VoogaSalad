@@ -58,4 +58,7 @@ public interface Level extends Type {
     
     void resetGridWaves();
     
+    void removePathReferences (int pathID);
+
+    
 }

@@ -44,7 +44,7 @@ public class LevelTypeManager extends AbstractTypeManager<Level> implements Leve
 	}
 	
 	private void removePathReferences(int pathID) {
-        applyToAllEntities(a -> a.removePath(pathID));
+        applyToAllEntities(a -> a.removePathReferences(pathID));
 	}
 
 	@Override
