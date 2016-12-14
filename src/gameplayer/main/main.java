@@ -20,7 +20,7 @@ public class main extends Application {
 	public void start(Stage s){
 		this.stage = s;
 		//This is just for testing, should be switched to creating the authoring environment first
-		GamePlayerController playerController = new GamePlayerController("player.samplexml/multipath.xml");
+		GamePlayerController playerController = new GamePlayerController("player.samplexml/newAaronGame.xml");
 		playerController.init(false);
 
 		s.setTitle(TITLE);
