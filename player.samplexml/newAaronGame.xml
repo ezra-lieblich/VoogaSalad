@@ -1019,12 +1019,12 @@
                     <triggerConditionGroovy class="engine.observer.ObservableObjectProperty">
                       <observers/>
                       <listeners/>
-                      <property class="string">collider.getHealth() == 10</property>
+                      <property class="string">5 == 5</property>
                     </triggerConditionGroovy>
                     <effectGroovy class="engine.observer.ObservableObjectProperty">
                       <observers/>
                       <listeners/>
-                      <property class="string">collider.setMovingSpeed(0);collider.setHealth(collider.getHealth()-8)</property>
+                      <property class="string">collider.setMovingSpeed(0);collider.setHealth(collider.getHealth()-4)</property>
                     </effectGroovy>
                   </engine.effect.EffectType>
                 </entry>
@@ -1060,12 +1060,12 @@
                     <triggerConditionGroovy class="engine.observer.ObservableObjectProperty">
                       <observers/>
                       <listeners/>
-                      <property class="string">collider.getHealth() == 10</property>
+                      <property class="string">5 == 5</property>
                     </triggerConditionGroovy>
                     <effectGroovy class="engine.observer.ObservableObjectProperty">
                       <observers/>
                       <listeners/>
-                      <property class="string">collider.setMovingSpeed(0);collider.setHealth(collider.getHealth()-8)</property>
+                      <property class="string">collider.setMovingSpeed(0);collider.setHealth(collider.getHealth()-4)</property>
                     </effectGroovy>
                   </engine.effect.EffectType>
                 </entry>

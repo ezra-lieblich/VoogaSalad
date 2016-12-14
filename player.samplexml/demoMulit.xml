@@ -432,7 +432,7 @@
                                 <listeners>
                                   <null/>
                                 </listeners>
-                                <property class="double">1.0</property>
+                                <property class="double">5.0</property>
                               </delay>
                               <frequency class="engine.observer.ObservableObjectProperty">
                                 <observers/>
@@ -499,7 +499,7 @@
                                 <listeners>
                                   <null/>
                                 </listeners>
-                                <property class="double">5.0</property>
+                                <property class="double">9.0</property>
                               </delay>
                               <frequency class="engine.observer.ObservableObjectProperty">
                                 <observers/>
@@ -566,7 +566,7 @@
                                 <listeners>
                                   <null/>
                                 </listeners>
-                                <property class="double">6.0</property>
+                                <property class="double">12.0</property>
                               </delay>
                               <frequency class="engine.observer.ObservableObjectProperty">
                                 <observers/>
