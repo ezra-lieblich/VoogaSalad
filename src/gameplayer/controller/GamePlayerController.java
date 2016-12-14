@@ -104,10 +104,14 @@ public class GamePlayerController implements Observer {
 		this(xmlFilePath);
 		this.oldLevel = settings.getLevel();
 		System.out.println("What is the level? :" + settings.getLevel());
+		this.oldLevel = settings.getLevel()-1; //does this do anything?
+
 		this.model.getData().setLevel(settings.getLevel());
 		this.model.getData().setGold(settings.getGold());
 		this.model.getData().setLife(settings.getLives());
 		this.model.getData().setScore(settings.getScore());
+		//this.model.getData().setGrid(settings.getGrid());
+		init(true);
 	}
 	
 	
@@ -231,8 +235,12 @@ public class GamePlayerController implements Observer {
 	}
 
 	public void addButtons(Tower t) {
-		t.getSellButton().setOnAction(e -> this.towerController.handleSellTowerClick());
-		t.getUpgradeButton().setOnAction(e -> this.towerController.upgrade(t.getUniqueID()));
+		t.getSellButton().setOnAction(e -> this.towerController.handleSellTowerClick(t));
+		if(t.upgradable()){
+			t.getUpgradeButton().setOnAction(e -> this.towerController.upgrade(t.getUniqueID()));
+		}
+		else
+			t.getUpgradeButton().setDisable(true);
 	}
 
 	// probably should move to frontend
