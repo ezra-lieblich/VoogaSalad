@@ -37,7 +37,6 @@ public class GameSavingController {
 		settings.setLevel(gameData.getCurrentLevel());
 		settings.setLives(gameData.getLife());
 		settings.setScore(gameData.getScore());
-		settings.setGrid(gameData.getGrid());
 		return new XStream(new DomDriver()).toXML(settings);
 	}
 	

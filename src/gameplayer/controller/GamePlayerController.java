@@ -105,13 +105,11 @@ public class GamePlayerController implements Observer {
 		this.oldLevel = settings.getLevel();
 		System.out.println("What is the level? :" + settings.getLevel());
 		this.oldLevel = settings.getLevel()-1; //does this do anything?
-
 		this.model.getData().setLevel(settings.getLevel());
 		this.model.getData().setGold(settings.getGold());
 		this.model.getData().setLife(settings.getLives());
 		this.model.getData().setScore(settings.getScore());
-		//this.model.getData().setGrid(settings.getGrid());
-		init(true);
+		this.model.initializeLevelInfo();
 	}
 	
 	
@@ -236,7 +234,7 @@ public class GamePlayerController implements Observer {
 
 	public void addButtons(Tower t) {
 		t.getSellButton().setOnAction(e -> this.towerController.handleSellTowerClick(t));
-		if(t.upgradable()){
+		if(t.getUpgradeCount() == 0){
 			t.getUpgradeButton().setOnAction(e -> this.towerController.upgrade(t.getUniqueID()));
 		}
 		else
@@ -272,6 +270,7 @@ public class GamePlayerController implements Observer {
 	}
 
 	private boolean okForNewLevel() {
+
 		return (enemyManager.getEnemyOnGrid().size() == 0&&this.intervalBetweenWaves<0
 				&& currentWave.size() == 0);
 	}
