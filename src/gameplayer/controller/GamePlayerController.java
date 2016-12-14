@@ -135,7 +135,6 @@ public class GamePlayerController implements Observer {
 	public void init(boolean newLevel) {
 		// HashMap<String, Double> settings = this.loader.getGameSetting();
 		// this.enemyManager.setCurrentCell(this.model.getData().getGrid().getStartPoint());
-		System.out.println("NEW LEVEL INIT");
 		createImageBank();
 		populateTowerToId();
 		initGUI(newLevel);
@@ -173,7 +172,6 @@ public class GamePlayerController implements Observer {
 
 	private void initGUI(boolean newlevel) {
 		// this.view = null;
-		System.out.println("initing gui");
 		int rows = model.getData().getRow();
 		int cols = model.getData().getColumns();
 		if (!newlevel) {
@@ -260,30 +258,30 @@ public class GamePlayerController implements Observer {
 		endCondition("http://people.duke.edu/~lz107/voogaTemplates/win.html");
 	}
 
-	private boolean okForNewLevel(double newLevel) {
-		return (this.oldLevel < newLevel && enemyManager.getEnemyOnGrid().size() == 0
+	private boolean okForNewLevel() {
+		return (enemyManager.getEnemyOnGrid().size() == 0&&this.intervalBetweenWaves<0
 				&& currentWave.size() == 0);
 
-		// return true;
 	}
 
 	private void checkCreateNewLevel() {
 		// new level condition
-		double newLevel = this.model.getData().getCurrentLevel();
-		if (okForNewLevel(newLevel)) {
-			System.out.println("NEW LEVEL TIME");
+		if (okForNewLevel()) {
+			enemyManager.getData().setLevel(enemyManager.getData().getCurrentLevel() + 1);
 			this.animation.pause();
-			this.startTime = System.currentTimeMillis();
-			this.intervalBetweenWaves = this.model.getEnemyManager().getTimeOfNextWave();
+			System.out.println("GAMELEVEL: "+this.enemyManager.getData().getCurrentLevel());
+
 			this.view.newLevelPopUp(e -> {
 				
 				this.model.initializeLevelInfo();
+				this.intervalBetweenWaves = this.model.getEnemyManager().getTimeOfNextWave();
+
 				// this.view.getGrid().getGrid().getChildren().clear();
 
 				this.view.getMainScreen().getChildren().clear();
 				init(true);
 				this.animation.play();
-
+				this.startTime = System.currentTimeMillis();
 			});
 		}
 	}
@@ -330,11 +328,7 @@ public class GamePlayerController implements Observer {
 			this.view.updateStatsDisplay(((GamePlayData) o).getGold(), ((GamePlayData) o).getLife(),
 					((GamePlayData) o).getCurrentLevel(), ((GamePlayData) o).getScore());
 			this.view.updateCurrentLevelStats(((GamePlayData) o).getCurrentLevel());
-			// check for game over condition
-			winLoseCondition();
-			// updateNewLevel();
-			checkCreateNewLevel();
-			//updateNewLevel();
+		
 
 		}
 	}
@@ -352,6 +346,7 @@ public class GamePlayerController implements Observer {
 		this.intervalBetweenWaves = this.model.getEnemyManager().getTimeOfNextWave();
 		spawnEnemyOnInterval(this.enemyManager,
 				this.enemyController/* , this.currentWave */);
+		System.out.println("GAMELEVEL: "+this.enemyManager.getData().getCurrentLevel());
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> {
 			((Pane) this.view.getGrid().getGrid()).getChildren().clear();
 			
@@ -364,8 +359,7 @@ public class GamePlayerController implements Observer {
 			this.enemyManager.update();
 			this.model.getCollisionManager().handleCollisions();
 			redrawEverything();
-			//checkCreateNewLevel();
-			updateNewLevel();
+			checkCreateNewLevel();
 			winLoseCondition();
 		});
 		animation.setCycleCount(Timeline.INDEFINITE);
@@ -378,20 +372,12 @@ public class GamePlayerController implements Observer {
 	//sets the new level under the correct conditions
 	private void updateNewLevel() {
 
-		System.out.println("old level: " + this.oldLevel);
-		System.out.println("Current level: " + enemyManager.getData().getCurrentLevel());
-		System.out.println("Num levels: " + enemyManager.getData().getLevelNumber());
+//		System.out.println("old level: " + this.oldLevel);
+//		System.out.println("Current level: " + enemyManager.getData().getCurrentLevel());
+//		System.out.println("Num levels: " + enemyManager.getData().getLevelNumber());
 
 		if (this.animationOn && enemyManager.getEnemyOnGrid().size() == 0 && currentWave.size() == 0) {
-
-			// System.out
-			// .println(enemyManager.getData().getCurrentLevel() + "<=" +
-			// enemyManager.getData().getLevelNumber());
-			//if (enemyManager.getData().getCurrentLevel() <= enemyManager.getData().getLevelNumber() - 1) {
-				System.out.println("WHY ARE YOU NOT SETTING LEVEL");
 				enemyManager.getData().setLevel(enemyManager.getData().getCurrentLevel() + 1);
-
-				System.out.println("Set new level: " + enemyManager.getData().getCurrentLevel());
 		}
 
 	}
@@ -488,27 +474,9 @@ public class GamePlayerController implements Observer {
 		}
 	}
 
-	/*
-	 * private void redraw(HashMap<Integer, ?> enemyRedraw){ for (int i :
-	 * enemyRedraw.keySet()) { if
-	 * (!enemiesOnScreen.containsKey(enemyRedraw.get(i).getUniqueID())) {
-	 * ImageView image = new
-	 * ImageView(graphics.createImage(enemyRedraw.get(i).getImage()));
-	 * graphics.setImageViewParams(image, DragDropView.DEFENSIVEWIDTH * 0.9,
-	 * DragDropView.DEFENSIVEHEIGHT * 0.9); image.setCache(true);
-	 * image.setCacheHint(CacheHint.SPEED);
-	 * image.setX(enemyRedraw.get(i).getX());
-	 * image.setY(enemyRedraw.get(i).getY());
-	 * enemiesOnScreen.put(enemyRedraw.get(i).getUniqueID(), image); } else {
-	 * enemiesOnScreen.get(enemyRedraw.get(i).getUniqueID()).setX(enemyRedraw.
-	 * get(i).getX());
-	 * enemiesOnScreen.get(enemyRedraw.get(i).getUniqueID()).setY(enemyRedraw.
-	 * get(i).getY()); } } }
-	 */
 	public HashMap<String, Image> createImageBank() {
 		Map<Integer, engine.tower.Tower> towers = this.loader.getTowers();
 		for (int i : towers.keySet()) {
-			System.out.print("towerImagePath: " + towers.get(i).getImagePath());
 			Image image = graphics.createImage(towers.get(i).getImagePath());
 			imageBank.put("Tower " + i, image);
 		}

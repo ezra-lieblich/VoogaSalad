@@ -54,9 +54,6 @@ public class CollisionManager {
 						
 						enemiesOnScreen.remove(targetUniqueID);
 						enemyManager.getEnemyOnGrid().remove(targetUniqueID);
-						System.out.println("HIT!!!!!!!");
-						System.out.println("enemyManagersize: "+enemyManager.getEnemyOnGrid().size());
-						System.out.println("enemiesOnScreen: "+enemiesOnScreen.size());
 					}
 
 				}

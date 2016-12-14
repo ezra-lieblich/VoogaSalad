@@ -233,21 +233,21 @@ public class GameGUI {
 	}
 
 	private void initChat() {
-		WebView browser = new WebView();
-		WebEngine webEngine = browser.getEngine();
-		webEngine.load("http://voogachat.herokuapp.com");
-		Tab tab = dragDrop.createTab("Chat");
-		tab.setContent(browser);
+//		WebView browser = new WebView();
+//		WebEngine webEngine = browser.getEngine();
+//		webEngine.load("http://voogachat.herokuapp.com");
+//		Tab tab = dragDrop.createTab("Chat");
+//		tab.setContent(browser);
 	}
 
 	private void initStatsTab() {
-		WebView browser = new WebView();
-		WebEngine webEngine = browser.getEngine();
-		webEngine.load("http://voogasquad.herokuapp.com/home");
-		ScrollPane scroll = new ScrollPane();
-		scroll.setContent(browser);
-		Tab tab = dragDrop.createTab("Your Stats");
-		tab.setContent(scroll);
+//		WebView browser = new WebView();
+//		WebEngine webEngine = browser.getEngine();
+//		webEngine.load("http://voogasquad.herokuapp.com/home");
+//		ScrollPane scroll = new ScrollPane();
+//		scroll.setContent(browser);
+//		Tab tab = dragDrop.createTab("Your Stats");
+//		tab.setContent(scroll);
 	}
 
 	private void initStatsDisplay(double gold, double lives, double level, double score) {
