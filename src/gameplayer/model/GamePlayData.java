@@ -84,7 +84,6 @@ public class GamePlayData extends Observable{
 		gridArray = this.grid.getGrid();
 		this.gridX = this.gridArray.length;
 		this.gridY = this.gridArray[0].length;
-		
 		// get level rewards and change current score, life, gold according
 	}
 	
@@ -184,6 +183,8 @@ public class GamePlayData extends Observable{
 	}
 
 	public void setLevel(int d) {
+		System.out.println("set level to be: " + d);
+		System.out.println("set level check win:  " + this.win);
 		this.currentLevel.set(d);;
 		setChanged();
 		notifyObservers();
