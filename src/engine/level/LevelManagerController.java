@@ -72,5 +72,4 @@ public interface LevelManagerController
     public List<WaveString> getWaveStrings (int levelID);
     
     public EffectManagerController getEffectManagerController ();
-
 }
