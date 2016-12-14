@@ -30,10 +30,10 @@ public class Grid {
 
 	//testing
 	public void printGrid(){
-		System.out.println("Grid");
+		//System.out.println("Grid");
 		Cell current = this.start;
 		while (current != null) {
-			System.out.println(current.getX() + ", " + current.getY());
+			//System.out.println(current.getX() + ", " + current.getY());
 			current = current.getNext();
 		}
 	}

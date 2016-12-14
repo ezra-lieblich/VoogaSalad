@@ -46,4 +46,6 @@ public interface GameSettingsAuthoringViewDelegate {
 
     public String getLevelName (int levelID);
 
+    public void onUserPressedAddEffect ();
+
 }

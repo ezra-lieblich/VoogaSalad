@@ -2,6 +2,8 @@ package authoring.editorview.gamesettings;
 
 import java.util.List;
 import authoring.editorview.EditorViewController;
+import authoring.editorview.collisioneffects.EffectAuthoringViewController;
+import engine.effect.EffectManagerController;
 import engine.level.LevelManagerController;
 import engine.path.Coordinate;
 import engine.path.PathManagerController;
@@ -15,6 +17,7 @@ public class GameSettingsAuthoringViewController extends EditorViewController
     private GameModeManagerController gameSettingsDataSource;
     private PathManagerController pathDataSource;
     private LevelManagerController levelDataSource;
+    private EffectManagerController effectDataSource;
     private int activeID = 0;
 
     public GameSettingsAuthoringViewController (int editorWidth, int editorHeight) {
@@ -29,6 +32,7 @@ public class GameSettingsAuthoringViewController extends EditorViewController
         this.gameSettingsDataSource = source;
         this.pathDataSource = pathSource;
         this.levelDataSource = levelSource;
+        effectDataSource = gameSettingsDataSource.getEffectManagerController();
         this.gameSettingsDataSource.addTypeBankListener(this.gameView);
         this.pathDataSource.addAvailablePathListener(a -> gameView.updateAvailablePaths(a));
 
@@ -143,6 +147,17 @@ public class GameSettingsAuthoringViewController extends EditorViewController
 
     public String getLevelName (int levelID) {
         return this.levelDataSource.getName(levelID);
+    }
+
+    @Override
+    public void onUserPressedAddEffect () {
+        EffectAuthoringViewController effectAuthoringView =
+                new EffectAuthoringViewController(effectDataSource);
+        effectDataSource.createType(effectAuthoringView.getEffectAuthoringView());
+        effectAuthoringView.setEffectOptions(effectDataSource.getCreatedTypeIds());
+        effectAuthoringView.setAvailClasses(effectDataSource.getAvailableClasses());
+        effectAuthoringView.setAvailDataObjects(effectDataSource.getAvailableDataObjects());
+        effectAuthoringView.openEffectView();
     }
 
 }
