@@ -24,6 +24,7 @@ public class EffectAvailableClassesView extends ImageBank implements EffectSetVi
         super();
         Label effectLabel = new Label("Available Classes");
         this.items.add(effectLabel);
+        listView.setPrefWidth(200);
     }
 
     @Override
