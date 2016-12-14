@@ -20,7 +20,7 @@ public class main extends Application {
 	public void start(Stage s){
 		this.stage = s;
 		//This is just for testing, should be switched to creating the authoring environment first
-		GamePlayerController playerController = new GamePlayerController("player.samplexml/WinEffect_FreePath_PitcforksTest.xml");
+		GamePlayerController playerController = new GamePlayerController("player.samplexml/examplegame.xml");
 		playerController.init(false);
 		s.setTitle(TITLE);
 		s.setScene(playerController.getMainScene());
