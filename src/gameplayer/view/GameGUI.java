@@ -207,6 +207,7 @@ public class GameGUI {
 		this.grid.getGrid().getChildren().clear();
 		
 		Button btn = graphics.createButton("Next level", e);
+		btn.getStyleClass().add("ipad-dark-grey");
 		ImageView stuff = graphics.createImageView(graphics.createImage("newlevel.png"));
 		graphics.setImageViewParams(stuff, GridGUI.GRID_WIDTH, GridGUI.GRID_HEIGHT);
 		//this.grid.getGrid().getChildren().add(this.newLevelBrowser);
