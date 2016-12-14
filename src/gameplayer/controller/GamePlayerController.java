@@ -261,9 +261,12 @@ public class GamePlayerController implements Observer {
 	private boolean okForNewLevel() {
 		System.out.println("enemyManager.getEnemyOnGrid().size(): "+enemyManager.getEnemyOnGrid().size());
 		System.out.println("currentWave.size(): "+currentWave.size() );
-		return (enemyManager.getEnemyOnGrid().size() == 0/*&&this.intervalBetweenWaves<=0*/
-				&& currentWave.size() == 0 && enemyManager.getData().getCurrentLevel()<enemyManager.getData().getLevelNumber());
+		return (noMoreEnemies() && enemyManager.getData().getCurrentLevel()<enemyManager.getData().getLevelNumber());
 
+	}
+	
+	private boolean noMoreEnemies(){
+		return (enemyManager.getEnemyOnGrid().size() == 0 && currentWave.size() == 0);
 	}
 
 	private void checkCreateNewLevel() {
@@ -311,8 +314,10 @@ public class GamePlayerController implements Observer {
 	}
 
 	private boolean winCondition() {
+		System.out.println("this.model.getData().getCurrentLevel() >= this.model.getData().getLevelNumber()"+
+	this.model.getData().getCurrentLevel() +">="+ this.model.getData().getLevelNumber());
 		return (this.model.getData().won() || (this.model.getData().getLife() > 0
-				&& this.model.getData().getCurrentLevel() >= this.model.getData().getLevelNumber()));
+				&& noMoreEnemies() && this.model.getData().getCurrentLevel() >= this.model.getData().getLevelNumber()));
 	}
 
 	private void winLoseCondition() {

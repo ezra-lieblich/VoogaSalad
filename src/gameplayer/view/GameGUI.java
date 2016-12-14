@@ -233,11 +233,11 @@ public class GameGUI {
 	}
 
 	private void initChat() {
-//		WebView browser = new WebView();
-//		WebEngine webEngine = browser.getEngine();
-//		webEngine.load("http://voogachat.herokuapp.com");
-//		Tab tab = dragDrop.createTab("Chat");
-//		tab.setContent(browser);
+		WebView browser = new WebView();
+		WebEngine webEngine = browser.getEngine();
+		webEngine.load("http://voogachat.herokuapp.com");
+		Tab tab = dragDrop.createTab("Chat");
+		tab.setContent(browser);
 	}
 
 	private void initStatsTab() {
