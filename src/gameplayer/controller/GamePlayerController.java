@@ -102,6 +102,8 @@ public class GamePlayerController implements Observer {
 
 	public GamePlayerController(String xmlFilePath, SavedSettings settings) {
 		this(xmlFilePath);
+		this.oldLevel = settings.getLevel();
+		System.out.println("What is the level? :" + settings.getLevel());
 		this.model.getData().setLevel(settings.getLevel());
 		this.model.getData().setGold(settings.getGold());
 		this.model.getData().setLife(settings.getLives());
@@ -145,6 +147,7 @@ public class GamePlayerController implements Observer {
 		}
 		this.towerController = new TowerController(this.model.getTowerManager(), this.view);
 		// initSaveGameButton();
+		//this.view.getStatsDisplay().getScorePane().getChildren().clear();
 
 	}
 
@@ -185,6 +188,8 @@ public class GamePlayerController implements Observer {
 			this.animation.pause();
 			this.animationOn = false;
 		});
+		this.dropController = new DragDropController(this.view, this.model, this.getTowerImageMap());
+		System.out.println("The level in initGUI: "+this.model.getData().getCurrentLevel());
 
 		if (newlevel) {
 			this.mainScene = view.init(this.model.getData().getGold(), this.model.getData().getLife(),
@@ -202,7 +207,7 @@ public class GamePlayerController implements Observer {
 			PathManager pathManager = this.loader.getPathManager();
 			this.view.getGrid().populatePath(model.getData().getGrid().getAllPaths(), pathManager);
 		}
-		this.dropController = new DragDropController(this.view, this.model, this.getTowerImageMap());
+		
 	}
 
 	private void handleMouseClicked(double x, double y) {
@@ -278,7 +283,6 @@ public class GamePlayerController implements Observer {
 			System.out.println("GAMELEVEL: "+this.enemyManager.getData().getCurrentLevel());
 
 			this.view.newLevelPopUp(e -> {
-				
 				winLoseCondition();
 				this.model.initializeLevelInfo();
 				this.intervalBetweenWaves = this.model.getEnemyManager().getTimeOfNextWave();
@@ -334,8 +338,9 @@ public class GamePlayerController implements Observer {
 	public void update(Observable o, Object arg) {
 		if (o instanceof GamePlayData) {
 			// update level in display
+			System.out.println("The level in update observable: "+this.model.getData().getCurrentLevel());
 			this.view.updateStatsDisplay(((GamePlayData) o).getGold(), ((GamePlayData) o).getLife(),
-					((GamePlayData) o).getCurrentLevel(), ((GamePlayData) o).getScore());
+				this.model.getData().getCurrentLevel(), ((GamePlayData) o).getScore());
 			this.view.updateCurrentLevelStats(((GamePlayData) o).getCurrentLevel());
 		
 
