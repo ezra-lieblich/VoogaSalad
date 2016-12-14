@@ -103,6 +103,11 @@ public class GamePlayData extends Observable{
 		return this.win;
 	}
 	
+	public void setGrid(Grid grid) {
+		this.grid = grid;
+		this.gridArray = grid.getGrid();
+	}
+	
 	public GamePlayerFactory getFactory(){
 		return this.factory;
 	}

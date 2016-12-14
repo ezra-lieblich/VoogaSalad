@@ -101,11 +101,14 @@ public class GamePlayerController implements Observer {
 	}
 
 	public GamePlayerController(String xmlFilePath, SavedSettings settings) {
-		this(xmlFilePath);
+		this(xmlFilePath); //should I be setting all of these things before calling init?
+		this.oldLevel = settings.getLevel()-1; //does this do anything?
 		this.model.getData().setLevel(settings.getLevel());
 		this.model.getData().setGold(settings.getGold());
 		this.model.getData().setLife(settings.getLives());
 		this.model.getData().setScore(settings.getScore());
+		this.model.getData().setGrid(settings.getGrid());
+		init(true);
 	}
 	
 	
