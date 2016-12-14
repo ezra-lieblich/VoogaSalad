@@ -30,5 +30,7 @@ public interface TowerUpdateView extends TowerSetView, IUpdateView {
     public void deleteTower ();
 
     public void setTowerListDataSource (ListDataSource source);
+    
+    public void setWeaponOptions (List<String> weaponOptions);
 
 }

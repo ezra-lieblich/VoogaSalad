@@ -1,9 +1,12 @@
 package authoring.editorview.tower;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import authoring.editorview.EditorViewController;
 import authoring.editorview.ListCellData;
 import authoring.editorview.ListDataSource;
+import authoring.editorview.NameIdPair;
 import authoring.editorview.collisioneffects.EffectAuthoringViewController;
 import authoring.utilityfactories.DialogueBoxFactory;
 import engine.effect.EffectManagerController;
@@ -26,6 +29,9 @@ public class TowerAuthoringViewController extends EditorViewController
     private WeaponManagerController weaponDataSource;
     private int currentTowerID;
     private TowerUpdateView towerView;
+    private List<NameIdPair> weapons;
+    private List<Integer> weaponIDList;
+    private List<String> weaponNames;
 
     public TowerAuthoringViewController (int editorWidth, int editorHeight) {
         towerView = TowerAuthoringViewFactory.build(editorWidth, editorHeight);
@@ -40,6 +46,7 @@ public class TowerAuthoringViewController extends EditorViewController
         this.weaponDataSource = weaponSource;
         this.towerDataSource.addTypeBankListener(this.towerView);
         effectDataSource = towerDataSource.getEffectManagerController();
+        weaponOptions();
         onUserPressedCreateNewTower();
     }
 
@@ -60,6 +67,7 @@ public class TowerAuthoringViewController extends EditorViewController
         towerView.updateTowerSellPriceDisplay(towerDataSource.getTowerSellPrice(currentTowerID));
         towerView.updateUnlockLevelDisplay(towerDataSource.getTowerUnlockLevel(currentTowerID));
         towerView.updateTowerUpgradeBank(towerDataSource.getTowerUpgrades(currentTowerID));
+        weaponOptions();
     }
 
     @Override
@@ -149,8 +157,15 @@ public class TowerAuthoringViewController extends EditorViewController
 
     @Override
     public void onUserEnteredTowerChosenWeapon (String towerChosenWeapon) {
-        // TODO Auto-generated method stub
+        int id = 0;
+        for (int i = 0; i < weaponNames.size(); i++) {
+            if (weaponNames.get(i).equals(towerChosenWeapon)) {
+                id = i;
+                break;
 
+            }
+        }
+        towerDataSource.setTowerChosenWeapon(currentTowerID, id);
     }
 
     @Override
@@ -200,6 +215,21 @@ public class TowerAuthoringViewController extends EditorViewController
         effectAuthoringView.setAvailClasses(effectDataSource.getAvailableClasses());
         effectAuthoringView.setAvailDataObjects(effectDataSource.getAvailableDataObjects());
         effectAuthoringView.openEffectView();
+    }
+
+    private void weaponOptions () {
+        weapons = new ArrayList<>();
+        weaponIDList = new ArrayList<>();
+        weaponNames = new ArrayList<>();
+        List<Integer> weaponIDs = weaponDataSource.getCreatedTypeIds();
+        for (int curID : weaponIDs) {
+            String weaponName = weaponDataSource.getName(curID);
+            NameIdPair temp = new NameIdPair(weaponName, curID);
+            weaponIDList.add(curID);
+            weapons.add(temp);
+            weaponNames.add(weaponName);
+        }
+        towerView.setWeaponOptions(weaponNames);
     }
 
 }
