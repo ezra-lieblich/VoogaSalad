@@ -64,17 +64,30 @@ public class Toolbar implements IToolbar {
 
     }
 
+    
+    
     public void saveFile (String content) {
         FileChooser choose = new FileChooser();
         choose.setTitle("Save game");
-        // FileChooser.ExtensionFilter extFilter =
-        // new FileChooser();
-        // choose.getExtensionFilters().add(extFilter);
-        File gameFile = choose.showSaveDialog(new Stage());
-        if (gameFile != null) {
-            FileAggregator.defaultInstance().createGameFolder(gameFile, content);
-        }
+        FileChooser.ExtensionFilter extFilter =
+                new FileChooser.ExtensionFilter("XML Files (*.xml)", "*.xml");
+        choose.getExtensionFilters().add(extFilter);
+        File newFile = choose.showSaveDialog(new Stage());
+        FileAggregator.defaultInstance().writeXMLFile(newFile, content);
     }
+    
+    
+//    public void saveFile (String content) {
+//        FileChooser choose = new FileChooser();
+//        choose.setTitle("Save game");
+//        // FileChooser.ExtensionFilter extFilter =
+//        // new FileChooser();
+//        // choose.getExtensionFilters().add(extFilter);
+//        File gameFile = choose.showSaveDialog(new Stage());
+//        if (gameFile != null) {
+//            FileAggregator.defaultInstance().createGameFolder(gameFile, content);
+//        }
+//    }
 
     @Override
     public void setOnPressedPreview (EventHandler<MouseEvent> e) {

@@ -42,6 +42,24 @@ public class FileAggregator {
 		return defaultInstance;
 	}
 	
+	
+	public void writeXMLFile(File xmlFile, String xmlContent){
+        if (xmlFile != null) {
+            FileWriter fileWriter;
+            try {
+                fileWriter = new FileWriter(xmlFile);
+                fileWriter.write(xmlContent);
+                fileWriter.close();
+            }
+            catch (IOException e) {
+                Alert fileError =
+                        DialogueBoxFactory.createErrorDialogueBox("Error with file. Can't be saved",
+                                                                  "File Error");
+                fileError.show();
+            }
+        }
+	}
+	
 	/**
 	 * 
 	 * @param rootDirectory – This is the folder with user-input title. The working game directory is renamed to match this folder.

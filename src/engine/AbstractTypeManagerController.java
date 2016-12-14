@@ -128,7 +128,7 @@ public abstract class AbstractTypeManagerController<E extends Manager<T>, U exte
     @Override
     public void setImagePath (int id, String imagePath) {
     	String oldPath = this.getImagePath(id);
-    	imagePath = FileAggregator.defaultInstance().addImageToAssets(oldPath, imagePath);
+//    	imagePath = FileAggregator.defaultInstance().addImageToAssets(oldPath, imagePath);
         typeManager.getEntity(id).setImagePath(imagePath);
     }
 
