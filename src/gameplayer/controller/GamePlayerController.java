@@ -259,14 +259,17 @@ public class GamePlayerController implements Observer {
 	}
 
 	private boolean okForNewLevel() {
-		return (enemyManager.getEnemyOnGrid().size() == 0&&this.intervalBetweenWaves<0
-				&& currentWave.size() == 0);
+		System.out.println("enemyManager.getEnemyOnGrid().size(): "+enemyManager.getEnemyOnGrid().size());
+		System.out.println("currentWave.size(): "+currentWave.size() );
+		return (enemyManager.getEnemyOnGrid().size() == 0/*&&this.intervalBetweenWaves<=0*/
+				&& currentWave.size() == 0 && enemyManager.getData().getCurrentLevel()<enemyManager.getData().getLevelNumber());
 
 	}
 
 	private void checkCreateNewLevel() {
 		// new level condition
 		if (okForNewLevel()) {
+			System.out.println("OK FOR NEW LEVEL");
 			enemyManager.getData().setLevel(enemyManager.getData().getCurrentLevel() + 1);
 			this.animation.pause();
 			System.out.println("GAMELEVEL: "+this.enemyManager.getData().getCurrentLevel());
