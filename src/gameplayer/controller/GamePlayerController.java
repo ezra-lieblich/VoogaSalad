@@ -369,19 +369,6 @@ public class GamePlayerController implements Observer {
 
 	}
 
-	//sets the new level under the correct conditions
-	private void updateNewLevel() {
-
-//		System.out.println("old level: " + this.oldLevel);
-//		System.out.println("Current level: " + enemyManager.getData().getCurrentLevel());
-//		System.out.println("Num levels: " + enemyManager.getData().getLevelNumber());
-
-		if (this.animationOn && enemyManager.getEnemyOnGrid().size() == 0 && currentWave.size() == 0) {
-				enemyManager.getData().setLevel(enemyManager.getData().getCurrentLevel() + 1);
-		}
-
-	}
-
 	private void spawnEnemyOnInterval(EnemyManager enemyManager, EnemyController control) {
 		Thread enemyThread = new Thread() {
 			public void run() {
