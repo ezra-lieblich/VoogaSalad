@@ -269,11 +269,13 @@ public class GamePlayerController implements Observer {
 			this.startTime = System.currentTimeMillis();
 			this.intervalBetweenWaves = this.model.getEnemyManager().getTimeOfNextWave();
 			this.view.newLevelPopUp(e -> {
+				
 				this.model.initializeLevelInfo();
 				// this.view.getGrid().getGrid().getChildren().clear();
 
 				this.view.getMainScreen().getChildren().clear();
 				init(true);
+				this.animation.play();
 
 			});
 		}
@@ -372,7 +374,13 @@ public class GamePlayerController implements Observer {
 		System.out.println("old level: " + this.oldLevel);
 		System.out.println("Current level: " + enemyManager.getData().getCurrentLevel());
 		System.out.println("Num levels: " + enemyManager.getData().getLevelNumber());
-		if (enemyManager.getEnemyOnGrid().size() == 0 && currentWave.size() == 0) {
+
+		if (this.animationOn && enemyManager.getEnemyOnGrid().size() == 0 && currentWave.size() == 0) {
+
+			// System.out
+			// .println(enemyManager.getData().getCurrentLevel() + "<=" +
+			// enemyManager.getData().getLevelNumber());
+			//if (enemyManager.getData().getCurrentLevel() <= enemyManager.getData().getLevelNumber() - 1) {
 				System.out.println("WHY ARE YOU NOT SETTING LEVEL");
 				enemyManager.getData().setLevel(enemyManager.getData().getCurrentLevel() + 1);
 
