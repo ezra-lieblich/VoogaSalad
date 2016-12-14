@@ -344,7 +344,6 @@ public class GamePlayerController implements Observer {
 	private void startAnimation() {
 		this.animationOn = true;
 		this.model.getData().getGrid().printGrid();
-		this.currentWave = this.model.getEnemyManager().getPackOfEnemyComing();
 		this.startTime = System.currentTimeMillis();
 		this.intervalBetweenWaves = this.model.getEnemyManager().getTimeOfNextWave();
 		spawnEnemyOnInterval(this.enemyManager,
