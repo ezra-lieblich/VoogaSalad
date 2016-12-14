@@ -142,6 +142,12 @@ public class GamePlayData extends Observable{
 	
 	public void setScore(double additionalScore){
 		this.score.set(this.score.get() + additionalScore );
+		try {
+			Wrapper.getInstance().logScore(Double.toString(this.score.get()));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		setChanged();
 		notifyObservers();
 	}
