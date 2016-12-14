@@ -282,6 +282,7 @@ public class GamePlayerController implements Observer {
 
 			this.view.newLevelPopUp(e -> {
 				
+				winLoseCondition();
 				this.model.initializeLevelInfo();
 				this.intervalBetweenWaves = this.model.getEnemyManager().getTimeOfNextWave();
 
@@ -363,6 +364,9 @@ public class GamePlayerController implements Observer {
 			
 			if (waveTimeIntervalElapsed()) {
 				this.currentWave = this.model.getEnemyManager().getPackOfEnemyComing();
+				
+				System.out.println("current wave size:  " + currentWave.size());
+
 				this.intervalBetweenWaves = this.model.getEnemyManager().getTimeOfNextWave();
 			}
 			
