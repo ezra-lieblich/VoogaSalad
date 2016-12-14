@@ -55,7 +55,7 @@ public class EffectAuthoringViewController extends EditorViewController
     @Override
     public void onUserSelectedAvailableClass (String selectedClass) {
         effectDataSource.setAvailableClass(selectedClass);
-        System.out.println(selectedClass);
+        //System.out.println(selectedClass);
         effectAuthoringView.getEffectAvailMethods()
                 .updateAvailMethods(effectDataSource.getAvailableClassMethods(selectedClass));
         // effectAuthoringView.effectDataSource.getAvailableClassMethods(selectedClass)
@@ -81,7 +81,7 @@ public class EffectAuthoringViewController extends EditorViewController
     @Override
     public ListCellData getCellDataForSubject (int id) {
         ListCellData cellData = new ListCellData();
-        System.out.println("id: " + id + " effectsDS: " + effectDataSource);
+        //System.out.println("id: " + id + " effectsDS: " + effectDataSource);
         cellData.setName(effectDataSource.getName(id));
         cellData.setImagePath(effectDataSource.getImagePath(id));
         cellData.setId(id);

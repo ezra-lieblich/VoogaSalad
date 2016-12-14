@@ -24,7 +24,6 @@ public class PathTypeManager extends AbstractTypeManager<Path> implements PathMa
                                    .filter(a -> a.getType().equals(manager.getEntity(index).getPathType()) && a.getGridRows() == manager.getEntity(index).getGridSize() && a.getGridColumns()==(manager.getEntity(index).getGridSize()))
                                    .map(Path::getId)
                                    .collect(Collectors.toList()));  
-        System.out.println("HERERER");
     }
     
     @Override 

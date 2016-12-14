@@ -39,8 +39,8 @@ public class Enemy extends Observable implements IDrawable {
 		this.showInfo = false;
 		this.enemyInfo = new Label("Name: " + name + "\nHealth: " + health);
 		this.shouldRemove = false;
-		this.goldReward = goldReward;
-		this.scoreReward = scoreReward;
+		this.goldReward = goldAward;
+		this.scoreReward = scoreReawrd;
 		initLabel();
 	}
 

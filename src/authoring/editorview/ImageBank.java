@@ -81,7 +81,7 @@ public abstract class ImageBank implements ChangeListener<Number> {
 
     public void updateBank (List<Integer> ids) {
         if (dataSource == null) {
-            System.out.println("Table data source not set");
+            //System.out.println("Table data source not set");
             return;
         }
         this.items.remove(CONTENT_OFFSET, items.size());

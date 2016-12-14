@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Optional;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
@@ -16,6 +17,7 @@ import gameplayer.model.Grid;
 import gameplayer.model.enemy.Enemy;
 import gameplayer.model.enemy.EnemyManager;
 import javafx.scene.control.Alert;
+import javafx.scene.control.TextInputDialog;
 
 public class GameSavingController {
 	//private XStream serializer;
@@ -29,7 +31,6 @@ public class GameSavingController {
 	}
 	
 	public String toPrettyXML() {
-		EnemyManager eman = gameModel.getEnemyManager();
 		GamePlayData gameData = gameModel.getData();
 		SavedSettings settings = new SavedSettings(this.xmlName);
 		settings.setGold(gameData.getGold());
@@ -40,31 +41,30 @@ public class GameSavingController {
 	}
 	
 	public void saveGame() {
-		//GamePlayData gameData = gameModel.getData();
-		//int level = gameData.getCurrentLevel();
-		//String content = this.xmlName+"\n"+level;
-		//File dirFile = new File("player.samplexml/savedGame-"+counter);
 		
+		String fileName = getUserInput();
 		String content = this.toPrettyXML();
 		FileWriter fw;
 		try {
-			fw = new FileWriter("SavedGames/savedGame.xml");
+			fw = new FileWriter("SavedGames/"+fileName+".xml");
 			BufferedWriter bw = new BufferedWriter(fw);
 			bw.write(content);
 			bw.close();
 		} catch (IOException e) {
 			System.out.println("Game does not exist, please choose another");
 		}
+	}
+	
+	private String getUserInput() {
+		TextInputDialog prompt = new TextInputDialog("Game Title");
+		prompt.setTitle("Save Game");
+		prompt.setHeaderText("Please enter the name of the game to save");
 		
-		/*
-		try {
-			FileWriter writer = new FileWriter(newFile);
-			writer.write(content);
-			writer.close();
-			
-		} catch (IOException e) {
-			e.printStackTrace();
+		Optional<String> input = prompt.showAndWait();
+		String gameTitle = "newGame";
+		if (input.isPresent()) {
+			gameTitle = input.get();
 		}
-		*/
+		return gameTitle;
 	}
 }

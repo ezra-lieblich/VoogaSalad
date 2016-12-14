@@ -111,7 +111,7 @@ public class DragDrop extends Observable{
 		graphicLib.setImageViewParams(copy, this.width, this.height);
 		int gridX = (int)(this.view.pixelToGridCoord(xpos+this.xError) * this.width);
 		int gridY = (int)(this.view.pixelToGridCoord(ypos+this.yError) * this.height);
-		System.out.println("New x,y: "+gridX+", "+gridY);
+		//System.out.println("New x,y: "+gridX+", "+gridY);
 		copy.setX(gridX);
 		copy.setY(gridY);
 		/*
