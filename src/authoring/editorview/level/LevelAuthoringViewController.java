@@ -90,7 +90,7 @@ public class LevelAuthoringViewController extends EditorViewController
     public void onUserEnteredEnemyFrequency (String waveID, String frequency) {
         try {
             Double.parseDouble(frequency);
-            levelDataSource.setWaveFrequency(currentLevelID, currentWaveID,
+            levelDataSource.setWaveFrequency(currentLevelID, Integer.parseInt(waveID),
                                              Double.parseDouble(frequency));
         }
         catch (NumberFormatException e) {
@@ -164,7 +164,7 @@ public class LevelAuthoringViewController extends EditorViewController
     public void onUserEnteredNumofEnemies (String waveID, String numEnemies) {
         try {
             Integer.parseInt(numEnemies);
-            levelDataSource.setWaveCount(currentLevelID, currentWaveID,
+            levelDataSource.setWaveCount(currentLevelID, Integer.parseInt(waveID),
                                          Integer.parseInt(numEnemies));
         }
         catch (NumberFormatException e) {
@@ -176,7 +176,7 @@ public class LevelAuthoringViewController extends EditorViewController
     public void onUserEnteredSpawnPoint (String waveID, String spawnPoint) {
         try {
             Integer.parseInt(spawnPoint);
-            levelDataSource.setWavePath(currentLevelID, currentWaveID,
+            levelDataSource.setWavePath(currentLevelID, Integer.parseInt(waveID),
                                         Integer.parseInt(spawnPoint));
         }
         catch (NumberFormatException e) {
@@ -188,7 +188,7 @@ public class LevelAuthoringViewController extends EditorViewController
     public void onUserEnteredWaveTimeDelay (String waveID, String timeDelay) {
         try {
             Double.parseDouble(timeDelay);
-            levelDataSource.setWaveDelay(currentLevelID, currentWaveID,
+            levelDataSource.setWaveDelay(currentLevelID, Integer.parseInt(waveID),
                                          Double.parseDouble(timeDelay));
         }
         catch (NumberFormatException e) {
