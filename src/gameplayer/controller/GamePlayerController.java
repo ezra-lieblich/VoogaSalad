@@ -236,7 +236,7 @@ public class GamePlayerController implements Observer {
 
 	public void addButtons(Tower t) {
 		t.getSellButton().setOnAction(e -> this.towerController.handleSellTowerClick(t));
-		if(t.upgradable()){
+		if(t.getUpgradeCount() == 0){
 			t.getUpgradeButton().setOnAction(e -> this.towerController.upgrade(t.getUniqueID()));
 		}
 		else
