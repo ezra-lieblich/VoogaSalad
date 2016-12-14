@@ -1,5 +1,6 @@
 package engine.settings;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import engine.AbstractType;
@@ -142,5 +143,12 @@ public class GameModeType extends AbstractType implements GameMode {
 	@Override
 	public List<Integer> getPaths() {
 		return paths.getProperty();
+	}
+
+
+
+	@Override
+	public void clearPaths() {
+		paths.setProperty(new ArrayList<>());
 	}
 }

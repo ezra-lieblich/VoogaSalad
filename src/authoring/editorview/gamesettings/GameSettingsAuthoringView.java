@@ -120,7 +120,6 @@ public class GameSettingsAuthoringView implements GameSettingsUpdateView, GameSe
 
     @Override
     public void updatePathList (List<Integer> pathList) {
-        //System.out.println("yo");
         gameSettingsEditor.updatePathList(pathList);
         gameSettingsPreview.updatePathList(pathList);
     }
