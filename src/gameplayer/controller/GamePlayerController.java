@@ -361,6 +361,7 @@ public class GamePlayerController implements Observer {
 			
 			if (waveTimeIntervalElapsed()) {
 				this.currentWave = this.model.getEnemyManager().getPackOfEnemyComing();
+				System.out.println("Current wave: "+currentWave.size());
 				this.intervalBetweenWaves = this.model.getEnemyManager().getTimeOfNextWave();
 			}
 			
