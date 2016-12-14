@@ -66,21 +66,7 @@ public class GridGUI {
 		return this.imagePath;
 	}
 	//for testing
-	@Deprecated
-	private void initDummyPath(){
-		
-		int[] stuff  = {0,0};
-		int []stuff1 = {1,1};
-		int []stuff2 = {2,2};
-		int[] stuff3={3,3};
-		int[] stuff4={4,4};
-		this.path = new ArrayList<int[]>();
-		this.path.add(stuff);
-		this.path.add(stuff1);
-		this.path.add(stuff2);
-		this.path.add(stuff3);
-		this.path.add(stuff4);
-	}
+
 	
 	public void init(){
 		//initDummyPath(); //TODO: get rid of
