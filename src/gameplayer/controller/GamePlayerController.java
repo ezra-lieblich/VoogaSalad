@@ -304,6 +304,7 @@ public class GamePlayerController implements Observer {
 		}
 	}
 
+	
 	private void endCondition(String url) {
 		try {
 			Wrapper.getInstance().logEndScore("" + this.model.getData().getGold(), "" + this.model.getData().getLife(),
