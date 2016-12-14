@@ -3,55 +3,37 @@ package gameplayer.controller;
 import gameplayer.loader.GamePlayerFactory;
 import gameplayer.loader.GameSavingController;
 import gameplayer.loader.XMLParser;
-import gameplayer.main.main;
-import gameplayer.model.Cell;
 import gameplayer.model.GamePlayData;
 import gameplayer.model.GamePlayModel;
-import gameplayer.model.IDrawable;
 import gameplayer.model.enemy.Enemy;
 import gameplayer.model.enemy.EnemyManager;
 import gameplayer.model.tower.Tower;
 import gameplayer.model.weapon.Weapon;
 import gameplayer.view.GameGUI;
-import gameplayer.view.GridGUI;
 import gameplayer.view.helper.GraphicsLibrary;
 import gameplayer.view.helper.dragdrop.DragDropView;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.application.Application;
-import javafx.embed.swing.JFXPanel;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.CacheHint;
-import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import statswrapper.Wrapper;
-import java.awt.BorderLayout;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Queue;
-import javax.swing.BorderFactory;
-import javax.swing.JPanel;
+
 
 import engine.path.PathManager;
 
@@ -74,17 +56,14 @@ public class GamePlayerController implements Observer {
 	private DragDropController dropController;
 	private EnemyManager enemyManager;
 	private double oldLevel;
-	private int timer = 1;
 	private GraphicsLibrary graphics;
 	private Queue<Enemy> currentWave;
 	private HashMap<String, Integer> towerToId;
-	private double enemyFrequency;
 	private double startTime;
 	private double intervalBetweenWaves;
 
 	private boolean animationOn = false;
 
-	private Thread enemyThread;
 	// Might need to be refactored into a different class
 	private HashMap<Integer, ImageView> weaponsOnScreen;
 	private HashMap<Integer, ImageView> enemiesOnScreen;
