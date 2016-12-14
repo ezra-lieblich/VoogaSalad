@@ -86,6 +86,7 @@ public class WaveTableView implements LevelSetView {
                                                                                                                    .getNewValue());
                                              delegate.onUserEnteredEnemy(t.getRowValue()
                                                      .getWaveNumber(), t.getNewValue());
+                                             System.out.println(t.getRowValue().getWaveNumber());
                                          }
                                      });
         enemyCountCol.setEditable(true);
@@ -101,6 +102,7 @@ public class WaveTableView implements LevelSetView {
                                                                                                                     .getNewValue());
                                               delegate.onUserEnteredNumofEnemies(t.getRowValue()
                                                       .getWaveNumber(), t.getNewValue());
+                                              System.out.println(t.getRowValue().getWaveNumber());
                                           }
                                       });
         enemyFrequencyCol.setEditable(true);
@@ -117,6 +119,7 @@ public class WaveTableView implements LevelSetView {
                                                   delegate.onUserEnteredEnemyFrequency(t
                                                           .getRowValue()
                                                           .getWaveNumber(), t.getNewValue());
+                                                  System.out.println(t.getRowValue().getWaveNumber());
                                               }
                                           });
         pathCol.setEditable(true);
@@ -132,6 +135,7 @@ public class WaveTableView implements LevelSetView {
                                                                                                               .getNewValue());
                                         delegate.onUserEnteredSpawnPoint(t.getRowValue()
                                                 .getWaveNumber(), t.getNewValue());
+                                        System.out.println(t.getRowValue().getWaveNumber());
                                     }
                                 });
         timeDelayCol.setEditable(true);
@@ -145,6 +149,7 @@ public class WaveTableView implements LevelSetView {
                                                              .setTimeDelay(t.getNewValue());
                                              delegate.onUserEnteredWaveTimeDelay(t.getRowValue()
                                                      .getWaveNumber(), t.getNewValue());
+                                             System.out.println(t.getRowValue().getWaveNumber());
                                          }
                                      });
     }

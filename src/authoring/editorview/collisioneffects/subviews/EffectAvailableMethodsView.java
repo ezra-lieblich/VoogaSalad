@@ -20,6 +20,7 @@ public class EffectAvailableMethodsView extends ImageBank implements EffectSetVi
 
     public EffectAvailableMethodsView () {
         super();
+        listView.setPrefWidth(450);
     }
 
     @Override

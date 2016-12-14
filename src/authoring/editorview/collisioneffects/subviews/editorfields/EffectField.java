@@ -21,6 +21,7 @@ public class EffectField extends TextFieldView implements EffectSetView {
 
     public EffectField (ResourceBundle resource) {
         super(resource);
+        effectTextField.setPrefWidth(500);
     }
 
     @Override
