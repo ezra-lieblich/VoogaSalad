@@ -9,7 +9,6 @@ public class SavedSettings {
 	private double gold;
 	private int level;
 	private double lives;
-	Grid grid;
 	
 	public SavedSettings(String xmlFileName) {
 		this.gameType = xmlFileName;
@@ -51,11 +50,4 @@ public class SavedSettings {
 		return lives;
 	}
 
-	public Grid getGrid() {
-		return grid;
-	}
-
-	public void setGrid(Grid grid) {
-		this.grid = grid;
-	}
 }
