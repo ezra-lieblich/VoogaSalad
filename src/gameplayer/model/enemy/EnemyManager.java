@@ -132,6 +132,7 @@ public class EnemyManager extends Observable{
 		boolean onLastCell = false;
 
 		double moveDist = enemy.getMovingSpeed();
+		if (enemy.getMovingSpeed() == 0.0) System.out.println("moving speed should stop");
 		
 
 		while (moveDist > 0) {
