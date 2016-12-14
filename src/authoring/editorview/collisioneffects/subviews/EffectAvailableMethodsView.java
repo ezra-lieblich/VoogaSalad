@@ -20,6 +20,7 @@ public class EffectAvailableMethodsView extends ImageBank implements EffectSetVi
 
     public EffectAvailableMethodsView () {
         super();
+        listView.setPrefWidth(450);
     }
 
     @Override
@@ -29,8 +30,7 @@ public class EffectAvailableMethodsView extends ImageBank implements EffectSetVi
 
     @Override
     protected void userSelectedRow (int index) {
-        // TODO Auto-generated method stub
-
+        // Do nothing
     }
 
     public void updateAvailMethods (List<String> list) {

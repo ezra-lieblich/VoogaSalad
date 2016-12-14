@@ -254,11 +254,14 @@ public class TowerManager extends Observable {
 	 */
 	public void upgradeTower(int UniqueID){
 		Tower toBeUpgraded = this.towersOnGrid.get(UniqueID);
+		
 		int upgradeType = toBeUpgraded.getUpgradeType();
-		engine.tower.Tower upgraded = this.upgradeTowerTypes.get(10); // change back to upgradeType when xml is fixed
+		engine.tower.Tower upgraded = this.upgradeTowerTypes.get(upgradeType); // change back to upgradeType when xml is fixed
+		/*
 		for(int i : this.upgradeTowerTypes.keySet()){
-			//System.out.println("key set: " + i);
+			System.out.println("key set: " + i);
 		}
+		*/
 		//System.out.println("tower upgrade check: " +upgraded== null );
 		//System.out.println("tower upgrade check: " +upgraded.getCost() );
 
