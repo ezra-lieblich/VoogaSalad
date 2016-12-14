@@ -1,10 +1,14 @@
 package authoring.editorview.tower.subviews.editorfields;
 
+import java.util.List;
 import java.util.ResourceBundle;
+import org.controlsfx.control.CheckComboBox;
 import authoring.editorview.tower.TowerSetView;
+import authoring.utilityfactories.ComboBoxFactory;
 import authoring.editorview.tower.TowerAuthoringViewDelegate;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.Node;
-import javafx.scene.layout.HBox;
 
 
 /**
@@ -14,13 +18,14 @@ import javafx.scene.layout.HBox;
  */
 public class TowerWeaponBank implements TowerSetView {
 
-    private HBox towerChooseWeaponBox;
     private TowerAuthoringViewDelegate delegate;
-    private ResourceBundle labelsResource;
+    private CheckComboBox<String> weaponComboBox;
+    private ObservableList<String> availableWeaponsList;
 
     public TowerWeaponBank (ResourceBundle labelsResource) {
-        this.labelsResource = labelsResource;
-        towerChooseWeaponBox = new HBox(5);
+        availableWeaponsList = FXCollections.observableArrayList();
+        weaponComboBox =
+                ComboBoxFactory.makeCheckComboBox(availableWeaponsList, a -> updateWeapons(a));
     }
 
     @Override
@@ -30,11 +35,14 @@ public class TowerWeaponBank implements TowerSetView {
 
     @Override
     public Node getInstanceAsNode () {
-        return towerChooseWeaponBox;
+        return weaponComboBox;
     }
 
     public void updateTowerChosenWeapon (String chosenWeapon) {
-        // towerChooseWeaponBox.setValue(chosenWeapon);
+    }
+
+    private void updateWeapons (List<String> updateWeapons) {
+
     }
 
 }

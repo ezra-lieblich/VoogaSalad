@@ -18,6 +18,7 @@ public class EffectNameField extends EditorNameView implements EffectSetView {
 
     public EffectNameField (ResourceBundle labelsResource) {
         super(labelsResource);
+        nameTextField.setPrefWidth(500);
     }
 
     @Override

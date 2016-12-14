@@ -7,8 +7,8 @@ import authoring.editorview.ListDataSource;
 import authoring.editorview.level.subviews.LevelBank;
 import authoring.editorview.level.subviews.LevelEditorView;
 import authoring.editorview.level.subviews.editorfields.AddLevelEffectView;
-import authoring.editorview.level.subviews.editorfields.CreateNewLevelView;
 import authoring.editorview.level.subviews.editorfields.CreateNewWaveView;
+import authoring.editorview.level.subviews.editorfields.DeleteLevel;
 import authoring.editorview.level.subviews.editorfields.LevelNameView;
 import authoring.editorview.level.subviews.editorfields.LevelRewardsView;
 import authoring.editorview.level.subviews.editorfields.LevelTransitionTimeField;
@@ -18,7 +18,6 @@ import javafx.scene.Node;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
-import javafx.scene.layout.VBox;
 
 
 /**
@@ -29,22 +28,19 @@ import javafx.scene.layout.VBox;
  */
 public class LevelAuthoringView implements LevelUpdateView {
 
-    private static final int EDITOR_SIZE = 300;
-
     private LevelAuthoringViewDelegate delegate;
 
     private GridPane levelView;
-    private VBox vbox;
     private LevelRewardsView levelRewardsView;
     private LevelNameView levelNameView;
     private LevelBank levelBank;
-    private CreateNewLevelView createNewLevelView;
     private PreviewLevelView previewLevelView;
     private LevelTransitionTimeField transitionTimeField;
     private WaveTableView waveTableView;
     private AddLevelEffectView addLevelEffect;
     private LevelEditorView levelEditorView;
     private CreateNewWaveView createWaveView;
+    private DeleteLevel deleteLevel;
 
     private ResourceBundle levelsResource =
             ResourceBundle.getBundle("resources/GameAuthoringLevels");
@@ -52,22 +48,20 @@ public class LevelAuthoringView implements LevelUpdateView {
     LevelAuthoringView (int width, int height) {
         this.levelView = new GridPane();
 
-        this.vbox = new VBox(10);
         this.levelRewardsView = new LevelRewardsView(levelsResource);
         this.levelNameView = new LevelNameView(levelsResource);
-        // should be with bank
-        this.createNewLevelView = new CreateNewLevelView(levelsResource);
         this.transitionTimeField = new LevelTransitionTimeField(levelsResource);
         this.waveTableView = new WaveTableView(levelsResource, width);
         this.previewLevelView = new PreviewLevelView();
         this.addLevelEffect = new AddLevelEffectView(levelsResource);
         this.createWaveView = new CreateNewWaveView(levelsResource);
+        this.deleteLevel = new DeleteLevel(levelsResource);
 
         this.levelBank = new LevelBank();
         this.levelEditorView =
                 new LevelEditorView(levelRewardsView, levelNameView, transitionTimeField,
                                     waveTableView, previewLevelView, addLevelEffect,
-                                    createNewLevelView, createWaveView);
+                                    deleteLevel, createWaveView);
         setLevelView();
     }
 
@@ -81,12 +75,12 @@ public class LevelAuthoringView implements LevelUpdateView {
         this.delegate = delegate;
         levelNameView.setDelegate(delegate);
         levelRewardsView.setDelegate(delegate);
-        createNewLevelView.setDelegate(delegate);
         transitionTimeField.setDelegate(delegate);
         waveTableView.setDelegate(delegate);
         addLevelEffect.setDelegate(delegate);
         levelBank.setDelegate(delegate);
         createWaveView.setDelegate(delegate);
+        deleteLevel.setDelegate(delegate);
     }
 
     private void setLevelView () {
@@ -150,7 +144,6 @@ public class LevelAuthoringView implements LevelUpdateView {
     @Override
     public void updateBank (List<Integer> ids) {
         this.levelBank.updateBank(ids);
-        //System.out.println("No level bank currently implemented");
     }
 
     @Override
@@ -162,10 +155,7 @@ public class LevelAuthoringView implements LevelUpdateView {
     @Override
     public void setLevelListDataSource (ListDataSource source) {
         this.levelBank.setListDataSource(source);
-        //System.out.println("No level bank currently implemented");
     }
-
-    // WAVE
 
     @Override
     public void updateDeleteEntity (String entityID) {
@@ -180,8 +170,12 @@ public class LevelAuthoringView implements LevelUpdateView {
 
     @Override
     public Integer getNearestAvailableItemID (int id) {
-        //System.out.println("No level bank implemented");
-        return null;
+        int currentIndex = this.levelBank.getIndexForItemWithID(id);
+        Integer nearestID = this.levelBank.getIDForItemAtIndex(currentIndex - 1);
+        if (nearestID == null) {
+            nearestID = this.levelBank.getIDForItemAtIndex(currentIndex + 1);
+        }
+        return nearestID;
     }
 
 }

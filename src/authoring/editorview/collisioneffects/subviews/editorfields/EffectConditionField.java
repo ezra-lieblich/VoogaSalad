@@ -21,6 +21,7 @@ public class EffectConditionField extends TextFieldView implements EffectSetView
 
     public EffectConditionField (ResourceBundle resource) {
         super(resource);
+        conditionField.setPrefWidth(500);
     }
 
     @Override
