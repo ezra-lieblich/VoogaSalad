@@ -34,6 +34,7 @@ public class GamePlayData extends Observable{
 	//CELL SIZE MUST BE INITIATED
 
 	
+	private Boolean lose = false;
 	private Boolean win = false;
 	private WinEffectFactory winFactory;
 	private EffectManager effectManager;
@@ -97,6 +98,11 @@ public class GamePlayData extends Observable{
 		this.win = true;
 		setChanged();
 		notifyObservers();
+	}
+	
+	@EffectMethod
+	public void setLose() {
+		this.lose= true;
 	}
 
 	public boolean won(){
