@@ -58,6 +58,7 @@ public class EnemyManager extends Observable{
 		this.allWaves = this.gameFactory.getWaves(this.gameData.getCurrentLevel());
 		initializeWaves();
 		this.noMoreWave = false;
+		System.out.println("reaching new level: " + this.gameData.getCurrentLevel() + " wave size " + this.allWaves.size());
 		//System.out.println("Start: " + grid.getStart().getX() + " " + grid.getStart().getY());
 		//System.out.println("end: " + grid.getEnd().getX() + " " + grid.getEnd().getY());
 

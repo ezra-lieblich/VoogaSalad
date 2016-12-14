@@ -279,6 +279,7 @@ public class GamePlayerController implements Observer {
 
 			this.view.newLevelPopUp(e -> {
 				
+				winLoseCondition();
 				this.model.initializeLevelInfo();
 				this.intervalBetweenWaves = this.model.getEnemyManager().getTimeOfNextWave();
 
@@ -360,6 +361,9 @@ public class GamePlayerController implements Observer {
 			
 			if (waveTimeIntervalElapsed()) {
 				this.currentWave = this.model.getEnemyManager().getPackOfEnemyComing();
+				
+				System.out.println("current wave size:  " + currentWave.size());
+				System.out.println("Enemy on grid? "+enemyManager.getEnemyOnGrid());
 				this.intervalBetweenWaves = this.model.getEnemyManager().getTimeOfNextWave();
 			}
 			
@@ -378,10 +382,12 @@ public class GamePlayerController implements Observer {
 	}
 
 	private void spawnEnemyOnInterval(EnemyManager enemyManager, EnemyController control) {
+		System.out.println("SPAWN NEW ENEMY");
 		Thread enemyThread = new Thread() {
 			public void run() {
 				long intervalBetween = (long) control.getEnemyModel().getFrequencyOfNextWave();
-				while (intervalBetween != 0) {
+				System.out.println("interval between : "+intervalBetween);
+				while (intervalBetween >= 0) {
 					if (currentWave.size() > 0) {
 						Enemy enemy = currentWave.poll();
 						enemyManager.spawnEnemy(enemy);

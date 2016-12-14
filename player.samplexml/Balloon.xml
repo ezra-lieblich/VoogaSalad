@@ -1019,6 +1019,73 @@
                               </frequency>
                             </engine.level.wave.WaveType>
                           </entry>
+                          <entry>
+                            <int>4</int>
+                            <engine.level.wave.WaveType>
+                              <name class="engine.observer.ObservableObjectProperty">
+                                <observers/>
+                                <listeners>
+                                  <null/>
+                                </listeners>
+                                <property class="string">lastWave</property>
+                              </name>
+                              <imagePath class="engine.observer.ObservableObjectProperty">
+                                <observers/>
+                                <listeners>
+                                  <null/>
+                                </listeners>
+                                <property class="string">Images/penguin.jpg</property>
+                              </imagePath>
+                              <size class="engine.observer.ObservableObjectProperty">
+                                <observers/>
+                                <listeners>
+                                  <null/>
+                                </listeners>
+                                <property class="double">1.0</property>
+                              </size>
+                              <sound class="engine.observer.ObservableObjectProperty">
+                                <observers/>
+                                <listeners/>
+                                <property class="string">Music/DopeBeats.mp3</property>
+                              </sound>
+                              <id>0</id>
+                              <enemyID class="engine.observer.ObservableObjectProperty">
+                                <observers/>
+                                <listeners>
+                                  <null/>
+                                </listeners>
+                                <property class="int">0</property>
+                              </enemyID>
+                              <pathID class="engine.observer.ObservableObjectProperty">
+                                <observers/>
+                                <listeners>
+                                  <null/>
+                                </listeners>
+                                <property class="int">0</property>
+                              </pathID>
+                              <enemyCount class="engine.observer.ObservableObjectProperty">
+                                <observers/>
+                                <listeners>
+                                  <null/>
+                                </listeners>
+                                <property class="int">1</property>
+                              </enemyCount>
+                              <delay class="engine.observer.ObservableObjectProperty">
+                                <observers/>
+                                <listeners>
+                                  <null/>
+                                </listeners>
+                                <property class="double">2.0</property>
+                              </delay>
+                              <frequency class="engine.observer.ObservableObjectProperty">
+                                <observers/>
+                                <listeners>
+                                  <null/>
+                                </listeners>
+                                <property class="double">1.0</property>
+                              </frequency>
+                            </engine.level.wave.WaveType>
+                          </entry>
                         </property>
                       </data>
                     </property>
