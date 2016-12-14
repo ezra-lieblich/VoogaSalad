@@ -333,6 +333,8 @@ public class GamePlayerController implements Observer {
 
 	private void winLoseCondition() {
 		if (loseCondition()) {
+			System.out.println("GAME OVER");
+			this.animation.pause();
 			gameOver();
 		} else if (winCondition()) {
 			// System.out.println("WIn game!");
