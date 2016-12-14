@@ -8,6 +8,7 @@ import authoring.editorview.collisioneffects.EffectAuthoringViewController;
 import authoring.utilityfactories.DialogueBoxFactory;
 import engine.effect.EffectManagerController;
 import engine.tower.TowerManagerController;
+import engine.weapon.WeaponManagerController;
 import authoring.editorview.tower.TowerUpdateView;
 
 
@@ -22,6 +23,7 @@ public class TowerAuthoringViewController extends EditorViewController
 
     private TowerManagerController towerDataSource;
     private EffectManagerController effectDataSource;
+    private WeaponManagerController weaponDataSource;
     private int currentTowerID;
     private TowerUpdateView towerView;
 
@@ -32,8 +34,10 @@ public class TowerAuthoringViewController extends EditorViewController
         this.view = towerView;
     }
 
-    public void setTowerDataSource (TowerManagerController source) {
+    public void setTowerDataSource (TowerManagerController source,
+                                    WeaponManagerController weaponSource) {
         this.towerDataSource = source;
+        this.weaponDataSource = weaponSource;
         this.towerDataSource.addTypeBankListener(this.towerView);
         effectDataSource = towerDataSource.getEffectManagerController();
         onUserPressedCreateNewTower();

@@ -33,8 +33,9 @@ public class LevelAuthoringViewController extends EditorViewController
         this.view = levelView;
     }
 
-    public void setLevelDataSource (LevelManagerController source) {
+    public void setLevelDataSource (LevelManagerController source, EnemyManagerController enemySource) {
         this.levelDataSource = source;
+        enemyDataSource = enemySource;
         this.levelDataSource.addTypeBankListener(this.levelView);
         effectDataSource = levelDataSource.getEffectManagerController();
         onUserEnteredCreateLevel();
