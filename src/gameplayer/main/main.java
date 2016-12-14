@@ -22,6 +22,7 @@ public class main extends Application {
 		//This is just for testing, should be switched to creating the authoring environment first
 		GamePlayerController playerController = new GamePlayerController("player.samplexml/newGameAaron.xml");
 		//playerController.init(false);
+
 		s.setTitle(TITLE);
 		s.setScene(playerController.getMainScene());
 		s.show();

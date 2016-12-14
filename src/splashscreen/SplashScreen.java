@@ -7,9 +7,14 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.DomDriver;
+
 import authoring.main.AuthoringController;
+import engine.GameAuthoringData;
 import gameplayer.controller.GamePlayerController;
 import gameplayer.controller.HomeSelection;
+import gameplayer.loader.SavedSettings;
 import gameplayer.loader.XMLParser;
 import gameplayer.view.helper.GraphicsLibrary;
 import javafx.geometry.Pos;
@@ -127,24 +132,27 @@ public class SplashScreen {
 	        
 			File out = filechooser.showOpenDialog(mainStage);
 			String xmlName;
+			SavedSettings settings;
 			int level;
 			try {
-				
+				XStream deserializer = new XStream(new DomDriver());
+				settings = (SavedSettings) deserializer.fromXML(new FileInputStream(out));
+				xmlName = settings.getGameType();
+				/*
 				FileReader fileReader = new FileReader(out);
 				
 				BufferedReader buffer = new BufferedReader(fileReader);
 				xmlName = buffer.readLine();
 				level = Integer.parseInt(buffer.readLine());
 				buffer.close();
+				*/
 						
 				
 			} catch (Exception e1) {
 				System.out.println("Error reading file, please use a different file");
 				return;
 			}
-			
-			GamePlayerController gameController = new GamePlayerController(xmlName, level);
-			gameController.init(false);
+			GamePlayerController gameController = new GamePlayerController(xmlName, settings);
 			
 			Stage stage = new Stage();
 			gameController.setDataStoreOnClose(stage);

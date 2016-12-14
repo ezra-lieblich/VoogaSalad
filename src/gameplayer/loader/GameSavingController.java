@@ -4,6 +4,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.HashMap;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
@@ -19,33 +20,31 @@ import javafx.scene.control.Alert;
 public class GameSavingController {
 	//private XStream serializer;
 	private GamePlayModel gameModel;
-	int counter;
 	String xmlName;
 	
 	public GameSavingController(GamePlayModel model, String xmlFilename) {
 		//serializer = new XStream(new DomDriver());
 		this.gameModel = model;
-		this.counter = 0;
 		this.xmlName = xmlFilename;
 	}
 	
 	public String toPrettyXML() {
 		EnemyManager eman = gameModel.getEnemyManager();
-		Enemy e = eman.getPackOfEnemyComing().element();
 		GamePlayData gameData = gameModel.getData();
-		//GamePlayerFactory factory = gameData.getFactory();
-		return "" +gameData.getCurrentLevel();
+		SavedSettings settings = new SavedSettings(this.xmlName);
+		return new XStream(new DomDriver()).toXML(settings);
 	}
 	
 	public void saveGame() {
-		GamePlayData gameData = gameModel.getData();
-		int level = gameData.getCurrentLevel();
-		String content = this.xmlName+"\n"+level;
+		//GamePlayData gameData = gameModel.getData();
+		//int level = gameData.getCurrentLevel();
+		//String content = this.xmlName+"\n"+level;
 		//File dirFile = new File("player.samplexml/savedGame-"+counter);
 		
+		String content = this.toPrettyXML();
 		FileWriter fw;
 		try {
-			fw = new FileWriter("player.samplexml/savedGame-"+counter+".txt");
+			fw = new FileWriter("SavedGames/savedGame.xml");
 			BufferedWriter bw = new BufferedWriter(fw);
 			bw.write(content);
 			bw.close();
@@ -53,7 +52,6 @@ public class GameSavingController {
 			System.out.println("Game does not exist, please choose another");
 		}
 		
-		counter += 1;
 		/*
 		try {
 			FileWriter writer = new FileWriter(newFile);
