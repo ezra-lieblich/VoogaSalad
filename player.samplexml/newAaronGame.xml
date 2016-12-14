@@ -1024,7 +1024,7 @@
                     <effectGroovy class="engine.observer.ObservableObjectProperty">
                       <observers/>
                       <listeners/>
-                      <property class="string">collider.setHealth(-10)</property>
+                      <property class="string">collider.setMovingSpeed(0);collider.setHealth(collider.getHealth()-8)</property>
                     </effectGroovy>
                   </engine.effect.EffectType>
                 </entry>
@@ -1065,7 +1065,7 @@
                     <effectGroovy class="engine.observer.ObservableObjectProperty">
                       <observers/>
                       <listeners/>
-                      <property class="string">collider.setHealth(-10)</property>
+                      <property class="string">collider.setMovingSpeed(0);collider.setHealth(collider.getHealth()-8)</property>
                     </effectGroovy>
                   </engine.effect.EffectType>
                 </entry>
