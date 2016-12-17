@@ -16,16 +16,16 @@ import gameplayer.view.helper.GraphicsLibrary;
  * This controller is responsible for triggering the end conditions of a game or
  * round. It has methods distinguishing when it is the end of a level versus the
  * end of a game. The game over and win game conditions consist of splashscreens
- * displaying text and images. The conditions for detecting whether a game has been won or
- * lost are constantly being checked as tower defense is a timed game, with
- * waves of enemies coming in at specific intervals and weapons killing off
- * enemies at largely varying intervals. This class is well designed. The
- * methods are named exactly for their purposes. There is no ambiguity. The
- * majority of the functionality is encapsulated, with the small exception of
- * the method that needs to be called inside the main timeline animation. The
- * only public method is incredibly easy to understand thanks to the numerous
- * private methods used to facilitate, the, what I like to call, in-code
- * documentation.
+ * displaying text and images. The conditions for detecting whether a game has
+ * been won or lost are constantly being checked as tower defense is a timed
+ * game, with waves of enemies coming in at specific intervals and weapons
+ * killing off enemies at largely varying intervals. This class is well
+ * designed. The methods are named exactly for their purposes. There is no
+ * ambiguity. The majority of the functionality is encapsulated, with the small
+ * exception of the method that needs to be called inside the main timeline
+ * animation. The only public method is incredibly easy to understand thanks to
+ * the numerous private methods used to facilitate, the, what I like to call,
+ * in-code documentation.
  * 
  * @author lucyzhang
  *
