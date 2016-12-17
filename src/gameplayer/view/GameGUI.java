@@ -47,6 +47,8 @@ public class GameGUI {
 	public static final int SCENE_HEIGHT = 700;
 	public static final double xError = -20;
 	public static final double yError = -60;
+	public static final String GAMEOVER_SCREEN = "http://people.duke.edu/~lz107/voogaTemplates/gameover.html";
+	public static final String WINGAME_SCREEN = "http://people.duke.edu/~lz107/voogaTemplates/win.html";
 
 	private BorderPane mainScreen;
 	private Scene scene;

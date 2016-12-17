@@ -44,6 +44,7 @@ public class GamePlayerController implements Observer {
 	public static final int ENTITY_SIZE = 70;
 	public static final int FRAMES_PER_SECOND = 60;
 	public static final int MILLISECOND_DELAY = 50;
+	
 	public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
 	private GamePlayerFactory loader;
 	private GameGUI view;
@@ -56,7 +57,9 @@ public class GamePlayerController implements Observer {
 	private CollisionController collisionController;
 	private GameSavingController gameSavingController;
 	private DragDropController dropController;
+	private EndConditionController winLoseController;
 	private EnemyManager enemyManager;
+	
 	private double oldLevel;
 	private GraphicsLibrary graphics;
 	private Queue<Enemy> currentWave;
@@ -84,6 +87,7 @@ public class GamePlayerController implements Observer {
 		this.enemyController = new EnemyController(this.model.getEnemyManager(), null);
 		this.weaponController = new WeaponController(this.model.getWeaponManager());
 		this.collisionController = new CollisionController(this.model.getCollisionManager());
+		this.winLoseController = new EndConditionController(this.model, this.view);
 		this.model.getData().addObserver(this);
 		this.enemyController.getEnemyModel().addObserver(this);
 		this.oldLevel = 0;

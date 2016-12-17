@@ -14,14 +14,23 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 import javafx.stage.Screen;
 
 public class GraphicsLibrary {
 	public Image createImage(String imageLocation) {
-		int index=imageLocation.lastIndexOf("/")+1;
+		int index = imageLocation.lastIndexOf("/") + 1;
 		String loc = imageLocation.substring(index, imageLocation.length());
 		Image image = new Image(getClass().getClassLoader().getResourceAsStream(loc));
 		return image;
+	}
+
+	public WebView createBrowser(String url) {
+		WebView browser = new WebView();
+		WebEngine webEngine = browser.getEngine();
+		webEngine.load(url);
+		return browser;
 	}
 
 	public ImageView createImageView(Image image) {
@@ -54,13 +63,13 @@ public class GraphicsLibrary {
 		image.setFitHeight(height);
 		image.setFitWidth(width);
 	}
-	
+
 	public Button createButton(String label) {
 		Button button = new Button(label);
 		return button;
 	}
-	
-	public Button createButton(String label, EventHandler<ActionEvent> e){
+
+	public Button createButton(String label, EventHandler<ActionEvent> e) {
 		Button button = new Button(label);
 		button.setOnAction(e);
 		return button;
@@ -93,8 +102,8 @@ public class GraphicsLibrary {
 		root.getChildren().add(t);
 		return t;
 	}
-	
-	public Text createText(Group root,String text) {
+
+	public Text createText(Group root, String text) {
 		Text t = new Text(text);
 		root.getChildren().add(t);
 		return t;
@@ -113,23 +122,23 @@ public class GraphicsLibrary {
 		root.getChildren().add(border);
 		return border;
 	}
-	
-	public GridPane creatGridPane(Group root, int hgap, int vgap){
+
+	public GridPane creatGridPane(Group root, int hgap, int vgap) {
 		GridPane grid = new GridPane();
-        grid.setHgap(hgap);
-        grid.setVgap(vgap);
-        //grid.setPadding(new Insets(25, 25, 25, 25));//TODO: change!
-        root.getChildren().add(grid);
-        return grid;
+		grid.setHgap(hgap);
+		grid.setVgap(vgap);
+		// grid.setPadding(new Insets(25, 25, 25, 25));//TODO: change!
+		root.getChildren().add(grid);
+		return grid;
 	}
-	
-	public TilePane creatTilePane(Group root, int hgap, int vgap){
+
+	public TilePane creatTilePane(Group root, int hgap, int vgap) {
 		TilePane grid = new TilePane();
-        grid.setHgap(hgap);
-        grid.setVgap(vgap);
-        //grid.setPadding(new Insets(25, 25, 25, 25));//TODO: change!
-        root.getChildren().add(grid);
-        return grid;
+		grid.setHgap(hgap);
+		grid.setVgap(vgap);
+		// grid.setPadding(new Insets(25, 25, 25, 25));//TODO: change!
+		root.getChildren().add(grid);
+		return grid;
 	}
 
 }
