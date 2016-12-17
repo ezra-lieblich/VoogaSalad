@@ -374,12 +374,8 @@ public class GamePlayerController implements Observer {
 		System.out.println("GAMELEVEL: "+this.enemyManager.getData().getCurrentLevel());
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> {
 			((Pane) this.view.getGrid().getGrid()).getChildren().clear();
-			
 			if (waveTimeIntervalElapsed()) {
 				this.currentWave = this.model.getEnemyManager().getPackOfEnemyComing();
-				
-				System.out.println("current wave size:  " + currentWave.size());
-				System.out.println("Enemy on grid? "+enemyManager.getEnemyOnGrid());
 				this.intervalBetweenWaves = this.model.getEnemyManager().getTimeOfNextWave();
 			}
 			

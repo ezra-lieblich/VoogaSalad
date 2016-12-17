@@ -98,7 +98,14 @@ public class Wrapper {
 		String json = "{\"gold\": \"" + gold + "\",\"lives\":\""+lives+"\",\"level\":\""+level+"\"}";
 		String response = executeRequest(url, json, true);
 	}
-	
+	/**
+	 * executeRequest executes the actual API call
+	 * @param url
+	 * @param json
+	 * @param post boolean, whether or the method is a post request
+	 * @return
+	 * @throws IOException
+	 */
 	private String executeRequest(URL url, String json, boolean post) throws IOException{
 		URLConnection urlConnection = url.openConnection();
 		urlConnection.setDoOutput(post); //false if post
@@ -107,7 +114,6 @@ public class Wrapper {
 		OutputStream outputStream = urlConnection.getOutputStream();
 		outputStream.write((json).getBytes("UTF-8"));
 		outputStream.flush();
-		//InputStream inputStream = urlConnection.getInputStream();
 		
 		//Get Response
         InputStream in = urlConnection.getInputStream();
@@ -119,7 +125,6 @@ public class Wrapper {
             response.append('\r');
         }
         rd.close();
-        ////System.out.println("Read attempt: " + response.toString());
         return response.toString();
 	}
 }

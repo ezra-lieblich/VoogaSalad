@@ -14,19 +14,20 @@ import statswrapper.Wrapper;
 public class CollisionManager {
 	EnemyManager enemyManager;
 	WeaponManager weaponManager;
-	HashMap<Integer,ImageView>enemiesOnScreen;
+	HashMap<Integer, ImageView> enemiesOnScreen;
 	GamePlayData gameData;
-	
-	public CollisionManager(GamePlayData gameData, WeaponManager wManager, EnemyManager eManager,HashMap<Integer,ImageView>enemiesOnScreen, GamePlayData data) {
+
+	public CollisionManager(GamePlayData gameData, WeaponManager wManager, EnemyManager eManager,
+			HashMap<Integer, ImageView> enemiesOnScreen, GamePlayData data) {
 		enemyManager = eManager;
 		weaponManager = wManager;
-		this.enemiesOnScreen=enemiesOnScreen;
+		this.enemiesOnScreen = enemiesOnScreen;
 		this.gameData = data;
 	}
-	
+
 	public void handleCollisions() {
 		Iterator<Weapon> iter = weaponManager.getWeaponOnGrid().values().iterator();
-		while(iter.hasNext()) {
+		while (iter.hasNext()) {
 			Weapon weapon = iter.next();
 			int targetUniqueID = weapon.getTargetEnemyID();
 			boolean enemyOnGrid = enemyManager.getEnemyOnGrid().keySet().contains(targetUniqueID);
@@ -35,32 +36,28 @@ public class CollisionManager {
 			if (!enemyOnGrid) {
 				xInRange = false;
 				yInRange = false;
-			}
-			else {
+			} else {
 				Enemy targetEnemy = enemyManager.getEnemyOnGrid().get(targetUniqueID);
 				int hitBox = 75;
-				xInRange = Math.abs(weapon.getX() - targetEnemy.getX()) <= hitBox; //make more robust
-				//System.out.println("weapon x " + weapon.getX());
-				//System.out.println("enemy x "+ targetEnemy.getX());
-				//System.out.println("weapon y " + weapon.getY());
-				//System.out.println("enemy y "+ targetEnemy.getY());
-				yInRange = Math.abs(weapon.getY() - targetEnemy.getY()) <= hitBox; //make more robust
-				
+				xInRange = Math.abs(weapon.getX() - targetEnemy.getX()) <= hitBox; // make
+																					// more
+																					// robust
+				yInRange = Math.abs(weapon.getY() - targetEnemy.getY()) <= hitBox; 
+
 				if (xInRange && yInRange) {
 					Collision collision = new Collision(weapon, targetEnemy, this.gameData);
 					collision.processCollision();
-					iter.remove(); 
+					iter.remove();
 					if (targetEnemy.getHealth() <= 0) {
-						
+
 						enemiesOnScreen.remove(targetUniqueID);
 						enemyManager.getEnemyOnGrid().remove(targetUniqueID);
 					}
 
 				}
 			}
-			
-			
+
 		}
 	}
-	
+
 }
