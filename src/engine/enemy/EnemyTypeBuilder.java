@@ -6,14 +6,21 @@ import engine.AbstractTypeBuilder;
 import engine.observer.ObservableObjectProperty;
 import engine.observer.ObservableProperty;
 
-
+/**
+ * Builder class that implements EnemyBuilder and EnemyInitializer. Builds enemies and sets up the listeners for them
+ * and then builds them. See the EnemyInitializer and EnemyBuilder to see what the methods do
+ * @author ezra
+ *
+ */
 public class EnemyTypeBuilder extends AbstractTypeBuilder<Enemy, EnemyBuilder> implements EnemyBuilder, EnemyInitializer{
 
+	//Default values that the all types have
     public static final String DEFAULT_NAME = "New Enemy";
     public static final String DEFAULT_IMAGE_PATH = "Images/butterfly.png";
     public static final double DEFAULT_SIZE = 1;
     public static final String DEFAULT_SOUND_PATH = "Music/DopeBeats.mp3";
 
+    //Default values for the enemy attributes
     public static final double DEFAULT_SPEED = 1;
     public static final double DEFAULT_HEALTH = 10;
     public static final double DEFAULT_DAMAGE = 2;
@@ -21,8 +28,7 @@ public class EnemyTypeBuilder extends AbstractTypeBuilder<Enemy, EnemyBuilder> i
     public static final double DEFAULT_MONEY = 20;
     public static final String DEFAULT_COLLISION_EFFECT = "";
 
-
-		  
+	//Observable properties that will have listeners added to them and then passed to the EnemyType	  
     private ObservableProperty<Double> speed;
 	private ObservableProperty<Double> health;
 	private ObservableProperty<Double> damage;

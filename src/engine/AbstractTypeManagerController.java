@@ -150,6 +150,10 @@ public abstract class AbstractTypeManagerController<E extends Manager<T>, U exte
     protected U getTypeBuilder () {
         return typeBuilder;
     }
+    
+    protected T getEntity (int id) {
+    	return typeManager.getEntity(id);
+    }
 
     protected abstract U constructTypeProperties (V updateView, U typeBuilder);
 

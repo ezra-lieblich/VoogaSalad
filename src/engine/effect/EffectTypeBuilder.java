@@ -23,7 +23,7 @@ public class EffectTypeBuilder extends AbstractTypeBuilder<Effect, EffectBuilder
     public static final String DEFAULT_SOUND_PATH = "Music/DopeBeats.mp3";
     public static final String DEFAULT_TRIGGER_CLASS = "gameplayer.model.enemy.Enemy";
 
-    public static final String DEFAULT_TRIGGER_CONDITION_GROOVY = "5 == 5";
+    public static final String DEFAULT_TRIGGER_CONDITION_GROOVY = "true";
     public static final String DEFAULT_EFFECT_GROOVY = "collider.setHealth(collider.getHealth() - 2)";
 
 
