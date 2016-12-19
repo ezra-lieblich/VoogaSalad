@@ -43,7 +43,6 @@ public class GamePlayerController implements Observer {
 	public static final int Y_OFFSET = 54;
 	public static final int ENTITY_SIZE = 70;
 	public static final int FRAMES_PER_SECOND = 60;
-	public static final int MILLISECOND_DELAY = 50;
 	public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
 	private GamePlayerFactory loader;
 	private GameGUI view;
@@ -56,6 +55,7 @@ public class GamePlayerController implements Observer {
 	private CollisionController collisionController;
 	private GameSavingController gameSavingController;
 	private DragDropController dropController;
+	private GameLoopController loopController; 
 	private EnemyManager enemyManager;
 	private double oldLevel;
 	private GraphicsLibrary graphics;
@@ -63,6 +63,7 @@ public class GamePlayerController implements Observer {
 	private HashMap<String, Integer> towerToId;
 	private double startTime;
 	private double intervalBetweenWaves;
+	
 
 	private boolean animationOn = false;
 
@@ -72,10 +73,7 @@ public class GamePlayerController implements Observer {
 	private HashMap<String, Image> imageBank;
 
 	public GamePlayerController(String xmlFilePath) {
-		// System.out.println(xmlFilePath);
-		// use xml parser to create classes.
 		this.loader = new GamePlayerFactory(new XMLParser(/* "player.samplexml/"+ */xmlFilePath));// hardcoded
-		// does not work because of the image path
 		checkIfValid();
 		this.currentWave = new LinkedList<>();
 		this.enemiesOnScreen = new HashMap<Integer, ImageView>();
@@ -92,12 +90,11 @@ public class GamePlayerController implements Observer {
 		this.animation = new Timeline();
 		this.graphics = new GraphicsLibrary();
 		this.enemyManager = this.enemyController.getEnemyModel();
+		this.loopController = new GameLoopController(this.model,this.enemyController.getEnemyModel(),this.enemyController,this.view); 
 		this.imageBank = new HashMap<String, Image>();
 		createImageBank();
 		this.gameSavingController = new GameSavingController(this.model, xmlFilePath);
 		init(false);
-		// this.gameSavingController.saveGame();
-
 	}
 
 	public GamePlayerController(String xmlFilePath, SavedSettings settings) {
@@ -184,7 +181,7 @@ public class GamePlayerController implements Observer {
 		}
 		initSaveGameButton();
 		this.view.bindAnimationStart(e -> {
-			this.startAnimation();
+			this.loopController.startAnimation();
 		});
 		this.view.bindAnimationStop(e -> {
 			this.animation.pause();
@@ -360,65 +357,8 @@ public class GamePlayerController implements Observer {
 
 	/*
 	 */
-	private void startAnimation() {
-		this.animationOn = true;
-		this.model.getData().getGrid().printGrid();
-		this.startTime = System.currentTimeMillis();
-		this.intervalBetweenWaves = this.model.getEnemyManager().getTimeOfNextWave();
-		spawnEnemyOnInterval(this.enemyManager,
-				this.enemyController/* , this.currentWave */);
-		System.out.println("GAMELEVEL: "+this.enemyManager.getData().getCurrentLevel());
-		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> {
-			((Pane) this.view.getGrid().getGrid()).getChildren().clear();
-			
-			if (waveTimeIntervalElapsed()) {
-				this.currentWave = this.model.getEnemyManager().getPackOfEnemyComing();
-				
-				System.out.println("current wave size:  " + currentWave.size());
-				System.out.println("Enemy on grid? "+enemyManager.getEnemyOnGrid());
-				this.intervalBetweenWaves = this.model.getEnemyManager().getTimeOfNextWave();
-			}
-			
-			this.model.updateInLevel(weaponsOnScreen);
-			this.enemyManager.update();
-			this.model.getCollisionManager().handleCollisions();
-			redrawEverything();
-			checkCreateNewLevel();
-			winLoseCondition();
-		});
-		animation.setCycleCount(Timeline.INDEFINITE);
-		animation.getKeyFrames().add(frame);
-		// animation.getKeyFrames().addAll(frame, this.enemyKeyFrame);//TODO
-		animation.play();
-
-	}
-
-	private void spawnEnemyOnInterval(EnemyManager enemyManager, EnemyController control) {
-		System.out.println("SPAWN NEW ENEMY");
-		Thread enemyThread = new Thread() {
-			public void run() {
-				long intervalBetween = (long) control.getEnemyModel().getFrequencyOfNextWave();
-				System.out.println("interval between : "+intervalBetween);
-				while (intervalBetween >= 0) {
-					if (currentWave.size() > 0) {
-						Enemy enemy = currentWave.poll();
-						enemyManager.spawnEnemy(enemy);
-					}
-
-					try {
-						Thread.sleep(intervalBetween);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-				}
-			}
-		};
-		enemyThread.start();
-	}
 
 	private void redrawEverything() {
-		// redraw path
-		// this.view.getGrid().populatePath(this.model.getGrid().getStartPoint());
 		this.view.getGrid().getGrid().getChildren().addAll(this.view.getGrid().getPathImages());
 		HashMap<Integer, Enemy> enemyRedraw = this.enemyManager.getEnemyOnGrid();
 		Map<Integer, Tower> towerRedraw = this.model.getTowerOnGrid();
