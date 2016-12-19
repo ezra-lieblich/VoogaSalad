@@ -9,20 +9,20 @@ import engine.observer.ObservableProperty;
 /**
  * I chose this is my masterpiece because it incorporates a lot of design principles we have learned throughout the year.
  * First, it contains ObservableProperties that are not JavaFX so as to provide more flexibility should we not chose not
- * to use JavaFX. It uses observables listeners that are incorporated by the Listener Methods. These methods
+ * to use JavaFX. It uses observables and listeners that are incorporated by the addListener Methods. These methods
  * incorporate functional programming as it takes in a functional interface where the controller passes in the corresponding
  * front end method that listens to these observable properties. Also it incorporates the builder pattern as seen
- * by the build methods and also the copyType uses the builder method. The builder pattern allows the user
- * to create complex objects while also being readable as they can call .build multiple times to create an object which
- * is seen in the copyType method. In addition the user can choose to not fill in parameters as their are optional parameters for everything as you
+ * by the build methods and also the copyType uses the builder methoda. The builder pattern allows the user
+ * to create complex objects while also being readable as they can call .build methods multiple times to create an object which
+ * is seen in the copyType method. In addition, the user can choose to not fill in parameters as their are optional parameters for everything as you
  * can see by the default values. Finally, there is a hierarchal design as you can see the interface it implements
- * and the classes it extends. This builders are also open and extensible as we use generics for all our builder, making
+ * and the classes it extends. These builders are also open and extensible as we use generics for all our builder, making
  * it easy to add new types that follow this similar design
  * 
  * 
  * 
- * Builder class that implements EnemyBuilder and EnemyInitializer. Builds enemies and sets up the listeners for them
- * and then builds them. See the EnemyInitializer and EnemyBuilder to see what the methods do. This class is referenced
+ * Builder class that implements EnemyBuilder and EnemyInitializer. Sets up the listeners for them
+ * and then builds enemies. See the EnemyInitializer and EnemyBuilder to see what the methods do. This class is referenced
  * in the EnemyManagerController and is called when the createType() method is called. It returns a newly built
  * Enemy with default values. It also is called by EnemyController when we need to copy the Enemy and rebuild/attach
  * listeners to the Enemies created. 
@@ -35,7 +35,7 @@ public class EnemyTypeBuilder extends AbstractTypeBuilder<Enemy, EnemyBuilder> i
     public static final String DEFAULT_NAME = "New Enemy";
     public static final String DEFAULT_IMAGE_PATH = "Images/butterfly.png";
     public static final double DEFAULT_SIZE = 1;
-    public static final String DEFAULT_SOUND_PATH = "Music/DopeBeats.mp3";
+    public static final String DEFAULT_SOUND_PATH = "Music/Cool.mp3";
 
     //Default values for the enemy attributes
     public static final double DEFAULT_SPEED = 1;
