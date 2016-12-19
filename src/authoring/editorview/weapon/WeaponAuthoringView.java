@@ -182,20 +182,4 @@ public class WeaponAuthoringView implements WeaponUpdateView {
         this.weaponBank.setListDataSource(source);
     }
 
-    @Override
-    public void updateDeleteEntity (String entityID) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public Integer getNearestAvailableItemID (int id) {
-        int currentIndex = this.weaponBank.getIndexForItemWithID(id);
-        Integer nearestID = this.weaponBank.getIDForItemAtIndex(currentIndex - 1);
-        if (nearestID == null) {
-            nearestID = this.weaponBank.getIDForItemAtIndex(currentIndex + 1);
-        }
-        return nearestID;
-    }
-
 }

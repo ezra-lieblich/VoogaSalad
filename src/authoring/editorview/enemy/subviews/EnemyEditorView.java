@@ -1,10 +1,13 @@
 package authoring.editorview.enemy.subviews;
 
 import java.io.File;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.Map;
 import java.util.ResourceBundle;
 import authoring.editorview.PhotoFileChooser;
 import authoring.editorview.enemy.EnemyAuthoringViewDelegate;
-import authoring.editorview.enemy.EnemySetView;
+import authoring.editorview.enemy.EnemySubView;
 import authoring.editorview.enemy.subviews.editorfields.EnemyHealthField;
 import authoring.editorview.enemy.subviews.editorfields.EnemyNameField;
 import authoring.editorview.enemy.subviews.editorfields.EnemyRewardMoneyField;
@@ -13,7 +16,6 @@ import authoring.editorview.enemy.subviews.editorfields.EnemySizeField;
 import authoring.editorview.enemy.subviews.editorfields.AddEnemyEffectView;
 import authoring.editorview.enemy.subviews.editorfields.DeleteEnemy;
 import authoring.editorview.enemy.subviews.editorfields.EnemyDamageField;
-import authoring.editorview.enemy.subviews.editorfields.EnemySpeedField;
 import authoring.utilityfactories.ButtonFactory;
 import authoring.utilityfactories.DialogueBoxFactory;
 import javafx.geometry.Insets;
@@ -40,7 +42,7 @@ import javafx.stage.Stage;
  *
  */
 
-public class EnemyEditorView extends PhotoFileChooser implements EnemySetView {
+public class EnemyEditorView extends PhotoFileChooser implements EnemySubView {
 
     private AnchorPane rootBuffer;
     private VBox vbox;
@@ -49,42 +51,43 @@ public class EnemyEditorView extends PhotoFileChooser implements EnemySetView {
 
     private DeleteEnemy deleteEnemy;
     private EnemyNameField enemyName;
-    private EnemySpeedField enemySpeed;
     private EnemyDamageField enemyDamage;
     private EnemyHealthField enemyHealth;
     private EnemyRewardMoneyField enemyRewardMoney;
     private EnemyRewardPointsField enemyRewardPoints;
     private EnemySizeField enemySize;
     private AddEnemyEffectView addEnemyEffect;
+    private Class<?> enemySpeed;
+    private Object enemySpeedObject;
 
     private ResourceBundle labelsResource;
-    private final String ENEMY_EFFECT_RESOURCE_PATH = "resources/GameAuthoringEnemy";
     private static final double BUFFER = 10.0;
 
-    public EnemyEditorView (EnemyNameField enemyName,
-                            EnemySpeedField enemySpeed,
-                            EnemyDamageField enemyDamage,
-                            EnemyHealthField enemyHealth,
-                            EnemyRewardMoneyField enemyRewardMoney,
-                            EnemyRewardPointsField enemyRewardPoints,
-                            EnemySizeField enemySize,
-                            DeleteEnemy deleteEnemy,
-                            AddEnemyEffectView addEnemyEffect) {
+    public EnemyEditorView (ResourceBundle labelsResource, Map<String, Class<?>> myClasses) {
         rootBuffer = new AnchorPane();
         vbox = new VBox(10);
         rootBuffer.getChildren().add(vbox);
 
-        this.enemyName = enemyName;
-        this.enemySpeed = enemySpeed;
-        this.enemyDamage = enemyDamage;
-        this.enemyHealth = enemyHealth;
-        this.enemyRewardMoney = enemyRewardMoney;
-        this.enemyRewardPoints = enemyRewardPoints;
-        this.enemySize = enemySize;
-        this.deleteEnemy = deleteEnemy;
-        this.addEnemyEffect = addEnemyEffect;
+        this.enemySpeed = myClasses.get("speed");
+        try {
+            enemySpeedObject = enemySpeed.getConstructor(ResourceBundle.class).newInstance(labelsResource);
+        }
+        catch (InstantiationException | IllegalAccessException | IllegalArgumentException
+                | InvocationTargetException | NoSuchMethodException | SecurityException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
 
-        labelsResource = ResourceBundle.getBundle(ENEMY_EFFECT_RESOURCE_PATH);
+        this.enemyName = new EnemyNameField(labelsResource);
+        this.enemyDamage = new EnemyDamageField(labelsResource);
+        this.enemyHealth = new EnemyHealthField(labelsResource);
+        this.enemyRewardMoney = new EnemyRewardMoneyField(labelsResource);
+        this.enemyRewardPoints = new EnemyRewardPointsField(labelsResource);
+        this.enemySize = new EnemySizeField(labelsResource);
+        this.deleteEnemy = new DeleteEnemy(labelsResource);
+        this.addEnemyEffect = new AddEnemyEffectView(labelsResource);
+
+        this.labelsResource = labelsResource;
 
         buildViewComponents();
     }
@@ -114,11 +117,23 @@ public class EnemyEditorView extends PhotoFileChooser implements EnemySetView {
                                                           }
                                                       });
         imageButton.setPrefWidth(280);
+        
+
+        try {
+            Method method = enemySpeed.getDeclaredMethod("getInstanceAsNode", null);
+            vbox.getChildren().add((Node) method.invoke(enemySpeedObject, null));
+        }
+        catch ( IllegalAccessException | IllegalArgumentException
+                | InvocationTargetException | NoSuchMethodException | SecurityException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
+
+        
         vbox.getChildren().addAll(
                                   imageButton,
                                   enemyName.getInstanceAsNode(),
                                   enemySize.getInstanceAsNode(),
-                                  enemySpeed.getInstanceAsNode(),
                                   enemyDamage.getInstanceAsNode(),
                                   enemyHealth.getInstanceAsNode(),
                                   enemyRewardMoney.getInstanceAsNode(),
@@ -126,6 +141,7 @@ public class EnemyEditorView extends PhotoFileChooser implements EnemySetView {
                                   addEnemyEffect.getInstanceAsNode(),
                                   deleteEnemy.getInstanceAsNode());
     }
+    
 
     public void clearView () {
         vbox.getChildren().clear();
@@ -134,6 +150,26 @@ public class EnemyEditorView extends PhotoFileChooser implements EnemySetView {
     @Override
     public void setDelegate (EnemyAuthoringViewDelegate delegate) {
         this.delegate = delegate;
+        enemyName.setDelegate(delegate);
+        enemyDamage.setDelegate(delegate);
+        enemyHealth.setDelegate(delegate);
+        enemyRewardMoney.setDelegate(delegate);
+        enemyRewardPoints.setDelegate(delegate);
+        enemySize.setDelegate(delegate);
+        deleteEnemy.setDelegate(delegate);
+        addEnemyEffect.setDelegate(delegate);
+        
+        try { 
+            Class[] methodParameters = new Class[] { EnemyAuthoringViewDelegate.class };
+            Method method = enemySpeed.getDeclaredMethod("setDelegate", methodParameters);
+            Object[] params = new Object[] { delegate };
+            method.invoke(enemySpeedObject, params);
+        }
+        catch (IllegalAccessException | IllegalArgumentException
+                | InvocationTargetException | NoSuchMethodException | SecurityException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
     }
 
     @Override

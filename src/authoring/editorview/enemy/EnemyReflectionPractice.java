@@ -22,7 +22,7 @@ public class EnemyReflectionPractice {
         Class myClass = enemyName.getClass();
         Method[] methods = myClass.getMethods();
         for (Method n: methods) {
-            System.out.println(n);
+            //System.out.println(n);
         }
         
     }

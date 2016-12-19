@@ -158,24 +158,9 @@ public class LevelAuthoringView implements LevelUpdateView {
     }
 
     @Override
-    public void updateDeleteEntity (String entityID) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
     public void updateWaves (List<WaveString> waves) {
         waveTableView.updateWaveTableView(waves);
     }
 
-    @Override
-    public Integer getNearestAvailableItemID (int id) {
-        int currentIndex = this.levelBank.getIndexForItemWithID(id);
-        Integer nearestID = this.levelBank.getIDForItemAtIndex(currentIndex - 1);
-        if (nearestID == null) {
-            nearestID = this.levelBank.getIDForItemAtIndex(currentIndex + 1);
-        }
-        return nearestID;
-    }
 
 }

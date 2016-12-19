@@ -104,10 +104,6 @@ public class GameSettingsAuthoringView implements GameSettingsUpdateView, GameSe
     }
 
     @Override
-    public void updateDeleteEntity (String entityID) {
-    }
-
-    @Override
     public void updateBank (List<Integer> ids) {
     }
 
@@ -127,11 +123,6 @@ public class GameSettingsAuthoringView implements GameSettingsUpdateView, GameSe
     @Override
     public void updatePathType (String pathType) {
         gameSettingsEditor.updatePathType(pathType);
-    }
-
-    @Override
-    public Integer getNearestAvailableItemID (int id) {
-        return null;
     }
 
     @Override

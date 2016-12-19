@@ -3,7 +3,7 @@ package authoring.editorview.enemy.subviews.editorfields;
 import java.io.File;
 import java.util.ResourceBundle;
 import authoring.editorview.enemy.EnemyAuthoringViewDelegate;
-import authoring.editorview.enemy.EnemySetView;
+import authoring.editorview.enemy.EnemySubView;
 import authoring.utilityfactories.DialogueBoxFactory;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
@@ -16,7 +16,7 @@ import javafx.scene.layout.AnchorPane;
  * @author Kayla Schulz
  *
  */
-public class EnemyImageView implements EnemySetView {
+public class EnemyImageView implements EnemySubView {
 
     private AnchorPane root;
     private EnemyAuthoringViewDelegate delegate;

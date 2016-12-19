@@ -168,18 +168,6 @@ public class EffectAuthoringView implements EffectUpdateView {
     }
 
     @Override
-    public void updateDeleteEntity (String entityID) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public Integer getNearestAvailableItemID (int id) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
     public void updateTriggers (List<String> triggers) {
         // TODO Auto-generated method stub
 

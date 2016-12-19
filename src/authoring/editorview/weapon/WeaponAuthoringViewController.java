@@ -89,9 +89,7 @@ public class WeaponAuthoringViewController extends EditorViewController
 
     @Override
     public void onUserPressedDeleteWeapon () {
-        int nextID = this.weaponView.getNearestAvailableItemID(currentWeaponID);
         weaponDataSource.deleteType(currentWeaponID);
-        currentWeaponID = nextID;
         this.refreshView();
     }
 

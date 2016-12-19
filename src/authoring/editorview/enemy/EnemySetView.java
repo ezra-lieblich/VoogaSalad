@@ -1,6 +1,6 @@
 package authoring.editorview.enemy;
 
-import authoring.editorview.INodeView;
+import authoring.editorview.ListDataSource;
 
 
 /**
@@ -10,8 +10,8 @@ import authoring.editorview.INodeView;
  * @author Kayla Schulz
  *
  */
-public interface EnemySetView extends INodeView {
+public interface EnemySetView extends EnemySubView {
 
-    public void setDelegate (EnemyAuthoringViewDelegate delegate);
+    public void setEnemyListDataSource (ListDataSource source);
 
 }

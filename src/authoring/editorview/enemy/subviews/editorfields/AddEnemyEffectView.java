@@ -2,13 +2,13 @@ package authoring.editorview.enemy.subviews.editorfields;
 
 import java.util.ResourceBundle;
 import authoring.editorview.enemy.EnemyAuthoringViewDelegate;
-import authoring.editorview.enemy.EnemySetView;
+import authoring.editorview.enemy.EnemySubView;
 import authoring.utilityfactories.ButtonFactory;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 
 
-public class AddEnemyEffectView implements EnemySetView {
+public class AddEnemyEffectView implements EnemySubView {
 
     private EnemyAuthoringViewDelegate delegate;
     private Button addEnemyEffectButton;

@@ -190,21 +190,6 @@ public class TowerAuthoringView implements TowerUpdateView {
         this.towerUpgradeBank.setListDataSource(source);
     }
 
-    @Override
-    public void updateDeleteEntity (String entityID) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public Integer getNearestAvailableItemID (int id) {
-        int currentIndex = this.towerBank.getIndexForItemWithID(id);
-        Integer nearestID = this.towerBank.getIDForItemAtIndex(currentIndex - 1);
-        if (nearestID == null) {
-            nearestID = this.towerBank.getIDForItemAtIndex(currentIndex + 1);
-        }
-        return nearestID;
-    }
 
     @Override
     public void setWeaponOptions (List<String> weaponOptions) {

@@ -33,7 +33,8 @@ public class LevelAuthoringViewController extends EditorViewController
         this.view = levelView;
     }
 
-    public void setLevelDataSource (LevelManagerController source, EnemyManagerController enemySource) {
+    public void setLevelDataSource (LevelManagerController source,
+                                    EnemyManagerController enemySource) {
         this.levelDataSource = source;
         enemyDataSource = enemySource;
         this.levelDataSource.addTypeBankListener(this.levelView);
@@ -71,9 +72,7 @@ public class LevelAuthoringViewController extends EditorViewController
 
     @Override
     public void onUserPressedDeleteLevel () {
-        int nextID = this.levelView.getNearestAvailableItemID(currentLevelID);
         levelDataSource.deleteType(currentLevelID);
-        currentLevelID = nextID;
         this.refreshView();
     }
 

@@ -23,8 +23,6 @@ public abstract class AbstractAnnotatedFactory<E extends Member> {
                                              String packageName,
                                              Scanner scanner) {
         Reflections reflections = new Reflections(packageName, scanner);
-        System.out.println(applySearch(reflections).stream()
-                           .collect(Collectors.groupingBy(a -> a.getDeclaringClass())));
         return applySearch(reflections).stream()
                 .collect(Collectors.groupingBy(a -> a.getDeclaringClass()));
     }

@@ -1,10 +1,18 @@
 package authoring.editorview.enemy;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.ResourceBundle;
 import authoring.editorview.EditorViewController;
 import authoring.editorview.ListCellData;
 import authoring.editorview.ListDataSource;
 import authoring.editorview.collisioneffects.EffectAuthoringViewController;
 import engine.effect.EffectManagerController;
+import engine.effect.Reflection;
+import engine.effect.ReflectionException;
 import engine.enemy.*;
 
 
@@ -15,15 +23,23 @@ import engine.enemy.*;
  *
  */
 public class EnemyAuthoringViewController extends EditorViewController
-        implements EnemyAuthoringViewDelegate, ListDataSource {
+        implements EnemyAuthoringViewDelegate, ListDataSource, EnemyUpdateView {
 
     private EnemyManagerController enemyDataSource;
     private EffectManagerController effectDataSource;
     private int currentEnemyID;
-    private EnemyUpdateView enemyView;
+    private EnemyAuthoringView enemyView;
+    private ResourceBundle labelsResource =
+            ResourceBundle.getBundle("resources/GameAuthoringEnemy");
+    private ResourceBundle reflectTest = ResourceBundle.getBundle("resources/EnemyReflection");
+    private Map<String, Class<?>> myClasses;
+
+    private static final String NO_MATCHING_PUBLIC_METHOD = "No matching public method %s for %s";
+    private static final String INCORRECTLY_NAMED_CLASS = "Incorrectly named class %s";
 
     public EnemyAuthoringViewController (int editorWidth, int editorHeight) {
-        enemyView = EnemyAuthoringViewFactory.build(editorWidth, editorHeight);
+        makeFields();
+        enemyView = new EnemyAuthoringView(myClasses);
         enemyView.setDelegate(this);
         enemyView.setEnemyListDataSource(this);
         this.view = enemyView;
@@ -31,25 +47,14 @@ public class EnemyAuthoringViewController extends EditorViewController
 
     public void setEnemyDataSource (EnemyManagerController source) {
         this.enemyDataSource = source;
-        this.enemyDataSource.addTypeBankListener(this.enemyView);
+        this.enemyDataSource.addTypeBankListener(this);
         effectDataSource = enemyDataSource.getEffectManagerController();
         onUserPressedCreateEnemy();
     }
 
-    public void refreshView () {
-        enemyView.updateImagePathDisplay(enemyDataSource.getImagePath(currentEnemyID));
-        enemyView.updateNameDisplay(enemyDataSource.getName(currentEnemyID));
-        enemyView.updateSizeDisplay(enemyDataSource.getSize(currentEnemyID));
-        enemyView.updateEnemyDamage(enemyDataSource.getEnemyDamage(currentEnemyID));
-        enemyView.updateEnemySpeed(enemyDataSource.getEnemySpeed(currentEnemyID));
-        enemyView.updateEnemyRewardMoney(enemyDataSource.getEnemyRewardMoney(currentEnemyID));
-        enemyView.updateEnemyRewardPoints(enemyDataSource.getEnemyRewardScore(currentEnemyID));
-        enemyView.updateEnemyHealthDisplay(enemyDataSource.getEnemyHealth(currentEnemyID));
-    }
-
     @Override
     public void onUserPressedCreateEnemy () {
-        currentEnemyID = enemyDataSource.createType(enemyView);
+        currentEnemyID = enemyDataSource.createType(this);
         refreshView();
     }
 
@@ -91,9 +96,7 @@ public class EnemyAuthoringViewController extends EditorViewController
 
     @Override
     public void onUserPressedDeleteEnemy () {
-        int nextID = this.enemyView.getNearestAvailableItemID(currentEnemyID);
         enemyDataSource.deleteType(currentEnemyID);
-        currentEnemyID = nextID;
         this.refreshView();
     }
 
@@ -101,6 +104,17 @@ public class EnemyAuthoringViewController extends EditorViewController
     public void onUserEnteredEnemySize (String enemySize) {
         enemyDataSource.setSize(currentEnemyID,
                                 Double.parseDouble(enemySize));
+    }
+
+    public void refreshView () {
+        updateImagePathDisplay(enemyDataSource.getImagePath(currentEnemyID));
+        updateNameDisplay(enemyDataSource.getName(currentEnemyID));
+        updateSizeDisplay(enemyDataSource.getSize(currentEnemyID));
+        updateEnemyDamage(enemyDataSource.getEnemyDamage(currentEnemyID));
+        updateEnemySpeed(enemyDataSource.getEnemySpeed(currentEnemyID));
+        updateEnemyRewardMoney(enemyDataSource.getEnemyRewardMoney(currentEnemyID));
+        updateEnemyRewardPoints(enemyDataSource.getEnemyRewardScore(currentEnemyID));
+        updateEnemyHealthDisplay(enemyDataSource.getEnemyHealth(currentEnemyID));
     }
 
     @Override
@@ -127,6 +141,103 @@ public class EnemyAuthoringViewController extends EditorViewController
         effectAuthoringView.setAvailClasses(effectDataSource.getAvailableClasses());
         effectAuthoringView.setAvailDataObjects(effectDataSource.getAvailableDataObjects());
         effectAuthoringView.openEffectView();
+    }
+
+    private void makeFields () {
+        myClasses = new HashMap<>();
+        for (String packageName : reflectTest.keySet()) {
+            Object testing;
+            try {
+                testing = Reflection.createInstance(packageName, labelsResource);
+                testing =
+                        testing.getClass().getConstructor(ResourceBundle.class)
+                                .newInstance(labelsResource);
+                myClasses.put(reflectTest.getString(packageName).toLowerCase(), testing.getClass());
+            }
+            catch (IllegalArgumentException | SecurityException | InstantiationException
+                    | InvocationTargetException | IllegalAccessException e) {
+                throw new ReflectionException(e, INCORRECTLY_NAMED_CLASS);
+            }
+            catch (NoSuchMethodException e) {
+                throw new ReflectionException(e, NO_MATCHING_PUBLIC_METHOD);
+            }
+        }
+    }
+
+    @Override
+    public void updateEnemySpeed (double speed) {
+        Class<?> enemySpeed = myClasses.get("speed");
+        updateFieldsThroughReflection(enemySpeed, Double.toString(speed));
+    }
+
+    @Override
+    public void updateEnemyBank (List<Integer> activeEnemies) {
+        Class<?> enemyBank = myClasses.get("bank");
+        updateFieldsThroughReflection(enemyBank, activeEnemies);
+    }
+
+    @Override
+    public void updateEnemyHealthDisplay (double health) {
+        Class<?> enemyHealth = myClasses.get("health");
+        updateFieldsThroughReflection(enemyHealth, Double.toString(health));
+    }
+
+    @Override
+    public void updateEnemyDamage (double damage) {
+        Class<?> enemyDamage = myClasses.get("damage");
+        updateFieldsThroughReflection(enemyDamage, Double.toString(damage));
+    }
+
+    @Override
+    public void updateEnemyRewardMoney (double rewardMoney) {
+        Class<?> enemyRewardMoney = myClasses.get("money");
+        updateFieldsThroughReflection(enemyRewardMoney, Double.toString(rewardMoney));
+    }
+
+    @Override
+    public void updateEnemyRewardPoints (double rewardPoints) {
+        Class<?> enemyRewardPoints = myClasses.get("points");
+        updateFieldsThroughReflection(enemyRewardPoints, Double.toString(rewardPoints));
+    }
+
+    @Override
+    public void updateNameDisplay (String name) {
+        Class<?> enemyName = myClasses.get("name");
+        updateFieldsThroughReflection(enemyName, name);
+    }
+
+    @Override
+    public void updateImagePathDisplay (String imagePath) {
+        Class<?> enemyImagePath = myClasses.get("image");
+        updateFieldsThroughReflection(enemyImagePath, imagePath);
+    }
+
+    @Override
+    public void updateSizeDisplay (double size) {
+        Class<?> enemySize = myClasses.get("size");
+        updateFieldsThroughReflection(enemySize, Double.toString(size));
+    }
+
+    @Override
+    public void updateBank (List<Integer> ids) {
+        Class<?> enemyBank = myClasses.get("bank");
+        updateFieldsThroughReflection(enemyBank, ids);
+    }
+
+    private void updateFieldsThroughReflection (Class<?> classToUpdate, Object updatedData) {
+        try {
+            Object enemySpeedObject =
+                    classToUpdate.getConstructor(ResourceBundle.class).newInstance(labelsResource);
+            Class<?>[] methodParameters = new Class[] { String.class };
+            Method method = classToUpdate.getDeclaredMethod("updateField", methodParameters);
+            Object[] params = new Object[] { updatedData };
+            method.setAccessible(true);
+            method.invoke(enemySpeedObject, params);
+        }
+        catch (NoSuchMethodException | IllegalAccessException | IllegalArgumentException
+                | InvocationTargetException | InstantiationException | SecurityException e) {
+            throw new ReflectionException(e, NO_MATCHING_PUBLIC_METHOD);
+        }
     }
 
 }

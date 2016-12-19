@@ -97,7 +97,7 @@ public class PathAuthoringView implements PathUpdateView {
 
     @Override
     public void updateType (String pathType) {
-        //System.out.println(pathType);
+        // System.out.println(pathType);
         pathEditor.updataPathType(pathType);
 
     }
@@ -105,11 +105,6 @@ public class PathAuthoringView implements PathUpdateView {
     @Override
     public void updatePath () {
         pathDesign.redrawPath();
-    }
-
-    @Override
-    public void updateDeleteEntity (String entityID) {
-        // TODO Auto-generated method stub
     }
 
     @Override
@@ -126,10 +121,5 @@ public class PathAuthoringView implements PathUpdateView {
     public void updateSizeDisplay (double size) {
     }
 
-    @Override
-    public Integer getNearestAvailableItemID (int id) {
-        // TODO Auto-generated method stub
-        return null;
-    }
 
 }

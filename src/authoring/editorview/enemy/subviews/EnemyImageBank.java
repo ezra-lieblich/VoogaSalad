@@ -1,6 +1,7 @@
 package authoring.editorview.enemy.subviews;
 
 import java.util.List;
+import java.util.ResourceBundle;
 import authoring.editorview.ImageBank;
 import authoring.editorview.enemy.EnemyAuthoringViewDelegate;
 import authoring.utilityfactories.ButtonFactory;
@@ -18,7 +19,7 @@ public class EnemyImageBank extends ImageBank {
     // TODO: Keep mapping in array of enemy IDs to list indices in order to be able to delete and
     // maintain order
 
-    public EnemyImageBank () {
+    public EnemyImageBank (ResourceBundle labelsResource) {
         super();
         Button newEnemyButton = ButtonFactory.makeButton("New Enemy", e -> {
             delegate.onUserPressedCreateEnemy();
