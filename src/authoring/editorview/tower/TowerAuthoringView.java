@@ -159,7 +159,7 @@ public class TowerAuthoringView implements TowerUpdateView {
     @Override
     public void updateImagePathDisplay (String imagePath) {
         this.towerImage.updateTowerImagePath(imagePath);
-        this.towerBank.updateBank();
+        this.towerBank.refreshBank();
     }
 
     @Override

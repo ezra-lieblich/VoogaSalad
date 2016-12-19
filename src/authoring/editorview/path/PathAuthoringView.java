@@ -93,7 +93,7 @@ public class PathAuthoringView implements PathUpdateView {
     public void updateImagePathDisplay (String imagePath) {
         pathEditor.updatePathImagePath(imagePath);
         pathDesign.updateImagePathDisplay(imagePath);
-        pathBank.updateBank();
+        pathBank.refreshBank();
     }
 
     @Override

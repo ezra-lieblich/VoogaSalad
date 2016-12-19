@@ -166,7 +166,7 @@ public class WeaponAuthoringView implements WeaponUpdateView {
 
     @Override
     public void updateImagePathDisplay (String imagePath) {
-        this.weaponBank.updateBank();
+        this.weaponBank.refreshBank();
         this.weaponImageView.updateWeaponImagePath(imagePath);
     }
 

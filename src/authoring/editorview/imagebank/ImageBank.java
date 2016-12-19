@@ -89,7 +89,7 @@ public abstract class ImageBank implements ChangeListener<Number> {
     /**
      * Refresh existing cells
      */
-    public void updateBank () {
+    public void refreshBank () {
         for (int i = 0; i < this.items.size(); i++){
         	if (!this.staticCells.containsKey(i)){
         		Integer id = this.itemIDs.get(i);
