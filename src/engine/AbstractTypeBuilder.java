@@ -25,12 +25,7 @@ import engine.observer.ObservableProperty;
  * Observer Pattern/functional programming - I made all the property Observable since I wanted Observers to have control at the property granularity over their observables
  * as opposed to making the whole class observable and having one generic update method for all of the properties. Furthermore these observable properties allow me to
  * do all of the Type binding during object creation and do a "one-time-set" where I then pass them in through the Type's constructor. This way I can encapsulate/hide the
- * fact that I used my own observable properties from other people who might want to use the Type classes (e.g. People working on the Engine). I implemented my own
- * observer pattern for a couple of reasons.
- *      1) I did not want to use any javafx properties in the back-end since that increases dependencies between the model and view.
- *      2) I wanted to avoid the unpleasant cast that occurs in the update call since the Java Observable class passes in an Object.
- * In implementing my own observable properties I added the capability to add listeners through functional interfaces. They take in Biconsumers for the
- * property's old and new value and are called any time the property is set.
+ * fact that I used my own observable properties from other people who might want to use the Type classes (e.g. People working on the Engine).
  * 
  * Interfaces - This class provides a great use of interfaces. In order to return the builder's subclass on an abstract builder call (e.g. buildName()) I made
  * use of F-bounded interfaces. The subclasses pass up their own interface into the Abstract class, which allows the Abstract class to take on more functionality
