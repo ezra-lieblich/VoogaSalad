@@ -26,21 +26,12 @@ public abstract class AbstractTypeManagerController<E extends Manager<T>, U exte
         this.typeBuilder = typeBuilder;
         managerMediator.addManager(typeManager);
         typeManager.addObserver(managerMediator);
-        // typeManager.addEntry(typeBuilder.build()); //Testing XML
     }
 
     @Override
     public void loadManagerData(E typeManager, V updateView) {
-        //this.typeManager = typeManager;
         this.typeManager.setEntities(typeManager.getEntities().keySet().stream().collect(Collectors.toMap(b -> b , b -> constructCopy(b, typeManager, updateView))));
-//    	Map<Integer, T> newMap = new HashMap<Integer, T>();
-//        for (Integer id : typeManager.getEntities().keySet()) {
-//        	T value = constructCopy(id, typeManager, updateView);
-//        	newMap.put(id, value);
-//        }
-//        this.typeManager.setEntities(newMap);
         typeBuilder.setNextId(this.typeManager.getMaxId());
-        //call some method that resets views
     }
     
     @Override
@@ -112,7 +103,6 @@ public abstract class AbstractTypeManagerController<E extends Manager<T>, U exte
         return typeManager.getEntityIds();
     }
 
-    //TODO - is this ok?
     @Override
     public boolean setName (int id, String name) {
         return handleRequest(isUnique(Type::getName, name), a -> a.getEntity(id).setName(name));
@@ -128,7 +118,6 @@ public abstract class AbstractTypeManagerController<E extends Manager<T>, U exte
     @Override
     public void setImagePath (int id, String imagePath) {
     	String oldPath = this.getImagePath(id);
-//    	imagePath = FileAggregator.defaultInstance().addImageToAssets(oldPath, imagePath);
         typeManager.getEntity(id).setImagePath(imagePath);
     }
 
@@ -146,7 +135,6 @@ public abstract class AbstractTypeManagerController<E extends Manager<T>, U exte
         return typeManager;
     }
 
-    // TODO - try and not need this
     protected U getTypeBuilder () {
         return typeBuilder;
     }
@@ -157,13 +145,6 @@ public abstract class AbstractTypeManagerController<E extends Manager<T>, U exte
 
     protected abstract U constructTypeProperties (V updateView, U typeBuilder);
 
-//    protected interface ViewFiller {
-//        void updateNameDisplay (String name);
-//
-//        void updateImagePathDisplay (String imagePath);
-//
-//        void updateSizeDisplay (double size);
-//    }
     
     protected <R> boolean isUnique(Function<T, R> getter, R value) {
         return !typeManager.getEntityIds().stream().map(a -> typeManager.getEntity(a)).anyMatch(b -> getter.apply(b).equals(value));

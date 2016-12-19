@@ -1,3 +1,4 @@
+
 package engine.settings;
 
 import java.util.Arrays;
@@ -13,12 +14,18 @@ import engine.observer.ObservableObjectProperty;
 import engine.observer.ObservableProperty;
 import engine.path.PathOption;
 
+/**
+ * This is the builder 
+ * @author ezra
+ *
+ */
 public class GameModeTypeBuilder extends AbstractTypeBuilder<GameMode, GameModeBuilder> implements GameModeBuilder, GameModeInitializer {
 
 	public static final String DEFAULT_NAME = "New Game";
     public static final String DEFAULT_IMAGE_PATH = "Images/greensquare.png";
     public static final double DEFAULT_SIZE = 1;
     public static final String DEFAULT_SOUND_PATH = "Music/DopeBeats.mp3";
+    
     public static final String[] DEFAULT_WINNING_CONDITIONS = new String[]{};
     public static final String[] DEFAULT_LOSING_CONDITIONS = new String[]{};
     public static final String DEFAULT_GAME_TYPE = "Normal";

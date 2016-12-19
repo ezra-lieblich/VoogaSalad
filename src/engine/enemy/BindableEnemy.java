@@ -6,7 +6,8 @@ import engine.BindableType;
 
 /**
  * Interface that binds all of the enemies attributes to the corresponding calls in the front end.
- * These listeners will be called at creation of an enemy and is implemented by the by EnemyTypeBuilder
+ * These listeners will be called at creation of an enemy and is implemented by the by EnemyTypeBuilder.
+ * Takes in functional interfaces and creates a builder
  * @author ezra
  *
  */

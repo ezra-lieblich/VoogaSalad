@@ -1,4 +1,4 @@
-package engine.enemy;
+ package engine.enemy;
 
 import authoring.editorview.enemy.EnemyUpdateView;
 import engine.AbstractTypeManagerController;
@@ -26,11 +26,19 @@ public class EnemyTypeManagerController
                                                 getTypeManager().getEnemyEffectManager());
     }
 
+    /*
+     * (non-Javadoc)
+     * @see engine.enemy.EnemyManagerController#setEnemySpeed(int, double)
+     */
     @Override
     public void setEnemySpeed (int enemyID, double enemySpeed) {
         getEntity(enemyID).setSpeed(enemySpeed);
     }
 
+    /*
+     * (non-Javadoc)
+     * @see engine.enemy.EnemyManagerController#setEnemyHealth(int, double)
+     */
     @Override
     public void setEnemyHealth (int enemyID, double enemyHealth) {
         getEntity(enemyID).setHealth(enemyHealth);
@@ -41,51 +49,90 @@ public class EnemyTypeManagerController
        getEntity(enemyID).setDamage(enemyDamage);
     }
 
+    /*
+     * (non-Javadoc)
+     * @see engine.enemy.EnemyManagerController#setEnemyRewardMoney(int, double)
+     */
     @Override
     public void setEnemyRewardMoney (int enemyID, double enemyRewardMoney) {
         getEntity(enemyID).setMoney(enemyRewardMoney);
     }
 
+    /*
+     * (non-Javadoc)
+     * @see engine.enemy.EnemyManagerController#setEnemyRewardScore(int, double)
+     */
     @Override
     public void setEnemyRewardScore (int enemyID, double enemyRewardPoints) {
         getEntity(enemyID).setScore(enemyRewardPoints);
     }
 
+    /*
+     * (non-Javadoc)
+     * @see engine.enemy.EnemyManagerController#setEnemyCollisionEffect(int, java.lang.String)
+     */
     @Override
     public void setEnemyCollisionEffect (int enemyID, String enemyCollisionEffect) {
        getEntity(enemyID).setCollisionEffect(enemyCollisionEffect);
     }
 
+    /*
+     * (non-Javadoc)
+     * @see engine.enemy.EnemyManagerController#getEnemySpeed(int)
+     */
     @Override
     public double getEnemySpeed (int enemyID) {
         return getEntity(enemyID).getSpeed();
     }
 
+    /*
+     * (non-Javadoc)
+     * @see engine.enemy.EnemyManagerController#getEnemyHealth(int)
+     */
     @Override
     public double getEnemyHealth (int enemyID) {
         return getEntity(enemyID).getHealth();
     }
 
+    /*
+     * (non-Javadoc)
+     * @see engine.enemy.EnemyManagerController#getEnemyDamage(int)
+     */
     @Override
     public double getEnemyDamage (int enemyID) {
         return getEntity(enemyID).getDamage();
     }
 
+    /*
+     * (non-Javadoc)
+     * @see engine.enemy.EnemyManagerController#getEnemyRewardMoney(int)
+     */
     @Override
     public double getEnemyRewardMoney (int enemyID) {
         return getEntity(enemyID).getMoney();
     }
 
+    /*
+     * (non-Javadoc)
+     * @see engine.enemy.EnemyManagerController#getEnemyRewardScore(int)
+     */
     @Override
     public double getEnemyRewardScore (int enemyID) {
         return getEntity(enemyID).getScore();
     }
 
+    /*
+     * (non-Javadoc)
+     * @see engine.enemy.EnemyManagerController#getEnemyCollisionEffect(int)
+     */
     @Override
     public String getEnemyCollisionEffect (int enemyID) {
         return getEntity(enemyID).getCollisionEffect();
     }
 
+    /**
+     * Sets up the listeners for the Enemy in the builder and calls the respective methods in the front end
+     */
     @Override
     protected EnemyBuilder constructTypeProperties (EnemyUpdateView updateView,
                                                     EnemyBuilder typeBuilder) {
@@ -101,6 +148,10 @@ public class EnemyTypeManagerController
 
     }
 
+    /*
+     * (non-Javadoc)
+     * @see engine.enemy.EnemyManagerController#getEffectManagerController()
+     */
     @Override
     public EffectManagerController getEffectManagerController () {
         return enemyEffectManagerController;

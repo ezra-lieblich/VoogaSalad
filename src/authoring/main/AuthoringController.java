@@ -90,8 +90,6 @@ public class AuthoringController {
     private void choosePreviewLevel () {
         List<Integer> possiblePaths =
                 modelController.getModelController(GameModeManager.class).getEntity(0).getPaths();
-        // TODO Select path options and on click call method below
-        // createPreview(modelController.getGameData());
     }
 
     public void saveAsXMLFile () throws IOException {
@@ -109,8 +107,7 @@ public class AuthoringController {
     }
 
     public void loadData () {
-        // TODO GameModeManagerController ConstructTypeProperties is empty because it needs methods
-        // to call in front end.
+
         String filePath = toolbar.loadFile();
 
         try {
@@ -138,7 +135,6 @@ public class AuthoringController {
 
         }
         catch (Exception e) {
-            //System.out.print(e);
             Alert errorDialogueBox = DialogueBoxFactory.createErrorDialogueBox("Error With File",
                                                                                "This file could not be loaded.");
         }

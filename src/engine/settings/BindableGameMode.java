@@ -14,7 +14,4 @@ public interface BindableGameMode extends BindableType<GameModeBuilder>{
 	GameModeBuilder addGridSizeListener(BiConsumer<Integer, Integer> listener);
 	GameModeBuilder addPathTypeListener(BiConsumer<PathOption, PathOption> listener);
 	GameModeBuilder addPathListener(BiConsumer<List<Integer>, List<Integer>> listener);
-
-
-
 }
