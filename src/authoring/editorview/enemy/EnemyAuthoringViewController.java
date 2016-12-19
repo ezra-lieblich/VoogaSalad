@@ -1,3 +1,6 @@
+// This entire file is a part of my masterpiece
+// Kayla Schulz
+
 package authoring.editorview.enemy;
 
 import java.lang.reflect.InvocationTargetException;
@@ -17,9 +20,46 @@ import engine.enemy.*;
 
 
 /**
+ * I chose this file as a part of my masterpiece, because it shows vast improvements from the way
+ * this controller was previously implemented. Previously, all of the enemy subfields (such as
+ * delete enemy,
+ * enemy size, etc.) were individually initialized as instance variables. They would then be passed
+ * to another
+ * class to show on the scene. There was a good amount of initialization and a lot of duplicated
+ * code. Through
+ * reflection, I have eliminated the large amount of duplicated code and unnecessary initialization
+ * of all
+ * of those fields.
  * 
- * @author Andrew Bihl
- * @author Kayla Schulz
+ * Another improvement was error checking. Previously, we would check for incorrect inputs in this
+ * controller.
+ * (Inside of each onUserEntered.... method, we would try to parse the double (when necessary) and
+ * throw
+ * a dialogue box if they put in an incorrect input. Now, that functionality is built into each text
+ * field so
+ * there is no longer duplicated error checking in the controller. Instead, it happens right when
+ * the text field is created.
+ * 
+ * Another huge improvement was moving the update fields to the controller. Previously, we sent all
+ * of the information
+ * to the back end through this controller, but the back end controller directly updated our view.
+ * Later on
+ * through our project, we ran into problems where our program would be more flexible if everything
+ * was run
+ * through the controller. With this use of reflection and updating, the program is immensely more
+ * flexible,
+ * allowing for more functionality and communication with the back end.
+ * 
+ * 
+ * Finally, this controller shows a good example of inheritance and the use of interfaces. The
+ * controller
+ * is simply the centerpiece of our project. (Well in this case, the centerpiece of the enemy view.)
+ * All of the
+ * other components come together in the controller and it is important it maintains order while
+ * communicating
+ * with the back end. The EnemyAuthoringViewDelegate and EnemyUpdateView show exactly how our
+ * information is
+ * passed from the model and the view and give a good picture of how to add to our program when a new field is desired.
  *
  */
 public class EnemyAuthoringViewController extends EditorViewController
@@ -31,7 +71,6 @@ public class EnemyAuthoringViewController extends EditorViewController
     private EnemyAuthoringView enemyView;
     private ResourceBundle labelsResource =
             ResourceBundle.getBundle("resources/GameAuthoringEnemy");
-    private ResourceBundle reflectTest = ResourceBundle.getBundle("resources/EnemyReflection");
     private Map<String, Class<?>> myClasses;
 
     private static final String NO_MATCHING_PUBLIC_METHOD = "No matching public method %s for %s";
@@ -145,83 +184,68 @@ public class EnemyAuthoringViewController extends EditorViewController
 
     private void makeFields () {
         myClasses = new HashMap<>();
-        for (String packageName : reflectTest.keySet()) {
+        ResourceBundle enemyClasses = ResourceBundle.getBundle("resources/EnemyReflection");
+        for (String packageName : enemyClasses.keySet()) {
             Object testing;
             try {
                 testing = Reflection.createInstance(packageName, labelsResource);
-                testing =
-                        testing.getClass().getConstructor(ResourceBundle.class)
-                                .newInstance(labelsResource);
-                myClasses.put(reflectTest.getString(packageName).toLowerCase(), testing.getClass());
+                myClasses.put(enemyClasses.getString(packageName).toLowerCase(),
+                              testing.getClass());
             }
-            catch (IllegalArgumentException | SecurityException | InstantiationException
-                    | InvocationTargetException | IllegalAccessException e) {
+            catch (IllegalArgumentException | SecurityException e) {
                 throw new ReflectionException(e, INCORRECTLY_NAMED_CLASS);
-            }
-            catch (NoSuchMethodException e) {
-                throw new ReflectionException(e, NO_MATCHING_PUBLIC_METHOD);
             }
         }
     }
 
     @Override
     public void updateEnemySpeed (double speed) {
-        Class<?> enemySpeed = myClasses.get("speed");
-        updateFieldsThroughReflection(enemySpeed, Double.toString(speed));
+        updateFieldsThroughReflection(myClasses.get("speed"), Double.toString(speed));
     }
 
     @Override
     public void updateEnemyBank (List<Integer> activeEnemies) {
-        Class<?> enemyBank = myClasses.get("bank");
-        updateFieldsThroughReflection(enemyBank, activeEnemies);
+        updateFieldsThroughReflection(myClasses.get("bank"), activeEnemies);
     }
 
     @Override
     public void updateEnemyHealthDisplay (double health) {
-        Class<?> enemyHealth = myClasses.get("health");
-        updateFieldsThroughReflection(enemyHealth, Double.toString(health));
+        updateFieldsThroughReflection(myClasses.get("health"), Double.toString(health));
     }
 
     @Override
     public void updateEnemyDamage (double damage) {
-        Class<?> enemyDamage = myClasses.get("damage");
-        updateFieldsThroughReflection(enemyDamage, Double.toString(damage));
+        updateFieldsThroughReflection(myClasses.get("damage"), Double.toString(damage));
     }
 
     @Override
     public void updateEnemyRewardMoney (double rewardMoney) {
-        Class<?> enemyRewardMoney = myClasses.get("money");
-        updateFieldsThroughReflection(enemyRewardMoney, Double.toString(rewardMoney));
+        updateFieldsThroughReflection(myClasses.get("money"), Double.toString(rewardMoney));
     }
 
     @Override
     public void updateEnemyRewardPoints (double rewardPoints) {
-        Class<?> enemyRewardPoints = myClasses.get("points");
-        updateFieldsThroughReflection(enemyRewardPoints, Double.toString(rewardPoints));
+        updateFieldsThroughReflection(myClasses.get("points"), Double.toString(rewardPoints));
     }
 
     @Override
     public void updateNameDisplay (String name) {
-        Class<?> enemyName = myClasses.get("name");
-        updateFieldsThroughReflection(enemyName, name);
+        updateFieldsThroughReflection(myClasses.get("name"), name);
     }
 
     @Override
     public void updateImagePathDisplay (String imagePath) {
-        Class<?> enemyImagePath = myClasses.get("image");
-        updateFieldsThroughReflection(enemyImagePath, imagePath);
+        updateFieldsThroughReflection(myClasses.get("image"), imagePath);
     }
 
     @Override
     public void updateSizeDisplay (double size) {
-        Class<?> enemySize = myClasses.get("size");
-        updateFieldsThroughReflection(enemySize, Double.toString(size));
+        updateFieldsThroughReflection(myClasses.get("size"), Double.toString(size));
     }
 
     @Override
     public void updateBank (List<Integer> ids) {
-        Class<?> enemyBank = myClasses.get("bank");
-        updateFieldsThroughReflection(enemyBank, ids);
+        updateFieldsThroughReflection(myClasses.get("bank"), ids);
     }
 
     private void updateFieldsThroughReflection (Class<?> classToUpdate, Object updatedData) {
