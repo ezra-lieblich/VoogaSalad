@@ -33,7 +33,7 @@ public class TowerUpgradeBank extends ImageBank implements TowerSetView {
         this.listView.setOrientation(Orientation.HORIZONTAL);
         this.listView.setMaxHeight(DEFAULT_BANK_HEIGHT);
         this.labelsResource = labelsResource;
-        this.items.add(createTowerButton);
+        this.addStaticCell(createTowerButton);
     }
 
     @Override

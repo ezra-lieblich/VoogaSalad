@@ -21,7 +21,7 @@ public class PathBank extends ImageBank {
                                              delegate.onUserEnteredCreatePath();
                                          });
         createPathButton.setPrefWidth(130);
-        items.add(createPathButton);
+        this.addStaticCell(createPathButton);
 
     }
 

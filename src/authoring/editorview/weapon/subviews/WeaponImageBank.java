@@ -29,7 +29,7 @@ public class WeaponImageBank extends ImageBank {
 
         createWeaponButton.setPrefWidth(130);
         // First cell is a button
-        items.add(createWeaponButton);
+        this.addStaticCell(createWeaponButton);
     }
 
     public void setDelegate (WeaponAuthoringViewDelegate delegate) {

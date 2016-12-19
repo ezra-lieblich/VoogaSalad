@@ -44,7 +44,7 @@ public class EffectAvailableMethodsView extends ImageBank implements EffectSetVi
         for (int i = 0; i < list.size(); i++) {
             Label temp = new Label(list.get(i));
             Node cell = temp;
-            items.add(cell);
+//            items.add(cell);
         }
     }
 

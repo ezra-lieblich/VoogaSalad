@@ -24,22 +24,18 @@ import javafx.scene.image.ImageView;
  *
  *         This class allows the user to implement a simple list view where cells are based off a
  *         list of data object IDs.
- *         The ListCellData object represents the information that should be presented in the list
- *         view, and is retrieved from a class implementing the
- *         dataSource interface.
- *         To change the way the list cells looks, override createCellFromData().
- *         If any initial cells hold non-data cells at all times, the CONTENT_OFFSET value must be
- *         set. For example, there may button in
- *         the first cell that is clicked to create a new object. The CONTENT_OFFSET should be set
- *         to 1 after this button cell is added so
- *         that the mapping of indices to data id's can be maintained.
- *
+ *         Information required to display the cell is retrieved from the dataSource interface.
+ *         To change the way cells are presented, override createCellForItemID();
+ *         
+ *         
+ *         To add static cells to the table view like buttons or other elements not representing items, use the addStaticCell method.
  */
 
 public abstract class ImageBank implements ChangeListener<Number> {
     protected ListDataSource dataSource;
     protected ListView<Node> listView;
-    protected ObservableList<Node> items;
+    //Subclasses should not have to directly access the list of items.
+    private ObservableList<Node> items;
     protected Map<Integer, Node> staticCells;
 
     // Mapping of indices of items in the table to their corresponding itemIDs.
@@ -178,9 +174,7 @@ public abstract class ImageBank implements ChangeListener<Number> {
     public void changed (ObservableValue<? extends Number> observable,
                          Number oldValue,
                          Number newValue) {
-    	if (this.itemIDs.containsKey(newValue.intValue())){
-            userSelectedRow(newValue.intValue());
-    	}
+    	userSelectedRow(newValue.intValue());
     }
 
 }

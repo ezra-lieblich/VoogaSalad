@@ -25,7 +25,7 @@ public class EnemyImageBank extends ImageBank {
             delegate.onUserPressedCreateEnemy();
         });
         newEnemyButton.setPrefWidth(130);
-        this.items.add(newEnemyButton);
+        this.addStaticCell(newEnemyButton);
     }
 
     public void setDelegate (EnemyAuthoringViewDelegate delegate) {

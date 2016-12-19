@@ -23,7 +23,7 @@ public class EffectAvailableClassesView extends ImageBank implements EffectSetVi
     public EffectAvailableClassesView () {
         super();
         Label effectLabel = new Label("Available Classes");
-        this.items.add(effectLabel);
+        this.addStaticCell(effectLabel);
         listView.setPrefWidth(200);
     }
 
@@ -60,7 +60,7 @@ public class EffectAvailableClassesView extends ImageBank implements EffectSetVi
             Label temp = new Label(list.get(i));
             listItems.add(list.get(i));
             Node cell = temp;
-            items.add(cell);
+//            items.add(cell);
         }
     }
 

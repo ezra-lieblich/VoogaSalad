@@ -57,7 +57,7 @@ public class EffectAvailableDataObjectsView extends ImageBank implements EffectS
             Label temp = new Label(list.get(i));
             listItems.add(list.get(i));
             Node cell = temp;
-            items.add(cell);
+//            items.add(cell);
         }
     }
 

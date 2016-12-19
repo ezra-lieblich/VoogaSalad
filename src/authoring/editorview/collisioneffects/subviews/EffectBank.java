@@ -21,7 +21,7 @@ public class EffectBank extends ImageBank implements EffectSetView {
     public EffectBank () {
         super();
         Label effectLabel = new Label("Effects");
-        this.items.add(effectLabel);
+        this.addStaticCell(effectLabel);
     }
 
     @Override

@@ -24,7 +24,7 @@ public class LevelBank extends ImageBank {
         Button newEnemyButton = ButtonFactory.makeButton("New Level", e -> {
             delegate.onUserEnteredCreateLevel();
         });
-        this.items.add(newEnemyButton);
+        this.addStaticCell(newEnemyButton);
     }
 
     public void setDelegate (LevelAuthoringViewDelegate delegate) {
