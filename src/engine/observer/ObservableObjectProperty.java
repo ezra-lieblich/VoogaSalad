@@ -9,6 +9,13 @@ import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.DoublePropertyBase;
 import javafx.beans.property.SimpleDoubleProperty;
 
+/**
+ * 
+ * 
+ * @author seanhudson
+ *
+ * @param <U>
+ */
 public class ObservableObjectProperty<U> extends AbstractObservable<U> implements ObservableProperty<U>{
     
     private List<BiConsumer<U, U>> listeners;

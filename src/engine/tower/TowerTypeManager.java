@@ -22,6 +22,12 @@ import engine.weapon.WeaponType;
 import gameplayer.model.effect.AbstractEffectFactory;
 import gameplayer.model.effect.CollisionEffectFactory;
 
+/**
+ * 
+ * 
+ * @author seanhudson
+ *
+ */
 public class TowerTypeManager extends AbstractTypeManager<Tower> implements TowerManager {
     
     public static final Class<? extends AbstractEffectFactory> DEFAULT_EFFECT_FACTORY = CollisionEffectFactory.class;

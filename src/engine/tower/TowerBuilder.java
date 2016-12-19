@@ -7,7 +7,12 @@ import engine.ability.Ability;
 import engine.enemy.Enemy;
 import engine.weapon.Weapon;
 
-
+/**
+ * 
+ * 
+ * @author seanhudson
+ *
+ */
 public interface TowerBuilder extends TypeBuilder<Tower, TowerBuilder>, BindableTower {
     
     TowerBuilder buildWeapons (Integer ... weapons);

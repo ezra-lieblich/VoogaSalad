@@ -12,6 +12,12 @@ import engine.observer.ObservableObjectProperty;
 import engine.observer.ObservableProperty;
 import engine.weapon.Weapon;
 
+/**
+ * 
+ * 
+ * @author seanhudson
+ *
+ */
 public class WeaponTypeBuilder extends AbstractTypeBuilder<Weapon, WeaponBuilder> implements WeaponBuilder, WeaponInitializer {
     
      public static final String DEFAULT_NAME = "New Weapon";

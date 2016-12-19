@@ -8,6 +8,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * 
+ * 
+ * 
+ * @author seanhudson
+ *
+ */
 public class PathType extends AbstractType implements Path {
 
     private ObservableProperty<PathOption> type;

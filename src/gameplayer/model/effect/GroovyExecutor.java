@@ -6,6 +6,13 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 
+/**
+ * 
+ * 
+ * 
+ * @author seanhudson
+ *
+ */
 public class GroovyExecutor {
     private static final String INCORRECT_RETURN_TYPE = "Groovy command did not return an instance of %s";
     private static final String INVALID_COMMAND = "Invalid Groovy command %s";

@@ -20,6 +20,12 @@ import engine.tower.TowerType;
 import engine.weapon.Weapon;
 import javafx.beans.property.DoubleProperty;
 
+/**
+ * 
+ * 
+ * @author seanhudson
+ *
+ */
 public class TowerTypeBuilder extends AbstractTypeBuilder<Tower, TowerBuilder> implements TowerBuilder, TowerInitializer {
     
      public static final String DEFAULT_NAME = "New Tower";

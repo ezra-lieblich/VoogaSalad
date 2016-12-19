@@ -9,7 +9,12 @@ import engine.ManagerMediator;
 import engine.effect.EffectManagerController;
 import engine.effect.EffectTypeManagerController;
 
-
+/**
+ * 
+ * 
+ * @author seanhudson
+ *
+ */
 public class TowerTypeManagerController
         extends AbstractTypeManagerController<TowerManager, TowerBuilder, Tower, TowerUpdateView>
         implements TowerManagerController {

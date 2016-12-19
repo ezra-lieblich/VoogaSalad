@@ -10,6 +10,7 @@ import engine.effect.EffectManagerController;
  * Passes edits made to the weapon by the designer to the game engine.
  * 
  * @author Andrew Bihl
+ * @author Sean Hudson
  */
 public interface WeaponManagerController extends ManagerController<WeaponManager, WeaponBuilder, Weapon, WeaponUpdateView> {
 

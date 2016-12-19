@@ -1,5 +1,11 @@
 package engine.path;
 
+/**
+ * 
+ * 
+ * @author seanhudson
+ *
+ */
 public class GridCoordinate implements Coordinate<Integer>{
     private int x;
     private int y;

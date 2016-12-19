@@ -4,7 +4,12 @@ import java.util.List;
 import java.util.function.BiConsumer;
 import engine.BindableType;
 
-
+/**
+ * 
+ * 
+ * @author seanhudson
+ *
+ */
 public interface BindablePath extends BindableType<PathBuilder>{
 
     PathBuilder addTypeListener (BiConsumer<PathOption, PathOption> listener);

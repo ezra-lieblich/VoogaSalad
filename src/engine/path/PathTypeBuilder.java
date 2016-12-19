@@ -17,6 +17,12 @@ import engine.tower.Tower;
 import engine.tower.TowerType;
 import engine.weapon.Weapon;
 
+/**
+ * 
+ * 
+ * @author seanhudson
+ *
+ */
 public class PathTypeBuilder extends AbstractTypeBuilder<Path, PathBuilder> implements PathBuilder, PathInitializer {
     
      public static final String DEFAULT_NAME = "New Path";

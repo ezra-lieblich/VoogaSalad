@@ -14,6 +14,12 @@ import engine.effect.Effect;
 import engine.effect.EffectData;
 import engine.effect.ReflectionException;
 
+/**
+ * 
+ * 
+ * @author seanhudson
+ *
+ */
 public abstract class AbstractEffectFactory {
     public static final Class<? extends Annotation> EFFECT_DATA = EffectData.class;
     private static final String INVALID_FIELD = "The effect factory does not contain the specified field.";

@@ -9,7 +9,12 @@ import engine.observer.ObservableListProperty;
 import engine.observer.ObservableProperty;
 import engine.weapon.Weapon;
 
-
+/**
+ * 
+ * 
+ * @author seanhudson
+ *
+ */
 public interface TowerInitializer extends TypeInitializer {
 
     ObservableList<Integer> getWeapons ();

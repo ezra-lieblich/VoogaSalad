@@ -4,6 +4,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * 
+ * 
+ * @author seanhudson
+ *
+ * @param <E>
+ */
 public class ObservableListProperty<E> extends ObservableObjectProperty<List<E>> implements ObservableList<E> {
 
     public ObservableListProperty(List<E> value) {

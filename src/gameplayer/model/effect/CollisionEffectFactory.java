@@ -6,6 +6,12 @@ import engine.effect.EffectData;
 import engine.effect.Enemy;
 import gameplayer.model.GamePlayData;
 
+/**
+ * 
+ * 
+ * @author seanhudson
+ *
+ */
 public class CollisionEffectFactory extends AbstractEffectFactory {
     public static final String TRIGGER_NAME = "collider";
     public static final String ENCOMPASSING_CLASS_NAME = "myself";

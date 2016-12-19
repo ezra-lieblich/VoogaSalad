@@ -13,7 +13,12 @@ import engine.AbstractTypeManagerController;
 import engine.ManagerMediator;
 import engine.tower.Tower;
 
-
+/**
+ * 
+ * 
+ * @author seanhudson
+ *
+ */
 public class PathTypeManagerController
         extends AbstractTypeManagerController<PathManager, PathBuilder, Path, PathUpdateView> implements PathManagerController {
 
