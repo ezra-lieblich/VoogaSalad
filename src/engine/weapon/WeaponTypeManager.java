@@ -10,6 +10,12 @@ import engine.enemy.EnemyManager;
 import gameplayer.model.effect.factory.AbstractEffectFactory;
 import gameplayer.model.effect.factory.CollisionEffectFactory;
 
+/**
+ * 
+ * 
+ * @author seanhudson
+ *
+ */
 public class WeaponTypeManager extends AbstractTypeManager<Weapon> implements WeaponManager {
     
     public static final Class<? extends AbstractEffectFactory> DEFAULT_EFFECT_FACTORY = CollisionEffectFactory.class;

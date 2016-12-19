@@ -3,6 +3,13 @@ package engine.observer;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 
+ * 
+ * @author seanhudson
+ *
+ * @param <U>
+ */
 public class AbstractObservable<U> implements Observable<U> {
     
     private List<Observer<Observable<U>, U>> observers;

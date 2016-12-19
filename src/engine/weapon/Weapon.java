@@ -3,6 +3,12 @@ package engine.weapon;
 import java.util.List;
 import engine.Type;
 
+/**
+ * 
+ * 
+ * @author seanhudson
+ *
+ */
 public interface Weapon extends Type{
     
     void removeTarget (int target);

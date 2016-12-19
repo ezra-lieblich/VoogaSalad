@@ -3,7 +3,16 @@ package engine;
 import java.util.List;
 import authoring.editorview.IUpdateView;
 
-
+/**
+ * This interface outlines the methods for interacting with the View Controllers
+ * 
+ * @author seanhudson
+ *
+ * @param <E> Manager subclass
+ * @param <U> Typebuilder subclass
+ * @param <T> Type subclass
+ * @param <V> View subclass
+ */
 public interface ManagerController<E extends Manager<T>, U extends TypeBuilder<T, U>, T extends Type, V extends IUpdateView> {
 
     int createType (V updateView);

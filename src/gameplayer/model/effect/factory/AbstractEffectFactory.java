@@ -24,10 +24,12 @@ import gameplayer.model.effect.GroovyExecutor;
  * Steams - This class provides a good example of Steams, where I am able to accomplish complex iterations in one line of code.
  * 
  * 
+ * 
  * This class provides a flexible and extensible way of handling GameEffect creation
  * that allows the subclasses to customize the creation process.
  * 
  * See CollisionEffectFactory for an example on how to extend this class.
+ * 
  * 
  * @author seanhudson
  *

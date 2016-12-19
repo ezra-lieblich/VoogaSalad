@@ -2,6 +2,13 @@ package engine.observer;
 
 import java.util.function.BiConsumer;
 
+/**
+ * 
+ * 
+ * @author seanhudson
+ *
+ * @param <U>
+ */
 public interface ObservableProperty<U> extends Observable<U> {
 
     U getProperty ();

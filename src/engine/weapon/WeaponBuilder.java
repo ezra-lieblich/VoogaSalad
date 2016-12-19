@@ -4,6 +4,12 @@ import java.util.List;
 import engine.TypeBuilder;
 import engine.tower.TowerBuilder;
 
+/**
+ * 
+ * 
+ * @author seanhudson
+ *
+ */
 public interface WeaponBuilder extends TypeBuilder<Weapon, WeaponBuilder>, BindableWeapon { //TODO - Add bindable interface
 
     WeaponBuilder buildTargets (Integer ... targets);

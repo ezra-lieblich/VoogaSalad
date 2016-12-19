@@ -10,7 +10,12 @@ import engine.observer.ObservableList;
 import engine.observer.ObservableListProperty;
 import engine.settings.GameModeManager;
 import engine.weapon.WeaponManager;
-
+/**
+ * 
+ * 
+ * @author seanhudson
+ *
+ */
 public class PathTypeManager extends AbstractTypeManager<Path> implements PathManager {
         
     private ObservableList<Integer> availablePaths;

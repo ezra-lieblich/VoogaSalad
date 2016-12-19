@@ -8,7 +8,12 @@ import engine.ManagerMediator;
 import engine.effect.EffectManagerController;
 import engine.effect.EffectTypeManagerController;
 
-
+/**
+ * 
+ * 
+ * @author seanhudson
+ *
+ */
 public class WeaponTypeManagerController extends
         AbstractTypeManagerController<WeaponManager, WeaponBuilder, Weapon, WeaponUpdateView>
         implements WeaponManagerController {

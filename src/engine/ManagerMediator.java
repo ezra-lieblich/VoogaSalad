@@ -9,7 +9,12 @@ import engine.path.Path;
 import engine.tower.Tower;
 import engine.weapon.Weapon;
 
-
+/**
+ * This interface handles the methods of the mediator class which manages the dependencies between managers
+ * 
+ * @author seanhudson
+ *
+ */
 public interface ManagerMediator extends Observer<Observable<MethodData<Object>>, MethodData<Object>> {//Observer<Manager<? extends Type>, MethodData<Object>> {
 
     void addManager(Manager<? extends Type> manager);

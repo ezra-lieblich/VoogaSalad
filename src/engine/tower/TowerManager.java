@@ -9,6 +9,12 @@ import engine.effect.EffectManager;
 import engine.enemy.EnemyManager;
 import engine.weapon.WeaponManager;
 
+/**
+ * 
+ * 
+ * @author seanhudson
+ *
+ */
 public interface TowerManager extends Manager<Tower> {
 
     void visitRemoveEntry(WeaponManager manager, Integer index);

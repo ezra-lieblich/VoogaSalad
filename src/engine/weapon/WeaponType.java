@@ -8,6 +8,12 @@ import engine.TypeInitializer;
 import engine.observer.ObservableList;
 import engine.observer.ObservableProperty;
 
+/**
+ * 
+ * 
+ * @author seanhudson
+ *
+ */
 public class WeaponType extends AbstractType implements Weapon {
     
     private ObservableList<Integer> targets;

@@ -3,6 +3,12 @@ package engine.path;
 import java.util.List;
 import java.util.function.Predicate;
 
+/**
+ * 
+ * 
+ * @author seanhudson
+ *
+ */
 public enum PathOption {
         SET,
         FREE {

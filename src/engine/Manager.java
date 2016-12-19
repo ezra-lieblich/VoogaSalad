@@ -5,6 +5,13 @@ import java.util.Map;
 import java.util.function.Consumer;
 import engine.observer.Observable;
 
+/**
+ * This interface out lines the methods for the manager classes
+ * 
+ * @author seanhudson
+ *
+ * @param <E> Type subclass
+ */
 public interface Manager<E extends Type> extends VisitorManager<MethodData<Object>>, VisitableManager<MethodData<Object>>, Observable<MethodData<Object>>, BindableManager<E> {
 
     int addEntry (E entry);

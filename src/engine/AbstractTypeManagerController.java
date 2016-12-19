@@ -12,7 +12,16 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import authoring.editorview.IUpdateView;
 
-
+/**
+ * This class handles the model controller's abstract behavior
+ * 
+ * @author seanhudson
+ *
+ * @param <E> Manager subclass
+ * @param <U> Typebuilder subclass
+ * @param <T> Type subclass
+ * @param <V> View subclass
+ */
 public abstract class AbstractTypeManagerController<E extends Manager<T>, U extends TypeBuilder<T, U>, T extends Type, V extends IUpdateView>
         implements ManagerController<E, U, T, V> {
 
@@ -26,21 +35,12 @@ public abstract class AbstractTypeManagerController<E extends Manager<T>, U exte
         this.typeBuilder = typeBuilder;
         managerMediator.addManager(typeManager);
         typeManager.addObserver(managerMediator);
-        // typeManager.addEntry(typeBuilder.build()); //Testing XML
     }
 
     @Override
     public void loadManagerData(E typeManager, V updateView) {
-        //this.typeManager = typeManager;
         this.typeManager.setEntities(typeManager.getEntities().keySet().stream().collect(Collectors.toMap(b -> b , b -> constructCopy(b, typeManager, updateView))));
-//    	Map<Integer, T> newMap = new HashMap<Integer, T>();
-//        for (Integer id : typeManager.getEntities().keySet()) {
-//        	T value = constructCopy(id, typeManager, updateView);
-//        	newMap.put(id, value);
-//        }
-//        this.typeManager.setEntities(newMap);
         typeBuilder.setNextId(this.typeManager.getMaxId());
-        //call some method that resets views
     }
     
     @Override
@@ -48,7 +48,7 @@ public abstract class AbstractTypeManagerController<E extends Manager<T>, U exte
         return typeManager.addEntry(constructType(updateView));
     }
     
-    @Override //TODO - remove duplicated code
+    @Override
     public int createCopy(int id, V updateView) {
         copyWithoutId(id).buildId(typeManager.getEntity(id).getId());
         return createType(updateView);
@@ -71,7 +71,6 @@ public abstract class AbstractTypeManagerController<E extends Manager<T>, U exte
                         .updateImagePathDisplay(newValue))
                 .addSizeListener( (oldValue, newValue) -> updateView
                         .updateSizeDisplay(newValue))
-                //.addSoundListener(listener) need method in front end to call
                 .build();
     }
     
@@ -112,7 +111,6 @@ public abstract class AbstractTypeManagerController<E extends Manager<T>, U exte
         return typeManager.getEntityIds();
     }
 
-    //TODO - is this ok?
     @Override
     public boolean setName (int id, String name) {
         return handleRequest(isUnique(Type::getName, name), a -> a.getEntity(id).setName(name));
@@ -128,7 +126,6 @@ public abstract class AbstractTypeManagerController<E extends Manager<T>, U exte
     @Override
     public void setImagePath (int id, String imagePath) {
     	String oldPath = this.getImagePath(id);
-//    	imagePath = FileAggregator.defaultInstance().addImageToAssets(oldPath, imagePath);
         typeManager.getEntity(id).setImagePath(imagePath);
     }
 
@@ -146,7 +143,6 @@ public abstract class AbstractTypeManagerController<E extends Manager<T>, U exte
         return typeManager;
     }
 
-    // TODO - try and not need this
     protected U getTypeBuilder () {
         return typeBuilder;
     }

@@ -4,7 +4,12 @@ import java.util.List;
 import java.util.function.BiConsumer;
 import engine.BindableType;
 
-
+/**
+ * 
+ * 
+ * @author seanhudson
+ *
+ */
 public interface BindableTower extends BindableType<TowerBuilder> {
 
     TowerBuilder addWeaponsListener (BiConsumer<List<Integer>, List<Integer>> listener);

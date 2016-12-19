@@ -4,7 +4,13 @@ import engine.effect.EffectData;
 import engine.effect.Enemy;
 import gameplayer.model.GamePlayData;
 
-
+/**
+ * 
+ * 
+ * 
+ * @author seanhudson
+ *
+ */
 public class WinEffectFactory extends AbstractEffectFactory {
     public static final String TRIGGER_NAME = "winTrigger";
     public static final String ENCOMPASSING_CLASS_NAME = "gamePlayData";

@@ -46,8 +46,7 @@ import engine.observer.ObservableProperty;
 public abstract class AbstractTypeBuilder<E extends Type, R extends TypeBuilder<E, R>>
         implements TypeBuilder<E, R>, TypeInitializer {
 
-    private static final String DEFAULT_NAME_FORMAT = "%s (%s)";
-
+    private static final String DEFAULT_NAME_FORMAT = "%s (%s)";    
     private final String DEFAULT_NAME;
     private final String DEFAULT_IMAGE_PATH;
     private final Double DEFAULT_SIZE;

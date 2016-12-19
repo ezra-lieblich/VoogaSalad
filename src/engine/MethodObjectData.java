@@ -1,5 +1,12 @@
 package engine;
 
+/**
+ * This class is used for storing a method's name and associated value for use in the observer/mediator pattern
+ * 
+ * @author seanhudson
+ *
+ * @param <E> Property Type
+ */
 public class MethodObjectData<E> implements MethodData<E>{
 
     private String method;

@@ -4,6 +4,12 @@ import java.util.List;
 import java.util.function.BiConsumer;
 import engine.Manager;
 
+/**
+ * 
+ * 
+ * @author seanhudson
+ *
+ */
 public interface PathManager extends Manager<Path> {
 
     void addAvailablePathListener(BiConsumer<List<Integer>, List<Integer>> listener);

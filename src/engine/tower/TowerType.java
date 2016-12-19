@@ -15,7 +15,12 @@ import engine.weapon.WeaponType;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 
-
+/**
+ * 
+ * 
+ * @author seanhudson
+ *
+ */
 public class TowerType extends AbstractType implements Tower {
 
     private ObservableList<Integer> weapons;

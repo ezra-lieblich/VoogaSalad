@@ -7,7 +7,12 @@ import engine.enemy.Enemy;
 import engine.weapon.Weapon;
 
 
-
+/**
+ * 
+ * 
+ * @author seanhudson
+ *
+ */
 public interface Tower extends Type {
 
     void addUpgrade (int upgrade);

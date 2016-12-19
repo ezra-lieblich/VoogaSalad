@@ -7,6 +7,12 @@ import com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type;
 import engine.effect.Effect;
 import engine.observer.ObservableProperty;
 
+/**
+ * 
+ * 
+ * @author seanhudson
+ *
+ */
 public class GameEffect {
     
     private final String triggerName;
