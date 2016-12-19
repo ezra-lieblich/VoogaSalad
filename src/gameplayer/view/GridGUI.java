@@ -32,24 +32,19 @@ public class GridGUI {
 	private double cellWidth;
 	private double cellHeight;
 	private GraphicsLibrary graphicsLib;
-	private List<int[]> path;
 	private List<ImageView> imagePath;
 
 	public static final String TEST_URL = "../../../Images/BalloonBackground.jpg"; 
 
-	public GridGUI(int rows, int columns/*, List<int[]> path*/) {
-		//System.out.println("Rows: "+rows+"; columns: "+columns);
+	public GridGUI(int rows, int columns) {
 		this.grid = new Pane();
-		this.grid.getStyleClass().add("gridGUI"); //for setting background in css file
-		//this.pathGrid = new Pane();
+		this.grid.getStyleClass().add("gridGUI"); 
 		this.graphicsLib = new GraphicsLibrary();
 		this.rows = rows;
 		this.cols = columns;
 		this.cellWidth = GRID_WIDTH / cols;
 		this.cellHeight = GRID_HEIGHT / this.rows;
 		this.imagePath = new ArrayList<ImageView>();
-		//System.out.println("Cell width: "+cellWidth+", "+cellHeight);
-		//this.path = path;
 	}
 	
 	public double getCellWidth(){
@@ -67,9 +62,7 @@ public class GridGUI {
 
 	
 	public void init(){
-		//initDummyPath(); //TODO: get rid of
 		styleGrid(TEST_URL);
-		//populatePath(this.path);
 		
 	}
 	public Pane getGrid() {
@@ -78,26 +71,14 @@ public class GridGUI {
 	
 
 	private void styleGrid(String terrainURL) {
-		setTerrain(terrainURL);
 		grid.getStyleClass().add("grid");
 		grid.setMinWidth(GRID_WIDTH);
 		grid.setMinHeight(GRID_HEIGHT);
 		
 	}
 
-	//right now, background is set in the css file
-	private void setTerrain(String imageURL) {
-//		grid.setStyle("-fx-background-image: url(" + TEST_URL + ");");
-	}
-
-	private void addTowerToGrid(Tower tower, int row, int col) {
-		ImageView towerImage = graphicsLib.createImageView(graphicsLib.createImage(tower.getImage()));
-		graphicsLib.setImageViewParams(towerImage, cellWidth * col, cellHeight * row, cellWidth, cellHeight);
-		this.grid.getChildren().addAll(towerImage, tower.getInfoBox());
-	}
 
 	public void populatePath(HashMap<Integer,Path>allPaths, PathManager pathManager){
-		//System.out.println("populate path!");
 		for(Integer uniquePath: allPaths.keySet()){
 			engine.path.Path currentPath = pathManager.getEntity(uniquePath);
 			String pathPicture = currentPath.getImagePath();
@@ -106,7 +87,6 @@ public class GridGUI {
 				ImageView pathImage = graphicsLib.createImageView(graphicsLib.createImage(pathPicture));
 				double x =current.getX();
 				double y = current.getY();
-				//System.out.println("path cell x: "+x+"; y: "+y);
 				graphicsLib.setImageViewParams(pathImage, x*cellWidth, y*cellHeight,cellWidth, cellHeight);
 				this.grid.getChildren().add(pathImage);
 				this.imagePath.add(pathImage);
@@ -115,16 +95,5 @@ public class GridGUI {
 		}
 	}
 
-	public void populateGrid(Grid grid) {
-		//populatePath(grid, gri)
-		/*
-		Cell[][] gridArr = grid.getGrid();
-		for (int row = 0; row < gridArr.length; row++) {
-			for (int col = 0; col < gridArr[row].length; col++) {
-
-			}
-		}
-		*/
-	}
 
 }

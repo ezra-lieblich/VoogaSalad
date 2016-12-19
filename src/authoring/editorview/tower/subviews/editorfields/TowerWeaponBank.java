@@ -9,6 +9,7 @@ import authoring.editorview.tower.TowerAuthoringViewDelegate;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
+import javafx.scene.control.ComboBox;
 
 
 /**
@@ -19,13 +20,16 @@ import javafx.scene.Node;
 public class TowerWeaponBank implements TowerSetView {
 
     private TowerAuthoringViewDelegate delegate;
-    private CheckComboBox<String> weaponComboBox;
-    private ObservableList<String> availableWeaponsList;
+    private ComboBox<Object> weaponComboBox;
+    private ObservableList<Object> availableWeaponsList;
 
     public TowerWeaponBank (ResourceBundle labelsResource) {
         availableWeaponsList = FXCollections.observableArrayList();
+        weaponComboBox = new ComboBox<Object>();
         weaponComboBox =
-                ComboBoxFactory.makeCheckComboBox(availableWeaponsList, a -> updateWeapons(a));
+                ComboBoxFactory.makeComboBox("Choose Weapon", e -> delegate
+                        .onUserEnteredTowerChosenWeapon(weaponComboBox.getValue().toString()),
+                                             availableWeaponsList);
     }
 
     @Override
@@ -41,8 +45,9 @@ public class TowerWeaponBank implements TowerSetView {
     public void updateTowerChosenWeapon (String chosenWeapon) {
     }
 
-    private void updateWeapons (List<String> updateWeapons) {
-
+    public void setOptions (List<String> updateWeapons) {
+        availableWeaponsList.clear();
+        availableWeaponsList.addAll(updateWeapons);
     }
 
 }

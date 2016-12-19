@@ -42,7 +42,6 @@ public class GamePathView implements GameSettingsSetView {
         root =
                 GridFactory.createRowWithLabelandNode(settingsResource.getString("Path"),
                                                       pathCheckComboBox, 125);
-
     }
 
     @Override
@@ -56,47 +55,51 @@ public class GamePathView implements GameSettingsSetView {
     }
 
     private void updatePaths (List<String> pathNames) {
-        for (NameIdPair pair : pathNameIdList) {
+    	for (NameIdPair pair : pathNameIdList) {
             if (pathNames.contains(pair.getName()) && !pathIdList.contains(pair.getId())) {
                 pathNameList.add(pair.getName());
                 pathIdList.add(pair.getId());
                 delegate.onUserEnteredPath(pair.getId());
             }
             else if (!pathNames.contains(pair.getName()) && pathNameList.contains(pair.getName())) {
-                pathNameList.remove(pair.getName());
+            	pathNameList.remove(pair.getName());
                 pathIdList.remove((Object) pair.getId());
                 delegate.onUserEnteredRemovePath(pair.getId());
 
             }
-
         }
+    }
+    
+    public void clearPathList(){
+    	pathIdList.clear();
+        pathNameList.clear();
     }
 
     public void setPathList (List<Integer> pathList) {
-        pathIdList.clear();
+    	pathIdList.clear();
         pathNameList.clear();
+        
         this.pathIdList = new ArrayList<Integer>(pathList);
         pathCheckComboBox.getCheckModel().clearChecks();
         for (Integer id : pathList) {
             for (NameIdPair pair : pathNameIdList) {
                 if (pair.getId() == id) {
-
-                    pathCheckComboBox.getCheckModel().check(pair.getName());
-                    pathNameList.add(pair.getName());
+                	pathNameList.add(pair.getName());
+                	if (!pathCheckComboBox.getCheckModel().isChecked(pair.getName())){
+                		pathCheckComboBox.getCheckModel().check(pair.getName());
+                	}                 
                 }
             }
         }
     }
 
     public void setAvailablePathList (List<Integer> availablePathList) {
-        pathNameIdList.clear();
+    	pathNameIdList.clear();
         this.availablePathList.clear();
         for (Integer id : availablePathList) {
             NameIdPair pair = new NameIdPair(delegate.getPathName(id), id);
             this.pathNameIdList.add(pair);
             this.availablePathList.add(delegate.getPathName(id));
         }
-
     }
-
 }

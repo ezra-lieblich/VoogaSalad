@@ -48,6 +48,7 @@ public final class ComboBoxFactory {
 
                     @Override
                     public void onChanged (javafx.collections.ListChangeListener.Change<? extends String> c) {
+
                         func.accept(checkComboBox.getCheckModel().getCheckedItems());
                     }
 

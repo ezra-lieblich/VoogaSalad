@@ -205,4 +205,9 @@ public class TowerAuthoringView implements TowerUpdateView {
         }
         return nearestID;
     }
+
+    @Override
+    public void setWeaponOptions (List<String> weaponOptions) {
+        towerWeaponBank.setOptions(weaponOptions);
+    }
 }
