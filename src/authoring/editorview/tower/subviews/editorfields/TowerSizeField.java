@@ -23,7 +23,7 @@ public class TowerSizeField implements TowerSetView {
 
     public TowerSizeField (ResourceBundle labelsResource) {
         towerSizeField =
-                TextFieldFactory.makeTextField(labelsResource.getString("EnterInt"),
+                TextFieldFactory.makeNumberTextField(labelsResource.getString("EnterInt"),
                                                e -> delegate.onUserEnteredTowerSize(towerSizeField
                                                        .getText()));
         towerSizeField.setPrefWidth(230);

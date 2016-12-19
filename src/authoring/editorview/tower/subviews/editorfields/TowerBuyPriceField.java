@@ -23,7 +23,7 @@ public class TowerBuyPriceField implements TowerSetView {
 
     public TowerBuyPriceField (ResourceBundle labelsResource) {
         towerBuyField =
-                TextFieldFactory.makeTextField(labelsResource.getString("EnterInt"),
+                TextFieldFactory.makeNumberTextField(labelsResource.getString("EnterInt"),
                                                e -> delegate
                                                        .onUserEnteredTowerBuyPrice(towerBuyField
                                                                .getText()));

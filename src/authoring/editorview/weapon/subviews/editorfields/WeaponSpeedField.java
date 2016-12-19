@@ -27,7 +27,7 @@ public class WeaponSpeedField implements WeaponSetView {
 
     private void createField (ResourceBundle labelsResource) {
         weaponSpeedField =
-                TextFieldFactory.makeTextField(labelsResource.getString("EnterInt"), e -> delegate
+                TextFieldFactory.makeNumberTextField(labelsResource.getString("EnterInt"), e -> delegate
                         .onUserEnteredWeaponSpeed(weaponSpeedField.getText()));
         weaponSpeedField.setPrefWidth(130);
         root = GridFactory.createRowWithLabelandNode(

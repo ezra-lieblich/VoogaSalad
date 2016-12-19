@@ -23,7 +23,7 @@ public class TowerUnlockLevelField implements TowerSetView {
 
     public TowerUnlockLevelField (ResourceBundle labelsResource) {
         towerLevelField =
-                TextFieldFactory.makeTextField(labelsResource.getString("EnterInt"),
+                TextFieldFactory.makeNumberTextField(labelsResource.getString("EnterInt"),
                                                e -> delegate
                                                        .onUserEnteredTowerUnlockLevel(towerLevelField
                                                                .getText()));

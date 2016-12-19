@@ -1,12 +1,10 @@
 package authoring.editorview.weapon;
 
 import java.io.IOException;
-import java.util.ResourceBundle;
 import authoring.editorview.EditorViewController;
 import authoring.editorview.ListCellData;
 import authoring.editorview.ListDataSource;
 import authoring.editorview.collisioneffects.EffectAuthoringViewController;
-import authoring.utilityfactories.DialogueBoxFactory;
 import engine.effect.EffectManagerController;
 import engine.weapon.WeaponManagerController;
 
@@ -41,35 +39,17 @@ public class WeaponAuthoringViewController extends EditorViewController
 
     @Override
     public void onUserEnteredWeaponFireRate (String weaponFireRate) {
-        try {
-            Double.parseDouble(weaponFireRate);
-            weaponDataSource.setWeaponFireRate(currentWeaponID, Double.parseDouble(weaponFireRate));
-        }
-        catch (NumberFormatException e) {
-            createDialogueBox();
-        }
+        weaponDataSource.setWeaponFireRate(currentWeaponID, Double.parseDouble(weaponFireRate));
     }
 
     @Override
     public void onUserEnteredWeaponSpeed (String weaponSpeed) {
-        try {
-            Double.parseDouble(weaponSpeed);
-            weaponDataSource.setWeaponSpeed(currentWeaponID, Double.parseDouble(weaponSpeed));
-        }
-        catch (NumberFormatException e) {
-            createDialogueBox();
-        }
+        weaponDataSource.setWeaponSpeed(currentWeaponID, Double.parseDouble(weaponSpeed));
     }
 
     @Override
     public void onUserEnteredWeaponRange (String weaponRange) {
-        try {
-            Double.parseDouble(weaponRange);
-            weaponDataSource.setWeaponRange(currentWeaponID, Double.parseDouble(weaponRange));
-        }
-        catch (NumberFormatException e) {
-            createDialogueBox();
-        }
+        weaponDataSource.setWeaponRange(currentWeaponID, Double.parseDouble(weaponRange));
     }
 
     @Override
@@ -102,12 +82,6 @@ public class WeaponAuthoringViewController extends EditorViewController
         weaponDataSource.setWeaponTrajectory(currentWeaponID, weaponTrajectory);
     }
 
-    private void createDialogueBox () {
-        ResourceBundle dialogueBoxResource = ResourceBundle.getBundle("resources/DialogueBox");
-        DialogueBoxFactory.createErrorDialogueBox(dialogueBoxResource.getString("Integer"),
-                                                  dialogueBoxResource.getString("CheckInput"));
-    }
-
     @Override
     public void onUserEnteredNewTargetEnemy (String enemyID) {
         // TODO Auto-generated method stub
@@ -124,13 +98,7 @@ public class WeaponAuthoringViewController extends EditorViewController
 
     @Override
     public void onUserEnteredWeaponSize (String weaponSize) {
-        try {
-            Double.parseDouble(weaponSize);
-            weaponDataSource.setSize(currentWeaponID, Double.parseDouble(weaponSize));
-        }
-        catch (NumberFormatException e) {
-            createDialogueBox();
-        }
+        weaponDataSource.setSize(currentWeaponID, Double.parseDouble(weaponSize));
     }
 
     @Override

@@ -27,7 +27,7 @@ public class WeaponFireRateField implements WeaponSetView {
 
     private void createField (ResourceBundle labelsResource) {
         weaponFireRateField =
-                TextFieldFactory.makeTextField(labelsResource.getString("EnterInt"), e -> delegate
+                TextFieldFactory.makeNumberTextField(labelsResource.getString("EnterInt"), e -> delegate
                         .onUserEnteredWeaponFireRate(weaponFireRateField.getText()));
         weaponFireRateField.setPrefWidth(130);
         root = GridFactory.createRowWithLabelandNode(

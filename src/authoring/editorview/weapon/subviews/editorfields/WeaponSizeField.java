@@ -28,7 +28,7 @@ public class WeaponSizeField implements WeaponSetView {
 
     private void createField (ResourceBundle labelsResource) {
         weaponSizeField =
-                TextFieldFactory.makeTextField(labelsResource.getString("EnterInt"), e -> delegate
+                TextFieldFactory.makeNumberTextField(labelsResource.getString("EnterInt"), e -> delegate
                         .onUserEnteredWeaponSize(weaponSizeField.getText()));
         weaponSizeField.setPrefWidth(130);
         root =

@@ -27,7 +27,7 @@ public class WeaponRangeField implements WeaponSetView {
 
     private void createField (ResourceBundle labelsResource) {
         weaponRangeField =
-                TextFieldFactory.makeTextField(labelsResource.getString("EnterInt"), e -> delegate
+                TextFieldFactory.makeNumberTextField(labelsResource.getString("EnterInt"), e -> delegate
                         .onUserEnteredWeaponRange(weaponRangeField.getText()));
         weaponRangeField.setPrefWidth(130);
         root = GridFactory.createRowWithLabelandNode(
