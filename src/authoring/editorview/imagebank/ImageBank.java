@@ -1,3 +1,22 @@
+// This entire file is part of my masterpiece.
+// Andrew Bihl
+
+/*
+ * PURPOSE: This class allows for simple implementation of an ImageBank based on a list of object with IDs. 
+ * 	It hides JavaFX like using a ListView, observing the selection model, maintaining an observable list, etc. 
+ * 	To subclass, the user only needs to implement the interface method and set what happens when a user selects a cell.
+ * 	To further customize a subclass, the user can override the createCellForItemID() method. 
+ * 	
+ * An example of a fully-functional, concrete implementation can be found in TowerImageBank in authoring.editorview.tower.subviews
+ * 
+ * WHY IT'S WELL-DESIGNED: It's very modular, extensible, and allows simpler implementation of a ListView by hiding details. The only thing enforced by the abstract class is that you provide some data based on item id,
+ * and that you set the action for when a user selects a cell. The actual list of items is hidden so that someone implementing a concrete implementation would
+ * not get confused and directly manipulate the list, which could cause a number of issues due to it being an observable list. 
+ * 
+ * This feature was made as a functional feature that could be used by other members of the team, saving them time.
+ * The re-factoring done for the masterpiece is the result of observing what confusion they ran into when implementing the class.
+ */
+
 package authoring.editorview.imagebank;
 
 import java.io.File;
@@ -23,10 +42,9 @@ import javafx.scene.image.ImageView;
  * @author Andrew Bihl
  *
  *         This class allows the user to implement a simple list view where cells are based off a
- *         list of data object IDs.
+ *         list of data items with IDs.
  *         Information required to display the cell is retrieved from the dataSource interface.
- *         To change the way cells are presented, override createCellForItemID();
- *         
+ *         To change the way cells are presented, override createCellForItemID(), and subclass the ListDataSource interface with any extra required data.
  *         
  *         To add static cells to the table view like buttons or other elements not representing items, use the addStaticCell method.
  */
@@ -83,7 +101,7 @@ public abstract class ImageBank implements ChangeListener<Number> {
     }
 
     /**
-     * Refresh existing cells
+     * Refresh existing cells with current item IDs. Overriding this method is not suggested.
      */
     public void refreshBank () {
         for (int i = 0; i < this.items.size(); i++){
@@ -97,6 +115,10 @@ public abstract class ImageBank implements ChangeListener<Number> {
         }
     }
     
+    /**
+     * Update the bank with the new list of item IDs. Overriding this method is not suggested.
+     * @param ids
+     */
     public void updateBank (List<Integer> ids) {
         if (dataSource == null) {
             return;
