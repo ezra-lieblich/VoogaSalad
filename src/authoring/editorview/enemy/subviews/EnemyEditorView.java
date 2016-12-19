@@ -3,17 +3,18 @@ package authoring.editorview.enemy.subviews;
 import java.io.File;
 import java.io.IOException;
 import java.util.ResourceBundle;
+
+import authoring.editorview.DeleteEntityView;
+import authoring.editorview.EditorNameView;
 import authoring.editorview.PhotoFileChooser;
 import authoring.editorview.enemy.EnemyAuthoringViewDelegate;
 import authoring.editorview.enemy.EnemySetView;
 import authoring.editorview.enemy.subviews.editorfields.EnemyHealthField;
 import authoring.editorview.enemy.subviews.editorfields.EnemyImageView;
-import authoring.editorview.enemy.subviews.editorfields.EnemyNameField;
 import authoring.editorview.enemy.subviews.editorfields.EnemyRewardMoneyField;
 import authoring.editorview.enemy.subviews.editorfields.EnemyRewardPointsField;
 import authoring.editorview.enemy.subviews.editorfields.EnemySizeField;
 import authoring.editorview.enemy.subviews.editorfields.AddEnemyEffectView;
-import authoring.editorview.enemy.subviews.editorfields.DeleteEnemy;
 import authoring.editorview.enemy.subviews.editorfields.EnemyDamageField;
 import authoring.editorview.enemy.subviews.editorfields.EnemySpeedField;
 import authoring.utilityfactories.ButtonFactory;
@@ -49,9 +50,9 @@ public class EnemyEditorView extends PhotoFileChooser implements EnemySetView {
     private EnemyAuthoringViewDelegate delegate;
     private File chosenFile;
 
-    private DeleteEnemy deleteEnemy;
+    private DeleteEntityView deleteEnemy;
     private EnemyImageView enemyImage;
-    private EnemyNameField enemyName;
+    private EditorNameView enemyName;
     private EnemySpeedField enemySpeed;
     private EnemyDamageField enemyDamage;
     private EnemyHealthField enemyHealth;
@@ -65,14 +66,14 @@ public class EnemyEditorView extends PhotoFileChooser implements EnemySetView {
     private static final double BUFFER = 10.0;
 
     public EnemyEditorView (EnemyImageView enemyImage,
-                            EnemyNameField enemyName,
+                            EditorNameView enemyName,
                             EnemySpeedField enemySpeed,
                             EnemyDamageField enemyDamage,
                             EnemyHealthField enemyHealth,
                             EnemyRewardMoneyField enemyRewardMoney,
                             EnemyRewardPointsField enemyRewardPoints,
                             EnemySizeField enemySize,
-                            DeleteEnemy deleteEnemy,
+                            DeleteEntityView deleteEnemy,
                             AddEnemyEffectView addEnemyEffect) {
         rootBuffer = new AnchorPane();
         vbox = new VBox(10);

@@ -3,13 +3,13 @@ package authoring.editorview.level;
 import java.util.List;
 import java.util.ResourceBundle;
 import engine.level.wave.WaveString;
+import authoring.editorview.DeleteEntityView;
+import authoring.editorview.EditorNameView;
 import authoring.editorview.ListDataSource;
 import authoring.editorview.level.subviews.LevelBank;
 import authoring.editorview.level.subviews.LevelEditorView;
 import authoring.editorview.level.subviews.editorfields.AddLevelEffectView;
 import authoring.editorview.level.subviews.editorfields.CreateNewWaveView;
-import authoring.editorview.level.subviews.editorfields.DeleteLevel;
-import authoring.editorview.level.subviews.editorfields.LevelNameView;
 import authoring.editorview.level.subviews.editorfields.LevelRewardsView;
 import authoring.editorview.level.subviews.editorfields.LevelTransitionTimeField;
 import authoring.editorview.level.subviews.editorfields.PreviewLevelView;
@@ -32,7 +32,7 @@ public class LevelAuthoringView implements LevelUpdateView {
 
     private GridPane levelView;
     private LevelRewardsView levelRewardsView;
-    private LevelNameView levelNameView;
+    private EditorNameView levelNameView;
     private LevelBank levelBank;
     private PreviewLevelView previewLevelView;
     private LevelTransitionTimeField transitionTimeField;
@@ -40,7 +40,7 @@ public class LevelAuthoringView implements LevelUpdateView {
     private AddLevelEffectView addLevelEffect;
     private LevelEditorView levelEditorView;
     private CreateNewWaveView createWaveView;
-    private DeleteLevel deleteLevel;
+    private DeleteEntityView deleteLevel;
 
     private ResourceBundle levelsResource =
             ResourceBundle.getBundle("resources/GameAuthoringLevels");
@@ -49,13 +49,13 @@ public class LevelAuthoringView implements LevelUpdateView {
         this.levelView = new GridPane();
 
         this.levelRewardsView = new LevelRewardsView(levelsResource);
-        this.levelNameView = new LevelNameView(levelsResource);
+        this.levelNameView = new EditorNameView(levelsResource, 75, 125);
         this.transitionTimeField = new LevelTransitionTimeField(levelsResource);
         this.waveTableView = new WaveTableView(levelsResource, width);
         this.previewLevelView = new PreviewLevelView();
         this.addLevelEffect = new AddLevelEffectView(levelsResource);
         this.createWaveView = new CreateNewWaveView(levelsResource);
-        this.deleteLevel = new DeleteLevel(levelsResource);
+        this.deleteLevel = new DeleteEntityView(levelsResource, 280);
 
         this.levelBank = new LevelBank();
         this.levelEditorView =
@@ -105,7 +105,7 @@ public class LevelAuthoringView implements LevelUpdateView {
 
     @Override
     public void updateNameDisplay (String name) {
-        levelNameView.updateName(name);
+        levelNameView.updateField(name);
         // also level chooser
 
     }

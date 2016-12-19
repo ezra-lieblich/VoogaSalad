@@ -38,7 +38,7 @@ public class PathAuthoringViewController extends EditorViewController
     }
 
     @Override
-    public void onUserEnteredPathName (String pathName) {
+    public void onUserEnteredName (String pathName) {
         pathDataSource.setName(activeID, pathName);
     }
 
@@ -72,7 +72,7 @@ public class PathAuthoringViewController extends EditorViewController
     }
 
     @Override
-    public void onUserEnteredDeletePath () {
+    public void onUserPressedDeleteEntity () {
         pathDataSource.deleteType(activeID);
 
     }

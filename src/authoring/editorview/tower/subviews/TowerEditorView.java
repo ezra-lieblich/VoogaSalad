@@ -3,16 +3,17 @@ package authoring.editorview.tower.subviews;
 import java.io.File;
 import java.io.IOException;
 import java.util.ResourceBundle;
+
+import authoring.editorview.DeleteEntityView;
+import authoring.editorview.EditorNameView;
 import authoring.editorview.PhotoFileChooser;
 import authoring.editorview.tower.TowerSetView;
 import authoring.editorview.tower.TowerAuthoringViewDelegate;
 import authoring.editorview.tower.subviews.editorfields.AddTowerEffectView;
-import authoring.editorview.tower.subviews.editorfields.DeleteTower;
 import authoring.editorview.tower.subviews.editorfields.TowerAbilityBank;
 import authoring.editorview.tower.subviews.editorfields.TowerBuyPriceField;
 import authoring.editorview.tower.subviews.editorfields.TowerWeaponBank;
 import authoring.editorview.tower.subviews.editorfields.TowerImageView;
-import authoring.editorview.tower.subviews.editorfields.TowerNameField;
 import authoring.editorview.tower.subviews.editorfields.TowerSellPriceField;
 import authoring.editorview.tower.subviews.editorfields.TowerSizeField;
 import authoring.editorview.tower.subviews.editorfields.TowerUnlockLevelField;
@@ -45,7 +46,7 @@ import javafx.stage.Stage;
 public class TowerEditorView extends PhotoFileChooser implements TowerSetView {
 
     private TowerAuthoringViewDelegate delegate;
-    private TowerNameField towerName;
+    private EditorNameView towerName;
     private TowerImageView towerImage;
     private TowerBuyPriceField towerBuyPrice;
     private TowerSellPriceField towerSellPrice;
@@ -55,7 +56,7 @@ public class TowerEditorView extends PhotoFileChooser implements TowerSetView {
     private TowerUpgradeBank towerUpgrade;
     private TowerSizeField towerSize;
     private AddTowerEffectView addTowerEffect;
-    private DeleteTower deleteTower;
+    private DeleteEntityView deleteTower;
 
     private VBox vbox;
     private ScrollPane completeView;
@@ -67,7 +68,7 @@ public class TowerEditorView extends PhotoFileChooser implements TowerSetView {
     private ResourceBundle labelsResource;
     private ResourceBundle dialogueBoxResource;
 
-    public TowerEditorView (TowerNameField towerName,
+    public TowerEditorView (EditorNameView towerName,
                             TowerImageView towerImage,
                             TowerBuyPriceField towerBuyPrice,
                             TowerSellPriceField towerSellPrice,
@@ -77,7 +78,7 @@ public class TowerEditorView extends PhotoFileChooser implements TowerSetView {
                             TowerUpgradeBank towerUpgrade,
                             TowerSizeField towerSize,
                             AddTowerEffectView addTowerEffect,
-                            DeleteTower deleteTower,
+                            DeleteEntityView deleteTower,
                             ResourceBundle labelsResource,
                             ResourceBundle dialogueBoxResource) {
 

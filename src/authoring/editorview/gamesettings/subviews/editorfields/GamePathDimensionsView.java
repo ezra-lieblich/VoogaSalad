@@ -7,7 +7,6 @@ import authoring.utilityfactories.DialogueBoxFactory;
 import authoring.utilityfactories.GridFactory;
 import authoring.utilityfactories.TextFieldFactory;
 import javafx.scene.Node;
-import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
@@ -68,10 +67,10 @@ public class GamePathDimensionsView implements GameSettingsSetView {
         }
         catch (NumberFormatException e) {
             setGridDimensions(dimensions);
-            Alert inputError =
-                    DialogueBoxFactory.createErrorDialogueBox(
-                                                              "The dimensions of the grid must be an integer.",
-                                                              "Input error");
+            
+            DialogueBoxFactory.createErrorDialogueBox(
+                                                      "The dimensions of the grid must be an integer.",
+                                                      "Input error");
         }
     }
 

@@ -2,6 +2,8 @@ package authoring.editorview.collisioneffects;
 
 import java.util.List;
 import java.util.ResourceBundle;
+
+import authoring.editorview.EditorNameView;
 import authoring.editorview.ListDataSource;
 import authoring.editorview.collisioneffects.subviews.EffectAvailableClassesView;
 import authoring.editorview.collisioneffects.subviews.EffectAvailableDataObjectsView;
@@ -10,7 +12,6 @@ import authoring.editorview.collisioneffects.subviews.EffectBank;
 import authoring.editorview.collisioneffects.subviews.EffectDataView;
 import authoring.editorview.collisioneffects.subviews.editorfields.EffectConditionField;
 import authoring.editorview.collisioneffects.subviews.editorfields.EffectField;
-import authoring.editorview.collisioneffects.subviews.editorfields.EffectNameField;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
@@ -30,7 +31,7 @@ public class EffectAuthoringView implements EffectUpdateView {
     private EffectAvailableDataObjectsView effectDataObjects;
     private EffectAvailableMethodsView effectAvailMethods;
     private EffectDataView effectDataView;
-    private EffectNameField nameField;
+    private EditorNameView nameField;
     private EffectConditionField conditionField;
     private EffectField effectField;
     private Scene myScene;
@@ -43,7 +44,7 @@ public class EffectAuthoringView implements EffectUpdateView {
         effectAvailClasses = new EffectAvailableClassesView();
         effectDataObjects = new EffectAvailableDataObjectsView();
         effectAvailMethods = new EffectAvailableMethodsView();
-        nameField = new EffectNameField(labelsResource);
+        nameField = new EditorNameView(labelsResource, 105, 125);
         conditionField = new EffectConditionField(labelsResource);
         effectField = new EffectField(labelsResource);
         effectDataView = new EffectDataView(nameField, conditionField, effectField);
@@ -72,7 +73,7 @@ public class EffectAuthoringView implements EffectUpdateView {
 
     @Override
     public void updateEffectName (String name) {
-        nameField.updateName(name);
+        nameField.updateField(name);
     }
 
     @Override
@@ -146,7 +147,7 @@ public class EffectAuthoringView implements EffectUpdateView {
 
     @Override
     public void updateNameDisplay (String name) {
-        nameField.updateName(name);
+        nameField.updateField(name);
     }
 
     @Override

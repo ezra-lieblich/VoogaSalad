@@ -2,11 +2,12 @@ package authoring.editorview.path.subviews;
 
 import java.util.ResourceBundle;
 import authoring.editorview.path.PathSetView;
+import authoring.editorview.DeleteEntityView;
+import authoring.editorview.EditorNameView;
 import authoring.editorview.path.PathAuthoringViewDelegate;
 import authoring.editorview.path.subviews.editorfields.PathDimensionsView;
 import authoring.editorview.path.subviews.editorfields.PathImageDisplayView;
 import authoring.editorview.path.subviews.editorfields.PathImageView;
-import authoring.editorview.path.subviews.editorfields.PathNameView;
 import authoring.editorview.path.subviews.editorfields.PathTypeView;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -29,22 +30,22 @@ public class PathEditorView implements PathSetView {
     private static final double BUFFER = 10.0;
 
     private PathImageView pathImageView;
-    private PathNameView pathNameView;
+    private EditorNameView pathNameView;
     private PathDimensionsView pathDimensionsView;
     private PathImageDisplayView pathImageDisplayView;
     private PathTypeView pathTypeView;
-    private DeletePathView deletePathView;
+    private DeleteEntityView deletePathView;
 
     public PathEditorView (int size, ResourceBundle pathResource) {
         rootBuffer = new AnchorPane();
         root = new VBox(10);
 
         this.pathImageView = new PathImageView();
-        this.pathNameView = new PathNameView(pathResource);
+        this.pathNameView = new EditorNameView(pathResource, 155, 125);
         this.pathDimensionsView = new PathDimensionsView();
         this.pathImageDisplayView = new PathImageDisplayView(pathResource);
         this.pathTypeView = new PathTypeView();
-        this.deletePathView = new DeletePathView();
+        this.deletePathView = new DeleteEntityView(pathResource, 280);
         buildView();
 
     }
@@ -89,7 +90,7 @@ public class PathEditorView implements PathSetView {
     }
 
     public void updatePathName (String pathName) {
-        pathNameView.updateName(pathName);
+        pathNameView.updateField(pathName);
     }
 
     public void updateGridDimensions (int dimensions) {

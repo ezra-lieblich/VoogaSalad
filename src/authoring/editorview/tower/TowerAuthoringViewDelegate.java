@@ -1,18 +1,18 @@
 package authoring.editorview.tower;
 
+import authoring.editorview.EditorViewDelegate;
+
 /**
  * 
  * @author Andrew Bihl
  * @author Kayla Schulz
  *
  */
-public interface TowerAuthoringViewDelegate {
+public interface TowerAuthoringViewDelegate extends EditorViewDelegate {
 
     public void onUserPressedCreateNewTower ();
 
     public void onUserPressedCreateTowerUpgrade ();
-
-    public void onUserPressedDeleteTower ();
 
     public void onUserPressedAddEffect ();
 
@@ -27,8 +27,6 @@ public interface TowerAuthoringViewDelegate {
     public void onUserEnteredTowerUpgrade (String towerUpgrade);
 
     public void onUserDeletedTowerUpgrade (String towerUpgrade);
-
-    public void onUserEnteredTowerName (String towerName);
 
     public void onUserEnteredTowerImagePath (String towerImagePath);
 

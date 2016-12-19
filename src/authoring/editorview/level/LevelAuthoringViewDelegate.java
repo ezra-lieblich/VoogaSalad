@@ -1,11 +1,13 @@
 package authoring.editorview.level;
 
+import authoring.editorview.EditorViewDelegate;
+
 /**
  * 
  * @author Kayla Schulz, Andrew Bihl, Diane Hadley
  *
  */
-public interface LevelAuthoringViewDelegate {
+public interface LevelAuthoringViewDelegate extends EditorViewDelegate {
 
     public void onUserEnteredRewardScore (String score);
 
@@ -15,19 +17,13 @@ public interface LevelAuthoringViewDelegate {
 
     public void onUserEnteredEditLevel (String level);
 
-    public void onUserEnteredLevelName (String levelName);
-
     public void onUserEnteredCreateLevel ();
-
-    public void onUserPressedDeleteLevel ();
 
     public void onUserEnteredTransitionTime (String time);
 
     public void onUserPressedAddEffect ();
 
     public void onUserSelectedLevel (int levelID);
-
-    // WAVE
 
     public void onUserEnteredAddWave ();
 

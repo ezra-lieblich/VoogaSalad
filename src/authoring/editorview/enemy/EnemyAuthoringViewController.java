@@ -120,7 +120,7 @@ public class EnemyAuthoringViewController extends EditorViewController
     }
 
     @Override
-    public void onUserEnteredEnemyName (String enemyName) {
+    public void onUserEnteredName (String enemyName) {
         enemyDataSource.setName(currentEnemyID, enemyName);
     }
 
@@ -131,7 +131,7 @@ public class EnemyAuthoringViewController extends EditorViewController
     }
 
     @Override
-    public void onUserPressedDeleteEnemy () {
+    public void onUserPressedDeleteEntity () {
         int nextID = this.enemyView.getNearestAvailableItemID(currentEnemyID);
         enemyDataSource.deleteType(currentEnemyID);
         currentEnemyID = nextID;

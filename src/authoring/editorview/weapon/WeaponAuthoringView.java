@@ -3,14 +3,15 @@ package authoring.editorview.weapon;
 import java.io.IOException;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import authoring.editorview.DeleteEntityView;
+import authoring.editorview.EditorNameView;
 import authoring.editorview.ListDataSource;
 import authoring.editorview.weapon.subviews.WeaponEditorView;
 import authoring.editorview.weapon.subviews.WeaponImageBank;
 import authoring.editorview.weapon.subviews.editorfields.AddWeaponEffectView;
-import authoring.editorview.weapon.subviews.editorfields.DeleteWeapon;
 import authoring.editorview.weapon.subviews.editorfields.WeaponFireRateField;
 import authoring.editorview.weapon.subviews.editorfields.WeaponImageView;
-import authoring.editorview.weapon.subviews.editorfields.WeaponNameField;
 import authoring.editorview.weapon.subviews.editorfields.WeaponPathField;
 import authoring.editorview.weapon.subviews.editorfields.WeaponRangeField;
 import authoring.editorview.weapon.subviews.editorfields.WeaponSizeField;
@@ -31,7 +32,7 @@ public class WeaponAuthoringView implements WeaponUpdateView {
     private GridPane weaponView;
     private WeaponImageBank weaponBank;
     private WeaponEditorView weaponEditorView;
-    private WeaponNameField weaponNameView;
+    private EditorNameView weaponNameView;
     private WeaponSpeedField weaponSpeedView;
     private WeaponFireRateField weaponFireRateView;
     private WeaponRangeField weaponRangeView;
@@ -39,7 +40,7 @@ public class WeaponAuthoringView implements WeaponUpdateView {
     private WeaponImageView weaponImageView;
     private WeaponSizeField weaponSizeView;
     private AddWeaponEffectView addWeaponEffect;
-    private DeleteWeapon deleteWeapon;
+    private DeleteEntityView deleteWeapon;
 
     private static final int EDITOR_WIDTH = 300;
 
@@ -56,14 +57,14 @@ public class WeaponAuthoringView implements WeaponUpdateView {
         weaponView = new GridPane();
 
         weaponBank = new WeaponImageBank(labelsResource);
-        weaponNameView = new WeaponNameField(labelsResource);
+        weaponNameView = new EditorNameView(labelsResource, 130, 150);
         weaponSpeedView = new WeaponSpeedField(labelsResource);
         weaponRangeView = new WeaponRangeField(labelsResource);
         weaponFireRateView = new WeaponFireRateField(labelsResource);
         weaponPathView = new WeaponPathField(labelsResource);
         weaponImageView = new WeaponImageView(labelsResource);
         weaponSizeView = new WeaponSizeField(labelsResource);
-        deleteWeapon = new DeleteWeapon(labelsResource);
+        deleteWeapon = new DeleteEntityView(labelsResource, 280);
 
         addWeaponEffect = new AddWeaponEffectView(labelsResource);
         weaponEditorView =
@@ -159,7 +160,7 @@ public class WeaponAuthoringView implements WeaponUpdateView {
 
     @Override
     public void updateNameDisplay (String name) {
-        this.weaponNameView.updateName(name);
+        this.weaponNameView.updateField(name);
 
     }
 

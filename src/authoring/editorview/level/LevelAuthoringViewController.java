@@ -59,7 +59,7 @@ public class LevelAuthoringViewController extends EditorViewController
     }
 
     @Override
-    public void onUserEnteredLevelName (String levelName) {
+    public void onUserEnteredName (String levelName) {
         levelDataSource.setName(currentLevelID, levelName);
     }
 
@@ -70,7 +70,7 @@ public class LevelAuthoringViewController extends EditorViewController
     }
 
     @Override
-    public void onUserPressedDeleteLevel () {
+    public void onUserPressedDeleteEntity () {
         int nextID = this.levelView.getNearestAvailableItemID(currentLevelID);
         levelDataSource.deleteType(currentLevelID);
         currentLevelID = nextID;

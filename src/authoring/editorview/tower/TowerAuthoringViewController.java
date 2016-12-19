@@ -71,7 +71,7 @@ public class TowerAuthoringViewController extends EditorViewController
     }
 
     @Override
-    public void onUserEnteredTowerName (String towerName) {
+    public void onUserEnteredName (String towerName) {
         towerDataSource.setName(currentTowerID, towerName);
     }
 
@@ -119,7 +119,7 @@ public class TowerAuthoringViewController extends EditorViewController
     }
 
     @Override
-    public void onUserPressedDeleteTower () {
+    public void onUserPressedDeleteEntity () {
         int nextID = this.towerView.getNearestAvailableItemID(currentTowerID);
         towerDataSource.deleteType(currentTowerID);
         currentTowerID = nextID;

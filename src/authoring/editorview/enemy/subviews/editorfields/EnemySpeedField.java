@@ -6,9 +6,6 @@ import authoring.editorview.enemy.EnemyAuthoringViewDelegate;
 import authoring.editorview.enemy.EnemySetView;
 import authoring.utilityfactories.GridFactory;
 import authoring.utilityfactories.TextFieldFactory;
-import javafx.scene.Node;
-import javafx.scene.control.TextField;
-
 
 /**
  * 
@@ -17,7 +14,6 @@ import javafx.scene.control.TextField;
  */
 public class EnemySpeedField extends TextFieldView implements EnemySetView {
 
-    private TextField enemySpeedField;
     private EnemyAuthoringViewDelegate delegate;
 
     public EnemySpeedField (ResourceBundle labelsResource) {
@@ -30,27 +26,16 @@ public class EnemySpeedField extends TextFieldView implements EnemySetView {
     }
 
     @Override
-    public Node getInstanceAsNode () {
-        return root;
-    }
-
-    @Override
-    public void updateField (String newData) {
-        enemySpeedField.setText(newData);
-    }
-
-    @Override
     protected void makeTextField (ResourceBundle labelsResource) {
-        enemySpeedField =
+    	textField =
                 TextFieldFactory.makeTextField(labelsResource.getString("EnterInt"),
                                                e -> delegate
-                                                       .onUserEnteredEnemySpeed(enemySpeedField
+                                                       .onUserEnteredEnemySpeed(textField
                                                                .getText()));
-        enemySpeedField.setPrefWidth(110);
+    	textField.setPrefWidth(110);
         root = GridFactory.createRowWithLabelandNode(
                                                      labelsResource.getString("Speed"),
-                                                     enemySpeedField,
+                                                     textField,
                                                      170);
     }
-
 }

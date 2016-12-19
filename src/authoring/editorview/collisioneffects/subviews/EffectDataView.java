@@ -1,10 +1,10 @@
 package authoring.editorview.collisioneffects.subviews;
 
+import authoring.editorview.EditorNameView;
 import authoring.editorview.collisioneffects.EffectAuthoringViewDelegate;
 import authoring.editorview.collisioneffects.EffectSetView;
 import authoring.editorview.collisioneffects.subviews.editorfields.EffectConditionField;
 import authoring.editorview.collisioneffects.subviews.editorfields.EffectField;
-import authoring.editorview.collisioneffects.subviews.editorfields.EffectNameField;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
@@ -19,11 +19,11 @@ public class EffectDataView implements EffectSetView {
 
     private EffectAuthoringViewDelegate delegate;
     private BorderPane effectDataPane;
-    private EffectNameField nameField;
+    private EditorNameView nameField;
     private EffectConditionField conditionField;
     private EffectField effectField;
 
-    public EffectDataView (EffectNameField nameField,
+    public EffectDataView (EditorNameView nameField,
                            EffectConditionField conditionField,
                            EffectField effectField) {
         effectDataPane = new BorderPane();

@@ -3,14 +3,15 @@ package authoring.editorview.weapon.subviews;
 import java.io.File;
 import java.io.IOException;
 import java.util.ResourceBundle;
+
+import authoring.editorview.DeleteEntityView;
+import authoring.editorview.EditorNameView;
 import authoring.editorview.PhotoFileChooser;
 import authoring.editorview.weapon.WeaponSetView;
 import authoring.editorview.weapon.WeaponAuthoringViewDelegate;
 import authoring.editorview.weapon.subviews.editorfields.AddWeaponEffectView;
-import authoring.editorview.weapon.subviews.editorfields.DeleteWeapon;
 import authoring.editorview.weapon.subviews.editorfields.WeaponFireRateField;
 import authoring.editorview.weapon.subviews.editorfields.WeaponImageView;
-import authoring.editorview.weapon.subviews.editorfields.WeaponNameField;
 import authoring.editorview.weapon.subviews.editorfields.WeaponPathField;
 import authoring.editorview.weapon.subviews.editorfields.WeaponRangeField;
 import authoring.editorview.weapon.subviews.editorfields.WeaponSizeField;
@@ -50,18 +51,18 @@ public class WeaponEditorView extends PhotoFileChooser implements WeaponSetView 
 
     private ResourceBundle labelsResource;
     private File chosenFile;
-    private WeaponNameField weaponName;
+    private EditorNameView weaponName;
     private WeaponSpeedField weaponSpeed;
     private WeaponFireRateField weaponFireRate;
     private WeaponRangeField weaponRange;
     private WeaponPathField weaponPath;
     private WeaponSizeField weaponSize;
     private AddWeaponEffectView addWeaponEffect;
-    private DeleteWeapon deleteWeapon;
+    private DeleteEntityView deleteWeapon;
 
     private ResourceBundle dialogueBoxResource;
 
-    public WeaponEditorView (WeaponNameField weaponName,
+    public WeaponEditorView (EditorNameView weaponName,
                              WeaponSpeedField weaponSpeed,
                              WeaponFireRateField weaponFireRate,
                              WeaponRangeField weaponRange,
@@ -69,7 +70,7 @@ public class WeaponEditorView extends PhotoFileChooser implements WeaponSetView 
                              WeaponImageView weaponImage,
                              WeaponSizeField weaponSize,
                              AddWeaponEffectView addWeaponEffect,
-                             DeleteWeapon deleteWeapon,
+                             DeleteEntityView deleteWeapon,
                              ResourceBundle labelsResource,
                              ResourceBundle dialogueBoxResource,
                              int columnWidth)

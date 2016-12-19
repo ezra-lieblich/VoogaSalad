@@ -93,7 +93,7 @@ public class WeaponAuthoringViewController extends EditorViewController
     }
 
     @Override
-    public void onUserEnteredWeaponName (String weaponName) {
+    public void onUserEnteredName (String weaponName) {
         weaponDataSource.setName(currentWeaponID, weaponName);
     }
 
@@ -115,7 +115,7 @@ public class WeaponAuthoringViewController extends EditorViewController
     }
 
     @Override
-    public void onUserPressedDeleteWeapon () {
+    public void onUserPressedDeleteEntity () {
         int nextID = this.weaponView.getNearestAvailableItemID(currentWeaponID);
         weaponDataSource.deleteType(currentWeaponID);
         currentWeaponID = nextID;

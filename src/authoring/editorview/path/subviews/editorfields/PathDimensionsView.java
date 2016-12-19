@@ -7,7 +7,6 @@ import authoring.utilityfactories.DialogueBoxFactory;
 import authoring.utilityfactories.GridFactory;
 import authoring.utilityfactories.TextFieldFactory;
 import javafx.scene.Node;
-import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
@@ -54,7 +53,7 @@ public class PathDimensionsView implements PathSetView {
                                                              e -> submitGridDimensions(dimensionsTextField
                                                                      .getText()));
 
-        dimensionsTextField.setMaxWidth(155); // TODO
+        dimensionsTextField.setPrefWidth(155); // TODO
 
         root =
                 GridFactory.createRowWithLabelandNode(pathResource.getString("DimensionsTextField"),
@@ -69,10 +68,10 @@ public class PathDimensionsView implements PathSetView {
         }
         catch (NumberFormatException e) {
             setGridDimensions(dimensions);
-            Alert inputError =
-                    DialogueBoxFactory.createErrorDialogueBox(
-                                                              "The dimensions of the grid must be an integer.",
-                                                              "Input error");
+            
+            DialogueBoxFactory.createErrorDialogueBox(
+                                                      "The dimensions of the grid must be an integer.",
+                                                      "Input error");
         }
     }
 

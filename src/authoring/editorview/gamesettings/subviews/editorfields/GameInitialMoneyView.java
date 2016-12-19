@@ -7,7 +7,6 @@ import authoring.utilityfactories.DialogueBoxFactory;
 import authoring.utilityfactories.GridFactory;
 import authoring.utilityfactories.TextFieldFactory;
 import javafx.scene.Node;
-import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
@@ -57,11 +56,10 @@ public class GameInitialMoneyView implements GameSettingsSetView {
         }
         catch (NumberFormatException e) {
             updateInitialMoney(initialMoney);
-            Alert inputError =
-                    DialogueBoxFactory.createErrorDialogueBox(
-                                                              "The amount of money must be an integer.",
-                                                              "Input error");
-            // TODO move to resource file
+           
+            DialogueBoxFactory.createErrorDialogueBox(
+                                                      "The amount of money must be an integer.",
+                                                      "Input error");
         }
     }
 

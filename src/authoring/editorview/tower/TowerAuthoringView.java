@@ -2,16 +2,17 @@ package authoring.editorview.tower;
 
 import java.util.List;
 import java.util.ResourceBundle;
+
+import authoring.editorview.DeleteEntityView;
+import authoring.editorview.EditorNameView;
 import authoring.editorview.ListDataSource;
 import authoring.editorview.tower.subviews.TowerEditorView;
 import authoring.editorview.tower.subviews.TowerImageBank;
 import authoring.editorview.tower.subviews.editorfields.AddTowerEffectView;
-import authoring.editorview.tower.subviews.editorfields.DeleteTower;
 import authoring.editorview.tower.subviews.editorfields.TowerAbilityBank;
 import authoring.editorview.tower.subviews.editorfields.TowerBuyPriceField;
 import authoring.editorview.tower.subviews.editorfields.TowerWeaponBank;
 import authoring.editorview.tower.subviews.editorfields.TowerImageView;
-import authoring.editorview.tower.subviews.editorfields.TowerNameField;
 import authoring.editorview.tower.subviews.editorfields.TowerSellPriceField;
 import authoring.editorview.tower.subviews.editorfields.TowerSizeField;
 import authoring.editorview.tower.subviews.editorfields.TowerUnlockLevelField;
@@ -32,7 +33,7 @@ public class TowerAuthoringView implements TowerUpdateView {
     private TowerAuthoringViewDelegate delegate;
     private GridPane towerView;
     private TowerImageBank towerBank;
-    private TowerNameField towerName;
+    private EditorNameView towerName;
     private TowerEditorView towerEditorView;
     private TowerImageView towerImage;
     private TowerBuyPriceField towerBuyPrice;
@@ -43,7 +44,7 @@ public class TowerAuthoringView implements TowerUpdateView {
     private TowerUpgradeBank towerUpgradeBank;
     private TowerSizeField towerSize;
     private AddTowerEffectView addTowerEffect;
-    private DeleteTower deleteTower;
+    private DeleteEntityView deleteTower;
 
     private ResourceBundle labelsResource =
             ResourceBundle.getBundle("resources/GameAuthoringTower");
@@ -52,7 +53,7 @@ public class TowerAuthoringView implements TowerUpdateView {
     public TowerAuthoringView () {
         towerView = new GridPane();
 
-        towerName = new TowerNameField(labelsResource);
+        towerName = new EditorNameView(labelsResource, 230, 150);
         towerImage = new TowerImageView(labelsResource);
         towerBuyPrice = new TowerBuyPriceField(labelsResource);
         towerSellPrice = new TowerSellPriceField(labelsResource);
@@ -62,7 +63,7 @@ public class TowerAuthoringView implements TowerUpdateView {
         towerUpgradeBank = new TowerUpgradeBank(labelsResource);
         towerSize = new TowerSizeField(labelsResource);
         addTowerEffect = new AddTowerEffectView(labelsResource);
-        deleteTower = new DeleteTower(labelsResource);
+        deleteTower = new DeleteEntityView(labelsResource, 280);
 
         towerBank = new TowerImageBank();
         towerEditorView =
@@ -152,7 +153,7 @@ public class TowerAuthoringView implements TowerUpdateView {
 
     @Override
     public void updateNameDisplay (String name) {
-        this.towerName.updateName(name);
+        this.towerName.updateField(name);
     }
 
     @Override

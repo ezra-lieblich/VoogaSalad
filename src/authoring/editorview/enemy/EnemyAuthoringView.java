@@ -2,17 +2,18 @@ package authoring.editorview.enemy;
 
 import java.util.List;
 import java.util.ResourceBundle;
+
+import authoring.editorview.DeleteEntityView;
+import authoring.editorview.EditorNameView;
 import authoring.editorview.ListDataSource;
 import authoring.editorview.enemy.subviews.EnemyEditorView;
 import authoring.editorview.enemy.subviews.EnemyImageBank;
 import authoring.editorview.enemy.subviews.editorfields.EnemyHealthField;
 import authoring.editorview.enemy.subviews.editorfields.EnemyImageView;
-import authoring.editorview.enemy.subviews.editorfields.EnemyNameField;
 import authoring.editorview.enemy.subviews.editorfields.EnemyRewardMoneyField;
 import authoring.editorview.enemy.subviews.editorfields.EnemyRewardPointsField;
 import authoring.editorview.enemy.subviews.editorfields.EnemySizeField;
 import authoring.editorview.enemy.subviews.editorfields.AddEnemyEffectView;
-import authoring.editorview.enemy.subviews.editorfields.DeleteEnemy;
 import authoring.editorview.enemy.subviews.editorfields.EnemyDamageField;
 import authoring.editorview.enemy.subviews.editorfields.EnemySpeedField;
 import javafx.scene.Node;
@@ -32,7 +33,7 @@ public class EnemyAuthoringView implements EnemyUpdateView {
     private EnemyAuthoringViewDelegate delegate;
     private GridPane enemyView;
     private EnemyImageBank enemyBank;
-    private EnemyNameField enemyName;
+    private EditorNameView enemyName;
     private EnemySpeedField enemySpeed;
     private EnemyImageView enemyImage;
     private EnemyEditorView enemyEditorView;
@@ -41,7 +42,7 @@ public class EnemyAuthoringView implements EnemyUpdateView {
     private EnemyRewardMoneyField enemyRewardMoney;
     private EnemyRewardPointsField enemyRewardPoints;
     private EnemySizeField enemySize;
-    private DeleteEnemy deleteEnemy;
+    private DeleteEntityView deleteEnemy;
     private AddEnemyEffectView addEnemyEffect;
 
     public EnemyAuthoringView () {
@@ -50,7 +51,7 @@ public class EnemyAuthoringView implements EnemyUpdateView {
 
         enemyView = new GridPane();
         enemyBank = new EnemyImageBank();
-        enemyName = new EnemyNameField(labelsResource);
+        enemyName = new EditorNameView(labelsResource, 110, 170);
         enemySpeed = new EnemySpeedField(labelsResource);
         enemyImage = new EnemyImageView(labelsResource);
         enemyDamage = new EnemyDamageField(labelsResource);
@@ -58,7 +59,7 @@ public class EnemyAuthoringView implements EnemyUpdateView {
         enemyRewardMoney = new EnemyRewardMoneyField(labelsResource);
         enemyRewardPoints = new EnemyRewardPointsField(labelsResource);
         enemySize = new EnemySizeField(labelsResource);
-        deleteEnemy = new DeleteEnemy(labelsResource);
+        deleteEnemy = new DeleteEntityView(labelsResource, 280);
         addEnemyEffect = new AddEnemyEffectView(labelsResource);
         enemyEditorView =
                 new EnemyEditorView(enemyImage, enemyName,
@@ -149,7 +150,7 @@ public class EnemyAuthoringView implements EnemyUpdateView {
 
     @Override
     public void updateNameDisplay (String name) {
-        this.enemyName.updateName(name);
+        this.enemyName.updateField(name);
     }
 
     @Override

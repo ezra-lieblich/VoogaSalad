@@ -50,7 +50,7 @@ public class GameSettingsAuthoringViewController extends EditorViewController
     }
 
     @Override
-    public void onUserEnteredGameName (String name) {
+    public void onUserEnteredName (String name) {
         this.gameSettingsDataSource.setName(activeID, name);
 
     }
@@ -159,5 +159,11 @@ public class GameSettingsAuthoringViewController extends EditorViewController
         effectAuthoringView.setAvailDataObjects(effectDataSource.getAvailableDataObjects());
         effectAuthoringView.openEffectView();
     }
+
+	@Override
+	public void onUserPressedDeleteEntity() {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

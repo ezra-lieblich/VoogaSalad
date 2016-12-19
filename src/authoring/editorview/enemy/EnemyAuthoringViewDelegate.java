@@ -1,16 +1,16 @@
 package authoring.editorview.enemy;
 
+import authoring.editorview.EditorViewDelegate;
+
 /**
  * 
  * @author Andrew Bihl
  * @author Kayla Schulz
  *
  */
-public interface EnemyAuthoringViewDelegate {
+public interface EnemyAuthoringViewDelegate extends EditorViewDelegate {
 
     public void onUserPressedCreateEnemy ();
-
-    public void onUserPressedDeleteEnemy ();
 
     public void onUserEnteredEnemySpeed (String enemySpeed);
 
@@ -23,8 +23,6 @@ public interface EnemyAuthoringViewDelegate {
     public void onUserEnteredEnemyMoney (String enemyRewardMoney);
 
     public void onUserEnteredEnemyImagePath (String enemyImagePath);
-
-    public void onUserEnteredEnemyName (String enemyName);
 
     public void onUserEnteredEnemySize (String enemySize);
 

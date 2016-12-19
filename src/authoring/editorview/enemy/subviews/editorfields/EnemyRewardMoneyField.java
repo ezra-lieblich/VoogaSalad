@@ -6,9 +6,6 @@ import authoring.editorview.enemy.EnemyAuthoringViewDelegate;
 import authoring.editorview.enemy.EnemySetView;
 import authoring.utilityfactories.GridFactory;
 import authoring.utilityfactories.TextFieldFactory;
-import javafx.scene.Node;
-import javafx.scene.control.TextField;
-
 
 /**
  * 
@@ -18,7 +15,6 @@ import javafx.scene.control.TextField;
 public class EnemyRewardMoneyField extends TextFieldView implements EnemySetView {
 
     private EnemyAuthoringViewDelegate delegate;
-    private TextField enemyRewardMoneyField;
 
     public EnemyRewardMoneyField (ResourceBundle labelsResource) {
         super(labelsResource);
@@ -30,26 +26,16 @@ public class EnemyRewardMoneyField extends TextFieldView implements EnemySetView
     }
 
     @Override
-    public Node getInstanceAsNode () {
-        return root;
-    }
-
-    @Override
-    public void updateField (String newData) {
-        enemyRewardMoneyField.setText(newData);
-    }
-
-    @Override
     protected void makeTextField (ResourceBundle labelsResource) {
-        enemyRewardMoneyField =
+    	textField =
                 TextFieldFactory.makeTextField(labelsResource.getString("EnterInt"),
                                                e -> delegate
-                                                       .onUserEnteredEnemyMoney(enemyRewardMoneyField
+                                                       .onUserEnteredEnemyMoney(textField
                                                                .getText()));
-        enemyRewardMoneyField.setPrefWidth(110);
+    	textField.setPrefWidth(110);
         root = GridFactory.createRowWithLabelandNode(
                                                      labelsResource.getString("RewardMoney"),
-                                                     enemyRewardMoneyField,
+                                                     textField,
                                                      170);
 
     }

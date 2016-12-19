@@ -2,13 +2,14 @@ package authoring.editorview.gamesettings.subviews;
 
 import java.util.List;
 import java.util.ResourceBundle;
+
+import authoring.editorview.EditorNameView;
 import authoring.editorview.gamesettings.GameSettingsAuthoringViewDelegate;
 import authoring.editorview.gamesettings.GameSettingsSetView;
 import authoring.editorview.gamesettings.subviews.editorfields.AddSettingsEffectView;
 import authoring.editorview.gamesettings.subviews.editorfields.GameImageView;
 import authoring.editorview.gamesettings.subviews.editorfields.GameInitialLivesView;
 import authoring.editorview.gamesettings.subviews.editorfields.GameInitialMoneyView;
-import authoring.editorview.gamesettings.subviews.editorfields.GameNameView;
 import authoring.editorview.gamesettings.subviews.editorfields.GamePathDimensionsView;
 import authoring.editorview.gamesettings.subviews.editorfields.GamePathTypeView;
 import authoring.editorview.gamesettings.subviews.editorfields.GamePathView;
@@ -30,7 +31,7 @@ public class GameSettingsEditorView implements GameSettingsSetView {
 
     private VBox root;
     private AnchorPane rootBuffer;
-    private GameNameView gameNameView;
+    private EditorNameView gameNameView;
     private GamePathTypeView gamePathTypeView;
     private GameImageView gameImageView;
     private GameInitialLivesView gameInitialLivesView;
@@ -49,7 +50,7 @@ public class GameSettingsEditorView implements GameSettingsSetView {
         this.root = new VBox(10);
 
         this.rootBuffer = new AnchorPane();
-        this.gameNameView = new GameNameView(settingsResource);
+        this.gameNameView = new EditorNameView(settingsResource, 105, 125);
         this.gameImageView = new GameImageView(settingsResource);
         this.gamePathTypeView = new GamePathTypeView();
         this.gameInitialLivesView = new GameInitialLivesView(settingsResource);
@@ -101,7 +102,7 @@ public class GameSettingsEditorView implements GameSettingsSetView {
     }
 
     public void updateName (String name) {
-        gameNameView.updateName(name);
+        gameNameView.updateField(name);
     }
 
     public void updateInitialLives (int lives) {

@@ -1,18 +1,30 @@
+// This entire file is part of my masterpiece.
+// Diane Hadley
+
 package authoring.editorview.path;
 
-public interface PathAuthoringViewDelegate {
+import authoring.editorview.EditorViewDelegate;
+
+/**
+ * 
+ * This interface is implemented by PathAuthoringViewController and contains methods
+ * that the view calls in order to update the controller. I included this in my masterpiece
+ * to demonstrate how EditorViewDelegate is extended.
+ * 
+ * @author Diane Hadley
+ *
+ */
+
+
+public interface PathAuthoringViewDelegate extends EditorViewDelegate {
 
     public void onUserEnteredGridDimensions (int dimensions);
 
     public void onUserEnteredPathImage (String pathImagePath);
 
-    public void onUserEnteredPathName (String pathName);
-
     public void onUserEnteredPathType (String pathType);
 
     public void onUserEnteredCreatePath ();
-
-    public void onUserEnteredDeletePath ();
 
     public void onUserEnteredEditPath (int pathID);
 

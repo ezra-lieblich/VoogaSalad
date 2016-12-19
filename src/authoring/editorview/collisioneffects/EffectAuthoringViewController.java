@@ -63,7 +63,7 @@ public class EffectAuthoringViewController extends EditorViewController
     }
 
     @Override
-    public void onUserEnteredEffectName (String name) {
+    public void onUserEnteredName (String name) {
         effectDataSource.setName(currentEffectID, name);
     }
 
@@ -101,5 +101,11 @@ public class EffectAuthoringViewController extends EditorViewController
     public void onUserEnteredEffectText (String effect) {
         effectDataSource.setEffect(currentEffectID, effect);
     }
+
+	@Override
+	public void onUserPressedDeleteEntity() {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

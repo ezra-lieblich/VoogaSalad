@@ -2,13 +2,14 @@ package authoring.editorview.level.subviews;
 
 import java.io.File;
 import java.io.IOException;
+
+import authoring.editorview.DeleteEntityView;
+import authoring.editorview.EditorNameView;
 import authoring.editorview.PhotoFileChooser;
 import authoring.editorview.level.LevelAuthoringViewDelegate;
 import authoring.editorview.level.LevelSetView;
 import authoring.editorview.level.subviews.editorfields.AddLevelEffectView;
 import authoring.editorview.level.subviews.editorfields.CreateNewWaveView;
-import authoring.editorview.level.subviews.editorfields.DeleteLevel;
-import authoring.editorview.level.subviews.editorfields.LevelNameView;
 import authoring.editorview.level.subviews.editorfields.LevelRewardsView;
 import authoring.editorview.level.subviews.editorfields.LevelTransitionTimeField;
 import authoring.editorview.level.subviews.editorfields.PreviewLevelView;
@@ -40,25 +41,25 @@ public class LevelEditorView extends PhotoFileChooser implements LevelSetView {
 
     private LevelAuthoringViewDelegate delegate;
     private LevelRewardsView levelRewardsView;
-    private LevelNameView levelNameView;
+    private EditorNameView levelNameView;
     LevelTransitionTimeField transitionTimeField;
     WaveTableView waveTableView;
     PreviewLevelView previewLevelView;
     AddLevelEffectView addLevelEffect;
     private CreateNewWaveView createWaveView;
-    private DeleteLevel deleteLevelView;
+    private DeleteEntityView deleteLevelView;
 
     private VBox vbox;
     private AnchorPane rootBuffer;
     private File chosenFile;
 
     public LevelEditorView (LevelRewardsView levelRewardsView,
-                            LevelNameView levelNameView,
+                            EditorNameView levelNameView,
                             LevelTransitionTimeField transitionTimeField,
                             WaveTableView waveTableView,
                             PreviewLevelView previewLevelView,
                             AddLevelEffectView addLevelEffect,
-                            DeleteLevel deleteLevelView,
+                            DeleteEntityView deleteLevelView,
                             CreateNewWaveView createWaveView) {
         this.levelRewardsView = levelRewardsView;
         this.levelNameView = levelNameView;

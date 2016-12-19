@@ -1,6 +1,8 @@
 package authoring.editorview.gamesettings;
 
 import java.util.List;
+
+import authoring.editorview.EditorViewDelegate;
 import engine.path.Coordinate;
 
 
@@ -10,13 +12,11 @@ import engine.path.Coordinate;
  * @author Kayla Schulz
  *
  */
-public interface GameSettingsAuthoringViewDelegate {
+public interface GameSettingsAuthoringViewDelegate extends EditorViewDelegate {
 
     public void onUserEnteredGameLives (int lives);
 
     public void onUserEnteredGameMoney (int money);
-
-    public void onUserEnteredGameName (String name);
 
     public void onUserEnteredGameImage (String imagePath);
 

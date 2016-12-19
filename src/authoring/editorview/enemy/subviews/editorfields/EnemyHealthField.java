@@ -18,7 +18,7 @@ import javafx.scene.control.TextField;
 public class EnemyHealthField extends TextFieldView implements EnemySetView {
 
     private EnemyAuthoringViewDelegate delegate;
-    private TextField enemyHealthField;
+   
 
     public EnemyHealthField (ResourceBundle labelsResource) {
         super(labelsResource);
@@ -30,27 +30,17 @@ public class EnemyHealthField extends TextFieldView implements EnemySetView {
     }
 
     @Override
-    public Node getInstanceAsNode () {
-        return root;
-    }
-
-    @Override
-    public void updateField (String newData) {
-        enemyHealthField.setText(newData);
-    }
-
-    @Override
     protected void makeTextField (ResourceBundle labelsResource) {
-        enemyHealthField =
+        textField =
                 TextFieldFactory.makeTextField(labelsResource.getString("EnterInt"),
                                                e -> delegate
-                                                       .onUserEnteredEnemyHealth(enemyHealthField
+                                                       .onUserEnteredEnemyHealth(textField
                                                                .getText()));
-        enemyHealthField.setPrefWidth(110);
+        textField.setPrefWidth(110);
 
         root = GridFactory.createRowWithLabelandNode(
                                                      labelsResource.getString("Health"),
-                                                     enemyHealthField,
+                                                     textField,
                                                      170);
 
     }
