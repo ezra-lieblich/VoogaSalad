@@ -1,3 +1,8 @@
+//This entire file is part of my code masterpiece
+//Ben Linde
+//This class is the controller for the game player. It initializes the front end GUI
+//with the game data gotten from the back end of the game player, which is received 
+//from the XML file. 
 package gameplayer.controller;
 
 import gameplayer.loader.GamePlayerFactory;
@@ -69,7 +74,7 @@ public class GamePlayerController implements Observer {
 	// Might need to be refactored into a different class
 	private HashMap<Integer, ImageView> weaponsOnScreen;
 	private HashMap<Integer, ImageView> enemiesOnScreen;
-	private HashMap<String, Image> imageBank;
+	private HashMap<Integer, Image> weaponImageBank;
 
 	public GamePlayerController(String xmlFilePath) {
 		// System.out.println(xmlFilePath);
@@ -92,8 +97,7 @@ public class GamePlayerController implements Observer {
 		this.animation = new Timeline();
 		this.graphics = new GraphicsLibrary();
 		this.enemyManager = this.enemyController.getEnemyModel();
-		this.imageBank = new HashMap<String, Image>();
-		createImageBank();
+		this.weaponImageBank = new HashMap<Integer, Image>();
 		this.gameSavingController = new GameSavingController(this.model, xmlFilePath);
 		init(false);
 		// this.gameSavingController.saveGame();
@@ -139,7 +143,7 @@ public class GamePlayerController implements Observer {
 	public void init(boolean newLevel) {
 		// HashMap<String, Double> settings = this.loader.getGameSetting();
 		// this.enemyManager.setCurrentCell(this.model.getData().getGrid().getStartPoint());
-		createImageBank();
+		createImageBanks();
 		populateTowerToId();
 		initGUI(newLevel);
 		try {
@@ -226,7 +230,9 @@ public class GamePlayerController implements Observer {
 		HashMap<Integer, Enemy> enemiesOnGrid = this.enemyManager.getEnemyOnGrid();
 		for (int i : enemiesOnGrid.keySet()) {
 			Enemy e = enemiesOnGrid.get(i);
-			if (e.getX() <= x && e.getX() + ENTITY_SIZE >= x && e.getY() <= y && e.getY() + ENTITY_SIZE >= y) {
+			double newX = this.view.gridToPixelCoordWidth(e.getX());
+			double newY = this.view.gridToPixelCoordHeight(e.getY());
+			if (newX <= x && newX + ENTITY_SIZE >= x && newY <= y && newY + ENTITY_SIZE >= y) {
 				e.toggleInfoVisibility();
 			}
 		}
@@ -241,7 +247,7 @@ public class GamePlayerController implements Observer {
 			t.getUpgradeButton().setDisable(true);
 	}
 
-	// probably should move to frontend
+//	// probably should move to frontend
 	private ArrayList<String> getTowerImages() {
 		ArrayList<String> towerImages = new ArrayList<String>();
 		Map<Integer, engine.tower.Tower> towers = this.loader.getTowers();
@@ -449,7 +455,7 @@ public class GamePlayerController implements Observer {
 		removeValFromMap(bulletRedraw, it);
 		for (int i : bulletRedraw.keySet()) {
 			if (!weaponsOnScreen.containsKey(bulletRedraw.get(i).getUniqueID())) {
-				Image ii = imageBank.get("Weapon " + bulletRedraw.get(i).getWeaponTypeID());
+				Image ii = weaponImageBank.get(bulletRedraw.get(i).getWeaponTypeID());
 				ImageView image = new ImageView(ii);
 				graphics.setImageViewParams(image, DragDropView.DEFENSIVEWIDTH * 0.5,
 						DragDropView.DEFENSIVEHEIGHT * 0.5);
@@ -487,17 +493,17 @@ public class GamePlayerController implements Observer {
 		}
 	}
 
-	public HashMap<String, Image> createImageBank() {
-		Map<Integer, engine.tower.Tower> towers = this.loader.getTowers();
-		for (int i : towers.keySet()) {
-			Image image = graphics.createImage(towers.get(i).getImagePath());
-			imageBank.put("Tower " + i, image);
-		}
+	public void createImageBanks(){
+		createWeaponImageBank();
+	}
+	
+	public HashMap<Integer, Image> createWeaponImageBank() {
 		Map<Integer, engine.weapon.Weapon> weapons = this.loader.getWeaponBank();
 		for (int i : weapons.keySet()) {
 			Image image = graphics.createImage(weapons.get(i).getImagePath());
-			imageBank.put("Weapon " + i, image);
+			weaponImageBank.put(i, image);
 		}
-		return imageBank;
+		return weaponImageBank;
 	}
+	
 }
