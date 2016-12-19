@@ -1,3 +1,5 @@
+//this entire file is part of my masterpiece.
+//AARON CHANG
 package gameplayer.loader;
 
 import java.util.ArrayList;
@@ -29,6 +31,16 @@ import gameplayer.model.Grid;
 import gameplayer.model.enemy.Enemy;
 import gameplayer.model.Path;
 
+/**
+ * This class is part of my masterpiece because it is used in conjunction with the XMLParser
+ * The XMLParser has a general method that uses Generics to return any type of manager
+ * This GamePlayerFactory class uses the XMLParser to create more specific objects relevant to the game player backend
+ * These two classes together show how you can create a very general/utility class, and another specific class for your needs
+ * 
+ * This class also uses java features like lambdas and resource files
+ * @author Aaron Chang
+ *
+ */
 public class GamePlayerFactory{
 	public static final String DEFAULT_RESOURCE_PACKAGE = "resources/";
 	public static final String SETTING_NAMES = "gamePlayerSettings";
@@ -90,23 +102,25 @@ public class GamePlayerFactory{
 		return this.gameModeManager.getGameModeEffectManager();
 	}
 
-
 	public Map<Integer, Tower> getTowers() {
 		return this.towerManager.getEntities();
 	}
 
 	public HashMap<String, Double> getGameSetting(){
 		HashMap<String,Double>settings = new HashMap<>(); 
-		System.out.println("resources???");
-		System.out.println(RESOURCES.getString("numLevels"));
 		settings.put(RESOURCES.getString("levelNumber"), (double) this.levelManager.getEntityIds().get(0)); 
 		settings.put(RESOURCES.getString("lives"),(double) this.gameMode.getInitalLives());
 		settings.put(RESOURCES.getString("gold"), (double) this.gameMode.getInitialMoney());
 		settings.put(RESOURCES.getString("numLevels"), (double) this.levelManager.getEntities().size());
-
 		return settings; 
 	}
 
+	/**
+	 * returns the game's grid, populated with the paths from the XML file
+	 * used by GamePlayData go initialize the grid
+	 * @param levelNumber
+	 * @return Grid 
+	 */
 	public Grid getGrid(int levelNumber){
 		String pathType = this.gameMode.getPathType().name();
 		HashMap<Integer, Path> allPaths = new HashMap<Integer, Path>(); 
@@ -152,8 +166,12 @@ public class GamePlayerFactory{
 		return ret;
 	}
 
+	/**
+	 * Method is used by game player model's EnemyManager to get waves of enemies
+	 * @return Queue<Enemy> representing waves
+	 */
 	public Queue<Enemy> getIndividualWaveQueue(Wave wave, int levelNumber) {
-		Map<Integer, EnemyKind> enemyTypes = this.enemyManager.getEntities(); //refactor name
+		Map<Integer, EnemyKind> enemyTypes = this.enemyManager.getEntities();
 		EnemyKind enemyType = enemyTypes.get(wave.getEnemyID());
 		Queue<Enemy> enemies = new LinkedList<Enemy>();
 		int pathID = wave.getPathID(); 
