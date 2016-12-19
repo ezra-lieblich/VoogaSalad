@@ -1,25 +1,30 @@
+// This entire file is part of my masterpiece.
+// Sean Hudson
 package engine.tower;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
 import engine.AbstractTypeBuilder;
-import engine.ability.Ability;
-import engine.enemy.Enemy;
 import engine.observer.ObservableList;
 import engine.observer.ObservableListProperty;
 import engine.observer.ObservableObjectProperty;
 import engine.observer.ObservableProperty;
-import engine.path.Coordinate;
-import engine.path.GridCoordinate;
 import engine.tower.Tower;
 import engine.tower.TowerType;
-import engine.weapon.Weapon;
-import javafx.beans.property.DoubleProperty;
 
+/**
+ * This class provides a concrete implementation on how to extend the AbstractTypeBuiler class
+ * I tried to make these builders as user friendly as possible. That is why I added the option to take
+ * in a list of elements through a List or varargs (e.g. buildWeapons()).
+ * 
+ * 
+ * This class allows clients to instruct the creation of Towers.
+ * 
+ * @author seanhudson
+ *
+ */
 public class TowerTypeBuilder extends AbstractTypeBuilder<Tower, TowerBuilder> implements TowerBuilder, TowerInitializer {
     
      public static final String DEFAULT_NAME = "New Tower";
@@ -27,8 +32,7 @@ public class TowerTypeBuilder extends AbstractTypeBuilder<Tower, TowerBuilder> i
      public static final double DEFAULT_SIZE = 1;
      public static final String DEFAULT_SOUND_PATH = "Music/DopeBeats.mp3";
 
-     //public static final List<Integer> DEFAULT_WEAPONS = Arrays.stream(new Integer[]{}).collect(Collectors.toList());
-     public static final Integer[] DEFAULT_WEAPONS = new Integer[]{0};
+     public static final Integer[] DEFAULT_WEAPONS = new Integer[]{};
      public static final Integer[] DEFAULT_ABILITIES = new Integer[]{};
      public static final Integer[] DEFAULT_UPGRADES = new Integer[]{};
      public static final double DEFAULT_COST = 10;
@@ -135,7 +139,6 @@ public class TowerTypeBuilder extends AbstractTypeBuilder<Tower, TowerBuilder> i
 
     @Override
     protected void restoreTypeDefaults () {
-        //this.weapons = new ObservableListProperty<Integer>(DEFAULT_WEAPONS);
         this.weapons = new ObservableListProperty<Integer>(Arrays.stream(DEFAULT_WEAPONS).collect(Collectors.toList()));
         this.abilities = new ObservableListProperty<Integer>(Arrays.stream(DEFAULT_ABILITIES).collect(Collectors.toList()));
         this.upgrades = new ObservableListProperty<Integer>(Arrays.stream(DEFAULT_UPGRADES).collect(Collectors.toList()));
