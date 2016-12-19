@@ -1,23 +1,18 @@
 package engine.effect;
 
-import java.lang.reflect.Method;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import authoring.editorview.collisioneffects.EffectUpdateView;
-import authoring.editorview.enemy.EnemyUpdateView;
 import engine.AbstractTypeManagerController;
 import engine.ManagerMediator;
-import engine.observer.ObservableObjectProperty;
-import engine.observer.ObservableProperty;
-import engine.tower.TowerTypeBuilder;
-import engine.tower.TowerTypeManager;
-import gameplayer.model.effect.GameEffect;
-import gameplayer.model.effect.GroovyExecutor;
 import gameplayer.model.effect.factory.AbstractEffectFactory;
-import gameplayer.model.effect.factory.CollisionEffectFactory;
 
-
+/**
+ * 
+ * 
+ * @author seanhudson
+ *
+ */
 public class EffectTypeManagerController extends
         AbstractTypeManagerController<EffectManager, EffectBuilder, Effect, EffectUpdateView>
         implements EffectManagerController {
@@ -25,31 +20,12 @@ public class EffectTypeManagerController extends
     
     public EffectTypeManagerController (ManagerMediator managerMediator, EffectManager effectTypeManager) {
         super(effectTypeManager, new EffectTypeBuilder(), managerMediator);
-//        
-//        EffectBuilder efb = new EffectTypeBuilder();
-//        Effect effectType = efb.buildTriggerConditionGroovy("collider.getHealth() == 50 && myself.getName() == 'Sean'").buildEffectGroovy("collider.setHealth(100)").build();
-//        CollisionEffectFactory testFactory = new CollisionEffectFactory();
-//        GameEffect gameEffect = testFactory.create(effectType);
-//        
-//        Enemy collider = new Enemy();
-//        Enemy myself = new Enemy();
-//        gameEffect.addEncompassingClass(myself); //Enemy constructor gameEffect.addEncompassingClass(this)
-//        
-//        gameEffect.addTrigger(collider);
-//        
-//        gameEffect.execute();
-        
     }
     
     EffectTypeManagerController (ManagerMediator managerMediator) {
         this(managerMediator, new EffectManagerFactory().create(DEFAULT_EFFECT_FACTORY));
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see engine.effect.EffectManagerController#getTriggers()
-     */
     @Override
     public void addActiveClassListener(EffectUpdateView updateView) throws ClassNotFoundException{
         getTypeManager().addActiveClassListener((oldValue, newValue) -> {
@@ -62,11 +38,6 @@ public class EffectTypeManagerController extends
         return getTypeManager().getAnnotatedClasses().stream().map(Class::getName).collect(Collectors.toList());
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see engine.effect.EffectManagerController#getTriggerMethods(java.lang.String)
-     */
     @Override
     public List<String> getAvailableClassMethods (String trigger) {
         try {
@@ -78,28 +49,6 @@ public class EffectTypeManagerController extends
         }
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see engine.effect.EffectManagerController#setTrigger(int, java.lang.String)
-     */
-  
-
-        // EffectType newEffect = new EffectType();
-        // ObservableProperty<String> observableTrigger = new
-        // ObservableObjectProperty<String>(trigger);
-        // observableTrigger.addListener((oldValue, newValue) ->
-        // effectView.updateTriggerConditions(effectManager.getAnnotatedClassMethods(newValue).stream().map(Method::getName).collect(Collectors.toList())
-        // ));
-        // newEffect.setTriggerClass(new ObservableObjectProperty<String>(trigger));
-        // observableTrigger.setProperty(trigger);
-        // enemy.addEffect(newEffect);
-        // System.out.println(enemy.getEffectsSize());
-        //
-        //
-        // return enemy.getEffectsSize() - 1;
-        // effectManager.getAnnotatedClassMethods(trigger)
-    
 
     @Override
     protected EffectBuilder constructTypeProperties (EffectUpdateView updateView,

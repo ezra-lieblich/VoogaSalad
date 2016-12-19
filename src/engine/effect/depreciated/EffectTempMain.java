@@ -1,3 +1,4 @@
+package engine.effect.depreciated;
 // package engine.effect;
 //
 // import javafx.application.Application;

@@ -4,7 +4,12 @@ import java.util.List;
 import authoring.editorview.collisioneffects.EffectUpdateView;
 import engine.ManagerController;
 
-
+/**
+ * 
+ * 
+ * @author seanhudson
+ *
+ */
 public interface EffectManagerController extends ManagerController<EffectManager, EffectBuilder, Effect, EffectUpdateView> {
 
     List<String> getAvailableClasses ();

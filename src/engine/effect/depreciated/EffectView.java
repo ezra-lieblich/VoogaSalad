@@ -1,4 +1,4 @@
-package engine.effect;
+package engine.effect.depreciated;
 
 import java.util.List;
 import authoring.editorview.IUpdateView;

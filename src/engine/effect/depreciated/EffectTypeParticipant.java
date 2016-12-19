@@ -3,7 +3,6 @@ package engine.effect.depreciated;
 import java.lang.reflect.Method;
 import java.util.List;
 import java.util.function.BiConsumer;
-import java.util.stream.Stream;
 import engine.observer.ObservableList;
 import engine.observer.ObservableListProperty;
 import engine.observer.ObservableObjectProperty;

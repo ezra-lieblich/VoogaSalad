@@ -2,7 +2,6 @@ package engine.tower;
 
 import java.util.Collections;
 import java.util.List;
-import com.oracle.webservices.internal.api.databinding.Databinding.Builder;
 import authoring.editorview.tower.TowerUpdateView;
 import engine.AbstractTypeManagerController;
 import engine.ManagerMediator;

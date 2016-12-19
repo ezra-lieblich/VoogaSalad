@@ -2,7 +2,6 @@ package engine.weapon;
 
 import java.util.List;
 import engine.TypeBuilder;
-import engine.tower.TowerBuilder;
 
 /**
  * 

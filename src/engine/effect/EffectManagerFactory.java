@@ -2,6 +2,12 @@ package engine.effect;
 
 import gameplayer.model.effect.factory.AbstractEffectFactory;
 
+/**
+ * 
+ * 
+ * @author seanhudson
+ *
+ */
 public class EffectManagerFactory {
     public static final String DEFAULT_PACKAGE_PATH = "gameplayer.model";
     AnnotatedDataMapFactory annotatedDataMapFactory;

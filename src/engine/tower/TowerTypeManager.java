@@ -2,23 +2,12 @@ package engine.tower;
 
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import engine.AbstractTypeManager;
-import engine.ManagerMediator;
-import engine.ability.Ability;
 import engine.ability.AbilityManager;
-import engine.ability.AbilityType;
-import engine.effect.EffectBuilder;
 import engine.effect.EffectManager;
 import engine.effect.EffectManagerFactory;
-import engine.effect.EffectTypeBuilder;
-import engine.effect.EffectTypeManager;
-import engine.enemy.EnemyManager;
-import engine.enemy.EnemyType;
-import engine.weapon.Weapon;
 import engine.weapon.WeaponManager;
-import engine.weapon.WeaponType;
 import gameplayer.model.effect.factory.AbstractEffectFactory;
 import gameplayer.model.effect.factory.CollisionEffectFactory;
 

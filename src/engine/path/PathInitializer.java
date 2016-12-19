@@ -1,6 +1,5 @@
 package engine.path;
 
-import java.util.List;
 import engine.TypeInitializer;
 import engine.observer.ObservableList;
 import engine.observer.ObservableProperty;

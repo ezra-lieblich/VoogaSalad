@@ -3,7 +3,12 @@ package engine.effect;
 
 import java.util.function.BiConsumer;
 
-
+/**
+ * 
+ * 
+ * @author seanhudson
+ *
+ */
 public interface BindableEffect {
 
     EffectBuilder addTriggerClassListener (BiConsumer<String, String> listener);

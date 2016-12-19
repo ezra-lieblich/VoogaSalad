@@ -1,7 +1,6 @@
 package gameplayer.model.effect.factory;
 
 import engine.effect.EffectData;
-import engine.effect.Enemy;
 import gameplayer.model.GamePlayData;
 
 /**

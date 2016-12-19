@@ -5,7 +5,6 @@ import engine.effect.EffectBuilder;
 import engine.effect.EffectManager;
 import engine.effect.EffectManagerFactory;
 import engine.effect.EffectTypeBuilder;
-import engine.effect.EffectTypeManager;
 import engine.enemy.EnemyManager;
 import gameplayer.model.effect.factory.AbstractEffectFactory;
 import gameplayer.model.effect.factory.CollisionEffectFactory;

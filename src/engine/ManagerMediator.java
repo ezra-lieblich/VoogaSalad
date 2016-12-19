@@ -1,13 +1,7 @@
 package engine;
 
-import engine.ability.Ability;
-import engine.enemy.Enemy;
-import engine.level.Level;
 import engine.observer.Observable;
 import engine.observer.Observer;
-import engine.path.Path;
-import engine.tower.Tower;
-import engine.weapon.Weapon;
 
 /**
  * This interface handles the methods of the mediator class which manages the dependencies between managers

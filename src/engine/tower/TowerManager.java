@@ -1,12 +1,9 @@
 package engine.tower;
 
-import java.util.List;
 import java.util.Map;
 import engine.Manager;
-import engine.Type;
 import engine.ability.AbilityManager;
 import engine.effect.EffectManager;
-import engine.enemy.EnemyManager;
 import engine.weapon.WeaponManager;
 
 /**

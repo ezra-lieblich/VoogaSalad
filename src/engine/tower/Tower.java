@@ -2,9 +2,6 @@ package engine.tower;
 
 import java.util.List;
 import engine.Type;
-import engine.ability.Ability;
-import engine.enemy.Enemy;
-import engine.weapon.Weapon;
 
 
 /**

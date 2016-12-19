@@ -1,4 +1,6 @@
-package engine.effect;
+package engine.effect.depreciated;
+
+import engine.effect.EffectMethod;
 
 public class SuperEnemy {
     String testSuperMethods;

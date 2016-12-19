@@ -1,7 +1,6 @@
 package gameplayer.model.effect;
 
 import java.util.Map;
-import java.util.Map.Entry;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;

@@ -1,8 +1,9 @@
-package engine.effect;
+package engine.effect.depreciated;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
+import engine.effect.EffectMethod;
+import engine.effect.EffectType;
 import gameplayer.model.Cell;
 import gameplayer.model.IDrawable;
 

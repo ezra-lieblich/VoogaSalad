@@ -4,14 +4,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
-import java.util.function.Predicate;
-import authoring.editorview.IUpdateView;
-import authoring.editorview.path.PathSetView;
 import authoring.editorview.path.PathUpdateView;
-import authoring.editorview.tower.TowerUpdateView;
 import engine.AbstractTypeManagerController;
 import engine.ManagerMediator;
-import engine.tower.Tower;
 
 /**
  * 

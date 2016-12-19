@@ -1,10 +1,7 @@
 package engine.weapon;
 
-import java.util.Collections;
 import java.util.List;
 import engine.AbstractType;
-import engine.Type;
-import engine.TypeInitializer;
 import engine.observer.ObservableList;
 import engine.observer.ObservableProperty;
 

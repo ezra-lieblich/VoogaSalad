@@ -1,9 +1,13 @@
 package engine.effect;
 
 import engine.Type;
-import engine.effect.depreciated.EffectParticipant;
-import engine.observer.ObservableProperty;
 
+/**
+ * 
+ * 
+ * @author seanhudson
+ *
+ */
 public interface Effect extends Type{
     
     String getTriggerClass();

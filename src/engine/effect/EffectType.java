@@ -1,13 +1,14 @@
 package engine.effect;
 
-import java.lang.reflect.Method;
-import java.util.List;
 import engine.AbstractType;
-import engine.TypeInitializer;
-import engine.effect.depreciated.EffectParticipant;
-import engine.observer.ObservableList;
 import engine.observer.ObservableProperty;
 
+/**
+ * 
+ * 
+ * @author seanhudson
+ *
+ */
 public class EffectType extends AbstractType implements Effect {
 
     private ObservableProperty<String> triggerClass;

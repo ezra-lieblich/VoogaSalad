@@ -1,19 +1,9 @@
 package engine.tower;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 import engine.AbstractType;
-import engine.ability.Ability;
-import engine.enemy.Enemy;
-import engine.enemy.EnemyType;
 import engine.observer.ObservableList;
 import engine.observer.ObservableProperty;
-import engine.weapon.Weapon;
-import engine.weapon.WeaponType;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
 
 /**
  * 

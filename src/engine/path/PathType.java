@@ -1,11 +1,8 @@
 package engine.path;
 
 import engine.AbstractType;
-import engine.TypeInitializer;
 import engine.observer.ObservableList;
 import engine.observer.ObservableProperty;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -79,11 +76,5 @@ public class PathType extends AbstractType implements Path {
 public void clearCoordinates () {
     coordinates.clear();
 }
-  
-//@Override
-//public void setCoordinates (List<Coordinate<Integer>> coordinates) {
-//    this.coordinates.setProperty(coordinates);
-//}
 
-    
 }

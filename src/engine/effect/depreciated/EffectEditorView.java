@@ -1,4 +1,4 @@
-package engine.effect;
+package engine.effect.depreciated;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +7,12 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 
-
+/**
+ * 
+ * 
+ * @author seanhudson
+ *
+ */
 public class EffectEditorView implements EffectView {
     Group node;
     Scene scene;

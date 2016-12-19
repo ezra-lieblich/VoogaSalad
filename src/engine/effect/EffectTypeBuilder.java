@@ -1,20 +1,16 @@
 package engine.effect;
 
-import java.lang.reflect.Method;
-import java.util.Arrays;
-import java.util.List;
 import java.util.function.BiConsumer;
-import java.util.stream.Collectors;
 import engine.AbstractTypeBuilder;
-import engine.effect.depreciated.BindableEffectParticipant;
-import engine.effect.depreciated.EffectFunction;
-import engine.effect.depreciated.EffectParticipant;
-import engine.effect.depreciated.EffectTypeParticipant;
-import engine.observer.ObservableList;
 import engine.observer.ObservableObjectProperty;
 import engine.observer.ObservableProperty;
 
-
+/**
+ * 
+ * 
+ * @author seanhudson
+ *
+ */
 public class EffectTypeBuilder extends AbstractTypeBuilder<Effect, EffectBuilder> implements EffectBuilder, EffectInitializer {
     
     public static final String DEFAULT_NAME = "New Effect";
