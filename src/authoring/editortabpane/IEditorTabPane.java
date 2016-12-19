@@ -1,6 +1,6 @@
 package authoring.editortabpane;
 
-import javafx.scene.Node;
+import authoring.editorview.INodeView;
 
 
 /**
@@ -8,9 +8,7 @@ import javafx.scene.Node;
  * @author Kayla Schulz
  *
  */
-public interface IEditorTabPane {
-
-    public Node getInstanceAsNode ();
+public interface IEditorTabPane extends INodeView {
 
     public void setDelegate (EditorTabPaneDelegate delegate);
 

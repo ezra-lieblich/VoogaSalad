@@ -14,8 +14,8 @@ public class EditorTabPaneFactory {
         // Does Nothing
     }
 
-    public static IEditorTabPane build (int aWidth, int aHeight, List<String> tabs) {
-        return new EditorTabPane(aWidth, aHeight, tabs);
+    public static IEditorTabPane build (int width, int height, List<String> tabs) {
+        return new EditorTabPane(width, height, tabs);
     }
 
 }
