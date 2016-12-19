@@ -1,8 +1,8 @@
 package authoring.editorview.level.subviews;
 
 import java.util.List;
-import authoring.editorview.ImageBank;
-import authoring.editorview.ListCellData;
+
+import authoring.editorview.imagebank.ImageBank;
 import authoring.editorview.level.LevelAuthoringViewDelegate;
 import authoring.utilityfactories.ButtonFactory;
 import javafx.scene.Node;
@@ -25,7 +25,6 @@ public class LevelBank extends ImageBank {
             delegate.onUserEnteredCreateLevel();
         });
         this.items.add(newEnemyButton);
-        this.CONTENT_OFFSET = 1;
     }
 
     public void setDelegate (LevelAuthoringViewDelegate delegate) {
@@ -43,14 +42,14 @@ public class LevelBank extends ImageBank {
             this.delegate.onUserSelectedLevel(selectedLevel);
     }
 
-    @Override
-    protected Node createCellFromData (ListCellData data) {
-        Label cell = new Label();
-        String name = data.getName();
-        if (name.equals(null) || name.length() < 1) {
-            name = DEFAULT_SUBJECT_IMAGE_PATH;
-        }
-        cell.setText(name);
-        return cell;
-    }
+//    @Override
+//    protected Node createCellFromData (ListCellData data) {
+//        Label cell = new Label();
+//        String name = data.getName();
+//        if (name.equals(null) || name.length() < 1) {
+//            name = DEFAULT_SUBJECT_IMAGE_PATH;
+//        }
+//        cell.setText(name);
+//        return cell;
+//    }
 }

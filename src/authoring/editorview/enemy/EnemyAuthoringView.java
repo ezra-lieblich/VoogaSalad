@@ -2,7 +2,7 @@ package authoring.editorview.enemy;
 
 import java.util.List;
 import java.util.ResourceBundle;
-import authoring.editorview.ListDataSource;
+
 import authoring.editorview.enemy.subviews.EnemyEditorView;
 import authoring.editorview.enemy.subviews.EnemyImageBank;
 import authoring.editorview.enemy.subviews.editorfields.EnemyHealthField;
@@ -15,6 +15,7 @@ import authoring.editorview.enemy.subviews.editorfields.AddEnemyEffectView;
 import authoring.editorview.enemy.subviews.editorfields.DeleteEnemy;
 import authoring.editorview.enemy.subviews.editorfields.EnemyDamageField;
 import authoring.editorview.enemy.subviews.editorfields.EnemySpeedField;
+import authoring.editorview.imagebank.ListDataSource;
 import javafx.scene.Node;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;

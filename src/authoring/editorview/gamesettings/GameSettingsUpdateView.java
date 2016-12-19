@@ -2,7 +2,7 @@ package authoring.editorview.gamesettings;
 
 import java.util.List;
 import authoring.editorview.IUpdateView;
-import authoring.editorview.ListDataSource;
+import authoring.editorview.imagebank.ListDataSource;
 
 
 public interface GameSettingsUpdateView extends GameSettingsSetView, IUpdateView {

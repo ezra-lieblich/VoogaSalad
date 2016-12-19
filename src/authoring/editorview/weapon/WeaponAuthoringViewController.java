@@ -3,9 +3,8 @@ package authoring.editorview.weapon;
 import java.io.IOException;
 import java.util.ResourceBundle;
 import authoring.editorview.EditorViewController;
-import authoring.editorview.ListCellData;
-import authoring.editorview.ListDataSource;
 import authoring.editorview.collisioneffects.EffectAuthoringViewController;
+import authoring.editorview.imagebank.ListDataSource;
 import authoring.utilityfactories.DialogueBoxFactory;
 import engine.effect.EffectManagerController;
 import engine.weapon.WeaponManagerController;
@@ -140,15 +139,6 @@ public class WeaponAuthoringViewController extends EditorViewController
     }
 
     @Override
-    public ListCellData getCellDataForSubject (int id) {
-        ListCellData cellData = new ListCellData();
-        cellData.setName(weaponDataSource.getName(id));
-        cellData.setImagePath(weaponDataSource.getImagePath(id));
-        cellData.setId(id);
-        return cellData;
-    }
-
-    @Override
     public void onUserPressedAddEffect () {
         EffectAuthoringViewController effectAuthoringView =
                 new EffectAuthoringViewController(effectDataSource);
@@ -158,5 +148,15 @@ public class WeaponAuthoringViewController extends EditorViewController
         effectAuthoringView.setAvailDataObjects(effectDataSource.getAvailableDataObjects());
         effectAuthoringView.openEffectView();
     }
+
+	@Override
+	public String getName(int id) {
+		return this.weaponDataSource.getName(id);
+	}
+
+	@Override
+	public String getImagePath(int id) {
+		return this.weaponDataSource.getImagePath(id);
+	}
 
 }

@@ -2,7 +2,8 @@ package authoring.editorview.tower;
 
 import java.util.List;
 import java.util.ResourceBundle;
-import authoring.editorview.ListDataSource;
+
+import authoring.editorview.imagebank.ListDataSource;
 import authoring.editorview.tower.subviews.TowerEditorView;
 import authoring.editorview.tower.subviews.TowerImageBank;
 import authoring.editorview.tower.subviews.editorfields.AddTowerEffectView;

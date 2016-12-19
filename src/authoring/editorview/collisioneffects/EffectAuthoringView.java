@@ -2,7 +2,7 @@ package authoring.editorview.collisioneffects;
 
 import java.util.List;
 import java.util.ResourceBundle;
-import authoring.editorview.ListDataSource;
+
 import authoring.editorview.collisioneffects.subviews.EffectAvailableClassesView;
 import authoring.editorview.collisioneffects.subviews.EffectAvailableDataObjectsView;
 import authoring.editorview.collisioneffects.subviews.EffectAvailableMethodsView;
@@ -11,6 +11,7 @@ import authoring.editorview.collisioneffects.subviews.EffectDataView;
 import authoring.editorview.collisioneffects.subviews.editorfields.EffectConditionField;
 import authoring.editorview.collisioneffects.subviews.editorfields.EffectField;
 import authoring.editorview.collisioneffects.subviews.editorfields.EffectNameField;
+import authoring.editorview.imagebank.ListDataSource;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;

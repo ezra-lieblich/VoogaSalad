@@ -1,11 +1,12 @@
 package authoring.editorview.path;
 
+import authoring.editorview.imagebank.ListDataSource;
 import authoring.editorview.path.subviews.PathBank;
 import authoring.editorview.path.subviews.PathDesignView;
 import authoring.editorview.path.subviews.PathEditorView;
 import java.util.List;
 import java.util.ResourceBundle;
-import authoring.editorview.ListDataSource;
+
 import engine.path.Coordinate;
 import javafx.scene.Node;
 import javafx.scene.layout.ColumnConstraints;

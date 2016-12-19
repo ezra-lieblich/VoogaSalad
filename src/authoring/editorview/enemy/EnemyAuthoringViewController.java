@@ -2,9 +2,8 @@ package authoring.editorview.enemy;
 
 import java.util.ResourceBundle;
 import authoring.editorview.EditorViewController;
-import authoring.editorview.ListCellData;
-import authoring.editorview.ListDataSource;
 import authoring.editorview.collisioneffects.EffectAuthoringViewController;
+import authoring.editorview.imagebank.ListDataSource;
 import authoring.utilityfactories.DialogueBoxFactory;
 import engine.effect.EffectManagerController;
 import engine.enemy.*;
@@ -151,15 +150,6 @@ public class EnemyAuthoringViewController extends EditorViewController
     }
 
     @Override
-    public ListCellData getCellDataForSubject (int enemyID) {
-        ListCellData cellData = new ListCellData();
-        cellData.setName(enemyDataSource.getName(enemyID));
-        cellData.setImagePath(enemyDataSource.getImagePath(enemyID));
-        cellData.setId(enemyID);
-        return cellData;
-    }
-
-    @Override
     public void onUserSelectedEnemy (int enemyID) {
         currentEnemyID = enemyID;
         refreshView();
@@ -175,5 +165,15 @@ public class EnemyAuthoringViewController extends EditorViewController
         effectAuthoringView.setAvailDataObjects(effectDataSource.getAvailableDataObjects());
         effectAuthoringView.openEffectView();
     }
+
+	@Override
+	public String getName(int id) {
+		return this.enemyDataSource.getName(id);
+	}
+
+	@Override
+	public String getImagePath(int id) {
+		return this.enemyDataSource.getImagePath(id);
+	}
 
 }

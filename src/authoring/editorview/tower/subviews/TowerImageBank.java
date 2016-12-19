@@ -1,7 +1,8 @@
 package authoring.editorview.tower.subviews;
 
 import java.util.List;
-import authoring.editorview.ImageBank;
+
+import authoring.editorview.imagebank.ImageBank;
 import authoring.editorview.tower.TowerAuthoringViewDelegate;
 import authoring.utilityfactories.ButtonFactory;
 import javafx.scene.control.Button;
@@ -24,8 +25,7 @@ public class TowerImageBank extends ImageBank {
                                              delegate.onUserPressedCreateNewTower();
                                          });
         createTowerButton.setPrefWidth(130);
-        items.add(createTowerButton);
-        this.CONTENT_OFFSET = 1;
+        this.addStaticCell(createTowerButton);
     }
 
     public void setDelegate (TowerAuthoringViewDelegate delegate) {

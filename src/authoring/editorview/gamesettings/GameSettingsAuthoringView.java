@@ -1,9 +1,10 @@
 package authoring.editorview.gamesettings;
 
 import java.util.List;
-import authoring.editorview.ListDataSource;
+
 import authoring.editorview.gamesettings.subviews.GameSettingsEditorView;
 import authoring.editorview.gamesettings.subviews.GameSettingsPreviewView;
+import authoring.editorview.imagebank.ListDataSource;
 import javafx.scene.Node;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;

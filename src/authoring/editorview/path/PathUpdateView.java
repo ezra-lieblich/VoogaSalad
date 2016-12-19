@@ -2,7 +2,7 @@ package authoring.editorview.path;
 
 import java.util.List;
 import authoring.editorview.IUpdateView;
-import authoring.editorview.ListDataSource;
+import authoring.editorview.imagebank.ListDataSource;
 import engine.path.Coordinate;
 
 

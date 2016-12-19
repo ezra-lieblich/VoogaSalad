@@ -1,10 +1,10 @@
 package authoring.editorview.collisioneffects.subviews;
 
 import java.util.List;
-import authoring.editorview.ImageBank;
-import authoring.editorview.ListCellData;
+
 import authoring.editorview.collisioneffects.EffectAuthoringViewDelegate;
 import authoring.editorview.collisioneffects.EffectSetView;
+import authoring.editorview.imagebank.ImageBank;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 
@@ -42,9 +42,9 @@ public class EffectBank extends ImageBank implements EffectSetView {
     }
 
     @Override
-    protected Node createCellFromData (ListCellData data) {
+    protected Node createCellForItemID(int id) {
         Label cell = new Label();
-        String name = data.getName();
+        String name = this.dataSource.getName(id);
         if (name.equals(null) || name.length() < 1) {
             name = DEFAULT_SUBJECT_IMAGE_PATH;
         }

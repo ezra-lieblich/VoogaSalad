@@ -4,10 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import authoring.editorview.EditorViewController;
-import authoring.editorview.ListCellData;
-import authoring.editorview.ListDataSource;
 import authoring.editorview.NameIdPair;
 import authoring.editorview.collisioneffects.EffectAuthoringViewController;
+import authoring.editorview.imagebank.ListDataSource;
 import authoring.utilityfactories.DialogueBoxFactory;
 import engine.effect.EffectManagerController;
 import engine.tower.TowerManagerController;
@@ -186,14 +185,6 @@ public class TowerAuthoringViewController extends EditorViewController
         refreshView();
     }
 
-    @Override
-    public ListCellData getCellDataForSubject (int id) {
-        ListCellData cellData = new ListCellData();
-        cellData.setName(towerDataSource.getName(id));
-        cellData.setImagePath(towerDataSource.getImagePath(id));
-        cellData.setId(id);
-        return cellData;
-    }
 
     @Override
     public void onUserSelectedTowerUpgrade (int towerID) {
@@ -231,5 +222,15 @@ public class TowerAuthoringViewController extends EditorViewController
         }
         towerView.setWeaponOptions(weaponNames);
     }
+
+	@Override
+	public String getName(int id) {
+		return this.towerDataSource.getName(id);
+	}
+
+	@Override
+	public String getImagePath(int id) {
+		return this.towerDataSource.getImagePath(id);
+	}
 
 }

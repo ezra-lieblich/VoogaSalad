@@ -1,8 +1,9 @@
 package authoring.editorview.tower.subviews.editorfields;
 
 import java.util.ResourceBundle;
-import authoring.editorview.ImageBank;
+
 import authoring.editorview.tower.TowerSetView;
+import authoring.editorview.imagebank.ImageBank;
 import authoring.editorview.tower.TowerAuthoringViewDelegate;
 import authoring.utilityfactories.ButtonFactory;
 import javafx.geometry.Orientation;
@@ -33,7 +34,6 @@ public class TowerUpgradeBank extends ImageBank implements TowerSetView {
         this.listView.setMaxHeight(DEFAULT_BANK_HEIGHT);
         this.labelsResource = labelsResource;
         this.items.add(createTowerButton);
-        this.CONTENT_OFFSET = 1;
     }
 
     @Override

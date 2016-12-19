@@ -1,8 +1,9 @@
 package authoring.editorview.enemy.subviews;
 
 import java.util.List;
-import authoring.editorview.ImageBank;
+
 import authoring.editorview.enemy.EnemyAuthoringViewDelegate;
+import authoring.editorview.imagebank.ImageBank;
 import authoring.utilityfactories.ButtonFactory;
 import javafx.scene.control.Button;
 
@@ -25,7 +26,6 @@ public class EnemyImageBank extends ImageBank {
         });
         newEnemyButton.setPrefWidth(130);
         this.items.add(newEnemyButton);
-        this.CONTENT_OFFSET = 1;
     }
 
     public void setDelegate (EnemyAuthoringViewDelegate delegate) {

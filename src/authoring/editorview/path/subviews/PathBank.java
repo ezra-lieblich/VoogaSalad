@@ -2,7 +2,8 @@ package authoring.editorview.path.subviews;
 
 import java.util.List;
 import java.util.ResourceBundle;
-import authoring.editorview.ImageBank;
+
+import authoring.editorview.imagebank.ImageBank;
 import authoring.editorview.path.PathAuthoringViewDelegate;
 import authoring.utilityfactories.ButtonFactory;
 import javafx.scene.control.Button;
@@ -21,7 +22,6 @@ public class PathBank extends ImageBank {
                                          });
         createPathButton.setPrefWidth(130);
         items.add(createPathButton);
-        this.CONTENT_OFFSET = 1;
 
     }
 

@@ -1,9 +1,13 @@
-package authoring.editorview;
+package authoring.editorview.imagebank;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -34,27 +38,37 @@ import javafx.scene.image.ImageView;
 
 public abstract class ImageBank implements ChangeListener<Number> {
     protected ListDataSource dataSource;
-
     protected ListView<Node> listView;
     protected ObservableList<Node> items;
+    protected Map<Integer, Node> staticCells;
 
-    // Index represents the enemies index in the list view, value represents the corresponding
-    // enemy's id
-    protected ArrayList<Integer> itemIDs;
+    // Mapping of indices of items in the table to their corresponding itemIDs.
+    protected Map<Integer, Integer> itemIDs;
 
     protected final int DEFAULT_CELL_HEIGHT = 60;
     protected final int DEFAULT_CELL_WIDTH = 60;
     protected final int DEFAULT_BANK_WIDTH = 120;
     protected final String DEFAULT_SUBJECT_IMAGE_PATH = "./Images/questionmark.png";
-    protected int CONTENT_OFFSET = 0;
 
     public ImageBank () {
         items = FXCollections.observableArrayList();
-        itemIDs = new ArrayList<Integer>();
+        itemIDs = new LinkedHashMap<Integer, Integer>();
+        staticCells = new HashMap<Integer, Node>();
         listView = new ListView<Node>();
         listView.setItems(items);
         listView.setPrefWidth(DEFAULT_BANK_WIDTH);
         listView.getSelectionModel().selectedIndexProperty().addListener(this);
+    }
+    
+    /**
+     * Add a non-item permanent cell to the list view. For example, a button that creates new instances of the item type.
+     * @param index – row where the cell will go
+     * @param cell – visual node that displayed in the row
+     */
+    protected void addStaticCell(Node cell){
+    	int index = this.items.size();
+    	this.items.add(cell);
+    	this.staticCells.put(index, cell);
     }
 
     public void setListDataSource (ListDataSource source) {
@@ -64,38 +78,52 @@ public abstract class ImageBank implements ChangeListener<Number> {
     public Node getInstanceAsNode () {
         return listView;
     }
-
-    public void updateBank () {
-        ArrayList<Integer> idCopy = (ArrayList<Integer>) this.itemIDs.clone();
-        int i = 0;
-        while (i < idCopy.size()) {
-            if (idCopy.get(i).equals(-1)) {
-                idCopy.remove(i);
-            }
-            else {
-                i++;
-            }
-        }
-        this.updateBank(idCopy);
+    
+    /**
+     * Clear list of items excluding static cells
+     */
+    protected void clearItems(){
+        this.itemIDs.clear();
     }
 
+    /**
+     * Refresh existing cells
+     */
+    public void updateBank () {
+        for (int i = 0; i < this.items.size(); i++){
+        	if (!this.staticCells.containsKey(i)){
+        		Integer id = this.itemIDs.get(i);
+        		if (id != null){
+            		Node cell = this.createCellForItemID(id);
+            		this.items.set(i, cell);
+        		}
+        	}
+        }
+    }
+    
     public void updateBank (List<Integer> ids) {
         if (dataSource == null) {
-            //System.out.println("Table data source not set");
             return;
         }
-        this.items.remove(CONTENT_OFFSET, items.size());
-        itemIDs = new ArrayList<Integer>();
-        if (ids.size() != 0) {
-            for (int i = 0; i <= Collections.max(ids) + 1; i++)
-                itemIDs.add(-1);
+        clearItems();
+        for (int i = 0; i < this.items.size(); i++){
+        	if (!this.staticCells.containsKey(i)){
+        		this.items.remove(i);
+        	}
         }
+        int index = this.staticCells.size();
         for (int i = 0; i < ids.size(); i++) {
-            ListCellData cellData = dataSource.getCellDataForSubject(ids.get(i));
-            Node cell = createCellFromData(cellData);
-            items.add(cell);
-            // itemIDs.set(cellData.getId(), items.size()-1);
-            itemIDs.set(items.size() - 1, cellData.getId());
+        	int id = ids.get(i);
+            Node cell = createCellForItemID(id);
+            if (index < this.items.size()){
+                items.set(index, cell);
+            }
+            else{
+            	this.items.add(cell);
+            	index = this.items.size()-1;
+            }
+            this.itemIDs.put(index, id);  
+            index++;
         }
     }
 
@@ -116,19 +144,26 @@ public abstract class ImageBank implements ChangeListener<Number> {
      */
     public Integer getIDForItemAtIndex (int index) {
         Integer result = this.itemIDs.get(index);
-        if (result < 0) {
+        if (result < 0 || result == null) {
             return null;
         }
         return result;
     }
 
-    protected Node createCellFromData (ListCellData data) {
+    /**
+     * 
+     * Override this class to change what cells look like.
+     * 
+     * @param id for item represented in the cell
+     * @return visual representation of the item
+     */
+    protected Node createCellForItemID (int id) {
         ImageView cell = new ImageView();
-        String imageFilePath = data.getImagePath();
+        String imageFilePath = dataSource.getImagePath(id);
         if (imageFilePath.equals(null) || imageFilePath.length() < 1) {
             imageFilePath = DEFAULT_SUBJECT_IMAGE_PATH;
         }
-        File file = new File(data.getImagePath());
+        File file = new File(imageFilePath);
         Image image = new Image(file.toURI().toString());
         cell.setImage(image);
         cell.setPreserveRatio(true);
@@ -143,7 +178,9 @@ public abstract class ImageBank implements ChangeListener<Number> {
     public void changed (ObservableValue<? extends Number> observable,
                          Number oldValue,
                          Number newValue) {
-        userSelectedRow(newValue.intValue());
+    	if (this.itemIDs.containsKey(newValue.intValue())){
+            userSelectedRow(newValue.intValue());
+    	}
     }
 
 }

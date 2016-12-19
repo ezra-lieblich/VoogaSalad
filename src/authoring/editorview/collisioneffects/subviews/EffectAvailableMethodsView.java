@@ -2,9 +2,10 @@ package authoring.editorview.collisioneffects.subviews;
 
 import java.util.ArrayList;
 import java.util.List;
-import authoring.editorview.ImageBank;
+
 import authoring.editorview.collisioneffects.EffectAuthoringViewDelegate;
 import authoring.editorview.collisioneffects.EffectSetView;
+import authoring.editorview.imagebank.ImageBank;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 
@@ -38,8 +39,7 @@ public class EffectAvailableMethodsView extends ImageBank implements EffectSetVi
             //System.out.println("Table data source not set");
             return;
         }
-        this.items.remove(CONTENT_OFFSET, items.size());
-        itemIDs = new ArrayList<Integer>();
+        this.clearItems();
 
         for (int i = 0; i < list.size(); i++) {
             Label temp = new Label(list.get(i));

@@ -1,8 +1,7 @@
 package authoring.editorview.path;
 
 import authoring.editorview.EditorViewController;
-import authoring.editorview.ListCellData;
-import authoring.editorview.ListDataSource;
+import authoring.editorview.imagebank.ListDataSource;
 import engine.path.PathManagerController;
 
 
@@ -78,15 +77,6 @@ public class PathAuthoringViewController extends EditorViewController
     }
 
     @Override
-    public ListCellData getCellDataForSubject (int id) {
-        ListCellData cellData = new ListCellData();
-        cellData.setName(pathDataSource.getName(id));
-        cellData.setImagePath(pathDataSource.getImagePath(id));
-        cellData.setId(id);
-        return cellData;
-    }
-
-    @Override
     public void refreshView () {
         pathView.updateImagePathDisplay(pathDataSource.getImagePath(activeID));
         pathView.updateGridDimensions(pathDataSource.getNumberofRows(activeID));
@@ -96,5 +86,15 @@ public class PathAuthoringViewController extends EditorViewController
         pathView.updatePath();
 
     }
+
+	@Override
+	public String getName(int id) {
+		return this.pathDataSource.getName(id);
+	}
+
+	@Override
+	public String getImagePath(int id) {
+		return this.pathDataSource.getImagePath(id);
+	}
 
 }

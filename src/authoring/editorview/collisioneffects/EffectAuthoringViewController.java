@@ -2,8 +2,7 @@ package authoring.editorview.collisioneffects;
 
 import java.util.List;
 import authoring.editorview.EditorViewController;
-import authoring.editorview.ListCellData;
-import authoring.editorview.ListDataSource;
+import authoring.editorview.imagebank.ListDataSource;
 import engine.effect.EffectManagerController;
 
 
@@ -78,15 +77,6 @@ public class EffectAuthoringViewController extends EditorViewController
         refreshView();
     }
 
-    @Override
-    public ListCellData getCellDataForSubject (int id) {
-        ListCellData cellData = new ListCellData();
-        //System.out.println("id: " + id + " effectsDS: " + effectDataSource);
-        cellData.setName(effectDataSource.getName(id));
-        cellData.setImagePath(effectDataSource.getImagePath(id));
-        cellData.setId(id);
-        return cellData;
-    }
 
     @Override
     public void refreshView () {
@@ -101,5 +91,15 @@ public class EffectAuthoringViewController extends EditorViewController
     public void onUserEnteredEffectText (String effect) {
         effectDataSource.setEffect(currentEffectID, effect);
     }
+
+	@Override
+	public String getName(int id) {
+		return this.effectDataSource.getName(id);
+	}
+
+	@Override
+	public String getImagePath(int id) {
+		return this.effectDataSource.getImagePath(id);
+	}
 
 }

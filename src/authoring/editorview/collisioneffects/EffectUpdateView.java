@@ -2,8 +2,8 @@ package authoring.editorview.collisioneffects;
 
 import java.util.List;
 import authoring.editorview.IUpdateView;
-import authoring.editorview.ListDataSource;
 import authoring.editorview.collisioneffects.subviews.EffectAvailableMethodsView;
+import authoring.editorview.imagebank.ListDataSource;
 
 
 /**

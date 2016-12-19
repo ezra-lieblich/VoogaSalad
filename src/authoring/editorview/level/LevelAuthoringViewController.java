@@ -2,9 +2,8 @@ package authoring.editorview.level;
 
 import java.util.ResourceBundle;
 import authoring.editorview.EditorViewController;
-import authoring.editorview.ListCellData;
-import authoring.editorview.ListDataSource;
 import authoring.editorview.collisioneffects.EffectAuthoringViewController;
+import authoring.editorview.imagebank.ListDataSource;
 import authoring.utilityfactories.DialogueBoxFactory;
 import engine.effect.EffectManagerController;
 import engine.enemy.EnemyManagerController;
@@ -226,16 +225,17 @@ public class LevelAuthoringViewController extends EditorViewController
     }
 
     @Override
-    public ListCellData getCellDataForSubject (int id) {
-        ListCellData cellData = new ListCellData();
-        cellData.setName(levelDataSource.getName(id));
-        cellData.setImagePath(levelDataSource.getImagePath(id));
-        cellData.setId(id);
-        return cellData;
-    }
-
-    @Override
     public void onUserEnteredAddWave () {
         levelDataSource.createWave(currentLevelID, levelView);
     }
+
+	@Override
+	public String getName(int id) {
+		return this.levelDataSource.getName(id);
+	}
+
+	@Override
+	public String getImagePath(int id) {
+		return this.levelDataSource.getImagePath(id);
+	}
 }
