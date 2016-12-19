@@ -42,7 +42,7 @@ public class EnemyRewardMoneyField extends TextFieldView implements EnemySetView
     @Override
     protected void makeTextField (ResourceBundle labelsResource) {
         enemyRewardMoneyField =
-                TextFieldFactory.makeTextField(labelsResource.getString("EnterInt"),
+                TextFieldFactory.makeNumberTextField(labelsResource.getString("EnterInt"),
                                                e -> delegate
                                                        .onUserEnteredEnemyMoney(enemyRewardMoneyField
                                                                .getText()));

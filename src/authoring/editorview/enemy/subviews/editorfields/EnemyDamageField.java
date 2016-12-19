@@ -31,7 +31,7 @@ public class EnemyDamageField extends TextFieldView implements EnemySetView {
     @Override
     protected void makeTextField (ResourceBundle labelsResource) {
         enemyDamageField =
-                TextFieldFactory.makeTextField(labelsResource.getString("EnterInt"),
+                TextFieldFactory.makeNumberTextField(labelsResource.getString("EnterInt"),
                                                e -> delegate
                                                        .onUserEnteredEnemyDamage(enemyDamageField
                                                                .getText()));

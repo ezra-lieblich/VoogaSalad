@@ -42,7 +42,7 @@ public class EnemyHealthField extends TextFieldView implements EnemySetView {
     @Override
     protected void makeTextField (ResourceBundle labelsResource) {
         enemyHealthField =
-                TextFieldFactory.makeTextField(labelsResource.getString("EnterInt"),
+                TextFieldFactory.makeNumberTextField(labelsResource.getString("EnterInt"),
                                                e -> delegate
                                                        .onUserEnteredEnemyHealth(enemyHealthField
                                                                .getText()));

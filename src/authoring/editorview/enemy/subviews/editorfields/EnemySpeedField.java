@@ -42,7 +42,7 @@ public class EnemySpeedField extends TextFieldView implements EnemySetView {
     @Override
     protected void makeTextField (ResourceBundle labelsResource) {
         enemySpeedField =
-                TextFieldFactory.makeTextField(labelsResource.getString("EnterInt"),
+                TextFieldFactory.makeNumberTextField(labelsResource.getString("EnterInt"),
                                                e -> delegate
                                                        .onUserEnteredEnemySpeed(enemySpeedField
                                                                .getText()));

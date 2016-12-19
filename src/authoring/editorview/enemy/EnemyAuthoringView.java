@@ -43,11 +43,14 @@ public class EnemyAuthoringView implements EnemyUpdateView {
     private EnemySizeField enemySize;
     private DeleteEnemy deleteEnemy;
     private AddEnemyEffectView addEnemyEffect;
+    private EnemyReflectionPractice enemyReflection;
 
     public EnemyAuthoringView () {
         String ENEMY_EFFECT_RESOURCE_PATH = "resources/GameAuthoringEnemy";
         ResourceBundle labelsResource = ResourceBundle.getBundle(ENEMY_EFFECT_RESOURCE_PATH);
 
+        enemyReflection = new EnemyReflectionPractice();
+        enemyReflection.testing();
         enemyView = new GridPane();
         enemyBank = new EnemyImageBank();
         enemyName = new EnemyNameField(labelsResource);

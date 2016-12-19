@@ -1,11 +1,9 @@
 package authoring.editorview.enemy;
 
-import java.util.ResourceBundle;
 import authoring.editorview.EditorViewController;
 import authoring.editorview.ListCellData;
 import authoring.editorview.ListDataSource;
 import authoring.editorview.collisioneffects.EffectAuthoringViewController;
-import authoring.utilityfactories.DialogueBoxFactory;
 import engine.effect.EffectManagerController;
 import engine.enemy.*;
 
@@ -57,61 +55,28 @@ public class EnemyAuthoringViewController extends EditorViewController
 
     @Override
     public void onUserEnteredEnemySpeed (String enemySpeed) {
-        try {
-            Double.parseDouble(enemySpeed);
-            enemyDataSource.setEnemySpeed(currentEnemyID, Double.parseDouble(enemySpeed));
-
-        }
-        catch (NumberFormatException e) {
-            createDialogueBox();
-        }
+        enemyDataSource.setEnemySpeed(currentEnemyID, Double.parseDouble(enemySpeed));
     }
 
     @Override
     public void onUserEnteredEnemyHealth (String enemyHealth) {
-        try {
-            Double.parseDouble(enemyHealth);
-            enemyDataSource.setEnemyHealth(currentEnemyID, Double.parseDouble(enemyHealth));
-        }
-        catch (NumberFormatException e) {
-            createDialogueBox();
-        }
-
+        enemyDataSource.setEnemyHealth(currentEnemyID, Double.parseDouble(enemyHealth));
     }
 
     @Override
     public void onUserEnteredEnemyDamage (String enemyDamage) {
-        try {
-            Double.parseDouble(enemyDamage);
-            enemyDataSource.setEnemyDamage(currentEnemyID, Double.parseDouble(enemyDamage));
-        }
-        catch (NumberFormatException e) {
-            createDialogueBox();
-        }
+        enemyDataSource.setEnemyDamage(currentEnemyID, Double.parseDouble(enemyDamage));
     }
 
     @Override
     public void onUserEnteredEnemyPoints (String enemyRewardPoints) {
-        try {
-            Double.parseDouble(enemyRewardPoints);
-            enemyDataSource.setEnemyRewardScore(currentEnemyID,
-                                                Double.parseDouble(enemyRewardPoints));
-        }
-        catch (NumberFormatException e) {
-            createDialogueBox();
-        }
+        enemyDataSource.setEnemyRewardScore(currentEnemyID, Double.parseDouble(enemyRewardPoints));
     }
 
     @Override
     public void onUserEnteredEnemyMoney (String enemyRewardMoney) {
-        try {
-            Double.parseDouble(enemyRewardMoney);
-            enemyDataSource.setEnemyRewardMoney(currentEnemyID,
-                                                Double.parseDouble(enemyRewardMoney));
-        }
-        catch (NumberFormatException e) {
-            createDialogueBox();
-        }
+        enemyDataSource.setEnemyRewardMoney(currentEnemyID,
+                                            Double.parseDouble(enemyRewardMoney));
     }
 
     @Override
@@ -124,12 +89,6 @@ public class EnemyAuthoringViewController extends EditorViewController
         enemyDataSource.setName(currentEnemyID, enemyName);
     }
 
-    private void createDialogueBox () {
-        ResourceBundle dialogueBoxResource = ResourceBundle.getBundle("resources/DialogueBox");
-        DialogueBoxFactory.createErrorDialogueBox(dialogueBoxResource.getString("Integer"),
-                                                  dialogueBoxResource.getString("CheckInput"));
-    }
-
     @Override
     public void onUserPressedDeleteEnemy () {
         int nextID = this.enemyView.getNearestAvailableItemID(currentEnemyID);
@@ -140,14 +99,8 @@ public class EnemyAuthoringViewController extends EditorViewController
 
     @Override
     public void onUserEnteredEnemySize (String enemySize) {
-        try {
-            Double.parseDouble(enemySize);
-            enemyDataSource.setSize(currentEnemyID,
-                                    Double.parseDouble(enemySize));
-        }
-        catch (NumberFormatException e) {
-            createDialogueBox();
-        }
+        enemyDataSource.setSize(currentEnemyID,
+                                Double.parseDouble(enemySize));
     }
 
     @Override

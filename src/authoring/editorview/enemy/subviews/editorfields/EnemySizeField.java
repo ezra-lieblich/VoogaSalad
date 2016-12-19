@@ -42,7 +42,7 @@ public class EnemySizeField extends TextFieldView implements EnemySetView {
     @Override
     protected void makeTextField (ResourceBundle labelsResource) {
         enemySizeField =
-                TextFieldFactory.makeTextField(labelsResource.getString("EnterInt"),
+                TextFieldFactory.makeNumberTextField(labelsResource.getString("EnterInt"),
                                                e -> delegate
                                                        .onUserEnteredEnemySize(enemySizeField
                                                                .getText()));
