@@ -64,7 +64,7 @@ public class EnemyAuthoringView implements EnemyUpdateView {
         deleteEnemy = new DeleteEnemy(labelsResource);
         addEnemyEffect = new AddEnemyEffectView(labelsResource);
         enemyEditorView =
-                new EnemyEditorView(enemyImage, enemyName,
+                new EnemyEditorView(enemyName,
                                     enemySpeed, enemyDamage, enemyHealth, enemyRewardMoney,
                                     enemyRewardPoints, enemySize, deleteEnemy, addEnemyEffect);
         buildView();

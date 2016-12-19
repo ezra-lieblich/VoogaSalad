@@ -27,6 +27,7 @@ import javafx.scene.layout.RowConstraints;
  *
  */
 public class WeaponAuthoringView implements WeaponUpdateView {
+    @SuppressWarnings("unused")
     private WeaponAuthoringViewDelegate delegate;
     private GridPane weaponView;
     private WeaponImageBank weaponBank;
@@ -43,15 +44,9 @@ public class WeaponAuthoringView implements WeaponUpdateView {
 
     private static final int EDITOR_WIDTH = 300;
 
-    private int width;
-    private int height;
-
     public WeaponAuthoringView (int width, int height) throws IOException {
         ResourceBundle labelsResource = ResourceBundle.getBundle("resources/GameAuthoringWeapon");
         ResourceBundle dialogueBoxResource = ResourceBundle.getBundle("resources/DialogueBox");
-
-        this.width = width;
-        this.height = height;
 
         weaponView = new GridPane();
 
@@ -70,7 +65,7 @@ public class WeaponAuthoringView implements WeaponUpdateView {
 
                 new WeaponEditorView(weaponNameView, weaponSpeedView, weaponFireRateView,
                                      weaponRangeView,
-                                     weaponPathView, weaponImageView, weaponSizeView,
+                                     weaponPathView, weaponSizeView,
                                      addWeaponEffect, deleteWeapon, labelsResource,
                                      dialogueBoxResource,
                                      EDITOR_WIDTH);

@@ -66,7 +66,7 @@ public class TowerAuthoringView implements TowerUpdateView {
 
         towerBank = new TowerImageBank();
         towerEditorView =
-                new TowerEditorView(towerName, towerImage, towerBuyPrice, towerSellPrice,
+                new TowerEditorView(towerName, towerBuyPrice, towerSellPrice,
                                     towerUnlockLevel, towerAbility, towerWeaponBank,
                                     towerUpgradeBank,
                                     towerSize, addTowerEffect, deleteTower,

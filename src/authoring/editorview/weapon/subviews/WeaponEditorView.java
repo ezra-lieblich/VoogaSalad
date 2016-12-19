@@ -9,7 +9,6 @@ import authoring.editorview.weapon.WeaponAuthoringViewDelegate;
 import authoring.editorview.weapon.subviews.editorfields.AddWeaponEffectView;
 import authoring.editorview.weapon.subviews.editorfields.DeleteWeapon;
 import authoring.editorview.weapon.subviews.editorfields.WeaponFireRateField;
-import authoring.editorview.weapon.subviews.editorfields.WeaponImageView;
 import authoring.editorview.weapon.subviews.editorfields.WeaponNameField;
 import authoring.editorview.weapon.subviews.editorfields.WeaponPathField;
 import authoring.editorview.weapon.subviews.editorfields.WeaponRangeField;
@@ -66,7 +65,6 @@ public class WeaponEditorView extends PhotoFileChooser implements WeaponSetView 
                              WeaponFireRateField weaponFireRate,
                              WeaponRangeField weaponRange,
                              WeaponPathField weaponPath,
-                             WeaponImageView weaponImage,
                              WeaponSizeField weaponSize,
                              AddWeaponEffectView addWeaponEffect,
                              DeleteWeapon deleteWeapon,

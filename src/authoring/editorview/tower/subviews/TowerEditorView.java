@@ -22,7 +22,6 @@ import authoring.utilityfactories.DialogueBoxFactory;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -58,7 +57,6 @@ public class TowerEditorView extends PhotoFileChooser implements TowerSetView {
     private DeleteTower deleteTower;
 
     private VBox vbox;
-    private ScrollPane completeView;
     private AnchorPane rootBuffer;
     private File chosenFile;
 
@@ -68,7 +66,6 @@ public class TowerEditorView extends PhotoFileChooser implements TowerSetView {
     private ResourceBundle dialogueBoxResource;
 
     public TowerEditorView (TowerNameField towerName,
-                            TowerImageView towerImage,
                             TowerBuyPriceField towerBuyPrice,
                             TowerSellPriceField towerSellPrice,
                             TowerUnlockLevelField towerUnlockLevel,
@@ -85,7 +82,6 @@ public class TowerEditorView extends PhotoFileChooser implements TowerSetView {
         this.dialogueBoxResource = dialogueBoxResource;
 
         this.towerName = towerName;
-        this.towerImage = towerImage;
         this.towerBuyPrice = towerBuyPrice;
         this.towerSellPrice = towerSellPrice;
         this.towerUnlockLevel = towerUnlockLevel;

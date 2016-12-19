@@ -50,7 +50,6 @@ public class EnemyEditorView extends PhotoFileChooser implements EnemySetView {
     private File chosenFile;
 
     private DeleteEnemy deleteEnemy;
-    private EnemyImageView enemyImage;
     private EnemyNameField enemyName;
     private EnemySpeedField enemySpeed;
     private EnemyDamageField enemyDamage;
@@ -64,8 +63,7 @@ public class EnemyEditorView extends PhotoFileChooser implements EnemySetView {
     private final String ENEMY_EFFECT_RESOURCE_PATH = "resources/GameAuthoringEnemy";
     private static final double BUFFER = 10.0;
 
-    public EnemyEditorView (EnemyImageView enemyImage,
-                            EnemyNameField enemyName,
+    public EnemyEditorView (EnemyNameField enemyName,
                             EnemySpeedField enemySpeed,
                             EnemyDamageField enemyDamage,
                             EnemyHealthField enemyHealth,
@@ -78,7 +76,6 @@ public class EnemyEditorView extends PhotoFileChooser implements EnemySetView {
         vbox = new VBox(10);
         rootBuffer.getChildren().add(vbox);
 
-        this.enemyImage = enemyImage;
         this.enemyName = enemyName;
         this.enemySpeed = enemySpeed;
         this.enemyDamage = enemyDamage;
