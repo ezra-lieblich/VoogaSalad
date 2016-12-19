@@ -6,6 +6,12 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import engine.observer.ObservableProperty;
 
+/**
+ * This class provides the implementation for the abstract behavior of all of the Type classes.
+ * 
+ * @author seanhudson
+ *
+ */
 public abstract class AbstractType implements Type {
     private ObservableProperty<String> name;
     private ObservableProperty<String> imagePath;

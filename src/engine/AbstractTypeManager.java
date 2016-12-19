@@ -17,7 +17,13 @@ import engine.observer.ObservableMap;
 import engine.observer.ObservableMapProperty;
 
 
-
+/**
+ * This class implements the abstract behavior for the Manager classes
+ * 
+ * @author seanhudson
+ *
+ * @param <E> Type subclass
+ */
 public abstract class AbstractTypeManager<E extends Type> extends AbstractObservable<MethodData<Object>>
         implements Manager<E> {
     private static final String INVALID_REFLECTION_CALL = "Invalid reflection call";
@@ -58,7 +64,6 @@ public abstract class AbstractTypeManager<E extends Type> extends AbstractObserv
     @Override
     public void setEntities(Map<Integer, E> entities) {
     	this.data.setProperty(entities);
-        //this.data = new ObservableMapProperty<Integer, E>(entities);
     }
     
     @Override
@@ -66,51 +71,11 @@ public abstract class AbstractTypeManager<E extends Type> extends AbstractObserv
         return getEntityIds().isEmpty() ? -1 : Collections.max(getEntityIds());
     }
 
-    // protected <U> U getFromEntity(Supplier<U> getter) {
-    // return getter.get();
-    // }
-    //
-    // protected <U> void setForEntity(Consumer<U> setter, U newValue) {
-    // setter.accept(newValue);
-    // //notifyObservers(activeId);
-    // }
-
-    /*
-     * public <U> Consumer<U> setForActiveEntity(Consumer<U> setter, U newValue) {
-     * //Apply Type::setName to activeEntity
-     * Consumer<U> blahtest = e - setter.accept(newValue);; //.setName(c); // Type::setName;
-     * List<E> tester = new ArrayList<E>();
-     * tester.forEach(setter);
-     * Consumer<U> activeFunc = c -> getActiveEntity()::setter;
-     * Consumer<AbstractTypeManager> eblah = c -> c.setForActiveEntity(getActiveEntity()::setter)
-     * }
-     */
-
     @Override // TODO - hide in interface
     public E getEntity (int index) {
         return data.getProperty().get(index);
     }
 
-    /*
-     * public void activate(int ... ids) {
-     * activeEntities.clear();
-     * Arrays.asList(ids).stream().map(data::get).forEach(activeEntities::add);
-     * }
-     * 
-     * protected void applyToActive(Consumer<E> function) {
-     * activeEntities.stream().forEach(function);
-     * }
-     */
-    // Method downPolymorphic = object.getClass().getMethod("visit",
-    // new Class[] { object.getClass() });
-    //
-    // if (downPolymorphic == null) {
-    // defaultVisit(object);
-    // } else {
-    // downPolymorphic.invoke(this, new Object[] {object});
-    // }
-    // TODO - error might occur due to taking in a VisitableManager
-    // TODO - get specific interface
     @Override
     public <U extends VisitableManager<MethodData<Object>>> void visitManager (U visitableManager,
                                                                           MethodData<Object> dataMethod) throws ReflectionException {

@@ -6,6 +6,14 @@ import java.util.function.BiConsumer;
 import engine.observer.ObservableObjectProperty;
 import engine.observer.ObservableProperty;
 
+/**
+ * 
+ * 
+ * @author seanhudson
+ *
+ * @param <E> Type subclass
+ * @param <R> F-bounded TypeBuilder interface
+ */
 public abstract class AbstractTypeBuilder<E extends Type, R extends TypeBuilder<E, R>> implements TypeBuilder<E, R>, TypeInitializer {
     
     private final String DEFAULT_NAME;

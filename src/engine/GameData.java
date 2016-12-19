@@ -1,5 +1,11 @@
 package engine;
 
+/**
+ * This interface provides the methods for accessing the data inside of GameData
+ * 
+ * @author seanhudson
+ *
+ */
 public interface GameData {
 
     String getTitle ();

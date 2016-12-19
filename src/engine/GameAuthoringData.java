@@ -1,7 +1,12 @@
 package engine;
 
 
-
+/**
+ * This class is the serializable data class
+ * 
+ * @author seanhudson
+ *
+ */
 public class GameAuthoringData implements GameData {
 
     private String title;

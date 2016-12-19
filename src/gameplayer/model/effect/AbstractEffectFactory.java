@@ -12,9 +12,11 @@ import java.util.function.BiConsumer;
 import java.util.stream.Stream;
 import engine.effect.Effect;
 import engine.effect.EffectData;
+import engine.effect.ReflectionException;
 
 public abstract class AbstractEffectFactory {
     public static final Class<? extends Annotation> EFFECT_DATA = EffectData.class;
+    private static final String INVALID_FIELD = "The effect factory does not contain the specified field.";
     
     private String triggerVariableName;
     private String encompasingClassVariableName;
@@ -59,14 +61,8 @@ public abstract class AbstractEffectFactory {
         try {
             effectAccessibleData.put(variableField.getName(), variableField.get(this));
         }
-        catch (IllegalArgumentException e) {
-            e.printStackTrace();
-            return;
-        }
-        catch (IllegalAccessException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-            return;
+        catch (IllegalArgumentException | IllegalAccessException e) {
+            throw new ReflectionException(e, INVALID_FIELD);
         }
     }
         
