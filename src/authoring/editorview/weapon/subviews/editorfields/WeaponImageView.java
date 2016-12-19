@@ -19,15 +19,14 @@ import javafx.scene.layout.AnchorPane;
 public class WeaponImageView implements WeaponSetView {
 
     private AnchorPane root;
+    @SuppressWarnings("unused")
     private WeaponAuthoringViewDelegate delegate;
-    private ResourceBundle labelsResource;
     private String imagePath;
     private ImageView weaponImage;
 
     private final int CHARACTER_SIZE = 250;
 
     public WeaponImageView (ResourceBundle labelsResource) {
-        this.labelsResource = labelsResource;
         weaponImage = new ImageView();
         weaponImage.setFitWidth(CHARACTER_SIZE);
         weaponImage.setFitHeight(CHARACTER_SIZE);

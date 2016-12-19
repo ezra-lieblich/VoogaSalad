@@ -1,7 +1,6 @@
 package authoring.editorview.gamesettings.subviews.editorfields;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ResourceBundle;
 import authoring.editorview.PhotoFileChooser;
 import authoring.editorview.gamesettings.GameSettingsAuthoringViewDelegate;
@@ -54,7 +53,7 @@ public class GameImageView extends PhotoFileChooser implements GameSettingsSetVi
                                                             photoFileResource
                                                                     .getString("SelectImage"));
                                              }
-                                             catch (IOException e1) {
+                                             catch (Exception e1) {
                                                  Alert errorDialogueBox =
                                                          DialogueBoxFactory.createErrorDialogueBox(
                                                                                                    photoFileResource
@@ -69,7 +68,7 @@ public class GameImageView extends PhotoFileChooser implements GameSettingsSetVi
     }
 
     @Override
-    public void openFileChooser (FileChooser chooseFile) throws IOException {
+    public void openFileChooser (FileChooser chooseFile) {
         File chosenFile = chooseFile.showOpenDialog(new Stage());
         if (chosenFile != null) {
             gameImagePath = chosenFile.toString();

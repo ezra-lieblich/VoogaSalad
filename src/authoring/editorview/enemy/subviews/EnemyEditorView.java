@@ -1,13 +1,11 @@
 package authoring.editorview.enemy.subviews;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ResourceBundle;
 import authoring.editorview.PhotoFileChooser;
 import authoring.editorview.enemy.EnemyAuthoringViewDelegate;
 import authoring.editorview.enemy.EnemySetView;
 import authoring.editorview.enemy.subviews.editorfields.EnemyHealthField;
-import authoring.editorview.enemy.subviews.editorfields.EnemyImageView;
 import authoring.editorview.enemy.subviews.editorfields.EnemyNameField;
 import authoring.editorview.enemy.subviews.editorfields.EnemyRewardMoneyField;
 import authoring.editorview.enemy.subviews.editorfields.EnemyRewardPointsField;
@@ -109,7 +107,7 @@ public class EnemyEditorView extends PhotoFileChooser implements EnemySetView {
                                                               selectFile("Select new enemy image",
                                                                          "Photos: ");
                                                           }
-                                                          catch (IOException e1) {
+                                                          catch (Exception e1) {
                                                               DialogueBoxFactory
                                                                       .createErrorDialogueBox("Unable to open file chooser",
                                                                                               "Try again");
@@ -144,7 +142,7 @@ public class EnemyEditorView extends PhotoFileChooser implements EnemySetView {
     }
 
     @Override
-    public void openFileChooser (FileChooser chooseFile) throws IOException {
+    public void openFileChooser (FileChooser chooseFile) {
         chosenFile = chooseFile.showOpenDialog(new Stage());
         if (chosenFile != null) {
             delegate.onUserEnteredEnemyImagePath(chosenFile.toURI().getPath());

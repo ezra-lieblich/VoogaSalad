@@ -1,7 +1,6 @@
 package authoring.editorview.tower.subviews;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ResourceBundle;
 import authoring.editorview.PhotoFileChooser;
 import authoring.editorview.tower.TowerSetView;
@@ -45,7 +44,6 @@ public class TowerEditorView extends PhotoFileChooser implements TowerSetView {
 
     private TowerAuthoringViewDelegate delegate;
     private TowerNameField towerName;
-    private TowerImageView towerImage;
     private TowerBuyPriceField towerBuyPrice;
     private TowerSellPriceField towerSellPrice;
     private TowerUnlockLevelField towerUnlockLevel;
@@ -95,8 +93,6 @@ public class TowerEditorView extends PhotoFileChooser implements TowerSetView {
         vbox = new VBox(10);
         rootBuffer = new AnchorPane();
         rootBuffer.getChildren().add(vbox);
-        // completeView = new ScrollPane();
-        // completeView.setContent(rootBuffer);
 
         buildViewComponents();
     }
@@ -112,8 +108,6 @@ public class TowerEditorView extends PhotoFileChooser implements TowerSetView {
         rootBuffer
                 .setBackground(new Background(new BackgroundFill(Color.rgb(235, 235, 235),
                                                                  CornerRadii.EMPTY, Insets.EMPTY)));
-
-        vbox.getChildren().add(towerImage.getInstanceAsNode());
         Button imageButton = ButtonFactory.makeButton(labelsResource.getString("Image"),
                                                       e -> {
                                                           try {
@@ -122,7 +116,7 @@ public class TowerEditorView extends PhotoFileChooser implements TowerSetView {
                                                                          labelsResource
                                                                                  .getString("Photos"));
                                                           }
-                                                          catch (IOException e1) {
+                                                          catch (Exception e1) {
                                                               DialogueBoxFactory
                                                                       .createErrorDialogueBox(dialogueBoxResource
                                                                               .getString("UnableToOpen"),
@@ -152,10 +146,9 @@ public class TowerEditorView extends PhotoFileChooser implements TowerSetView {
     }
 
     @Override
-    public void openFileChooser (FileChooser chooseFile) throws IOException {
+    public void openFileChooser (FileChooser chooseFile) {
         chosenFile = chooseFile.showOpenDialog(new Stage());
         if (chosenFile != null) {
-            // System.out.println(chosenFile.toURI().getPath());
             delegate.onUserEnteredTowerImagePath(chosenFile.toURI().getPath());
         }
     }

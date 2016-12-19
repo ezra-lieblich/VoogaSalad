@@ -1,7 +1,6 @@
 package authoring.editorview.level.subviews;
 
 import java.io.File;
-import java.io.IOException;
 import authoring.editorview.PhotoFileChooser;
 import authoring.editorview.level.LevelAuthoringViewDelegate;
 import authoring.editorview.level.LevelSetView;
@@ -101,10 +100,9 @@ public class LevelEditorView extends PhotoFileChooser implements LevelSetView {
     }
 
     @Override
-    public void openFileChooser (FileChooser chooseFile) throws IOException {
+    public void openFileChooser (FileChooser chooseFile) {
         chosenFile = chooseFile.showOpenDialog(new Stage());
         if (chosenFile != null) {
-            // System.out.println(chosenFile.toURI().getPath());
             delegate.onUserEnteredLevelImagePath(chosenFile.toURI().getPath());
         }
     }

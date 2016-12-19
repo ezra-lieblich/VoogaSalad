@@ -39,7 +39,6 @@ public final class TextFieldFactory {
         textField.setPromptText(promptText);
         textField.setOnAction(event);
         textField.textProperty().addListener( (observable, oldValue, newValue) -> {
-            System.out.print("old: " + oldValue);
             textField.addEventHandler(ActionEvent.ACTION, e -> testInput(textField, oldValue));
         });
 

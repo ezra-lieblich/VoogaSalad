@@ -1,6 +1,5 @@
 package authoring.editorview.weapon;
 
-import java.io.IOException;
 
 
 /**
@@ -11,7 +10,7 @@ import java.io.IOException;
 
 public class WeaponAuthoringViewFactory {
 
-    public static WeaponUpdateView build (int width, int height) throws IOException {
+    public static WeaponUpdateView build (int width, int height) {
         return new WeaponAuthoringView(width, height);
     }
 

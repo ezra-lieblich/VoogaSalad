@@ -49,7 +49,7 @@ public class ViewController implements EditorTabPaneDelegate {
         view.setEditorTabPaneDelegate(this);
     }
 
-    private void createEditors () throws IOException {
+    private void createEditors () {
         checkNullTabs();
         ResourceBundle settingsResource = ResourceBundle.getBundle(SETTINGS_RESOURCE_PATH);
         editors = new HashMap<String, EditorViewController>();

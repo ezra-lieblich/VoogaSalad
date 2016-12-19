@@ -1,7 +1,6 @@
 package authoring.editorview.weapon.subviews;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ResourceBundle;
 import authoring.editorview.PhotoFileChooser;
 import authoring.editorview.weapon.WeaponSetView;
@@ -69,11 +68,8 @@ public class WeaponEditorView extends PhotoFileChooser implements WeaponSetView 
                              AddWeaponEffectView addWeaponEffect,
                              DeleteWeapon deleteWeapon,
                              ResourceBundle labelsResource,
-                             ResourceBundle dialogueBoxResource,
-                             int columnWidth)
-        throws IOException {
+                             int columnWidth) {
         this.labelsResource = labelsResource;
-        this.dialogueBoxResource = dialogueBoxResource;
         this.weaponName = weaponName;
         this.weaponSpeed = weaponSpeed;
         this.weaponFireRate = weaponFireRate;
@@ -97,7 +93,7 @@ public class WeaponEditorView extends PhotoFileChooser implements WeaponSetView 
         this.delegate = delegate;
     }
 
-    private void buildViewComponents () throws IOException {
+    private void buildViewComponents () {
 
         AnchorPane.setLeftAnchor(vboxView, BUFFER);
         AnchorPane.setTopAnchor(vboxView, BUFFER);
@@ -117,7 +113,7 @@ public class WeaponEditorView extends PhotoFileChooser implements WeaponSetView 
                                                                          labelsResource
                                                                                  .getString("NewWeapon"));
                                                           }
-                                                          catch (IOException e1) {
+                                                          catch (Exception e1) {
                                                               DialogueBoxFactory
                                                                       .createErrorDialogueBox(dialogueBoxResource
                                                                               .getString("UnableToOpen"),

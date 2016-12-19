@@ -1,6 +1,5 @@
 package authoring.editorview.weapon;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.ResourceBundle;
 import authoring.editorview.ListDataSource;
@@ -44,9 +43,8 @@ public class WeaponAuthoringView implements WeaponUpdateView {
 
     private static final int EDITOR_WIDTH = 300;
 
-    public WeaponAuthoringView (int width, int height) throws IOException {
+    public WeaponAuthoringView (int width, int height) {
         ResourceBundle labelsResource = ResourceBundle.getBundle("resources/GameAuthoringWeapon");
-        ResourceBundle dialogueBoxResource = ResourceBundle.getBundle("resources/DialogueBox");
 
         weaponView = new GridPane();
 
@@ -62,12 +60,10 @@ public class WeaponAuthoringView implements WeaponUpdateView {
 
         addWeaponEffect = new AddWeaponEffectView(labelsResource);
         weaponEditorView =
-
                 new WeaponEditorView(weaponNameView, weaponSpeedView, weaponFireRateView,
                                      weaponRangeView,
                                      weaponPathView, weaponSizeView,
                                      addWeaponEffect, deleteWeapon, labelsResource,
-                                     dialogueBoxResource,
                                      EDITOR_WIDTH);
         buildView();
     }

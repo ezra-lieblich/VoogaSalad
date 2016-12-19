@@ -1,10 +1,7 @@
 package authoring.editorview.path.subviews.editorfields;
 
-import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
 import java.util.ResourceBundle;
-import javax.imageio.ImageIO;
 import authoring.editorview.PhotoFileChooser;
 import authoring.editorview.path.PathSetView;
 import authoring.editorview.path.PathAuthoringViewDelegate;
@@ -48,7 +45,7 @@ public class PathImageView extends PhotoFileChooser implements PathSetView {
                                                                                                   // resource
                                                                                                   // file
                                              }
-                                             catch (IOException e1) {
+                                             catch (Exception e1) {
                                                  Alert errorDialogueBox =
                                                          DialogueBoxFactory
                                                                  .createErrorDialogueBox("Invalid File",
@@ -61,10 +58,9 @@ public class PathImageView extends PhotoFileChooser implements PathSetView {
     }
 
     @Override
-    public void openFileChooser (FileChooser chooseFile) throws IOException {
+    public void openFileChooser (FileChooser chooseFile) {
         File chosenFile = chooseFile.showOpenDialog(new Stage());
         if (chosenFile != null) {
-            BufferedImage image = ImageIO.read(chosenFile);
             pathImagePath = chosenFile.toURI().getPath();
             delegate.onUserEnteredPathImage(pathImagePath);
         }
