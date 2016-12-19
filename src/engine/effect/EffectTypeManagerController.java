@@ -12,10 +12,10 @@ import engine.observer.ObservableObjectProperty;
 import engine.observer.ObservableProperty;
 import engine.tower.TowerTypeBuilder;
 import engine.tower.TowerTypeManager;
-import gameplayer.model.effect.AbstractEffectFactory;
-import gameplayer.model.effect.CollisionEffectFactory;
 import gameplayer.model.effect.GameEffect;
 import gameplayer.model.effect.GroovyExecutor;
+import gameplayer.model.effect.factory.AbstractEffectFactory;
+import gameplayer.model.effect.factory.CollisionEffectFactory;
 
 
 public class EffectTypeManagerController extends

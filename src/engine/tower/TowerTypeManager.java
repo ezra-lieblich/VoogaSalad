@@ -19,8 +19,8 @@ import engine.enemy.EnemyType;
 import engine.weapon.Weapon;
 import engine.weapon.WeaponManager;
 import engine.weapon.WeaponType;
-import gameplayer.model.effect.AbstractEffectFactory;
-import gameplayer.model.effect.CollisionEffectFactory;
+import gameplayer.model.effect.factory.AbstractEffectFactory;
+import gameplayer.model.effect.factory.CollisionEffectFactory;
 
 public class TowerTypeManager extends AbstractTypeManager<Tower> implements TowerManager {
     

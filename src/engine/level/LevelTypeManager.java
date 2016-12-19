@@ -6,8 +6,8 @@ import engine.effect.EffectManagerFactory;
 import engine.enemy.EnemyManager;
 import engine.path.PathManager;
 import engine.settings.GameModeManager;
-import gameplayer.model.effect.AbstractEffectFactory;
-import gameplayer.model.effect.CollisionEffectFactory;
+import gameplayer.model.effect.factory.AbstractEffectFactory;
+import gameplayer.model.effect.factory.CollisionEffectFactory;
 
 
 /**

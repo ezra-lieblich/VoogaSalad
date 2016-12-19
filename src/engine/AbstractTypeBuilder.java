@@ -16,7 +16,7 @@ import engine.observer.ObservableProperty;
  * create an object. The copyType() method provides a good example of this chaining.
  * 
  * Template Method Pattern - The use of the template method pattern is what makes this feature so powerful. By abstracting all of the common builder behavior
- * into this class, the subclasses only deal with subclass specific functionality that is well templated to ensure that it works with the Abstract class
+ * into generic methods of this class, the subclasses only deal with subclass specific functionality that is well templated to ensure that it works with the Abstract class
  * as well as the rest of the program. Whenever a new TypeBuilder is needed, the programmer just needs to extend this class and implement the trivial
  * abstract methods. The Abstract class then handles all of the more complex interactions with the client. For instance The build() method ensures that
  * the object is always created in the right way. Once the object is built it restores the default methods which calls a template method for the subclass
