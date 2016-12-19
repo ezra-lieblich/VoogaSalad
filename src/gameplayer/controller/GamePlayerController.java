@@ -76,7 +76,6 @@ public class GamePlayerController implements Observer {
 		// use xml parser to create classes.
 		this.loader = new GamePlayerFactory(new XMLParser(/* "player.samplexml/"+ */xmlFilePath));// hardcoded
 		// does not work because of the image path
-		checkIfValid();
 		this.currentWave = new LinkedList<>();
 		this.enemiesOnScreen = new HashMap<Integer, ImageView>();
 		this.weaponsOnScreen = new HashMap<Integer, ImageView>();
@@ -103,7 +102,6 @@ public class GamePlayerController implements Observer {
 	public GamePlayerController(String xmlFilePath, SavedSettings settings) {
 		this(xmlFilePath);
 		this.oldLevel = settings.getLevel();
-		System.out.println("What is the level? :" + settings.getLevel());
 		this.oldLevel = settings.getLevel()-1; //does this do anything?
 		this.model.getData().setLevel(settings.getLevel());
 		this.model.getData().setGold(settings.getGold());
@@ -124,17 +122,6 @@ public class GamePlayerController implements Observer {
 		return this.towerToId;
 	}
 
-	/**
-	 * Checks to see if XML is valid If not, it will not create a game and it
-	 * will throw an error
-	 */
-	public void checkIfValid() {
-		if (!loader.xmlIsValid()) {
-			//// ////System.out.println("XML is invalid, game cannot be
-			//// created");
-			// TODO: actually throw an error
-		}
-	}
 
 	public void init(boolean newLevel) {
 		// HashMap<String, Double> settings = this.loader.getGameSetting();
@@ -324,8 +311,6 @@ public class GamePlayerController implements Observer {
 	}
 
 	private boolean winCondition() {
-		System.out.println("this.model.getData().getCurrentLevel() >= this.model.getData().getLevelNumber()"+
-	this.model.getData().getCurrentLevel() +">="+ this.model.getData().getLevelNumber());
 		return (this.model.getData().won() || (this.model.getData().getLife() > 0
 				&& noMoreEnemies() && this.model.getData().getCurrentLevel() >= this.model.getData().getLevelNumber()));
 	}

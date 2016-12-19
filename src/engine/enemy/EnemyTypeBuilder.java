@@ -7,7 +7,7 @@ import engine.observer.ObservableObjectProperty;
 import engine.observer.ObservableProperty;
 
 
-public class EnemyTypeBuilder extends AbstractTypeBuilder<Enemy, EnemyBuilder> implements EnemyBuilder, EnemyInitializer{
+public class EnemyTypeBuilder extends AbstractTypeBuilder<EnemyKind, EnemyBuilder> implements EnemyBuilder, EnemyInitializer{
 
     public static final String DEFAULT_NAME = "New Enemy";
     public static final String DEFAULT_IMAGE_PATH = "Images/butterfly.png";
@@ -137,7 +137,7 @@ public class EnemyTypeBuilder extends AbstractTypeBuilder<Enemy, EnemyBuilder> i
 	}
 
 	@Override
-	protected Enemy create() {
+	protected EnemyKind create() {
 		return new EnemyType(this);
 	}
 
@@ -157,7 +157,7 @@ public class EnemyTypeBuilder extends AbstractTypeBuilder<Enemy, EnemyBuilder> i
 	}
 
 	@Override
-	protected EnemyBuilder copyType(Enemy type) {
+	protected EnemyBuilder copyType(EnemyKind type) {
 		return this
 		.buildCollisionEffect(type.getCollisionEffect())
 		.buildDamage(type.getDamage())

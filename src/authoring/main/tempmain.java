@@ -31,7 +31,7 @@ public class tempmain extends Application {
 			try {
 				generalController.saveAsXMLFile();
 			} catch (IOException e1) {
-				DialogueBoxFactory.createErrorDialogueBox("Couldn't load authoring environment", "IOExcpetion");
+				DialogueBoxFactory.createErrorDialogueBox("Couldn't save", "IOExcpetion");
 				
 			}
 		});

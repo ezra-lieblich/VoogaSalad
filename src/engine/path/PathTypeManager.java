@@ -11,7 +11,7 @@ import engine.observer.ObservableListProperty;
 import engine.settings.GameModeManager;
 import engine.weapon.WeaponManager;
 
-public class PathTypeManager extends AbstractTypeManager<Path> implements PathManager {
+public class PathTypeManager extends AbstractTypeManager<PathKind> implements PathManager {
         
     private ObservableList<Integer> availablePaths;
     
@@ -22,7 +22,7 @@ public class PathTypeManager extends AbstractTypeManager<Path> implements PathMa
     public void visitGridSize(GameModeManager manager, Integer index) {
         availablePaths.setProperty(getEntities().values().stream()
                                    .filter(a -> a.getType().equals(manager.getEntity(index).getPathType()) && a.getGridRows() == manager.getEntity(index).getGridSize() && a.getGridColumns()==(manager.getEntity(index).getGridSize()))
-                                   .map(Path::getId)
+                                   .map(PathKind::getId)
                                    .collect(Collectors.toList()));  
     }
     

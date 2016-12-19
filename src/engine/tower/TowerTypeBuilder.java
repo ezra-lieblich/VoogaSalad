@@ -8,7 +8,7 @@ import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
 import engine.AbstractTypeBuilder;
 import engine.ability.Ability;
-import engine.enemy.Enemy;
+import engine.enemy.EnemyKind;
 import engine.observer.ObservableList;
 import engine.observer.ObservableListProperty;
 import engine.observer.ObservableObjectProperty;

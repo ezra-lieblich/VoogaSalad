@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class PathType extends AbstractType implements Path {
+public class PathType extends AbstractType implements PathKind {
 
     private ObservableProperty<PathOption> type;
     private ObservableList<Coordinate<Integer>> coordinates; 

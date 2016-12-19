@@ -3,7 +3,7 @@ package engine.enemy;
 
 import engine.TypeBuilder;
 
-public interface EnemyBuilder extends TypeBuilder<Enemy, EnemyBuilder>, BindableEnemy { //TODO - Add bindable interface
+public interface EnemyBuilder extends TypeBuilder<EnemyKind, EnemyBuilder>, BindableEnemy { //TODO - Add bindable interface
 
 	EnemyBuilder buildSpeed(double speed);
 	EnemyBuilder buildHealth(double health);

@@ -1,6 +1,6 @@
 package gameplayer.loader;
 
-import engine.enemy.Enemy;
+import engine.enemy.EnemyKind;
 import gameplayer.model.Cell;
 
 public class EnemyFactory {
@@ -11,7 +11,7 @@ public class EnemyFactory {
 		currID = 0;
 	}
 	
-	public gameplayer.model.enemy.Enemy createModelEnemy(Enemy enemyType, Cell start, int pathID) { //refactor name
+	public gameplayer.model.enemy.Enemy createModelEnemy(EnemyKind enemyType, Cell start, int pathID) { //refactor name
 		int ID = currID;
 		String name = enemyType.getName();
 		double movingSpeed = enemyType.getSpeed();

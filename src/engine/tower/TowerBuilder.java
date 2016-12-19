@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.function.BiConsumer;
 import engine.TypeBuilder;
 import engine.ability.Ability;
-import engine.enemy.Enemy;
+import engine.enemy.EnemyKind;
 import engine.weapon.Weapon;
 
 

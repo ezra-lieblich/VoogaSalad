@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.function.BiConsumer;
 import engine.AbstractTypeBuilder;
 import engine.ability.Ability;
-import engine.enemy.Enemy;
+import engine.enemy.EnemyKind;
 import engine.observer.ObservableObjectProperty;
 import engine.observer.ObservableProperty;
 import engine.tower.Tower;

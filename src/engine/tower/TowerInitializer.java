@@ -3,7 +3,7 @@ package engine.tower;
 import java.util.List;
 import engine.TypeInitializer;
 import engine.ability.Ability;
-import engine.enemy.Enemy;
+import engine.enemy.EnemyKind;
 import engine.observer.ObservableList;
 import engine.observer.ObservableListProperty;
 import engine.observer.ObservableProperty;

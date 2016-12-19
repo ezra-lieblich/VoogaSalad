@@ -4,7 +4,7 @@ import java.util.List;
 import engine.Type;
 
 
-public interface Path extends Type {
+public interface PathKind extends Type {
 
     PathOption getType ();
 

@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import engine.AbstractType;
 import engine.ability.Ability;
-import engine.enemy.Enemy;
+import engine.enemy.EnemyKind;
 import engine.enemy.EnemyType;
 import engine.observer.ObservableList;
 import engine.observer.ObservableProperty;

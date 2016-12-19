@@ -7,7 +7,7 @@ import java.util.function.Consumer;
 import authoring.editorview.path.PathUpdateView;
 import engine.ManagerController;
 
-public interface PathManagerController extends ManagerController<PathManager, PathBuilder, Path, PathUpdateView>{
+public interface PathManagerController extends ManagerController<PathManager, PathBuilder, PathKind, PathUpdateView>{
 
     boolean setNewPathCoordinate (int pathID, int x, int y);
     

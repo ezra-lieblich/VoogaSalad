@@ -5,7 +5,7 @@ import engine.Type;
 /**
  * Created by ezra on 11/19/16.
  */
-public interface Enemy extends Type {
+public interface EnemyKind extends Type {
 
     double getSpeed();
 

@@ -8,7 +8,7 @@ import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
 import engine.AbstractTypeBuilder;
 import engine.ability.Ability;
-import engine.enemy.Enemy;
+import engine.enemy.EnemyKind;
 import engine.observer.ObservableList;
 import engine.observer.ObservableListProperty;
 import engine.observer.ObservableObjectProperty;
@@ -17,7 +17,7 @@ import engine.tower.Tower;
 import engine.tower.TowerType;
 import engine.weapon.Weapon;
 
-public class PathTypeBuilder extends AbstractTypeBuilder<Path, PathBuilder> implements PathBuilder, PathInitializer {
+public class PathTypeBuilder extends AbstractTypeBuilder<PathKind, PathBuilder> implements PathBuilder, PathInitializer {
     
      public static final String DEFAULT_NAME = "New Path";
      public static final String DEFAULT_IMAGE_PATH = "Images/blacksquare.png";
@@ -70,7 +70,7 @@ public class PathTypeBuilder extends AbstractTypeBuilder<Path, PathBuilder> impl
     }
     
     @Override
-    protected Path create () {
+    protected PathKind create () {
         return new PathType(this);
     }
 
@@ -132,7 +132,7 @@ public class PathTypeBuilder extends AbstractTypeBuilder<Path, PathBuilder> impl
     }
 
     @Override
-    protected PathBuilder copyType (Path type) {
+    protected PathBuilder copyType (PathKind type) {
         return this
                 .buildCoordinates(type.getCoordinates())
                 .buildGridSizeColumns(type.getGridColumns())

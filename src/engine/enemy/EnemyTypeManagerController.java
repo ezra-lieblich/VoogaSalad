@@ -13,7 +13,7 @@ import engine.effect.EffectTypeManagerController;
  * Created by ezra on 11/29/16.
  */
 public class EnemyTypeManagerController
-        extends AbstractTypeManagerController<EnemyManager, EnemyBuilder, Enemy, EnemyUpdateView>
+        extends AbstractTypeManagerController<EnemyManager, EnemyBuilder, EnemyKind, EnemyUpdateView>
         implements EnemyManagerController {
     private EffectManagerController enemyEffectManagerController;
 

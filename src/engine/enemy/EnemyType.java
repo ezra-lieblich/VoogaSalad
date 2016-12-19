@@ -3,7 +3,7 @@ package engine.enemy;
 import engine.AbstractType;
 import engine.observer.ObservableProperty;
 
-public class EnemyType extends AbstractType implements Enemy {
+public class EnemyType extends AbstractType implements EnemyKind {
 
     private ObservableProperty<Double> speed;
 	private ObservableProperty<Double> health;

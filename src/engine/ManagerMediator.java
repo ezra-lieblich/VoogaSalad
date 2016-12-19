@@ -1,11 +1,11 @@
 package engine;
 
 import engine.ability.Ability;
-import engine.enemy.Enemy;
+import engine.enemy.EnemyKind;
 import engine.level.Level;
 import engine.observer.Observable;
 import engine.observer.Observer;
-import engine.path.Path;
+import engine.path.PathKind;
 import engine.tower.Tower;
 import engine.weapon.Weapon;
 

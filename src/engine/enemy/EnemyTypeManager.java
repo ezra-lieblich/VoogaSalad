@@ -6,7 +6,7 @@ import engine.effect.EffectManagerFactory;
 import gameplayer.model.effect.AbstractEffectFactory;
 import gameplayer.model.effect.CollisionEffectFactory;
 
-public class EnemyTypeManager extends AbstractTypeManager<Enemy> implements EnemyManager {
+public class EnemyTypeManager extends AbstractTypeManager<EnemyKind> implements EnemyManager {
     
     public static final Class<? extends AbstractEffectFactory> DEFAULT_EFFECT_FACTORY = CollisionEffectFactory.class;
 

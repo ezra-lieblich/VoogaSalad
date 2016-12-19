@@ -10,7 +10,7 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 import engine.ability.AbilityManagerController;
 import engine.ability.AbilityTypeManagerController;
-import engine.enemy.Enemy;
+import engine.enemy.EnemyKind;
 import engine.enemy.EnemyManager;
 import engine.enemy.EnemyManagerController;
 import engine.enemy.EnemyTypeManagerController;

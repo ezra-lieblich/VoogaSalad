@@ -11,6 +11,7 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
 import authoring.main.AuthoringController;
+import authoring.main.ExitDialogueBox;
 import authoring.utilityfactories.DialogueBoxFactory;
 import engine.GameAuthoringData;
 import gameplayer.controller.GamePlayerController;
@@ -196,6 +197,17 @@ public class SplashScreen {
 		s.setHeight(SIZE);
 		s.setWidth(SIZE + 395);
 		s.show();
+		
+		ExitDialogueBox box = new ExitDialogueBox();
+        box.displayDialogueBoxOnExit(s, e -> {
+			try {
+				generalController.saveAsXMLFile();
+			} catch (IOException e1) {
+				DialogueBoxFactory.createErrorDialogueBox("Couldn't save", "IOExcpetion");
+				
+			}
+		});
+
 
 	}
 

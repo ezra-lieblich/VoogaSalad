@@ -99,7 +99,7 @@ public class GridGUI {
 	public void populatePath(HashMap<Integer,Path>allPaths, PathManager pathManager){
 		//System.out.println("populate path!");
 		for(Integer uniquePath: allPaths.keySet()){
-			engine.path.Path currentPath = pathManager.getEntity(uniquePath);
+			engine.path.PathKind currentPath = pathManager.getEntity(uniquePath);
 			String pathPicture = currentPath.getImagePath();
 			Cell current = allPaths.get(uniquePath).getPathStart();
 			while (current != null){

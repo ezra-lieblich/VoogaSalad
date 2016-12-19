@@ -7,6 +7,6 @@ import engine.effect.EffectManager;
 /**
  * Created by ezra on 11/19/16.
  */
-public interface EnemyManager extends Manager<Enemy> {
+public interface EnemyManager extends Manager<EnemyKind> {
     EffectManager getEnemyEffectManager () ;
 }

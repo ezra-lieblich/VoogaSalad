@@ -7,7 +7,7 @@ import engine.effect.EffectManagerController;
 
 // IEnemyUpdateView needs to extend IUpdateView
 public interface EnemyManagerController
-        extends ManagerController<EnemyManager, EnemyBuilder, Enemy, EnemyUpdateView> {
+        extends ManagerController<EnemyManager, EnemyBuilder, EnemyKind, EnemyUpdateView> {
 
     public void setEnemySpeed (int enemyID, double enemySpeed);
 
